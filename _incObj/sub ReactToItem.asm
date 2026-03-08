@@ -345,6 +345,10 @@ KillSonic:
 	endif
 		move.b	#id_Death,obAnim(a0)
 		bset	#7,obGfx(a0)
+
+		move.b	#$8F, d0
+		jmp	MegaPCM_PlaySample
+		
 	if FixBugs
 		move.w	#sfx_HitSpikes,d0 ; play spikes death sound
 		cmpi.b	#id_Spikes,obID(a2)	; check if you were killed by spikes
@@ -362,6 +366,7 @@ KillSonic:
 
 .sound:
 		jsr	(QueueSound2).l
+
 
 .dontdie:
 		moveq	#-1,d0
