@@ -2702,7 +2702,7 @@ Music8A:	include "sound/music/Mus8A - Title Screen.asm"
 		even
 Music8B:	include "sound/music/Mus8B - Ending.asm"
 		even
-Music8C:	include "sound/music/Mus8C - Boss.asm"
+Music8C:	include "sound/music/TG2000Tracks/Coffinman.asm"
 		even
 Music8D:	include "sound/music/Mus8D - FZ.asm"
 		even
@@ -2714,7 +2714,7 @@ Music90:	include "sound/music/Mus90 - Continue Screen.asm"
 		even
 Music91:	include "sound/music/Mus91 - Credits.asm"
 		even
-Music92:	include "sound/music/Mus92 - Drowning.asm"
+Music92:	include "sound/music/TG2000Tracks/Thundersink.asm"
 		even
 Music93:	include "sound/music/Mus93 - Get Emerald.asm"
 		even
