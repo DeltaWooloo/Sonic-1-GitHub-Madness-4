@@ -149,7 +149,7 @@ Card_ItemData:	dc.w $D0	; y-axis position
 ; 4 bytes per item (YYYY XXXX)
 ; 4 items per level (GREEN HILL, ZONE, ACT X, oval)
 ; ---------------------------------------------------------------------------
-Card_ConData:	dc.w 0,	$120, $FEFC, $13C, $414, $154, $214, $150 ; GHZ
+Card_ConData:	dc.w 0,	$120, $FEFC, $13C, $414, $154, $214, $154 ; GHZ
 		dc.w 0,	$120, $FF24, $164, $440, $180, $240, $180 ; LZ
 		dc.w 0,	$120, $FEE0, $120, $3F8, $138, $1F8, $138 ; MZ
 		dc.w 0,	$120, $FEFC, $13C, $414, $154, $214, $154 ; SLZ
