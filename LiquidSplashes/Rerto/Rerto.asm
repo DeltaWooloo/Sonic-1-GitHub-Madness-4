@@ -132,8 +132,8 @@ SonicRetro:
 	jsr	.ExecuteObjects
 	jsr	BuildSprites
 
-	andi.b	#btnStart,(v_jpadpress1).w 
-	bne.w	.Exit
+        andi.b	#btnStart, (v_jpadpress1).w 
+        bne.w   .Exit
 
 	tst.w	(v_generictimer).w
 	beq.w	.Exit

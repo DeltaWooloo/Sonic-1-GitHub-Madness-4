@@ -93,7 +93,7 @@ copyTilemap:	macro source,destination,width,height
 		locVRAM	destination,d0
 		moveq	#(width)-1,d1
 		moveq	#(height)-1,d2
-		bsr.w	TilemapToVRAM
+		jsr	(TilemapToVRAM).w
 		endm
 
 ; ---------------------------------------------------------------------------
