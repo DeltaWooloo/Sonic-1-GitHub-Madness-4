@@ -76,7 +76,7 @@ TryAgain_Obj_LoadLetters:
 		move.b	#id_CreditsText,(a1)
 		move.b	#6,obRoutine(a1)
 		move.l	#Map_TryAgain,obMap(a1)
-		move.w	#make_art_tile(ArtTile_Credits_Font,0,0),obGfx(a0)
+		move.w	#make_art_tile(0,0,0),obGfx(a0)
 		move.b	#8,obRender(a1)
 ;		move.b	#1,obPriority(a1)
 		move.w	#$FFF0,obY(a1)
