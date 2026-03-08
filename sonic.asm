@@ -4651,15 +4651,22 @@ M_Card_GHZ_End
 	even
 
 M_Card_LZ:	spriteHeader	; LABYRINTH
-	spritePiece	-$44, -8, 2, 2, $26, 0, 0, 0, 0	; L
-	spritePiece	-$34, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	-$24, -8, 2, 2, 4, 0, 0, 0, 0	; B
-	spritePiece	-$14, -8, 2, 2, $4A, 0, 0, 0, 0	; Y
-	spritePiece	-4, -8, 2, 2, $3A, 0, 0, 0, 0	; R
-	spritePiece	$C, -8, 1, 2, $20, 0, 0, 0, 0	; I
-	spritePiece	$14, -8, 2, 2, $2E, 0, 0, 0, 0	; N
-	spritePiece	$24, -8, 2, 2, $42, 0, 0, 0, 0	; T
-	spritePiece	$34, -8, 2, 2, $1C, 0, 0, 0, 0	; H
+	spritePiece	-$78, -8, 2, 2, 0, 0, 0, 0, 0	; A
+	spritePiece	-$68, -8, 2, 2, $4E, 0, 0, 0, 0	; Z
+	spritePiece	-$58, -8, 2, 2, $46, 0, 0, 0, 0	; U
+	spritePiece	-$48, -8, 2, 2, $3A, 0, 0, 0, 0	; R
+	spritePiece	-$38, -8, 2, 2, $10, 0, 0, 0, 0	; E
+
+	spritePiece	-$20, -8, 2, 2, $3A, 0, 0, 0, 0	; R
+	spritePiece	-$10, -8, 2, 2, 0, 0, 0, 0, 0	; A
+	spritePiece	0, -8, 1, 2, $20, 0, 0, 0, 0	; I
+	spritePiece	8, -8, 2, 2, $2E, 0, 0, 0, 0	; N
+	spritePiece	$18, -8, 2, 2, $14, 0, 0, 0, 0	; F
+	spritePiece	$28, -8, 2, 2, $32, 0, 0, 0, 0	; O
+	spritePiece	$38, -8, 2, 2, $3A, 0, 0, 0, 0	; R
+	spritePiece	$48, -8, 2, 2, $10, 0, 0, 0, 0	; E
+	spritePiece	$58, -8, 2, 2, $3E, 0, 0, 0, 0	; S
+	spritePiece	$68, -8, 2, 2, $42, 0, 0, 0, 0	; T
 M_Card_LZ_End
 	even
 
