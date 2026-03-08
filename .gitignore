@@ -12,3 +12,5 @@ sonic.debug.lst
 
 # Built ROMs.
 *.gen
+s1built.prev.bin
+s1built.bin
