@@ -62,6 +62,10 @@ PalThanatosCredits:	bincludeEndMarker "hipncoolstuff/ThanatosCredits/Palette.pal
 -	move.l	d0,(a1)+
 	dbf.w	d1,-
 
+	; Clear variables
+	lea	(than_rom_position).l,a0
+	move.l	d0,(a0) ; clears than_y_plane with it
+
 	; Load art/map
 	locVRAM	$20
 	lea	(NemThanatosCredits).l,a0 ; load art
@@ -72,7 +76,35 @@ PalThanatosCredits:	bincludeEndMarker "hipncoolstuff/ThanatosCredits/Palette.pal
 	move.w	#1,d0
 	jsr	(EniDec).l
 
-
+	; Fade In
 	jsr	(PaletteFadeIn).l
 
+	QueueSound_M bgm_Ending,0
+
 	bra.s	*
+
+RenderTextLine:
+	lea	(than_rom_position).l,a0
+	move.w	(a0),d0
+
+	clr.w	d0
+
+	move.b	(a0)+,d0
+	beq.s	+
++	rts
+
+Credits_Text_Thanatos:
+	charset ' ',0
+	charset 'A','Z',1
+
+thantxt: macro txt
+	dc.b strlen(txt),txt
+	endm
+
+	dc.b	"SONIC I GITHUB MADNESS IV"
+	dc.b	0
+	dc.b	"THIS IS FUNNY TEXT"
+	dc.b	"SPAGUETTI BY MARIO"
+	even
+
+	charset
