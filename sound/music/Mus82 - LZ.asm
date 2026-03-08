@@ -14,9 +14,9 @@ BGM_DUNGEON3_Header:		; To clean up
 	smpsHeaderFM	BGM_DUNGEON3_FM4,	$00, $13
 	smpsHeaderFM	BGM_DUNGEON3_FM5,	$00, $15
 	smpsHeaderFM	BGM_DUNGEON3_FM6,	$00, $1E
-	smpsHeaderPSG	BGM_DUNGEON3_PSG1,	$0C, $18, $00, $00
-	smpsHeaderPSG	BGM_DUNGEON3_PSG2,	$0C, $20, $00, $00
-	smpsHeaderPSG	BGM_DUNGEON3_PSG3,	$0C, $30, $00, $00
+	smpsHeaderPSG	BGM_DUNGEON3_PSG1,	$00, $03, $00, $00
+	smpsHeaderPSG	BGM_DUNGEON3_PSG2,	$00, $04, $00, $00
+	smpsHeaderPSG	BGM_DUNGEON3_PSG3,	$00, $06, $00, $00
 
 BGM_DUNGEON3_Voices:
 ;	FM Voice 00 -> 00: FM_DUN03_00
@@ -709,43 +709,43 @@ BGM_DUNGEON3_PSG1_04_0_144:
 BGM_DUNGEON3_PSG1_05_0_144_0B:
 	dc.b nC3, $06, nCs3, nBb2, $0F, nRst, $09, nBb2, $06, nB2, nAb2, $0F, nRst, $15
 	smpsPSGvoice	duntone_02
-	smpsPSGAlterVol	$08
+	smpsPSGAlterVol	$01
 	dc.b nCs2, $08
-	smpsPSGAlterVol	$20
+	smpsPSGAlterVol	$04
 	dc.b $04
-	smpsPSGAlterVol	$E0
+	smpsPSGAlterVol	$FC
 	dc.b nFs2, $08
-	smpsPSGAlterVol	$20
+	smpsPSGAlterVol	$04
 	dc.b $04
-	smpsPSGAlterVol	$E0
+	smpsPSGAlterVol	$FC
 	dc.b $08
-	smpsPSGAlterVol	$20
+	smpsPSGAlterVol	$04
 	dc.b $08
-	smpsPSGAlterVol	$20
+	smpsPSGAlterVol	$04
 	dc.b $14
 	smpsReturn
 
 BGM_DUNGEON3_PSG1_06_0_108:
 	dc.b smpsNoAttack, $0C
-	smpsPSGAlterVol	$C0
+	smpsPSGAlterVol	$F8
 	dc.b nB1, $08
-	smpsPSGAlterVol	$20
+	smpsPSGAlterVol	$04
 	dc.b $04
-	smpsPSGAlterVol	$E0
+	smpsPSGAlterVol	$FC
 	dc.b nE2, $08
-	smpsPSGAlterVol	$20
+	smpsPSGAlterVol	$04
 	dc.b $04
-	smpsPSGAlterVol	$E0
+	smpsPSGAlterVol	$FC
 	dc.b $08
-	smpsPSGAlterVol	$20
+	smpsPSGAlterVol	$04
 	dc.b $08
-	smpsPSGAlterVol	$20
+	smpsPSGAlterVol	$04
 	dc.b $38
 	smpsReturn
 
 BGM_DUNGEON3_PSG1_07_0_144_03:
 	smpsPSGvoice	duntone_01
-	smpsPSGAlterVol	$D0
+	smpsPSGAlterVol	$FA
 	dc.b nE1, $09, nRst, $03, nE1, $09, nRst, $03, nE1, $09, nRst, $03, nE1, $09, nRst, $03
 	dc.b nE1, $09, nRst, $03, nE1, $09, nRst, $03, nE1, $09, nRst, $03, nE1, $09, nRst, $03
 	dc.b nE1, $09, nRst, $03, nE1, $09, nRst, $03, nE1, $09, nRst, $03, nE1, $09, nRst, $03
@@ -766,7 +766,7 @@ BGM_DUNGEON3_PSG1_07_0_144:
 
 BGM_DUNGEON3_PSG1_09_0_144_08:
 	smpsPSGvoice	duntone_03
-	smpsPSGAlterVol	$E8
+	smpsPSGAlterVol	$FD
 	dc.b nD2, $06, nB1, nG1, nFs1, nD1, nB0, nG0, nB0, nFs1, nG1, nB1, nD2, nC2, nA1, nF1
 	dc.b nE1, nC1, nA0, nF0, nA0, nE1, nF1, nA1, nC2
 	smpsReturn
@@ -808,7 +808,7 @@ BGM_DUNGEON3_PSG2_Jump:
 	smpsCall BGM_DUNGEON3_PSG2_08_0_144
 	smpsCall BGM_DUNGEON3_PSG2_09_0_144
 	smpsCall BGM_DUNGEON3_PSG2_0A_0_108
-	smpsPSGAlterVol	$F0
+	smpsPSGAlterVol	$FE
 	smpsJump BGM_DUNGEON3_PSG2_Jump
 
 BGM_DUNGEON3_PSG2_00_0_144:
@@ -827,41 +827,41 @@ BGM_DUNGEON3_PSG2_03_0_144_0A:
 	dc.b smpsNoAttack, $54
 	smpsPSGvoice	duntone_02
 	dc.b nA1, $08
-	smpsPSGAlterVol	$20
+	smpsPSGAlterVol	$04
 	dc.b $04
-	smpsPSGAlterVol	$E0
+	smpsPSGAlterVol	$FC
 	dc.b nCs2, $08
-	smpsPSGAlterVol	$20
+	smpsPSGAlterVol	$04
 	dc.b $04
-	smpsPSGAlterVol	$E0
+	smpsPSGAlterVol	$FC
 	dc.b $08
-	smpsPSGAlterVol	$20
+	smpsPSGAlterVol	$04
 	dc.b $08
-	smpsPSGAlterVol	$20
+	smpsPSGAlterVol	$04
 	dc.b $14
 	smpsReturn
 
 BGM_DUNGEON3_PSG2_04_0_108:
 	dc.b smpsNoAttack, $0C
-	smpsPSGAlterVol	$C0
+	smpsPSGAlterVol	$F8
 	dc.b nFs1, $08
-	smpsPSGAlterVol	$20
+	smpsPSGAlterVol	$04
 	dc.b $04
-	smpsPSGAlterVol	$E0
+	smpsPSGAlterVol	$FC
 	dc.b nB1, $08
-	smpsPSGAlterVol	$20
+	smpsPSGAlterVol	$04
 	dc.b $04
-	smpsPSGAlterVol	$E0
+	smpsPSGAlterVol	$FC
 	dc.b $08
-	smpsPSGAlterVol	$20
+	smpsPSGAlterVol	$04
 	dc.b $08
-	smpsPSGAlterVol	$20
+	smpsPSGAlterVol	$04
 	dc.b $38
 	smpsReturn
 
 BGM_DUNGEON3_PSG2_05_0_144_03:
 	smpsPSGvoice	duntone_01
-	smpsPSGAlterVol	$D0
+	smpsPSGAlterVol	$FA
 	dc.b nA0, $09, nRst, $03, nA0, $09, nRst, $03, nA0, $09, nRst, $03, nA0, $09, nRst, $03
 	dc.b nA0, $09, nRst, $03, nA0, $09, nRst, $03, nA0, $09, nRst, $03, nA0, $09, nRst, $03
 	dc.b nA0, $09, nRst, $03, nA0, $09, nRst, $03, nA0, $09, nRst, $03, nA0, $09, nRst, $03
