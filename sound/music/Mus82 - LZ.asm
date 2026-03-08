@@ -557,6 +557,7 @@ BGM_DUNGEON3_FM5_0C_0_108:
 	smpsReturn
 
 BGM_DUNGEON3_FM6:
+	dc.b nRst, $03
 
 BGM_DUNGEON3_FM6_Jump:
 	smpsCall BGM_DUNGEON3_FM6_00_0_144_7F
@@ -581,7 +582,7 @@ BGM_DUNGEON3_FM6_Jump:
 	smpsJump BGM_DUNGEON3_FM6_Jump
 
 BGM_DUNGEON3_FM6_00_0_144_7F:
-	dc.b smpsNoAttack, $03, nRst, $06
+	dc.b	nRst, $06
 	smpsSetvoice	$01
 	smpsPan		panCenter, $00
 	smpsAlterNote		$06
@@ -654,7 +655,7 @@ BGM_DUNGEON3_FM6_0C_0_144:
 	smpsReturn
 
 BGM_DUNGEON3_FM6_0D_0_108:
-	dc.b nRst, $06, nFs2, $0C, nA3, $12, $42, nRst, $06
+	dc.b nRst, $06, nFs2, $0C, nA3, $12, $42, nRst, $09
 	smpsReturn
 
 BGM_DUNGEON3_PSG1:
@@ -681,7 +682,7 @@ BGM_DUNGEON3_PSG1_Jump:
 	smpsJump BGM_DUNGEON3_PSG1_Jump
 
 BGM_DUNGEON3_PSG1_00_0_144:
-	dc.b smpsNoAttack, $7E, smpsNoAttack, $12
+	dc.b nRst, $7E, nRst, $12
 	smpsReturn
 
 BGM_DUNGEON3_PSG1_01_0_144:
@@ -796,8 +797,8 @@ BGM_DUNGEON3_PSG2_Jump:
 	smpsCall BGM_DUNGEON3_PSG2_00_0_144
 	smpsCall BGM_DUNGEON3_PSG2_00_0_144
 	smpsCall BGM_DUNGEON3_PSG2_00_0_144
-	smpsCall BGM_DUNGEON3_PSG2_01_0_144
-	smpsCall BGM_DUNGEON3_PSG2_02_0_144
+	smpsCall BGM_DUNGEON3_PSG2_00_0_144
+	smpsCall BGM_DUNGEON3_PSG2_00_0_144
 	smpsCall BGM_DUNGEON3_PSG2_03_0_144_0A
 	smpsCall BGM_DUNGEON3_PSG2_04_0_108
 	smpsCall BGM_DUNGEON3_PSG2_05_0_144_03
@@ -812,15 +813,7 @@ BGM_DUNGEON3_PSG2_Jump:
 	smpsJump BGM_DUNGEON3_PSG2_Jump
 
 BGM_DUNGEON3_PSG2_00_0_144:
-	dc.b smpsNoAttack, $7E, smpsNoAttack, $12
-	smpsReturn
-
-BGM_DUNGEON3_PSG2_01_0_144:
-	dc.b smpsNoAttack, $7E, smpsNoAttack, $12
-	smpsReturn
-
-BGM_DUNGEON3_PSG2_02_0_144:
-	dc.b smpsNoAttack, $7E, smpsNoAttack, $12
+	dc.b nRst, $7E, nRst, $12
 	smpsReturn
 
 BGM_DUNGEON3_PSG2_03_0_144_0A:
@@ -926,7 +919,7 @@ BGM_DUNGEON3_PSG3_Jump:
 	smpsJump BGM_DUNGEON3_PSG3_Jump
 
 BGM_DUNGEON3_PSG3_00_0_144:
-	dc.b smpsNoAttack, $7E, smpsNoAttack, $12
+	dc.b nRst, $7E, nRst, $12
 	smpsReturn
 
 BGM_DUNGEON3_PSG3_00_0_108:
