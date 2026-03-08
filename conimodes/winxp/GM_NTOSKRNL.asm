@@ -136,9 +136,9 @@ WinXP_ScrollBar_Noreset:
 .WinXP_ScrollBar_Noupdate:
 		rts
 
-Nem_WinXP:	incbin	"conimodes\winxp\Art.bin"
+Nem_WinXP:	incbin	"conimodes/winxp/Art.bin"
 		even
-Eni_WinXP:	incbin	"conimodes\winxp\Map.bin"
+Eni_WinXP:	incbin	"conimodes/winxp/Map.bin"
 		even
-Pal_WinXP:	incbin	"conimodes\winxp\Palette.bin"
+Pal_WinXP:	incbin	"conimodes/winxp/Palette.bin"
 		even

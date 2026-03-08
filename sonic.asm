@@ -427,6 +427,8 @@ ptr_GM_SegaEU:	bra.w	GM_SegaEU		; Sega Screen EU ($24)
 		rts
 
 JMP_GM_ColdBrew:	jmp	(GM_ColdBrew).l
+
+JMP_GM_ThanatosCredits:	jmp	(GM_ThanatosCredits).l
 ; ===========================================================================
 	if SkipChecksumCheck=0
 CheckSumError:
@@ -1960,9 +1962,9 @@ Pal_SBZ3SonWat:		bincludeEndMarker	"palette/Sonic - SBZ3 Underwater.bin"
 Pal_SSResult:		bincludeEndMarker	"palette/Special Stage Results.bin"
 Pal_Continue:		bincludeEndMarker	"palette/Special Stage Continue Bonus.bin"
 Pal_Ending:		bincludeEndMarker	"palette/Ending.bin"
-Pal_SplashPal:	bincludeEndMarker	"eurosega\pal.bin"
-Pal_ColdBrew:	bincludeEndMarker	"conimodes\cold brew\palette.bin"
-Pal_ColdBrewG:	bincludeEndMarker	"conimodes\cold brew\palette grayscale.bin"
+Pal_SplashPal:	bincludeEndMarker	"eurosega/pal.bin"
+Pal_ColdBrew:	bincludeEndMarker	"conimodes/cold brew/palette.bin"
+Pal_ColdBrewG:	bincludeEndMarker	"conimodes/cold brew/palette grayscale.bin"
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to wait for VBlank routines to complete
@@ -7567,12 +7569,14 @@ Nem_SegaLogo:	binclude	"artnem/Sega Logo (JP1).nem" ; large Sega logo
 Eni_SegaLogo:	binclude	"tilemaps/Sega Logo (JP1).eni" ; large Sega logo (mappings)
 		even
 	endif
-Eni_GitHub:	incbin	ATOGKTitle/Enigma/GitHub.bin	   
+
+Eni_GitHub:	binclude	"ATOGKTitle/Enigma/Github.bin"
 		even
-Eni_Madness:	incbin	ATOGKTitle/Enigma/Madness.bin	 
+Eni_Madness:	binclude	"ATOGKTitle/Enigma/Madness.bin"
 		even
-Nem_GitMadScr:	incbin	ATOGKTitle/Nemesis/GitMad.bin	
-		even		
+Nem_GitMadScr:	binclude	"ATOGKTitle/Nemesis/GitMad.bin"
+		even
+
 Eni_Title:	binclude	"tilemaps/Title Screen.eni" ; title screen foreground (mappings)
 		even
 Nem_TitleFg:	binclude	"artnem/Title Screen Foreground.nem"
@@ -7585,9 +7589,9 @@ Eni_JapNames:	binclude	"tilemaps/Hidden Japanese Credits.eni" ; Japanese credits
 		even
 Nem_JapNames:	binclude	"artnem/Hidden Japanese Credits.nem"
 		even
-Eni_SplashMap:	binclude	"eurosega\map.bin" 
+Eni_SplashMap:	binclude	"eurosega/map.bin"
 		even
-Nem_SplashTiles:	binclude	"eurosega\tiles.bin"
+Nem_SplashTiles:	binclude	"eurosega/tiles.bin"
 		even
 
 ; ---------------------------------------------------------------------------
@@ -8403,13 +8407,14 @@ ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 			endif
 		endif
 
-		include	"sound\MegaPCM.asm"
-		include	"sound\SampleTable.asm"
+		include	"sound/MegaPCM.asm"
+		include	"sound/SampleTable.asm"
 
-SoundDriver:	include "sound\s1.sounddriver.asm"
+SoundDriver:	include "sound/s1.sounddriver.asm"
 
-		include "conimodes\cold brew\GM_ColdBrew.asm"
-		include "conimodes\winxp\GM_NTOSKRNL.asm"
+		include "conimodes/cold brew/GM_ColdBrew.asm"
+		include "conimodes/winxp/GM_NTOSKRNL.asm"
+		include "hipncoolstuff/ThanatosCredits/Main.asm"
 ; end of 'ROM'
 		even
 ; ==============================================================
