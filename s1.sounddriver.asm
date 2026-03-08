@@ -38,7 +38,10 @@ PSG_Index:
 		dc.l PSG1, PSG2, PSG3
 		dc.l PSG4, PSG5, PSG6
 		dc.l PSG7, PSG8, PSG9
+
 		dc.l PSG_1UP01, PSG_1UP02, PSG_1UP03
+
+		dc.l PSG_DUN3_01, PSG_DUN3_02, PSG_DUN3_03
 
 PSG1:		dc.b 0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,$80
 
@@ -70,6 +73,16 @@ PSG_1UP02:
 
 PSG_1UP03:
 		dc.b 0,1,2,4,6,8,$A,$C,$E,$80
+
+PSG_DUN3_01:	dc.b 7,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1
+		dc.b 2,2,2,2,2,2,2,3,3,3,3,3,3,3,4,4
+		dc.b 4,4,4,4,4,5,5,5,5,5,5,5,6,$80
+
+PSG_DUN3_02:	dc.b 7,0,0,0,0,0,0,0,0,0,0,1,3,4,6,7
+		dc.b 9,$A,$C,$D,$F,$80
+
+PSG_DUN3_03:	dc.b 7,0,0,0,0,0,0,0,1,3,4,6,7,9,$A,$C
+		dc.b $D,$F,$80
 
 	even
 
@@ -2697,7 +2710,7 @@ SonicDriverVer = 1 ; Tell SMPS2ASM that we're using Sonic 1's driver.
 ; ---------------------------------------------------------------------------
 Music81:	include "sound/music/Mus81 - GHZ.asm"
 		even
-Music82:	include "sound/music/Mus82 - LZ.asm"
+Music82:	include "sound/music/DaxKatter/Mus - Azure Rainforest.asm"
 		even
 Music83:	include "sound/music/Mus83 - MZ.asm"
 		even
@@ -2709,7 +2722,7 @@ Music86:	include "sound/music/Mus86 - SBZ.asm"
 		even
 Music87:	include "sound/music/Mus87 - Invincibility.asm"
 		even
-Music88:	include "sound/music/Mus88 - Extra Life.asm"
+Music88:	include "sound/music/DaxKatter/Mus - NBT Extra Life.asm"
 		even
 Music89:	include "sound/music/Mus89 - Special Stage.asm"
 		even
@@ -2733,7 +2746,7 @@ Music92:	include "sound/music/TG2000Tracks/Thundersink.asm"
 		even
 Music93:	include "sound/music/Mus93 - Get Emerald.asm"
 		even
-Music_NewBark:	include "sound/music/Mus - New Bark Town.asm"
+Music_NewBark:	include "sound/music/DaxKatter/Mus - New Bark Town.asm"
 		even
 ; ---------------------------------------------------------------------------
 ; Sound effect pointers
