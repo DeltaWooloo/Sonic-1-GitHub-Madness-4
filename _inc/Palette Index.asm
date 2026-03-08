@@ -43,4 +43,5 @@ palid_ColdBrewG:		makePalEntry	Pal_ColdBrewG, 		v_palette_line_1
 palid_SonicRetro:	makePalEntry Pal_SonicRetro, v_palette_line_1
 palid_SonisRetro:	makePalEntry Pal_SonisRetro, v_palette_line_1
 palid_SplashPal:	makePalEntry	Pal_SplashPal, 		v_palette_line_1
+palid_TryAgain:		makePalEntry	Pal_TryAgain, 		v_palette_line_1
 	even

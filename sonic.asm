@@ -55,6 +55,13 @@ ZoneCount = 6
 ; Simplifying macros and functions
 	include	"Macros.asm"
 
+; ---------------------------------------------------------------------------
+; SMPS2ASM - A collection of macros that make SMPS's bytecode human-readable.
+; ---------------------------------------------------------------------------
+FixMusicAndSFXDataBugs = FixBugs
+SonicDriverVer = 1 ; Tell SMPS2ASM that we're using Sonic 1's driver.
+		include "sound/_smps2asm_inc.asm"
+
 ; ===========================================================================
 ; Equates section - Names for constants
 	include	"Constants.asm"
@@ -1983,6 +1990,7 @@ Pal_Ending:		bincludeEndMarker	"palette/Ending.bin"
 Pal_SplashPal:	bincludeEndMarker	"eurosega/pal.bin"
 Pal_ColdBrew:	bincludeEndMarker	"conimodes/cold brew/palette.bin"
 Pal_ColdBrewG:	bincludeEndMarker	"conimodes/cold brew/palette grayscale.bin"
+
 Pal_SonicRetro: bincludeEndMarker "LiquidSplashes/Rerto/Palette.bin"
 Pal_SonisRetro: bincludeEndMarker "LiquidSplashes/Rerto/PaletteSonis.bin"
     even
@@ -4300,10 +4308,15 @@ TryAgainEnd:
 
 		moveq	#plcid_TryAgain,d0
 		bsr.w	QuickPLC	; load "TRY AGAIN" or "END" patterns
+		lea	(v_ram_start).l,a1
+		lea	(Eni_TheIdiotBros).l,a0 ; load mappings for Japanese credits
+		move.w	#make_art_tile(ArtTile_Try_Again_Eggman,0,FALSE),d0
+		bsr.w	EniDec
 
+		copyTilemap	v_ram_start,vram_fg+$310,17,12
 		clearRAM v_palette_fading
 
-		moveq	#palid_Ending,d0
+		moveq	#palid_TryAgain,d0
 		bsr.w	PalLoad_Fade	; load ending palette
 		clr.w	(v_palette_fading+$40).w
 		move.b	#id_EndEggman,(v_endeggman).w ; load Eggman object
@@ -7991,7 +8004,8 @@ Nem_CreditText:	binclude	"artnem/Ending - Credits.nem"
 		even
 Nem_EndStH:	binclude	"artnem/Ending - StH Logo.nem"
 		even
-
+Eni_TheIdiotBros:	binclude	"tilemaps/Idiots.eni"
+		even
 		; AngleMap starts at $62900 in all revisions, which amounts
 		; to $104 bytes of padding for rev00 and $40 for rev01/rev02.
 		; From a technical standpoint, this padding serves no purpose.
