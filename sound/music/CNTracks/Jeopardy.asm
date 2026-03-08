@@ -13,7 +13,7 @@ Jeopardy_Header:
 	smpsHeaderFM        Jeopardy_FM5,	$00, $18
 	smpsHeaderPSG       Jeopardy_PSG1,	$DC, $06, $00, $08
 	smpsHeaderPSG       Jeopardy_PSG2,	$DC, $04, $00, $08
-	smpsHeaderPSG       Jeopardy_PSG3,	$00, $02, $00, fTone_04
+	smpsHeaderPSG       Jeopardy_PSG3,	$00, $03, $00, fTone_04
 
 Jeopardy_DAC:
 ;	smpsStop

@@ -4,13 +4,9 @@ SonLVL INI Files/dllcache
 SonLVL INI Files/SonLVL.log
 
 # Misc. compiler output.
-sonic.lst
-sonic.log
+*.lst
+*.log
 sonic.p
-sonic.debug.lst
 
 # Built ROMs.
 *.gen
-s1built.prev.bin
-s1built.bin
-sonic.debug.lst
