@@ -416,46 +416,31 @@ GameInit:
 		move.b	#id_Sega,(v_gamemode).w ; set Game Mode to Sega Screen
 
 MainGameLoop:
-		move.b	(v_gamemode).w,d0 ; load Game Mode
-		andi.w	#$7C,d0	; limit Game Mode value to $1C max (change to a maximum of 7C to add more game modes)
-		jsr	GameModeArray(pc,d0.w) ; jump to apt location in ROM
-		bra.s	MainGameLoop	; loop indefinitely
+		move.b	(v_gamemode).w,d0			; load Game Mode
+		andi.w	#$7C,d0					; limit Game Mode value to $1C max (change to a maximum of 7C to add more game modes)
+		chk	#GameModeArray_End-GameModeArray-4,d0	; bounds check
+		move.l	GameModeArray(pc,d0.w),a0
+		jsr	(a0)					; jump to apt location in ROM
+		bra.s	MainGameLoop				; loop indefinitely
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Main game mode array
 ; ---------------------------------------------------------------------------
 
 GameModeArray:
-
-ptr_GM_Sega:	bra.w	GM_Sega		; Sega Screen ($00)
-
-ptr_GM_Title:	bra.w	GM_Title	; Title Screen ($04)
-
-ptr_GM_Demo:	bra.w	GM_Level	; Demo Mode ($08)
-
-ptr_GM_Level:	bra.w	GM_Level	; Normal Level ($0C)
-
-ptr_GM_Special:	bra.w	GM_Special	; Special Stage ($10)
-
-ptr_GM_Cont:	bra.w	GM_Continue	; Continue Screen ($14)
-
-ptr_GM_Ending:	bra.w	GM_Ending	; End of game sequence ($18)
-
-ptr_GM_Credits:	bra.w	GM_Credits	; Credits ($1C)
-
-ptr_GM_ColdBrew:bra.w	JMP_GM_ColdBrew	; Cold Brew ($20)
-
-ptr_GM_SegaEU:	bra.w	JMP_GM_ColdBrew	; CONDEMNED ($24)
-
-ptr_GM_DebugMode:	bra.w	GM_DebugMenu	; Debug Menu ($28)
-
-ptr_GM_ThanatosCredits:	bra.w	JMP_GM_Thanatos ; Credits - Thanatos ver. ($2C)
-
-GameModeArray_End:		rts
-
-JMP_GM_ColdBrew:	jmp	(GM_ColdBrew).l
-
-JMP_GM_Thanatos:	jmp	(GM_ThanatosCredits).l
+ptr_GM_Sega:		dc.l	GM_Sega			; Sega Screen ($00)
+ptr_GM_Title:		dc.l	GM_Title		; Title Screen ($04)
+ptr_GM_Demo:		dc.l	GM_Level		; Demo Mode ($08)
+ptr_GM_Level:		dc.l	GM_Level		; Normal Level ($0C)
+ptr_GM_Special:		dc.l	GM_Special		; Special Stage ($10)
+ptr_GM_Cont:		dc.l	GM_Continue		; Continue Screen ($14)
+ptr_GM_Ending:		dc.l	GM_Ending		; End of game sequence ($18)
+ptr_GM_Credits:		dc.l	GM_Credits		; Credits ($1C)
+ptr_GM_ColdBrew:	dc.l	GM_ColdBrew		; Cold Brew ($20)
+ptr_GM_SegaEU:		dc.l	GM_ColdBrew		; Sega Screen EU ($24)
+ptr_GM_DebugMode:	dc.l	GM_DebugMenu		; Debug Menu ($28)
+ptr_GM_ThanatosCredits:	dc.l	GM_ThanatosCredits	; Credits - Thanatos ver. ($2C)
+GameModeArray_End:
 ; ===========================================================================
 	if SkipChecksumCheck=0
 CheckSumError:
