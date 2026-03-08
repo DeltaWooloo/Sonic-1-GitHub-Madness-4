@@ -19,7 +19,7 @@ eegg_time = objoff_30		; time between juggle motions
 
 EEgg_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
-		move.w	#$120,obX(a0)
+		move.w	#$120-$20,obX(a0)
 		move.w	#$F4,obScreenY(a0)
 		move.l	#Map_EEgg,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Try_Again_Eggman,0,0),obGfx(a0)

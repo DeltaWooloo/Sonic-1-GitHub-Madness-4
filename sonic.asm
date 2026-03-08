@@ -1877,6 +1877,8 @@ Pal_Sega2:	binclude	"palette/Sega2.bin"
 
 PalLoad_Fade:
 		lea	(Pal_Index).l,a1
+
+LoadUnindexedPalette_Fade:
 		lsl.w	#3,d0
 		adda.w	d0,a1
 		movea.l	(a1)+,a2	; get palette data address
@@ -1977,9 +1979,13 @@ Pal_SBZ3SonWat:		bincludeEndMarker	"palette/Sonic - SBZ3 Underwater.bin"
 Pal_SSResult:		bincludeEndMarker	"palette/Special Stage Results.bin"
 Pal_Continue:		bincludeEndMarker	"palette/Special Stage Continue Bonus.bin"
 Pal_Ending:		bincludeEndMarker	"palette/Ending.bin"
+
 Pal_SplashPal:	bincludeEndMarker	"eurosega/pal.bin"
 Pal_ColdBrew:	bincludeEndMarker	"conimodes/cold brew/palette.bin"
 Pal_ColdBrewG:	bincludeEndMarker	"conimodes/cold brew/palette grayscale.bin"
+Pal_SonicRetro: bincludeEndMarker "LiquidSplashes/Rerto/Palette.bin"
+Pal_SonisRetro: bincludeEndMarker "LiquidSplashes/Rerto/PaletteSonis.bin"
+    even
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to wait for VBlank routines to complete
@@ -2075,7 +2081,7 @@ Sega_WaitEnd:
 
 Sega_GotoTitle:
 		move.b	#id_Title,(v_gamemode).w ; go to title screen
-		rts
+		jmp	LiquidSplashes		; i have a million oil im the best  tru  ckdriver in the world
 ; ===========================================================================
 
 ;----------------------------------------------------------------------------
@@ -4286,6 +4292,7 @@ TryAgainEnd:
 		move.w	#$9200,(a6)	; window vertical position
 		move.w	#$8B03,(a6)	; line scroll mode
 		move.w	#$8720,(a6)	; set background colour (line 3; colour 0)
+		move.w	#$8C00,(a6)	; set to H32 mode - running bit in my changes - coni
 		clr.b	(f_wtr_state).w
 		bsr.w	ClearScreen
 
@@ -4302,7 +4309,7 @@ TryAgainEnd:
 		move.b	#id_EndEggman,(v_endeggman).w ; load Eggman object
 		jsr	(ExecuteObjects).l
 		jsr	(BuildSprites).l
-		move.w	#1800,(v_generictimer).w ; show screen for 30 seconds
+		move.w	#60*60,(v_generictimer).w ; show screen for a minute
 		bsr.w	PaletteFadeIn
 		move.w	#bgm_Jeopardy,d0	; "you fucking idiot"
 		bsr.w	QueueSound1	; play ending sequence music
@@ -4323,6 +4330,9 @@ TryAg_MainLoop:
 		bra.s	TryAg_MainLoop
 
 TryAg_Exit:
+		bsr.w	PaletteFadeOut
+		lea	(vdp_control_port).l,a6
+		move.w	#$8C81,(a6)	; set to H40 mode - hacky fix - coni
 		move.b	#id_Sega,(v_gamemode).w ; goto Sega screen
 		rts
 
@@ -8381,6 +8391,8 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 		include "conimodes/cold brew/GM_ColdBrew.asm"
 		include "conimodes/winxp/GM_NTOSKRNL.asm"
 		include "hipncoolstuff/ThanatosCredits/Main.asm"
+
+		include "LiquidSplashes/Splashes.asm"
 ; end of 'ROM'
 		even
 ; ==============================================================
