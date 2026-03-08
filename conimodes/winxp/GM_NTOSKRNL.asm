@@ -78,9 +78,9 @@ GM_WinXP_MainLoop:
 GM_WinXP_ChangeMode:
 		bsr.w	WinXP_CLearPal
 		cmpi.b	#id_Level+$80,(v_gamemode).w
-		beq.s	@noset	; if mode is $C (level), branch
+		beq.s	.noset	; if mode is $C (level), branch
 		move.b	#id_Title,(v_gamemode).w	; go to Title Screen
-@noset:
+.noset:
 		rts
 
 WinXP_CLearPal:

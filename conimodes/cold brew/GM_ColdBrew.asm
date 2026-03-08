@@ -8,9 +8,9 @@
 ;		lea		ColdBrew_GrayScale,a2
 ;		move.w	#$F,d7
 ;
-;	@loop:
+;	.loop:
 ;		move.l	(a2)+,(a1)+	; move data to RAM
-;		dbf	d3,@loop
+;		dbf	d3,.loop
 ;
 ; ---------------------------------------------------------------------------
 GM_ColdBrew:

@@ -393,7 +393,7 @@ GameInit:
 
 MainGameLoop:
 		move.b	(v_gamemode).w,d0 ; load Game Mode
-		andi.w	#$1C,d0	; limit Game Mode value to $1C max (change to a maximum of 7C to add more game modes)
+		andi.w	#$7C,d0	; limit Game Mode value to $1C max (change to a maximum of 7C to add more game modes)
 		jsr	GameModeArray(pc,d0.w) ; jump to apt location in ROM
 		bra.s	MainGameLoop	; loop indefinitely
 ; ===========================================================================
@@ -419,7 +419,10 @@ ptr_GM_Ending:	bra.w	GM_Ending	; End of game sequence ($18)
 
 ptr_GM_Credits:	bra.w	GM_Credits	; Credits ($1C)
 
+ptr_GM_ColdBrew:bra.w	JMP_GM_ColdBrew	; Credits ($20)
 		rts
+
+JMP_GM_ColdBrew:	jmp	(GM_ColdBrew).l
 ; ===========================================================================
 	if SkipChecksumCheck=0
 CheckSumError:
@@ -2120,6 +2123,8 @@ Pal_SBZ3SonWat:		bincludeEndMarker	"palette/Sonic - SBZ3 Underwater.bin"
 Pal_SSResult:		bincludeEndMarker	"palette/Special Stage Results.bin"
 Pal_Continue:		bincludeEndMarker	"palette/Special Stage Continue Bonus.bin"
 Pal_Ending:		bincludeEndMarker	"palette/Ending.bin"
+Pal_ColdBrew:	bincludeEndMarker	"conimodes\cold brew\palette.bin"
+Pal_ColdBrewG:	bincludeEndMarker	"conimodes\cold brew\palette grayscale.bin"
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to wait for VBlank routines to complete
@@ -2680,13 +2685,15 @@ loc_33E4:
 		move.w	Demo_Levels(pc,d0.w),d0	; load level number for demo
 		move.w	d0,(v_zone).w
 		addq.w	#1,(v_demonum).w ; add 1 to demo number
-		cmpi.w	#4,(v_demonum).w ; is demo number less than 4?
+		cmpi.w	#5,(v_demonum).w ; is demo number less than 5?
 		blo.s	loc_3422	; if yes, branch
 		move.w	#0,(v_demonum).w ; reset demo number to 0
 
 loc_3422:
 		move.w	#1,(f_demo).w	; turn demo mode on
 		move.b	#id_Demo,(v_gamemode).w ; set screen mode to 08 (demo)
+		cmpi.w	#$700,d0	; is level number 0700 (the cold brew zone)?
+		beq.s	Demo_Brew	; if yes, branch
 		cmpi.w	#$600,d0	; is level number 0600 (special stage)?
 		bne.s	Demo_Level	; if not, branch
 		move.b	#id_Special,(v_gamemode).w ; set screen mode to $10 (Special Stage)
@@ -2703,6 +2710,11 @@ Demo_Level:
 		move.l	#5000,(v_scorelife).w ; extra life is awarded at 50000 points
 	endif
 		rts
+
+Demo_Brew:
+		move.b	#id_ColdBrew,(v_gamemode).w ; set screen mode to $34
+		rts	
+
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Levels used in demos
@@ -8463,6 +8475,8 @@ ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 
 SoundDriver:	include "s1.sounddriver.asm"
 
+		include "conimodes\cold brew\GM_ColdBrew.asm"
+		include "conimodes\winxp\GM_NTOSKRNL.asm"
 ; end of 'ROM'
 		even
 EndOfRom:

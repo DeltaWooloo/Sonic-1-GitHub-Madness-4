@@ -2,6 +2,14 @@
 ; Constants
 ; ---------------------------------------------------------------------------
 
+; define stuff from older disassemblies because eyes
+;- CONI
+PlaySound	=		QueueSound1
+PlaySound_Special	=		QueueSound2
+PalLoad1	=		PalLoad_Fade
+PalLoad2	=		PalLoad
+v_pal_dry	=		v_palette
+
 Size_of_SegaPCM:		equ $6978
 Size_of_DAC_driver_guess:	equ $1760
 
@@ -67,6 +75,7 @@ id_Special:	equ ptr_GM_Special-GameModeArray; $10
 id_Continue:	equ ptr_GM_Cont-GameModeArray	; $14
 id_Ending:	equ ptr_GM_Ending-GameModeArray	; $18
 id_Credits:	equ ptr_GM_Credits-GameModeArray; $1C
+id_ColdBrew:	equ ptr_GM_ColdBrew-GameModeArray; $20
 
 ; Levels
 id_GHZ:		equ 0
@@ -76,7 +85,8 @@ id_SLZ:		equ 3
 id_SYZ:		equ 4
 id_SBZ:		equ 5
 id_EndZ:	equ 6
-id_SS:		equ 7
+id_SS:		equ 6
+id_CBZ:		equ 7
 
 ; Colours
 cBlack:		equ $000		; colour black
