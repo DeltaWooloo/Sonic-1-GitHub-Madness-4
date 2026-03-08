@@ -46,10 +46,13 @@ SonicRetro:
 	move.b	#bgm_Retro,d0
 	jsr	QueueSound2
 
-	; this sucks and was a total hack
+	; This randomizer sucks from the front rather then the back
 	jsr	RandomNumber
-	andi.w	#$02*6, d0
+	and.l	#$FFFF,d0			; clear high word, it's kinda funky with divu
+	divu.w	#(.InitRoutinesEnd-.InitRoutines)/4,d0
+	swap	d0				; get modulo
 
+	lsl.w	#2,d0
 	jsr	.InitRoutines(pc, d0)
 	jmp	.Loop
 
@@ -62,6 +65,7 @@ SonicRetro:
 	bra.w	.SonisRetros
 	bra.w	.SonisRetros
 	bra.w	.EmeraldFall
+.InitRoutinesEnd:
 
 ; ====================================================================================
 
