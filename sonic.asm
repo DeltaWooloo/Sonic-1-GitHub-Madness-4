@@ -4250,7 +4250,8 @@ TryAgainEnd:
 		jsr	(BuildSprites).l
 		move.w	#1800,(v_generictimer).w ; show screen for 30 seconds
 		bsr.w	PaletteFadeIn
-
+		move.w	#bgm_Jeopardy,d0	; "you fucking idiot"
+		bsr.w	QueueSound1	; play ending sequence music
 ; ---------------------------------------------------------------------------
 ; "TRY AGAIN" and "END" screen main loop
 ; ---------------------------------------------------------------------------

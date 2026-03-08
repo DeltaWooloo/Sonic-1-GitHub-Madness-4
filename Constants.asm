@@ -220,6 +220,8 @@ bgm_Credits:	equ ((ptr_mus91-MusicIndex)/4)+bgm__First
 bgm_Drowning:	equ ((ptr_mus92-MusicIndex)/4)+bgm__First
 bgm_Emerald:	equ ((ptr_mus93-MusicIndex)/4)+bgm__First
 bgm_NewBarkTown:	equ ((ptr_mus_newbark-MusicIndex)/4)+bgm__First
+bgm_REMansion:	equ ((ptr_mus95-MusicIndex)/4)+bgm__First
+bgm_Jeopardy:	equ ((ptr_mus96-MusicIndex)/4)+bgm__First
 bgm__Last:	equ ((ptr_musend-MusicIndex-4)/4)+bgm__First
 
 ; Sound effects
