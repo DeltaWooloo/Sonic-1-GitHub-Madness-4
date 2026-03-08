@@ -11,6 +11,10 @@
 ; ===========================================================================
 ; ASSEMBLY OPTIONS:
 
+CheatsOn = 1
+; 	| If 0, build it with no cheats active
+; 	| If 1, build it with all cheats active
+
 Revision = 1
 ; 	| If 0, build the original version of the game, dubbed REV00
 ; 	| If 1, build the later version, dubbed REV01, which includes various bugfixes and enhancements
@@ -391,6 +395,17 @@ GameInit:
 		bsr.w	VDPSetupGame
 		bsr.w	JoypadInit
 		bsr.w	Init_MegaPCM
+		if CheatsOn=1
+		move.w	#$101,(f_levselcheat).w
+		move.w	#$101,(f_debugcheat).w
+		else
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		endif
 		move.b	#id_Sega,(v_gamemode).w ; set Game Mode to Sega Screen
 
 MainGameLoop:
