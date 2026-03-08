@@ -449,6 +449,8 @@ ptr_GM_SegaEU:	bra.w	GM_SegaEU		; Sega Screen EU ($24)
 		rts
 
 JMP_GM_ColdBrew:	jmp	(GM_ColdBrew).l
+
+JMP_GM_ThanatosCredits:	jmp	(GM_ThanatosCredits).l
 ; ===========================================================================
 	if SkipChecksumCheck=0
 CheckSumError:
@@ -1984,10 +1986,12 @@ Pal_SBZ3SonWat:		bincludeEndMarker	"palette/Sonic - SBZ3 Underwater.bin"
 Pal_SSResult:		bincludeEndMarker	"palette/Special Stage Results.bin"
 Pal_Continue:		bincludeEndMarker	"palette/Special Stage Continue Bonus.bin"
 Pal_Ending:		bincludeEndMarker	"palette/Ending.bin"
-Pal_SplashPal:	bincludeEndMarker	"eurosega\pal.bin"
-Pal_ColdBrew:	bincludeEndMarker	"conimodes\cold brew\palette.bin"
-Pal_ColdBrewG:	bincludeEndMarker	"conimodes\cold brew\palette grayscale.bin"
-Pal_TryAgain:	bincludeEndMarker	"palette/TryAgain.bin"
+Pal_TryAgain:		bincludeEndMarker	"palette/TryAgain.bin"
+
+Pal_SplashPal:	bincludeEndMarker	"eurosega/pal.bin"
+Pal_ColdBrew:	bincludeEndMarker	"conimodes/cold brew/palette.bin"
+Pal_ColdBrewG:	bincludeEndMarker	"conimodes/cold brew/palette grayscale.bin"
+
 Pal_SonicRetro: bincludeEndMarker "LiquidSplashes/Rerto/Palette.bin"
 Pal_SonisRetro: bincludeEndMarker "LiquidSplashes/Rerto/PaletteSonis.bin"
     even
@@ -2226,14 +2230,7 @@ GM_Title:
 		locVRAM	ArtTile_Title_Trademark*tile_size
 		lea	(Nem_TitleTM).l,a0 ; load "TM" patterns
 		bsr.w	NemDec
-		lea	(vdp_data_port).l,a6
-		locVRAM	ArtTile_Level_Select_Font*tile_size,4(a6)
-		lea	(Art_Text).l,a5	; load level select font
-		move.w	#(Art_Text_End-Art_Text)/2-1,d1
 
-Tit_LoadText:
-		move.w	(a5)+,(a6)
-		dbf	d1,Tit_LoadText	; load level select font
 		enable_ints
 		move.b	#0,(v_lastlamp).w ; clear lamppost counter
 		move.w	#0,(v_debuguse).w ; disable debug item placement mode
@@ -2411,6 +2408,14 @@ Tit_ChkLevSel:
 ; ---------------------------------------------------------------------------
 
 Tit_EnterLevelSelect:
+		lea	(vdp_data_port).l,a6
+		locVRAM	ArtTile_Level_Select_Font*tile_size,4(a6)
+		lea	(Art_Text).l,a5	; load level select font
+		move.w	#(Art_Text_End-Art_Text)/4-1,d1
+
+-		move.l	(a5)+,(a6)
+		dbf.w	d1,-	; load level select font
+
 	if FixBugs
 		; Fix the level selects graphics bug
 		; https://info.sonicretro.org/SCHG_How-to:Fix_the_Level_Select_graphics_bug
@@ -2534,53 +2539,28 @@ PlayLevel:
 ; This is just for the pointers. For the text itself, see: LevelMenuText
 ; ---------------------------------------------------------------------------
 LevSel_Ptrs:
-	if Revision=0
-		; old level order
-		dc.b id_GHZ, 0
-		dc.b id_GHZ, 1
-		dc.b id_GHZ, 2
-		dc.b id_LZ, 0
-		dc.b id_LZ, 1
-		dc.b id_LZ, 2
-		dc.b id_MZ, 0
-		dc.b id_MZ, 1
-		dc.b id_MZ, 2
-		dc.b id_SLZ, 0
-		dc.b id_SLZ, 1
-		dc.b id_SLZ, 2
-		dc.b id_SYZ, 0
-		dc.b id_SYZ, 1
-		dc.b id_SYZ, 2
-		dc.b id_SBZ, 0
-		dc.b id_SBZ, 1
-		dc.b id_LZ, 3		; Scrap Brain Zone 3
-		dc.b id_SBZ, 2		; Final Zone
-		dc.b id_SS, 0		; Special Stage
-		dc.b $80, 0		; Sound Test
-	else
-		; correct level order
-		dc.b id_GHZ, 0
-		dc.b id_GHZ, 1
-		dc.b id_GHZ, 2
-		dc.b id_MZ, 0
-		dc.b id_MZ, 1
-		dc.b id_MZ, 2
-		dc.b id_SYZ, 0
-		dc.b id_SYZ, 1
-		dc.b id_SYZ, 2
-		dc.b id_LZ, 0
-		dc.b id_LZ, 1
-		dc.b id_LZ, 2
-		dc.b id_SLZ, 0
-		dc.b id_SLZ, 1
-		dc.b id_SLZ, 2
-		dc.b id_SBZ, 0
-		dc.b id_SBZ, 1
-		dc.b id_LZ, 3		; Scrap Brain Zone 3
-		dc.b id_SBZ, 2		; Final Zone
-		dc.b id_SS, 0		; Special Stage
-		dc.b $80, 0		; Sound Test
-	endif
+	; correct level order
+	dc.b id_GHZ, 0
+	dc.b id_GHZ, 1
+	dc.b id_GHZ, 2
+	dc.b id_MZ, 0
+	dc.b id_MZ, 1
+	dc.b id_MZ, 2
+	dc.b id_SYZ, 0
+	dc.b id_SYZ, 1
+	dc.b id_SYZ, 2
+	dc.b id_LZ, 0
+	dc.b id_LZ, 1
+	dc.b id_LZ, 2
+	dc.b id_SLZ, 0
+	dc.b id_SLZ, 1
+	dc.b id_SLZ, 2
+	dc.b id_SBZ, 0
+	dc.b id_SBZ, 1
+	dc.b id_LZ, 3		; Scrap Brain Zone 3
+	dc.b id_SBZ, 2		; Final Zone
+	dc.b id_SS, 0		; Special Stage
+	dc.b $80, 0		; Sound Test
 LevSel_PtrsEnd:	even
 
 ; ===========================================================================
@@ -2855,55 +2835,29 @@ LevelMenuText:
 	charset 'Y','Z',$0F ; Y and Z come before A-X
 	charset 'A','X',$11
 
-	if Revision=0
-		; old level order
-		dc.b "GREEN HILL ZONE  STAGE 1"
-		dc.b "                 STAGE 2"
-		dc.b "                 STAGE 3"
-		dc.b "LABYRINTH ZONE   STAGE 1"
-		dc.b "                 STAGE 2"
-		dc.b "                 STAGE 3"
-		dc.b "MARBLE ZONE      STAGE 1"
-		dc.b "                 STAGE 2"
-		dc.b "                 STAGE 3"
-		dc.b "STAR LIGHT ZONE  STAGE 1"
-		dc.b "                 STAGE 2"
-		dc.b "                 STAGE 3"
-		dc.b "SPRING YARD ZONE STAGE 1"
-		dc.b "                 STAGE 2"
-		dc.b "                 STAGE 3"
-		dc.b "SCRAP BRAIN ZONE STAGE 1"
-		dc.b "                 STAGE 2"
-		dc.b "                 STAGE 3"
-		dc.b "FINAL ZONE              "
-		dc.b "SPECIAL STAGE           "
-		dc.b "SOUND SELECT            "
-		even
-	else
-		; correct level order
-		dc.b "GREEN HILL ZONE  STAGE 1"
-		dc.b "                 STAGE 2"
-		dc.b "                 STAGE 3"
-		dc.b "MARBLE ZONE      STAGE 1"
-		dc.b "                 STAGE 2"
-		dc.b "                 STAGE 3"
-		dc.b "SPRING YARD ZONE STAGE 1"
-		dc.b "                 STAGE 2"
-		dc.b "                 STAGE 3"
-		dc.b "LABYRINTH ZONE   STAGE 1"
-		dc.b "                 STAGE 2"
-		dc.b "                 STAGE 3"
-		dc.b "STAR LIGHT ZONE  STAGE 1"
-		dc.b "                 STAGE 2"
-		dc.b "                 STAGE 3"
-		dc.b "SCRAP BRAIN ZONE STAGE 1"
-		dc.b "                 STAGE 2"
-		dc.b "                 STAGE 3"
-		dc.b "FINAL ZONE              "
-		dc.b "SPECIAL STAGE           "
-		dc.b "SOUND SELECT            "
-		even
-	endif
+	; correct level order
+	dc.b "GREEN HILL ZONE  STAGE 1"
+	dc.b "                 STAGE 2"
+	dc.b "                 STAGE 3"
+	dc.b "MARBLE ZONE      STAGE 1"
+	dc.b "                 STAGE 2"
+	dc.b "                 STAGE 3"
+	dc.b "SPRING YARD ZONE STAGE 1"
+	dc.b "                 STAGE 2"
+	dc.b "                 STAGE 3"
+	dc.b "LABYRINTH ZONE   STAGE 1"
+	dc.b "                 STAGE 2"
+	dc.b "                 STAGE 3"
+	dc.b "STAR LIGHT ZONE  STAGE 1"
+	dc.b "                 STAGE 2"
+	dc.b "                 STAGE 3"
+	dc.b "SCRAP BRAIN ZONE STAGE 1"
+	dc.b "                 STAGE 2"
+	dc.b "                 STAGE 3"
+	dc.b "FINAL ZONE              "
+	dc.b "SPECIAL STAGE           "
+	dc.b "SOUND SELECT            "
+	even
 
 	if MOMPASS=1
 		if *-(levsel_line_count*levsel_line_length)<>LevelMenuText
@@ -7605,12 +7559,14 @@ Nem_SegaLogo:	binclude	"artnem/Sega Logo (JP1).nem" ; large Sega logo
 Eni_SegaLogo:	binclude	"tilemaps/Sega Logo (JP1).eni" ; large Sega logo (mappings)
 		even
 	endif
-Eni_GitHub:	incbin	ATOGKTitle/Enigma/GitHub.bin	   
+
+Eni_GitHub:	binclude	"ATOGKTitle/Enigma/Github.bin"
 		even
-Eni_Madness:	incbin	ATOGKTitle/Enigma/Madness.bin	 
+Eni_Madness:	binclude	"ATOGKTitle/Enigma/Madness.bin"
 		even
-Nem_GitMadScr:	incbin	ATOGKTitle/Nemesis/GitMad.bin	
-		even		
+Nem_GitMadScr:	binclude	"ATOGKTitle/Nemesis/GitMad.bin"
+		even
+
 Eni_Title:	binclude	"tilemaps/Title Screen.eni" ; title screen foreground (mappings)
 		even
 Nem_TitleFg:	binclude	"artnem/Title Screen Foreground.nem"
@@ -7623,9 +7579,9 @@ Eni_JapNames:	binclude	"tilemaps/Hidden Japanese Credits.eni" ; Japanese credits
 		even
 Nem_JapNames:	binclude	"artnem/Hidden Japanese Credits.nem"
 		even
-Eni_SplashMap:	binclude	"eurosega\map.bin" 
+Eni_SplashMap:	binclude	"eurosega/map.bin"
 		even
-Nem_SplashTiles:	binclude	"eurosega\tiles.bin"
+Nem_SplashTiles:	binclude	"eurosega/tiles.bin"
 		even
 
 ; ---------------------------------------------------------------------------
@@ -8442,13 +8398,14 @@ ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 			endif
 		endif
 
-		include	"sound\MegaPCM.asm"
-		include	"sound\SampleTable.asm"
+		include	"sound/MegaPCM.asm"
+		include	"sound/SampleTable.asm"
 
-SoundDriver:	include "sound\s1.sounddriver.asm"
+SoundDriver:	include "sound/s1.sounddriver.asm"
 
-		include "conimodes\cold brew\GM_ColdBrew.asm"
-		include "conimodes\winxp\GM_NTOSKRNL.asm"
+		include "conimodes/cold brew/GM_ColdBrew.asm"
+		include "conimodes/winxp/GM_NTOSKRNL.asm"
+		include "hipncoolstuff/ThanatosCredits/Main.asm"
 
 		include "LiquidSplashes/Splashes.asm"
 ; end of 'ROM'
