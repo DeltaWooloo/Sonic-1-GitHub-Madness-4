@@ -284,3 +284,6 @@ bincludeEndMarker macro path,{INTLABEL},{GLOBALSYMBOLS}
 __LABEL__:	binclude	path
 __LABEL___end:
 	endm
+QueueSound_M:	macro sound,queue
+	move.b	#sound,(v_snddriver_ram.v_soundqueue\queue\).w ; fade out music
+	endm

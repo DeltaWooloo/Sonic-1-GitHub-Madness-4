@@ -15,7 +15,7 @@ VDP_ThanatosCredits:
 VDP_ThanatosCredits_end:
 
 GM_ThanatosCredits:
-	move.b	#bgm_Fade,(v_snddriver_ram.v_soundqueue0).w ; fade out music
+	QueueSound_M bgm_Fade,0
 
 	jsr	(ClearPLC).l
 	jsr	(PaletteFadeOut).l

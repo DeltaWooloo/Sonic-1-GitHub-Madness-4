@@ -13,7 +13,7 @@ Jeopardy_Header:
 	smpsHeaderFM        Jeopardy_FM5,	$00, $18
 	smpsHeaderPSG       Jeopardy_PSG1,	$DC, $06, $00, $08
 	smpsHeaderPSG       Jeopardy_PSG2,	$DC, $04, $00, $08
-	smpsHeaderPSG       Jeopardy_PSG3,	$00, $03, $00, fTone_04
+	smpsHeaderPSG       Jeopardy_PSG3,	$00, $02, $00, fTone_04
 
 Jeopardy_DAC:
 ;	smpsStop
@@ -49,6 +49,7 @@ Jeopardy_FM2:
 
 Jeopardy_FM3:
 ;	smpsStop
+	smpsPan             panLeft, $00
 	smpsSetvoice        $02
 	dc.b	nRst, $06, nA3, $09, nA3, nA3, $18
 	dc.b	nRst, $06, nF4, $09, nF4, nE4, $18
@@ -62,6 +63,7 @@ Jeopardy_FM3:
 
 Jeopardy_FM4:
 ;	smpsStop
+	smpsPan             panRight, $00
 	smpsSetvoice        $02
 	dc.b	nRst, $06, nC4, $09, nC4, nC4, $18
 	dc.b	nRst, $06, nD4, $09, nD4, nG4, $18

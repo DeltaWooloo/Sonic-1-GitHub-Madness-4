@@ -443,17 +443,19 @@ ptr_GM_Ending:	bra.w	GM_Ending	; End of game sequence ($18)
 
 ptr_GM_Credits:	bra.w	GM_Credits	; Credits ($1C)
 
-ptr_GM_ColdBrew:bra.w	JMP_GM_ColdBrew	; Credits ($20)
+ptr_GM_ColdBrew:bra.w	JMP_GM_ColdBrew	; Cold Brew ($20)
 
 ptr_GM_SegaEU:	bra.w	JMP_GM_ColdBrew	; CONDEMNED ($24)
 
-ptr_GM_DebugMode:	bra.w	GM_DebugMenu		; Debug Menu ($28)	
+ptr_GM_DebugMode:	bra.w	GM_DebugMenu	; Debug Menu ($28)
+
+ptr_GM_ThanatosCredits:	bra.w	JMP_GM_Thanatos ; Credits - Thanatos ver. ($2C)
 
 GameModeArray_End:		rts
 
 JMP_GM_ColdBrew:	jmp	(GM_ColdBrew).l
 
-JMP_GM_ThanatosCredits:	jmp	(GM_ThanatosCredits).l
+JMP_GM_Thanatos:	jmp	(GM_ThanatosCredits).l
 ; ===========================================================================
 	if SkipChecksumCheck=0
 CheckSumError:
