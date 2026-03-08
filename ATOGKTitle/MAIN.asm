@@ -8,7 +8,7 @@ VDPData:         equ   $C00000
 VDPCtrl:         equ   $C00004
 Chunk:	         equ   $FF0000
 Timer:           equ   $FFFFF614
-SmilingBomb:     equ   $0A
+SmilingBomb:     equ   bgm_Title
 FadeOut:         equ   $FE
 vblank:          equ   $FFFFF62A
 VDP_buff:	     equ   $FFFFF60C	
@@ -21,7 +21,7 @@ VDP_buff:	     equ   $FFFFF60C
 ; ===========================================================================
 
 GitHubScreen: 		 		
-		jsr		(MegaPCM_StopPlayback).l
+;		jsr		(MegaPCM_StopPlayback).l
 ;		move.b	#FadeOut,d0
 ;		bsr.w	PlaySound_Special ; stop music
 ;		bsr.w	ClearPLC         ; PLCs Reset - CONI - this and the music fade already called formerly soooo

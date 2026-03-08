@@ -2063,12 +2063,12 @@ Sega_GotoTitle:
 ; ---------------------------------------------------------------------------
 
 GM_Title:
-		move.b	#bgm_Stop,d0
+		move.b	#bgm_Fade,d0
 		bsr.w	QueueSound2 ; stop music
 		bsr.w	ClearPLC
 		bsr.w	PaletteFadeOut
-		disable_ints
-		bsr.w	DACDriverLoad
+;		disable_ints
+;		bsr.w	DACDriverLoad
 		lea	(vdp_control_port).l,a6
 		move.w	#$8004,(a6)	; 8-colour mode
 		move.w	#$8200+(vram_fg>>10),(a6) ; set foreground nametable address
@@ -2103,7 +2103,8 @@ GM_Title:
 		jsr	(ExecuteObjects).l
 		jsr	(BuildSprites).l
 		bsr.w	PaletteFadeIn
-		disable_ints
+
+;		disable_ints
 		locVRAM	ArtTile_Title_Foreground*tile_size
 		lea	(Nem_TitleFg).l,a0 ; load title screen patterns
 		bsr.w	NemDec
@@ -2121,7 +2122,10 @@ GM_Title:
 Tit_LoadText:
 		move.w	(a5)+,(a6)
 		dbf	d1,Tit_LoadText	; load level select font
-
+		include	"ATOGKTitle/MAIN.asm"	; Code (simply ran by inclusion)
+FinalTitle:
+		bsr.w	ClearPLC	
+		bsr.w	PaletteWhiteOut
 		move.b	#0,(v_lastlamp).w ; clear lamppost counter
 		move.w	#0,(v_debuguse).w ; disable debug item placement mode
 		move.w	#0,(f_demo).w	; disable debug mode
@@ -2139,7 +2143,6 @@ Tit_LoadText:
 		bsr.w	KosDec
 		bsr.w	LevelLayoutLoad
 		bsr.w	PaletteFadeOut
-		disable_ints
 		bsr.w	ClearScreen
 		lea	(vdp_control_port).l,a5
 		lea	(vdp_data_port).l,a6
@@ -2165,8 +2168,6 @@ Tit_LoadText:
 		bsr.w	NemDec
 		moveq	#palid_Title,d0	; load title screen palette
 		bsr.w	PalLoad_Fade
-		move.b	#bgm_Title,d0
-		bsr.w	QueueSound2	; play title screen music
 		move.b	#0,(f_debugmode).w ; disable debug mode
 		move.w	#376,(v_generictimer).w ; run title screen for 376 frames
 		
@@ -7482,7 +7483,12 @@ Nem_SegaLogo:	binclude	"artnem/Sega Logo (JP1).nem" ; large Sega logo
 Eni_SegaLogo:	binclude	"tilemaps/Sega Logo (JP1).eni" ; large Sega logo (mappings)
 		even
 	endif
-
+Eni_GitHub:	incbin	ATOGKTitle/Enigma/GitHub.bin	   
+		even
+Eni_Madness:	incbin	ATOGKTitle/Enigma/Madness.bin	 
+		even
+Nem_GitMadScr:	incbin	ATOGKTitle/Nemesis/GitMad.bin	
+		even		
 Eni_Title:	binclude	"tilemaps/Title Screen.eni" ; title screen foreground (mappings)
 		even
 Nem_TitleFg:	binclude	"artnem/Title Screen Foreground.nem"
