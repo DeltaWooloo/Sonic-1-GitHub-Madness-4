@@ -1,11 +1,4 @@
-s1disasm_git
-============
+Sonic 1 Github Madness 4
 
-The very latest Sonic 1 Disassembly.
-
-See: http://info.sonicretro.org/Disassemblies
-
-DISCLAIMER:
-Any and all content presented in this repository is presented for informational and educational purposes only.
-Commercial usage is expressly prohibited. Sonic Retro claims no ownership of any code in these repositories.
-You assume any and all responsibility for using this content responsibly. Sonic Retro claims no responsibiliy or warranty.
+The madness is back to make you mad and shit. If you do wanna join in the fun and commit to the repo, click below to join the server:
+https://discord.gg/ZDDyfQeWbx
