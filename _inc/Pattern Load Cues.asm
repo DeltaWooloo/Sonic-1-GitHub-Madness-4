@@ -366,7 +366,7 @@ PLC_Endingend:
 PLC_TryAgain:	dc.w ((PLC_TryAgainend-PLC_TryAgain-2)/6)-1
 		plcm	Nem_EndEm,      ArtTile_Try_Again_Emeralds ; emeralds
 		plcm	Nem_TryAgain,   ArtTile_Try_Again_Eggman   ; Eggman
-		plcm	Nem_CreditText, $0       ; credits alphabet
+		plcm	Nem_CreditText, ArtTile_Credits_Font       ; credits alphabet
 PLC_TryAgainend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - Eggman on SBZ 2

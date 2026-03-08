@@ -28,7 +28,7 @@ TCha_Main:	; Routine 0
 		move.b	#0,obRender(a1)
 		move.b	#1,obPriority(a1)
 		move.w	#$104,obX(a1)
-		move.w	#$120,objoff_38(a1)
+		move.w	#$120-$20,objoff_38(a1)
 		move.w	#$EC,obScreenY(a1)
 		move.w	obScreenY(a1),objoff_3A(a1)
 		move.b	#$1C,objoff_3C(a1)

@@ -2,7 +2,7 @@
 Jeopardy_Header:
 	smpsHeaderStartSong 1
 	smpsHeaderVoice     Jeopardy_Voices
-	smpsHeaderChan      $03, $00
+	smpsHeaderChan      $06, $03
 	smpsHeaderTempo     $01, $02
 
 	smpsHeaderDAC       Jeopardy_DAC
@@ -10,13 +10,13 @@ Jeopardy_Header:
 	smpsHeaderFM        Jeopardy_FM2,	$00, $08
 	smpsHeaderFM        Jeopardy_FM3,	$00, $0C
 	smpsHeaderFM        Jeopardy_FM4,	$00, $0C
-	smpsHeaderFM        Jeopardy_FM5,	$F4, $18
-;	smpsHeaderPSG       Jeopardy_PSG1,	$D0, $01, $00, $00
-;	smpsHeaderPSG       Jeopardy_PSG2,	$D0, $03, $00, $00
-;	smpsHeaderPSG       Jeopardy_PSG3,	$00, $03, $00, fTone_04
+	smpsHeaderFM        Jeopardy_FM5,	$00, $18
+	smpsHeaderPSG       Jeopardy_PSG1,	$DC, $06, $00, $08
+	smpsHeaderPSG       Jeopardy_PSG2,	$DC, $04, $00, $08
+	smpsHeaderPSG       Jeopardy_PSG3,	$00, $02, $00, fTone_04
 
 Jeopardy_DAC:
-	smpsStop
+;	smpsStop
 	dc.b	dKick, $06, dKick, dSnare, $03, dKick, $09, $09, $03, dSnare, $06, dKick
 	smpsLoop            $00, $06, Jeopardy_DAC
 	dc.b	dSnare, $0C, dKick, $06, $06, $0C, $0C, $0C, $0C, dSnare, $03, $03, $06, $03, $03, $06
@@ -26,18 +26,19 @@ Jeopardy_FM5:				; reverb
 	smpsAlterNote       $03
 	dc.b	nRst, $06
 Jeopardy_FM1:
-	smpsStop
+;	smpsStop
 	smpsSetvoice        $00
+Jeopardy_PSG2:				; PSG duet
 	dc.b	nC4, $0C, nF4, nC4, nF3, nC4, nF4, nC4, $18
 	dc.b	nC4, $0C, nF4, nC4, nF4, nA4, $12, nG4, $06, nF4, nE4, nD4, nCs4
 	dc.b	nC4, $0C, nF4, nC4, nF3, nC4, nF4, nC4, $18
 	dc.b	nF4, $0C, nRst, $06, nD4, nC4, $0C, nBb3, $0C, nA3, $0C, nG3, $0C, nF3, $18
 	smpsAlterPitch      $03	; this may cause overflowing but where its used ends early sooooooo
-	smpsJump            Jeopardy_FM1
+	smpsJump            Jeopardy_PSG2
 
 
 Jeopardy_FM2:
-	smpsStop
+;	smpsStop
 	smpsSetvoice        $01
 	dc.b	nF3, $0C, nC3, nD3, nA2, nG2, nD3, nC3, nD3, $06, nE3
 	dc.b	nF3, $0C, nC3, nD3, nA2, nG2, nA2, $06, nBb2, nC3, $18
@@ -47,35 +48,42 @@ Jeopardy_FM2:
 	smpsJump            Jeopardy_FM2
 
 Jeopardy_FM3:
+;	smpsStop
 	smpsSetvoice        $02
-	dc.b	nD2, $05, nRst, $2F, nD2, $04, nRst, $30, nD2, $04, nRst, $2E
-	dc.b	nD2, $06, nRst, $2F, nD2, $04, nRst, $30, nD2, $04, nRst, $2E
-	dc.b	nD2, $06, nRst, $2E, nD2, $05, nRst, $30, nD2, $04, nRst, $2F
-	dc.b	nD2, $05, nRst, $2F, nD2, $04, nRst, $2E, smpsNoAttack, nRst, $01, smpsNoAttack
-	dc.b	nD2, $05, nRst, $07, smpsNoAttack, nRst, $01, smpsNoAttack, nD2, $05, nRst, $01
-	dc.b	nD2, $05, nRst, $02, nD2, $05, nRst, $7F, $23
-	smpsAlterVol        $FD
-	dc.b	nF4, $05, nRst, $01, nF4, $06, nRst, $01, nD4, $05, nRst, $01
-	dc.b	nD4, $06, nRst, $01, nC4, $05, nRst, $01, nC4, $06, nRst, $1C
-	smpsAlterVol        $03
-	dc.b	nD2, $04, nRst, $2F, nD2, $05, nRst, $2F, nD2, $04, nRst, $2E
-	dc.b	nD2, $06, nRst, $2F, nD2, $04, nRst, $30, nD2, $04, nRst, $2E
-	dc.b	smpsNoAttack, nRst, $01, smpsNoAttack, nD2, $05, nRst, $2E, nD2, $05, nRst, $30
-	dc.b	nD2, $04, nRst, $2F, nD2, $05, nRst, $2F, nD2, $04, nRst, $2F
-	dc.b	smpsNoAttack, nRst, $01, smpsNoAttack, nD2, $04, nRst, $07, nD2, $06, nRst, $01
-	dc.b	nD2, $05, nRst, $02, nD2, $05, nRst, $7F, $23
+	dc.b	nRst, $06, nA3, $09, nA3, nA3, $18
+	dc.b	nRst, $06, nF4, $09, nF4, nE4, $18
+	dc.b	nRst, $06, nA3, $09, nC4, nA3, $18
+	dc.b	nRst, $06, nF4, $09, nF4, nG4, $18
+	dc.b	nRst, $06, nC4, $09, nC4, nA3, $18
+	dc.b	nRst, $06, nF4, $09, nD4, nG4, $18
+	dc.b	nD4, $0C, nRst, nRst, nRst, nE4, nE4, nF4, $18
 	smpsAlterPitch      $03
 	smpsJump            Jeopardy_FM3
 
 Jeopardy_FM4:
-	smpsStop
+;	smpsStop
 	smpsSetvoice        $02
-	dc.b	nF3, $0C, nC3, nD3, nA2, nG2, nD3, nC3, nD3, $06, nE3
-	dc.b	nF3, $0C, nC3, nD3, nA2, nG2, nA2, $06, nBb2, nC3, $18
-	dc.b	nF3, $0C, nC3, nD3, nA2, nG2, nD3, nC3, nD3, $06, nE3
-	dc.b	nF3, $0C, nRst, nRst, nRst, nC2, nC2, nF2, $18
+	dc.b	nRst, $06, nC4, $09, nC4, nC4, $18
+	dc.b	nRst, $06, nD4, $09, nD4, nG4, $18
+	dc.b	nRst, $06, nC4, $09, nA3, nC4, $18
+	dc.b	nRst, $06, nD4, $09, nD4, nE4, $18
+	dc.b	nRst, $06, nA3, $09, nA3, nC4, $18
+	dc.b	nRst, $06, nD4, $09, nF4, nE4, $18
+	dc.b	nBb3, $0C, nRst, nRst, nRst, nC4, nC4, nC4, $18
 	smpsAlterPitch      $03
 	smpsJump            Jeopardy_FM4
+
+Jeopardy_PSG1:				; PSG reverb
+	smpsAlterNote       $03
+	dc.b	nRst, $06
+	smpsJump				Jeopardy_PSG2
+
+Jeopardy_PSG3:
+	smpsPSGform         $E6
+	dc.b	nMaxPSG, $06
+	smpsPSGform         $E4
+	dc.b	nMaxPSG
+	smpsJump				Jeopardy_PSG3
 
 Jeopardy_Voices:
 ;	Voice $00

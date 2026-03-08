@@ -67,7 +67,7 @@ nMaxPSG2			EQU nB6
 ; DAC Equates
 	enum		dKick=$81,dSnare,dTimpani,dHiTimpani,dMidTimpani,dLowTimpani,dVLowTimpani
 	nextenum	dChunkyKick,dPokeSnare,dPokeKickCrashHi,dPokeHiTimpani,dPokeMidTimpani
-	nextenum	dPokeLowTimpani
+	nextenum	dPokeLowTimpani,dDAMN
 	nextenum	dSega	; Sega should always be last
 ; ---------------------------------------------------------------------------
 ; Channel IDs for SFX
