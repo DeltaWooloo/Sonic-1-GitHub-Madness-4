@@ -11,6 +11,10 @@
 ; ===========================================================================
 ; ASSEMBLY OPTIONS:
 
+CheatsOn = 1
+; 	| If 0, build it with no cheats active
+; 	| If 1, build it with all cheats active
+
 Revision = 1
 ; 	| If 0, build the original version of the game, dubbed REV00
 ; 	| If 1, build the later version, dubbed REV01, which includes various bugfixes and enhancements
@@ -391,6 +395,17 @@ GameInit:
 		bsr.w	VDPSetupGame
 		bsr.w	JoypadInit
 		bsr.w	Init_MegaPCM
+		if CheatsOn=1
+		move.w	#$101,(f_levselcheat).w
+		move.w	#$101,(f_debugcheat).w
+		else
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		endif
 		move.b	#id_Sega,(v_gamemode).w ; set Game Mode to Sega Screen
 
 MainGameLoop:
@@ -4289,7 +4304,8 @@ TryAgainEnd:
 		jsr	(BuildSprites).l
 		move.w	#1800,(v_generictimer).w ; show screen for 30 seconds
 		bsr.w	PaletteFadeIn
-
+		move.w	#bgm_Jeopardy,d0	; "you fucking idiot"
+		bsr.w	QueueSound1	; play ending sequence music
 ; ---------------------------------------------------------------------------
 ; "TRY AGAIN" and "END" screen main loop
 ; ---------------------------------------------------------------------------
@@ -4303,8 +4319,8 @@ TryAg_MainLoop:
 		bne.s	TryAg_Exit	; if yes, branch
 		tst.w	(v_generictimer).w ; has 30 seconds elapsed?
 		beq.s	TryAg_Exit	; if yes, branch
-		cmpi.b	#id_Credits,(v_gamemode).w
-		beq.s	TryAg_MainLoop
+;		cmpi.b	#id_Credits,(v_gamemode).w
+		bra.s	TryAg_MainLoop
 
 TryAg_Exit:
 		move.b	#id_Sega,(v_gamemode).w ; goto Sega screen

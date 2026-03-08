@@ -45,22 +45,22 @@ Cred_Display:	; Routine 2
 ; ===========================================================================
 
 TryAgain_ObjData:	; X pos, Frame, Land,	Wait
-			dc.w 	$50,	$100,	$A0, 	$0	; Y
-			dc.w 	$60,	$200,	$A0, 	$10	; O
-			dc.w 	$70,	$300,	$A0,	$20	; U
-			dc.w 	$90,	$400, 	$A0,	$30	; F
-			dc.w 	$A0,	$300,	$A0, 	$40	; U
-			dc.w 	$B0,	$500,	$A0,	$50	; C
-			dc.w 	$C0,	$600, 	$A0,	$60	; K
-			dc.w 	$D0,	$700,	$A0,	$70	; I
-			dc.w 	$E0,	$800,	$A0,	$80	; N
-			dc.w 	$F0,	$900,	$A0,	$90	; G
-			dc.w 	$80,	$700,	$B0,	$10+$A0	; I
-			dc.w 	$90,	$800,	$B0,	$20+$A0	; D
-			dc.w 	$A0,	$700,	$B0,	$30+$A0	; I
+			dc.w 	$D0,	$C00, 	$B0,	$60+$A0	; .
+			dc.w 	$C0,	$B00,	$B0,	$50+$A0	; T
 			dc.w 	$B0,	$200, 	$B0,	$40+$A0	; O
-			dc.w 	$C0,	$A00,	$B0,	$50+$A0	; T
-			dc.w 	$D0,	$B00, 	$B0,	$60+$A0	; .
+			dc.w 	$A0,	$700,	$B0,	$30+$A0	; I
+			dc.w 	$90,	$A00,	$B0,	$20+$A0	; D
+			dc.w 	$80,	$700,	$B0,	$10+$A0	; I
+			dc.w 	$F0,	$900,	$A0,	$90	; G
+			dc.w 	$E0,	$800,	$A0,	$80	; N
+			dc.w 	$D0,	$700,	$A0,	$70	; I
+			dc.w 	$C0,	$600, 	$A0,	$60	; K
+			dc.w 	$B0,	$500,	$A0,	$50	; C
+			dc.w 	$A0,	$300,	$A0, 	$40	; U
+			dc.w 	$90,	$400, 	$A0,	$30	; F
+			dc.w 	$70,	$300,	$A0,	$20	; U
+			dc.w 	$60,	$200,	$A0, 	$10	; O
+			dc.w 	$50,	$100,	$A0, 	$0	; Y
 TryAgain_Main:	; Routine 0
 		lea	TryAgain_ObjData(pc),a2
 		movea.l	a0,a1
@@ -76,7 +76,7 @@ TryAgain_Obj_LoadLetters:
 		move.b	#id_CreditsText,(a1)
 		move.b	#6,obRoutine(a1)
 		move.l	#Map_TryAgain,obMap(a1)
-		move.w	#make_art_tile(ArtTile_Credits_Font,0,0),obGfx(a0)
+		move.w	#make_art_tile(ArtTile_Credits_Font,0,0),obGfx(a1)
 		move.b	#8,obRender(a1)
 ;		move.b	#1,obPriority(a1)
 		move.w	#$FFF0,obY(a1)
