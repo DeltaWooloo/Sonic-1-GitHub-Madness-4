@@ -1,5 +1,5 @@
 ; ---------------------------------------------------------------------------
-; Object 01 - Sonic
+; Object 01 - whoever moved sonic to a seperate object needs to go fuck themselves and burn in a fire cause thats awful
 ; ---------------------------------------------------------------------------
 
 ; Obj01:
@@ -39,8 +39,8 @@ Sonic_Main:	; Routine 0
 		move.b	#2,obPriority(a0)
 		move.b	#$18,obActWid(a0)
 		move.b	#4,obRender(a0)
-		move.w	#$600,(v_sonspeedmax).w ; Sonic's top speed
-		move.w	#$C,(v_sonspeedacc).w ; Sonic's acceleration
+		move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
+		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
 		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
 
 ; Obj01_Control:
