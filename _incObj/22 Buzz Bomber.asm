@@ -16,6 +16,7 @@ Buzz_Index:	dc.w Buzz_Main-Buzz_Index
 buzz_timedelay = objoff_32
 buzz_buzzstatus = objoff_34
 buzz_parent = objoff_3C
+buzz_shots = objoff_3E
 ; ===========================================================================
 
 Buzz_Main:	; Routine 0
@@ -46,7 +47,7 @@ Buzz_Action:	; Routine 2
 		btst	#1,buzz_buzzstatus(a0) ; is Buzz Bomber near Sonic?
 		bne.s	.fire		; if yes, branch
 		addq.b	#2,ob2ndRout(a0)
-		move.w	#127,buzz_timedelay(a0) ; set time delay to just over 2 seconds
+		move.w	#2,buzz_timedelay(a0) ; set time delay to like nothing
 		move.w	#$400,obVelX(a0) ; move Buzz Bomber to the right
 		move.b	#1,obAnim(a0)	; use "flying" animation
 		btst	#0,obStatus(a0)	; is Buzz Bomber facing left?
@@ -64,13 +65,8 @@ Buzz_Action:	; Routine 2
 		move.w	obX(a0),obX(a1)
 		move.w	obY(a0),obY(a1)
 		addi.w	#$1C,obY(a1)
-		move.w	#$200,obVelY(a1) ; move missile downwards
-		move.w	#$200,obVelX(a1) ; move missile to the right
-	if FixBugs
+
 		moveq	#$18-4,d0
-	else
-		move.w	#$18,d0
-	endif
 		btst	#0,obStatus(a0)	; is Buzz Bomber facing left?
 		bne.s	.noflip2	; if not, branch
 		neg.w	d0
@@ -79,10 +75,18 @@ Buzz_Action:	; Routine 2
 .noflip2:
 		add.w	d0,obX(a1)
 		move.b	obStatus(a0),obStatus(a1)
-		move.w	#$E,buzz_timedelay(a1)
+		move.w	#$4,buzz_timedelay(a1)
 		move.l	a0,buzz_parent(a1)
+		addq.b 	#1, buzz_shots(a0)
+
+		cmpi.b 	#3, buzz_shots(a0)
+		blt.s	.keepfiring
+
 		move.b	#1,buzz_buzzstatus(a0) ; set to "already fired" to prevent refiring
-		move.w	#59,buzz_timedelay(a0)
+		move.b #0, buzz_shots(a0)
+
+
+.keepfiring:	move.w	#10,buzz_timedelay(a0)
 		move.b	#2,obAnim(a0)	; use "firing" animation
 
 .fail:
@@ -101,7 +105,7 @@ Buzz_Action:	; Routine 2
 		neg.w	d0
 
 .isleft:
-		cmpi.w	#$60,d0		; is Buzz Bomber within $60 pixels of Sonic?
+		cmpi.w	#$70,d0		; is Buzz Bomber within $60 pixels of Sonic?
 		bhs.s	.keepgoing	; if not, branch
 		tst.b	obRender(a0)
 		bpl.s	.keepgoing

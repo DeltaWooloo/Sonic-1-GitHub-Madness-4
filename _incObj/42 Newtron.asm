@@ -55,7 +55,7 @@ Newt_Action:	; Routine 2
 		beq.s	.istype00	; if type is 00, branch
 
 		move.w	#make_art_tile(ArtTile_Newtron,1,0),obGfx(a0)
-		move.b	#8,ob2ndRout(a0) ; goto .type01 next
+		move.b	#6,ob2ndRout(a0) ; goto .type01 next
 		move.b	#4,obAnim(a0)	; use different animation
 
 .outofrange:
@@ -124,27 +124,35 @@ Newt_Action:	; Routine 2
 
 .type01:
 		cmpi.b	#1,obFrame(a0)
-		bne.s	.firemissile
+		bne.s	.firemissiles
 		move.b	#$C,obColType(a0)
 
-.firemissile:
+.firemissiles:
 		cmpi.b	#2,obFrame(a0)
 		bne.s	.fail
 		tst.b	objoff_32(a0)
 		bne.s	.fail
 		move.b	#1,objoff_32(a0)
+		
+		lea	.yveltable, a3
+		moveq	#2, d4
+
+.makemissile:	
 		bsr.w	FindFreeObj
 		bne.s	.fail
 		_move.b	#id_Missile,obID(a1) ; load missile object
 		move.w	obX(a0),obX(a1)
 		move.w	obY(a0),obY(a1)
 		subq.w	#8,obY(a1)
-		move.w	#$200,obVelX(a1)
+		move.w	#$300,obVelX(a1)
+		move.w 	(a3)+,obVelY(a1)
 		move.w	#$14,d0
+		move.b	#1,obSubtype(a0)
 		btst	#0,obStatus(a0)
 		bne.s	.noflip
 		neg.w	d0
 		neg.w	obVelX(a1)
+		dbf 	d4, .makemissile
 
 .noflip:
 		add.w	d0,obX(a1)
@@ -153,6 +161,9 @@ Newt_Action:	; Routine 2
 
 .fail:
 		rts
+
+.yveltable:
+		dc.w 	$0000, $0200, $FDFF
 ; ===========================================================================
 
 Newt_Delete:	; Routine 4

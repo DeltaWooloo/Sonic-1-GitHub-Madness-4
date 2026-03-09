@@ -13,6 +13,7 @@ Spik_Index:	dc.w Spik_Main-Spik_Index
 
 spik_origX = objoff_30		; start X position
 spik_origY = objoff_32		; start Y position
+spik_shooting = objoff_33	; iwbtg spike being shot flag
 
 Spik_Var:	dc.b 0,	$14		; frame number, object width
 		dc.b 1,	$10
@@ -38,7 +39,7 @@ Spik_Main:	; Routine 0
 		move.b	(a1)+,obActWid(a0)
 		move.w	obX(a0),spik_origX(a0)
 		move.w	obY(a0),spik_origY(a0)
-
+		
 Spik_Solid:	; Routine 2
 		bsr.w	Spik_Type0x	; make the object move
 		move.w	#4,d2
@@ -133,6 +134,7 @@ Spik_Type0x:
 Spik_TypeIndex:	dc.w Spik_Type00-Spik_TypeIndex
 		dc.w Spik_Type01-Spik_TypeIndex
 		dc.w Spik_Type02-Spik_TypeIndex
+		dc.w Spik_Type03-Spik_TypeIndex
 ; ===========================================================================
 
 Spik_Type00:
@@ -159,19 +161,47 @@ Spik_Type02:
 
 Spik_Wait:
 		tst.w	objoff_38(a0)		; is time delay = zero?
-		beq.s	loc_CFA4	; if yes, branch
+		beq.w	loc_CFA4	; if yes, branch
 		subq.w	#1,objoff_38(a0)	; subtract 1 from time delay
-		bne.s	locret_CFE6
+		bne.w	locret_CFE6
 		tst.b	obRender(a0)
-		bpl.s	locret_CFE6
+		bpl.w	locret_CFE6
 		move.w	#sfx_SpikesMove,d0
 		jsr	(QueueSound2).l	; play "spikes moving" sound
-		bra.s	locret_CFE6
+		bra.w	locret_CFE6
+
+Spik_Type03:
+		tst.b	obRender(a0)
+		bpl.w	locret_CFE6
+
+		tst.b	spik_shooting(a0)
+		beq.s 	.shoot
+
+		lea	v_player, a1
+		move.w	(v_player+obX).w,d0
+		sub.w	obX(a0),d0
+		bpl.s	.isleft
+		neg.w	d0
+
+.isleft:
+		cmp.b	obActWid(a0), d0	; are we in range?
+		bgt.s	.exit			; if not, branch
+
+		move.w	#-$A00, obVelY(a0)
+		move.b 	#1, spik_shooting(a0)
+
+.exit:
+		rts
+
+.shoot:
+		move.w	#-$A00, obVelY(a0)
+		jmp 	SpeedToPos
+
 ; ===========================================================================
 
 loc_CFA4:
 		tst.w	objoff_36(a0)
-		beq.s	loc_CFC6
+		beq.sw	loc_CFC6
 		subi.w	#$800,objoff_34(a0)
 		bcc.s	locret_CFE6
 		move.w	#0,objoff_34(a0)

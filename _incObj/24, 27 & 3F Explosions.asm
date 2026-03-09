@@ -73,6 +73,9 @@ Obj27_Main:				; XREF: Obj27_Index
 		jsr	(PlaySound_Special).l ;	play breaking enemy sound
         	bsr.w   Obj27_GetVelocity
 
+	        move.b  #1, (v_flashtimer).w
+		move.w 	#$0EEE, (v_flashcolor).w
+		
 Obj27_Animate:				; XREF: Obj27_Index
 		subq.b	#1,$1E(a0)	; subtract 1 from frame	duration
 		bpl.s	Obj27_Display
