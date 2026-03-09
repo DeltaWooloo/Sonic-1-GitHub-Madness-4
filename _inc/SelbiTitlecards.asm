@@ -29,8 +29,8 @@ TitleCard_MZ2:	equ  "ALBERTA CANADA"
 TitleCard_MZ3:	equ  "GARBLE"
 TitleCard_MZ4:	equ  "GARBLE"
 
-TitleCard_SYZ1:	equ  "SPRINGTARD"
-TitleCard_SYZ2:	equ  "SPRINGTARD"
+TitleCard_SYZ1:	equ  "SPRING YARD"
+TitleCard_SYZ2:	equ  "SPRING YARD"
 TitleCard_SYZ3:	equ  "PRING YARD"
 TitleCard_SYZ4:	equ  "SPRINGTARD"
 
