@@ -120,13 +120,13 @@ DebuggerMenu_Controls:
 		beq.s	.down
 		subq.w	#1,d0
 		bcc.s	.down
-		moveq	#5,d0			; wrap to last item
+		moveq	#6,d0			; wrap to last item
 
 .down:
 		btst	#1,d1			; down?
 		beq.s	.setsel
 		addq.w	#1,d0
-		cmpi.w	#6,d0
+		cmpi.w	#7,d0
 		bcs.s	.setsel
 		moveq	#0,d0			; wrap to first item
 
@@ -249,7 +249,7 @@ DebuggerMenu_MenuText:
 		lea	(vdp_data_port).l,a6
 		move.l	#$44100003,d4		; plane A, row 8 col 8
 		move.w	#$A685,d3		; white
-		moveq	#5,d1			; 6 lines
+		moveq	#6,d1			; 7 lines
 
 .names:
 		move.l	d4,4(a6)
@@ -283,7 +283,7 @@ DebuggerMenu_RenderValues:
 		lea	(vdp_data_port).l,a6
 		move.l	#$44380003,d4		; plane A, row 8 col 24
 		move.w	#$A685,d3		; white
-		moveq	#5,d1			; 6 items
+		moveq	#6,d1			; 7 items
 
 .loop:
 		move.l	d4,4(a6)		; set VRAM write address
