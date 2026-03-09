@@ -123,7 +123,7 @@ Pow_ChkRings:
 		cmpi.b	#6,d0		; does monitor contain 10 rings?
 		bne.s	Pow_ChkS
 
-		addi.w	#10,(v_rings).w	; add 10 rings to the number of rings you have
+		addi.w	#70,(v_rings).w	; add 70 rings to the number of rings you have because you are smart
 		ori.b	#1,(f_ringcount).w ; update the ring counter
 		cmpi.w	#100,(v_rings).w ; check if you have 100 rings
 		blo.s	Pow_RingSound
