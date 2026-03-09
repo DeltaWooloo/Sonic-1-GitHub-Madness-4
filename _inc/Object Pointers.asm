@@ -7,7 +7,7 @@ ptr_Obj03:		dc.l NullObject
 ptr_Obj04:		dc.l NullObject
 ptr_Obj05:		dc.l NullObject
 ptr_Obj06:		dc.l NullObject
-ptr_Obj07:		dc.l NullObject
+ptr_Obj07:		dc.l GM_CNNicoJumpOBJ
 ptr_Splash:		dc.l Splash		; $08
 ptr_SonicSpecial:	dc.l SonicSpecial
 ptr_DrownCount:		dc.l DrownCount

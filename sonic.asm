@@ -440,6 +440,7 @@ ptr_GM_ColdBrew:	dc.l	GM_ColdBrew		; Cold Brew ($20)
 ptr_GM_SegaEU:		dc.l	GM_ColdBrew		; Sega Screen EU ($24)
 ptr_GM_DebugMode:	dc.l	GM_DebugMenu		; Debug Menu ($28)
 ptr_GM_ThanatosCredits:	dc.l	GM_ThanatosCredits	; Credits - Thanatos ver. ($2C)
+ptr_GM_CNNicoJump:	dc.l	GM_CNNicoJump	; Credits - Thanatos ver. ($30)
 GameModeArray_End:
 ; ===========================================================================
 	if SkipChecksumCheck=0
@@ -7945,6 +7946,7 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 
 		include "conimodes/cold brew/GM_ColdBrew.asm"
 		include "conimodes/winxp/GM_NTOSKRNL.asm"
+		include "conimodes/splash/GM_CNNicoJump.asm"
 		include "hipncoolstuff/ThanatosCredits/Main.asm"
 
 		include "Splashes.asm"

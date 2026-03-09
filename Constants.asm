@@ -9,6 +9,7 @@ PlaySound_Special	=		QueueSound2
 PalLoad1	=		PalLoad_Fade
 PalLoad2	=		PalLoad
 v_pal_dry	=		v_palette
+v_demolength	= v_generictimer
 
 Size_of_SegaPCM:		equ $6978
 Size_of_DAC_driver_guess:	equ $1760
