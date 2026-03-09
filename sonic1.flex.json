@@ -1,8 +1,28 @@
 {
     "Flex": 2,
     "name": "Sonic 1",
-    "node": "04c2a44c-6bca-4601-838f-609d8a749c72",
+    "node": "472ab9f3-6355-46ce-a3a8-3fd70d6d9cd8",
     "objects": [
+        {
+            "format": "Sonic 1.js",
+            "name": "object",
+            "palettes": [],
+            "art": {
+                "path": "..\\s1scratchpad\\Data\\Art\\Nemesis\\HUD - Life Counter Icon.bin",
+                "compression": "Nemesis",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            },
+            "uuid": "a44c6bca-b601-438f-a09d-8a749c725a07"
+        },
         {
             "format": "Sonic 1.js",
             "name": "HUD",
@@ -762,7 +782,7 @@
                 }
             ],
             "isDirectory": true,
-            "expanded": false,
+            "expanded": true,
             "uuid": "d70d6d9c-d886-4fb1-8792-9999eaa239c3"
         },
         {
