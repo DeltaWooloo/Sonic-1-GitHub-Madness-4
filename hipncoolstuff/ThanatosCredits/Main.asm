@@ -76,16 +76,35 @@ PalThanatosCredits:	bincludeEndMarker "hipncoolstuff/ThanatosCredits/Palette.pal
 	move.w	#1,d0
 	jsr	(EniDec).l
 
-	; Fade In
-	jsr	(PaletteFadeIn).l
+	; Scroll text
+	lea (v_hscrolltablebuffer).w,a0
+	move.w	#224-1/2,d1
+	lea	(Sine_Data).l,a1
 
-	QueueSound_M bgm_Ending,0
+-	move.w	(a1)+,d0
+	neg.w	d0
+	asr.w	#2,d0
+	add.w	#$60,d0
+	move.w	d0,(a0)
+	move.w	d0,4(a0)
+	addq.w	#8,a0
+	dbf.w	d1,-
 
+	; Load initial text
 	move.w	#$A,d5
 -	bsr.s	RenderTextLine
 	dbf.w	d5,-
 
-	bra.s	*
+	QueueSound_M bgm_Ending,0
+
+	; Fade In
+	jsr	(PaletteFadeIn).l
+
+-	move.b	#2,(v_vbla_routine).w
+	jsr	WaitForVBla
+; 	bsr.s	Thanatos_Scroll
+	add.w	#1,(v_scrposy_vdp).w
+	bra.s	-
 
 Thanatos_ClearPlane:
 	moveq	#0,d0
