@@ -1,8 +1,28 @@
 {
     "Flex": 2,
     "name": "Sonic 1",
-    "node": "6355e6ce-e3a8-4fd7-8d6d-9cd8865fb147",
+    "node": "04c2a44c-6bca-4601-838f-609d8a749c72",
     "objects": [
+        {
+            "format": "Sonic 1.js",
+            "name": "HUD",
+            "palettes": [],
+            "art": {
+                "path": "artnem\\HUD.nem",
+                "compression": "Nemesis",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "_maps\\HUD.asm",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            },
+            "uuid": "04c2a44c-6bca-4601-838f-609d8a749c72"
+        },
         {
             "name": "Common",
             "children": [
