@@ -28,6 +28,23 @@ GM_DebugMenu:
 		ResetDMAQueue
 
 		writeVRAM	Art_MenuFont,$D080
+
+     		locVRAM    ArtTile_Title_Japanese_Text*tile_size
+       		lea    (Nem_JapNames).l,a0 ; load Japanese credits
+       		bsr.w    NemDec
+       		locVRAM    ArtTile_Sonic_Team_Font*tile_size
+      		lea    (Nem_CreditText).l,a0 ; load alphabet
+      		bsr.w    NemDec
+      		lea    (v_ram_start).l,a1
+     		lea    (Eni_JapNames).l,a0 ; load mappings for Japanese credits
+     		move.w    #make_art_tile(ArtTile_Title_Japanese_Text,0,FALSE),d0
+     		bsr.w    EniDec
+
+     		copyTilemap    v_ram_start,vram_fg,40,28
+
+		moveq    #palid_SegaBG,d0
+        	bsr.w    PalLoad    ; load Sega logo palette
+		
 		enable_display
 		lea	(v_hscrolltablebuffer).w,a1
 		moveq	#0,d0
