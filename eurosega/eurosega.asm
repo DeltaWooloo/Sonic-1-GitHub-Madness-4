@@ -56,14 +56,13 @@ GM_SegaEU_ClrObjRam:
 		jsr	PaletteFadeIn
 		move.b	#bgm_EuroSega,d0
 		jsr	PlaySound_Special	
-		move.w	#60*3,(v_generictimer).w
+
 
 GM_SegaEU_MainLoop:
 		move.b	#4,(v_vbla_routine).w
 		jsr	WaitForVBla
 		jsr	(ExecuteObjects).l
 		jsr	(BuildSprites).l
-		tst.w	(v_generictimer).w
 		move.w	#2*60,(v_generictimer).w 
 		andi.b	#btnStart,(v_jpadpress1).w		
 		beq.s	GM_SegaEU_MainLoop
