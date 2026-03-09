@@ -5,13 +5,13 @@ UNOwenWasHer_Header:
 	smpsHeaderTempo     $02, $00
 
 	smpsHeaderDAC       UNOwenWasHer_DAC
-	smpsHeaderFM        UNOwenWasHer_FM1,	$00, $0E
-	smpsHeaderFM        UNOwenWasHer_FM2,	$00, $0F
-	smpsHeaderFM        UNOwenWasHer_FM3,	$00, $0E
-	smpsHeaderFM        UNOwenWasHer_FM4,	$00, $0E
-	smpsHeaderFM        UNOwenWasHer_FM5,	$00, $0E
+	smpsHeaderFM        UNOwenWasHer_FM1,	$00, $0E-$03
+	smpsHeaderFM        UNOwenWasHer_FM2,	$00, $0E-$03
+	smpsHeaderFM        UNOwenWasHer_FM3,	$00, $0E-$03
+	smpsHeaderFM        UNOwenWasHer_FM4,	$00, $0E-$03
+	smpsHeaderFM        UNOwenWasHer_FM5,	$00, $0E-$03
 	smpsHeaderPSG       UNOwenWasHer_PSG1,	$00, $02, $00, $00
-	smpsHeaderPSG       UNOwenWasHer_PSG2,	$00, $03, $00, $00
+	smpsHeaderPSG       UNOwenWasHer_PSG2,	$00, $02, $00, $00
 	smpsHeaderPSG       UNOwenWasHer_PSG3,	$00, $05, $00, $00
 
 ; DAC Data
@@ -19,63 +19,63 @@ UNOwenWasHer_DAC:
 	smpsPan             panCenter, $00
 
 UNOwenWasHer_Jump00:
-	dc.b	$85, $0C, dSnare, $06, $03, $09, dKick, $06, $06, dSnare, $03, dKick
-	dc.b	dSnare, dKick, dSnare, dSnare, $85, $06, dKick, $03, $03, dSnare, $06, $03
-	dc.b	$09, dKick, $06, dSnare, $03, $03, $03, $03, $03
+	dc.b	dPokeKickCrashHi, $0C, dPokeSnare, $06, $03, $09, dKick, $06, $06, dPokeSnare, $03, dKick
+	dc.b	dPokeSnare, dKick, dPokeSnare, dPokeSnare, dPokeKickCrashHi, $06, dKick, $03, $03, dPokeSnare, $06, $03
+	dc.b	$09, dKick, $06, dPokeSnare, $03, $03, $03, $03, $03
 
 UNOwenWasHer_Loop00:
-	dc.b	dKick, dSnare, dSnare, $85, $0C, dSnare, $06, $03, $09, dKick, $06, $06
-	dc.b	dSnare, $03, dKick, dSnare, dKick, dSnare, dSnare, $85, $06, dKick, $03, $03
-	dc.b	dSnare, $06, $03, $09, dKick, $06, $03, dSnare, dSnare, dKick, dSnare
+	dc.b	dKick, dPokeSnare, dPokeSnare, dPokeKickCrashHi, $0C, dPokeSnare, $06, $03, $09, dKick, $06, $06
+	dc.b	dPokeSnare, $03, dKick, dPokeSnare, dKick, dPokeSnare, dPokeSnare, dPokeKickCrashHi, $06, dKick, $03, $03
+	dc.b	dPokeSnare, $06, $03, $09, dKick, $06, $03, dPokeSnare, dPokeSnare, dKick, dPokeSnare
 	smpsLoop            $00, $02, UNOwenWasHer_Loop00
-	dc.b	dKick, dSnare, dSnare, $85, $0C, dSnare, $06, $03, $09, dKick, $06, $06
-	dc.b	dSnare, $03, dKick, dSnare, dKick, dSnare, dSnare, $85, dSnare, dKick, dSnare, dSnare
-	dc.b	$06, $03, $06, $03, dKick, dSnare, dKick, $08, $08, dSnare, $03, $02
-	dc.b	$03, $85, $0C, dKick, dKick, $06, dSnare, dKick, dSnare, dKick, $0C, $06
-	dc.b	dSnare, dKick, $0C, $06, dSnare, dKick, $0C, $0C, $06, dSnare, $03, $03
-	dc.b	dKick, $06, dSnare, dKick, dSnare, $03, $03, dKick, dSnare, dSnare, dSnare, dKick
-	dc.b	dSnare, dSnare, $06, dKick, $03, dSnare, dSnare, dSnare, dKick, $0C, dSnare, dKick
-	dc.b	$06, dSnare, dSnare, dSnare, dKick, $0C, dSnare, $06, $06, dKick, $0C, dSnare
-	dc.b	$06, $06, dKick, $0C, dSnare, dKick, $06, dSnare, $03, $03, $06, $06
-	dc.b	dKick, dSnare, $03, $03, dKick, dSnare, dSnare, dSnare, dKick, dSnare, dSnare, $06
+	dc.b	dKick, dPokeSnare, dPokeSnare, dPokeKickCrashHi, $0C, dPokeSnare, $06, $03, $09, dKick, $06, $06
+	dc.b	dPokeSnare, $03, dKick, dPokeSnare, dKick, dPokeSnare, dPokeSnare, dPokeKickCrashHi, dPokeSnare, dKick, dPokeSnare, dPokeSnare
+	dc.b	$06, $03, $06, $03, dKick, dPokeSnare, dKick, $08, $08, dPokeSnare, $03, $02
+	dc.b	$03, dPokeKickCrashHi, $0C, dKick, dKick, $06, dPokeSnare, dKick, dPokeSnare, dKick, $0C, $06
+	dc.b	dPokeSnare, dKick, $0C, $06, dPokeSnare, dKick, $0C, $0C, $06, dPokeSnare, $03, $03
+	dc.b	dKick, $06, dPokeSnare, dKick, dPokeSnare, $03, $03, dKick, dPokeSnare, dPokeSnare, dPokeSnare, dKick
+	dc.b	dPokeSnare, dPokeSnare, $06, dKick, $03, dPokeSnare, dPokeSnare, dPokeSnare, dKick, $0C, dPokeSnare, dKick
+	dc.b	$06, dPokeSnare, dPokeSnare, dPokeSnare, dKick, $0C, dPokeSnare, $06, $06, dKick, $0C, dPokeSnare
+	dc.b	$06, $06, dKick, $0C, dPokeSnare, dKick, $06, dPokeSnare, $03, $03, $06, $06
+	dc.b	dKick, dPokeSnare, $03, $03, dKick, dPokeSnare, dPokeSnare, dPokeSnare, dKick, dPokeSnare, dPokeSnare, $06
 	dc.b	$03, $03, $03
 
 UNOwenWasHer_Loop01:
-	dc.b	$03, dKick, $0C, $0C, $0C, $0C, $0C, $0C, $06, dSnare, dKick, $03
-	dc.b	dSnare, $06
+	dc.b	$03, dKick, $0C, $0C, $0C, $0C, $0C, $0C, $06, dPokeSnare, dKick, $03
+	dc.b	dPokeSnare, $06
 	smpsLoop            $00, $07, UNOwenWasHer_Loop01
-	dc.b	$03, dKick, $0C, $0C, $0C, $0C, $06, dSnare, $03, $03, $06, $03
-	dc.b	$03, dKick, dSnare, dSnare, $06, $03, $03, $03, $03, $85, $60, dKick
+	dc.b	$03, dKick, $0C, $0C, $0C, $0C, $06, dPokeSnare, $03, $03, $06, $03
+	dc.b	$03, dKick, dPokeSnare, dPokeSnare, $06, $03, $03, $03, $03, dPokeKickCrashHi, $60, dKick
 	dc.b	$30, $30
 
 UNOwenWasHer_Loop02:
 	dc.b	$12, $03, $03, $18
 	smpsLoop            $00, $03, UNOwenWasHer_Loop02
-	dc.b	$12, $03, $03, $0C, dSnare, $03, $03, $03, $0F, dKick, $0C, $0C
-	dc.b	$0C, $0C, $0C, $06, dSnare, dKick, $03, dSnare, $06, $03, dKick, $0C
-	dc.b	$0C, $0C, $0C, $06, dSnare, $03, $03, dKick, $06, dSnare, $03, $03
-	dc.b	dKick, $09, dSnare, $03, dKick, $06, dSnare, $85, $0C, dKick, dKick, $06
-	dc.b	dSnare, dKick, dSnare, dKick, $0C, $06, dSnare, dKick, $0C, $06, dSnare, dKick
-	dc.b	$0C, $0C, $06, dSnare, $03, $03, dKick, $06, dSnare, dKick, dSnare, $03
-	dc.b	$03, dKick, dSnare, dSnare, dSnare, dKick, dSnare, dSnare, $06, dKick, $03, dSnare
-	dc.b	dSnare, dSnare, $85, $0C, dSnare, dKick, $06, dSnare, dSnare, dSnare, dKick, $0C
-	dc.b	dSnare, $06, $06, dKick, $0C, dSnare, $06, $06, dKick, $0C, dSnare, dKick
-	dc.b	$06, dSnare, $03, $03, $06, $06, dKick, dSnare, $03, $03, dKick, dSnare
-	dc.b	dSnare, dSnare, dKick, dSnare, dSnare, $06, $03, $03, $03, $03, $85, $0C
-	dc.b	dSnare, dKick, $06, dSnare, dSnare
+	dc.b	$12, $03, $03, $0C, dPokeSnare, $03, $03, $03, $0F, dKick, $0C, $0C
+	dc.b	$0C, $0C, $0C, $06, dPokeSnare, dKick, $03, dPokeSnare, $06, $03, dKick, $0C
+	dc.b	$0C, $0C, $0C, $06, dPokeSnare, $03, $03, dKick, $06, dPokeSnare, $03, $03
+	dc.b	dKick, $09, dPokeSnare, $03, dKick, $06, dPokeSnare, dPokeKickCrashHi, $0C, dKick, dKick, $06
+	dc.b	dPokeSnare, dKick, dPokeSnare, dKick, $0C, $06, dPokeSnare, dKick, $0C, $06, dPokeSnare, dKick
+	dc.b	$0C, $0C, $06, dPokeSnare, $03, $03, dKick, $06, dPokeSnare, dKick, dPokeSnare, $03
+	dc.b	$03, dKick, dPokeSnare, dPokeSnare, dPokeSnare, dKick, dPokeSnare, dPokeSnare, $06, dKick, $03, dPokeSnare
+	dc.b	dPokeSnare, dPokeSnare, dPokeKickCrashHi, $0C, dPokeSnare, dKick, $06, dPokeSnare, dPokeSnare, dPokeSnare, dKick, $0C
+	dc.b	dPokeSnare, $06, $06, dKick, $0C, dPokeSnare, $06, $06, dKick, $0C, dPokeSnare, dKick
+	dc.b	$06, dPokeSnare, $03, $03, $06, $06, dKick, dPokeSnare, $03, $03, dKick, dPokeSnare
+	dc.b	dPokeSnare, dPokeSnare, dKick, dPokeSnare, dPokeSnare, $06, $03, $03, $03, $03, dPokeKickCrashHi, $0C
+	dc.b	dPokeSnare, dKick, $06, dPokeSnare, dPokeSnare
 
 UNOwenWasHer_Loop03:
-	dc.b	dSnare, dKick, $0C, dSnare, $06, $06, dKick, $0C, dSnare, $06, $06, dKick
-	dc.b	$0C, dSnare, dKick, $06, dSnare, $03, $03, $06
+	dc.b	dPokeSnare, dKick, $0C, dPokeSnare, $06, $06, dKick, $0C, dPokeSnare, $06, $06, dKick
+	dc.b	$0C, dPokeSnare, dKick, $06, dPokeSnare, $03, $03, $06
 	smpsLoop            $00, $03, UNOwenWasHer_Loop03
-	dc.b	$06, dKick, $0C, dSnare, $06, $06, dKick, $0C, dSnare, $06, $1E, dKick
-	dc.b	$18, $18, $0C, $0C, $06, dSnare, $03, $03, dKick
+	dc.b	$06, dKick, $0C, dPokeSnare, $06, $06, dKick, $0C, dPokeSnare, $06, $1E, dKick
+	dc.b	$18, $18, $0C, $0C, $06, dPokeSnare, $03, $03, dKick
 
 UNOwenWasHer_Loop04:
-	dc.b	dSnare, $06, $03, dKick, $0C, $0C, $0C, $0C, $0C, $0C, $06, dSnare
+	dc.b	dPokeSnare, $06, $03, dKick, $0C, $0C, $0C, $0C, $0C, $0C, $06, dPokeSnare
 	dc.b	dKick, $03
 	smpsLoop            $00, $06, UNOwenWasHer_Loop04
-	dc.b	dSnare, $06, $03, dKick, $0C, $0C, dSnare
+	dc.b	dPokeSnare, $06, $03, dKick, $0C, $0C, dPokeSnare
 
 UNOwenWasHer_Loop05:
 	dc.b	$02, $01
@@ -404,7 +404,6 @@ UNOwenWasHer_Loop09:
 UNOwenWasHer_PSG1:
 	smpsModSet          $00, $02, $01, $02
 	smpsLoop            $00, $04, UNOwenWasHer_PSG1
-	smpsPSGAlterVol     $01
 	smpsAlterNote       $00
 	smpsPSGvoice        $00
 	smpsModSet          $00, $02, $01, $02
