@@ -13,29 +13,23 @@ Card_Index:	dc.w Card_CheckSBZ3-Card_Index
 		dc.w Card_Wait-Card_Index
 		dc.w Card_Wait-Card_Index
 
-card_mainX = objoff_30		; position for card to display on
-card_finalX = objoff_32		; position for card to finish on
+card_mainX:	equ	objoff_30		; position for card to display on
+card_finalX:	equ	objoff_32		; position for card to finish on
 ; ===========================================================================
 
 Card_CheckSBZ3:	; Routine 0
 		movea.l	a0,a1
+
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
-		cmpi.w	#(id_LZ<<8)+3,(v_zone).w ; check if level is SBZ 3
-		bne.s	Card_CheckFZ
-		moveq	#5,d0		; load title card number 5 (SBZ)
-
-Card_CheckFZ:
-		move.w	d0,d2
-		cmpi.w	#(id_SBZ<<8)+2,(v_zone).w ; check if level is FZ
-		bne.s	Card_LoadConfig
-		moveq	#6,d0		; load title card number 6 (FZ)
-		moveq	#$B,d2		; use "FINAL" mappings
-
-Card_LoadConfig:
-		lea	(Card_ConData).l,a3
-		lsl.w	#4,d0
+		move.b	d0,d2
+		lsl.w	#2,d0
+		add.b	(v_act).w,d0
+		lsl.b	#3,d0
+		lea	(TTL_ConData).l,a3
 		adda.w	d0,a3
+		movea.l	(a3),a3
+
 		lea	(Card_ItemData).l,a2
 		moveq	#3,d1
 
@@ -47,20 +41,14 @@ Card_Loop:
 		move.w	(a2)+,obScreenY(a1)
 		move.b	(a2)+,obRoutine(a1)
 		move.b	(a2)+,d0
-		bne.s	Card_ActNumber
+		bne.s	Card_MakeSprite
 		move.b	d2,d0
-
-Card_ActNumber:
-		cmpi.b	#7,d0
-		bne.s	Card_MakeSprite
+		lsl.b	#2,d0
 		add.b	(v_act).w,d0
-		cmpi.b	#3,(v_act).w
-		bne.s	Card_MakeSprite
-		subq.b	#1,d0
 
 Card_MakeSprite:
 		move.b	d0,obFrame(a1)	; display frame number d0
-		move.l	#Map_Card,obMap(a1)
+		move.l	#Map_Card_Extended,obMap(a1)
 		move.w	#make_art_tile(ArtTile_Title_Card,0,1),obGfx(a1)
 		move.b	#$78,obActWid(a1)
 		move.b	#0,obRender(a1)
@@ -132,28 +120,30 @@ Card_ChangeArt:
 		addi.w	#plcid_GHZAnimals,d0
 		jsr	(AddPLC).l	; load animal patterns
 
+		lea	(v_ttlcardzone).w,a1
+		bsr.w	DeleteChild
+		lea	(v_ttlcardact).w,a1
+		bsr.w	DeleteChild
+		lea	(v_ttlcardoval).w,a1
+		bsr.w	DeleteChild
+
 Card_Delete:
 		bra.w	DeleteObject
 ; ===========================================================================
-Card_ItemData:	dc.w $D0	; y-axis position
+Card_ItemData:
+		; v_ttlcardname
+		dc.w $D0	; y-axis position
 		dc.b 2,	0	; routine number, frame number (changes)
+
+		; v_ttlcardzone
 		dc.w $E4
-		dc.b 2,	6
+		dc.b 2,	ZoneCount*4
+
+		; v_ttlcardact
 		dc.w $EA
-		dc.b 2,	7
+		dc.b 2,	(ZoneCount*4)+1
+
+		; v_ttlcardoval
 		dc.w $E0
-		dc.b 2,	$A
-; ---------------------------------------------------------------------------
-; Title card configuration data
-; Format:
-; 4 bytes per item (YYYY XXXX)
-; 4 items per level (GREEN HILL, ZONE, ACT X, oval)
-; ---------------------------------------------------------------------------
-Card_ConData:	dc.w 0,	$120, $FEFC, $13C, $414, $154, $214, $154 ; GHZ
-		dc.w 0,	$120, $FF24, $164, $440, $180, $240, $180 ; LZ
-		dc.w 0,	$120, $FEE0, $120, $3F8, $138, $1F8, $138 ; MZ
-		dc.w 0,	$120, $FEFC, $13C, $414, $154, $214, $154 ; SLZ
-		dc.w 0,	$120, $FF04, $144, $41C, $15C, $21C, $15C ; SYZ
-		dc.w 0,	$120, $FF04, $144, $41C, $15C, $21C, $15C ; SBZ
-		dc.w 0,	$120, $FEE4, $124, $3EC, $3EC, $1EC, $12C ; FZ
+		dc.b 2,	(ZoneCount*4)+2
 ; ===========================================================================
