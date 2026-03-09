@@ -113,7 +113,8 @@ v_jpadhold1:		ds.b	1		; joypad input - held
 v_jpadpress1:		ds.b	1		; joypad input - pressed
 			ds.b	6		; unused
 v_vdp_buffer1:		ds.w	1		; VDP instruction buffer of register $81 (used for enabling/disabling display)
-			ds.b	6		; unused
+v_flashcolor:		ds.w	1		; flash color
+			ds.b	4		; unused
 v_generictimer:		ds.w	1		; generic timer, decrements to 0 in vblank (word)
 v_scrposy_vdp:		ds.w	1		; screen position y (VDP)
 v_bgscrposy_vdp:	ds.w	1		; background screen position y (VDP)
@@ -121,7 +122,7 @@ v_scrposx_vdp:		ds.w	1		; screen position x (VDP)
 v_bgscrposx_vdp:	ds.w	1		; background screen position x (VDP)
 v_bg3scrposy_vdp:	ds.w	1
 v_bg3scrposx_vdp:	ds.w	1
-v_flashtimer:		ds.b	1		; red flash timer
+v_flashtimer:		ds.b	1		; flash timer
 			ds.b	1
 v_hbla_hreg:		ds.w	1		; VDP H.interrupt register buffer (8Axx)
 v_hbla_line = v_hbla_hreg+1			; screen line where water starts and palette is changed by HBlank

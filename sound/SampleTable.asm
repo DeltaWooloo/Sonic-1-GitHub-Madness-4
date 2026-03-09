@@ -24,7 +24,8 @@ SampleTable:
 	dcSample   	TYPE_PCM,       CrispBilly,     8000, 	            ; $93
 	dcSample   	TYPE_PCM,      	BlueLobster,    8000, 	            ; $94
    	dcSample    	TYPE_PCM,      	WinTwoK,        8000, 	            ; $95
-    	dcSample    	TYPE_PCM,      	DeppaDig,      	8000, 	            ; $96	
+    	dcSample    	TYPE_PCM,      	DeppaDig,      	8000, 	            ; $96
+    	dcSample    	TYPE_PCM,      	QuakeRocket,    11297, 	            ; $97	
 	dc.w	-1	; end marker
 
 ; ---------------------------------------------------------------
@@ -40,7 +41,7 @@ SampleTable:
 	incdac	yume2kki, "sound/dac/2kki.wav"
 	incdac	SegaPCM, "sound/dac/sega.wav"
 	incdac	DooDoo, "sound/dac/idk/doodoofeces.pcm"
-
+	incdac	QuakeRocket, "sound/dac/tankfire1.wav"
 	even
 
 ; ---------------------------------------------------------------

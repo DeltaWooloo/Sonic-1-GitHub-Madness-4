@@ -34,10 +34,10 @@ Cat_Main:	; Routine 0
 		clr.w	obVelY(a0)
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_Cat,obMap(a0)
-		move.w	#make_art_tile(ArtTile_SBZ_Caterkiller,1,0),obGfx(a0)
+		move.w	#make_art_tile(ArtTile_SBZ_Caterkiller,0,0),obGfx(a0)
 		cmpi.b	#id_SBZ,(v_zone).w ; if level is SBZ, branch
 		beq.s	.isscrapbrain
-		move.w	#make_art_tile(ArtTile_MZ_SYZ_Caterkiller,1,0),obGfx(a0) ; MZ/SYZ specific code
+		move.w	#make_art_tile(ArtTile_MZ_SYZ_Caterkiller,0,0),obGfx(a0) ; MZ/SYZ specific code
 
 .isscrapbrain:
 		andi.b	#3,obRender(a0)
@@ -146,8 +146,8 @@ Cat_Index2:	dc.w .wait-Cat_Index2
 .move:
 		addq.b	#2,ob2ndRout(a0)
 		move.b	#$10,objoff_2A(a0)
-		move.w	#-$C0,obVelX(a0)
-		move.w	#$40,obInertia(a0)
+		move.w	#-$100,obVelX(a0)
+		move.w	#$A0,obInertia(a0)
 		bchg	#4,objoff_2B(a0)
 		bne.s	loc_16AFC
 		clr.w	obVelX(a0)
@@ -314,7 +314,7 @@ loc_16C0C:
 		beq.s	locj_173E4
 		btst	#0,obStatus(a0)
 		beq.s	locj_173E4
-		cmpi.w	#-$C0,obVelX(a0)
+		cmpi.w	#-$100,obVelX(a0)
 		bne.s	locj_173E4
 		subq.w	#1,obX(a0)
 		addq.b	#1,cat_parent(a0)
@@ -389,7 +389,7 @@ loc_16C96:
 
 loc_16CAA:
 		move.w	d0,obVelX(a0)
-		move.w	#-$400,obVelY(a0)
+		move.w	#-$A00,obVelY(a0)
 		move.b	#$C,obRoutine(a0)
 		andi.b	#$F8,obFrame(a0)
 

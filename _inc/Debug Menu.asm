@@ -46,7 +46,7 @@ GM_DebugMenu:
 		move.l	d0,(a6)
 		dbf	d1,DebugMenu_ClrScroll2	; clear scroll data (in VRAM)
 
-		move.b	#$08,(v_gamemode).w	; set game mode to Level
+		move.b	#$0C,(v_gamemode).w	; set game mode to Level
 		move.b	#0,(v_zone).w		; zone 0 (GHZ)
 		move.b	#0,(v_act).w		; act 1
 		move.b	#3,(v_lives).w		; 3 lives

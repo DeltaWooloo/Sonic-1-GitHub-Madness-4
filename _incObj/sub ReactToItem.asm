@@ -366,7 +366,7 @@ KillSonic:
 
 .sound:
 		jsr	(QueueSound2).l
-
+		jsr	GHM3Explode
 
 .dontdie:
 		moveq	#-1,d0

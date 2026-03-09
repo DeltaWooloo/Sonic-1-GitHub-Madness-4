@@ -144,82 +144,108 @@ ptr_mus96:		dc.l Music96
 ptr_mus97:		dc.l Music97
 ptr_musRetro:		dc.l MusicRetro
 ptr_mus99:		dc.l Music99
+ptr_mus9A:		dc.l Music9A
+ptr_mus9B:		dc.l Music9B
+ptr_mus9C:		dc.l Music9C
+ptr_mus9D:		dc.l Music9D
+ptr_mus9E:		dc.l Music9E
+ptr_mus9F:		dc.l Music9F
 
-;ptr_mus14:	dc.l Music14
-;ptr_mus15:	dc.l Music15
-;ptr_mus16:	dc.l Music16
-;ptr_mus17:	dc.l Music17
-;ptr_mus18:	dc.l Music18
-;ptr_mus19:	dc.l Music19
-;ptr_mus1A:	dc.l Music1A
-;ptr_mus1C:	dc.l Music1C
-;ptr_mus1D:	dc.l Music1D
-;ptr_mus1E:	dc.l Music1E
-;ptr_mus1F:	dc.l Music1F
-;ptr_mus20:	dc.l Music20
-;ptr_mus21:	dc.l Music21
-;ptr_mus22:	dc.l Music22
-;ptr_mus23:	dc.l Music23
-;ptr_mus24:	dc.l Music24
-;ptr_mus25:	dc.l Music25
-;ptr_mus26:	dc.l Music26
-;ptr_mus27:	dc.l Music27
-;ptr_mus28:	dc.l Music28
-;ptr_mus29:	dc.l Music29
-;ptr_mus2A:	dc.l Music2A
-;ptr_mus2B:	dc.l Music2B
-;ptr_mus2C:	dc.l Music2C
-;ptr_mus2D:	dc.l Music2D
-;ptr_mus2E:	dc.l Music2E
-;ptr_mus2F:	dc.l Music2F
-;ptr_mus30:	dc.l Music30
-;ptr_mus31:	dc.l Music31
-;ptr_mus32:	dc.l Music32
-;ptr_mus33:	dc.l Music33
-;ptr_mus34:	dc.l Music34
-;ptr_mus35:	dc.l Music35
-;ptr_mus36:	dc.l Music36
-;ptr_mus37:	dc.l Music37
-;ptr_mus38:	dc.l Music38
-;ptr_mus39:	dc.l Music39
-;ptr_mus3A:	dc.l Music3A
-;ptr_mus3B:	dc.l Music3B
-;ptr_mus3C:	dc.l Music3C
-;ptr_mus3D:	dc.l Music3D
-;ptr_mus3E:	dc.l Music3E
-;ptr_mus3F:	dc.l Music3F
-;ptr_mus40:	dc.l Music40
-;ptr_mus41:	dc.l Music41
-;ptr_mus42:	dc.l Music42
-;ptr_mus43:	dc.l Music43
-;ptr_mus44:	dc.l Music44
-;ptr_mus45:	dc.l Music45
-;;ptr_mus46:	dc.l Music46
-;ptr_mus47:	dc.l Music47
-;ptr_mus48:	dc.l Music48
-;ptr_mus49:	dc.l Music49
-;ptr_mus4A:	dc.l Music4A
-;ptr_mus4B:	dc.l Music4B
-;ptr_mus4C:	dc.l Music4C
-;ptr_mus4D:	dc.l Music4D
-;ptr_mus4E:	dc.l Music4E
-;ptr_mus4F:	dc.l Music4F
-;ptr_mus50:	dc.l Music50
-;ptr_mus51:	dc.l Music51
-;ptr_mus52:	dc.l Music52
-;ptr_mus53:	dc.l Music53
-;ptr_mus54:	dc.l Music54
-;ptr_mus55:	dc.l Music55
-;ptr_mus56:	dc.l Music56
-;ptr_mus57:	dc.l Music57
-;ptr_mus58:	dc.l Music58
-;ptr_mus59:	dc.l Music59
-;ptr_mus5A:	dc.l Music5A
-;ptr_mus5B:	dc.l Music5B
-;ptr_mus5C:	dc.l Music5C
-;ptr_mus5D:	dc.l Music5D
-;ptr_mus5E:	dc.l Music5E
-;ptr_mus5F:	dc.l Music5F
+;ptr_mus00:		dc.l Music00
+;ptr_mus01:		dc.l Music01
+;ptr_mus02:		dc.l Music02
+;ptr_mus03:		dc.l Music03
+;ptr_mus04:		dc.l Music04
+;ptr_mus05:		dc.l Music05
+;ptr_mus06:		dc.l Music06
+;ptr_mus07:		dc.l Music07
+;ptr_mus08:		dc.l Music08
+;ptr_mus09:		dc.l Music09
+;ptr_mus0A:		dc.l Music0A
+;ptr_mus0B:		dc.l Music0B
+;ptr_mus0C:		dc.l Music0C
+;ptr_mus0D:		dc.l Music0D
+;ptr_mus0E:		dc.l Music0E
+;ptr_mus0F:		dc.l Music0F
+;ptr_mus10:		dc.l Music10
+;ptr_mus11:		dc.l Music11
+;ptr_mus12:		dc.l Music12
+;ptr_mus13:		dc.l Music13
+;ptr_mus14:		dc.l Music14
+;ptr_mus15:		dc.l Music15
+;ptr_mus16:		dc.l Music16
+;ptr_mus17:		dc.l Music17
+;ptr_mus18:		dc.l Music18
+;ptr_mus19:		dc.l Music19
+;ptr_mus1A:		dc.l Music1A
+;ptr_mus1C:		dc.l Music1C
+;ptr_mus1D:		dc.l Music1D
+;ptr_mus1E:		dc.l Music1E
+;ptr_mus1F:		dc.l Music1F
+;ptr_mus20:		dc.l Music20
+;ptr_mus21:		dc.l Music21
+;ptr_mus22:		dc.l Music22
+;ptr_mus23:		dc.l Music23
+;ptr_mus24:		dc.l Music24
+;ptr_mus25:		dc.l Music25
+;ptr_mus26:		dc.l Music26
+;ptr_mus27:		dc.l Music27
+;ptr_mus28:		dc.l Music28
+;ptr_mus29:		dc.l Music29
+;ptr_mus2A:		dc.l Music2A
+;ptr_mus2B:		dc.l Music2B
+;ptr_mus2C:		dc.l Music2C
+;ptr_mus2D:		dc.l Music2D
+;ptr_mus2E:		dc.l Music2E
+;ptr_mus2F:		dc.l Music2F
+;ptr_mus30:		dc.l Music30
+;ptr_mus31:		dc.l Music31
+;ptr_mus32:		dc.l Music32
+;ptr_mus33:		dc.l Music33
+;ptr_mus34:		dc.l Music34
+;ptr_mus35:		dc.l Music35
+;ptr_mus36:		dc.l Music36
+;ptr_mus37:		dc.l Music37
+;ptr_mus38:		dc.l Music38
+;ptr_mus39:		dc.l Music39
+;ptr_mus3A:		dc.l Music3A
+;ptr_mus3B:		dc.l Music3B
+;ptr_mus3C:		dc.l Music3C
+;ptr_mus3D:		dc.l Music3D
+;ptr_mus3E:		dc.l Music3E
+;ptr_mus3F:		dc.l Music3F
+;ptr_mus40:		dc.l Music40
+;ptr_mus41:		dc.l Music41
+;ptr_mus42:		dc.l Music42
+;ptr_mus43:		dc.l Music43
+;ptr_mus44:		dc.l Music44
+;ptr_mus45:		dc.l Music45
+;;ptr_mus46:		dc.l Music46
+;ptr_mus47:		dc.l Music47
+;ptr_mus48:		dc.l Music48
+;ptr_mus49:		dc.l Music49
+;ptr_mus4A:		dc.l Music4A
+;ptr_mus4B:		dc.l Music4B
+;ptr_mus4C:		dc.l Music4C
+;ptr_mus4D:		dc.l Music4D
+;ptr_mus4E:		dc.l Music4E
+;ptr_mus4F:		dc.l Music4F
+;ptr_mus50:		dc.l Music50
+;ptr_mus51:		dc.l Music51
+;ptr_mus52:		dc.l Music52
+;ptr_mus53:		dc.l Music53
+;ptr_mus54:		dc.l Music54
+;ptr_mus55:		dc.l Music55
+;ptr_mus56:		dc.l Music56
+;ptr_mus57:		dc.l Music57
+;ptr_mus58:		dc.l Music58
+;ptr_mus59:		dc.l Music59
+;ptr_mus5A:		dc.l Music5A
+;ptr_mus5B:		dc.l Music5B
+;ptr_mus5C:		dc.l Music5C
+;ptr_mus5D:		dc.l Music5D
+;ptr_mus5E:		dc.l Music5E
+;ptr_mus5F:		dc.l Music5F
 
 ptr_musend
 
@@ -2833,10 +2859,21 @@ MusicRetro:	include "sound/music/LiquidTracks/Mus - Sonic Retro.asm"
 		even
 Music99:	include "../conimodes/splash/Jingle.asm"
 		even
+Music9A:	include	"sound/music/TG2000Tracks/VampireKiller.asm"
+		even
+Music9B:	include	"sound/music/TG2000Tracks/WarnOfSon.asm"
+		even
+Music9C:	include	"sound/music/TG2000Tracks/Carefree.asm"
+		even
+Music9D:	include	"sound/music/TG2000Tracks/DoomGate.asm"
+		even
+Music9E:	include	"sound/music/TG2000Tracks/Dingaling.asm"
+		even
+Music9F:	include	"sound/music/TG2000Tracks/Megalovania.asm"
+		even
+
 
 Music14:	include	"sound/music/TG2000Tracks/Aporia.asm"
-		even
-Music15:	include	"sound/music/TG2000Tracks/VampireKiller.asm"
 		even
 Music16:	include	"sound/music/TG2000Tracks/Gadget.asm"
 		even
@@ -2847,10 +2884,6 @@ Music18:	include	"sound/music/TG2000Tracks/TwoSteps.asm"
 Music19:	include	"sound/music/TG2000Tracks/FurElise.asm"
 		even
 Music1A:	include	"sound/music/TG2000Tracks/Ding.asm"
-		even
-Music1B:	include	"sound/music/TG2000Tracks/WarnOfSon.asm"
-		even
-Music1C:	include	"sound/music/TG2000Tracks/Carefree.asm"
 		even
 Music1D:	include	"sound/music/TG2000Tracks/GreenHills.asm"
 		even
@@ -2863,16 +2896,13 @@ Music20:	include	"sound/music/TG2000Tracks/SadMac.asm"
 Music21:	include	"sound/music/TG2000Tracks/TG2000Jingle.asm"
 		even
 
-Music22:	include	"sound/music/TG2000Tracks/DoomGate.asm"
-		even
-		even
+	
 Music23:	incbin	"sound/music/TG2000Tracks/SwingSinners.bin"
 		even
 Music24:	incbin	"sound/music/TG2000Tracks/AVGNInvF.bin"
 		even
 
-Music25:	include	"sound/music/TG2000Tracks/Dingaling.asm"
-		even
+
 Music26:	include	"sound/music/TG2000Tracks/Minuscule.asm"
 		even
 Music27:	include	"sound/music/TG2000Tracks/Folgers.asm"
@@ -2927,8 +2957,7 @@ Music3E:	include	"sound/music/TG2000Tracks/BadEmerald.asm"
 		even
 Music3F:	include	"sound/music/TG2000Tracks/SkyBase.asm"
 		even
-Music40:	include	"sound/music/TG2000Tracks/Megalovania.asm"
-		even
+
 Music41:	include	"sound/music/TG2000Tracks/Scrappy.asm"
 		even
 Music42:	include	"sound/music/TG2000Tracks/WeAreTheSonic.asm"

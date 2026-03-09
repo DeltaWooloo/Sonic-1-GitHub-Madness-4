@@ -109,9 +109,9 @@ Spring_LR:	; Routine 8
 		move.b	#8,obRoutine(a0)
 
 loc_DC0C:
-		btst	#5,obStatus(a0)
-		bne.s	Spring_BounceLR
-		rts
+		cmpi.b	#1,d4
+		beq.s	Spring_BounceLR
+		rts	
 ; ===========================================================================
 
 Spring_BounceLR:
