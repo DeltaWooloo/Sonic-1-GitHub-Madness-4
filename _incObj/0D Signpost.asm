@@ -16,7 +16,7 @@ Signpost:
 Sign_Index:	dc.w Sign_Main-Sign_Index
 		dc.w Sign_Touch-Sign_Index
 		dc.w Sign_Spin-Sign_Index
-		dc.w Sign_SonicRun-Sign_Index
+		dc.w GotThroughAct-Sign_Index
 		dc.w Sign_Exit-Sign_Index
 
 spintime = objoff_30		; time for signpost to spin
@@ -96,6 +96,11 @@ Sign_SparkPos:	dc.b -$18,-$10		; x-position, y-position
 		dc.b -$18,   8
 		dc.b  $18, $10
 ; ===========================================================================
+; ---------------------------------------------------------------------------
+; ABSOLUTE BULLSHIT CODE
+; ---------------------------------------------------------------------------
+; ===========================================================================
+
 
 Sign_SonicRun:	; Routine 6
 		tst.w	(v_debuguse).w	; is debug mode on?
