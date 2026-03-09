@@ -2839,7 +2839,7 @@ Music8E:	include "sound/music/Mus8E - Sonic Got Through.asm"
 		even
 Music8F:	include "sound/music/Mus8F - Game Over.asm"
 		even
-Music90:	include "sound/music/Mus90 - Continue Screen.asm"
+Music90:	include "sound/music/LiquidTracks/Mus - Uwol Menu.asm"
 		even
 Music91:	include "sound/music/Mus91 - Credits.asm"
 		even
