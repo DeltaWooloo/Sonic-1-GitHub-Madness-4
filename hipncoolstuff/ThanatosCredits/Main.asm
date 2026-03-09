@@ -64,7 +64,7 @@ PalThanatosCredits:	bincludeEndMarker "hipncoolstuff/ThanatosCredits/Palette.pal
 
 	; Clear variables
 	lea	(than_rom_position).l,a0
-	move.l	d0,(a0) ; clears than_y_plane with it
+	move.l	d0,(a0) ; clears than_ypos with it
 
 	; Load art/map
 	locVRAM	$20
@@ -81,30 +81,97 @@ PalThanatosCredits:	bincludeEndMarker "hipncoolstuff/ThanatosCredits/Palette.pal
 
 	QueueSound_M bgm_Ending,0
 
+	move.w	#$A,d5
+-	bsr.s	RenderTextLine
+	dbf.w	d5,-
+
 	bra.s	*
 
+Thanatos_ClearPlane:
+	moveq	#0,d0
+	lea	(than_plane).l,a0
+	move.w	#$100/$4-1,d1
+-	move.l	d0,(a0)+
+	dbf.w	d1,-
+	rts
+
 RenderTextLine:
-	lea	(than_rom_position).l,a0
-	move.w	(a0),d0
+	bsr.w	Thanatos_ClearPlane
 
+	move.w	(than_rom_position).l,d0
+
+	lea	(than_plane).l,a2
+
+	lea	(Credits_Text_Thanatos).l,a0
+	adda.w	d0,a0
+	move.w	#0,d1
+	move.b	(a0)+,d1
+	add.w	d1,(than_rom_position).l
+	subq.w	#2,d1
+	bmi.s	.post
+
+.loop	lea	(v_ram_start).l,a1
 	clr.w	d0
-
 	move.b	(a0)+,d0
-	beq.s	+
-+	rts
+	bmi.s	.space
+	add.w	d0,d0
+	add.w	d0,d0
+	add.w	d0,d0
+	add.w	d0,a1
+	cmpi.w	#8*8,d0
+	beq.s	.i
+	cmpi.w	#27*8,d0
+	beq.s	.i
+	move.l	(a1),(a2)
+	move.l	4(a1),$80(a2)
+	adda.w	#4,a2
+
+	dbf.w	d1,.loop
+.post	disable_ints
+
+	lea	(vdp_control_port).l,a5
+	move.l	#$94000000+((((than_plane_end-than_plane)>>1)&$FF00)<<8)+$9300+(((than_plane_end-than_plane)>>1)&$FF),(a5)
+	move.l	#$96000000+(((than_plane>>1)&$FF00)<<8)+$9500+((than_plane>>1)&$FF),(a5)
+	move.w	#$9700+((((than_plane>>1)&$FF0000)>>16)&$7F),(a5)
+	move.w	(than_ypos).l,d0
+	add.w	#$4000,d0
+	move.w	d0,(a5)
+
+	move.w	#$80+($C000>>14),(v_vdp_buffer2).w
+	move.w	(v_vdp_buffer2).w,(a5)
+
+	enable_ints
+	add.w	#$180,(than_ypos).l
+	andi.w	#$0FFF,(than_ypos).l
+	rts
+
+.i	move.w	(a1),(a2)
+	move.w	4(a1),$80(a2)
+.space	adda.w	#2,a2
+	dbf.w	d1,.loop
+	bra.s	.post
 
 Credits_Text_Thanatos:
-	charset ' ',0
-	charset 'A','Z',1
+	charset ' ',$FF
+	charset 'A','Z',0
+	charset ':',26
+	charset '.',27
 
 thantxt: macro txt
-	dc.b strlen(txt),txt
+	dc.b strlen(txt)+1,txt
 	endm
 
-	dc.b	"SONIC I GITHUB MADNESS IV"
-	dc.b	0
-	dc.b	"THIS IS FUNNY TEXT"
-	dc.b	"SPAGUETTI BY MARIO"
+	thantxt	"SONIC I:"
+	thantxt	"GITHUB MADNESS IV"
+	thantxt	"THIS IS FUNNY TEXT..."
+	thantxt	"SPAGUETTI BY MARIO"
+	thantxt	"CREDITS BY HIPSNAKE"
+	thantxt	"TEST"
+	thantxt	"LOREM IPSUM"
+	thantxt	"MORE TEXT"
+	thantxt	"OH SHIT ITS GETTING"
+	thantxt	"OFFSCREEN"
+	thantxt	"THIS WILL SCROLL"
 	even
 
 	charset
