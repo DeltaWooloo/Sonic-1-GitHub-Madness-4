@@ -17,8 +17,14 @@ SampleTable:
 	dcSample	TYPE_PCM,	PokeTimpani,	7500			; $8D
 	dcSample	TYPE_PCM,	DAMN,		16000			; $8E
 	dcSample	TYPE_PCM,	Trevor,		0, FLAGS_SFX		; $8F
+
 	dcSample	TYPE_PCM_TURBO,	yume2kki,	0, FLAGS_SFX		; $90
 	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0, FLAGS_SFX		; $91
+	dcSample    	TYPE_PCM,      	DooDoo,      	8000, 	            	; $92
+	dcSample   	TYPE_PCM,       CrispBilly,     8000, 	            ; $93
+	dcSample   	TYPE_PCM,      	BlueLobster,    8000, 	            ; $94
+   	dcSample    	TYPE_PCM,      	WinTwoK,        8000, 	            ; $95
+    	dcSample    	TYPE_PCM,      	DeppaDig,      	8000, 	            ; $96	
 	dc.w	-1	; end marker
 
 ; ---------------------------------------------------------------
@@ -33,5 +39,13 @@ SampleTable:
 	incdac	Trevor, "sound/dac/Trevor.wav"
 	incdac	yume2kki, "sound/dac/2kki.wav"
 	incdac	SegaPCM, "sound/dac/sega.wav"
+	incdac	DooDoo, "sound/dac/idk/doodoofeces.pcm"
 
 	even
+
+; ---------------------------------------------------------------
+; Stuff for Splash Screens
+	incdac	CrispBilly, "sound/dac/splashes/CrispBilly.wav"
+	incdac	BlueLobster, "sound/dac/splashes/BlueLobster.wav"
+	incdac	WinTwoK, "sound/dac/splashes/WinTwoK.wav"
+	incdac	DeppaDig, "sound/dac/splashes/DeppaDig.wav"

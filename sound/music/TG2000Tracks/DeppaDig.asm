@@ -7,7 +7,7 @@ DeppaDig_Header:
     smpsHeaderDAC       DeppaDig_DAC
 
 DeppaDig_DAC:
-    dc.b    $AB         ; play BGM sample
+    dc.b    $96         ; play BGM sample
     smpsStop
 
 DeppaDig_Voices:

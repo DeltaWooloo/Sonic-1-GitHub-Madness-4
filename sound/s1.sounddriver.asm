@@ -144,7 +144,87 @@ ptr_mus96:		dc.l Music96
 ptr_mus97:		dc.l Music97
 ptr_musRetro:		dc.l MusicRetro
 ptr_mus99:		dc.l Music99
+
+;ptr_mus14:	dc.l Music14
+;ptr_mus15:	dc.l Music15
+;ptr_mus16:	dc.l Music16
+;ptr_mus17:	dc.l Music17
+;ptr_mus18:	dc.l Music18
+;ptr_mus19:	dc.l Music19
+;ptr_mus1A:	dc.l Music1A
+;ptr_mus1C:	dc.l Music1C
+;ptr_mus1D:	dc.l Music1D
+;ptr_mus1E:	dc.l Music1E
+;ptr_mus1F:	dc.l Music1F
+;ptr_mus20:	dc.l Music20
+;ptr_mus21:	dc.l Music21
+;ptr_mus22:	dc.l Music22
+;ptr_mus23:	dc.l Music23
+;ptr_mus24:	dc.l Music24
+;ptr_mus25:	dc.l Music25
+;ptr_mus26:	dc.l Music26
+;ptr_mus27:	dc.l Music27
+;ptr_mus28:	dc.l Music28
+;ptr_mus29:	dc.l Music29
+;ptr_mus2A:	dc.l Music2A
+;ptr_mus2B:	dc.l Music2B
+;ptr_mus2C:	dc.l Music2C
+;ptr_mus2D:	dc.l Music2D
+;ptr_mus2E:	dc.l Music2E
+;ptr_mus2F:	dc.l Music2F
+;ptr_mus30:	dc.l Music30
+;ptr_mus31:	dc.l Music31
+;ptr_mus32:	dc.l Music32
+;ptr_mus33:	dc.l Music33
+;ptr_mus34:	dc.l Music34
+;ptr_mus35:	dc.l Music35
+;ptr_mus36:	dc.l Music36
+;ptr_mus37:	dc.l Music37
+;ptr_mus38:	dc.l Music38
+;ptr_mus39:	dc.l Music39
+;ptr_mus3A:	dc.l Music3A
+;ptr_mus3B:	dc.l Music3B
+;ptr_mus3C:	dc.l Music3C
+;ptr_mus3D:	dc.l Music3D
+;ptr_mus3E:	dc.l Music3E
+;ptr_mus3F:	dc.l Music3F
+;ptr_mus40:	dc.l Music40
+;ptr_mus41:	dc.l Music41
+;ptr_mus42:	dc.l Music42
+;ptr_mus43:	dc.l Music43
+;ptr_mus44:	dc.l Music44
+;ptr_mus45:	dc.l Music45
+;;ptr_mus46:	dc.l Music46
+;ptr_mus47:	dc.l Music47
+;ptr_mus48:	dc.l Music48
+;ptr_mus49:	dc.l Music49
+;ptr_mus4A:	dc.l Music4A
+;ptr_mus4B:	dc.l Music4B
+;ptr_mus4C:	dc.l Music4C
+;ptr_mus4D:	dc.l Music4D
+;ptr_mus4E:	dc.l Music4E
+;ptr_mus4F:	dc.l Music4F
+;ptr_mus50:	dc.l Music50
+;ptr_mus51:	dc.l Music51
+;ptr_mus52:	dc.l Music52
+;ptr_mus53:	dc.l Music53
+;ptr_mus54:	dc.l Music54
+;ptr_mus55:	dc.l Music55
+;ptr_mus56:	dc.l Music56
+;ptr_mus57:	dc.l Music57
+;ptr_mus58:	dc.l Music58
+;ptr_mus59:	dc.l Music59
+;ptr_mus5A:	dc.l Music5A
+;ptr_mus5B:	dc.l Music5B
+;ptr_mus5C:	dc.l Music5C
+;ptr_mus5D:	dc.l Music5D
+;ptr_mus5E:	dc.l Music5E
+;ptr_mus5F:	dc.l Music5F
+
 ptr_musend
+
+;Note to TG2000 or any other track implementors, remove semicolons on pointers upon implementing a track on a commented pointer! 
+
 ; ---------------------------------------------------------------------------
 ; Priority of sound. New music or SFX must have a priority higher than or equal
 ; to what is stored in v_sndprio or it won't play. If bit 7 of new priority is
@@ -692,17 +772,32 @@ PlaySoundID:
 		beq.w	StopAllSound
 		bpl.s	.locret				; If >= 0, return (not a valid sound, bgm or command)
 		move.b	#$80,SMPS_RAM.v_sound_id(a6)	; reset music flag
-		cmpi.b	#bgm__Last,d7		; Is this music ($01-$3F)?
-		bls.w	Sound_PlayBGM		; Branch if yes
-
+	if FixBugs
 		cmpi.b	#bgm__Last,d7		; Is this music ($81-$93)?
+	else
+		; DANGER! Music ends at $93, yet this checks until $9F; attempting to
+		; play sounds $94-$9F will cause a crash!
+		; See LevSel_NoCheat for more.
+		cmpi.b	#bgm__Last+$C,d7	; Is this music ($81-$9F)?
+	endif
 		bls.w	Sound_PlayBGM		; Branch if yes
+		cmpi.b	#sfx__First,d7		; Is this after music but before sfx? (redundant check)
+		blo.w	.locret			; Return if yes
 		cmpi.b	#sfx__Last,d7		; Is this sfx ($A0-$CF)?
 		bls.w	Sound_PlaySFX		; Branch if yes
+		cmpi.b	#spec__First,d7		; Is this after sfx but before special sfx? (redundant check)
+		blo.w	.locret			; Return if yes
+	if FixBugs
 		cmpi.b	#spec__Last,d7		; Is this special sfx ($D0-$D0)?
 		bls.w	Sound_PlaySpecial	; Branch if yes
 		cmpi.b	#flg__First,d7		; Is this after special sfx but before $E0?
 		blo.w	.locret			; Return if yes
+	else
+		; DANGER! Special SFXes end at $D0, yet this checks until $DF; attempting to
+		; play sounds $D1-$DF will cause a crash!
+		cmpi.b	#spec__Last+$10,d7	; Is this special sfx ($D0-$DF)?
+		blo.w	Sound_PlaySpecial	; Branch if yes
+	endif
 		cmpi.b	#flg__Last,d7		; Is this $E0-$E4?
 		bls.s	Sound_E0toE4		; Branch if yes
 ; locret_71F8C:
@@ -2688,7 +2783,7 @@ cfOpF9:
 ; ---------------------------------------------------------------------------
 ; Music data
 ; ---------------------------------------------------------------------------
-Music81:	include "sound/music/DaxKatter/Mus - Limited Hill.asm"
+Music81:	include "sound/music/Mus81 - GHZ.asm"
 		even
 Music82:	include "sound/music/DaxKatter/Mus - Azure Rainforest.asm"
 		even
@@ -2738,11 +2833,116 @@ MusicRetro:	include "sound/music/LiquidTracks/Mus - Sonic Retro.asm"
 		even
 Music99:	include "../conimodes/splash/Jingle.asm"
 		even
+
+Music14:	include	"sound/music/TG2000Tracks/Aporia.asm"
+		even
+Music15:	include	"sound/music/TG2000Tracks/VampireKiller.asm"
+		even
+Music16:	include	"sound/music/TG2000Tracks/Gadget.asm"
+		even
+Music17:	include	"sound/music/TG2000Tracks/CanCanInv.asm"
+		even
+Music18:	include	"sound/music/TG2000Tracks/TwoSteps.asm"
+		even
+Music19:	include	"sound/music/TG2000Tracks/FurElise.asm"
+		even
+Music1A:	include	"sound/music/TG2000Tracks/Ding.asm"
+		even
+Music1B:	include	"sound/music/TG2000Tracks/WarnOfSon.asm"
+		even
+Music1C:	include	"sound/music/TG2000Tracks/Carefree.asm"
+		even
+Music1D:	include	"sound/music/TG2000Tracks/GreenHills.asm"
+		even
+Music1E:	include	"sound/music/TG2000Tracks/Son1UP.asm"
+		even
+Music1F:	include	"sound/music/TG2000Tracks/DooDoo.asm"
+		even
+Music20:	include	"sound/music/TG2000Tracks/SadMac.asm"
+		even
+Music21:	include	"sound/music/TG2000Tracks/TG2000Jingle.asm"
+		even
+
+Music22:	include	"sound/music/TG2000Tracks/DoomGate.asm"
+		even
+		even
+Music23:	incbin	"sound/music/TG2000Tracks/SwingSinners.bin"
+		even
+Music24:	incbin	"sound/music/TG2000Tracks/AVGNInvF.bin"
+		even
+
+Music25:	include	"sound/music/TG2000Tracks/Dingaling.asm"
+		even
+Music26:	include	"sound/music/TG2000Tracks/Minuscule.asm"
+		even
+Music27:	include	"sound/music/TG2000Tracks/Folgers.asm"
+		even
+Music28:	include	"sound/music/TG2000Tracks/Rickroll.asm"
+		even
+Music29:	include	"sound/music/TG2000Tracks/Wormy.asm"
+		even
+
+Music2A:	include	"sound/music/TG2000Tracks/Starman.asm"
+		even
+Music2B:	include	"sound/music/TG2000Tracks/MayoDed.asm"
+		even
+Music2C:	include	"sound/music/TG2000Tracks/PuyoReject.asm"
+		even
+Music2D:	include	"sound/music/TG2000Tracks/NewShop.asm"
+		even
+Music2E:	include	"sound/music/TG2000Tracks/JamesPond.asm"
+		even
+Music2F:	include	"sound/music/TG2000Tracks/AlexKiddEnd.asm"
+		even
+Music30:	include	"sound/music/TG2000Tracks/Cheetah.asm"
+		even
+
+Music31:	include	"sound/music/TG2000Tracks/DJKK.asm"
+		even
+Music32:	include	"sound/music/TG2000Tracks/FuneralMarch.asm"
+		even
+Music33:	include	"sound/music/TG2000Tracks/Levian.asm"
+		even
+Music34:	include	"sound/music/TG2000Tracks/BatMan.asm"
+		even
+Music35:	include	"sound/music/TG2000Tracks/Peppa.asm"
+		even
+Music36:	include	"sound/music/TG2000Tracks/Resetti.asm"
+		even
+Music37:	include	"sound/music/TG2000Tracks/CrispBilly.asm"
+		even
+Music38:	include	"sound/music/TG2000Tracks/BlueLobster.asm"
+		even
+Music39:	include	"sound/music/TG2000Tracks/WinTwoK.asm"
+		even
+Music3A:	include	"sound/music/TG2000Tracks/DeppaDig.asm"
+		even
+Music3B:	include	"sound/music/TG2000Tracks/Spoopy.asm"
+		even
+Music3C:	include	"sound/music/TG2000Tracks/ChickenDance.asm"
+		even
+Music3D:	include	"sound/music/TG2000Tracks/CanCan.asm"
+		even
+Music3E:	include	"sound/music/TG2000Tracks/BadEmerald.asm"
+		even
+Music3F:	include	"sound/music/TG2000Tracks/SkyBase.asm"
+		even
+Music40:	include	"sound/music/TG2000Tracks/Megalovania.asm"
+		even
+Music41:	include	"sound/music/TG2000Tracks/Scrappy.asm"
+		even
+Music42:	include	"sound/music/TG2000Tracks/WeAreTheSonic.asm"
+		even
+Music43:	include	"sound/music/TG2000Tracks/LG.asm"
+		even
+Music44:	include	"sound/music/TG2000Tracks/Thomas.asm"
+		even
+Music45:	include	"sound/music/TG2000Tracks/ILBT.asm"
+		even
+
 ; ---------------------------------------------------------------------------
 ; Sound effect pointers
 ; ---------------------------------------------------------------------------
-LowerSoundIndex:
-
 SoundIndex:
 ptr_sndA0:	dc.l SoundA0
 ptr_sndA1:	dc.l SoundA1
@@ -2804,8 +3004,6 @@ ptr_specend
 ; ---------------------------------------------------------------------------
 ; Sound effect data
 ; ---------------------------------------------------------------------------
-Sound60:	include "sound/sfx/Snd60 - Violence.asm"
-		even
 SoundA0:	include "sound/sfx/SndA0 - Jump.asm"
 		even
 SoundA1:	include "sound/sfx/SndA1 - Lamppost.asm"
@@ -2908,4 +3106,3 @@ SoundCF:	include "sound/sfx/SndCF - Signpost.asm"
 ; ---------------------------------------------------------------------------
 SoundD0:	include "sound/sfx/SndD0 - Waterfall.asm"
 		even
-

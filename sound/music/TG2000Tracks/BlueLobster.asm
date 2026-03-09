@@ -7,7 +7,7 @@ BlueLobster_Header:
     smpsHeaderDAC       BlueLobster_DAC
 
 BlueLobster_DAC:
-    dc.b    $A8         ; play BGM sample
+    dc.b    $94         ; play BGM sample
     smpsStop
 
 BlueLobster_Voices:

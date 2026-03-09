@@ -7,7 +7,7 @@ CrispBilly_Header:
     smpsHeaderDAC       CrispBilly_DAC
 
 CrispBilly_DAC:
-    dc.b    $A7         ; play BGM sample
+    dc.b    $93         ; play BGM sample
     smpsStop
 
 CrispBilly_Voices:
