@@ -2688,7 +2688,7 @@ cfOpF9:
 ; ---------------------------------------------------------------------------
 ; Music data
 ; ---------------------------------------------------------------------------
-Music81:	include "sound/music/Mus81 - GHZ.asm"
+Music81:	include "sound/music/DaxKatter/Mus - Limited Hill.asm"
 		even
 Music82:	include "sound/music/DaxKatter/Mus - Azure Rainforest.asm"
 		even
