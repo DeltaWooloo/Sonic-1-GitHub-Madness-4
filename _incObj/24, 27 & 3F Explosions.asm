@@ -54,9 +54,6 @@ Obj27_Index:	dc.w Obj27_LoadAnimal-Obj27_Index
 
 Obj27_LoadAnimal:			; XREF: Obj27_Index
 		addq.b	#2,$24(a0)
-		bsr.w	FindFreeObj
-		bne.s	Obj27_Main
-		move.b	#$28,0(a1)	; load animal object
 		move.w	8(a0),8(a1)
 		move.w	$C(a0),$C(a1)
 		move.w	$3E(a0),$3E(a1)
@@ -72,41 +69,33 @@ Obj27_Main:				; XREF: Obj27_Index
 		; move.b	#7,$1E(a0)	; set frame duration to	7 frames
 		move.b	#$E,$1E(a0)	; GMZ
 		move.b	#0,$1A(a0)
-		move.w	#$C1,d0
+		move.w	#sfx_Bomb,d0
 		jsr	(PlaySound_Special).l ;	play breaking enemy sound
-
-		lea	(Obj27_ExplosionXYSpd).l,a2	; GMZ: Get Explosion X/Y Speeds according to subtype
-		move.b	$28(a0),d0
-		move.w	(a2,d0.w),$10(a0)
-		move.w	2(a2,d0.w),$12(a0)
+        	bsr.w   Obj27_GetVelocity
 
 Obj27_Animate:				; XREF: Obj27_Index
 		subq.b	#1,$1E(a0)	; subtract 1 from frame	duration
 		bpl.s	Obj27_Display
-		; move.b	#7,$1E(a0)	; set frame duration to	7 frames
-		move.b	#$E,$1E(a0)	; GMZ
+		move.b	#3,$1E(a0)	; set frame duration to	7 frames
 		addq.b	#1,$1A(a0)	; next frame
 		cmpi.b	#5,$1A(a0)	; is the final frame (05) displayed?
 		beq.w	DeleteObject	; if yes, branch
 
 Obj27_Display:
 		jsr	SpeedToPos	; GMZ
-		addi.w	#$38,$12(a0)	; GMZ: Explosion Gravity
 		bra.w	DisplaySprite
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
-Obj27_ExplosionXYSpd:
-		; dc.w	-$350, -$300	; Left
-		; dc.w	-$200, -$450	; Near middle (left)
-		; dc.w	0, -$500	; Middle
-		; dc.w	$200, -$450	; Near middle (right)
-		; dc.w	$350, -$300	; Right
 
-		dc.w	-$150, -$400	; Left
-		dc.w	-$100, -$550	; Near middle (left)
-		dc.w	0, -$600	; Middle
-		dc.w	$100, -$550	; Near middle (right)
-		dc.w	$150, -$400	; Right
+Obj27_GetVelocity:
+		sub.w	obAngle(a0), d0
+		jsr	CalcSine
+		asr.l	#8, d1
+		move.w	d1, obVelX(a0)
+		asr.l	#8, d0
+		move.w	d0, obVelY(a0)
+        	rts
+
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Object 3F - explosion from a destroyed boss, bomb or cannonball

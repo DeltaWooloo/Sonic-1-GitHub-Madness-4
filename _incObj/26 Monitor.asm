@@ -149,14 +149,8 @@ Mon_BreakOpen:	; Routine 4
 		move.b	obAnim(a0),obAnim(a1)
 
 Mon_Explode:
-		bsr.w	FindFreeObj
-		bne.s	.fail
-		_move.b	#id_ExplosionItem,obID(a1) ; load explosion object
-		addq.b	#2,obRoutine(a1) ; don't create an animal
-		move.w	obX(a0),obX(a1)
-		move.w	obY(a0),obY(a1)
+		jsr	GHM3Explode
 
-.fail:
 		lea	(v_objstate).w,a2
 		moveq	#0,d0
 		move.b	obRespawnNo(a0),d0
