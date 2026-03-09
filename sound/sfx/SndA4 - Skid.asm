@@ -4,8 +4,8 @@ SndA4_Skid_Header:
 	smpsHeaderTempoSFX  $01
 	smpsHeaderChanSFX   $02
 
-	smpsHeaderSFXChannel cPSG2, SndA4_Skid_PSG2,	$F4, $00
-	smpsHeaderSFXChannel cPSG3, SndA4_Skid_PSG3,	$F4, $00
+	smpsHeaderSFXChannel cPSG2, SndA4_Skid_PSG2,	$A4, $00
+	smpsHeaderSFXChannel cPSG3, SndA4_Skid_PSG3,	$A4, $00
 
 ; PSG2 Data
 SndA4_Skid_PSG2:
@@ -24,7 +24,7 @@ SndA4_Skid_PSG3:
 
 SndA4_Skid_Loop00:
 	dc.b	nAb3, $01, nRst, $01
-	smpsLoop            $00, $0B, SndA4_Skid_Loop00
+	smpsLoop            $00, $0E, SndA4_Skid_Loop00
 	smpsStop
 
 ; Song seems to not use any FM voices
