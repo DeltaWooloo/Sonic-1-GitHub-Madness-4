@@ -64,12 +64,7 @@ nMaxPSG2			EQU nB6
 	nextenum	fTone_07,fTone_08,fTone_09,uptone_01,uptone_02,uptone_03,duntone_01
 	nextenum	duntone_02,duntone_03
 ; ---------------------------------------------------------------------------
-; DAC Equates
-	enum		dKick=$81,dSnare,dTimpani,dHiTimpani,dMidTimpani,dLowTimpani,dVLowTimpani
-	nextenum	dChunkyKick,dPokeSnare,dPokeKickCrashHi,dPokeHiTimpani,dPokeMidTimpani
-	nextenum	dPokeLowTimpani,dDAMN,dTrevor,d2kki
-	nextenum	dSega	; Sega should always be last
-; ---------------------------------------------------------------------------
+
 ; Channel IDs for SFX
 cPSG1				EQU $80
 cPSG2				EQU $A0

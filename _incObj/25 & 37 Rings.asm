@@ -157,7 +157,7 @@ CollectRing:
 
 		jmp	(QueueSound2).l
 .playsnd:		
-		move.b	#$97, d0
+		move.b	#dQuakeRocket,d0
 		jmp	MegaPCM_PlaySample
 
 ; End of function CollectRing

@@ -294,6 +294,34 @@ bgm_Slowdown:	equ ((ptr_flgE3-Sound_ExIndex)/4)+flg__First
 bgm_Stop:	equ ((ptr_flgE4-Sound_ExIndex)/4)+flg__First
 flg__Last:	equ ((ptr_flgend-Sound_ExIndex-4)/4)+flg__First
 
+; DAC Equates - Putting them here for ease of access
+dKick			equ $81
+dSnare			equ $82
+dTimpani		equ $83
+dHiTimpani		equ $84
+dMidTimpani		equ $85
+dLowTimpani		equ $86
+dVLowTimpani		equ $87
+dChunkyKick		equ $88
+dPokeSnare		equ $89
+dPokeKickCrashHi	equ $8A
+dPokeHiTimpani		equ $8B
+dPokeMidTimpani		equ $8C
+dPokeLowTimpani		equ $8D
+dDAMN			equ $8E
+dTrevor			equ $8F
+d2kki			equ $90
+dDooDoo			equ $91
+dCrispBilly		equ $92
+dBlueLobster		equ $93
+dWinTwoK		equ $94
+dDeppaDig		equ $95
+dQuakeRocket		equ $96
+
+; Sega should always be last
+dSega			equ $97
+
+
 ; Sonic frame IDs
 fr_Null:	equ 0
 fr_Stand:	equ 1

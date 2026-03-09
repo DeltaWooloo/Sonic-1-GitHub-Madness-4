@@ -54,8 +54,8 @@ GM_SegaDooDoo_ClrObjRam:
 		jsr	(ExecuteObjects).l
 		jsr	(BuildSprites).l
 		jsr	PaletteFadeIn
-		move.b	#bgm_DooDooSega,d0
-		jsr	PlaySound_Special	
+		move.b	#dDooDoo,d0
+		jsr	MegaPCM_PlaySample
 		move.w	#60*3,(v_generictimer).w
 
 GM_SegaDooDoo_MainLoop:

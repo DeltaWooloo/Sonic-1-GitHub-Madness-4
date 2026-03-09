@@ -15,17 +15,19 @@ SampleTable:
 	dcSample	TYPE_PCM,	PokeTimpani,	15000			; $8B
 	dcSample	TYPE_PCM,	PokeTimpani,	11297			; $8C
 	dcSample	TYPE_PCM,	PokeTimpani,	7500			; $8D
+
 	dcSample	TYPE_PCM,	DAMN,		16000			; $8E
 	dcSample	TYPE_PCM,	Trevor,		0, FLAGS_SFX		; $8F
-
 	dcSample	TYPE_PCM_TURBO,	yume2kki,	0, FLAGS_SFX		; $90
-	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0, FLAGS_SFX		; $91
-	dcSample    	TYPE_PCM,      	DooDoo,      	8000, 	            	; $92
-	dcSample   	TYPE_PCM,       CrispBilly,     8000, 	            ; $93
-	dcSample   	TYPE_PCM,      	BlueLobster,    8000, 	            ; $94
-   	dcSample    	TYPE_PCM,      	WinTwoK,        8000, 	            ; $95
-    	dcSample    	TYPE_PCM,      	DeppaDig,      	8000, 	            ; $96
-    	dcSample    	TYPE_PCM,      	QuakeRocket,    11297, 	            ; $97	
+	dcSample	TYPE_PCM,	DooDoo,		8000,			; $91
+	dcSample	TYPE_PCM,	CrispBilly,	8000,			; $92
+	dcSample	TYPE_PCM,	BlueLobster,	8000,			; $93
+	dcSample	TYPE_PCM,	WinTwoK,	8000,			; $94
+	dcSample	TYPE_PCM,	DeppaDig,	8000,			; $95
+	dcSample	TYPE_PCM,	QuakeRocket,	11297,			; $96
+
+	; Keep this as the last sample pls (and make sure to add a sample constant to _smps2asm.asm
+	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0, FLAGS_SFX		; $97
 	dc.w	-1	; end marker
 
 ; ---------------------------------------------------------------
