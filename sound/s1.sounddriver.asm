@@ -2815,7 +2815,7 @@ Music82:	include "sound/music/DaxKatter/Mus - Azure Rainforest.asm"
 		even
 Music83:	include "sound/music/Mus83 - MZ.asm"
 		even
-Music84:	include "sound/music/Mus84 - SLZ.asm"
+Music84:	incbin "sound/music/Vertz1515/Book.bin"
 		even
 Music85:	include "sound/music/Mus85 - SYZ.asm"
 		even
@@ -2839,7 +2839,7 @@ Music8E:	include "sound/music/Mus8E - Sonic Got Through.asm"
 		even
 Music8F:	include "sound/music/Mus8F - Game Over.asm"
 		even
-Music90:	include "sound/music/Mus90 - Continue Screen.asm"
+Music90:	include "sound/music/LiquidTracks/Mus - Uwol Menu.asm"
 		even
 Music91:	include "sound/music/Mus91 - Credits.asm"
 		even
