@@ -129,12 +129,19 @@ splash_liquid macro routine
 	dc.w	1
 	dc.l	routine
 	endm
+
+splash_turd macro routine
+	dc.w	1
+	dc.l	routine
+	endm
+
 ; Entries
 
 	splash_liquid SonicRetro
 	splash_liquid Yume2kki
 	splash_solid LastBurenyuu,$20,$81,120
 	splash_liquid GM_SegaEU
+	splash_turd Remilia
 	dc.l	-1 ; end marker
 
 ; Files for solid
@@ -144,4 +151,7 @@ splash_liquid macro routine
 	include "LiquidSplashes/Rerto/Rerto.asm"
 	include "LiquidSplashes/2kki/2kki.asm"
 	include "eurosega/eurosega.asm"
+
+; Files for turd
+	include "CrazyRemilia/Remi/Remi.asm"
 

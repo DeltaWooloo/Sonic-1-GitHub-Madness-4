@@ -321,9 +321,10 @@ dBlueLobster		equ $93
 dWinTwoK		equ $94
 dDeppaDig		equ $95
 dQuakeRocket		equ $96
+dsupbeaches		equ $97
 
 ; Sega should always be last
-dSega			equ $97
+dSega			equ $98
 
 
 ; Sonic frame IDs

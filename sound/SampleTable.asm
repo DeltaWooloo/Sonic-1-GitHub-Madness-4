@@ -25,6 +25,7 @@ SampleTable:
 	dcSample	TYPE_PCM,	WinTwoK,	8000,			; $94
 	dcSample	TYPE_PCM,	DeppaDig,	8000,			; $95
 	dcSample	TYPE_PCM,	QuakeRocket,	11297,			; $96
+	dcSample	TYPE_PCM,	supbeaches,	11297,			; $97
 
 	; Keep this as the last sample pls (and make sure to add a sample constant to _smps2asm.asm
 	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0, FLAGS_SFX		; $97
@@ -41,9 +42,10 @@ SampleTable:
 	incdac	DAMN, "sound/dac/DAX/DAMN.pcm"
 	incdac	Trevor, "sound/dac/Trevor.wav"
 	incdac	yume2kki, "sound/dac/2kki.wav"
-	incdac	SegaPCM, "sound/dac/sega.wav"
+	incdac	supbeaches, "sound/dac/supbeaches.wav"
 	incdac	DooDoo, "sound/dac/idk/doodoofeces.pcm"
 	incdac	QuakeRocket, "sound/dac/tankfire1.wav"
+	incdac	SegaPCM, "sound/dac/sega.wav"
 	even
 
 ; ---------------------------------------------------------------
