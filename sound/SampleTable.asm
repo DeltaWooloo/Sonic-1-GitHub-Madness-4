@@ -26,9 +26,18 @@ SampleTable:
 	dcSample	TYPE_PCM,	DeppaDig,	8000,			; $95
 	dcSample	TYPE_PCM,	QuakeRocket,	11297,			; $96
 	dcSample	TYPE_PCM,	supbeaches,	11297,			; $97
+	dcSample	TYPE_PCM,	CL_Penis,	11297,			; $98
+	dcSample	TYPE_PCM,	CL_STFU,	11297,FLAGS_SFX		; $99
+	dcSample	TYPE_PCM,	CL_Fuck,	11297,			; $9A
+	dcSample	TYPE_PCM,	CL_YouCanSuck,	11297,FLAGS_SFX		; $9B
+	dcSample	TYPE_PCM,	CL_DoYouSuck,	11297,FLAGS_SFX		; $9C
+	dcSample	TYPE_PCM,	CL_Dicks,	11297,			; $9D
+	dcSample	TYPE_PCM,	CL_OnTheBall,	11297,			; $9E
+	dcSample	TYPE_PCM,	Penises,	11297,			; $9F
+	dcSample	TYPE_PCM,	EggNo,		11297,			; $A0
 
 	; Keep this as the last sample pls (and make sure to add a sample constant to _smps2asm.asm
-	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0, FLAGS_SFX		; $97
+	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0, FLAGS_SFX		; $A1
 	dc.w	-1	; end marker
 
 ; ---------------------------------------------------------------
@@ -45,6 +54,15 @@ SampleTable:
 	incdac	supbeaches, "sound/dac/supbeaches.wav"
 	incdac	DooDoo, "sound/dac/idk/doodoofeces.pcm"
 	incdac	QuakeRocket, "sound/dac/tankfire1.wav"
+	incdac	CL_Penis, "sound/dac/CL_Penis.wav"
+	incdac	CL_STFU, "sound/dac/CL_STFU.wav"
+	incdac	CL_Fuck, "sound/dac/CL_Fuck.wav"
+	incdac	CL_YouCanSuck, "sound/dac/CL_YouCanSuck.wav"
+	incdac	CL_DoYouSuck, "sound/dac/CL_DoYouSuck.wav"
+	incdac	CL_Dicks, "sound/dac/CL_Dicks.wav"
+	incdac	CL_OnTheBall, "sound/dac/CL_OnTheBall.wav"
+	incdac	Penises, "sound/dac/Penises.wav"
+	incdac	EggNo, "sound/dac/EggNo.wav"
 	incdac	SegaPCM, "sound/dac/sega.wav"
 	even
 

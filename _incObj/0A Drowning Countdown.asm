@@ -231,6 +231,7 @@ Drown_Countdown:; Routine $A
 		move.b	#$81,(f_playerctrl).w ; lock controls and disable object interaction
 		move.w	#sfx_Drown,d0
 		jsr	(QueueSound2).l	; play drowning sound
+		pcm 	dYouCanSuck
 		move.b	#$A,objoff_34(a0)
 		move.w	#1,objoff_36(a0)
 		move.w	#$78,objoff_2C(a0)

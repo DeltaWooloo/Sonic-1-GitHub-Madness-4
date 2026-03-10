@@ -322,9 +322,18 @@ dWinTwoK		equ $94
 dDeppaDig		equ $95
 dQuakeRocket		equ $96
 dsupbeaches		equ $97
+dPenis			equ $98
+dSTFU			equ $99
+dFuck			equ $9A
+dYouCanSuck		equ $9B
+dDoYouSuck		equ $9C
+dDicks			equ $9D
+dOnTheBall		equ $9E
+dPenises		equ $9F
+dEggNo			equ $A0
 
 ; Sega should always be last
-dSega			equ $98
+dSega			equ $A1
 
 
 ; Sonic frame IDs

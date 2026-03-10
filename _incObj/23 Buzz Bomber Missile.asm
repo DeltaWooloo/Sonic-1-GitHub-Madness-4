@@ -51,7 +51,9 @@ Msl_Main:	; Routine 0
 
 		move.w	#sfx_Bomb,d0
 		jsr	(PlaySound_Special).l ;	play breaking enemy sound
-		
+
+		pcm 	dDicks
+
 		tst.b	obSubtype(a0)	; was object created by a Newtron?
 		beq.s	Msl_Animate	; if not, branch
 

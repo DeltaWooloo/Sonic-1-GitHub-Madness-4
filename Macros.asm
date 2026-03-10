@@ -287,3 +287,9 @@ __LABEL___end:
 QueueSound_M:	macro sound,queue
 	move.b	#sound,(v_snddriver_ram.v_soundqueue\queue\).w ; fade out music
 	endm
+
+
+pcm:	macro id
+	move.b	#id,d0
+	jsr	MegaPCM_PlaySample
+	endm

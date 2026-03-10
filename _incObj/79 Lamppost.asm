@@ -76,8 +76,9 @@ Lamp_Blue:	; Routine 2
 		sub.w	obY(a0),d0
 		addi.w	#$40,d0
 		cmpi.w	#$68,d0
-		bhs.s	.donothing
+		bhs.w	.donothing
 
+		pcm	dSTFU
 		move.w	#sfx_Lamppost,d0
 		jsr	(QueueSound2).l	; play lamppost sound
 		addq.b	#2,obRoutine(a0)
