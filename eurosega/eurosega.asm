@@ -70,7 +70,21 @@ GM_SegaEU_MainLoop:
 
 ;		tst.w	(v_SplashSkip).w
 ;		bne.s	.skipsplashEU
+;		move.b	#id_Title,(v_gamemode).w ; go to splash screen
+
+	move.w	#60*9, (v_generictimer).w
+
+	jsr	PaletteFadeIn
+
+.Loop:
+	move.b	#$4,(v_vbla_routine).w
+	jsr	WaitForVBla
+
+	tst.w	(v_generictimer).w
+
+
 		move.b	#id_Title,(v_gamemode).w ; go to splash screen
+
 GM_SegaEU_Return:
 		rts	
 ;.skipsplashEU:

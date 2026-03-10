@@ -140,33 +140,33 @@ splash_turd macro routine
 	splash_liquid SonicRetro
 	splash_liquid Yume2kki
 	splash_solid Blessed,$40,$A8,200
-	splash_solid Shiki,$20,$2B,280
-	splash_solid SonicBroke,$20,$25,480
+	splash_solid Shiki,$20,$2A,280
+	splash_solid SonicBroke,$20,$4E,480
 	splash_solid Monke,$20,$1C,480
 	splash_solid Wait,$60,$1B,145
-	splash_solid SadMac,$60,$29,175
-	splash_solid Drift,$20,$2D,480
+	splash_solid SadMac,$60,$28,175
+	splash_solid Drift,$20,$2C,480
 	splash_solid LastBurenyuu,$20,$24,240
-	splash_solid BLUE_LOBSTER,$20,$3E,280
+	splash_solid BLUE_LOBSTER,$20,$25,280
 	splash_solid ReimuDrip,$20,$20,160
-	splash_solid Cmruey,$20,$30,240
-	splash_solid Disappointed,$20,$3A,480
+	splash_solid Cmruey,$20,$2F,240
+	splash_solid Disappointed,$20,$39,480
 	splash_solid Mines,$20,$25,650
-	splash_solid Waldo,$40,$32,100
-	splash_solid Undertaley,$10,$34,300
-	splash_solid StupidBat,$40,$3B,480
-	splash_solid Sad,$40,$42,200
-	splash_solid Support,$60,$43,480
+	splash_solid Waldo,$40,$31,100
+	splash_solid Undertaley,$10,$33,300
+	splash_solid StupidBat,$40,$3A,480
+	splash_solid Sad,$40,$3D,200
+	splash_solid Support,$60,$3E,480
 	splash_solid Peppa,$40,$25,200
 	splash_solid Snowgrave,$40,$25,100
-	splash_solid Damnit,$40,$25,500
-	splash_solid Iceage,$40,$35,300
-	splash_solid Fredbear,$40,$39,480
-	splash_solid CRT,$40,$33,300
-	splash_solid Crispbilly,$40,$28,200
-	splash_solid Bonniewtf,$60,$3D,300
-	splash_solid Rick,$40,$2F,480
-	splash_solid W,$40,$3F,380
+	splash_solid Damnit,$40,$4A,500
+	splash_solid Iceage,$40,$34,300
+	splash_solid Fredbear,$40,$38,480
+	splash_solid CRT,$40,$32,300
+	splash_solid Crispbilly,$40,$25,200
+	splash_solid Bonniewtf,$60,$3C,300
+	splash_solid Rick,$40,$2E,480
+	splash_solid W,$40,$25,380
 	splash_liquid GM_SegaEU
 	splash_turd Remilia
 	dc.l	-1 ; end marker

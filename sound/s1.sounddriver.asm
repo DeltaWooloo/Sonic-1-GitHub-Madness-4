@@ -224,11 +224,11 @@ ptr_mus45:		dc.l Music45
 ptr_mus46:		dc.l Music46
 ;ptr_mus47:		dc.l Music47
 ptr_mus48:		dc.l Music48
-;ptr_mus49:		dc.l Music49
-;ptr_mus4A:		dc.l Music4A
-;ptr_mus4B:		dc.l Music4B
-;ptr_mus4C:		dc.l Music4C
-;ptr_mus4D:		dc.l Music4D
+ptr_mus49:		dc.l Music49
+ptr_mus4A:		dc.l Music4A
+ptr_mus4B:		dc.l Music4B
+ptr_mus4C:		dc.l Music4C
+ptr_mus4D:		dc.l Music4D
 ;ptr_mus4E:		dc.l Music4E
 ;ptr_mus4F:		dc.l Music4F
 ;ptr_mus50:		dc.l Music50
@@ -2963,6 +2963,16 @@ Music46:	include	"sound/music/HS_Tracks/Basillica.asm"
 ;Music47:	include	"sound/music/HS_Tracks/Basillica S1 Drums.asm"
 ;		even ; oof
 Music48:	include	"sound/music/HS_Tracks/GCV2005.asm"
+		even
+Music49:	include	"sound/music/Misc/DeltaTale fighte.asm"
+		even
+Music4A:	include	"sound/music/Misc/Pac2.asm"
+		even
+Music4B:	include	"sound/music/TG2000Tracks/Passport.asm"
+		even
+Music4C:	include	"sound/music/Mus83 - MZ.asm"
+		even
+Music4D:	include	"sound/music/Mus90 - Continue Screen.asm"
 		even
 ; ---------------------------------------------------------------------------
 ; Sound effect pointers
