@@ -161,7 +161,7 @@ Deform_LZ:
 	; plain background scroll
 		move.w	(v_scrshiftx).w,d4
 		ext.l	d4
-		asl.l	#7,d4
+		asl.l	#3,d4
 		move.w	(v_scrshifty).w,d5
 		ext.l	d5
 		asl.l	#7,d5

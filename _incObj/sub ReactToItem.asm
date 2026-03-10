@@ -292,6 +292,8 @@ HurtSonic:
 		move.w	#0,obInertia(a0)
 		move.b	#id_Hurt,obAnim(a0)
 		move.w	#120,flashtime(a0)	; set temp invincible time to 2 seconds
+		pcm	dFuck
+		
 	if FixBugs
 		move.w	#sfx_HitSpikes,d0
 		cmpi.b	#id_Spikes,obID(a2)	; was damage caused by spikes?

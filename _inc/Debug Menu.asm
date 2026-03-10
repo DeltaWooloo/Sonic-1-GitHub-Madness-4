@@ -96,22 +96,53 @@ dbugmenuSinCntr	= $FFFFF760	; sine info
 dbugmenuScrCnt	= $FFFFF764      
 dbugmenuCos	= $FFFFF768
 dbugmenuFactor	= $FFFFF76C	; mul. factor
+dbugmenuFlag	= $FFFFF770	
+dbugmenuFlag2	= $FFFFF771
 
 _dbugmenuSineSlide:
         lea     v_hscrolltablebuffer,a1
+	eor.b	#1,dbugmenuFlag2
+	bne.s	.lol	
+	add.w	#4,a1
+.lol
         add.l   #$6000,dbugmenuScrCnt.w
         moveq   #240/4,d7
         moveq   #0,d2
+
+	btst.b	#0,dbugmenuFlag
+	bne.s	.Decrement
+
         add.l	#$9000,dbugmenuFactor
         move.w  dbugmenuFactor,d2
-        andi.w	#$FF,dbugmenuFactor
-        move.w	#0,dbugmenuSinCntr.w
+        cmpi.w	#$FF,dbugmenuFactor
+        blt.s	.Ok
+       	add.b	#1,dbugmenuFlag
+       	bra.s	.Ok
+
+.Decrement
+        sub.l	#$9000,dbugmenuFactor
+        move.w  dbugmenuFactor,d2
+        cmpi.w	#-$FF,dbugmenuFactor
+        bgt.s	.Ok
+       	add.b	#1,dbugmenuFlag
+.Ok
+	move.w	#0,dbugmenuSinCntr.w
 
 .ScrLoop:
 	add.w   #1,dbugmenuSinCntr.w
        	move.w  dbugmenuSinCntr.w,d0
         jsr     CalcSine
         mulu.w  d2,d0
+        move.w	d2,d3
+        asr.w	#3,d3
+        add.w	d2,d3
+        asr.w   #7,d0
+        move.w  #0,(a1)+
+        move.w  d0,(a1)+
+	add.w   #1,dbugmenuSinCntr.w
+       	move.w  dbugmenuSinCntr.w,d0
+        jsr     CalcSine
+        mulu.w  d3,d0
         asr.w   #7,d0
         move.w  #0,(a1)+
         move.w  d0,(a1)+
@@ -125,14 +156,7 @@ _dbugmenuSineSlide:
 	add.w   #1,dbugmenuSinCntr.w
        	move.w  dbugmenuSinCntr.w,d0
         jsr     CalcSine
-        mulu.w  d2,d0
-        asr.w   #7,d0
-        move.w  #0,(a1)+
-        move.w  d0,(a1)+
-	add.w   #1,dbugmenuSinCntr.w
-       	move.w  dbugmenuSinCntr.w,d0
-        jsr     CalcSine
-        mulu.w  d2,d0
+        mulu.w  d3,d0
         asr.w   #7,d0
         move.w  #0,(a1)+
         move.w  d0,(a1)+
@@ -376,7 +400,7 @@ RenderZoneName:
 		move.w	(a1,d0.w),d0
 		lea	ZoneNameTable(pc),a1
 		adda.w	d0,a1
-		moveq	#11,d2			; 12 chars
+		moveq	#15,d2			; 12 chars
 		bra.w	SingleLineRender
 
 .unknown:
@@ -393,15 +417,15 @@ ZoneNameTable:
 		dc.w	ZoneName_MSZ-ZoneNameTable
 		dc.w	ZoneName_ABC-ZoneNameTable
 
-ZoneName_GHZ:	dc.b	"GREEN HILL  "
-ZoneName_LZ:	dc.b	"LABYRINTH   "
-ZoneName_MZ:	dc.b	"MARBLE      "
-ZoneName_SLZ:	dc.b	"SPRING YARD "
-ZoneName_SYZ:	dc.b	"SCRAP BRAIN "
-ZoneName_SBZ:	dc.b	"FINAL       "
-ZoneName_End:	dc.b	"ENDING      "
-ZoneName_MSZ:	dc.b	"ZONE ID 7   "
-ZoneName_ABC:	dc.b	"ZONE ID 8   "
+ZoneName_GHZ:	dc.b	"PENILE HILLS    "
+ZoneName_LZ:	dc.b	"AZURE RAINFOREST"
+ZoneName_MZ:	dc.b	"ALBERTA CANADA  "
+ZoneName_SLZ:	dc.b	"MICROSLOP HQ    "
+ZoneName_SYZ:	dc.b	"SPRING YARD     "
+ZoneName_SBZ:	dc.b	"SCRAP BRAIN     "
+ZoneName_End:	dc.b	"ENDING          "
+ZoneName_MSZ:	dc.b	"COLD BREW       "
+ZoneName_ABC:	dc.b	"WINDOWS         "
 		even
 
 ; ---------------------------------------------------------------------------

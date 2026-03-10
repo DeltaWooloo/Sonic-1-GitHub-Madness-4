@@ -41,10 +41,12 @@ palid_SSResult:		makePalEntry	Pal_SSResult, 		v_palette_line_1
 palid_Continue:		makePalEntry	Pal_Continue, 		v_palette_line_1
 palid_Ending:		makePalEntry	Pal_Ending, 		v_palette_line_1
 palid_ColdBrew:		makePalEntry	Pal_ColdBrew, 		v_palette_line_1
-palid_ColdBrewG:		makePalEntry	Pal_ColdBrewG, 		v_palette_line_1
-palid_SonicRetro:	makePalEntry Pal_SonicRetro, v_palette_line_1
-palid_SonisRetro:	makePalEntry Pal_SonisRetro, v_palette_line_1
+palid_ColdBrewG:	makePalEntry	Pal_ColdBrewG, 		v_palette_line_1
+palid_SonicRetro:	makePalEntry 	Pal_SonicRetro, 	v_palette_line_1
+palid_SonisRetro:	makePalEntry 	Pal_SonisRetro, 	v_palette_line_1
 palid_SplashPal:	makePalEntry	Pal_SplashPal, 		v_palette_line_1
 palid_TryAgain:		makePalEntry	Pal_TryAgain, 		v_palette_line_1
 palid_CN:		makePalEntry	Pal_CN, 		v_palette_line_1
+palid_FelixDecision:	makePalEntry 	Pal_FelixDecision, 	v_palette_line_1
+palid_FelixGameOver:	makePalEntry 	Pal_FelixGameOver, 	v_palette_line_1
 	even

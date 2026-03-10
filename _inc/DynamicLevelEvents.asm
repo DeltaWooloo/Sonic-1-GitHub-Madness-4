@@ -195,30 +195,11 @@ DLE_LZ12:
 ; ===========================================================================
 
 DLE_LZ3:
-		tst.b	(f_switch+$F).w	; has switch $F been pressed?
-		beq.s	loc_6F28	; if not, branch
-		lea	(v_lvllayout+$80*2+6).w,a1
-		cmpi.b	#7,(a1)
-		beq.s	loc_6F28
-		move.b	#7,(a1)		; modify level layout
-		move.w	#sfx_Rumbling,d0
-		bsr.w	QueueSound2 ; play rumbling sound
-
-loc_6F28:
 		tst.b	(v_dle_routine).w
 		bne.s	locret_6F64
 		cmpi.w	#boss_lz_x-$140,(v_screenposx).w
 		blo.s	locret_6F62
-		cmpi.w	#boss_lz_y+$540,(v_screenposy).w
-		bhs.s	locret_6F62
 		bsr.w	FindFreeObj
-		bne.s	loc_6F4A
-		_move.b	#id_BossLabyrinth,obID(a1) ; load LZ boss object
-
-loc_6F4A:
-		move.w	#bgm_Boss,d0
-		bsr.w	QueueSound1	; play boss music
-		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w
 		moveq	#plcid_Boss,d0
 		bra.w	AddPLC		; load boss patterns

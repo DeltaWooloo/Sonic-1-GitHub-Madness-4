@@ -2005,6 +2005,8 @@ Pal_SSResult:		bincludeEndMarker	"palette/Special Stage Results.bin"
 Pal_Continue:		bincludeEndMarker	"palette/Special Stage Continue Bonus.bin"
 Pal_Ending:		bincludeEndMarker	"palette/Ending.bin"
 Pal_TryAgain:		bincludeEndMarker	"palette/TryAgain.bin"
+Pal_FelixDecision:	bincludeEndMarker	"ContinueScreen/Graphics/Tile/Decision/Palette.bin"
+Pal_FelixGameOver:	bincludeEndMarker	"ContinueScreen/Graphics/Tile/GameOver/Palette.bin"
 
 Pal_SplashPal:	bincludeEndMarker	"eurosega/pal.bin"
 Pal_ColdBrew:	bincludeEndMarker	"conimodes/cold brew/palette.bin"
@@ -2159,18 +2161,8 @@ GM_Title:
 		jsr	(BuildSprites).l
 		bsr.w	PaletteFadeIn
 
-		disable_ints
-		locVRAM	ArtTile_Title_Foreground*tile_size
-		lea	(Nem_TitleFg).l,a0 ; load title screen patterns
-		bsr.w	NemDec
-		locVRAM	ArtTile_Title_Sonic*tile_size
-		lea	(Nem_TitleSonic).l,a0 ; load Sonic title screen patterns
-		bsr.w	NemDec
-		locVRAM	ArtTile_Title_Trademark*tile_size
-		lea	(Nem_TitleTM).l,a0 ; load "TM" patterns
-		bsr.w	NemDec
 
-		enable_ints
+
 		move.b	#0,(v_lastlamp).w ; clear lamppost counter
 		move.w	#0,(v_debuguse).w ; disable debug item placement mode
 		move.w	#0,(f_demo).w	; disable debug mode
@@ -2190,6 +2182,11 @@ FinalTitle:
 		lea	(Blk256_GHZ).l,a0 ; load GHZ 256x256 mappings
 		lea	(v_256x256).l,a1
 		bsr.w	KosDec
+		disable_ints
+		locVRAM	ArtTile_Level*tile_size
+		lea	(Nem_GHZ).l,a0 ; load GHZ patterns
+		bsr.w	NemDec
+		enable_ints
 		bsr.w	LevelLayoutLoad
 		bsr.w	ClearScreen
 		lea	(vdp_control_port).l,a5
@@ -2211,9 +2208,18 @@ FinalTitle:
 		copyTilemap	v_ram_start,vram_fg+$206,34,22
 	endif
 
-		locVRAM	ArtTile_Level*tile_size
-		lea	(Nem_GHZ_1st).l,a0 ; load GHZ patterns
+		disable_ints
+		locVRAM	ArtTile_Title_Foreground*tile_size
+		lea	(Nem_TitleFg).l,a0 ; load title screen patterns
 		bsr.w	NemDec
+		locVRAM	ArtTile_Title_Sonic*tile_size
+		lea	(Nem_TitleSonic).l,a0 ; load Sonic title screen patterns
+		bsr.w	NemDec
+		locVRAM	ArtTile_Title_Trademark*tile_size
+		lea	(Nem_TitleTM).l,a0 ; load "TM" patterns
+		bsr.w	NemDec
+		enable_ints
+
 		moveq	#palid_Title,d0	; load title screen palette
 		bsr.w	PalLoad_Fade
 		move.b	#0,(f_debugmode).w ; disable debug mode
@@ -2591,12 +2597,6 @@ Level_ChkDebug:
 Level_ChkWater:
 		move.w	#0,(v_jpadhold2).w
 		move.w	#0,(v_jpadhold1).w
-		cmpi.b	#id_LZ,(v_zone).w ; is level LZ?
-		bne.s	Level_LoadObj	; if not, branch
-		move.b	#id_WaterSurface,(v_watersurface1).w ; load water surface object
-		move.w	#$60,(v_watersurface1+obX).w
-		move.b	#id_WaterSurface,(v_watersurface2).w
-		move.w	#$120,(v_watersurface2+obX).w
 
 Level_LoadObj:
 		jsr	(ObjPosLoad).l
@@ -3417,92 +3417,6 @@ byte_4CC4:	dc.b 6,	$30, $30, $30, $28, $18, $18, $18
 byte_4CCC:	dc.b 8,	2, 4, $FF, 2, 3, 8, $FF, 4, 2, 2, 3, 8,	$FD, 4,	2, 2, 3, 2, $FF
 		even
 
-; ===========================================================================
-
-; ---------------------------------------------------------------------------
-; Continue screen
-; ---------------------------------------------------------------------------
-
-GM_Continue:
-		bsr.w	PaletteFadeOut
-		disable_ints
-		disable_display
-		lea	(vdp_control_port).l,a6
-		move.w	#$8004,(a6)	; 8 colour mode
-		move.w	#$8700,(a6)	; background colour
-		bsr.w	ClearScreen
-
-		clearRAM v_objspace
-
-		locVRAM	ArtTile_Title_Card*tile_size
-		lea	(Nem_TitleCard).l,a0 ; load title card patterns
-		bsr.w	NemDec
-		locVRAM	ArtTile_Continue_Sonic*tile_size
-		lea	(Nem_ContSonic).l,a0 ; load Sonic patterns
-		bsr.w	NemDec
-		locVRAM	ArtTile_Mini_Sonic*tile_size
-		lea	(Nem_MiniSonic).l,a0 ; load continue screen patterns
-		bsr.w	NemDec
-		moveq	#10,d1
-		jsr	(ContScrCounter).l	; run countdown (start from 10)
-		moveq	#palid_Continue,d0
-		bsr.w	PalLoad_Fade	; load continue screen palette
-		move.b	#bgm_Continue,d0
-		bsr.w	QueueSound1	; play continue music
-		move.w	#659,(v_generictimer).w ; set time delay to 11 seconds
-		clr.l	(v_screenposx).w
-		move.l	#$1000000,(v_screenposy).w
-		move.b	#id_ContSonic,(v_player).w ; load Sonic object
-		move.b	#id_ContScrItem,(v_continuetext).w ; load continue screen objects
-		move.b	#id_ContScrItem,(v_continuelight).w
-		move.b	#3,(v_continuelight+obPriority).w
-		move.b	#4,(v_continuelight+obFrame).w
-		move.b	#id_ContScrItem,(v_continueicon).w
-		move.b	#4,(v_continueicon+obRoutine).w
-		jsr	(ExecuteObjects).l
-		jsr	(BuildSprites).l
-		enable_display
-		bsr.w	PaletteFadeIn
-
-; ---------------------------------------------------------------------------
-; Continue screen main loop
-; ---------------------------------------------------------------------------
-
-Cont_MainLoop:
-		move.b	#$16,(v_vbla_routine).w
-		bsr.w	WaitForVBla
-		cmpi.b	#6,(v_player+obRoutine).w
-		bhs.s	loc_4DF2
-		disable_ints
-		move.w	(v_generictimer).w,d1
-		divu.w	#60,d1
-		andi.l	#$F,d1
-		jsr	(ContScrCounter).l
-		enable_ints
-
-loc_4DF2:
-		jsr	(ExecuteObjects).l
-		jsr	(BuildSprites).l
-		cmpi.w	#$180,(v_player+obX).w ; has Sonic run off screen?
-		bhs.s	Cont_GotoLevel	; if yes, branch
-		cmpi.b	#6,(v_player+obRoutine).w
-		bhs.s	Cont_MainLoop
-		tst.w	(v_generictimer).w
-		bne.w	Cont_MainLoop
-		move.b	#id_Sega,(v_gamemode).w ; go to Sega screen
-		rts
-; ===========================================================================
-
-Cont_GotoLevel:
-		move.b	#id_Level,(v_gamemode).w ; set screen mode to $0C (level)
-		move.b	#3,(v_lives).w	; set lives to 3
-		moveq	#0,d0
-		move.w	d0,(v_rings).w	; clear rings
-		move.l	d0,(v_time).w	; clear time
-		move.l	d0,(v_score).w	; clear score
-		move.b	d0,(v_lastlamp).w ; clear lamppost count
-		subq.b	#1,(v_continues).w ; subtract 1 from continues
-		rts
 ; ===========================================================================
 
 		include	"_incObj/80 Continue Screen Elements.asm"
@@ -7493,7 +7407,7 @@ Nem_Squirrel:	binclude	"artnem/Animal Squirrel.nem"
 ; ---------------------------------------------------------------------------
 Blk16_GHZ:	binclude	"map16/GHZ.eni"
 		even
-Nem_GHZ_1st:	binclude	"artnem/8x8 - GHZ1.nem"	; GHZ primary patterns
+Nem_GHZ:	binclude	"artnem/8x8 - GHZ.nem"	; GHZ primary patterns
 		even
 Nem_GHZ_2nd:	binclude	"artnem/8x8 - GHZ2.nem"	; GHZ secondary patterns
 		even
@@ -8055,6 +7969,7 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 		include "hipncoolstuff/ThanatosCredits/Main.asm"
 
 		include "Buttcrack/Game.asm"
+		include	"ContinueScreen/Continue.asm"
 
 		include "Splashes.asm"
 		include	"_inc/GHM3Explode.asm"
