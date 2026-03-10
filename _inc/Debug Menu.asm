@@ -309,7 +309,7 @@ DebuggerMenu_Redraw:
 DebuggerMenu_MenuText:
 		lea	Text_MainMenu(pc),a1
 		lea	(vdp_data_port).l,a6
-		move.l	#$44100003,d4		; plane A, row 8 col 8
+		move.l	#$44080003,d4		; plane A, row 8 col 4
 		move.w	#$A685,d3		; white
 		moveq	#6,d1			; 7 lines
 
@@ -322,7 +322,7 @@ DebuggerMenu_MenuText:
 
 		move.w	(v_levselitem).w,d0
 		move.w	d0,d1
-		move.l	#$44100003,d4
+		move.l	#$44080003,d4
 		lsl.w	#8,d0
 		swap	d0
 		add.l	d0,d4			; advance to selected row
@@ -343,7 +343,7 @@ DebuggerMenu_MenuText:
 DebuggerMenu_RenderValues:
 		lea	Debugger_Data(pc),a3
 		lea	(vdp_data_port).l,a6
-		move.l	#$44380003,d4		; plane A, row 8 col 24
+		move.l	#$44280003,d4		; plane A, row 8 col 20
 		move.w	#$A685,d3		; white
 		moveq	#6,d1			; 7 items
 
@@ -353,10 +353,56 @@ DebuggerMenu_RenderValues:
 		moveq	#0,d0
 		move.b	(a2),d0			; read current value
 		bsr.w	RenderHexByte
+		cmpi.w	#5,d1			; is this the ZONE ID row? (d1=5 on 2nd iter, row index 1)
+		bne.s	.skipzonename
+		move.b	(v_zone).w,d0		; get zone value
+		bsr.w	RenderZoneName		; render zone name after hex digits
+.skipzonename:
 		adda.l	#8,a3			; next entry
 		addi.l	#$1000000,d4		; next row
 		dbf	d1,.loop
 		rts
+
+; ---------------------------------------------------------------------------
+; Render zone name string for the current zone ID selected
+; ---------------------------------------------------------------------------
+
+RenderZoneName:
+		move.w	#0,(a6)
+		cmpi.b	#8,d0
+		bhi.s	.unknown
+		lsl.w	#1,d0
+		lea	ZoneNameTable(pc),a1
+		move.w	(a1,d0.w),d0
+		lea	ZoneNameTable(pc),a1
+		adda.w	d0,a1
+		moveq	#11,d2			; 12 chars
+		bra.w	SingleLineRender
+
+.unknown:
+		rts
+; ---------------------------------------------------------------------------
+ZoneNameTable:
+		dc.w	ZoneName_GHZ-ZoneNameTable
+		dc.w	ZoneName_LZ-ZoneNameTable
+		dc.w	ZoneName_MZ-ZoneNameTable
+		dc.w	ZoneName_SLZ-ZoneNameTable
+		dc.w	ZoneName_SYZ-ZoneNameTable
+		dc.w	ZoneName_SBZ-ZoneNameTable
+		dc.w	ZoneName_End-ZoneNameTable
+		dc.w	ZoneName_MSZ-ZoneNameTable
+		dc.w	ZoneName_ABC-ZoneNameTable
+
+ZoneName_GHZ:	dc.b	"GREEN HILL  "
+ZoneName_LZ:	dc.b	"LABYRINTH   "
+ZoneName_MZ:	dc.b	"MARBLE      "
+ZoneName_SLZ:	dc.b	"SPRING YARD "
+ZoneName_SYZ:	dc.b	"SCRAP BRAIN "
+ZoneName_SBZ:	dc.b	"FINAL       "
+ZoneName_End:	dc.b	"ENDING      "
+ZoneName_MSZ:	dc.b	"ZONE ID 7   "
+ZoneName_ABC:	dc.b	"ZONE ID 8   "
+		even
 
 ; ---------------------------------------------------------------------------
 ; Render the byte in d0 as two hex digits
