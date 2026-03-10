@@ -2815,7 +2815,7 @@ Music82:	include "sound/music/DaxKatter/Mus - Azure Rainforest.asm"
 		even
 Music83:	include "sound/music/Mus83 - MZ.asm"
 		even
-Music84:	include "sound/music/Mus84 - SLZ.asm"
+Music84:	incbin "sound/music/Vertz1515/Book.bin"
 		even
 Music85:	include "sound/music/Mus85 - SYZ.asm"
 		even
