@@ -92,19 +92,19 @@ TryAgain_ObjData:	; X pos, 	Frame,			Land,	Wait
 			dc.w 	$50-$20,	OB8ATextY,		$A0, 	$0	; Y
 
 Awesome_ObjData:	; X pos, 	Frame,			Land,	Wait
-			dc.w 	$120-$28,	OB8ATextS,		$B0, 	$F0+$280	; S
-			dc.w 	$110-$28,	OB8ATextS,		$B0, 	$E0+$280	; S
-			dc.w 	$100-$28,	OB8ATextE,		$B0, 	$D0+$280	; E
-			dc.w 	$F0-$28,	OB8ATextN,		$B0, 	$C0+$280	; N
-			dc.w 	$E0-$28,	OB8ATextS,		$B0, 	$B0+$280	; S
-			dc.w 	$D0-$28,	OB8ATextU,		$B0, 	$A0+$280	; U
-			dc.w 	$C0-$28,	OB8ATextO,		$B0, 	$90+$280	; O
-			dc.w 	$B0-$28,	OB8ATextI,		$B0, 	$80+$280	; I
-			dc.w 	$A0-$28,	OB8ATextC,		$B0, 	$70+$280	; C
-			dc.w 	$90-$28,	OB8ATextA,		$B0, 	$60+$280	; A
-			dc.w 	$80-$28,	OB8ATextD,		$B0, 	$50+$280	; D
-			dc.w 	$70-$28,	OB8ATextO,		$B0, 	$40+$280	; O
-			dc.w 	$60-$28,	OB8ATextB,		$B0, 	$30+$280	; B
+			dc.w 	$120-$30,	OB8ATextS,		$B0, 	$F0+$280	; S
+			dc.w 	$110-$30,	OB8ATextS,		$B0, 	$E0+$280	; S
+			dc.w 	$100-$30,	OB8ATextE,		$B0, 	$D0+$280	; E
+			dc.w 	$F0-$30,	OB8ATextN,		$B0, 	$C0+$280	; N
+			dc.w 	$E0-$30,	OB8ATextS,		$B0, 	$B0+$280	; S
+			dc.w 	$D0-$30,	OB8ATextU,		$B0, 	$A0+$280	; U
+			dc.w 	$C0-$30,	OB8ATextO,		$B0, 	$90+$280	; O
+			dc.w 	$B0-$30,	OB8ATextI,		$B0, 	$80+$280	; I
+			dc.w 	$A0-$30,	OB8ATextC,		$B0, 	$70+$280	; C
+			dc.w 	$90-$30,	OB8ATextA,		$B0, 	$60+$280	; A
+			dc.w 	$80-$30,	OB8ATextD,		$B0, 	$50+$280	; D
+			dc.w 	$70-$30,	OB8ATextO,		$B0, 	$40+$280	; O
+			dc.w 	$60-$30,	OB8ATextB,		$B0, 	$30+$280	; B
 			dc.w 	$40-$28,	OB8ATextF,		$B0, 	$20+$280	; F
 			dc.w 	$30-$28,	OB8ATextO,		$B0, 	$10+$280	; O
 			dc.w 	$120-$28,	OB8ATextE,		$A0,	$D0+$1B0	; E
