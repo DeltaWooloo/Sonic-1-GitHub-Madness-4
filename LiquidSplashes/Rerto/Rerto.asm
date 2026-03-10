@@ -184,7 +184,7 @@ SonicRetro:
 ; ====================================================================================
 
 .DrawLogo:
-	lea	($FF0000),a1			; ...and the location to decompress in a1
+	lea	($FF0000),a1			; The location to decompress in a1
 	move.w	#0, d0				; VRAM 0ffset (not per-tile)
 	jsr	EniDec.w			; Decompress!
 
