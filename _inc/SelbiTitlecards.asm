@@ -34,9 +34,9 @@ TitleCard_SYZ2:	equ  "SPRING FIELD"
 TitleCard_SYZ3:	equ  "HOMERS"
 TitleCard_SYZ4:	equ  "porn"
 
-TitleCard_LZ1:	equ  "WATERLOGGED"
-TitleCard_LZ2:	equ  "WATERLOGGED"
-TitleCard_LZ3:	equ  "DIRE DIRE DICKS"
+TitleCard_LZ1:	equ  "AZURE RAINFOREST"
+TitleCard_LZ2:	equ  "JUST AN ETRIAN"
+TitleCard_LZ3:	equ  "FOE FOE FOE FOE"
 TitleCard_LZ4:	equ  "PRONGLE PIT"	; LZ4 is SBZ3
 
 TitleCard_SLZ1:	equ  "MICRODICK HD"
