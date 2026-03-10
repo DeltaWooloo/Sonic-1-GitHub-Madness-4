@@ -182,7 +182,7 @@ ptr_mus1A:		dc.l Music1A
 ;ptr_mus1C:		dc.l Music1C
 ptr_mus1D:		dc.l Music1D
 ptr_mus1E:		dc.l Music1E
-ptr_mus1F:		dc.l Music1F
+;ptr_mus1F:		dc.l Music1F
 ptr_mus20:		dc.l Music20
 ptr_mus21:		dc.l Music21
 ;ptr_mus22:		dc.l Music22
@@ -206,10 +206,10 @@ ptr_mus33:		dc.l Music33
 ptr_mus34:		dc.l Music34
 ptr_mus35:		dc.l Music35
 ptr_mus36:		dc.l Music36
-ptr_mus37:		dc.l Music37
-ptr_mus38:		dc.l Music38
-ptr_mus39:		dc.l Music39
-ptr_mus3A:		dc.l Music3A
+;ptr_mus37:		dc.l Music37
+;ptr_mus38:		dc.l Music38
+;ptr_mus39:		dc.l Music39
+;ptr_mus3A:		dc.l Music3A
 ptr_mus3B:		dc.l Music3B
 ptr_mus3C:		dc.l Music3C
 ptr_mus3D:		dc.l Music3D
@@ -222,8 +222,8 @@ ptr_mus43:		dc.l Music43
 ptr_mus44:		dc.l Music44
 ptr_mus45:		dc.l Music45
 ptr_mus46:		dc.l Music46
-ptr_mus47:		dc.l Music47
-;ptr_mus48:		dc.l Music48
+;ptr_mus47:		dc.l Music47
+ptr_mus48:		dc.l Music48
 ;ptr_mus49:		dc.l Music49
 ;ptr_mus4A:		dc.l Music4A
 ;ptr_mus4B:		dc.l Music4B
@@ -2888,8 +2888,6 @@ Music1D:	include	"sound/music/TG2000Tracks/GreenHills.asm"
 		even
 Music1E:	include	"sound/music/TG2000Tracks/Son1UP.asm"
 		even
-Music1F:	include	"sound/music/TG2000Tracks/DooDoo.asm"
-		even
 Music20:	include	"sound/music/TG2000Tracks/SadMac.asm"
 		even
 Music21:	include	"sound/music/TG2000Tracks/TG2000Jingle.asm"
@@ -2938,14 +2936,6 @@ Music35:	include	"sound/music/TG2000Tracks/Peppa.asm"
 		even
 Music36:	include	"sound/music/TG2000Tracks/Resetti.asm"
 		even
-Music37:	include	"sound/music/TG2000Tracks/CrispBilly.asm"
-		even
-Music38:	include	"sound/music/TG2000Tracks/BlueLobster.asm"
-		even
-Music39:	include	"sound/music/TG2000Tracks/WinTwoK.asm"
-		even
-Music3A:	include	"sound/music/TG2000Tracks/DeppaDig.asm"
-		even
 Music3B:	include	"sound/music/TG2000Tracks/Spoopy.asm"
 		even
 Music3C:	include	"sound/music/TG2000Tracks/ChickenDance.asm"
@@ -2970,10 +2960,10 @@ Music45:	include	"sound/music/TG2000Tracks/ILBT.asm"
 		even
 Music46:	include	"sound/music/HS_Tracks/Basillica.asm"
 		even ; oof
-Music47:	include	"sound/music/HS_Tracks/Basillica S1 Drums.asm"
-		even ; oof
-;Music48:	include	"sound/music/HS_Tracks/GCV2005.asm"
-;		even
+;Music47:	include	"sound/music/HS_Tracks/Basillica S1 Drums.asm"
+;		even ; oof
+Music48:	include	"sound/music/HS_Tracks/GCV2005.asm"
+		even
 ; ---------------------------------------------------------------------------
 ; Sound effect pointers
 ; ---------------------------------------------------------------------------

@@ -239,7 +239,6 @@ bgm_FurElise:	equ ((ptr_mus19-MusicIndex)/4)+bgm__First
 bgm_Ding:	equ ((ptr_mus1A-MusicIndex)/4)+bgm__First
 bgm_GreenHills:	equ ((ptr_mus1D-MusicIndex)/4)+bgm__First
 bgm_Son1UP:	equ ((ptr_mus1E-MusicIndex)/4)+bgm__First
-bgm_DooDoo:	equ ((ptr_mus1F-MusicIndex)/4)+bgm__First
 bgm_SadMac:	equ ((ptr_mus20-MusicIndex)/4)+bgm__First
 bgm_TG2000Jingle:	equ ((ptr_mus21-MusicIndex)/4)+bgm__First
 bgm_SwingSinners:	equ ((ptr_mus23-MusicIndex)/4)+bgm__First
@@ -261,10 +260,6 @@ bgm_Levian:	equ ((ptr_mus33-MusicIndex)/4)+bgm__First
 bgm_BatMan:	equ ((ptr_mus34-MusicIndex)/4)+bgm__First
 bgm_Peppa:	equ ((ptr_mus35-MusicIndex)/4)+bgm__First
 bgm_Resetti:	equ ((ptr_mus36-MusicIndex)/4)+bgm__First
-bgm_CrispBilly:	equ ((ptr_mus37-MusicIndex)/4)+bgm__First
-bgm_BlueLobster:	equ ((ptr_mus38-MusicIndex)/4)+bgm__First
-bgm_WinTwoK:	equ ((ptr_mus39-MusicIndex)/4)+bgm__First
-bgm_DeppaDig:	equ ((ptr_mus3A-MusicIndex)/4)+bgm__First
 bgm_Spoopy:	equ ((ptr_mus3B-MusicIndex)/4)+bgm__First
 bgm_ChickenDance:	equ ((ptr_mus3C-MusicIndex)/4)+bgm__First
 bgm_CanCan:	equ ((ptr_mus3D-MusicIndex)/4)+bgm__First
