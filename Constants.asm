@@ -344,6 +344,7 @@ bgm_Stop:	equ ((ptr_flgE4-Sound_ExIndex)/4)+flg__First
 flg__Last:	equ ((ptr_flgend-Sound_ExIndex-4)/4)+flg__First
 
 ; DAC Equates - Putting them here for ease of access
+; Song Samples
 dKick			equ $81
 dSnare			equ $82
 dTimpani		equ $83
@@ -357,28 +358,38 @@ dPokeKickCrashHi	equ $8A
 dPokeHiTimpani		equ $8B
 dPokeMidTimpani		equ $8C
 dPokeLowTimpani		equ $8D
-dDAMN			equ $8E
-dTrevor			equ $8F
-d2kki			equ $90
-dDooDoo			equ $91
-dCrispBilly		equ $92
-dBlueLobster		equ $93
-dWinTwoK		equ $94
-dDeppaDig		equ $95
-dQuakeRocket		equ $96
-dsupbeaches		equ $97
-dPenis			equ $98
-dSTFU			equ $99
-dFuck			equ $9A
-dYouCanSuck		equ $9B
-dDoYouSuck		equ $9C
-dDicks			equ $9D
-dOnTheBall		equ $9E
-dPenises		equ $9F
-dEggNo			equ $A0
+dAmenKick:		equ $8E
+dAmenSnare1:		equ $8F
+dAmenSnare2:		equ $90
+dAmenShortKick1:	equ $91
+dAmenShortKick2:	equ $92
+dAmenRide1:		equ $93
+dAmenRide2:		equ $94
+dAmenCrash:		equ $95
+
+; SFX Samples
+dDAMN			equ $96
+dTrevor			equ $97
+d2kki			equ $98
+dDooDoo			equ $99
+dCrispBilly		equ $9A
+dBlueLobster		equ $9B
+dWinTwoK		equ $9C
+dDeppaDig		equ $9D
+dQuakeRocket		equ $9E
+dsupbeaches		equ $9F
+dPenis			equ $A0
+dSTFU			equ $A1
+dFuck			equ $A2
+dYouCanSuck		equ $A3
+dDoYouSuck		equ $A4
+dDicks			equ $A5
+dOnTheBall		equ $A6
+dPenises		equ $A7
+dEggNo			equ $A8
 
 ; Sega should always be last
-dSega			equ $A1
+dSega			equ $A9
 
 
 ; Sonic frame IDs

@@ -1,13 +1,3 @@
-; Fat fucking chud shim
-dAmenKick:			equ 	$9F
-dAmenSnare1:		equ 	$A0
-dAmenSnare2:		equ 	$A1
-dAmenShortKick1:	equ 	$A2
-dAmenShortKick2:	equ 	$A3
-dAmenRide1:			equ 	$A4
-dAmenRide2:			equ 	$A5
-dAmenCrash:			equ 	$A6
-
 Basillica_Header:
 	smpsHeaderStartSong 1
 	smpsHeaderVoice     Basillica_Voices

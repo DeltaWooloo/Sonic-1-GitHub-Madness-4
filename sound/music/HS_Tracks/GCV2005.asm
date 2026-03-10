@@ -23,21 +23,27 @@ GCV2005:
 
 GCV2005_PSG3:
 	; Pattern 00
-    dc.b nRst,3*2
+	dc.b nRst,3*2
 
 	smpsPSGform	$E4
-    dc.b nC7,3,3,3,6
+	dc.b nC7,3,3,3,6
 	smpsPSGvoice gcv_psg0
 	dc.b nC6,3*2
-    smpsPSGvoice gcv_psg1
+	smpsPSGvoice gcv_psg1
 	dc.b nC7,3,3,3,6
 	smpsPSGvoice gcv_psg0
 	dc.b nC6,3*2
 
-    smpsPSGvoice gcv_psg1
-	dc.b nC7,3*3
 	smpsPSGvoice gcv_psg1
-	dc.b nC6, 3,_smpsAlterVol,1,3,_smpsAlterVol,1,3,_smpsAlterVol,1,3,3
+	dc.b	nC7,3*3
+	smpsPSGvoice gcv_psg1
+	dc.b	nC6, 3
+	smpsAlterVol	1
+	dc.b	3
+	smpsAlterVol,1
+	dc.b	3
+	dc.b	smpsAlterVol,1
+	dc.b	3,3
 
 	; Pattern 01
 	@loop1:
@@ -74,7 +80,7 @@ GCV2005_FM1:
 	; Pattern 00
 
 	smpsFMvoice 0 ; Bass
-    dc.b nRst,3*2
+	dc.b nRst,3*2
 
 	dc.b nG2,3,3,3,3,nRst,6
 	dc.b nG2,3,3,3,3,nRst,6
