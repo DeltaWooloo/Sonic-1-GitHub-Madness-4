@@ -20,6 +20,7 @@ Anml_Index:
 		dc.w loc_91C0-Anml_Index	; POCKY
 		dc.w loc_9184-Anml_Index	; RICKY
 		dc.w loc_91C0-Anml_Index	; RIN
+		dc.w loc_91C0-Anml_Index	; RIN
 Anml_BadnikIndexEnd:
 		dc.w loc_9240-Anml_Index ; Anml_FromPrison (from hivebrain's 2022 disassembly)
 		dc.w loc_9260-Anml_Index ; ENDING 1
@@ -35,7 +36,7 @@ Anml_BadnikIndexEnd:
 		dc.w loc_92D6-Anml_Index ; ENDING 11
 
 
-Anml_VarIndex:	dc.b 7,	5 ; Green Hill Zone
+Anml_VarIndex:	dc.b 8,	5 ; Green Hill Zone
 		dc.b 2, 3 ; Labyrinth Zone
 		dc.b 6, 3 ; Marble Zone
 		dc.b 4, 5 ; Star Light Zone
@@ -73,6 +74,9 @@ Anml_Variables:
 		dc.w -$280, -$380
 		dc.l Map_Animal4
 	; CUSTOM ANIMALS ARE ADDED AFTERWARDS
+	; ORINGE
+		dc.w -$180, -$300
+		dc.l Map_Animal5
 	; ORINGE
 		dc.w -$180, -$300
 		dc.l Map_Animal5
