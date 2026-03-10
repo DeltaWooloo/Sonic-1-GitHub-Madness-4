@@ -68,7 +68,7 @@ Deform_GHZ:
 		move.w	d0,d4
 		bsr.w	ScrollBlock3
 		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
-		move.w	#$6F,d1
+		move.w	#$6F-8,d1
 		sub.w	d4,d1
 		move.w	(v_screenposx).w,d0
 		cmpi.b	#id_Title,(v_gamemode).w
