@@ -35,15 +35,16 @@ SampleTable:
 	dcSample	TYPE_PCM,	CL_OnTheBall,	11297,			; $9E
 	dcSample	TYPE_PCM,	Penises,	11297,			; $9F
 	dcSample	TYPE_PCM,	EggNo,		11297,			; $A0
-	dcSample	TYPE_PCM,	Amen_Snare1,	0			; $A1
-	dcSample	TYPE_PCM,	Amen_Snare2,	0			; $A2
-	dcSample	TYPE_PCM,	Amen_ShortKick1,0			; $A3
-	dcSample	TYPE_PCM,	Amen_ShortKick2,0			; $A4
-	dcSample	TYPE_PCM,	Amen_Ride1,	0			; $A5
-	dcSample	TYPE_PCM,	Amen_Ride2,	0			; $A6
-	dcSample	TYPE_PCM,	Amen_Crash,	0			; $A7
+	dcSample	TYPE_PCM,	Amen_Kick,	0			; $A1
+	dcSample	TYPE_PCM,	Amen_Snare1,	0			; $A2
+	dcSample	TYPE_PCM,	Amen_Snare2,	0			; $A3
+	dcSample	TYPE_PCM,	Amen_ShortKick1,0			; $A4
+	dcSample	TYPE_PCM,	Amen_ShortKick2,0			; $A5
+	dcSample	TYPE_PCM,	Amen_Ride1,	0			; $A6
+	dcSample	TYPE_PCM,	Amen_Ride2,	0			; $A7
+	dcSample	TYPE_PCM,	Amen_Crash,	0			; $A8
 	; Keep this as the last sample pls (and make sure to add a sample constant to _smps2asm.asm
-	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0, FLAGS_SFX		; $A8
+	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0, FLAGS_SFX		; $A9
 	dc.w	-1	; end marker
 
 ; ---------------------------------------------------------------
