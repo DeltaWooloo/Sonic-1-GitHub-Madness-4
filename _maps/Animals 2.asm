@@ -1,21 +1,18 @@
-; ---------------------------------------------------------------------------
-; Sprite mappings - animals
-; ---------------------------------------------------------------------------
-Map_Animal2_internal:	mappingsTable
-	mappingsTableEntry.w	byte_948A
-	mappingsTableEntry.w	byte_9490
-	mappingsTableEntry.w	byte_9484
+Map_052e: mappingsTable
+	mappingsTableEntry.w	Map_052e_0
+	mappingsTableEntry.w	Map_052e_1
+	mappingsTableEntry.w	Map_052e_2
 
-byte_9484:	spriteHeader
-	spritePiece	-8, -$C, 2, 3, 0, 0, 0, 0, 0
-byte_9484_End
+Map_052e_0:	spriteHeader
+ spritePiece -8, -4, 2, 2, 6, 0, 0, 0, 0
+Map_052e_0_End
 
-byte_948A:	spriteHeader
-	spritePiece	-8, -4, 2, 2, 6, 0, 0, 0, 0
-byte_948A_End
+Map_052e_1:	spriteHeader
+ spritePiece -8, -4, 2, 2, $A, 0, 0, 0, 0
+Map_052e_1_End
 
-byte_9490:	spriteHeader
-	spritePiece	-8, -4, 2, 2, $A, 0, 0, 0, 0
-byte_9490_End
+Map_052e_2:	spriteHeader
+ spritePiece -8, -5, 2, 2, 0, 0, 0, 0, 0
+Map_052e_2_End
 
 	even

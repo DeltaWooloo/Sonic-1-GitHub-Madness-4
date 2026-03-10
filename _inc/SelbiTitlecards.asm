@@ -19,35 +19,35 @@
 ; - ZONE text must be 5 characters or less
 ; ---------------------------------------------------------------------------
 
-TitleCard_GHZ1:	equ  "PENILE HILLS"
-TitleCard_GHZ2:	equ  "PENILE HILLS"
+TitleCard_GHZ1:	equ  "ORANGE WORLD"
+TitleCard_GHZ2:	equ  "ORANGE WORLD"
 TitleCard_GHZ3:	equ  "TTS BATTLE"
-TitleCard_GHZ4:	equ  "PENILE HILLS"
+TitleCard_GHZ4:	equ  "porn"
 
 TitleCard_MZ1:	equ  "ALBERTA CANADA"
-TitleCard_MZ2:	equ  "ALBERTA CANADA"
+TitleCard_MZ2:	equ  "ALBERTA CANADINA"
 TitleCard_MZ3:	equ  "GARBLE"
-TitleCard_MZ4:	equ  "GARBLE"
+TitleCard_MZ4:	equ  "porn"
 
-TitleCard_SYZ1:	equ  "SPRING YARD"
-TitleCard_SYZ2:	equ  "SPRING YARD"
-TitleCard_SYZ3:	equ  "PRING YARD"
-TitleCard_SYZ4:	equ  "SPRINGTARD"
+TitleCard_SYZ1:	equ  "SPRING FIELD"
+TitleCard_SYZ2:	equ  "SPRING FIELD"
+TitleCard_SYZ3:	equ  "HOMERS"
+TitleCard_SYZ4:	equ  "porn"
 
-TitleCard_LZ1:	equ  "AZURE RAINFOREST"
-TitleCard_LZ2:	equ  "AZURE RAINFOREST"
+TitleCard_LZ1:	equ  "WATERLOGGED"
+TitleCard_LZ2:	equ  "WATERLOGGED"
 TitleCard_LZ3:	equ  "DIRE DIRE DICKS"
-TitleCard_LZ4:	equ  "Scrap Brain"	; LZ4 is SBZ3
+TitleCard_LZ4:	equ  "PRONGLE PIT"	; LZ4 is SBZ3
 
-TitleCard_SLZ1:	equ  "Microslop HQ"
-TitleCard_SLZ2:	equ  "Microslop HQ"
-TitleCard_SLZ3:	equ  "Microslop HQ"
-TitleCard_SLZ4:	equ  "Microslop HQ"
+TitleCard_SLZ1:	equ  "MICRODICK HD"
+TitleCard_SLZ2:	equ  "MICRODICK HD"
+TitleCard_SLZ3:	equ  "CLIPPY CLITORIS"
+TitleCard_SLZ4:	equ  "porn"
 
-TitleCard_SBZ1:	equ  "SCRAP BRAIN"
-TitleCard_SBZ2:	equ  "SCRAP BRAIN"
-TitleCard_SBZ3:	equ  "Final"		; SBZ3 is FZ
-TitleCard_SBZ4:	equ  "SCRAP BRAIN"
+TitleCard_SBZ1:	equ  "PRONGLE PLANT"
+TitleCard_SBZ2:	equ  "PRONGLE PLANT"
+TitleCard_SBZ3:	equ  "PIGFAT PUSSHOLE"		; SBZ3 is FZ
+TitleCard_SBZ4:	equ  "porn"
 
 TitleCard_Zone:	equ  "ZONE"
 TitleCard_UseLowerAct: equ 1	; 0 = ACT -- 1 = Act
