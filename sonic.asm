@@ -2157,18 +2157,8 @@ GM_Title:
 		jsr	(BuildSprites).l
 		bsr.w	PaletteFadeIn
 
-		disable_ints
-		locVRAM	ArtTile_Title_Foreground*tile_size
-		lea	(Nem_TitleFg).l,a0 ; load title screen patterns
-		bsr.w	NemDec
-		locVRAM	ArtTile_Title_Sonic*tile_size
-		lea	(Nem_TitleSonic).l,a0 ; load Sonic title screen patterns
-		bsr.w	NemDec
-		locVRAM	ArtTile_Title_Trademark*tile_size
-		lea	(Nem_TitleTM).l,a0 ; load "TM" patterns
-		bsr.w	NemDec
 
-		enable_ints
+
 		move.b	#0,(v_lastlamp).w ; clear lamppost counter
 		move.w	#0,(v_debuguse).w ; disable debug item placement mode
 		move.w	#0,(f_demo).w	; disable debug mode
@@ -2188,6 +2178,11 @@ FinalTitle:
 		lea	(Blk256_GHZ).l,a0 ; load GHZ 256x256 mappings
 		lea	(v_256x256).l,a1
 		bsr.w	KosDec
+		disable_ints
+		locVRAM	ArtTile_Level*tile_size
+		lea	(Nem_GHZ).l,a0 ; load GHZ patterns
+		bsr.w	NemDec
+		enable_ints
 		bsr.w	LevelLayoutLoad
 		bsr.w	ClearScreen
 		lea	(vdp_control_port).l,a5
@@ -2209,9 +2204,18 @@ FinalTitle:
 		copyTilemap	v_ram_start,vram_fg+$206,34,22
 	endif
 
-		locVRAM	ArtTile_Level*tile_size
-		lea	(Nem_GHZ_1st).l,a0 ; load GHZ patterns
+		disable_ints
+		locVRAM	ArtTile_Title_Foreground*tile_size
+		lea	(Nem_TitleFg).l,a0 ; load title screen patterns
 		bsr.w	NemDec
+		locVRAM	ArtTile_Title_Sonic*tile_size
+		lea	(Nem_TitleSonic).l,a0 ; load Sonic title screen patterns
+		bsr.w	NemDec
+		locVRAM	ArtTile_Title_Trademark*tile_size
+		lea	(Nem_TitleTM).l,a0 ; load "TM" patterns
+		bsr.w	NemDec
+		enable_ints
+
 		moveq	#palid_Title,d0	; load title screen palette
 		bsr.w	PalLoad_Fade
 		move.b	#0,(f_debugmode).w ; disable debug mode
@@ -7475,7 +7479,7 @@ Nem_Squirrel:	binclude	"artnem/Animal Squirrel.nem"
 ; ---------------------------------------------------------------------------
 Blk16_GHZ:	binclude	"map16/GHZ.eni"
 		even
-Nem_GHZ_1st:	binclude	"artnem/8x8 - GHZ1.nem"	; GHZ primary patterns
+Nem_GHZ:	binclude	"artnem/8x8 - GHZ.nem"	; GHZ primary patterns
 		even
 Nem_GHZ_2nd:	binclude	"artnem/8x8 - GHZ2.nem"	; GHZ secondary patterns
 		even
