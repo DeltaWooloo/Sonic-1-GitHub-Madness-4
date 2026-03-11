@@ -101,6 +101,8 @@ Deform_GHZ:
 		add.w	(v_bg3screenposx).w,d0
 		neg.w	d0
 		move.w	#$F,d1
+			asr.w	#1,d0
+		
 	.cloudLoop2:		; middle cloud (16px)
 		move.l	d0,(a1)+
 		dbf	d1,.cloudLoop2
@@ -109,6 +111,7 @@ Deform_GHZ:
 		add.w	(v_bg3screenposx).w,d0
 		neg.w	d0
 		move.w	#$F,d1
+		asr.w	#2,d0
 	.cloudLoop3:		; lower cloud (16px)
 		move.l	d0,(a1)+
 		dbf	d1,.cloudLoop3
@@ -116,23 +119,29 @@ Deform_GHZ:
 		move.w	#$2F,d1
 		move.w	(v_bg3screenposx).w,d0
 		neg.w	d0
+			asr.w	#1,d0
+	
 	.mountainLoop:		; distant mountains (48px)
 		move.l	d0,(a1)+
 		dbf	d1,.mountainLoop
 
-		move.w	#$27,d1
+		move.w	#$21,d1
 		move.w	(v_bg2screenposx).w,d0
 		neg.w	d0
+			asr.w	#2,d0
+
 	.hillLoop:			; hills & waterfalls (40px)
 		move.l	d0,(a1)+
 		dbf	d1,.hillLoop
 
 		move.w	(v_bg2screenposx).w,d0
 		move.w	(v_screenposx).w,d2
+			asr.w	#1,d0
+		
 		sub.w	d0,d2
 		ext.l	d2
 		asl.l	#8,d2
-		divs.w	#$68,d2
+		divs.w	#$6E,d2
 		ext.l	d2
 		asl.l	#8,d2
 		moveq	#0,d3
