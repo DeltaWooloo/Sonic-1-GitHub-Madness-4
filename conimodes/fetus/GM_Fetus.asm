@@ -1,4 +1,4 @@
-DiffVariable	=	$00
+DiffVariable	=	f_difficulty
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -48,20 +48,37 @@ GM_Fet_ClrObjRam:
 
 		moveq	#palid_Fetus,d0
 		jsr		(PalLoad1).l		; load palette
+		lea     (v_palette_fading+$14).w,a1
+		bsr.s	GM_Fet_PalSet
 		jsr		(PaletteFadeIn).l
 
-GM_CNB_Loop:
+GM_Fet_Loop:
 		move.b	#8,(v_vbla_routine).w
 		jsr		(WaitForVBla).l
-		jsr	(ExecuteObjects).l
-		jsr	(BuildSprites).l
-		andi.b	#btnStart,(v_jpadpress1).w ; check if Start is pressed
-		beq.s	GM_CNB_Loop	; if not, branch
-
+		cmpi.b	#btnA,(v_jpadpress1).w ; check if action button is pressed
+		bne.s	GM_Fet_ControlExit	; if not, branch
+		bchg	#0,(DiffVariable).w
+		lea     (v_palette+$14).w,a1
+		bsr.s	GM_Fet_PalSet
+GM_Fet_ControlExit:
+		andi.b	#btnStart,(v_jpadpress1).w ; check if Start is held - i can't check the same variable again apparently idk why - coni
+		beq.s	GM_Fet_Loop	; if not, branch
 		jsr		(PaletteFadeOut).l	; INCASE
 		lea	(vdp_control_port).l,a6
 		move.w	#$8C81,(a6)	; set to next screen mode
 		move.b	#id_Title,(v_gamemode).w ; go to title screen
+		rts
+
+GM_Fet_PalSet:
+		lea     (Pal_Fetus+4*2).l,a0
+		tst.b	(DiffVariable).w ; check difficulty
+		beq.s	.dontset
+		lea     (Pal_Fetus+7*2).l,a0
+	.dontset:
+		move.w	#$12,d7	; 16 colors ($20 bytes)
+	.loop:
+		move.l  (a0)+,(a1)+
+		dbf.w	d7,.loop
 		rts
 
 Pal_Fetus:		bincludeEndMarker	"conimodes/fetus/pal.bin"

@@ -55,44 +55,6 @@ GM_WinXP_ClrObjRam:
 GM_WinXP_FadeLoop:
 		move.b	#2,(v_vbla_routine).w
 		jsr		(WaitForVBla).l
-		bsr.w	WinXP_PalCycFade
-;		cmpi.b	#btnStart,(v_jpadhold1).w	; is Start being pressed?
-;		beq.s	GM_WinXP_ChangeMode		; if yes, branch.
-;		tst.w	(v_generictimer).w ; is it time to start WHEN THAT COLD BREW HITS?
-;		bne.s	GM_WinXP_FadeLoop	; if not, branch
-		cmpi.w	#$14,(v_pcyc_num).w	; is it the last frame?
-		bne.s	GM_WinXP_FadeLoop			; if not, branch
-
-
-		move.w	#15*60,(v_generictimer).w 
-
-GM_WinXP_MainLoop:
-		move.b	#2,(v_vbla_routine).w
-		jsr		(WaitForVBla).l
-		bsr.w	WinXP_ScrollBar
-;		cmpi.b	#btnStart,(v_jpadhold1).w	; is Start being pressed?
-;		beq.s	GM_WinXP_ChangeMode		; if yes, branch.
-		tst.w	(v_generictimer).w ; is it time to start WHEN THAT COLD BREW HITS?
-		bne.s	GM_WinXP_MainLoop	; if not, branch
-
-GM_WinXP_ChangeMode:
-		bsr.w	WinXP_CLearPal
-		cmpi.b	#id_Level+$80,(v_gamemode).w
-		beq.s	.noset	; if mode is $C (level), branch
-		move.b	#id_Title,(v_gamemode).w	; go to Title Screen
-.noset:
-		rts
-
-WinXP_CLearPal:
-		lea	(v_pal_dry).w,a1
-		moveq	#0,d0
-		move.w	#$1F,d1
-	WinXP_ClrPal:
-		move.l	d0,(a1)+
-		dbf	d1,WinXP_ClrPal ; fill palette with black
-		rts
-
-WinXP_PalCycFade:
 		subq.w	#1,(v_pcyc_time).w
 		bpl.s	WinXP_PalSkip
 		move.w	#$8,(v_pcyc_time).w
@@ -117,6 +79,34 @@ WinXP_Palupdate:
 		move.l  (a0)+,(a1)+
 		move.l  (a0)+,(a1)+
 WinXP_PalSkip:
+		cmpi.w	#$14,(v_pcyc_num).w	; is it the last frame?
+		bne.s	GM_WinXP_FadeLoop			; if not, branch
+
+
+		move.w	#15*60,(v_generictimer).w 
+
+GM_WinXP_MainLoop:
+		move.b	#2,(v_vbla_routine).w
+		jsr		(WaitForVBla).l
+		bsr.w	WinXP_ScrollBar
+		tst.w	(v_generictimer).w ; is it time to start WHEN THAT COLD BREW HITS?
+		bne.s	GM_WinXP_MainLoop	; if not, branch
+
+GM_WinXP_ChangeMode:
+		bsr.w	WinXP_CLearPal
+		cmpi.b	#id_Level+$80,(v_gamemode).w
+		beq.s	.noset	; if mode is $C (level), branch
+		move.b	#id_Title,(v_gamemode).w	; go to Title Screen
+.noset:
+		rts
+
+WinXP_CLearPal:
+		lea	(v_pal_dry).w,a1
+		moveq	#0,d0
+		move.w	#$1F,d1
+	WinXP_ClrPal:
+		move.l	d0,(a1)+
+		dbf	d1,WinXP_ClrPal ; fill palette with black
 		rts
 		
 WinXP_ScrollBar:
