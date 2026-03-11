@@ -112,18 +112,18 @@ locret_146E6:
 ; End of function Sonic_AnglePos
 
 ; ===========================================================================
-		move.l	obX(a0),d2
-		move.w	obVelX(a0),d0
-		ext.l	d0
-		asl.l	#8,d0
-		sub.l	d0,d2
-		move.l	d2,obX(a0)
-		move.w	#$38,d0
-		ext.l	d0
-		asl.l	#8,d0
-		sub.l	d0,d3
-		move.l	d3,obY(a0)
-		rts
+;		move.l	obX(a0),d2
+;		move.w	obVelX(a0),d0
+;		ext.l	d0
+;		asl.l	#8,d0
+;		sub.l	d0,d2
+;		move.l	d2,obX(a0)
+;		move.w	#$38,d0
+;		ext.l	d0
+;		asl.l	#8,d0
+;		sub.l	d0,d3
+;		move.l	d3,obY(a0)
+;		rts
 ; ===========================================================================
 
 locret_1470A:
@@ -138,21 +138,21 @@ locret_1470A:
 		sub.l	d0,d3
 		move.l	d3,obY(a0)
 		rts
-		rts
+;		rts
 ; ===========================================================================
-		move.l	obX(a0),d2
-		move.l	obY(a0),d3
-		move.w	obVelX(a0),d0
-		ext.l	d0
-		asl.l	#8,d0
-		sub.l	d0,d2
-		move.w	obVelY(a0),d0
-		ext.l	d0
-		asl.l	#8,d0
-		sub.l	d0,d3
-		move.l	d2,obX(a0)
-		move.l	d3,obY(a0)
-		rts
+;		move.l	obX(a0),d2
+;		move.l	obY(a0),d3
+;		move.w	obVelX(a0),d0
+;		ext.l	d0
+;		asl.l	#8,d0
+;		sub.l	d0,d2
+;		move.w	obVelY(a0),d0
+;		ext.l	d0
+;		asl.l	#8,d0
+;		sub.l	d0,d3
+;		move.l	d2,obX(a0)
+;		move.l	d3,obY(a0)
+;		rts
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to change Sonic's angle as he walks along the floor
