@@ -37,7 +37,7 @@ Deform_Index:	dc.w Deform_GHZ-Deform_Index, Deform_LZ-Deform_Index
 		dc.w Deform_SYZ-Deform_Index, Deform_SBZ-Deform_Index
 		zonewarning Deform_Index,2
 		dc.w Deform_GHZ-Deform_Index, Deform_GHZ-Deform_Index
-		dc.w Deform_SLZ-Deform_Index
+		dc.w Deform_SLZ-Deform_Index, Deform_Joint-Deform_Index
 ; ---------------------------------------------------------------------------
 ; Green Hill Zone background layer deformation code
 ; ---------------------------------------------------------------------------
@@ -650,6 +650,34 @@ Deform_SBZ2:;loc_68A2:
 		dbf	d1,.loop
 		rts
 ; End of function Deform_SBZ
+
+; ---------------------------------------------------------------------------
+; The Joint Zone background layer deformation code
+; ---------------------------------------------------------------------------
+
+; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
+
+
+Deform_Joint:
+		move.w	(v_scrshiftx).w,d4
+		ext.l	d4
+		asl.l	#7,d4
+		move.w	(v_scrshifty).w,d5
+		ext.l	d5
+		asl.l	#7,d5
+		bsr.w	BGScroll_XY	; ScrollBlock1 in older disassemblies
+		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
+		lea	(v_hscrolltablebuffer).w,a1
+		move.w	#224-1,d1
+		move.w	(v_screenposx).w,d0
+		neg.w	d0
+		swap	d0
+		move.w	(v_bgscreenposx).w,d0
+		neg.w	d0
+.loop:		move.l	d0,(a1)+
+		dbf	d1,.loop
+		rts
+; End of function Deform_Joint
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to scroll the level horizontally as Sonic moves

@@ -45,6 +45,7 @@ Anml_VarIndex:	dc.b 8,	5 ; Green Hill Zone
 		dc.b 0,	5 ; Green Hill Zone
 		dc.b 0,	5 ; COLD BREW Zone
 		dc.b 4, 5 ; WINDOWS Zone
+		dc.b 7, 1 ; JOINT Zone
 ; Even are first, odd are second
 ; Map_Animal1 is a TALL FOREVER animal
 ; Map_Animal2 is a BLOCK animal

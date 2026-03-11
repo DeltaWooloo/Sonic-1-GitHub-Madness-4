@@ -41,3 +41,19 @@
 		even
 
 		zonewarning LevelOrder,8
+
+		dc.l 0,0 ; ending
+
+		; WINDOWS Zone
+		dc.b id_WIN, 1	; Act 1
+		dc.b id_WIN, 2	; Act 2
+		dc.b id_Joint, 0	; Act 3
+		dc.b 0, 0
+
+		; Joint Zone
+		dc.b id_Joint, 1	; Act 1
+		dc.b id_Joint, 2	; Act 2
+		dc.b id_LZ, 3	; Act 3
+		dc.b 0, 0
+
+		even

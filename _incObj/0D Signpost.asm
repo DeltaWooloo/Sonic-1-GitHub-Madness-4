@@ -42,6 +42,8 @@ Sign_Touch:	; Routine 2
 		jsr	(QueueSound1).l	; play signpost sound
 		clr.b	(f_timecount).w	; stop time counter
 		move.w	(v_limitright2).w,(v_limitleft2).w ; lock screen position
+		move.w	#bgm_Stop,d0
+		jsr	(QueueSound2).l	; stop music		
 		addq.b	#2,obRoutine(a0)
 
 .notouch:
@@ -170,8 +172,7 @@ GotThroughAct:
 		move.w	(v_rings).w,d0	; load number of rings
 		mulu.w	#10,d0		; multiply by 10
 		move.w	d0,(v_ringbonus).w ; set ring bonus
-		move.w	#bgm_GotThrough,d0
-		jsr	(QueueSound2).l	; play "Sonic got through" music
+		pcm 	dBoingBoing
 
 locret_ECEE:
 		rts

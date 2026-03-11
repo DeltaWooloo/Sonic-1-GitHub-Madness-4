@@ -2007,6 +2007,7 @@ Pal_Ending:		bincludeEndMarker	"palette/Ending.bin"
 Pal_TryAgain:		bincludeEndMarker	"palette/TryAgain.bin"
 Pal_FelixDecision:	bincludeEndMarker	"ContinueScreen/Graphics/Tile/Decision/Palette.bin"
 Pal_FelixGameOver:	bincludeEndMarker	"ContinueScreen/Graphics/Tile/GameOver/Palette.bin"
+Pal_Joint:		bincludeEndMarker	"palette/Joint Zone.bin"
 
 Pal_SplashPal:	bincludeEndMarker	"eurosega/pal.bin"
 Pal_ColdBrew:	bincludeEndMarker	"conimodes/cold brew/palette.bin"
@@ -2181,28 +2182,28 @@ GM_Title:
 FinalTitle:
 		bsr.w	PaletteWhiteOut
 		bsr.w	ClearPLC	
-		bsr.w	LevelSizeLoad
-		bsr.w	DeformLayers
-		lea	(v_16x16).w,a1
-		lea	(Blk16_GHZ).l,a0 ; load GHZ 16x16 mappings
-		move.w	#make_art_tile(ArtTile_Level,0,FALSE),d0
-		bsr.w	EniDec
-		lea	(Blk256_GHZ).l,a0 ; load GHZ 256x256 mappings
-		lea	(v_256x256).l,a1
-		bsr.w	KosDec
-		disable_ints
-		locVRAM	ArtTile_Level*tile_size
-		lea	(Nem_GHZ).l,a0 ; load GHZ patterns
-		bsr.w	NemDec
-		enable_ints
-		bsr.w	LevelLayoutLoad
 		bsr.w	ClearScreen
-		lea	(vdp_control_port).l,a5
-		lea	(vdp_data_port).l,a6
-		lea	(v_bgscreenposx).w,a3
-		lea	(v_lvllayout+$40).w,a4
-		move.w	#$6000,d2
-		bsr.w	DrawChunks
+;		bsr.w	LevelSizeLoad
+;		bsr.w	DeformLayers
+;		lea	(v_16x16).w,a1
+;		lea	(Blk16_GHZ).l,a0 ; load GHZ 16x16 mappings
+;		move.w	#make_art_tile(ArtTile_Level,0,FALSE),d0
+;		bsr.w	EniDec
+;		lea	(Blk256_GHZ).l,a0 ; load GHZ 256x256 mappings
+;		lea	(v_256x256).l,a1
+;		bsr.w	KosDec
+;		disable_ints
+;		locVRAM	ArtTile_Level*tile_size
+;		lea	(Nem_GHZ).l,a0 ; load GHZ patterns
+;		bsr.w	NemDec
+;		enable_ints
+;		bsr.w	LevelLayoutLoad
+;		lea	(vdp_control_port).l,a5
+;		lea	(vdp_data_port).l,a6
+;		lea	(v_bgscreenposx).w,a3
+;		lea	(v_lvllayout+$40).w,a4
+;		move.w	#$6000,d2
+;		bsr.w	DrawChunks
 		lea	(v_ram_start).l,a1 ; overwriting unused chunk RAM
 		lea	(Eni_Title).l,a0 ; load title screen mappings
 		move.w	#0,d0
@@ -2276,30 +2277,29 @@ Tit_MainLoop:
 		move.b	#4,(v_vbla_routine).w	; set routine 4 in V-Int
 		bsr.w	WaitForVBla		; wait for V-Blank to finish
 		jsr	(ExecuteObjects).l	; execute title screen objects
-		bsr.w	DeformLayers		; run background deformation
+;		bsr.w	DeformLayers		; run background deformation
 		jsr	(BuildSprites).l	; display sprites
 		bsr.w	PalCycle_Title		; run title screen palette cycle
 		bsr.w	RunPLC			; run any potential PLC
-
-		move.w	(v_player+obX).w,d0	; get current title screen position (big Sonic object)
-		addq.w	#2,d0			; move it 2px to the right
-		move.w	d0,(v_player+obX).w	; write new X position
-		cmpi.w	#$1C00,d0		; has Sonic object passed $1C00 on x-axis?
-		blo.s	Tit_ChkRegion		; if not, branch
-		; Will never happen due to the short title screen generic timer.
-		; This likely was an old failsafe before Demos were introduced.
-		move.b	#id_Sega,(v_gamemode).w	; return to Sega screen
-		rts
+; NOTE BY CONI - i commented a majority of the code, you'll need to add new routines for deform and such
+;		move.w	(v_player+obX).w,d0	; get current title screen position (big Sonic object)
+;		addq.w	#2,d0			; move it 2px to the right
+;		move.w	d0,(v_player+obX).w	; write new X position
+;		cmpi.w	#$1C00,d0		; has Sonic object passed $1C00 on x-axis?
+;		blo.s	Tit_ChkRegion		; if not, branch
+;		; Will never happen due to the short title screen generic timer.
+;		; This likely was an old failsafe before Demos were introduced.
+;		move.b	#id_Sega,(v_gamemode).w	; return to Sega screen
+;		rts
 ; ===========================================================================
-
-Tit_ChkRegion:
-		tst.b	(v_megadrive).w		; check if the machine is US or Japanese
-		bpl.s	Tit_RegionJap		; if Japanese, branch
-		lea	(LevSelCode_US).l,a0	; load US code
-		bra.s	Tit_EnterCheat		; skip over
-
-Tit_RegionJap:
-		lea	(LevSelCode_J).l,a0	; load J code
+;
+;Tit_ChkRegion:
+;		tst.b	(v_megadrive).w		; check if the machine is US or Japanese
+;		bpl.s	Tit_RegionJap		; if Japanese, branch
+;		lea	(LevSelCode_US).l,a0	; load US code
+;		bra.s	Tit_EnterCheat		; skip over
+;Tit_RegionJap:
+		lea	(LevSelCode).l,a0	; load code
 
 Tit_EnterCheat:
 		move.w	(v_title_dcount).w,d0	; get number of successful D-Pad cheat inputs
@@ -2320,11 +2320,11 @@ Tit_ActivateCheat:
 		move.w	(v_title_ccount).w,d1	; get number of tiles C was pressed
 		lsr.w	#1,d1			; half pressed amount
 		andi.w	#3,d1			; only four cheats are possible
-		beq.s	Tit_PlayRing		; if C was not pressed, only activate level select
-		tst.b	(v_megadrive).w		; check if the machine is US or Japanese
-		bpl.s	Tit_PlayRing		; if Japanese, branch
-		moveq	#1,d1			; on non-Japanese console, force index to slow motion cheat
-		move.b	d1,1(a0,d1.w)		; enable debug mode first (and slow motion in the next line)
+;		beq.s	Tit_PlayRing		; if C was not pressed, only activate level select
+;		tst.b	(v_megadrive).w		; check if the machine is US or Japanese
+;		bpl.s	Tit_PlayRing		; if Japanese, branch
+;		moveq	#1,d1			; on non-Japanese console, force index to slow motion cheat
+;		move.b	d1,1(a0,d1.w)		; enable debug mode first (and slow motion in the next line)
 
 Tit_PlayRing:
 		move.b	#1,(a0,d1.w)		; activate cheat depending on C-press count
@@ -2362,15 +2362,15 @@ Tit_ChkLevSel:
 ; ---------------------------------------------------------------------------
 ; Level select codes
 ; ---------------------------------------------------------------------------
-LevSelCode_J:
-	if Revision=0
-		dc.b btnUp,btnDn,btnL,btnR,0,$FF
-	else
-		dc.b btnUp,btnDn,btnDn,btnDn,btnL,btnR,0,$FF
-	endif
-		even
+;LevSelCode_J:
+;	if Revision=0
+;		dc.b btnUp,btnDn,btnL,btnR,0,$FF
+;	else
+;		dc.b btnUp,btnDn,btnDn,btnDn,btnL,btnR,0,$FF
+;	endif
+;		even
 
-LevSelCode_US:	dc.b btnUp,btnDn,btnL,btnR,0,$FF
+LevSelCode:	dc.b btnUp,btnDn,btnL,btnR,0,$FF
 		even		
 ; ---------------------------------------------------------------------------
 ; Demo mode
@@ -2382,19 +2382,19 @@ GotoDemo:
 loc_33B6:
 		move.b	#4,(v_vbla_routine).w
 		bsr.w	WaitForVBla
-		bsr.w	DeformLayers
-		bsr.w	PaletteCycle
+;		bsr.w	DeformLayers
+		bsr.w	PalCycle_Title		; run title screen palette cycle
 		bsr.w	RunPLC
-		move.w	(v_player+obX).w,d0
-		addq.w	#2,d0
-		move.w	d0,(v_player+obX).w
-		cmpi.w	#$1C00,d0
-		blo.s	loc_33E4
-		move.b	#id_Sega,(v_gamemode).w
-		rts
+;		move.w	(v_player+obX).w,d0
+;		addq.w	#2,d0
+;		move.w	d0,(v_player+obX).w
+;		cmpi.w	#$1C00,d0
+;		blo.s	loc_33E4
+;		move.b	#id_Sega,(v_gamemode).w
+;		rts
 ; ===========================================================================
-
-loc_33E4:
+;
+;loc_33E4:
 		andi.b	#btnStart,(v_jpadpress1).w ; is Start button pressed?
 		bne.w	Tit_ChkLevSel	; if yes, branch
 		tst.w	(v_generictimer).w
@@ -2459,6 +2459,7 @@ MusicList:
 		dc.b bgm_FZ	; Ending
 		dc.b bgm_FZ	; cold brew but use that in case you want to hijack music or something
 		dc.b bgm_FZ	; WIN98
+		dc.b bgm_LZ	; Joint
 		even
 ; ===========================================================================
 
@@ -2585,6 +2586,7 @@ Level_SkipTtlCard:
 		bsr.w	LevelSizeLoad
 		bsr.w	DeformLayers
 		bset	#2,(v_fg_scroll_flags).w
+		bsr.w	LoadZoneTiles	; load art
 		bsr.w	LevelDataLoad ; load block mappings and palettes
 		bsr.w	LoadTilesFromStart
 		jsr	(ConvertCollisionArray).l
@@ -2814,6 +2816,7 @@ ColPointers:	dc.l Col_GHZ
 		dc.l Col_GHZ ; Pointer for Ending is missing by default.
 		dc.l Col_BREW
 		dc.l Col_WIN
+		dc.l Col_Joint
 		include	"_inc/Oscillatory Routines.asm"
 
 ; ---------------------------------------------------------------------------
@@ -3473,6 +3476,7 @@ End_LoadData:
 		bsr.w	LevelSizeLoad
 		bsr.w	DeformLayers
 		bset	#2,(v_fg_scroll_flags).w
+		bsr.w	LoadZoneTiles	; load art
 		bsr.w	LevelDataLoad
 		bsr.w	LoadTilesFromStart
 		move.l	#Col_GHZ,(v_collindex).w ; load collision index
@@ -3869,6 +3873,46 @@ Demo_EndGHZ2:	binclude	"demodata/Ending - GHZ2.bin"
 		include	"_inc/DeformLayers (JP1).asm"
 		include	"_inc/Level Drawing (JP1).asm"
 	endif
+
+; ---------------------------------------------------------------------------
+; Subroutine to load level art data
+; ---------------------------------------------------------------------------
+
+; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
+
+LoadZoneTiles:
+		moveq	#0,d0
+		move.b	(v_zone).w,d0
+		lsl.w	#4,d0
+		lea		(LevelHeaders).l,a2
+		lea		(a2,d0.w),a2
+		move.l	(a2)+,d0
+		andi.l	#$FFFFFF,d0 ; 8x8 tile pointer
+		movea.l	d0,a0
+		lea		($FF0000).l,a1
+		bsr.w	KosDec
+		move.w	a1,d3
+		move.w	d3,d7
+		andi.w	#$FFF,d3
+		lsr.w	#1,d3
+		rol.w	#4,d7
+		andi.w	#$F,d7
+
+.loop:	move.w	d7,d2
+		lsl.w	#7,d2
+		lsl.w	#5,d2
+		move.l	#$FFFFFF,d1
+		move.w	d2,d1
+		jsr		(QueueDMATransfer).l
+		move.w	d7,-(sp)
+		move.b	#$C,(v_vbla_routine).w
+		bsr.w	WaitForVBla
+		bsr.w	RunPLC
+		move.w	(sp)+,d7
+		move.w	#$800,d3
+		dbf		d7,.loop
+		rts
+; End of function LoadZoneTiles
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to load basic level data
@@ -7422,23 +7466,21 @@ Nem_Rin:	binclude	"artnem/Animal Rin.nem"
 ; ---------------------------------------------------------------------------
 Blk16_GHZ:	binclude	"map16/GHZ.eni"
 		even
-Nem_GHZ:	binclude	"artnem/8x8 - GHZ.nem"	; GHZ primary patterns
-		even
-Nem_GHZ_2nd:	binclude	"artnem/8x8 - GHZ2.nem"	; GHZ secondary patterns
+Kos_GHZ:	binclude	"artkos/8x8 - GHZ.kos"	; GHZ primary patterns
 		even
 Blk256_GHZ:	binclude	"map256/GHZ.kos"
 		even
 
 Blk16_LZ:	binclude	"map16/LZ.eni"
 		even
-Nem_LZ:		binclude	"artnem/8x8 - LZ.nem"	; LZ primary patterns
+Kos_LZ:		binclude	"artkos/8x8 - LZ.kos"	; LZ primary patterns
 		even
 Blk256_LZ:	binclude	"map256/LZ.kos"
 		even
 
 Blk16_MZ:	binclude	"map16/MZ.eni"
 		even
-Nem_MZ:		binclude	"artnem/8x8 - MZ.nem"	; MZ primary patterns
+Kos_MZ:		binclude	"artkos/8x8 - MZ.kos"	; MZ primary patterns
 		even
 Blk256_MZ:
 	if Revision=0
@@ -7451,21 +7493,21 @@ Blk256_MZ:
 
 Blk16_SLZ:	binclude	"map16/SLZ.eni"
 		even
-Nem_SLZ:	binclude	"artnem/8x8 - SLZ.nem"	; SLZ primary patterns
+Kos_SLZ:	binclude	"artkos/8x8 - SLZ.kos"	; SLZ primary patterns
 		even
 Blk256_SLZ:	binclude	"map256/SLZ.kos"
 		even
 
 Blk16_SYZ:	binclude	"map16/SYZ.eni"
 		even
-Nem_SYZ:	binclude	"artnem/8x8 - SYZ.nem"	; SYZ primary patterns
+Kos_SYZ:	binclude	"artkos/8x8 - SYZ.kos"	; SYZ primary patterns
 		even
 Blk256_SYZ:	binclude	"map256/SYZ.kos"
 		even
 
 Blk16_SBZ:	binclude	"map16/SBZ.eni"
 		even
-Nem_SBZ:	binclude	"artnem/8x8 - SBZ.nem"	; SBZ primary patterns
+Kos_SBZ:	binclude	"artkos/8x8 - SBZ.kos"	; SBZ primary patterns
 		even
 Blk256_SBZ:
 	if Revision=0
@@ -7478,16 +7520,23 @@ Blk256_SBZ:
 
 Blk16_BREW:	binclude	"map16/BREW.eni"
 		even
-Nem_BREW:	binclude	"artnem/8x8 - BREW.nem"	; GHZ primary patterns
+Kos_BREW:	binclude	"artkos/8x8 - BREW.kos"	; GHZ primary patterns
 		even
 Blk256_BREW:	binclude	"map256/BREW.kos"
 		even
 
 Blk16_WIN:	binclude	"map16/WIN.eni"
 		even
-Nem_WIN:	binclude	"artnem/8x8 - WIN.nem"	; WIN primary patterns
+Kos_WIN:	binclude	"artkos/8x8 - WIN.kos"	; WIN primary patterns
 		even
 Blk256_WIN:	binclude	"map256/WIN.kos"
+		even
+
+Blk16_Joint:	binclude	"map16/Joint.eni"
+		even
+Kos_Joint:	binclude	"artkos/8x8 - Joint.kos"	; Joint primary patterns
+		even
+Blk256_Joint:	binclude	"map256/Joint.kos"
 		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - bosses and ending sequence
@@ -7562,6 +7611,8 @@ Col_SBZ:	binclude	"collide/SBZ.bin"	; SBZ index
 Col_BREW:	binclude	"collide/BREW.bin"	; BREW index
 		even
 Col_WIN:	binclude	"collide/SLZ.bin"	; WIN index
+		even
+Col_Joint:	binclude	"collide/Joint.bin"	; Joint index
 		even
 
 ; ---------------------------------------------------------------------------
@@ -7658,6 +7709,11 @@ Level_Index:
 		dc.w Level_WIN2-Level_Index, Level_WINbg-Level_Index, Level_WIN1Unk-Level_Index
 		dc.w Level_WIN3-Level_Index, Level_WINbg-Level_Index, Level_WIN1Unk-Level_Index
 		dc.w Level_WIN1Unk-Level_Index, Level_WIN1Unk-Level_Index, Level_WIN1Unk-Level_Index
+		; JOINT
+		dc.w Level_Joint1-Level_Index, Level_Jointbg-Level_Index, Level_Joint1Unk-Level_Index
+		dc.w Level_Joint2-Level_Index, Level_Jointbg-Level_Index, Level_Joint1Unk-Level_Index
+		dc.w Level_Joint3-Level_Index, Level_Jointbg-Level_Index, Level_Joint1Unk-Level_Index
+		dc.w Level_Joint1Unk-Level_Index, Level_Joint1Unk-Level_Index, Level_Joint1Unk-Level_Index
 
 
 Level_GHZ1:	binclude	"levels/ghz1.bin"
@@ -7764,6 +7820,16 @@ Level_WIN3:	binclude	"levels/WIN3.bin"
 		even
 Level_WIN1Unk:	dc.l 0
 
+Level_Joint1:	binclude	"levels/Joint1.bin"
+		even
+Level_Jointbg:	binclude	"levels/Jointbg.bin"
+		even
+Level_Joint2:	binclude	"levels/Joint2.bin"
+		even
+Level_Joint3:	binclude	"levels/Joint3.bin"
+		even
+Level_Joint1Unk:	dc.l 0
+
 ; ---------------------------------------------------------------------------
 ; Uncompressed graphics - Giant Rings
 ; ---------------------------------------------------------------------------
@@ -7828,6 +7894,11 @@ ObjPos_Index:
 		dc.w ObjPos_WIN2-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_WIN3-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_WIN1-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		; Joint
+		dc.w ObjPos_Joint1-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_Joint2-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_Joint3-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_Joint1-ObjPos_Index, ObjPos_Null-ObjPos_Index
 ObjPosLZPlatform_Index:
 		dc.w ObjPos_LZ1pf1-ObjPos_Index, ObjPos_LZ1pf2-ObjPos_Index
 		dc.w ObjPos_LZ2pf1-ObjPos_Index, ObjPos_LZ2pf2-ObjPos_Index
@@ -7956,6 +8027,12 @@ ObjPos_WIN1:	binclude	"objpos/WIN1.bin"
 ObjPos_WIN2:	binclude	"objpos/WIN2.bin"
 		even
 ObjPos_WIN3:	binclude	"objpos/WIN3.bin"
+		even
+ObjPos_Joint1:	binclude	"objpos/Joint1.bin"
+		even
+ObjPos_Joint2:	binclude	"objpos/Joint2.bin"
+		even
+ObjPos_Joint3:	binclude	"objpos/Joint3.bin"
 		even
 ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 

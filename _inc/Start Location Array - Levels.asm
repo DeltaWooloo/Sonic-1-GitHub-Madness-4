@@ -49,4 +49,10 @@
 		binclude	"startpos/WIN3.bin"
 		dc.w	$80,$A8
 
+		binclude	"startpos/Joint1.bin"
+		binclude	"startpos/Joint2.bin"
+		binclude	"startpos/Joint3.bin"
+		dc.w	$80,$A8
+
+
 		even

@@ -75,7 +75,8 @@ Bom_Action:	; Routine 2
 
 .stopwalking:
 		subq.b	#2,ob2ndRout(a0)
-		move.w	#179,bom_time(a0) ; set time delay to 3 seconds
+		move.w	#30,bom_time(a0) ; set time delay to Second s
+		pcm 	dBabyAlarm
 		clr.w	obVelX(a0)	; stop walking
 		move.b	#0,obAnim(a0)	; use waiting animation
 		rts
@@ -85,6 +86,7 @@ Bom_Action:	; Routine 2
 		subq.w	#1,bom_time(a0)	; subtract 1 from time delay
 		bpl.s	.noexplode	; if time remains, branch
 		_move.b	#id_ExplosionBomb,obID(a0) ; change bomb into an explosion
+		jsr 	GHM3Explode
 		move.b	#0,obRoutine(a0)
 
 .noexplode:
@@ -99,7 +101,7 @@ Bom_Action:	; Routine 2
 
 .isleft:
 		cmpi.w	#$60,d0		; is Sonic within $60 pixels?
-		bhs.s	.outofrange	; if not, branch
+		bhs.w	.outofrange	; if not, branch
 		move.w	(v_player+obY).w,d0
 		sub.w	obY(a0),d0
 		bcc.s	.isabove
@@ -111,8 +113,9 @@ Bom_Action:	; Routine 2
 		tst.w	(v_debuguse).w
 		bne.s	.outofrange
 
+		pcm 	dBabyAlarm
 		move.b	#4,ob2ndRout(a0)
-		move.w	#143,bom_time(a0) ; set fuse time
+		move.w	#20,bom_time(a0) ; set fuse time
 		clr.w	obVelX(a0)
 		move.b	#2,obAnim(a0)	; use activated animation
 		bsr.w	FindNextFreeObj
@@ -130,8 +133,9 @@ Bom_Action:	; Routine 2
 		neg.w	obVelY(a1)	; reverse direction for fuse
 
 .normal:
-		move.w	#143,bom_time(a1) ; set fuse time
+		move.w	#20,bom_time(a1) ; set fuse time
 		move.l	a0,bom_parent(a1)
+
 
 .outofrange:
 		rts

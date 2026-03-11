@@ -28,6 +28,7 @@ PalCycle_Index:	dc.w PalCycle_GHZ-PalCycle_Index
 		dc.w PalCycle_GHZ-PalCycle_Index	; Ending
 		dc.w PalCycle_MZ-PalCycle_Index
 		dc.w PalCycle_MZ-PalCycle_Index
+		dc.w PalCycle_MZ-PalCycle_Index
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 

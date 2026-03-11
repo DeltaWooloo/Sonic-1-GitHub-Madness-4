@@ -49,4 +49,5 @@ palid_TryAgain:		makePalEntry	Pal_TryAgain, 		v_palette_line_1
 palid_CN:		makePalEntry	Pal_CN, 		v_palette_line_1
 palid_FelixDecision:	makePalEntry 	Pal_FelixDecision, 	v_palette_line_1
 palid_FelixGameOver:	makePalEntry 	Pal_FelixGameOver, 	v_palette_line_1
+palid_Joint:		makePalEntry	Pal_Joint, 		v_palette_line_2
 	even

@@ -13,6 +13,7 @@ DebugList:
 		dc.w .Ending-DebugList
 		dc.w .BREW-DebugList
 		dc.w .WIN-DebugList
+		dc.w .Joint-DebugList
 
 dbug:	macro map,object,subtype,frame,vram
 		dc.l map+(object<<24)
@@ -254,5 +255,18 @@ dbug:	macro map,object,subtype,frame,vram
 		dbug	Map_Orb,	id_Orbinaut,	0,	0,	make_art_tile(ArtTile_SLZ_Orbinaut,1,0)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
 .WINend:
+
+.Joint:
+		dc.w (.Jointend-.Joint-2)/8
+
+;			mappings	object		subtype	frame	VRAM setting
+		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
+		dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
+		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
+		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
+.Jointend:
+
+		even
 
 		even

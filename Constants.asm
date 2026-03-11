@@ -94,6 +94,8 @@ id_SBZ:		equ 5
 id_EndZ:	equ 6
 id_SS:		equ 6
 id_CBZ:		equ 7
+id_WIN:		equ 8
+id_Joint:	equ 9
 
 ; Colours
 cBlack:		equ $000		; colour black
@@ -383,9 +385,13 @@ dDicks				equ $A6
 dOnTheBall			equ $A7
 dPenises			equ $A8
 dEggNo				equ $A9
-
+dBabyAlarm			equ $AA
+dBoingBoing			equ $AB
+dBoioing			equ $AC
+dBoik				equ $AD
+dOrangeLaugh		equ $AE
 ; Sega should always be last
-dSega				equ $AA
+dSega				equ $AF
 
 
 ; Sonic frame IDs

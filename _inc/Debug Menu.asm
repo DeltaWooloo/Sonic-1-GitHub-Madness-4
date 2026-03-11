@@ -301,7 +301,7 @@ Debugger_Data:
 		dc.b	$04,$00,(GameModeArray_End-GameModeArray)-4,$00		; step 4, range 0-8
 
 		dc.l	v_zone			; ZONE ID
-		dc.b	$01,$00,$08,$00		; step 1, range 0-5
+		dc.b	$01,$00,$09,$00		; step 1, range 0-5
 
 		dc.l	v_act			; ACT ID
 		dc.b	$01,$00,$02,$00		; step 1, range 0-2
@@ -393,7 +393,7 @@ DebuggerMenu_RenderValues:
 
 RenderZoneName:
 		move.w	#0,(a6)
-		cmpi.b	#8,d0
+		cmpi.b	#9,d0
 		bhi.s	.unknown
 		lsl.w	#1,d0
 		lea	ZoneNameTable(pc),a1
@@ -416,6 +416,7 @@ ZoneNameTable:
 		dc.w	ZoneName_End-ZoneNameTable
 		dc.w	ZoneName_MSZ-ZoneNameTable
 		dc.w	ZoneName_ABC-ZoneNameTable
+		dc.w	ZoneName_Joint-ZoneNameTable
 
 ZoneName_GHZ:	dc.b	"PENILE HILLS    "
 ZoneName_LZ:	dc.b	"AZURE RAINFOREST"
@@ -426,6 +427,7 @@ ZoneName_SBZ:	dc.b	"SCRAP BRAIN     "
 ZoneName_End:	dc.b	"ENDING          "
 ZoneName_MSZ:	dc.b	"COLD BREW       "
 ZoneName_ABC:	dc.b	"WINDOWS         "
+ZoneName_Joint:	dc.b	"THE JOINT       "
 		even
 
 ; ---------------------------------------------------------------------------

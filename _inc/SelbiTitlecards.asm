@@ -49,6 +49,10 @@ TitleCard_SBZ2:	equ  "PRONGLE PLANT"
 TitleCard_SBZ3:	equ  "PIGFAT PUSSHOLE"		; SBZ3 is FZ
 TitleCard_SBZ4:	equ  "porn"
 
+TitleCard_Joint1:	equ  "The Joint"
+TitleCard_Joint2:	equ  "Ten years in the"
+TitleCard_Joint3:	equ  "Made you a fuckin"
+
 TitleCard_Zone:	equ  "ZONE"
 TitleCard_UseLowerAct: equ 1	; 0 = ACT -- 1 = Act
 
@@ -174,6 +178,26 @@ TTL_ConData:
 		dc.l TTLCard_SBZ2_ConData, TTLCard_SBZ2_Array	; SBZ2
 		dc.l TTLCard_SBZ3_ConData, TTLCard_SBZ3_Array	; SBZ3 (FZ)
 		dc.l TTLCard_SBZ4_ConData, TTLCard_SBZ4_Array	; SBZ4
+
+		dc.l TTLCard_SYZ1_ConData, TTLCard_SYZ1_Array	; End
+		dc.l TTLCard_SYZ2_ConData, TTLCard_SYZ2_Array
+		dc.l TTLCard_SYZ3_ConData, TTLCard_SYZ3_Array
+		dc.l TTLCard_SYZ4_ConData, TTLCard_SYZ4_Array
+
+		dc.l TTLCard_SYZ1_ConData, TTLCard_SYZ1_Array	; Cold brew
+		dc.l TTLCard_SYZ2_ConData, TTLCard_SYZ2_Array
+		dc.l TTLCard_SYZ3_ConData, TTLCard_SYZ3_Array
+		dc.l TTLCard_SYZ4_ConData, TTLCard_SYZ4_Array
+
+		dc.l TTLCard_SYZ1_ConData, TTLCard_SYZ1_Array	; WIN1
+		dc.l TTLCard_SYZ2_ConData, TTLCard_SYZ2_Array	; WIN2
+		dc.l TTLCard_SYZ3_ConData, TTLCard_SYZ3_Array	; WIN3
+		dc.l TTLCard_SYZ4_ConData, TTLCard_SYZ4_Array	; WIN4
+
+		dc.l TTLCard_Joint1_ConData, TTLCard_Joint1_Array	; Joint1
+		dc.l TTLCard_Joint2_ConData, TTLCard_Joint2_Array	; Joint2
+		dc.l TTLCard_Joint3_ConData, TTLCard_Joint3_Array	; Joint3
+		dc.l 0, 0	; Joint4
 		even
 
 ; ---------------------------------------------------------------------------
@@ -333,9 +357,31 @@ Map_Card_Extended:	mappingsTable
 	mappingsTableEntry.w	TTLCard_SBZ2	; Scrap Brain Zone 2
 	mappingsTableEntry.w	TTLCard_SBZ3	; Scrap Brain Zone 3 (Final Zone)
 	mappingsTableEntry.w	TTLCard_SBZ4	; Scrap Brain Zone 4
+
+	mappingsTableEntry.w	TTLCard_SLZ1	; Ending
+	mappingsTableEntry.w	TTLCard_SLZ2
+	mappingsTableEntry.w	TTLCard_SLZ3
+	mappingsTableEntry.w	TTLCard_SLZ4
+
+	mappingsTableEntry.w	TTLCard_SLZ1	; Cold Brew
+	mappingsTableEntry.w	TTLCard_SLZ2
+	mappingsTableEntry.w	TTLCard_SLZ3
+	mappingsTableEntry.w	TTLCard_SLZ4
+
+	mappingsTableEntry.w	TTLCard_SLZ1	; Windows Zone 1
+	mappingsTableEntry.w	TTLCard_SLZ2	; Windows Zone 2
+	mappingsTableEntry.w	TTLCard_SLZ3	; Windows Zone 3
+	mappingsTableEntry.w	TTLCard_SLZ4	; Windows Zone 4
+
+	mappingsTableEntry.w	TTLCard_Joint1	; Star Light Zone 1
+	mappingsTableEntry.w	TTLCard_Joint2	; Star Light Zone 2
+	mappingsTableEntry.w	TTLCard_Joint3	; Star Light Zone 3
+	mappingsTableEntry.w	TTLCard_Joint3	; Star Light Zone 4
+
 	mappingsTableEntry.w	TTLCard_Zone	; "ZONE" text
 	mappingsTableEntry.w	TTLCard_Act	; Act number
 	mappingsTableEntry.w	TTLCard_Oval	; Blue oval
+EndOfTitleCards:
 
 TTLCard_GHZ1:	titlecard TitleCard_GHZ1,0,0
 TTLCard_GHZ2:	titlecard TitleCard_GHZ2,0,0
@@ -361,6 +407,11 @@ TTLCard_SBZ1:	titlecard TitleCard_SBZ1,0,0
 TTLCard_SBZ2:	titlecard TitleCard_SBZ2,0,0
 TTLCard_SBZ3:	titlecard TitleCard_SBZ3,1,0 ; FZ (hide act)
 TTLCard_SBZ4:	titlecard TitleCard_SBZ4,0,0
+
+TTLCard_Joint1:	titlecard TitleCard_Joint1,1,0 ; one act fakeout
+TTLCard_Joint2:	titlecard TitleCard_Joint2,0,0
+TTLCard_Joint3:	titlecard TitleCard_Joint3,0,0
+
 TTLCard_Zone:	titlecard TitleCard_Zone,1,1 ; ZONE label (alternate tile offset)
 
 TTLCard_Act:	spriteHeader	; "ACT" and number 1/2/3/4

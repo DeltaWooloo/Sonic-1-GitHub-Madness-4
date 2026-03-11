@@ -17,16 +17,17 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal
 ;			1st PLC				2nd PLC				256x256 data			palette
 ;					level gfx*			16x16 data			music*
 
-		lhead	plcid_GHZ,	Nem_GHZ_2nd,	plcid_GHZ2,	Blk16_GHZ,	Blk256_GHZ,	bgm_GHZ,	palid_GHZ	; Green Hill
-		lhead	plcid_LZ,	Nem_LZ,		plcid_LZ2,	Blk16_LZ,	Blk256_LZ,	bgm_LZ,		palid_LZ	; Labyrinth
-		lhead	plcid_MZ,	Nem_MZ,		plcid_MZ2,	Blk16_MZ,	Blk256_MZ,	bgm_MZ,		palid_MZ	; Marble
-		lhead	plcid_SLZ,	Nem_SLZ,	plcid_SLZ2,	Blk16_SLZ,	Blk256_SLZ,	bgm_SLZ,	palid_SLZ	; Star Light
-		lhead	plcid_SYZ,	Nem_SYZ,	plcid_SYZ2,	Blk16_SYZ,	Blk256_SYZ,	bgm_SYZ,	palid_SYZ	; Spring Yard
-		lhead	plcid_SBZ,	Nem_SBZ,	plcid_SBZ2,	Blk16_SBZ,	Blk256_SBZ,	bgm_SBZ,	palid_SBZ1	; Scrap Brain
+		lhead	plcid_GHZ,	Kos_GHZ,	plcid_GHZ2,	Blk16_GHZ,	Blk256_GHZ,	bgm_GHZ,	palid_GHZ	; Green Hill
+		lhead	plcid_LZ,	Kos_LZ,		plcid_LZ2,	Blk16_LZ,	Blk256_LZ,	bgm_LZ,		palid_LZ	; Labyrinth
+		lhead	plcid_MZ,	Kos_MZ,		plcid_MZ2,	Blk16_MZ,	Blk256_MZ,	bgm_MZ,		palid_MZ	; Marble
+		lhead	plcid_SLZ,	Kos_SLZ,	plcid_SLZ2,	Blk16_SLZ,	Blk256_SLZ,	bgm_SLZ,	palid_SLZ	; Star Light
+		lhead	plcid_SYZ,	Kos_SYZ,	plcid_SYZ2,	Blk16_SYZ,	Blk256_SYZ,	bgm_SYZ,	palid_SYZ	; Spring Yard
+		lhead	plcid_SBZ,	Kos_SBZ,	plcid_SBZ2,	Blk16_SBZ,	Blk256_SBZ,	bgm_SBZ,	palid_SBZ1	; Scrap Brain
 		zonewarning LevelHeaders,$10
-		lhead	plcid_ENDZ,	Nem_GHZ_2nd,plcid_ENDZ2,Blk16_GHZ,	Blk256_GHZ,	bgm_SBZ,	palid_Ending	; Ending
-		lhead	plcid_BREW,	Nem_BREW,	plcid_BREW,	Blk16_BREW,	Blk256_BREW,bgm_FZ,		palid_BREW	; COLD BREW
-		lhead	plcid_WIN,	Nem_WIN,	plcid_WIN,	Blk16_WIN,	Blk256_WIN,bgm_FZ,		palid_WIN	; GITHUB MADNESS 3D BLAST - CLIPPIES ISLAND
+		lhead	plcid_ENDZ,	Kos_GHZ,	plcid_ENDZ2,Blk16_GHZ,	Blk256_GHZ,	bgm_SBZ,	palid_Ending	; Ending
+		lhead	plcid_BREW,	Kos_BREW,	plcid_BREW,	Blk16_BREW,	Blk256_BREW,bgm_FZ,		palid_BREW	; COLD BREW
+		lhead	plcid_WIN,	Kos_WIN,	plcid_WIN,	Blk16_WIN,	Blk256_WIN,bgm_FZ,		palid_WIN	; GITHUB MADNESS 3D BLAST - CLIPPIES ISLAND
+		lhead	plcid_Joint,	Kos_Joint,	plcid_Joint,	Blk16_Joint,	Blk256_Joint,bgm_FZ,		palid_Joint	; The joint
 		even
 
 ;	* music and level gfx are actually set elsewhere, so these values are useless

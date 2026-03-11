@@ -131,19 +131,20 @@ Card_Delete:
 		bra.w	DeleteObject
 ; ===========================================================================
 Card_ItemData:
+.zonetext = (EndOfTitleCards-Map_Card_Extended)/2-3
 		; v_ttlcardname
 		dc.w $D0	; y-axis position
 		dc.b 2,	0	; routine number, frame number (changes)
 
 		; v_ttlcardzone
 		dc.w $E4
-		dc.b 2,	ZoneCount*4
+		dc.b 2,	.zonetext
 
 		; v_ttlcardact
 		dc.w $EA
-		dc.b 2,	(ZoneCount*4)+1
+		dc.b 2,	.zonetext+1
 
 		; v_ttlcardoval
 		dc.w $E0
-		dc.b 2,	(ZoneCount*4)+2
+		dc.b 2,	.zonetext+2
 ; ===========================================================================
