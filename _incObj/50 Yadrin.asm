@@ -52,8 +52,8 @@ Yad_Main:	; Routine 0
 		move.w	#make_art_tile(ArtTile_Yadrin,0,0),obGfx(a0)
 		move.b	#4,obRender(a0)
 		move.b	#4,obPriority(a0)
-		move.b	#$14,obActWid(a0)
-		move.b	#$11,obHeight(a0)
+		move.b	#$10,obActWid(a0)
+		move.b	#$6,obHeight(a0)
 		move.b	#8,obWidth(a0)
 		move.b	#$CC,obColType(a0)
 		bsr.w	ObjectFall
@@ -86,8 +86,8 @@ Yad_Move:
 		subq.w	#1,yad_timedelay(a0) ; subtract 1 from pause time
 		bpl.s	locret_F8E2	; if time remains, branch
 		addq.b	#2,ob2ndRout(a0)
-		sub.w	#$500,obVelX(a0) ; move object   
-		; Hi
+		sub.w	#$100,obVelX(a0) ; move object   
+ 		; Hi
 		move.b	#1,obAnim(a0)
 		bchg	#0,obStatus(a0)
 		bne.s	locret_F8E2
