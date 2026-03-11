@@ -387,9 +387,11 @@ dPenises			equ $A8
 dEggNo				equ $A9
 dBabyAlarm			equ $AA
 dBoingBoing			equ $AB
-
+dBoioing			equ $AC
+dBoik				equ $AD
+dOrangeLaugh		equ $AE
 ; Sega should always be last
-dSega				equ $AC
+dSega				equ $AF
 
 
 ; Sonic frame IDs
