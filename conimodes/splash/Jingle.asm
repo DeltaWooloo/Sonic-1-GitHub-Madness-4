@@ -6,20 +6,20 @@ CN_Jingle_Header:
 
 
 	smpsHeaderDAC       CN_Jingle_DAC
-	smpsHeaderFM        CN_Jingle_FM1,	$24+$00, $0C
-	smpsHeaderFM        CN_Jingle_FM2,	$24+$01, $0C
-	smpsHeaderFM        CN_Jingle_FM3,	$24+$02, $10
-	smpsHeaderFM        CN_Jingle_FM4,	$24+$03, $10
-	smpsHeaderFM        CN_Jingle_FM5,	$24+$04, $14
-	smpsHeaderFM        CN_Jingle_FM6,	$24+$05, $14
-	smpsHeaderPSG       CN_Jingle_PSG1,	$0C+$0C, $02, $00, $01
-	smpsHeaderPSG       CN_Jingle_PSG2,	$0C+$0C, $00, $00, $01
+	smpsHeaderFM        CN_Jingle_FM1,	$24+$0D, $0C
+	smpsHeaderFM        CN_Jingle_FM2,	$24+$0D, $0C
+	smpsHeaderFM        CN_Jingle_FM3,	$24+$0D, $10
+	smpsHeaderFM        CN_Jingle_FM4,	$24+$0D, $10
+	smpsHeaderFM        CN_Jingle_FM5,	$24+$0D, $14
+	smpsHeaderFM        CN_Jingle_FM6,	$24+$0D, $14
+	smpsHeaderPSG       CN_Jingle_PSG1,	$0C+$0D, $02, $00, $01
+	smpsHeaderPSG       CN_Jingle_PSG2,	$0C+$0D, $00, $00, $01
 	smpsHeaderPSG       CN_Jingle_PSG3,	$0C+$0D, $00, $00, $01
 
 ; FM5 Data
 CN_Jingle_FM5:
 	dc.b	nRst, $10
-
+	smpsPan             panRight, $00
 ; FM1 Data
 CN_Jingle_FM1:
 	smpsSetvoice        $00
@@ -29,7 +29,7 @@ CN_Jingle_FM1:
 ; FM6 Data
 CN_Jingle_FM6:
 	dc.b	nRst, $10
-
+	smpsPan             panLeft, $00
 ; FM2 Data
 CN_Jingle_FM2:
 	smpsSetvoice        $00
