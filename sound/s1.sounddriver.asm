@@ -2972,7 +2972,7 @@ Music4B:	include	"sound/music/TG2000Tracks/Passport.asm"
 		even
 Music4C:	include	"sound/music/Mus83 - MZ.asm"
 		even
-Music4D:	include	"sound/music/Mus90 - Continue Screen.asm"
+Music4D:	include	"sound/music/LiquidTracks/Mus - CCLobby.asm"
 		even
 ; ---------------------------------------------------------------------------
 ; Sound effect pointers
