@@ -50,9 +50,11 @@ SampleTable:
 	dcSample	TYPE_PCM,	CL_OnTheBall,	11297,			; $A7
 	dcSample	TYPE_PCM,	Penises,	11297,				; $A8
 	dcSample	TYPE_PCM,	EggNo,		11297,				; $A9
-
+	dcSample	TYPE_PCM,	BabyAlarm,	0,FLAGS_SFX 		; $AA
+	; Level end theme
+	dcSample	TYPE_PCM_TURBO,	BoingBoing,	0,FLAGS_LOOP 		; $AB
 	; Keep this as the last sample pls (and make sure to add a sample constant to _smps2asm.asm
-	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0, FLAGS_SFX	; $AA
+	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0, FLAGS_SFX	; $AB
 	dc.w	-1	; end marker
 
 ; ---------------------------------------------------------------
@@ -96,6 +98,11 @@ SampleTable:
 	incdac	CL_OnTheBall, "sound/dac/CL_OnTheBall.wav"
 	incdac	Penises, "sound/dac/Penises.wav"
 	incdac	EggNo, "sound/dac/EggNo.wav"
+	incdac	BabyAlarm, "sound/dac/BabyAlarm.wav"
+
+; ---------------------------------------------------------------
+; Null level end
+	incdac	BoingBoing, "sound/dac/BoingBoing.wav"
 
 ; ---------------------------------------------------------------
 ; Stuff for Splash Screens

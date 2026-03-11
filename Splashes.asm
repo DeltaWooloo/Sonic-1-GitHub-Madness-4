@@ -155,7 +155,7 @@ splash_turd macro routine
 	splash_solid Disappointed,$20,$39,480
 	splash_solid Mines,$20,$25,650
 	splash_solid Waldo,$40,$31,100
-	splash_solid Undertaley,$10,$33,300
+	; splash_solid Undertaley,$10,$33,300
 	splash_solid StupidBat,$40,$3A,480
 	splash_solid Sad,$40,$3D,200
 	splash_solid Support,$60,$3E,480
@@ -188,7 +188,7 @@ splash_turd macro routine
 	inc_solid_splash Disappointed
 	inc_solid_splash Mines
 	inc_solid_splash Waldo
-	inc_solid_splash Undertaley
+	; inc_solid_splash Undertaley
 	inc_solid_splash StupidBat
 	inc_solid_splash Sad
 	inc_solid_splash Support
