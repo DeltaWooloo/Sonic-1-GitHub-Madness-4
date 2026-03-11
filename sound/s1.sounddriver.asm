@@ -230,7 +230,7 @@ ptr_mus4B:		dc.l Music4B
 ptr_mus4C:		dc.l Music4C
 ptr_mus4D:		dc.l Music4D
 ptr_mus4E:		dc.l Music4E
-;ptr_mus4F:		dc.l Music4F
+ptr_mus4F:		dc.l Music4F
 ;ptr_mus50:		dc.l Music50
 ;ptr_mus51:		dc.l Music51
 ;ptr_mus52:		dc.l Music52
@@ -2832,7 +2832,7 @@ Music8B:	include "sound/music/Mus8B - Ending.asm"
 		even
 Music8C:	binclude "sound/music/boss.bin"
 		even
-Music8D:	include "sound/music/Mus8D - FZ.asm"
+Music8D:	include "sound/music/Dawid/Extremely_intense_boss_song_for_someone.asm" ;very intense not really but eh idgaf
 		even
 Music8E:	include "sound/music/Mus8E - Sonic Got Through.asm"
 		even
@@ -2844,7 +2844,7 @@ Music91:	include "sound/music/Mus91 - Credits.asm"
 		even
 Music92:	include "sound/music/TG2000Tracks/Thundersink.asm"
 		even
-Music93:	include "sound/music/Mus93 - Get Emerald.asm"
+Music93:	include "sound/music/Dawid/WINDOWS2000.asm";you got a windows 2000 product activation key!!!!!!!!! (or you used kgen you fucking idiot)
 		even
 Music_NewBark:	include "sound/music/DaxKatter/Mus - New Bark Town.asm"
 		even
@@ -2975,6 +2975,8 @@ Music4C:	include	"sound/music/Mus83 - MZ.asm"
 Music4D:	include	"sound/music/LiquidTracks/Mus - CCLobby.asm"
 		even
 Music4E:	include	"sound/music/CNTracks/MEMORIES.asm"
+		even
+Music4F:	binclude	"sound/music/Dawid/BomerDudeAtgamesong.bin" ;i have no idea too
 		even
 ; ---------------------------------------------------------------------------
 ; Sound effect pointers
