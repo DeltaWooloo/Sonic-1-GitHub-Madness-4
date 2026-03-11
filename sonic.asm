@@ -11,6 +11,11 @@
 ; ===========================================================================
 ; ASSEMBLY OPTIONS:
 
+
+DickingAround = 1
+; 	| If 0, loads SEGA screen first (for public release)
+; 	| If 1, load Debug Menu first
+
 CheatsOn = 1
 ; 	| If 0, build it with no cheats active
 ; 	| If 1, build it with all cheats active
@@ -413,7 +418,11 @@ GameInit:
 		nop
 		nop
 		endif
+		if DickingAround=1
+		move.b	#id_DebugMenu,(v_gamemode).w ; set Game Mode to deubg menu Screen
+		else
 		move.b	#id_Sega,(v_gamemode).w ; set Game Mode to Sega Screen
+		endif
 
 MainGameLoop:
 		move.b	(v_gamemode).w,d0			; load Game Mode
