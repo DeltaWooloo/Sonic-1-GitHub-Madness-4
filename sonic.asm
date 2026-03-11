@@ -4214,7 +4214,7 @@ Map_Swing_SLZ:	include	"_maps/Swinging Platforms (SLZ).asm"
 		include	"_incObj/17 Spiked Pole Helix.asm"
 Map_Hel:	include	"_maps/Spiked Pole Helix.asm"
 		include	"_incObj/18 Platforms.asm"
-Map_Plat_Unused:include	"_maps/Platforms (unused).asm"
+;Map_Plat_Unused:include	"_maps/Platforms (unused).asm"	; REMOVE UNUSED DATA - CONI
 Map_Plat_GHZ:	include	"_maps/Platforms (GHZ).asm"
 Map_Plat_SYZ:	include	"_maps/Platforms (SYZ).asm"
 Map_Plat_SLZ:	include	"_maps/Platforms (SLZ).asm"
@@ -4333,8 +4333,8 @@ Map_CFlo:	include	"_maps/Collapsing Floors.asm"
 		include	"_incObj/1C Scenery.asm"
 Map_Scen:	include	"_maps/Scenery.asm"
 
-		include	"_incObj/1D Unused Switch.asm"
-Map_Swi:	include	"_maps/Unused Switch.asm"
+;		include	"_incObj/1D Unused Switch.asm"	; REMOVE UNUSED DATA - CONI
+;Map_Swi:	include	"_maps/Unused Switch.asm"	; REMOVE UNUSED DATA - CONI
 
 		include	"_incObj/2A SBZ Small Door.asm"
 		include	"_anim/SBZ Small Door.asm"
@@ -5713,12 +5713,12 @@ ResumeMusic:
 Map_Drown:	include	"_maps/Drowning Countdown.asm"
 
 		include	"_incObj/38 Shield and Invincibility.asm"
-		include	"_incObj/4A Special Stage Entry (Unused).asm"
+;		include	"_incObj/4A Special Stage Entry (Unused).asm"	; REMOVE UNUSED DATA - CONI
 		include	"_incObj/08 Water Splash.asm"
 		include	"_anim/Shield and Invincibility.asm"
 Map_Shield:	include	"_maps/Shield and Invincibility.asm"
-		include	"_anim/Special Stage Entry (Unused).asm"
-Map_Vanish:	include	"_maps/Special Stage Entry (Unused).asm"
+;		include	"_anim/Special Stage Entry (Unused).asm"	; REMOVE UNUSED DATA - CONI
+;Map_Vanish:	include	"_maps/Special Stage Entry (Unused).asm"	; REMOVE UNUSED DATA - CONI
 		include	"_anim/Water Splash.asm"
 Map_Splash:	include	"_maps/Water Splash.asm"
 
@@ -7181,14 +7181,14 @@ Nem_Swing:	binclude	"artnem/GHZ Swinging Platform.nem"
 		even
 Nem_Bridge:	binclude	"artnem/GHZ Bridge.nem"
 		even
-Nem_GhzUnkBlock:binclude	"artnem/Unused - GHZ Block.nem"
-		even
+;Nem_GhzUnkBlock:binclude	"artnem/Unused - GHZ Block.nem"
+;		even
 Nem_Ball:	binclude	"artnem/GHZ Giant Ball.nem"
 		even
 Nem_Spikes:	binclude	"artnem/Spikes.nem"
 		even
-Nem_GhzLog:	binclude	"artnem/Unused - GHZ Log.nem"
-		even
+;Nem_GhzLog:	binclude	"artnem/Unused - GHZ Log.nem"
+;		even
 Nem_SpikePole:	binclude	"artnem/GHZ Spiked Log.nem"
 		even
 Nem_PplRock:	binclude	"artnem/GHZ Purple Rock.nem"
@@ -7243,16 +7243,16 @@ Nem_MzSwitch:	binclude	"artnem/MZ Switch.nem"
 		even
 Nem_MzGlass:	binclude	"artnem/MZ Green Glass Block.nem"
 		even
-Nem_UnkGrass:	binclude	"artnem/Unused - Grass.nem"
-		even
+;Nem_UnkGrass:	binclude	"artnem/Unused - Grass.nem"
+;		even
 Nem_MzFire:	binclude	"artnem/Fireballs.nem"
 		even
 Nem_Lava:	binclude	"artnem/MZ Lava.nem"
 		even
 Nem_MzBlock:	binclude	"artnem/MZ Green Pushable Block.nem"
 		even
-Nem_MzUnkBlock:	binclude	"artnem/Unused - MZ Background.nem"
-		even
+;Nem_MzUnkBlock:	binclude	"artnem/Unused - MZ Background.nem"
+;		even
 
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - SLZ stuff
@@ -7327,8 +7327,8 @@ Nem_Crabmeat:	binclude	"artnem/Enemy Crabmeat.nem"
 		even
 Nem_Buzz:	binclude	"artnem/Enemy Buzz Bomber.nem"
 		even
-Nem_UnkExplode:	binclude	"artnem/Unused - Explosion.nem"
-		even
+;Nem_UnkExplode:	binclude	"artnem/Unused - Explosion.nem"
+;		even
 Nem_Burrobot:	binclude	"artnem/Enemy Burrobot.nem"
 		even
 Nem_Chopper:	binclude	"artnem/Enemy Chopper.nem"
