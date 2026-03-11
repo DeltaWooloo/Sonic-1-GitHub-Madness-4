@@ -452,6 +452,7 @@ ptr_GM_ThanatosCredits:	dc.l	GM_ThanatosCredits	; Credits - Thanatos ver. ($2C)
 ptr_GM_ButtcrackMan:	dc.l	GM_ButtcrackMan		; BUTTCRACK MAN ($30)
 ptr_GM_CNNicoJump:	dc.l	GM_CNNicoJump	; CN Logo ($34)
 ptr_GM_TryAgainEnd:	dc.l	TryAgainEnd	; Testable TRY AGAIN/END screen ($38)
+ptr_GM_Fetus:	dc.l	GM_Fetus	; Difficulty Select screen out of spite ($3C)
 GameModeArray_End:
 ; ===========================================================================
 	if SkipChecksumCheck=0
@@ -8069,6 +8070,7 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 		include "conimodes/cold brew/GM_ColdBrew.asm"
 		include "conimodes/winxp/GM_NTOSKRNL.asm"
 		include "conimodes/splash/GM_CNNicoJump.asm"
+		include "conimodes/fetus/GM_Fetus.asm"
 		include "hipncoolstuff/ThanatosCredits/Main.asm"
 
 		include "Buttcrack/Game.asm"

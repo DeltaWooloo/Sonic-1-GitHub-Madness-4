@@ -273,6 +273,7 @@ bgm_WeAreTheSonic:	equ ((ptr_mus42-MusicIndex)/4)+bgm__First
 bgm_LG:		equ ((ptr_mus43-MusicIndex)/4)+bgm__First
 bgm_Thomas:	equ ((ptr_mus44-MusicIndex)/4)+bgm__First
 bgm_ILBT:	equ ((ptr_mus45-MusicIndex)/4)+bgm__First
+bgm_Memories:	equ ((ptr_mus4E-MusicIndex)/4)+bgm__First
 bgm__Last:	equ ((ptr_musend-MusicIndex-4)/4)+bgm__First
 
 ; Sound effects
