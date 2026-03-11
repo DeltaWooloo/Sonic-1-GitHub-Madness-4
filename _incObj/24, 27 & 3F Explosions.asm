@@ -42,61 +42,74 @@ MDis_Animate:	; Routine 2
 ; ---------------------------------------------------------------------------
 
 ExplosionItem:
+expl.BaseX	= $30
+expl.BaseY	= $34
+expl.Factor	= $36
 		moveq	#0,d0
-		move.b	$24(a0),d0
-		move.w	Obj27_Index(pc,d0.w),d1
-		jmp	Obj27_Index(pc,d1.w)
+		move.b	obRoutine(a0),d0
+		move.w	ExplItem_Index(pc,d0.w),d1
+		jmp	ExplItem_Index(pc,d1.w)
 ; ===========================================================================
-Obj27_Index:	dc.w Obj27_LoadAnimal-Obj27_Index
-		dc.w Obj27_Main-Obj27_Index
-		dc.w Obj27_Animate-Obj27_Index
+ExplItem_Index:	dc.w ExplItem_Init-ExplItem_Index
+		dc.w ExplItem_Main-ExplItem_Index
 ; ===========================================================================
 
-Obj27_LoadAnimal:			; XREF: Obj27_Index
-		addq.b	#2,$24(a0)
-		move.w	8(a0),8(a1)
-		move.w	$C(a0),$C(a1)
-		move.w	$3E(a0),$3E(a1)
-
-Obj27_Main:				; XREF: Obj27_Index
-		addq.b	#2,$24(a0)
-		move.l	#Map_ExplodeItem,4(a0)
-		move.w	#$5A0,2(a0)
-		move.b	#4,1(a0)
-		move.b	#1,$18(a0)
-		move.b	#0,$20(a0)
-		move.b	#$C,$19(a0)
+ExplItem_Init:
+		addq.b	#2,obRoutine(a0)
+		move.w	obX(a0),expl.BaseX(a0)
+		move.w	obY(a0),expl.BaseY(a0)
+		move.w	#$800,expl.Factor(a0)
+		jsr	RandomNumber
+		move.w	d0,obAngle(a0)		; use angle as sin cntr
+ddd		;move.w	obX(a0),obX(a1)
+		;move.w	obY(a0),obY(a1)
+		;move.w	$3E(a0),$3E(a1)
+		move.l	#Map_ExplodeItem,obMap(a0)
+		move.w	#$5A0,obGfx(a0)
+		move.b	#4,obRender(a0)
+		move.b	#1,obPriority(a0)
+		move.b	#0,obColType(a0)
+		move.b	#$C,obActWid(a0)
 		; move.b	#7,$1E(a0)	; set frame duration to	7 frames
 		move.b	#$E,$1E(a0)	; GMZ
 		move.b	#0,$1A(a0)
 		move.w	#sfx_Bomb,d0
 		jsr	(PlaySound_Special).l ;	play breaking enemy sound
-        	bsr.w   Obj27_GetVelocity
 
 	        move.b  #1, (v_flashtimer).w
 		move.w 	#$0EEE, (v_flashcolor).w
 		
-Obj27_Animate:				; XREF: Obj27_Index
+ExplItem_Main:
 		subq.b	#1,$1E(a0)	; subtract 1 from frame	duration
-		bpl.s	Obj27_Display
+		bpl.s	ExplItem_Display
 		move.b	#3,$1E(a0)	; set frame duration to	7 frames
 		addq.b	#1,$1A(a0)	; next frame
 		cmpi.b	#5,$1A(a0)	; is the final frame (05) displayed?
 		beq.w	DeleteObject	; if yes, branch
 
-Obj27_Display:
-		jsr	SpeedToPos	; GMZ
+ExplItem_Display:
+        	bsr.w   ExplItem_GetVelocity
+		jsr	ObjectFall	; GMZ
 		bra.w	DisplaySprite
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 
-Obj27_GetVelocity:
-		sub.w	obAngle(a0), d0
+ExplItem_GetVelocity:
+		subi.w	#$3A,expl.Factor(a0)
+		move.b	expl.Factor(a0),d4
+		moveq	#0,d0
+		move.w	expl.BaseX(a0),d2
+		move.w	expl.BaseY(a0),d3
+		addi.w	#8,obAngle(a0)
+		move.w	obAngle(a0),d0
 		jsr	CalcSine
-		; asr.l	#8, d0
-		; asr.l	#8, d1
-		move.w	d1, obVelX(a0)
-		move.w	d0, obVelY(a0)
+		asr.w	d4,d0
+		asr.w	d4,d1
+		add.w	d1, d2
+		add.w	d1, d2
+		add.w	d0, d3
+		move.w	d2,obX(a0)
+		move.w	d3,obY(a0)
         	rts
 
 ; ===========================================================================
@@ -111,7 +124,7 @@ ExplosionBomb:
 		jmp	ExBom_Index(pc,d1.w)
 ; ===========================================================================
 ExBom_Index:	dc.w ExBom_Main-ExBom_Index
-		dc.w Obj27_Animate-ExBom_Index
+		dc.w ExplItem_Main-ExBom_Index
 ; ===========================================================================
 
 ExBom_Main:	; Routine 0
