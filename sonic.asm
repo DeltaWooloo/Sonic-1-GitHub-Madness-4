@@ -7963,9 +7963,9 @@ Nem_Testicle:   incbin  "ATOGKsplashesWIP/Art/TEAM TESTICLE.nem"
                 even
 Eni_Testicle:   incbin  "ATOGKsplashesWIP/Eni/TEAM TESTICLE.eni"	
                 even	
-Pal_S2:         incbin  "ATOGKsplashesWIP/sonic2main.bin"	 
+Pal_S2:         bincludeEndMarker  "ATOGKsplashesWIP/sonic2main.bin"	 
                 even 
-Pal_STMsonic:   incbin  "ATOGKsplashesWIP/STMsonic.bin"	  
+Pal_STMsonic:   bincludeEndMarker  "ATOGKsplashesWIP/STMsonic.bin"	  
                 even
 		
 		
