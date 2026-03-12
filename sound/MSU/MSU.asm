@@ -22,5 +22,5 @@ _MCD_NoSeek			= $16			; Seek time emulation switch. 0-enulation on(default state
 _MCD_PlayTrack_Loop		= $1A			; #1 = decimal number of track (1-99). #2 = offset in sectors from the start of the track to apply when looping
 ; ---------------------------------------------------------------------------
 
-Init_MSU_Driver:		binclude "Sound/MSU/MSU.bin"
+Init_MSU_Driver:		binclude "sound/MSU/MSU.bin"
 	even
