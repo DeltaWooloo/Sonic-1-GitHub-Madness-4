@@ -87,3 +87,5 @@ CN_Jingle_Voices:
 	smpsVcDecayLevel    $0F, $0C, $0D, $02
 	smpsVcReleaseRate   $03, $02, $02, $02
 	smpsVcTotalLevel    $00, $25, $1A, $4C
+	
+	smpsFooterEndSong	"conimodes/splash/Jingle.asm"

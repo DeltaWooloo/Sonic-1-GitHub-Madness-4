@@ -13,3 +13,10 @@ sonic.p
 sonic.debug.lst
 s1built.prev.bin
 s1built.bin
+"
+Assets/Tools/Art/*.lnk
+Assets/Tools/Audio/*.lnk
+Assets/Tools/Disasm/Hw_Ref/*.lnk
+Assets/Tools/Editor/*.lnk
+Assets/Tools/Emu/*.lnk
+Assets/Tools/Misc/*.lnk

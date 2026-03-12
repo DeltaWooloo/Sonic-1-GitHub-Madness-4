@@ -7,3 +7,4 @@ call KENSSharp.exe -r k "MapLink.kos"
 call KENSSharp.exe -r k "MapLink2.kos"
 call KENSSharp.exe -r k "MapMain.kos"
 call KENSSharp.exe -r k "MapSquare.kos"
+REM pause
