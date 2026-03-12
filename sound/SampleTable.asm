@@ -19,14 +19,16 @@ SampleTable:
 	dcSample	TYPE_PCM,	PokeTimpani,	15000			; $8B
 	dcSample	TYPE_PCM,	PokeTimpani,	11297			; $8C
 	dcSample	TYPE_PCM,	PokeTimpani,	7500			; $8D
-	dcSample	TYPE_PCM,	Amen_Kick,	0					; $8E
-	dcSample	TYPE_PCM,	Amen_Snare1,	0				; $8F
-	dcSample	TYPE_PCM,	Amen_Snare2,	0				; $90
-	dcSample	TYPE_PCM,	Amen_ShortKick1,0				; $91
-	dcSample	TYPE_PCM,	Amen_ShortKick2,0				; $92
-	dcSample	TYPE_PCM,	Amen_Ride1,	0					; $93
-	dcSample	TYPE_PCM,	Amen_Ride2,	0					; $94
-	dcSample	TYPE_PCM,	Amen_Crash,	0					; $95
+	dcSample	TYPE_PCM,	Amen_Kick,	0			; $8E
+	dcSample	TYPE_PCM,	Amen_Snare1,	0			; $8F
+	dcSample	TYPE_PCM,	Amen_Snare2,	0			; $90
+	dcSample	TYPE_PCM,	Amen_ShortKick1,0			; $91
+	dcSample	TYPE_PCM,	Amen_ShortKick2,0			; $92
+	dcSample	TYPE_PCM,	Amen_Ride1,	0			; $93
+	dcSample	TYPE_PCM,	Amen_Ride2,	0			; $94
+	dcSample	TYPE_PCM,	Amen_Crash,	0			; $95
+	dcSample	TYPE_DPCM,	CF_DrumLoopA,	16000			; $95
+	dcSample	TYPE_DPCM,	CF_DrumLoopB,	16000			; $95
 
 	; SFX SAMPLES (like any funny quotes etc...)
 	dcSample	TYPE_PCM,	DAMN,		16000				; $96
@@ -68,9 +70,9 @@ SampleTable:
 	dcSample	TYPE_PCM,	OrngLaugh,	0,FLAGS_SFX 		; $B7
 
 	dcSample	TYPE_DPCM,	ClintonHi,	20600,FLAGS_SFX 	; $B8
-	dcSample	TYPE_DPCM,	ClintonYeah,	20600,FLAGS_SFX ; $B9
-	; Keep this as the last sample pls (and make sure to add a sample constant to _smps2asm.asm
+	dcSample	TYPE_DPCM,	ClintonYeah,	20600,FLAGS_SFX 	; $B9
 	dcSample	TYPE_PCM,	QuakeJump,	0, FLAGS_SFX 		; $BA
+	; Keep this as the last sample pls (and make sure to add a sample constant to _smps2asm.asm
 	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0, FLAGS_SFX	; $BB
 	dc.w	-1	; end marker
 
@@ -97,6 +99,11 @@ SampleTable:
 	incdac	Amen_Ride1, "sound/dac/amenbreak/ride1.wav"
 	incdac	Amen_Ride2, "sound/dac/amenbreak/ride2.wav"
 	incdac	Amen_Crash, "sound/dac/amenbreak/crash.wav"
+
+; ---------------------------------------------------------------
+; Clinton Fuckerdrum beat
+	incdac	CF_DrumLoopA, "sound/dac/Clinton Fucker/DRUMS_A.dpcm"
+	incdac	CF_DrumLoopB, "sound/dac/Clinton Fucker/DRUMS_B.dpcm"
 
 ; ---------------------------------------------------------------
 ; All your funny meme samples you can find
