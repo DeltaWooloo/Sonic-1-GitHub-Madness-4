@@ -171,7 +171,7 @@ DebuggerMenu_Controls:
 		btst	#7,d1			; Start
 		bne.w	DebuggerMenu_LoadGame
 
-		cmpi.w	#6,(v_levselitem).w	; Sound Test row?
+		cmpi.w	#(Debugger_Data.soundtest-Debugger_Data)/12,(v_levselitem).w	; Sound Test row?
 		bne.s	.checklr
 
 		btst	#5,d1			; C: play sound
@@ -206,13 +206,13 @@ DebuggerMenu_Controls:
 		beq.s	.down
 		subq.w	#1,d0
 		bcc.s	.down
-		moveq	#6,d0			; wrap to last item
+		moveq	#(Debugger_Data.end-Debugger_Data)/12-1,d0		; wrap to last item
 
 .down:
 		btst	#1,d1			; down?
 		beq.s	.setsel
 		addq.w	#1,d0
-		cmpi.w	#7,d0
+		cmpi.w	#(Debugger_Data.end-Debugger_Data)/12,d0
 		bcs.s	.setsel
 		moveq	#0,d0			; wrap to first item
 
@@ -225,13 +225,14 @@ DebuggerMenu_Controls:
 
 .leftright:
 		move.w	(v_levselitem).w,d1
-		mulu.w	#8,d1			; 8 bytes per entry
+		mulu.w	#12,d1			; 12 bytes per entry
 		lea	Debugger_Data(pc),a1
 		adda.w	d1,a1
 		movea.l	(a1)+,a2		; RAM address
 		move.b	(a1)+,d5		; step
 		move.b	(a1)+,d6		; min
 		move.b	(a1)+,d7		; max
+		addq.w	#4,a1			; textren
 
 		move.b	(a2),d3			; current value
 
@@ -244,7 +245,7 @@ DebuggerMenu_Controls:
 		bcc.s	.commit
 		
 .setmin:
-		cmpi.w	#5,(v_levselitem).w	; Sound Test wraps
+		cmpi.w	#(Debugger_Data.soundtest-Debugger_Data)/12,(v_levselitem).w	; Sound Test wraps
 		beq.s	.commit
 		move.b	d6,d3			; clamp to min
 		bra.s	.commit
@@ -256,7 +257,7 @@ DebuggerMenu_Controls:
 		bls.s	.commit
 		
 .setmax:
-		cmpi.w	#5,(v_levselitem).w	; Sound Test wraps
+		cmpi.w	#(Debugger_Data.soundtest-Debugger_Data)/12,(v_levselitem).w	; Sound Test wraps
 		beq.s	.commit
 		move.b	d7,d3			; clamp to max
 
@@ -293,30 +294,42 @@ DebuggerMenu_PlaySound:
 
 ; ---------------------------------------------------------------------------
 ; Data table for menu entries (8 bytes each):
-;   longword - RAM address, byte - step, byte - min, byte - max, byte - pad
+;   longword - RAM address, byte - step, byte - min, byte - max, byte - pad, longword - debug screen text (0 for no text)
 ; ---------------------------------------------------------------------------
 
 Debugger_Data:
 		dc.l	v_gamemode		; GAME MODE ID
 		dc.b	$04,$00,(GameModeArray_End-GameModeArray)-4,$00		; step 4, range 0-8
+		dc.l	GamemodeNameTable
 
 		dc.l	v_zone			; ZONE ID
 		dc.b	$01,$00,$09,$00		; step 1, range 0-5
+		dc.l	ZoneNameTable
 
 		dc.l	v_act			; ACT ID
 		dc.b	$01,$00,$02,$00		; step 1, range 0-2
+		dc.l	0
 
 		dc.l	v_emeralds			; EMERALDS
 		dc.b	$01,$00,$06,$00		; step 1, range 0-6
+		dc.l	0
 
 		dc.l	v_lives			; LIVES
 		dc.b	$01,$01,$63,$00		; step 1, range 1-99
+		dc.l	0
+
+		dc.l	v_characterid		; CHARACTER
+		dc.b	$01,$00,chrid_last,$00	; step 1, range 1-99
+		dc.l	CharacterNameTable
 
 		dc.l	f_debugmode+1		; DEBUG MODE
 		dc.b	$01,$00,$01,$00		; step 1, range 0-1
-
+		dc.l	0
+.soundtest:
 		dc.l	v_dbgmenu_sndid		; SOUND TEST (C=play, A=+$10, B=-$10)
 		dc.b	$01,$00,$FF,$00		; step 1, range 0-$FF
+		dc.l	0
+.end:
 
 ; ---------------------------------------------------------------------------
 ; Redraw the full menu
@@ -335,8 +348,7 @@ DebuggerMenu_MenuText:
 		lea	(vdp_data_port).l,a6
 		move.l	#$44080003,d4		; plane A, row 8 col 4
 		move.w	#$A685,d3		; white
-		moveq	#6,d1			; 7 lines
-
+		moveq	#(Debugger_Data.end-Debugger_Data)/12-1,d1
 .names:
 		move.l	d4,4(a6)
 		moveq	#15,d2			; 16 chars per label
@@ -369,20 +381,19 @@ DebuggerMenu_RenderValues:
 		lea	(vdp_data_port).l,a6
 		move.l	#$44280003,d4		; plane A, row 8 col 20
 		move.w	#$A685,d3		; white
-		moveq	#6,d1			; 7 items
-
+		moveq	#(Debugger_Data.end-Debugger_Data)/12-1,d1
 .loop:
 		move.l	d4,4(a6)		; set VRAM write address
 		movea.l	(a3),a2			; load RAM address from table
 		moveq	#0,d0
 		move.b	(a2),d0			; read current value
 		bsr.w	RenderHexByte
-		cmpi.w	#5,d1			; is this the ZONE ID row? (d1=5 on 2nd iter, row index 1)
-		bne.s	.skipzonename
-		move.b	(v_zone).w,d0		; get zone value
+		move.l	8(a3),d0
+		beq.s	.skiptext
+		move.l	d0,a1
 		bsr.w	RenderZoneName		; render zone name after hex digits
-.skipzonename:
-		adda.l	#8,a3			; next entry
+.skiptext:
+		lea	12(a3),a3
 		addi.l	#$1000000,d4		; next row
 		dbf	d1,.loop
 		rts
@@ -392,42 +403,71 @@ DebuggerMenu_RenderValues:
 ; ---------------------------------------------------------------------------
 
 RenderZoneName:
-		move.w	#0,(a6)
-		cmpi.b	#9,d0
+		moveq	#0,d0
+		move.b	(a2),d0			; get ram value
+		moveq	#0,d2
+		move.b	6(a3),d2
+		cmp.b	d2,d0
 		bhi.s	.unknown
-		lsl.w	#1,d0
-		lea	ZoneNameTable(pc),a1
+		move.b	4(a3),d2
+		divu.w	d2,d0
+		move.b	5(a3),d2
+		sub.w	d2,d0
+		add.w	d0,d0
 		move.w	(a1,d0.w),d0
-		lea	ZoneNameTable(pc),a1
 		adda.w	d0,a1
-		moveq	#15,d2			; 12 chars
+		moveq	#16-1,d2
+		move.w	#0,(a6)
 		bra.w	SingleLineRender
-
 .unknown:
 		rts
 ; ---------------------------------------------------------------------------
 ZoneNameTable:
-		dc.w	ZoneName_GHZ-ZoneNameTable
-		dc.w	ZoneName_LZ-ZoneNameTable
-		dc.w	ZoneName_MZ-ZoneNameTable
-		dc.w	ZoneName_SLZ-ZoneNameTable
-		dc.w	ZoneName_SYZ-ZoneNameTable
-		dc.w	ZoneName_SBZ-ZoneNameTable
-		dc.w	ZoneName_End-ZoneNameTable
-		dc.w	ZoneName_MSZ-ZoneNameTable
-		dc.w	ZoneName_ABC-ZoneNameTable
-		dc.w	ZoneName_Joint-ZoneNameTable
+.t:		dc.w	.GHZ-.t
+		dc.w	.LZ-.t
+		dc.w	.MZ-.t
+		dc.w	.SLZ-.t
+		dc.w	.SYZ-.t
+		dc.w	.SBZ-.t
+		dc.w	.End-.t
+		dc.w	.MSZ-.t
+		dc.w	.ABC-.t
+		dc.w	.Joint-.t
 
-ZoneName_GHZ:	dc.b	"PENILE HILLS    "
-ZoneName_LZ:	dc.b	"AZURE RAINFOREST"
-ZoneName_MZ:	dc.b	"ALBERTA CANADA  "
-ZoneName_SLZ:	dc.b	"MICROSLOP HQ    "
-ZoneName_SYZ:	dc.b	"SPRING YARD     "
-ZoneName_SBZ:	dc.b	"PRONGLE PLANT   "
-ZoneName_End:	dc.b	"ENDING          "
-ZoneName_MSZ:	dc.b	"COLD BREW       "
-ZoneName_ABC:	dc.b	"WINDOWS         "
-ZoneName_Joint:	dc.b	"THE JOINT       "
+.GHZ:		dc.b	"PENILE HILLS    "
+.LZ:		dc.b	"AZURE RAINFOREST"
+.MZ:		dc.b	"ALBERTA CANADA  "
+.SLZ:		dc.b	"MICROSLOP HQ    "
+.SYZ:		dc.b	"SPRING YARD     "
+.SBZ:		dc.b	"PRONGLE PLANT   "
+.End:		dc.b	"ENDING          "
+.MSZ:		dc.b	"COLD BREW       "
+.ABC:		dc.b	"WINDOWS         "
+.Joint:		dc.b	"THE JOINT       "
+		even
+
+GamemodeNameTable:
+.t:		dc.w	.Sega-.t
+		dc.w	.Tittle-.t
+		dc.w	.Demo-.t
+		dc.w	.Level-.t
+		dc.w	.Special-.t
+		rept ( (GameModeArray_End-GameModeArray)-(((*)-.t)*2) )/4
+		dc.w	.IDFK-.t
+		endr
+
+.Sega:		dc.b	"SEGA SCREEN     "
+.Tittle:	dc.b	"TITTLE SCREEN   "
+.Demo:		dc.b	"LEVEL DEMO      "
+.Level:		dc.b	"LEVEL           "
+.Special:	dc.b	"SPECIAL STAGE   "
+.IDFK:		dc.b	"PLACEHOLDER NAME"
+		even
+
+CharacterNameTable:
+.t:		dc.w	.Tonic-.t
+
+.Tonic:		dc.b	"TONIC TEETHGIVER"
 		even
 
 ; ---------------------------------------------------------------------------
@@ -469,6 +509,7 @@ Text_MainMenu:
 		dc.b	"ACT ID          "
 		dc.b	"EMERALDS        "
 		dc.b	"LIVES           "
+		dc.b	"CHARACTER       "
 		dc.b	"DEBUG MODE      "
 		dc.b	"SOUND TEST      "
 		even

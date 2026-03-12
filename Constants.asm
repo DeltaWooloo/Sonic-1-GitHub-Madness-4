@@ -101,6 +101,10 @@ id_CBZ:		equ 7
 id_WIN:		equ 8
 id_Joint:	equ 9
 
+; Playable Characters
+chrid_tonic	equ 0
+chrid_last	equ 0
+
 ; Colours
 cBlack:		equ $000		; colour black
 cWhite:		equ $EEE		; colour white

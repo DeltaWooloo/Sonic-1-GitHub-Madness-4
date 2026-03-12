@@ -5,8 +5,17 @@
 ; Obj01:
 SonicPlayer:
 		tst.w	(v_debuguse).w	; is debug mode being used?
-		beq.s	Sonic_Normal	; if not, branch
+		beq.s	.getplayer	; if not, branch
 		jmp	(DebugMode).l
+.getplayer:
+		moveq	#0,d0
+		move.b	(v_characterid).w,d0
+		chk	#chrid_last,d0
+		lsl.w	#2,d0
+		move.l	.lut(pc,d0.w),a1
+		jmp	(a1)
+.lut:
+		dc.l	Sonic_Normal
 ; ===========================================================================
 
 ; Obj01_Normal:
@@ -97,20 +106,6 @@ Sonic_Modes:	dc.w Sonic_MdNormal-Sonic_Modes
 		dc.w Sonic_MdRoll-Sonic_Modes
 		dc.w Sonic_MdJump2-Sonic_Modes
 ; ---------------------------------------------------------------------------
-; Music to play after invincibility wears off
-; ---------------------------------------------------------------------------
-MusicList2:
-		dc.b bgm_GHZ
-		dc.b bgm_LZ
-		dc.b bgm_MZ
-		dc.b bgm_SLZ
-		dc.b bgm_SYZ
-		dc.b bgm_SBZ
-		zonewarning MusicList2,1
-		; The ending doesn't get an entry
-		even
-
-; ---------------------------------------------------------------------------
 ; Subroutine to display Sonic and set music
 ; ---------------------------------------------------------------------------
 
@@ -142,8 +137,7 @@ Sonic_Display:
 		moveq	#5,d0		; play SBZ music
 
 .music:
-		lea	(MusicList2).l,a1
-		move.b	(a1,d0.w),d0
+		move.b	(v_zonemusic).w,d0
 		jsr	(QueueSound1).l	; play normal music
 
 .removeinvincible:

@@ -433,7 +433,9 @@ v_scorecopy:		ds.l	1		; score, duplicate
 	else
 v_scorelife:		ds.l	1		; points required for an extra life (JP1 only)
 	endif
-			ds.b	$1A		; unused
+v_characterid:		ds.b	1
+v_zonemusic:		ds.b	1
+			ds.b	$18		; unused
 f_levselcheat:		ds.b	1		; level select cheat flag
 f_slomocheat:		ds.b	1		; slow motion & frame advance cheat flag
 f_debugcheat:		ds.b	1		; debug mode cheat flag
