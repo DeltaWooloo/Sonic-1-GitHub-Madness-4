@@ -38,7 +38,7 @@ MarioTeam_Screen:
 		bsr.w   Set_TilemapToVRAM
 		
 		moveq   #palid_Sonic,d0      
-		bsr.w   Set_PalLoad2
+		bsr.w   Set_PalLoad1
 		
 		move.w  #$100,(Timer).w          ; Time     
 		move.w  (VDP_buff).w,d0
@@ -48,13 +48,24 @@ MarioTeam_Screen:
 		
 
 MarioTeam_Wait:
-		bsr.w	Set_Fadeout		
 		bsr.w   LoopDelay
 		bne.s   MarioTeam_Wait
 
 ; ---------------------------------------------------------------------------
 
 RickTeamheads_Screen:		
+		bsr.w	Set_Fadeout		
+		move    #$2700,sr           ; Goodbye inters!
+		lea     (VDPCtrl).l,a6
+		move.w  #$8004,(a6)          
+		move.w  #$8230,(a6)          
+		move.w  #$8407,(a6)          
+		move.w  #$8B03,(a6)          
+		move.w  #$8720,(a6)
+		move.w  (VDP_buff).w,d0
+		andi.b  #$BF,d0
+		move.w  d0,(VDPCtrl).l
+		
 		bsr.w   Set_ClearScreen
 		move.l  #$40000000,($C00004).l      ; Art
 		lea     (Nem_RickTeam).l,a0   
@@ -66,7 +77,7 @@ RickTeamheads_Screen:
 		bsr.w   Set_TilemapToVRAM
 		
 		moveq   #palid_Savethemoonsonic,d0      
-		bsr.w   Set_PalLoad2
+		bsr.w   Set_PalLoad1
 		
 		move.w  #$100,(Timer).w          ; Time
 		move.w  (VDP_buff).w,d0
@@ -75,13 +86,24 @@ RickTeamheads_Screen:
 		bsr.w	Set_Fadein
 
 RickTeam_Wait:
-		bsr.w	Set_Fadeout
 		bsr.w   LoopDelay
 		bne.s   RickTeam_Wait
 
 ; ---------------------------------------------------------------------------
 
 TeamTesticle_Screen:		
+		bsr.w	Set_Fadeout		
+		move    #$2700,sr           ; Goodbye inters!
+		lea     (VDPCtrl).l,a6
+		move.w  #$8004,(a6)          
+		move.w  #$8230,(a6)          
+		move.w  #$8407,(a6)          
+		move.w  #$8B03,(a6)          
+		move.w  #$8720,(a6)
+		move.w  (VDP_buff).w,d0
+		andi.b  #$BF,d0
+		move.w  d0,(VDPCtrl).l
+		
 		bsr.w   Set_ClearScreen
 		move.l  #$40000000,($C00004).l      ; Art
 		lea     (Nem_Testicle).l,a0  
@@ -93,7 +115,7 @@ TeamTesticle_Screen:
 		bsr.w   Set_TilemapToVRAM
 		
 		moveq   #palid_S2,d0      
-		bsr.w   Set_PalLoad2		
+		bsr.w   Set_PalLoad1		
 		move.w  #$100,(Timer).w          ; Time
 		move.w  (VDP_buff).w,d0
 		ori.b   #$40,d0
@@ -101,12 +123,11 @@ TeamTesticle_Screen:
 		bsr.w	Set_Fadein
 
 Testicle_Wait:
-		bsr.w	Set_Fadeout		
 		bsr.w   LoopDelay
 		bne.s   Testicle_Wait
 
 Exit_Splashes:
-		jmp	RunSplashes	
+ 		jmp	RunSplashes	
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; MISC
@@ -114,7 +135,12 @@ Exit_Splashes:
 ; ===========================================================================
 
 Set_VDPLoc:
-		jmp   VDP_Location
+		 move.w	#0,d0    ; Send d0 to 0
+		bsr.w   EniDec
+		lea  	(Chunk).l,a1		; Load destination, where to decompress mapping
+		move.l  #$40000003,d0
+        moveq	#$27,d1			; Set X loop
+		moveq	#$1B,d2			; Set Y loop
 		rts
 Set_TilemapToVRAM:		
 		jmp  TilemapToVRAM
@@ -131,6 +157,6 @@ Set_ClearScreen:
 Set_NemDec:
         jmp NemDec
         rts		
-Set_PalLoad2:
-        jmp  PalLoad2
+Set_PalLoad1:
+        jmp  PalLoad1
         rts			
