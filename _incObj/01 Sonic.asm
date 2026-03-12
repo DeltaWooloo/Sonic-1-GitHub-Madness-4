@@ -974,8 +974,8 @@ Sonic_Jump:
 		addq.l	#4,sp	; Run in-air subroutines when we return.
 		move.b	#1,jumping(a0)	; set jump flag.
 		clr.b	sticktoconvex(a0)
-		move.w	#sfx_Jump,d0
-		jsr	(QueueSound2).l	; play jumping sound
+		move.b	#dQuakeJump,d0
+		jsr	MegaPCM_PlaySample
 		move.b	#$13,obHeight(a0)	; set Sonic's hitbox to standing size. This is a leftover from the victory animation in prototypes.
 		move.b	#9,obWidth(a0)
 		btst	#2,obStatus(a0)	; is Sonic already in a ball state?
