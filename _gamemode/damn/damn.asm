@@ -123,7 +123,7 @@ GM_Damn_MainHandler:
 		st.b	damnram_exit
 		rts
 
-		include "_gamemode/damn/Comper_DirectToVRAM.asm"
+		include "_gamemode/damn/Comper_DirectToVram.asm"
 GM_Damn_Art:	binclude "_gamemode/damn/damn-art.comp"
 GM_Damn_Map:	binclude "_gamemode/damn/damn-map.comp"
 GM_Damn_Pal:	binclude "_gamemode/damn/damn-pal.unc"
