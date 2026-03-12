@@ -188,7 +188,7 @@ MadnessScr_Frame3:
 		lea     (Eni_Madness).l,a0
 		bsr.w   VDP_Location
 		bsr.w   TilemapToVRAM
-		move.w  #60*2,(Timer).w     ; Text Time
+		move.w  #(60*2)+15,(Timer).w     ; Text Time
 		move.w  (VDP_buff).w,d0
 		ori.b   #$40,d0
 		move.w  d0,(VDPCtrl).l
