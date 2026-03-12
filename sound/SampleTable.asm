@@ -81,7 +81,8 @@ SampleTable:
 	dcSample	TYPE_PCM,	QuakeJump,	0,	FLAGS_SFX	; $C1
 	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX	; $C2
 	dcSample	TYPE_PCM,	letsgoeee,	0,	FLAGS_SFX	; $C3
-	
+	dcSample	TYPE_PCM,	Lg,			16000, FLAGS_SFX	; $C4
+	dcSample	TYPE_PCM,	Segay,	0, FLAGS_SFX	; $C5
 	dc.w	-1	; end marker
 
 ; ---------------------------------------------------------------
@@ -142,7 +143,7 @@ SampleTable:
 	incdac	ClintonYeah, "sound/dac/clintonfucker_yeah.dpcm"
 	incdac	QuakeJump, "sound/dac/quakejump.wav"
 	incdac	letsgoeee, "sound/dac/letsgoeee.wav"   ; hi
-	
+	incdac	Lg, "sound/dac/lg/Echo.pcm"
 ; ---------------------------------------------------------------
 ; Null level end
 	incdac	BoingBoing, "sound/dac/BoingBoing.dpcm"
@@ -169,5 +170,6 @@ SampleTable:
 ; ---------------------------------------------------------------
 ; Whatever you want the Sega sound to be
 	incdac	SegaPCM, "sound/dac/sega.wav"
+	incdac	Segay, "sound/dac/sega2.wav" (add a region check so the sample will play)
 	even
 
