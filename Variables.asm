@@ -144,7 +144,9 @@ f_pause:		ds.w	1		; flag set to pause the game
 			ds.b	4		; unused
 v_vdp_buffer2:		ds.w	1		; VDP instruction buffer
 v_dbgmenu_sndid:		ds.b 	1
+v_dbgmenu_pcmid:		ds.b 	1
 v_dbgmenu_exit:			ds.b	1
+				ds.b	1	; even padding
 f_hbla_pal:		ds.w	1		; flag set to change palette during HBlank (0000 = no; 0001 = change)
 v_waterpos1:		ds.w	1		; water height, actual
 v_waterpos2:		ds.w	1		; water height, ignoring sway
@@ -166,7 +168,6 @@ v_plc_dataword:		ds.l	1
 v_plc_shiftvalue:	ds.l	1
 v_plc_patternsleft:	ds.w	1
 v_plc_framepatternsleft:ds.w	1
-			ds.b	4		; unused
 v_plc_buffer_end:
 
 v_levelvariables:				; variables that are reset between levels

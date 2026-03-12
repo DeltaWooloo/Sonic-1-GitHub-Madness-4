@@ -58,6 +58,7 @@ GM_DebugMenu:
 		move.b	#0,(v_emeralds).w	; 0 emeralds
 		move.b	#3,(v_lives).w		; 3 lives
 		clr.b	(v_dbgmenu_sndid).w
+		move.b	#$81,(v_dbgmenu_pcmid).w
 		clr.b	(v_dbgmenu_exit).w
 
 		bsr.w	DebuggerMenu_Redraw
@@ -171,20 +172,29 @@ DebuggerMenu_Controls:
 		btst	#7,d1			; Start
 		bne.w	DebuggerMenu_LoadGame
 
-		cmpi.w	#(Debugger_Data.soundtest-Debugger_Data)/12,(v_levselitem).w	; Sound Test row?
-		bne.s	.checklr
-
+		move.w	(v_levselitem).w,d0
+		lsl.w	#2,d0
+		jmp	.lut(pc,d0.w)
+.lut:
+		bra.w	.checklr
+		bra.w	.checklr
+		bra.w	.checklr
+		bra.w	.checklr
+		bra.w	.checklr
+		bra.w	.checklr
+		bra.w	.checklr
+		bra.w	.soundtest
+		bra.w	.pcmtest
+.soundtest:
 		btst	#5,d1			; C: play sound
 		bne.w	DebuggerMenu_PlaySound
-
 		btst	#6,d1			; A: sound ID +$10
-		beq.s	.checkB
+		beq.s	.snd_checkB
 		move.b	(v_dbgmenu_sndid).w,d0
 		add.b	#$10,d0
 		move.b	d0,(v_dbgmenu_sndid).w
 		bra.w	DebuggerMenu_Redraw
-
-.checkB:
+.snd_checkB:
 		btst	#4,d1			; B: sound ID -$10
 		beq.s	.checklr
 		move.b	(v_dbgmenu_sndid).w,d0
@@ -192,6 +202,22 @@ DebuggerMenu_Controls:
 		move.b	d0,(v_dbgmenu_sndid).w
 		bra.w	DebuggerMenu_Redraw
 
+.pcmtest:
+		btst	#5,d1			; C: play sound
+		bne.w	DebuggerMenu_PlayPCM
+		btst	#6,d1			; A: sound ID +$10
+		beq.s	.pcm_checkB
+		move.b	(v_dbgmenu_pcmid).w,d0
+		add.b	#$10,d0
+		move.b	d0,(v_dbgmenu_pcmid).w
+		bra.w	DebuggerMenu_Redraw
+.pcm_checkB:
+		btst	#4,d1			; B: sound ID -$10
+		beq.s	.checklr
+		move.b	(v_dbgmenu_pcmid).w,d0
+		sub.b	#$10,d0
+		move.b	d0,(v_dbgmenu_pcmid).w
+		bra.w	DebuggerMenu_Redraw
 .checklr:
 		move.b	d1,d0
 		andi.b	#$0C,d0			; left/right bits
@@ -292,6 +318,10 @@ DebuggerMenu_PlaySound:
 		bsr.w	QueueSound1
 		rts
 
+DebuggerMenu_PlayPCM:
+		move.b	(v_dbgmenu_pcmid).w,d0
+		jmp	MegaPCM_PlaySample
+
 ; ---------------------------------------------------------------------------
 ; Data table for menu entries (8 bytes each):
 ;   longword - RAM address, byte - step, byte - min, byte - max, byte - pad, longword - debug screen text (0 for no text)
@@ -328,6 +358,10 @@ Debugger_Data:
 .soundtest:
 		dc.l	v_dbgmenu_sndid		; SOUND TEST (C=play, A=+$10, B=-$10)
 		dc.b	$01,$00,$FF,$00		; step 1, range 0-$FF
+		dc.l	0
+.pcmtest:
+		dc.l	v_dbgmenu_pcmid		; SOUND TEST (C=play, A=+$10, B=-$10)
+		dc.b	$01,$81,$FF,$00		; step 1, range 0-$FF
 		dc.l	0
 .end:
 
@@ -535,6 +569,7 @@ Text_MainMenu:
 		dc.b	"CHARACTER       "
 		dc.b	"DEBUG MODE      "
 		dc.b	"SOUND TEST      "
+		dc.b	"PCM TEST        "
 		even
 
 ; ===========================================================================
