@@ -253,7 +253,7 @@ Sonic_MdNormal:
 		bsr.w	Sonic_Roll
 		bsr.w	Sonic_LevelBound
 		jsr	(SpeedToPos).l
-		bsr.w	Sonic_AnglePos
+		bsr.w	FootCollision
 		bsr.w	Sonic_SlopeRepel
 		rts
 ; ===========================================================================
@@ -281,7 +281,7 @@ Sonic_MdRoll:
 		bsr.w	Sonic_RollSpeed
 		bsr.w	Sonic_LevelBound
 		jsr	(SpeedToPos).l
-		bsr.w	Sonic_AnglePos
+		bsr.w	FootCollision
 		bsr.w	Sonic_SlopeRepel
 		rts
 ; ===========================================================================

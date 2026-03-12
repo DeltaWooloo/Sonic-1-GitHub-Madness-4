@@ -1,11 +1,11 @@
 ; ---------------------------------------------------------------------------
-; Subroutine to change Sonic's angle & position as he walks along the floor
+; Subroutine to stick any object to floor collision. 
 ; ---------------------------------------------------------------------------
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 
-Sonic_AnglePos:
+FootCollision:
 		btst	#3,obStatus(a0)
 		beq.s	loc_14602
 		moveq	#0,d0
@@ -41,11 +41,13 @@ loc_1462C:
 loc_14630:
 		andi.b	#$C0,d0
 		cmpi.b	#$40,d0
-		beq.w	Sonic_WalkVertL
+		beq.w	FootCol_L
 		cmpi.b	#$80,d0
-		beq.w	Sonic_WalkCeiling
+		beq.w	FootCol_U
 		cmpi.b	#$C0,d0
-		beq.w	Sonic_WalkVertR
+		beq.w	FootCol_R
+
+FootCol_D:
 		move.w	obY(a0),d2
 		move.w	obX(a0),d3
 		moveq	#0,d0
@@ -109,7 +111,7 @@ loc_146CC:
 
 locret_146E6:
 		rts
-; End of function Sonic_AnglePos
+; End of function FootCollision
 
 ; ===========================================================================
 ;		move.l	obX(a0),d2
@@ -190,7 +192,7 @@ loc_1476A:
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 
-Sonic_WalkVertR:
+FootCol_R:
 		move.w	obY(a0),d2
 		move.w	obX(a0),d3
 		moveq	#0,d0
@@ -250,7 +252,7 @@ loc_147FE:
 		bclr	#5,obStatus(a0)
 		move.b	#id_Run,obPrevAni(a0) ; restart Sonic's animation
 		rts
-; End of function Sonic_WalkVertR
+; End of function FootCol_R
 
 ; ---------------------------------------------------------------------------
 ; Subroutine allowing Sonic to walk upside-down
@@ -259,7 +261,7 @@ loc_147FE:
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 
-Sonic_WalkCeiling:
+FootCol_U:
 		move.w	obY(a0),d2
 		move.w	obX(a0),d3
 		moveq	#0,d0
@@ -320,7 +322,7 @@ loc_148A0:
 		bclr	#5,obStatus(a0)
 		move.b	#id_Run,obPrevAni(a0) ; restart Sonic's animation
 		rts
-; End of function Sonic_WalkCeiling
+; End of function FootCol_U
 
 ; ---------------------------------------------------------------------------
 ; Subroutine allowing Sonic to walk up a vertical slope/wall to his left
@@ -329,7 +331,7 @@ loc_148A0:
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 
-Sonic_WalkVertL:
+FootCol_L:
 		move.w	obY(a0),d2
 		move.w	obX(a0),d3
 		moveq	#0,d0
@@ -390,4 +392,4 @@ loc_14942:
 		bclr	#5,obStatus(a0)
 		move.b	#id_Run,obPrevAni(a0) ; restart Sonic's animation
 		rts
-; End of function Sonic_WalkVertL
+; End of function FootCol_L

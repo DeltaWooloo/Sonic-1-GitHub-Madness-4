@@ -5803,8 +5803,11 @@ Map_Shield:	include	"_maps/Shield and Invincibility.asm"
 		include	"_anim/Water Splash.asm"
 Map_Splash:	include	"_maps/Water Splash.asm"
 
-		include	"_incObj/Sonic AnglePos.asm"
 
+
+		;include	"_incObj/Sonic AnglePos.asm"
+		
+		include	"_incObj/sub FootCollision.asm"		; :^)
 		include	"_incObj/sub FindNearestTile.asm"
 		include	"_incObj/sub FindFloor.asm"
 		include	"_incObj/sub FindWall.asm"
