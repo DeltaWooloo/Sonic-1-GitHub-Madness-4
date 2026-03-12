@@ -139,7 +139,7 @@ Vectors:
 		dc.l ErrorTrap			; Unused (reserved)
 		dc.b "SEGA MEGA DRIVE " ; Hardware system ID (Console name)
 		dc.b "SONICGM4 2026.04" ; Copyright holder and release date (generally year)
-		dc.b "I WILL BANISH YOU TO THAT TOWN IN JOHTO         " ; Domestic name
+		dc.b "I WILL BANISH YOU TO THAT TOWN IN JOHTO wdgaster" ; Domestic name
 		dc.b "GITHUB MADNESS 4: RETURN OF THE FEVERDREAM      " ; International name
 		dc.b "GM 00042069-25" ; Serial/version number (Rev non-0)
 Checksum:
