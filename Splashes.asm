@@ -160,7 +160,7 @@ splash_turd macro routine
 	splash_solid ReimuDrip,$20,$20,160
 	splash_solid Cmruey,$20,$2F,240
 	splash_solid Disappointed,$20,$39,480
-	splash_solid Mines,$20,$25,650
+	splash_solid Mines,$20,$04,650
 	splash_solid Waldo,$40,$31,100
 	; splash_solid Undertaley,$10,$33,300
 	splash_solid StupidBat,$40,$3A,480
@@ -175,7 +175,7 @@ splash_turd macro routine
 	splash_solid Crispbilly,$40,$25,200
 	splash_solid Bonniewtf,$60,$3C,300
 	splash_solid Rick,$40,$2E,480
-	splash_solid W,$40,$25,380
+	splash_solid W,$40,$13,380
 	splash_liquid GM_SegaEU
 	splash_turd Remilia
 	dc.l	-1 ; end marker

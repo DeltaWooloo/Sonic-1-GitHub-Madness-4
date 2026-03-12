@@ -2,8 +2,8 @@
 ; |           Sonic tMY NUTS ITCH isassembly for Sega Mega Drive            |
 ;  =========================================================================
 ;
-; Disassembly created by Hivebrain
-; thanks to drx, Stealth and Esrael L.G. Neto
+; Disassembly created by xx_THEULTIMATEGAMER_xx235
+; thanks to Bill Gates(the owner of fucking microsoft hes really bad), Clownancy(the) and Esrael Sonic Edtior Neato!
 ; ---------------------------------------------------------------------------
 ; NOTE:
 ; Set your editor's tab width to 8 characters wide for viewing this file.
@@ -46,7 +46,7 @@ AddressSRAM = 3
 ;	| (odd only is the most common)
 
 ZoneCount = 6
-;	| Used for the zonewarning macro. Do not change, unless more zones get added.
+;	| Used for the zonewarning macro. Do not change, unless more zones get added. aka never change it just add zone fles after it duh
 ;	| Discrete zones are: GHZ, LZ, MZ, SLZ, SYZ, and SBZ
 
 ; ===========================================================================
@@ -323,8 +323,8 @@ GameProgram:
 		tst.w	(vdp_control_port).l
 		btst	#6,(expansion_control).l
 		beq.s	CheckSumCheck
-		cmpi.l	#'init',(v_init).w ; has checksum routine already run?
-		beq.w	GameInit	; if yes, branch
+		cmpi.l	#'init',(v_init).w ; ye bruv has the checksum started innit?
+		beq.w	GameInit	; if yes, fucking branch. HARD
 
 CheckSumCheck:
 	if SkipChecksumCheck=0
@@ -336,11 +336,11 @@ CheckSumCheck:
 		add.w	(a0)+,d1
 		cmp.l	a0,d0
 		bhs.s	.loop
-		movea.l	#Checksum,a1	; read the checksum
-		cmp.w	(a1),d1		; compare checksum in header to ROM
+		movea.l	#Checksum,a1	; read the CHECKSUM (cheese helper epic crate keep some user money)
+		cmp.w	(a1),d1		; compare checksum in header to ROM "random only memory" RAM "read access memory????!90238902"
 		bne.w	CheckSumError	; if they don't match, branch
 	endif
-
+;man im going nuts
 CheckSumOk:
 		clearRAM v_crossresetram,v_ram_end
 		move.b	(console_version).l,d0

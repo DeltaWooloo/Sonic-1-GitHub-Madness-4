@@ -2,17 +2,17 @@ Mus85_SYZ_Header:
 	smpsHeaderStartSong 1
 	smpsHeaderVoice     Mus85_SYZ_Voices
 	smpsHeaderChan      $06, $03
-	smpsHeaderTempo     $02, $03
+	smpsHeaderTempo     $02, $05
 
 	smpsHeaderDAC       Mus85_SYZ_DAC
-	smpsHeaderFM        Mus85_SYZ_FM1,	$F4, $11
-	smpsHeaderFM        Mus85_SYZ_FM2,	$E8, $0B
-	smpsHeaderFM        Mus85_SYZ_FM3,	$F4, $14
-	smpsHeaderFM        Mus85_SYZ_FM4,	$F4, $18
-	smpsHeaderFM        Mus85_SYZ_FM5,	$F4, $18
-	smpsHeaderPSG       Mus85_SYZ_PSG1,	$D0, $06, $00, fTone_06
-	smpsHeaderPSG       Mus85_SYZ_PSG2,	$E8, $07, $00, $00
-	smpsHeaderPSG       Mus85_SYZ_PSG3,	$00, $05, $00, fTone_04
+	smpsHeaderFM        Mus85_SYZ_FM1,	$F0, $11
+	smpsHeaderFM        Mus85_SYZ_FM2,	$E9, $0B
+	smpsHeaderFM        Mus85_SYZ_FM3,	$FF, $14
+	smpsHeaderFM        Mus85_SYZ_FM4,	$FA, $18
+	smpsHeaderFM        Mus85_SYZ_FM5,	$F1, $18
+	smpsHeaderPSG       Mus85_SYZ_PSG1,	$D7, $06, $00, fTone_06
+	smpsHeaderPSG       Mus85_SYZ_PSG2,	$E2, $07, $00, $00
+	smpsHeaderPSG       Mus85_SYZ_PSG3,	$01, $05, $00, fTone_04
 
 ; FM1 Data
 Mus85_SYZ_FM1:
@@ -231,7 +231,7 @@ Mus85_SYZ_Jump03:
 
 ; DAC Data
 Mus85_SYZ_DAC:
-	dc.b	dSnare, $06, $06, $06, $06, $06, $06, $04, $02, $04, dKick, $02
+	dc.b	dMidTimpani, $06, $06, $06, $06, $06, $06, $04, $02, $04, dMidTimpani, $02
 
 Mus85_SYZ_Loop00:
 	smpsCall            Mus85_SYZ_Call00
@@ -372,4 +372,3 @@ Mus85_SYZ_Voices:
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $00, $18, $22, $18
 
-	smpsFooterEndSong	"Mus85 - SYZ.asm"
