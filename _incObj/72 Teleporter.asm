@@ -67,8 +67,7 @@ loc_1670E:
 		move.w	obX(a0),obX(a1)
 		move.w	obY(a0),obY(a1)
 		clr.b	objoff_32(a0)
-		move.w	#sfx_Roll,d0
-		jsr	(QueueSound2).l	; play Sonic rolling sound
+		pcm	dLg
 
 locret_1675C:
 		rts
