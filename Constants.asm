@@ -363,6 +363,7 @@ flg__Last:	equ ((ptr_flgend-Sound_ExIndex-4)/4)+flg__First
 ; Order them identically to the one in sound/SampleTable.asm
 ; Song Samples
 
+-
 	phase $81
 dKick				ds.b 1
 dSnare				ds.b 1
