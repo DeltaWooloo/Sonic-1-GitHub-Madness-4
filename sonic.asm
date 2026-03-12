@@ -2132,11 +2132,14 @@ Sega_GotoTitle:
 		cmpi.b	#btnABC, (v_jpadhold1).w
 		beq.s	.skip
 
-		jmp	RunSplashes		; i have a million oil im the best  tru  ckdriver in the world
+		jmp	MultiSplash_Init		; i have a million oil im the best  tru  ckdriver in the world
 
 .skip
 		pcm 	dEggNo
 		rts				; skip splash screens with heavy
+		
+		include	"ATOGKsplashesWIP/MAIN.asm"	; Code (simply ran by inclusion)
+	
 ; ===========================================================================
 
 
@@ -7942,6 +7945,30 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 	endif
 
 		include "clinton fucker/Clinton Fucker.asm"
+		; ===========================================================================
+; ---------------------------------------------------------------------------
+; ART, MAPS AND PALETTE
+; ---------------------------------------------------------------------------
+; ===========================================================================
+		
+Nem_MarioTeam:  incbin  "ATOGKsplashesWIP/Art/marioteam.nem"
+                even
+Eni_MarioTeam:  incbin  "ATOGKsplashesWIP/Eni/marioteam.eni"
+                even
+Nem_RickTeam:   incbin  "ATOGKsplashesWIP/Art/rick teamheads.nem"
+                even
+Eni_RickTeam:   incbin  "ATOGKsplashesWIP/Eni/rick teamheads.eni"
+                even
+Nem_Testicle:   incbin  "ATOGKsplashesWIP/Art/TEAM TESTICLE.nem"
+                even
+Eni_Testicle:   incbin  "ATOGKsplashesWIP/Eni/TEAM TESTICLE.eni"	
+                even	
+Pal_S2:         incbin  "ATOGKsplashesWIP/sonic2main.bin"	 
+                even 
+Pal_STMsonic:   incbin  "ATOGKsplashesWIP/STMsonic.bin"	  
+                even
+		
+		
 ; end of 'ROM'
 		even
 ; ==============================================================
@@ -7950,6 +7977,9 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 ; --------------------------------------------------------------
 
    include   "ErrorHandler.asm"
+
+
+
 
 ; --------------------------------------------------------------
 ; WARNING!
