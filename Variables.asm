@@ -429,11 +429,7 @@ v_levseldelay:		ds.w	1		; level select - time until change when up/down is held
 v_levselitem:		ds.w	1		; level select - item selected
 v_levselsound:		ds.w	1		; level select - sound selected
 			ds.b	$3A		; unused
-	if Revision=0
-v_scorecopy:		ds.l	1		; score, duplicate
-	else
 v_scorelife:		ds.l	1		; points required for an extra life (JP1 only)
-	endif
 v_characterid:		ds.b	1
 v_zonemusic:		ds.b	1
 			ds.b	$18		; unused

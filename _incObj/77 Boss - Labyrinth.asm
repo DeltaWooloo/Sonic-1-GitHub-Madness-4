@@ -274,9 +274,7 @@ loc_180F6:
 loc_18112:
 		move.w	#bgm_LZ,d0
 		jsr	(QueueSound1).l		; play LZ music
-	if Revision<>0
 		clr.b	(f_lockscreen).w
-	endif
 		bset	#0,obStatus(a0)
 		addq.b	#2,ob2ndRout(a0)
 

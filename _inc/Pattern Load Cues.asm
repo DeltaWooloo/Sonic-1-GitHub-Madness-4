@@ -304,10 +304,6 @@ PLC_Signpostend:
 ; Pattern load cues - beta special stage warp effect
 ; ---------------------------------------------------------------------------
 PLC_Warp:
-	if Revision=0
-		dc.w ((PLC_Warpend-PLC_Warp-2)/6)-1
-		plcm	Nem_Warp, ArtTile_Warp
-	endif
 PLC_Warpend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - special stage
@@ -421,9 +417,6 @@ PLC_Ending:	dc.w ((PLC_Endingend-PLC_Ending-2)/6)-1
 		plcm	Nem_EndFlower, ArtTile_Ending_Flowers   ; flowers
 		plcm	Nem_EndEm,     ArtTile_Ending_Emeralds  ; emeralds
 		plcm	Nem_EndSonic,  ArtTile_Ending_Sonic     ; Sonic
-	if Revision=0
-		plcm	Nem_EndEggman, ArtTile_Ending_Eggman    ; Eggman's death (unused)
-	endif
 		plcm	Nem_Rabbit,    ArtTile_Ending_Rabbit    ; rabbit
 		plcm	Nem_Chicken,   ArtTile_Ending_Chicken   ; chicken
 		plcm	Nem_Penguin,   ArtTile_Ending_Penguin   ; penguin

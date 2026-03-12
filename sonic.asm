@@ -22,10 +22,6 @@ CheatsOn = 1
 
 MSUEnabled = 1
 
-Revision = 1
-; 	| If 0, build the original version of the game, dubbed REV00
-; 	| If 1, build the later version, dubbed REV01, which includes various bugfixes and enhancements
-
 FixBugs = 1
 ;	| If 1, enables various bugfixes across the game and sound driver
 ;	| See also FixMusicAndSFXDataBugs
@@ -162,7 +158,8 @@ RomEndLoc:	dc.l EndOfRom-1		; End address of ROM
 		dc.b "HEY JIMMY, GIMME A ROM HEADER AREA FOR NOTHIN'.     " ; Notes (unused, anything can be put in this space, but it has to be 52 bytes.)
 		dc.b "JUE             " ; Region (Country code)
 EndOfHeader:
-
+		binclude "rom manual.txt"
+		even
 ; ===========================================================================
 ; Crash/Freeze the 68000. Unlike Sonic 2, Sonic 1 uses the 68000 for playing music, so it stops too
 
