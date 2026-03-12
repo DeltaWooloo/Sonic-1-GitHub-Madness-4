@@ -1,107 +1,111 @@
 REM Custom build process to re-compress all art assets, for space saving$
-REM Comment out to do so
 
-REM cls
-REM cd "artkos"
-REM call recmp.bat
-REM cd ..
+Set Recomp=0
+IF %Recomp% EQU 0 GOTO SKIP
 
-REM cd "artnem"
-REM call recmp.bat
-REM cd ..
+cls
+cd "artkos"
+call recmp.bat
+cd ..
 
-REM cd "ATOGKSpongeBob"
-REM call recmp.bat
-REM cd "Objects\Enemy"
-REM call recmp.bat
-REM cd ..\..\..\
+cd "artnem"
+call recmp.bat
+cd ..
 
-REM cd "ATOGKTitle"
-REM cd "Enigma"
-REM call recmp.bat
-REM cd ..
-REM cd "Nemesis"
-REM call recmp.bat
-REM cd ..\..\
+cd "ATOGKSpongeBob"
+call recmp.bat
+cd "Objects\Enemy"
+call recmp.bat
+cd ..\..\..\
 
-REM cd "conimodes"
-REM cd "cold brew"
-REM call recmp.bat
-REM cd ..
-REM cd "fetus"
-REM call recmp.bat
-REM cd ..
-REM cd "splash"
-REM call recmp.bat
-REM cd ..
-REM cd "winxp"
-REM call recmp.bat
-REM cd ..\..
+cd "ATOGKTitle"
+cd "Enigma"
+call recmp.bat
+cd ..
+cd "Nemesis"
+call recmp.bat
+cd ..\..\
 
-REM cd "ContinueScreen"
-REM cd "Graphics\Tile"
-REM cd "Decision"
-REM call recmp.bat
-REM cd ..
-REM cd "GameOver"
-REM call recmp.bat
-REM cd ..\..\..\..\
+cd "conimodes"
+cd "cold brew"
+call recmp.bat
+cd ..
+cd "fetus"
+call recmp.bat
+cd ..
+cd "splash"
+call recmp.bat
+cd ..
+cd "winxp"
+call recmp.bat
+cd ..\..
 
-REM cd "CrazyRemilia"
-REM cd "Remi"
-REM call recmp.bat
-REM cd ..\..\
+cd "ContinueScreen"
+cd "Graphics\Tile"
+cd "Decision"
+call recmp.bat
+cd ..
+cd "GameOver"
+call recmp.bat
+cd ..\..\..\..\
 
-REM cd "eurosega"
-REM call recmp.bat
-REM cd ..
+cd "CrazyRemilia"
+cd "Remi"
+call recmp.bat
+cd ..\..\
 
-REM cd "hipncoolstuff"
-REM cd "ThanatosCredits"
-REM call recmp.bat
-REM cd ..\..\
+cd "eurosega"
+call recmp.bat
+cd ..
 
-REM cd "LiquidSplashes"
-REM cd "2kki"
-REM call recmp.bat
-REM cd ..
-REM cd "EagleSoft"
-REM call recmp.bat
-REM cd ..
-REM cd "Rerto"
-REM cd "GFX"
-REM call recmp.bat
-REM cd ..
-REM cd "Tilemaps"
-REM call recmp.bat
-REM cd ..\..\
-REM cd "SSRG"
-REM call recmp.bat
-REM cd ..\..\
+cd "hipncoolstuff"
+cd "ThanatosCredits"
+call recmp.bat
+cd ..\..\
 
-REM cd "map16"
-REM call recmp.bat
-REM cd ..
+cd "LiquidSplashes"
+cd "2kki"
+call recmp.bat
+cd ..
+cd "EagleSoft"
+call recmp.bat
+cd ..
+cd "Rerto"
+cd "GFX"
+call recmp.bat
+cd ..
+cd "Tilemaps"
+call recmp.bat
+cd ..\..\
+cd "SSRG"
+call recmp.bat
+cd ..\..\
 
-REM cd "map256"
-REM call recmp.bat
-REM cd ..
+cd "map16"
+call recmp.bat
+cd ..
 
-REM cd "segadoodoo"
-REM call recmp.bat
-REM cd ..
+cd "map256"
+call recmp.bat
+cd ..
 
-REM cd "SolidSplashes"
-REM call recmp.bat
-REM cd ..
+cd "segadoodoo"
+call recmp.bat
+cd ..
 
-REM cd "sslayout"
-REM call recmp.bat
-REM cd ..
+cd "SolidSplashes"
+call recmp.bat
+cd ..
 
-REM cd "tilemaps"
-REM call recmp.bat
-REM cd ..
+cd "sslayout"
+call recmp.bat
+cd ..
+
+cd "tilemaps"
+call recmp.bat
+cd ..
+
+:SKIP
 
 @ECHO OFF
 REM // This file has been gutted and replaced with the Lua build script.
