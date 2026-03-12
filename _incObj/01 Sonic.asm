@@ -875,6 +875,13 @@ Sonic_LevelBound:
 		move.w	#0,obX+2(a0)
 		move.w	#0,obVelX(a0)	; stop Sonic moving
 		move.w	#0,obInertia(a0)
+			move.w	#$600,$10(a0)
+					move.w	#-$200,$12(a0)
+	   bchg	#0,$22(a0)      ; Fliped Sprite
+		bne.s	.lvlboundtest
+		neg.w	d0
+		
+.lvlboundtest:		
 		bra.s	.chkbottom
 ; End of function Sonic_LevelBound
 
