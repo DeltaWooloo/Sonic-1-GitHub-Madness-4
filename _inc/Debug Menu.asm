@@ -277,7 +277,7 @@ DebuggerMenu_LoadGame:
 		move.b	d0,(v_lastspecial).w ; clear special stage number
 		move.l	d0,(v_emldlist).w ; clear emeralds
 		move.l	d0,(v_emldlist+4).w ; clear emeralds
-		move.b	d0,(v_continues).w ; clear continues		
+		move.b	#2,(v_continues).w ; set continues to 2 for the accurate felix experience		
 		move.l	#5000,(v_scorelife).w ; extra life is awarded at 50000 points
 		move.b	#1,(v_dbgmenu_exit).w		
 		rts

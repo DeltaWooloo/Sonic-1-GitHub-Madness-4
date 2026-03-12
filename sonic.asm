@@ -2049,6 +2049,7 @@ Pal_SonicRetro: bincludeEndMarker "LiquidSplashes/Rerto/Palette.bin"
 Pal_SonisRetro: bincludeEndMarker "LiquidSplashes/Rerto/PaletteSonis.bin"
 Pal_MenuText:		bincludeEndMarker	"palette/Menu Font.bin"
     even
+Pal_Black:		bincludeEndMarker	"palette/Black.bin"
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to wait for VBlank routines to complete
@@ -2386,6 +2387,7 @@ Tit_ChkStartOrDemo:
 		beq.w	Tit_MainLoop		; if not, continue looping title screen
 
 Tit_ChkLevSel:
+		move.b	#2,(v_continues).w 		; set continues to 2 for when it goes to level instead
 		move.b	#id_DebugMenu,(v_gamemode).w	; go to debug mode
 		rts
 ; ---------------------------------------------------------------------------		
