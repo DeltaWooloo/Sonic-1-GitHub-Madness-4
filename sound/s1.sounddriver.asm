@@ -44,7 +44,7 @@ PSG_Index:
 
 		dc.l PSG_DUN3_01, PSG_DUN3_02, PSG_DUN3_03
 
-		dc.l PSG_CF_01, PSG_CF_02
+		dc.l PSG_CF_01, PSG_CF_02, PSG_GO_01
 
 PSG1:		dc.b 0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,$80
 	even
@@ -106,6 +106,11 @@ PSG_CF_01:	dc.b 0,0,1,4,$D,$F,$80
 	even
 
 PSG_CF_02:	dc.b 3,3,3,4,4,4,4,6,6,6,9,9,9,9,9,9,$F,$80
+	even
+
+PSG_GO_01:	dc.b 0,2,2,2,2,2,3,3,3,3,4,4,5,5,6,6,7
+		dc.b 7,8,8,9,9,$A,$A,$B,$B,$C,$C,$D,$D
+		dc.b $E,$E,$F,$80
 	even
 
 ; ---------------------------------------------------------------------------
@@ -2859,7 +2864,7 @@ Music8D:	include "sound/music/Dawid/Extremely_intense_boss_song_for_someone.asm"
 		even
 Music8E:	include "sound/music/Mus8E - Sonic Got Through.asm"
 		even
-Music8F:	include "sound/music/Mus8F - Game Over.asm"
+Music8F:	include "sound/music/DaxKatter/Mus - NBT Game Over.asm"
 		even
 Music90:	include "sound/music/LiquidTracks/Mus - Uwol Menu.asm"
 		even
