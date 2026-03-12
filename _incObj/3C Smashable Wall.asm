@@ -68,7 +68,8 @@ Smash_Solid:	; Routine 2
 
 Smash_FragMove:	; Routine 4
 		bsr.w	SpeedToPos
-		addi.w	#$70,obVelY(a0)	; make fragment fall faster
+		; hi
+		subi.w	#$70,obVelY(a0)	; make fragment up faster
 		bsr.w	DisplaySprite
 		tst.b	obRender(a0)
 		bpl.w	DeleteObject
