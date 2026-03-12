@@ -130,7 +130,7 @@ clearRAM:	macro startAddress,endAddress
 	else
 		.length: := startAddress_end-startAddress
 	endif
-		lea	(startAddress).w,a1
+		lea	startAddress,a1
 		moveq	#0,d0
 		move.w	#.length/4-1,d1
 

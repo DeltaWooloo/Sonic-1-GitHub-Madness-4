@@ -408,12 +408,7 @@ v_limittopdb:		ds.w	1		; level upper boundary, buffered for debug mode
 v_limitbtmdb:		ds.w	1		; level bottom boundary, buffered for debug mode
 			ds.b	$C		; unused
 v_timingvariables_end:
-
-v_chunk0collision:	ds.w	1		; very subtly (and perhaps unintentionally) used by FindNearestTile when encountering chunk 0
-	if v_chunk0collision<>ramaddr($FFFFFF00)
-		fatal "v_chunk0collision needs to be at address $FFFFFF00 so that FindNearestTile works correctly (currently offset by \{signedToString(v_chunk0collision-ramaddr($FFFFFF00))} bytes) ."
-	endif
-			ds.b	$E		; unused
+			ds.b	$10		; unused
 v_screenposx_dup:	ds.l	1		; screen position x (duplicate)
 v_screenposy_dup:	ds.l	1		; screen position y (duplicate)
 v_bgscreenposx_dup:	ds.l	1		; background screen position x (duplicate)
@@ -438,26 +433,28 @@ v_scorecopy:		ds.l	1		; score, duplicate
 	else
 v_scorelife:		ds.l	1		; points required for an extra life (JP1 only)
 	endif
-			ds.b	$1C		; unused
+			ds.b	$1A		; unused
 f_levselcheat:		ds.b	1		; level select cheat flag
 f_slomocheat:		ds.b	1		; slow motion & frame advance cheat flag
 f_debugcheat:		ds.b	1		; debug mode cheat flag
 f_creditscheat:		ds.b	1		; hidden credits & press start cheat flag
 v_title_dcount:		ds.w	1		; number of times the d-pad is pressed on title screen
 v_title_ccount:		ds.w	1		; number of times C is pressed on title screen
-			ds.b	2		; unused
-v_unused2:		ds.w	1		; unused
-v_unused3:		ds.b	1		; unused
-v_unused4:		ds.b	1		; unused
-v_unused5:		ds.b	1		; unused
-v_unused6:		ds.b	1		; unused
+
 f_demo:			ds.w	1		; demo mode flag (0 = no; 1 = yes; $8001 = ending)
 v_demonum:		ds.w	1		; demo level number (not the same as the level number)
 v_creditsnum:		ds.w	1		; credits index number
-			ds.b	2		; unused
 v_megadrive:		ds.b	1		; Megadrive machine type
 f_difficulty:		ds.b	1		; unused
 f_debugmode:		ds.w	1		; debug mode flag
+
+v_vintcode:
+.jmp:			ds.w	1
+.addr:			ds.l	1
+v_hintcode:
+.jmp:			ds.w	1
+.addr:			ds.l	1
+
 v_init:			ds.l	1		; 'init' text string
 v_ram_end:
     if * > 0	; Don't declare more space than the RAM can contain!

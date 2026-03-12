@@ -23,8 +23,6 @@ CheatsOn = 1
 Revision = 1
 ; 	| If 0, build the original version of the game, dubbed REV00
 ; 	| If 1, build the later version, dubbed REV01, which includes various bugfixes and enhancements
-; 	| If 2, build the hacked version from Sonic Mega Collection, dubbed REVXB,
-;	|       which (sloppily) fixes the infamous "spike bug" -- not recommended
 
 FixBugs = 1
 ;	| If 1, enables various bugfixes across the game and sound driver
@@ -52,37 +50,18 @@ ZoneCount = 6
 ;	| Discrete zones are: GHZ, LZ, MZ, SLZ, SYZ, and SBZ
 
 ; ===========================================================================
-; AS-specific macros and assembler settings
 	cpu 68000
 	include "MacroSetup.asm"
-
-; ===========================================================================
-; Simplifying macros and functions
-	include	"Macros.asm"
-
-; ---------------------------------------------------------------------------
-; SMPS2ASM - A collection of macros that make SMPS's bytecode human-readable.
-; ---------------------------------------------------------------------------
+	include "Macros.asm"
+	include "Constants.asm"
+	include "Variables.asm"
+	include "Debugger.asm"
 FixMusicAndSFXDataBugs = FixBugs
 SonicDriverVer = 1 ; Tell SMPS2ASM that we're using Sonic 1's driver.
-		include "sound/_smps2asm_inc.asm"
-
-; ===========================================================================
-; Equates section - Names for constants
-	include	"Constants.asm"
-
-; ===========================================================================
-; Equates section - Names for variables
-	include	"Variables.asm"
-
-	include	"Debugger.asm"
-
-; ===========================================================================
-; Expressing sprite mappings and DPLCs in a portable and human-readable form
+	include "sound/_smps2asm_inc.asm"
 SonicMappingsVer = 1
 SonicDplcVer = 1
-	include	"_maps/_MapMacros.asm"
-
+	include "_maps/_MapMacros.asm"
 ; ===========================================================================
 ; start of ROM
 
@@ -92,7 +71,7 @@ StartOfRom:
 	endif
 
 Vectors:
-		dc.l v_systemstack&$FFFFFF	; Initial stack pointer value
+		dc.l v_systemstack		; Initial stack pointer value
 		dc.l EntryPoint			; Start of program
 		dc.l BusError			; Bus error
 		dc.l AddressError		; Address error (4)
@@ -121,9 +100,9 @@ Vectors:
 		dc.l ErrorTrap			; IRQ level 1
 		dc.l COP_SBlast			; IRQ level 2 (Copera soundblaster FM)
 		dc.l PCO_ADPCM			; IRQ level 3 (28)
-		dc.l HBlank				; IRQ level 4 (horizontal retrace interrupt)
-		dc.l HBlank				; IRQ level 5 (horizontal retrace interrupt/Pico). GenesisDoes: This allows for Model 2 Sega Pico compatibility
-		dc.l VBlank				; IRQ level 6 (vertical retrace interrupt)
+		dc.l v_hintcode				; IRQ level 4 (horizontal retrace interrupt)
+		dc.l v_hintcode				; IRQ level 5 (horizontal retrace interrupt/Pico). GenesisDoes: This allows for Model 2 Sega Pico compatibility
+		dc.l v_vintcode				; IRQ level 6 (vertical retrace interrupt)
 		dc.l ErrorTrap			; IRQ level 7 (32)
 		
 		dc.l ErrorTrap			; TRAP #00 exception
@@ -150,7 +129,6 @@ Vectors:
 		dc.l ErrorTrap			; Unused (reserved)
 		dc.l ErrorTrap			; Unused (reserved)
 		dc.l ErrorTrap			; Unused (reserved)
-	if Revision<>2|FixBugs
 		dc.l ErrorTrap			; Unused (reserved)
 		dc.l ErrorTrap			; Unused (reserved)
 		dc.l ErrorTrap			; Unused (reserved)
@@ -159,35 +137,13 @@ Vectors:
 		dc.l ErrorTrap			; Unused (reserved)
 		dc.l ErrorTrap			; Unused (reserved)
 		dc.l ErrorTrap			; Unused (reserved)
-	else
-loc_E0:		; Relocated code from Spik_Hurt. REVXB was a nasty hex-edit.
-		; See _incObj/36 Spikes.asm for more info.
-		move.l	obY(a0),d3
-		move.w	obVelY(a0),d0
-		ext.l	d0
-		asl.l	#8,d0
-		jmp	(loc_D5A2).l
-
-		dc.w ErrorTrap
-		dc.l ErrorTrap
-		dc.l ErrorTrap
-		dc.l ErrorTrap
-	endif
 		dc.b "SEGA MEGA DRIVE " ; Hardware system ID (Console name)
 		dc.b "SONICGM4 2026.04" ; Copyright holder and release date (generally year)
 		dc.b "I WILL BANISH YOU TO THAT TOWN IN JOHTO         " ; Domestic name
 		dc.b "GITHUB MADNESS 4: RETURN OF THE FEVERDREAM      " ; International name
-	if Revision=0
-		dc.b "GM 00001009-00"   ; Serial/version number (Rev 0)
-	else
 		dc.b "GM 00042069-25" ; Serial/version number (Rev non-0)
-	endif
 Checksum:
-	if Revision=0
-		dc.w $264A	; Hardcoded to make it easier to check for ROM correctness
-	else
-		dc.w $AFC7
-	endif
+		dc.w 0
 		dc.b "J               " ; I/O support
 		dc.l StartOfRom		; Start address of ROM
 RomEndLoc:	dc.l EndOfRom-1		; End address of ROM
@@ -386,25 +342,17 @@ CheckSumCheck:
 	endif
 
 CheckSumOk:
-		lea	(v_crossresetram).w,a6
-		moveq	#0,d7
-		move.w	#(v_ram_end-v_crossresetram)/4-1,d6
-.clearRAM:
-		move.l	d7,(a6)+
-		dbf	d6,.clearRAM	; clear RAM ($FE00-$FFFF)
-
+		clearRAM v_crossresetram,v_ram_end
 		move.b	(console_version).l,d0
 		andi.b	#$C0,d0
 		move.b	d0,(v_megadrive).w ; get region setting
 		move.l	#'init',(v_init).w ; set flag so checksum won't run again
 
 GameInit:
-		lea	(v_ram_start).l,a6
-		moveq	#0,d7
-		move.w	#(v_crossresetram-v_ram_start_def)/4-1,d6
-.clearRAM:
-		move.l	d7,(a6)+
-		dbf	d6,.clearRAM	; clear RAM ($0000-$FDFF)
+		clearRAM v_ram_start_def,v_crossresetram
+		move.w	#opcode_jmpabslong,(v_vintcode.jmp).w
+		move.l	#VBlank,(v_vintcode.addr).w
+		move.w	#opcode_rte,(v_hintcode.jmp).w
 		jsr	(InitDMAQueue).l
 		bsr.w	VDPSetupGame
 		bsr.w	JoypadInit
@@ -412,13 +360,6 @@ GameInit:
 		if CheatsOn=1
 		move.w	#$101,(f_levselcheat).w
 		move.w	#$101,(f_debugcheat).w
-		else
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
 		endif
 		if DickingAround=1
 		move.b	#id_DebugMenu,(v_gamemode).w ; set Game Mode to deubg menu Screen
@@ -884,7 +825,7 @@ HBlank:
 		rept (4*$10)/2			; overwrite full palette (4 rows, 2 colors per move)
 			move.l	(a0)+,(a1)	; move water palette to CRAM
 		endr
-		move.w	#$8A00+223,4(a1)	; reset horizontal interrupt counter
+		move.w	#$8AFF,4(a1)	; reset horizontal interrupt counter
 		movem.l	(sp)+,a0-a1
 
 		tst.b	(f_doupdatesinhblank).w	; was frame update delayed by water surface being near the top of the screen?
@@ -911,7 +852,7 @@ HBlank:
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
-Init_MegaPCM
+Init_MegaPCM:
 		jsr	(MegaPCM_LoadDriver).l
 		lea	(SampleTable).l,a0
 		jsr	MegaPCM_LoadSampleTable
@@ -996,7 +937,7 @@ VDPSetupGame:
 
 		move.w	(VDPSetupArray+2).l,d0
 		move.w	d0,(v_vdp_buffer1).w		; buffer register $81 (used for enabling/disabling display)
-		move.w	#$8A00+223,(v_hbla_hreg).w	; H-INT every 224th scanline
+		move.w	#$8AFF,(v_hbla_hreg).w	; H-INT every 224th scanline
 		moveq	#0,d0
 		move.l	#$C0000000,(vdp_control_port).l ; set VDP to CRAM write
 		move.w	#($80)/2-1,d7
@@ -1089,22 +1030,10 @@ LoadDynPLC:
 ClearScreen:
 		fillVRAM	0, vram_fg, vram_fg+plane_size_64x32 ; clear foreground namespace
 		fillVRAM	0, vram_bg, vram_bg+plane_size_64x32 ; clear background namespace
-
-	if Revision=0
-		move.l	#0,(v_scrposy_vdp).w
-		move.l	#0,(v_scrposx_vdp).w
-	else
 		clr.l	(v_scrposy_vdp).w
 		clr.l	(v_scrposx_vdp).w
-	endif
-
-	if FixBugs
 		clearRAM v_spritetablebuffer,v_spritetablebuffer_end
 		clearRAM v_hscrolltablebuffer,v_hscrolltablebuffer_end_padded
-	else
-		clearRAM v_spritetablebuffer,v_spritetablebuffer_end+4 ; Clears too much RAM, clearing the first 4 bytes of v_palette_water.
-		clearRAM v_hscrolltablebuffer,v_hscrolltablebuffer_end_padded+4 ; Clears too much RAM, clearing the first 4 bytes of v_objspace.
-	endif
 		ResetDMAQueue
 		rts
 ; End of function ClearScreen
@@ -2094,9 +2023,7 @@ WaitForVBla:
 
 		include	"_incObj/sub RandomNumber.asm"
 		include	"_incObj/sub CalcSine.asm"
-	if Revision=0
 		include	"_incObj/sub CalcSqrt.asm"
-	endif
 		include	"_incObj/sub CalcAngle.asm"
 
 ; ===========================================================================
@@ -2131,12 +2058,9 @@ GM_Sega:
 		copyTilemap	v_ram_start,vram_bg+$510,24,8
 		copyTilemap	v_ram_start+24*8*2,vram_fg,40,28
 
-	if Revision<>0
 		tst.b	(v_megadrive).w	; is console Japanese?
 		bmi.s	.loadpal
 		copyTilemap	v_ram_start+$A40,vram_fg+$53A,3,2 ; hide "TM" with a white rectangle
-	endif
-
 .loadpal:
 		moveq	#palid_SegaBG,d0
 		bsr.w	PalLoad	; load Sega logo palette
@@ -2231,7 +2155,6 @@ GM_Title:
 		move.b	#0,(v_lastlamp).w ; clear lamppost counter
 		move.w	#0,(v_debuguse).w ; disable debug item placement mode
 		move.w	#0,(f_demo).w	; disable debug mode
-		move.w	#0,(v_unused2).w ; unused variable
 		move.w	#(id_GHZ<<8),(v_zone).w	; set level to GHZ (00)
 		move.w	#0,(v_pcyc_time).w ; disable palette cycling
 		include	"ATOGKTitle/MAIN.asm"	; Code (simply ran by inclusion)
@@ -2309,11 +2232,8 @@ FinalTitle:
 		move.b	#id_PSBTM,(v_pressstart).w ; load "PRESS START BUTTON" object
 		;clr.b	(v_pressstart+obRoutine).w ; The 'Mega Games 10' version of Sonic 1 added this line, to fix the 'PRESS START BUTTON' object not appearing
 
-	if Revision<>0
 		tst.b	(v_megadrive).w	; is console Japanese?
 		bpl.s	.isjap		; if yes, branch
-	endif
-
 		move.b	#id_PSBTM,(v_titletm).w ; load "TM" object
 		move.b	#3,(v_titletm+obFrame).w
 .isjap:
@@ -2489,9 +2409,7 @@ Demo_Level:
 		move.w	d0,(v_rings).w	; clear rings
 		move.l	d0,(v_time).w	; clear time
 		move.l	d0,(v_score).w	; clear score
-	if Revision<>0
 		move.l	#5000,(v_scorelife).w ; extra life is awarded at 50000 points
-	endif
 		rts
 
 Demo_Brew:
@@ -2593,6 +2511,8 @@ Level_ClrRam:
 
 		disable_ints
 		bsr.w	ClearScreen
+		move.w	#opcode_jmpabslong,(v_hintcode.jmp).w
+		move.l	#HBlank,(v_hintcode.addr).w
 		lea	(vdp_control_port).l,a6
 		move.w	#$8B03,(a6)	; line scroll mode
 		move.w	#$8200+(vram_fg>>10),(a6) ; set foreground nametable address
@@ -2601,7 +2521,7 @@ Level_ClrRam:
 		move.w	#$9001,(a6)		; 64-cell hscroll size
 		move.w	#$8004,(a6)		; 8-colour mode
 		move.w	#$8720,(a6)		; set background colour (line 3; colour 0)
-		move.w	#$8A00+223,(v_hbla_hreg).w ; set palette change position (for water)
+		move.w	#$8AFF,(v_hbla_hreg).w ; set palette change position (for water)
 		move.w	(v_hbla_hreg).w,(a6)
 		cmpi.b	#id_LZ,(v_zone).w ; is level LZ?
 		bne.s	Level_LoadPal	; if not, branch
@@ -2797,10 +2717,8 @@ Level_MainLoop:
 		bsr.w	MoveSonicInDemo
 		bsr.w	LZWaterFeatures
 		jsr	(ExecuteObjects).l
-	if Revision<>0
 		tst.w	(f_restart).w
-		bne.w	GM_Level
-	endif
+		bne.w	Level_Restarted
 		tst.w	(v_debuguse).w	; is debug mode being used?
 		bne.s	Level_DoScroll	; if yes, branch
 		cmpi.b	#6,(v_player+obRoutine).w ; has Sonic just died?
@@ -2820,18 +2738,16 @@ Level_SkipScroll:
 
 		cmpi.b	#id_Demo,(v_gamemode).w
 		beq.s	Level_ChkDemo	; if mode is 8 (demo), branch
-	if Revision=0
-		tst.w	(f_restart).w	; is the level set to restart?
-		bne.w	GM_Level	; if yes, branch
-	endif
 		cmpi.b	#id_Level,(v_gamemode).w
 		beq.w	Level_MainLoop	; if mode is $C (level), branch
 		rts
+Level_Restarted:
+		cmpi.b	#id_Demo,(v_gamemode).w
+		beq.s	Level_EndDemo
+		bra.w	GM_Level
 ; ===========================================================================
 
 Level_ChkDemo:
-		tst.w	(f_restart).w	; is level set to restart?
-		bne.s	Level_EndDemo	; if yes, branch
 		tst.w	(v_generictimer).w ; is there time left on the demo?
 		beq.s	Level_EndDemo	; if not, branch
 		cmpi.b	#id_Demo,(v_gamemode).w
@@ -3080,13 +2996,8 @@ SS_MainLoop:
 SS_ChkEnd:
 		cmpi.b	#id_Special,(v_gamemode).w ; is game mode $10 (special stage)?
 		beq.w	SS_MainLoop	; if yes, branch
-
 		tst.w	(f_demo).w	; is demo mode on?
-	if Revision=0
-		bne.w	SS_ToSegaScreen	; if yes, branch
-	else
 		bne.w	SS_ToLevel
-	endif
 		move.b	#id_Level,(v_gamemode).w ; set screen mode to $0C (level)
 		cmpi.w	#(id_SBZ<<8)+3,(v_zone).w ; is level number higher than FZ?
 		blo.s	SS_Finish	; if not, branch
@@ -3165,12 +3076,10 @@ SS_ToSegaScreen:
 		move.b	#id_Sega,(v_gamemode).w ; goto Sega screen
 		rts
 
-	if Revision<>0
 SS_ToLevel:
 		cmpi.b	#id_Level,(v_gamemode).w
 		beq.s	SS_ToSegaScreen
 		rts
-	endif
 
 ; ---------------------------------------------------------------------------
 ; Special stage background loading subroutine
@@ -3550,7 +3459,7 @@ GM_Ending:
 		move.w	#$9001,(a6)		; 64-cell hscroll size
 		move.w	#$8004,(a6)		; 8-colour mode
 		move.w	#$8720,(a6)		; set background colour (line 3; colour 0)
-		move.w	#$8A00+223,(v_hbla_hreg).w ; set palette change position (for water)
+		move.w	#$8AFF,(v_hbla_hreg).w ; set palette change position (for water)
 		move.w	(v_hbla_hreg).w,(a6)
 		move.w	#30,(v_air).w
 		move.w	#id_EndZ<<8,(v_zone).w ; set level number to 0600 (extra flowers)
@@ -3953,15 +3862,9 @@ Demo_EndSBZ2:	binclude	"demodata/Ending - SBZ2.bin"
 Demo_EndGHZ2:	binclude	"demodata/Ending - GHZ2.bin"
 		even
 
-	if Revision=0
-		include	"_inc/LevelSizeLoad & BgScrollSpeed.asm"
-		include	"_inc/DeformLayers.asm"
-		include	"_inc/Level Drawing.asm"
-	else
 		include	"_inc/LevelSizeLoad & BgScrollSpeed (JP1).asm"
 		include	"_inc/DeformLayers (JP1).asm"
 		include	"_inc/Level Drawing (JP1).asm"
-	endif
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to load level art data
@@ -4630,11 +4533,7 @@ Map_Missile:	include	"_maps/Buzz Bomber Missile.asm"
 		include	"_anim/Rings.asm"
 
 Map_Ring:
-	if Revision=0
-		include	"_maps/Rings.asm"
-	else
 		include	"_maps/Rings (JP1).asm"
-	endif
 
 Map_GRing:	include	"_maps/Giant Ring.asm"
 Map_Flash:	include	"_maps/Ring Flash.asm"
@@ -5824,7 +5723,6 @@ ResumeMusic:
 		move.w	#bgm_SBZ,d0	; play SBZ music
 
 .notsbz:
-	if Revision<>0
 		tst.b	(v_invinc).w ; is Sonic invincible?
 		beq.s	.notinvinc ; if not, branch
 		move.w	#bgm_Invincible,d0
@@ -5833,8 +5731,6 @@ ResumeMusic:
 		beq.s	.playselected ; if not, branch
 		move.w	#bgm_Boss,d0
 .playselected:
-	endif
-
 		jsr	(QueueSound1).l
 
 .over12:
@@ -7119,25 +7015,6 @@ Map_HUD:	include	"_maps/HUD.asm"
 
 AddPoints:
 		move.b	#1,(f_scorecount).w ; set score counter to update
-
-	if Revision=0
-		lea	(v_scorecopy).w,a2
-		lea	(v_score).w,a3
-		add.l	d0,(a3)		; add d0*10 to the score
-		move.l	#999999,d1
-		cmp.l	(a3),d1		; is score below 999999?
-		bhi.w	.belowmax	; if yes, branch
-		move.l	d1,(a3)		; reset score to 999999
-		move.l	d1,(a2)
-
-.belowmax:
-		move.l	(a3),d0
-		cmp.l	(a2),d0
-		blo.w	.locret_1C6B6
-		move.l	d0,(a2)
-
-	else
-
 		lea	(v_score).w,a3
 		add.l	d0,(a3)
 		move.l	#999999,d1
@@ -7156,8 +7033,6 @@ AddPoints:
 		addq.b	#1,(f_lifecount).w
 		move.w	#bgm_ExtraLife,d0
 		jmp	(QueueSound1).l
-	endif
-
 .locret_1C6B6:
 .noextralife:
 		rts
@@ -7178,32 +7053,17 @@ Art_LivesNums:	binclude	"artunc/Lives Counter Numbers.bin" ; 8x8 pixel numbers o
 		include	"_inc/LevelHeaders.asm"
 		include	"_inc/Pattern Load Cues.asm"
 
-		; Nem_SegaLogo has a bunch of padding before it that differs between revisions:
-		; - in rev00, it starts at $1DC00, which amounts to $EE bytes
-		; - in rev01/rev02, it starts at $1E700, which amounts to $48E bytes
-		; From a technical standpoint, this padding serves no purpose.
-		if PaddingOptimization=0
-			align	$200
-			if Revision<>0
-				dc.b	[$300]$FF
-			endif
-		endif
-
-	if Revision=0
-Nem_SegaLogo:	binclude	"artnem/Sega Logo.nem"	; large Sega logo
-		even
-Eni_SegaLogo:	binclude	"tilemaps/Sega Logo.eni" ; large Sega logo (mappings)
-		even
-	else
 Nem_SegaLogo:	binclude	"artnem/Sega Logo (JP1).nem" ; large Sega logo
 		even
 Eni_SegaLogo:	binclude	"tilemaps/Sega Logo (JP1).eni" ; large Sega logo (mappings)
 		even
-	endif
 
 Eni_GitHub:	binclude	"ATOGKTitle/Enigma/Github.bin"
 		even
 Eni_Madness:	binclude	"ATOGKTitle/Enigma/Madness.bin"
+		even
+;!@ GenesisDoes
+Eni_GHIV:	binclude	"ATOGKTitle/Enigma/IV.bin"
 		even
 Nem_GitMadScr:	binclude	"ATOGKTitle/Nemesis/GitMad.bin"
 		even
@@ -7238,28 +7098,10 @@ Art_Sonic:	binclude	"artunc/Sonic.bin"	; Sonic
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - various
 ; ---------------------------------------------------------------------------
-	if Revision=0
-Nem_Smoke:	binclude	"artnem/Unused - Smoke.nem"
-		even
-Nem_SyzSparkle:	binclude	"artnem/Unused - SYZ Sparkles.nem"
-		even
-	endif
-
 Nem_Shield:	binclude	"artnem/Shield.nem"
 		even
 Nem_Stars:	binclude	"artnem/Invincibility Stars.nem"
 		even
-
-	if Revision=0
-Nem_LzSonic:	binclude	"artnem/Unused - LZ Sonic.nem" ; Sonic holding his breath
-		even
-Nem_UnkFire:	binclude	"artnem/Unused - Fireball.nem" ; unused fireball
-		even
-Nem_Warp:	binclude	"artnem/Unused - SStage Flash.nem" ; entry to special stage flash
-		even
-Nem_Goggle:	binclude	"artnem/Unused - Goggles.nem" ; unused goggles
-		even
-	endif
 
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - special stage
@@ -7574,14 +7416,8 @@ Blk16_MZ:	binclude	"map16/MZ.eni"
 		even
 Kos_MZ:		binclude	"artkos/8x8 - MZ.kos"	; MZ primary patterns
 		even
-Blk256_MZ:
-	if Revision=0
-		binclude	"map256/MZ.kos"
+Blk256_MZ:	binclude	"map256/MZ (JP1).kos"
 		even
-	else
-		binclude	"map256/MZ (JP1).kos"
-		even
-	endif
 
 Blk16_SLZ:	binclude	"map16/SLZ.eni"
 		even
@@ -7601,14 +7437,8 @@ Blk16_SBZ:	binclude	"map16/SBZ.eni"
 		even
 Kos_SBZ:	binclude	"artkos/8x8 - SBZ.kos"	; SBZ primary patterns
 		even
-Blk256_SBZ:
-	if Revision=0
-		binclude	"map256/SBZ.kos"
+Blk256_SBZ:	binclude	"map256/SBZ (JP1).kos"
 		even
-	else
-		binclude	"map256/SBZ (JP1).kos"
-		even
-	endif
 
 Blk16_BREW:	binclude	"map16/BREW.eni"
 		even
@@ -7653,11 +7483,6 @@ Nem_EndSonic:	binclude	"artnem/Ending - Sonic.nem"
 		even
 Nem_TryAgain:	binclude	"artnem/Ending - Try Again.nem"
 		even
-	if Revision=0
-Nem_EndEggman:
-		binclude	"artnem/Unused - Eggman Ending.nem"
-		even
-	endif
 Kos_EndFlowers:	binclude	"artkos/Flowers at Ending.kos" ; ending sequence animated flowers
 		even
 Nem_EndFlower:	binclude	"artnem/Ending - Flowers.nem"
@@ -7668,16 +7493,6 @@ Nem_EndStH:	binclude	"artnem/Ending - StH Logo.nem"
 		even
 Eni_TheIdiotBros:	binclude	"tilemaps/Idiots.eni"
 		even
-		; AngleMap starts at $62900 in all revisions, which amounts
-		; to $104 bytes of padding for rev00 and $40 for rev01/rev02.
-		; From a technical standpoint, this padding serves no purpose.
-		if PaddingOptimization=0
-			if Revision=0
-				dc.b	[$104]$FF
-			else
-				dc.b	[$40]$FF
-			endif
-		endif
 
 ; ---------------------------------------------------------------------------
 ; Collision data
@@ -7718,19 +7533,10 @@ SS_3:		binclude	"sslayout/3.eni"
 		even
 SS_4:		binclude	"sslayout/4.eni"
 		even
-	if Revision=0
-SS_5:		binclude	"sslayout/5.eni"
-		even
-SS_6:		binclude	"sslayout/6.eni"
-		even
-	else
-		; SS 5 and 6 had broken objects outside the accessible layout;
-		; rev01 removes those - remaining layouts stay unchanged.
 SS_5:		binclude	"sslayout/5 (JP1).eni"
 		even
 SS_6:		binclude	"sslayout/6 (JP1).eni"
 		even
-	endif
 
 ; ---------------------------------------------------------------------------
 ; Animated uncompressed graphics
@@ -7864,12 +7670,7 @@ Level_SLZ1Unk:	dc.l 0
 
 Level_SYZ1:	binclude	"levels/syz1.bin"
 		even
-Level_SYZbg:
-	if Revision=0
-		binclude	"levels/syzbg.bin"
-	else
-		binclude	"levels/syzbg (JP1).bin"
-	endif
+Level_SYZbg:	binclude	"levels/syzbg (JP1).bin"
 		even
 Level_SYZ1Unk:	dc.l 0
 Level_SYZ2:	binclude	"levels/syz2.bin"
@@ -7928,13 +7729,6 @@ Level_Joint1Unk:	dc.l 0
 Art_BigRing:	binclude	"artunc/Giant Ring.bin"
 		even
 
-		; ObjPos_Index starts at $6B000 in all revisions, which amounts
-		; to $9C bytes of padding for rev00 and $DC for rev01/rev02.
-		; From a technical standpoint, this padding serves no purpose.
-		if PaddingOptimization=0
-			align	$100
-		endif
-	
 ; ---------------------------------------------------------------------------
 ; Sprite locations index
 ; ---------------------------------------------------------------------------
@@ -8007,33 +7801,15 @@ ObjPos_GHZ1:	binclude	"objpos/ghz1.bin"
 		even
 ObjPos_GHZ2:	binclude	"objpos/ghz2.bin"
 		even
-ObjPos_GHZ3:
-	if Revision=0
-		binclude	"objpos/ghz3.bin"
+ObjPos_GHZ3:	binclude	"objpos/ghz3 (JP1).bin"
 		even
-	else
-		binclude	"objpos/ghz3 (JP1).bin"
-		even
-	endif
 
-ObjPos_LZ1:
-	if Revision=0
-		binclude	"objpos/lz1.bin"
+ObjPos_LZ1:	binclude	"objpos/lz1 (JP1).bin"
 		even
-	else
-		binclude	"objpos/lz1 (JP1).bin"
-		even
-	endif
 ObjPos_LZ2:	binclude	"objpos/lz2.bin"
 		even
-ObjPos_LZ3:
-	if Revision=0
-		binclude	"objpos/lz3.bin"
+ObjPos_LZ3:	binclude	"objpos/lz3 (JP1).bin"
 		even
-	else
-		binclude	"objpos/lz3 (JP1).bin"
-		even
-	endif
 ObjPos_SBZ3:	binclude	"objpos/sbz3.bin"
 		even
 ObjPos_LZ1pf1:	binclude	"objpos/lz1pf1.bin"
@@ -8049,14 +7825,8 @@ ObjPos_LZ3pf1:	binclude	"objpos/lz3pf1.bin"
 ObjPos_LZ3pf2:	binclude	"objpos/lz3pf2.bin"
 		even
 
-ObjPos_MZ1:
-	if Revision=0
-		binclude	"objpos/mz1.bin"
+ObjPos_MZ1:	binclude	"objpos/mz1 (JP1).bin"
 		even
-	else
-		binclude	"objpos/mz1 (JP1).bin"
-		even
-	endif
 ObjPos_MZ2:	binclude	"objpos/mz2.bin"
 		even
 ObjPos_MZ3:	binclude	"objpos/mz3.bin"
@@ -8072,23 +7842,11 @@ ObjPos_SYZ1:	binclude	"objpos/syz1.bin"
 		even
 ObjPos_SYZ2:	binclude	"objpos/syz2.bin"
 		even
-ObjPos_SYZ3:
-	if Revision=0
-		binclude	"objpos/syz3.bin"
+ObjPos_SYZ3:	binclude	"objpos/syz3 (JP1).bin"
 		even
-	else
-		binclude	"objpos/syz3 (JP1).bin"
-		even
-	endif
 
-ObjPos_SBZ1:
-	if Revision=0
-		binclude	"objpos/sbz1.bin"
+ObjPos_SBZ1:	binclude	"objpos/sbz1 (JP1).bin"
 		even
-	else
-		binclude	"objpos/sbz1 (JP1).bin"
-		even
-	endif
 ObjPos_SBZ2:	binclude	"objpos/sbz2.bin"
 		even
 ObjPos_FZ:	binclude	"objpos/fz.bin"
@@ -8127,19 +7885,6 @@ ObjPos_Joint2:	binclude	"objpos/Joint2.bin"
 ObjPos_Joint3:	binclude	"objpos/Joint3.bin"
 		even
 ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
-
-		; SoundDriver starts at $71990 in all revisions, which amounts
-		; to $62A bytes of padding for rev00 and $63C for rev01/rev02.
-		; It appears to be placed in such a way that the sound driver
-		; ends right on the $80000 mark in the ROM in all revisions.
-		; From a technical standpoint, this padding serves no purpose.
-		if PaddingOptimization=0
-			if Revision=0
-				dc.b	[$62A]$FF
-			else
-				dc.b	[$63C]$FF
-			endif
-		endif
 
 		include	"sound/MegaPCM.asm"
 		include	"sound/SampleTable.asm"

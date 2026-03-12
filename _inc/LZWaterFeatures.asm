@@ -17,13 +17,12 @@ LZWaterFeatures:
 		tst.w	d0
 		bpl.s	.isbelow	; if water is below top of screen, branch
 
-		move.b	#223,(v_hbla_line).w
-		move.b	#1,(f_wtr_state).w ; screen is all underwater
-
+		moveq	#-1,d0
+		move.b	#1,(f_wtr_state).w	; screen is all underwater
 .isbelow:
-		cmpi.w	#223,d0		; is water within 223 pixels of top of screen?
+		cmpi.w	#224-1,d0	; is water within 223 pixels of top of screen?
 		blo.s	.isvisible	; if yes, branch
-		move.w	#223,d0
+		moveq	#-1,d0
 
 .isvisible:
 		move.b	d0,(v_hbla_line).w ; set water surface as on-screen

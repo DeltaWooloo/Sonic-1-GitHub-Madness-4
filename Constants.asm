@@ -14,6 +14,10 @@ v_demolength	= v_generictimer
 Size_of_SegaPCM:		equ $6978
 Size_of_DAC_driver_guess:	equ $1760
 
+opcode_rte		equ $4E71
+opcode_jmpabslong	equ $4EF9
+opcode_jmpabsword	equ $4EF8
+
 ; Clocks
 Master_Clock:    equ 53693175
 M68000_Clock:    equ Master_Clock/7

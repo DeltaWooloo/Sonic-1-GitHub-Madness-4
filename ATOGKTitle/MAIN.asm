@@ -188,7 +188,7 @@ MadnessScr_Frame3:
 		lea     (Eni_Madness).l,a0
 		bsr.w   VDP_Location
 		bsr.w   TilemapToVRAM
-		move.w  #$28,(Timer).w     ; Text Time
+		move.w  #60*2,(Timer).w     ; Text Time
 		move.w  (VDP_buff).w,d0
 		ori.b   #$40,d0
 		move.w  d0,(VDPCtrl).l
@@ -199,6 +199,36 @@ MadnessScr_Frame3:
 MadnessScr_Loop3: 		              
   		bsr.w   LoopDelay
 		bne.s   MadnessScr_Loop3
+		
+;!@ GenesisDoes: Show IV
+GithubMadness4_Frame:
+		lea     (Chunk).l,a1		
+		lea     (Eni_GitHub).l,a0
+		bsr.w   VDP_Location2
+		bsr.w   TilemapToVRAM
+		
+		lea     (Chunk).l,a1              
+		lea     (Eni_Madness).l,a0
+		bsr.w   VDP_Location
+		bsr.w   TilemapToVRAM
+
+		lea     (Chunk).l,a1		
+		lea     (Eni_GHIV).l,a0
+		bsr.w   VDP_Location3
+		bsr.w   TilemapToVRAM
+		move.w  #$28,(Timer).w     ; Text Time
+		move.w  (VDP_buff).w,d0
+		ori.b   #$40,d0
+		move.w  d0,(VDPCtrl).l
+		;!@ GD
+		
+		moveq	#0,d0
+		move.b	#dTheFourth,d0
+		jsr		(MegaPCM_PlaySample).l
+	
+MadnessScr_Loop7: 		              
+  		bsr.w   LoopDelay
+		bne.s   MadnessScr_Loop7
 
 BlankScr_Frame6: 		 		
  		bsr.w	ClearScreen      ; Screen Reset
@@ -225,6 +255,24 @@ VDP_Location:
 		move.l  #$461A0003,d0
         moveq	#$27,d1			; Set X loop
 		moveq	#$1B,d2			; Set Y loop
+		rts
+		
+VDP_Location2:
+        move.w	#0,d0    ; Send d0 to 0
+		bsr.w   EniDec
+		lea  	(Chunk).l,a1		; Load destination, where to decompress mapping
+		move.l  #$451A0003,d0
+        moveq	#$27,d1			; Set X loop
+		moveq	#$1B,d2			; Set Y loop
+		rts
+		
+VDP_Location3:
+        move.w	#0,d0    ; Send d0 to 0
+		bsr.w   EniDec
+		lea  	(Chunk).l,a1		; Load destination, where to decompress mapping
+		move.l  #$47220003,d0
+        moveq	#$04-1,d1			; Set X loop
+		moveq	#$02-1,d2			; Set Y loop
 		rts
 		
 LoopDelay:		
