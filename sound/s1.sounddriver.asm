@@ -741,6 +741,15 @@ PauseMusic:
 ; loc_71E94:
 .unpausemusic:
 		clr.b	SMPS_RAM.f_pausemusic(a6)
+
+	if MSUEnabled
+		; Resume CDA
+		tst.b	SMPS_RAM.v_cda_playing(a6)
+		beq.s	.skipunp
+		MCDSend	#_MCD_UnPauseTrack
+
+.skipunp:
+	endif
 		moveq	#SMPS_Track.len,d3
 		lea	SMPS_RAM.v_music_fm_tracks(a6),a5
 		moveq	#6-1,d4					; 6 FM; loc_71EA0:
@@ -833,15 +842,14 @@ PlaySoundID:
 		moveq	#0,d7
 		move.b	SMPS_RAM.v_sound_id(a6),d7
 		move.b	#$80,SMPS_RAM.v_sound_id(a6)	; reset music flag
-	if FixBugs
+
 		cmpi.b	#bgm__Last,d7		; Is this music ($81-$93)?
+	if MSUEnabled
+		blo.w	Sound_PlayCDA				; Branch if yes
 	else
-		; DANGER! Music ends at $93, yet this checks until $9F; attempting to
-		; play sounds $94-$9F will cause a crash!
-		; See LevSel_NoCheat for more.
-		cmpi.b	#bgm__Last+$C,d7	; Is this music ($81-$9F)?
+		blo.w	Sound_PlayBGM				; Branch if yes
 	endif
-		bls.w	Sound_PlayBGM		; Branch if yes
+
 		cmpi.b	#sfx__First,d7		; Is this after music but before sfx? (redundant check)
 		blo.w	.locret			; Return if yes
 		cmpi.b	#sfx__Last,d7		; Is this sfx ($A0-$CF)?
@@ -888,6 +896,163 @@ PlaySegaSound:
 		move.b	#dSega,d0	; I feel like this should be a constant?
 		jmp	MegaPCM_PlaySample
 
+
+	if MSUEnabled
+
+; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
+
+Sound_PlayCDA:
+	; Clownacy | Making the music backup share RAM with the SFX tracks makes this code so much more complicated...
+	; First up, we have to meddle with bit 7 PlaybackControl, but, afterwards, we wanna put it back the way it was, so we gotta back all 10 of them up
+	lea	SMPS_RAM.v_music_track_ram(a6),a5
+	moveq	#SMPS_MUSIC_TRACK_COUNT-1,d0		; 1 DAC + 6 FM + 3 PSG tracks
+; loc_71FE6:
+.clearsfxloop:
+	bclr	#2,SMPS_Track.PlaybackControl(a5)	; Clear 'SFX is overriding' bit
+	bclr	#7,SMPS_Track.PlaybackControl(a5)	; we don't want the SFX update processing the music track backup
+	beq.s	.notPlaying
+	bset	#2,SMPS_Track.PlaybackControl(a5)	; Backup 'track is playing' bit in bit 2
+.notPlaying:
+	lea	SMPS_Track.len(a5),a5
+	dbf	d0,.clearsfxloop
+
+	; The RAM this code changes is immediately overwritten with the music track backup, so the code's useless
+;	lea	SMPS_RAM.v_sfx_track_ram(a6),a5
+;	moveq	#((SMPS_RAM.v_spcsfx_track_ram_end-SMPS_RAM.v_sfx_track_ram)/SMPS_Track.len)-1,d0	; 3 FM + 3 PSG tracks (SFX) + 1 FM + 1 PSG tracks (special SFX)
+; loc_71FF8:
+;.cleartrackplayloop:
+;	bclr	#7,SMPS_Track.PlaybackControl(a5)	; Clear 'track is playing' bit
+;	lea	SMPS_Track.len(a5),a5
+;	dbf	d0,.cleartrackplayloop
+
+	; Clownacy | We're backing-up the variables and tracks separately, to put the backed-up variables after the backed-up tracks
+	; this is so the backed-up tracks and SFX tracks start at the same place: at the end of the music tracks
+	clr.b	SMPS_RAM.v_sndprio(a6)	; Clear priority
+
+	lea	SMPS_RAM.v_music_track_ram(a6),a0
+	lea	SMPS_RAM.v_1up_ram_copy(a6),a1
+	move.w	#((SMPS_RAM.v_music_track_ram_end-SMPS_RAM.v_music_track_ram)/4)-1,d0	; Backup music track data
+; loc_72012:
+.backuptrackramloop:
+	move.l	(a0)+,(a1)+
+	dbf	d0,.backuptrackramloop
+
+    if (SMPS_RAM.v_music_track_ram_end-SMPS_RAM.v_music_track_ram)&2
+	move.w	(a0)+,(a1)+
+    endif
+    if (SMPS_RAM.v_music_track_ram_end-SMPS_RAM.v_music_track_ram)&1
+	move.b	(a0)+,(a1)+
+    endif
+
+	bsr.w	InitMusicPlayback						; reset SMPS memory
+	st	SMPS_RAM.v_cda_playing(a6)		; set CDA playing flag
+
+	move.w	d7,d1
+	add.w	d1,d1
+	add.w	d1,d1
+	lea	PlayCD_Index-4(pc,d1.w),a0
+
+	tst.l 	(a0)
+	beq.w	Sound_PlayBGM
+
+	moveq	#0,d0
+	move.b	(a0),d0								; argument
+	move.l	(a0),d1								; loop state
+	andi.l	#$FFFFFF,d1							; get loop
+	MCDSend	d0, d7, d1						; request MCD a track
+	rts
+
+; ===========================================================================
+
+; HORRIBLE Flag index, for tracks
+; empty index = smps
+PlayCD_Index:
+
+	; flag, loop time
+
+	; Levels
+	dc.L	_MCD_PlayTrack<<24|$00000000	; $01
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	_MCD_PlayTrack<<24|$00000000	; $11	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+
+	even
+	endif
+
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Play music track $81-$9F
@@ -933,6 +1098,15 @@ Sound_PlayBGM:
 		clr.b	SMPS_RAM.v_fadein_counter(a6)
 ; loc_7202C:
 .bgm_loadMusic:
+	if MSUEnabled
+		; If CDA is playing, stop it
+		tst.b 	SMPS_RAM.v_cda_playing(a6)
+		beq.s	.NoCD
+		MCDSend	#_MCD_PauseTrack, #0		; Stop
+		clr.b	SMPS_RAM.v_cda_playing(a6)
+
+.NoCD:
+	endif
 		jsr	InitMusicPlayback(pc)
 		movea.l	(Go_SpeedUpIndex).l,a4
 		subi.b	#bgm__First,d7
@@ -1513,6 +1687,14 @@ FadeOutMusic:
 		jsr	StopSpecialSFX(pc)
 		move.b	#3,SMPS_RAM.v_fadeout_delay(a6)			; Set fadeout delay to 3
 		move.b	#$28,SMPS_RAM.v_fadeout_counter(a6)		; Set fadeout counter
+	if MSUEnabled
+		; Fade out CD track
+		tst.b	(MegaCDMode).w
+		beq.s	.skip
+		MCDSend	#_MCD_PauseTrack, #$28		; flag, timer
+	endif
+
+.skip:
 ;		clr.b	SMPS_RAM.v_music_dac_track.PlaybackControl(a6)	; Stop DAC track
 		clr.b	SMPS_RAM.f_speedup(a6)				; Disable speed shoes tempo
 		rts
@@ -1630,6 +1812,15 @@ FMSilenceAll:
 ; ---------------------------------------------------------------------------
 ; Sound_E4: StopSoundAndMusic:
 StopAllSound:
+	if MSUEnabled
+		; If CDA is playing, stop it
+		tst.b SMPS_RAM.v_cda_playing(a6)
+		beq.s	.NoCD
+		MCDSend	#_MCD_PauseTrack, #0		; Stop
+		clr.b	SMPS_RAM.v_cda_playing(a6)
+
+.NoCD:
+	endif
 ;		moveq	#$2B,d0		; Enable/disable DAC
 ;		move.b	#$80,d1		; Enable DAC
 ;		jsr	WriteFMI(pc)

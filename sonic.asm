@@ -2590,6 +2590,7 @@ Level_GetBgm:
 		add.b   (v_act), d0
 		lea	(MusicList).l,a1 ; load music playlist
 		move.b	(a1,d0.w),d0
+		seq	(MegaCDMode).w
 		move.b	d0,(v_zonemusic).w
 		bsr.w	QueueSound1	; play music
 		move.b	#id_TitleCard,(v_titlecard).w ; load title card object

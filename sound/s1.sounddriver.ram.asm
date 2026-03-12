@@ -35,8 +35,8 @@ v_1up_ram:
 v_sndprio:		ds.b	1	; sound priority (priority of new music/SFX must be higher or equal to this value or it won't play; bit 7 of priority being set prevents this value from changing)
 v_main_tempo_timeout:	ds.b	1	; Counts down to zero; when zero, resets to next value and delays song by 1 frame
 v_main_tempo:		ds.b	1	; Used for music only
-v_cda_playing:			ds.b 1
-v_cda_ignore:			ds.b 1
+v_cda_playing:		ds.b 1
+v_cda_ignore:		ds.b 1
 f_pausemusic:		ds.b	1	; flag set to stop music when paused
 v_fadeout_counter:	ds.b	1
 			ds.b	1	; unused

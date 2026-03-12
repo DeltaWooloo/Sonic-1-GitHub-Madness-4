@@ -106,7 +106,7 @@ v_snddriver_ram:	SMPS_RAM		; sound driver state
 			ds.b	$40		; unused
 
 v_gamemode:		ds.b	1		; game mode (00=Sega; 04=Title; 08=Demo; 0C=Level; 10=SS; 14=Cont; 18=End; 1C=Credit; +8C=PreLevel)
-			ds.b	1		; unused
+MegaCDMode:		ds.b	1		; MCD enabled
 v_jpadhold2:		ds.b	1		; joypad input - held, duplicate
 v_jpadpress2:		ds.b	1		; joypad input - pressed, duplicate
 v_jpadhold1:		ds.b	1		; joypad input - held
@@ -421,7 +421,7 @@ v_fg_scroll_flags_dup:	ds.w	1
 v_bg1_scroll_flags_dup:	ds.w	1
 v_bg2_scroll_flags_dup:	ds.w	1
 v_bg3_scroll_flags_dup:	ds.w	1
-MegaCDMode:		ds.b 	1
+			ds.b 	1
 			ds.b	$47		; unused
 v_timingandscreenvariables_end:
 

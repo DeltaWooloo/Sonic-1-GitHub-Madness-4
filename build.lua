@@ -34,6 +34,9 @@ if abort then
     os.exit(exit_code, true)
 end
 
+print("Making release")
+os.execute("copy gm4built.gen __Release\\GHM4.gen")
+
 -- Append symbol table to the ROM.
 local extra_tools = common.find_tools("debug symbol generator", "https://github.com/vladikcomper/md-modules", "https://github.com/sonicretro/s1disasm", "convsym")
 if not extra_tools then
@@ -45,6 +48,7 @@ os.execute(extra_tools.convsym .. " sonic.debug.lst gm4built.debug.gen -input as
 -- Correct the ROM's header with a proper checksum and end-of-ROM value.
 common.fix_header("gm4built.gen")
 common.fix_header("gm4built.debug.gen")
+
 
 -- A successful build; we can quit now.
 common.exit()
