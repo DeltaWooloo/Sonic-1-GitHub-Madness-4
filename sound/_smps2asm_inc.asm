@@ -62,7 +62,7 @@ nMaxPSG2			EQU nB6
 ; PSG volume envelope equates
 	enum		fTone_01=$01,fTone_02,fTone_03,fTone_04,fTone_05,fTone_06
 	nextenum	fTone_07,fTone_08,fTone_09,uptone_01,uptone_02,uptone_03,duntone_01
-	nextenum	duntone_02,duntone_03
+	nextenum	duntone_02,duntone_03,cfTone_01,cfTone_02
 ; ---------------------------------------------------------------------------
 
 ; Channel IDs for SFX

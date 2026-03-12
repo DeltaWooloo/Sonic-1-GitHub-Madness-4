@@ -44,47 +44,68 @@ PSG_Index:
 
 		dc.l PSG_DUN3_01, PSG_DUN3_02, PSG_DUN3_03
 
+		dc.l PSG_CF_01, PSG_CF_02
+
 PSG1:		dc.b 0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,$80
+	even
 
 PSG2:		dc.b 0,2,4,6,8,$10,$80
+	even
 
 PSG3:		dc.b 0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,$80
+	even
 
 PSG4:		dc.b 0,0,2,3,4,4,5,5,5,6,$80
+	even
 
 PSG6:		dc.b 3,3,3,2,2,2,2,1,1,1,0,0,0,0,$80
+	even
 
 PSG5:		dc.b 0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2
 		dc.b 2,2,2,3,3,3,3,3,3,3,3,4,$80
+	even
 
 PSG7:		dc.b 0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,3,3,3,4,4,4,5,5,5,6,7,$80
+	even
 
 PSG8:		dc.b 0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,5,5,5
 		dc.b 5,5,6,6,6,6,6,7,7,7,$80
+	even
 
 PSG9:		dc.b 0,1,2,3,4,5,6,7,8,9,$A,$B,$C,$D,$E,$F,$80
+	even
 
 PSG_1UP01:
 		dc.b 0,0,2,3,4,4,5,5,5,6,6,$80
+	even
 
 PSG_1UP02:
 		dc.b 0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3
 		dc.b 4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7
 		dc.b 8,8,8,8,9,9,9,9,$A,$A,$A,$A,$80
+	even
 
 PSG_1UP03:
 		dc.b 0,1,2,4,6,8,$A,$C,$E,$80
+	even
 
 PSG_DUN3_01:	dc.b 7,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1
 		dc.b 2,2,2,2,2,2,2,3,3,3,3,3,3,3,4,4
 		dc.b 4,4,4,4,4,5,5,5,5,5,5,5,6,$80
+	even
 
 PSG_DUN3_02:	dc.b 7,0,0,0,0,0,0,0,0,0,0,1,3,4,6,7
 		dc.b 9,$A,$C,$D,$F,$80
+	even
 
 PSG_DUN3_03:	dc.b 7,0,0,0,0,0,0,0,1,3,4,6,7,9,$A,$C
 		dc.b $D,$F,$80
+	even
 
+PSG_CF_01:	dc.b 0,0,1,4,$D,$F,$80
+	even
+
+PSG_CF_02:	dc.b 3,3,3,4,4,4,4,6,6,6,9,9,9,9,9,9,$F,$80
 	even
 
 ; ---------------------------------------------------------------------------
@@ -222,7 +243,7 @@ ptr_mus43:		dc.l Music43
 ptr_mus44:		dc.l Music44
 ptr_mus45:		dc.l Music45
 ptr_mus46:		dc.l Music46
-;ptr_mus47:		dc.l Music47
+ptr_mus47:		dc.l Music47
 ptr_mus48:		dc.l Music48
 ptr_mus49:		dc.l Music49
 ptr_mus4A:		dc.l Music4A
@@ -2962,8 +2983,8 @@ Music45:	include	"sound/music/TG2000Tracks/ILBT.asm"
 		even
 Music46:	include	"sound/music/HS_Tracks/Basillica.asm"
 		even ; oof
-;Music47:	include	"sound/music/HS_Tracks/Basillica S1 Drums.asm"
-;		even ; oof
+Music47:	include	"sound/music/Kat/Mus - Clinton Fucker.asm"
+		even ; oof
 Music48:	include	"sound/music/HS_Tracks/GCV2005.asm"
 		even
 Music49:	include	"sound/music/Misc/DeltaTale fighte.asm"

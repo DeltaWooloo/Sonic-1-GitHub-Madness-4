@@ -1,5 +1,5 @@
 ;  =========================================================================
-; |           Sonic the Hedgehog Disassembly for Sega Mega Drive            |
+; |           Sonic tMY NUTS ITCH isassembly for Sega Mega Drive            |
 ;  =========================================================================
 ;
 ; Disassembly created by Hivebrain
@@ -39,7 +39,7 @@ ZeroOffsetOptimization = 0|AllOptimizations
 PaddingOptimization = 0|AllOptimizations
 ;	| If 1, removes about 3 KB of various superfluous padding
 
-EnableSRAM = 0
+EnableSRAM = 1
 ;	| If 1, enable SRAM support
 BackupSRAM = 1
 ;	| 0 = no saving (read-only SRAM); 1 = allow saving
@@ -176,7 +176,7 @@ loc_E0:		; Relocated code from Spik_Hurt. REVXB was a nasty hex-edit.
 		dc.b "SEGA MEGA DRIVE " ; Hardware system ID (Console name)
 		dc.b "SONICGM4 2026.04" ; Copyright holder and release date (generally year)
 		dc.b "I WILL BANISH YOU TO THAT TOWN IN JOHTO         " ; Domestic name
-		dc.b "I WILL BANISH YOU TO THAT TOWN IN JOHTO         " ; International name
+		dc.b "GITHUB MADNESS 4: RETURN OF THE FEVERDREAM      " ; International name
 	if Revision=0
 		dc.b "GM 00001009-00"   ; Serial/version number (Rev 0)
 	else
@@ -2072,6 +2072,7 @@ Pal_SonicRetro: bincludeEndMarker "LiquidSplashes/Rerto/Palette.bin"
 Pal_SonisRetro: bincludeEndMarker "LiquidSplashes/Rerto/PaletteSonis.bin"
 Pal_MenuText:		bincludeEndMarker	"palette/Menu Font.bin"
     even
+Pal_Black:		bincludeEndMarker	"palette/Black.bin"
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to wait for VBlank routines to complete
@@ -2413,6 +2414,7 @@ Tit_ChkStartOrDemo:
 		beq.w	Tit_MainLoop		; if not, continue looping title screen
 
 Tit_ChkLevSel:
+		move.b	#2,(v_continues).w 		; set continues to 2 for when it goes to level instead
 		move.b	#id_DebugMenu,(v_gamemode).w	; go to debug mode
 		rts
 ; ---------------------------------------------------------------------------		
@@ -2532,6 +2534,7 @@ GM_Level:
 		bmi.s	Level_NoMusicFade
 		move.b	#bgm_Fade,d0
 		bsr.w	QueueSound2 ; fade out music
+		jsr     MegaPCM_StopPlayback
 
 Level_NoMusicFade:
 		bsr.w	ClearPLC
