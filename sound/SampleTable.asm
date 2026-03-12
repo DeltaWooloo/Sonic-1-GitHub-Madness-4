@@ -64,7 +64,7 @@ SampleTable:
 	dcSample	TYPE_PCM,	EggNo,		11297,				; $B2
 	dcSample	TYPE_PCM,	BabyAlarm,	0,FLAGS_SFX 		; $B3
 	; Level end theme
-	dcSample	TYPE_DPCM,	BoingBoing,	16000,FLAGS_LOOP 	; $B4
+	dcSample	TYPE_DPCM,	BoingBoing,	16000,FLAGS_SFX|FLAGS_LOOP 	; $B4
 	dcSample	TYPE_PCM,	Boik,	0,FLAGS_SFX 			; $B5
 	dcSample	TYPE_PCM,	Boioing,	0,FLAGS_SFX 		; $B6
 	dcSample	TYPE_PCM,	OrngLaugh,	0,FLAGS_SFX 		; $B7

@@ -51,6 +51,7 @@ Msl_Main:	; Routine 0
 
 		move.w	#sfx_Bomb,d0
 		jsr	(PlaySound_Special).l ;	play breaking enemy sound
+		move.w  #$15, v_screenshaketime.w
 
 		pcm 	dDicks
 
