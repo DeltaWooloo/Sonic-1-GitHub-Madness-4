@@ -1,7 +1,7 @@
-CNNicoJumpHeader: dc.b $00,$00
+CNNicoJumpHeader: dc.b $00,$01
 ; 1. screen resolution - 00 = H32, else = H40
 ; 1. jingle - 00 = no jingle , else = jingle plays
-CNJingleID = $99
+CNJingleID = $19
 CNSCRMode: dc.w $8C81
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -41,27 +41,29 @@ GM_CNB_ClrObjRam:
 
 		locVRAM	$20
 		lea     (Nem_CNLogo).l,a0
-		jsr		(NemDec).l	
+		jsr		(NemDec).l
 
-		move.w  #$80,(v_demolength).w
-		move.b  #7,(v_objspace).w
-		move.b  #7,(v_objspace+$40).w
-		move.b  #4,(v_objspace+$64).w
+v_logoobj	=	v_objspace
+v_nicoobj	=	v_objspace+$40
+
+		move.b  #7,(v_logoobj).w		; spawn logo
+		move.b  #7,(v_nicoobj).w	; spawn nico
+		move.b  #4,(v_nicoobj+obRoutine).w	; set routine to that is is INDEED THE NICO
 
 		moveq	#palid_CN,d0
 		jsr		(PalLoad1).l		; load palette
 		jsr		(PaletteFadeIn).l
 GM_CNB_StartLoop:
-		move.b	#8,(v_vbla_routine).w
+		move.b	#2,(v_vbla_routine).w
 		jsr		(WaitForVBla).l
 		jsr	(ExecuteObjects).l
 		jsr	(BuildSprites).l
 		andi.b	#btnStart,(v_jpadpress1).w ; check if Start is pressed
 		bne.s	GM_CNB_End	; if not, branch
-		tst.w   (v_demolength).w
+		cmpi.b  #$11,(v_nicoobj+obFrame).w		; ensure conic has been set to the victory frame
 		bne.s   GM_CNB_StartLoop
 
-		move.w  #$C0,(v_demolength).w
+		move.w  #$100,(v_demolength).w
 		tst.b	(CNNicoJumpHeader+$01).l
 		beq.s	GM_CNB_MainLoop
 		move.b	#CNJingleID,d0
@@ -88,4 +90,4 @@ GM_CNB_End:
 				include "conimodes/splash/OBJECT.asm"
 Pal_CN:		bincludeEndMarker	"conimodes/splash/palette.bin"
 Nem_CNLogo:		binclude	"conimodes/splash/art.bin"
-Map_CNSCROBJ:	include "conimodes/splash/Conic the Maniac Maps.asm"
+Map_CNSCROBJ:	include "conimodes/splash/SpritesMaps.asm"
