@@ -1,8 +1,8 @@
 
-	include "hipncoolstuff/ThanatosCredits/Variables.asm"
+	include "_gamemode/ThanatosCredits/Variables.asm"
 
-NemThanatosCredits:	binclude "hipncoolstuff/ThanatosCredits/Credits Font.nem"
-EniThanatosCredits:	binclude "hipncoolstuff/ThanatosCredits/Credits Font.eni"
+NemThanatosCredits:	binclude "_gamemode/ThanatosCredits/Credits Font.nem"
+EniThanatosCredits:	binclude "_gamemode/ThanatosCredits/Credits Font.eni"
 
 VDP_ThanatosCredits:
 	dc.w $8700
@@ -21,6 +21,8 @@ GM_ThanatosCredits:
 	jsr	(ClearPLC).l
 	jsr	(PaletteFadeOut).l
 
+	disable_ints
+
 	; Configure VDP
 	move.w	(v_vdp_buffer1).w,d0
 	ori.b	#$BF,d0
@@ -36,6 +38,8 @@ GM_ThanatosCredits:
 	move.w	(v_vdp_buffer1).w,d0
 	ori.b	#$40,d0
 	move.w	d0,(vdp_control_port).l
+
+	enable_ints
 
 	; Empty object space
 	lea	(v_objspace).w,a1
@@ -54,7 +58,7 @@ GM_ThanatosCredits:
 	bpl.s	-
 	bra.s	PalThanatosCredits_end
 
-PalThanatosCredits:	bincludeEndMarker "hipncoolstuff/ThanatosCredits/Palette.pal"
+PalThanatosCredits:	bincludeEndMarker "_gamemode/ThanatosCredits/Palette.pal"
 
 	; moveq	#0,d0 ; d0 should be clear, if not use this
 	adda.w	#$20,a1
@@ -68,12 +72,6 @@ PalThanatosCredits:	bincludeEndMarker "hipncoolstuff/ThanatosCredits/Palette.pal
 	move.w	d0,(a0)+ ; rom pos
 	move.w	#$E00,(a0)+ ; y_pos
 	move.w	d0,(a0) ; end flag
-
-	; Clear extra plane data
-	lea	(than_plane+$100).l,a0
-	move.w	#$80/$4-1,d1
--	move.l	d0,(a0)+
-	dbf.w	d1,-
 
 	; Load art/map
 	locVRAM	$20

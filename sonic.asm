@@ -7921,7 +7921,7 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 		include "conimodes/winxp/GM_NTOSKRNL.asm"
 		include "conimodes/splash/GM_CNNicoJump.asm"
 		include "conimodes/fetus/GM_Fetus.asm"
-		include "hipncoolstuff/ThanatosCredits/Main.asm"
+		include "_gamemode/ThanatosCredits/Main.asm"
 
 		include "Buttcrack/Game.asm"
 		include	"ContinueScreen/Continue.asm"
