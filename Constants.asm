@@ -389,33 +389,34 @@ dYoFreddy			equ $9F
 dGithub				equ $A0
 dMadness			equ $A1
 dMadnessR			equ $A2
-dEggmanLaugh		equ $A3
-dGenesisDoes1		equ $A4
-dGenesisCan1		equ $A5
-dGenesisCan2		equ $A6
-dSM64_MM			equ	$A7
+dTheFourth			equ $A3
+dEggmanLaugh		equ $A4
+dGenesisDoes1		equ $A5
+dGenesisCan1		equ $A6
+dGenesisCan2		equ $A7
+dSM64_MM			equ	$A8
 
-dQuakeRocket		equ $A8
-dsupbeaches			equ $A9
-dPenis				equ $AA
-dSTFU				equ $AB
-dFuck				equ $AC
-dYouCanSuck			equ $AD
-dDoYouSuck			equ $AE
-dDicks				equ $AF
-dOnTheBall			equ $B0
-dPenises			equ $B1
-dEggNo				equ $B2
-dBabyAlarm			equ $B3
-dBoingBoing			equ $B4
-dBoioing			equ $B5
-dBoik				equ $B6
-dOrangeLaugh		equ $B7
-dClintonHi			equ $B8
-dClintonYeah		equ $B9
-dQuakeJump			equ $BA
+dQuakeRocket		equ $A9
+dsupbeaches			equ $AA
+dPenis				equ $AB
+dSTFU				equ $AC
+dFuck				equ $AD
+dYouCanSuck			equ $AE
+dDoYouSuck			equ $AF
+dDicks				equ $B0
+dOnTheBall			equ $B1
+dPenises			equ $B2
+dEggNo				equ $B3
+dBabyAlarm			equ $B4
+dBoingBoing			equ $B5
+dBoioing			equ $B6
+dBoik				equ $B7
+dOrangeLaugh		equ $B8
+dClintonHi			equ $B9
+dClintonYeah		equ $BA
+dQuakeJump			equ $BB
 ; Sega should always be last
-dSega				equ $BB
+dSega				equ $BC
 
 
 ; Sonic frame IDs

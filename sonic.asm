@@ -7177,6 +7177,9 @@ Eni_GitHub:	binclude	"ATOGKTitle/Enigma/Github.bin"
 		even
 Eni_Madness:	binclude	"ATOGKTitle/Enigma/Madness.bin"
 		even
+;!@ GenesisDoes
+Eni_GHIV:	binclude	"ATOGKTitle/Enigma/IV.bin"
+		even
 Nem_GitMadScr:	binclude	"ATOGKTitle/Nemesis/GitMad.bin"
 		even
 

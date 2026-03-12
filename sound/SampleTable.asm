@@ -43,35 +43,36 @@ SampleTable:
 	dcSample	TYPE_DPCM,	Github, 16000,FLAGS_SFX			; $A0
 	dcSample	TYPE_DPCM,	Madness, 16000,FLAGS_SFX		; $A1
 	dcSample	TYPE_DPCM,	MadnessR, 16000,FLAGS_SFX		; $A2
-	dcSample	TYPE_DPCM,	eggmanLaugh, 16000,FLAGS_SFX	; $A3
-	dcSample	TYPE_DPCM,	GenesisDoes1, 16000				; $A4
-	dcSample	TYPE_DPCM,	GenesisCan1, 16000				; $A5
-	dcSample	TYPE_DPCM,	GenesisCan2, 16000				; $A6
-	dcSample	TYPE_DPCM,	SM64_MM, 16000					; $A7
+	dcSample	TYPE_DPCM,	TheFourth, 16000,FLAGS_SFX		; $A3
+	dcSample	TYPE_DPCM,	eggmanLaugh, 16000,FLAGS_SFX	; $A4
+	dcSample	TYPE_DPCM,	GenesisDoes1, 16000				; $A5
+	dcSample	TYPE_DPCM,	GenesisCan1, 16000				; $A6
+	dcSample	TYPE_DPCM,	GenesisCan2, 16000				; $A7
+	dcSample	TYPE_DPCM,	SM64_MM, 16000					; $A8
 
-	dcSample	TYPE_PCM,	QuakeRocket,	11297,			; $A8
-	dcSample	TYPE_PCM,	supbeaches,	11297,				; $A9
-	dcSample	TYPE_PCM,	CL_Penis,	11297,				; $AA
-	dcSample	TYPE_PCM,	CL_STFU,	11297,FLAGS_SFX		; $AB
-	dcSample	TYPE_PCM,	CL_Fuck,	11297,				; $AC
-	dcSample	TYPE_PCM,	CL_YouCanSuck,	11297,FLAGS_SFX	; $AD
-	dcSample	TYPE_PCM,	CL_DoYouSuck,	11297,FLAGS_SFX	; $AE
-	dcSample	TYPE_PCM,	CL_Dicks,	11297,				; $AF
-	dcSample	TYPE_PCM,	CL_OnTheBall,	11297,			; $B0
-	dcSample	TYPE_PCM,	Penises,	11297,				; $B1
-	dcSample	TYPE_PCM,	EggNo,		11297,				; $B2
-	dcSample	TYPE_PCM,	BabyAlarm,	0,FLAGS_SFX 		; $B3
+	dcSample	TYPE_PCM,	QuakeRocket,	11297,			; $A9
+	dcSample	TYPE_PCM,	supbeaches,	11297,				; $AA
+	dcSample	TYPE_PCM,	CL_Penis,	11297,				; $AB
+	dcSample	TYPE_PCM,	CL_STFU,	11297,FLAGS_SFX		; $AC
+	dcSample	TYPE_PCM,	CL_Fuck,	11297,				; $AD
+	dcSample	TYPE_PCM,	CL_YouCanSuck,	11297,FLAGS_SFX	; $AE
+	dcSample	TYPE_PCM,	CL_DoYouSuck,	11297,FLAGS_SFX	; $AF
+	dcSample	TYPE_PCM,	CL_Dicks,	11297,				; $B0
+	dcSample	TYPE_PCM,	CL_OnTheBall,	11297,			; $B1
+	dcSample	TYPE_PCM,	Penises,	11297,				; $B2
+	dcSample	TYPE_PCM,	EggNo,		11297,				; $B3
+	dcSample	TYPE_PCM,	BabyAlarm,	0,FLAGS_SFX 		; $B4
 	; Level end theme
-	dcSample	TYPE_DPCM,	BoingBoing,	16000,FLAGS_LOOP 	; $B4
-	dcSample	TYPE_PCM,	Boik,	0,FLAGS_SFX 			; $B5
-	dcSample	TYPE_PCM,	Boioing,	0,FLAGS_SFX 		; $B6
-	dcSample	TYPE_PCM,	OrngLaugh,	0,FLAGS_SFX 		; $B7
+	dcSample	TYPE_DPCM,	BoingBoing,	16000,FLAGS_LOOP 	; $B5
+	dcSample	TYPE_PCM,	Boik,	0,FLAGS_SFX 			; $B6
+	dcSample	TYPE_PCM,	Boioing,	0,FLAGS_SFX 		; $B7
+	dcSample	TYPE_PCM,	OrngLaugh,	0,FLAGS_SFX 		; $B8
 
-	dcSample	TYPE_DPCM,	ClintonHi,	20600,FLAGS_SFX 	; $B8
-	dcSample	TYPE_DPCM,	ClintonYeah,	20600,FLAGS_SFX ; $B9
+	dcSample	TYPE_DPCM,	ClintonHi,	20600,FLAGS_SFX 	; $B9
+	dcSample	TYPE_DPCM,	ClintonYeah,	20600,FLAGS_SFX ; $BA
 	; Keep this as the last sample pls (and make sure to add a sample constant to _smps2asm.asm
-	dcSample	TYPE_PCM,	QuakeJump,	0, FLAGS_SFX 		; $BA
-	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0, FLAGS_SFX	; $BB
+	dcSample	TYPE_PCM,	QuakeJump,	0, FLAGS_SFX 		; $BB
+	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0, FLAGS_SFX	; $BC
 	dc.w	-1	; end marker
 
 ; ---------------------------------------------------------------
@@ -138,6 +139,7 @@ SampleTable:
 	incdac	Github,	 "sound/dac/GenesisDoes/git-hub.dpcm"
 	incdac	Madness, "sound/dac/GenesisDoes/Madness.dpcm"
 	incdac	MadnessR,"sound/dac/GenesisDoes/MadnessR.dpcm"
+	incdac	TheFourth,"sound/dac/GenesisDoes/4.dpcm"
 	incdac	eggmanLaugh,"sound/dac/GenesisDoes/eggmanLaugh.dpcm"
 	incdac	GenesisDoes1,"sound/dac/GenesisDoes/GenesisDoes1.dpcm"
 	incdac	GenesisCan1,"sound/dac/GenesisDoes/GenesisCan1.dpcm"
