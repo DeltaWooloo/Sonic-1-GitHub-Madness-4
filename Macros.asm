@@ -375,6 +375,8 @@ pcm:	macro id
 ; -------------------------------------------------------------
 
 MCDSend macro	id, arg, arg2
+	tst.b	(MegaCDMode).w
+	beq.w	.skip
 .wait
 	tst.b	(MCD_Status).l
 	bne.s	.wait
@@ -390,4 +392,5 @@ MCDSend macro	id, arg, arg2
 .wait2
 	tst.b	(MCD_Status).l						; waiting for the first command to be executed
 	beq.s	.wait2
+.skip
     endm

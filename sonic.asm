@@ -355,8 +355,12 @@ GameInit:
 		move.w	#opcode_rte,(v_hintcode.jmp).w
 
 	if MSUEnabled
+		btst 	#5, (console_version)
+		bne.s 	.NoMCD
 		jsr	(Init_MSU_Driver).l
 		seq	(MegaCDMode).w
+
+.NoMCD
 	else
 		clr.b	(MegaCDMode).w
 	endif

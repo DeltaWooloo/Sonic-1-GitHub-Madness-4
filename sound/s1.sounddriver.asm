@@ -1049,6 +1049,7 @@ PlayCD_Index:
 	dc.l	$00000000
 	dc.l	$00000000
 	dc.l	$00000000
+	dc.l	$00000000
 
 	even
 	endif
