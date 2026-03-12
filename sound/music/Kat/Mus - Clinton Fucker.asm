@@ -164,7 +164,7 @@ BGM_Clinton_Voices:
 	smpsVcDecayRate2	$08, $06, $06, $07
 	smpsVcDecayLevel	$0F, $01, $01, $02
 	smpsVcReleaseRate	$07, $06, $07, $06
-	smpsVcTotalLevel	$11, $1D, $23, $24
+	smpsVcTotalLevel	$00, $1D, $23, $24
 
 ;	FM Voice 01 -> 01: bass
 	smpsVcAlgorithm		$00
