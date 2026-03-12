@@ -371,31 +371,34 @@ dTrevor				equ $97
 d2kki				equ $98
 dDooDoo				equ $99
 dCrispBilly			equ $9A
-dBlueLobster			equ $9B
+dBlueLobster		equ $9B
 dWinTwoK			equ $9C
 dDeppaDig			equ $9D
-dEagleSoftSong			equ $9E
-dQuakeRocket			equ $9F
-dsupbeaches			equ $A0
-dPenis				equ $A1
-dSTFU				equ $A2
-dFuck				equ $A3
-dYouCanSuck			equ $A4
-dDoYouSuck			equ $A5
-dDicks				equ $A6
-dOnTheBall			equ $A7
-dPenises			equ $A8
-dEggNo				equ $A9
-dBabyAlarm			equ $AA
-dBoingBoing			equ $AB
-dBoioing			equ $AC
-dBoik				equ $AD
-dOrangeLaugh			equ $AE
-dClintonHi			equ $AF
-dClintonYeah			equ $B0
-dQuakeJump			equ $B1
+dEagleSoftSong		equ $9E
+dGithub				equ $9F
+dMadness			equ $A0
+dMadnessR			equ $A1
+dQuakeRocket		equ $A2
+dsupbeaches			equ $A3
+dPenis				equ $A4
+dSTFU				equ $A5
+dFuck				equ $A6
+dYouCanSuck			equ $A7
+dDoYouSuck			equ $A8
+dDicks				equ $A9
+dOnTheBall			equ $A9
+dPenises			equ $AA
+dEggNo				equ $AB
+dBabyAlarm			equ $AC
+dBoingBoing			equ $AD
+dBoioing			equ $AE
+dBoik				equ $AF
+dOrangeLaugh		equ $B0
+dClintonHi			equ $B1
+dClintonYeah		equ $B2
+dQuakeJump			equ $B3
 ; Sega should always be last
-dSega				equ $B2
+dSega				equ $B4
 
 
 ; Sonic frame IDs

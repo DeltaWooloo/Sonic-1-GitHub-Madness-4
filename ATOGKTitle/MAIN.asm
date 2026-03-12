@@ -54,7 +54,11 @@ GitHubScr_Frame1:
 		ori.b   #$40,d0
 		move.w  d0,(VDPCtrl).l
 	    move.b	#SmilingBomb,d0  ; From Yuu Yuu Hakusho
-	    bsr.w	PlaySound_Special   
+	    bsr.w	PlaySound_Special
+		
+		;!@ GenesisDoes
+		move.b	#dGithub, d0
+		jsr		(MegaPCM_PlaySample).l
 		
 GitHubScr_Loop: 		              
 		bsr.w   LoopDelay
@@ -76,7 +80,10 @@ GitHubScr_Frame2:
 		move.w  #$10,(Timer).w     ; Text Time
 		move.w  (VDP_buff).w,d0
 		ori.b   #$40,d0
-		move.w  d0,(VDPCtrl).l
+		move.w  d0,(VDPCtrl).l		
+		;!@ GD
+		move.b	#dGithub, d0
+		jsr		(MegaPCM_PlaySample).l
 	
 GitHubScr_Loop2: 		              
  		bsr.w   LoopDelay
@@ -99,6 +106,9 @@ GitHubScr_Frame3:
 		move.w  (VDP_buff).w,d0
 		ori.b   #$40,d0
 		move.w  d0,(VDPCtrl).l
+		;!@ GD
+		move.b	#dGithub, d0
+		jsr		(MegaPCM_PlaySample).l
 	
 GitHubScr_Loop3: 		              
   		bsr.w   LoopDelay
@@ -118,6 +128,10 @@ MadnessScr_Frame1:
 		bsr.w   VDP_Location
 		bsr.w   TilemapToVRAM
 		move.w  #$12,(Timer).w     ; Text Time
+		
+		;!@ GenesisDoes
+		move.b	#dMadness, d0
+		jsr		(MegaPCM_PlaySample).l
  		
 MadnessScr_Loop: 		              
 		bsr.w   LoopDelay
@@ -140,6 +154,9 @@ MadnessScr_Frame2:
 		move.w  (VDP_buff).w,d0
 		ori.b   #$40,d0
 		move.w  d0,(VDPCtrl).l
+		;!@ GD
+		move.b	#dMadness, d0
+		jsr		(MegaPCM_PlaySample).l
 	
 MadnessScr_Loop2: 		              
  		bsr.w   LoopDelay
@@ -162,6 +179,9 @@ MadnessScr_Frame3:
 		move.w  (VDP_buff).w,d0
 		ori.b   #$40,d0
 		move.w  d0,(VDPCtrl).l
+		;!@ GD
+		move.b	#dMadnessR, d0
+		jsr		(MegaPCM_PlaySample).l
 	
 MadnessScr_Loop3: 		              
   		bsr.w   LoopDelay
