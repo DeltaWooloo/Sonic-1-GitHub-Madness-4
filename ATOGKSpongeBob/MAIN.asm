@@ -235,42 +235,6 @@ BobPlay_Animate:
 
 BobPlay_Delete:
 		jmp     DeleteObject
-; ===========================================================================				
-; ---------------------------------------------------------------------------
-; OBJECT PLANE: Island spongebob intro
-; ---------------------------------------------------------------------------
-; ===========================================================================		
-
-IslandPlane:
-		moveq	#0,d0
-		move.b	obRoutine(a0),d0
-		move.w	IslPla_Index(pc,d0.w),d1
-		jmp	IslPla_Index(pc,d1.w)
-; ===========================================================================
-IslPla_Index:	dc.w IslPla_Main-IslPla_Index
-		dc.w IslPla_Display-IslPla_Index
-; ===========================================================================
-
-IslPla_Main:	; Routine 0
-		addq.b	#2,obRoutine(a0)
-		move.l	#Map_ExtraPlane,obMap(a0)
-		move.w	#$C000,obGfx(a0)
-		move.b	#$10,obActWid(a0)
-
-IslPla_Display:	; Routine 2
-		move.l	(v_bg2screenposx).w,d1
-		add.l	d1,d1
-		swap	d1
-		neg.w	d1
-		move.w	d1,obX(a0)
-		move.l	(v_screenposy).w,d1
-		add.l	d1,d1
-		swap	d1
-		andi.w	#$3F,d1
-		neg.w	d1
-		addi.w	#$100,d1
-		move.w	d1,obScreenY(a0)
-		jmp	DisplaySprite
 			
 ; ===========================================================================				
 ; ---------------------------------------------------------------------------
@@ -295,10 +259,6 @@ Art_JellyFish:	incbin	"ATOGKSpongeBob\Objects\Enemy\Art.bin"	; Art
 Map_JellyFish:	incbin	"ATOGKSpongeBob\Objects\Enemy\Mappings.asm"	; Mappings Art
 		even
 ; ===========================================================================		
-		
-Map_ExtraPlane:	incbin	"ATOGKSpongeBob\Objects\Scroll\Mappings.asm"	; Mappings Art
-		even
-; ===========================================================================		
 
 Nem_Ocean:	incbin	"ATOGKSpongeBob\8x8Ocean.bin"	; Ocean Art
 		even
@@ -316,13 +276,11 @@ Pal_Ocean:	incbin	"ATOGKSpongeBob\PalOcean.bin"	; Palette
 ObjIndex_Sponge:
 ptr_SpongeBobPlayer:	dc.l SpongeBobPlayer	; $01
 ptr_JellyFish:		    dc.l NullObject         ; $02
-ptr_IslandPlane:		dc.l IslandPlane         ; $03
-ptr_Missile2:		    dc.l NullObject         ; $04
+ptr_Missile2:		    dc.l NullObject         ; $03
 	
 
 id_ObjPlayBob:		equ ((ptr_SpongeBobPlayer-ObjIndex_Sponge)/4)+1
 id_ObjEnemy:		equ ((ptr_JellyFish-ObjIndex_Sponge)/4)+1
-id_ObjExtraPlane:		equ ((ptr_IslandPlane-ObjIndex_Sponge)/4)+1
 id_ObjMissile:		equ ((ptr_Missile2-ObjIndex_Sponge)/4)+1
 
 PalP_Sponge:

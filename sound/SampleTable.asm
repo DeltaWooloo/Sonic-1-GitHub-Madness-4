@@ -80,6 +80,8 @@ SampleTable:
 	dcSample	TYPE_DPCM,	ClintonYeah,	20600,	FLAGS_SFX	; $C0
 	dcSample	TYPE_PCM,	QuakeJump,	0,	FLAGS_SFX	; $C1
 	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX	; $C2
+	dcSample	TYPE_PCM,	letsgoeee,	0,	FLAGS_SFX	; $C3
+	
 	dc.w	-1	; end marker
 
 ; ---------------------------------------------------------------
@@ -139,6 +141,8 @@ SampleTable:
 	incdac	ClintonHi, "sound/dac/clintonfucker_hi.dpcm"
 	incdac	ClintonYeah, "sound/dac/clintonfucker_yeah.dpcm"
 	incdac	QuakeJump, "sound/dac/quakejump.wav"
+	incdac	letsgoeee, "sound/dac/letsgoeee.wav"   ; hi
+	
 ; ---------------------------------------------------------------
 ; Null level end
 	incdac	BoingBoing, "sound/dac/BoingBoing.dpcm"
