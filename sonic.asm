@@ -2534,6 +2534,7 @@ GM_Level:
 		bmi.s	Level_NoMusicFade
 		move.b	#bgm_Fade,d0
 		bsr.w	QueueSound2 ; fade out music
+		jsr     MegaPCM_StopPlayback
 
 Level_NoMusicFade:
 		bsr.w	ClearPLC
