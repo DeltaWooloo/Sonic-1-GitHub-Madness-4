@@ -54,7 +54,7 @@ ExplItem_Index:	dc.w ExplItem_Init-ExplItem_Index
 		dc.w ExplItem_Main-ExplItem_Index
 ; ===========================================================================
 
-ExplItem_Init:
+ExplItem_Init:		
 		addq.b	#2,obRoutine(a0)
 		move.w	obX(a0),expl.BaseX(a0)
 		move.w	obY(a0),expl.BaseY(a0)
@@ -73,9 +73,19 @@ ddd		;move.w	obX(a0),obX(a1)
 		; move.b	#7,$1E(a0)	; set frame duration to	7 frames
 		move.b	#$E,$1E(a0)	; GMZ
 		move.b	#0,$1A(a0)
+ 
+		tst.b	(v_invinc).w	; you have invincibility?
+		beq.s	ExplItem_NormalSFX	; so no, jump it
+		move.w	#$CB,d0
+		jsr	(PlaySound_Special).l ;	play odd explosion sfx
+; i hate "PlaySound_Special" name, i prefer to use "SetSound" - atolly
+        bra.w   ExplItem_stupidjump
+		
+ExplItem_NormalSFX:				;29_Index	
 		move.w	#sfx_Bomb,d0
 		jsr	(PlaySound_Special).l ;	play breaking enemy sound
-
+		
+ExplItem_stupidjump:
 	        move.b  #1, (v_flashtimer).w
 		move.w 	#$0EEE, (v_flashcolor).w
 		

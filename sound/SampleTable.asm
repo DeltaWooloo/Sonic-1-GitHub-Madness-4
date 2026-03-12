@@ -60,7 +60,8 @@ SampleTable:
 	dcSample	TYPE_DPCM,	ClintonHi,	20600,FLAGS_SFX 	; $AF
 	dcSample	TYPE_DPCM,	ClintonYeah,	20600,FLAGS_SFX 	; $B0
 	; Keep this as the last sample pls (and make sure to add a sample constant to _smps2asm.asm
-	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0, FLAGS_SFX	; $B1
+	dcSample	TYPE_PCM,	QuakeJump,	0, FLAGS_SFX 	; $B1
+	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0, FLAGS_SFX	; $B2
 	dc.w	-1	; end marker
 
 ; ---------------------------------------------------------------
@@ -110,6 +111,7 @@ SampleTable:
 	incdac	OrngLaugh, "sound/dac/AnOrangesLaugh.wav"
 	incdac	ClintonHi, "sound/dac/clintonfucker_hi.dpcm"
 	incdac	ClintonYeah, "sound/dac/clintonfucker_yeah.dpcm"
+	incdac	QuakeJump, "sound/dac/quakejump.wav"
 ; ---------------------------------------------------------------
 ; Null level end
 	incdac	BoingBoing, "sound/dac/BoingBoing.dpcm"

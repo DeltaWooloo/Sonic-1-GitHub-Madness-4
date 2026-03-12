@@ -393,8 +393,9 @@ dBoik				equ $AD
 dOrangeLaugh			equ $AE
 dClintonHi			equ $AF
 dClintonYeah			equ $B0
+dQuakeJump			equ $B1
 ; Sega should always be last
-dSega				equ $B1
+dSega				equ $B2
 
 
 ; Sonic frame IDs

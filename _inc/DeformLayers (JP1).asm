@@ -20,7 +20,9 @@ DeformLayers:
 		bsr.w	ScrollVertical
 		bsr.w	DynamicLevelEvents
 		move.w	(v_screenposy).w,(v_scrposy_vdp).w
+		move.w	(v_screenposy).w,(v_scrposy_orig).w
 		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
+		bsr.w	ShakeScreen
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
 		add.w	d0,d0
@@ -676,6 +678,29 @@ Deform_Joint:
 		rts
 ; End of function Deform_Joint
 
+; ---------------------------------------------------------------------------
+; temporarily using generictimer as an input
+; ---------------------------------------------------------------------------
+
+ShakeScreen:
+	move.w  v_scrposy_orig.w,d0
+	move.w  v_screenshaketime.w,d1
+	tst.w   d1
+	beq.s   .Done
+	subq.w	#1,v_screenshaketime.w
+	asr.w   #2,d1
+	andi.w	#$1F,d1
+
+	move.w	v_vbla_count+2.w,d2
+	move	d2,ccr			; you can tell i love this
+	bcs.s	.Odd
+	neg.w   d1
+.Odd:
+	add.w   d1,d0
+	move.w  d0,v_screenposy.w
+	rts
+.Done:
+	rts
 ; ---------------------------------------------------------------------------
 ; Subroutine to scroll the level horizontally as Sonic moves
 ; ---------------------------------------------------------------------------

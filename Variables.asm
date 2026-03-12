@@ -188,7 +188,8 @@ v_limitbtm2:		ds.w	1		; bottom level boundary
 v_unused11:		ds.w	1		; unused
 v_limitleft3:		ds.w	1		; left level boundary, at the end of an act
 v_clintonfucker		ds.b	1		; clintonfucker flag
-			ds.b	5		; unused
+			ds.b	1
+v_scrposy_orig:		ds.b	4		; stored y screen pos
 v_scrshiftx:		ds.w	1		; x-screen shift (new - last) * $100
 v_scrshifty:		ds.w	1		; y-screen shift (new - last) * $100
 v_lookshift:		ds.w	1		; screen shift when Sonic looks up/down
@@ -265,7 +266,7 @@ v_lani4_frame:		ds.b	1		; level graphics animation 4 - current frame
 v_lani4_time:		ds.b	1		; level graphics animation 4 - time until next frame
 v_lani5_frame:		ds.b	1		; level graphics animation 5 - current frame
 v_lani5_time:		ds.b	1		; level graphics animation 5 - time until next frame
-			ds.b	2		; unused
+v_screenshaketime:	ds.b	2		; screen shake timer
 v_gfxbigring:		ds.w	1		; settings for giant ring graphics loading
 f_conveyrev:		ds.b	1		; flag set to reverse conveyor belts in LZ/SBZ
 v_obj63:		ds.b	6		; object 63 (LZ/SBZ platforms) variables
