@@ -2093,7 +2093,7 @@ Sega_WaitEnd:
 Sega_GotoTitle:
 		move.b	#id_Title,(v_gamemode).w ; go to title screen
 
-		btst	#bitA|bitB|bitC,(v_jpadhold1).w
+		cmpi.b	#btnABC, (v_jpadhold1).w
 		beq.s	.skip
 
 		jmp	RunSplashes		; i have a million oil im the best  tru  ckdriver in the world
