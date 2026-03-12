@@ -279,11 +279,13 @@ bgm_Thomas:	equ ((ptr_mus44-MusicIndex)/4)+bgm__First
 bgm_ILBT:	equ ((ptr_mus45-MusicIndex)/4)+bgm__First
 bgm_ClintonFuck:	equ ((ptr_mus47-MusicIndex)/4)+bgm__First
 bgm_Memories:	equ ((ptr_mus4E-MusicIndex)/4)+bgm__First
-bgm_musBomerDude:	equ ((ptr_mus4F-MusicIndex)/4)+bgm__First
+; bgm_musBomerDude:	equ ((ptr_mus4F-MusicIndex)/4)+bgm__First
 bgm_Continue2:	equ ((ptr_mus50-MusicIndex)/4)+bgm__First
 bgm_Coffinman:	equ ((ptr_mus51-MusicIndex)/4)+bgm__First
 bgm_Carefree:	equ ((ptr_mus9C-MusicIndex)/4)+bgm__First
-bgm_Delta:	equ ((ptr_mus49-MusicIndex)/4)+bgm__First
+bgm_VampKiller:	equ ((ptr_mus9A-MusicIndex)/4)+bgm__First
+bgm_GCV2005:	equ ((Music48-MusicIndex)/4)+bgm__First
+bgm_music83	equ ((Music4C-MusicIndex)/4)+bgm__First
 ;!@GenesisDoes
 bgm_GenesisDoes1:	equ ((ptr_mus52-MusicIndex)/4)+bgm__First
 bgm_GenesisCan1:	equ ((ptr_mus53-MusicIndex)/4)+bgm__First

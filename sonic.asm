@@ -2437,8 +2437,8 @@ MusicList:
 		dc.b bgm_LZ		; LZ3
 		dc.b bgm_LZ		; LZ4
 		dc.b bgm_MZ		; MZ1
-		dc.b bgm_MZ		; MZ2
-		dc.b bgm_MZ		; MZ3
+		dc.b $4E ;bgm_music83	; MZ2
+		dc.b bgm_VampKiller	; MZ3
 		dc.b bgm_MZ		; MZ4
 		dc.b bgm_SLZ		; SLZ1
 		dc.b bgm_SLZ		; SLZ2
@@ -2446,7 +2446,7 @@ MusicList:
 		dc.b bgm_SLZ		; SLZ4
 		dc.b bgm_SYZ		; SYZ1
 		dc.b bgm_CanCan		; SYZ2
-		dc.b bgm_Delta		; SYZ3
+		dc.b $49 ;bgm_GCV2005	; SYZ3
 		dc.b bgm_SYZ		; SYZ4
 		dc.b bgm_SBZ		; SBZ1
 		dc.b bgm_SBZ		; SBZ2
