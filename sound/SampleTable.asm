@@ -170,6 +170,6 @@ SampleTable:
 ; ---------------------------------------------------------------
 ; Whatever you want the Sega sound to be
 	incdac	SegaPCM, "sound/dac/sega.wav"
-	incdac	Segay, "sound/dac/sega2.wav" (add a region check so the sample will play)
+	incdac	Segay, "sound/dac/sega2.wav" ; (add a region check so the sample will play)
 	even
 
