@@ -140,11 +140,11 @@ CollectRing:
 		addq.w	#1,(v_rings).w	; add 1 to rings
 		ori.b	#1,(f_ringcount).w ; update the rings counter
 		move.w	#sfx_Ring,d0	; play ring sound
-		cmpi.w	#100,(v_rings).w ; do you have < 100 rings?
+		cmpi.w	#420,(v_rings).w ; do you have < 420 rings?
 		blo.s	.playsnd	; if yes, branch
 		bset	#1,(v_lifecount).w ; update lives counter
 		beq.s	.got100
-		cmpi.w	#200,(v_rings).w ; do you have < 200 rings?
+		cmpi.w	#666,(v_rings).w ; do you have < 666 rings?
 		blo.s	.playsnd	; if yes, branch
 		bset	#2,(v_lifecount).w ; update lives counter
 		bne.s	.playsnd
