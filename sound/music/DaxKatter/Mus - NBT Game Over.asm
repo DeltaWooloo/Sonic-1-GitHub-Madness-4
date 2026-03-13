@@ -24,7 +24,7 @@ Snd_GameOver_FM1:
 	smpsSetvoice		$00
 	smpsModSet		$07, $01, $01, $02
 	dc.b	nC4, $08, nD4, $04, nE4, $0C, nRst, nG4, nRst, $08, nF4, $10, nE4, $0C
-	dc.b	nD4, nF4
+	dc.b	nD4, $08, nRst, $04, nF4, $08, nRst, $04
 	smpsModSet		$28, $01, $18, $05
 	dc.b	nDs4, $60
 	smpsStop
@@ -114,7 +114,7 @@ Snd_GameOver_DAC:
 	dc.b	dElectricMidTom, $08, dElectricLowTom, $04
 	dc.b	dPokeKickCrashHi, $14, dChunkyKick, $04, dSnare, $14
 	dc.b	dChunkyKick, $10, dChunkyKick, $0C, dSnare, $18
-	dc.b	dPokeKickCrashHi, $5C, dElectricMidTom, $04, dElectricLowTom, $08
+	dc.b	dPokeKickCrashHi, $58, dElectricMidTom, $04, dElectricLowTom, dElectricFloorTom
 	smpsStop
 
 Snd_GameOver_Voices:
@@ -130,7 +130,7 @@ Snd_GameOver_Voices:
 	smpsVcDecayRate1	$0F, $1F, $1F, $1F
 	smpsVcDecayRate2	$02, $00, $00, $00
 	smpsVcDecayLevel	$01, $00, $00, $00
-	smpsVcReleaseRate	$0A, $06, $06, $06
+	smpsVcReleaseRate	$08, $00, $00, $00
 	smpsVcTotalLevel	$01, $22, $24, $18
 
 ;	Voice $01
