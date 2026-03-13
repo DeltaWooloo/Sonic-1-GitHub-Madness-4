@@ -56,13 +56,29 @@ PBullet_Run:
 ; ===========================================================================
 
 PBullet_Callback:
+		move.b	obColType(a1),d0 ; load collision type (1)
+		move.b	obColType(a1),d1 ; load collision type (2, collision type system is dumb)
+
 		andi.b	#$C0, d1	; is obColType $40 or higher?
 		beq.s	.DestroyTouched	; if YEAhg, branch
+
+		andi.b	#$3F,d0
+		cmpi.b	#$6, d0		; is collision type $46 ?
+		beq.s	.OpenMonitor	; if yes, branch
+		
 		rts
 
 .DestroyTouched:
-		moveq  #10,d0    ; add 100 to score
-		jsr  AddPoints
+		moveq  #10, d0		; add 100 to score
+		jsr	AddPoints
     		move.b	#id_ExplosionItem, obID(a1) ; change object to explosion
 		move.b	#0,obRoutine(a1)
+		rts
+
+.OpenMonitor:
+		tst.b	ob2ndRout(a1)
+		bne.s	.DoNotOpen
+		addq.b	#2,obRoutine(a1) ; advance the monitor's routine counter
+
+.DoNotOpen
 		rts
