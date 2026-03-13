@@ -39,7 +39,7 @@ v_cda_playing:		ds.b 1
 v_cda_ignore:		ds.b 1
 f_pausemusic:		ds.b	1	; flag set to stop music when paused
 v_fadeout_counter:	ds.b	1
-			ds.b	1	; unused
+v_palmuscounter		ds.b	1	; PAL refresh
 v_fadeout_delay:	ds.b	1
 v_communication_byte:	ds.b	1	; used in Ristar to sync with a boss' attacks; unused here
 f_updating_dac:		ds.b	1	; $80 if updating DAC, $00 otherwise

@@ -387,7 +387,15 @@ UpdateMusic:
 ; loc_71BF8:
 .bgmpsgnext:
 		dbf	d7,.bgmpsgloop
-
+		btst #6,(v_megadrive).w ; is MD PAL?
+		beq.s .SMPSPALno ; if not, don't run
+		cmpi.b #$5,SMPS_RAM.v_palmuscounter(a6) ; 5th frame?
+		bne.s .end ; if not, branch
+		clr.b SMPS_RAM.v_palmuscounter(a6) ; reset counter
+		bra.w UpdateMusic ; run sound driver again
+	.end:
+		addq.b #$1,SMPS_RAM.v_palmuscounter(a6) ; add 1 to frame count
+	.SMPSPALno:
 		move.b	#$80,SMPS_RAM.f_voice_selector(a6)	; Now at SFX tracks
 		moveq	#SMPS_SFX_FM_TRACK_COUNT-1,d7		; 3 FM tracks (SFX)
 ; loc_71C04:
