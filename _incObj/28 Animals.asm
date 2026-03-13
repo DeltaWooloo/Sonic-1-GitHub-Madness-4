@@ -33,7 +33,7 @@ Anml_BadnikIndexEnd:dc.w loc_9240-Anml_Index ; Anml_FromPrison (from hivebrain's
 		dc.w loc_9314-Anml_Index ; ENDING 9
 		dc.w loc_9370-Anml_Index ; ENDING 10
 		dc.w loc_92D6-Anml_Index ; ENDING 11
-Anml_CapsuleRoutID:		equ (Anml_BadnikIndexEnd-Anml_Index)/2
+Anml_CapsuleRoutID:		equ Anml_BadnikIndexEnd-Anml_Index
 
 Anml_VarIndex:	dc.b 8,	5 ; Green Hill Zone
 		dc.b 2, 3 ; Labyrinth Zone
