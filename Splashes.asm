@@ -158,6 +158,7 @@ splash_turd macro routine
 	splash_solid LastBurenyuu,$20,$24,240
 	splash_solid BLUE_LOBSTER,$20,$25,280
 	splash_solid ReimuDrip,$20,$20,160
+	;splash_solid Sane,$40,$25,720
 	splash_solid Cmruey,$20,$2F,240
 	splash_solid Disappointed,$20,$39,480
 	splash_solid Mines,$20,$04,650

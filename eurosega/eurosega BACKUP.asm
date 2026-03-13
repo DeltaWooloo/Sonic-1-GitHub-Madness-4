@@ -59,18 +59,30 @@ GM_SegaEU_ClrObjRam:
 
 
 GM_SegaEU_MainLoop:
+		move.b	#4,(v_vbla_routine).w
+		jsr	WaitForVBla
+		jsr	(ExecuteObjects).l
+		jsr	(BuildSprites).l
+		move.w	#2*60,(v_generictimer).w 
+		andi.b	#btnStart,(v_jpadpress1).w		
+		beq.s	GM_SegaEU_MainLoop
+
+
+;		tst.w	(v_SplashSkip).w
+;		bne.s	.skipsplashEU
+;		move.b	#id_Title,(v_gamemode).w ; go to splash screen
+
+
 
 
 .Loop:
-	move.b	#$1,(v_vbla_routine).w
+	move.w	#60*9, (v_generictimer).w
+	move.b	#$4,(v_vbla_routine).w
 	jsr	WaitForVBla
 
 	tst.w	(v_generictimer).w
-	beq.w	.Exit
 
-	bra.s	.Loop
 
-.Exit:
 		move.b	#id_Title,(v_gamemode).w ; go to splash screen
 
 GM_SegaEU_Return:
