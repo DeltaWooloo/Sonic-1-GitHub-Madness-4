@@ -190,8 +190,8 @@ Lamp_LoadInfo:
 		move.w	(v_lamp_bg2scry).w,(v_bg2screenposy).w
 		move.w	(v_lamp_bg3scrx).w,(v_bg3screenposx).w
 		move.w	(v_lamp_bg3scry).w,(v_bg3screenposy).w
-		cmpi.b	#id_LZ,(v_zone).w	; is this Labyrinth Zone?
-		bne.s	.notlabyrinth	; if not, branch
+		tst.b	(v_waterflag).w	; is this Labyrinth Zone?
+		bpl.s	.notlabyrinth	; if not, branch
 
 		move.w	(v_lamp_wtrpos).w,(v_waterpos2).w
 		move.b	(v_lamp_wtrrout).w,(v_wtr_routine).w

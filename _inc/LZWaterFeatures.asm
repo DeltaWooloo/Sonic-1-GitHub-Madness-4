@@ -3,8 +3,8 @@
 ; ---------------------------------------------------------------------------
 
 LZWaterFeatures:
-		cmpi.b	#id_LZ,(v_zone).w ; check if level is LZ
-		bne.s	.notlabyrinth	; if not, branch
+		tst.b	(v_waterflag).w
+		bpl.s	.notlabyrinth
 		clr.b	(f_wtr_state).w
 		moveq	#0,d0
 		move.b	(v_oscillate+2).w,d0
@@ -33,10 +33,18 @@ LZWaterFeatures:
 ; ---------------------------------------------------------------------------
 ; Initial water heights
 ; ---------------------------------------------------------------------------
-WaterHeight:	dc.w $140	; Labyrinth 1
-		dc.w $140	; Labyrinth 2
-		dc.w $140	; Labyrinth 3
-		dc.w $228	; Scrap Brain 3
+WaterHeight:
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_GHZ
+		dc.w $0110,$0110,$0110,$0228	; id_LZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
 		even
 ; ===========================================================================
 

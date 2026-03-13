@@ -187,15 +187,9 @@ Sonic_RecordPosition:
 
 
 Sonic_Water:
-		cmpi.b	#id_LZ,(v_zone).w	; is level LZ?
-		beq.s	.islabyrinth	; if yes, branch
+		tst.b	(v_waterflag).w	; is level LZ?
+		beq.s	.exit	; if yes, branch
 
-.exit:
-		rts
-; ===========================================================================
-
-; Obj01_InWater:
-.islabyrinth:
 		move.w	(v_waterpos1).w,d0
 		cmp.w	obY(a0),d0	; is Sonic above the water?
 		bge.s	.abovewater	; if yes, branch
@@ -214,9 +208,8 @@ Sonic_Water:
 		move.b	#id_Splash,(v_splash).w ; load splash object
 		move.w	#sfx_Splash,d0
 		jmp	(QueueSound2).l	 ; play splash sound
-; ===========================================================================
-
-; Obj01_OutWater:
+.exit:
+		rts
 .abovewater:
 		bclr	#6,obStatus(a0)
 		beq.s	.exit

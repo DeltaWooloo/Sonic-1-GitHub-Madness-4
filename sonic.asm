@@ -445,26 +445,15 @@ VBlank:
 		move.w	(vdp_control_port).l,d0
 		move.l	#$40000010,(vdp_control_port).l
 		move.l	(v_scrposy_vdp).w,(vdp_data_port).l ; send screen y-axis pos. to VSRAM
-; used to push off CRAM dots in pal but nobody gives a shit anyway who needs itjebfjsbf
-;		btst	#6,(v_megadrive).w ; is Megadrive PAL?
-;		beq.s	.notPAL		; if not, branch
-;
-;		move.w	#$700,d0
-;.waitPAL:
-;		dbf	d0,.waitPAL ; wait here in a loop doing nothing for a while...
-;
-;.notPAL:
 		move.b	(v_vbla_routine).w,d0
 		move.b	#0,(v_vbla_routine).w
 		move.w	#1,(f_hbla_pal).w
 		andi.w	#$3E,d0
 		move.w	VBla_Index(pc,d0.w),d0
 		jsr	VBla_Index(pc,d0.w)
-
 VBla_Music:
+		enable_ints
 		jsr	(UpdateMusic).l
-
-VBla_Exit:
 		addq.l	#1,(v_vbla_count).w
 		movem.l	(sp)+,d0-a6
 		rte	
@@ -491,37 +480,16 @@ VBla_Index:	dc.w VBla_00-VBla_Index	; (lag frame)
 
 ; loc_B88:
 VBla_00:
-		cmpi.b	#$80+id_Level,(v_gamemode).w
-		beq.s	.islevel
-		cmpi.b	#id_Level,(v_gamemode).w ; is game on a level?
-		bne.w	VBla_Music	; if not, branch
-
-.islevel:
-		cmpi.b	#id_LZ,(v_zone).w ; is level LZ ?
-		bne.w	VBla_Music	; if not, branch
-
-; used to push off CRAM dots in pal but nobody gives a shit anyway who needs itjebfjsbf
-;		move.w	(vdp_control_port).l,d0
-;		btst	#6,(v_megadrive).w ; is Megadrive PAL?
-;		beq.s	.notPAL		; if not, branch
-;
-;		move.w	#$700,d0
-;.waitPAL:
-;		dbf	d0,.waitPAL
-;
-;.notPAL:
+		tst.b	(v_waterflag).w
+		beq.w	VBla_Music
 		move.w	#1,(f_hbla_pal).w ; set HBlank flag
-		
-		
+
 		tst.b	(f_wtr_state).w	; is water above top of screen?
 		bne.s	.waterabove 	; if yes, branch
-
 		writeCRAM	v_palette,0
 		bra.s	.waterbelow
-
 .waterabove:
 		writeCRAM	v_palette_water,0
-
 .waterbelow:
 		move.w	(v_hbla_hreg).w,(a5)
 		
@@ -612,25 +580,23 @@ VBla_10:
 
 ; loc_C6E:
 VBla_08:
-		
-		
 		bsr.w	ReadJoypads
-		tst.b	(f_wtr_state).w
-		bne.s	.waterabove
-
-		writeCRAM	v_palette,0
-		bra.s	.waterbelow
-
-.waterabove:
-		writeCRAM	v_palette_water,0
-
-.waterbelow:
-		move.w	(v_hbla_hreg).w,(a5)
-
 		writeVRAM	v_hscrolltablebuffer,vram_hscroll
 		writeVRAM	v_spritetablebuffer,vram_sprites
+		move.w	(v_hbla_hreg).w,(a5)
+		tst.b	(f_wtr_state).w
+		bne.s	.waterabove
+		writeCRAM	v_palette,0
+		bra.s	.waterbelow
+.waterabove:
+		writeCRAM	v_palette_water,0
+.waterbelow:
 		jsr	ProcessDMAQueue(pc)
-		
+
+		tst.w	(v_generictimer).w		; is there time left in the generic timer left?
+		beq.w	.end				; if not, branch
+		subq.w	#1,(v_generictimer).w		; subtract 1 from time left
+.end:
 		movem.l	(v_screenposx).w,d0-d7
 		movem.l	d0-d7,(v_screenposx_dup).w
 		movem.l	(v_fg_scroll_flags).w,d0-d1
@@ -641,12 +607,12 @@ VBla_08:
 		; enough time to do all the transfers in VBla_UpdateScreen before the palette needs to get
 		; changed for the water. Without this special check, the water surface would violently flicker
 		; whenever it's near the top of the screen. It's a rather dirty workaround, but it works.
+		tst.b	(v_waterflag).w
+		beq.s	VBla_UpdateScreen
 		cmpi.b	#96,(v_hbla_line).w		; is LZ water surface within 96 pixels of the top of the screen?
 		bhs.s	VBla_UpdateScreen		; if not, do screen updates now
 		move.b	#1,(f_doupdatesinhblank).w	; otherwise, we don't have enough time to do them now before HBlank hits, defer updates to then
-		addq.l	#4,sp				; skip return address (i.e. postpone updating the sound driver as well)
-		bra.w	VBla_Exit			; go straight back to to the VBlank exit
-
+		rts
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Subroutine to update various screen elements during interrupts.
@@ -661,13 +627,7 @@ VBla_UpdateScreen:
 		bsr.w	LoadTilesAsYouMove	; update level tiles while screen is moving
 		jsr	(AnimateLevelGfx).l	; updated animated tiles
 		jsr	(HUD_Update).l		; update HUD data
-		bsr.w	ProcessDPLC_3Tiles	; run a bit of PLC decompression
-
-		tst.w	(v_generictimer).w	; is there time left in the generic timer left?
-		beq.w	.end			; if not, branch
-		subq.w	#1,(v_generictimer).w	; subtract 1 from time left
-.end:
-		rts
+		bra.w	ProcessDPLC_3Tiles	; run a bit of PLC decompression
 ; End of function VBla_UpdateScreen
 
 ; ===========================================================================
@@ -676,12 +636,10 @@ VBla_UpdateScreen:
 ; ---------------------------------------------------------------------------
 
 VBla_0A:
-		
-		
 		bsr.w	ReadJoypads
-		writeCRAM	v_palette,0
 		writeVRAM	v_spritetablebuffer,vram_sprites
 		writeVRAM	v_hscrolltablebuffer,vram_hscroll
+		writeCRAM	v_palette,0
 		
 		bsr.w	PalCycle_SS
 		jsr	ProcessDMAQueue(pc)
@@ -698,22 +656,17 @@ VBla_0A:
 
 VBla_0C:
 VBla_18:
-		
-		
 		bsr.w	ReadJoypads
-		tst.b	(f_wtr_state).w
-		bne.s	.waterabove
-
-		writeCRAM	v_palette,0
-		bra.s	.waterbelow
-
-.waterabove:
-		writeCRAM	v_palette_water,0
-
-.waterbelow:
-		move.w	(v_hbla_hreg).w,(a5)
 		writeVRAM	v_hscrolltablebuffer,vram_hscroll
 		writeVRAM	v_spritetablebuffer,vram_sprites
+		move.w	(v_hbla_hreg).w,(a5)
+		tst.b	(f_wtr_state).w
+		bne.s	.waterabove
+		writeCRAM	v_palette,0
+		bra.s	.waterbelow
+.waterabove:
+		writeCRAM	v_palette_water,0
+.waterbelow:
 		jsr	ProcessDMAQueue(pc)
 		
 		movem.l	(v_screenposx).w,d0-d7
@@ -723,8 +676,7 @@ VBla_18:
 		bsr.w	LoadTilesAsYouMove
 		jsr	(AnimateLevelGfx).l
 		jsr	(HUD_Update).l
-		bsr.w	ProcessDPLC_9Tiles
-		rts
+		bra.w	ProcessDPLC_9Tiles
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -754,12 +706,10 @@ VBla_12:
 ; ---------------------------------------------------------------------------
 
 VBla_16:
-		
-		
 		bsr.w	ReadJoypads
-		writeCRAM	v_palette,0
 		writeVRAM	v_spritetablebuffer,vram_sprites
 		writeVRAM	v_hscrolltablebuffer,vram_hscroll
+		writeCRAM	v_palette,0
 		
 		jsr	ProcessDMAQueue(pc)
 		tst.w	(v_generictimer).w
@@ -779,22 +729,16 @@ VBla_16:
 
 ; sub_106E:
 VBla_StandardTransfers:
-		
-		
 		bsr.w	ReadJoypads
 
+		writeVRAM	v_spritetablebuffer,vram_sprites
+		writeVRAM	v_hscrolltablebuffer,vram_hscroll
 		tst.b	(f_wtr_state).w			; is the screen completely underwater?
 		bne.s	.underwater			; if yes, branch
 		writeCRAM	v_palette,0		; write full regular palette buffer to CRAM
-		bra.s	.rest
-
+		rts
 .underwater:
 		writeCRAM	v_palette_water,0	; write full water palette buffer to CRAM
-
-.rest:
-		writeVRAM	v_spritetablebuffer,vram_sprites
-		writeVRAM	v_hscrolltablebuffer,vram_hscroll
-		
 		rts
 ; End of function VBla_StandardTransfers
 
@@ -855,7 +799,6 @@ HBlank:
 		clr.b	(f_doupdatesinhblank).w	; clear delayed updates flag
 		movem.l	d0-a6,-(sp)
 		bsr.w	VBla_UpdateScreen	; do all the screen updates that were skipped during VBlank now
-		jsr	(UpdateMusic).l		; update the sound driver
 		movem.l	(sp)+,d0-a6
 		rte	
 ; End of function HBlank
@@ -1469,8 +1412,8 @@ FadeIn_FromBlack:
 		bsr.s	FadeIn_AddColour ; increase colour
 		dbf	d0,.addcolour	; repeat for size of palette
 
-		cmpi.b	#id_LZ,(v_zone).w	; is level Labyrinth?
-		bne.s	.exit		; if not, branch
+		tst.b	(v_waterflag).w	; is level Labyrinth?
+		bpl.s	.exit		; if not, branch
 
 		moveq	#0,d0
 		lea	(v_palette_water).w,a0
@@ -1658,8 +1601,8 @@ WhiteIn_FromWhite:
 		bsr.s	WhiteIn_DecColour ; decrease colour
 		dbf	d0,.decolour	; repeat for size of palette
 
-		cmpi.b	#id_LZ,(v_zone).w	; is level Labyrinth?
-		bne.s	.exit		; if not, branch
+		tst.b	(v_waterflag).w	; is level Labyrinth?
+		bpl.s	.exit		; if not, branch
 		moveq	#0,d0
 		lea	(v_palette_water).w,a0
 		lea	(v_palette_water_fading).w,a1
@@ -2529,7 +2472,14 @@ Level_NoMusicFade:
 		clearRAM v_misc_variables
 		clearRAM v_levelvariables
 		clearRAM v_timingandscreenvariables
-
+;		move.b	#0,(v_waterflag).w
+;		cmp.b	#id_GHZ,(v_zone).w
+;		beq.s	.yawata
+;		cmp.b	#id_LZ,(v_zone).w
+;		bne.s	.nowata
+.yawata:
+		move.b	#$80,(v_waterflag).w
+.nowata:
 		disable_ints
 		fillVRAM $2F,0,$10000		; fill vram with dummy tiles
 		bsr.w	ClearScreen
@@ -2561,12 +2511,14 @@ Level_NoMusicFade:
 		move.w	#$8720,(a6)		; set background colour (line 3; colour 0)
 		move.w	#$8AFF,(v_hbla_hreg).w ; set palette change position (for water)
 		move.w	(v_hbla_hreg).w,(a6)
-		cmpi.b	#id_LZ,(v_zone).w ; is level LZ?
-		bne.s	Level_LoadPal	; if not, branch
+		tst.b	(v_waterflag).w ; is level LZ?
+		bpl.s	Level_LoadPal	; if not, branch
 
 		move.w	#$8014,(a6)	; enable H-interrupts
 		moveq	#0,d0
-		move.b	(v_act).w,d0
+		move.b	(v_zone).w,d0
+		lsl.w	#2,d0
+		add.b	(v_act).w,d0
 		add.w	d0,d0
 		lea	(WaterHeight).l,a1 ; load water height array
 		move.w	(a1,d0.w),d0
@@ -2578,15 +2530,15 @@ Level_NoMusicFade:
 		move.b	#1,(f_water).w	; enable water
 
 Level_LoadPal:
-		move.b	#$c3, d0
+		move.b	#dLetsGOO, d0
 		jsr		MegaPCM_PlaySample
 		; hiii
 		move.w	#30,(v_air).w
 		enable_ints
 		moveq	#palid_Sonic,d0
 		bsr.w	PalLoad	; load Sonic's palette
-		cmpi.b	#id_LZ,(v_zone).w ; is level LZ?
-		bne.s	Level_GetBgm	; if not, branch
+		tst.b	(v_waterflag).w ; is level LZ?
+		bpl.s	Level_GetBgm	; if not, branch
 
 		moveq	#palid_LZSonWater,d0 ; palette number $F (LZ)
 		cmpi.b	#3,(v_act).w	; is act number 3?
@@ -2703,8 +2655,8 @@ Level_Demo:
 		move.w	#510,(v_generictimer).w
 
 Level_ChkWaterPal:
-		cmpi.b	#id_LZ,(v_zone).w ; is level LZ/SBZ3?
-		bne.s	Level_Delay	; if not, branch
+		tst.b	(v_waterflag).w ; is level LZ/SBZ3?
+		bpl.s	Level_Delay	; if not, branch
 		moveq	#palid_LZWater,d0 ; palette $B (LZ underwater)
 		cmpi.b	#3,(v_act).w	; is level SBZ3?
 		bne.s	Level_WtrNotSbz	; if not, branch
@@ -5823,12 +5775,8 @@ Map_WFall:	include	"_maps/Waterfalls.asm"
 ResumeMusic:
 		cmpi.w	#12,(v_air).w	; more than 12 seconds of air left?
 		bhi.s	.over12		; if yes, branch
-		move.w	#bgm_LZ,d0	; play LZ music
-		cmpi.w	#(id_LZ<<8)+3,(v_zone).w ; check if level is 0103 (SBZ3)
-		bne.s	.notsbz
-		move.w	#bgm_SBZ,d0	; play SBZ music
-
-.notsbz:
+		moveq	#0,d0
+		move.b	(v_zonemusic).w,d0
 		tst.b	(v_invinc).w ; is Sonic invincible?
 		beq.s	.notinvinc ; if not, branch
 		move.w	#bgm_Invincible,d0

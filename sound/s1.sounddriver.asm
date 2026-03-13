@@ -617,17 +617,10 @@ NoteTimeoutUpdate:
 		subq.b	#1,SMPS_Track.NoteTimeout(a5)		; Update note fill timeout
 		bne.s	.locret					; Return if it hasn't expired
 		bset	#1,SMPS_Track.PlaybackControl(a5)	; Put track at rest
-		tst.b	SMPS_Track.VoiceControl(a5)		; Is this a PSG track?
-		bmi.w	.psgnoteoff				; If yes, branch
-		jsr	FMNoteOff(pc)
 		addq.w	#4,sp					; Do not return to caller
-		rts
-; ===========================================================================
-; loc_71DBE:
-.psgnoteoff:
-		jsr	PSGNoteOff(pc)
-		addq.w	#4,sp		; Do not return to caller
-; locret_71DC4:
+		tst.b	SMPS_Track.VoiceControl(a5)		; Is this a PSG track?
+		bpl.w	FMNoteOff				; If not then mute FM
+		bra.w	PSGNoteOff				; If so then mute PSG
 .locret:
 		rts
 ; End of function NoteTimeoutUpdate
@@ -637,31 +630,22 @@ NoteTimeoutUpdate:
 
 ; sub_71DC6:
 DoModulation:
-		addq.w	#4,sp					; Do not return to caller (but see below)
 		btst	#3,SMPS_Track.PlaybackControl(a5)	; Is modulation active?
-		beq.s	.locret					; Return if not
-		tst.b	SMPS_Track.ModulationWait(a5)		; Has modulation wait expired?
-		beq.s	.waitdone				; If yes, branch
+		beq.s	.locnoret				; Return if not
 		subq.b	#1,SMPS_Track.ModulationWait(a5)	; Update wait timeout
-		rts
-; ===========================================================================
-; loc_71DDA:
-.waitdone:
+		bcc.s	.locnoret				; If it hasn't expired yet, branch
+		clr.b	SMPS_Track.ModulationWait(a5)
 		subq.b	#1,SMPS_Track.ModulationSpeed(a5)	; Update speed
-		beq.s	.updatemodulation			; If it expired, want to update modulation
-		rts
-; ===========================================================================
-; loc_71DE2:
-.updatemodulation:
+		bne.s	.locnoret				; If it hasn't expired, don't update modulation
 		movea.l	SMPS_Track.ModulationPtr(a5),a0		; Get modulation data
 		move.b	1(a0),SMPS_Track.ModulationSpeed(a5)	; Restore modulation speed
 		tst.b	SMPS_Track.ModulationSteps(a5)		; Check number of steps
 		bne.s	.calcfreq				; If nonzero, branch
 		move.b	3(a0),SMPS_Track.ModulationSteps(a5)	; Restore from modulation data
 		neg.b	SMPS_Track.ModulationDelta(a5)		; Negate modulation delta
+.locnoret:
+		addq.w	#4,sp					; Do not return to caller
 		rts
-; ===========================================================================
-; loc_71DFE:
 .calcfreq:
 		subq.b	#1,SMPS_Track.ModulationSteps(a5)	; Update modulation steps
 		move.b	SMPS_Track.ModulationDelta(a5),d6	; Get modulation delta
@@ -669,9 +653,6 @@ DoModulation:
 		add.w	SMPS_Track.ModulationVal(a5),d6		; Add cumulative modulation change
 		move.w	d6,SMPS_Track.ModulationVal(a5)		; Store it
 		add.w	SMPS_Track.Freq(a5),d6			; Add note frequency to it
-		subq.w	#4,sp					; In this case, we want to return to caller after all
-; locret_71E16:
-.locret:
 		rts
 ; End of function DoModulation
 
