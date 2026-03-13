@@ -46,6 +46,10 @@ GitHubScr_Frame1:
 		
 		;!@ GenesisDoes
 		move.w  #60*3,(Timer).w
+		btst #6,(v_megadrive).w ; is MD PAL?
+		beq.s .notpal ; if not, don't run
+		move.w  #50*3,(Timer).w     ; Blank Time
+.notpal:
 		move.w  (VDP_buff).w,d0
 		ori.b   #$40,d0
 		move.w  d0,(VDPCtrl).l
@@ -63,6 +67,10 @@ YoFreddy_Loop:
 		moveq	#palid_Sonic,d0	; load Sonic's palette
 		bsr.w	PalLoad2	; Load Sonic Color
 		move.w  #$16,(Timer).w     ; Blank Time
+		btst #6,(v_megadrive).w ; is MD PAL?
+		beq.s .notpal ; if not, don't run
+		move.w  #$11,(Timer).w     ; Blank Time
+.notpal:
 		move.w  (VDP_buff).w,d0
 		ori.b   #$40,d0
 		move.w  d0,(VDPCtrl).l
@@ -80,7 +88,10 @@ GitHubScr_Loop:
 BlankScr_Frame1: 		 		
  		bsr.w	ClearScreen      ; Screen Reset
  		move.w  #$16,(Timer).w     ; Blank Time
-		
+		btst #6,(v_megadrive).w ; is MD PAL?
+		beq.s .notpal ; if not, don't run
+		move.w  #$11,(Timer).w     ; Blank Time
+.notpal:
 BlankScr_Loop1: 		              
 		bsr.w   LoopDelay
 		bne.s   BlankScr_Loop1
@@ -105,7 +116,10 @@ GitHubScr_Loop2:
 BlankScr_Frame2: 		 		
  		bsr.w	ClearScreen      ; Screen Reset
  		move.w  #$16,(Timer).w     ; Blank Time
-		
+		btst #6,(v_megadrive).w ; is MD PAL?
+		beq.s .notpal ; if not, don't run
+		move.w  #$11,(Timer).w     ; Blank Time
+.notpal:
 BlankScr_Loop2: 		              
 		bsr.w   LoopDelay
 		bne.s   BlankScr_Loop2
@@ -116,6 +130,10 @@ GitHubScr_Frame3:
 		bsr.w   VDP_Location
 		bsr.w   TilemapToVRAM
 		move.w  #$45,(Timer).w
+		btst #6,(v_megadrive).w ; is MD PAL?
+		beq.s .notpal ; if not, don't run
+		move.w  #$38,(Timer).w     ; Blank Time
+.notpal:
 		move.w  (VDP_buff).w,d0
 		ori.b   #$40,d0
 		move.w  d0,(VDPCtrl).l
@@ -130,7 +148,10 @@ GitHubScr_Loop3:
 BlankScr_Frame3: 		 		
  		bsr.w	ClearScreen      ; Screen Reset
  		move.w  #$16,(Timer).w     ; Blank Time
-		
+		btst #6,(v_megadrive).w ; is MD PAL?
+		beq.s .notpal ; if not, don't run
+		move.w  #$11,(Timer).w     ; Blank Time
+.notpal:
 BlankScr_Loop3: 		              
 		bsr.w   LoopDelay
 		bne.s   BlankScr_Loop3
@@ -140,8 +161,7 @@ MadnessScr_Frame1:
 		lea     (Eni_Madness).l,a0
 		bsr.w   VDP_Location
 		bsr.w   TilemapToVRAM
-		move.w  #$12,(Timer).w     ; Text Time
-		
+		move.w  #$13,(Timer).w     ; Text Time
 		;!@ GenesisDoes
 		move.b	#dMadness, d0
 		jsr		(MegaPCM_PlaySample).l
@@ -153,7 +173,10 @@ MadnessScr_Loop:
 BlankScr_Frame4: 		 		
  		bsr.w	ClearScreen      ; Screen Reset
 		move.w  #$16,(Timer).w     ; Blank Time
-		
+		btst #6,(v_megadrive).w ; is MD PAL?
+		beq.s .notpal ; if not, don't run
+		move.w  #$12,(Timer).w     ; Blank Time
+.notpal:
 BlankScr_Loop4: 		              
 		bsr.w   LoopDelay
 		bne.s   BlankScr_Loop4
@@ -163,7 +186,7 @@ MadnessScr_Frame2:
 		lea     (Eni_Madness).l,a0
 		bsr.w   VDP_Location
 		bsr.w   TilemapToVRAM
-		move.w  #$12,(Timer).w     ; Text Time
+		move.w  #$13,(Timer).w     ; Text Time
 		move.w  (VDP_buff).w,d0
 		ori.b   #$40,d0
 		move.w  d0,(VDPCtrl).l
@@ -178,7 +201,10 @@ MadnessScr_Loop2:
 BlankScr_Frame5: 		 		
  		bsr.w	ClearScreen      ; Screen Reset
  		move.w  #$16,(Timer).w     ; Blank Time
-		
+		btst #6,(v_megadrive).w ; is MD PAL?
+		beq.s .notpal ; if not, don't run
+		move.w  #$11,(Timer).w     ; Blank Time
+.notpal:
 BlankScr_Loop5: 		              
 		bsr.w   LoopDelay
 		bne.s   BlankScr_Loop5
@@ -189,6 +215,10 @@ MadnessScr_Frame3:
 		bsr.w   VDP_Location
 		bsr.w   TilemapToVRAM
 		move.w  #(60*2)+15,(Timer).w     ; Text Time
+		btst #6,(v_megadrive).w ; is MD PAL?
+		beq.s .notpal ; if not, don't run
+		move.w  #(50*2)+15,(Timer).w     ; Text Time
+.notpal:
 		move.w  (VDP_buff).w,d0
 		ori.b   #$40,d0
 		move.w  d0,(VDPCtrl).l
@@ -233,7 +263,6 @@ MadnessScr_Loop7:
 BlankScr_Frame6: 		 		
  		bsr.w	ClearScreen      ; Screen Reset
  		move.w  #$10,(Timer).w     ; Blank Time
-		
 BlankScr_Loop6: 		              
 		bsr.w   LoopDelay
 		bne.s   BlankScr_Loop6
