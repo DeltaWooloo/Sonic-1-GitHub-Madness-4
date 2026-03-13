@@ -523,8 +523,7 @@ GamemodeNameTable:
 
 CharacterNameTable:
 .t:		dc.w	.Tonic-.t
-
-.Tonic:		dc.b	"TONIC TEETHGIVER"
+.Tonic:		dc.b	"TEETH TONIC"
 		even
 
 ; ---------------------------------------------------------------------------
