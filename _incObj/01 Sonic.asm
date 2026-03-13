@@ -128,6 +128,8 @@ Sonic_Display:
 		bne.s	.chkshoes
 		tst.b	(f_lockscreen).w
 		bne.s	.removeinvincible
+		tst.b	(v_clintonfucker).w	; is clinton Fucking?
+		bne.w	.removeinvincible	; if yes, branch
 		cmpi.w	#$C,(v_air).w
 		blo.s	.removeinvincible
 		moveq	#0,d0
