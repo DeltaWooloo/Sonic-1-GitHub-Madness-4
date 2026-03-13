@@ -22,7 +22,7 @@ Levian_FM1:
 	smpsPan		panCentre,	$00
 	dc.b		nF4,	$0C
 Levian_Jump01:
-	dc.b		nC4,	nF4,	$06,	nRst,	nF4,	$12,	nG4,	$06
+	dc.b		nC4,	$0C,	nF4,	$06,	nRst,	nF4,	$12,	nG4,	$06
 	dc.b		nAb4,	nAb4,	nF4,	nF4,	nF4,	$0C,	nF4,	$06
 	dc.b		nAb4,	nG4,	nRst,	nEb4,	nRst,	nEb4,	nRst,	nG4
 	dc.b		$0C,	nAb4,	$06,	nRst,	nF4,	nRst,	nF4,	$0C
@@ -48,7 +48,7 @@ Levian_FM2:
 	dc.b		nRst,	$0C
 Levian_Jump02:
 	smpsFMvoice	$01
-	dc.b		nF2,	nF3,	$06,	nF3,	nF2,	$0C,	nF3,	$06
+	dc.b		nF2,	$0C,	nF3,	$06,	nF3,	nF2,	$0C,	nF3,	$06
 	dc.b		nF3,	nF2,	$0C,	nF3,	$06,	nF3,	nF2,	$0C
 	dc.b		nF3,	$06,	nF3,	nEb2,	$0C,	nEb3,	$06,	nEb3
 	dc.b		nEb2,	$0C,	nEb3,	$06,	nEb3,	nF2,	$0C,	nF3

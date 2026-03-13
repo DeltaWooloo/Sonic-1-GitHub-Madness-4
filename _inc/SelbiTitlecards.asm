@@ -49,6 +49,16 @@ TitleCard_SBZ2:	equ  "FUCKIN FACTORY"
 TitleCard_SBZ3:	equ  "PIGFAT PUSSHOLE"		; SBZ3 is FZ
 TitleCard_SBZ4:	equ  "porn"
 
+TitleCard_Brew1:	equ  "COLD BREW"
+TitleCard_Brew2:	equ  "HOT BREW"
+TitleCard_Brew3:	equ  "Hostile Soul"
+TitleCard_Brew4:	equ  "AGGA"
+
+TitleCard_WIN1:	equ  "Insert Title"
+TitleCard_WIN2:	equ  "Insert Tit"
+TitleCard_WIN3:	equ  "AGGA"
+TitleCard_WIN4:	equ  "AGGA"
+
 TitleCard_Joint1:	equ  "The Joint"
 TitleCard_Joint2:	equ  "Ten years in the"
 TitleCard_Joint3:	equ  "Made you a fuckin"
@@ -184,15 +194,16 @@ TTL_ConData:
 		dc.l TTLCard_SYZ3_ConData, TTLCard_SYZ3_Array
 		dc.l TTLCard_SYZ4_ConData, TTLCard_SYZ4_Array
 
-		dc.l TTLCard_SYZ1_ConData, TTLCard_SYZ1_Array	; Cold brew
-		dc.l TTLCard_SYZ2_ConData, TTLCard_SYZ2_Array
-		dc.l TTLCard_SYZ3_ConData, TTLCard_SYZ3_Array
-		dc.l TTLCard_SYZ4_ConData, TTLCard_SYZ4_Array
+		dc.l TTLCard_Brew1_ConData, TTLCard_Brew1_Array	; Brew1
+		dc.l TTLCard_Brew2_ConData, TTLCard_Brew2_Array	; Brew2
+		dc.l TTLCard_Brew3_ConData, TTLCard_Brew3_Array	; Brew3
+		dc.l TTLCard_Brew4_ConData, TTLCard_Brew4_Array	; Brew4
 
-		dc.l TTLCard_SYZ1_ConData, TTLCard_SYZ1_Array	; WIN1
-		dc.l TTLCard_SYZ2_ConData, TTLCard_SYZ2_Array	; WIN2
-		dc.l TTLCard_SYZ3_ConData, TTLCard_SYZ3_Array	; WIN3
-		dc.l TTLCard_SYZ4_ConData, TTLCard_SYZ4_Array	; WIN4
+		dc.l TTLCard_WIN1_ConData, TTLCard_WIN1_Array	; WIN1
+		dc.l TTLCard_WIN2_ConData, TTLCard_WIN2_Array	; WIN2
+		dc.l TTLCard_WIN3_ConData, TTLCard_WIN3_Array	; WIN3
+		dc.l TTLCard_WIN4_ConData, TTLCard_WIN4_Array	; WIN4
+
 
 		dc.l TTLCard_Joint1_ConData, TTLCard_Joint1_Array	; Joint1
 		dc.l TTLCard_Joint2_ConData, TTLCard_Joint2_Array	; Joint2
@@ -363,15 +374,15 @@ Map_Card_Extended:	mappingsTable
 	mappingsTableEntry.w	TTLCard_SLZ3
 	mappingsTableEntry.w	TTLCard_SLZ4
 
-	mappingsTableEntry.w	TTLCard_SLZ1	; Cold Brew
-	mappingsTableEntry.w	TTLCard_SLZ2
-	mappingsTableEntry.w	TTLCard_SLZ3
-	mappingsTableEntry.w	TTLCard_SLZ4
+	mappingsTableEntry.w	TTLCard_Brew1	; Cold Brew
+	mappingsTableEntry.w	TTLCard_Brew2
+	mappingsTableEntry.w	TTLCard_Brew3
+	mappingsTableEntry.w	TTLCard_Brew4
 
-	mappingsTableEntry.w	TTLCard_SLZ1	; Windows Zone 1
-	mappingsTableEntry.w	TTLCard_SLZ2	; Windows Zone 2
-	mappingsTableEntry.w	TTLCard_SLZ3	; Windows Zone 3
-	mappingsTableEntry.w	TTLCard_SLZ4	; Windows Zone 4
+	mappingsTableEntry.w	TTLCard_WIN1	; Windows Zone 1
+	mappingsTableEntry.w	TTLCard_WIN2	; Windows Zone 2
+	mappingsTableEntry.w	TTLCard_WIN3	; Windows Zone 3
+	mappingsTableEntry.w	TTLCard_WIN4	; Windows Zone 4
 
 	mappingsTableEntry.w	TTLCard_Joint1	; Star Light Zone 1
 	mappingsTableEntry.w	TTLCard_Joint2	; Star Light Zone 2
@@ -407,7 +418,14 @@ TTLCard_SBZ1:	titlecard TitleCard_SBZ1,0,0
 TTLCard_SBZ2:	titlecard TitleCard_SBZ2,0,0
 TTLCard_SBZ3:	titlecard TitleCard_SBZ3,1,0 ; FZ (hide act)
 TTLCard_SBZ4:	titlecard TitleCard_SBZ4,0,0
-
+TTLCard_Brew1:	titlecard TitleCard_Brew1,0,0
+TTLCard_Brew2:	titlecard TitleCard_Brew2,0,0
+TTLCard_Brew3:	titlecard TitleCard_Brew3,1,0
+TTLCard_Brew4:	titlecard TitleCard_Brew4,0,0
+TTLCard_WIN1:	titlecard TitleCard_WIN1,0,0
+TTLCard_WIN2:	titlecard TitleCard_WIN2,0,0
+TTLCard_WIN3:	titlecard TitleCard_WIN3,1,0
+TTLCard_WIN4:	titlecard TitleCard_WIN4,0,0
 TTLCard_Joint1:	titlecard TitleCard_Joint1,1,0 ; one act fakeout
 TTLCard_Joint2:	titlecard TitleCard_Joint2,0,0
 TTLCard_Joint3:	titlecard TitleCard_Joint3,0,0
