@@ -3117,7 +3117,7 @@ Music26:	include	"sound/music/TG2000Tracks/Minuscule.asm"
 		even
 Music27:	include	"sound/music/TG2000Tracks/Folgers.asm"
 		even
-Music28:	include	"sound/music/TG2000Tracks/Rickroll.asm"
+Music28:	include	"sound/music/RickRoll.asm"
 		even
 Music29:	include	"sound/music/TG2000Tracks/Wormy.asm"
 		even
