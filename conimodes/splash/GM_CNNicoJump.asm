@@ -18,10 +18,10 @@ GM_CNNicoJump:
 		move.w	#$8400+(vram_bg>>13),(a6) ; set background nametable address
 		move.w	#$8700,(a6)	; set background colour (line 0; colour 0)
 		move.w	#$8B00,(a6)	; cell scroll mode
-		move.w	#$8C00,d0	; set to H32 S/H mode
+		move.w	#$8C00,d0	; set to H32 mode
 		tst.b	(CNNicoJumpHeader).l
 		beq.s	.NotH40
-		move.w	#$8C89,d0	; set to H40 S/H mode
+		move.w	#$8C81,d0	; set to H40 mode
 .NotH40:
 		move.w	d0,(a6)	; set to H32 S/H mode
 		move.w	#$9001,(a6)	; 64-cell hscroll size
@@ -49,7 +49,8 @@ v_nicoobj	=	v_objspace+$40
 		move.b  #7,(v_logoobj).w		; spawn logo
 		move.b  #7,(v_nicoobj).w	; spawn nico
 		move.b  #4,(v_nicoobj+obRoutine).w	; set routine to that is is INDEED THE NICO
-
+		jsr	(ExecuteObjects).l
+		jsr	(BuildSprites).l
 		moveq	#palid_CN,d0
 		jsr		(PalLoad1).l		; load palette
 		jsr		(PaletteFadeIn).l
