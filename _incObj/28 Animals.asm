@@ -21,8 +21,7 @@ Anml_Index:
 		dc.w loc_9184-Anml_Index	; RICKY
 		dc.w loc_91C0-Anml_Index	; RIN
 		dc.w loc_91C0-Anml_Index	; RIN
-Anml_BadnikIndexEnd:
-		dc.w loc_9240-Anml_Index ; Anml_FromPrison (from hivebrain's 2022 disassembly)
+Anml_BadnikIndexEnd:dc.w loc_9240-Anml_Index ; Anml_FromPrison (from hivebrain's 2022 disassembly)
 		dc.w loc_9260-Anml_Index ; ENDING 1
 		dc.w loc_9260-Anml_Index ; ENDING 2
 		dc.w loc_9280-Anml_Index ; ENDING 3
@@ -34,7 +33,7 @@ Anml_BadnikIndexEnd:
 		dc.w loc_9314-Anml_Index ; ENDING 9
 		dc.w loc_9370-Anml_Index ; ENDING 10
 		dc.w loc_92D6-Anml_Index ; ENDING 11
-
+Anml_CapsuleRoutID:		equ (Anml_BadnikIndexEnd-Anml_Index)/2
 
 Anml_VarIndex:	dc.b 8,	5 ; Green Hill Zone
 		dc.b 2, 3 ; Labyrinth Zone
@@ -174,8 +173,8 @@ Anml_Display:
 		bra.w	DisplaySprite
 ; ===========================================================================
 
-loc_911C:
-		move.b	#$12,obRoutine(a0)
+loc_911C:	; THIS is the routine for capsules, thank you hivebrain (his 2022 disasm is very good documentationwise)
+		move.b	#Anml_CapsuleRoutID,obRoutine(a0)
 		clr.w	obVelX(a0)
 		bra.w	DisplaySprite
 ; ===========================================================================

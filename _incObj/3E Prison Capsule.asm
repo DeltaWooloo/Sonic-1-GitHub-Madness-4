@@ -129,7 +129,10 @@ Pri_Explosion:	; Routine 6, 8, $A
 
 .makeanimal:
 		move.b	#2,(v_bossstatus).w
-		move.b	#id_Damn,(v_gamemode).w
+		cmpi.b	#id_LZ,(v_zone).w ; is level LZ ?
+		beq.s	.nodamnn	; if yes, branch
+		move.b	#id_Damn,(v_gamemode).w	; TEMPORARY UNTIL FIX
+.nodamnn:
 		move.b	#$C,obRoutine(a0)	; replace explosions with animals
 		move.b	#6,obFrame(a0)
 		move.w	#150,obTimeFrame(a0)
@@ -203,7 +206,7 @@ Pri_EndAct:	; Routine $E
 		beq.s	.found		; if yes, branch
 		adda.w	d2,a1		; next object RAM
 		dbf	d0,.findanimal	; repeat $3E times
-
+		move.b	#id_Damn,(v_gamemode).w
 		jsr	(GotThroughAct).l
 		jmp	(DeleteObject).l
 
