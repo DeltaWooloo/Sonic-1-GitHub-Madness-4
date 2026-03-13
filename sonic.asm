@@ -5199,16 +5199,84 @@ BuildSprites:
 BuildSpr_Draw:
 		movea.w	obGfx(a0),a3
 		btst	#0,d4
-		bne.s	BuildSpr_FlipX
+		bne.w	BuildSpr_FlipX
 		btst	#1,d4
 		bne.w	BuildSpr_FlipY
+		cmpi.b	#$F,obID(a0)		; hard-coded for now until I can get the table working
+		beq.w	BuildSpr_NormalOld	; if title screen mask sprite, use s1 culling
 ; End of function BuildSpr_Draw
 
 
-; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
+; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
 
 
 BuildSpr_Normal:
+		cmpi.b	#$50,d5		; check sprite limit
+		beq.s	.return
+		move.b	(a1)+,d0	; get y-offset
+		ext.w	d0
+		add.w	d2,d0		; add y-position
+		cmpi.w	#$60,d0		; is y-pos less than 128
+		bls.s	.derenderY	; if so, branch
+		cmpi.w	#$160,d0	; is y-pos greater than 352
+		bhs.s	.derenderY	; if so, branch
+		move.w	d0,(a2)+	; write to buffer
+		move.b	(a1)+,(a2)+	; write sprite size
+		addq.b	#1,d5		; increase sprite counter
+		move.b	d5,(a2)+	; set as sprite link
+		move.b	(a1)+,d0	; get art tile
+		lsl.w	#8,d0
+		move.b	(a1)+,d0
+		add.w	a3,d0		; add art tile offset
+		move.w	d0,(a2)+	; write to buffer
+		move.b	(a1)+,d0	; get x-offset
+		ext.w	d0
+		add.w	d3,d0		; add x-position
+		cmpi.w	#$60,d0		; is x-pos less than 128
+		bls.s	.derenderX	; if so, branch
+		cmpi.w	#$1C0,d0	; is x-pos greater than 448
+		bhs.s	.derenderX	; if so branch
+;		andi.w	#$1FF,d0	; keep within 512px
+;		bne.s	.writeX
+;		addq.w	#1,d0
+
+;	.writeX:
+		move.w	d0,(a2)+	; write to buffer
+		dbf	d1,BuildSpr_Normal	; process next sprite piece
+
+	.return:
+		rts	
+		
+	.derenderY:
+		addq.w	#4,a1
+		dbf	d1,BuildSpr_Normal
+		rts
+		
+	.derenderX:
+		subq.w	#6,a2
+		subq.b	#1,d5
+		dbf	d1,BuildSpr_Normal
+		rts
+; End of function BuildSpr_Normal
+
+;ObjCullTable:
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0
+;	even
+
+; ===========================================================================
+
+; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
+
+
+BuildSpr_NormalOld:
 		cmpi.b	#$50,d5		; check sprite limit
 		beq.s	.return
 		move.b	(a1)+,d0	; get y-offset
@@ -5232,12 +5300,11 @@ BuildSpr_Normal:
 
 	.writeX:
 		move.w	d0,(a2)+	; write to buffer
-		dbf	d1,BuildSpr_Normal	; process next sprite piece
+		dbf	d1,BuildSpr_NormalOld	; process next sprite piece
 
 	.return:
-		rts
+		rts	
 ; End of function BuildSpr_Normal
-
 ; ===========================================================================
 
 BuildSpr_FlipX:
