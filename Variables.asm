@@ -280,14 +280,16 @@ v_obj6B:		ds.b	1		; object 6B (SBZ stomper) variable
 f_lockctrl:		ds.b	1		; flag set to lock controls during ending sequence
 f_bigring:		ds.b	1		; flag set when Sonic collects the giant ring
 f_obj56:		ds.b	1		; object 56 flag
-v_d_anim_done:		ds.b	1		; unused
+			ds.b	1		; unused
 v_itembonus:		ds.w	1		; item bonus from broken enemies, blocks etc.
 v_timebonus:		ds.w	1		; time bonus at the end of an act
 v_ringbonus:		ds.w	1		; ring bonus at the end of an act
 f_endactbonus:		ds.b	1		; time/ring bonus update flag at the end of an act
 v_sonicend:		ds.b	1		; routine counter for Sonic in the ending sequence
 v_lz_deform:		ds.w	1		; LZ deformation offset, in units of $80
-			ds.b	6		; unused
+			ds.b	4		; unused
+;v_d_anim_done:		ds.w	1
+			ds.w	1
 f_switch:		ds.b	$10		; flags set when Sonic stands on a switch
 v_scroll_block_1_size:	ds.w	1
 v_scroll_block_2_size:	ds.w	1		; unused
