@@ -65,13 +65,15 @@ RunSplashes:
 		move.l	(a4)+,(a3)+	; move data to RAM
 		dbf	d7,.loop_pal
 
-		move.b	(a2)+,d0 ; music
-		btst	#7, d0
-		bne.s	.sampleid
+		move.b	(a2)+,d0	; next byte is blank for address alignment
+		move.b	(a2)+,d0 	; is this a pcm or a sound id?
+		bne.s	.sampleid	; if pcm flag set, jump to pcm playback
+		move.b	(a2)+,d0 	; get sound id
 		jsr	PlaySound_Special
 		bra.s	.musicid
 
 	.sampleid:
+		move.b	(a2)+,d0	; get pcm id
 		jsr	MegaPCM_PlaySample
 
 	.musicid:
@@ -119,16 +121,20 @@ Pal_\name\: binclude "SolidSplashes/Pal - \name\.bin"
 ; in case you use a shared palette/art/tilemap
 ; size is palette size btw
 
-splash_solid_split macro art,tilemap,pal,size,musicid,frameduration
+_bgm	equ 0
+_pcm	equ 1
+
+splash_solid_split macro art,tilemap,pal,size,pcmflag,musicid,frameduration
 	dc.w	0
 	dc.l	art,tilemap,pal
-	dc.b	(size/4)-1,musicid
+	dc.b	(size/4)-1,0
+	dc.b	pcmflag,musicid
 	dc.w	frameduration
 	endm
 
 ; dedicated palette,art & tilemap
-splash_solid macro name,size,musicid,frameduration
-	splash_solid_split Art_\name\,Map_\name\,Pal_\name\,size,musicid,frameduration
+splash_solid macro name,size,pcmflag,musicid,frameduration
+	splash_solid_split Art_\name\,Map_\name\,Pal_\name\,size,pcmflag,musicid,frameduration
 	endm
 
 ; for routines
@@ -150,40 +156,40 @@ splash_turd macro routine
 	splash_liquid Yume2kki
 	
 	;!@ GenesisDoes
-	splash_solid GenesisDoes1,$40,dGenesisDoes1,60*10
-	splash_solid GenesisCan1,$40,dGenesisCan1,60*3
-	splash_solid GenesisCan2,$40,dGenesisCan2,60*3
-	splash_solid SM64_MM,$40,dSM64_MM,60*4
+	splash_solid GenesisDoes1,$40,1,dGenesisDoes1,60*10
+	splash_solid GenesisCan1,$40,1,dGenesisCan1,60*3
+	splash_solid GenesisCan2,$40,1,dGenesisCan2,60*3
+	splash_solid SM64_MM,$40,1,dSM64_MM,60*4
 	
-	splash_solid Blessed,$40,$A8,200
-	splash_solid Shiki,$20,$2A,280
-	splash_solid SonicBroke,$20,$51,480
-	splash_solid Monke,$20,$1C,480
-	splash_solid Wait,$60,$1B,145
-	splash_solid SadMac,$60,$28,175
-	splash_solid Drift,$20,$2C,480
-	splash_solid LastBurenyuu,$20,$24,240
-	splash_solid BLUE_LOBSTER,$20,dBlueLobster,280
-	splash_solid ReimuDrip,$20,$20,160
-	;splash_solid Sane,$40,$25,720
-	splash_solid Cmruey,$20,$2F,240
-	splash_solid Disappointed,$20,$39,480
-	splash_solid Mines,$20,$04,650
-	splash_solid Waldo,$40,$31,100
-	; splash_solid Undertaley,$10,$33,300
-	splash_solid StupidBat,$40,$3A,480
-	splash_solid Sad,$40,$3D,200
-	splash_solid Support,$60,$3E,480
-	splash_solid Peppa,$40,$25,200
-	splash_solid Snowgrave,$40,$25,100
-	splash_solid Damnit,$40,$4A,500
-	splash_solid Iceage,$40,$34,300
-	splash_solid Fredbear,$40,$38,480
-	splash_solid CRT,$40,$32,300
-	splash_solid Crispbilly,$40,$25,200
-	splash_solid Bonniewtf,$60,$3C,300
-	splash_solid Rick,$40,$2E,480
-	splash_solid W,$40,$13,380
+	splash_solid Blessed,$40,0,sfx_SSGoal,200
+	splash_solid Shiki,$20,0,$2A,280
+	splash_solid SonicBroke,$20,0,$51,480
+	splash_solid Monke,$20,0,$1C,480
+	splash_solid Wait,$60,0,$1B,145
+	splash_solid SadMac,$60,0,$28,175
+	splash_solid Drift,$20,0,$2C,480
+	splash_solid LastBurenyuu,$20,0,$24,240
+	splash_solid BLUE_LOBSTER,$20,1,dBlueLobster,280
+	splash_solid ReimuDrip,$20,0,$20,160
+	;splash_solid Sane,$40,0,$25,720
+	splash_solid Cmruey,$20,0,$2F,240
+	splash_solid Disappointed,$20,0,$39,480
+	splash_solid Mines,$20,0,$04,650
+	splash_solid Waldo,$40,0,$31,100
+	; splash_solid Undertaley,$10,0,$33,300
+	splash_solid StupidBat,$40,0,$3A,480
+	splash_solid Sad,$40,0,$3D,200
+	splash_solid Support,$60,0,$3E,480
+	splash_solid Peppa,$40,0,$25,200
+	splash_solid Snowgrave,$40,0,$25,100
+	splash_solid Damnit,$40,0,$4A,500
+	splash_solid Iceage,$40,0,$34,300
+	splash_solid Fredbear,$40,0,$38,480
+	splash_solid CRT,$40,0,$32,300
+	splash_solid Crispbilly,$40,0,$25,200
+	splash_solid Bonniewtf,$60,0,$3C,300
+	splash_solid Rick,$40,0,$2E,480
+	splash_solid W,$40,0,$13,380
 	splash_liquid GM_SegaEU
 	splash_turd Remilia
 	dc.l	-1 ; end marker

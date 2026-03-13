@@ -242,6 +242,11 @@ bgm_REMansion:	equ ((ptr_mus95-MusicIndex)/4)+bgm__First
 bgm_Jeopardy:	equ ((ptr_mus96-MusicIndex)/4)+bgm__First
 bgm_EuroSega:	equ ((ptr_mus97-MusicIndex)/4)+bgm__First
 bgm_Retro:	equ ((ptr_musRetro-MusicIndex)/4)+bgm__First
+bgm_ConiJingle:	equ ((ptr_mus99-MusicIndex)/4)+bgm__First
+bgm_VampKiller:	equ ((ptr_mus9A-MusicIndex)/4)+bgm__First
+bgm_PuyoDrown:	equ ((ptr_mus9B-MusicIndex)/4)+bgm__First
+bgm_Carefree:	equ ((ptr_mus9C-MusicIndex)/4)+bgm__First
+
 bgm_Aporia:	equ ((ptr_mus14-MusicIndex)/4)+bgm__First
 bgm_Gadget:	equ ((ptr_mus16-MusicIndex)/4)+bgm__First
 bgm_CanCanInv:	equ ((ptr_mus17-MusicIndex)/4)+bgm__First
@@ -287,8 +292,6 @@ bgm_Memories:	equ ((ptr_mus4E-MusicIndex)/4)+bgm__First
 ; bgm_musBomerDude:	equ ((ptr_mus4F-MusicIndex)/4)+bgm__First
 bgm_Continue2:	equ ((ptr_mus50-MusicIndex)/4)+bgm__First
 bgm_Coffinman:	equ ((ptr_mus51-MusicIndex)/4)+bgm__First
-bgm_Carefree:	equ ((ptr_mus9C-MusicIndex)/4)+bgm__First
-bgm_VampKiller:	equ ((ptr_mus9A-MusicIndex)/4)+bgm__First
 bgm_GCV2005:	equ ((Music48-MusicIndex)/4)+bgm__First
 bgm_music83	equ ((Music4C-MusicIndex)/4)+bgm__First
 ;!@GenesisDoes

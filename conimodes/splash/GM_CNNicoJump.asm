@@ -1,7 +1,6 @@
 CNNicoJumpHeader: dc.b $00,$01
 ; 1. screen resolution - 00 = H32, else = H40
 ; 1. jingle - 00 = no jingle , else = jingle plays
-CNJingleID = $19
 CNSCRMode: dc.w $8C81
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -67,7 +66,7 @@ GM_CNB_StartLoop:
 		move.w  #$100,(v_demolength).w
 		tst.b	(CNNicoJumpHeader+$01).l
 		beq.s	GM_CNB_MainLoop
-		move.b	#CNJingleID,d0
+		move.b	#bgm_ConiJingle,d0
 		jsr		(PlaySound_Special).l  ; CN Jingle
 
 GM_CNB_MainLoop:
