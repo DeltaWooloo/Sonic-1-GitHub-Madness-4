@@ -56,9 +56,8 @@ PBullet_Run:
 ; ===========================================================================
 
 PBullet_Callback:
-		cmpi.b	#$46, d1	; is collision type $46 ?
-		beq.s	.OpenMonitor	; if yes, branch
-		
+		andi.b	#$C0, d1	; is obColType $40 or higher?
+		beq.s	.DestroyTouched	; if YEAhg, branch
 		rts
 
 .DestroyTouched:
