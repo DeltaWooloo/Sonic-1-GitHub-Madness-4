@@ -41,6 +41,7 @@ ClintonFucker:
 
 CliFucker_Init:
 	addq.b	#2,obRoutine(a0)
+	move.l	(v_palette_line_1+20),(v_palette_line_2+20)
 	move.b	#bgm_Fade,d0
 	jsr	QueueSound2
 
