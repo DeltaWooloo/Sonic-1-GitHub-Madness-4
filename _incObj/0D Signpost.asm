@@ -105,6 +105,8 @@ Sign_SparkPos:	dc.b -$18,-$10		; x-position, y-position
 
 
 Sign_SonicRun:	; Routine 6
+                cmpi.w (id_SBZ<<8)+1,(v_zone).w ; check if level is CLOCK WORK 2
+                beq.s fuckyou76
 		tst.w	(v_debuguse).w	; is debug mode on?
 		bne.w	locret_ECEE	; if yes, branch
 	if FixBugs
@@ -136,7 +138,25 @@ loc_EC70:
 loc_EC86:
 		addq.b	#2,obRoutine(a0)
 
+fuckyou76:
+                 tst.w	(v_debuguse).w	; is debug mode	on?
+		 bne.w	locret_ECEE	; if yes, branch
+		 btst	#1,(v_player+obStatus).w
+		 bne.s	loc_EC70fuck
+		 move.b	#1,(f_lockctrl).w ; lock controls
+		 move.w	#btnR<<8,(v_jpadhold2).w ; make Sonic run to the right
 
+loc_EC70fuck:
+		 tst.b	(v_player).w
+		 beq.s	loc_EC869
+		 move.w	(v_player+obX).w,d0
+		 move.w	(v_limitright2).w,d1
+		 addi.w	#$128,d1
+		 cmp.w	d1,d0
+		 bcs.s	locret_ECEE
+loc_EC869:
+              addq.b #2,obRoutine(a0);absolute fucking cinema
+;NMRTT SBZ2 shittery fixer
 ; ---------------------------------------------------------------------------
 ; Subroutine to set up bonuses at the end of an act
 ; ---------------------------------------------------------------------------
