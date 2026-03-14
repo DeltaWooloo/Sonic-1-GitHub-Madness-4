@@ -153,8 +153,8 @@ splash_turd macro routine
 	splash_liquid	GM_SSRGScreen
 	splash_liquid	GM_EagleSoft
 	splash_liquid	GM_CNNicoJump
-	splash_liquid	GM_TGSplash
 ;	splash_liquid	DaxKatter_Splash
+	splash_liquid	GM_TGSplash
 	splash_liquid	Yume2kki
 
 	;!@ GenesisDoes
