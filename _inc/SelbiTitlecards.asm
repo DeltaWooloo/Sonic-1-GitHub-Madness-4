@@ -420,12 +420,12 @@ TTLCard_SBZ3:	titlecard TitleCard_SBZ3,1,0 ; FZ (hide act)
 TTLCard_SBZ4:	titlecard TitleCard_SBZ4,0,0
 TTLCard_Brew1:	titlecard TitleCard_Brew1,0,0
 TTLCard_Brew2:	titlecard TitleCard_Brew2,0,0
-TTLCard_Brew3:	titlecard TitleCard_Brew3,1,0
-TTLCard_Brew4:	titlecard TitleCard_Brew4,0,0
+TTLCard_Brew3:	titlecard TitleCard_Brew3,0,0
+TTLCard_Brew4:	titlecard TitleCard_Brew4,1,0
 TTLCard_WIN1:	titlecard TitleCard_WIN1,0,0
 TTLCard_WIN2:	titlecard TitleCard_WIN2,0,0
 TTLCard_WIN3:	titlecard TitleCard_WIN3,0,0
-TTLCard_WIN4:	titlecard TitleCard_WIN4,1,0
+TTLCard_WIN4:	titlecard TitleCard_WIN4,0,0
 TTLCard_Joint1:	titlecard TitleCard_Joint1,1,0 ; one act fakeout
 TTLCard_Joint2:	titlecard TitleCard_Joint2,0,0
 TTLCard_Joint3:	titlecard TitleCard_Joint3,0,0
