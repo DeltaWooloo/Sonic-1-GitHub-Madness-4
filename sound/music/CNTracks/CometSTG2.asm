@@ -144,8 +144,10 @@ CometSTG2_Loop09:
 CometSTG2_FM3J:
 CometSTG2_Loop0A:
 	smpsCall            CometSTG2_FM3C1
+	dc.b	nCs5, $0C, nB4
 	dc.b	nB4, $09, $03, nRst, $06, nB4, $1E, nRst, $06, nB4, $03, nRst, $06, nB4, $03, nRst, $06, nD5, $0C, nD5
 	smpsCall            CometSTG2_FM3C1
+	dc.b	nCs5, $0C, nD5
 	dc.b	nE5, $09, $03, nRst, $06, nE5, $1E, nRst, $06, nE5, $03, nRst, $06, nE5, $03, nRst, $06, nD5, $0C, nD5
 	smpsLoop            $00, $02, CometSTG2_Loop0A
 	dc.b	nCs5, $30, nD5, $12, nCs5, $1E, nB4, $12, nA4, $1E, nB4, $12, nA4, $1E
@@ -153,7 +155,7 @@ CometSTG2_Loop0A:
 	smpsJump				CometSTG2_FM3J
 
 CometSTG2_FM3C1:
-	dc.b	nCs5, $09, $03, nRst, $06, nCs5, $1E, nRst, $06, nCs5, $03, nRst, $06, nCs5, $03, nRst, $06, nCs5, $0C, nB4
+	dc.b	nCs5, $09, $03, nRst, $06, nCs5, $1E, nRst, $06, nCs5, $03, nRst, $06, nCs5, $03, nRst, $06
 	smpsReturn
 
 ; FM4 Data
@@ -164,19 +166,12 @@ CometSTG2_Loop07:
 	dc.b	nG5, $03, nG5, nG5, nG5, nRst, nG5, nRst, nG5, nRst, $18
 CometSTG2_FM4J:
 CometSTG2_Loop08:
-	dc.b	nA4, $08, nRst, $01, nA4, $02, nRst, $07, nA4, $1E, nRst, $06
-	dc.b	nAb4, $02, nRst, $07, nAb4, $02, nRst, $07, nAb4, $18, nRst, $09
-	dc.b	nAb4, $02, nRst, $07, nAb4, $1E, nRst, $06, nAb4, $02, nRst, $07
-	dc.b	nAb4, $02, nRst, $07, nB4, $0B, nRst, $01, nB4, $0B, nRst, $01
-	dc.b	nA4, $08, nRst, $01, nA4, $02, nRst, $07, nA4, $1E, nRst, $06
-	dc.b	nA4, $02, nRst, $07, nA4, $02, nRst, $07, nA4, $18, nCs5, $08
-	dc.b	nRst, $01, nCs5, $02, nRst, $07, nCs5, $1E, nRst, $06, nCs5, $02
-	dc.b	nRst, $07, nCs5, $02, nRst, $07, nA4, $0B, nRst, $01, nA4, $0B
-	dc.b	nRst, $01
+	dc.b	nA4, $09, $03, nRst, $06, nA4, $1E, nRst, $06, nAb4, $03, nRst, $06, nAb4, $03, nRst, $06, nAb4, $18
+	dc.b	nAb4, $09, $03, nRst, $06, nAb4, $1E, nRst, $06, nAb4, $03, nRst, $06, nAb4, $03, nRst, $06, nB4, $0C, nB4
+	dc.b	nA4, $09, $03, nRst, $06, nA4, $1E, nRst, $06, nA4, $03, nRst, $06, nA4, $03, nRst, $06, nA4, $18
+	dc.b	nCs5, $09, $03, nRst, $06, nCs5, $1E, nRst, $06, nCs5, $03, nRst, $06, nCs5, $03, nRst, $06, nA4, $0C, nA4
 	smpsLoop            $00, $02, CometSTG2_Loop08
-	dc.b	nA4, $30, nBb4, $0F, nRst, $03, nBb4, $1E, nAb4, $0F, nRst, $03
-	dc.b	nE4, $1E, nFs4, $0F, nRst, $03, nFs4, $1E, nRst, $30, nA4, nB4
-	dc.b	nRst, $12, nD5, $1E
+	dc.b	nA4, $30, nBb4, $12, nBb4, $1E, nAb4, $12, nE4, $1E, nFs4, $12, nFs4, $1E, nFs4, $30, nA4, nB4, nRst, $12, nD5, $12, $1E
 	smpsJump				CometSTG2_FM4J
 
 ; FM5 Data
@@ -187,19 +182,13 @@ CometSTG2_Loop05:
 	dc.b	nE5, $03, nE5, nE5, nE5, nRst, nE5, nRst, nE5, nRst, $18
 CometSTG2_FM5J:
 CometSTG2_Loop06:
-	dc.b	nFs4, $08, nRst, $01, nFs4, $02, nRst, $07, nFs4, $1E, nRst, $06
-	dc.b	nF4, $02, nRst, $07, nF4, $02, nRst, $07, nF4, $18, nE4, $08
-	dc.b	nRst, $01, nE4, $02, nRst, $07, nE4, $1E, nRst, $06, nE4, $02
-	dc.b	nRst, $07, nE4, $02, nRst, $07, nG4, $0B, nRst, $01, nG4, $0B
-	dc.b	nRst, $01, nFs4, $08, nRst, $01, nFs4, $02, nRst, $07, nFs4, $1E
-	dc.b	nRst, $06, nFs4, $02, nRst, $07, nFs4, $02, nRst, $07, nFs4, $18
-	dc.b	nA4, $08, nRst, $01, nA4, $02, nRst, $07, nA4, $1E, nRst, $06
-	dc.b	nA4, $02, nRst, $07, nA4, $02, nRst, $07, nFs4, $0B, nRst, $01
-	dc.b	nFs4, $0B, nRst, $01
+	dc.b	nFs4, $09, nFs4, $03, nRst, $06, nFs4, $1E, nRst, $06, nF4, $03, nRst, $06, nF4, $03, nRst, $06, nF4, $18
+	dc.b	nE4, $09, nE4, $03, nRst, $06, nE4, $1E, nRst, $06, nE4, $03, nRst, $06, nE4, $03, nRst, $06, nG4, $0C, nG4
+	dc.b	nFs4, $09, nFs4, $03, nRst, $06, nFs4, $1E, nRst, $06, nFs4, $03, nRst, $06, nFs4, $03, nRst, $06, nFs4, $18
+	dc.b	nA4, $09, nA4, $03, nRst, $06, nA4, $1E, nRst, $06, nA4, $03, nRst, $06, nA4, $03, nRst, $03, nFs4, $0C, nFs4
 	smpsLoop            $00, $02, CometSTG2_Loop06
-	dc.b	nFs4, $2E, nRst, $02, nG4, $0F, nRst, $03, nG4, $1E, nE4, $0F
-	dc.b	nRst, $03, nCs4, $1E, nEb4, $0F, nRst, $03, nEb4, $1E, nD4, $30
-	dc.b	nE4, nFs4, nA4, $0F, nRst, $03, nB4, $1E
+	dc.b	nFs4, $30, nG4, $12, nG4, $1E, nE4, $12, nCs4, $1E, nEb4, $12, nEb4, $1E
+	dc.b	nD4, $30, nE4, nFs4, nA4, $12, nB4, $1E
 	smpsJump				CometSTG2_FM5J
 
 ; PSG1 Data
