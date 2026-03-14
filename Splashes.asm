@@ -239,6 +239,7 @@ splash_turd macro routine
 	include "LiquidSplashes/SSRG/SSRG.asm"
 	include "LiquidSplashes/EagleSoft/EagleSoft.asm"
 	include "DAX_Splash/DaxKatter Splash.asm"
+	include "Nano's SHIT/splash/GM_SplashScreenSkipper.asm"
 	include "LiquidSplashes/2kki/2kki.asm"
 	include "eurosega/eurosega.asm"
 	include "TGSplash/TGSplash.asm"
