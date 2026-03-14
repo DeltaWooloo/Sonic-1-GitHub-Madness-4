@@ -10,8 +10,8 @@ CometSTG2_Header:
 	smpsHeaderFM        CometSTG2_FM3,	$F4, $10
 	smpsHeaderFM        CometSTG2_FM4,	$F4, $10
 	smpsHeaderFM        CometSTG2_FM5,	$F4, $10
-	smpsHeaderPSG       CometSTG2_PSG1,	$00, $02, $00, $00
-	smpsHeaderPSG       CometSTG2_PSG2,	$00, $02, $00, $00
+	smpsHeaderPSG       CometSTG2_PSG1,	$00, $02, $00, $08
+	smpsHeaderPSG       CometSTG2_PSG2,	$00, $02, $00, $08
 	smpsHeaderPSG       CometSTG2_PSG3,	$00, $03, $00, $00
 
 ; FM1 Data
@@ -38,14 +38,6 @@ CometSTG2_FM1J:
 	smpsAlterNote       $00
 	dc.b	nF5, $03, nFs5, nAb5, nA5, $06, nB5, $03, nRst, nCs6, nD6, nRst
 	dc.b	nE6, $33, nRst, $0F, nE6, $03, nF6, nFs6, nE6, $02, smpsNoAttack, nF6, smpsNoAttack, nE6, nD6, $03, nRst, nCs6, nRst, nB5
-;	dc.b	nD4, $03, nE4, nFs4, nB4, nCs5, nD5, nFs5, $09, nE5, nD5, $03, nRst, nD5, $12, nCs5, $1E, nRst, $06
-;	smpsAlterVol        $04
-;	dc.b	nCs4, $03, nD4, nE4, nA4, nB4, nCs5, nE5, $09, nD5, nCs5, $03, nRst, nAb4, $12, nFs4, $1E
-;	dc.b	nFs4, $03, nAb4, nA4, nCs5, nFs5, $24, nE4, $03, nFs4, nAb4
-;	dc.b	nA4, nE5, $24, nD4, $03, nE4, nFs4, nAb4, nD5, $24
-;;	smpsAlterVol        $FC
-;	dc.b	nA3, $03, nB3, nCs4, nD4, nFs4, nE4, nFs4, nAb4, nB4, $02, nCs5
-;	dc.b	nA4, nB4, $03, nCs5, nE5, nFs5, nAb5, nB5
 	dc.b	nCs6, $2F
 	smpsSetvoice        $03
 	smpsAlterPitch    $0C
@@ -171,7 +163,8 @@ CometSTG2_Loop08:
 	dc.b	nA4, $09, $03, nRst, $06, nA4, $1E, nRst, $06, nA4, $03, nRst, $06, nA4, $03, nRst, $06, nA4, $18
 	dc.b	nCs5, $09, $03, nRst, $06, nCs5, $1E, nRst, $06, nCs5, $03, nRst, $06, nCs5, $03, nRst, $06, nA4, $0C, nA4
 	smpsLoop            $00, $02, CometSTG2_Loop08
-	dc.b	nA4, $30, nBb4, $12, nBb4, $1E, nAb4, $12, nE4, $1E, nFs4, $12, nFs4, $1E, nFs4, $30, nA4, nB4, nRst, $12, nD5, $12, $1E
+	dc.b	nA4, $30, nBb4, $12, nBb4, $1E, nAb4, $12, nE4, $1E, nFs4, $12, nFs4, $1E
+	dc.b	nFs4, $30, nA4, nB4, nD5, $12, $1E
 	smpsJump				CometSTG2_FM4J
 
 ; FM5 Data
@@ -185,7 +178,7 @@ CometSTG2_Loop06:
 	dc.b	nFs4, $09, nFs4, $03, nRst, $06, nFs4, $1E, nRst, $06, nF4, $03, nRst, $06, nF4, $03, nRst, $06, nF4, $18
 	dc.b	nE4, $09, nE4, $03, nRst, $06, nE4, $1E, nRst, $06, nE4, $03, nRst, $06, nE4, $03, nRst, $06, nG4, $0C, nG4
 	dc.b	nFs4, $09, nFs4, $03, nRst, $06, nFs4, $1E, nRst, $06, nFs4, $03, nRst, $06, nFs4, $03, nRst, $06, nFs4, $18
-	dc.b	nA4, $09, nA4, $03, nRst, $06, nA4, $1E, nRst, $06, nA4, $03, nRst, $06, nA4, $03, nRst, $03, nFs4, $0C, nFs4
+	dc.b	nA4, $09, nA4, $03, nRst, $06, nA4, $1E, nRst, $06, nA4, $03, nRst, $06, nA4, $03, nRst, $06, nFs4, $0C, nFs4
 	smpsLoop            $00, $02, CometSTG2_Loop06
 	dc.b	nFs4, $30, nG4, $12, nG4, $1E, nE4, $12, nCs4, $1E, nEb4, $12, nEb4, $1E
 	dc.b	nD4, $30, nE4, nFs4, nA4, $12, nB4, $1E
@@ -193,26 +186,20 @@ CometSTG2_Loop06:
 
 ; PSG1 Data
 CometSTG2_PSG1:
-	smpsStop
+;	smpsStop
 	dc.b	nRst, $30
 CometSTG2_PSG1J:
 CometSTG2_Loop21:
-	dc.b	$60
+	dc.b	nRst, $60
 	smpsLoop            $00, $08, CometSTG2_Loop21
-	dc.b	nCs3, $2E, nRst, $01
-	smpsPSGAlterVol     $03
-	dc.b	nE2
-	smpsPSGAlterVol     $FF
-	dc.b	nFs2
-	smpsPSGAlterVol     $FF
-	dc.b	nA2
-	smpsPSGAlterVol     $FF
-	dc.b	nB2, nCs3, $12, nB2, nA2, $0C, nAb2, $12, nFs2, $0B, nG2, $01
-	dc.b	nAb2, $0C, nA2, $02, nRst, $04, nAb2, $01, $02, nRst, $03, nG2
-	dc.b	$01, nAb2, $0B, nFs2, $1E, nRst, $12, nFs2, $01, $05, nE2, $06
-	dc.b	nD2, $02, nRst, $04, nCs2, $02, nRst, $04, nB1, $06, nCs2, $12
-	dc.b	nB1, $0C, nA1, nFs1, $06, nB1, $1D, nC2, $01, nCs2, $06, nD2
-	dc.b	$02, nRst, $04, nE2, $06, nCs2, $12, nB1, $1E
+	dc.b	nRst, $06, nD1, $03, nE1, nFs1, nB1, nCs2, nD2, nFs2, $09, nE2, nD2, $03, nRst, nD2, $12, nCs2, $1E, nRst, $06
+	smpsAlterVol        $FE
+	dc.b	nCs1, $03, nD1, nE1, nA1, nB1, nCs2, nE2, $09, nD2, nCs2, $03, nRst, nAb1, $12, nFs1, $1E
+	dc.b	nFs1, $03, nAb1, nA1, nCs2, nFs2, $24, nE1, $03, nFs1, nAb1
+	dc.b	nA1, nE2, $24, nD1, $03, nE1, nFs1, nAb1, nD2, $24
+	smpsAlterVol        $02
+	dc.b	nA0, $03, nB0, nCs1, nD1, nFs1, nE1, nFs1, nAb1, nB1, $02, nCs2
+	dc.b	nA1, nB1, $03, nCs2, nE2, nFs2, nAb2, nB2
 	smpsJump				CometSTG2_PSG1J
 
 ; PSG2 Data
@@ -220,96 +207,73 @@ CometSTG2_PSG2:
 ;	smpsStop
 	dc.b	nRst, $30
 CometSTG2_PSG2J:
+	smpsCall            CometSTG2_PSG2PAT
+	dc.b	nE2
+	smpsCall            CometSTG2_PSG2PAT
+	dc.b	nE2, nE1, nA1, nCs2, nE2, nCs2, nA1, nE2, nCs2, nE0, $01, nFs0
+	dc.b	nAb0, nA0, nB0, nCs1, nD1, nE1, nFs1, nAb1, nA1, nB1, nCs2, nD2
+	dc.b	nE2, nFs2, nAb2, nA2, nB2, nCs3, nD3, nE3, nFs3, nAb3, nRst, $06
+	smpsPSGAlterVol     $FE
+	dc.b	nB0, $03, nCs1, nD1, nG1, nA1, nB1, nD2
+	dc.b	$09, nCs2, nB1, $03, nRst, nBb1, $30, nRst, $06
+	dc.b	nA0, $03, nB0, nCs1, nE1, nFs1, nA1, nCs2
+	dc.b	$09, nB1, nA1, $03, nRst, nEb1, $30, nD1, $03, nE1, nFs1
+	dc.b	nA1, nD2, $24, nCs1, $03, nD1, nE1, nFs1, $02
+	dc.b	nRst, $01, nCs2, $24, nB0, $03, nCs1, nD1, nE1
+	dc.b	nB1, $24
+	smpsPSGAlterVol     $02
+	dc.b	nFs0, $03, nAb0, nA0, nB0, nD1, nCs1, nD1, nE1, nAb1, $02, nA1
+	dc.b	nFs1, nAb1, $03, nA1, nB1, nD2, nE2, nAb2
+	smpsJump				CometSTG2_PSG2J
+
+CometSTG2_PSG2PAT:
 	dc.b	nD1, $03, nFs1, nA1
 CometSTG2_Loop12:
 	dc.b	nCs2, nA1, nFs1
 	smpsLoop            $00, $04, CometSTG2_Loop12
-	dc.b	nCs2, nD1, nF1, nAb1
-
+	dc.b	nCs2
+	
+	dc.b	nD1, nF1, nAb1
 CometSTG2_Loop13:
 	dc.b	nB1, nAb1, nF1
 	smpsLoop            $00, $04, CometSTG2_Loop13
-	dc.b	nB1, nCs1, nE1, nAb1
-
+	dc.b	nB1
+	
+	dc.b	nCs1, nE1, nAb1
 CometSTG2_Loop14:
 	dc.b	nB1, nAb1, nE1
 	smpsLoop            $00, $04, CometSTG2_Loop14
-	dc.b	nB1, nCs1, nE1, nA1
+	dc.b	nB1
 
+	dc.b	nCs1, nE1, nA1
 CometSTG2_Loop15:
 	dc.b	nCs2, nA1, nE1
 	smpsLoop            $00, $04, CometSTG2_Loop15
-	dc.b	nCs2, nD1, nFs1, nA1
+	dc.b	nCs2
 
+	dc.b	nD1, nFs1, nA1
 CometSTG2_Loop16:
 	dc.b	nCs2, nA1, nFs1
 	smpsLoop            $00, $04, CometSTG2_Loop16
-	dc.b	nCs2, nB0, nD1, nFs1
-
+	dc.b	nCs2
+	
+	dc.b	nB0, nD1, nFs1
 CometSTG2_Loop17:
 	dc.b	nA1, nFs1, nD1
 	smpsLoop            $00, $04, CometSTG2_Loop17
-	dc.b	nA1, nE1, nA1, nD2
+	dc.b	nA1
 
+	dc.b	nE1, nA1, nD2
 CometSTG2_Loop18:
 	dc.b	nFs2, nD2, nA1
 	smpsLoop            $00, $04, CometSTG2_Loop18
-	dc.b	nFs2, nE1, nA1, nCs2
+	dc.b	nFs2
 
+	dc.b	nE1, nA1, nCs2
 CometSTG2_Loop19:
 	dc.b	nE2, nCs2, nA1
 	smpsLoop            $00, $04, CometSTG2_Loop19
-	dc.b	nE2, nD1, nFs1, nA1
-
-CometSTG2_Loop1A:
-	dc.b	nCs2, nA1, nFs1
-	smpsLoop            $00, $04, CometSTG2_Loop1A
-	dc.b	nCs2, nCs1, nE1, nAb1
-
-CometSTG2_Loop1B:
-	dc.b	nB1, nAb1, nE1
-	smpsLoop            $00, $04, CometSTG2_Loop1B
-	dc.b	nB1, nCs1, nE1, nA1
-
-CometSTG2_Loop1C:
-	dc.b	nCs2, nA1, nE1
-	smpsLoop            $00, $04, CometSTG2_Loop1C
-	dc.b	nCs2, nD1, nFs1, nA1
-
-CometSTG2_Loop1D:
-	dc.b	nCs2, nA1, nFs1
-	smpsLoop            $00, $04, CometSTG2_Loop1D
-	dc.b	nCs2, nB0, nD1, nFs1
-
-CometSTG2_Loop1E:
-	dc.b	nA1, nFs1, nD1
-	smpsLoop            $00, $04, CometSTG2_Loop1E
-	dc.b	nA1, nE1, nA1, nD2
-
-CometSTG2_Loop1F:
-	dc.b	nFs2, nD2, nA1
-	smpsLoop            $00, $04, CometSTG2_Loop1F
-	dc.b	nFs2, nE1, nA1, nCs2
-
-CometSTG2_Loop20:
-	dc.b	nE2, nCs2, nA1
-	smpsLoop            $00, $04, CometSTG2_Loop20
-	dc.b	nE2, nE1, nA1, nCs2, nE2, nCs2, nA1, nE2, nCs2, nE0, $01, nFs0
-	dc.b	nAb0, nA0, nB0, nCs1, nD1, nE1, nFs1, nAb1, nA1, nB1, nCs2, nD2
-	dc.b	nE2, nFs2, nAb2, nA2, nB2, nCs3, nD3, nE3, nFs3, nAb3, nRst, $06
-	smpsPSGAlterVol     $02
-	dc.b	nB0, $03, nCs1, nD1, $02, nRst, $01, nG1, $03, nA1, nB1, nD2
-	dc.b	$09, nCs2, nB1, $02, nRst, $04, nBb1, $30, nRst, $06
-	smpsPSGAlterVol     $03
-	dc.b	nA0, $03, nB0, nCs1, $02, nRst, $01, nE1, $03, nFs1, nA1, nCs2
-	dc.b	$09, nB1, nA1, $02, nRst, $04, nEb1, $30, nD1, $03, nE1, nFs1
-	dc.b	nA1, $02, nRst, $01, nD2, $24, nCs1, $03, nD1, nE1, nFs1, $02
-	dc.b	nRst, $01, nCs2, $24, nB0, $03, nCs1, nD1, nE1, $02, nRst, $01
-	dc.b	nB1, $24
-	smpsPSGAlterVol     $FD
-	dc.b	nFs0, $03, nAb0, nA0, nB0, nD1, nCs1, nD1, nE1, nAb1, $02, nA1
-	dc.b	nFs1, nAb1, $03, nA1, nB1, nD2, nE2, nAb2
-	smpsJump				CometSTG2_PSG2J
+	smpsReturn
 
 ; PSG3 Data
 CometSTG2_PSG3:
