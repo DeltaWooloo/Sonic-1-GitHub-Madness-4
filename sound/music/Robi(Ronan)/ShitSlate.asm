@@ -45,7 +45,7 @@ CleanSlate_Drums:
 	dc.b	dPokeKickCrashHi, $0C
 	dc.b	dPokeSnare, $0C, dChunkyKick, $06, $06, dPokeSnare, $0C, dChunkyKick, $0C, dPokeSnare, $06
 	dc.b	dPokeSnare, $06, dChunkyKick, $06, dPokeSnare, $03, dElectricHighTom, $03, dElectricLowTom, $03, dElectricFloorTom, $03
-	dc.b	dElectricFloorTom, $03, dElectricFloorTom, $7B, dPokeKickCrashHi, $06, dElectricHighTom, $06, dPokeSnare, $03, dPokeSnare, $03, dPokeSnare, $03, dPokeSnare, $03
+	dc.b	dElectricFloorTom, $03, dFuck, $7B, dPokeKickCrashHi, $06, dElectricHighTom, $06, dPokeSnare, $03, dPokeSnare, $03, dPokeSnare, $03, dPokeSnare, $03
 	smpsJump	CleanSlate_Drums
 
 ; FM1 Data
