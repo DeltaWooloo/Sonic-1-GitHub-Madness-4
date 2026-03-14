@@ -51,10 +51,10 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 	lhead	plcid_ENDZ,Kos_GHZ,plcid_ENDZ2,Blk16_GHZ,Blk256_GHZ,bgm_SBZ,palid_Ending,Col_GHZ,ObjPos_End,Level_End,Level_GHZbg	
 	lhead	plcid_ENDZ,Kos_GHZ,plcid_ENDZ2,Blk16_GHZ,Blk256_GHZ,bgm_SBZ,palid_Ending,Col_GHZ,ObjPos_End,Level_End,Level_GHZbg	
 
-	lhead	plcid_BREW,Kos_BREW,plcid_BREW,Blk16_BREW,Blk256_BREW,bgm_FZ,palid_BREW,Col_BREW,ObjPos_BREW1,Level_BREW1,Level_BREWbg
-	lhead	plcid_BREW,Kos_BREW,plcid_BREW,Blk16_BREW,Blk256_BREW,bgm_FZ,palid_BREW,Col_BREW,ObjPos_BREW2,Level_BREW2,Level_BREWbg
-	lhead	plcid_BREW,Kos_BREW,plcid_BREW,Blk16_BREW,Blk256_BREW,bgm_FZ,palid_BREW,Col_BREW,ObjPos_BREW3,Level_BREW3,Level_BREWbg
-	lhead	plcid_BREW,Kos_BREW,plcid_BREW,Blk16_BREW,Blk256_BREW,bgm_FZ,palid_BREW,Col_BREW,ObjPos_BREW1,Level_BREW1,Level_BREWbg
+	lhead	plcid_BREW,Kos_BREW,plcid_BREW,Blk16_BREW,Blk256_BREW,bgm_ColdBrew,palid_BREW,Col_BREW,ObjPos_BREW1,Level_BREW1,Level_BREWbg
+	lhead	plcid_BREW,Kos_BREW,plcid_BREW,Blk16_BREW,Blk256_BREW,bgm_ColdBrew,palid_BREW,Col_BREW,ObjPos_BREW2,Level_BREW2,Level_BREWbg
+	lhead	plcid_BREW,Kos_BREW,plcid_BREW,Blk16_BREW,Blk256_BREW,bgm_BadEmerald,palid_BREW,Col_BREW,ObjPos_BREW3,Level_BREW3,Level_BREWbg
+	lhead	plcid_BREW,Kos_BREW,plcid_BREW,Blk16_BREW,Blk256_BREW,bgm_BadEmerald,palid_BREW,Col_BREW,ObjPos_BREW1,Level_BREW1,Level_BREWbg
 
 	lhead	plcid_WIN,Kos_WIN,plcid_WIN,Blk16_WIN,Blk256_WIN,bgm_FZ,palid_WIN,Col_WIN,ObjPos_WIN1,Level_WIN1,Level_WINbg
 	lhead	plcid_WIN,Kos_WIN,plcid_WIN,Blk16_WIN,Blk256_WIN,bgm_FZ,palid_WIN,Col_WIN,ObjPos_WIN2,Level_WIN2,Level_WINbg
