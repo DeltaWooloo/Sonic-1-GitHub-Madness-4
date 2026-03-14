@@ -397,7 +397,9 @@ v_oscillate:		ds.w	1		; oscillation bitfield
 v_timingandscreenvariables:
 v_timingvariables:
 			ds.b	$40		; values which oscillate - for swinging platforms, et al
-			ds.b	$20		; unused
+v_layoutptr		ds.l	1
+v_bglayoutptr		ds.l	1
+			ds.b	24		; unused
 v_ani0_time:		ds.b	1		; synchronised sprite animation 0 - time until next frame (used for synchronised animations)
 v_ani0_frame:		ds.b	1		; synchronised sprite animation 0 - current frame
 v_ani1_time:		ds.b	1		; synchronised sprite animation 1 - time until next frame
