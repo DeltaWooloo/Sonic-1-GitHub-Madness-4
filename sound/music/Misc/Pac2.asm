@@ -4,7 +4,7 @@ Pac_Header:
 	smpsHeaderChan	$06,	$03
 	smpsHeaderTempo	$01,	$00
 
-	smpsHeaderDAC	Pac_FM6,	smpsPitch00,	$0C
+	smpsHeaderDAC	Pac_DAC
 	smpsHeaderFM	Pac_FM1,	smpsPitch00,	$08
 	smpsHeaderFM	Pac_FM2,	smpsPitch00,	$0C
 	smpsHeaderFM	Pac_FM3,	smpsPitch00,	$0C
@@ -15,7 +15,7 @@ Pac_Header:
 	smpsHeaderPSG       Pac_PSG3,	$00, $00, $00, $00
 	dc.b		$00,	$00,	$00,	$00
 ; FM6 Data
-Pac_FM6:
+Pac_DAC:
 	smpsStop
 
 ; PSG1 Data

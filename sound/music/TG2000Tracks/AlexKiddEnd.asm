@@ -1,7 +1,7 @@
 AlexKiddEnd_Header:
 	smpsHeaderStartSong 1
 	smpsHeaderVoice	AlexKiddEnd_Voices
-	smpsHeaderChan	$06,	$03
+	smpsHeaderChan	$07,	$00
 	smpsHeaderTempo	$01,	$00
 
 	smpsHeaderDAC	AlexKiddEnd_DAC
@@ -11,10 +11,6 @@ AlexKiddEnd_Header:
 	smpsHeaderFM	AlexKiddEnd_FM3,	smpsPitch00,	$00
 	smpsHeaderFM	AlexKiddEnd_FM4,	smpsPitch00,	$00
 	smpsHeaderFM	AlexKiddEnd_FM5,	smpsPitch00,	$00
-	smpsHeaderPSG       AlexKiddEnd_PSG1,	$00, $00, $00, $00
-	smpsHeaderPSG       AlexKiddEnd_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       AlexKiddEnd_PSG3,	$00, $00, $00, $00
-	dc.b		$00,	$00,	$00,	$00
 
 ; DAC Data
 AlexKiddEnd_DAC:

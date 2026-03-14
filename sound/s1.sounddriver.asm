@@ -3167,7 +3167,7 @@ Music45:	include	"sound/music/TG2000Tracks/ILBT.asm"
 Music46:	include	"sound/music/HS_Tracks/Basillica.asm"
 		even ; oof
 Music47:	include	"sound/music/Kat/Mus - Clinton Fucker.asm"
-		even ; oof
+		even
 Music48:	include	"sound/music/HS_Tracks/GCV2005.asm"
 		even
 Music49:	include	"sound/music/Misc/DeltaTale fighte.asm"
