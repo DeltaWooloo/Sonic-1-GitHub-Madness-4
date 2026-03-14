@@ -224,7 +224,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 ; Background music
 	enumconf $1
 	enum	bgm__First=$1
-	nextenum bgm_GHZ
+	nextenum bgm_GHZ=bgm__First
 	nextenum bgm_LZ
 	nextenum bgm_MZ
 	nextenum bgm_SLZ
@@ -315,7 +315,7 @@ bgm__Last = bgm_DoleBOSS
 
 ; Sound effects
 	enum	sfx__First=$A0
-	nextenum sfx_Jump
+	nextenum sfx_Jump=sfx__First
 	nextenum sfx_Lamppost
 	nextenum sfx_A2
 	nextenum sfx_Death
@@ -370,7 +370,7 @@ sfx__Last = sfx_MenuConfirm
 
 ; Special sound effects
 	enum	spec__First=$F0
-	nextenum sfx_Waterfall
+	nextenum sfx_Waterfall=spec__First
 spec__Last = sfx_Waterfall
 
 flg__First:	equ $FB
