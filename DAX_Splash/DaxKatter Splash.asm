@@ -54,22 +54,14 @@ DaxKatter_Splash:
 		move.w	#make_art_tile($80,0,0),d0
 		jsr	(EniDec).w
 
-;		copyTilemap128	vram_fg+$A52,31-1,4-1	; Send plane mappings to VRAM
-		locVRAM	vram_fg+$A52,d0
-		moveq	#(31-1/8-1),d1
-		moveq	#(4-1/8-1),d2
-		bsr.w	Dax_PlaneMap
+		copyTilemap128	vram_fg+$A52,31-1,4-1	; Send plane mappings to VRAM
 
 		lea	(EniMap_BringsYou).l,a0
 		lea	(v_ram_start).l,a1
 		move.w	#make_art_tile($80,1,0),d0
 		jsr	(EniDec).w
 
-;		copyTilemap128	vram_fg+$E5A,18-1,3-1	; Send plane mappings to VRAM
-		locVRAM	vram_fg+$E5A,d0
-		moveq	#(18-1/8-1),d1
-		moveq	#(3-1/8-1),d2
-		bsr.w	Dax_PlaneMap
+		copyTilemap128	vram_fg+$E5A,18-1,3-1	; Send plane mappings to VRAM
 
 		; load palette
 		moveq	#64/2-1,d0
