@@ -75,7 +75,7 @@ Pow_ChkShoes:
 		move.b	#1,(v_shoes).w	; speed up the BG music
 		move.w	#$4B0,(v_player+shoetime).w	; time limit for the power-up
 		move.w	#$C00,(v_sonspeedmax).w ; change Sonic's top speed
-		move.w	#$5,(v_sonspeedacc).w	; change Sonic's acceleration
+		move.w	#$16,(v_sonspeedacc).w	; change Sonic's acceleration
 		move.w	#$80,(v_sonspeeddec).w	; change Sonic's deceleration
 		tst.b	(v_clintonfucker).w ; is boss mode on?
 		bne.w	Pow_NoMusic	; if yes, branch
