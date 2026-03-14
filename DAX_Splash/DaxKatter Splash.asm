@@ -62,9 +62,12 @@ DaxKatter_SplashScreen:
 		copyTilemap128	vram_fg+$E5A,18-1,3-1	; Send plane mappings to VRAM
 
 		; load palette
+		moveq	#16/2-1,d0
 		lea	(Pal_DaxKatterOff).l,a1
 		lea	(v_palette_fading).w,a2
-		jsr	(PalLoad_Line16).w
+.loadpal:
+		move.l	(a1)+,(a2)+
+		dbf	d0,.loadpal
 
 		move.b	#$12,(v_vbla_routine).w
 		jsr	(WaitForVBla).w
@@ -105,16 +108,23 @@ DaxKatter_SplashScreen:
 		jsr	(PlaySound_Special).l		; play Spindash Release SFX
 		jsr	(PaletteWhiteOut).w
 
-.loadpal
+		moveq	#16/2-1,d0
 		lea	(Pal_DaxKatterOn).l,a1
 		lea	(v_palette_fading_line_1).w,a2
-		jsr	(PalLoad_Line16).w
+.loadpal2:
+		move.l	(a1)+,(a2)+
+		dbf	d0,.loadpal2
+
 		jsr	(PaletteWhiteIn).w
 
-.loadBringsYou
+		moveq	#16/2-1,d0
 		lea	(Pal_DaxKatterBringsYou).l,a1
 		lea	(v_palette_fading_line_2).w,a2
-		jsr	(PalLoad_Line16).w
+
+.loadpal3:
+		move.l	(a1)+,(a2)+
+		dbf	d0,.loadpal3
+
 		move.b	#sfx_MenuConfirm,d0
 		jsr	(PlaySound_Special).l		; play Menu Confirmation SFX
 		bsr.w	Pal_FadeBringsYou
