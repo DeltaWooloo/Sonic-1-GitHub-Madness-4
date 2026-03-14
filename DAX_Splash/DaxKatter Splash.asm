@@ -17,7 +17,8 @@ DaxKatter_Splash:
 		disable_display
 		jsr	(ClearScreen).w
 
-		fillVRAM	0, $A000, $E000
+		fillVRAM	0, $A000, $C000
+		fillVRAM	0, $C000, $E000
 
 		lea	(vdp_control_port).l,a6
 		move.w	#$8004,(a6)				; disable HInt, HV counter, 8-colour mode
@@ -173,9 +174,9 @@ DaxKatterD_Index:
 Obj_DaxD_Init:
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_DaxKatterD,obMap(a0)
-		move.w	#$1,obGfx(a0)	; Start at $A000
+		move.w	#$8001,obGfx(a0)	; Start at $A000
 		move.w	#$80+360,obX(a0)
-		move.w	#$80+94,obY(a0)
+		move.w	#$80+94,obScreenY(a0)
 		move.b	#1,obPriority(a0)
 		move.b	#0,obAnim(a0)
 		move.b	#0,obFrame(a0)
