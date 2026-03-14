@@ -2441,7 +2441,7 @@ MusicList:
 		dc.b $4E ;bgm_music83	; MZ2
 		dc.b bgm_VampKiller	; MZ3
 		dc.b bgm_MZ		; MZ4
-		dc.b bgm_Passport		; SLZ1
+		dc.b bgm_SLZ		; SLZ1
 		dc.b $1D ; dooms gate	; SLZ2
 		dc.b bgm_BadEmerald	; SLZ3
 		dc.b bgm_SLZ		; SLZ4
@@ -2462,7 +2462,7 @@ MusicList:
 		dc.b bgm_BadEmerald; cold brew3
 		dc.b bgm_BadEmerald; cold brew4
 		dc.b bgm_CleanSlate	; WIN98 1
-		dc.b bgm_FZ		; WIN98 2
+		dc.b bgm_Passport	; WIN98 2
 		dc.b bgm_FZ		; WIN98 3
 		dc.b bgm_FZ		; WIN98 4
 		dc.b bgm_LZ		; Joint 1
@@ -2577,11 +2577,16 @@ Level_GetBgm:
 		tst.w	(f_demo).w
 		bmi.s	Level_SkipTtlCard
 		moveq	#0,d0
-		move.b  (v_zone), d0
-		lsl.w   #2, d0
-		add.b   (v_act), d0
-		lea	(MusicList).l,a1 ; load music playlist
-		move.b	(a1,d0.w),d0
+		moveq	#0,d0
+		move.b	(v_zone).w,d0
+		lsl.w	#7,d0
+		lea	(LevelHeaders).l,a2
+		lea	(a2,d0.w),a2
+		moveq	#0,d0
+		move.b	v_act.w,d0
+		lsl.w	#5,d0
+		lea	(a2,d0.w),a2 
+		move.b	13(a2),d0
 		move.b	d0,(v_zonemusic).w
 		bsr.w	QueueSound1	; play music
 		move.b	#id_TitleCard,(v_titlecard).w ; load title card object
