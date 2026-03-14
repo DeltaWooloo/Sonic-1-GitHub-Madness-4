@@ -1852,6 +1852,21 @@ loc_20BC:
 Pal_Sega1:	binclude	"palette/Sega1.bin"
 Pal_Sega2:	binclude	"palette/Sega2.bin"
 		dc.w		$AA4,$CC6	; KILL YOURSELF
+
+; ---------------------------------------------------------------------------
+; Load a direct palette into somewhere in RAM.
+; INPUT: a0   = palette pointer
+;        a1   = destination (often palette, fadingPalette, or VDPDATA)
+;        d7.b = size $XX-1 (amount of colors minus 1)
+; ---------------------------------------------------------------------------
+
+PalLoadUser:
+	andi.l	#$FF,d7
+.LoadToQueue:
+	move.w	(a0)+,(a1)+
+	dbf	d7,.LoadToQueue
+	rts
+
 ; ---------------------------------------------------------------------------
 ; Subroutines to load palettes
 
@@ -2497,10 +2512,13 @@ Level_NoMusicFade:
 		bsr.w	AddPLC			; load standard patterns
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
-		lsl.w	#4,d0
+		lsl.w	#7,d0
 		lea	(LevelHeaders).l,a2
 		lea	(a2,d0.w),a2
 		moveq	#0,d0
+		move.b	v_act.w,d0
+		lsl.w	#5,d0
+		lea	(a2,d0.w),a2 
 		move.b	(a2),d0
 		beq.s	.nolevelplc1
 		bsr.w	AddPLC			; load level patterns
@@ -2538,7 +2556,7 @@ Level_NoMusicFade:
 
 Level_LoadPal:
 		move.b	#dLetsGOO, d0
-		jsr		MegaPCM_PlaySample
+		jsr	MegaPCM_PlaySample
 		; hiii
 		move.w	#30,(v_air).w
 		enable_ints
@@ -2593,8 +2611,8 @@ Level_SkipTtlCard:
 		bsr.w	LoadZoneTiles	; load art
 		bsr.w	LevelDataLoad ; load block mappings and palettes
 		bsr.w	LoadTilesFromStart
-		jsr	(ConvertCollisionArray).l
-		bsr.w	ColIndexLoad
+		;jsr	(ConvertCollisionArray).l
+		;bsr.w	ColIndexLoad
 		bsr.w	LZWaterFeatures
 		move.b	#id_SonicPlayer,(v_player).w ; load Sonic object
 		tst.w	(f_demo).w
@@ -3681,10 +3699,13 @@ GM_Credits:
 		bsr.w	EndingDemoLoad
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
-		lsl.w	#4,d0
+		lsl.w	#7,d0
 		lea	(LevelHeaders).l,a2
 		lea	(a2,d0.w),a2
 		moveq	#0,d0
+		move.b	v_act.w,d0
+		lsl.w	#5,d0
+		lea	(a2,d0.w),a2 
 		move.b	(a2),d0
 		beq.s	Cred_SkipObjGfx
 		bsr.w	AddPLC		; load object graphics
@@ -3872,13 +3893,17 @@ Demo_EndGHZ2:	binclude	"demodata/Ending - GHZ2.bin"
 LoadZoneTiles:
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
-		lsl.w	#4,d0
-		lea		(LevelHeaders).l,a2
-		lea		(a2,d0.w),a2
+		lsl.w	#7,d0
+		lea	(LevelHeaders).l,a2
+		lea	(a2,d0.w),a2
+		moveq	#0,d0
+		move.b	v_act.w,d0
+		lsl.w	#5,d0
+		lea	(a2,d0.w),a2
 		move.l	(a2)+,d0
 		andi.l	#$FFFFFF,d0 ; 8x8 tile pointer
 		movea.l	d0,a0
-		lea		($FF0000).l,a1
+		lea	($FF0000).l,a1
 		bsr.w	KosDec
 		move.w	a1,d3
 		move.w	d3,d7
@@ -3887,7 +3912,7 @@ LoadZoneTiles:
 		rol.w	#4,d7
 		andi.w	#$F,d7
 
-.loop:	move.w	d7,d2
+.loop:		move.w	d7,d2
 		lsl.w	#7,d2
 		lsl.w	#5,d2
 		move.l	#$FFFFFF,d1
@@ -3913,9 +3938,13 @@ LoadZoneTiles:
 LevelDataLoad:
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
-		lsl.w	#4,d0
+		lsl.w	#7,d0
 		lea	(LevelHeaders).l,a2
 		lea	(a2,d0.w),a2
+		moveq	#0,d0
+		move.b	v_act.w,d0
+		lsl.w	#5,d0
+		lea	(a2,d0.w),a2 
 		move.l	a2,-(sp)
 		addq.l	#4,a2
 		movea.l	(a2)+,a0
@@ -3925,26 +3954,33 @@ LevelDataLoad:
 		movea.l	(a2)+,a0
 		lea	(v_256x256).l,a1 ; RAM address for 256x256 mappings
 		bsr.w	KosDec
+		move.w	(a2)+,d5
+		move.w	(a2)+,d5
+		move.l	(a2)+,v_collindex
+		move.l	(a2),(v_opl_data).w
+		move.l	(a2)+,(v_opl_data+4).w
+		move.l	(a2)+,v_layoutptr
+		move.l	(a2),v_bglayoutptr
 		bsr.w	LevelLayoutLoad
-		move.w	(a2)+,d0
-		move.w	(a2),d0
-		andi.w	#$FF,d0
-		cmpi.w	#(id_LZ<<8)+3,(v_zone).w ; is level SBZ3 (LZ4) ?
-		bne.s	.notSBZ3	; if not, branch
-		moveq	#palid_SBZ3,d0	; use SB3 palette
+		andi.w	#$FF,d5
+		move.w	d5,d0
+		cmpi.w	#(id_LZ<<8)+3,(v_zone).w	; is level SBZ3 (LZ4) ?
+		bne.s	.notSBZ3			; if not, branch
+		moveq	#palid_SBZ3,d0			; use SB3 palette
 
 .notSBZ3:
-		cmpi.w	#(id_SBZ<<8)+1,(v_zone).w ; is level SBZ2?
-		beq.s	.isSBZorFZ	; if yes, branch
-		cmpi.w	#(id_SBZ<<8)+2,(v_zone).w ; is level FZ?
-		bne.s	.normalpal	; if not, branch
+		cmpi.w	#(id_SBZ<<8)+1,(v_zone).w	; is level SBZ2?
+		beq.s	.isSBZorFZ			; if yes, branch
+		cmpi.w	#(id_SBZ<<8)+2,(v_zone).w	; is level FZ?
+		bne.s	.normalpal			; if not, branch
 
 .isSBZorFZ:
-		moveq	#palid_SBZ2,d0	; use SBZ2/FZ palette
+		moveq	#palid_SBZ2,d0		; use SBZ2/FZ palette
 
 .normalpal:
-		bsr.w	PalLoad_Fade	; load palette (based on d0)
-		movea.l	(sp)+,a2
+		bsr.w	PalLoad_Fade		; load palette (based on d0)
+
+		movea.l	(sp)+,a2	; restore from like  way before
 		addq.w	#4,a2		; read number for 2nd PLC
 		moveq	#0,d0
 		move.b	(a2),d0
@@ -3954,25 +3990,16 @@ LevelDataLoad:
 .skipPLC:
 		moveq	#plcid_Main2,d0
 		bra.w	AddPLC
-; End of function LevelDataLoad
 
 ; ---------------------------------------------------------------------------
 ; Level layout loading subroutine
 ; ---------------------------------------------------------------------------
 
-; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 
 LevelLayoutLoad:
 		lea	(v_lvllayout).w,a3
-	if FixBugs
-		move.w	#(v_lvllayout_end-v_lvllayout)/4-1,d1
-	else
-		; ; v_lvllayout is only $400 bytes, but this clears $800...
-		; In Sonic 2, this function was corrected to only clear the
-		; layout buffer.
 		move.w	#(v_lvllayout_end-v_lvllayout)/2-1,d1
-	endif
 		moveq	#0,d0
 
 LevLoad_ClrRam:
@@ -3980,28 +4007,17 @@ LevLoad_ClrRam:
 		dbf	d1,LevLoad_ClrRam ; clear the RAM ($A400-A7FF)
 
 		lea	(v_lvllayout).w,a3 ; RAM address for level layout
-		moveq	#0,d1
+		move.l	v_layoutptr,a1
 		bsr.w	LevelLayoutLoad2 ; load level layout into RAM
 		lea	(v_lvllayout+$40).w,a3 ; RAM address for background layout
-		moveq	#2,d1
-; End of function LevelLayoutLoad
+		move.l	v_bglayoutptr,a1
+		; fall into LevelLayoutLoad2
 
+; ---------------------------------------------------------------------------
 ; "LevelLayoutLoad2" is run twice - for the level and the background
-
-; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
-
+; ---------------------------------------------------------------------------
 
 LevelLayoutLoad2:
-		move.w	(v_zone).w,d0
-		lsl.b	#6,d0
-		lsr.w	#5,d0
-		move.w	d0,d2
-		add.w	d0,d0
-		add.w	d2,d0
-		add.w	d1,d0
-		lea	(Level_Index).l,a1
-		move.w	(a1,d0.w),d0
-		lea	(a1,d0.w),a1
 		moveq	#0,d1
 		move.w	d1,d2
 		move.b	(a1)+,d1	; load level width (in tiles)
@@ -5411,17 +5427,7 @@ OPL_Index:	dc.w OPL_Main-OPL_Index
 
 OPL_Main:
 		addq.b	#2,(v_opl_routine).w
-		move.w	(v_zone).w,d0
-		lsl.b	#6,d0
-		lsr.w	#4,d0
-		lea	(ObjPos_Index).l,a0
-		movea.l	a0,a1
-		adda.w	(a0,d0.w),a0
-		move.l	a0,(v_opl_data).w
-		move.l	a0,(v_opl_data+4).w
-		adda.w	2(a1,d0.w),a1
-		move.l	a1,(v_opl_data+8).w
-		move.l	a1,(v_opl_data+$C).w
+		move.l	(v_opl_data).w,a0
 		lea	(v_objstate).w,a2
 		move.w	#$101,(a2)+
 	if FixBugs
