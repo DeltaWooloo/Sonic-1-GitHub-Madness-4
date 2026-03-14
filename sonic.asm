@@ -2429,7 +2429,7 @@ MusicList:
 		dc.b $4E ;bgm_music83	; MZ2
 		dc.b bgm_VampKiller	; MZ3
 		dc.b bgm_MZ		; MZ4
-		dc.b bgm_SLZ		; SLZ1
+		dc.b bgm_Passport		; SLZ1
 		dc.b $1D ; dooms gate	; SLZ2
 		dc.b bgm_BadEmerald	; SLZ3
 		dc.b bgm_SLZ		; SLZ4
