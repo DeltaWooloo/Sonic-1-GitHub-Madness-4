@@ -153,7 +153,7 @@ splash_turd macro routine
 	splash_liquid	GM_SSRGScreen
 	splash_liquid	GM_EagleSoft
 	splash_liquid	GM_CNNicoJump
-;	splash_liquid	DaxKatter_Splash
+	splash_liquid	DaxKatter_Splash
 	splash_liquid	GM_TGSplash
 	splash_liquid	Yume2kki
 
@@ -238,7 +238,7 @@ splash_turd macro routine
 	include "LiquidSplashes/Rerto/Rerto.asm"
 	include "LiquidSplashes/SSRG/SSRG.asm"
 	include "LiquidSplashes/EagleSoft/EagleSoft.asm"
-;	include "DAX_Splash/DaxKatter Splash.asm"
+	include "DAX_Splash/DaxKatter Splash.asm"
 	include "LiquidSplashes/2kki/2kki.asm"
 	include "eurosega/eurosega.asm"
 	include "TGSplash/TGSplash.asm"

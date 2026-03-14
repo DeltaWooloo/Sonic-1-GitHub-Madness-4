@@ -14,6 +14,7 @@ GM_TGSplash:
 	dbra	d0, .ClearRAM
 
 	lea	(vdp_control_port).l, a6
+	move.w	#$8400+(vram_bg>>13),(a6)	; reset DaxKatter splash bg nametable
 	move.w	#$9011, (a6)
 
 	move.b	#bgm_Stop,d0

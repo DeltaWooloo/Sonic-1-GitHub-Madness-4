@@ -17,13 +17,12 @@ DaxKatter_Splash:
 		disable_display
 		jsr	(ClearScreen).w
 
-		fillVRAM	0, $A000, $C000
-		fillVRAM	0, $C000, $E000
+		fillVRAM	0, $0000, $10000
 
 		lea	(vdp_control_port).l,a6
 		move.w	#$8004,(a6)				; disable HInt, HV counter, 8-colour mode
 		move.w	#$8200+(vram_fg>>10),(a6)		; set foreground nametable address
-		move.w	#$8400+(vram_bg>>13),(a6)		; set background nametable address
+		move.w	#$8400+($8000>>13),(a6)		; set background nametable address
 		move.w	#$8700+(2<<4),(a6)			; set background colour (line 3; colour 0)
 		move.w	#$8B03,(a6)				; line scroll mode
 		move.w	#$8C81,(a6)				; set 40cell screen size, no interlacing, no s/h
@@ -129,7 +128,8 @@ DaxKatter_Splash:
 
 		move.b	#sfx_MenuConfirm,d0
 		jsr	(PlaySound_Special).l		; play Menu Confirmation SFX
-;		bsr.w	Pal_FadeBringsYou
+		move.w	#$202F,(v_pfade_start).w ; set start position = 0; size = $40
+		jsr	(PalFadeIn_Alt).w
 		move.w	#5*30,(v_generictimer).w
 
 .mainloop2
@@ -172,6 +172,7 @@ Obj_DaxD_Init:
 		move.b	#1,obPriority(a0)
 		move.b	#0,obAnim(a0)
 		move.b	#0,obFrame(a0)
+		move.b	#0,obRender(a0)
 
 Obj_DaxD_Move:
 		subi.w	#14,obX(a0)
@@ -200,6 +201,7 @@ Ani_DaxKatterD:
 		dc.w .Ani01-Ani_DaxKatterD
 
 .Ani00:		dc.b	30, 0, afEnd
+		even
 
 .Ani01:		dc.b	1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 3, 2
 		dc.b	1, 0, afChange, 0
@@ -218,24 +220,6 @@ DKSS_Scroll:
 	move.l	d0,(a0)+
 	dbf	d1,.loop
 	rts
-
-;Pal_FadeBringsYou:
-;		move.w	#bytes_to_word((palette_line_1>>8),48-1),(Palette_fade_info).w	; set fade info and fade count
-;		jsr	(Pal_FillBlack).l
-;		move.b	#$E,(Palette_fade_max_color_check).w	; MJ: prepare maximum colour check
-;		clr.b	(Palette_fade_delay_count).w	; MJ: clear Palette_fade_delay_count (changed to RAM for compatability
-;
-;.fadein:
-;		move.b	#$12,(v_vbla_routine).w
-;		jsr	(WaitForVBla).w
-;		jsr	(ExecuteObjects).l
-;		jsr	(BuildSprites).l
-;		bchg	#0,(Palette_fade_delay_count).w	; MJ: change delay counter
-;		beq.s	.fadein				; MJ: if null, delay a frame
-;		jsr	(Pal_FromBlack).w
-;		subq.b	#2,(Palette_fade_max_color_check).w	; MJ: decrease colour check
-;		bne.s	.fadein				; MJ: if it has not reached null, branch
-;		rts
 
 Dax_PlaneMap:
 		move.l	#vdpCommDelta(planeLoc(128,0,1)),d4			; row increment value
