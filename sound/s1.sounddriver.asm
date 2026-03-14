@@ -3040,7 +3040,7 @@ Music89:	include "sound/music/Mus89 - Special Stage.asm"
 		even
 Music8A:	include "sound/music/Mus8A - Title Screen.asm"
 		even
-Music8B:	include "sound/music/Mus8B - Ending.asm"
+Music8B:	include "sound/music/MattTracks/Mus - Ending.asm"
 		even
 Music8C:	binclude "sound/music/boss.bin"
 		even
