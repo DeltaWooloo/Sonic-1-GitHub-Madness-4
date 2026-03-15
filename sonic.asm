@@ -2094,11 +2094,9 @@ Sega_WaitEnd:
 Sega_GotoTitle:
 		move.b	#id_Title,(v_gamemode).w ; go to title screen
 
-		cmpi.b	#btnABC, (v_jpadhold1).w
-		beq.s	.skip
-
-		jmp	MultiSplash_Init		; i have a million oil im the best  tru  ckdriver in the world
-
+		btst	#bitA,(v_jpadhold1).w
+		bne.s	.skip
+		jmp	RunSplashes
 .skip
 		pcm 	dEggNo
 		rts				; skip splash screens with heavy

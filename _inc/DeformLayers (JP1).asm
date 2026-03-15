@@ -552,23 +552,122 @@ Deform_SBZ2:;loc_68A2:
 
 
 Deform_Joint:
-		move.w	(v_scrshiftx).w,d4
-		ext.l	d4
-		asl.l	#7,d4
+		moveq	#0,d4
 		move.w	(v_scrshifty).w,d5
 		ext.l	d5
-		asl.l	#7,d5
+		asl.l	#6,d5
 		bsr.w	BGScroll_XY	; ScrollBlock1 in older disassemblies
 		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
 		lea	(v_hscrolltablebuffer).w,a1
-		move.w	#224-1,d1
 		move.w	(v_screenposx).w,d0
 		neg.w	d0
 		swap	d0
-		move.w	(v_bgscreenposx).w,d0
+		move.w	(v_screenposx).w,d0
 		neg.w	d0
-.loop:		move.l	d0,(a1)+
-		dbf	d1,.loop
+
+		move.w	d0,d3
+
+; First Block
+ 		move.w	(v_screenposy).w,d1
+ 		lsr.w	#2,d1
+		neg.w	d1
+		addi.w	#32-1,d1
+		bmi.s	+
+
+		lsr.w	#1,d0
+
+-		move.l	d0,(a1)+
+		dbf.w	d1,-
+
+; Second Block
++
+		add.w	#32-1,d1
+		bmi.s	+
+
+		move.w	d3,d0
+		lsr.w	#1,d0
+		add.w	d3,d0
+		lsr.w	#1,d0
+
+-		move.l	d0,(a1)+
+		dbf.w	d1,-
+; Middle
++
+		add.w	#72,d1
+		bmi.s	+
+		move.w	d3,d0
+		lsr.w	#2,d0
+
+-		move.l	d0,(a1)+
+		dbf.w	d1,-
+; Light seams
++
+		add.w	#40,d1
+		bmi.s	+
+		move.w	d3,d0
+		lsr.w	#2,d0
+
+		clr.w	d4
+		move.w	(v_screenposx).w,d4 ; dx
+		lsr.w	#2,d4
+		divu.w	#224>>1,d4
+		swap	d4
+.dy = -40
+		; sy = sx = -1
+		move.w	d4,(v_bg_calc_var).w
+		addi.w	#.dy,(v_bg_calc_var).w ; error
+-
+		move.w	(v_bg_calc_var).w,d2
+		add.w	d2,d2
+		cmpi.w	#.dy,d2
+		blt.s	.no_y_add
+		add.w	#.dy,(v_bg_calc_var).w
+		subq.w	#1,d0
+.no_y_add
+		cmp.w	d4,d2
+		bgt.s	-
+		add.w	d4,(v_bg_calc_var).w
+		move.l	d0,(a1)+
+		dbf.w	d1,-
+; Second Block
++
+		add.w	#32-1,d1
+		bmi.s	+
+
+		move.w	d3,d0
+		lsr.w	#1,d0
+		add.w	d3,d0
+		lsr.w	#1,d0
+
+-		move.l	d0,(a1)+
+		dbf.w	d1,-
++
+; First Block
+		addi.w	#40-1,d1
+		bmi.s	+
+
+		move.l	#v_hscrolltablebuffer_end,d2
+		sub.l	a1,d2
+
+		move.w	d3,d0
+		lsr.w	#1,d0
+
+-		move.l	d0,(a1)+
+		subq.w	#4,d2
+		ble.s	.end
+		dbf.w	d1,-
+; Remaining
++
+		move.l	#v_hscrolltablebuffer_end,d1
+		sub.l	a1,d1
+		blo.s	.end
+; 		KDebug.WriteLine "%<.w d1>"
+;
+-		move.l	d0,(a1)+
+		subq.w	#4,d1
+		bgt.s	-
+
+.end
 		rts
 ; End of function Deform_Joint
 

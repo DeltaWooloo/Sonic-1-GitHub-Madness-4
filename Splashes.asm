@@ -149,11 +149,13 @@ splash_turd macro routine
 	endm
 
 ; Entries
+	splash_liquid	MultiSplash_Init
 	splash_liquid	SonicRetro
 	splash_liquid	GM_SSRGScreen
 	splash_liquid	GM_EagleSoft
 	splash_liquid	GM_CNNicoJump
 	splash_liquid	DaxKatter_Splash
+	splash_liquid	Malachi_Splash
 	splash_liquid	GM_TGSplash
 	splash_liquid	Yume2kki
 
@@ -166,9 +168,9 @@ splash_turd macro routine
 	
 	splash_solid	Blessed,	$40, 0,	sfx_SSGoal,	200
 	;splash_solid	Shiki,		$20, 0,	bgm_SwingSinners,280
-	;splash_solid	SonicBroke,	$20, 0,	bgm_Continue2,480
+	splash_solid	SonicBroke,	$20, 0,	bgm_Continue2,480
 	;splash_solid	Monke,		$20, 0,	bgm_Carefree,	480
-	;splash_solid	Wait,		$60, 0,	bgm_PuyoDrown,	145
+	splash_solid	Wait,		$60, 0,	bgm_PuyoDrown,	145
 	;splash_solid	SadMac,		$60, 0,	bgm_SadMac,	175
 	;splash_solid	Drift,		$20, 0,	bgm_Minuscule,	480
 	;splash_solid	LastBurenyuu,	$20, 0,	bgm_FurElise,	240
@@ -208,9 +210,9 @@ splash_turd macro routine
 
 	inc_solid_splash Blessed
 	;inc_solid_splash Shiki
-	;inc_solid_splash SonicBroke
+	inc_solid_splash SonicBroke
 	;inc_solid_splash Monke
-	;inc_solid_splash Wait
+	inc_solid_splash Wait
 	;inc_solid_splash SadMac
 	;inc_solid_splash Drift
 	;inc_solid_splash LastBurenyuu
@@ -240,6 +242,7 @@ splash_turd macro routine
 	include "LiquidSplashes/SSRG/SSRG.asm"
 	include "LiquidSplashes/EagleSoft/EagleSoft.asm"
 	include "DAX_Splash/DaxKatter Splash.asm"
+	include "_gamemode/vmss/_runcode.asm"
 	include "Nano's SHIT/splash/GM_SplashScreenSkipper.asm"
 	include "LiquidSplashes/2kki/2kki.asm"
 	include "eurosega/eurosega.asm"

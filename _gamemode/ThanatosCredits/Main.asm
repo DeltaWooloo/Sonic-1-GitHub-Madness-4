@@ -304,7 +304,7 @@ thantxt: macro txt
 
 	thantxt	"PROJECT LEADS"
 	dc.b	1
-	thantxt	"DELTAW MALACHI"
+	thantxt	"DELTAW"
 	dc.b	1,1
 
 
@@ -319,6 +319,7 @@ thantxt: macro txt
 	thantxt	"FREAKY BILLY"
 	thantxt	"ROJO MMX"
 	thantxt	"DAXKATTER"
+	thantxt	"MALACHI"
 	thantxt	"ADD YOUR NAME HERE"
 	dc.b	1,1
 
