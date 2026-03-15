@@ -79,6 +79,10 @@ Pow_ChkShoes:
 		move.w	#$80,(v_sonspeeddec).w	; change Sonic's deceleration
 		tst.b	(v_clintonfucker).w ; is boss mode on?
 		bne.w	Pow_NoMusic	; if yes, branch
+		
+		;!@ GenesisDoes: Play boost powa PCM
+		pcm	dBoostPower
+		
 		move.w	#bgm_Speedup,d0
 		jmp	(QueueSound1).l		; Speed up the music
 ; ===========================================================================
