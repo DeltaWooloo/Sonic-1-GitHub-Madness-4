@@ -79,7 +79,7 @@ RickTeamheads_Screen:
 		
 		moveq   #palid_Savethemoonsonic,d0      
 		bsr.w   Set_PalLoad1
-		move.b	#dBoik,d0	; Boik
+		move.b	#$B9,d0	; suck my dick
 		jsr	(MegaPCM_PlaySample).l
 		move.w  #$40,(Timer).w          ; Time
 		move.w  (VDP_buff).w,d0
