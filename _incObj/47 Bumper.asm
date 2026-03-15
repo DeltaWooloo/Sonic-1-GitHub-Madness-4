@@ -32,10 +32,10 @@ Bump_Hit:	; Routine 2
 		sub.w	obY(a1),d2
 		jsr	(CalcAngle).l
 		jsr	(CalcSine).l
-		muls.w	#-$700,d1
+		muls.w	#-$300,d1
 		asr.l	#8,d1
 		move.w	d1,obVelX(a1)	; bounce Sonic away
-		muls.w	#-$700,d0
+		muls.w	#-$300,d0
 		asr.l	#8,d0
 		move.w	d0,obVelY(a1)	; bounce Sonic away
 		bset	#1,obStatus(a1)
@@ -43,8 +43,8 @@ Bump_Hit:	; Routine 2
 		bclr	#5,obStatus(a1)
 		clr.b	jumping(a1)
 		move.b	#1,obAnim(a0)	; use "hit" animation
-		move.w	#sfx_Bumper,d0
-		jsr	(QueueSound2).l	; play bumper sound
+		move.b	#dBoik,d0	; Boik
+		jsr		(MegaPCM_PlaySample).l
 		lea	(v_objstate).w,a2
 		moveq	#0,d0
 		move.b	obRespawnNo(a0),d0
