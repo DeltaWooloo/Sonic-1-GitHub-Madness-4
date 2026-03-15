@@ -194,7 +194,7 @@ splash_turd macro routine
 	;splash_solid	Crispbilly,	$40, 0,	bgm_Ding,	200
 	;splash_solid	Bonniewtf,	$60, 0,	bgm_Resetti,	300
 	;splash_solid	Rick,		$40, 0,	bgm_Rickroll,	480
-	splash_solid	W,		$40, 0,	bgm_Emerald,	380
+	splash_solid	W,		$40, 0,	bgm_Win2K,	380
 
 	splash_liquid	GM_SegaEU
 	splash_turd	Remilia
