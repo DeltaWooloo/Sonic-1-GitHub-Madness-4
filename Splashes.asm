@@ -158,6 +158,7 @@ splash_turd macro routine
 	splash_liquid	Malachi_Splash
 	splash_liquid	GM_TGSplash
 	splash_liquid	Yume2kki
+	splash_liquid	GM_NT
 
 	;!@ GenesisDoes
 	splash_solid	GenesisDoes1,	$40, 1,	dGenesisDoes1,	60*10

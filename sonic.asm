@@ -409,7 +409,8 @@ ptr_GM_TryAgainEnd:	dc.l	TryAgainEnd		; Testable TRY AGAIN/END screen ($38)
 ptr_GM_Fetus:		dc.l	GM_Fetus		; Difficulty Select screen out of spite ($3C)
 ptr_GM_Damn:		dc.l	GM_Damn			; DAMN!!!!!!!!!!!!!!!!!!!!!!!
 ptr_GM_TGSplash:	dc.l	GM_TGSplash		; TG2000 Splash Screen ($44)
-;ptr_GM_RPGBattle:	dc.l	GM_RPGBattle		; RPG Battle (for Azure Rainforest) ($48)
+ptr_GM_NMR:	dc.l	GM_NT		; Shitle Team ($48)
+;ptr_GM_RPGBattle:	dc.l	GM_RPGBattle		; RPG Battle (for Azure Rainforest) ($4C)
 ptr_SplashScreenSkipper:dc.l	GM_SplashScreenSkipper	; My Stupid Splash is here
 GameModeArray_End:
 ; ===========================================================================
@@ -1991,7 +1992,7 @@ Pal_SplashPal:	bincludeEndMarker	"eurosega/pal.bin"
 Pal_ColdBrew:	bincludeEndMarker	"conimodes/cold brew/palette.bin"
 Pal_ColdBrewG:	bincludeEndMarker	"conimodes/cold brew/palette grayscale.bin"
 Pal_TGPal:	bincludeEndMarker	"TGSplash/pal.bin"
-
+PAL_NT:   bincludeEndMarker	"NMRTT/NM_PAL.bin"
 Pal_SonicRetro: bincludeEndMarker "LiquidSplashes/Rerto/Palette.bin"
 Pal_SonisRetro: bincludeEndMarker "LiquidSplashes/Rerto/PaletteSonis.bin"
 Pal_MenuText:		bincludeEndMarker	"palette/Menu Font.bin"
@@ -2104,6 +2105,7 @@ Sega_GotoTitle:
 		include	"ATOGKsplashesWIP/MAIN.asm"	; Code (simply ran by inclusion)
 	
 ; ===========================================================================
+        include "NEEDLE.asm" ;le shitty code
 
 
 ; ---------------------------------------------------------------------------
@@ -7146,14 +7148,22 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 		include	"_inc/GHM3Explode.asm"
 
 		include	"_gamemode/damn/damn.asm"
-
 	if MSUEnabled
 		include "sound/MSU/MSU.asm"
 	endif
 
 		include "clinton fucker/Clinton Fucker.asm"
 		include	"_incObj/10 Player Bullet.asm"
-		
+; ---------------------------------------------------------------------------
+; NEEDLEMOUSE SHITTERY  Team Splash Screen files
+; ---------------------------------------------------------------------------
+
+ART_NT:   incbin	"NMRTT/NM_ART.bin"
+        even
+
+MAP_NT:   incbin	"NMRTT/NM_MAP.bin"
+        even
+
 ; end of 'ROM'
 		even
 ; ==============================================================
