@@ -13,7 +13,7 @@ Memories_Header:
 	smpsHeaderFM        Memories_FM5,	$01, $16
 	smpsHeaderPSG       Memories_PSG1,	$00, $00, $00, $00
 	smpsHeaderPSG       Memories_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       Memories_PSG3,	$0C, $02, $00, fTone_04
+	smpsHeaderPSG       Memories_PSG3,	$00, $02, $00, fTone_04
 
 ; FM4 Data
 Memories_FM4:
