@@ -68,7 +68,7 @@ SonAni_Float1:	dc.b 7,	fr_Float1, fr_Float4, afEnd
 		even
 SonAni_Float2:	dc.b 7,	fr_Float1, fr_Float2, fr_Float5, fr_Float3, fr_Float6, afEnd
 		even
-SonAni_Spring:	dc.b $2F, fr_Spring1, fr_Spring2, fr_Spring3, afChange, id_Walk
+SonAni_Spring:	dc.b 3, fr_Spring, fr_Spring2, fr_Spring3, afEnd
 		even
 SonAni_Hang:	dc.b 4,	fr_Hang1, fr_Hang2, afEnd
 		even
