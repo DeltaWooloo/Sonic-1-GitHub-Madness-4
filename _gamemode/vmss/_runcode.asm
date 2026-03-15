@@ -64,10 +64,21 @@ Malachi_Splash:
 		rts
 .done:
 ; end of ZX0
+; load joypad routine
+		lea	.joypad(pc),a0
+		move.l	a0,(a1)+
+; run screen
 		jsr	(a5)
 ; alright we're done
 		jsr	VDPSetupGame
 		enable_display
 		rts
+; d0 = non-zero to skip screen
+.joypad:
+		jsr	ReadJoypads
+		move.b	(v_jpadpress1).w,d0
+		and.b	#btnStart,d0
+		rts
+
 .vmsplash:	binclude "_gamemode/vmss/_vmsplash.zx0"
 		even
