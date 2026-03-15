@@ -66,7 +66,7 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 	lhead	plcid_Joint,Kos_Joint,plcid_Joint,Blk16_Joint,Blk256_Joint,bgm_FZ,palid_Joint,Col_Joint,ObjPos_Joint3,Level_Joint3,Level_Jointbg
 	lhead	plcid_Joint,Kos_Joint,plcid_Joint,Blk16_Joint,Blk256_Joint,bgm_FZ,palid_Joint,Col_Joint,ObjPos_Joint1,Level_Joint1,Level_Jointbg
 
-	lhead	plcid_Joint,Kos_DVZ,plcid_Joint,Blk16_DVZ,Blk256_DVZ,bgm_FZ,palid_DVZ,Col_DVZ,ObjPos_DVZ1,Level_DVZ1,Level_DVZbg	
+	lhead	plcid_Joint,Kos_DVZ,plcid_Joint,Blk16_DVZ,Blk256_DVZ,bgm_DoleDetective,palid_DVZ,Col_DVZ,ObjPos_DVZ1,Level_DVZ1,Level_DVZbg	
 	lhead	plcid_Joint,Kos_DVZ,plcid_Joint,Blk16_DVZ,Blk256_DVZ,bgm_FZ,palid_DVZ,Col_DVZ,ObjPos_DVZ2,Level_DVZ2,Level_DVZbg
 	lhead	plcid_Joint,Kos_DVZ,plcid_Joint,Blk16_DVZ,Blk256_DVZ,bgm_FZ,palid_DVZ,Col_DVZ,ObjPos_DVZ3,Level_DVZ3,Level_DVZbg
 	lhead	plcid_Joint,Kos_DVZ,plcid_Joint,Blk16_DVZ,Blk256_DVZ,bgm_FZ,palid_DVZ,Col_DVZ,ObjPos_DVZ1,Level_DVZ1,Level_DVZbg
