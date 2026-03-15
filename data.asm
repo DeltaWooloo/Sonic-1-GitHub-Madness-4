@@ -472,7 +472,7 @@ Col_SBZ:	binclude	"collide/SBZ.bin"	; SBZ index
 		even
 Col_BREW:	binclude	"collide/BREW.bin"	; BREW index
 		even
-Col_WIN:	binclude	"collide/SLZ.bin"	; WIN index
+Col_WIN:	binclude	"collide/WIN.bin"	; WIN index
 		even
 Col_Joint:	binclude	"collide/Joint.bin"	; Joint index
 		even
