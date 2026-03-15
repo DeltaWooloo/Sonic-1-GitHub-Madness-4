@@ -379,7 +379,7 @@ Debugger_Data:
 		dc.l	0
 
 		dc.l	v_characterid		; CHARACTER
-		dc.b	$01,$01,chrid_last,$00	; step 1, range 1-99
+		dc.b	$01,$00,chrid_last,$00	; step 1, range 1-99
 		dc.l	CharacterNameTable
 
 		dc.l	f_debugmode+1		; DEBUG MODE

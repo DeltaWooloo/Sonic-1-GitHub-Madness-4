@@ -106,7 +106,8 @@ id_DVZ:		equ 10
 
 ; Playable Characters
 chrid_tonic	equ 0
-chrid_last	equ 0
+chrid_maniac	equ 1
+chrid_last	equ 1
 
 ; Colours
 cBlack:		equ $000		; colour black
