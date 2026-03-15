@@ -2,17 +2,17 @@ BGM_Dummy_Header:
 	smpsHeaderStartSong	3
 	smpsHeaderVoice		BGM_Dummy_Voices
 	smpsHeaderChan		$04, $00
-	smpsHeaderTempo		$02, $0A
+	smpsHeaderTempo		$01, $01
 
 	smpsHeaderDAC		BGM_Dummy_DAC
-	smpsHeaderFM		BGM_Dummy_FM1,	$00, $0B
-	smpsHeaderFM		BGM_Dummy_FM2,	$00, $0D
-	smpsHeaderFM		BGM_Dummy_FM3,	$00, $09
+	smpsHeaderFM		BGM_Dummy_FM1,	$07, $01
+	smpsHeaderFM		BGM_Dummy_FM2,	$10, $01
+	smpsHeaderFM		BGM_Dummy_FM3,	$02, $01
 
 ; FM1 Data
 BGM_Dummy_FM1:
 	smpsSetvoice	$00
-	dc.b	nC5, $04, nD5
+	dc.b	nC5, $0A, nD5
 
 BGM_Dummy_Jump00:
 	smpsSetvoice	$00
@@ -30,7 +30,7 @@ BGM_Dummy_Jump00:
 ; FM2 Data
 BGM_Dummy_FM2:
 	smpsSetvoice	$00
-	dc.b	nRst, $08
+	dc.b	nRst, $10
 
 BGM_Dummy_Jump01:
 	smpsCall	BGM_Dummy_Call00
@@ -51,7 +51,7 @@ BGM_Dummy_Call00:
 ; FM3 Data
 BGM_Dummy_FM3:
 	smpsSetvoice	$00
-	dc.b	nRst, $08
+	dc.b	nRst, $09
 
 BGM_Dummy_Jump02:
 	smpsCall	BGM_Dummy_Call02
@@ -85,7 +85,11 @@ BGM_Dummy_Call03:
 
 ; DAC Data
 BGM_Dummy_DAC:
-	smpsStop
+	dc.b	dSnare, dSnare,dSnare,dSnare,dSnare,dSnare
+	dc.b	dSnare, dSnare,dSnare,dSnare,dSnare,dSnare
+	dc.b	dSnare, dSnare,dSnare,dSnare,dSnare,dSnare
+	dc.b	dSnare, dSnare,dSnare,dSnare,dSnare,dSnare
+	smpsJump BGM_Dummy_DAC
 
 BGM_Dummy_Voices:
 ;	Voice $00
