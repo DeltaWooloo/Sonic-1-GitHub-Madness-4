@@ -12,7 +12,7 @@ fight.mid_Header:
 	smpsHeaderFM        fight.mid_FM5,	$00, $10
 	smpsHeaderPSG       fight.mid_PSG1,	$00, $02, $00, $08
 	smpsHeaderPSG       fight.mid_PSG2,	$00, $02, $00, $08
-	smpsHeaderPSG       fight.mid_PSG3,	$0C, $03, $00, fTone_02
+	smpsHeaderPSG       fight.mid_PSG3,	$00, $03, $00, fTone_02
 	
 ; FM1 Data
 fight.mid_FM1:

@@ -137,7 +137,7 @@ ptr_mus5A:		dc.l Music5A
 ptr_mus52:		dc.l Music52
 ptr_mus5B:		dc.l Music5B
 ptr_mus5C:		dc.l Music5C
-;ptr_mus5D:		dc.l Music5D
+ptr_mus5D:		dc.l Music5D
 ;ptr_mus5E:		dc.l Music5E
 ;ptr_mus5F:		dc.l Music5F
 	dc.l 0	; i had to do this because for some reason it wouldnt play the final track otherwise - coni
@@ -325,6 +325,8 @@ Music52:	include	"music/Kat/Mus - Dole Detective.asm"
 Music5B:	include "music/Dawid/WINDOWS2000.asm";you got a windows 2000 product activation key!!!!!!!!! (or you used kgen you fucking idiot)
 		even
 Music5C:	include	"music/TG2000Tracks/Easton.asm" 
+		even
+Music5D:	include	"music/CNTracks/SneakySnitch.asm"
 		even
 ;Music53:	include	"music/GenesisDoes/GenesisCan1.asm"
 ;		even
