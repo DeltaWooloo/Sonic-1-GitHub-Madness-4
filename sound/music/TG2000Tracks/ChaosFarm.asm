@@ -4,7 +4,8 @@ ChaosFarm_Header:
 	smpsHeaderChan	$06,	$03
 	smpsHeaderTempo	$01,	$00
 
-	smpsHeaderDAC   ChaosFarm_DAC
+
+	smpsHeaderDAC	ChaosFarm_DAC
 	smpsHeaderFM	ChaosFarm_FM1,	smpsPitch00,	$00
 	smpsHeaderFM	ChaosFarm_FM2,	smpsPitch00,	$00
 	smpsHeaderFM	ChaosFarm_FM3,	smpsPitch00,	$00
@@ -23,6 +24,7 @@ ChaosFarm_PSG3:
 ; DAC Data
 ChaosFarm_DAC:
 	smpsStop
+
 
 ; FM1 Data
 ChaosFarm_FM1:
@@ -317,4 +319,5 @@ ChaosFarm_Voices:
 	dc.b		$0B,$1F,$0F,$1F,$0F,$23,$15,$1D,$00;			Voice 00
 	dc.b		$3C,$31,$52,$50,$30,$52,$53,$52,$53,$08,$00,$08,$00,$04,$00,$04
 	dc.b		$00,$10,$07,$10,$07,$1A,$00,$16,$00;			Voice 01
+	smpsFooterEndSong	"TG2000Tracks/ChaosFarm.asm"
 	even
