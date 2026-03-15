@@ -311,9 +311,9 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_ColdBrew
 	nextenum bgm_DoleBOSS
 	nextenum bgm_GreenHill
-	nextenum bgm_CleanSlate
 	nextenum bgm_OrangeSong
-bgm__Last = bgm_OrangeSong
+	nextenum bgm_CleanSlate
+bgm__Last = bgm_CleanSlate
 
 ; Sound effects
 	enum	sfx__First=$A0
