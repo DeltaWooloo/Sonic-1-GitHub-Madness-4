@@ -1,5 +1,5 @@
 cls
-call KENSSharp.exe -r k "BREW.kos"
+call KENSSharp.exe -r k "DVZ.kos"
 call KENSSharp.exe -r k "GHZ.kos"
 call KENSSharp.exe -r k "Joint.kos"
 call KENSSharp.exe -r k "LZ.kos"
@@ -12,4 +12,5 @@ call KENSSharp.exe -r k "SBZ.kos"
 call KENSSharp.exe -r k "SLZ.kos"
 call KENSSharp.exe -r k "SYZ.kos"
 call KENSSharp.exe -r k "WIN.kos"
+call KENSSharp.exe -r k "BREW.kos"
 REM pause

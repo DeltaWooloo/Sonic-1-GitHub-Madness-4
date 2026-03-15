@@ -63,10 +63,11 @@ SampleTable:
 	dcSample	TYPE_DPCM,	TheFourth,	16000,FLAGS_SFX	; $A9
 	dcSample	TYPE_DPCM,	eggmanLaugh,	16000,FLAGS_SFX	; $AA
 	dcSample	TYPE_DPCM,	GenesisDoes1,	16000		; $AB
+	;!@ DELETED - NOP'd out with dummy.wav
 	dcSample	TYPE_DPCM,	GenesisCan1,	16000		; $AC
 	dcSample	TYPE_DPCM,	GenesisCan2,	16000		; $AD
+	
 	dcSample	TYPE_DPCM,	DAMN,		16000		; $AE
-
 	dcSample	TYPE_PCM,	QuakeRocket,	11297,		; $AF
 	dcSample	TYPE_PCM,	supbeaches,	11297,		; $B0
 	dcSample	TYPE_PCM,	CL_Penis,	11297,		; $B1
@@ -180,9 +181,13 @@ SampleTable:
 	incdac	TheFourth,"sound/dac/GenesisDoes/4.dpcm"
 	incdac	eggmanLaugh,"sound/dac/GenesisDoes/eggmanLaugh.dpcm"
 	incdac	GenesisDoes1,"sound/dac/GenesisDoes/GenesisDoes1.dpcm"
-	incdac	GenesisCan1,"sound/dac/GenesisDoes/GenesisCan1.dpcm"
-	incdac	GenesisCan2,"sound/dac/GenesisDoes/GenesisCan2.dpcm"
-	incdac	SM64_MM,"sound/dac/GenesisDoes/SM64_MM.dpcm"
+	;!@ DELETED - NOP'd out with Dummy.wav
+	;incdac	GenesisCan1,"sound/dac/GenesisDoes/GenesisCan1.dpcm"
+	;incdac	GenesisCan2,"sound/dac/GenesisDoes/GenesisCan2.dpcm"
+	;incdac	SM64_MM,"sound/dac/GenesisDoes/SM64_MM.dpcm"
+	incdac	GenesisCan1,"sound/dac/dummy.dpcm"
+	incdac	GenesisCan2,"sound/dac/dummy.dpcm"
+	incdac	SM64_MM,"sound/dac/dummy.dpcm"
 
 ; ---------------------------------------------------------------
 ; Whatever you want the Sega sound to be
