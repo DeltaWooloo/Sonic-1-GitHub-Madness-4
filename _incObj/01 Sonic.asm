@@ -282,6 +282,7 @@ Sonic_MdJump:
 		subi.w	#$28,obVelY(a0)
 
 .notunderwater:
+        bsr.w	Sonic_ExtraJump
 		bsr.w	Sonic_JumpAngle
 		bsr.w	Sonic_Floor
 		rts
@@ -314,6 +315,7 @@ Sonic_MdJump2:
 		beq.s	.SHITCODE
 		subi.w	#$28,obVelY(a0)
 .SHITCODE		
+        bsr.w	Sonic_ExtraJump
 		bsr.w	Sonic_JumpAngle
 		bsr.w	Sonic_Floor
 		rts
@@ -975,6 +977,29 @@ Sonic_ChkRoll:
 		rts
 ; End of function Sonic_Roll
 
+ExtraJumpUsed:		equ  $3b
+
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; EXTRAJUMP CODE
+; ---------------------------------------------------------------------------
+; ===========================================================================
+
+Sonic_ExtraJump:
+		tst.b   ExtraJumpUsed(a0)   
+        bne.s   ExtraJumpReturn
+		move.b  (v_jpadpress2).w,d0    ; Is ABC pressed? 
+        andi.b  #$70,d0             ; the button input itself
+        beq.w   ExtraJumpReturn      ; If not, branch
+		move.b  #1,ExtraJumpUsed(a0)
+	    move.w  #-$3E0,obVelY(a0)    
+        move.w  #-$300,obVelX(a0)
+		btst	#0,obStatus(a0)	; Is Sonic facing left?
+		bne.s	ExtraJumpReturn	; if not, branch
+		neg.w	obVelX(a0)
+		
+ExtraJumpReturn:
+        rts
 ; ---------------------------------------------------------------------------
 ; Subroutine allowing Sonic to jump
 ; ---------------------------------------------------------------------------
@@ -983,6 +1008,7 @@ Sonic_ChkRoll:
 
 
 Sonic_Jump:
+		clr.b   ExtraJumpUsed(a0)
 		move.b	(v_jpadpress2).w,d0
 		andi.b	#btnB|btnC,d0	; is B or C pressed?
 		beq.w	.return	; if not, branch
