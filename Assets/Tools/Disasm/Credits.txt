@@ -1,0 +1,14 @@
+GoodToFuFriday:							Basis of Sega Mega Pico modkit, inspiration for ROM hack
+GenesisFan64 (RIP):						NikonaMD library, basis for Hardware Diagnosics program
+MaskOfDestiny:							Blastem Emulator (Pico/Copera emulation), adding support for Sega Mega Pico mode
+Notaz/Irixxx:							PicoDrive emulator/enhanced, Pico notes
+Jorge:									Genesis 3 VA2 Pico Mode notes, support on modkit design
+
+
+AlexField (S2 Wai beta, Options/2P Results beta music SMPS2ASM):	https://github.com/AlexField442/Sonic-2-Simon-Wai-Disassembly
+
+Iso Kilo (Proto Victory): 				https://sonicresearch.org/community/index.php?threads/restore-sonic-1s-prototype-victory.5790/#post-83222
+		 (Centered Title Screen):		https://sonicresearch.org/community/index.php?threads/easy-centering-sonic-1s-title-screen.5861/
+		 (ADudeCalledLeo/S1 Debug Fix):	https://sonicresearch.org/community/index.php?threads/how-to-fix-sonic-1s-debug-mode.5664/
+
+ETC

@@ -1,10 +1,21 @@
 REM Custom build process to re-compress all art assets, for space saving$
+REM Also custom for selectively compiling SMPS2ASM files
 
 Set Recomp=0
 Set musiccomp=0
 IF %Recomp% EQU 0 GOTO SKIP
 
 cls
+
+cd "_gamemode"
+cd "damn"
+call recmp.bat
+cd ..\
+
+cd "ThanatosCredits"
+call recmp.bat
+cd ..\..\
+
 cd "artkos"
 call recmp.bat
 cd ..
@@ -12,6 +23,15 @@ cd ..
 cd "artnem"
 call recmp.bat
 cd ..
+
+cd "ATOGKsplashesWIP"
+cd "Art"
+call recmp.bat
+cd ..
+
+cd "Eni"
+call recmp.bat
+cd ..\..\
 
 cd "ATOGKSpongeBob"
 call recmp.bat
@@ -27,11 +47,18 @@ cd "Nemesis"
 call recmp.bat
 cd ..\..\
 
+cd "clinton fucker"
+call recmp.bat
+cd ..
+
 cd "conimodes"
 cd "cold brew"
 call recmp.bat
 cd ..
 cd "fetus"
+call recmp.bat
+cd ..
+cd "foxyboo"
 call recmp.bat
 cd ..
 cd "splash"
@@ -48,21 +75,27 @@ call recmp.bat
 cd ..
 cd "GameOver"
 call recmp.bat
-cd ..\..\..\..\
+cd ..\..\
+cd "Sprite\Cursor"
+call recmp.bat
+cd ..\..\..\..
 
 cd "CrazyRemilia"
 cd "Remi"
 call recmp.bat
 cd ..\..\
 
+cd "DAX_Splash"
+cd "Art"
+call recmp.bat
+cd ..
+cd "Maps"
+call recmp.bat
+cd ..\..\
+
 cd "eurosega"
 call recmp.bat
 cd ..
-
-cd "hipncoolstuff"
-cd "ThanatosCredits"
-call recmp.bat
-cd ..\..\
 
 cd "LiquidSplashes"
 cd "2kki"
@@ -89,6 +122,11 @@ cd ..
 cd "map256"
 call recmp.bat
 cd ..
+
+cd "Nano's SHIT"
+cd "splash\data\"
+call recmp.bat
+cd ..\..\..
 
 cd "segadoodoo"
 call recmp.bat

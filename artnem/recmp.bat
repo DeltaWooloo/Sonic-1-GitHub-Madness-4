@@ -1,4 +1,5 @@
 cls
+call KENSSharp.exe -r n "8x8 - DVZ.bin"
 call KENSSharp.exe -r n "8x8 - GHZ1.nem"
 call KENSSharp.exe -r n "8x8 - SYZ.nem"
 call KENSSharp.exe -r n "Animal Chicken.nem"
@@ -140,6 +141,7 @@ call KENSSharp.exe -r n "SYZ Small Spikeball.nem"
 call KENSSharp.exe -r n "Title Cards.nem"
 call KENSSharp.exe -r n "Title Screen Foreground.nem"
 call KENSSharp.exe -r n "Title Screen Sonic.nem"
+call KENSSharp.exe -r n "Title Screen Sonic.nemfuck"
 call KENSSharp.exe -r n "Title Screen TM.nem"
 call KENSSharp.exe -r n "Unused - Eggman Ending.nem"
 call KENSSharp.exe -r n "Unused - Explosion.nem"

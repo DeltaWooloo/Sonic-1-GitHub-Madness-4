@@ -161,7 +161,6 @@ splash_turd macro routine
 
 	;!@ GenesisDoes
 	splash_solid	GenesisDoes1,	$40, 1,	dGenesisDoes1,	60*10
-	; sorry man
 	;splash_solid	GenesisCan1,	$40, 1,	dGenesisCan1,	60*3
 	;splash_solid	GenesisCan2,	$40, 1,	dGenesisCan2,	60*3
 	;splash_solid	SM64_MM,	$40, 1,	dSM64_MM,	60*4
