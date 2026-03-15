@@ -2003,7 +2003,7 @@ Sonic_LoadGfx:
 		move.b	d0,(v_sonframenum).w		; update cached frame number
 		move.l	dgfxaddr(a0),a2			; load Sonic DPLC table
 		move.w	#ArtTile_Sonic*tile_size,d4	; starting VRAM tile
-		move.l	#Art_Sonic,d6			; base Sonic art pointer
+		move.l	artaddr(a0),d6			; base Sonic art pointer
 		jmp	(LoadDynPLC).l			; load DPLC
 .end:
 		rts					; return
