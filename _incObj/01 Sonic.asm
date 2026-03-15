@@ -903,7 +903,6 @@ Sonic_LevelBound:
 		move.w	#0,obX+2(a0)
 		move.w	#0,obInertia(a0)
 		move.w	#-$200,obVelY(a0)
-; sfx_Bumper sfx_SSGlass dBoioing dPyo
 		move.w	#sfx_Bonus,d0
 		jsr	QueueSound2
 		bra.w	.chkbottom

@@ -28,10 +28,12 @@ ReactToItem_Other:
 .loop:
 		cmpa.l	a0,a1
 		beq.s 	.next
+		
 		tst.b	obRender(a1)
 		bpl.s	.next
+
 		move.b	obColType(a1),d0
-		bne.s	.proximity	; if nonzero, branch
+		bne.s	.checkx	; if nonzero, branch
 
 .next:
 		lea	object_size(a1),a1	; next object RAM
@@ -42,29 +44,22 @@ ReactToItem_Other:
 
 ; ===========================================================================
 
-.proximity:
-		andi.w	#$3F,d0
-		add.w	d0,d0
-		lea	.sizes-2(pc,d0.w),a2
+.checkx:
 		moveq	#0,d1
-		move.b	(a2)+,d1
+		move.b	obWidth(a1),d1
 		move.w	obX(a1),d0
 		sub.w	d1,d0
 		sub.w	d2,d0
-		bcc.s	.outsidex	; branch if not touching
+		bcc.s	.next	; branch if not touching
 		add.w	d1,d1
 		add.w	d1,d0
 		bcs.s	.checky	; branch if touching
 		bra.w	.next
 ; ===========================================================================
 
-.outsidex:
-		cmp.w	d4,d0
-		bhi.w	.next
-
 .checky:
 		moveq	#0,d1
-		move.b	(a2)+,d1
+		move.b	obHeight(a1),d1
 		move.w	obY(a1),d0
 		sub.w	d1,d0
 		sub.w	d3,d0
@@ -78,60 +73,15 @@ ReactToItem_Other:
 .outsidey:
 		cmp.w	d5,d0
 		bhi.w	.next
-		; RaiseError "outside y"
 
 ; we're all set and can run the callback
 .withiny:
-		; RaiseError "within y"
-		move.b	obColType(a0),d1 ; load collision type of host
-		move.b	obColType(a1),d2 ; load collision type of victim
 		movea.l	obColCallback(a0), a3
 		jsr 	(a3)
 		
 		; might add more stuff here please don't kill me dax
 		rts
 ; ===========================================================================
-
-; AS is forcing my hand to make this a local label or else it won't build
-; so i just have to make a duplicate
-; fuck you
-.sizes:		;   width, height
-		dc.b  $14, $14		; $01
-		dc.b   $C, $14		; $02
-		dc.b  $14,  $C		; $03
-		dc.b	4, $10		; $04
-		dc.b   $C, $12		; $05
-		dc.b  $10, $10		; $06
-		dc.b	6,   6		; $07
-		dc.b  $18,  $C		; $08
-		dc.b   $C, $10		; $09
-		dc.b  $10,  $C		; $0A
-		dc.b	8,   8		; $0B
-		dc.b  $14, $10		; $0C
-		dc.b  $14,   8		; $0D
-		dc.b   $E,  $E		; $0E
-		dc.b  $18, $18		; $0F
-		dc.b  $28, $10		; $10
-		dc.b  $10, $18		; $11
-		dc.b	8, $10		; $12
-		dc.b  $20, $70		; $13
-		dc.b  $40, $20		; $14
-		dc.b  $80, $20		; $15
-		dc.b  $20, $20		; $16
-		dc.b	8,   8		; $17
-		dc.b	4,   4		; $18
-		dc.b  $20,   8		; $19
-		dc.b   $C,  $C		; $1A
-		dc.b	8,   4		; $1B
-		dc.b  $18,   4		; $1C
-		dc.b  $28,   4		; $1D
-		dc.b	4,   8		; $1E
-		dc.b	4, $18		; $1F
-		dc.b	4, $28		; $20
-		dc.b	4, $20		; $21
-		dc.b  $18, $18		; $22
-		dc.b   $C, $18		; $23
-		dc.b  $48,   8		; $24
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to react to obColType(a0)

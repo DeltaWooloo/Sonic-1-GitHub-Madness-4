@@ -65,7 +65,6 @@ dYouCanSuck			ds.b 1
 dDoYouSuck			ds.b 1
 dDicks				ds.b 1
 dOnTheBall			ds.b 1
-dPenises			ds.b 1
 dEggNo				ds.b 1
 dBabyAlarm			ds.b 1
 dBoingBoing			ds.b 1
@@ -79,7 +78,6 @@ dSega				ds.b 1
 dLetsGOO			ds.b 1
 dLg				ds.b 1
 dSega2				ds.b 1
-dPyo				ds.b 1
 dCrapSnare			ds.b 1
 dRobiScream			ds.b 1
 	dephase
