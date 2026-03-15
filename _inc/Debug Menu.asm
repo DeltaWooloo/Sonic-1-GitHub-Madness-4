@@ -531,7 +531,7 @@ GamemodeNameTable:
 		dc.w	.Difficulty-.t
 		dc.w	.DamnScreen-.t
 		rept ( (GameModeArray_End-GameModeArray)-(((*)-.t)*2) )/4
-		dc.w	.IDFK-.t
+		dc.w	.TG2000Logo-.t
 		dc.w	.Skipper-.t
 		endr
 
@@ -551,8 +551,8 @@ GamemodeNameTable:
 .TryAgainTest:	dc.b	"TRY AGAIN/END   "
 .Difficulty:	dc.b	"DIFFICULTY      "
 .DamnScreen:	dc.b	"DAMN!!!!!!!!!!!!"
-.IDFK:		dc.b	"PLACEHOLDER NAME"
-.Skipper:	dc.b	"SPLASH SKIPPER "
+.TG2000Logo:	dc.b	"TG2000 LOGO     "
+.Skipper:	dc.b	"SPLASH SKIPPER  "
 		even
 
 CharacterNameTable:

@@ -164,7 +164,7 @@ splash_turd macro routine
 	;splash_solid	GenesisCan2,	$40, 1,	dGenesisCan2,	60*3
 	;splash_solid	SM64_MM,	$40, 1,	dSM64_MM,	60*4
 	
-	;splash_solid	Blessed,	$40, 0,	sfx_SSGoal,	200
+	splash_solid	Blessed,	$40, 0,	sfx_SSGoal,	200
 	;splash_solid	Shiki,		$20, 0,	bgm_SwingSinners,280
 	;splash_solid	SonicBroke,	$20, 0,	bgm_Continue2,480
 	;splash_solid	Monke,		$20, 0,	bgm_Carefree,	480
