@@ -39,7 +39,7 @@ Deform_Index:	dc.w Deform_GHZ-Deform_Index, Deform_LZ-Deform_Index
 		dc.w Deform_SYZ-Deform_Index, Deform_SBZ-Deform_Index
 		zonewarning Deform_Index,2
 		dc.w Deform_GHZ-Deform_Index, Deform_GHZ-Deform_Index
-		dc.w Deform_SLZ-Deform_Index, Deform_Joint-Deform_Index
+		dc.w Deform_WZ-Deform_Index, Deform_Joint-Deform_Index
 		dc.w Deform_LZ-Deform_Index,Deform_LZ-Deform_Index
 		dc.w Deform_LZ-Deform_Index,Deform_LZ-Deform_Index
 ; ---------------------------------------------------------------------------
@@ -618,6 +618,35 @@ Deform_Joint:
 		rts
 ; End of function Deform_Joint
 
+
+; ---------------------------------------------------------------------------
+; The Windows Zone background layer deformation code
+; ---------------------------------------------------------------------------
+
+; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
+
+Deform_WZ:
+		move.w	(v_scrshiftx).w,d4
+		ext.l	d4
+		asl.l	#7,d4
+		moveq	#0,d6
+		bsr.w	BGScroll_Block2
+
+		move.w	(v_screenposx).w,d0
+		neg.w	d0
+		swap	d0			; FG scroll in high word
+		move.w	(v_bg2screenposx).w,d0
+		neg.w	d0			; BG scroll in low word
+
+		lea	(v_hscrolltablebuffer).w,a1
+		move.w	#$DF,d1			; 224 lines
+		
+	.fillLoop:
+		move.l	d0,(a1)+
+		dbf	d1,.fillLoop
+
+		move.w	(v_screenposy).w,(v_bgscreenposy).w
+		rts
 ; ---------------------------------------------------------------------------
 ; temporarily using generictimer as an input
 ; ---------------------------------------------------------------------------

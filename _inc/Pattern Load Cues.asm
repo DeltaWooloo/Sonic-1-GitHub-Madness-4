@@ -247,22 +247,10 @@ PLC_BREW2end:
 ; ---------------------------------------------------------------------------
 PLC_WIN:	dc.w ((PLC_WIN2-PLC_WIN-2)/6)-1
 ;		plcm	Nem_WIN,       ArtTile_Level                    ; SLZ main patterns
-		plcm	Nem_Bomb,      ArtTile_Bomb                     ; bomb enemy
-		plcm	Nem_Orbinaut,  ArtTile_SLZ_Orbinaut             ; orbinaut enemy
-		plcm	Nem_MzFire,    ArtTile_SLZ_Fireball             ; fireballs
-		plcm	Nem_SlzBlock,  ArtTile_SLZ_Collapsing_Floor     ; block
-		plcm	Nem_SlzWall,   ArtTile_GHZ_SLZ_Smashable_Wall+4 ; breakable wall
-		plcm	Nem_Spikes,    ArtTile_Spikes                   ; spikes
 		plcm	Nem_HSpring,   ArtTile_Spring_Horizontal        ; horizontal spring
 		plcm	Nem_VSpring,   ArtTile_Spring_Vertical          ; vertical spring
 
 PLC_WIN2:	dc.w ((PLC_WIN2end-PLC_WIN2-2)/6)-1
-		plcm	Nem_Seesaw,    ArtTile_SLZ_Seesaw                ; seesaw
-		plcm	Nem_Fan,       ArtTile_SLZ_Fan                   ; fan
-		plcm	Nem_Pylon,     ArtTile_SLZ_Pylon                 ; foreground pylon
-		plcm	Nem_SlzSwing,  ArtTile_SLZ_Swing                 ; swinging platform
-		plcm	Nem_SlzCannon, ArtTile_SLZ_Fireball_Launcher     ; fireball launcher
-		plcm	Nem_SlzSpike,  ArtTile_SLZ_Spikeball             ; spikeball
 PLC_WIN2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - The Joint
