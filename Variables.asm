@@ -114,8 +114,8 @@ v_jpadpress1:		ds.b	1		; joypad input - pressed
 			ds.b	6		; unused
 v_vdp_buffer1:		ds.w	1		; VDP instruction buffer of register $81 (used for enabling/disabling display)
 v_flashcolor:		ds.w	1		; flash color
-			ds.b	1		; unused
-			ds.b	3
+v_bg_calc_var:		ds.w	1		; bg calc
+			ds.b	2
 v_generictimer:		ds.w	1		; generic timer, decrements to 0 in vblank (word)
 v_scrposy_vdp:		ds.w	1		; screen position y (VDP)
 v_bgscrposy_vdp:	ds.w	1		; background screen position y (VDP)
