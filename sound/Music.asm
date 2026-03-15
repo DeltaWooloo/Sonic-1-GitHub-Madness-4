@@ -126,7 +126,6 @@ ptr_mus4E:		dc.l Music4E
 ptr_mus4F:		dc.l Music4F
 ptr_mus50:		dc.l Music50
 ptr_mus51:		dc.l Music51
-;ptr_mus52:		dc.l Music52
 ;ptr_mus53:		dc.l Music53
 ;ptr_mus54:		dc.l Music54
 ;ptr_mus55:		dc.l Music55
@@ -135,6 +134,7 @@ ptr_mus57:		dc.l Music57
 ptr_mus58:		dc.l Music58
 ptr_mus59:		dc.l Music59
 ptr_mus5A:		dc.l Music5A
+ptr_mus52:		dc.l Music52
 ;ptr_mus5B:		dc.l Music5B
 ;ptr_mus5C:		dc.l Music5C
 ;ptr_mus5D:		dc.l Music5D
@@ -310,14 +310,6 @@ Music50:	include	"music/Mus90 - Continue Screen.asm"
 		even
 Music51:	include	"music/TG2000Tracks/Coffinman.asm" ;Boss Track
 		even
-;Music52:	include	"music/GenesisDoes/GenesisDoes1.asm"
-;		even
-;Music53:	include	"music/GenesisDoes/GenesisCan1.asm"
-;		even
-;Music54:	include	"music/GenesisDoes/GenesisCan2.asm"
-;		even
-;Music55:	include	"music/GenesisDoes/SM64_MM.asm"
-;		even
 Music56:	include	"music/CNTracks/CometSTG2.asm"
 		even
 Music57:	include	"music/CNTracks/TheCheetosChairRoom.asm"
@@ -328,5 +320,13 @@ Music59:	include	"music/TG2000Tracks/OrangeSong.asm"
 		even
 Music5A:	include	"music/PikaNoob/treasurecaves.asm" 
 		even
+Music52:	include	"music/Kat/Mus - Dole Detective.asm"
+		even
+;Music53:	include	"music/GenesisDoes/GenesisCan1.asm"
+;		even
+;Music54:	include	"music/GenesisDoes/GenesisCan2.asm"
+;		even
+;Music55:	include	"music/GenesisDoes/SM64_MM.asm"
+;		even
 
 	END
