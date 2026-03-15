@@ -17,7 +17,7 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 
 
 	lhead	plcid_GHZ,Kos_GHZ,plcid_GHZ2,Blk16_GHZ,Blk256_GHZ,bgm_GHZ,palid_GHZ,Col_GHZ,ObjPos_GHZ1,Level_GHZ1,Level_GHZbg		
-	lhead	plcid_GHZ,Kos_GHZ,plcid_GHZ2,Blk16_GHZ,Blk256_GHZ,bgm_Carefree,palid_GHZ,Col_GHZ,ObjPos_GHZ2,Level_GHZ2,Level_GHZbg
+	lhead	plcid_GHZ,Kos_GHZ,plcid_GHZ2,Blk16_GHZ,Blk256_GHZ,bgm_OrangeSong,palid_GHZ,Col_GHZ,ObjPos_GHZ2,Level_GHZ2,Level_GHZbg
 	lhead	plcid_GHZ,Kos_GHZ,plcid_GHZ2,Blk16_GHZ,Blk256_GHZ,bgm_GreenHills,palid_GHZ,Col_GHZ,ObjPos_GHZ3,Level_GHZ3,Level_GHZbg		
 	lhead	plcid_GHZ,Kos_GHZ,plcid_GHZ2,Blk16_GHZ,Blk256_GHZ,bgm_GHZ,palid_GHZ,Col_GHZ,ObjPos_Null,Level_GHZ1,Level_GHZbg			
 
