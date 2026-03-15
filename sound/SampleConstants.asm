@@ -4,25 +4,37 @@
 
 -
 	phase $81
+; Sonic 1
 dKick				ds.b 1
 dSnare				ds.b 1
+dProtoSnare			ds.b 1
 dTimpani			ds.b 1
 dHiTimpani			ds.b 1
 dMidTimpani			ds.b 1
 dLowTimpani			ds.b 1
 dVLowTimpani			ds.b 1
 
+; Sonic 2
+dHiTom				ds.b 1
+dMidTom				ds.b 1
+dLowTom				ds.b 1
+dFloorTom			ds.b 1
+
+; Sonic 3
 dElectricHighTom		ds.b 1
 dElectricMidTom			ds.b 1
 dElectricLowTom			ds.b 1
 dElectricFloorTom		ds.b 1
 
+; Dax Sample Set
 dChunkyKick			ds.b 1
 dPokeSnare			ds.b 1
 dPokeKickCrashHi		ds.b 1
 dPokeHiTimpani			ds.b 1
 dPokeMidTimpani			ds.b 1
 dPokeLowTimpani			ds.b 1
+
+; Amen Break Sample Set
 dAmenKick:			ds.b 1
 dAmenSnare1:			ds.b 1
 dAmenSnare2:			ds.b 1
@@ -31,8 +43,11 @@ dAmenShortKick2:		ds.b 1
 dAmenRide1:			ds.b 1
 dAmenRide2:			ds.b 1
 dAmenCrash:			ds.b 1
+
+; Clinton Fucker
 dClintLoopA:			ds.b 1
 dClintLoopB:			ds.b 1
+
 ; SFX Samples
 dDAMN				ds.b 1
 dTrevor				ds.b 1
@@ -42,6 +57,7 @@ dCrispBilly			ds.b 1
 dBlueLobster			ds.b 1
 dWinTwoK			ds.b 1
 dDeppaDig			ds.b 1
+
 ;!@ GenesisDoes
 dEagleSoftSong			ds.b 1
 dYoFreddy			ds.b 1

@@ -143,6 +143,11 @@ DaxKatter_Splash:
 		bne.s	.mainloop2
 
 .done
+		move.b	#bgm_Fade,d0
+		jsr	(PlaySound_Special).l		; fade out music
+		jsr	(PaletteFadeOut).w
+		jsr	VDPSetupGame
+		enable_display
 		rts
 
 ; ---------------------------------------------------------------------------

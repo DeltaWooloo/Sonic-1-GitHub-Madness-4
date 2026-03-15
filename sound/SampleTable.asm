@@ -6,12 +6,20 @@ SampleTable:
 	; STOCK SONIC 1
 	dcSample	TYPE_DPCM,	Kick,		8000		; $81
 	dcSample	TYPE_PCM,	Snare,		24000		; $82
+	dcSample	TYPE_PCM,	Snare,		16000		; $82
 	dcSample	TYPE_DPCM,	Timpani,	7250		; $83
 	dcSample	TYPE_DPCM,	Timpani,	9750		; $84
 	dcSample	TYPE_DPCM,	Timpani,	8750		; $85
 	dcSample	TYPE_DPCM,	Timpani,	7150		; $86
 	dcSample	TYPE_DPCM,	Timpani,	7000		; $87
 
+	; SONIC 2
+	dcSample	TYPE_PCM,	Tom,		22799		; S2 Hi-Tom
+	dcSample	TYPE_PCM,	Tom,		18262		; S2 Mid-Tom
+	dcSample	TYPE_PCM,	Tom,		15232		; S2 Low-Tom
+	dcSample	TYPE_PCM,	Tom,		13714		; S2 Floor-Tom
+
+	; SONIC 3 & KNUCKLES (AND 3D BLAST)
 	dcSample	TYPE_PCM,	ElectricTom,	20513		; $88
 	dcSample	TYPE_PCM,	ElectricTom,	15803		; $89
 	dcSample	TYPE_PCM,	ElectricTom,	13482		; $8A
@@ -24,6 +32,7 @@ SampleTable:
 	dcSample	TYPE_PCM,	PokeTimpani,	15000		; $8F
 	dcSample	TYPE_PCM,	PokeTimpani,	11297		; $90
 	dcSample	TYPE_PCM,	PokeTimpani,	7500		; $91
+
 	dcSample	TYPE_PCM,	Amen_Kick,	0		; $92
 	dcSample	TYPE_PCM,	Amen_Snare1,	0		; $93
 	dcSample	TYPE_PCM,	Amen_Snare2,	0		; $94
@@ -32,6 +41,7 @@ SampleTable:
 	dcSample	TYPE_PCM,	Amen_Ride1,	0		; $97
 	dcSample	TYPE_PCM,	Amen_Ride2,	0		; $98
 	dcSample	TYPE_PCM,	Amen_Crash,	0		; $99
+
 	dcSample	TYPE_DPCM,	CF_DrumLoopA,	16000		; $9A
 	dcSample	TYPE_DPCM,	CF_DrumLoopB,	16000		; $9B
 
@@ -97,6 +107,10 @@ SampleTable:
 	incdac	Kick, "sound/dac/S1/kick.dpcm"
 	incdac	Snare, "sound/dac/S1/snare.pcm"
 	incdac	Timpani, "sound/dac/S1/timpani.dpcm"
+
+; ---------------------------------------------------------------
+; Sonic 2 Samples
+	incdac	Tom, "Sound/dac/S2/Tom.pcm"
 
 ; ---------------------------------------------------------------
 ; Sonic 3 Samples
