@@ -66,7 +66,6 @@ SampleTable:
 	dcSample	TYPE_PCM,	CL_DoYouSuck,	11297,FLAGS_SFX	; $B5
 	dcSample	TYPE_PCM,	CL_Dicks,	11297,		; $B6
 	dcSample	TYPE_PCM,	CL_OnTheBall,	11297,		; $B7
-	dcSample	TYPE_PCM,	Penises,	11297,		; $B8
 	dcSample	TYPE_PCM,	EggNo,		11297,		; $B9
 	dcSample	TYPE_PCM,	BabyAlarm,	0,FLAGS_SFX	; $BA
 
@@ -83,7 +82,6 @@ SampleTable:
 	dcSample	TYPE_PCM,	letsgoeee,	0,	FLAGS_SFX	; $C3
 	dcSample	TYPE_PCM,	Lg,		16000, FLAGS_SFX	; $C4
 	dcSample	TYPE_PCM,	Segay,		0, FLAGS_SFX		; $C5
-	dcSample	TYPE_DPCM,	Pyo,		11025, FLAGS_SFX	; $C6
 
 
 	; ADVISORY: If you're coming to this repo just to add samples,
@@ -143,7 +141,6 @@ SampleTable:
 	incdac	CL_DoYouSuck, "sound/dac/CL_DoYouSuck.wav"
 	incdac	CL_Dicks, "sound/dac/CL_Dicks.wav"
 	incdac	CL_OnTheBall, "sound/dac/CL_OnTheBall.wav"
-	incdac	Penises, "sound/dac/Penises.wav"
 	incdac	EggNo, "sound/dac/EggNo.wav"
 	incdac	BabyAlarm, "sound/dac/BabyAlarm.wav"
 	incdac	Boioing, "sound/dac/boioioing.wav"
@@ -154,7 +151,6 @@ SampleTable:
 	incdac	QuakeJump, "sound/dac/quakejump.wav"
 	incdac	letsgoeee, "sound/dac/letsgoeee.wav"   ; hi
 	incdac	Lg, "sound/dac/lg/Echo.pcm"
-	incdac	Pyo, "sound/dac/pyo-11khz.dpcm"
 ; ---------------------------------------------------------------
 ; Null level end
 	incdac	BoingBoing, "sound/dac/BoingBoing.dpcm"
