@@ -14,7 +14,6 @@ GM_TGSplash:
 	dbra	d0, .ClearRAM
 
 	lea	(vdp_control_port).l, a6
-	move.w	#$8400+(vram_bg>>13),(a6)	; reset DaxKatter splash bg nametable
 	move.w	#$9011, (a6)
 
 	move.b	#bgm_Stop,d0
@@ -37,7 +36,7 @@ GM_TGSplash:
 
 	lea 	.Palette, a0
 	lea 	(v_palette_fading), a1
-	move.w  #$1F, d0
+	move.w  #$2F, d0
 
 .PaletteLoop:
 	move.l  (a0)+, (a1)+

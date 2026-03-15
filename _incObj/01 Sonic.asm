@@ -87,8 +87,8 @@ Sonic_Control:	; Routine 2
 		move.w	obX(a0), obX(a1)
 		move.w	obY(a0), obY(a1)
 		move.b	d1, obAngle(a1)
-		add.b	$40, d1
-		; dbf	d2, .makebullets
+		add.b	#$40, d1
+		dbf	d2, .makebullets
 
 		move.w  #$25, v_screenshaketime  ; tonic has insane firepower
 		move.w  #sfx_Bomb, d0
@@ -903,7 +903,6 @@ Sonic_LevelBound:
 		move.w	#0,obX+2(a0)
 		move.w	#0,obInertia(a0)
 		move.w	#-$200,obVelY(a0)
-; sfx_Bumper sfx_SSGlass dBoioing dPyo
 		move.w	#sfx_Bonus,d0
 		jsr	QueueSound2
 		bra.w	.chkbottom

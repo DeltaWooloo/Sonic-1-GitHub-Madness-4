@@ -72,7 +72,6 @@ GM_Continue:
 	bra.s 	.ContinueScreenLoop
 
 .DecisionMade:
-
 	tst.b 	(v_objspace+$33)		; check state for yes/no
 	beq.s 	.ExitContinue			; if 0, exit to level. fallthrough to game over if 1
 
@@ -127,7 +126,6 @@ GM_Continue:
 	locVRAM $0
 	lea	(.Decision_Art).l, a0
 	jsr	NemDec
-
 
 	; Tilemap
 	Continue_DrawMap	.Decision_Map

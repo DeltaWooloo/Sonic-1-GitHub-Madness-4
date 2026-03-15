@@ -40,6 +40,8 @@ Deform_Index:	dc.w Deform_GHZ-Deform_Index, Deform_LZ-Deform_Index
 		zonewarning Deform_Index,2
 		dc.w Deform_GHZ-Deform_Index, Deform_GHZ-Deform_Index
 		dc.w Deform_SLZ-Deform_Index, Deform_Joint-Deform_Index
+		dc.w Deform_LZ-Deform_Index,Deform_LZ-Deform_Index
+		dc.w Deform_LZ-Deform_Index,Deform_LZ-Deform_Index
 ; ---------------------------------------------------------------------------
 ; Green Hill Zone background layer deformation code
 ; ---------------------------------------------------------------------------
@@ -526,105 +528,43 @@ Deform_SYZ:
 		lea	(a2,d0.w),a2
 		bra.w	Bg_Scroll_X
 ; End of function Deform_SYZ
-
+; ===========================================================================
 ; ---------------------------------------------------------------------------
-; Scrap Brain Zone background layer deformation code
+; Scrap Brain Zone background layer deformation code ; Atolly
 ; ---------------------------------------------------------------------------
+; ===========================================================================
 
-; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
-
+AppleScrMv:	equ   $FFFFA806
+; ---------------------------------------------------------------------------
 
 Deform_SBZ:
 		tst.b	(v_act).w
 		bne.w	Deform_SBZ2
-	; block 1 - lower black buildings
-		move.w	(v_scrshiftx).w,d4
-		ext.l	d4
-		asl.l	#7,d4
-		moveq	#2,d6
-		bsr.w	BGScroll_Block1
-	; block 3 - distant brown buildings
-		move.w	(v_scrshiftx).w,d4
+	     move.w	(v_scrshiftx).w,d4
 		ext.l	d4
 		asl.l	#6,d4
-		moveq	#6,d6
-		bsr.w	BGScroll_Block3
-	; block 2 - upper black buildings
-		move.w	(v_scrshiftx).w,d4
-		ext.l	d4
-		asl.l	#5,d4
-		move.l	d4,d1
-		asl.l	#1,d4
-		add.l	d1,d4
-		moveq	#4,d6
-		bsr.w	BGScroll_Block2
-	; vertical scrolling
-		moveq	#0,d4
 		move.w	(v_scrshifty).w,d5
 		ext.l	d5
-		asl.l	#5,d5
-		bsr.w	BGScroll_YRelative
-
-		move.w	(v_bgscreenposy).w,d0
-		move.w	d0,(v_bg2screenposy).w
-		move.w	d0,(v_bg3screenposy).w
-		move.w	d0,(v_bgscrposy_vdp).w
-		move.b	(v_bg1_scroll_flags).w,d0
-		or.b	(v_bg3_scroll_flags).w,d0
-		or.b	d0,(v_bg2_scroll_flags).w
-		clr.b	(v_bg1_scroll_flags).w
-		clr.b	(v_bg3_scroll_flags).w
-	; calculate background scroll buffer
-		lea	(v_bgscroll_buffer).w,a1
-		move.w	(v_screenposx).w,d2
-		neg.w	d2
-		asr.w	#2,d2
-		move.w	d2,d0
-		asr.w	#1,d0
-		sub.w	d2,d0
-		ext.l	d0
-		asl.l	#3,d0
-		divs.w	#4,d0
-		ext.l	d0
-		asl.l	#4,d0
-		asl.l	#8,d0
-		moveq	#0,d3
-		move.w	d2,d3
-		move.w	#3,d1
-	.cloudLoop:		
-		move.w	d3,(a1)+
-		swap	d3
-		add.l	d0,d3
-		swap	d3
-		dbf	d1,.cloudLoop
-
-		move.w	(v_bg3screenposx).w,d0
+		asl.l	#4,d5
+		asl.l	#1,d5
+		bsr.w	BGScroll_Block1
+		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
+		lea	(v_hscrolltablebuffer).w,a1
+		move.w	#223,d1
+		move.w	(v_screenposx).w,d0
 		neg.w	d0
-		move.w	#9,d1
-	.buildingLoop1:		; distant brown buildings
-		move.w	d0,(a1)+
-		dbf	d1,.buildingLoop1
-
-		move.w	(v_bg2screenposx).w,d0
+		swap	d0
+GreenApple_scr:		
+		lea	    (AppleScrMv).w,a2
+		addi.l	#$F000,(a2)+    ; Scroll 2
+		move.w	(AppleScrMv).w,d0
+		add.w	($FFFFF700).w,d0
 		neg.w	d0
-		move.w	#6,d1
-	.buildingLoop2:		; upper black buildings
-		move.w	d0,(a1)+
-		dbf	d1,.buildingLoop2
 
-		move.w	(v_bgscreenposx).w,d0
-		neg.w	d0
-		move.w	#$A,d1
-	.buildingLoop3:		; lower black buildings
-		move.w	d0,(a1)+
-		dbf	d1,.buildingLoop3
-		lea	(v_bgscroll_buffer).w,a2
-		move.w	(v_bgscreenposy).w,d0
-		move.w	d0,d2
-		andi.w	#$1F0,d0
-		lsr.w	#3,d0
-		lea	(a2,d0.w),a2
-		bra.w	Bg_Scroll_X
+loc_6576:
+		move.l	d0,(a1)+
+		dbf	d1,loc_6576
+		rts
 ;-------------------------------------------------------------------------------
 Deform_SBZ2:;loc_68A2:
 	; plain background deformation
@@ -741,6 +681,11 @@ MoveScreenHoriz:
 	if FixBugs
 		; Fix horizontal wrap bug
 		; https://info.sonicretro.org/SCHG_How-to:Fix_the_camera_follow_bug
+		
+		; It's too stupid to put links in this lol - ato
+		
+		; https://www.youtube.com/watch?v=xvFZjo5PgG0
+		
 		subi.w	#(320/2)-16,d0	; is distance less than 144px?
 		blt.s	SH_BehindMid	; if yes, branch
 		subi.w	#16,d0		; is distance more than 160px?

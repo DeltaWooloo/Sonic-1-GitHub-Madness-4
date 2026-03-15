@@ -40,10 +40,10 @@ SampleTable:
 	dcSample	TYPE_PCM,	Trevor,		0,FLAGS_SFX	; $9D
 	dcSample	TYPE_DPCM,	yume2kki,	16000,FLAGS_SFX	; $9E
 	dcSample	TYPE_PCM,	DooDoo,		8000,		; $9F
-	dcSample	TYPE_PCM,	CrispBilly,	8000,		; $A0
-	dcSample	TYPE_PCM,	BlueLobster,	8000,		; $A1
-	dcSample	TYPE_PCM,	WinTwoK,	8000,		; $A2
-	dcSample	TYPE_PCM,	DeppaDig,	8000,		; $A3
+	dcSample	TYPE_PCM,	DAMN,		8000,		; $A0
+	dcSample	TYPE_PCM,	DAMN,		8000,		; $A1
+	dcSample	TYPE_PCM,	DAMN,		8000,		; $A2
+	dcSample	TYPE_PCM,	DAMN,		8000,		; $A3
 	; !@GenesisDoes
 	dcSample	TYPE_DPCM,	EagleSoft_Song,	16000,FLAGS_SFX	; $A4
 	dcSample	TYPE_DPCM,	YoFreddy,	16000,FLAGS_SFX	; $A5
@@ -55,7 +55,7 @@ SampleTable:
 	dcSample	TYPE_DPCM,	GenesisDoes1,	16000		; $AB
 	dcSample	TYPE_DPCM,	GenesisCan1,	16000		; $AC
 	dcSample	TYPE_DPCM,	GenesisCan2,	16000		; $AD
-	dcSample	TYPE_DPCM,	SM64_MM,	16000		; $AE
+	dcSample	TYPE_DPCM,	DAMN,		16000		; $AE
 
 	dcSample	TYPE_PCM,	QuakeRocket,	11297,		; $AF
 	dcSample	TYPE_PCM,	supbeaches,	11297,		; $B0
@@ -66,7 +66,6 @@ SampleTable:
 	dcSample	TYPE_PCM,	CL_DoYouSuck,	11297,FLAGS_SFX	; $B5
 	dcSample	TYPE_PCM,	CL_Dicks,	11297,		; $B6
 	dcSample	TYPE_PCM,	CL_OnTheBall,	11297,		; $B7
-	dcSample	TYPE_PCM,	Penises,	11297,		; $B8
 	dcSample	TYPE_PCM,	EggNo,		11297,		; $B9
 	dcSample	TYPE_PCM,	BabyAlarm,	0,FLAGS_SFX	; $BA
 
@@ -83,9 +82,15 @@ SampleTable:
 	dcSample	TYPE_PCM,	letsgoeee,	0,	FLAGS_SFX	; $C3
 	dcSample	TYPE_PCM,	Lg,		16000, FLAGS_SFX	; $C4
 	dcSample	TYPE_PCM,	Segay,		0, FLAGS_SFX		; $C5
-	dcSample	TYPE_DPCM,	Pyo,		11025, FLAGS_SFX	; $C6
-    dcSample	TYPE_PCM,	Stupid,		0, FLAGS_SFX	; $C7
-	dc.w	-1	; end marker
+
+
+	; ADVISORY: If you're coming to this repo just to add samples,
+	; they are going to get removed. Sorry!
+	; Wait until more important shit is implemented
+
+	; end 
+   	;dcSample	TYPE_PCM,	Stupid,		0, FLAGS_SFX	; $C9
+	dc.w	-1
 
 ; ---------------------------------------------------------------
 ; Stock Sonic 1 Samples
@@ -122,6 +127,7 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; All your funny meme samples you can find
+
 	incdac	DAMN, "sound/dac/DAX/DAMN.pcm"
 	incdac	Trevor, "sound/dac/Trevor.wav"
 	incdac	yume2kki, "sound/dac/2kki.dpcm"
@@ -135,7 +141,6 @@ SampleTable:
 	incdac	CL_DoYouSuck, "sound/dac/CL_DoYouSuck.wav"
 	incdac	CL_Dicks, "sound/dac/CL_Dicks.wav"
 	incdac	CL_OnTheBall, "sound/dac/CL_OnTheBall.wav"
-	incdac	Penises, "sound/dac/Penises.wav"
 	incdac	EggNo, "sound/dac/EggNo.wav"
 	incdac	BabyAlarm, "sound/dac/BabyAlarm.wav"
 	incdac	Boioing, "sound/dac/boioioing.wav"
@@ -146,18 +151,12 @@ SampleTable:
 	incdac	QuakeJump, "sound/dac/quakejump.wav"
 	incdac	letsgoeee, "sound/dac/letsgoeee.wav"   ; hi
 	incdac	Lg, "sound/dac/lg/Echo.pcm"
-	incdac	Pyo, "sound/dac/pyo-11khz.dpcm"
-	incdac	Stupid, "sound/dac/youstupid.wav"
 ; ---------------------------------------------------------------
 ; Null level end
 	incdac	BoingBoing, "sound/dac/BoingBoing.dpcm"
 
 ; ---------------------------------------------------------------
 ; Stuff for Splash Screens
-	incdac	CrispBilly, "sound/dac/splashes/CrispBilly.wav"
-	incdac	BlueLobster, "sound/dac/splashes/BlueLobster.wav"
-	incdac	WinTwoK, "sound/dac/splashes/WinTwoK.wav"
-	incdac	DeppaDig, "sound/dac/splashes/DeppaDig.wav"
 	;!@ GenesisDOes - EagleSoft screen 
 	incdac	EagleSoft_Song,	"sound/dac/GenesisDoes/EagleSoft_Song.dpcm"
 	incdac	YoFreddy,	"sound/dac/GenesisDoes/YoFreddy.dpcm"
@@ -175,5 +174,3 @@ SampleTable:
 ; Whatever you want the Sega sound to be
 	incdac	SegaPCM, "sound/dac/sega.wav"
 	incdac	Segay, "sound/dac/sega2.wav" ; (add a region check so the sample will play)
-	even
-

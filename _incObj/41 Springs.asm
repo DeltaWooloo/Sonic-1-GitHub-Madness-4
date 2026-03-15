@@ -86,6 +86,8 @@ Spring_BounceUp:
 		clr.b	obSolid(a0)
 		move.w	#sfx_Spring,d0
 		jsr	(QueueSound2).l	; play spring sound
+		move.b	#$C7, d0
+		jsr		(MegaPCM_PlaySample).l
 
 Spring_AniUp:	; Routine 4
 		lea	(Ani_Spring).l,a1
@@ -136,6 +138,8 @@ loc_DC56:
 		bclr	#5,obStatus(a1)
 		move.w	#sfx_Spring,d0
 		jsr	(QueueSound2).l	; play spring sound
+                move.b	#$C7, d0
+		jsr		(MegaPCM_PlaySample).l
 
 Spring_AniLR:	; Routine $A
 		lea	(Ani_Spring).l,a1
@@ -180,6 +184,8 @@ Spring_BounceDwn:
 		clr.b	obSolid(a0)
 		move.w	#sfx_Spring,d0
 		jsr	(QueueSound2).l	; play spring sound
+                move.b	#$C7, d0
+		jsr		(MegaPCM_PlaySample).l
 
 Spring_AniDwn:	; Routine $10
 		lea	(Ani_Spring).l,a1

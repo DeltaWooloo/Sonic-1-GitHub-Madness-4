@@ -336,7 +336,9 @@ DebuggerMenu_Act4EnablerTable:
 		dc.b	$1		; BREW
 		dc.b	$0		; WIN
 		dc.b	$0		; JOINT
-
+		dc.b	$0		; DVZ
+		even
+		
 ; ---------------------------------------------------------------------------
 ; Play the currently selected sound ID
 ; ---------------------------------------------------------------------------
@@ -361,7 +363,7 @@ Debugger_Data:
 		dc.l	GamemodeNameTable
 
 		dc.l	v_zone			; ZONE ID
-		dc.b	$01,$00,$09,$00		; step 1, range 0-5
+		dc.b	$01,$00,10,$00		; step 1, range 0-5
 		dc.l	ZoneNameTable
 
 		dc.l	v_act			; ACT ID
@@ -495,6 +497,7 @@ ZoneNameTable:
 		dc.w	.MSZ-.t
 		dc.w	.ABC-.t
 		dc.w	.Joint-.t
+		dc.w	.DVZ-.t
 
 .GHZ:		dc.b	"PENILE HILLS    "
 .LZ:		dc.b	"AZURE RAINFOREST"
@@ -506,6 +509,7 @@ ZoneNameTable:
 .MSZ:		dc.b	"COLD BREW       "
 .ABC:		dc.b	"WINDOWS         "
 .Joint:		dc.b	"THE JOINT       "
+.DVZ:		dc.b	"DOLEVILLE       "
 		even
 
 GamemodeNameTable:
@@ -528,6 +532,7 @@ GamemodeNameTable:
 		dc.w	.DamnScreen-.t
 		rept ( (GameModeArray_End-GameModeArray)-(((*)-.t)*2) )/4
 		dc.w	.IDFK-.t
+		dc.w	.Skipper-.t
 		endr
 
 .Sega:		dc.b	"SEGA SCREEN     "
@@ -547,6 +552,7 @@ GamemodeNameTable:
 .Difficulty:	dc.b	"DIFFICULTY      "
 .DamnScreen:	dc.b	"DAMN!!!!!!!!!!!!"
 .IDFK:		dc.b	"PLACEHOLDER NAME"
+.Skipper:	dc.b	"SPLASH SKIPPER "
 		even
 
 CharacterNameTable:

@@ -27,6 +27,8 @@ GM_CNNicoJump:
 		move.w	#$9200,(a6)	; window vertical position
 		clr.b	(f_wtr_state).w
 		jsr		(ClearScreen).l
+		clr.l	(v_scrshiftx).w	; prevent yucky misalignment
+		clr.l	(v_scrshifty).w	; prevent yucky misalignment
 		move.w	(v_vdp_buffer1).w,d0
 		ori.b	#$40,d0
 		move.w	d0,(vdp_control_port).l
