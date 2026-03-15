@@ -81,7 +81,7 @@ id_Continue:	equ ptr_GM_Cont-GameModeArray	; $14
 id_Ending:	equ ptr_GM_Ending-GameModeArray	; $18
 id_Credits:	equ ptr_GM_Credits-GameModeArray; $1C
 id_ColdBrew:	equ ptr_GM_ColdBrew-GameModeArray; $20
-id_SegaEU:	equ ptr_GM_SegaEU-GameModeArray; $24
+id_FoxyBoo:	equ ptr_GM_FoxyBoo-GameModeArray; $24
 id_DebugMenu:	equ ptr_GM_DebugMode-GameModeArray; $28
 id_Thanatos:	equ ptr_GM_ThanatosCredits-GameModeArray; $2C
 id_ButtcrackMan:	equ ptr_GM_ButtcrackMan-GameModeArray
@@ -314,6 +314,8 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_OrangeSong
 	nextenum bgm_TreasureCaves
 	nextenum bgm_DoleDetective
+	nextenum bgm_Win2K
+	nextenum bgm_Easton
 
 	; Keep this last
 	nextenum bgm__Last

@@ -419,7 +419,16 @@ HurtSonic:
 KillSonic:
 		tst.w	(v_debuguse).w	; is debug mode active?
 		bne.s	.dontdie	; if yes, branch
+;		tst.b	(v_enablefox).w
+;		beq.s	.NotFoxy
+		move.l	#'FOXY',d1	; seed
+		jsr		(RandomNumber).l
+		cmpi.b	#$FF,(v_random).w
+		bne.s	.NotFoxy
 		move.b	#0,(v_invinc).w	; remove invincibility
+		move.w	#2,(f_restart).w ; FOXY SCARE
+		rts
+.NotFoxy:
 		move.b	#6,obRoutine(a0)
 		bsr.w	Sonic_ResetOnFloor
 		bset	#1,obStatus(a0)
@@ -435,11 +444,10 @@ KillSonic:
 	endif
 		move.b	#id_Null,obAnim(a0)
 		bset	#7,obGfx(a0)
-
 		move.b	#dTrevor, d0
-		jsr	MegaPCM_PlaySample
+		jsr	(MegaPCM_PlaySample).l
 		move.b	#$8, d1
-		jmp	GHM3Explode_Custom
+		jmp	(GHM3Explode_Custom).l
 		
 	if FixBugs
 		move.w	#sfx_HitSpikes,d0 ; play spikes death sound

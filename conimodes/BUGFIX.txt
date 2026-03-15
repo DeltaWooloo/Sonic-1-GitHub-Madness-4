@@ -1,0 +1,3 @@
+CN SPLASH: conic object would end up rendered at the wrong position sometimes, render 0 does not support the objectfall routine, which needs updates true y position instead of screen position
+FOXY JUMPSCARE: art never loads in level mode
+COLD BREW: tilemap is not cleared correctly

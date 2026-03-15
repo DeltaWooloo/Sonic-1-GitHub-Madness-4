@@ -135,8 +135,8 @@ ptr_mus58:		dc.l Music58
 ptr_mus59:		dc.l Music59
 ptr_mus5A:		dc.l Music5A
 ptr_mus52:		dc.l Music52
-;ptr_mus5B:		dc.l Music5B
-;ptr_mus5C:		dc.l Music5C
+ptr_mus5B:		dc.l Music5B
+ptr_mus5C:		dc.l Music5C
 ;ptr_mus5D:		dc.l Music5D
 ;ptr_mus5E:		dc.l Music5E
 ;ptr_mus5F:		dc.l Music5F
@@ -178,7 +178,7 @@ Music91:	include "music/Mus91 - Credits.asm"
 		even
 Music92:	include "music/TG2000Tracks/Thundersink.asm"
 		even
-Music93:	include "music/Dawid/WINDOWS2000.asm";you got a windows 2000 product activation key!!!!!!!!! (or you used kgen you fucking idiot)
+Music93:	include	"music/TG2000Tracks/ChaosFarm.asm" 
 		even
 Music_NewBark:	include "music/DaxKatter/Mus - New Bark Town.asm"
 		even
@@ -321,6 +321,10 @@ Music59:	include	"music/TG2000Tracks/OrangeSong.asm"
 Music5A:	include	"music/PikaNoob/treasurecaves.asm" 
 		even
 Music52:	include	"music/Kat/Mus - Dole Detective.asm"
+		even
+Music5B:	include "music/Dawid/WINDOWS2000.asm";you got a windows 2000 product activation key!!!!!!!!! (or you used kgen you fucking idiot)
+		even
+Music5C:	include	"music/TG2000Tracks/Easton.asm" 
 		even
 ;Music53:	include	"music/GenesisDoes/GenesisCan1.asm"
 ;		even

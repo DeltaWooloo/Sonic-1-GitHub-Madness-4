@@ -63,7 +63,7 @@ GM_SplashScreenSkipper:
 		move.b  #id_Title,(v_gamemode).w		; go to the Title Screen
 		cmpi.b	#btnB,(v_jpadpress1).w			; is B Button Pressed?
 		bne.s	.GM_SplashScreenSkipper_Main
-		move.b  #id_SegaEU,(v_gamemode).w		; go to the ColdBrew Splash
+		move.b  #id_ColdBrew,(v_gamemode).w		; go to the ColdBrew Splash
 		rts
 		bra.s   .GM_SplashScreenSkipper_Main
 		

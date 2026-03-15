@@ -522,7 +522,7 @@ GamemodeNameTable:
 		dc.w	.Ending-.t
 		dc.w	.CreditsS1-.t
 		dc.w	.ColdBrew-.t
-		dc.w	.ColdBrew-.t
+		dc.w	.FoxyScare-.t
 		dc.w	.DebugMenu-.t
 		dc.w	.Thanatos-.t
 		dc.w	.ButtcrackMan-.t
@@ -544,6 +544,7 @@ GamemodeNameTable:
 .Ending:	dc.b	"ENDING          "
 .CreditsS1:	dc.b	"CREDITS SONIC 1 "
 .ColdBrew:	dc.b	"COLD BREW       "
+.FoxyScare:	dc.b	"FOXY JUMPSCARE  "
 .DebugMenu:	dc.b	"DEBUG MENU      "
 .Thanatos:	dc.b	"THANATOS CREDITS"
 .ButtcrackMan:	dc.b	"BUTTCRACK MAN   "

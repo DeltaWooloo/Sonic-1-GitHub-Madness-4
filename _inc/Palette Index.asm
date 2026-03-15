@@ -56,4 +56,5 @@ palid_TGPal:		makePalEntry	Pal_TGPal, 		v_palette_line_1
 palid_S2:		makePalEntry	Pal_S2,			v_palette_line_1
 palid_Savethemoonsonic:	makePalEntry	Pal_STMsonic,		v_palette_line_1
 palid_DVZ:		makePalEntry	Pal_DVZ,		v_palette_line_2
+palid_Foxy:	makePalEntry	Pal_Foxy,		v_palette_line_1
 	even

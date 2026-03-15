@@ -28,7 +28,7 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 
 	lhead	plcid_MZ,Kos_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_MZ,palid_MZ,Col_MZ,ObjPos_MZ1, Level_MZ1,Level_MZ1bg			
 	lhead	plcid_MZ,Kos_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,$4E,palid_MZ,Col_MZ,ObjPos_MZ2, Level_MZ2,Level_MZ2bg
-	lhead	plcid_MZ,Kos_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_VampKiller,palid_MZ,Col_MZ,ObjPos_MZ3, Level_MZ3,Level_MZ3bg
+	lhead	plcid_MZ,Kos_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_Easton,palid_MZ,Col_MZ,ObjPos_MZ3, Level_MZ3,Level_MZ3bg
 	lhead	plcid_MZ,Kos_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_MZ,palid_MZ,Col_MZ,ObjPos_Null,Level_MZ1,Level_MZ1bg
 
 	lhead	plcid_SLZ,Kos_SLZ,plcid_SLZ2,Blk16_SLZ,Blk256_SLZ,bgm_SLZ,palid_SLZ,Col_SLZ,ObjPos_SLZ1,Level_SLZ1,Level_SLZbg

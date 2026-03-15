@@ -90,14 +90,14 @@ SampleTable:
 	dcSample	TYPE_PCM,	Boioing,	5250,	FLAGS_SFX	; $C2
 	dcSample	TYPE_PCM,	OrngLaugh,	0,	FLAGS_SFX		; $C3
 
-	dcSample	TYPE_DPCM,	ClintonHi,	20600,	FLAGS_SFX	; $C4
-	dcSample	TYPE_DPCM,	ClintonYeah,20600,	FLAGS_SFX	; $C5
-	dcSample	TYPE_PCM,	QuakeJump,	0,	FLAGS_SFX		; $C6
-	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX	; $C7
-	dcSample	TYPE_PCM,	letsgoeee,	0,	FLAGS_SFX		; $C8
-	dcSample	TYPE_PCM,	Lg,		16000, FLAGS_SFX		; $C9
-	dcSample	TYPE_PCM,	Segay,		0, FLAGS_SFX		; $CA
-
+	dcSample	TYPE_DPCM,	ClintonHi,	20600,	FLAGS_SFX	; $BF
+	dcSample	TYPE_DPCM,	ClintonYeah,	20600,	FLAGS_SFX	; $C0
+	dcSample	TYPE_PCM,	QuakeJump,	0,	FLAGS_SFX	; $C1
+	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX	; $C2
+	dcSample	TYPE_PCM,	letsgoeee,	0,	FLAGS_SFX	; $C3
+	dcSample	TYPE_PCM,	Lg,		16000, FLAGS_SFX	; $C4
+	dcSample	TYPE_PCM,	Segay,		0, FLAGS_SFX		; $C5
+	dcSample	TYPE_PCM,	Foxy,		0, FLAGS_SFX		; $C6
 
 	; ADVISORY: If you're coming to this repo just to add samples,
 	; they are going to get removed. Sorry!
@@ -170,6 +170,7 @@ SampleTable:
 	incdac	QuakeJump, "sound/dac/quakejump.wav"
 	incdac	letsgoeee, "sound/dac/letsgoeee.wav"   ; hi
 	incdac	Lg, "sound/dac/lg/Echo.pcm"
+	incdac	Foxy, "sound/dac/foxy.wav"
 ; ---------------------------------------------------------------
 ; Null level end
 	incdac	BoingBoing, "sound/dac/BoingBoing.dpcm"

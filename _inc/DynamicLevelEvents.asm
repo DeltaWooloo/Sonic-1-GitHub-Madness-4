@@ -335,10 +335,10 @@ locret_7072:
 ; ===========================================================================
 
 DLE_MZ2:
-		move.w	#$520,(v_limitbtm1).w
-		cmpi.w	#$1700,(v_screenposx).w
+		move.w	#$500,(v_limitbtm1).w
+		cmpi.w	#$800,(v_screenposx).w
 		blo.s	locret_7088
-		move.w	#$200,(v_limitbtm1).w
+		move.w	#$300,(v_limitbtm1).w
 
 locret_7088:
 		rts

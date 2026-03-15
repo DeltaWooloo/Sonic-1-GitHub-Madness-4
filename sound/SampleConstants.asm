@@ -95,7 +95,6 @@ dSega				ds.b 1
 dLetsGOO			ds.b 1
 dLg					ds.b 1
 dSega2				ds.b 1
-dCrapSnare			ds.b 1
-dRobiScream			ds.b 1
+dTwerkOf87			ds.b 1
 	dephase
 	!org -
