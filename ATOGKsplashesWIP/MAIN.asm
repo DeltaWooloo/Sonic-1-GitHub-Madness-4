@@ -41,7 +41,7 @@ MarioTeam_Screen:
 		bsr.w   Set_PalLoad1
 
 		
-		move.w  #$100,(Timer).w          ; Time     
+		move.w  #$80,(Timer).w          ; Time     
 		move.w  (VDP_buff).w,d0
 		ori.b   #$40,d0
 		move.w  d0,(VDPCtrl).l
@@ -79,8 +79,10 @@ RickTeamheads_Screen:
 		
 		moveq   #palid_Savethemoonsonic,d0      
 		bsr.w   Set_PalLoad1
+		move.b	#$B4,d0	; Boik
+		jsr		(MegaPCM_PlaySample).l
 		
-		move.w  #$80,(Timer).w          ; Time
+		move.w  #$40,(Timer).w          ; Time
 		move.w  (VDP_buff).w,d0
 		ori.b   #$40,d0
 		move.w  d0,(VDPCtrl).l
@@ -93,8 +95,7 @@ RickTeam_Wait:
 ; ---------------------------------------------------------------------------
 
 TeamTesticle_Screen:		
-		bsr.w	Set_Fadeout		
-		move    #$2700,sr           ; Goodbye inters!
+ 		move    #$2700,sr           ; Goodbye inters!
 		lea     (VDPCtrl).l,a6
 		move.w  #$8004,(a6)          
 		move.w  #$8230,(a6)          
@@ -128,7 +129,7 @@ Testicle_Wait:
 		bne.s   Testicle_Wait
 
 Exit_Splashes:
- 		rts
+ 		jmp	RunSplashes	
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; MISC
