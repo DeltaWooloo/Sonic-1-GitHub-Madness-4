@@ -113,7 +113,7 @@ Ending_FM4_Loop:
 	dc.b	nRst, 42
 	smpsSetvoice	$00
 	smpsAlterVol	15
-	smpsModSet	$00, $01, $08, $06
+	smpsModSet	$00, $01, $08, $03
 	dc.b	nE5, 12, nE6, 4, nRst, 2, nCs6, 12, nRst, 6, nE5, 12
 	dc.b	nDs5, 12, nB4, 6, nDs5, 4, nE5, 2, nDs5, 12, nE5
 	dc.b	nB4, 24, 22, nC4, 6, 2, 6, 3, nRst, nC4, 4, nGs4, 6, 6

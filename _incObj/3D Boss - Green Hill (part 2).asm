@@ -83,6 +83,8 @@ loc_179AC:
 		addq.w	#1,objoff_3C(a0)
 		beq.s	loc_179BC
 		bpl.s	loc_179C2
+		move.b	#bgm_Fade,d0    ; fadeout
+		jsr	    (QueueSound2).l ; fade out music	
  		bra.s	loc_179EE
 ; ===========================================================================
 
@@ -108,8 +110,6 @@ loc_179DA:
 
 loc_179E0:
 		clr.w	obVelY(a0)
-		move.w	#bgm_GHZ,d0
-		jsr	(QueueSound1).l		; play GHZ music
         move.w	#sfx_Lamppost,d0
 		jsr	(QueueSound2).l	; play fall sound
 		
