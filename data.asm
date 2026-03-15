@@ -409,6 +409,12 @@ Kos_Joint:	binclude	"artkos/8x8 - Joint.kos"	; Joint primary patterns
 		even
 Blk256_Joint:	binclude	"map256/Joint.kos"
 		even
+Blk16_DVZ:	binclude	"map16/DVZ.eni"
+		even
+Kos_DVZ:	binclude	"artkos/8x8 - DVZ.kos"	; DVZ	primary padded. pamperspoop
+		even
+Blk256_DVZ:	binclude	"map256/DVZ.kos"
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - bosses and ending sequence
 ; ---------------------------------------------------------------------------
@@ -470,7 +476,8 @@ Col_WIN:	binclude	"collide/SLZ.bin"	; WIN index
 		even
 Col_Joint:	binclude	"collide/Joint.bin"	; Joint index
 		even
-
+Col_DVZ:	binclude	"collide/DVZ.bin"	; Joint index
+		even
 ; ---------------------------------------------------------------------------
 ; Special Stage layouts
 ; ---------------------------------------------------------------------------
@@ -673,8 +680,17 @@ Level_Joint2:	binclude	"levels/Joint2.bin"
 		even
 Level_Joint3:	binclude	"levels/Joint3.bin"
 		even
-Level_Joint1Unk:	dc.l 0
-
+Level_Joint1Unk:	
+		dc.l 0
+Level_DVZ1:	binclude	"levels/DVZ1.bin"
+		even
+Level_DVZ2:	binclude	"levels/DVZ1.bin"
+		even
+Level_DVZ3:	binclude	"levels/DVZ1.bin"
+		even
+Level_DVZbg:	;binclude	"levels/dvz.bin"
+		dc.l 0
+		even
 ; ---------------------------------------------------------------------------
 ; Uncompressed graphics - Giant Rings
 ; ---------------------------------------------------------------------------
@@ -840,6 +856,12 @@ ObjPos_Joint2:	binclude	"objpos/Joint2.bin"
 		even
 ObjPos_Joint3:	binclude	"objpos/Joint3.bin"
 		even
+ObjPos_DVZ1:	binclude	"objpos/dvz1.bin"
+		even
+ObjPos_DVZ2:	binclude	"objpos/dvz2.bin"
+		even
+ObjPos_DVZ3:	binclude	"objpos/dvz3.bin"
+		even
 ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 
 ; ===========================================================================
@@ -864,3 +886,4 @@ Pal_S2:         bincludeEndMarker  "ATOGKsplashesWIP/sonic2main.bin"
                 even 
 Pal_STMsonic:   bincludeEndMarker  "ATOGKsplashesWIP/STMsonic.bin"	  
                 even
+

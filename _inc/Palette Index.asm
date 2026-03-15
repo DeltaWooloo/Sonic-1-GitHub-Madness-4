@@ -53,6 +53,7 @@ palid_Joint:		makePalEntry	Pal_Joint, 		v_palette_line_2
 palid_Fetus:		makePalEntry	Pal_Fetus, 		v_palette_line_1
 palid_Black:		makePalEntry	Pal_Black, 		v_palette_line_1
 palid_TGPal:		makePalEntry	Pal_TGPal, 		v_palette_line_1
-palid_S2:		makePalEntry	Pal_S2,		v_palette_line_1
-palid_Savethemoonsonic:		makePalEntry	Pal_STMsonic,		v_palette_line_1
+palid_S2:		makePalEntry	Pal_S2,			v_palette_line_1
+palid_Savethemoonsonic:	makePalEntry	Pal_STMsonic,		v_palette_line_1
+palid_DVZ:		makePalEntry	Pal_DVZ,		v_palette_line_2
 	even

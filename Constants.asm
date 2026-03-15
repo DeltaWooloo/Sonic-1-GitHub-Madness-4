@@ -102,6 +102,7 @@ id_SS:		equ 6
 id_CBZ:		equ 7
 id_WIN:		equ 8
 id_Joint:	equ 9
+id_DVZ:		equ 10
 
 ; Playable Characters
 chrid_tonic	equ 0
@@ -472,6 +473,9 @@ fr_Float6:	equ 1+$54
 fr_Injury:	equ 1+$55
 fr_GetAir:	equ 1+$56
 fr_WaterSlide:	equ 1+$57
+fr_Spring1:	equ 1+$58
+fr_Spring2:	equ 1+$59
+fr_Spring3:	equ 1+$5A
 
 ; Boss locations
 ; The main values are based on where the camera boundaries mainly lie

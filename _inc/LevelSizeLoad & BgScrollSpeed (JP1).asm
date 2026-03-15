@@ -150,6 +150,7 @@ LoopTileNums:
 		dc.b	$B5,	$7F,	$1F,	$20	; BREW
 		dc.b	$AA,	$B4,	$7F,	$7F	; WIN
 		dc.b	$7F,	$7F,	$7F,	$7F	; Joint
+		dc.b	$7F,	$7F,	$7F,	$7F	; DVZ
 		even
 
 ; ---------------------------------------------------------------------------
@@ -182,6 +183,7 @@ BgScroll_Index:	dc.w BgScroll_GHZ-BgScroll_Index, BgScroll_LZ-BgScroll_Index
 		dc.w BgScroll_SYZ-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
 		zonewarning BgScroll_Index,2
 		dc.w BgScroll_End-BgScroll_Index, BgScroll_MZ-BgScroll_Index
+		dc.w BgScroll_MZ-BgScroll_Index, BgScroll_MZ-BgScroll_Index
 		dc.w BgScroll_MZ-BgScroll_Index, BgScroll_MZ-BgScroll_Index
 ; ===========================================================================
 

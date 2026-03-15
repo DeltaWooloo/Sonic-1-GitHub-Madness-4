@@ -62,6 +62,12 @@ TitleCard_WIN4:	equ  "AGGA"
 TitleCard_Joint1:	equ  "The Joint"
 TitleCard_Joint2:	equ  "Ten years in the"
 TitleCard_Joint3:	equ  "Made you a fuckin"
+TitleCard_Joint4:	equ  "porn"
+
+TitleCard_DVZ1:	equ  "DOLEVILLE"
+TitleCard_DVZ2:	equ  "THE BIRTHPLACE"
+TitleCard_DVZ3:	equ  "THE SELF"
+TitleCard_DVZ4:	equ  "THE JIGGLYJOSH"
 
 TitleCard_Zone:	equ  "ZONE"
 TitleCard_UseLowerAct: equ 1	; 0 = ACT -- 1 = Act
@@ -209,6 +215,12 @@ TTL_ConData:
 		dc.l TTLCard_Joint2_ConData, TTLCard_Joint2_Array	; Joint2
 		dc.l TTLCard_Joint3_ConData, TTLCard_Joint3_Array	; Joint3
 		dc.l 0, 0	; Joint4
+
+
+		dc.l TTLCard_DVZ1_ConData, TTLCard_DVZ1_Array	; DVZ1
+		dc.l TTLCard_DVZ2_ConData, TTLCard_DVZ2_Array	; DVZ2
+		dc.l TTLCard_DVZ3_ConData, TTLCard_DVZ3_Array	; DVZ3
+		dc.l 0, 0	; DVZ4		
 		even
 
 ; ---------------------------------------------------------------------------
@@ -389,6 +401,11 @@ Map_Card_Extended:	mappingsTable
 	mappingsTableEntry.w	TTLCard_Joint3	; Star Light Zone 3
 	mappingsTableEntry.w	TTLCard_Joint3	; Star Light Zone 4
 
+	mappingsTableEntry.w	TTLCard_DVZ1	; DVZ 1
+	mappingsTableEntry.w	TTLCard_DVZ2	; DVZ 2
+	mappingsTableEntry.w	TTLCard_DVZ3	; DVZ 3
+	mappingsTableEntry.w	TTLCard_DVZ4	; DVZ 4
+
 	mappingsTableEntry.w	TTLCard_Zone	; "ZONE" text
 	mappingsTableEntry.w	TTLCard_Act	; Act number
 	mappingsTableEntry.w	TTLCard_Oval	; Blue oval
@@ -429,6 +446,11 @@ TTLCard_WIN4:	titlecard TitleCard_WIN4,0,0
 TTLCard_Joint1:	titlecard TitleCard_Joint1,1,0 ; one act fakeout
 TTLCard_Joint2:	titlecard TitleCard_Joint2,0,0
 TTLCard_Joint3:	titlecard TitleCard_Joint3,0,0
+TTLCard_Joint4:	titlecard TitleCard_Joint4,1,0 ; one act fakeout
+TTLCard_DVZ1:	titlecard TitleCard_DVZ1,0,0
+TTLCard_DVZ2:	titlecard TitleCard_DVZ2,0,0
+TTLCard_DVZ3:	titlecard TitleCard_DVZ3,0,0
+TTLCard_DVZ4:	titlecard TitleCard_DVZ4,0,0
 
 TTLCard_Zone:	titlecard TitleCard_Zone,1,1 ; ZONE label (alternate tile offset)
 

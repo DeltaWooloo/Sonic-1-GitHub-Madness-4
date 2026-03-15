@@ -52,13 +52,17 @@ loc_6DC4:
 ; ---------------------------------------------------------------------------
 ; Offset index for dynamic level events
 ; ---------------------------------------------------------------------------
-DLE_Index:	dc.w DLE_GHZ-DLE_Index, DLE_LZ-DLE_Index
-		dc.w DLE_MZ-DLE_Index, DLE_SLZ-DLE_Index
-		dc.w DLE_SYZ-DLE_Index, DLE_SBZ-DLE_Index
-		zonewarning DLE_Index,2
-		dc.w DLE_Ending-DLE_Index, DLE_BREW-DLE_Index
-		dc.w DLE_WIN-DLE_Index, DLE_Joint-DLE_Index
-
+DLE_Index:	dc.w 	DLE_GHZ-DLE_Index
+		dc.w	DLE_LZ-DLE_Index
+		dc.w 	DLE_MZ-DLE_Index
+		dc.w	DLE_SLZ-DLE_Index
+		dc.w 	DLE_SYZ-DLE_Index
+		dc.w	DLE_SBZ-DLE_Index
+		dc.w	DLE_Ending-DLE_Index
+		dc.w	DLE_BREW-DLE_Index
+		dc.w	DLE_WIN-DLE_Index
+		dc.w	DLE_Joint-DLE_Index
+		dc.w	DLE_DVZ-DLE_Index
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Green Hill Zone dynamic level events
@@ -799,4 +803,11 @@ DLE_WIN:
 ; The Joint Zone dynamic level events
 ; ---------------------------------------------------------------------------
 DLE_Joint:
+		rts
+
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; kys
+; ---------------------------------------------------------------------------
+DLE_DVZ:
 		rts

@@ -56,4 +56,10 @@
 		dc.b id_LZ, 3	; Act 3
 		dc.b 0, 0
 
+		; Doleville Zone
+		dc.b id_DVZ, 1	; Act 1
+		dc.b id_DVZ, 2	; Act 2
+		dc.b id_LZ, 3	; Act 3
+		dc.b 0, 0
+
 		even
