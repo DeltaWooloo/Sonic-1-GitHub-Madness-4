@@ -2,14 +2,14 @@ BGM_1UP_Header:
 	smpsHeaderStartSong	1
 	smpsHeaderVoice		BGM_1UP_Voices
 	smpsHeaderChan		$06, $03
-	smpsHeaderTempo		$01, $20
+	smpsHeaderTempo		$02, $07
 
 	smpsHeaderDAC	BGM_1UP_DAC
-	smpsHeaderFM	BGM_1UP_FM1,	$10, $28
-	smpsHeaderFM	BGM_1UP_FM2,	$10, $2A
-	smpsHeaderFM	BGM_1UP_FM3,	$10, $28
-	smpsHeaderFM	BGM_1UP_FM4,	$10, $28
-	smpsHeaderFM	BGM_1UP_FM5,	$10, $28
+	smpsHeaderFM	BGM_1UP_FM1,	$00, $08
+	smpsHeaderFM	BGM_1UP_FM2,	$00, $0A
+	smpsHeaderFM	BGM_1UP_FM3,	$00, $18
+	smpsHeaderFM	BGM_1UP_FM4,	$00, $18
+	smpsHeaderFM	BGM_1UP_FM5,	$00, $18
 	smpsHeaderPSG	BGM_1UP_PSG1,	$F4, $00, $00, uptone_01
 	smpsHeaderPSG	BGM_1UP_PSG2,	$F4, $06, $00, uptone_01
 	smpsHeaderPSG	BGM_1UP_PSG3,	$F4, $00, $00, uptone_03
@@ -27,7 +27,6 @@ BGM_1UP_FM1:
 	smpsSetvoice		$00
 	dc.b	nC4, $03, nD4
 	dc.b	nE4, $0C, nG4, nF4, $06, nE4, nD4, $03, nRst, nF4, $06, nE4, $12, nC4, $06
-	dc.b	$01, nG4, $04, nRst, $02, nG4, $04, nRst, $02, nG4, $0C, nRst
 
 BGM_1UP_FM1_Loop01:
 	dc.b	nC4, $06, nRst, $02
@@ -44,13 +43,7 @@ BGM_1UP_FM2:
 BGM_1UP_FM3:
 	smpsSetvoice	$02
 	smpsPan		panLeft, $00
-	dc.b	nG2, $02, nRst, $01, nRst, $03, nG3, $02, nRst, $01, nG3, $02
-	dc.b	nRst, $01, nA2, $02, nRst, $01, nRst, $03, nA3, $02, nRst, $01
-	dc.b	nA3, $02, nRst, $01, nB2, $02, nRst, $01, nRst, $03, nB3, $02
-	dc.b	nRst, $01, nB3, $02, nRst, $01, nA2, $02, nRst, $01, nRst, $03
-	dc.b	nA3, $02, nRst, $01, nA3, $02, nRst, $01, nG2, $05, nRst, $01
-	dc.b	nD2, $05, nRst, $01, nG2, $05, nRst, $01, nD2, $05, nRst, $01
-	dc.b	nG2, $0	dc.b	nRst, $06, nE4, $03, nRst, nC4, nRst, nG4, $06, nF4, $0C, nG4, $03, nRst
+	dc.b	nRst, $06, nE4, $03, nRst, nC4, nRst, nG4, $06, nF4, $0C, nG4, $03, nRst
 	dc.b	nB4, $06, nC5, $1E, $06
 	smpsStop
 
@@ -88,7 +81,7 @@ BGM_1UP_PSG3:
 BGM_1UP_DAC:
 	dc.b	dChunkyKick, $03, $03, dPokeKickCrashHi, $12, dChunkyKick, $06
 	dc.b	dPokeSnare, dChunkyKick, $0C, $06, dPokeHiTimpani, dPokeMidTimpani
-	dc.b	dPokeHiTimpani, dPokeMidTimpani, dPokeHiTimpani, dPokeHiTimpani, dPokeMidTimpani, dPokeHiTimpani, dPokeHiTimpani, dPokeMidTimpani, dPokeHiTimpani, $0C, nRst, $12
+	dc.b	dPokeHiTimpani, dPokeMidTimpani, dPokeHiTimpani, $0C, nRst, $12
 	smpsFade
 	smpsStop
 
