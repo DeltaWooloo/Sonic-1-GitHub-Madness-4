@@ -5,7 +5,7 @@ CometSTG2_Header:
 	smpsHeaderTempo     $02, $0D
 
 	smpsHeaderDAC       CometSTG2_DAC
-	smpsHeaderFM        CometSTG2_FM1,	$00, $0C
+	smpsHeaderFM        CometSTG2_FM1,	$00, $10
 	smpsHeaderFM        CometSTG2_FM2,	$00, $08
 	smpsHeaderFM        CometSTG2_FM3,	$F4, $10
 	smpsHeaderFM        CometSTG2_FM4,	$F4, $10
@@ -189,15 +189,16 @@ CometSTG2_PSG1:
 ;	smpsStop
 	dc.b	nRst, $30
 CometSTG2_PSG1J:
-CometSTG2_Loop21:
-	dc.b	nRst, $60
-	smpsLoop            $00, $08, CometSTG2_Loop21
-	dc.b	nRst, $06, nD1, $03, nE1, nFs1, nB1, nCs2, nD2, nFs2, $09, nE2, nD2, $03, nRst, nD2, $12, nCs2, $1E, nRst, $06
-	smpsAlterVol        $FE
+	dc.b	nRst, $06
+	smpsAlterVol     $04
+	smpsCall           CometSTG2_PSG2PAT
+	smpsAlterVol     $FC
+	dc.b	nD1, $03, nE1, nFs1, nB1, nCs2, nD2, nFs2, $09, nE2, nD2, $03, nRst, nD2, $12, nCs2, $1E, nRst, $06
+;	smpsAlterVol        $FE
 	dc.b	nCs1, $03, nD1, nE1, nA1, nB1, nCs2, nE2, $09, nD2, nCs2, $03, nRst, nAb1, $12, nFs1, $1E
 	dc.b	nFs1, $03, nAb1, nA1, nCs2, nFs2, $24, nE1, $03, nFs1, nAb1
 	dc.b	nA1, nE2, $24, nD1, $03, nE1, nFs1, nAb1, nD2, $24
-	smpsAlterVol        $02
+;	smpsAlterVol        $02
 	dc.b	nA0, $03, nB0, nCs1, nD1, nFs1, nE1, nFs1, nAb1, nB1, $02, nCs2
 	dc.b	nA1, nB1, $03, nCs2, nE2, nFs2, nAb2, nB2
 	smpsJump				CometSTG2_PSG1J
@@ -207,26 +208,37 @@ CometSTG2_PSG2:
 ;	smpsStop
 	dc.b	nRst, $30
 CometSTG2_PSG2J:
-	smpsCall            CometSTG2_PSG2PAT
-	dc.b	nE2
-	smpsCall            CometSTG2_PSG2PAT
-	dc.b	nE2, nE1, nA1, nCs2, nE2, nCs2, nA1, nE2, nCs2, nE0, $01, nFs0
-	dc.b	nAb0, nA0, nB0, nCs1, nD1, nE1, nFs1, nAb1, nA1, nB1, nCs2, nD2
-	dc.b	nE2, nFs2, nAb2, nA2, nB2, nCs3, nD3, nE3, nFs3, nAb3, nRst, $06
-	smpsPSGAlterVol     $FE
+	smpsCall           CometSTG2_PSG2PAT
+	dc.b	nRst, $06
+;	smpsAlterVol     $FE
 	dc.b	nB0, $03, nCs1, nD1, nG1, nA1, nB1, nD2
 	dc.b	$09, nCs2, nB1, $03, nRst, nBb1, $30, nRst, $06
 	dc.b	nA0, $03, nB0, nCs1, nE1, nFs1, nA1, nCs2
 	dc.b	$09, nB1, nA1, $03, nRst, nEb1, $30, nD1, $03, nE1, nFs1
-	dc.b	nA1, nD2, $24, nCs1, $03, nD1, nE1, nFs1, $02
-	dc.b	nRst, $01, nCs2, $24, nB0, $03, nCs1, nD1, nE1
+	dc.b	nA1, nD2, $24, nCs1, $03, nD1, nE1, nFs1, $03
+	dc.b	nCs2, $24, nB0, $03, nCs1, nD1, nE1
 	dc.b	nB1, $24
-	smpsPSGAlterVol     $02
+;	smpsAlterVol     $02
 	dc.b	nFs0, $03, nAb0, nA0, nB0, nD1, nCs1, nD1, nE1, nAb1, $02, nA1
 	dc.b	nFs1, nAb1, $03, nA1, nB1, nD2, nE2, nAb2
 	smpsJump				CometSTG2_PSG2J
 
 CometSTG2_PSG2PAT:
+	smpsCall            CometSTG2_PSG2C1
+	dc.b	nE1, nA1, nCs2
+CometSTG2_Loop19:
+	dc.b	nE2, nCs2, nA1
+	smpsLoop            $00, $04, CometSTG2_Loop19
+	dc.b	nE2
+	smpsCall            CometSTG2_PSG2C1
+	dc.b	nE1, nA1, nCs2
+	dc.b	nE2, nCs2, nA1
+	dc.b	nE2, nCs2, nE0, $01, nFs0
+	dc.b	nAb0, nA0, nB0, nCs1, nD1, nE1, nFs1, nAb1, nA1, nB1, nCs2, nD2
+	dc.b	nE2, nFs2, nAb2, nA2, nB2, nCs3, nD3, nE3, nFs3, nAb3
+	smpsReturn
+
+CometSTG2_PSG2C1:
 	dc.b	nD1, $03, nFs1, nA1
 CometSTG2_Loop12:
 	dc.b	nCs2, nA1, nFs1
@@ -268,11 +280,6 @@ CometSTG2_Loop18:
 	dc.b	nFs2, nD2, nA1
 	smpsLoop            $00, $04, CometSTG2_Loop18
 	dc.b	nFs2
-
-	dc.b	nE1, nA1, nCs2
-CometSTG2_Loop19:
-	dc.b	nE2, nCs2, nA1
-	smpsLoop            $00, $04, CometSTG2_Loop19
 	smpsReturn
 
 ; PSG3 Data
@@ -350,23 +357,23 @@ CometSTG2_DACC3:
 	smpsReturn
 
 CometSTG2_Voices:
-;	Voice $01
-;	$35
-;	$01, $01, $13, $00, 	$1F, $1D, $18, $19, 	$00, $09, $06, $0D
-;	$00, $00, $02, $03, 	$00, $06, $15, $16, 	$1E, $80, $83, $80
+;	Voice $03
+;	$3D
+;	$01, $21, $51, $01, 	$12, $14, $14, $0F, 	$0A, $05, $05, $05
+;	$00, $00, $00, $00, 	$2B, $2B, $2B, $1B, 	$19, $80, $80, $80
 	smpsVcAlgorithm     $05
-	smpsVcFeedback      $06
+	smpsVcFeedback      $07
 	smpsVcUnusedBits    $00
-	smpsVcDetune        $00, $01, $00, $00
-	smpsVcCoarseFreq    $00, $03, $01, $01
+	smpsVcDetune        $00, $05, $02, $00
+	smpsVcCoarseFreq    $01, $01, $01, $01
 	smpsVcRateScale     $00, $00, $00, $00
-	smpsVcAttackRate    $19, $18, $1D, $1F
+	smpsVcAttackRate    $0F, $14, $14, $12
 	smpsVcAmpMod        $00, $00, $00, $00
-	smpsVcDecayRate1    $0D, $06, $09, $00
-	smpsVcDecayRate2    $03, $02, $00, $00
-	smpsVcDecayLevel    $01, $01, $00, $00
-	smpsVcReleaseRate   $06, $05, $06, $00
-	smpsVcTotalLevel    $00, $03, $00, $1E
+	smpsVcDecayRate1    $05, $05, $05, $0A
+	smpsVcDecayRate2    $00, $00, $00, $00
+	smpsVcDecayLevel    $01, $02, $02, $02
+	smpsVcReleaseRate   $0B, $0B, $0B, $0B
+	smpsVcTotalLevel    $00, $00, $00, $19
 
 ;	Voice $01
 ;	$3A
