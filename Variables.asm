@@ -114,7 +114,8 @@ v_jpadpress1:		ds.b	1		; joypad input - pressed
 			ds.b	6		; unused
 v_vdp_buffer1:		ds.w	1		; VDP instruction buffer of register $81 (used for enabling/disabling display)
 v_flashcolor:		ds.w	1		; flash color
-			ds.b	4		; unused
+v_bg_calc_var:		ds.w	1		; bg calc
+			ds.b	2
 v_generictimer:		ds.w	1		; generic timer, decrements to 0 in vblank (word)
 v_scrposy_vdp:		ds.w	1		; screen position y (VDP)
 v_bgscrposy_vdp:	ds.w	1		; background screen position y (VDP)
@@ -143,7 +144,9 @@ f_pause:		ds.w	1		; flag set to pause the game
 			ds.b	4		; unused
 v_vdp_buffer2:		ds.w	1		; VDP instruction buffer
 v_dbgmenu_sndid:		ds.b 	1
+v_dbgmenu_pcmid:		ds.b 	1
 v_dbgmenu_exit:			ds.b	1
+				ds.b	1	; even padding
 f_hbla_pal:		ds.w	1		; flag set to change palette during HBlank (0000 = no; 0001 = change)
 v_waterpos1:		ds.w	1		; water height, actual
 v_waterpos2:		ds.w	1		; water height, ignoring sway
@@ -165,7 +168,6 @@ v_plc_dataword:		ds.l	1
 v_plc_shiftvalue:	ds.l	1
 v_plc_patternsleft:	ds.w	1
 v_plc_framepatternsleft:ds.w	1
-			ds.b	4		; unused
 v_plc_buffer_end:
 
 v_levelvariables:				; variables that are reset between levels
@@ -188,7 +190,7 @@ v_limitbtm2:		ds.w	1		; bottom level boundary
 v_unused11:		ds.w	1		; unused
 v_limitleft3:		ds.w	1		; left level boundary, at the end of an act
 v_clintonfucker		ds.b	1		; clintonfucker flag
-			ds.b	1
+v_waterflag:		ds.b	1
 v_scrposy_orig:		ds.b	4		; stored y screen pos
 v_scrshiftx:		ds.w	1		; x-screen shift (new - last) * $100
 v_scrshifty:		ds.w	1		; y-screen shift (new - last) * $100
@@ -285,7 +287,9 @@ v_ringbonus:		ds.w	1		; ring bonus at the end of an act
 f_endactbonus:		ds.b	1		; time/ring bonus update flag at the end of an act
 v_sonicend:		ds.b	1		; routine counter for Sonic in the ending sequence
 v_lz_deform:		ds.w	1		; LZ deformation offset, in units of $80
-			ds.b	6		; unused
+			ds.b	4		; unused
+v_d_anim_done:		ds.w	1
+;			ds.w	1
 f_switch:		ds.b	$10		; flags set when Sonic stands on a switch
 v_scroll_block_1_size:	ds.w	1
 v_scroll_block_2_size:	ds.w	1		; unused
@@ -393,7 +397,9 @@ v_oscillate:		ds.w	1		; oscillation bitfield
 v_timingandscreenvariables:
 v_timingvariables:
 			ds.b	$40		; values which oscillate - for swinging platforms, et al
-			ds.b	$20		; unused
+v_layoutptr		ds.l	1
+v_bglayoutptr		ds.l	1
+			ds.b	24		; unused
 v_ani0_time:		ds.b	1		; synchronised sprite animation 0 - time until next frame (used for synchronised animations)
 v_ani0_frame:		ds.b	1		; synchronised sprite animation 0 - current frame
 v_ani1_time:		ds.b	1		; synchronised sprite animation 1 - time until next frame
@@ -408,12 +414,7 @@ v_limittopdb:		ds.w	1		; level upper boundary, buffered for debug mode
 v_limitbtmdb:		ds.w	1		; level bottom boundary, buffered for debug mode
 			ds.b	$C		; unused
 v_timingvariables_end:
-
-v_chunk0collision:	ds.w	1		; very subtly (and perhaps unintentionally) used by FindNearestTile when encountering chunk 0
-	if v_chunk0collision<>ramaddr($FFFFFF00)
-		fatal "v_chunk0collision needs to be at address $FFFFFF00 so that FindNearestTile works correctly (currently offset by \{signedToString(v_chunk0collision-ramaddr($FFFFFF00))} bytes) ."
-	endif
-			ds.b	$E		; unused
+			ds.b	$10		; unused
 v_screenposx_dup:	ds.l	1		; screen position x (duplicate)
 v_screenposy_dup:	ds.l	1		; screen position y (duplicate)
 v_bgscreenposx_dup:	ds.l	1		; background screen position x (duplicate)
@@ -426,38 +427,41 @@ v_fg_scroll_flags_dup:	ds.w	1
 v_bg1_scroll_flags_dup:	ds.w	1
 v_bg2_scroll_flags_dup:	ds.w	1
 v_bg3_scroll_flags_dup:	ds.w	1
-			ds.b	$48		; unused
+			ds.b 	1
+			ds.b	$47		; unused
 v_timingandscreenvariables_end:
 
 v_levseldelay:		ds.w	1		; level select - time until change when up/down is held
 v_levselitem:		ds.w	1		; level select - item selected
 v_levselsound:		ds.w	1		; level select - sound selected
 			ds.b	$3A		; unused
-	if Revision=0
-v_scorecopy:		ds.l	1		; score, duplicate
-	else
 v_scorelife:		ds.l	1		; points required for an extra life (JP1 only)
-	endif
-			ds.b	$1C		; unused
+v_characterid:		ds.b	1
+v_zonemusic:		ds.b	1
+			ds.b	7		; unused
+MegaCDMode:		ds.b 	1
+			ds.b 	$10
 f_levselcheat:		ds.b	1		; level select cheat flag
 f_slomocheat:		ds.b	1		; slow motion & frame advance cheat flag
 f_debugcheat:		ds.b	1		; debug mode cheat flag
 f_creditscheat:		ds.b	1		; hidden credits & press start cheat flag
 v_title_dcount:		ds.w	1		; number of times the d-pad is pressed on title screen
 v_title_ccount:		ds.w	1		; number of times C is pressed on title screen
-			ds.b	2		; unused
-v_unused2:		ds.w	1		; unused
-v_unused3:		ds.b	1		; unused
-v_unused4:		ds.b	1		; unused
-v_unused5:		ds.b	1		; unused
-v_unused6:		ds.b	1		; unused
+
 f_demo:			ds.w	1		; demo mode flag (0 = no; 1 = yes; $8001 = ending)
 v_demonum:		ds.w	1		; demo level number (not the same as the level number)
 v_creditsnum:		ds.w	1		; credits index number
-			ds.b	2		; unused
 v_megadrive:		ds.b	1		; Megadrive machine type
 f_difficulty:		ds.b	1		; unused
 f_debugmode:		ds.w	1		; debug mode flag
+
+v_vintcode:
+.jmp:			ds.w	1
+.addr:			ds.l	1
+v_hintcode:
+.jmp:			ds.w	1
+.addr:			ds.l	1
+
 v_init:			ds.l	1		; 'init' text string
 v_ram_end:
     if * > 0	; Don't declare more space than the RAM can contain!

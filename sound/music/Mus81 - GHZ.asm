@@ -14,6 +14,11 @@ MWaterS_Header:
 	smpsHeaderPSG       MWaterS_PSG2,	$F1, $03, $00, fTone_09
 	smpsHeaderPSG       MWaterS_PSG3,	$F4, $01, $00, fTone_09
 
+; FM5 Data
+MWaterS_FM5:
+	smpsAlterNote       $02
+	dc.b	nRst, $06
+
 ; FM1 Data
 MWaterS_FM1:
 	smpsSetvoice        $04
@@ -22,7 +27,7 @@ MWaterS_FM1:
 	dc.b	nB3
 	smpsCall            MWaterS_Call04
 	dc.b	nG3, $30, nG2, $0C, nG2, $06, nC3, nG2, nC3, nC3, nG3, nC3
-	smpsSetvoice        $04
+;	smpsSetvoice        $04			- redundant
 	dc.b	nG4, $06, nAb4, nBb4, nG4, $06, smpsNoAttack, $18, nRst, $06, nG4, nAb4
 	dc.b	nBb4, nG4, nF4, $0C, nEb4, $06, nG4, $12, nC4, nG4, $0C, nF4
 	dc.b	$12, nEb4, nD4, $0C, nEb4, $0C, nC4, $06, nG4, smpsNoAttack, $18, nRst
@@ -144,11 +149,8 @@ MWaterS_Call00:
 	smpsAlterVol        $FF
 	smpsReturn
 
-; FM5 Data
-MWaterS_FM5:
-	smpsAlterNote       $02
-	dc.b	nRst, $06
-	smpsJump            MWaterS_FM1
+
+;	smpsJump            MWaterS_FM1
 
 ; DAC Data
 MWaterS_DAC:
@@ -181,7 +183,7 @@ MWaterS_Loop01:
 MWaterS_PSG1:
 	smpsAlterNote       $01
 	dc.b	nRst, $06
-	smpsJump            MWaterS_PSG2
+;	smpsJump            MWaterS_PSG2
 
 ; PSG2 Data
 MWaterS_PSG2:

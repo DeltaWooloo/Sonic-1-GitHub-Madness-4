@@ -6,7 +6,7 @@ Remilia:
 	jsr	ClearScreen
 	
 	lea	$FFFF0000, a0
-	move.l	#(($FFFF/2)/4)-1, d0
+	move.l	#(($8000)/4)-1, d0
 	moveq	#0, d1
 
 .ClearRAM:
@@ -35,7 +35,7 @@ Remilia:
 	jsr	NemDec
 
 	lea 	.Palette, a0
-	lea 	($FFFFFB80), a1
+	lea 	(v_palette_fading), a1
 	move.w  #$1F, d0
 
 .PaletteLoop:

@@ -13,13 +13,17 @@ sonic.p
 sonic.debug.lst
 s1built.prev.bin
 s1built.bin
-"
+__Release/GHM4.cue
+
+#GenesisDoes source tool shortcuts
 Assets/Tools/Art/*.lnk
 Assets/Tools/Audio/*.lnk
 Assets/Tools/Disasm/Hw_Ref/*.lnk
 Assets/Tools/Editor/*.lnk
 Assets/Tools/Emu/*.lnk
 Assets/Tools/Misc/*.lnk
+
+#GenesisDoes source assets
 Assets/Audio/GenesisDoes1/Genesis _ That's All (HQ) \[k0qil0eKTEk\].mp3
 Assets/Audio/GenesisCan/Sonic the Hedgehog Pasta USA Commercial.mp3
 Assets/Audio/GenesisDoes1/GenesisDoes1_data

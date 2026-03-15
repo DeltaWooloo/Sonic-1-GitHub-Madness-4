@@ -5,7 +5,8 @@ ptr_SonicPlayer:	dc.l SonicPlayer	; $01
 ptr_Obj02:		dc.l NullObject
 ptr_Obj03:		dc.l NullObject
 ptr_Obj04:		dc.l NullObject
-ptr_Obj05:		dc.l NullObject
+;ptr_Obj05:		dc.l NullObject
+ptr_Obj05:		dc.l Obj_DaxKatterD
 ptr_ClintonFucker:	dc.l ClintonFucker
 ptr_Obj07:		dc.l GM_CNNicoJumpOBJ
 ptr_Splash:		dc.l Splash		; $08
@@ -16,7 +17,7 @@ ptr_FlapDoor:		dc.l FlapDoor
 ptr_Signpost:		dc.l Signpost
 ptr_TitleSonic:		dc.l TitleSonic
 ptr_PSBTM:		dc.l PSBTM
-ptr_Obj10:		dc.l Obj10		; $10
+ptr_PlayerBullet:	dc.l PlayerBullet		; $10
 ptr_Bridge:		dc.l Bridge
 ptr_SpinningLight:	dc.l SpinningLight
 ptr_LavaMaker:		dc.l LavaMaker
@@ -29,7 +30,7 @@ ptr_Obj19:		dc.l Obj19
 ptr_CollapseLedge:	dc.l CollapseLedge
 ptr_WaterSurface:	dc.l WaterSurface
 ptr_Scenery:		dc.l Scenery
-ptr_MagicSwitch:	dc.l NullObject	; REMOVE UNUSED DATA - CONI
+ptr_MagicSwitch:	dc.l BrewText
 ptr_BallHog:		dc.l BallHog
 ptr_Crabmeat:		dc.l Crabmeat
 ptr_Cannonball:		dc.l Cannonball		; $20
@@ -160,7 +161,7 @@ id_FlapDoor:		equ ((ptr_FlapDoor-Obj_Index)/4)+1
 id_Signpost:		equ ((ptr_Signpost-Obj_Index)/4)+1
 id_TitleSonic:		equ ((ptr_TitleSonic-Obj_Index)/4)+1
 id_PSBTM:		equ ((ptr_PSBTM-Obj_Index)/4)+1
-id_Obj10:		equ ((ptr_Obj10-Obj_Index)/4)+1			; $10
+id_PlayerBullet:		equ ((ptr_PlayerBullet-Obj_Index)/4)+1			; $10
 id_Bridge:		equ ((ptr_Bridge-Obj_Index)/4)+1
 id_SpinningLight:	equ ((ptr_SpinningLight-Obj_Index)/4)+1
 id_LavaMaker:		equ ((ptr_LavaMaker-Obj_Index)/4)+1

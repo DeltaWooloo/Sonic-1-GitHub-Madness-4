@@ -1,9 +1,9 @@
 ;  =========================================================================
-; |           Sonic the Hedgehog Disassembly for Sega Mega Drive            |
+; |           Sonic tMY NUTS ITCH isassembly for Sega Mega Drive            |
 ;  =========================================================================
 ;
-; Disassembly created by Hivebrain
-; thanks to drx, Stealth and Esrael L.G. Neto
+; Disassembly created by xx_THEULTIMATEGAMER_xx235
+; thanks to Bill Gates(the owner of fucking microsoft hes really bad), Clownancy(the) and Esrael Sonic Edtior Neato!
 ; ---------------------------------------------------------------------------
 ; NOTE:
 ; Set your editor's tab width to 8 characters wide for viewing this file.
@@ -20,11 +20,7 @@ CheatsOn = 1
 ; 	| If 0, build it with no cheats active
 ; 	| If 1, build it with all cheats active
 
-Revision = 1
-; 	| If 0, build the original version of the game, dubbed REV00
-; 	| If 1, build the later version, dubbed REV01, which includes various bugfixes and enhancements
-; 	| If 2, build the hacked version from Sonic Mega Collection, dubbed REVXB,
-;	|       which (sloppily) fixes the infamous "spike bug" -- not recommended
+MSUEnabled = 0
 
 FixBugs = 1
 ;	| If 1, enables various bugfixes across the game and sound driver
@@ -39,7 +35,7 @@ ZeroOffsetOptimization = 0|AllOptimizations
 PaddingOptimization = 0|AllOptimizations
 ;	| If 1, removes about 3 KB of various superfluous padding
 
-EnableSRAM = 0
+EnableSRAM = 1
 ;	| If 1, enable SRAM support
 BackupSRAM = 1
 ;	| 0 = no saving (read-only SRAM); 1 = allow saving
@@ -48,41 +44,20 @@ AddressSRAM = 3
 ;	| (odd only is the most common)
 
 ZoneCount = 6
-;	| Used for the zonewarning macro. Do not change, unless more zones get added.
+;	| Used for the zonewarning macro. Do not change, unless more zones get added. aka never change it just add zone fles after it duh
 ;	| Discrete zones are: GHZ, LZ, MZ, SLZ, SYZ, and SBZ
 
 ; ===========================================================================
-; AS-specific macros and assembler settings
 	cpu 68000
+	message "Pass \{MOMPASS}"
 	include "MacroSetup.asm"
-
-; ===========================================================================
-; Simplifying macros and functions
-	include	"Macros.asm"
-
-; ---------------------------------------------------------------------------
-; SMPS2ASM - A collection of macros that make SMPS's bytecode human-readable.
-; ---------------------------------------------------------------------------
-FixMusicAndSFXDataBugs = FixBugs
-SonicDriverVer = 1 ; Tell SMPS2ASM that we're using Sonic 1's driver.
-		include "sound/_smps2asm_inc.asm"
-
-; ===========================================================================
-; Equates section - Names for constants
-	include	"Constants.asm"
-
-; ===========================================================================
-; Equates section - Names for variables
-	include	"Variables.asm"
-
-	include	"Debugger.asm"
-
-; ===========================================================================
-; Expressing sprite mappings and DPLCs in a portable and human-readable form
+	include "Macros.asm"
+	include "Constants.asm"
+	include "Variables.asm"
+	include "Debugger.asm"
 SonicMappingsVer = 1
 SonicDplcVer = 1
-	include	"_maps/_MapMacros.asm"
-
+	include "_maps/_MapMacros.asm"
 ; ===========================================================================
 ; start of ROM
 
@@ -92,7 +67,7 @@ StartOfRom:
 	endif
 
 Vectors:
-		dc.l v_systemstack&$FFFFFF	; Initial stack pointer value
+		dc.l v_systemstack		; Initial stack pointer value
 		dc.l EntryPoint			; Start of program
 		dc.l BusError			; Bus error
 		dc.l AddressError		; Address error (4)
@@ -121,9 +96,9 @@ Vectors:
 		dc.l ErrorTrap			; IRQ level 1
 		dc.l COP_SBlast			; IRQ level 2 (Copera soundblaster FM)
 		dc.l PCO_ADPCM			; IRQ level 3 (28)
-		dc.l HBlank				; IRQ level 4 (horizontal retrace interrupt)
-		dc.l HBlank				; IRQ level 5 (horizontal retrace interrupt/Pico). GenesisDoes: This allows for Model 2 Sega Pico compatibility
-		dc.l VBlank				; IRQ level 6 (vertical retrace interrupt)
+		dc.l v_hintcode				; IRQ level 4 (horizontal retrace interrupt)
+		dc.l v_hintcode				; IRQ level 5 (horizontal retrace interrupt/Pico). GenesisDoes: This allows for Model 2 Sega Pico compatibility
+		dc.l v_vintcode				; IRQ level 6 (vertical retrace interrupt)
 		dc.l ErrorTrap			; IRQ level 7 (32)
 		
 		dc.l ErrorTrap			; TRAP #00 exception
@@ -150,7 +125,6 @@ Vectors:
 		dc.l ErrorTrap			; Unused (reserved)
 		dc.l ErrorTrap			; Unused (reserved)
 		dc.l ErrorTrap			; Unused (reserved)
-	if Revision<>2|FixBugs
 		dc.l ErrorTrap			; Unused (reserved)
 		dc.l ErrorTrap			; Unused (reserved)
 		dc.l ErrorTrap			; Unused (reserved)
@@ -159,35 +133,13 @@ Vectors:
 		dc.l ErrorTrap			; Unused (reserved)
 		dc.l ErrorTrap			; Unused (reserved)
 		dc.l ErrorTrap			; Unused (reserved)
-	else
-loc_E0:		; Relocated code from Spik_Hurt. REVXB was a nasty hex-edit.
-		; See _incObj/36 Spikes.asm for more info.
-		move.l	obY(a0),d3
-		move.w	obVelY(a0),d0
-		ext.l	d0
-		asl.l	#8,d0
-		jmp	(loc_D5A2).l
-
-		dc.w ErrorTrap
-		dc.l ErrorTrap
-		dc.l ErrorTrap
-		dc.l ErrorTrap
-	endif
 		dc.b "SEGA MEGA DRIVE " ; Hardware system ID (Console name)
 		dc.b "SONICGM4 2026.04" ; Copyright holder and release date (generally year)
 		dc.b "I WILL BANISH YOU TO THAT TOWN IN JOHTO         " ; Domestic name
-		dc.b "I WILL BANISH YOU TO THAT TOWN IN JOHTO         " ; International name
-	if Revision=0
-		dc.b "GM 00001009-00"   ; Serial/version number (Rev 0)
-	else
+		dc.b "GITHUB MADNESS 4: RETURN OF THE FEVERDREAM      " ; International name
 		dc.b "GM 00042069-25" ; Serial/version number (Rev non-0)
-	endif
 Checksum:
-	if Revision=0
-		dc.w $264A	; Hardcoded to make it easier to check for ROM correctness
-	else
-		dc.w $AFC7
-	endif
+		dc.w 0
 		dc.b "J               " ; I/O support
 		dc.l StartOfRom		; Start address of ROM
 RomEndLoc:	dc.l EndOfRom-1		; End address of ROM
@@ -195,15 +147,18 @@ RomEndLoc:	dc.l EndOfRom-1		; End address of ROM
 		dc.l $FFFFFF		; End address of RAM
 	if EnableSRAM=1
 		dc.b "RA", $A0+(BackupSRAM<<6)+(AddressSRAM<<3), $20 ; SRAM support
+		dc.l $200001
+		dc.l $2003FF
 	else
 		dc.l $20202020
-	endif
 		dc.l $20202020		; SRAM start ($200001)
 		dc.l $20202020		; SRAM end ($20xxxx)
+	endif
 		dc.b "HEY JIMMY, GIMME A ROM HEADER AREA FOR NOTHIN'.     " ; Notes (unused, anything can be put in this space, but it has to be 52 bytes.)
 		dc.b "JUE             " ; Region (Country code)
 EndOfHeader:
-
+		binclude "rom manual.txt"
+		even
 ; ===========================================================================
 ; Crash/Freeze the 68000. Unlike Sonic 2, Sonic 1 uses the 68000 for playing music, so it stops too
 
@@ -214,6 +169,7 @@ ErrorTrap:
 ; ===========================================================================
 
 EntryPoint:
+		disable_ints
 		tst.l	(port_1_control_hi).l	; test port A & B control registers
 		bne.s	PortA_Ok
 		tst.w	(expansion_control_hi).l ; test port C control register
@@ -281,7 +237,6 @@ PSGInitLoop:
 		dbf	d5,PSGInitLoop	; repeat for other channels
 		move.w	d0,(a2)
 		movem.l	(a6),d0-a6	; clear all registers
-		disable_ints
 
 SkipSetup:
 		bra.s	GameProgram	; begin game
@@ -364,11 +319,23 @@ zStartupCodeEndLoc:
 ; ===========================================================================
 
 GameProgram:
+
+	if MSUEnabled
+		btst 	#5, (console_version)
+		bne.s 	.NoMCD
+		
+		jsr	(Init_MSU_Driver).l
+		move.b	#1, (MegaCDMode).w
+
+.NoMCD
+	else
+		move.b	#0, (MegaCDMode).w
+	endif
 		tst.w	(vdp_control_port).l
 		btst	#6,(expansion_control).l
 		beq.s	CheckSumCheck
-		cmpi.l	#'init',(v_init).w ; has checksum routine already run?
-		beq.w	GameInit	; if yes, branch
+		cmpi.l	#'init',(v_init).w ; ye bruv has the checksum started innit?
+		beq.w	GameInit	; if yes, fucking branch. HARD
 
 CheckSumCheck:
 	if SkipChecksumCheck=0
@@ -380,31 +347,23 @@ CheckSumCheck:
 		add.w	(a0)+,d1
 		cmp.l	a0,d0
 		bhs.s	.loop
-		movea.l	#Checksum,a1	; read the checksum
-		cmp.w	(a1),d1		; compare checksum in header to ROM
+		movea.l	#Checksum,a1	; read the CHECKSUM (cheese helper epic crate keep some user money)
+		cmp.w	(a1),d1		; compare checksum in header to ROM "random only memory" RAM "read access memory????!90238902"
 		bne.w	CheckSumError	; if they don't match, branch
 	endif
-
+;man im going nuts
 CheckSumOk:
-		lea	(v_crossresetram).w,a6
-		moveq	#0,d7
-		move.w	#(v_ram_end-v_crossresetram)/4-1,d6
-.clearRAM:
-		move.l	d7,(a6)+
-		dbf	d6,.clearRAM	; clear RAM ($FE00-$FFFF)
-
+		clearRAM v_crossresetram,v_ram_end
 		move.b	(console_version).l,d0
 		andi.b	#$C0,d0
 		move.b	d0,(v_megadrive).w ; get region setting
 		move.l	#'init',(v_init).w ; set flag so checksum won't run again
 
 GameInit:
-		lea	(v_ram_start).l,a6
-		moveq	#0,d7
-		move.w	#(v_crossresetram-v_ram_start_def)/4-1,d6
-.clearRAM:
-		move.l	d7,(a6)+
-		dbf	d6,.clearRAM	; clear RAM ($0000-$FDFF)
+		clearRAM v_ram_start_def,v_crossresetram
+		move.w	#opcode_jmpabslong,(v_vintcode.jmp).w
+		move.l	#VBlank,(v_vintcode.addr).w
+		move.w	#opcode_rte,(v_hintcode.jmp).w
 		jsr	(InitDMAQueue).l
 		bsr.w	VDPSetupGame
 		bsr.w	JoypadInit
@@ -412,13 +371,6 @@ GameInit:
 		if CheatsOn=1
 		move.w	#$101,(f_levselcheat).w
 		move.w	#$101,(f_debugcheat).w
-		else
-		nop
-		nop
-		nop
-		nop
-		nop
-		nop
 		endif
 		if DickingAround=1
 		move.b	#id_DebugMenu,(v_gamemode).w ; set Game Mode to deubg menu Screen
@@ -452,9 +404,13 @@ ptr_GM_SegaEU:		dc.l	GM_ColdBrew		; Sega Screen EU ($24)
 ptr_GM_DebugMode:	dc.l	GM_DebugMenu		; Debug Menu ($28)
 ptr_GM_ThanatosCredits:	dc.l	GM_ThanatosCredits	; Credits - Thanatos ver. ($2C)
 ptr_GM_ButtcrackMan:	dc.l	GM_ButtcrackMan		; BUTTCRACK MAN ($30)
-ptr_GM_CNNicoJump:	dc.l	GM_CNNicoJump	; CN Logo ($34)
-ptr_GM_TryAgainEnd:	dc.l	TryAgainEnd	; Testable TRY AGAIN/END screen ($38)
-ptr_GM_Fetus:	dc.l	GM_Fetus	; Difficulty Select screen out of spite ($3C)
+ptr_GM_CNNicoJump:	dc.l	GM_CNNicoJump		; CN Logo ($34)
+ptr_GM_TryAgainEnd:	dc.l	TryAgainEnd		; Testable TRY AGAIN/END screen ($38)
+ptr_GM_Fetus:		dc.l	GM_Fetus		; Difficulty Select screen out of spite ($3C)
+ptr_GM_Damn:		dc.l	GM_Damn			; DAMN!!!!!!!!!!!!!!!!!!!!!!!
+ptr_GM_TGSplash:	dc.l	GM_TGSplash		; TG2000 Splash Screen ($44)
+;ptr_GM_RPGBattle:	dc.l	GM_RPGBattle		; RPG Battle (for Azure Rainforest) ($48)
+ptr_SplashScreenSkipper:dc.l	GM_SplashScreenSkipper	; My Stupid Splash is here
 GameModeArray_End:
 ; ===========================================================================
 	if SkipChecksumCheck=0
@@ -489,26 +445,15 @@ VBlank:
 		move.w	(vdp_control_port).l,d0
 		move.l	#$40000010,(vdp_control_port).l
 		move.l	(v_scrposy_vdp).w,(vdp_data_port).l ; send screen y-axis pos. to VSRAM
-; used to push off CRAM dots in pal but nobody gives a shit anyway who needs itjebfjsbf
-;		btst	#6,(v_megadrive).w ; is Megadrive PAL?
-;		beq.s	.notPAL		; if not, branch
-;
-;		move.w	#$700,d0
-;.waitPAL:
-;		dbf	d0,.waitPAL ; wait here in a loop doing nothing for a while...
-;
-;.notPAL:
 		move.b	(v_vbla_routine).w,d0
 		move.b	#0,(v_vbla_routine).w
 		move.w	#1,(f_hbla_pal).w
 		andi.w	#$3E,d0
 		move.w	VBla_Index(pc,d0.w),d0
 		jsr	VBla_Index(pc,d0.w)
-
 VBla_Music:
+		enable_ints
 		jsr	(UpdateMusic).l
-
-VBla_Exit:
 		addq.l	#1,(v_vbla_count).w
 		movem.l	(sp)+,d0-a6
 		rte	
@@ -535,37 +480,16 @@ VBla_Index:	dc.w VBla_00-VBla_Index	; (lag frame)
 
 ; loc_B88:
 VBla_00:
-		cmpi.b	#$80+id_Level,(v_gamemode).w
-		beq.s	.islevel
-		cmpi.b	#id_Level,(v_gamemode).w ; is game on a level?
-		bne.w	VBla_Music	; if not, branch
-
-.islevel:
-		cmpi.b	#id_LZ,(v_zone).w ; is level LZ ?
-		bne.w	VBla_Music	; if not, branch
-
-; used to push off CRAM dots in pal but nobody gives a shit anyway who needs itjebfjsbf
-;		move.w	(vdp_control_port).l,d0
-;		btst	#6,(v_megadrive).w ; is Megadrive PAL?
-;		beq.s	.notPAL		; if not, branch
-;
-;		move.w	#$700,d0
-;.waitPAL:
-;		dbf	d0,.waitPAL
-;
-;.notPAL:
+		tst.b	(v_waterflag).w
+		beq.w	VBla_Music
 		move.w	#1,(f_hbla_pal).w ; set HBlank flag
-		
-		
+
 		tst.b	(f_wtr_state).w	; is water above top of screen?
 		bne.s	.waterabove 	; if yes, branch
-
 		writeCRAM	v_palette,0
 		bra.s	.waterbelow
-
 .waterabove:
 		writeCRAM	v_palette_water,0
-
 .waterbelow:
 		move.w	(v_hbla_hreg).w,(a5)
 		
@@ -656,25 +580,23 @@ VBla_10:
 
 ; loc_C6E:
 VBla_08:
-		
-		
 		bsr.w	ReadJoypads
-		tst.b	(f_wtr_state).w
-		bne.s	.waterabove
-
-		writeCRAM	v_palette,0
-		bra.s	.waterbelow
-
-.waterabove:
-		writeCRAM	v_palette_water,0
-
-.waterbelow:
-		move.w	(v_hbla_hreg).w,(a5)
-
 		writeVRAM	v_hscrolltablebuffer,vram_hscroll
 		writeVRAM	v_spritetablebuffer,vram_sprites
+		move.w	(v_hbla_hreg).w,(a5)
+		tst.b	(f_wtr_state).w
+		bne.s	.waterabove
+		writeCRAM	v_palette,0
+		bra.s	.waterbelow
+.waterabove:
+		writeCRAM	v_palette_water,0
+.waterbelow:
 		jsr	ProcessDMAQueue(pc)
-		
+
+		tst.w	(v_generictimer).w		; is there time left in the generic timer left?
+		beq.w	.end				; if not, branch
+		subq.w	#1,(v_generictimer).w		; subtract 1 from time left
+.end:
 		movem.l	(v_screenposx).w,d0-d7
 		movem.l	d0-d7,(v_screenposx_dup).w
 		movem.l	(v_fg_scroll_flags).w,d0-d1
@@ -685,12 +607,12 @@ VBla_08:
 		; enough time to do all the transfers in VBla_UpdateScreen before the palette needs to get
 		; changed for the water. Without this special check, the water surface would violently flicker
 		; whenever it's near the top of the screen. It's a rather dirty workaround, but it works.
+		tst.b	(v_waterflag).w
+		beq.s	VBla_UpdateScreen
 		cmpi.b	#96,(v_hbla_line).w		; is LZ water surface within 96 pixels of the top of the screen?
 		bhs.s	VBla_UpdateScreen		; if not, do screen updates now
 		move.b	#1,(f_doupdatesinhblank).w	; otherwise, we don't have enough time to do them now before HBlank hits, defer updates to then
-		addq.l	#4,sp				; skip return address (i.e. postpone updating the sound driver as well)
-		bra.w	VBla_Exit			; go straight back to to the VBlank exit
-
+		rts
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Subroutine to update various screen elements during interrupts.
@@ -705,13 +627,7 @@ VBla_UpdateScreen:
 		bsr.w	LoadTilesAsYouMove	; update level tiles while screen is moving
 		jsr	(AnimateLevelGfx).l	; updated animated tiles
 		jsr	(HUD_Update).l		; update HUD data
-		bsr.w	ProcessDPLC_3Tiles	; run a bit of PLC decompression
-
-		tst.w	(v_generictimer).w	; is there time left in the generic timer left?
-		beq.w	.end			; if not, branch
-		subq.w	#1,(v_generictimer).w	; subtract 1 from time left
-.end:
-		rts
+		bra.w	ProcessDPLC_3Tiles	; run a bit of PLC decompression
 ; End of function VBla_UpdateScreen
 
 ; ===========================================================================
@@ -720,12 +636,10 @@ VBla_UpdateScreen:
 ; ---------------------------------------------------------------------------
 
 VBla_0A:
-		
-		
 		bsr.w	ReadJoypads
-		writeCRAM	v_palette,0
 		writeVRAM	v_spritetablebuffer,vram_sprites
 		writeVRAM	v_hscrolltablebuffer,vram_hscroll
+		writeCRAM	v_palette,0
 		
 		bsr.w	PalCycle_SS
 		jsr	ProcessDMAQueue(pc)
@@ -742,22 +656,17 @@ VBla_0A:
 
 VBla_0C:
 VBla_18:
-		
-		
 		bsr.w	ReadJoypads
-		tst.b	(f_wtr_state).w
-		bne.s	.waterabove
-
-		writeCRAM	v_palette,0
-		bra.s	.waterbelow
-
-.waterabove:
-		writeCRAM	v_palette_water,0
-
-.waterbelow:
-		move.w	(v_hbla_hreg).w,(a5)
 		writeVRAM	v_hscrolltablebuffer,vram_hscroll
 		writeVRAM	v_spritetablebuffer,vram_sprites
+		move.w	(v_hbla_hreg).w,(a5)
+		tst.b	(f_wtr_state).w
+		bne.s	.waterabove
+		writeCRAM	v_palette,0
+		bra.s	.waterbelow
+.waterabove:
+		writeCRAM	v_palette_water,0
+.waterbelow:
 		jsr	ProcessDMAQueue(pc)
 		
 		movem.l	(v_screenposx).w,d0-d7
@@ -767,8 +676,7 @@ VBla_18:
 		bsr.w	LoadTilesAsYouMove
 		jsr	(AnimateLevelGfx).l
 		jsr	(HUD_Update).l
-		bsr.w	ProcessDPLC_9Tiles
-		rts
+		bra.w	ProcessDPLC_9Tiles
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -798,12 +706,10 @@ VBla_12:
 ; ---------------------------------------------------------------------------
 
 VBla_16:
-		
-		
 		bsr.w	ReadJoypads
-		writeCRAM	v_palette,0
 		writeVRAM	v_spritetablebuffer,vram_sprites
 		writeVRAM	v_hscrolltablebuffer,vram_hscroll
+		writeCRAM	v_palette,0
 		
 		jsr	ProcessDMAQueue(pc)
 		tst.w	(v_generictimer).w
@@ -823,22 +729,16 @@ VBla_16:
 
 ; sub_106E:
 VBla_StandardTransfers:
-		
-		
 		bsr.w	ReadJoypads
 
+		writeVRAM	v_spritetablebuffer,vram_sprites
+		writeVRAM	v_hscrolltablebuffer,vram_hscroll
 		tst.b	(f_wtr_state).w			; is the screen completely underwater?
 		bne.s	.underwater			; if yes, branch
 		writeCRAM	v_palette,0		; write full regular palette buffer to CRAM
-		bra.s	.rest
-
+		rts
 .underwater:
 		writeCRAM	v_palette_water,0	; write full water palette buffer to CRAM
-
-.rest:
-		writeVRAM	v_spritetablebuffer,vram_sprites
-		writeVRAM	v_hscrolltablebuffer,vram_hscroll
-		
 		rts
 ; End of function VBla_StandardTransfers
 
@@ -884,7 +784,7 @@ HBlank:
 		rept (4*$10)/2			; overwrite full palette (4 rows, 2 colors per move)
 			move.l	(a0)+,(a1)	; move water palette to CRAM
 		endr
-		move.w	#$8A00+223,4(a1)	; reset horizontal interrupt counter
+		move.w	#$8AFF,4(a1)	; reset horizontal interrupt counter
 		movem.l	(sp)+,a0-a1
 
 		tst.b	(f_doupdatesinhblank).w	; was frame update delayed by water surface being near the top of the screen?
@@ -899,7 +799,6 @@ HBlank:
 		clr.b	(f_doupdatesinhblank).w	; clear delayed updates flag
 		movem.l	d0-a6,-(sp)
 		bsr.w	VBla_UpdateScreen	; do all the screen updates that were skipped during VBlank now
-		jsr	(UpdateMusic).l		; update the sound driver
 		movem.l	(sp)+,d0-a6
 		rte	
 ; End of function HBlank
@@ -911,7 +810,7 @@ HBlank:
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
-Init_MegaPCM
+Init_MegaPCM:
 		jsr	(MegaPCM_LoadDriver).l
 		lea	(SampleTable).l,a0
 		jsr	MegaPCM_LoadSampleTable
@@ -925,6 +824,21 @@ Init_MegaPCM
 		illegal				; I don't know why AS is breaking this
 	endif
 .SampleTableOk:
+
+	if MSUEnabled
+		; check CD mode
+		tst.b	(MegaCDMode).w
+		beq.s	.skip
+	
+		move.w	sr,-(sp)		; save current interrupt mask
+		disable_ints			; mask off interrupts
+	
+		MCDSend	#_MCD_SetVolume, #255
+		MCDSend	#_MCD_NoSeek, #1
+		move.w	(sp)+,sr		; restore ints
+
+.skip:
+	endif
 		rts
 
 ; ===========================================================================
@@ -985,24 +899,26 @@ ReadJoypads:
 
 
 VDPSetupGame:
+		move	#$2700,sr
+		move.w	#opcode_jmpabslong,(v_vintcode.jmp).w
+		move.l	#VBlank,(v_vintcode.addr).w
+		move.w	#opcode_rte,(v_hintcode.jmp).w
+
 		lea	(vdp_control_port).l,a0
 		lea	(vdp_data_port).l,a1
-		lea	(VDPSetupArray).l,a2
+		lea	VDPSetupArray(pc),a2
 		moveq	#(VDPSetupArray_End-VDPSetupArray)/2-1,d7
-
-.setreg:
-		move.w	(a2)+,(a0)
+.setreg:	move.w	(a2)+,(a0)
 		dbf	d7,.setreg	; set the VDP registers
 
-		move.w	(VDPSetupArray+2).l,d0
+		move.w	VDPSetupArray+2(pc),d0
 		move.w	d0,(v_vdp_buffer1).w		; buffer register $81 (used for enabling/disabling display)
-		move.w	#$8A00+223,(v_hbla_hreg).w	; H-INT every 224th scanline
+		move.w	#$8AFF,(v_hbla_hreg).w		; H-INT every 224th scanline
+
 		moveq	#0,d0
 		move.l	#$C0000000,(vdp_control_port).l ; set VDP to CRAM write
 		move.w	#($80)/2-1,d7
-
-.clrCRAM:
-		move.w	d0,(a1)
+.clrCRAM:	move.w	d0,(a1)
 		dbf	d7,.clrCRAM	; clear the CRAM
 
 		clr.l	(v_scrposy_vdp).w
@@ -1087,24 +1003,13 @@ LoadDynPLC:
 
 
 ClearScreen:
+		fillVRAM	0, 0, $40 ; clear first two tiles
 		fillVRAM	0, vram_fg, vram_fg+plane_size_64x32 ; clear foreground namespace
 		fillVRAM	0, vram_bg, vram_bg+plane_size_64x32 ; clear background namespace
-
-	if Revision=0
-		move.l	#0,(v_scrposy_vdp).w
-		move.l	#0,(v_scrposx_vdp).w
-	else
 		clr.l	(v_scrposy_vdp).w
 		clr.l	(v_scrposx_vdp).w
-	endif
-
-	if FixBugs
 		clearRAM v_spritetablebuffer,v_spritetablebuffer_end
 		clearRAM v_hscrolltablebuffer,v_hscrolltablebuffer_end_padded
-	else
-		clearRAM v_spritetablebuffer,v_spritetablebuffer_end+4 ; Clears too much RAM, clearing the first 4 bytes of v_palette_water.
-		clearRAM v_hscrolltablebuffer,v_hscrolltablebuffer_end_padded+4 ; Clears too much RAM, clearing the first 4 bytes of v_objspace.
-	endif
 		ResetDMAQueue
 		rts
 ; End of function ClearScreen
@@ -1161,27 +1066,26 @@ AddPLC:
 		add.w	d0,d0
 		move.w	(a1,d0.w),d0
 		lea	(a1,d0.w),a1		; jump to relevant PLC
-		lea	(v_plc_buffer).w,a2 ; PLC buffer space
-
+		lea	(v_plc_buffer-6).w,a2
+		moveq	#(v_plc_buffer_end-v_plc_buffer)/6-1,d0
 .findspace:
-		tst.l	(a2)		; is space available in RAM?
-		beq.s	.copytoRAM	; if yes, branch
 		addq.w	#6,a2		; if not, try next space
-		bra.s	.findspace
-; ===========================================================================
-
+		tst.l	(a2)		; is space available in RAM?
+		dbeq	d0,.findspace	; if yes, exit loop and branch
+		bne.s	.noslots
 .copytoRAM:
 		move.w	(a1)+,d0	; get length of PLC
 		bmi.s	.skip
-
 .loop:
 		move.l	(a1)+,(a2)+
 		move.w	(a1)+,(a2)+	; copy PLC to RAM
 		dbf	d0,.loop	; repeat for length of PLC
-
 .skip:
 		movem.l	(sp)+,a1-a2 ; a1=object
 		rts
+; if you're running into this error, you ran out of PLC slots
+.noslots:
+		illegal
 ; End of function AddPLC
 
 ; ---------------------------------------------------------------------------
@@ -1508,8 +1412,8 @@ FadeIn_FromBlack:
 		bsr.s	FadeIn_AddColour ; increase colour
 		dbf	d0,.addcolour	; repeat for size of palette
 
-		cmpi.b	#id_LZ,(v_zone).w	; is level Labyrinth?
-		bne.s	.exit		; if not, branch
+		tst.b	(v_waterflag).w	; is level Labyrinth?
+		bpl.s	.exit		; if not, branch
 
 		moveq	#0,d0
 		lea	(v_palette_water).w,a0
@@ -1583,6 +1487,7 @@ PaletteFadeOut:
 		bsr.s	FadeOut_ToBlack
 		bsr.w	RunPLC
 		dbf	d4,.mainloop
+		clr.b	(v_waterflag).w
 		rts
 ; End of function PaletteFadeOut
 
@@ -1697,8 +1602,8 @@ WhiteIn_FromWhite:
 		bsr.s	WhiteIn_DecColour ; decrease colour
 		dbf	d0,.decolour	; repeat for size of palette
 
-		cmpi.b	#id_LZ,(v_zone).w	; is level Labyrinth?
-		bne.s	.exit		; if not, branch
+		tst.b	(v_waterflag).w	; is level Labyrinth?
+		bpl.s	.exit		; if not, branch
 		moveq	#0,d0
 		lea	(v_palette_water).w,a0
 		lea	(v_palette_water_fading).w,a1
@@ -1771,6 +1676,7 @@ PaletteWhiteOut:
 		bsr.s	WhiteOut_ToWhite
 		bsr.w	RunPLC
 		dbf	d4,.mainloop
+		clr.b	(v_waterflag).w
 		rts
 ; End of function PaletteWhiteOut
 
@@ -1943,6 +1849,21 @@ loc_20BC:
 Pal_Sega1:	binclude	"palette/Sega1.bin"
 Pal_Sega2:	binclude	"palette/Sega2.bin"
 		dc.w		$AA4,$CC6	; KILL YOURSELF
+
+; ---------------------------------------------------------------------------
+; Load a direct palette into somewhere in RAM.
+; INPUT: a0   = palette pointer
+;        a1   = destination (often palette, fadingPalette, or VDPDATA)
+;        d7.b = size $XX-1 (amount of colors minus 1)
+; ---------------------------------------------------------------------------
+
+PalLoadUser:
+	andi.l	#$FF,d7
+.LoadToQueue:
+	move.w	(a0)+,(a1)+
+	dbf	d7,.LoadToQueue
+	rts
+
 ; ---------------------------------------------------------------------------
 ; Subroutines to load palettes
 
@@ -2041,6 +1962,7 @@ Pal_SegaBG:		bincludeEndMarker	"palette/Sega Background.bin"
 Pal_Title:		bincludeEndMarker	"palette/Title Screen.bin"
 Pal_LevelSel:		bincludeEndMarker	"palette/Level Select.bin"
 Pal_Sonic:		bincludeEndMarker	"palette/Sonic.bin"
+Pal_SplScrSki:		bincludeEndMarker	"Nano's SHIT/splash/data/pal.pal"
 Pal_GHZ:		bincludeEndMarker	"palette/Green Hill Zone.bin"
 Pal_LZ:			bincludeEndMarker	"palette/Labyrinth Zone.bin"
 Pal_LZWater:		bincludeEndMarker	"palette/Labyrinth Zone Underwater.bin"
@@ -2063,15 +1985,18 @@ Pal_TryAgain:		bincludeEndMarker	"palette/TryAgain.bin"
 Pal_FelixDecision:	bincludeEndMarker	"ContinueScreen/Graphics/Tile/Decision/Palette.bin"
 Pal_FelixGameOver:	bincludeEndMarker	"ContinueScreen/Graphics/Tile/GameOver/Palette.bin"
 Pal_Joint:		bincludeEndMarker	"palette/Joint Zone.bin"
+Pal_DVZ:		bincludeEndMarker	"palette/DoleVille Zone.bin"
 
 Pal_SplashPal:	bincludeEndMarker	"eurosega/pal.bin"
 Pal_ColdBrew:	bincludeEndMarker	"conimodes/cold brew/palette.bin"
 Pal_ColdBrewG:	bincludeEndMarker	"conimodes/cold brew/palette grayscale.bin"
+Pal_TGPal:	bincludeEndMarker	"TGSplash/pal.bin"
 
 Pal_SonicRetro: bincludeEndMarker "LiquidSplashes/Rerto/Palette.bin"
 Pal_SonisRetro: bincludeEndMarker "LiquidSplashes/Rerto/PaletteSonis.bin"
 Pal_MenuText:		bincludeEndMarker	"palette/Menu Font.bin"
     even
+Pal_Black:		bincludeEndMarker	"palette/Black.bin"
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to wait for VBlank routines to complete
@@ -2093,9 +2018,7 @@ WaitForVBla:
 
 		include	"_incObj/sub RandomNumber.asm"
 		include	"_incObj/sub CalcSine.asm"
-	if Revision=0
 		include	"_incObj/sub CalcSqrt.asm"
-	endif
 		include	"_incObj/sub CalcAngle.asm"
 
 ; ===========================================================================
@@ -2130,12 +2053,9 @@ GM_Sega:
 		copyTilemap	v_ram_start,vram_bg+$510,24,8
 		copyTilemap	v_ram_start+24*8*2,vram_fg,40,28
 
-	if Revision<>0
 		tst.b	(v_megadrive).w	; is console Japanese?
 		bmi.s	.loadpal
 		copyTilemap	v_ram_start+$A40,vram_fg+$53A,3,2 ; hide "TM" with a white rectangle
-	endif
-
 .loadpal:
 		moveq	#palid_SegaBG,d0
 		bsr.w	PalLoad	; load Sega logo palette
@@ -2150,9 +2070,15 @@ Sega_WaitPal:
 		bsr.w	WaitForVBla
 		bsr.w	PalCycle_Sega
 		bne.s	Sega_WaitPal
+		tst.b   (v_megadrive).w		; is the region japan 
+		bne.s   .segajap		; if not branch, idk how it works but it plays the first one
+		pcm	dSega2			; SEEGAY
+		bra.s 	.Continue		; branch this useless shit
+		
+.segajap:
+		pcm 	dSega			; WHAT THE FUUUUUUUUUUUUUU
 
-		move.b	#sfx_Sega,d0
-		bsr.w	QueueSound2	; play "SEGA" sound
+.Continue:
 		move.b	#$14,(v_vbla_routine).w
 		bsr.w	WaitForVBla
 		move.w	#3*60,(v_generictimer).w
@@ -2168,14 +2094,15 @@ Sega_WaitEnd:
 Sega_GotoTitle:
 		move.b	#id_Title,(v_gamemode).w ; go to title screen
 
-		btst	#bitA|bitB|bitC,(v_jpadhold1).w
-		beq.s	.skip
-
-		jmp	RunSplashes		; i have a million oil im the best  tru  ckdriver in the world
-
+		btst	#bitA,(v_jpadhold1).w
+		bne.s	.skip
+		jmp	RunSplashes
 .skip
 		pcm 	dEggNo
 		rts				; skip splash screens with heavy
+		
+		include	"ATOGKsplashesWIP/MAIN.asm"	; Code (simply ran by inclusion)
+	
 ; ===========================================================================
 
 
@@ -2230,7 +2157,6 @@ GM_Title:
 		move.b	#0,(v_lastlamp).w ; clear lamppost counter
 		move.w	#0,(v_debuguse).w ; disable debug item placement mode
 		move.w	#0,(f_demo).w	; disable debug mode
-		move.w	#0,(v_unused2).w ; unused variable
 		move.w	#(id_GHZ<<8),(v_zone).w	; set level to GHZ (00)
 		move.w	#0,(v_pcyc_time).w ; disable palette cycling
 		include	"ATOGKTitle/MAIN.asm"	; Code (simply ran by inclusion)
@@ -2308,11 +2234,8 @@ FinalTitle:
 		move.b	#id_PSBTM,(v_pressstart).w ; load "PRESS START BUTTON" object
 		;clr.b	(v_pressstart+obRoutine).w ; The 'Mega Games 10' version of Sonic 1 added this line, to fix the 'PRESS START BUTTON' object not appearing
 
-	if Revision<>0
 		tst.b	(v_megadrive).w	; is console Japanese?
 		bpl.s	.isjap		; if yes, branch
-	endif
-
 		move.b	#id_PSBTM,(v_titletm).w ; load "TM" object
 		move.b	#3,(v_titletm+obFrame).w
 .isjap:
@@ -2321,8 +2244,6 @@ FinalTitle:
 		jsr	(ExecuteObjects).l
 		bsr.w	DeformLayers
 		jsr	(BuildSprites).l
-		moveq	#plcid_Main,d0
-		bsr.w	NewPLC
 		move.w	#0,(v_title_dcount).w
 		move.w	#0,(v_title_ccount).w
 		enable_display
@@ -2413,6 +2334,7 @@ Tit_ChkStartOrDemo:
 		beq.w	Tit_MainLoop		; if not, continue looping title screen
 
 Tit_ChkLevSel:
+		move.b	#2,(v_continues).w 		; set continues to 2 for when it goes to level instead
 		move.b	#id_DebugMenu,(v_gamemode).w	; go to debug mode
 		rts
 ; ---------------------------------------------------------------------------		
@@ -2487,9 +2409,7 @@ Demo_Level:
 		move.w	d0,(v_rings).w	; clear rings
 		move.l	d0,(v_time).w	; clear time
 		move.l	d0,(v_score).w	; clear score
-	if Revision<>0
 		move.l	#5000,(v_scorelife).w ; extra life is awarded at 50000 points
-	endif
 		rts
 
 Demo_Brew:
@@ -2505,21 +2425,52 @@ Demo_Levels:	binclude	"misc/Demo Level Order - Intro.bin"
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
-; Music playlist
+; Music playlist 
+; !!!!!!!!!!!!!!!!!!!! DEPRECATED !!!!!!!!!!!!!!!!!!!! 
+; Look in "_inc/LevelHeaders.asm"
 ; ---------------------------------------------------------------------------
-MusicList:
-		dc.b bgm_GHZ	; GHZ
-		dc.b bgm_LZ	; LZ
-		dc.b bgm_MZ	; MZ
-		dc.b bgm_SLZ	; SLZ
-		dc.b bgm_SYZ	; SYZ
-		dc.b bgm_SBZ	; SBZ
-		zonewarning MusicList,1
-		dc.b bgm_FZ	; Ending
-		dc.b bgm_FZ	; cold brew but use that in case you want to hijack music or something
-		dc.b bgm_FZ	; WIN98
-		dc.b bgm_LZ	; Joint
-		even
+;MusicList:
+;		dc.b bgm_GHZ		; GHZ1
+;		dc.b bgm_OrangeSong	; GHZ2
+;		dc.b bgm_GreenHills	; GHZ3
+;		dc.b bgm_GHZ		; GHZ4
+;		dc.b bgm_LZ		; LZ1
+;		dc.b bgm_LZ		; LZ2
+;		dc.b bgm_LZ		; LZ3
+;		dc.b $15 ;RE basement	; LZ4 (SBZ3)
+;		dc.b bgm_MZ		; MZ1
+;		dc.b $4E ;bgm_music83	; MZ2
+;		dc.b bgm_VampKiller	; MZ3
+;		dc.b bgm_MZ		; MZ4
+;		dc.b bgm_SLZ		; SLZ1
+;		dc.b $1D ; dooms gate	; SLZ2
+;		dc.b bgm_BadEmerald	; SLZ3
+;		dc.b bgm_SLZ		; SLZ4
+;		dc.b bgm_SYZ		; SYZ1
+;		dc.b bgm_CanCan		; SYZ2
+;		dc.b $49 ;bgm_GCV2005	; SYZ3
+;		dc.b bgm_SYZ		; SYZ4
+;		dc.b bgm_SBZ		; SBZ1
+;		dc.b bgm_Cheetah	; SBZ2
+;		dc.b bgm_FZ		; SBZ3
+;		dc.b bgm_FZ		; SBZ4
+;		dc.b bgm_FZ		; Ending1
+;		dc.b bgm_FZ		; Ending2
+;		dc.b bgm_FZ		; Ending3
+;		dc.b bgm_FZ		; Ending4
+;		dc.b bgm_ColdBrew; cold brew
+;		dc.b bgm_ColdBrew; cold brew2
+;		dc.b bgm_BadEmerald; cold brew3
+;		dc.b bgm_BadEmerald; cold brew4
+;		dc.b bgm_CleanSlate	; WIN98 1
+;		dc.b bgm_Passport	; WIN98 2
+;		dc.b bgm_FZ		; WIN98 3
+;		dc.b bgm_FZ		; WIN98 4
+;		dc.b bgm_LZ		; Joint 1
+;		dc.b bgm_LZ		; Joint 2
+;		dc.b bgm_LZ		; Joint 3
+;		dc.b bgm_LZ		; Joint 4
+;		even
 ; ===========================================================================
 
 ; ---------------------------------------------------------------------------
@@ -2532,35 +2483,47 @@ GM_Level:
 		bmi.s	Level_NoMusicFade
 		move.b	#bgm_Fade,d0
 		bsr.w	QueueSound2 ; fade out music
+		jsr     MegaPCM_StopPlayback
 
 Level_NoMusicFade:
 		bsr.w	ClearPLC
 		bsr.w	PaletteFadeOut
-		tst.w	(f_demo).w	; is an ending sequence demo running?
-		bmi.s	Level_ClrRam	; if yes, branch
-		jsr	(TitleCards_LoadArt).l
-		moveq	#0,d0
-		move.b	(v_zone).w,d0
-		lsl.w	#4,d0
-		lea	(LevelHeaders).l,a2
-		lea	(a2,d0.w),a2
-		moveq	#0,d0
-		move.b	(a2),d0
-		beq.s	loc_37FC
-		bsr.w	AddPLC		; load level patterns
-
-loc_37FC:
-		moveq	#plcid_Main2,d0
-		bsr.w	AddPLC		; load standard patterns
-
-Level_ClrRam:
 		clearRAM v_objspace
 		clearRAM v_misc_variables
 		clearRAM v_levelvariables
 		clearRAM v_timingandscreenvariables
-
+;		move.b	#0,(v_waterflag).w
+;		cmp.b	#id_GHZ,(v_zone).w
+;		beq.s	.yawata
+;		cmp.b	#id_LZ,(v_zone).w
+;		bne.s	.nowata
+.yawata:
+		move.b	#$80,(v_waterflag).w
+.nowata:
 		disable_ints
+		fillVRAM $2F,0,$10000		; fill vram with dummy tiles
 		bsr.w	ClearScreen
+		tst.w	(f_demo).w		; is an ending sequence demo running?
+		bmi.s	.notitlecard		; if yes, branch
+		jsr	(TitleCards_LoadArt).l
+		moveq	#plcid_Main,d0
+		bsr.w	AddPLC			; load standard patterns
+		moveq	#0,d0
+		move.b	(v_zone).w,d0
+		lsl.w	#7,d0
+		lea	(LevelHeaders).l,a2
+		lea	(a2,d0.w),a2
+		moveq	#0,d0
+		move.b	v_act.w,d0
+		lsl.w	#5,d0
+		lea	(a2,d0.w),a2 
+		move.b	(a2),d0
+		beq.s	.nolevelplc1
+		bsr.w	AddPLC			; load level patterns
+.nolevelplc1:
+.notitlecard:
+		move.w	#opcode_jmpabslong,(v_hintcode.jmp).w
+		move.l	#HBlank,(v_hintcode.addr).w
 		lea	(vdp_control_port).l,a6
 		move.w	#$8B03,(a6)	; line scroll mode
 		move.w	#$8200+(vram_fg>>10),(a6) ; set foreground nametable address
@@ -2569,14 +2532,16 @@ Level_ClrRam:
 		move.w	#$9001,(a6)		; 64-cell hscroll size
 		move.w	#$8004,(a6)		; 8-colour mode
 		move.w	#$8720,(a6)		; set background colour (line 3; colour 0)
-		move.w	#$8A00+223,(v_hbla_hreg).w ; set palette change position (for water)
+		move.w	#$8AFF,(v_hbla_hreg).w ; set palette change position (for water)
 		move.w	(v_hbla_hreg).w,(a6)
-		cmpi.b	#id_LZ,(v_zone).w ; is level LZ?
-		bne.s	Level_LoadPal	; if not, branch
+		tst.b	(v_waterflag).w ; is level LZ?
+		bpl.s	Level_LoadPal	; if not, branch
 
 		move.w	#$8014,(a6)	; enable H-interrupts
 		moveq	#0,d0
-		move.b	(v_act).w,d0
+		move.b	(v_zone).w,d0
+		lsl.w	#2,d0
+		add.b	(v_act).w,d0
 		add.w	d0,d0
 		lea	(WaterHeight).l,a1 ; load water height array
 		move.w	(a1,d0.w),d0
@@ -2588,12 +2553,15 @@ Level_ClrRam:
 		move.b	#1,(f_water).w	; enable water
 
 Level_LoadPal:
+		move.b	#dLetsGOO, d0
+		jsr	MegaPCM_PlaySample
+		; hiii
 		move.w	#30,(v_air).w
 		enable_ints
 		moveq	#palid_Sonic,d0
 		bsr.w	PalLoad	; load Sonic's palette
-		cmpi.b	#id_LZ,(v_zone).w ; is level LZ?
-		bne.s	Level_GetBgm	; if not, branch
+		tst.b	(v_waterflag).w ; is level LZ?
+		bpl.s	Level_GetBgm	; if not, branch
 
 		moveq	#palid_LZSonWater,d0 ; palette number $F (LZ)
 		cmpi.b	#3,(v_act).w	; is act number 3?
@@ -2610,19 +2578,17 @@ Level_GetBgm:
 		tst.w	(f_demo).w
 		bmi.s	Level_SkipTtlCard
 		moveq	#0,d0
+		moveq	#0,d0
 		move.b	(v_zone).w,d0
-		cmpi.w	#(id_LZ<<8)+3,(v_zone).w ; is level SBZ3?
-		bne.s	Level_BgmNotLZ4	; if not, branch
-		moveq	#5,d0		; use 5th music (SBZ)
-
-Level_BgmNotLZ4:
-		cmpi.w	#(id_SBZ<<8)+2,(v_zone).w ; is level FZ?
-		bne.s	Level_PlayBgm	; if not, branch
-		moveq	#6,d0		; use 6th music (FZ)
-
-Level_PlayBgm:
-		lea	(MusicList).l,a1 ; load music playlist
-		move.b	(a1,d0.w),d0
+		lsl.w	#7,d0
+		lea	(LevelHeaders).l,a2
+		lea	(a2,d0.w),a2
+		moveq	#0,d0
+		move.b	v_act.w,d0
+		lsl.w	#5,d0
+		lea	(a2,d0.w),a2 
+		move.b	13(a2),d0
+		move.b	d0,(v_zonemusic).w
 		bsr.w	QueueSound1	; play music
 		move.b	#id_TitleCard,(v_titlecard).w ; load title card object
 
@@ -2648,8 +2614,8 @@ Level_SkipTtlCard:
 		bsr.w	LoadZoneTiles	; load art
 		bsr.w	LevelDataLoad ; load block mappings and palettes
 		bsr.w	LoadTilesFromStart
-		jsr	(ConvertCollisionArray).l
-		bsr.w	ColIndexLoad
+		;jsr	(ConvertCollisionArray).l
+		;bsr.w	ColIndexLoad
 		bsr.w	LZWaterFeatures
 		move.b	#id_SonicPlayer,(v_player).w ; load Sonic object
 		tst.w	(f_demo).w
@@ -2717,8 +2683,8 @@ Level_Demo:
 		move.w	#510,(v_generictimer).w
 
 Level_ChkWaterPal:
-		cmpi.b	#id_LZ,(v_zone).w ; is level LZ/SBZ3?
-		bne.s	Level_Delay	; if not, branch
+		tst.b	(v_waterflag).w ; is level LZ/SBZ3?
+		bpl.s	Level_Delay	; if not, branch
 		moveq	#palid_LZWater,d0 ; palette $B (LZ underwater)
 		cmpi.b	#3,(v_act).w	; is level SBZ3?
 		bne.s	Level_WtrNotSbz	; if not, branch
@@ -2769,10 +2735,8 @@ Level_MainLoop:
 		bsr.w	MoveSonicInDemo
 		bsr.w	LZWaterFeatures
 		jsr	(ExecuteObjects).l
-	if Revision<>0
 		tst.w	(f_restart).w
-		bne.w	GM_Level
-	endif
+		bne.w	Level_Restarted
 		tst.w	(v_debuguse).w	; is debug mode being used?
 		bne.s	Level_DoScroll	; if yes, branch
 		cmpi.b	#6,(v_player+obRoutine).w ; has Sonic just died?
@@ -2792,18 +2756,16 @@ Level_SkipScroll:
 
 		cmpi.b	#id_Demo,(v_gamemode).w
 		beq.s	Level_ChkDemo	; if mode is 8 (demo), branch
-	if Revision=0
-		tst.w	(f_restart).w	; is the level set to restart?
-		bne.w	GM_Level	; if yes, branch
-	endif
 		cmpi.b	#id_Level,(v_gamemode).w
 		beq.w	Level_MainLoop	; if mode is $C (level), branch
 		rts
+Level_Restarted:
+		cmpi.b	#id_Demo,(v_gamemode).w
+		beq.s	Level_EndDemo
+		bra.w	GM_Level
 ; ===========================================================================
 
 Level_ChkDemo:
-		tst.w	(f_restart).w	; is level set to restart?
-		bne.s	Level_EndDemo	; if yes, branch
 		tst.w	(v_generictimer).w ; is there time left on the demo?
 		beq.s	Level_EndDemo	; if not, branch
 		cmpi.b	#id_Demo,(v_gamemode).w
@@ -3006,7 +2968,7 @@ GM_Special:
 		move.b	#id_SonicSpecial,(v_player).w ; load special stage Sonic object
 		bsr.w	PalCycle_SS
 		clr.w	(v_ssangle).w	; set stage angle to "upright"
-		move.w	#$40,(v_ssrotate).w ; set stage rotation speed
+		move.w	#$90,(v_ssrotate).w ; set stage rotation speed
 		move.w	#bgm_SS,d0
 		bsr.w	QueueSound1	; play special stage BG music
 		move.w	#0,(v_btnpushtime1).w
@@ -3052,13 +3014,8 @@ SS_MainLoop:
 SS_ChkEnd:
 		cmpi.b	#id_Special,(v_gamemode).w ; is game mode $10 (special stage)?
 		beq.w	SS_MainLoop	; if yes, branch
-
 		tst.w	(f_demo).w	; is demo mode on?
-	if Revision=0
-		bne.w	SS_ToSegaScreen	; if yes, branch
-	else
 		bne.w	SS_ToLevel
-	endif
 		move.b	#id_Level,(v_gamemode).w ; set screen mode to $0C (level)
 		cmpi.w	#(id_SBZ<<8)+3,(v_zone).w ; is level number higher than FZ?
 		blo.s	SS_Finish	; if not, branch
@@ -3137,12 +3094,10 @@ SS_ToSegaScreen:
 		move.b	#id_Sega,(v_gamemode).w ; goto Sega screen
 		rts
 
-	if Revision<>0
 SS_ToLevel:
 		cmpi.b	#id_Level,(v_gamemode).w
 		beq.s	SS_ToSegaScreen
 		rts
-	endif
 
 ; ---------------------------------------------------------------------------
 ; Special stage background loading subroutine
@@ -3522,7 +3477,7 @@ GM_Ending:
 		move.w	#$9001,(a6)		; 64-cell hscroll size
 		move.w	#$8004,(a6)		; 8-colour mode
 		move.w	#$8720,(a6)		; set background colour (line 3; colour 0)
-		move.w	#$8A00+223,(v_hbla_hreg).w ; set palette change position (for water)
+		move.w	#$8AFF,(v_hbla_hreg).w ; set palette change position (for water)
 		move.w	(v_hbla_hreg).w,(a6)
 		move.w	#30,(v_air).w
 		move.w	#id_EndZ<<8,(v_zone).w ; set level number to 0600 (extra flowers)
@@ -3747,10 +3702,13 @@ GM_Credits:
 		bsr.w	EndingDemoLoad
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
-		lsl.w	#4,d0
+		lsl.w	#7,d0
 		lea	(LevelHeaders).l,a2
 		lea	(a2,d0.w),a2
 		moveq	#0,d0
+		move.b	v_act.w,d0
+		lsl.w	#5,d0
+		lea	(a2,d0.w),a2 
 		move.b	(a2),d0
 		beq.s	Cred_SkipObjGfx
 		bsr.w	AddPLC		; load object graphics
@@ -3925,15 +3883,9 @@ Demo_EndSBZ2:	binclude	"demodata/Ending - SBZ2.bin"
 Demo_EndGHZ2:	binclude	"demodata/Ending - GHZ2.bin"
 		even
 
-	if Revision=0
-		include	"_inc/LevelSizeLoad & BgScrollSpeed.asm"
-		include	"_inc/DeformLayers.asm"
-		include	"_inc/Level Drawing.asm"
-	else
 		include	"_inc/LevelSizeLoad & BgScrollSpeed (JP1).asm"
 		include	"_inc/DeformLayers (JP1).asm"
 		include	"_inc/Level Drawing (JP1).asm"
-	endif
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to load level art data
@@ -3944,13 +3896,17 @@ Demo_EndGHZ2:	binclude	"demodata/Ending - GHZ2.bin"
 LoadZoneTiles:
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
-		lsl.w	#4,d0
-		lea		(LevelHeaders).l,a2
-		lea		(a2,d0.w),a2
+		lsl.w	#7,d0
+		lea	(LevelHeaders).l,a2
+		lea	(a2,d0.w),a2
+		moveq	#0,d0
+		move.b	v_act.w,d0
+		lsl.w	#5,d0
+		lea	(a2,d0.w),a2
 		move.l	(a2)+,d0
 		andi.l	#$FFFFFF,d0 ; 8x8 tile pointer
 		movea.l	d0,a0
-		lea		($FF0000).l,a1
+		lea	($FF0000).l,a1
 		bsr.w	KosDec
 		move.w	a1,d3
 		move.w	d3,d7
@@ -3959,7 +3915,7 @@ LoadZoneTiles:
 		rol.w	#4,d7
 		andi.w	#$F,d7
 
-.loop:	move.w	d7,d2
+.loop:		move.w	d7,d2
 		lsl.w	#7,d2
 		lsl.w	#5,d2
 		move.l	#$FFFFFF,d1
@@ -3985,9 +3941,13 @@ LoadZoneTiles:
 LevelDataLoad:
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
-		lsl.w	#4,d0
+		lsl.w	#7,d0
 		lea	(LevelHeaders).l,a2
 		lea	(a2,d0.w),a2
+		moveq	#0,d0
+		move.b	v_act.w,d0
+		lsl.w	#5,d0
+		lea	(a2,d0.w),a2 
 		move.l	a2,-(sp)
 		addq.l	#4,a2
 		movea.l	(a2)+,a0
@@ -3997,26 +3957,33 @@ LevelDataLoad:
 		movea.l	(a2)+,a0
 		lea	(v_256x256).l,a1 ; RAM address for 256x256 mappings
 		bsr.w	KosDec
+		move.w	(a2)+,d5
+		move.w	(a2)+,d5
+		move.l	(a2)+,v_collindex
+		move.l	(a2),(v_opl_data).w
+		move.l	(a2)+,(v_opl_data+4).w
+		move.l	(a2)+,v_layoutptr
+		move.l	(a2),v_bglayoutptr
 		bsr.w	LevelLayoutLoad
-		move.w	(a2)+,d0
-		move.w	(a2),d0
-		andi.w	#$FF,d0
-		cmpi.w	#(id_LZ<<8)+3,(v_zone).w ; is level SBZ3 (LZ4) ?
-		bne.s	.notSBZ3	; if not, branch
-		moveq	#palid_SBZ3,d0	; use SB3 palette
+		andi.w	#$FF,d5
+		move.w	d5,d0
+		cmpi.w	#(id_LZ<<8)+3,(v_zone).w	; is level SBZ3 (LZ4) ?
+		bne.s	.notSBZ3			; if not, branch
+		moveq	#palid_SBZ3,d0			; use SB3 palette
 
 .notSBZ3:
-		cmpi.w	#(id_SBZ<<8)+1,(v_zone).w ; is level SBZ2?
-		beq.s	.isSBZorFZ	; if yes, branch
-		cmpi.w	#(id_SBZ<<8)+2,(v_zone).w ; is level FZ?
-		bne.s	.normalpal	; if not, branch
+		cmpi.w	#(id_SBZ<<8)+1,(v_zone).w	; is level SBZ2?
+		beq.s	.isSBZorFZ			; if yes, branch
+		cmpi.w	#(id_SBZ<<8)+2,(v_zone).w	; is level FZ?
+		bne.s	.normalpal			; if not, branch
 
 .isSBZorFZ:
-		moveq	#palid_SBZ2,d0	; use SBZ2/FZ palette
+		moveq	#palid_SBZ2,d0		; use SBZ2/FZ palette
 
 .normalpal:
-		bsr.w	PalLoad_Fade	; load palette (based on d0)
-		movea.l	(sp)+,a2
+		bsr.w	PalLoad_Fade		; load palette (based on d0)
+
+		movea.l	(sp)+,a2	; restore from like  way before
 		addq.w	#4,a2		; read number for 2nd PLC
 		moveq	#0,d0
 		move.b	(a2),d0
@@ -4024,26 +3991,18 @@ LevelDataLoad:
 		bsr.w	AddPLC		; load pattern load cues
 
 .skipPLC:
-		rts
-; End of function LevelDataLoad
+		moveq	#plcid_Main2,d0
+		bra.w	AddPLC
 
 ; ---------------------------------------------------------------------------
 ; Level layout loading subroutine
 ; ---------------------------------------------------------------------------
 
-; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 
 LevelLayoutLoad:
 		lea	(v_lvllayout).w,a3
-	if FixBugs
-		move.w	#(v_lvllayout_end-v_lvllayout)/4-1,d1
-	else
-		; ; v_lvllayout is only $400 bytes, but this clears $800...
-		; In Sonic 2, this function was corrected to only clear the
-		; layout buffer.
 		move.w	#(v_lvllayout_end-v_lvllayout)/2-1,d1
-	endif
 		moveq	#0,d0
 
 LevLoad_ClrRam:
@@ -4051,28 +4010,17 @@ LevLoad_ClrRam:
 		dbf	d1,LevLoad_ClrRam ; clear the RAM ($A400-A7FF)
 
 		lea	(v_lvllayout).w,a3 ; RAM address for level layout
-		moveq	#0,d1
+		move.l	v_layoutptr,a1
 		bsr.w	LevelLayoutLoad2 ; load level layout into RAM
 		lea	(v_lvllayout+$40).w,a3 ; RAM address for background layout
-		moveq	#2,d1
-; End of function LevelLayoutLoad
+		move.l	v_bglayoutptr,a1
+		; fall into LevelLayoutLoad2
 
+; ---------------------------------------------------------------------------
 ; "LevelLayoutLoad2" is run twice - for the level and the background
-
-; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
-
+; ---------------------------------------------------------------------------
 
 LevelLayoutLoad2:
-		move.w	(v_zone).w,d0
-		lsl.b	#6,d0
-		lsr.w	#5,d0
-		move.w	d0,d2
-		add.w	d0,d0
-		add.w	d2,d0
-		add.w	d1,d0
-		lea	(Level_Index).l,a1
-		move.w	(a1,d0.w),d0
-		lea	(a1,d0.w),a1
 		moveq	#0,d1
 		move.w	d1,d2
 		move.b	(a1)+,d1	; load level width (in tiles)
@@ -4602,11 +4550,7 @@ Map_Missile:	include	"_maps/Buzz Bomber Missile.asm"
 		include	"_anim/Rings.asm"
 
 Map_Ring:
-	if Revision=0
-		include	"_maps/Rings.asm"
-	else
 		include	"_maps/Rings (JP1).asm"
-	endif
 
 Map_GRing:	include	"_maps/Giant Ring.asm"
 Map_Flash:	include	"_maps/Ring Flash.asm"
@@ -5235,16 +5179,84 @@ BuildSprites:
 BuildSpr_Draw:
 		movea.w	obGfx(a0),a3
 		btst	#0,d4
-		bne.s	BuildSpr_FlipX
+		bne.w	BuildSpr_FlipX
 		btst	#1,d4
 		bne.w	BuildSpr_FlipY
+		cmpi.b	#$F,obID(a0)		; hard-coded for now until I can get the table working
+		beq.w	BuildSpr_NormalOld	; if title screen mask sprite, use s1 culling
 ; End of function BuildSpr_Draw
 
 
-; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
+; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
 
 
 BuildSpr_Normal:
+		cmpi.b	#$50,d5		; check sprite limit
+		beq.s	.return
+		move.b	(a1)+,d0	; get y-offset
+		ext.w	d0
+		add.w	d2,d0		; add y-position
+		cmpi.w	#$60,d0		; is y-pos less than 128
+		bls.s	.derenderY	; if so, branch
+		cmpi.w	#$160,d0	; is y-pos greater than 352
+		bhs.s	.derenderY	; if so, branch
+		move.w	d0,(a2)+	; write to buffer
+		move.b	(a1)+,(a2)+	; write sprite size
+		addq.b	#1,d5		; increase sprite counter
+		move.b	d5,(a2)+	; set as sprite link
+		move.b	(a1)+,d0	; get art tile
+		lsl.w	#8,d0
+		move.b	(a1)+,d0
+		add.w	a3,d0		; add art tile offset
+		move.w	d0,(a2)+	; write to buffer
+		move.b	(a1)+,d0	; get x-offset
+		ext.w	d0
+		add.w	d3,d0		; add x-position
+		cmpi.w	#$60,d0		; is x-pos less than 128
+		bls.s	.derenderX	; if so, branch
+		cmpi.w	#$1C0,d0	; is x-pos greater than 448
+		bhs.s	.derenderX	; if so branch
+;		andi.w	#$1FF,d0	; keep within 512px
+;		bne.s	.writeX
+;		addq.w	#1,d0
+
+;	.writeX:
+		move.w	d0,(a2)+	; write to buffer
+		dbf	d1,BuildSpr_Normal	; process next sprite piece
+
+	.return:
+		rts	
+		
+	.derenderY:
+		addq.w	#4,a1
+		dbf	d1,BuildSpr_Normal
+		rts
+		
+	.derenderX:
+		subq.w	#6,a2
+		subq.b	#1,d5
+		dbf	d1,BuildSpr_Normal
+		rts
+; End of function BuildSpr_Normal
+
+;ObjCullTable:
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+;	dc.b	0,0,0,0,0,0,0,0,0,0,0,0
+;	even
+
+; ===========================================================================
+
+; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
+
+
+BuildSpr_NormalOld:
 		cmpi.b	#$50,d5		; check sprite limit
 		beq.s	.return
 		move.b	(a1)+,d0	; get y-offset
@@ -5268,12 +5280,11 @@ BuildSpr_Normal:
 
 	.writeX:
 		move.w	d0,(a2)+	; write to buffer
-		dbf	d1,BuildSpr_Normal	; process next sprite piece
+		dbf	d1,BuildSpr_NormalOld	; process next sprite piece
 
 	.return:
-		rts
+		rts	
 ; End of function BuildSpr_Normal
-
 ; ===========================================================================
 
 BuildSpr_FlipX:
@@ -5419,17 +5430,7 @@ OPL_Index:	dc.w OPL_Main-OPL_Index
 
 OPL_Main:
 		addq.b	#2,(v_opl_routine).w
-		move.w	(v_zone).w,d0
-		lsl.b	#6,d0
-		lsr.w	#4,d0
-		lea	(ObjPos_Index).l,a0
-		movea.l	a0,a1
-		adda.w	(a0,d0.w),a0
-		move.l	a0,(v_opl_data).w
-		move.l	a0,(v_opl_data+4).w
-		adda.w	2(a1,d0.w),a1
-		move.l	a1,(v_opl_data+8).w
-		move.l	a1,(v_opl_data+$C).w
+		move.l	(v_opl_data).w,a0
 		lea	(v_objstate).w,a2
 		move.w	#$101,(a2)+
 	if FixBugs
@@ -5789,27 +5790,22 @@ Map_WFall:	include	"_maps/Waterfalls.asm"
 
 ResumeMusic:
 		cmpi.w	#12,(v_air).w	; more than 12 seconds of air left?
-		bhi.s	.over12		; if yes, branch
-		move.w	#bgm_LZ,d0	; play LZ music
-		cmpi.w	#(id_LZ<<8)+3,(v_zone).w ; check if level is 0103 (SBZ3)
-		bne.s	.notsbz
-		move.w	#bgm_SBZ,d0	; play SBZ music
-
-.notsbz:
-	if Revision<>0
+		bhi.s	over12yo		; if yes, branch
+		moveq	#0,d0
+		move.b	(v_zonemusic).w,d0
 		tst.b	(v_invinc).w ; is Sonic invincible?
 		beq.s	.notinvinc ; if not, branch
 		move.w	#bgm_Invincible,d0
 .notinvinc:
 		tst.b	(f_lockscreen).w ; is Sonic at a boss?
-		beq.s	.playselected ; if not, branch
+		beq.s	playselectedlele ; if not, branch
 		move.w	#bgm_Boss,d0
-.playselected:
-	endif
-
+		cmpi.w	#(id_SLZ<<8)+2,(v_zone).w ; ist das level mein?
+        bne.s   playselectedlele
+        move.w  #$1F,d0 ; MEGALOVANIA BABY
+playselectedlele:
 		jsr	(QueueSound1).l
-
-.over12:
+over12yo:
 		move.w	#30,(v_air).w	; reset air to 30 seconds
 		clr.b	(v_sonicbubbles+objoff_32).w
 		rts
@@ -7075,8 +7071,6 @@ Map_SS_Down:	include	"_maps/SS DOWN Block.asm"
 
 		include	"_incObj/09 Sonic in Special Stage.asm"
 
-		include	"_incObj/10.asm"
-
 		include	"_inc/AnimateLevelGfx.asm"
 
 		include	"_incObj/21 HUD.asm"
@@ -7091,25 +7085,6 @@ Map_HUD:	include	"_maps/HUD.asm"
 
 AddPoints:
 		move.b	#1,(f_scorecount).w ; set score counter to update
-
-	if Revision=0
-		lea	(v_scorecopy).w,a2
-		lea	(v_score).w,a3
-		add.l	d0,(a3)		; add d0*10 to the score
-		move.l	#999999,d1
-		cmp.l	(a3),d1		; is score below 999999?
-		bhi.w	.belowmax	; if yes, branch
-		move.l	d1,(a3)		; reset score to 999999
-		move.l	d1,(a2)
-
-.belowmax:
-		move.l	(a3),d0
-		cmp.l	(a2),d0
-		blo.w	.locret_1C6B6
-		move.l	d0,(a2)
-
-	else
-
 		lea	(v_score).w,a3
 		add.l	d0,(a3)
 		move.l	#999999,d1
@@ -7128,8 +7103,6 @@ AddPoints:
 		addq.b	#1,(f_lifecount).w
 		move.w	#bgm_ExtraLife,d0
 		jmp	(QueueSound1).l
-	endif
-
 .locret_1C6B6:
 .noextralife:
 		rts
@@ -7149,969 +7122,10 @@ Art_LivesNums:	binclude	"artunc/Lives Counter Numbers.bin" ; 8x8 pixel numbers o
 		include	"_inc/DebugList.asm"
 		include	"_inc/LevelHeaders.asm"
 		include	"_inc/Pattern Load Cues.asm"
-
-		; Nem_SegaLogo has a bunch of padding before it that differs between revisions:
-		; - in rev00, it starts at $1DC00, which amounts to $EE bytes
-		; - in rev01/rev02, it starts at $1E700, which amounts to $48E bytes
-		; From a technical standpoint, this padding serves no purpose.
-		if PaddingOptimization=0
-			align	$200
-			if Revision<>0
-				dc.b	[$300]$FF
-			endif
-		endif
-
-	if Revision=0
-Nem_SegaLogo:	binclude	"artnem/Sega Logo.nem"	; large Sega logo
-		even
-Eni_SegaLogo:	binclude	"tilemaps/Sega Logo.eni" ; large Sega logo (mappings)
-		even
-	else
-Nem_SegaLogo:	binclude	"artnem/Sega Logo (JP1).nem" ; large Sega logo
-		even
-Eni_SegaLogo:	binclude	"tilemaps/Sega Logo (JP1).eni" ; large Sega logo (mappings)
-		even
-	endif
-
-Eni_GitHub:	binclude	"ATOGKTitle/Enigma/Github.bin"
-		even
-Eni_Madness:	binclude	"ATOGKTitle/Enigma/Madness.bin"
-		even
-Nem_GitMadScr:	binclude	"ATOGKTitle/Nemesis/GitMad.bin"
-		even
-
-Eni_Title:	binclude	"tilemaps/Title Screen.eni" ; title screen foreground (mappings)
-		even
-Nem_TitleFg:	binclude	"artnem/Title Screen Foreground.nem"
-		even
-Nem_TitleSonic:	binclude	"artnem/Title Screen Sonic.nem"
-		even
-Nem_TitleTM:	binclude	"artnem/Title Screen TM.nem"
-		even
-Eni_JapNames:	binclude	"tilemaps/Hidden Japanese Credits.eni" ; Japanese credits (mappings)
-		even
-Nem_JapNames:	binclude	"artnem/Hidden Japanese Credits.nem"
-		even
-Eni_SplashMap:	binclude	"eurosega/map.bin"
-		even
-Nem_SplashTiles:	binclude	"eurosega/tiles.bin"
-		even
-
-; ---------------------------------------------------------------------------
-; Uncompressed graphics - Sonic
-; ---------------------------------------------------------------------------
-Map_Sonic:	include	"_maps/Sonic.asm"
-
-SonicDynPLC:	include	"_maps/Sonic - Dynamic Gfx Script.asm"
-
-Art_Sonic:	binclude	"artunc/Sonic.bin"	; Sonic
-		even
-
-; ---------------------------------------------------------------------------
-; Compressed graphics - various
-; ---------------------------------------------------------------------------
-	if Revision=0
-Nem_Smoke:	binclude	"artnem/Unused - Smoke.nem"
-		even
-Nem_SyzSparkle:	binclude	"artnem/Unused - SYZ Sparkles.nem"
-		even
-	endif
-
-Nem_Shield:	binclude	"artnem/Shield.nem"
-		even
-Nem_Stars:	binclude	"artnem/Invincibility Stars.nem"
-		even
-
-	if Revision=0
-Nem_LzSonic:	binclude	"artnem/Unused - LZ Sonic.nem" ; Sonic holding his breath
-		even
-Nem_UnkFire:	binclude	"artnem/Unused - Fireball.nem" ; unused fireball
-		even
-Nem_Warp:	binclude	"artnem/Unused - SStage Flash.nem" ; entry to special stage flash
-		even
-Nem_Goggle:	binclude	"artnem/Unused - Goggles.nem" ; unused goggles
-		even
-	endif
-
-; ---------------------------------------------------------------------------
-; Compressed graphics - special stage
-; ---------------------------------------------------------------------------
-Map_SSWalls:	include	"_maps/SS Walls.asm"
-
-Nem_SSWalls:	binclude	"artnem/Special Walls.nem" ; special stage walls
-		even
-Eni_SSBg1:	binclude	"tilemaps/SS Background 1.eni" ; special stage background (mappings)
-		even
-Nem_SSBgFish:	binclude	"artnem/Special Birds & Fish.nem" ; special stage birds and fish background
-		even
-Eni_SSBg2:	binclude	"tilemaps/SS Background 2.eni" ; special stage background (mappings)
-		even
-Nem_SSBgCloud:	binclude	"artnem/Special Clouds.nem" ; special stage clouds background
-		even
-Nem_SSGOAL:	binclude	"artnem/Special GOAL.nem" ; special stage GOAL block
-		even
-Nem_SSRBlock:	binclude	"artnem/Special R.nem"	; special stage R block
-		even
-Nem_SS1UpBlock:	binclude	"artnem/Special 1UP.nem" ; special stage 1UP block
-		even
-Nem_SSEmStars:	binclude	"artnem/Special Emerald Twinkle.nem" ; special stage stars from a collected emerald
-		even
-Nem_SSRedWhite:	binclude	"artnem/Special Red-White.nem" ; special stage red/white block
-		even
-Nem_SSZone1:	binclude	"artnem/Special ZONE1.nem" ; special stage ZONE1 block
-		even
-Nem_SSZone2:	binclude	"artnem/Special ZONE2.nem" ; ZONE2 block
-		even
-Nem_SSZone3:	binclude	"artnem/Special ZONE3.nem" ; ZONE3 block
-		even
-Nem_SSZone4:	binclude	"artnem/Special ZONE4.nem" ; ZONE4 block
-		even
-Nem_SSZone5:	binclude	"artnem/Special ZONE5.nem" ; ZONE5 block
-		even
-Nem_SSZone6:	binclude	"artnem/Special ZONE6.nem" ; ZONE6 block
-		even
-Nem_SSUpDown:	binclude	"artnem/Special UP-DOWN.nem" ; special stage UP/DOWN block
-		even
-Nem_SSEmerald:	binclude	"artnem/Special Emeralds.nem" ; special stage chaos emeralds
-		even
-Nem_SSGhost:	binclude	"artnem/Special Ghost.nem" ; special stage ghost block
-		even
-Nem_SSWBlock:	binclude	"artnem/Special W.nem"	; special stage W block
-		even
-Nem_SSGlass:	binclude	"artnem/Special Glass.nem" ; special stage destroyable glass block
-		even
-Nem_ResultEm:	binclude	"artnem/Special Result Emeralds.nem" ; chaos emeralds on special stage results screen
-		even
-
-; ---------------------------------------------------------------------------
-; Compressed graphics - GHZ stuff
-; ---------------------------------------------------------------------------
-Nem_Stalk:	binclude	"artnem/GHZ Flower Stalk.nem"
-		even
-Nem_Swing:	binclude	"artnem/GHZ Swinging Platform.nem"
-		even
-Nem_Bridge:	binclude	"artnem/GHZ Bridge.nem"
-		even
-;Nem_GhzUnkBlock:binclude	"artnem/Unused - GHZ Block.nem"
-;		even
-Nem_Ball:	binclude	"artnem/GHZ Giant Ball.nem"
-		even
-Nem_Spikes:	binclude	"artnem/Spikes.nem"
-		even
-;Nem_GhzLog:	binclude	"artnem/Unused - GHZ Log.nem"
-;		even
-Nem_SpikePole:	binclude	"artnem/GHZ Spiked Log.nem"
-		even
-Nem_PplRock:	binclude	"artnem/GHZ Purple Rock.nem"
-		even
-Nem_GhzWall1:	binclude	"artnem/GHZ Breakable Wall.nem"
-		even
-Nem_GhzWall2:	binclude	"artnem/GHZ Edge Wall.nem"
-		even
-
-; ---------------------------------------------------------------------------
-; Compressed graphics - LZ stuff
-; ---------------------------------------------------------------------------
-Nem_Water:	binclude	"artnem/LZ Water Surface.nem"
-		even
-Nem_Splash:	binclude	"artnem/LZ Water & Splashes.nem"
-		even
-Nem_LzSpikeBall:binclude	"artnem/LZ Spiked Ball & Chain.nem"
-		even
-Nem_FlapDoor:	binclude	"artnem/LZ Flapping Door.nem"
-		even
-Nem_Bubbles:	binclude	"artnem/LZ Bubbles & Countdown.nem"
-		even
-Nem_LzBlock3:	binclude	"artnem/LZ 32x16 Block.nem"
-		even
-Nem_LzDoor1:	binclude	"artnem/LZ Vertical Door.nem"
-		even
-Nem_Harpoon:	binclude	"artnem/LZ Harpoon.nem"
-		even
-Nem_LzPole:	binclude	"artnem/LZ Breakable Pole.nem"
-		even
-Nem_LzDoor2:	binclude	"artnem/LZ Horizontal Door.nem"
-		even
-Nem_LzWheel:	binclude	"artnem/LZ Wheel.nem"
-		even
-Nem_Gargoyle:	binclude	"artnem/LZ Gargoyle & Fireball.nem"
-		even
-Nem_LzBlock2:	binclude	"artnem/LZ Blocks.nem"
-		even
-Nem_LzPlatfm:	binclude	"artnem/LZ Rising Platform.nem"
-		even
-Nem_Cork:	binclude	"artnem/LZ Cork.nem"
-		even
-Nem_LzBlock1:	binclude	"artnem/LZ 32x32 Block.nem"
-		even
-
-; ---------------------------------------------------------------------------
-; Compressed graphics - MZ stuff
-; ---------------------------------------------------------------------------
-Nem_MzMetal:	binclude	"artnem/MZ Metal Blocks.nem"
-		even
-Nem_MzSwitch:	binclude	"artnem/MZ Switch.nem"
-		even
-Nem_MzGlass:	binclude	"artnem/MZ Green Glass Block.nem"
-		even
-;Nem_UnkGrass:	binclude	"artnem/Unused - Grass.nem"
-;		even
-Nem_MzFire:	binclude	"artnem/Fireballs.nem"
-		even
-Nem_Lava:	binclude	"artnem/MZ Lava.nem"
-		even
-Nem_MzBlock:	binclude	"artnem/MZ Green Pushable Block.nem"
-		even
-;Nem_MzUnkBlock:	binclude	"artnem/Unused - MZ Background.nem"
-;		even
-
-; ---------------------------------------------------------------------------
-; Compressed graphics - SLZ stuff
-; ---------------------------------------------------------------------------
-Nem_Seesaw:	binclude	"artnem/SLZ Seesaw.nem"
-		even
-Nem_SlzSpike:	binclude	"artnem/SLZ Little Spikeball.nem"
-		even
-Nem_Fan:	binclude	"artnem/SLZ Fan.nem"
-		even
-Nem_SlzWall:	binclude	"artnem/SLZ Breakable Wall.nem"
-		even
-Nem_Pylon:	binclude	"artnem/SLZ Pylon.nem"
-		even
-Nem_SlzSwing:	binclude	"artnem/SLZ Swinging Platform.nem"
-		even
-Nem_SlzBlock:	binclude	"artnem/SLZ 32x32 Block.nem"
-		even
-Nem_SlzCannon:	binclude	"artnem/SLZ Cannon.nem"
-		even
-
-; ---------------------------------------------------------------------------
-; Compressed graphics - SYZ stuff
-; ---------------------------------------------------------------------------
-Nem_Bumper:	binclude	"artnem/SYZ Bumper.nem"
-		even
-Nem_SyzSpike2:	binclude	"artnem/SYZ Small Spikeball.nem"
-		even
-Nem_LzSwitch:	binclude	"artnem/Switch.nem"
-		even
-Nem_SyzSpike1:	binclude	"artnem/SYZ Large Spikeball.nem"
-		even
-
-; ---------------------------------------------------------------------------
-; Compressed graphics - SBZ stuff
-; ---------------------------------------------------------------------------
-Nem_SbzWheel1:	binclude	"artnem/SBZ Running Disc.nem"
-		even
-Nem_SbzWheel2:	binclude	"artnem/SBZ Junction Wheel.nem"
-		even
-Nem_Cutter:	binclude	"artnem/SBZ Pizza Cutter.nem"
-		even
-Nem_Stomper:	binclude	"artnem/SBZ Stomper.nem"
-		even
-Nem_SpinPform:	binclude	"artnem/SBZ Spinning Platform.nem"
-		even
-Nem_TrapDoor:	binclude	"artnem/SBZ Trapdoor.nem"
-		even
-Nem_SbzFloor:	binclude	"artnem/SBZ Collapsing Floor.nem"
-		even
-Nem_Electric:	binclude	"artnem/SBZ Electrocuter.nem"
-		even
-Nem_SbzBlock:	binclude	"artnem/SBZ Vanishing Block.nem"
-		even
-Nem_FlamePipe:	binclude	"artnem/SBZ Flaming Pipe.nem"
-		even
-Nem_SbzDoor1:	binclude	"artnem/SBZ Small Vertical Door.nem"
-		even
-Nem_SlideFloor:	binclude	"artnem/SBZ Sliding Floor Trap.nem"
-		even
-Nem_SbzDoor2:	binclude	"artnem/SBZ Large Horizontal Door.nem"
-		even
-Nem_Girder:	binclude	"artnem/SBZ Crushing Girder.nem"
-		even
-
-; ---------------------------------------------------------------------------
-; Compressed graphics - enemies
-; ---------------------------------------------------------------------------
-Nem_BallHog:	binclude	"artnem/Enemy Ball Hog.nem"
-		even
-Nem_Crabmeat:	binclude	"artnem/Enemy Crabmeat.nem"
-		even
-Nem_Buzz:	binclude	"artnem/Enemy Buzz Bomber.nem"
-		even
-;Nem_UnkExplode:	binclude	"artnem/Unused - Explosion.nem"
-;		even
-Nem_Burrobot:	binclude	"artnem/Enemy Burrobot.nem"
-		even
-Nem_Chopper:	binclude	"artnem/Enemy Chopper.nem"
-		even
-Nem_Jaws:	binclude	"artnem/Enemy Jaws.nem"
-		even
-Nem_Roller:	binclude	"artnem/Enemy Roller.nem"
-		even
-Nem_Motobug:	binclude	"artnem/Enemy Motobug.nem"
-		even
-Nem_Newtron:	binclude	"artnem/Enemy Newtron.nem"
-		even
-Nem_Yadrin:	binclude	"artnem/Enemy Yadrin.nem"
-		even
-Nem_Basaran:	binclude	"artnem/Enemy Basaran.nem"
-		even
-Nem_Splats:	binclude	"artnem/Enemy Splats.nem"
-		even
-Nem_Bomb:	binclude	"artnem/Enemy Bomb.nem"
-		even
-Nem_Orbinaut:	binclude	"artnem/Enemy Orbinaut.nem"
-		even
-Nem_Cater:	binclude	"artnem/Enemy Caterkiller.nem"
-		even
-
-; ---------------------------------------------------------------------------
-; Compressed graphics - various
-; ---------------------------------------------------------------------------
-Nem_TitleCard:	binclude	"artnem/Title Cards.nem"
-		even
-Nem_Hud:	binclude	"artnem/HUD.nem"	; HUD (rings, time, score)
-		even
-Nem_Lives:	binclude	"artnem/HUD - Life Counter Icon.nem"
-		even
-Nem_Ring:	binclude	"artnem/Rings.nem"
-		even
-Nem_Monitors:	binclude	"artnem/Monitors.nem"
-		even
-Nem_Explode:	binclude	"artnem/Explosion.nem"
-		even
-Nem_Points:	binclude	"artnem/Points.nem"	; points from destroyed enemy or object
-		even
-Nem_GameOver:	binclude	"artnem/Game Over.nem"	; game over / time over
-		even
-Nem_HSpring:	binclude	"artnem/Spring Horizontal.nem"
-		even
-Nem_VSpring:	binclude	"artnem/Spring Vertical.nem"
-		even
-Nem_SignPost:	binclude	"artnem/Signpost.nem"	; end of level signpost
-		even
-Nem_Lamp:	binclude	"artnem/Lamppost.nem"
-		even
-Nem_BigFlash:	binclude	"artnem/Giant Ring Flash.nem"
-		even
-Nem_Bonus:	binclude	"artnem/Hidden Bonuses.nem" ; hidden bonuses at end of a level
-		even
-Nem_WINNERCard:	binclude	"artnem/WIN Cards.nem"
-		even
-; ---------------------------------------------------------------------------
-; Compressed graphics - continue screen
-; ---------------------------------------------------------------------------
-Nem_ContSonic:	binclude	"artnem/Continue Screen Sonic.nem"
-		even
-Nem_MiniSonic:	binclude	"artnem/Continue Screen Stuff.nem"
-		even
-
-; ---------------------------------------------------------------------------
-; Compressed graphics - animals
-; ---------------------------------------------------------------------------
-Nem_Rabbit:	binclude	"artnem/Animal Rabbit.nem"
-		even
-Nem_Chicken:	binclude	"artnem/Animal Chicken.nem"
-		even
-Nem_Penguin:	binclude	"artnem/Animal Penguin.nem"
-		even
-Nem_Seal:	binclude	"artnem/Animal Seal.nem"
-		even
-Nem_Pig:	binclude	"artnem/Animal Pig.nem"
-		even
-Nem_Flicky:	binclude	"artnem/Animal Flicky.nem"
-		even
-Nem_Squirrel:	binclude	"artnem/Animal Squirrel.nem"
-		even
-Nem_Rin:	binclude	"artnem/Animal Rin.nem"
-		even
-; ---------------------------------------------------------------------------
-; Compressed graphics - primary patterns and block mappings
-; ---------------------------------------------------------------------------
-Blk16_GHZ:	binclude	"map16/GHZ.eni"
-		even
-Kos_GHZ:	binclude	"artkos/8x8 - GHZ.kos"	; GHZ primary patterns
-		even
-Blk256_GHZ:	binclude	"map256/GHZ.kos"
-		even
-
-Blk16_LZ:	binclude	"map16/LZ.eni"
-		even
-Kos_LZ:		binclude	"artkos/8x8 - LZ.kos"	; LZ primary patterns
-		even
-Blk256_LZ:	binclude	"map256/LZ.kos"
-		even
-
-Blk16_MZ:	binclude	"map16/MZ.eni"
-		even
-Kos_MZ:		binclude	"artkos/8x8 - MZ.kos"	; MZ primary patterns
-		even
-Blk256_MZ:
-	if Revision=0
-		binclude	"map256/MZ.kos"
-		even
-	else
-		binclude	"map256/MZ (JP1).kos"
-		even
-	endif
-
-Blk16_SLZ:	binclude	"map16/SLZ.eni"
-		even
-Kos_SLZ:	binclude	"artkos/8x8 - SLZ.kos"	; SLZ primary patterns
-		even
-Blk256_SLZ:	binclude	"map256/SLZ.kos"
-		even
-
-Blk16_SYZ:	binclude	"map16/SYZ.eni"
-		even
-Kos_SYZ:	binclude	"artkos/8x8 - SYZ.kos"	; SYZ primary patterns
-		even
-Blk256_SYZ:	binclude	"map256/SYZ.kos"
-		even
-
-Blk16_SBZ:	binclude	"map16/SBZ.eni"
-		even
-Kos_SBZ:	binclude	"artkos/8x8 - SBZ.kos"	; SBZ primary patterns
-		even
-Blk256_SBZ:
-	if Revision=0
-		binclude	"map256/SBZ.kos"
-		even
-	else
-		binclude	"map256/SBZ (JP1).kos"
-		even
-	endif
-
-Blk16_BREW:	binclude	"map16/BREW.eni"
-		even
-Kos_BREW:	binclude	"artkos/8x8 - BREW.kos"	; GHZ primary patterns
-		even
-Blk256_BREW:	binclude	"map256/BREW.kos"
-		even
-
-Blk16_WIN:	binclude	"map16/WIN.eni"
-		even
-Kos_WIN:	binclude	"artkos/8x8 - WIN.kos"	; WIN primary patterns
-		even
-Blk256_WIN:	binclude	"map256/WIN.kos"
-		even
-
-Blk16_Joint:	binclude	"map16/Joint.eni"
-		even
-Kos_Joint:	binclude	"artkos/8x8 - Joint.kos"	; Joint primary patterns
-		even
-Blk256_Joint:	binclude	"map256/Joint.kos"
-		even
-; ---------------------------------------------------------------------------
-; Compressed graphics - bosses and ending sequence
-; ---------------------------------------------------------------------------
-Nem_Eggman:	binclude	"artnem/Boss - Main.nem"
-		even
-Nem_Weapons:	binclude	"artnem/Boss - Weapons.nem"
-		even
-Nem_Prison:	binclude	"artnem/Prison Capsule.nem"
-		even
-Nem_Sbz2Eggman:	binclude	"artnem/Boss - Eggman in SBZ2 & FZ.nem"
-		even
-Nem_FzBoss:	binclude	"artnem/Boss - Final Zone.nem"
-		even
-Nem_FzEggman:	binclude	"artnem/Boss - Eggman after FZ Fight.nem"
-		even
-Nem_Exhaust:	binclude	"artnem/Boss - Exhaust Flame.nem"
-		even
-Nem_EndEm:	binclude	"artnem/Ending - Emeralds.nem"
-		even
-Nem_EndSonic:	binclude	"artnem/Ending - Sonic.nem"
-		even
-Nem_TryAgain:	binclude	"artnem/Ending - Try Again.nem"
-		even
-	if Revision=0
-Nem_EndEggman:
-		binclude	"artnem/Unused - Eggman Ending.nem"
-		even
-	endif
-Kos_EndFlowers:	binclude	"artkos/Flowers at Ending.kos" ; ending sequence animated flowers
-		even
-Nem_EndFlower:	binclude	"artnem/Ending - Flowers.nem"
-		even
-Nem_CreditText:	binclude	"artnem/Ending - Credits.nem"
-		even
-Nem_EndStH:	binclude	"artnem/Ending - StH Logo.nem"
-		even
-Eni_TheIdiotBros:	binclude	"tilemaps/Idiots.eni"
-		even
-		; AngleMap starts at $62900 in all revisions, which amounts
-		; to $104 bytes of padding for rev00 and $40 for rev01/rev02.
-		; From a technical standpoint, this padding serves no purpose.
-		if PaddingOptimization=0
-			if Revision=0
-				dc.b	[$104]$FF
-			else
-				dc.b	[$40]$FF
-			endif
-		endif
-
-; ---------------------------------------------------------------------------
-; Collision data
-; ---------------------------------------------------------------------------
-AngleMap:	binclude	"collide/Angle Map.bin"
-		even
-CollArray1:	binclude	"collide/Collision Array (Normal).bin"
-		even
-CollArray2:	binclude	"collide/Collision Array (Rotated).bin"
-		even
-Col_GHZ:	binclude	"collide/GHZ.bin"	; GHZ index
-		even
-Col_LZ:		binclude	"collide/LZ.bin"	; LZ index
-		even
-Col_MZ:		binclude	"collide/MZ.bin"	; MZ index
-		even
-Col_SLZ:	binclude	"collide/SLZ.bin"	; SLZ index
-		even
-Col_SYZ:	binclude	"collide/SYZ.bin"	; SYZ index
-		even
-Col_SBZ:	binclude	"collide/SBZ.bin"	; SBZ index
-		even
-Col_BREW:	binclude	"collide/BREW.bin"	; BREW index
-		even
-Col_WIN:	binclude	"collide/SLZ.bin"	; WIN index
-		even
-Col_Joint:	binclude	"collide/Joint.bin"	; Joint index
-		even
-
-; ---------------------------------------------------------------------------
-; Special Stage layouts
-; ---------------------------------------------------------------------------
-SS_1:		binclude	"sslayout/1.eni"
-		even
-SS_2:		binclude	"sslayout/2.eni"
-		even
-SS_3:		binclude	"sslayout/3.eni"
-		even
-SS_4:		binclude	"sslayout/4.eni"
-		even
-	if Revision=0
-SS_5:		binclude	"sslayout/5.eni"
-		even
-SS_6:		binclude	"sslayout/6.eni"
-		even
-	else
-		; SS 5 and 6 had broken objects outside the accessible layout;
-		; rev01 removes those - remaining layouts stay unchanged.
-SS_5:		binclude	"sslayout/5 (JP1).eni"
-		even
-SS_6:		binclude	"sslayout/6 (JP1).eni"
-		even
-	endif
-
-; ---------------------------------------------------------------------------
-; Animated uncompressed graphics
-; ---------------------------------------------------------------------------
-Art_GhzWater:	binclude	"artunc/GHZ Waterfall.bin"
-		even
-Art_GhzFlower1:	binclude	"artunc/GHZ Flower Large.bin"
-		even
-Art_GhzFlower2:	binclude	"artunc/GHZ Flower Small.bin"
-		even
-Art_MzLava1:	binclude	"artunc/MZ Lava Surface.bin"
-		even
-Art_MzLava2:	binclude	"artunc/MZ Lava.bin"
-		even
-Art_MzTorch:	binclude	"artunc/MZ Background Torch.bin"
-		even
-Art_SbzSmoke:	binclude	"artunc/SBZ Background Smoke.bin"
-		even
-
-; ---------------------------------------------------------------------------
-; Level layout index
-; Format: foreground, background, leftover/unused
-; ---------------------------------------------------------------------------
-Level_Index:
-		; GHZ
-		dc.w Level_GHZ1-Level_Index, Level_GHZbg-Level_Index, Level_GHZ1Unk-Level_Index
-		dc.w Level_GHZ2-Level_Index, Level_GHZbg-Level_Index, Level_GHZ2Unk-Level_Index
-		dc.w Level_GHZ3-Level_Index, Level_GHZbg-Level_Index, Level_GHZ3Unk-Level_Index
-		dc.w Level_GHZ4Unk-Level_Index, Level_GHZ4Unk-Level_Index, Level_GHZ4Unk-Level_Index
-		; LZ
-		dc.w Level_LZ1-Level_Index, Level_LZbg-Level_Index, Level_LZ1Unk-Level_Index
-		dc.w Level_LZ2-Level_Index, Level_LZbg-Level_Index, Level_LZ2Unk-Level_Index
-		dc.w Level_LZ3-Level_Index, Level_LZbg-Level_Index, Level_LZ3Unk-Level_Index
-		dc.w Level_SBZ3-Level_Index, Level_LZbg-Level_Index, Level_SBZ3Unk-Level_Index
-		; MZ
-		dc.w Level_MZ1-Level_Index, Level_MZ1bg-Level_Index, Level_MZ1-Level_Index
-		dc.w Level_MZ2-Level_Index, Level_MZ2bg-Level_Index, Level_MZ2Unk-Level_Index
-		dc.w Level_MZ3-Level_Index, Level_MZ3bg-Level_Index, Level_MZ3Unk-Level_Index
-		dc.w Level_MZ4Unk-Level_Index, Level_MZ4Unk-Level_Index, Level_MZ4Unk-Level_Index
-		; SLZ
-		dc.w Level_SLZ1-Level_Index, Level_SLZbg-Level_Index, Level_SLZ1Unk-Level_Index
-		dc.w Level_SLZ2-Level_Index, Level_SLZbg-Level_Index, Level_SLZ1Unk-Level_Index
-		dc.w Level_SLZ3-Level_Index, Level_SLZbg-Level_Index, Level_SLZ1Unk-Level_Index
-		dc.w Level_SLZ1Unk-Level_Index, Level_SLZ1Unk-Level_Index, Level_SLZ1Unk-Level_Index
-		; SYZ
-		dc.w Level_SYZ1-Level_Index, Level_SYZbg-Level_Index, Level_SYZ1Unk-Level_Index
-		dc.w Level_SYZ2-Level_Index, Level_SYZbg-Level_Index, Level_SYZ2Unk-Level_Index
-		dc.w Level_SYZ3-Level_Index, Level_SYZbg-Level_Index, Level_SYZ3Unk-Level_Index
-		dc.w Level_SYZ4Unk-Level_Index, Level_SYZ4Unk-Level_Index, Level_SYZ4Unk-Level_Index
-		; SBZ
-		dc.w Level_SBZ1-Level_Index, Level_SBZ1bg-Level_Index, Level_SBZ1bg-Level_Index
-		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
-		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2Unk-Level_Index
-		dc.w Level_SBZ4Unk-Level_Index, Level_SBZ4Unk-Level_Index, Level_SBZ4Unk-Level_Index
-		zonewarning Level_Index,24
-		; Ending
-		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, Level_EndUnk-Level_Index
-		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, Level_EndUnk-Level_Index
-		dc.w Level_EndUnk-Level_Index, Level_EndUnk-Level_Index, Level_EndUnk-Level_Index
-		dc.w Level_EndUnk-Level_Index, Level_EndUnk-Level_Index, Level_EndUnk-Level_Index
-		; COLD BREW
-		dc.w Level_BREW1-Level_Index, Level_BREWbg-Level_Index, Level_BREW1Unk-Level_Index
-		dc.w Level_BREW2-Level_Index, Level_BREWbg-Level_Index, Level_BREW1Unk-Level_Index
-		dc.w Level_BREW3-Level_Index, Level_BREWbg-Level_Index, Level_BREW1Unk-Level_Index
-		dc.w Level_BREW1Unk-Level_Index, Level_BREW1Unk-Level_Index, Level_BREW1Unk-Level_Index
-		; WIN98
-		dc.w Level_WIN1-Level_Index, Level_WINbg-Level_Index, Level_WIN1Unk-Level_Index
-		dc.w Level_WIN2-Level_Index, Level_WINbg-Level_Index, Level_WIN1Unk-Level_Index
-		dc.w Level_WIN3-Level_Index, Level_WINbg-Level_Index, Level_WIN1Unk-Level_Index
-		dc.w Level_WIN1Unk-Level_Index, Level_WIN1Unk-Level_Index, Level_WIN1Unk-Level_Index
-		; JOINT
-		dc.w Level_Joint1-Level_Index, Level_Jointbg-Level_Index, Level_Joint1Unk-Level_Index
-		dc.w Level_Joint2-Level_Index, Level_Jointbg-Level_Index, Level_Joint1Unk-Level_Index
-		dc.w Level_Joint3-Level_Index, Level_Jointbg-Level_Index, Level_Joint1Unk-Level_Index
-		dc.w Level_Joint1Unk-Level_Index, Level_Joint1Unk-Level_Index, Level_Joint1Unk-Level_Index
-
-
-Level_GHZ1:	binclude	"levels/ghz1.bin"
-		even
-Level_GHZ1Unk:	dc.l 0
-Level_GHZ2:	binclude	"levels/ghz2.bin"
-		even
-Level_GHZ2Unk:	dc.l 0
-Level_GHZ3:	binclude	"levels/ghz3.bin"
-		even
-Level_GHZbg:	binclude	"levels/ghzbg.bin"
-		even
-Level_GHZ3Unk:	dc.l 0
-Level_GHZ4Unk:	dc.l 0
-
-Level_LZ1:	binclude	"levels/lz1.bin"
-		even
-Level_LZbg:	binclude	"levels/lzbg.bin"
-		even
-Level_LZ1Unk:	dc.l 0
-Level_LZ2:	binclude	"levels/lz2.bin"
-		even
-Level_LZ2Unk:	dc.l 0
-Level_LZ3:	binclude	"levels/lz3.bin"
-		even
-Level_LZ3Unk:	dc.l 0
-Level_SBZ3:	binclude	"levels/sbz3.bin"
-		even
-Level_SBZ3Unk:	dc.l 0
-
-Level_MZ1:	binclude	"levels/mz1.bin"
-		even
-Level_MZ1bg:	binclude	"levels/mz1bg.bin"
-		even
-Level_MZ2:	binclude	"levels/mz2.bin"
-		even
-Level_MZ2bg:	binclude	"levels/mz2bg.bin"
-		even
-Level_MZ2Unk:	dc.l 0
-Level_MZ3:	binclude	"levels/mz3.bin"
-		even
-Level_MZ3bg:	binclude	"levels/mz3bg.bin"
-		even
-Level_MZ3Unk:	dc.l 0
-Level_MZ4Unk:	dc.l 0
-
-Level_SLZ1:	binclude	"levels/slz1.bin"
-		even
-Level_SLZbg:	binclude	"levels/slzbg.bin"
-		even
-Level_SLZ2:	binclude	"levels/slz2.bin"
-		even
-Level_SLZ3:	binclude	"levels/slz3.bin"
-		even
-Level_SLZ1Unk:	dc.l 0
-
-Level_SYZ1:	binclude	"levels/syz1.bin"
-		even
-Level_SYZbg:
-	if Revision=0
-		binclude	"levels/syzbg.bin"
-	else
-		binclude	"levels/syzbg (JP1).bin"
-	endif
-		even
-Level_SYZ1Unk:	dc.l 0
-Level_SYZ2:	binclude	"levels/syz2.bin"
-		even
-Level_SYZ2Unk:	dc.l 0
-Level_SYZ3:	binclude	"levels/syz3.bin"
-		even
-Level_SYZ3Unk:	dc.l 0
-Level_SYZ4Unk:	dc.l 0
-
-Level_SBZ1:	binclude	"levels/sbz1.bin"
-		even
-Level_SBZ1bg:	binclude	"levels/sbz1bg.bin"
-		even
-Level_SBZ2:	binclude	"levels/sbz2.bin"
-		even
-Level_SBZ2bg:	binclude	"levels/sbz2bg.bin"
-		even
-Level_SBZ2Unk:	dc.l 0
-Level_SBZ4Unk:	dc.l 0
-Level_End:	binclude	"levels/ending.bin"
-		even
-Level_EndUnk:	dc.l 0
-Level_BREW1:	binclude	"levels/BREW1.bin"
-		even
-Level_BREWbg:	binclude	"levels/BREWbg.bin"
-		even
-Level_BREW2:	binclude	"levels/BREW2.bin"
-		even
-Level_BREW3:	binclude	"levels/BREW3.bin"
-		even
-Level_BREW1Unk:	dc.l 0
-Level_WIN1:	binclude	"levels/WIN1.bin"
-		even
-Level_WINbg:	binclude	"levels/WINbg.bin"
-		even
-Level_WIN2:	binclude	"levels/WIN2.bin"
-		even
-Level_WIN3:	binclude	"levels/WIN3.bin"
-		even
-Level_WIN1Unk:	dc.l 0
-
-Level_Joint1:	binclude	"levels/Joint1.bin"
-		even
-Level_Jointbg:	binclude	"levels/Jointbg.bin"
-		even
-Level_Joint2:	binclude	"levels/Joint2.bin"
-		even
-Level_Joint3:	binclude	"levels/Joint3.bin"
-		even
-Level_Joint1Unk:	dc.l 0
-
-; ---------------------------------------------------------------------------
-; Uncompressed graphics - Giant Rings
-; ---------------------------------------------------------------------------
-Art_BigRing:	binclude	"artunc/Giant Ring.bin"
-		even
-
-		; ObjPos_Index starts at $6B000 in all revisions, which amounts
-		; to $9C bytes of padding for rev00 and $DC for rev01/rev02.
-		; From a technical standpoint, this padding serves no purpose.
-		if PaddingOptimization=0
-			align	$100
-		endif
-	
-; ---------------------------------------------------------------------------
-; Sprite locations index
-; ---------------------------------------------------------------------------
-ObjPos_Index:
-		; GHZ
-		dc.w ObjPos_GHZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_GHZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_GHZ3-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_GHZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		; LZ
-		dc.w ObjPos_LZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_LZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_LZ3-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_SBZ3-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		; MZ
-		dc.w ObjPos_MZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_MZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_MZ3-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_MZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		; SLZ
-		dc.w ObjPos_SLZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_SLZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_SLZ3-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_SLZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		; SYZ
-		dc.w ObjPos_SYZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_SYZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_SYZ3-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_SYZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		; SBZ
-		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_SBZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_FZ-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		zonewarning ObjPos_Index,$10
-		; Ending
-		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		; --- Put extra object data here. ---
-		; BREW
-		dc.w ObjPos_BREW1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_BREW2-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_BREW3-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_BREW1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		; WIN
-		dc.w ObjPos_WIN1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_WIN2-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_WIN3-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_WIN1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		; Joint
-		dc.w ObjPos_Joint1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_Joint2-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_Joint3-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_Joint1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-ObjPosLZPlatform_Index:
-		dc.w ObjPos_LZ1pf1-ObjPos_Index, ObjPos_LZ1pf2-ObjPos_Index
-		dc.w ObjPos_LZ2pf1-ObjPos_Index, ObjPos_LZ2pf2-ObjPos_Index
-		dc.w ObjPos_LZ3pf1-ObjPos_Index, ObjPos_LZ3pf2-ObjPos_Index
-		dc.w ObjPos_LZ1pf1-ObjPos_Index, ObjPos_LZ1pf2-ObjPos_Index
-ObjPosSBZPlatform_Index:
-		dc.w ObjPos_SBZ1pf1-ObjPos_Index, ObjPos_SBZ1pf2-ObjPos_Index
-		dc.w ObjPos_SBZ1pf3-ObjPos_Index, ObjPos_SBZ1pf4-ObjPos_Index
-		dc.w ObjPos_SBZ1pf5-ObjPos_Index, ObjPos_SBZ1pf6-ObjPos_Index
-		dc.w ObjPos_SBZ1pf1-ObjPos_Index, ObjPos_SBZ1pf2-ObjPos_Index
-		dc.b $FF, $FF, 0, 0, 0,	0
-
-ObjPos_GHZ1:	binclude	"objpos/ghz1.bin"
-		even
-ObjPos_GHZ2:	binclude	"objpos/ghz2.bin"
-		even
-ObjPos_GHZ3:
-	if Revision=0
-		binclude	"objpos/ghz3.bin"
-		even
-	else
-		binclude	"objpos/ghz3 (JP1).bin"
-		even
-	endif
-
-ObjPos_LZ1:
-	if Revision=0
-		binclude	"objpos/lz1.bin"
-		even
-	else
-		binclude	"objpos/lz1 (JP1).bin"
-		even
-	endif
-ObjPos_LZ2:	binclude	"objpos/lz2.bin"
-		even
-ObjPos_LZ3:
-	if Revision=0
-		binclude	"objpos/lz3.bin"
-		even
-	else
-		binclude	"objpos/lz3 (JP1).bin"
-		even
-	endif
-ObjPos_SBZ3:	binclude	"objpos/sbz3.bin"
-		even
-ObjPos_LZ1pf1:	binclude	"objpos/lz1pf1.bin"
-		even
-ObjPos_LZ1pf2:	binclude	"objpos/lz1pf2.bin"
-		even
-ObjPos_LZ2pf1:	binclude	"objpos/lz2pf1.bin"
-		even
-ObjPos_LZ2pf2:	binclude	"objpos/lz2pf2.bin"
-		even
-ObjPos_LZ3pf1:	binclude	"objpos/lz3pf1.bin"
-		even
-ObjPos_LZ3pf2:	binclude	"objpos/lz3pf2.bin"
-		even
-
-ObjPos_MZ1:
-	if Revision=0
-		binclude	"objpos/mz1.bin"
-		even
-	else
-		binclude	"objpos/mz1 (JP1).bin"
-		even
-	endif
-ObjPos_MZ2:	binclude	"objpos/mz2.bin"
-		even
-ObjPos_MZ3:	binclude	"objpos/mz3.bin"
-		even
-
-ObjPos_SLZ1:	binclude	"objpos/slz1.bin"
-		even
-ObjPos_SLZ2:	binclude	"objpos/slz2.bin"
-		even
-ObjPos_SLZ3:	binclude	"objpos/slz3.bin"
-		even
-ObjPos_SYZ1:	binclude	"objpos/syz1.bin"
-		even
-ObjPos_SYZ2:	binclude	"objpos/syz2.bin"
-		even
-ObjPos_SYZ3:
-	if Revision=0
-		binclude	"objpos/syz3.bin"
-		even
-	else
-		binclude	"objpos/syz3 (JP1).bin"
-		even
-	endif
-
-ObjPos_SBZ1:
-	if Revision=0
-		binclude	"objpos/sbz1.bin"
-		even
-	else
-		binclude	"objpos/sbz1 (JP1).bin"
-		even
-	endif
-ObjPos_SBZ2:	binclude	"objpos/sbz2.bin"
-		even
-ObjPos_FZ:	binclude	"objpos/fz.bin"
-		even
-ObjPos_SBZ1pf1:	binclude	"objpos/sbz1pf1.bin"
-		even
-ObjPos_SBZ1pf2:	binclude	"objpos/sbz1pf2.bin"
-		even
-ObjPos_SBZ1pf3:	binclude	"objpos/sbz1pf3.bin"
-		even
-ObjPos_SBZ1pf4:	binclude	"objpos/sbz1pf4.bin"
-		even
-ObjPos_SBZ1pf5:	binclude	"objpos/sbz1pf5.bin"
-		even
-ObjPos_SBZ1pf6:	binclude	"objpos/sbz1pf6.bin"
-		even
-
-ObjPos_End:	binclude	"objpos/ending.bin"
-		even
-ObjPos_BREW1:	binclude	"objpos/BREW1.bin"
-		even
-ObjPos_BREW2:	binclude	"objpos/BREW2.bin"
-		even
-ObjPos_BREW3:	binclude	"objpos/BREW3.bin"
-		even
-ObjPos_WIN1:	binclude	"objpos/WIN1.bin"
-		even
-ObjPos_WIN2:	binclude	"objpos/WIN2.bin"
-		even
-ObjPos_WIN3:	binclude	"objpos/WIN3.bin"
-		even
-ObjPos_Joint1:	binclude	"objpos/Joint1.bin"
-		even
-ObjPos_Joint2:	binclude	"objpos/Joint2.bin"
-		even
-ObjPos_Joint3:	binclude	"objpos/Joint3.bin"
-		even
-ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
-
-		; SoundDriver starts at $71990 in all revisions, which amounts
-		; to $62A bytes of padding for rev00 and $63C for rev01/rev02.
-		; It appears to be placed in such a way that the sound driver
-		; ends right on the $80000 mark in the ROM in all revisions.
-		; From a technical standpoint, this padding serves no purpose.
-		if PaddingOptimization=0
-			if Revision=0
-				dc.b	[$62A]$FF
-			else
-				dc.b	[$63C]$FF
-			endif
-		endif
+		
+; ===========================================================================
+		include	"data.asm"		; data includes in here
+; ===========================================================================
 
 		include	"sound/MegaPCM.asm"
 		include	"sound/SampleTable.asm"
@@ -8123,7 +7137,7 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 		include "conimodes/winxp/GM_NTOSKRNL.asm"
 		include "conimodes/splash/GM_CNNicoJump.asm"
 		include "conimodes/fetus/GM_Fetus.asm"
-		include "hipncoolstuff/ThanatosCredits/Main.asm"
+		include "_gamemode/ThanatosCredits/Main.asm"
 
 		include "Buttcrack/Game.asm"
 		include	"ContinueScreen/Continue.asm"
@@ -8131,7 +7145,15 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 		include "Splashes.asm"
 		include	"_inc/GHM3Explode.asm"
 
+		include	"_gamemode/damn/damn.asm"
+
+	if MSUEnabled
+		include "sound/MSU/MSU.asm"
+	endif
+
 		include "clinton fucker/Clinton Fucker.asm"
+		include	"_incObj/10 Player Bullet.asm"
+		
 ; end of 'ROM'
 		even
 ; ==============================================================
@@ -8140,6 +7162,9 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 ; --------------------------------------------------------------
 
    include   "ErrorHandler.asm"
+
+
+
 
 ; --------------------------------------------------------------
 ; WARNING!

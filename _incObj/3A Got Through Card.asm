@@ -140,6 +140,9 @@ Got_AddBonus:
 ; ===========================================================================
 
 Got_NextLevel:	; Routine $A
+		bsr.w	DisplaySprite
+
+GotoNextLevel:
 		move.b	(v_zone).w,d0
 		andi.w	#7,d0
 		lsl.w	#3,d0
@@ -152,7 +155,7 @@ Got_NextLevel:	; Routine $A
 		tst.w	d0
 		bne.s	Got_ChkSS
 		move.b	#id_Sega,(v_gamemode).w
-		bra.s	Got_Display2
+		rts
 ; ===========================================================================
 
 Got_ChkSS:
@@ -160,14 +163,12 @@ Got_ChkSS:
 		tst.b	(f_bigring).w	; has Sonic jumped into a giant ring?
 		beq.s	loc_C6EA	; if not, branch
 		move.b	#id_Special,(v_gamemode).w ; set game mode to Special Stage (10)
-		bra.s	Got_Display2
+		rts
 ; ===========================================================================
 
 loc_C6EA:
 		move.w	#1,(f_restart).w ; restart level
-
-Got_Display2:
-		bra.w	DisplaySprite
+		rts
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Level order array

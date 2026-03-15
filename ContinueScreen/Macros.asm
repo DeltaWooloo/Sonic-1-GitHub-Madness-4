@@ -12,3 +12,13 @@ Continue_DrawMap: macro TileMap
 	moveq	#30, d2				; Height
 	jsr	TilemapToVRAM			; Draw tilemap!
 	endm
+
+; ===========================================================================
+; Macro to draw string to the screen at a position
+; ===========================================================================
+Continue_DrawText: macro String, Row, Column
+	lea	(String).l, a1
+	move.w 	#Row, d6
+	move.w 	#Column, d5
+	jsr	ContinueText_Draw
+	endm

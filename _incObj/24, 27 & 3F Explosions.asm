@@ -86,8 +86,7 @@ ExplItem_NormalSFX:				;29_Index
 		jsr	(PlaySound_Special).l ;	play breaking enemy sound
 		
 ExplItem_stupidjump:
-	        move.b  #1, (v_flashtimer).w
-		move.w 	#$0EEE, (v_flashcolor).w
+		move.w  #$25, v_screenshaketime.w
 		
 ExplItem_Main:
 		subq.b	#1,$1E(a0)	; subtract 1 from frame	duration

@@ -1,0 +1,63 @@
+Operating system: Microsoft Windows NT 6.2.9200.0
+Opening INI file "C:\Program Files (x86)\Panda Security\Panda Security Protection\Perdidos\Sonic-1-GitHub-Madness-4-main\ATOGKsplashesWIP\SonPLN.ini"...
+Game type is S1.
+Loading Marioteam...
+Loading plane mappings from file "ENI/marioteam.eni", using compression Enigma...
+Loading palette file "palette/Sonic.bin"...
+Source: 0 Destination: 0 Length: 16
+Loading 8x8 tiles from file "ART/marioteam.nem", using compression Nemesis...
+Mappings data size does not match given width/height. Expected: 2240 (40x28*2) Actual: 2624.
+System.AggregateException: Se han producido uno o varios errores. ---> System.IO.FileNotFoundException: Palette file could not be loaded! Have you set up your disassembly properly?
+   en SonicRetro.SonLVL.SonPLN.MainForm.LoadLevelPalette() en C:\Programs\SonLVL\SonPLN\MainForm.cs:línea 448
+   en System.Threading.Tasks.Task.InnerInvoke()
+   en System.Threading.Tasks.Task.Execute()
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en System.Threading.Tasks.Task.FastWaitAll(Task[] tasks)
+   en System.Threading.Tasks.Parallel.Invoke(ParallelOptions parallelOptions, Action[] actions)
+   en System.Threading.Tasks.Parallel.Invoke(Action[] actions)
+   en SonicRetro.SonLVL.SonPLN.MainForm.backgroundLevelLoader_DoWork(Object sender, DoWorkEventArgs e) en C:\Programs\SonLVL\SonPLN\MainForm.cs:línea 329
+---> (Nº de excepción interna 0) System.IO.FileNotFoundException: Palette file could not be loaded! Have you set up your disassembly properly?
+Nombre de archivo: 'palette/Sonic.bin'
+   en SonicRetro.SonLVL.SonPLN.MainForm.LoadLevelPalette() en C:\Programs\SonLVL\SonPLN\MainForm.cs:línea 448
+   en System.Threading.Tasks.Task.InnerInvoke()
+   en System.Threading.Tasks.Task.Execute()<---
+
+Opening INI file "C:\Program Files (x86)\Panda Security\Panda Security Protection\Perdidos\Sonic-1-GitHub-Madness-4-main\ATOGKsplashesWIP\SonPLN.ini"...
+Game type is S1.
+Loading Marioteam...
+Loading 8x8 tiles from file "ART/marioteam.nem", using compression Nemesis...
+Loading palette file "Sonic.bin"...
+Source: 0 Destination: 0 Length: 16
+Loading plane mappings from file "ENI/marioteam.eni", using compression Enigma...
+Mappings data size does not match given width/height. Expected: 2240 (40x28*2) Actual: 2624.
+Load completed.
+Opening INI file "C:\Program Files (x86)\Panda Security\Panda Security Protection\Perdidos\Sonic-1-GitHub-Madness-4-main\ATOGKsplashesWIP\SonPLN.ini"...
+Game type is S1.
+Loading Marioteam...
+Loading palette file "sonic(unused).bin"...
+Source: 0 Destination: 0 Length: 16
+Loading 8x8 tiles from file "ART/marioteam.nem", using compression Nemesis...
+Loading plane mappings from file "ENI/marioteam.eni", using compression Enigma...
+Mappings data size does not match given width/height. Expected: 2240 (40x28*2) Actual: 2624.
+Load completed.
+Loading RickTeamheads...
+Loading palette file "Sonic.bin"...
+Source: 0 Destination: 0 Length: 16
+Loading 8x8 tiles from file "ART/rick teamheads.nem", using compression Nemesis...
+Loading plane mappings from file "ENI/rick teamheads.eni", using compression Enigma...
+Mappings data size does not match given width/height. Expected: 2240 (40x28*2) Actual: 2624.
+System.AggregateException: Se han producido uno o varios errores. ---> System.IO.FileNotFoundException: Palette file could not be loaded! Have you set up your disassembly properly?
+   en SonicRetro.SonLVL.SonPLN.MainForm.LoadLevelPalette() en C:\Programs\SonLVL\SonPLN\MainForm.cs:línea 448
+   en System.Threading.Tasks.Task.InnerInvoke()
+   en System.Threading.Tasks.Task.Execute()
+   --- Fin del seguimiento de la pila de la excepción interna ---
+   en System.Threading.Tasks.Task.FastWaitAll(Task[] tasks)
+   en System.Threading.Tasks.Parallel.Invoke(ParallelOptions parallelOptions, Action[] actions)
+   en System.Threading.Tasks.Parallel.Invoke(Action[] actions)
+   en SonicRetro.SonLVL.SonPLN.MainForm.backgroundLevelLoader_DoWork(Object sender, DoWorkEventArgs e) en C:\Programs\SonLVL\SonPLN\MainForm.cs:línea 329
+---> (Nº de excepción interna 0) System.IO.FileNotFoundException: Palette file could not be loaded! Have you set up your disassembly properly?
+Nombre de archivo: 'Sonic.bin'
+   en SonicRetro.SonLVL.SonPLN.MainForm.LoadLevelPalette() en C:\Programs\SonLVL\SonPLN\MainForm.cs:línea 448
+   en System.Threading.Tasks.Task.InnerInvoke()
+   en System.Threading.Tasks.Task.Execute()<---
+

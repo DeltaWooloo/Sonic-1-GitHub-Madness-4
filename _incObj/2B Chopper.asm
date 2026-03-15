@@ -17,6 +17,7 @@ chop_origY = objoff_30
 
 Chop_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
+		move.l 	#Chop_Callback, obColCallback(a0)
 		move.l	#Map_Chop,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Chopper,0,0),obGfx(a0)
 		move.b	#4,obRender(a0)
@@ -25,7 +26,7 @@ Chop_Main:	; Routine 0
 		move.b	#$10,obActWid(a0)
 		move.w	#-$700,obVelY(a0) ; set vertical speed
 		move.w	obY(a0),chop_origY(a0) ; save original position
-
+		
 Chop_ChgSpeed:	; Routine 2
 		lea	(Ani_Chop).l,a1
 		bsr.w	AnimateSprite
@@ -48,4 +49,8 @@ Chop_ChgSpeed:	; Routine 2
 		move.b	#2,obAnim(a0)	; use stationary animation
 
 .nochg:
+		jsr 	ReactToItem_Other
+		rts
+
+Chop_Callback:
 		rts

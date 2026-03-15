@@ -14,6 +14,10 @@ v_demolength	= v_generictimer
 Size_of_SegaPCM:		equ $6978
 Size_of_DAC_driver_guess:	equ $1760
 
+opcode_rte		equ $4E73
+opcode_jmpabslong	equ $4EF9
+opcode_jmpabsword	equ $4EF8
+
 ; Clocks
 Master_Clock:    equ 53693175
 M68000_Clock:    equ Master_Clock/7
@@ -80,9 +84,11 @@ id_ColdBrew:	equ ptr_GM_ColdBrew-GameModeArray; $20
 id_SegaEU:	equ ptr_GM_SegaEU-GameModeArray; $24
 id_DebugMenu:	equ ptr_GM_DebugMode-GameModeArray; $28
 id_Thanatos:	equ ptr_GM_ThanatosCredits-GameModeArray; $2C
-; insert $30 here
+id_ButtcrackMan:	equ ptr_GM_ButtcrackMan-GameModeArray
 id_CNNico:	equ ptr_GM_CNNicoJump-GameModeArray; $34
 id_TryAgainEnd:	equ ptr_GM_TryAgainEnd-GameModeArray; $38
+id_Damn:	equ ptr_GM_Damn-GameModeArray
+id_TGSplash:	equ ptr_GM_TGSplash-GameModeArray; $44
 
 ; Levels
 id_GHZ:		equ 0
@@ -96,6 +102,11 @@ id_SS:		equ 6
 id_CBZ:		equ 7
 id_WIN:		equ 8
 id_Joint:	equ 9
+id_DVZ:		equ 10
+
+; Playable Characters
+chrid_tonic	equ 0
+chrid_last	equ 0
 
 ; Colours
 cBlack:		equ $000		; colour black
@@ -191,6 +202,10 @@ objoff_38:	equ $38
 objoff_39:	equ $39
 objoff_3A:	equ $3A
 objoff_3B:	equ $3B
+
+; Optional callback routine pointer if using ReactToItem_Other... 
+; It's quite obvious, but please don't use the offsets past this if you call that routine.
+obColCallback	= objoff_3C
 objoff_3C:	equ $3C
 objoff_3D:	equ $3D
 objoff_3E:	equ $3E
@@ -208,139 +223,160 @@ afReset:	equ $FB	; reset animation and 2nd object routine counter
 af2ndRoutine:	equ $FA	; increment 2nd routine counter
 
 ; Background music
-bgm__First:	equ $01
-bgm_GHZ:	equ ((ptr_mus81-MusicIndex)/4)+bgm__First
-bgm_LZ:		equ ((ptr_mus82-MusicIndex)/4)+bgm__First
-bgm_MZ:		equ ((ptr_mus83-MusicIndex)/4)+bgm__First
-bgm_SLZ:	equ ((ptr_mus84-MusicIndex)/4)+bgm__First
-bgm_SYZ:	equ ((ptr_mus85-MusicIndex)/4)+bgm__First
-bgm_SBZ:	equ ((ptr_mus86-MusicIndex)/4)+bgm__First
-bgm_Invincible:	equ ((ptr_mus87-MusicIndex)/4)+bgm__First
-bgm_ExtraLife:	equ ((ptr_mus88-MusicIndex)/4)+bgm__First
-bgm_SS:		equ ((ptr_mus89-MusicIndex)/4)+bgm__First
-bgm_Title:	equ ((ptr_mus8A-MusicIndex)/4)+bgm__First
-bgm_Ending:	equ ((ptr_mus8B-MusicIndex)/4)+bgm__First
-bgm_Boss:	equ ((ptr_mus8C-MusicIndex)/4)+bgm__First
-bgm_FZ:		equ ((ptr_mus8D-MusicIndex)/4)+bgm__First
-bgm_GotThrough:	equ ((ptr_mus8E-MusicIndex)/4)+bgm__First
-bgm_GameOver:	equ ((ptr_mus8F-MusicIndex)/4)+bgm__First
-bgm_Continue:	equ ((ptr_mus90-MusicIndex)/4)+bgm__First
-bgm_Credits:	equ ((ptr_mus91-MusicIndex)/4)+bgm__First
-bgm_Drowning:	equ ((ptr_mus92-MusicIndex)/4)+bgm__First
-bgm_Emerald:	equ ((ptr_mus93-MusicIndex)/4)+bgm__First
-bgm_NewBarkTown:	equ ((ptr_mus_newbark-MusicIndex)/4)+bgm__First
-bgm_REMansion:	equ ((ptr_mus95-MusicIndex)/4)+bgm__First
-bgm_Jeopardy:	equ ((ptr_mus96-MusicIndex)/4)+bgm__First
-bgm_EuroSega:	equ ((ptr_mus97-MusicIndex)/4)+bgm__First
-bgm_Retro:	equ ((ptr_musRetro-MusicIndex)/4)+bgm__First
-bgm_Aporia:	equ ((ptr_mus14-MusicIndex)/4)+bgm__First
-bgm_Gadget:	equ ((ptr_mus16-MusicIndex)/4)+bgm__First
-bgm_CanCanInv:	equ ((ptr_mus17-MusicIndex)/4)+bgm__First
-bgm_TwoSteps:	equ ((ptr_mus18-MusicIndex)/4)+bgm__First
-bgm_FurElise:	equ ((ptr_mus19-MusicIndex)/4)+bgm__First
-bgm_Ding:	equ ((ptr_mus1A-MusicIndex)/4)+bgm__First
-bgm_GreenHills:	equ ((ptr_mus1D-MusicIndex)/4)+bgm__First
-bgm_Son1UP:	equ ((ptr_mus1E-MusicIndex)/4)+bgm__First
-bgm_SadMac:	equ ((ptr_mus20-MusicIndex)/4)+bgm__First
-bgm_TG2000Jingle:	equ ((ptr_mus21-MusicIndex)/4)+bgm__First
-bgm_SwingSinners:	equ ((ptr_mus23-MusicIndex)/4)+bgm__First
-bgm_AVGNInvF:	equ ((ptr_mus24-MusicIndex)/4)+bgm__First
-bgm_Minuscule:	equ ((ptr_mus26-MusicIndex)/4)+bgm__First
-bgm_Folgers:	equ ((ptr_mus27-MusicIndex)/4)+bgm__First
-bgm_Rickroll:	equ ((ptr_mus28-MusicIndex)/4)+bgm__First
-bgm_Wormy:	equ ((ptr_mus29-MusicIndex)/4)+bgm__First
-bgm_Starman:	equ ((ptr_mus2A-MusicIndex)/4)+bgm__First
-bgm_MayoDed:	equ ((ptr_mus2B-MusicIndex)/4)+bgm__First
-bgm_PuyoReject:	equ ((ptr_mus2C-MusicIndex)/4)+bgm__First
-bgm_NewShop:	equ ((ptr_mus2D-MusicIndex)/4)+bgm__First
-bgm_JamesPond:	equ ((ptr_mus2E-MusicIndex)/4)+bgm__First
-bgm_AlexKiddEnd:	equ ((ptr_mus2F-MusicIndex)/4)+bgm__First
-bgm_Cheetah:	equ ((ptr_mus30-MusicIndex)/4)+bgm__First
-bgm_DJKK:	equ ((ptr_mus31-MusicIndex)/4)+bgm__First
-bgm_FuneralMarch:	equ ((ptr_mus32-MusicIndex)/4)+bgm__First
-bgm_Levian:	equ ((ptr_mus33-MusicIndex)/4)+bgm__First
-bgm_BatMan:	equ ((ptr_mus34-MusicIndex)/4)+bgm__First
-bgm_Peppa:	equ ((ptr_mus35-MusicIndex)/4)+bgm__First
-bgm_Resetti:	equ ((ptr_mus36-MusicIndex)/4)+bgm__First
-bgm_Spoopy:	equ ((ptr_mus3B-MusicIndex)/4)+bgm__First
-bgm_ChickenDance:	equ ((ptr_mus3C-MusicIndex)/4)+bgm__First
-bgm_CanCan:	equ ((ptr_mus3D-MusicIndex)/4)+bgm__First
-bgm_BadEmerald:	equ ((ptr_mus3E-MusicIndex)/4)+bgm__First
-bgm_SkyBase:	equ ((ptr_mus3F-MusicIndex)/4)+bgm__First
-bgm_UNOwenWasHer:	equ ((ptr_mus40-MusicIndex)/4)+bgm__First
-bgm_Scrappy:	equ ((ptr_mus41-MusicIndex)/4)+bgm__First
-bgm_WeAreTheSonic:	equ ((ptr_mus42-MusicIndex)/4)+bgm__First
-bgm_LG:		equ ((ptr_mus43-MusicIndex)/4)+bgm__First
-bgm_Thomas:	equ ((ptr_mus44-MusicIndex)/4)+bgm__First
-bgm_ILBT:	equ ((ptr_mus45-MusicIndex)/4)+bgm__First
-bgm_Memories:	equ ((ptr_mus4E-MusicIndex)/4)+bgm__First
-bgm_musBomerDude:	equ ((ptr_mus4F-MusicIndex)/4)+bgm__First
-bgm_Continue2:	equ ((ptr_mus50-MusicIndex)/4)+bgm__First
-bgm_Coffinman:	equ ((ptr_mus51-MusicIndex)/4)+bgm__First
-;!@GenesisDoes
-bgm_GenesisDoes1:	equ ((ptr_mus52-MusicIndex)/4)+bgm__First
-bgm_GenesisCan1:	equ ((ptr_mus53-MusicIndex)/4)+bgm__First
-bgm_GenesisCan2:	equ ((ptr_mus54-MusicIndex)/4)+bgm__First
-bgm_SM64_MM:	equ ((ptr_mus55-MusicIndex)/4)+bgm__First
+	enumconf $1
+	enum	bgm__First=$1
+	nextenum bgm_GHZ=bgm__First
+	nextenum bgm_LZ
+	nextenum bgm_MZ
+	nextenum bgm_SLZ
+	nextenum bgm_SYZ
+	nextenum bgm_SBZ
+	nextenum bgm_Invincible
+	nextenum bgm_ExtraLife
+	nextenum bgm_SS
+	nextenum bgm_Title
+	nextenum bgm_Ending
+	nextenum bgm_Boss
+	nextenum bgm_FZ
+	nextenum bgm_GotThrough
+	nextenum bgm_GameOver
+	nextenum bgm_Continue
+	nextenum bgm_Credits
+	nextenum bgm_Drowning
+	nextenum bgm_Emerald
+	nextenum bgm_NewBarkTown
+	nextenum bgm_REMansion
+	nextenum bgm_Jeopardy
+	nextenum bgm_EuroSega
+	nextenum bgm_Retro
+	nextenum bgm_ConiJingle
+	nextenum bgm_VampKiller
+	nextenum bgm_PuyoDrown
+	nextenum bgm_Carefree
+	nextenum bgm_Doom
+	nextenum bgm_Dingaling
+	nextenum bgm_Megalovania
+	nextenum bgm_Aporia
+	nextenum bgm_Gadget
+	nextenum bgm_CanCanInv
+	nextenum bgm_TwoSteps
+	nextenum bgm_FurElise
+	nextenum bgm_Ding
+	nextenum bgm_GreenHills
+	nextenum bgm_Son1UP
+	nextenum bgm_SadMac
+	nextenum bgm_TG2000Jingle
+	nextenum bgm_SwingSinners
+	nextenum bgm_AVGNInvF
+	nextenum bgm_Minuscule
+	nextenum bgm_Folgers
+	nextenum bgm_Rickroll
+	nextenum bgm_Wormy
+	nextenum bgm_Starman
+	nextenum bgm_MayoDed
+	nextenum bgm_PuyoReject
+	nextenum bgm_NewShop
+	nextenum bgm_JamesPond
+	nextenum bgm_AlexKiddEnd
+	nextenum bgm_Cheetah
+	nextenum bgm_DJKK
+	nextenum bgm_FuneralMarch
+	nextenum bgm_Levian
+	nextenum bgm_BatMan
+	nextenum bgm_Peppa
+	nextenum bgm_Resetti
+	nextenum bgm_Spoopy
+	nextenum bgm_ChickenDance
+	nextenum bgm_CanCan
+	nextenum bgm_BadEmerald
+	nextenum bgm_SkyBase
+	nextenum bgm_UNOwenWasHer
+	nextenum bgm_Scrappy
+	nextenum bgm_WeAreTheSonic
+	nextenum bgm_LG
+	nextenum bgm_Thomas
+	nextenum bgm_ILBT
+	nextenum bgm_Basillica
+	nextenum bgm_ClintonFuck
+	nextenum bgm_GCV2005
+	nextenum bgm_DeltaTale
+	nextenum bgm_Pac2
+	nextenum bgm_Passport
+	nextenum bgm_music83
+	nextenum bgm_CCLobby
+	nextenum bgm_Memories
+	nextenum bgm_musBomerDude
+	nextenum bgm_Continue2
+	nextenum bgm_Coffinman
+	nextenum bgm_ColdBrew
+	nextenum bgm_DoleBOSS
+	nextenum bgm_GreenHill
+	nextenum bgm_OrangeSong
+	nextenum bgm_TreasureCaves
+	nextenum bgm_DoleDetective
 
-bgm__Last:	equ ((ptr_musend-MusicIndex-4)/4)+bgm__First
+	; Keep this last
+	nextenum bgm__Last
 
 ; Sound effects
-sfx__First:	equ $A0
-sfx_Jump:	equ ((ptr_sndA0-SoundIndex)/4)+sfx__First
-sfx_Lamppost:	equ ((ptr_sndA1-SoundIndex)/4)+sfx__First
-sfx_A2:		equ ((ptr_sndA2-SoundIndex)/4)+sfx__First
-sfx_Death:	equ ((ptr_sndA3-SoundIndex)/4)+sfx__First
-sfx_Skid:	equ ((ptr_sndA4-SoundIndex)/4)+sfx__First
-sfx_A5:		equ ((ptr_sndA5-SoundIndex)/4)+sfx__First
-sfx_HitSpikes:	equ ((ptr_sndA6-SoundIndex)/4)+sfx__First
-sfx_Push:	equ ((ptr_sndA7-SoundIndex)/4)+sfx__First
-sfx_SSGoal:	equ ((ptr_sndA8-SoundIndex)/4)+sfx__First
-sfx_SSItem:	equ ((ptr_sndA9-SoundIndex)/4)+sfx__First
-sfx_Splash:	equ ((ptr_sndAA-SoundIndex)/4)+sfx__First
-sfx_AB:		equ ((ptr_sndAB-SoundIndex)/4)+sfx__First
-sfx_HitBoss:	equ ((ptr_sndAC-SoundIndex)/4)+sfx__First
-sfx_Bubble:	equ ((ptr_sndAD-SoundIndex)/4)+sfx__First
-sfx_Fireball:	equ ((ptr_sndAE-SoundIndex)/4)+sfx__First
-sfx_Shield:	equ ((ptr_sndAF-SoundIndex)/4)+sfx__First
-sfx_Saw:	equ ((ptr_sndB0-SoundIndex)/4)+sfx__First
-sfx_Electric:	equ ((ptr_sndB1-SoundIndex)/4)+sfx__First
-sfx_Drown:	equ ((ptr_sndB2-SoundIndex)/4)+sfx__First
-sfx_Flamethrower:equ ((ptr_sndB3-SoundIndex)/4)+sfx__First
-sfx_Bumper:	equ ((ptr_sndB4-SoundIndex)/4)+sfx__First
-sfx_Ring:	equ ((ptr_sndB5-SoundIndex)/4)+sfx__First
-sfx_SpikesMove:	equ ((ptr_sndB6-SoundIndex)/4)+sfx__First
-sfx_Rumbling:	equ ((ptr_sndB7-SoundIndex)/4)+sfx__First
-sfx_B8:		equ ((ptr_sndB8-SoundIndex)/4)+sfx__First
-sfx_Collapse:	equ ((ptr_sndB9-SoundIndex)/4)+sfx__First
-sfx_SSGlass:	equ ((ptr_sndBA-SoundIndex)/4)+sfx__First
-sfx_Door:	equ ((ptr_sndBB-SoundIndex)/4)+sfx__First
-sfx_Teleport:	equ ((ptr_sndBC-SoundIndex)/4)+sfx__First
-sfx_ChainStomp:	equ ((ptr_sndBD-SoundIndex)/4)+sfx__First
-sfx_Roll:	equ ((ptr_sndBE-SoundIndex)/4)+sfx__First
-sfx_Continue:	equ ((ptr_sndBF-SoundIndex)/4)+sfx__First
-sfx_Basaran:	equ ((ptr_sndC0-SoundIndex)/4)+sfx__First
-sfx_BreakItem:	equ ((ptr_sndC1-SoundIndex)/4)+sfx__First
-sfx_Warning:	equ ((ptr_sndC2-SoundIndex)/4)+sfx__First
-sfx_GiantRing:	equ ((ptr_sndC3-SoundIndex)/4)+sfx__First
-sfx_Bomb:	equ ((ptr_sndC4-SoundIndex)/4)+sfx__First
-sfx_Cash:	equ ((ptr_sndC5-SoundIndex)/4)+sfx__First
-sfx_RingLoss:	equ ((ptr_sndC6-SoundIndex)/4)+sfx__First
-sfx_ChainRise:	equ ((ptr_sndC7-SoundIndex)/4)+sfx__First
-sfx_Burning:	equ ((ptr_sndC8-SoundIndex)/4)+sfx__First
-sfx_Bonus:	equ ((ptr_sndC9-SoundIndex)/4)+sfx__First
-sfx_EnterSS:	equ ((ptr_sndCA-SoundIndex)/4)+sfx__First
-sfx_WallSmash:	equ ((ptr_sndCB-SoundIndex)/4)+sfx__First
-sfx_Spring:	equ ((ptr_sndCC-SoundIndex)/4)+sfx__First
-sfx_Switch:	equ ((ptr_sndCD-SoundIndex)/4)+sfx__First
-sfx_RingLeft:	equ ((ptr_sndCE-SoundIndex)/4)+sfx__First
-sfx_Signpost:	equ ((ptr_sndCF-SoundIndex)/4)+sfx__First
-sfx__Last:	equ ((ptr_sndend-SoundIndex-4)/4)+sfx__First
+	enum	sfx__First=$A0
+	nextenum sfx_Jump=sfx__First
+	nextenum sfx_Lamppost
+	nextenum sfx_A2
+	nextenum sfx_Death
+	nextenum sfx_Skid
+	nextenum sfx_A5
+	nextenum sfx_HitSpikes
+	nextenum sfx_Push
+	nextenum sfx_SSGoal
+	nextenum sfx_SSItem
+	nextenum sfx_Splash
+	nextenum sfx_AB
+	nextenum sfx_HitBoss
+	nextenum sfx_Bubble
+	nextenum sfx_Fireball
+	nextenum sfx_Shield
+	nextenum sfx_Saw
+	nextenum sfx_Electric
+	nextenum sfx_Drown
+	nextenum sfx_Flamethrower
+	nextenum sfx_Bumper
+	nextenum sfx_Ring
+	nextenum sfx_SpikesMove
+	nextenum sfx_Rumbling
+	nextenum sfx_B8
+	nextenum sfx_Collapse
+	nextenum sfx_SSGlass
+	nextenum sfx_Door
+	nextenum sfx_Teleport
+	nextenum sfx_ChainStomp
+	nextenum sfx_Roll
+	nextenum sfx_Continue
+	nextenum sfx_Basaran
+	nextenum sfx_BreakItem
+	nextenum sfx_Warning
+	nextenum sfx_GiantRing
+	nextenum sfx_Bomb
+	nextenum sfx_Cash
+	nextenum sfx_RingLoss
+	nextenum sfx_ChainRise
+	nextenum sfx_Burning
+	nextenum sfx_Bonus
+	nextenum sfx_EnterSS
+	nextenum sfx_WallSmash
+	nextenum sfx_Spring
+	nextenum sfx_Switch
+	nextenum sfx_RingLeft
+	nextenum sfx_Signpost
+	nextenum sfx_Thud
+	nextenum sfx_Dash
+	nextenum sfx_MenuConfirm
+sfx__Last = sfx_MenuConfirm
 
 ; Special sound effects
-spec__First:	equ $F0
-sfx_Waterfall:	equ ((ptr_sndD0-SpecSoundIndex)/4)+spec__First
-spec__Last:	equ ((ptr_specend-SpecSoundIndex-4)/4)+spec__First
+	enum	spec__First=$F0
+	nextenum sfx_Waterfall=spec__First
+spec__Last = sfx_Waterfall
 
 flg__First:	equ $FB
 bgm_Fade:	equ ((ptr_flgE0-Sound_ExIndex)/4)+flg__First
@@ -350,73 +386,7 @@ bgm_Slowdown:	equ ((ptr_flgE3-Sound_ExIndex)/4)+flg__First
 bgm_Stop:	equ ((ptr_flgE4-Sound_ExIndex)/4)+flg__First
 flg__Last:	equ ((ptr_flgend-Sound_ExIndex-4)/4)+flg__First
 
-; DAC Equates - Putting them here for ease of access
-; Song Samples
-dKick				equ $81
-dSnare				equ $82
-dTimpani			equ $83
-dHiTimpani			equ $84
-dMidTimpani			equ $85
-dLowTimpani			equ $86
-dVLowTimpani		equ $87
-dChunkyKick			equ $88
-dPokeSnare			equ $89
-dPokeKickCrashHi	equ $8A
-dPokeHiTimpani		equ $8B
-dPokeMidTimpani		equ $8C
-dPokeLowTimpani		equ $8D
-dAmenKick:			equ $8E
-dAmenSnare1:		equ $8F
-dAmenSnare2:		equ $90
-dAmenShortKick1:	equ $91
-dAmenShortKick2:	equ $92
-dAmenRide1:			equ $93
-dAmenRide2:			equ $94
-dAmenCrash:			equ $95
-
-; SFX Samples
-dDAMN				equ $96
-dTrevor				equ $97
-d2kki				equ $98
-dDooDoo				equ $99
-dCrispBilly			equ $9A
-dBlueLobster		equ $9B
-dWinTwoK			equ $9C
-dDeppaDig			equ $9D
-;!@ GenesisDoes
-dEagleSoftSong		equ $9E
-dYoFreddy			equ $9F
-dGithub				equ $A0
-dMadness			equ $A1
-dMadnessR			equ $A2
-dEggmanLaugh		equ $A3
-dGenesisDoes1		equ $A4
-dGenesisCan1		equ $A5
-dGenesisCan2		equ $A6
-dSM64_MM			equ	$A7
-
-dQuakeRocket		equ $A8
-dsupbeaches			equ $A9
-dPenis				equ $AA
-dSTFU				equ $AB
-dFuck				equ $AC
-dYouCanSuck			equ $AD
-dDoYouSuck			equ $AE
-dDicks				equ $AF
-dOnTheBall			equ $B0
-dPenises			equ $B1
-dEggNo				equ $B2
-dBabyAlarm			equ $B3
-dBoingBoing			equ $B4
-dBoioing			equ $B5
-dBoik				equ $B6
-dOrangeLaugh		equ $B7
-dClintonHi			equ $B8
-dClintonYeah		equ $B9
-dQuakeJump			equ $BA
-; Sega should always be last
-dSega				equ $BB
-
+	include "sound/SampleConstants.asm"
 
 ; Sonic frame IDs
 fr_Null:	equ 0
@@ -507,6 +477,9 @@ fr_Float6:	equ 1+$54
 fr_Injury:	equ 1+$55
 fr_GetAir:	equ 1+$56
 fr_WaterSlide:	equ 1+$57
+; rape
+fr_Spring2:	equ 1+$5C
+fr_Spring3:	equ 1+$5D
 
 ; Boss locations
 ; The main values are based on where the camera boundaries mainly lie

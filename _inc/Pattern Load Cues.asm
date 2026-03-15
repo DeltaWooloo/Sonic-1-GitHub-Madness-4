@@ -29,6 +29,8 @@ ptr_PLC_WIN:		dc.w PLC_WIN-ArtLoadCues
 ptr_PLC_WIN2:		dc.w PLC_WIN2-ArtLoadCues
 ptr_PLC_Joint:		dc.w PLC_Joint-ArtLoadCues
 ptr_PLC_Joint2:		dc.w PLC_Joint2-ArtLoadCues
+ptr_PLC_DVZ:		dc.w PLC_DVZ-ArtLoadCues
+ptr_PLC_DVZ2:		dc.w PLC_DVZ2-ArtLoadCues
 ptr_PLC_TitleCard:	dc.w PLC_TitleCard-ArtLoadCues
 ptr_PLC_Boss:		dc.w PLC_Boss-ArtLoadCues
 ptr_PLC_Signpost:	dc.w PLC_Signpost-ArtLoadCues
@@ -52,10 +54,8 @@ ptr_PLC_TryAgain:	dc.w PLC_TryAgain-ArtLoadCues
 ptr_PLC_EggmanSBZ2:	dc.w PLC_EggmanSBZ2-ArtLoadCues
 ptr_PLC_FZBoss:		dc.w PLC_FZBoss-ArtLoadCues
 ptr_PLC_WINNERCard:	dc.w PLC_WINNERCard-ArtLoadCues
-
 plcm:	macro gfx,vram
-		dc.l gfx
-		dc.w (vram)*$20
+		dc.w (gfx>>16)&$FF,gfx&$FFFF,vram*32
 		endm
 
 ; ---------------------------------------------------------------------------
@@ -66,12 +66,12 @@ PLC_Main:	dc.w ((PLC_Mainend-PLC_Main-2)/6)-1
 		plcm	Nem_Hud,    ArtTile_HUD           ; HUD
 		plcm	Nem_Lives,  ArtTile_Lives_Counter ; lives counter
 		plcm	Nem_Ring,   ArtTile_Ring          ; rings
+		plcm	Nem_Monitors, ArtTile_Monitor       ; monitors
 PLC_Mainend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - standard block 2
 ; ---------------------------------------------------------------------------
 PLC_Main2:	dc.w ((PLC_Main2end-PLC_Main2-2)/6)-1
-		plcm	Nem_Monitors, ArtTile_Monitor       ; monitors
 		plcm	Nem_Shield,   ArtTile_Shield        ; shield
 		plcm	Nem_Stars,    ArtTile_Invincibility ; invincibility stars
 PLC_Main2end:
@@ -115,10 +115,10 @@ PLC_GHZ2end:
 ; Pattern load cues - Labyrinth
 ; ---------------------------------------------------------------------------
 PLC_LZ:		dc.w ((PLC_LZ2-PLC_LZ-2)/6)-1
+		plcm	Nem_Spikes,      ArtTile_Spikes             ; spikes
 ;		plcm	Nem_LZ,          ArtTile_Level              ; LZ main patterns
 
 PLC_LZ2:	dc.w ((PLC_LZ2end-PLC_LZ2-2)/6)-1
-		plcm	Nem_Spikes,      ArtTile_Spikes             ; spikes
 		plcm	Nem_HSpring,     ArtTile_Spring_Horizontal  ; horizontal spring
 		plcm	Nem_VSpring,     ArtTile_Spring_Vertical    ; vertical spring
 PLC_LZ2end:
@@ -247,22 +247,10 @@ PLC_BREW2end:
 ; ---------------------------------------------------------------------------
 PLC_WIN:	dc.w ((PLC_WIN2-PLC_WIN-2)/6)-1
 ;		plcm	Nem_WIN,       ArtTile_Level                    ; SLZ main patterns
-		plcm	Nem_Bomb,      ArtTile_Bomb                     ; bomb enemy
-		plcm	Nem_Orbinaut,  ArtTile_SLZ_Orbinaut             ; orbinaut enemy
-		plcm	Nem_MzFire,    ArtTile_SLZ_Fireball             ; fireballs
-		plcm	Nem_SlzBlock,  ArtTile_SLZ_Collapsing_Floor     ; block
-		plcm	Nem_SlzWall,   ArtTile_GHZ_SLZ_Smashable_Wall+4 ; breakable wall
-		plcm	Nem_Spikes,    ArtTile_Spikes                   ; spikes
 		plcm	Nem_HSpring,   ArtTile_Spring_Horizontal        ; horizontal spring
 		plcm	Nem_VSpring,   ArtTile_Spring_Vertical          ; vertical spring
 
 PLC_WIN2:	dc.w ((PLC_WIN2end-PLC_WIN2-2)/6)-1
-		plcm	Nem_Seesaw,    ArtTile_SLZ_Seesaw                ; seesaw
-		plcm	Nem_Fan,       ArtTile_SLZ_Fan                   ; fan
-		plcm	Nem_Pylon,     ArtTile_SLZ_Pylon                 ; foreground pylon
-		plcm	Nem_SlzSwing,  ArtTile_SLZ_Swing                 ; swinging platform
-		plcm	Nem_SlzCannon, ArtTile_SLZ_Fireball_Launcher     ; fireball launcher
-		plcm	Nem_SlzSpike,  ArtTile_SLZ_Spikeball             ; spikeball
 PLC_WIN2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - The Joint
@@ -275,6 +263,17 @@ PLC_Joint2:	dc.w ((PLC_Joint2end-PLC_Joint2-2)/6)-1
 		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal      ; horizontal spring
 		plcm	Nem_VSpring,    ArtTile_Spring_Vertical        ; vertical spring
 PLC_Joint2end:
+; ---------------------------------------------------------------------------
+; Pattern load cues - DoleVille
+; ---------------------------------------------------------------------------
+PLC_DVZ:	dc.w ((PLC_DVZ2-PLC_DVZ-2)/6)-1
+;		plcm	Nem_Joint,       ArtTile_Level                   ; Joint main patterns
+
+PLC_DVZ2:	dc.w ((PLC_DVZ2end-PLC_DVZ2-2)/6)-1
+		plcm	Nem_Spikes,     ArtTile_Spikes                 ; spikes
+		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal      ; horizontal spring
+		plcm	Nem_VSpring,    ArtTile_Spring_Vertical        ; vertical spring
+PLC_DVZ2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - title card
 ; ---------------------------------------------------------------------------
@@ -304,10 +303,6 @@ PLC_Signpostend:
 ; Pattern load cues - beta special stage warp effect
 ; ---------------------------------------------------------------------------
 PLC_Warp:
-	if Revision=0
-		dc.w ((PLC_Warpend-PLC_Warp-2)/6)-1
-		plcm	Nem_Warp, ArtTile_Warp
-	endif
 PLC_Warpend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - special stage
@@ -406,6 +401,13 @@ PLC_JointAnimals:	dc.w ((PLC_JointAnimalsend-PLC_JointAnimals-2)/6)-1
 		plcm	Nem_Chicken, ArtTile_Animal_2 ; cocky
 PLC_JointAnimalsend:
 ; ---------------------------------------------------------------------------
+; Pattern load cues - DVZ animals
+; ---------------------------------------------------------------------------
+PLC_DVZAnimals:	dc.w ((PLC_DVZAnimalsend-PLC_DVZAnimals-2)/6)-1
+		plcm	Nem_Squirrel,    ArtTile_Animal_1 ; ricky
+		plcm	Nem_Chicken, ArtTile_Animal_2 ; cocky
+PLC_DVZAnimalsend:
+; ---------------------------------------------------------------------------
 ; Pattern load cues - special stage results screen
 ; ---------------------------------------------------------------------------
 PLC_SSResult:dc.w ((PLC_SpeStResultend-PLC_SSResult-2)/6)-1
@@ -421,9 +423,6 @@ PLC_Ending:	dc.w ((PLC_Endingend-PLC_Ending-2)/6)-1
 		plcm	Nem_EndFlower, ArtTile_Ending_Flowers   ; flowers
 		plcm	Nem_EndEm,     ArtTile_Ending_Emeralds  ; emeralds
 		plcm	Nem_EndSonic,  ArtTile_Ending_Sonic     ; Sonic
-	if Revision=0
-		plcm	Nem_EndEggman, ArtTile_Ending_Eggman    ; Eggman's death (unused)
-	endif
 		plcm	Nem_Rabbit,    ArtTile_Ending_Rabbit    ; rabbit
 		plcm	Nem_Chicken,   ArtTile_Ending_Chicken   ; chicken
 		plcm	Nem_Penguin,   ArtTile_Ending_Penguin   ; penguin
@@ -469,47 +468,49 @@ PLC_WINNERCardend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cue IDs
 ; ---------------------------------------------------------------------------
-plcid_Main:		equ (ptr_PLC_Main-ArtLoadCues)/2	; 0
-plcid_Main2:		equ (ptr_PLC_Main2-ArtLoadCues)/2	; 1
-plcid_Explode:		equ (ptr_PLC_Explode-ArtLoadCues)/2	; 2
-plcid_GameOver:		equ (ptr_PLC_GameOver-ArtLoadCues)/2	; 3
-plcid_GHZ:		equ (ptr_PLC_GHZ-ArtLoadCues)/2		; 4
-plcid_GHZ2:		equ (ptr_PLC_GHZ2-ArtLoadCues)/2	; 5
-plcid_LZ:		equ (ptr_PLC_LZ-ArtLoadCues)/2		; 6
-plcid_LZ2:		equ (ptr_PLC_LZ2-ArtLoadCues)/2		; 7
-plcid_MZ:		equ (ptr_PLC_MZ-ArtLoadCues)/2		; 8
-plcid_MZ2:		equ (ptr_PLC_MZ2-ArtLoadCues)/2		; 9
-plcid_SLZ:		equ (ptr_PLC_SLZ-ArtLoadCues)/2		; $A
-plcid_SLZ2:		equ (ptr_PLC_SLZ2-ArtLoadCues)/2	; $B
-plcid_SYZ:		equ (ptr_PLC_SYZ-ArtLoadCues)/2		; $C
-plcid_SYZ2:		equ (ptr_PLC_SYZ2-ArtLoadCues)/2	; $D
-plcid_SBZ:		equ (ptr_PLC_SBZ-ArtLoadCues)/2		; $E
-plcid_SBZ2:		equ (ptr_PLC_SBZ2-ArtLoadCues)/2	; $F
-plcid_ENDZ:		equ (ptr_PLC_ENDZ-ArtLoadCues)/2		; $E
-plcid_ENDZ2:		equ (ptr_PLC_ENDZ2-ArtLoadCues)/2	; $F
-plcid_BREW:		equ (ptr_PLC_BREW-ArtLoadCues)/2		; 4
-plcid_BREW2:		equ (ptr_PLC_BREW2-ArtLoadCues)/2	; 5
-plcid_WIN:		equ (ptr_PLC_WIN-ArtLoadCues)/2		; 4
-plcid_WIN2:		equ (ptr_PLC_WIN-ArtLoadCues)/2	; 5
-plcid_Joint:		equ (ptr_PLC_Joint-ArtLoadCues)/2		; $20
-plcid_Joint2:		equ (ptr_PLC_Joint2-ArtLoadCues)/2	; $21
-plcid_TitleCard:	equ (ptr_PLC_TitleCard-ArtLoadCues)/2	; $10
-plcid_Boss:		equ (ptr_PLC_Boss-ArtLoadCues)/2	; $11
-plcid_Signpost:		equ (ptr_PLC_Signpost-ArtLoadCues)/2	; $12
-plcid_Warp:		equ (ptr_PLC_Warp-ArtLoadCues)/2	; $13
-plcid_SpecialStage:	equ (ptr_PLC_SpecialStage-ArtLoadCues)/2 ; $14
-plcid_GHZAnimals:	equ (ptr_PLC_GHZAnimals-ArtLoadCues)/2	; $15
-plcid_LZAnimals:	equ (ptr_PLC_LZAnimals-ArtLoadCues)/2	; $16
-plcid_MZAnimals:	equ (ptr_PLC_MZAnimals-ArtLoadCues)/2	; $17
-plcid_SLZAnimals:	equ (ptr_PLC_SLZAnimals-ArtLoadCues)/2	; $18
-plcid_SYZAnimals:	equ (ptr_PLC_SYZAnimals-ArtLoadCues)/2	; $19
-plcid_SBZAnimals:	equ (ptr_PLC_SBZAnimals-ArtLoadCues)/2	; $1A
-plcid_ENDZAnimals:	equ (ptr_PLC_ENDZAnimals-ArtLoadCues)/2	; $19
-plcid_BREWAnimals:	equ (ptr_PLC_BREWAnimals-ArtLoadCues)/2	; $1A
-plcid_WINAnimals:	equ (ptr_PLC_WINAnimals-ArtLoadCues)/2	; $19
-plcid_SSResult:		equ (ptr_PLC_SSResult-ArtLoadCues)/2	; $1B
-plcid_Ending:		equ (ptr_PLC_Ending-ArtLoadCues)/2	; $1C
-plcid_TryAgain:		equ (ptr_PLC_TryAgain-ArtLoadCues)/2	; $1D
-plcid_EggmanSBZ2:	equ (ptr_PLC_EggmanSBZ2-ArtLoadCues)/2	; $1E
-plcid_FZBoss:		equ (ptr_PLC_FZBoss-ArtLoadCues)/2	; $1F
-plcid_WINNERCard:	equ (ptr_PLC_WINNERCard-ArtLoadCues)/2	; $10
+plcid_Main:		equ (ptr_PLC_Main-ArtLoadCues)/2	
+plcid_Main2:		equ (ptr_PLC_Main2-ArtLoadCues)/2	
+plcid_Explode:		equ (ptr_PLC_Explode-ArtLoadCues)/2	
+plcid_GameOver:		equ (ptr_PLC_GameOver-ArtLoadCues)/2	
+plcid_GHZ:		equ (ptr_PLC_GHZ-ArtLoadCues)/2		
+plcid_GHZ2:		equ (ptr_PLC_GHZ2-ArtLoadCues)/2	
+plcid_LZ:		equ (ptr_PLC_LZ-ArtLoadCues)/2		
+plcid_LZ2:		equ (ptr_PLC_LZ2-ArtLoadCues)/2		
+plcid_MZ:		equ (ptr_PLC_MZ-ArtLoadCues)/2		
+plcid_MZ2:		equ (ptr_PLC_MZ2-ArtLoadCues)/2		
+plcid_SLZ:		equ (ptr_PLC_SLZ-ArtLoadCues)/2		
+plcid_SLZ2:		equ (ptr_PLC_SLZ2-ArtLoadCues)/2	
+plcid_SYZ:		equ (ptr_PLC_SYZ-ArtLoadCues)/2		
+plcid_SYZ2:		equ (ptr_PLC_SYZ2-ArtLoadCues)/2	
+plcid_SBZ:		equ (ptr_PLC_SBZ-ArtLoadCues)/2		
+plcid_SBZ2:		equ (ptr_PLC_SBZ2-ArtLoadCues)/2	
+plcid_ENDZ:		equ (ptr_PLC_ENDZ-ArtLoadCues)/2	
+plcid_ENDZ2:		equ (ptr_PLC_ENDZ2-ArtLoadCues)/2	
+plcid_BREW:		equ (ptr_PLC_BREW-ArtLoadCues)/2	
+plcid_BREW2:		equ (ptr_PLC_BREW2-ArtLoadCues)/2	
+plcid_WIN:		equ (ptr_PLC_WIN-ArtLoadCues)/2		
+plcid_WIN2:		equ (ptr_PLC_WIN-ArtLoadCues)/2		
+plcid_Joint:		equ (ptr_PLC_Joint-ArtLoadCues)/2	
+plcid_Joint2:		equ (ptr_PLC_Joint2-ArtLoadCues)/2
+plcid_DVZ:		equ (ptr_PLC_DVZ-ArtLoadCues)/2	
+plcid_DVZ2:		equ (ptr_PLC_DVZ2-ArtLoadCues)/2	
+plcid_TitleCard:	equ (ptr_PLC_TitleCard-ArtLoadCues)/2	
+plcid_Boss:		equ (ptr_PLC_Boss-ArtLoadCues)/2	
+plcid_Signpost:		equ (ptr_PLC_Signpost-ArtLoadCues)/2	
+plcid_Warp:		equ (ptr_PLC_Warp-ArtLoadCues)/2	
+plcid_SpecialStage:	equ (ptr_PLC_SpecialStage-ArtLoadCues)/2
+plcid_GHZAnimals:	equ (ptr_PLC_GHZAnimals-ArtLoadCues)/2	
+plcid_LZAnimals:	equ (ptr_PLC_LZAnimals-ArtLoadCues)/2	
+plcid_MZAnimals:	equ (ptr_PLC_MZAnimals-ArtLoadCues)/2	
+plcid_SLZAnimals:	equ (ptr_PLC_SLZAnimals-ArtLoadCues)/2	
+plcid_SYZAnimals:	equ (ptr_PLC_SYZAnimals-ArtLoadCues)/2	
+plcid_SBZAnimals:	equ (ptr_PLC_SBZAnimals-ArtLoadCues)/2	
+plcid_ENDZAnimals:	equ (ptr_PLC_ENDZAnimals-ArtLoadCues)/2	
+plcid_BREWAnimals:	equ (ptr_PLC_BREWAnimals-ArtLoadCues)/2	
+plcid_WINAnimals:	equ (ptr_PLC_WINAnimals-ArtLoadCues)/2	
+plcid_SSResult:		equ (ptr_PLC_SSResult-ArtLoadCues)/2	
+plcid_Ending:		equ (ptr_PLC_Ending-ArtLoadCues)/2	
+plcid_TryAgain:		equ (ptr_PLC_TryAgain-ArtLoadCues)/2	
+plcid_EggmanSBZ2:	equ (ptr_PLC_EggmanSBZ2-ArtLoadCues)/2	
+plcid_FZBoss:		equ (ptr_PLC_FZBoss-ArtLoadCues)/2	
+plcid_WINNERCard:	equ (ptr_PLC_WINNERCard-ArtLoadCues)/2	

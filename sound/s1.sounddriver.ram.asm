@@ -35,9 +35,11 @@ v_1up_ram:
 v_sndprio:		ds.b	1	; sound priority (priority of new music/SFX must be higher or equal to this value or it won't play; bit 7 of priority being set prevents this value from changing)
 v_main_tempo_timeout:	ds.b	1	; Counts down to zero; when zero, resets to next value and delays song by 1 frame
 v_main_tempo:		ds.b	1	; Used for music only
+v_cda_playing:		ds.b 1
+v_cda_ignore:		ds.b 1
 f_pausemusic:		ds.b	1	; flag set to stop music when paused
 v_fadeout_counter:	ds.b	1
-			ds.b	1	; unused
+v_palmuscounter		ds.b	1	; PAL refresh
 v_fadeout_delay:	ds.b	1
 v_communication_byte:	ds.b	1	; used in Ristar to sync with a boss' attacks; unused here
 f_updating_dac:		ds.b	1	; $80 if updating DAC, $00 otherwise
@@ -62,7 +64,7 @@ v_speeduptempo:		ds.b	1	; music - tempo modifier with speed shoes
 f_speedup:		ds.b	1	; flag indicating whether speed shoes tempo is on ($80) or off ($00)
 v_ring_speaker:		ds.b	1	; which speaker the "ring" sound is played in (00 = right; 01 = left)
 f_push_playing:		ds.b	1	; if set, prevents further push sounds from playing
-			ds.b	$13	; unused
+			ds.b	$11	; unused
 v_track_ram:
 v_music_track_ram:			; Start of music RAM
 v_music_fmdac_tracks:

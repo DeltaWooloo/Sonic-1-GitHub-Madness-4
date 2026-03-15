@@ -22,15 +22,15 @@
 TitleCard_GHZ1:	equ  "ORANGE WORLD"
 TitleCard_GHZ2:	equ  "ORANGE WORLD"
 TitleCard_GHZ3:	equ  "TTS BATTLE"
-TitleCard_GHZ4:	equ  "porn"
+TitleCard_GHZ4:	equ  "Robi says hi"
 
 TitleCard_MZ1:	equ  "ALBERTA CANADA"
 TitleCard_MZ2:	equ  "ALBERTA CANADINA"
-TitleCard_MZ3:	equ  "GARBLE"
+TitleCard_MZ3:	equ  "KILOS LAIR"
 TitleCard_MZ4:	equ  "porn"
 
 TitleCard_SYZ1:	equ  "SPRING FIELD"
-TitleCard_SYZ2:	equ  "SPRING FIELD"
+TitleCard_SYZ2:	equ  "PRING FIELD"
 TitleCard_SYZ3:	equ  "HOMERS"
 TitleCard_SYZ4:	equ  "porn"
 
@@ -40,18 +40,34 @@ TitleCard_LZ3:	equ  "FOE FOE FOE FOE"
 TitleCard_LZ4:	equ  "PRONGLE PIT"	; LZ4 is SBZ3
 
 TitleCard_SLZ1:	equ  "MICRODICK HD"
-TitleCard_SLZ2:	equ  "MICRODICK HD"
+TitleCard_SLZ2:	equ  "MEIN KRAFT"
 TitleCard_SLZ3:	equ  "CLIPPY CLITORIS"
 TitleCard_SLZ4:	equ  "porn"
 
 TitleCard_SBZ1:	equ  "PRONGLE PLANT"
-TitleCard_SBZ2:	equ  "PRONGLE PLANT"
+TitleCard_SBZ2:	equ  "FUCKIN FACTORY"
 TitleCard_SBZ3:	equ  "PIGFAT PUSSHOLE"		; SBZ3 is FZ
 TitleCard_SBZ4:	equ  "porn"
+
+TitleCard_Brew1:	equ  "COLD BREW"
+TitleCard_Brew2:	equ  "HOT BREW"
+TitleCard_Brew3:	equ  "Roast Brew"
+TitleCard_Brew4:	equ  "Hostile Soul"
+
+TitleCard_WIN1:	equ  "Insert Title"
+TitleCard_WIN2:	equ  "Insert Tit"
+TitleCard_WIN3:	equ  "AGGA"
+TitleCard_WIN4:	equ  "AGGA"
 
 TitleCard_Joint1:	equ  "The Joint"
 TitleCard_Joint2:	equ  "Ten years in the"
 TitleCard_Joint3:	equ  "Made you a fuckin"
+TitleCard_Joint4:	equ  "porn"
+
+TitleCard_DVZ1:	equ  "DOLEVILLE"
+TitleCard_DVZ2:	equ  "THE BIRTHPLACE"
+TitleCard_DVZ3:	equ  "THE SELF"
+TitleCard_DVZ4:	equ  "THE JIGGLYJOSH"
 
 TitleCard_Zone:	equ  "ZONE"
 TitleCard_UseLowerAct: equ 1	; 0 = ACT -- 1 = Act
@@ -184,20 +200,27 @@ TTL_ConData:
 		dc.l TTLCard_SYZ3_ConData, TTLCard_SYZ3_Array
 		dc.l TTLCard_SYZ4_ConData, TTLCard_SYZ4_Array
 
-		dc.l TTLCard_SYZ1_ConData, TTLCard_SYZ1_Array	; Cold brew
-		dc.l TTLCard_SYZ2_ConData, TTLCard_SYZ2_Array
-		dc.l TTLCard_SYZ3_ConData, TTLCard_SYZ3_Array
-		dc.l TTLCard_SYZ4_ConData, TTLCard_SYZ4_Array
+		dc.l TTLCard_Brew1_ConData, TTLCard_Brew1_Array	; Brew1
+		dc.l TTLCard_Brew2_ConData, TTLCard_Brew2_Array	; Brew2
+		dc.l TTLCard_Brew3_ConData, TTLCard_Brew3_Array	; Brew3
+		dc.l TTLCard_Brew4_ConData, TTLCard_Brew4_Array	; Brew4
 
-		dc.l TTLCard_SYZ1_ConData, TTLCard_SYZ1_Array	; WIN1
-		dc.l TTLCard_SYZ2_ConData, TTLCard_SYZ2_Array	; WIN2
-		dc.l TTLCard_SYZ3_ConData, TTLCard_SYZ3_Array	; WIN3
-		dc.l TTLCard_SYZ4_ConData, TTLCard_SYZ4_Array	; WIN4
+		dc.l TTLCard_WIN1_ConData, TTLCard_WIN1_Array	; WIN1
+		dc.l TTLCard_WIN2_ConData, TTLCard_WIN2_Array	; WIN2
+		dc.l TTLCard_WIN3_ConData, TTLCard_WIN3_Array	; WIN3
+		dc.l TTLCard_WIN4_ConData, TTLCard_WIN4_Array	; WIN4
+
 
 		dc.l TTLCard_Joint1_ConData, TTLCard_Joint1_Array	; Joint1
 		dc.l TTLCard_Joint2_ConData, TTLCard_Joint2_Array	; Joint2
 		dc.l TTLCard_Joint3_ConData, TTLCard_Joint3_Array	; Joint3
 		dc.l 0, 0	; Joint4
+
+
+		dc.l TTLCard_DVZ1_ConData, TTLCard_DVZ1_Array	; DVZ1
+		dc.l TTLCard_DVZ2_ConData, TTLCard_DVZ2_Array	; DVZ2
+		dc.l TTLCard_DVZ3_ConData, TTLCard_DVZ3_Array	; DVZ3
+		dc.l 0, 0	; DVZ4		
 		even
 
 ; ---------------------------------------------------------------------------
@@ -363,20 +386,25 @@ Map_Card_Extended:	mappingsTable
 	mappingsTableEntry.w	TTLCard_SLZ3
 	mappingsTableEntry.w	TTLCard_SLZ4
 
-	mappingsTableEntry.w	TTLCard_SLZ1	; Cold Brew
-	mappingsTableEntry.w	TTLCard_SLZ2
-	mappingsTableEntry.w	TTLCard_SLZ3
-	mappingsTableEntry.w	TTLCard_SLZ4
+	mappingsTableEntry.w	TTLCard_Brew1	; Cold Brew
+	mappingsTableEntry.w	TTLCard_Brew2
+	mappingsTableEntry.w	TTLCard_Brew3
+	mappingsTableEntry.w	TTLCard_Brew4
 
-	mappingsTableEntry.w	TTLCard_SLZ1	; Windows Zone 1
-	mappingsTableEntry.w	TTLCard_SLZ2	; Windows Zone 2
-	mappingsTableEntry.w	TTLCard_SLZ3	; Windows Zone 3
-	mappingsTableEntry.w	TTLCard_SLZ4	; Windows Zone 4
+	mappingsTableEntry.w	TTLCard_WIN1	; Windows Zone 1
+	mappingsTableEntry.w	TTLCard_WIN2	; Windows Zone 2
+	mappingsTableEntry.w	TTLCard_WIN3	; Windows Zone 3
+	mappingsTableEntry.w	TTLCard_WIN4	; Windows Zone 4
 
 	mappingsTableEntry.w	TTLCard_Joint1	; Star Light Zone 1
 	mappingsTableEntry.w	TTLCard_Joint2	; Star Light Zone 2
 	mappingsTableEntry.w	TTLCard_Joint3	; Star Light Zone 3
 	mappingsTableEntry.w	TTLCard_Joint3	; Star Light Zone 4
+
+	mappingsTableEntry.w	TTLCard_DVZ1	; DVZ 1
+	mappingsTableEntry.w	TTLCard_DVZ2	; DVZ 2
+	mappingsTableEntry.w	TTLCard_DVZ3	; DVZ 3
+	mappingsTableEntry.w	TTLCard_DVZ4	; DVZ 4
 
 	mappingsTableEntry.w	TTLCard_Zone	; "ZONE" text
 	mappingsTableEntry.w	TTLCard_Act	; Act number
@@ -407,10 +435,22 @@ TTLCard_SBZ1:	titlecard TitleCard_SBZ1,0,0
 TTLCard_SBZ2:	titlecard TitleCard_SBZ2,0,0
 TTLCard_SBZ3:	titlecard TitleCard_SBZ3,1,0 ; FZ (hide act)
 TTLCard_SBZ4:	titlecard TitleCard_SBZ4,0,0
-
+TTLCard_Brew1:	titlecard TitleCard_Brew1,0,0
+TTLCard_Brew2:	titlecard TitleCard_Brew2,0,0
+TTLCard_Brew3:	titlecard TitleCard_Brew3,0,0
+TTLCard_Brew4:	titlecard TitleCard_Brew4,1,0
+TTLCard_WIN1:	titlecard TitleCard_WIN1,0,0
+TTLCard_WIN2:	titlecard TitleCard_WIN2,0,0
+TTLCard_WIN3:	titlecard TitleCard_WIN3,0,0
+TTLCard_WIN4:	titlecard TitleCard_WIN4,0,0
 TTLCard_Joint1:	titlecard TitleCard_Joint1,1,0 ; one act fakeout
 TTLCard_Joint2:	titlecard TitleCard_Joint2,0,0
 TTLCard_Joint3:	titlecard TitleCard_Joint3,0,0
+TTLCard_Joint4:	titlecard TitleCard_Joint4,1,0 ; one act fakeout
+TTLCard_DVZ1:	titlecard TitleCard_DVZ1,0,0
+TTLCard_DVZ2:	titlecard TitleCard_DVZ2,0,0
+TTLCard_DVZ3:	titlecard TitleCard_DVZ3,0,0
+TTLCard_DVZ4:	titlecard TitleCard_DVZ4,0,0
 
 TTLCard_Zone:	titlecard TitleCard_Zone,1,1 ; ZONE label (alternate tile offset)
 

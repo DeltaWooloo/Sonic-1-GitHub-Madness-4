@@ -48,17 +48,17 @@ GM_Fet_ClrObjRam:
 
 		moveq	#palid_Fetus,d0
 		jsr		(PalLoad1).l		; load palette
-		lea     (v_palette_fading+$14).w,a1
+		lea     (v_palette_fading+$12).w,a1
 		bsr.s	GM_Fet_PalSet
 		jsr		(PaletteFadeIn).l
 
 GM_Fet_Loop:
-		move.b	#8,(v_vbla_routine).w
+		move.b	#2,(v_vbla_routine).w
 		jsr		(WaitForVBla).l
 		cmpi.b	#btnA,(v_jpadpress1).w ; check if action button is pressed
 		bne.s	GM_Fet_ControlExit	; if not, branch
 		bchg	#0,(DiffVariable).w
-		lea     (v_palette+$14).w,a1
+		lea     (v_palette+$12).w,a1
 		bsr.s	GM_Fet_PalSet
 GM_Fet_ControlExit:
 		andi.b	#btnStart,(v_jpadpress1).w ; check if Start is held - i can't check the same variable again apparently idk why - coni
@@ -70,12 +70,12 @@ GM_Fet_ControlExit:
 		rts
 
 GM_Fet_PalSet:
-		lea     (Pal_Fetus+4*2).l,a0
+		lea     (Pal_Fetus+3*2).l,a0
 		tst.b	(DiffVariable).w ; check difficulty
 		beq.s	.dontset
-		lea     (Pal_Fetus+7*2).l,a0
+		lea     (Pal_Fetus+6*2).l,a0
 	.dontset:
-		move.w	#$12,d7	; 16 colors ($20 bytes)
+		move.w	#$3,d7	; 6 colors
 	.loop:
 		move.l  (a0)+,(a1)+
 		dbf.w	d7,.loop

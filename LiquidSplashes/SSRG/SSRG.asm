@@ -440,8 +440,8 @@ OS_SpinIn:
 		blt	OS_Display					; if not, branch
 		addq.b	#$02,$24(a0)			; increase routine counter
 		;!@ moveq	#$FFFFFFBD,d0		; set to play spiked chandelier SFX
-		move.w	#sfx_ChainStomp,d0		; set to play spiked chandelier SFX
-		
+		move.w	#sfx_WallSmash,d0		; set the ugly explosion sfx
+
 		jsr	PlaySound_Special			; play SFX
 		move.l	#$FF00FC00,$10(a0)			; set X and Y bounce off speeds
 		;!@ lea	($FFFFD010).l,a1			; load object ram's X and Y speeds
@@ -627,8 +627,8 @@ OL_WaitTime:
 		bne	OL_WT_Wait				; if not finished, branch
 		
 		;!@ Spring sfx
-		move.w	#sfx_Spring,d0
-		jsr	(PlaySound_Special).l			; play spring sound
+		move.b	#dBoik,d0	; Boik
+		jsr		(MegaPCM_PlaySample).l
 		
 		addq.b	#$02,$24(a0)				; increase routine counter
 
@@ -701,8 +701,8 @@ OL_NoMove:
 
 OL_NoFinish:
 		; !@ play glass block sound
-		move.w	#sfx_SSGlass,d0
-		jsr	(PlaySound_Special).l	
+		move.b	#dBoik,d0	; Boik
+		jsr	(MegaPCM_PlaySample).l
 		addi.b	#$20,$02(a0)				; increase palette line being used
 
 ; ===========================================================================

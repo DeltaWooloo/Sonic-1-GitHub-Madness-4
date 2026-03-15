@@ -1,12 +1,21 @@
 ; ---------------------------------------------------------------------------
-; Object 01 - whoever moved sonic to a seperate object needs to go fuck themselves and burn in a fire cause thats awful
+; Object 01 - whoever moved sonic to a seperate object needs to go [love] themselves and [have an 8 hours of sleep] cause thats [amazing]
 ; ---------------------------------------------------------------------------
 
 ; Obj01:
 SonicPlayer:
 		tst.w	(v_debuguse).w	; is debug mode being used?
-		beq.s	Sonic_Normal	; if not, branch
+		beq.s	.getplayer	; if not, branch
 		jmp	(DebugMode).l
+.getplayer:
+		moveq	#0,d0
+		move.b	(v_characterid).w,d0
+		chk	#chrid_last,d0
+		lsl.w	#2,d0
+		move.l	.lut(pc,d0.w),a1
+		jmp	(a1)
+.lut:
+		dc.l	Sonic_Normal
 ; ===========================================================================
 
 ; Obj01_Normal:
@@ -62,6 +71,30 @@ Sonic_Control:	; Routine 2
 .ignorecontrols:
 		btst	#0,(f_playerctrl).w ; are controls locked?
 		bne.s	.ignoremodes	; if yes, branch
+
+		btst	#6,(v_jpadpress1)
+		beq.s	.nobullets
+
+		moveq   #3, d2
+		moveq   #0, d1
+		moveq   #0, d0
+
+.makebullets:
+		bsr.w	FindFreeObj
+		bne.s	.nobullets
+
+		move.b	#id_PlayerBullet, obID(a1)
+		move.w	obX(a0), obX(a1)
+		move.w	obY(a0), obY(a1)
+		move.b	d1, obAngle(a1)
+		add.b	#$40, d1
+		dbf	d2, .makebullets
+
+		move.w  #$25, v_screenshaketime  ; tonic has insane firepower
+		move.w  #sfx_Bomb, d0
+		jsr  PlaySound_Special
+
+.nobullets:
 		moveq	#0,d0
 		move.b	obStatus(a0),d0
 		andi.w	#6,d0
@@ -97,20 +130,6 @@ Sonic_Modes:	dc.w Sonic_MdNormal-Sonic_Modes
 		dc.w Sonic_MdRoll-Sonic_Modes
 		dc.w Sonic_MdJump2-Sonic_Modes
 ; ---------------------------------------------------------------------------
-; Music to play after invincibility wears off
-; ---------------------------------------------------------------------------
-MusicList2:
-		dc.b bgm_GHZ
-		dc.b bgm_LZ
-		dc.b bgm_MZ
-		dc.b bgm_SLZ
-		dc.b bgm_SYZ
-		dc.b bgm_SBZ
-		zonewarning MusicList2,1
-		; The ending doesn't get an entry
-		even
-
-; ---------------------------------------------------------------------------
 ; Subroutine to display Sonic and set music
 ; ---------------------------------------------------------------------------
 
@@ -133,6 +152,8 @@ Sonic_Display:
 		bne.s	.chkshoes
 		tst.b	(f_lockscreen).w
 		bne.s	.removeinvincible
+		tst.b	(v_clintonfucker).w	; is clinton Fucking?
+		bne.w	.removeinvincible	; if yes, branch
 		cmpi.w	#$C,(v_air).w
 		blo.s	.removeinvincible
 		moveq	#0,d0
@@ -142,8 +163,7 @@ Sonic_Display:
 		moveq	#5,d0		; play SBZ music
 
 .music:
-		lea	(MusicList2).l,a1
-		move.b	(a1,d0.w),d0
+		move.b	(v_zonemusic).w,d0
 		jsr	(QueueSound1).l	; play normal music
 
 .removeinvincible:
@@ -156,9 +176,9 @@ Sonic_Display:
 		beq.s	.exit
 		subq.w	#1,shoetime(a0)	; subtract 1 from time
 		bne.s	.exit
-		move.w	#$600,(v_sonspeedmax).w ; restore Sonic's speed
-		move.w	#$C,(v_sonspeedacc).w ; restore Sonic's acceleration
-		move.w	#$80,(v_sonspeeddec).w ; restore Sonic's deceleration
+		move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
+		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
+		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
 		move.b	#0,(v_shoes).w	; cancel speed shoes
 		move.w	#bgm_Slowdown,d0
 		jmp	(QueueSound1).l	; run music at normal speed
@@ -191,15 +211,9 @@ Sonic_RecordPosition:
 
 
 Sonic_Water:
-		cmpi.b	#id_LZ,(v_zone).w	; is level LZ?
-		beq.s	.islabyrinth	; if yes, branch
+		tst.b	(v_waterflag).w	; is level LZ?
+		beq.s	.exit	; if yes, branch
 
-.exit:
-		rts
-; ===========================================================================
-
-; Obj01_InWater:
-.islabyrinth:
 		move.w	(v_waterpos1).w,d0
 		cmp.w	obY(a0),d0	; is Sonic above the water?
 		bge.s	.abovewater	; if yes, branch
@@ -218,16 +232,15 @@ Sonic_Water:
 		move.b	#id_Splash,(v_splash).w ; load splash object
 		move.w	#sfx_Splash,d0
 		jmp	(QueueSound2).l	 ; play splash sound
-; ===========================================================================
-
-; Obj01_OutWater:
+.exit:
+		rts
 .abovewater:
 		bclr	#6,obStatus(a0)
 		beq.s	.exit
 		bsr.w	ResumeMusic
-		move.w	#$600,(v_sonspeedmax).w ; restore Sonic's speed
-		move.w	#$C,(v_sonspeedacc).w ; restore Sonic's acceleration
-		move.w	#$80,(v_sonspeeddec).w ; restore Sonic's deceleration
+		move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
+		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
+		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
 		asl.w	obVelY(a0)
 		beq.w	.exit
 		move.b	#id_Splash,(v_splash).w ; load splash object
@@ -537,7 +550,7 @@ loc_130BA:
 		addi.b	#$20,d0
 		andi.b	#$C0,d0
 		bne.s	locret_130E8
-		cmpi.w	#$400,d0
+		cmpi.w	#$100,d0
 		blt.s	locret_130E8
 		move.b	#id_Stop,obAnim(a0) ; use "stopping" animation
 		bclr	#0,obStatus(a0)
@@ -583,7 +596,7 @@ loc_13120:
 		addi.b	#$20,d0
 		andi.b	#$C0,d0
 		bne.s	locret_1314E
-		cmpi.w	#-$400,d0
+		cmpi.w	#-$100,d0
 		bgt.s	locret_1314E
 		move.b	#id_Stop,obAnim(a0) ; use "stopping" animation
 		bset	#0,obStatus(a0)
@@ -732,7 +745,11 @@ Sonic_JumpDirection:
 		move.w	(v_sonspeedacc).w,d5
 		asl.w	#1,d5
 		btst	#4,obStatus(a0)
-		bne.s	Obj01_ResetScr2
+		beq.s	.Skip
+		btst	#bitC,(v_jpadhold2).w ; is left being pressed?
+		beq.s	.Skip
+		add.w	#$30,obVelY(a0)
+.Skip
 		move.w	obVelX(a0),d0
 		btst	#bitL,(v_jpadhold2).w ; is left being pressed?
 		beq.s	loc_13278	; if not, branch
@@ -832,30 +849,24 @@ Sonic_LevelBound:
 		move.w	(v_limitleft2).w,d0
 		addi.w	#$10,d0
 		cmp.w	d1,d0		; has Sonic touched the side boundary?
-		bhi.s	.sides		; if yes, branch
+		bhi.s	.leftside		; if yes, branch
 		move.w	(v_limitright2).w,d0
-		addi.w	#$128,d0
-		tst.b	(f_lockscreen).w
-		bne.s	.screenlocked
-		addi.w	#$40,d0
+		addi.w	#$130,d0
+;		tst.b	(f_lockscreen).w
+;		bne.s	.screenlocked
+;		addi.w	#$38,d0
 
 .screenlocked:
 		cmp.w	d1,d0		; has Sonic touched the side boundary?
-		bls.s	.sides		; if yes, branch
+		bls.s	.rightside	; if yes, branch
 
 .chkbottom:
 		move.w	(v_limitbtm2).w,d0
-	if FixBugs
-		; The original code does not consider that the camera boundary
-		; may be in the middle of lowering itself, which is why going
-		; down the S-tunnel in Green Hill Zone Act 1 fast enough can
-		; kill Sonic.
 		move.w	(v_limitbtm1).w,d1
 		cmp.w	d0,d1
 		blo.s	.skip
 		move.w	d1,d0
 .skip:
-	endif
 		addi.w	#224,d0
 		cmp.w	obY(a0),d0	; has Sonic touched the bottom boundary?
 		blt.s	.bottom		; if yes, branch
@@ -864,25 +875,53 @@ Sonic_LevelBound:
 
 ; Boundary_Bottom
 .bottom:
+		addi.w	#$4C4,d0
+		cmp.w	obY(a0),d0	; has Sonic touched the bottom boundary?
+		blt.s	.bottom2		; if yes, branch 
+		tst.b   $3A(a0)     ; codeeeee
+		bne.s   .no_sfx 
+		move.b  #1, $3A(a0) 
+		bsr.w	reproduceSFX	
+		
+.no_sfx:
+		rts
+; ===========================================================================
+		
+.bottom2:		
 		cmpi.w	#(id_SBZ<<8)+1,(v_zone).w ; is level SBZ2 ?
-		bne.w	.JUMP_KillSonic	; if not, kill Sonic
+		bne.s	.JUMP_KillSonic	; if not, kill Sonic
 		cmpi.w	#$2000,(v_player+obX).w
-		blo.w	.JUMP_KillSonic
+		blo.s	.JUMP_KillSonic
 		clr.b	(v_lastlamp).w	; clear lamppost counter
 		move.w	#1,(f_restart).w ; restart the level
 		move.w	#(id_LZ<<8)+3,(v_zone).w ; set level to SBZ3 (LZ4)
 		rts
-.JUMP_KillSonic:	jmp (KillSonic).l
+.JUMP_KillSonic:	
+		jmp (KillSonic).l
 ; ===========================================================================
 
 ; Boundary_Sides
+.leftside:
+		move.w	#$600,obVelX(a0)
+		bclr	#0,obStatus(a0)
+		bra.s	.sides
+.rightside:
+		move.w	#-$600,obVelX(a0)
+		bset	#0,obStatus(a0)
+		;bra.s	.sides
 .sides:
 		move.w	d0,obX(a0)
 		move.w	#0,obX+2(a0)
-		move.w	#0,obVelX(a0)	; stop Sonic moving
 		move.w	#0,obInertia(a0)
-		bra.s	.chkbottom
+		move.w	#-$200,obVelY(a0)
+		move.b	#dBoik,d0	; Boik
+		jsr		(MegaPCM_PlaySample).l
+		bra.w	.chkbottom
 ; End of function Sonic_LevelBound
+
+reproduceSFX:
+        move.w	#sfx_Lamppost,d0
+		jmp	(QueueSound2).l	; play lamppost sound
 
 ; ---------------------------------------------------------------------------
 ; Subroutine allowing Sonic to roll when he's moving
@@ -945,7 +984,7 @@ Sonic_ChkRoll:
 
 Sonic_Jump:
 		move.b	(v_jpadpress2).w,d0
-		andi.b	#btnABC,d0	; is A, B or C pressed?
+		andi.b	#btnB|btnC,d0	; is B or C pressed?
 		beq.w	.return	; if not, branch
 		moveq	#0,d0
 		move.b	obAngle(a0),d0
@@ -1180,11 +1219,11 @@ Sonic_Floor:
 		move.w	obVelX(a0),d1
 		move.w	obVelY(a0),d2
 		jsr	(CalcAngle).l
-		move.b	d0,(v_unused3).w
+;		move.b	d0,(v_unused3).w
 		subi.b	#$20,d0
-		move.b	d0,(v_unused4).w
+;		move.b	d0,(v_unused4).w
 		andi.b	#$C0,d0
-		move.b	d0,(v_unused5).w
+;		move.b	d0,(v_unused5).w
 		cmpi.b	#$40,d0
 		beq.w	loc_13680
 		cmpi.b	#$80,d0
@@ -1206,7 +1245,7 @@ loc_135F0:
 
 loc_13602:
 		bsr.w	Sonic_HitFloor
-		move.b	d1,(v_unused6).w
+;		move.b	d1,(v_unused6).w
 		tst.w	d1
 		bpl.s	locret_1367E
 		move.b	obVelY(a0),d2
@@ -1507,11 +1546,6 @@ GameOver:
 		move.b	#1,(v_gameovertext2+obFrame).w ; set OVER object to correct frame
 		clr.b	(f_timeover).w
 
-loc_138C2:
-		move.w	#bgm_GameOver,d0
-		jsr	(QueueSound1).l	; play game over music
-		moveq	#plcid_GameOver,d0
-		jmp	(AddPLC).l	; load game over patterns
 ; ===========================================================================
 
 loc_138D4:
@@ -1523,7 +1557,6 @@ loc_138D4:
 		move.b	#id_GameOverCard,(v_gameovertext2).w ; load OVER object
 		move.b	#2,(v_gameovertext1+obFrame).w
 		move.b	#3,(v_gameovertext2+obFrame).w
-		bra.s	loc_138C2
 ; ===========================================================================
 
 locret_13900:

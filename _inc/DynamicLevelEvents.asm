@@ -52,13 +52,17 @@ loc_6DC4:
 ; ---------------------------------------------------------------------------
 ; Offset index for dynamic level events
 ; ---------------------------------------------------------------------------
-DLE_Index:	dc.w DLE_GHZ-DLE_Index, DLE_LZ-DLE_Index
-		dc.w DLE_MZ-DLE_Index, DLE_SLZ-DLE_Index
-		dc.w DLE_SYZ-DLE_Index, DLE_SBZ-DLE_Index
-		zonewarning DLE_Index,2
-		dc.w DLE_Ending-DLE_Index, DLE_BREW-DLE_Index
-		dc.w DLE_WIN-DLE_Index, DLE_Joint-DLE_Index
-
+DLE_Index:	dc.w 	DLE_GHZ-DLE_Index
+		dc.w	DLE_LZ-DLE_Index
+		dc.w 	DLE_MZ-DLE_Index
+		dc.w	DLE_SLZ-DLE_Index
+		dc.w 	DLE_SYZ-DLE_Index
+		dc.w	DLE_SBZ-DLE_Index
+		dc.w	DLE_Ending-DLE_Index
+		dc.w	DLE_BREW-DLE_Index
+		dc.w	DLE_WIN-DLE_Index
+		dc.w	DLE_Joint-DLE_Index
+		dc.w	DLE_DVZ-DLE_Index
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Green Hill Zone dynamic level events
@@ -295,10 +299,8 @@ loc_702E:
 loc_703C:
 		cmpi.w	#$500,(v_screenposy).w
 		blo.s	locret_704E
-	if Revision<>0
 		cmpi.w	#$B80,(v_screenposx).w
 		bcs.s	locret_704E
-	endif
 		move.w	#$500,(v_limittop2).w
 		addq.b	#2,(v_dle_routine).w
 
@@ -307,7 +309,6 @@ locret_704E:
 ; ===========================================================================
 
 loc_7050:
-	if Revision<>0
 		cmpi.w	#$B80,(v_screenposx).w
 		bcc.s	locj_76B8
 		cmpi.w	#$340,(v_limittop2).w
@@ -321,8 +322,6 @@ locj_76B8:
 		bcs.s	locret_7072
 		move.w	#$500,(v_limittop2).w
 locj_76CE:
-	endif
-
 		cmpi.w	#$E70,(v_screenposx).w
 		blo.s	locret_7072
 		move.w	#0,(v_limittop2).w
@@ -691,6 +690,104 @@ DLE_Ending:
 ; ---------------------------------------------------------------------------
 
 DLE_BREW:
+		moveq	#0,d0
+		move.b	(v_act).w,d0
+		add.w	d0,d0
+		move.w	DLE_BREWx(pc,d0.w),d0
+		jmp	DLE_BREWx(pc,d0.w)
+; ===========================================================================
+DLE_BREWx:	dc.w DLE_BREW1-DLE_BREWx
+		dc.w DLE_BREW2-DLE_BREWx
+		dc.w DLE_BREW3-DLE_BREWx
+		dc.w DLE_BREW4-DLE_BREWx
+; ===========================================================================
+
+DLE_BREW1:
+		move.w	#$300,(v_limitbtm1).w ; set lower y-boundary
+		cmpi.w	#$1780,(v_screenposx).w ; has the camera reached $1780 on x-axis?
+		blo.s	locret_6E08BR	; if not, branch
+		move.w	#$400,(v_limitbtm1).w ; set lower y-boundary
+DLE_BREW4:
+locret_6E08BR:
+		rts
+; ===========================================================================
+
+DLE_BREW2:
+		move.w	#$300,(v_limitbtm1).w ; set lower y-boundary
+
+locret_6E3ABR:
+		rts
+; ===========================================================================
+
+DLE_BREW3:
+		moveq	#0,d0
+		move.b	(v_dle_routine).w,d0
+		move.w	off_6E4ABR(pc,d0.w),d0
+		jmp	off_6E4ABR(pc,d0.w)
+; ===========================================================================
+off_6E4ABR:	dc.w DLE_BREW3main-off_6E4ABR
+		dc.w DLE_BREW3ScrollEnd-off_6E4ABR
+		dc.w DLE_BREW3boss-off_6E4ABR
+		dc.w DLE_BREW3end-off_6E4ABR
+; ===========================================================================
+
+DLE_BREW3main:
+		add.w	#1,(v_limitleft2).w
+		cmpi.w	#boss_ghz_x-$220,(v_screenposx).w
+		bcs.s	BrewAutoScroll
+		clr.w	(v_limitleft2).w
+		move.w	#boss_ghz_x+16,(v_limitright2).w
+		move.w	#boss_ghz_y,(v_limitbtm1).w
+		addq.b	#2,(v_dle_routine).w
+BrewAutoScroll:
+		move.b	#1,(f_lockscreen).w ; lock screen
+		moveq	#1,d0
+		add.w	d0,(v_limitright2).w
+
+		add.w	d0,(v_screenposx).w
+		move.w	(v_screenposx).w,d0
+		asr.w	#2,d0
+		move.w	d0,(v_bg2screenposx).w
+		bra.w	DLE_BREW3end
+
+; ===========================================================================
+DLE_BREW3ScrollEnd:
+		cmpi.w	#boss_ghz_x,(v_screenposx).w
+		bcs.s	.NoEizaYet
+		addq.b	#2,(v_dle_routine).w
+.NoEizaYet:
+		rts
+; ===========================================================================
+
+DLE_BREW3boss:
+		cmpi.w	#$960,(v_screenposx).w
+		bhs.s	loc_6EB0BR
+		subq.b	#2,(v_dle_routine).w
+
+loc_6EB0BR:
+		cmpi.w	#boss_ghz_x,(v_screenposx).w
+		blo.s	locret_6EE8BR
+		bsr.w	FindFreeObj
+		bne.s	loc_6ED0BR
+		_move.b	#id_BossGreenHill,obID(a1) ; load BREW boss object
+		move.w	#boss_ghz_x+$100,obX(a1)
+		move.w	#boss_ghz_y-$80,obY(a1)
+
+loc_6ED0BR:
+		move.w	#bgm_Boss,d0
+		bsr.w	QueueSound1	; play boss music
+		move.b	#1,(f_lockscreen).w ; lock screen
+		addq.b	#2,(v_dle_routine).w
+		moveq	#plcid_Boss,d0
+		bra.w	AddPLC		; load boss patterns
+; ===========================================================================
+
+locret_6EE8BR:
+		rts
+; ===========================================================================
+
+DLE_BREW3end:
+		move.w	(v_screenposx).w,(v_limitleft2).w
 		rts
 
 ; ===========================================================================
@@ -706,4 +803,11 @@ DLE_WIN:
 ; The Joint Zone dynamic level events
 ; ---------------------------------------------------------------------------
 DLE_Joint:
+		rts
+
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; kys
+; ---------------------------------------------------------------------------
+DLE_DVZ:
 		rts

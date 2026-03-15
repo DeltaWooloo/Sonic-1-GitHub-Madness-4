@@ -1,7 +1,7 @@
 PuyoReject_Header:
 	smpsHeaderStartSong 1
 	smpsHeaderVoice	PuyoReject_Voices
-	smpsHeaderChan	$06,	$03
+	smpsHeaderChan	$07,	$00
 	smpsHeaderTempo	$01,	$00
 
 	smpsHeaderDAC	PuyoReject_DAC
@@ -11,23 +11,9 @@ PuyoReject_Header:
 	smpsHeaderFM	PuyoReject_FM4,	smpsPitch00,	$00
 	smpsHeaderFM	PuyoReject_FM5,	smpsPitch00,	$00
 	smpsHeaderFM	PuyoReject_FM6,	smpsPitch00,	$00
-	smpsHeaderPSG       PuyoReject_PSG1,	$00, $00, $00, $00
-	smpsHeaderPSG       PuyoReject_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       PuyoReject_PSG3,	$00, $00, $00, $00
-	dc.b		$00,	$00,	$00,	$00		
 
 ; DAC Data
 PuyoReject_DAC:
-	smpsStop
-
-; PSG1 Data
-PuyoReject_PSG1:
-	smpsStop
-; PSG2 Data
-PuyoReject_PSG2:
-	smpsStop
-; PSG3 Data
-PuyoReject_PSG3:
 	smpsStop
 
 ; FM1 Data

@@ -39,7 +39,9 @@ Deform_Index:	dc.w Deform_GHZ-Deform_Index, Deform_LZ-Deform_Index
 		dc.w Deform_SYZ-Deform_Index, Deform_SBZ-Deform_Index
 		zonewarning Deform_Index,2
 		dc.w Deform_GHZ-Deform_Index, Deform_GHZ-Deform_Index
-		dc.w Deform_SLZ-Deform_Index, Deform_Joint-Deform_Index
+		dc.w Deform_WZ-Deform_Index, Deform_Joint-Deform_Index
+		dc.w Deform_LZ-Deform_Index,Deform_LZ-Deform_Index
+		dc.w Deform_LZ-Deform_Index,Deform_LZ-Deform_Index
 ; ---------------------------------------------------------------------------
 ; Green Hill Zone background layer deformation code
 ; ---------------------------------------------------------------------------
@@ -460,171 +462,63 @@ Deform_SYZ:
 		bsr.w	Bg_Scroll_Y
 		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
 	; calculate background scroll buffer
-		lea	(v_bgscroll_buffer).w,a1
-		move.w	(v_screenposx).w,d2
-		neg.w	d2
+		lea	(v_hscrolltablebuffer).w,a1
+		add.w	#4,v_bgscroll_buffer
+		move.w	(v_bgscroll_buffer).w,d2
+		move.w	(v_screenposx).w,d0
+		neg	d0
+		swap 	d0
 		move.w	d2,d0
-		asr.w	#3,d0
-		sub.w	d2,d0
-		ext.l	d0
-		asl.l	#3,d0
-		divs.w	#8,d0
-		ext.l	d0
-		asl.l	#4,d0
-		asl.l	#8,d0
-		moveq	#0,d3
-		move.w	d2,d3
-		asr.w	#1,d3
-		move.w	#7,d1
-	.cloudLoop:		
-		move.w	d3,(a1)+
-		swap	d3
-		add.l	d0,d3
-		swap	d3
-		dbf	d1,.cloudLoop
-
-		move.w	d2,d0
-		asr.w	#3,d0
-		move.w	#4,d1
-	.mountainLoop:		
-		move.w	d0,(a1)+
-		dbf	d1,.mountainLoop
-
-		move.w	d2,d0
-		asr.w	#2,d0
-		move.w	#5,d1
+		move.w	#256-1,d1
 	.buildingLoop:		
-		move.w	d0,(a1)+
+		move.l	d0,(a1)+
 		dbf	d1,.buildingLoop
-
-		move.w	d2,d0
-		move.w	d2,d1
-		asr.w	#1,d1
-		sub.w	d1,d0
-		ext.l	d0
-		asl.l	#4,d0
-		divs.w	#$E,d0
-		ext.l	d0
-		asl.l	#4,d0
-		asl.l	#8,d0
-		moveq	#0,d3
-		move.w	d2,d3
-		asr.w	#1,d3
-		move.w	#$D,d1
-	.bushLoop:		
-		move.w	d3,(a1)+
-		swap	d3
-		add.l	d0,d3
-		swap	d3
-		dbf	d1,.bushLoop
-
-		lea	(v_bgscroll_buffer).w,a2
-		move.w	(v_bgscreenposy).w,d0
-		move.w	d0,d2
-		andi.w	#$1F0,d0
-		lsr.w	#3,d0
-		lea	(a2,d0.w),a2
-		bra.w	Bg_Scroll_X
+		rts
+		;lea	(v_bgscroll_buffer).w,a2
+		;move.w	(v_bgscreenposy).w,d0
+		;move.w	d0,d2
+		;andi.w	#$1F0,d0
+		;lsr.w	#3,d0
+		;lea	(a2,d0.w),a2
+		;bra.w	Bg_Scroll_X
 ; End of function Deform_SYZ
-
+; ===========================================================================
 ; ---------------------------------------------------------------------------
-; Scrap Brain Zone background layer deformation code
+; Scrap Brain Zone background layer deformation code ; Atolly
 ; ---------------------------------------------------------------------------
+; ===========================================================================
 
-; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
-
+AppleScrMv:	equ   $FFFFA806
+; ---------------------------------------------------------------------------
 
 Deform_SBZ:
 		tst.b	(v_act).w
 		bne.w	Deform_SBZ2
-	; block 1 - lower black buildings
-		move.w	(v_scrshiftx).w,d4
-		ext.l	d4
-		asl.l	#7,d4
-		moveq	#2,d6
-		bsr.w	BGScroll_Block1
-	; block 3 - distant brown buildings
-		move.w	(v_scrshiftx).w,d4
+	     move.w	(v_scrshiftx).w,d4
 		ext.l	d4
 		asl.l	#6,d4
-		moveq	#6,d6
-		bsr.w	BGScroll_Block3
-	; block 2 - upper black buildings
-		move.w	(v_scrshiftx).w,d4
-		ext.l	d4
-		asl.l	#5,d4
-		move.l	d4,d1
-		asl.l	#1,d4
-		add.l	d1,d4
-		moveq	#4,d6
-		bsr.w	BGScroll_Block2
-	; vertical scrolling
-		moveq	#0,d4
 		move.w	(v_scrshifty).w,d5
 		ext.l	d5
-		asl.l	#5,d5
-		bsr.w	BGScroll_YRelative
-
-		move.w	(v_bgscreenposy).w,d0
-		move.w	d0,(v_bg2screenposy).w
-		move.w	d0,(v_bg3screenposy).w
-		move.w	d0,(v_bgscrposy_vdp).w
-		move.b	(v_bg1_scroll_flags).w,d0
-		or.b	(v_bg3_scroll_flags).w,d0
-		or.b	d0,(v_bg2_scroll_flags).w
-		clr.b	(v_bg1_scroll_flags).w
-		clr.b	(v_bg3_scroll_flags).w
-	; calculate background scroll buffer
-		lea	(v_bgscroll_buffer).w,a1
-		move.w	(v_screenposx).w,d2
-		neg.w	d2
-		asr.w	#2,d2
-		move.w	d2,d0
-		asr.w	#1,d0
-		sub.w	d2,d0
-		ext.l	d0
-		asl.l	#3,d0
-		divs.w	#4,d0
-		ext.l	d0
-		asl.l	#4,d0
-		asl.l	#8,d0
-		moveq	#0,d3
-		move.w	d2,d3
-		move.w	#3,d1
-	.cloudLoop:		
-		move.w	d3,(a1)+
-		swap	d3
-		add.l	d0,d3
-		swap	d3
-		dbf	d1,.cloudLoop
-
-		move.w	(v_bg3screenposx).w,d0
+		asl.l	#4,d5
+		asl.l	#1,d5
+		bsr.w	BGScroll_Block1
+		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
+		lea	(v_hscrolltablebuffer).w,a1
+		move.w	#223,d1
+		move.w	(v_screenposx).w,d0
 		neg.w	d0
-		move.w	#9,d1
-	.buildingLoop1:		; distant brown buildings
-		move.w	d0,(a1)+
-		dbf	d1,.buildingLoop1
-
-		move.w	(v_bg2screenposx).w,d0
+		swap	d0
+GreenApple_scr:		
+		lea	    (AppleScrMv).w,a2
+		addi.l	#$F000,(a2)+    ; Scroll 2
+		move.w	(AppleScrMv).w,d0
+		add.w	($FFFFF700).w,d0
 		neg.w	d0
-		move.w	#6,d1
-	.buildingLoop2:		; upper black buildings
-		move.w	d0,(a1)+
-		dbf	d1,.buildingLoop2
 
-		move.w	(v_bgscreenposx).w,d0
-		neg.w	d0
-		move.w	#$A,d1
-	.buildingLoop3:		; lower black buildings
-		move.w	d0,(a1)+
-		dbf	d1,.buildingLoop3
-		lea	(v_bgscroll_buffer).w,a2
-		move.w	(v_bgscreenposy).w,d0
-		move.w	d0,d2
-		andi.w	#$1F0,d0
-		lsr.w	#3,d0
-		lea	(a2,d0.w),a2
-		bra.w	Bg_Scroll_X
+loc_6576:
+		move.l	d0,(a1)+
+		dbf	d1,loc_6576
+		rts
 ;-------------------------------------------------------------------------------
 Deform_SBZ2:;loc_68A2:
 	; plain background deformation
@@ -658,26 +552,154 @@ Deform_SBZ2:;loc_68A2:
 
 
 Deform_Joint:
-		move.w	(v_scrshiftx).w,d4
-		ext.l	d4
-		asl.l	#7,d4
+		moveq	#0,d4
 		move.w	(v_scrshifty).w,d5
 		ext.l	d5
-		asl.l	#7,d5
+		asl.l	#6,d5
 		bsr.w	BGScroll_XY	; ScrollBlock1 in older disassemblies
 		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
 		lea	(v_hscrolltablebuffer).w,a1
-		move.w	#224-1,d1
 		move.w	(v_screenposx).w,d0
 		neg.w	d0
 		swap	d0
-		move.w	(v_bgscreenposx).w,d0
+		move.w	(v_screenposx).w,d0
 		neg.w	d0
-.loop:		move.l	d0,(a1)+
-		dbf	d1,.loop
+
+		move.w	d0,d3
+
+; First Block
+ 		move.w	(v_screenposy).w,d1
+ 		lsr.w	#2,d1
+		neg.w	d1
+		addi.w	#32-1,d1
+		bmi.s	+
+
+		lsr.w	#1,d0
+
+-		move.l	d0,(a1)+
+		dbf.w	d1,-
+
+; Second Block
++
+		add.w	#32-1,d1
+		bmi.s	+
+
+		move.w	d3,d0
+		lsr.w	#1,d0
+		add.w	d3,d0
+		lsr.w	#1,d0
+
+-		move.l	d0,(a1)+
+		dbf.w	d1,-
+; Middle
++
+		add.w	#72,d1
+		bmi.s	+
+		move.w	d3,d0
+		lsr.w	#2,d0
+
+-		move.l	d0,(a1)+
+		dbf.w	d1,-
+; Light seams
++
+		add.w	#40,d1
+		bmi.s	+
+		move.w	d3,d0
+		lsr.w	#2,d0
+
+		clr.w	d4
+		move.w	(v_screenposx).w,d4 ; dx
+		lsr.w	#2,d4
+		divu.w	#224>>1,d4
+		swap	d4
+.dy = -40
+		; sy = sx = -1
+		move.w	d4,(v_bg_calc_var).w
+		addi.w	#.dy,(v_bg_calc_var).w ; error
+-
+		move.w	(v_bg_calc_var).w,d2
+		add.w	d2,d2
+		cmpi.w	#.dy,d2
+		blt.s	.no_y_add
+		add.w	#.dy,(v_bg_calc_var).w
+		subq.w	#1,d0
+.no_y_add
+		cmp.w	d4,d2
+		bgt.s	-
+		add.w	d4,(v_bg_calc_var).w
+		move.l	d0,(a1)+
+		dbf.w	d1,-
+; Second Block
++
+		add.w	#32-1,d1
+		bmi.s	+
+
+		move.w	d3,d0
+		lsr.w	#1,d0
+		add.w	d3,d0
+		lsr.w	#1,d0
+
+-		move.l	d0,(a1)+
+		dbf.w	d1,-
++
+; First Block
+		addi.w	#40-1,d1
+		bmi.s	+
+
+		move.l	#v_hscrolltablebuffer_end,d2
+		sub.l	a1,d2
+
+		move.w	d3,d0
+		lsr.w	#1,d0
+
+-		move.l	d0,(a1)+
+		subq.w	#4,d2
+		ble.s	.end
+		dbf.w	d1,-
+; Remaining
++
+		move.l	#v_hscrolltablebuffer_end,d1
+		sub.l	a1,d1
+		blo.s	.end
+; 		KDebug.WriteLine "%<.w d1>"
+;
+-		move.l	d0,(a1)+
+		subq.w	#4,d1
+		bgt.s	-
+
+.end
 		rts
 ; End of function Deform_Joint
 
+
+; ---------------------------------------------------------------------------
+; The Windows Zone background layer deformation code
+; ---------------------------------------------------------------------------
+
+; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
+
+Deform_WZ:
+		move.w	(v_scrshiftx).w,d4
+		ext.l	d4
+		asl.l	#7,d4
+		moveq	#0,d6
+		bsr.w	BGScroll_Block2
+
+		move.w	(v_screenposx).w,d0
+		neg.w	d0
+		swap	d0			; FG scroll in high word
+		move.w	(v_bg2screenposx).w,d0
+		neg.w	d0			; BG scroll in low word
+
+		lea	(v_hscrolltablebuffer).w,a1
+		move.w	#$DF,d1			; 224 lines
+		
+	.fillLoop:
+		move.l	d0,(a1)+
+		dbf	d1,.fillLoop
+
+		move.w	(v_screenposy).w,(v_bgscreenposy).w
+		rts
 ; ---------------------------------------------------------------------------
 ; temporarily using generictimer as an input
 ; ---------------------------------------------------------------------------
@@ -741,6 +763,11 @@ MoveScreenHoriz:
 	if FixBugs
 		; Fix horizontal wrap bug
 		; https://info.sonicretro.org/SCHG_How-to:Fix_the_camera_follow_bug
+		
+		; It's too stupid to put links in this lol - ato
+		
+		; https://www.youtube.com/watch?v=xvFZjo5PgG0
+		
 		subi.w	#(320/2)-16,d0	; is distance less than 144px?
 		blt.s	SH_BehindMid	; if yes, branch
 		subi.w	#16,d0		; is distance more than 160px?

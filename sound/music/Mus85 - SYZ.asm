@@ -22,41 +22,41 @@ Mus85_SYZ_Jump02:
 	smpsSetvoice        $00
 	smpsModSet          $08, $01, $06, $04
 	smpsCall            Mus85_SYZ_Call08
-	dc.b	nD6, $0A, nF6, $2C
+	dc.b	nE6, $0A, nE6, $2C
 	smpsCall            Mus85_SYZ_Call08
-	dc.b	nD6, nF6, $02, nRst, $04, nF6, $02, nRst, $04, nG6, $04, nF6
-	dc.b	$02, nG6, $04, nRst, $02, nA6, $06
+	dc.b	nE6, nE6, $02, nRst, $04, nE6, $02, nRst, $04, nE6, $04, nE6
+	dc.b	$02, nE6, $04, nRst, $02, nE6, $06
 	smpsWeirdD1LRR
 	dc.b	nRst, $12
-	smpsSetvoice        $04
+	smpsSetvoice        $00
 	smpsModOff
 	smpsAlterVol        $08
 	smpsCall            Mus85_SYZ_Call09
 	smpsCall            Mus85_SYZ_Call0A
-	dc.b	nA5, $08, nC6, $0C, nG6, $0A, nA6, $02, nRst, $04, nA6, $02
-	dc.b	nG6, $03, nRst, nF6, $0C
+	dc.b	nE5, $08, nE6, $0C, nE6, $0A, nE6, $02, nRst, $04, nE6, $02
+	dc.b	nE6, $03, nRst, nE6, $0C
 	smpsCall            Mus85_SYZ_Call09
-	dc.b	nRst, $06, nE6, $02, nRst, $04, nE6, $0C, nF6, nE6, $0A, nD6
+	dc.b	nRst, $06, nE6, $02, nRst, $04, nE6, $0C, nE6, nE6, $0A, nE6
 	dc.b	$02, nRst, $2A
 	smpsAlterVol        $F8
 	smpsJump            Mus85_SYZ_Jump02
 
 Mus85_SYZ_Call08:
-	dc.b	nRst, $04, nE6, $02, nRst, $04, nE6, $08, nC6, $02, nRst, $04
-	dc.b	nA5, $02, nRst, $04, nE6, $0A, nC6, $02, nRst, $0C, nRst, $2E
-	dc.b	nFs6, $02, nRst, $04, nFs6, $08, nD6, $02, nRst, $04, nB5, $02
-	dc.b	nRst, $04, nFs6, $0C
+	dc.b	nRst, $04, nE6, $02, nRst, $04, nE6, $08, nE6, $02, nRst, $04
+	dc.b	nE5, $02, nRst, $04, nE6, $0A, nE6, $02, nRst, $0C, nRst, $2E
+	dc.b	nE6, $02, nRst, $04, nE6, $08, nE6, $02, nRst, $04, nE5, $02
+	dc.b	nRst, $04, nE6, $0C
 	smpsReturn
 
 Mus85_SYZ_Call09:
 	smpsCall            Mus85_SYZ_Call0A
-	dc.b	nA5, nRst, $02, nBb5, nRst, $04, nBb5, $08, nC6, $03, nRst, nBb5
-	dc.b	nRst, nA5, $04, nBb5, nRst, $02, nC6, $0E
+	dc.b	nE5, nRst, $02, nE5, nRst, $04, nE5, $08, nE6, $03, nRst, nE5
+	dc.b	nRst, nE5, $04, nE5, nRst, $02, nE6, $0E
 	smpsReturn
 
 Mus85_SYZ_Call0A:
-	dc.b	nRst, $04, nF6, $08, nE6, $03, nRst, nD6, nRst, nC6, nRst, nD6
-	dc.b	nRst, nC6, $04
+	dc.b	nRst, $04, nE6, $08, nE6, $03, nRst, nE6, nRst, nE6, nRst, nE6
+	dc.b	nRst, nE6, $04
 	smpsReturn
 
 ; FM2 Data
@@ -64,40 +64,40 @@ Mus85_SYZ_FM2:
 	smpsSetvoice        $01
 	smpsAlterVol        $FE
 	smpsNop             $01
-	dc.b	nA4, $03, nRst, nA4, nRst, nG4, nRst, nG4, nRst, nF4, nRst, nF4
-	dc.b	nRst, nE4, nRst, nE4, $02, nRst, nD4
+	dc.b	nA4, $03, nRst, nA4, nRst, nA4, nRst, nA4, nRst, nA4, nRst, nA4
+	dc.b	nRst, nA4, nRst, nA4, $02, nRst, nD4
 	smpsAlterVol        $02
 
 Mus85_SYZ_Jump01:
 	smpsCall            Mus85_SYZ_Call06
-	dc.b	nBb4, nRst, $02, nA4, nRst, $04, nA4, $08, nG4, $03, nRst, nG4
-	dc.b	nRst, nF4, nRst, nF4, nRst, nE4, $0A, nD4, $02
+	dc.b	nA4, nRst, $02, nA4, nRst, $04, nA4, $08, nA4, $03, nRst, nA4
+	dc.b	nRst, nA4, nRst, nA4, nRst, nA4, $0A, nA4, $02
 	smpsCall            Mus85_SYZ_Call06
-	dc.b	nBb4, $08, nA4, $03, nRst, nA4, nRst, nA4, nRst, nA4, nRst, nA4
-	dc.b	nRst, $13, nBb4, $02
+	dc.b	nA4, $08, nA4, $03, nRst, nA4, nRst, nA4, nRst, nA4, nRst, nA4
+	dc.b	nRst, $13, nA4, $02
 
 Mus85_SYZ_Loop04:
 	smpsCall            Mus85_SYZ_Call07
-	dc.b	nBb4
+	dc.b	nA4
 	smpsLoop            $00, $02, Mus85_SYZ_Loop04
 	smpsCall            Mus85_SYZ_Call07
-	dc.b	nE4, nRst, $04, nE4, $08, nE4, $03, nRst, nE4, nRst, nA4, $09
-	dc.b	nRst, $03, nA4, $0A, nD4, $02, nRst, $2E, nD4, $02
+	dc.b	nA4, nRst, $04, nA4, $08, nA4, $03, nRst, nA4, nRst, nA4, $09
+	dc.b	nRst, $03, nA4, $0A, nA4, $02, nRst, $2E, nA4, $02
 	smpsNop             $01
 	smpsJump            Mus85_SYZ_Jump01
 
 Mus85_SYZ_Call06:
-	dc.b	nRst, $04, nD4, $08, nE4, $03, nRst, nD4, nRst, nE4, nRst, nD4
-	dc.b	nRst, nF4, $04, nA4, nRst, $02, nA4, nRst, $04, nE5, $08, nC5
-	dc.b	$03, nRst, nC5, nRst, nA4, nRst, nA4, nRst, nF4, $0A, nE4, $02
-	dc.b	nRst, $04, nE4, $08, nFs4, $03, nRst, nE4, nRst, nFs4, nRst, nE4
-	dc.b	nRst, nG4, $04
+	dc.b	nRst, $04, nA4, $08, nA4, $03, nRst, nA4, nRst, nA4, nRst, nA4
+	dc.b	nRst, nA4, $04, nA4, nRst, $02, nA4, nRst, $04, nA5, $08, nA5
+	dc.b	$03, nRst, nA5, nRst, nA4, nRst, nA4, nRst, nA4, $0A, nA4, $02
+	dc.b	nRst, $04, nA4, $08, nA4, $03, nRst, nA4, nRst, nA4, nRst, nA4
+	dc.b	nRst, nA4, $04
 	smpsReturn
 
 Mus85_SYZ_Call07:
-	dc.b	nRst, $04, nBb4, $08, nC5, $03, nRst, nBb4, nRst, nA4, $06, nRst
-	dc.b	nBb4, $04, nA4, nRst, $02, nG4, nRst, $04, nG4, $08, nA4, $03
-	dc.b	nRst, nG4, nRst, nF4, nRst, nF4, nRst, nG4, $04, nA4, nRst, $02
+	dc.b	nRst, $04, nA4, $08, nA5, $03, nRst, nA4, nRst, nA4, $06, nRst
+	dc.b	nA4, $04, nA4, nRst, $02, nA4, nRst, $04, nA4, $08, nA4, $03
+	dc.b	nRst, nA4, nRst, nA4, nRst, nA4, nRst, nA4, $04, nA4, nRst, $02
 	smpsReturn
 
 ; FM3 Data
@@ -105,28 +105,28 @@ Mus85_SYZ_FM3:
 	dc.b	nRst, $30
 	smpsSetvoice        $05
 	smpsCall            Mus85_SYZ_Call04
-	dc.b	nRst, $06, nA6, $02, nRst, $0A, nG6, $02, nRst, $0A, nF6, $02
-	dc.b	nRst, $04, nE6, $02, nRst, nF6, nE6, nRst, $04
+	dc.b	nRst, $06, nA6, $02, nRst, $0A, nA6, $02, nRst, $0A, nA6, $02
+	dc.b	nRst, $04, nA6, $02, nRst, nA6, nA6, nRst, $04
 	smpsCall            Mus85_SYZ_Call04
-	dc.b	nA5, $02, nRst, nA5, nCs6, nRst, nCs6, nE6, nRst, nE6, nG6, nRst
-	dc.b	nG6, nA6, nRst, $10, nRst, $04, nF5, $02
+	dc.b	nA5, $02, nRst, nA5, nA6, nRst, nA6, nA6, nRst, nA6, nA6, nRst
+	dc.b	nA6, nA6, nRst, $10, nRst, $04, nA5, $02
 	smpsCall            Mus85_SYZ_Call05
-	dc.b	nRst, $13, nF5, $02
+	dc.b	nRst, $13, nA5, $02
 	smpsCall            Mus85_SYZ_Call05
-	dc.b	nRst, nC5, nRst, nD5, $04, nE5, nRst, $02, nF5
+	dc.b	nRst, nA5, nRst, nA5, $04, nA5, nRst, $02, nA5
 	smpsCall            Mus85_SYZ_Call05
-	dc.b	nRst, $15, nRst, $04, nA6, $08, nG6, $03, nRst, nG6, nRst, nF6
-	dc.b	nRst, nF6, nRst, nE6, $04, nF6, $02, nE6, $04, nD6, $02
+	dc.b	nRst, $15, nRst, $04, nA6, $08, nA6, $03, nRst, nA6, nRst, nA6
+	dc.b	nRst, nA6, nRst, nA6, $04, nA6, $02, nA6, $04, nA6, $02
 	smpsJump            Mus85_SYZ_FM3
 
 Mus85_SYZ_Call04:
-	dc.b	nRst, $36, nA5, $04, nC6, $02, nD6, $04, nF6, $02, nRst, $06
-	dc.b	nA5, $04, nC6, $02, nD6, $04, nF6, $02, nRst, $3C
+	dc.b	nRst, $36, nA5, $04, nA6, $02, nA6, $04, nA6, $02, nRst, $06
+	dc.b	nA5, $04, nA6, $02, nA6, $04, nA6, $02, nRst, $3C
 	smpsReturn
 
 Mus85_SYZ_Call05:
-	dc.b	nRst, $04, nF5, $08, nF5, $03, nRst, nF5, nRst, nE5, nRst, $13
-	dc.b	nD5, $02, nRst, $04, nD5, $08, nD5, $03, nRst, nD5, nRst, nC5
+	dc.b	nRst, $04, nA5, $08, nA5, $03, nRst, nA5, nRst, nA5, nRst, $13
+	dc.b	nA5, $02, nRst, $04, nA5, $08, nA5, $03, nRst, nA5, nRst, nA5
 	smpsReturn
 
 ; FM4 Data
@@ -138,40 +138,40 @@ Mus85_SYZ_FM4:
 
 Mus85_SYZ_Jump00:
 	smpsModSet          $01, $01, $01, $04
-	smpsSetvoice        $02
+	smpsSetvoice        $03
 	smpsCall            Mus85_SYZ_Call02
 	smpsAlterVol        $FC
-	dc.b	nD6, $02
+	dc.b	nBb6, $02
 	smpsCall            Mus85_SYZ_Call03
 	smpsAlterVol        $04
 	smpsJump            Mus85_SYZ_Jump00
 
 Mus85_SYZ_Call02:
 	smpsCall            Mus85_SYZ_Call0D
-	dc.b	nA6, $30
+	dc.b	nBb6, $30
 	smpsCall            Mus85_SYZ_Call0D
-	dc.b	nCs7, $03, nRst, nCs7, nRst, nCs7, nRst, nCs7, nRst, nCs7, $03, nRst
+	dc.b	nBb7, $03, nRst, nBb7, nRst, nBb7, nRst, nBb7, nRst, nBb7, $03, nRst
 	dc.b	$13
 	smpsReturn
 
 Mus85_SYZ_Call0D:
-	dc.b	nE6, $24, nF6, $06, nG6, nE6, $24, nC6, $06, nD6, nE6, $24
-	dc.b	nF6, $06, nG6
+	dc.b	nBb6, $24, nBb6, $06, nBb6, nBb6, $24, nBb6, $06, nBb6, nBb6, $24
+	dc.b	nBb6, $06, nBb6
 	smpsReturn
 
 Mus85_SYZ_Call03:
 	smpsCall            Mus85_SYZ_Call0C
-	dc.b	nRst, $13, nD6, $02
+	dc.b	nRst, $13, nBb6, $02
 	smpsCall            Mus85_SYZ_Call0C
-	dc.b	nRst, nA5, nRst, nBb5, $04, nC6, nRst, $02, nD6
+	dc.b	nRst, nBb5, nRst, nBb5, $04, nBb6, nRst, $02, nBb6
 	smpsCall            Mus85_SYZ_Call0C
-	dc.b	nRst, $13, nA5, $0E, nCs6, $0C, nE6, nCs7, $0A, nD7, $02, nRst
+	dc.b	nRst, $13, nBb5, $0E, nBb6, $0C, nBb6, nBb7, $0A, nBb7, $02, nRst
 	dc.b	$30
 	smpsReturn
 
 Mus85_SYZ_Call0C:
-	dc.b	nRst, $04, nD6, $08, nD6, $03, nRst, nD6, nRst, nC6, nRst, nA6
-	dc.b	nRst, nF6, nRst, $07, nBb5, $02, nRst, $04, nBb5, $08, nBb5, $03
+	dc.b	nRst, $04, nBb6, $08, nBb6, $03, nRst, nBb6, nRst, nBb6, nRst, nBb6
+	dc.b	nRst, nBb6, nRst, $07, nBb5, $02, nRst, $04, nBb5, $08, nBb5, $03
 	dc.b	nRst, nBb5, nRst, nA5
 	smpsReturn
 
@@ -184,11 +184,11 @@ Mus85_SYZ_Call01:
 
 Mus85_SYZ_Call0B:
 	smpsChanTempoDiv    $01
-	dc.b	nBb3, $01, smpsNoAttack, nA3, $04, nRst, $07, nBb3, $01, smpsNoAttack, nA3, $04
-	dc.b	nRst, $07, nC4, $01, smpsNoAttack, nB3, $04, nRst, $07, nC4, $01, smpsNoAttack
-	dc.b	nB3, $04, nRst, $07, nCs4, $01, smpsNoAttack, nC4, $04, nRst, $07, nCs4
-	dc.b	$01, smpsNoAttack, nC4, $04, nRst, $07, nD4, $01, smpsNoAttack, nCs4, $04, nRst
-	dc.b	$07, nD4, $01, smpsNoAttack, nCs4, $04, nRst, $07
+	dc.b	nBb3, $01, smpsNoAttack, nBb3, $04, nRst, $07, nBb3, $01, smpsNoAttack, nBb3, $04
+	dc.b	nRst, $07, nBb4, $01, smpsNoAttack, nBb3, $04, nRst, $07, nBb4, $01, smpsNoAttack
+	dc.b	nBb3, $04, nRst, $07, nBb4, $01, smpsNoAttack, nBb4, $04, nRst, $07, nBb4
+	dc.b	$01, smpsNoAttack, nBb4, $04, nRst, $07, nBb4, $01, smpsNoAttack, nBb4, $04, nRst
+	dc.b	$07, nBb4, $01, smpsNoAttack, nBb4, $04, nRst, $07
 	smpsChanTempoDiv    $02
 	smpsReturn
 
@@ -231,35 +231,35 @@ Mus85_SYZ_Jump03:
 
 ; DAC Data
 Mus85_SYZ_DAC:
-	dc.b	dSnare, $06, $06, $06, $06, $06, $06, $04, $02, $04, dKick, $02
+	dc.b	dSnare, $06, $06, $06, $06, $06, $06, $04, $02, $04, dSnare, $02
 
 Mus85_SYZ_Loop00:
 	smpsCall            Mus85_SYZ_Call00
 	smpsLoop            $00, $03, Mus85_SYZ_Loop00
-	dc.b	nRst, $04, dKick, $08, dSnare, $06, dKick, dKick, $06, dSnare, dSnare, dSnare
-	dc.b	$04, dKick, $02
+	dc.b	nRst, $04, dSnare, $08, dSnare, $06, dSnare, dSnare, $06, dSnare, dSnare, dSnare
+	dc.b	$04, dSnare, $02
 
 Mus85_SYZ_Loop01:
 	smpsCall            Mus85_SYZ_Call00
 	smpsLoop            $00, $02, Mus85_SYZ_Loop01
-	dc.b	nRst, $04, dKick, $08, dSnare, $06, dKick, dKick, $0C, dSnare, dSnare, $06
-	dc.b	$06, $06, $06, $10, $02, $04, dKick, $02
+	dc.b	nRst, $04, dSnare, $08, dSnare, $06, dSnare, dSnare, $0C, dSnare, dSnare, $06
+	dc.b	$06, $06, $06, $10, $02, $04, dSnare, $02
 
 Mus85_SYZ_Loop02:
 	smpsCall            Mus85_SYZ_Call00
 	smpsLoop            $00, $03, Mus85_SYZ_Loop02
-	dc.b	nRst, $04, dKick, $08, dSnare, $06, dKick, dKick, $06, dSnare, dSnare, dSnare
-	dc.b	$04, dKick, $02
+	dc.b	nRst, $04, dSnare, $08, dSnare, $06, dSnare, dSnare, $06, dSnare, dSnare, dSnare
+	dc.b	$04, dSnare, $02
 
 Mus85_SYZ_Loop03:
 	smpsCall            Mus85_SYZ_Call00
 	smpsLoop            $00, $03, Mus85_SYZ_Loop03
-	dc.b	nRst, $0C, dSnare, $0A, dKick, $02, dSnare, $06, dSnare, dSnare, $06, $04
-	dc.b	dKick, $02
+	dc.b	nRst, $0C, dSnare, $0A, dSnare, $02, dSnare, $06, dSnare, dSnare, $06, $04
+	dc.b	dSnare, $02
 	smpsJump            Mus85_SYZ_Loop00
 
 Mus85_SYZ_Call00:
-	dc.b	nRst, $04, dKick, $08, dSnare, $06, dKick, dKick, $0C, dSnare, $0A, dKick
+	dc.b	nRst, $04, dSnare, $08, dSnare, $06, dSnare, dSnare, $0C, dSnare, $0A, dSnare
 	dc.b	$02
 	smpsReturn
 

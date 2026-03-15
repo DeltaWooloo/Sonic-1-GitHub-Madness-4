@@ -91,9 +91,8 @@ Pri_Switched:	; Routine 4
 		move.b	#$A,obRoutine(a0)
 		move.w	#60,obTimeFrame(a0) ; set time between animal spawns
 		clr.b	(f_timecount).w	; stop time counter
-		clr.b	(f_lockscreen).w ; lock screen position
-		move.b	#1,(f_lockctrl).w ; lock controls
-		move.w	#(btnR<<8),(v_jpadhold2).w ; make Sonic run to the right
+		move.w	(v_screenposx).w,(v_limitleft1).w	; lock screen if DLEs haven't already
+		move.w	(v_screenposx).w,(v_limitleft2).w	; looking at you Dax
 		clr.b	ob2ndRout(a0)
 		bclr	#3,(v_player+obStatus).w
 		bset	#1,(v_player+obStatus).w
@@ -129,6 +128,11 @@ Pri_Explosion:	; Routine 6, 8, $A
 
 .makeanimal:
 		move.b	#2,(v_bossstatus).w
+; WE GOT IT FIXDE ASDASDIASJIAJ THE ANIMASL
+;		cmpi.b	#id_LZ,(v_zone).w ; is level LZ ?
+;		beq.s	.nodamnn	; if yes, branch
+;		move.b	#id_Damn,(v_gamemode).w	; TEMPORARY UNTIL FIX
+;.nodamnn:
 		move.b	#$C,obRoutine(a0)	; replace explosions with animals
 		move.b	#6,obFrame(a0)
 		move.w	#150,obTimeFrame(a0)
@@ -202,8 +206,8 @@ Pri_EndAct:	; Routine $E
 		beq.s	.found		; if yes, branch
 		adda.w	d2,a1		; next object RAM
 		dbf	d0,.findanimal	; repeat $3E times
-
-		jsr	(GotThroughAct).l
+		move.b	#id_Damn,(v_gamemode).w
+;		jsr	(GotThroughAct).l
 		jmp	(DeleteObject).l
 
 .found:

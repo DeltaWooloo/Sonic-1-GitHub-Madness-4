@@ -44,47 +44,91 @@ PSG_Index:
 
 		dc.l PSG_DUN3_01, PSG_DUN3_02, PSG_DUN3_03
 
+		dc.l PSG_CF_01, PSG_CF_02, PSG_GO_01
+
+		dc.l PSG_GCV1, PSG_GCV2
+
+		dc.l PSG_DD_01, PSG_DD_02
+
 PSG1:		dc.b 0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,$80
+	even
 
 PSG2:		dc.b 0,2,4,6,8,$10,$80
+	even
 
 PSG3:		dc.b 0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,$80
+	even
 
 PSG4:		dc.b 0,0,2,3,4,4,5,5,5,6,$80
+	even
 
 PSG6:		dc.b 3,3,3,2,2,2,2,1,1,1,0,0,0,0,$80
+	even
 
 PSG5:		dc.b 0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2
 		dc.b 2,2,2,3,3,3,3,3,3,3,3,4,$80
+	even
 
 PSG7:		dc.b 0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,3,3,3,4,4,4,5,5,5,6,7,$80
+	even
 
 PSG8:		dc.b 0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,5,5,5
 		dc.b 5,5,6,6,6,6,6,7,7,7,$80
+	even
 
 PSG9:		dc.b 0,1,2,3,4,5,6,7,8,9,$A,$B,$C,$D,$E,$F,$80
+	even
 
 PSG_1UP01:
 		dc.b 0,0,2,3,4,4,5,5,5,6,6,$80
+	even
 
 PSG_1UP02:
 		dc.b 0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3
 		dc.b 4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7
 		dc.b 8,8,8,8,9,9,9,9,$A,$A,$A,$A,$80
+	even
 
 PSG_1UP03:
 		dc.b 0,1,2,4,6,8,$A,$C,$E,$80
+	even
 
 PSG_DUN3_01:	dc.b 7,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1
 		dc.b 2,2,2,2,2,2,2,3,3,3,3,3,3,3,4,4
 		dc.b 4,4,4,4,4,5,5,5,5,5,5,5,6,$80
+	even
 
 PSG_DUN3_02:	dc.b 7,0,0,0,0,0,0,0,0,0,0,1,3,4,6,7
 		dc.b 9,$A,$C,$D,$F,$80
+	even
 
 PSG_DUN3_03:	dc.b 7,0,0,0,0,0,0,0,1,3,4,6,7,9,$A,$C
 		dc.b $D,$F,$80
+	even
 
+PSG_CF_01:	dc.b 0,0,1,4,$D,$F,$80
+	even
+
+PSG_CF_02:	dc.b 3,3,3,4,4,4,4,6,6,6,9,9,9,9,9,9,$F,$80
+	even
+
+PSG_GO_01:	dc.b 0,2,2,2,2,2,3,3,3,3,4,4,5,5,6,6,7
+		dc.b 7,8,8,9,9,$A,$A,$B,$B,$C,$C,$D,$D
+		dc.b $E,$E,$F,$80
+	even
+
+PSG_GCV1:
+		dc.b	0,0,4,4,5,5,6,6,7,7,8,8,$80
+	even
+
+PSG_GCV2:
+		dc.b	0,0,7,$F,$80
+	even
+
+PSG_DD_01:	dc.b 0,2,7,$D,$F,$80
+	even
+
+PSG_DD_02:	dc.b 1,0,0,0,0,1,2,$80
 	even
 
 ; ---------------------------------------------------------------------------
@@ -114,145 +158,6 @@ SpeedUpIndex:
 		;dc.b ?		; Credits
 		;dc.b ?		; Drowning
 		;dc.b ?		; Get Emerald
-
-; ---------------------------------------------------------------------------
-; Music Pointers
-; ---------------------------------------------------------------------------
-MusicIndex:
-ptr_mus81:		dc.l Music81
-ptr_mus82:		dc.l Music82
-ptr_mus83:		dc.l Music83
-ptr_mus84:		dc.l Music84
-ptr_mus85:		dc.l Music85
-ptr_mus86:		dc.l Music86
-ptr_mus87:		dc.l Music87
-ptr_mus88:		dc.l Music88
-ptr_mus89:		dc.l Music89
-ptr_mus8A:		dc.l Music8A
-ptr_mus8B:		dc.l Music8B
-ptr_mus8C:		dc.l Music8C
-ptr_mus8D:		dc.l Music8D
-ptr_mus8E:		dc.l Music8E
-ptr_mus8F:		dc.l Music8F
-ptr_mus90:		dc.l Music90
-ptr_mus91:		dc.l Music91
-ptr_mus92:		dc.l Music92
-ptr_mus93:		dc.l Music93
-ptr_mus_newbark:	dc.l Music_NewBark
-ptr_mus95:		dc.l Music95
-ptr_mus96:		dc.l Music96
-ptr_mus97:		dc.l Music97
-ptr_musRetro:		dc.l MusicRetro
-ptr_mus99:		dc.l Music99
-ptr_mus9A:		dc.l Music9A
-ptr_mus9B:		dc.l Music9B
-ptr_mus9C:		dc.l Music9C
-ptr_mus9D:		dc.l Music9D
-ptr_mus9E:		dc.l Music9E
-ptr_mus9F:		dc.l Music9F
-
-;ptr_mus00:		dc.l Music00
-;ptr_mus01:		dc.l Music01
-;ptr_mus02:		dc.l Music02
-;ptr_mus03:		dc.l Music03
-;ptr_mus04:		dc.l Music04
-;ptr_mus05:		dc.l Music05
-;ptr_mus06:		dc.l Music06
-;ptr_mus07:		dc.l Music07
-;ptr_mus08:		dc.l Music08
-;ptr_mus09:		dc.l Music09
-;ptr_mus0A:		dc.l Music0A
-;ptr_mus0B:		dc.l Music0B
-;ptr_mus0C:		dc.l Music0C
-;ptr_mus0D:		dc.l Music0D
-;ptr_mus0E:		dc.l Music0E
-;ptr_mus0F:		dc.l Music0F
-;ptr_mus10:		dc.l Music10
-;ptr_mus11:		dc.l Music11
-;ptr_mus12:		dc.l Music12
-;ptr_mus13:		dc.l Music13
-ptr_mus14:		dc.l Music14
-;ptr_mus15:		dc.l Music15
-ptr_mus16:		dc.l Music16
-ptr_mus17:		dc.l Music17
-ptr_mus18:		dc.l Music18
-ptr_mus19:		dc.l Music19
-ptr_mus1A:		dc.l Music1A
-;ptr_mus1B:		dc.l Music1B
-;ptr_mus1C:		dc.l Music1C
-ptr_mus1D:		dc.l Music1D
-ptr_mus1E:		dc.l Music1E
-;ptr_mus1F:		dc.l Music1F
-ptr_mus20:		dc.l Music20
-ptr_mus21:		dc.l Music21
-;ptr_mus22:		dc.l Music22
-ptr_mus23:		dc.l Music23
-ptr_mus24:		dc.l Music24
-;ptr_mus25:		dc.l Music25
-ptr_mus26:		dc.l Music26
-ptr_mus27:		dc.l Music27
-ptr_mus28:		dc.l Music28
-ptr_mus29:		dc.l Music29
-ptr_mus2A:		dc.l Music2A
-ptr_mus2B:		dc.l Music2B
-ptr_mus2C:		dc.l Music2C
-ptr_mus2D:		dc.l Music2D
-ptr_mus2E:		dc.l Music2E
-ptr_mus2F:		dc.l Music2F
-ptr_mus30:		dc.l Music30
-ptr_mus31:		dc.l Music31
-ptr_mus32:		dc.l Music32
-ptr_mus33:		dc.l Music33
-ptr_mus34:		dc.l Music34
-ptr_mus35:		dc.l Music35
-ptr_mus36:		dc.l Music36
-;ptr_mus37:		dc.l Music37
-;ptr_mus38:		dc.l Music38
-;ptr_mus39:		dc.l Music39
-;ptr_mus3A:		dc.l Music3A
-ptr_mus3B:		dc.l Music3B
-ptr_mus3C:		dc.l Music3C
-ptr_mus3D:		dc.l Music3D
-ptr_mus3E:		dc.l Music3E
-ptr_mus3F:		dc.l Music3F
-ptr_mus40:		dc.l Music40
-ptr_mus41:		dc.l Music41
-ptr_mus42:		dc.l Music42
-ptr_mus43:		dc.l Music43
-ptr_mus44:		dc.l Music44
-ptr_mus45:		dc.l Music45
-ptr_mus46:		dc.l Music46
-;ptr_mus47:		dc.l Music47
-ptr_mus48:		dc.l Music48
-ptr_mus49:		dc.l Music49
-ptr_mus4A:		dc.l Music4A
-ptr_mus4B:		dc.l Music4B
-ptr_mus4C:		dc.l Music4C
-ptr_mus4D:		dc.l Music4D
-ptr_mus4E:		dc.l Music4E
-ptr_mus4F:		dc.l Music4F
-ptr_mus50:		dc.l Music50
-ptr_mus51:		dc.l Music51
-
-;!@ GenesisDoes
-ptr_mus52:		dc.l Music52
-ptr_mus53:		dc.l Music53
-ptr_mus54:		dc.l Music54
-ptr_mus55:		dc.l Music55
-;ptr_mus56:		dc.l Music56
-;ptr_mus57:		dc.l Music57
-;ptr_mus58:		dc.l Music58
-;ptr_mus59:		dc.l Music59
-;ptr_mus5A:		dc.l Music5A
-;ptr_mus5B:		dc.l Music5B
-;ptr_mus5C:		dc.l Music5C
-;ptr_mus5D:		dc.l Music5D
-;ptr_mus5E:		dc.l Music5E
-;ptr_mus5F:		dc.l Music5F
-
-ptr_musend
-
-;Note to TG2000 or any other track implementors, remove semicolons on pointers upon implementing a track on a commented pointer! 
 
 ; ---------------------------------------------------------------------------
 ; Priority of sound. New music or SFX must have a priority higher than or equal
@@ -355,7 +260,15 @@ UpdateMusic:
 ; loc_71BF8:
 .bgmpsgnext:
 		dbf	d7,.bgmpsgloop
-
+		btst #6,(v_megadrive).w ; is MD PAL?
+		beq.s .SMPSPALno ; if not, don't run
+		cmpi.b #$5,SMPS_RAM.v_palmuscounter(a6) ; 5th frame?
+		bne.s .end ; if not, branch
+		clr.b SMPS_RAM.v_palmuscounter(a6) ; reset counter
+		bra.w UpdateMusic ; run sound driver again
+	.end:
+		addq.b #$1,SMPS_RAM.v_palmuscounter(a6) ; add 1 to frame count
+	.SMPSPALno:
 		move.b	#$80,SMPS_RAM.f_voice_selector(a6)	; Now at SFX tracks
 		moveq	#SMPS_SFX_FM_TRACK_COUNT-1,d7		; 3 FM tracks (SFX)
 ; loc_71C04:
@@ -577,17 +490,10 @@ NoteTimeoutUpdate:
 		subq.b	#1,SMPS_Track.NoteTimeout(a5)		; Update note fill timeout
 		bne.s	.locret					; Return if it hasn't expired
 		bset	#1,SMPS_Track.PlaybackControl(a5)	; Put track at rest
-		tst.b	SMPS_Track.VoiceControl(a5)		; Is this a PSG track?
-		bmi.w	.psgnoteoff				; If yes, branch
-		jsr	FMNoteOff(pc)
 		addq.w	#4,sp					; Do not return to caller
-		rts
-; ===========================================================================
-; loc_71DBE:
-.psgnoteoff:
-		jsr	PSGNoteOff(pc)
-		addq.w	#4,sp		; Do not return to caller
-; locret_71DC4:
+		tst.b	SMPS_Track.VoiceControl(a5)		; Is this a PSG track?
+		bpl.w	FMNoteOff				; If not then mute FM
+		bra.w	PSGNoteOff				; If so then mute PSG
 .locret:
 		rts
 ; End of function NoteTimeoutUpdate
@@ -597,31 +503,22 @@ NoteTimeoutUpdate:
 
 ; sub_71DC6:
 DoModulation:
-		addq.w	#4,sp					; Do not return to caller (but see below)
 		btst	#3,SMPS_Track.PlaybackControl(a5)	; Is modulation active?
-		beq.s	.locret					; Return if not
-		tst.b	SMPS_Track.ModulationWait(a5)		; Has modulation wait expired?
-		beq.s	.waitdone				; If yes, branch
+		beq.s	.locnoret				; Return if not
 		subq.b	#1,SMPS_Track.ModulationWait(a5)	; Update wait timeout
-		rts
-; ===========================================================================
-; loc_71DDA:
-.waitdone:
+		bcc.s	.locnoret				; If it hasn't expired yet, branch
+		clr.b	SMPS_Track.ModulationWait(a5)
 		subq.b	#1,SMPS_Track.ModulationSpeed(a5)	; Update speed
-		beq.s	.updatemodulation			; If it expired, want to update modulation
-		rts
-; ===========================================================================
-; loc_71DE2:
-.updatemodulation:
+		bne.s	.locnoret				; If it hasn't expired, don't update modulation
 		movea.l	SMPS_Track.ModulationPtr(a5),a0		; Get modulation data
 		move.b	1(a0),SMPS_Track.ModulationSpeed(a5)	; Restore modulation speed
 		tst.b	SMPS_Track.ModulationSteps(a5)		; Check number of steps
 		bne.s	.calcfreq				; If nonzero, branch
 		move.b	3(a0),SMPS_Track.ModulationSteps(a5)	; Restore from modulation data
 		neg.b	SMPS_Track.ModulationDelta(a5)		; Negate modulation delta
+.locnoret:
+		addq.w	#4,sp					; Do not return to caller
 		rts
-; ===========================================================================
-; loc_71DFE:
 .calcfreq:
 		subq.b	#1,SMPS_Track.ModulationSteps(a5)	; Update modulation steps
 		move.b	SMPS_Track.ModulationDelta(a5),d6	; Get modulation delta
@@ -629,9 +526,6 @@ DoModulation:
 		add.w	SMPS_Track.ModulationVal(a5),d6		; Add cumulative modulation change
 		move.w	d6,SMPS_Track.ModulationVal(a5)		; Store it
 		add.w	SMPS_Track.Freq(a5),d6			; Add note frequency to it
-		subq.w	#4,sp					; In this case, we want to return to caller after all
-; locret_71E16:
-.locret:
 		rts
 ; End of function DoModulation
 
@@ -671,10 +565,18 @@ FMSetRest:
 ; ===========================================================================
 ; loc_71E50:
 PauseMusic:
-		bmi.s	.unpausemusic			; Branch if music is being unpaused
+		bmi.w	.unpausemusic			; Branch if music is being unpaused
 		cmpi.b	#2,SMPS_RAM.f_pausemusic(a6)
 		beq.w	.done
 		move.b	#2,SMPS_RAM.f_pausemusic(a6)
+
+	if MSUEnabled
+		tst.b	SMPS_RAM.v_cda_playing(a6)
+		beq.s	.skip
+		MCDSend	#_MCD_PauseTrack, #20	; flag, timer
+	.skip:
+		endif
+
 		moveq	#$FFFFFFB4,d0			; Command to set AMS/FMS/panning
 		moveq	#0,d1				; No panning, AMS or FMS
 		jsr	WriteFMI(pc)			; FM1
@@ -707,6 +609,15 @@ PauseMusic:
 ; loc_71E94:
 .unpausemusic:
 		clr.b	SMPS_RAM.f_pausemusic(a6)
+
+	if MSUEnabled
+		; Resume CDA
+		tst.b	SMPS_RAM.v_cda_playing(a6)
+		beq.s	.skipunp
+		MCDSend	#_MCD_UnPauseTrack
+
+.skipunp:
+	endif
 		moveq	#SMPS_Track.len,d3
 		lea	SMPS_RAM.v_music_fm_tracks(a6),a5
 		moveq	#6-1,d4					; 6 FM; loc_71EA0:
@@ -799,15 +710,14 @@ PlaySoundID:
 		moveq	#0,d7
 		move.b	SMPS_RAM.v_sound_id(a6),d7
 		move.b	#$80,SMPS_RAM.v_sound_id(a6)	; reset music flag
-	if FixBugs
+
 		cmpi.b	#bgm__Last,d7		; Is this music ($81-$93)?
+	if MSUEnabled
+		blo.w	Sound_PlayBGM				; Branch if yes
 	else
-		; DANGER! Music ends at $93, yet this checks until $9F; attempting to
-		; play sounds $94-$9F will cause a crash!
-		; See LevSel_NoCheat for more.
-		cmpi.b	#bgm__Last+$C,d7	; Is this music ($81-$9F)?
+		blo.w	Sound_PlayBGM				; Branch if yes
 	endif
-		bls.w	Sound_PlayBGM		; Branch if yes
+
 		cmpi.b	#sfx__First,d7		; Is this after music but before sfx? (redundant check)
 		blo.w	.locret			; Return if yes
 		cmpi.b	#sfx__Last,d7		; Is this sfx ($A0-$CF)?
@@ -854,6 +764,153 @@ PlaySegaSound:
 		move.b	#dSega,d0	; I feel like this should be a constant?
 		jmp	MegaPCM_PlaySample
 
+
+	if MSUEnabled
+
+; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
+
+Sound_PlayCDA:
+	; Clownacy | Making the music backup share RAM with the SFX tracks makes this code so much more complicated...
+	; First up, we have to meddle with bit 7 PlaybackControl, but, afterwards, we wanna put it back the way it was, so we gotta back all 10 of them up
+	lea	SMPS_RAM.v_music_track_ram(a6),a5
+	moveq	#SMPS_MUSIC_TRACK_COUNT-1,d0		; 1 DAC + 6 FM + 3 PSG tracks
+; loc_71FE6:
+.clearsfxloop:
+	bclr	#2,SMPS_Track.PlaybackControl(a5)	; Clear 'SFX is overriding' bit
+	bclr	#7,SMPS_Track.PlaybackControl(a5)	; we don't want the SFX update processing the music track backup
+	beq.s	.notPlaying
+	bset	#2,SMPS_Track.PlaybackControl(a5)	; Backup 'track is playing' bit in bit 2
+.notPlaying:
+	lea	SMPS_Track.len(a5),a5
+	dbf	d0,.clearsfxloop
+
+	; The RAM this code changes is immediately overwritten with the music track backup, so the code's useless
+;	lea	SMPS_RAM.v_sfx_track_ram(a6),a5
+;	moveq	#((SMPS_RAM.v_spcsfx_track_ram_end-SMPS_RAM.v_sfx_track_ram)/SMPS_Track.len)-1,d0	; 3 FM + 3 PSG tracks (SFX) + 1 FM + 1 PSG tracks (special SFX)
+; loc_71FF8:
+;.cleartrackplayloop:
+;	bclr	#7,SMPS_Track.PlaybackControl(a5)	; Clear 'track is playing' bit
+;	lea	SMPS_Track.len(a5),a5
+;	dbf	d0,.cleartrackplayloop
+
+	; Clownacy | We're backing-up the variables and tracks separately, to put the backed-up variables after the backed-up tracks
+	; this is so the backed-up tracks and SFX tracks start at the same place: at the end of the music tracks
+	clr.b	SMPS_RAM.v_sndprio(a6)	; Clear priority
+
+	lea	SMPS_RAM.v_music_track_ram(a6),a0
+	lea	SMPS_RAM.v_1up_ram_copy(a6),a1
+	move.w	#((SMPS_RAM.v_music_track_ram_end-SMPS_RAM.v_music_track_ram)/4)-1,d0	; Backup music track data
+; loc_72012:
+.backuptrackramloop:
+	bsr.w	InitMusicPlayback						; reset SMPS memory
+	st	SMPS_RAM.v_cda_playing(a6)		; set CDA playing flag
+
+	move.w	d7,d1
+	add.w	d1,d1
+	add.w	d1,d1
+	lea	PlayCD_Index-4(pc,d1.w),a0
+
+	tst.l 	(a0)
+	beq.w	Sound_PlayBGM
+
+	moveq	#0,d0
+	move.b	(a0),d0								; argument
+	move.l	(a0),d1								; loop state
+	andi.l	#$FFFFFF,d1							; get loop
+	MCDSend	d0, d7, d1						; request MCD a track
+	rts
+
+; ===========================================================================
+
+; HORRIBLE Flag index, for tracks
+; empty index = smps
+PlayCD_Index:
+
+	; flag, loop time
+	dc.L	_MCD_PlayTrack<<24|$00000000	; $01
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	_MCD_PlayTrack<<24|$00000000	; $11
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+	dc.l	$00000000
+
+	even
+	endif
+
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Play music track $81-$9F
@@ -899,6 +956,15 @@ Sound_PlayBGM:
 		clr.b	SMPS_RAM.v_fadein_counter(a6)
 ; loc_7202C:
 .bgm_loadMusic:
+	if MSUEnabled
+		; If CDA is playing, stop it
+		tst.b 	SMPS_RAM.v_cda_playing(a6)
+		beq.s	.NoCD
+		MCDSend	#_MCD_PauseTrack, #0		; Stop
+		clr.b	SMPS_RAM.v_cda_playing(a6)
+
+.NoCD:
+	endif
 		jsr	InitMusicPlayback(pc)
 		movea.l	(Go_SpeedUpIndex).l,a4
 		subi.b	#bgm__First,d7
@@ -906,6 +972,7 @@ Sound_PlayBGM:
 		movea.l	(Go_MusicIndex).l,a4
 		lsl.w	#2,d7
 		movea.l	(a4,d7.w),a4		; a4 now points to (uncompressed) song data
+		adda.l	#MusicIndex,a4
 		moveq	#0,d0
 		move.w	(a4),d0			; load voice pointer
 		add.l	a4,d0			; It is a relative pointer
@@ -1111,6 +1178,7 @@ Sound_PlaySFX:
 		subi.b	#sfx__First,d7		; Make it 0-based
 		lsl.w	#2,d7			; Convert sfx ID into index
 		movea.l	(a0,d7.w),a3		; SFX data pointer
+		adda.l	#SoundIndex,a3
 		movea.l	a3,a1
 		moveq	#0,d1
 		move.w	(a1)+,d1		; Voice pointer
@@ -1235,6 +1303,7 @@ Sound_PlaySpecial:
 		subi.b	#spec__First,d7			; Make it 0-based
 		lsl.w	#2,d7
 		movea.l	(a0,d7.w),a3
+		adda.l	#SpecSoundIndex,a3
 		movea.l	a3,a1
 		moveq	#0,d0
 		move.w	(a1)+,d0				; Voice pointer
@@ -1479,6 +1548,14 @@ FadeOutMusic:
 		jsr	StopSpecialSFX(pc)
 		move.b	#3,SMPS_RAM.v_fadeout_delay(a6)			; Set fadeout delay to 3
 		move.b	#$28,SMPS_RAM.v_fadeout_counter(a6)		; Set fadeout counter
+	if MSUEnabled
+		; Fade out CD track
+		tst.b	(MegaCDMode).w
+		beq.s	.skip
+		MCDSend	#_MCD_PauseTrack, #$28		; flag, timer
+	endif
+
+.skip:
 ;		clr.b	SMPS_RAM.v_music_dac_track.PlaybackControl(a6)	; Stop DAC track
 		clr.b	SMPS_RAM.f_speedup(a6)				; Disable speed shoes tempo
 		rts
@@ -1596,6 +1673,15 @@ FMSilenceAll:
 ; ---------------------------------------------------------------------------
 ; Sound_E4: StopSoundAndMusic:
 StopAllSound:
+	if MSUEnabled
+		; If CDA is playing, stop it
+		tst.b SMPS_RAM.v_cda_playing(a6)
+		beq.s	.NoCD
+		MCDSend	#_MCD_PauseTrack, #0		; Stop
+		clr.b	SMPS_RAM.v_cda_playing(a6)
+
+.NoCD:
+	endif
 ;		moveq	#$2B,d0		; Enable/disable DAC
 ;		move.b	#$80,d1		; Enable DAC
 ;		jsr	WriteFMI(pc)
@@ -2197,14 +2283,13 @@ PSGSilenceAll:
 ; 6991.28Hz. These changes need to be applied here in order for ports of
 ; songs from Sonic 3 and later to sound correct.
 ;
-; Here is what Sonic 3's version of this table looks like:
-;		MakePSGFrequencies  109.34,    109.34,    109.34,    109.34,    109.34,    109.34,    109.34,    109.34,    109.34,    110.20,    116.76,    123.73
+; Here is what Sonic 1/2's version of this table looks like:
 ;		MakePSGFrequencies  130.98,    138.78,    146.99,    155.79,    165.22,    174.78,    185.19,    196.24,    207.91,    220.63,    233.52,    247.47
 ;		MakePSGFrequencies  261.96,    277.56,    293.59,    311.58,    329.97,    349.56,    370.39,    392.49,    415.83,    440.39,    468.03,    494.95
 ;		MakePSGFrequencies  522.71,    556.51,    588.73,    621.44,    661.89,    699.12,    740.79,    782.24,    828.59,    880.79,    932.17,    989.91
 ;		MakePSGFrequencies 1045.42,   1107.52,   1177.47,   1242.89,   1316.00,   1398.25,   1491.47,   1575.50,   1669.55,   1747.82,   1864.34,   1962.46
 ;		MakePSGFrequencies 2071.49,   2193.34,   2330.42,   2485.78,   2601.40,   2796.51,   2943.69,   3107.23,   3290.01,   3495.64,   3608.40,   3857.25
-;		MakePSGFrequencies 4142.98,   4302.32,   4660.85,   4863.50,   5084.56,   5326.69,   5887.39,   6214.47,   6580.02,   6991.28, 223721.56, 223721.56
+;		MakePSGFrequencies 4142.98,   4302.32,   4660.85,   4863.50,   5084.56,   5326.69,   5887.39,   6214.47,   6580.02, 223721.56
 ; ---------------------------------------------------------------------------
 MakePSGFrequency function frequency,min($3FF,roundFloatToInteger(PSG_Sample_Rate/(frequency*2)))
 MakePSGFrequencies macro
@@ -2215,12 +2300,13 @@ MakePSGFrequencies macro
 
 ; word_729CE:
 PSGFrequencies:
+		MakePSGFrequencies  109.34,    109.34,    109.34,    109.34,    109.34,    109.34,    109.34,    109.34,    109.34,    110.20,    116.76,    123.73
 		MakePSGFrequencies  130.98,    138.78,    146.99,    155.79,    165.22,    174.78,    185.19,    196.24,    207.91,    220.63,    233.52,    247.47
 		MakePSGFrequencies  261.96,    277.56,    293.59,    311.58,    329.97,    349.56,    370.39,    392.49,    415.83,    440.39,    468.03,    494.95
 		MakePSGFrequencies  522.71,    556.51,    588.73,    621.44,    661.89,    699.12,    740.79,    782.24,    828.59,    880.79,    932.17,    989.91
 		MakePSGFrequencies 1045.42,   1107.52,   1177.47,   1242.89,   1316.00,   1398.25,   1491.47,   1575.50,   1669.55,   1747.82,   1864.34,   1962.46
 		MakePSGFrequencies 2071.49,   2193.34,   2330.42,   2485.78,   2601.40,   2796.51,   2943.69,   3107.23,   3290.01,   3495.64,   3608.40,   3857.25
-		MakePSGFrequencies 4142.98,   4302.32,   4660.85,   4863.50,   5084.56,   5326.69,   5887.39,   6214.47,   6580.02, 223721.56
+		MakePSGFrequencies 4142.98,   4302.32,   4660.85,   4863.50,   5084.56,   5326.69,   5887.39,   6214.47,   6580.02,   6991.28, 223721.56, 223721.56
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
@@ -2807,357 +2893,9 @@ cfOpF9:
 		move.b	#$F,d1		; Loaded with fixed value (max RR, 1TL)
 		bra.w	WriteFMI
 
-; ---------------------------------------------------------------------------
-; Music data
-; ---------------------------------------------------------------------------
-Music81:	include "sound/music/Mus81 - GHZ.asm"
-		even
-Music82:	include "sound/music/DaxKatter/Mus - Azure Rainforest.asm"
-		even
-Music83:	incbin "sound/music/Vertz1515/LaSuerteDeLosTontos.bin"
-		even
-Music84:	incbin "sound/music/Vertz1515/SomeFunnyBook.bin"
-		even
-Music85:	include "sound/music/Mus85 - SYZ.asm"
-		even
-Music86:	include "sound/music/Mus86 - SBZ.asm"
-		even
-Music87:	include "sound/music/TG2000Tracks/SomariInv.asm"
-		even
-Music88:	include "sound/music/DaxKatter/Mus - NBT Extra Life.asm"
-		even
-Music89:	include "sound/music/Mus89 - Special Stage.asm"
-		even
-Music8A:	include "sound/music/Mus8A - Title Screen.asm"
-		even
-Music8B:	include "sound/music/Mus8B - Ending.asm"
-		even
-Music8C:	binclude "sound/music/boss.bin"
-		even
-Music8D:	include "sound/music/Dawid/Extremely_intense_boss_song_for_someone.asm" ;very intense not really but eh idgaf
-		even
-Music8E:	include "sound/music/Mus8E - Sonic Got Through.asm"
-		even
-Music8F:	include "sound/music/Mus8F - Game Over.asm"
-		even
-Music90:	include "sound/music/LiquidTracks/Mus - Uwol Menu.asm"
-		even
-Music91:	include "sound/music/Mus91 - Credits.asm"
-		even
-Music92:	include "sound/music/TG2000Tracks/Thundersink.asm"
-		even
-Music93:	include "sound/music/Dawid/WINDOWS2000.asm";you got a windows 2000 product activation key!!!!!!!!! (or you used kgen you fucking idiot)
-		even
-Music_NewBark:	include "sound/music/DaxKatter/Mus - New Bark Town.asm"
-		even
-Music95:	include "sound/music/CNTracks/RE Mansion.asm"
-		even
-Music96:	include "sound/music/CNTracks/Jeopardy.asm"
-		even
-Music97:	include "sound/music/TG2000Tracks/1UPEmerald.asm"
-		even
-MusicRetro:	include "sound/music/LiquidTracks/Mus - Sonic Retro.asm"
-		even
-Music99:	include "../conimodes/splash/Jingle.asm"
-		even
-Music9A:	include	"sound/music/TG2000Tracks/VampireKiller.asm"
-		even
-Music9B:	include	"sound/music/TG2000Tracks/WarnOfSon.asm"
-		even
-Music9C:	include	"sound/music/TG2000Tracks/Carefree.asm"
-		even
-Music9D:	include	"sound/music/TG2000Tracks/DoomGate.asm"
-		even
-Music9E:	include	"sound/music/TG2000Tracks/Dingaling.asm"
-		even
-Music9F:	include	"sound/music/TG2000Tracks/Megalovania.asm"
-		even
-
-
-Music14:	include	"sound/music/TG2000Tracks/Aporia.asm"
-		even
-Music16:	include	"sound/music/TG2000Tracks/Gadget.asm"
-		even
-Music17:	include	"sound/music/TG2000Tracks/CanCanInv.asm"
-		even
-Music18:	include	"sound/music/TG2000Tracks/TwoSteps.asm"
-		even
-Music19:	include	"sound/music/TG2000Tracks/FurElise.asm"
-		even
-Music1A:	include	"sound/music/TG2000Tracks/Ding.asm"
-		even
-Music1D:	include	"sound/music/TG2000Tracks/GreenHills.asm"
-		even
-Music1E:	include	"sound/music/TG2000Tracks/Son1UP.asm"
-		even
-Music20:	include	"sound/music/TG2000Tracks/SadMac.asm"
-		even
-Music21:	include	"sound/music/TG2000Tracks/TG2000Jingle.asm"
-		even
-
-	
-Music23:	incbin	"sound/music/TG2000Tracks/SwingSinners.bin"
-		even
-Music24:	incbin	"sound/music/TG2000Tracks/AVGNInvF.bin"
-		even
-
-
-Music26:	include	"sound/music/TG2000Tracks/Minuscule.asm"
-		even
-Music27:	include	"sound/music/TG2000Tracks/Folgers.asm"
-		even
-Music28:	include	"sound/music/TG2000Tracks/Rickroll.asm"
-		even
-Music29:	include	"sound/music/TG2000Tracks/Wormy.asm"
-		even
-
-Music2A:	include	"sound/music/TG2000Tracks/Starman.asm"
-		even
-Music2B:	include	"sound/music/TG2000Tracks/MayoDed.asm"
-		even
-Music2C:	include	"sound/music/TG2000Tracks/PuyoReject.asm"
-		even
-Music2D:	include	"sound/music/TG2000Tracks/NewShop.asm"
-		even
-Music2E:	include	"sound/music/TG2000Tracks/JamesPond.asm"
-		even
-Music2F:	include	"sound/music/TG2000Tracks/AlexKiddEnd.asm"
-		even
-Music30:	include	"sound/music/TG2000Tracks/Cheetah.asm"
-		even
-
-Music31:	include	"sound/music/TG2000Tracks/DJKK.asm"
-		even
-Music32:	include	"sound/music/TG2000Tracks/FuneralMarch.asm"
-		even
-Music33:	include	"sound/music/TG2000Tracks/Levian.asm"
-		even
-Music34:	include	"sound/music/TG2000Tracks/BatMan.asm"
-		even
-Music35:	include	"sound/music/TG2000Tracks/Peppa.asm"
-		even
-Music36:	include	"sound/music/TG2000Tracks/Resetti.asm"
-		even
-Music3B:	include	"sound/music/TG2000Tracks/Spoopy.asm"
-		even
-Music3C:	include	"sound/music/TG2000Tracks/ChickenDance.asm"
-		even
-Music3D:	include	"sound/music/TG2000Tracks/CanCan.asm"
-		even
-Music3E:	include	"sound/music/TG2000Tracks/BadEmerald.asm"
-		even
-Music3F:	include	"sound/music/TG2000Tracks/SkyBase.asm"
-		even
-Music40:	include	"sound/music/Mus84 - SLZ.asm"
-		even
-Music41:	include	"sound/music/TG2000Tracks/Scrappy.asm"
-		even
-Music42:	include	"sound/music/TG2000Tracks/WeAreTheSonic.asm"
-		even
-Music43:	include	"sound/music/TG2000Tracks/LG.asm"
-		even
-Music44:	include	"sound/music/TG2000Tracks/Thomas.asm"
-		even
-Music45:	include	"sound/music/TG2000Tracks/ILBT.asm"
-		even
-Music46:	include	"sound/music/HS_Tracks/Basillica.asm"
-		even ; oof
-;Music47:	include	"sound/music/HS_Tracks/Basillica S1 Drums.asm"
-;		even ; oof
-Music48:	include	"sound/music/HS_Tracks/GCV2005.asm"
-		even
-Music49:	include	"sound/music/Misc/DeltaTale fighte.asm"
-		even
-Music4A:	include	"sound/music/Misc/Pac2.asm"
-		even
-Music4B:	include	"sound/music/TG2000Tracks/Passport.asm"
-		even
-Music4C:	include	"sound/music/Mus83 - MZ.asm"
-		even
-Music4D:	include	"sound/music/LiquidTracks/Mus - CCLobby.asm"
-		even
-Music4E:	include	"sound/music/CNTracks/MEMORIES.asm"
-		even
-Music4F:	binclude	"sound/music/Dawid/BomerDudeAtgamesong.bin" ;i have no idea too
-		even
-Music50:	include	"sound/music/Mus90 - Continue Screen.asm"
-		even
-Music51:	include	"sound/music/TG2000Tracks/Coffinman.asm"
-		even
-		
-;!@ GenesisDoes
-Music52:	include	"sound/music/GenesisDoes/GenesisDoes1.asm"
-		even
-Music53:	include	"sound/music/GenesisDoes/GenesisCan1.asm"
-		even
-Music54:	include	"sound/music/GenesisDoes/GenesisCan2.asm"
-		even
-Music55:	include	"sound/music/GenesisDoes/SM64_MM.asm"
-		even
-
-; ---------------------------------------------------------------------------
-; Sound effect pointers
-; ---------------------------------------------------------------------------
-SoundIndex:
-ptr_sndA0:	dc.l SoundA0
-ptr_sndA1:	dc.l SoundA1
-ptr_sndA2:	dc.l SoundA2
-ptr_sndA3:	dc.l SoundA3
-ptr_sndA4:	dc.l SoundA4
-ptr_sndA5:	dc.l SoundA5
-ptr_sndA6:	dc.l SoundA6
-ptr_sndA7:	dc.l SoundA7
-ptr_sndA8:	dc.l SoundA8
-ptr_sndA9:	dc.l SoundA9
-ptr_sndAA:	dc.l SoundAA
-ptr_sndAB:	dc.l SoundAB
-ptr_sndAC:	dc.l SoundAC
-ptr_sndAD:	dc.l SoundAD
-ptr_sndAE:	dc.l SoundAE
-ptr_sndAF:	dc.l SoundAF
-ptr_sndB0:	dc.l SoundB0
-ptr_sndB1:	dc.l SoundB1
-ptr_sndB2:	dc.l SoundB2
-ptr_sndB3:	dc.l SoundB3
-ptr_sndB4:	dc.l SoundB4
-ptr_sndB5:	dc.l SoundB5
-ptr_sndB6:	dc.l SoundB6
-ptr_sndB7:	dc.l SoundB7
-ptr_sndB8:	dc.l SoundB8
-ptr_sndB9:	dc.l SoundB9
-ptr_sndBA:	dc.l SoundBA
-ptr_sndBB:	dc.l SoundBB
-ptr_sndBC:	dc.l SoundBC
-ptr_sndBD:	dc.l SoundBD
-ptr_sndBE:	dc.l SoundBE
-ptr_sndBF:	dc.l SoundBF
-ptr_sndC0:	dc.l SoundC0
-ptr_sndC1:	dc.l SoundC1
-ptr_sndC2:	dc.l SoundC2
-ptr_sndC3:	dc.l SoundC3
-ptr_sndC4:	dc.l SoundC4
-ptr_sndC5:	dc.l SoundC5
-ptr_sndC6:	dc.l SoundC6
-ptr_sndC7:	dc.l SoundC7
-ptr_sndC8:	dc.l SoundC8
-ptr_sndC9:	dc.l SoundC9
-ptr_sndCA:	dc.l SoundCA
-ptr_sndCB:	dc.l SoundCB
-ptr_sndCC:	dc.l SoundCC
-ptr_sndCD:	dc.l SoundCD
-ptr_sndCE:	dc.l SoundCE
-ptr_sndCF:	dc.l SoundCF
-ptr_sndend
-
-; ---------------------------------------------------------------------------
-; Special sound effect pointers
-; ---------------------------------------------------------------------------
-SpecSoundIndex:
-ptr_sndD0:	dc.l SoundD0
-ptr_specend
-
-; ---------------------------------------------------------------------------
-; Sound effect data
-; ---------------------------------------------------------------------------
-SoundA0:	include "sound/sfx/SndA0 - Jump.asm"
-		even
-SoundA1:	include "sound/sfx/SndA1 - Lamppost.asm"
-		even
-SoundA2:	include "sound/sfx/SndA2.asm"
-		even
-SoundA3:	include "sound/sfx/SndA3 - Death.asm"
-		even
-SoundA4:	include "sound/sfx/SndA4 - Skid.asm"
-		even
-SoundA5:	include "sound/sfx/SndA5.asm"
-		even
-SoundA6:	include "sound/sfx/SndA6 - Hit Spikes.asm"
-		even
-SoundA7:	include "sound/sfx/SndA7 - Push Block.asm"
-		even
-SoundA8:	include "sound/sfx/SndA8 - SS Goal.asm"
-		even
-SoundA9:	include "sound/sfx/SndA9 - SS Item.asm"
-		even
-SoundAA:	include "sound/sfx/SndAA - Splash.asm"
-		even
-SoundAB:	include "sound/sfx/SndAB.asm"
-		even
-SoundAC:	include "sound/sfx/SndAC - Hit Boss.asm"
-		even
-SoundAD:	include "sound/sfx/SndAD - Get Bubble.asm"
-		even
-SoundAE:	include "sound/sfx/SndAE - Fireball.asm"
-		even
-SoundAF:	include "sound/sfx/SndAF - Shield.asm"
-		even
-SoundB0:	include "sound/sfx/SndB0 - Saw.asm"
-		even
-SoundB1:	include "sound/sfx/SndB1 - Electric.asm"
-		even
-SoundB2:	include "sound/sfx/SndB2 - Drown Death.asm"
-		even
-SoundB3:	include "sound/sfx/SndB3 - Flamethrower.asm"
-		even
-SoundB4:	include "sound/sfx/SndB4 - Bumper.asm"
-		even
-SoundB5:	include "sound/sfx/SndB5 - Ring.asm"
-		even
-SoundB6:	include "sound/sfx/SndB6 - Spikes Move.asm"
-		even
-SoundB7:	include "sound/sfx/SndB7 - Rumbling.asm"
-		even
-SoundB8:	include "sound/sfx/SndB8.asm"
-		even
-SoundB9:	include "sound/sfx/SndB9 - Collapse.asm"
-		even
-SoundBA:	include "sound/sfx/SndBA - SS Glass.asm"
-		even
-SoundBB:	include "sound/sfx/SndBB - Door.asm"
-		even
-SoundBC:	include "sound/sfx/SndBC - Teleport.asm"
-		even
-SoundBD:	include "sound/sfx/SndBD - ChainStomp.asm"
-		even
-SoundBE:	include "sound/sfx/SndBE - Roll.asm"
-		even
-SoundBF:	include "sound/sfx/SndBF - Get Continue.asm"
-		even
-SoundC0:	include "sound/sfx/SndC0 - Basaran Flap.asm"
-		even
-SoundC1:	include "sound/sfx/SndC1 - Break Item.asm"
-		even
-SoundC2:	include "sound/sfx/SndC2 - Drown Warning.asm"
-		even
-SoundC3:	include "sound/sfx/SndC3 - Giant Ring.asm"
-		even
-SoundC4:	include "sound/sfx/SndC4 - Bomb.asm"
-		even
-SoundC5:	include "sound/sfx/SndC5 - Cash Register.asm"
-		even
-SoundC6:	include "sound/sfx/SndC6 - Ring Loss.asm"
-		even
-SoundC7:	include "sound/sfx/SndC7 - Chain Rising.asm"
-		even
-SoundC8:	include "sound/sfx/SndC8 - Burning.asm"
-		even
-SoundC9:	include "sound/sfx/SndC9 - Hidden Bonus.asm"
-		even
-SoundCA:	include "sound/sfx/SndCA - Enter SS.asm"
-		even
-SoundCB:	include "sound/sfx/SndCB - Wall Smash.asm"
-		even
-SoundCC:	include "sound/sfx/SndCC - Spring.asm"
-		even
-SoundCD:	include "sound/sfx/SndCD - Switch.asm"
-		even
-SoundCE:	include "sound/sfx/SndCE - Ring Left Speaker.asm"
-		even
-SoundCF:	include "sound/sfx/SndCF - Signpost.asm"
-		even
-
-; ---------------------------------------------------------------------------
-; Special sound effect data
-; ---------------------------------------------------------------------------
-SoundD0:	include "sound/sfx/SndD0 - Waterfall.asm"
-		even
+SpecSoundIndex: binclude "sound/music_built/SFX_Special.bin"
+	even
+MusicIndex: binclude "sound/music_built/Music.bin"
+	even
+SoundIndex: binclude "sound/music_built/SFX.bin"
+	even

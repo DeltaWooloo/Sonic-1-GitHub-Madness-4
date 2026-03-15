@@ -1,37 +1,24 @@
 ; ---------------------------------------------------------------------------
-; Subroutine to queue a sound into buffer 1, often used for BGM
-
-; input:
-;	d0 = track to play
+; Subroutine to queue a sound ID for SMPS to process
+; input: d0.b = track ID
 ; ---------------------------------------------------------------------------
-
-; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
-
-; PlaySound:
+; PlaySound: PlaySound_Special: PlaySound_Unused:
 QueueSound1:
+QueueSound2:
+QueueSound3:
+		tst.b	(v_snddriver_ram.v_soundqueue0).w
+		beq.s	.c1
 		move.b	d0,(v_snddriver_ram.v_soundqueue0).w
 		rts
-; End of function QueueSound1
-
-; ---------------------------------------------------------------------------
-; Subroutine to queue a sound into buffer 2, often used for SFX
-; ---------------------------------------------------------------------------
-
-; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
-
-; PlaySound_Special:
-QueueSound2:
+.c1:
+		tst.b	(v_snddriver_ram.v_soundqueue1).w
+		beq.s	.c2
 		move.b	d0,(v_snddriver_ram.v_soundqueue1).w
 		rts
-; End of function QueueSound2
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Subroutine to	queue a sound into buffer 3, unused and broken.
-; Enabling "FixBugs" will make this usable.
-; ---------------------------------------------------------------------------
-
-; PlaySound_Unused:
-QueueSound3:
+.c2:
+;		tst.b	(v_snddriver_ram.v_soundqueue2).w
+;		beq.s	.c3
 		move.b	d0,(v_snddriver_ram.v_soundqueue2).w
 		rts
+;.c3:
+;		rts

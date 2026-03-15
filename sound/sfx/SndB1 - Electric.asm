@@ -17,18 +17,18 @@ SndB1_Electric_Voices:
 ;	$83
 ;	$12, $10, $13, $1E, 	$1F, $1F, $1F, $1F, 	$00, $00, $00, $00
 ;	$02, $02, $02, $02, 	$2F, $2F, $FF, $3F, 	$05, $10, $34, $87
-	smpsVcAlgorithm     $03
-	smpsVcFeedback      $00
-	smpsVcUnusedBits    $02
-	smpsVcDetune        $01, $01, $01, $01
-	smpsVcCoarseFreq    $0E, $03, $00, $02
+	smpsVcAlgorithm     $01
+	smpsVcFeedback      $07
+	smpsVcUnusedBits    $03
+	smpsVcDetune        $03, $01, $03, $02
+	smpsVcCoarseFreq    $02, $00, $00, $01
 	smpsVcRateScale     $00, $00, $00, $00
 	smpsVcAttackRate    $1F, $1F, $1F, $1F
 	smpsVcAmpMod        $00, $00, $00, $00
-	smpsVcDecayRate1    $00, $00, $00, $00
-	smpsVcDecayRate2    $02, $02, $02, $02
-	smpsVcDecayLevel    $03, $0F, $02, $02
+	smpsVcDecayRate1    $02, $09, $18, $05
+	smpsVcDecayRate2    $05, $10, $1F, $0B
+	smpsVcDecayLevel    $02, $04, $02, $01
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-	smpsVcTotalLevel    $07, $34, $10, $05
+	smpsVcTotalLevel    $00, $04, $07, $0E
 
 	smpsFooterEndSong	"SndB1 - Electric.asm"

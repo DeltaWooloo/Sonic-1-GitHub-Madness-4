@@ -59,7 +59,7 @@ GM_CB_ClrObjRam:
 		moveq	#palid_ColdBrew,d0
 		jsr		(PalLoad1).l		; load palette
 		jsr		(PaletteFadeIn).l
-		move.b	#$19,d0
+		move.b	#bgm_ColdBrew,d0
 		jsr		(PlaySound).l ; music
 
 GM_CB_MainLoop:
@@ -69,7 +69,7 @@ GM_CB_MainLoop:
 		bne.s	.dontdistort	; if not, branch
 		lea	(v_hscrolltablebuffer).w,a1	; copy bg positions to hscroll
 		move.w	#223,d1
-		move.w	0,d0
+		move.w	#256,d0
 		add.l	#0,d0
 .titbgupdate:		
 		move.l	d0,(a1)+
@@ -82,13 +82,16 @@ GM_CB_MainLoop:
 
 		move.w	#2*60,(v_generictimer).w 
 
+		move.b	#$1D,(v_objspace).W
+
 		moveq	#palid_ColdBrewG,d0
 		jsr		(PalLoad2).l		; load palette
 
 GM_CB_MainLoop2:
 		move.b	#2,(v_vbla_routine).w
 		jsr		(WaitForVBla).l
-		;something to display the text
+		jsr	(ExecuteObjects).l
+		jsr	(BuildSprites).l
 		cmpi.b	#btnStart,(v_jpadhold1).w	; is Start being pressed?
 		beq.s	GM_CB_ChangeMode		; if yes, branch.
 		tst.w	(v_generictimer).w ; is it time to start snowboarding?
@@ -96,6 +99,12 @@ GM_CB_MainLoop2:
 		jsr		(PaletteWhiteOut).l
 		move.w	#20*60,(v_generictimer).w 
 		jsr		(PaletteWhiteIn).l
+
+
+
+
+
+
 
 GM_CB_MainLoop3:
 		move.b	#2,(v_vbla_routine).w
@@ -116,4 +125,8 @@ GM_CB_ChangeMode:
 Nem_ColdBrew:	incbin	"conimodes/cold brew/Art.bin"
 		even
 Eni_ColdBrew:	incbin	"conimodes/cold brew/Map.bin"
+		even
+Map_BREWHITTER:	include	"conimodes/cold brew/TheHitterMaps.asm"
+		even
+				include	"conimodes/cold brew/TheHitter.asm"
 		even

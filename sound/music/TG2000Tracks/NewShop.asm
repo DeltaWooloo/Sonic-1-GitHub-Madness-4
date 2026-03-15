@@ -1,7 +1,7 @@
 SFZShop_Header:
 	smpsHeaderStartSong 1
 	smpsHeaderVoice	SFZShop_Voices
-	smpsHeaderChan	$06,	$03
+	smpsHeaderChan	$07,	$03
 	smpsHeaderTempo	$01,	$00
 
 	smpsHeaderDAC	SFZShop_DAC
@@ -14,7 +14,6 @@ SFZShop_Header:
 	smpsHeaderPSG       SFZShop_PSG1,	$00, $00, $00, $00
 	smpsHeaderPSG       SFZShop_PSG2,	$00, $00, $00, $00
 	smpsHeaderPSG       SFZShop_PSG3,	$00, $00, $00, $00
-	dc.b		$00,	$00,	$00,	$00	
 
 ; DAC Data
 SFZShop_DAC:

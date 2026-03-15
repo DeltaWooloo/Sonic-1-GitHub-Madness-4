@@ -856,4 +856,5 @@ common.assemble_file = assemble_file
 common.assemble_file_and_handle_failure = assemble_file_and_handle_failure
 common.build_rom = build_rom
 common.build_rom_and_handle_failure = build_rom_and_handle_failure
+common.is_windows = is_windows
 return common

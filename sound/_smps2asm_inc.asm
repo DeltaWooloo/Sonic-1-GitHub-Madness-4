@@ -49,20 +49,17 @@ psgdelta	EQU 12
 ; nMaxPSG1 and nMaxPSG2 are used only for songs from S3/S&K/S3D drivers.
 ; The use of psgdelta is intended to undo the effects of PSGPitchConvert
 ; and ensure that the ending note is indeed the maximum PSG frequency.
-	if SonicDriverVer<=2
-nMaxPSG				EQU nA5
-nMaxPSG1			EQU nA5+psgdelta
-nMaxPSG2			EQU nA5+psgdelta
-	else
+
 nMaxPSG				EQU nBb6-psgdelta
 nMaxPSG1			EQU nBb6
 nMaxPSG2			EQU nB6
-	endif
+
 ; ---------------------------------------------------------------------------
 ; PSG volume envelope equates
 	enum		fTone_01=$01,fTone_02,fTone_03,fTone_04,fTone_05,fTone_06
 	nextenum	fTone_07,fTone_08,fTone_09,uptone_01,uptone_02,uptone_03,duntone_01
-	nextenum	duntone_02,duntone_03
+	nextenum	duntone_02,duntone_03,cfTone_01,cfTone_02,goTone_01
+	nextenum	fTone_GCV1,fTone_GCV2,ddTone_01,ddTone_02
 ; ---------------------------------------------------------------------------
 
 ; Channel IDs for SFX
@@ -120,10 +117,8 @@ convertMainTempoMod macro mod
 
 ; PSG conversion to S3/S&K/S3D drivers require a tone shift of 12 semi-tones.
 PSGPitchConvert macro pitch
-	if (SonicDriverVer>=3)&&(SourceDriver<3)
+	if (SourceDriver<3)
 		dc.b	(pitch+psgdelta)&$FF
-	elseif (SonicDriverVer<3)&&(SourceDriver>=3)
-		dc.b	(pitch-psgdelta)&$FF
 	else
 		dc.b	pitch
 	endif

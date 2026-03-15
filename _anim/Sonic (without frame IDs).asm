@@ -68,7 +68,7 @@ SonAni_Float1:	dc.b 7,	$3C, $3F, afEnd
 		even
 SonAni_Float2:	dc.b 7,	$3C, $3D, $53, $3E, $54, afEnd
 		even
-SonAni_Spring:	dc.b $2F, $40, afChange, id_Walk
+SonAni_Spring:	dc.b $2F, $40, $5D, $5E, afChange, id_Walk
 		even
 SonAni_Hang:	dc.b 4,	$41, $42, afEnd
 		even

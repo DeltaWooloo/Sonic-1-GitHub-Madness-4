@@ -65,9 +65,18 @@ RunSplashes:
 		move.l	(a4)+,(a3)+	; move data to RAM
 		dbf	d7,.loop_pal
 
-		move.b	(a2)+,d0 ; music
+		move.b	(a2)+,d0	; next byte is blank for address alignment
+		move.b	(a2)+,d0 	; is this a pcm or a sound id?
+		bne.s	.sampleid	; if pcm flag set, jump to pcm playback
+		move.b	(a2)+,d0 	; get sound id
 		jsr	PlaySound_Special
+		bra.s	.musicid
 
+	.sampleid:
+		move.b	(a2)+,d0	; get pcm id
+		jsr	MegaPCM_PlaySample
+
+	.musicid:
 		move.w	(a2)+,(v_generictimer).w ; duration in seconds
 		jsr	PaletteFadeIn
 	.loop:
@@ -112,16 +121,20 @@ Pal_\name\: binclude "SolidSplashes/Pal - \name\.bin"
 ; in case you use a shared palette/art/tilemap
 ; size is palette size btw
 
-splash_solid_split macro art,tilemap,pal,size,musicid,frameduration
+_bgm	equ 0
+_pcm	equ 1
+
+splash_solid_split macro art,tilemap,pal,size,pcmflag,musicid,frameduration
 	dc.w	0
 	dc.l	art,tilemap,pal
-	dc.b	(size/4)-1,musicid
+	dc.b	(size/4)-1,0
+	dc.b	pcmflag,musicid
 	dc.w	frameduration
 	endm
 
 ; dedicated palette,art & tilemap
-splash_solid macro name,size,musicid,frameduration
-	splash_solid_split Art_\name\,Map_\name\,Pal_\name\,size,musicid,frameduration
+splash_solid macro name,size,pcmflag,musicid,frameduration
+	splash_solid_split Art_\name\,Map_\name\,Pal_\name\,size,pcmflag,musicid,frameduration
 	endm
 
 ; for routines
@@ -136,93 +149,104 @@ splash_turd macro routine
 	endm
 
 ; Entries
+	splash_liquid	MultiSplash_Init
+	splash_liquid	SonicRetro
+	splash_liquid	GM_SSRGScreen
+	splash_liquid	GM_EagleSoft
+	splash_liquid	GM_CNNicoJump
+	splash_liquid	DaxKatter_Splash
+	splash_liquid	Malachi_Splash
+	splash_liquid	GM_TGSplash
+	splash_liquid	Yume2kki
 
-	splash_liquid SonicRetro
-	splash_liquid GM_SSRGScreen
-	splash_liquid GM_EagleSoft
-	splash_liquid Yume2kki
-	
 	;!@ GenesisDoes
-	splash_solid GenesisDoes1,$40,bgm_GenesisDoes1,60*10
-	splash_solid GenesisCan1,$40,bgm_GenesisCan1,60*3
-	splash_solid GenesisCan2,$40,bgm_GenesisCan2,60*3
-	splash_solid SM64_MM,$40,bgm_SM64_MM,60*4
+	splash_solid	GenesisDoes1,	$40, 1,	dGenesisDoes1,	60*10
+	; sorry man
+	;splash_solid	GenesisCan1,	$40, 1,	dGenesisCan1,	60*3
+	;splash_solid	GenesisCan2,	$40, 1,	dGenesisCan2,	60*3
+	;splash_solid	SM64_MM,	$40, 1,	dSM64_MM,	60*4
 	
-	splash_solid Blessed,$40,$A8,200
-	splash_solid Shiki,$20,$2A,280
-	splash_solid SonicBroke,$20,$51,480
-	splash_solid Monke,$20,$1C,480
-	splash_solid Wait,$60,$1B,145
-	splash_solid SadMac,$60,$28,175
-	splash_solid Drift,$20,$2C,480
-	splash_solid LastBurenyuu,$20,$24,240
-	splash_solid BLUE_LOBSTER,$20,$25,280
-	splash_solid ReimuDrip,$20,$20,160
-	splash_solid Cmruey,$20,$2F,240
-	splash_solid Disappointed,$20,$39,480
-	splash_solid Mines,$20,$25,650
-	splash_solid Waldo,$40,$31,100
-	; splash_solid Undertaley,$10,$33,300
-	splash_solid StupidBat,$40,$3A,480
-	splash_solid Sad,$40,$3D,200
-	splash_solid Support,$60,$3E,480
-	splash_solid Peppa,$40,$25,200
-	splash_solid Snowgrave,$40,$25,100
-	splash_solid Damnit,$40,$4A,500
-	splash_solid Iceage,$40,$34,300
-	splash_solid Fredbear,$40,$38,480
-	splash_solid CRT,$40,$32,300
-	splash_solid Crispbilly,$40,$25,200
-	splash_solid Bonniewtf,$60,$3C,300
-	splash_solid Rick,$40,$2E,480
-	splash_solid W,$40,$25,380
-	splash_liquid GM_SegaEU
-	splash_turd Remilia
+	splash_solid	Blessed,	$40, 0,	sfx_SSGoal,	200
+	;splash_solid	Shiki,		$20, 0,	bgm_SwingSinners,280
+	splash_solid	SonicBroke,	$20, 0,	bgm_Continue2,480
+	;splash_solid	Monke,		$20, 0,	bgm_Carefree,	480
+	splash_solid	Wait,		$60, 0,	bgm_PuyoDrown,	145
+	;splash_solid	SadMac,		$60, 0,	bgm_SadMac,	175
+	;splash_solid	Drift,		$20, 0,	bgm_Minuscule,	480
+	;splash_solid	LastBurenyuu,	$20, 0,	bgm_FurElise,	240
+	;splash_solid	BLUE_LOBSTER,	$20, 1,	dBlueLobster,	280
+	;splash_solid	ReimuDrip,	$20, 0,	bgm_Aporia,	160
+	;splash_solid	Sane,		$40, 0,	bgm_Ding,	720
+	;splash_solid	Cmruey,		$20, 0,	bgm_Wormy,	240
+	;splash_solid	Disappointed,	$20, 0,	bgm_Levian,	480
+	;splash_solid	Mines,		$20, 0,	bgm_SLZ,	650
+	;splash_solid	Waldo,		$40, 0,	bgm_MayoDed,	100
+	; splash_solid	Undertaley,	$10, 0,	bgm_NewShop,	300
+	;splash_solid	StupidBat,	$40, 0,	bgm_BatMan,	480
+	;splash_solid	Sad,		$40, 0,	bgm_Spoopy,	200
+	;splash_solid	Support,	$60, 0,	bgm_ChickenDance,480
+	;splash_solid	Peppa,		$40, 0,	bgm_Ding,	200
+	;splash_solid	Snowgrave,	$40, 0,	bgm_Ding,	100
+	;splash_solid	Damnit,		$40, 0,	bgm_GCV2005,	500
+	;splash_solid	Iceage,		$40, 0,	bgm_JamesPond,	300
+	;splash_solid	Fredbear,	$40, 0,	bgm_FuneralMarch,480
+	splash_solid	CRT,		$40, 0,	bgm_PuyoReject,	300
+	;splash_solid	Crispbilly,	$40, 0,	bgm_Ding,	200
+	;splash_solid	Bonniewtf,	$60, 0,	bgm_Resetti,	300
+	;splash_solid	Rick,		$40, 0,	bgm_Rickroll,	480
+	splash_solid	W,		$40, 0,	bgm_Emerald,	380
+
+	splash_liquid	GM_SegaEU
+	splash_turd	Remilia
 	dc.l	-1 ; end marker
 
 
 	; Files for solid
 	;!@ GenesisDoes
 	inc_solid_splash GenesisDoes1
-	inc_solid_splash GenesisCan1
-	inc_solid_splash GenesisCan2
-	inc_solid_splash SM64_MM
-	
+	;inc_solid_splash GenesisCan1
+	;inc_solid_splash GenesisCan2
+	;inc_solid_splash SM64_MM
+
 	inc_solid_splash Blessed
-	inc_solid_splash Shiki
+	;inc_solid_splash Shiki
 	inc_solid_splash SonicBroke
-	inc_solid_splash Monke
+	;inc_solid_splash Monke
 	inc_solid_splash Wait
-	inc_solid_splash SadMac
-	inc_solid_splash Drift
-	inc_solid_splash LastBurenyuu
-	inc_solid_splash BLUE_LOBSTER
-	inc_solid_splash ReimuDrip
-	inc_solid_splash Cmruey
-	inc_solid_splash Disappointed
-	inc_solid_splash Mines
-	inc_solid_splash Waldo
+	;inc_solid_splash SadMac
+	;inc_solid_splash Drift
+	;inc_solid_splash LastBurenyuu
+	;inc_solid_splash BLUE_LOBSTER
+	;inc_solid_splash ReimuDrip
+	;inc_solid_splash Cmruey
+	;inc_solid_splash Disappointed
+	;inc_solid_splash Mines
+	;inc_solid_splash Waldo
 	; inc_solid_splash Undertaley
-	inc_solid_splash StupidBat
-	inc_solid_splash Sad
-	inc_solid_splash Support
-	inc_solid_splash Peppa
-	inc_solid_splash Snowgrave
-	inc_solid_splash Damnit
-	inc_solid_splash Iceage
-	inc_solid_splash Fredbear
+	;inc_solid_splash StupidBat
+	;inc_solid_splash Sad
+	;inc_solid_splash Support
+	;inc_solid_splash Peppa
+	;inc_solid_splash Snowgrave
+	;inc_solid_splash Damnit
+	;inc_solid_splash Iceage
+	;inc_solid_splash Fredbear
 	inc_solid_splash CRT
-	inc_solid_splash Crispbilly
-	inc_solid_splash Bonniewtf
-	inc_solid_splash Rick
+	;inc_solid_splash Crispbilly
+	;inc_solid_splash Bonniewtf
+	;inc_solid_splash Rick
 	inc_solid_splash W
 
 ; Files for liquid
 	include "LiquidSplashes/Rerto/Rerto.asm"
 	include "LiquidSplashes/SSRG/SSRG.asm"
-	include "LiquidSplashes/EagleSoft/EagleSoft.asm"	
-	include "LiquidSplashes/2kki/2kki.asm"	
+	include "LiquidSplashes/EagleSoft/EagleSoft.asm"
+	include "DAX_Splash/DaxKatter Splash.asm"
+	include "_gamemode/vmss/_runcode.asm"
+	include "Nano's SHIT/splash/GM_SplashScreenSkipper.asm"
+	include "LiquidSplashes/2kki/2kki.asm"
 	include "eurosega/eurosega.asm"
+	include "TGSplash/TGSplash.asm"
 
 ; Files for turd
 	include "CrazyRemilia/Remi/Remi.asm"

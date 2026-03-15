@@ -130,7 +130,7 @@ clearRAM:	macro startAddress,endAddress
 	else
 		.length: := startAddress_end-startAddress
 	endif
-		lea	(startAddress).w,a1
+		lea	startAddress,a1
 		moveq	#0,d0
 		move.w	#.length/4-1,d1
 
@@ -364,3 +364,33 @@ pcm:	macro id
 	move.b	#id,d0
 	jsr	MegaPCM_PlaySample
 	endm
+
+; ---------------------------------------------------------------------------
+; Macro to communicate with Sega CD
+; THANK YOU THEBLAD!!!!
+; Arguments:
+; 1 - command id
+; 2 - command arg
+; 2 - command arg2
+; -------------------------------------------------------------
+
+MCDSend macro	id, arg, arg2
+	tst.b	(MegaCDMode).w
+	beq.w	.skip
+.wait
+	tst.b	(MCD_Status).l
+	bne.s	.wait
+	move.b	id,(MCD_Command).l
+	if ("arg"<>"")
+		move.b arg,(MCD_Argument).l
+	endif
+	if ("arg2"<>"")
+		move.l arg2,(MCD_Argument2).l
+	endif
+	addq.b  #1,(MCD_Command_Clock).l
+
+.wait2
+	tst.b	(MCD_Status).l						; waiting for the first command to be executed
+	beq.s	.wait2
+.skip
+    endm

@@ -1,5 +1,5 @@
 ; ---------------------------------------------------------------------------
-; Object 1E - Ball Hog enemy (SBZ)
+; Object 1E - Quagmire enemy (SBZ)
 ; ---------------------------------------------------------------------------
 
 BallHog:
@@ -18,7 +18,7 @@ Hog_Main:	; Routine 0
 		move.b	#$13,obHeight(a0)
 		move.b	#8,obWidth(a0)
 		move.l	#Map_Hog,obMap(a0)
-		move.w	#make_art_tile(ArtTile_Ball_Hog,1,0),obGfx(a0)
+		move.w	#make_art_tile(ArtTile_Ball_Hog,0,0),obGfx(a0)
 		move.b	#4,obRender(a0)
 		move.b	#4,obPriority(a0)
 		move.b	#5,obColType(a0)

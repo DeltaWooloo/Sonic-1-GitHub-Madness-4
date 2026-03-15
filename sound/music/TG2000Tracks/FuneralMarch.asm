@@ -2,7 +2,7 @@ FuneralMarch_Header:
 
 	smpsHeaderStartSong 1
 	smpsHeaderVoice	FuneralMarch_Voices
-	smpsHeaderChan	$06,	$03
+	smpsHeaderChan	$07,	$03
 	smpsHeaderTempo	$01,	$00
 
 	smpsHeaderDAC	FuneralMarch_DAC
