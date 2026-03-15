@@ -133,7 +133,7 @@ ptr_mus51:		dc.l Music51
 ptr_mus56:		dc.l Music56
 ptr_mus57:		dc.l Music57
 ptr_mus58:		dc.l Music58
-;ptr_mus59:		dc.l Music59
+ptr_mus59:		dc.l Music59
 ;ptr_mus5A:		dc.l Music5A
 ;ptr_mus5B:		dc.l Music5B
 ;ptr_mus5C:		dc.l Music5C
@@ -323,6 +323,8 @@ Music56:	include	"music/CNTracks/CometSTG2.asm"
 Music57:	include	"music/CNTracks/TheCheetosChairRoom.asm"
 		even
 Music58:	include	"music/TG2000Tracks/DoleBOSS.asm" ;Boss Track
+		even
+Music59:	include	"music/TG2000Tracks/OrangeSong.asm" 
 		even
 
 	END

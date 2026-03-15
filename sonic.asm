@@ -2433,7 +2433,7 @@ Demo_Levels:	binclude	"misc/Demo Level Order - Intro.bin"
 ; ---------------------------------------------------------------------------
 ;MusicList:
 ;		dc.b bgm_GHZ		; GHZ1
-;		dc.b bgm_Carefree	; GHZ2
+;		dc.b bgm_OrangeSong	; GHZ2
 ;		dc.b bgm_GreenHills	; GHZ3
 ;		dc.b bgm_GHZ		; GHZ4
 ;		dc.b bgm_LZ		; LZ1
