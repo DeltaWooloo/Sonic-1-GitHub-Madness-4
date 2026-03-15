@@ -86,6 +86,8 @@ CliFucker_Init2:
 	rts
 
 CliFucker_Main:
+	cmpi.w	#$50,v_screenposx
+	ble.w	.Exit
 	add.l	#$7000,clifuck.Speed(a0)
 	lea 	v_player, a1
 	move.w	obX(a1),d0
@@ -116,9 +118,40 @@ CliFucker_Main:
 	lea	Ani_Clinton,a1
 	jsr	AnimateSprite
 	jsr	DisplaySprite
-
 	rts
+.Exit:
+	tst.b	(v_endcard).w
+	bne.s	.ok
+	;move.w	(v_limitright2).w,(v_limitleft2).w
+	clr.b	(v_invinc).w	; disable invincibility
+	clr.b	(f_timecount).w	; stop time counter
+	move.b	#id_GotThroughCard,(v_endcard).w
+	moveq	#plcid_WINNERCard,d0
+	jsr	(NewPLC).l	; load title card patterns
+	move.b	#1,(f_endactbonus).w
+	moveq	#0,d0
+	move.b	(v_timemin).w,d0
+	mulu.w	#60,d0		; convert minutes to seconds
+	moveq	#0,d1
+	move.b	(v_timesec).w,d1
+	add.w	d1,d0		; add up your time
+	divu.w	#15,d0		; divide by 15
+	moveq	#$14,d1
+	cmp.w	d1,d0		; is time 5 minutes or higher?
+	blo.s	.hastimebonus	; if not, branch
+	move.w	d1,d0		; use minimum time bonus (0)
 
+.hastimebonus:
+	add.w	d0,d0
+	;move.w	TimeBonuses(pc,d0.w),(v_timebonus).w ; set time bonus
+	move.w	(v_rings).w,d0	; load number of rings
+	mulu.w	#10,d0		; multiply by 10
+	move.w	d0,(v_ringbonus).w ; set ring bonus
+	pcm 	dBoingBoing
+	jsr	GHM3Explode
+	move.b	#0,(a0)
+.ok:
+	rts
 
 Ani_Clinton:
 .tbl:
