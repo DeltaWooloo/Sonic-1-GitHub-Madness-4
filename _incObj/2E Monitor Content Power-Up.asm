@@ -82,8 +82,7 @@ Pow_ChkShoes:
 		
 		;!@ GenesisDoes: Play boost powa PCM
 		pcm	dBoostPower
-		
-		move.w	#bgm_Speedup,d0
+		move.b	#bgm_AVGNInv,d0
 		jmp	(QueueSound1).l		; Speed up the music
 ; ===========================================================================
 

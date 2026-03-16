@@ -270,7 +270,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_SadMac
 	nextenum bgm_TG2000Jingle
 	nextenum bgm_SwingSinners
-	nextenum bgm_AVGNInvF
+	nextenum bgm_AVGNInv
 	nextenum bgm_Minuscule
 	nextenum bgm_Folgers
 	nextenum bgm_Rickroll

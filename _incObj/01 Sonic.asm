@@ -312,7 +312,13 @@ Sonic_Display:
 		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
 		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
 		move.b	#0,(v_shoes).w	; cancel speed shoes
-		move.w	#bgm_Slowdown,d0
+		move.b	(v_zone).w,d0
+		cmpi.w	#(id_LZ<<8)+3,(v_zone).w ; check if level is SBZ3
+		bne.s	.music2
+		moveq	#5,d0		; play SBZ music
+
+.music2:
+		move.b	(v_zonemusic).w,d0
 		jmp	(QueueSound1).l	; run music at normal speed
 
 .exit:

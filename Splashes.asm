@@ -169,7 +169,7 @@ splash_turd macro routine
 	
 	splash_solid	Blessed,	$40, 0,	sfx_SSGoal,	200
 	;splash_solid	Shiki,		$20, 0,	bgm_SwingSinners,280
-	splash_solid	SonicBroke,	$20, 0,	bgm_Continue2,480
+	splash_solid	SonicBroke,	$20, 0,	bgm_Continue2,	480
 	;splash_solid	Monke,		$20, 0,	bgm_Carefree,	480
 	splash_solid	Wait,		$60, 0,	bgm_PuyoDrown,	145
 	;splash_solid	SadMac,		$60, 0,	bgm_SadMac,	175
