@@ -360,9 +360,13 @@ QueueSound_M:	macro sound,queue
 	endm
 
 
-pcm:	macro id
+pcm:	macro id,terminate
 	move.b	#id,d0
-	jsr	MegaPCM_PlaySample
+    if ("terminate"="0") || ("terminate"="")
+	jsr	(MegaPCM_PlaySample).l
+    else
+	jmp	(MegaPCM_PlaySample).l
+    endif
 	endm
 
 ; ---------------------------------------------------------------------------

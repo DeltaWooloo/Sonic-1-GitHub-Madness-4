@@ -25,7 +25,10 @@ Obj09_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.b	#$E,obHeight(a0)
 		move.b	#7,obWidth(a0)
-		move.l	#Map_Tonic,obMap(a0)
+		jsr	GetPlayerData
+		move.l	d0,obMap(a0)
+		move.l	d1,dgfxaddr(a0)
+		move.l	d2,artaddr(a0)
 		move.w	#make_art_tile(ArtTile_Sonic,0,0),obGfx(a0)
 		move.b	#4,obRender(a0)
 		move.b	#0,obPriority(a0)
@@ -74,7 +77,7 @@ Obj09_Display:
 		move.w	(v_ssangle).w,d0
 		add.w	(v_ssrotate).w,d0
 		move.w	d0,(v_ssangle).w
-		jsr	(Sonic_Animate).l
+		jsr	(Player_Animate).l
 		rts
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
