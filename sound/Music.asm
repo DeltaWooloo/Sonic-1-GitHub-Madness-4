@@ -110,7 +110,7 @@ ptr_mus5E:		dc.l Music5E
 ptr_mus5F:		dc.l Music5F
 ;ptr_mus5E:		dc.l Music5E
 ;ptr_mus5F:		dc.l Music5F
-;ptr_mus60:		dc.l Music60
+ptr_mus60:		dc.l Music60
 ;ptr_mus61:		dc.l Music61
 ;ptr_mus62:		dc.l Music62
 ;ptr_mus63:		dc.l Music63
@@ -334,4 +334,6 @@ Music5E:	include	"music/PikaNoob/Mus - Ronic Setro.asm"
 		even
 Music5F:	include	"music/NiaTracks/Mus - Donnie1.asm"
 		even	
+Music60:	include	"music/TG2000Tracks/Elevator.asm" 
+		even
 	END
