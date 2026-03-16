@@ -731,12 +731,20 @@ off_6E4ABR:	dc.w DLE_BREW3main-off_6E4ABR
 		dc.w DLE_BREW3end-off_6E4ABR
 ; ===========================================================================
 
+EizaArtList:
+	dc.l	Nem_Clinton
+;	dc.l	Nem_Eiza
+	dc.w	$8000
+	dc.l	-1		; Was it that hard?
+
 DLE_BREW3main:
 		add.w	#1,(v_limitleft2).w
 		cmpi.w	#boss_ghz_x-$220,(v_screenposx).w
 		bcs.s	BrewAutoScroll
+		lea		EizaArtList,a1
+		jsr	UserPLC
 		clr.w	(v_limitleft2).w
-		move.w	#boss_ghz_x+16,(v_limitright2).w
+		move.w	#boss_ghz_x,(v_limitright2).w
 		move.w	#boss_ghz_y,(v_limitbtm1).w
 		addq.b	#2,(v_dle_routine).w
 BrewAutoScroll:
@@ -752,6 +760,7 @@ BrewAutoScroll:
 
 ; ===========================================================================
 DLE_BREW3ScrollEnd:
+		clr.w	(v_limitleft2).w
 		cmpi.w	#boss_ghz_x,(v_screenposx).w
 		bcs.s	.NoEizaYet
 		addq.b	#2,(v_dle_routine).w

@@ -1,0 +1,32 @@
+{
+    "Flex": 2,
+    "name": "",
+    "node": "020850ed-42b9-47ae-8cc6-5b78e663b997",
+    "objects": [
+        {
+            "format": "Sonic 1.js",
+            "name": "object",
+            "palettes": [
+                {
+                    "path": "..\\..\\palette\\BREW Zone.bin",
+                    "length": 1
+                }
+            ],
+            "art": {
+                "path": "art.bin",
+                "compression": "Nemesis",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "map.asm",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            },
+            "uuid": "020850ed-42b9-47ae-8cc6-5b78e663b997"
+        }
+    ]
+}
