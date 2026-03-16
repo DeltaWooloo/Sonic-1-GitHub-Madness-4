@@ -107,7 +107,7 @@ ptr_mus5B:		dc.l Music5B
 ptr_mus5C:		dc.l Music5C
 ptr_mus5D:		dc.l Music5D
 ptr_mus5E:		dc.l Music5E
-
+ptr_mus5F:		dc.l Music5F
 ;ptr_mus5E:		dc.l Music5E
 ;ptr_mus5F:		dc.l Music5F
 ;ptr_mus60:		dc.l Music60
@@ -332,4 +332,6 @@ Music5D:	include	"music/AburtosTracks/Mus - GEMS Hill.asm"
 		even
 Music5E:	include	"music/PikaNoob/Mus - Ronic Setro.asm"
 		even
+Music5F:	include	"music/TheWTracks/Mus - We'll Be Right Back.asm"
+		even	
 	END

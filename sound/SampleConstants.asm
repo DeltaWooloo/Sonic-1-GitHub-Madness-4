@@ -72,6 +72,7 @@ dTheFourth			ds.b 1
 
 dEggmanLaugh		ds.b 1
 dGenesisDoes1		ds.b 1
+dRightBack			ds.b 1
 dGenesisCan1		ds.b 1
 dGenesisCan2		ds.b 1
 dSM64_MM			ds.b 1

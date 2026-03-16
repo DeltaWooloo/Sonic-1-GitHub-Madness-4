@@ -67,48 +67,49 @@ SampleTable:
 	dcSample	TYPE_DPCM,	TheFourth,	16000,FLAGS_SFX		; $AE
 	dcSample	TYPE_DPCM,	eggmanLaugh,	16000,FLAGS_SFX	; $AF
 	dcSample	TYPE_DPCM,	GenesisDoes1,	16000			; $B0
+	dcSample	TYPE_PCM,	BeRightBack,	16000,				; $B1	
 	;!@ DELETED - NOP'd out with dummy.wav
 	;dcSample	TYPE_DPCM,	GenesisCan1,16000,FLAGS_SFX		; $B1
 	;dcSample	TYPE_DPCM,	GenesisCan2,16000,FLAGS_SFX		; $B2
 	;dcSample	TYPE_DPCM,	SM64_MM,16000,FLAGS_SFX			; $B3
-	dcSample	TYPE_DPCM,	dummy,16000,FLAGS_SFX			; $B1
 	dcSample	TYPE_DPCM,	dummy,16000,FLAGS_SFX			; $B2
-	dcSample	TYPE_DPCM,	Boost,		16000,FLAGS_SFX		; $B3
+	dcSample	TYPE_DPCM,	dummy,16000,FLAGS_SFX			; $B3
+	dcSample	TYPE_DPCM,	Boost,		16000,FLAGS_SFX		; $B4
 	
-	dcSample	TYPE_DPCM,	DAMN,		16000				; $B4
-	dcSample	TYPE_PCM,	QuakeRocket,	11297,			; $B5
-	dcSample	TYPE_PCM,	supbeaches,	11297,				; $B6
-	dcSample	TYPE_PCM,	CL_Penis,	11297,				; $B7
-	dcSample	TYPE_PCM,	CL_STFU,	11297,FLAGS_SFX		; $B8
-	dcSample	TYPE_PCM,	CL_Fuck,	11297,				; $B9
-	dcSample	TYPE_PCM,	CL_YouCanSuck,	11297,FLAGS_SFX	; $BA
-	dcSample	TYPE_PCM,	CL_DoYouSuck,	11297,FLAGS_SFX	; $BB
-	dcSample	TYPE_PCM,	CL_Dicks,	11297,				; $BC
-	dcSample	TYPE_PCM,	CL_OnTheBall,	11297,			; $BD
-	dcSample	TYPE_PCM,	EggNo,		11297,				; $BE
-	dcSample	TYPE_PCM,	BabyAlarm,	0,FLAGS_SFX			; $BF
+	dcSample	TYPE_DPCM,	DAMN,		16000				; $B5
+	dcSample	TYPE_PCM,	QuakeRocket,	11297,			; $B6
+	dcSample	TYPE_PCM,	supbeaches,	11297,				; $B7
+	dcSample	TYPE_PCM,	CL_Penis,	11297,				; $B8
+	dcSample	TYPE_PCM,	CL_STFU,	11297,FLAGS_SFX		; $B9
+	dcSample	TYPE_PCM,	CL_Fuck,	11297,				; $BA
+	dcSample	TYPE_PCM,	CL_YouCanSuck,	11297,FLAGS_SFX	; $BB
+	dcSample	TYPE_PCM,	CL_DoYouSuck,	11297,FLAGS_SFX	; $BC
+	dcSample	TYPE_PCM,	CL_Dicks,	11297,				; $BD
+	dcSample	TYPE_PCM,	CL_OnTheBall,	11297,			; $BE
+	dcSample	TYPE_PCM,	EggNo,		11297,				; $BF
+	dcSample	TYPE_PCM,	BabyAlarm,	0,FLAGS_SFX			; $C0
 
 	;Level end theme
-	dcSample	TYPE_DPCM,	BoingBoing,	16000,	FLAGS_SFX|FLAGS_LOOP	; $C0
-	dcSample	TYPE_PCM,	Boik,		5250,	FLAGS_SFX	; $C1
-	dcSample	TYPE_PCM,	Boioing,	5250,	FLAGS_SFX	; $C2
-	dcSample	TYPE_PCM,	OrngLaugh,	0,	FLAGS_SFX		; $C3
+	dcSample	TYPE_DPCM,	BoingBoing,	16000,	FLAGS_SFX|FLAGS_LOOP	; $C1
+	dcSample	TYPE_PCM,	Boik,		5250,	FLAGS_SFX	; $C2
+	dcSample	TYPE_PCM,	Boioing,	5250,	FLAGS_SFX	; $C3
+	dcSample	TYPE_PCM,	OrngLaugh,	0,	FLAGS_SFX		; $C4
 
-	dcSample	TYPE_DPCM,	ClintonHi,	20600,	FLAGS_SFX	; $BF
-	dcSample	TYPE_DPCM,	ClintonYeah,	20600,	FLAGS_SFX	; $C0
-	dcSample	TYPE_PCM,	QuakeJump,	0,	FLAGS_SFX	; $C1
-	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX	; $C2
-	dcSample	TYPE_PCM,	letsgoeee,	0,	FLAGS_SFX	; $C3
-	dcSample	TYPE_PCM,	Lg,		16000, FLAGS_SFX	; $C4
-	dcSample	TYPE_PCM,	Segay,		0, FLAGS_SFX		; $C5
-	dcSample	TYPE_PCM,	Foxy,		0, FLAGS_SFX		; $C6
-	dcSample	TYPE_PCM,	GayNeil,	0, FLAGS_SFX		; $C6
+	dcSample	TYPE_DPCM,	ClintonHi,	20600,	FLAGS_SFX	; $C5
+	dcSample	TYPE_DPCM,	ClintonYeah,	20600,	FLAGS_SFX	; $C6
+	dcSample	TYPE_PCM,	QuakeJump,	0,	FLAGS_SFX	; $C7
+	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX	; $C8
+	dcSample	TYPE_PCM,	letsgoeee,	0,	FLAGS_SFX	; $C9
+	dcSample	TYPE_PCM,	Lg,		16000, FLAGS_SFX	; $CA
+	dcSample	TYPE_PCM,	Segay,		0, FLAGS_SFX		; $CB
+	dcSample	TYPE_PCM,	Foxy,		0, FLAGS_SFX		; $CC
+	dcSample	TYPE_PCM,	GayNeil,	0, FLAGS_SFX		; $CD
 	; ADVISORY: If you're coming to this repo just to add samples,
 	; they are going to get removed. Sorry!
 	; Wait until more important shit is implemented
 
 	; end 
-   	;dcSample	TYPE_PCM,	Stupid,		0, FLAGS_SFX	; $CD
+   	;dcSample	TYPE_PCM,	Stupid,		0, FLAGS_SFX	; $CE
 	dc.w	-1
 
 ; ---------------------------------------------------------------
@@ -196,6 +197,7 @@ SampleTable:
 	incdac	TheFourth,"sound/dac/GenesisDoes/Four.dpcm"
 	incdac	eggmanLaugh,"sound/dac/GenesisDoes/eggmanLaugh.dpcm"
 	incdac	GenesisDoes1,"sound/dac/GenesisDoes/GenesisDoes1.dpcm"
+	incdac	BeRightBack,"sound/dac/well-be-right-back.wav"	
 	;!@ DELETED - NOP'd out with Dummy.wav
 	;incdac	GenesisCan1,"sound/dac/GenesisDoes/GenesisCan1.dpcm"
 	;incdac	GenesisCan2,"sound/dac/GenesisDoes/GenesisCan2.dpcm"
