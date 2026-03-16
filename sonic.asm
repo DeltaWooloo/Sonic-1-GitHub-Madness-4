@@ -2387,17 +2387,7 @@ loc_33B6:
 		bne.w	loc_33B6
 		move.b	#bgm_Fade,d0
 		bsr.w	QueueSound2 ; fade out music
-		move.w	(v_demonum).w,d0 ; load demo number
-		andi.w	#7,d0
-		add.w	d0,d0
-		move.w	Demo_Levels(pc,d0.w),d0	; load level number for demo
-		move.w	d0,(v_zone).w
-		addq.w	#1,(v_demonum).w ; add 1 to demo number
-		cmpi.w	#5,(v_demonum).w ; is demo number less than 5?
-		blo.s	loc_3422	; if yes, branch
-		move.w	#0,(v_demonum).w ; reset demo number to 0
-
-loc_3422:
+		bsr.w	DemoSetup
 		move.w	#1,(f_demo).w	; turn demo mode on
 		move.b	#id_Demo,(v_gamemode).w ; set screen mode to 08 (demo)
 		cmpi.w	#$700,d0	; is level number 0700 (the cold brew zone)?
@@ -2420,6 +2410,19 @@ Demo_Level:
 Demo_Brew:
 		move.b	#id_ColdBrew,(v_gamemode).w ; set screen mode to $34
 		rts	
+
+DemoSetup:
+		move.w	(v_demonum).w,d0 ; load demo number
+		andi.w	#7,d0
+		add.w	d0,d0
+		move.w	Demo_Levels(pc,d0.w),d0	; load level number for demo
+		move.w	d0,(v_zone).w
+		addq.w	#1,(v_demonum).w ; add 1 to demo number
+		cmpi.w	#5,(v_demonum).w ; is demo number less than 5?
+		blo.s	loc_3422	; if yes, branch
+		move.w	#0,(v_demonum).w ; reset demo number to 0
+loc_3422:
+		rts
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------

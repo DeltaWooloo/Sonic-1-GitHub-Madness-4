@@ -314,6 +314,11 @@ DebuggerMenu_LoadGame:
 		move.b	#2,(v_continues).w ; set continues to 2 for the accurate felix experience		
 		move.l	#5000,(v_scorelife).w ; extra life is awarded at 50000 points
 		move.b	#1,(v_dbgmenu_exit).w
+		cmpi.b	#$08,(v_gamemode).w	; is game mode demo?
+		bne.s	.Act4			; if not, branch
+;		jsr		(DemoSetup).l
+		move.w	#1,(f_demo).w ; set demo mode flag on
+.Act4:
 		cmpi.b	#3,(v_act).w		; is act 4?
 		bne.s	.KeepAsAct4			; if not, keep act
 ;DebuggerMenu_AntiAct4:			; support act 4, but ensure if the zone does not have one (if not, set to 3) - CONI
