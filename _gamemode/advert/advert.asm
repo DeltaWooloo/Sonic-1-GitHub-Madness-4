@@ -1,6 +1,6 @@
-advertdata macro seconds,art,map,pal,bgm,pcm
+advertdata macro seconds,skipsec,art,map,pal,bgm,pcm
 	dc.l art,map,pal
-	dc.b seconds,bgm,pcm,0
+	dc.b seconds,skipsec,bgm,pcm
 	endm
 advertdatasize equ 16
 ; ---------------------------------------------------------------------------
@@ -24,6 +24,14 @@ GM_Advert:
 		jsr	ClearScreen
 		clr.b	(f_wtr_state).w
 
+		lea	.eyecatch1(pc),a2
+		bsr.s	.render
+
+		jsr	RandomNumber				; RAND8(2,5)
+		and.b	#3,d0
+		addq.b	#2,d0
+		move.b	d0,(v_pcyc_num).w
+.adsloop:
 		lea	.table(pc),a2
 		jsr	RandomNumber				; RAND16(0,adcnt)
 		and.l	#$FFFF,d0
@@ -31,7 +39,17 @@ GM_Advert:
 		swap	d0					; get modulo
 		mulu.w	#advertdatasize,d0
 		add.w	d0,a2
+		bsr.s	.render
+		subq.b	#1,(v_pcyc_num).w
+		bne.s	.adsloop
 
+		lea	.eyecatch2(pc),a2
+		bsr.s	.render
+; return to main game
+		move.b	#id_Level,(v_gamemode).w
+		rts
+
+.render:
 		move.l	(a2)+,a0
 		move.l	a2,-(sp)
 		jsr	ClearPLC
@@ -66,8 +84,9 @@ GM_Advert:
 		dbf	d0,.palinit
 
 		moveq	#5,d0
-		move.b	(a2)+,d0
 		moveq	#5,d1
+		move.b	(a2)+,d0
+		move.b	(a2)+,d1
 		moveq	#60,d2
 		btst	#6,(v_megadrive).w
 		beq.s	.ntsc
@@ -103,17 +122,33 @@ GM_Advert:
 		tst.w	(v_generictimer).w
 		bne.s	.mainloop
 .mainexit:
-; return to main game
-		move.b	#id_Level,(v_gamemode).w
+		move.b	#bgm_Fade,d0
+		jsr	QueueSound2
+		jsr	PaletteWhiteOut
 		rts
 ; ---------------------------------------------------------------------------
 .table:
-		advertdata 30,Ad_Lactose.art,Ad_Lactose.fg,Ad_Lactose.pal,bgm_ClintonFuck,0
-		advertdata 5,Art_CRT,Map_CRT,Pal_CRT,bgm_PuyoReject,0
+		advertdata 30,5,Ad_Lactose.art,Ad_Lactose.fg,Ad_Lactose.pal,bgm_ClintonFuck,0
+		advertdata 5,10,Art_CRT,Map_CRT,Pal_CRT,bgm_PuyoReject,0
+		advertdata 30,5,Ad_Deltarune.art,Ad_Deltarune.fg,Ad_Deltarune.pal,bgm_DeltaTale,0
 .tablee:
 
+.eyecatch1:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg1,Ad_Eyecatch.pal,bgm_MayoDed,0
+.eyecatch2:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg2,Ad_Eyecatch.pal,bgm_EuroSega,0
+
+Ad_Eyecatch:
+.pal:		binclude "_gamemode/advert/eyecatch-pal.unc"
+.fg1:		binclude "_gamemode/advert/eyecatch-map1.eni"
+.fg2:		binclude "_gamemode/advert/eyecatch-map2.eni"
+.art:		binclude "_gamemode/advert/eyecatch-art.nem"
+		even
 Ad_Lactose:
-.pal:		binclude "_gamemode/advert/adstart-pal.unc"
-.fg:		binclude "_gamemode/advert/adstart-map.eni"
-.art:		binclude "_gamemode/advert/adstart-art.nem"
+.pal:		binclude "_gamemode/advert/ad-lactose-pal.unc"
+.fg:		binclude "_gamemode/advert/ad-lactose-map.eni"
+.art:		binclude "_gamemode/advert/ad-lactose-art.nem"
+		even
+Ad_Deltarune:
+.pal:		binclude "_gamemode/advert/ad-deltarune-pal.unc"
+.fg:		binclude "_gamemode/advert/ad-deltarune-map.eni"
+.art:		binclude "_gamemode/advert/ad-deltarune-art.nem"
 		even

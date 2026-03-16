@@ -6,11 +6,11 @@ SonLVL INI Files/SonLVL.log
 # Misc. compiler output.
 *.lst
 *.log
-sonic.p
+*.bak
+*.p
 
 # Built ROMs.
 *.gen
-sonic.debug.lst
 s1built.prev.bin
 s1built.bin
 __Release/GHM4.cue
