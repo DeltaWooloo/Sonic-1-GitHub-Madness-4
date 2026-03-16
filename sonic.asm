@@ -414,6 +414,7 @@ ptr_GM_DaxKatter:	dc.l	GM_DaxKatter		; DaxKatter Brings You
 ptr_SplashScreenSkipper:dc.l	GM_SplashScreenSkipper	; My Stupid Splash is here
 ptr_Advert:		dc.l	GM_Advert		; For all the reject splash screens I guess
 ;ptr_GM_RPGBattle:	dc.l	GM_RPGBattle		; RPG Battle (for Azure Rainforest) ($4C)
+ptr_GiovanniSplash:	dc.l	GiovanniSplash		; jo
 GameModeArray_End:
 ; ===========================================================================
 	if SkipChecksumCheck=0
@@ -7202,6 +7203,12 @@ ART_NT:   incbin	"NMRTT/NM_ART.bin"
 
 MAP_NT:   incbin	"NMRTT/NM_MAP.bin"
         even
+	
+; ---------------------------------------------------------------------------
+; "GIOVANNI.GEN" Splash Screen Graphics
+; ---------------------------------------------------------------------------
+
+Nem_Giovanni:	incbin	"dotgen/Giovanni Logo Graphics.nem"
 
 ; end of 'ROM'
 		even

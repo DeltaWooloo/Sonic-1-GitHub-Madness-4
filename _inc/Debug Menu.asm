@@ -535,6 +535,7 @@ GamemodeNameTable:
 		dc.w	.DaxKatter-.t
 		dc.w	.Skipper-.t
 		dc.w	.Advert-.t
+		dc.w	.Giovanni-.t
 		rept ( (GameModeArray_End-GameModeArray)-(((*)-.t)*2) )/4
 		dc.w	.Placeholder-.t
 		endr
@@ -561,6 +562,7 @@ GamemodeNameTable:
 .DaxKatter:	dc.b	"DAXKATTER LOGO  "
 .Skipper:	dc.b	"SPLASH SKIPPER  "
 .Advert:	dc.b	"ADVERTISEMENTS  "
+.Giovanni:	dc.b	"GIOVANNI.GEN    "
 .Placeholder:	dc.b	"PLACEHOLDER NAME"
 		even
 
@@ -617,6 +619,8 @@ Text_MainMenu:
 		even
 
 ; ===========================================================================
+; 2026-03-16: love y'all <3 - giovanni.gen
+;
 ; Subroutine that renders one line of text.
 ; Default code is meant for ASCII rendering, but can be replaced for work with Sonic 2's font.
 ; Code for S2 version by warr1or2 (https://sonicresearch.org/community/index.php?threads/sonic-1-have-an-option-screen-up-using-the-level-select-and-seperating-the-two.5998/#post-85614)
