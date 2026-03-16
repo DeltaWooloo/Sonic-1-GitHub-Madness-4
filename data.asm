@@ -685,6 +685,8 @@ Level_BREW2:	binclude	"levels/BREW2.bin"
 		even
 Level_BREW3:	binclude	"levels/BREW3.bin"
 		even
+Level_BREW4:	binclude	"levels/BREW4.bin"
+		even
 Level_BREW1Unk:	dc.l 0
 Level_WIN1:	binclude	"levels/WIN1.bin"
 		even
@@ -867,6 +869,8 @@ ObjPos_BREW1:	binclude	"objpos/BREW1.bin"
 ObjPos_BREW2:	binclude	"objpos/BREW2.bin"
 		even
 ObjPos_BREW3:	binclude	"objpos/BREW3.bin"
+		even
+ObjPos_BREW4:	binclude	"objpos/BREW4.bin"
 		even
 ObjPos_WIN1:	binclude	"objpos/WIN1.bin"
 		even

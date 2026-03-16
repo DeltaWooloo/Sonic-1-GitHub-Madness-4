@@ -42,7 +42,7 @@
 		binclude	"startpos/BREW1.bin"
 		binclude	"startpos/BREW2.bin"
 		binclude	"startpos/BREW3.bin"
-		dc.w	$80,$A8
+		binclude	"startpos/BREW4.bin"
 		
 		binclude	"startpos/WIN1.bin"
 		binclude	"startpos/WIN2.bin"

@@ -38,7 +38,7 @@ Deform_Index:	dc.w Deform_GHZ-Deform_Index, Deform_LZ-Deform_Index
 		dc.w Deform_MZ-Deform_Index, Deform_SLZ-Deform_Index
 		dc.w Deform_SYZ-Deform_Index, Deform_SBZ-Deform_Index
 		zonewarning Deform_Index,2
-		dc.w Deform_GHZ-Deform_Index, Deform_GHZ-Deform_Index
+		dc.w Deform_GHZ-Deform_Index, Deform_CBZ-Deform_Index
 		dc.w Deform_WZ-Deform_Index, Deform_Joint-Deform_Index
 		dc.w Deform_LZ-Deform_Index,Deform_LZ-Deform_Index
 		dc.w Deform_LZ-Deform_Index,Deform_LZ-Deform_Index
@@ -700,6 +700,62 @@ Deform_WZ:
 
 		move.w	(v_screenposy).w,(v_bgscreenposy).w
 		rts
+
+Deform_CBZ:
+	; calculate Y position
+		lea	(v_hscrolltablebuffer).w,a1
+		move.w	(v_screenposy).w,d0
+		andi.w	#$7FF,d0
+		lsr.w	#5,d0
+		cmpi.w	#$20,d0
+		bls.s	.limitY
+		moveq	#$20,d0
+	.limitY:
+		move.w	d0,d4
+		move.w	d0,(v_bgscrposy_vdp).w
+		move.w	(v_screenposx).w,d0
+		neg.w	d0
+		swap	d0
+	; auto-scroll clouds
+		addi.l	#$4000,(v_bgscroll_buffer).w
+		move.w	(v_bgscroll_buffer).w,d0
+		move.w	(v_screenposx).w,d2
+		asr.w	#6,d2
+		add.w	d2,d0
+		neg.w	d0
+		move.w	#$54,d1
+		sub.w	d4,d1
+		bcs.s	.gotoCloud2
+	.cloudLoop1:
+		move.l	d0,(a1)+
+		dbf	d1,.cloudLoop1
+	.gotoCloud2:
+		move.w	#$1E,d1
+		move.w	(v_screenposx).w,d0
+		neg.w	d0
+		asr.w	#4,d0
+	.mountainLoop:		; distant mountains
+		move.l	d0,(a1)+
+		dbf	d1,.mountainLoop
+
+		move.w	#$4F,d1
+		move.w	(v_screenposx).w,d0
+		neg.w	d0
+		asr.w	#3,d0
+	.hillLoop:			; closer mountains
+		move.l	d0,(a1)+
+		dbf	d1,.hillLoop
+
+		move.w	#$3F,d1
+		move.w	(v_screenposx).w,d0
+		neg.w	d0
+		asr.w	#2,d0
+	.waterLoop:			; trees
+		move.l	d0,(a1)+
+		dbf	d1,.waterLoop
+		rts
+; End of function Deform_CBZ
+
 ; ---------------------------------------------------------------------------
 ; temporarily using generictimer as an input
 ; ---------------------------------------------------------------------------
