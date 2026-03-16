@@ -133,6 +133,7 @@ GM_Advert:
 		advertdata 30,5,Ad_Deltarune.art,Ad_Deltarune.fg,Ad_Deltarune.pal,bgm_DeltaTale,0
 		advertdata 10,10,Ad_3SonicSonic.art,Ad_3SonicSonic.fg,Ad_3SonicSonic.pal,bgm_LG,0
 		advertdata 5,10,Ad_YuriPropaganda.art,Ad_YuriPropaganda.fg,Ad_YuriPropaganda.pal,bgm_LZ,0
+		advertdata 30,5,Ad_Eggblock.art,Ad_Eggblock.fg,Ad_Eggblock.pal,bgm_Continue,0
 .tablee:
 
 .eyecatch1:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg1,Ad_Eyecatch.pal,0,dRightBack
@@ -163,4 +164,9 @@ Ad_YuriPropaganda:
 .pal:		binclude "_gamemode/advert/ad-yuri-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-yuri-map.eni"
 .art:		binclude "_gamemode/advert/ad-yuri-art.nem"
+		even
+Ad_Eggblock:
+.pal:		binclude "_gamemode/advert/ad-eggblock-pal.unc"
+.fg:		binclude "_gamemode/advert/ad-eggblock-map.eni"
+.art:		binclude "_gamemode/advert/ad-eggblock-art.nem"
 		even
