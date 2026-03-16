@@ -161,6 +161,7 @@ splash_turd macro routine
 	splash_liquid	GM_NT
 
 	;!@ GenesisDoes
+	splash_solid	Compile,	$40, 0,	$00,		60*3
 	splash_solid	GenesisDoes1,	$40, 1,	dGenesisDoes1,	60*10
 	;splash_solid	GenesisCan1,	$40, 1,	dGenesisCan1,	60*3
 	;splash_solid	GenesisCan2,	$40, 1,	dGenesisCan2,	60*3
@@ -208,6 +209,7 @@ splash_turd macro routine
 	;inc_solid_splash GenesisCan2
 	;inc_solid_splash SM64_MM
 
+	inc_solid_splash Compile
 	inc_solid_splash Blessed
 	;inc_solid_splash Shiki
 	inc_solid_splash SonicBroke
