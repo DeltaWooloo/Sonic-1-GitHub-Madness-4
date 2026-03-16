@@ -268,6 +268,10 @@ PLC_Joint2end:
 ; ---------------------------------------------------------------------------
 PLC_DVZ:	dc.w ((PLC_DVZ2-PLC_DVZ-2)/6)-1
 ;		plcm	Nem_Joint,       ArtTile_Level                   ; Joint main patterns
+		plcm	Nem_Spikes,    ArtTile_Spikes                 ; spikes
+		plcm	Nem_HSpring,   ArtTile_Spring_Horizontal      ; horizontal spring
+		plcm	Nem_VSpring,   ArtTile_Spring_Vertical        ; vertical spring
+
 
 PLC_DVZ2:	dc.w ((PLC_DVZ2end-PLC_DVZ2-2)/6)-1
 		plcm	Nem_Spikes,     ArtTile_Spikes                 ; spikes

@@ -558,7 +558,9 @@ GamemodeNameTable:
 
 CharacterNameTable:
 .t:		dc.w	.Tonic-.t
-.Tonic:		dc.b	"TEETH TONIC"
+		dc.w	.Maniac-.t
+.Tonic:		dc.b	"TEETH TONIC     "
+.Maniac:	dc.b	"MANIAC MOUSE    "
 		even
 
 ; ---------------------------------------------------------------------------

@@ -193,7 +193,7 @@ Sonic_Control:	; Routine 2
 		move.b	obPrevAni(a0),obAnim(a0)
 
 .nowindtunnel:
-		bsr.w	Sonic_Animate
+		bsr.w	Player_Animate
 		tst.b	(f_playerctrl).w
 		bmi.s	.ignoreobjcoll
 		jsr	(ReactToItem).l
@@ -1567,7 +1567,7 @@ Sonic_Hurt:	; Routine 4
 		bsr.w	Sonic_HurtStop
 		bsr.w	Sonic_LevelBound
 		bsr.w	Sonic_RecordPosition
-		bsr.w	Sonic_Animate
+		bsr.w	Player_Animate
 		bsr.w	Sonic_LoadGfx
 		jmp	(DisplaySprite).l
 
@@ -1618,7 +1618,7 @@ Sonic_Death:	; Routine 6
 		bsr.w	GameOver
 		jsr	(ObjectFall).l
 		bsr.w	Sonic_RecordPosition
-		bsr.w	Sonic_Animate
+		bsr.w	Player_Animate
 		bsr.w	Sonic_LoadGfx
 		jmp	(DisplaySprite).l
 
@@ -1694,7 +1694,7 @@ Sonic_Drowned:
 		bsr.w	SpeedToPos		; Make Sonic able to move
 		addi.w	#$10,obVelY(a0)		; Apply gravity
 		bsr.w	Sonic_RecordPosition	; Record position
-		bsr.w	Sonic_Animate		; Animate Sonic
+		bsr.w	Player_Animate		; Animate Sonic
 		bsr.w	Sonic_LoadGfx		; Load Sonic's DPLCs
 		bra.w	DisplaySprite		; And finally, display Sonic
 ; End of function Sonic_Drowned
@@ -1793,6 +1793,25 @@ Sonic_Loops:
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
+
+Player_Animate:
+		moveq	#0,d0
+		move.b	(v_characterid).w,d0
+		chk	#chrid_last,d0
+		add.w	d0,d0
+		add.w	d0,d0
+		jmp 	.AniRoutTbl(pc,d0.w)
+; ---------------------------------------------------------------------------
+.AniRoutTbl	
+		bra.w	Sonic_Animate
+		bra.w	Maniac_Animate	
+		bra.w	Sonic_Animate
+		bra.w	Sonic_Animate
+		bra.w	Sonic_Animate
+
+; ---------------------------------------------------------------------------
+; Sonic animation routine
+; ---------------------------------------------------------------------------
 
 Sonic_Animate:
 		lea	(Ani_Sonic).l,a1
@@ -2015,8 +2034,189 @@ Sonic_Animate:
 		bra.w	.loadframe
 
 ; End of function Sonic_Animate
+; ---------------------------------------------------------------------------
+; Maniac animation routine
+; ---------------------------------------------------------------------------
 
-		include	"_anim/Sonic.asm"
+Maniac_Animate:
+		lea	(Ani_Maniac).l,a1
+		moveq	#0,d0
+		move.b	obAnim(a0),d0
+		cmp.b	obPrevAni(a0),d0 ; has animation changed?
+		beq.s	.do		; if not, branch
+		move.b	d0,obPrevAni(a0)
+		move.b	#0,obAniFrame(a0) ; reset animation
+		move.b	#0,obTimeFrame(a0) ; reset frame duration
+
+; SAnim_Do:
+.do:
+		add.w	d0,d0
+		adda.w	(a1,d0.w),a1	; jump to appropriate animation script
+		move.b	(a1),d0
+		bmi.s	.walkrunroll	; if animation is walk/run/roll/jump, branch
+		move.b	obStatus(a0),d1
+		andi.b	#1,d1
+		andi.b	#$FC,obRender(a0)
+		or.b	d1,obRender(a0)
+		subq.b	#1,obTimeFrame(a0) ; subtract 1 from frame duration
+		bpl.s	.delay		; if time remains, branch
+		move.b	d0,obTimeFrame(a0) ; load frame duration
+
+; SAnim_Do2:
+.loadframe:
+		moveq	#0,d1
+		move.b	obAniFrame(a0),d1 ; load current frame number
+		move.b	1(a1,d1.w),d0	; read sprite number from script
+		bmi.s	.end_FF		; if animation is complete, branch
+
+; SAnim_Next:
+.next:
+		move.b	d0,obFrame(a0)	; load sprite number
+		addq.b	#1,obAniFrame(a0) ; next frame number
+
+; SAnim_Delay:
+.delay:
+		rts
+; ----------------------------------------------------------------------------
+
+; SAnim_End_FF:
+.end_FF:
+		addq.b	#1,d0		; is the end flag - $FF ?
+		bne.s	.end_FE		; if not, branch
+		move.b	#0,obAniFrame(a0) ; restart the animation
+		move.b	1(a1),d0	; read sprite number
+		bra.s	.next
+; ----------------------------------------------------------------------------
+
+; SAnim_End_FE
+.end_FE:
+		addq.b	#1,d0		; is the end flag - $FE ?
+		bne.s	.end_FD		; if not, branch
+		move.b	2(a1,d1.w),d0	; read the next byte in the script
+		sub.b	d0,obAniFrame(a0) ; jump back d0 bytes in the script
+		sub.b	d0,d1
+		move.b	1(a1,d1.w),d0	; read sprite number
+		bra.s	.next
+; ----------------------------------------------------------------------------
+
+; SAnim_End_FD:
+.end_FD:
+		addq.b	#1,d0		; is the end flag - $FD ?
+		bne.s	.end		; if not, branch
+		move.b	2(a1,d1.w),obAnim(a0) ; read next byte, run that animation
+
+; SAnim_End:
+.end:
+		rts
+; ----------------------------------------------------------------------------
+
+; SAnim_WalkRun:
+.walkrunroll:
+		subq.b	#1,obTimeFrame(a0) ; subtract 1 from frame duration
+		bpl.s	.delay		; if time remains, branch
+		addq.b	#1,d0		; is animation walking/running?
+		bne.w	.rolljump	; if not, branch
+		moveq	#0,d1
+		move.b	obAngle(a0),d0	; get Sonic's angle
+		move.b	obStatus(a0),d2
+		andi.b	#1,d2		; is Sonic mirrored horizontally?
+		bne.s	.flip		; if yes, branch
+		not.b	d0		; reverse angle
+
+.flip:
+		addi.b	#$10,d0		; add $10 to angle
+		bpl.s	.noinvert	; if angle is $0-$7F, branch
+		moveq	#3,d1
+
+.noinvert:
+		andi.b	#$FC,obRender(a0)
+		eor.b	d1,d2
+		or.b	d2,obRender(a0)
+		btst	#5,obStatus(a0)	; is Sonic pushing something?
+		bne.w	.push		; if yes, branch
+
+		lsr.b	#4,d0		; divide angle by $10
+		andi.b	#6,d0		; angle must be 0, 2, 4 or 6
+		move.w	obInertia(a0),d2 ; get Sonic's speed
+		bpl.s	.nomodspeed
+		neg.w	d2		; modulus speed
+
+.nomodspeed:
+		lea	(ManiacAni_Run).l,a1 ; use running animation
+		cmpi.w	#$600,d2	; is Sonic at running speed?
+		bhs.s	.running	; if yes, branch
+
+		lea	(ManiacAni_Walk).l,a1 ; use walking animation
+		move.b	d0,d1
+		lsr.b	#1,d1
+		add.b	d1,d0
+
+.running:
+		add.b	d0,d0
+		move.b	d0,d3
+		neg.w	d2
+		addi.w	#$800,d2
+		bpl.s	.belowmax
+		moveq	#0,d2		; max animation speed
+
+.belowmax:
+		lsr.w	#8,d2
+		move.b	d2,obTimeFrame(a0) ; modify frame duration
+		bsr.w	.loadframe
+		add.b	d3,obFrame(a0)	; modify frame number
+		rts
+; ----------------------------------------------------------------------------
+
+; SAnim_RollJump:
+.rolljump:
+		addq.b	#1,d0		; is animation rolling/jumping?
+		bne.s	.push		; if not, branch
+		move.w	obInertia(a0),d2 ; get Sonic's speed
+		bpl.s	.nomodspeed2
+		neg.w	d2
+
+.nomodspeed2:
+		lea	(ManiacAni_Roll2).l,a1 ; use fast animation
+		cmpi.w	#$600,d2	; is Sonic moving fast?
+		bhs.s	.rollfast	; if yes, branch
+		lea	(ManiacAni_Roll).l,a1 ; use slower animation
+
+.rollfast:
+		neg.w	d2
+		addi.w	#$400,d2
+		bpl.s	.belowmax2
+		moveq	#0,d2
+
+.belowmax2:
+		lsr.w	#8,d2
+		move.b	d2,obTimeFrame(a0) ; modify frame duration
+		move.b	obStatus(a0),d1
+		andi.b	#1,d1
+		andi.b	#$FC,obRender(a0)
+		or.b	d1,obRender(a0)
+		bra.w	.loadframe
+; ----------------------------------------------------------------------------
+
+; SAnim_Push:
+.push:
+		move.w	obInertia(a0),d2 ; get Sonic's speed
+		bmi.s	.negspeed
+		neg.w	d2
+
+.negspeed:
+		addi.w	#$800,d2
+		bpl.s	.belowmax3	
+		moveq	#0,d2
+
+.belowmax3:
+		lsr.w	#6,d2
+		move.b	d2,obTimeFrame(a0) ; modify frame duration
+		lea	(SonAni_Push).l,a1
+		move.b	obStatus(a0),d1
+		andi.b	#1,d1
+		andi.b	#$FC,obRender(a0)
+		or.b	d1,obRender(a0)
+		bra.w	.loadframe
 
 ; ---------------------------------------------------------------------------
 ; Sonic DPLC loading subroutine
@@ -2035,3 +2235,8 @@ Sonic_LoadGfx:
 .end:
 		rts					; return
 ; End of function Sonic_LoadGfx
+
+
+		include	"char_assets/Sonic Ani.asm"
+		include	"char_assets/Maniac Ani.asm"
+
