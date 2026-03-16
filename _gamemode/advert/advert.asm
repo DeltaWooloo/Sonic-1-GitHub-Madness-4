@@ -131,6 +131,7 @@ GM_Advert:
 		advertdata 30,5,Ad_Lactose.art,Ad_Lactose.fg,Ad_Lactose.pal,bgm_ClintonFuck,0
 		advertdata 5,10,Art_CRT,Map_CRT,Pal_CRT,bgm_PuyoReject,0
 		advertdata 30,5,Ad_Deltarune.art,Ad_Deltarune.fg,Ad_Deltarune.pal,bgm_DeltaTale,0
+		advertdata 10,10,Ad_3SonicSonic.art,Ad_3SonicSonic.fg,Ad_3SonicSonic.pal,bgm_LG,0
 .tablee:
 
 .eyecatch1:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg1,Ad_Eyecatch.pal,bgm_MayoDed,0
@@ -151,4 +152,9 @@ Ad_Deltarune:
 .pal:		binclude "_gamemode/advert/ad-deltarune-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-deltarune-map.eni"
 .art:		binclude "_gamemode/advert/ad-deltarune-art.nem"
+		even
+Ad_3SonicSonic:
+.pal:		binclude "_gamemode/advert/ad-3ss-pal.unc"
+.fg:		binclude "_gamemode/advert/ad-3ss-map.eni"
+.art:		binclude "_gamemode/advert/ad-3ss-art.nem"
 		even
