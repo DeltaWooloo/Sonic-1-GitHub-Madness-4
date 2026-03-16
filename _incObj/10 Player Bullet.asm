@@ -2,6 +2,7 @@
 ; Object 10 - Player Bullet
 ; ---------------------------------------------------------------------------
 
+bulletfactor = $30
 PlayerBullet:
 		moveq	#0, d0
 		move.b	obRoutine(a0), d0
@@ -25,7 +26,7 @@ PBullet_Init:
 
 		move.b	obAngle(a0), d0  ; get angle to d0
 		jsr	(CalcSine).w  ; returns the sine in d0 and the cosine in d1
-		move.w	#$600, d2  ; set speed
+		move.w	bulletfactor(a0), d2  ; set speed
 		muls.w	d2, d1    ; multiply cosine by $600
 		asr.l	#8, d1    ; division by $100
 		move.w	d1, obVelX(a0)  ; set x velocity

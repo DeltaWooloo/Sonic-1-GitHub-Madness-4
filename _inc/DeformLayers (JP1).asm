@@ -19,15 +19,15 @@ DeformLayers:
 		bsr.w	ScrollHoriz
 		bsr.w	ScrollVertical
 		bsr.w	DynamicLevelEvents
-		move.w	(v_screenposy).w,(v_scrposy_orig).w
-		bsr.w	ShakeScreen
 		move.w	(v_screenposy).w,(v_scrposy_vdp).w
 		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
 		add.w	d0,d0
 		move.w	Deform_Index(pc,d0.w),d0
-		jmp	Deform_Index(pc,d0.w)
+		jsr	Deform_Index(pc,d0.w)
+		move.w	(v_scrposy_vdp).w,(v_scrposy_orig).w
+		bra.w	ShakeScreen
 ; End of function DeformLayers
 
 ; ===========================================================================
@@ -757,7 +757,7 @@ Deform_CBZ:
 ; End of function Deform_CBZ
 
 ; ---------------------------------------------------------------------------
-; temporarily using generictimer as an input
+; this sucks redo it plz
 ; ---------------------------------------------------------------------------
 
 ShakeScreen:
@@ -775,7 +775,7 @@ ShakeScreen:
 	neg.w   d1
 .Odd:
 	add.w   d1,d0
-	move.w  d0,v_screenposy.w
+	move.w  d0,v_scrposy_vdp.w
 	rts
 .Done:
 	rts

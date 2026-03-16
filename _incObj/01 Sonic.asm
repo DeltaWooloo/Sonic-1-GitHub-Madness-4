@@ -159,10 +159,52 @@ Sonic_Control:	; Routine 2
 
 .ignorecontrols:
 		btst	#0,(f_playerctrl).w 		; are controls locked?
-		bne.s	.ignoremodes			; if yes, branch
+		bne.w	.ignoremodes			; if yes, branch
 
+		cmpi.b	#chrid_maniac,v_characterid	; check if needle
+		bne.s	.Skipma				; skip if not
+		btst	#6,(v_jpadpress1)
+		beq.w	.nobullets
+
+; ----------------------------------------------------------------------------
+; needlemouse bullet spawn
+; ----------------------------------------------------------------------------
+
+		moveq   #3, d2
+		moveq   #0, d1
+		moveq   #0, d0
+		move.b	obAngle(a0), d1
+		btst	#0,obStatus(a0)
+		beq.s	.notflip1
+		add.b	#$80,d1
+.notflip1:
+		sub.w	#$C,d1
+
+.makebullets1:
+		bsr.w	FindFreeObj
+		bne.w	.nobullets
+
+		move.b	#id_PlayerBullet, obID(a1)
+		move.w	#$B00,bulletfactor(a1)
+		move.w	obX(a0), obX(a1)
+		move.w	obY(a0), obY(a1)
+		move.b	d1, obAngle(a1)
+		add.b	#$8, d1
+		dbf	d2, .makebullets1
+
+		move.w	#$F, v_screenshaketime		; tonic has insane firepower
+		move.w	#sfx_Bomb, d0
+		jsr	PlaySound_Special		
+		bra.w	.nobullets			; skip ahead
+
+; ----------------------------------------------------------------------------
+; needlemouse bullet spawn
+; ----------------------------------------------------------------------------
+
+.Skipma
 		btst	#6,(v_jpadpress1)
 		beq.s	.nobullets
+
 
 		moveq   #3, d2
 		moveq   #0, d1
@@ -173,6 +215,7 @@ Sonic_Control:	; Routine 2
 		bne.s	.nobullets
 
 		move.b	#id_PlayerBullet, obID(a1)
+		move.w	#$600,bulletfactor(a1)
 		move.w	obX(a0), obX(a1)
 		move.w	obY(a0), obY(a1)
 		move.b	d1, obAngle(a1)
