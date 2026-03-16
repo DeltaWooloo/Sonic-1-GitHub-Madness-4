@@ -67,6 +67,7 @@ Player_Init:	; Routine 0
 ; d0 = map
 ; d1 = dgfx
 ; d2 = art
+; d3 = palette
 ; ----------------------------------------------------------------------------
 
 GetPlayerData:
@@ -78,11 +79,12 @@ GetPlayerData:
 	move.l	(a2)+,d0
 	move.l	(a2)+,d1
 	move.l	(a2)+,d2
+	move.l	(a2)+,d3
 	rts
 
 PlayerMapList:
-	dc.l	Map_Tonic,Dgfx_Tonic,Art_Tonic,0
-	dc.l	Map_Sonic,Dgfx_Sonic,Art_Sonic,0
+	dc.l	Map_Tonic,Dgfx_Tonic,Art_Tonic,Pal_Tonic
+	dc.l	Map_Sonic,Dgfx_Sonic,Art_Sonic,Pal_Sonic_2
 
 ; ----------------------------------------------------------------------------
 ; TeethTonic character init routine

@@ -38,22 +38,24 @@ Nem_TGTiles:	binclude	"TGSplash/tiles.bin"
 ; Uncompressed graphics - Sonic
 ; ---------------------------------------------------------------------------
 Map_Tonic:	include		"_maps/Tonic.asm"
-
+		even
 Dgfx_Tonic:	include		"_maps/Tonic DGFX.asm"
-
+		even
 Art_Tonic:	binclude	"artunc/Tonic.bin"	; Sonic
 		even
-
+Pal_Tonic:	binclude	"palette/Tonic.bin"
+		even
 ; ---------------------------------------------------------------------------
 ; Uncompressed graphics - Sonic
 ; ---------------------------------------------------------------------------
 Map_Sonic:	include		"_maps/Sonic.asm"
-
+		even
 Dgfx_Sonic:	include		"_maps/Sonic - Dynamic Gfx Script.asm"
-
+		even
 Art_Sonic:	binclude	"artunc/Sonic.bin"	; Sonic
 		even
-
+Pal_Sonic_2:	binclude	"palette/Sonic.bin"
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - various
 ; ---------------------------------------------------------------------------

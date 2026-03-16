@@ -1962,7 +1962,7 @@ PalLoad_Water:
 Pal_SegaBG:		bincludeEndMarker	"palette/Sega Background.bin"
 Pal_Title:		bincludeEndMarker	"palette/Title Screen.bin"
 Pal_LevelSel:		bincludeEndMarker	"palette/Level Select.bin"
-Pal_Sonic:		bincludeEndMarker	"palette/Sonic.bin"
+Pal_Sonic:		bincludeEndMarker	"palette/Sonic.bin"			; generic sonic palette
 Pal_SplScrSki:		bincludeEndMarker	"Nano's SHIT/splash/data/pal.pal"
 Pal_GHZ:		bincludeEndMarker	"palette/Green Hill Zone.bin"
 Pal_LZ:			bincludeEndMarker	"palette/Labyrinth Zone.bin"
@@ -2560,8 +2560,22 @@ Level_LoadPal:
 		; hiii
 		move.w	#30,(v_air).w
 		enable_ints
-		moveq	#palid_Sonic,d0
-		bsr.w	PalLoad	; load Sonic's palette
+
+		; load player palette
+
+		jsr	GetPlayerData
+		move.l	d3,a0
+		lea	v_palette,a1
+
+		move.l	(a0)+,(a1)+	; quick
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+
 		tst.b	(v_waterflag).w ; is level LZ?
 		bpl.s	Level_GetBgm	; if not, branch
 
