@@ -138,6 +138,7 @@ GM_Advert:
 		advertdata 15,5,Ad_GameStar.art,Ad_GameStar.fg,Ad_GameStar.pal,bgm_NewShop,0
 		advertdata 10,10,Ad_Craig.art,Ad_Craig.fg,Ad_Craig.pal,bgm_LG,0
 		advertdata 30,10,Ad_Carbuncle.art,Ad_Carbuncle.fg,Ad_Carbuncle.pal,bgm_Sunset,0
+		advertdata 30,5,Ad_Support.art,Ad_Support.fg,Ad_Support.pal,bgm_ChickenDance,0
 .tablee:
 .eyecatch1:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg1,Ad_Eyecatch.pal,0,dRightBack
 .eyecatch2:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg2,Ad_Eyecatch.pal,bgm_EuroSega,0
@@ -193,3 +194,10 @@ Ad_Carbuncle:
 .fg:		binclude "_gamemode/advert/ad-carbuncle-map.eni"
 .art:		binclude "_gamemode/advert/ad-carbuncle-art.nem"
 		even
+
+Ad_Support:
+.pal:		binclude "_gamemode/advert/Pal - Support.bin"
+.fg:		binclude "_gamemode/advert/Map - Support.eni"
+.art:		binclude "_gamemode/advert/Art - Support.nem"
+		even
+
