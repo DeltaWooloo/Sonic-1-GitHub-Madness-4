@@ -103,9 +103,9 @@ FoxyBooFrames:
 	dc.l	Eni_FoxyBooF4
 	dc.l	Eni_FoxyBooF4
 
-Pal_Foxy:		bincludeEndMarker	"conimodes/FoxyBoo/pal.bin"
-Nem_FoxyBoo:		binclude	"conimodes/FoxyBoo/art.bin"
-Eni_FoxyBooF1:		binclude	"conimodes/FoxyBoo/map1.bin"
-Eni_FoxyBooF2:		binclude	"conimodes/FoxyBoo/map2.bin"
-Eni_FoxyBooF3:		binclude	"conimodes/FoxyBoo/map3.bin"
-Eni_FoxyBooF4:		binclude	"conimodes/FoxyBoo/map4.bin"
+Pal_Foxy:		bincludeEndMarker	"conimodes/foxyboo/pal.bin"
+Nem_FoxyBoo:		binclude	"conimodes/foxyboo/art.bin"
+Eni_FoxyBooF1:		binclude	"conimodes/foxyboo/map1.bin"
+Eni_FoxyBooF2:		binclude	"conimodes/foxyboo/map2.bin"
+Eni_FoxyBooF3:		binclude	"conimodes/foxyboo/map3.bin"
+Eni_FoxyBooF4:		binclude	"conimodes/foxyboo/map4.bin"

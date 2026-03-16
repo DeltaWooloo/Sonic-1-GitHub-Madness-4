@@ -68,12 +68,12 @@ Overload_SetupVDP:
 		rts
 ; ======================================================================
 
-Nem_TOverload:	binclude	"_gamemode\Team Overload\Art_TOverload.bin"
+Nem_TOverload:	binclude	"_gamemode/Team Overload/Art_TOverload.bin"
 		even
-Pal_TOverload:	binclude	"_gamemode\Team Overload\Pal_TOverload.bin"
+Pal_TOverload:	binclude	"_gamemode/Team Overload/Pal_TOverload.bin"
 		even
-Map_TOverloadA:	binclude	"_gamemode\Team Overload\Map_TOverload_A.bin"
+Map_TOverloadA:	binclude	"_gamemode/Team Overload/Map_TOverload_A.bin"
 		even
-Map_TOverloadB:	binclude	"_gamemode\Team Overload\Map_TOverload_B.bin"
+Map_TOverloadB:	binclude	"_gamemode/Team Overload/Map_TOverload_B.bin"
 		even
 ; ======================================================================

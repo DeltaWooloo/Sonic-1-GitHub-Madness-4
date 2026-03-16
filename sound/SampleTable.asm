@@ -120,7 +120,7 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Sonic 2 Samples
-	incdac	Tom, "Sound/dac/S2/Tom.pcm"
+	incdac	Tom, "sound/dac/S2/Tom.pcm"
 
 ; ---------------------------------------------------------------
 ; Sonic 3 Samples
@@ -180,7 +180,7 @@ SampleTable:
 	incdac	QuakeJump, "sound/dac/quakejump.wav"
 	incdac	letsgoeee, "sound/dac/letsgoeee.wav"   ; hi
 	incdac	Lg, "sound/dac/lg/Echo.pcm"
-	incdac	Foxy, "sound/dac/foxy.wav"
+	incdac	Foxy, "sound/dac/Foxy.wav"
 	incdac	GayNeil, "sound/dac/gayneil.wav"
 ; ---------------------------------------------------------------
 ; Null level end
