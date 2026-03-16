@@ -109,6 +109,7 @@ GM_Advert:
 ; ---------------------------------------------------------------------------
 .table:
 		advertdata 30,Ad_Lactose.art,Ad_Lactose.fg,Ad_Lactose.pal,bgm_ClintonFuck,0
+		advertdata 5,Art_CRT,Map_CRT,Pal_CRT,bgm_PuyoReject,0
 .tablee:
 
 Ad_Lactose:
