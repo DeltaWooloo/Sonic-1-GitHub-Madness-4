@@ -378,7 +378,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum sfx_TonicTongue
 	nextenum sfx_FCBlip
 	nextenum sfx_FCSelect
-sfx__Last = sfx_MenuConfirm
+sfx__Last = sfx_FCSelect
 
 ; Special sound effects
 	enum	spec__First=$F0
