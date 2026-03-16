@@ -24,7 +24,21 @@ v_16x16:		ds.b	$1800		; 16x16 tile mappings
 
 VDP_Command_Buffer:	ds.w	7*$12		; stores 18 ($12) VDP commands to issue the next time ProcessDMAQueue is called
 VDP_Command_Buffer_Slot:ds.l	1		; stores the address of the next open slot for a queued VDP command
-			ds.b	$200		; unused ($200 were freed up by the new DMA Queue)
+
+v_palflags:	ds.b 1		; GIO: Palette changer flags. (1 byte. Bit 0 = above water. Bit 1 = below water. Bit 2 = palette cycle. Other bits MUST stay 0.)
+v_awcount:	ds.b 1		; GIO: Counter for number of above water palette entries to be changed. (1 byte)
+v_bwcount:	ds.b 1		; GIO: Counter for number of below water palette entries to be changed. (1 byte)
+v_paltime:	ds.b 1		; GIO: Frequency of palette changes. (1 byte)
+v_paltimecur:	ds.b 1		; GIO: Actual timer used for palette transitioning. (1 byte)
+v_pcyccount:	ds.b 1		; GIO: Counter for number of palette cycle entries to be changed. (1 byte)
+p_awtarget:	ds.b 4		; GIO: ROM pointer to the above water target palette. (4 bytes)
+p_bwtarget:	ds.b 4		; GIO: ROM pointer to the below water target palette. (4 bytes)
+p_awreplace:	ds.b 4		; GIO: RAM pointer to the first above water palette entry to be replaced. (4 bytes)
+p_bwreplace:	ds.b 4		; GIO: RAM pointer to the first below water palette entry to be replaced. (4 bytes)
+p_pcyctarget:	ds.b 4		; GIO: ROM pointer to the palette cycle target palette. (4 bytes)
+v_palcycleram:	ds.b $20	; GIO: Buffer for the palette cycling data (as much RAM as you want)
+
+			ds.b	$1C6		; unused ($200 were freed up by the new DMA Queue) (and giovanni yoinked some lmao)
 v_tracksonic:		ds.b	$100		; position tracking data for Sonic
 v_hscrolltablebuffer:	ds.b	$380		; scrolling table data
 v_hscrolltablebuffer_end:
