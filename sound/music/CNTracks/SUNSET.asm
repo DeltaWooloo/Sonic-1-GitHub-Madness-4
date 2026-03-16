@@ -155,26 +155,26 @@ Sunset_FM3C1:
 ; DAC Data
 Sunset_DAC:
 	smpsCall			Sunset_DACC1
-	dc.b	$84
+	dc.b	dTick
 	smpsCall			Sunset_DACC1
-	dc.b	$84, $03, $84
+	dc.b	dTick, $03, dTick
 	smpsLoop            $00, $03, Sunset_DAC
 	smpsCall			Sunset_DACC1
-	dc.b	$84
-	dc.b	dKick, $06, $84, dKick, $84, $03, $84, dSnare, dSnare, dLowTimpani, $06, dSnare, dSnare, $03, dSnare
+	dc.b	dTick
+	dc.b	dKick, $06, dTick, dKick, dTick, $03, dTick, dSnare, dSnare, dLowTimpani, $06, dSnare, dSnare, $03, dSnare
 Sunset_DACL:
 	smpsCall			Sunset_DACC2
-	dc.b	dSnare, $84
+	dc.b	dSnare, dTick
 	smpsCall			Sunset_DACC2
 	dc.b	dSnare, $06, $03, dSnare
 	smpsJump				Sunset_DACL
 
 Sunset_DACC1:
-	dc.b	dKick, $06, $84, dKick, $84, $03, $84, dKick, $84, $84, $06, dSnare
+	dc.b	dKick, $06, dTick, dKick, dTick, $03, dTick, dKick, dTick, dTick, $06, dSnare
 	smpsReturn
 
 Sunset_DACC2:
-	dc.b	dKick, $06, $84, dSnare, $84, $03, $84, dKick, $84, $84, $06
+	dc.b	dKick, $06, dTick, dSnare, dTick, $03, dTick, dKick, dTick, dTick, $06
 	smpsReturn
 
 Sunset_Voices:

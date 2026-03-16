@@ -52,6 +52,9 @@ dAmenCrash:			ds.b 1
 dClintLoopA:		ds.b 1
 dClintLoopB:		ds.b 1
 
+; Conic 1 DAC
+dTick:			ds.b 1
+
 ; SFX Samples
 dDAMN				ds.b 1
 dTrevor				ds.b 1
