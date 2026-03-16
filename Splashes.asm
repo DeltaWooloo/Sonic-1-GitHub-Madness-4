@@ -149,6 +149,7 @@ splash_turd macro routine
 	endm
 
 ; Entries
+	splash_liquid	funnybutthole
 	splash_liquid	MultiSplash_Init
 	splash_liquid	SonicRetro
 	splash_liquid	GM_SSRGScreen
@@ -251,7 +252,7 @@ splash_turd macro routine
 	include "LiquidSplashes/2kki/2kki.asm"
 	include "eurosega/eurosega.asm"
 	include "TGSplash/TGSplash.asm"
-
+	include "LiquidSplashes/funny butthole/poop.asm"
 ; Files for turd
 	include "CrazyRemilia/Remi/Remi.asm"
 

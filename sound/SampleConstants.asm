@@ -102,5 +102,6 @@ dLg					ds.b 1
 dSega2				ds.b 1
 dTwerkOf87			ds.b 1
 dGayNeil			ds.b 1
+dfunnyb_utthole			ds.b 1
 	dephase
 	!org -
