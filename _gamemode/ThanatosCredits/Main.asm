@@ -311,8 +311,11 @@ thantxt: macro txt
 	thantxt	"MEMBERS"
 	dc.b	1
 	thantxt	"KATSUSHIMI"
+	thantxt	"ATOLLY GUYKE"
+	thantxt	"KGL"
 	thantxt	"GENESISDOES"
 	thantxt	"DINGISH"
+	thantxt	"MATTMANIA"
 	thantxt "THE GAMER MM"
 	thantxt	"HIPSNAKE"
 	thantxt	"LIQUID GROGU"
@@ -320,7 +323,7 @@ thantxt: macro txt
 	thantxt	"FREAKY BILLY"
 	thantxt	"ROJO MMX"
 	thantxt	"DAXKATTER"
-	thantxt	"MALACHI"	
+	thantxt	"MALACHI"		
 	thantxt	"ADD YOUR NAME HERE"
 	dc.b	1,1
 
@@ -329,6 +332,8 @@ thantxt: macro txt
 	dc.b	1
 	thantxt	"TEETH TONIC"
 	thantxt	"NOID MY GOAT"
+	thantxt	"S2 ARCHIVES"
+	thantxt	"AND HIS STUPID TEAM"
 	thantxt	"KRIKZZ FOR EVERDRIVE"
 	dc.b	1,1,1
 	thantxt	"AND YOUR MOM"
