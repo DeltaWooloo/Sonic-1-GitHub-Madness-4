@@ -52,11 +52,10 @@ GM_TGSplash:
 .Loop:
 	move.b	#$4,(v_vbla_routine).w
 	jsr	WaitForVBla
-
+	andi.b	#btnStart,(v_jpadpress1).l
+	bne.s	.Exit
 	tst.w	(v_generictimer).w
-	beq.w	.Exit
-
-	bra.s	.Loop
+	bne.s	.Loop
 
 .Exit:
 	move.b	#id_Title,(v_gamemode).w
