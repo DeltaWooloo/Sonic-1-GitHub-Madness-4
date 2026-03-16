@@ -451,4 +451,4 @@ MWaterS_Voices:
 	smpsVcReleaseRate   $0A, $05, $0A, $05
 	smpsVcTotalLevel    $00, $07, $00, $1A
 
-	smpsFooterEndSong	"Mus81 - GHZ.asm"
+	smpsFooterEndSong	"LiquidTracks/Mus - Mega Water S.asm"

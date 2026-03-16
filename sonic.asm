@@ -409,9 +409,10 @@ ptr_GM_TryAgainEnd:	dc.l	TryAgainEnd		; Testable TRY AGAIN/END screen ($38)
 ptr_GM_Fetus:		dc.l	GM_Fetus		; Difficulty Select screen out of spite ($3C)
 ptr_GM_Damn:		dc.l	GM_Damn			; DAMN!!!!!!!!!!!!!!!!!!!!!!!
 ptr_GM_TGSplash:	dc.l	GM_TGSplash		; TG2000 Splash Screen ($44)
-ptr_GM_NMR:	dc.l	GM_NT		; Shitle Team ($48)
-;ptr_GM_RPGBattle:	dc.l	GM_RPGBattle		; RPG Battle (for Azure Rainforest) ($4C)
+ptr_GM_NMR:		dc.l	GM_NT			; Shitle Team ($48)
+ptr_GM_DaxKatter:	dc.l	GM_DaxKatter		; DaxKatter Brings You
 ptr_SplashScreenSkipper:dc.l	GM_SplashScreenSkipper	; My Stupid Splash is here
+;ptr_GM_RPGBattle:	dc.l	GM_RPGBattle		; RPG Battle (for Azure Rainforest) ($4C)
 GameModeArray_End:
 ; ===========================================================================
 	if SkipChecksumCheck=0

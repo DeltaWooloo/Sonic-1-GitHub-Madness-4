@@ -372,4 +372,4 @@ Mus85_SYZ_Voices:
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $00, $18, $22, $18
 
-	smpsFooterEndSong	"Mus85 - SYZ.asm"
+	smpsFooterEndSong	"DaxKatter/Mus - Limited Yard.asm"

@@ -2,13 +2,13 @@
 ; DaxKatter Splash Screen
 ; ---------------------------------------------------------------------------
 
-	include	"DAX_Splash/Dax_Macros.asm"
+	include	"DAX/Splash/Dax_Macros.asm"
 
 v_splash_logo = v_objspace
 
 ; =============== S U B R O U T I N E =======================================
 
-DaxKatter_Splash:
+GM_DaxKatter:
 		move.b	#bgm_Stop,d0
 		jsr	(PlaySound_Special).l		; fade out music
 		jsr	(ClearPLC).l
@@ -148,6 +148,7 @@ DaxKatter_Splash:
 		jsr	(PaletteFadeOut).w
 		jsr	VDPSetupGame
 		enable_display
+		move.b	#id_Title,(v_gamemode).w	; go to title screen if not in Splashes
 		rts
 
 ; ---------------------------------------------------------------------------
@@ -246,39 +247,39 @@ Dax_PlaneMap:
 ; ---------------------------------------------------------------------------
 
 Map_DaxKatterD:
-	include		"DAX_Splash/Maps/Map - DaxKatter Splash.asm"
+	include		"DAX/Splash/Maps/Map - DaxKatter Splash.asm"
 	even
 
 EniMap_DaxKatterText:
-	binclude	"DAX_Splash/Maps/Map - DaxKatter Mappings.eni"
+	binclude	"DAX/Splash/Maps/Map - DaxKatter Mappings.eni"
 	even
 
 EniMap_BringsYou:
-	binclude	"DAX_Splash/Maps/Map - Brings You Mappings.eni"
+	binclude	"DAX/Splash/Maps/Map - Brings You Mappings.eni"
 	even
 
 ; ---------------------------------------------------------------------------
 
 Pal_DaxKatterOff:
-	binclude	"DAX_Splash/Pal/Pal - Init.bin"
+	binclude	"DAX/Splash/Pal/Pal - Init.bin"
 	even
 
 Pal_DaxKatterOn:
-	binclude	"DAX_Splash/Pal/Pal - After Flash.bin"
+	binclude	"DAX/Splash/Pal/Pal - After Flash.bin"
 	even
 
 Pal_DaxKatterBringsYou:
-	binclude	"DAX_Splash/Pal/Pal - Brings You.bin"
+	binclude	"DAX/Splash/Pal/Pal - Brings You.bin"
 	even
 
 ; ---------------------------------------------------------------------------
 
 ArtNem_DaxKatter_D:
-	binclude	"DAX_Splash/Art/DaxKatter Splash - D.nem"
+	binclude	"DAX/Splash/Art/DaxKatter Splash - D.nem"
 	even
 
 ArtNem_DaxKatter_Text:
-	binclude	"DAX_Splash/Art/DaxKatter Splash - Text.nem"
+	binclude	"DAX/Splash/Art/DaxKatter Splash - Text.nem"
 	even
 
 ; ---------------------------------------------------------------------------

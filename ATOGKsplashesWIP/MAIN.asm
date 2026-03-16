@@ -46,11 +46,7 @@ MarioTeam_Screen:
 		ori.b   #$40,d0
 		move.w  d0,(VDPCtrl).l
 		bsr.w	Set_Fadein
-		
-
-MarioTeam_Wait:
-		bsr.w   LoopDelay
-		bne.s   MarioTeam_Wait
+		bsr.w	LoopDelay_ChkStart
 
 ; ---------------------------------------------------------------------------
 
@@ -86,10 +82,7 @@ RickTeamheads_Screen:
 		ori.b   #$40,d0
 		move.w  d0,(VDPCtrl).l
 		bsr.w	Set_Fadein
-
-RickTeam_Wait:
-		bsr.w   LoopDelay
-		bne.s   RickTeam_Wait
+		bsr.w	LoopDelay_ChkStart
 
 ; ---------------------------------------------------------------------------
 
@@ -123,9 +116,7 @@ TeamTesticle_Screen:
 		move.w  d0,(VDPCtrl).l
 		bsr.w	Set_Fadein
 
-Testicle_Wait:
-		bsr.w   LoopDelay
-		bne.s   Testicle_Wait
+		bsr.w	LoopDelay_ChkStart
 
 Exit_Splashes:
  		rts

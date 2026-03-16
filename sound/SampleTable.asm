@@ -14,10 +14,10 @@ SampleTable:
 	dcSample	TYPE_DPCM,	Timpani,	7000				; $88
 
 	; SONIC 2
-	dcSample	TYPE_PCM,	Tom,		22799				; $89 S2 Hi-Tom
-	dcSample	TYPE_PCM,	Tom,		18262				; $8A S2 Mid-Tom
-	dcSample	TYPE_PCM,	Tom,		15232				; $8B S2 Low-Tom
-	dcSample	TYPE_PCM,	Tom,		13714				; $8C S2 Floor-Tom
+	dcSample	TYPE_PCM,	Tom,		22799			; $89 S2 Hi-Tom
+	dcSample	TYPE_PCM,	Tom,		18262			; $8A S2 Mid-Tom
+	dcSample	TYPE_PCM,	Tom,		15232			; $8B S2 Low-Tom
+	dcSample	TYPE_PCM,	Tom,		13714			; $8C S2 Floor-Tom
 
 	; SONIC 3 & KNUCKLES (AND 3D BLAST)
 	dcSample	TYPE_PCM,	ElectricTom,	20513			; $8D
@@ -25,9 +25,13 @@ SampleTable:
 	dcSample	TYPE_PCM,	ElectricTom,	13482			; $8F
 	dcSample	TYPE_PCM,	ElectricTom,	11274			; $90
 
+	; #SPINBALLSWEEP
+	dcSample	TYPE_PCM,	SpinKick,	10400			; Kick (Spinball)
+	dcSample	TYPE_PCM,	SpinSnare,	10400			; Snare (Spinball)
+
 	; CUSTOM SAMPLES
-	dcSample	TYPE_PCM,	ChunkyKick,	16000				; $91
-	dcSample	TYPE_PCM,	PokeSnare,	16864				; $92
+	dcSample	TYPE_PCM,	ChunkyKick,	16000			; $91
+	dcSample	TYPE_PCM,	PokeSnare,	16864			; $92
 	dcSample	TYPE_PCM,	PokeKickCrash,	15300			; $93
 	dcSample	TYPE_PCM,	PokeTimpani,	15000			; $94
 	dcSample	TYPE_PCM,	PokeTimpani,	11297			; $95
@@ -120,6 +124,11 @@ SampleTable:
 ; ---------------------------------------------------------------
 ; Sonic 3 Samples
 	incdac	ElectricTom, "sound/dac/S3/ElectricTom.pcm"
+
+; ---------------------------------------------------------------
+; Spinball Samples
+	incdac	SpinKick, "sound/dac/Spinball/SpinKick.pcm"
+	incdac	SpinSnare, "sound/dac/Spinball/SpinSnare.pcm"
 
 ; ---------------------------------------------------------------
 ; Samples from Dax's Sample Set

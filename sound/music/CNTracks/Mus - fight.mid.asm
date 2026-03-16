@@ -555,4 +555,4 @@ fight.mid_Voices:
 	smpsVcReleaseRate   $0D, $0D, $0D, $0D
 	smpsVcTotalLevel    $00, $14, $17, $1E
 	
-	smpsFooterEndSong	"Mus86 - SBZ.asm"
+	smpsFooterEndSong	"CNTracks/Mus - fight.mid.asm"

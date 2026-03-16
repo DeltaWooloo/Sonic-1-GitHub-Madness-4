@@ -4738,4 +4738,4 @@ SpecialStagePorted_Voices:
 	smpsVcReleaseRate   $07, $07, $07, $07
 	smpsVcTotalLevel    $00, $18, $18, $14
 
-	smpsFooterEndSong	"Mus89 - Special Stage.asm"
+	smpsFooterEndSong	"LiquidTracks/Mus - Special Stage.asm"

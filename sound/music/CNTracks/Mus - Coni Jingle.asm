@@ -88,4 +88,4 @@ CN_Jingle_Voices:
 	smpsVcReleaseRate   $03, $02, $02, $02
 	smpsVcTotalLevel    $00, $25, $1A, $4C
 	
-	smpsFooterEndSong	"conimodes/splash/Jingle.asm"
+	smpsFooterEndSong	"CNTracks/Mus - Coni Jingle.asm"

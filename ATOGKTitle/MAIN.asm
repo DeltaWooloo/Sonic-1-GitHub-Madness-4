@@ -309,4 +309,14 @@ LoopDelay:
 		bsr.w	WaitForVBla	
  		tst.w   (Timer).w
 		rts
-		
+
+LoopDelay_ChkStart:
+		move.b	#2,(vblank).w
+		bsr.w	WaitForVBla
+		andi.b	#btnStart,(v_jpadpress1).w
+		bne.s	.Next
+		tst.w	(Timer).w
+		bne.s	LoopDelay_ChkStart
+
+.Next:
+		rts

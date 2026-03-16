@@ -9517,5 +9517,5 @@ Pac_Voices:
 	dc.b		$02,$04,$04,$02,$02,$10,$16,$13,$1D,$07,$1F,$1F,$1F,$07,$1F,$00
 	dc.b		$00,$56,$0F,$59,$09,$7F,$2B,$7F,$00;			Voice 23
 	
-	smpsFooterEndSong	"Misc/Pac2.asm"
+	smpsFooterEndSong	"TG2000Tracks/Pac2.asm"
 	even

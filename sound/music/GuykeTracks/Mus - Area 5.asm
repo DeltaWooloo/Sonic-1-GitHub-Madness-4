@@ -14762,5 +14762,4 @@ music83_Voices:
 	smpsVcReleaseRate	$0F,	$0F,	$0F,	$0F
 	smpsVcTotalLevel	$00,	$00,	$00,	$00
 	
-	smpsFooterEndSong	"Mus83 - MZ.asm"
-	even
+	smpsFooterEndSong	"GuykeTracks/Mus - Area 5.asm"

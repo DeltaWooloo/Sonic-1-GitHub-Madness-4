@@ -4471,5 +4471,5 @@ DELTARUNE_Voices:
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $00, $1E, $1E, $1E
 	
-	smpsFooterEndSong	"Misc/DeltaTale fighte.asm"
+	smpsFooterEndSong	"Dawid/DeltaTale fighte.asm"
 

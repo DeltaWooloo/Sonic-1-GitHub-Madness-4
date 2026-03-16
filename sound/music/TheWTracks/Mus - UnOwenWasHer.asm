@@ -760,4 +760,4 @@ UNOwenWasHer_Voices:
 	smpsVcReleaseRate   $07, $06, $07, $06
 	smpsVcTotalLevel    $0A, $38, $0A, $21
 
-	smpsFooterEndSong	"Mus84 - SLZ.asm"
+	smpsFooterEndSong	"TheWTracks/Mus - UnOwenWasHer.asm"

@@ -26,6 +26,10 @@ dElectricMidTom		ds.b 1
 dElectricLowTom		ds.b 1
 dElectricFloorTom	ds.b 1
 
+; Sonic Spinball
+dSpinKick		ds.b 1
+dSpinSnare		ds.b 1
+
 ; Dax Sample Set
 dChunkyKick			ds.b 1
 dPokeSnare			ds.b 1

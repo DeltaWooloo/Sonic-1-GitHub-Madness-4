@@ -530,8 +530,10 @@ GamemodeNameTable:
 		dc.w	.TryAgainTest-.t
 		dc.w	.Difficulty-.t
 		dc.w	.DamnScreen-.t
-		rept ( (GameModeArray_End-GameModeArray)-(((*)-.t)*2) )/4
 		dc.w	.TG2000Logo-.t
+		dc.w	.NMR-.t
+		dc.w	.DaxKatter-.t
+		rept ( (GameModeArray_End-GameModeArray)-(((*)-.t)*2) )/4
 		dc.w	.Skipper-.t
 		endr
 
@@ -553,6 +555,8 @@ GamemodeNameTable:
 .Difficulty:	dc.b	"DIFFICULTY      "
 .DamnScreen:	dc.b	"DAMN!!!!!!!!!!!!"
 .TG2000Logo:	dc.b	"TG2000 LOGO     "
+.NMR:		dc.b	"NEEDLEMOUSE TEAM"
+.DaxKatter:	dc.b	"DAXKATTER LOGO  "
 .Skipper:	dc.b	"SPLASH SKIPPER  "
 		even
 
