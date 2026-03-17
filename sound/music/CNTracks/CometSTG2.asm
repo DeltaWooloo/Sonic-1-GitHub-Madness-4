@@ -18,8 +18,8 @@ CometSTG2_Header:
 CometSTG2_FM1:
 	smpsSetvoice        $02
 	dc.b	nD5, $03, nD5, nD5, nD5, nRst, nD5, nRst, nD5, nRst, $18
-	smpsSetvoice        $00
 CometSTG2_FM1J:
+	smpsSetvoice        $00
 	dc.b	nA4, $03, nB4, nCs5, nE5
 	smpsCall            CometSTG2_FM1C1
 	dc.b	nD5, nE5, nF5
