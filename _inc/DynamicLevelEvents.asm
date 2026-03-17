@@ -153,7 +153,7 @@ loc_6EB0:
 
 loc_6ED0:
 		move.w	#bgm_Boss,d0
-		bsr.w	QueueSound1	; play boss music
+		jsr		(QueueSound1).l	; play boss music
 		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w
 		moveq	#plcid_Boss,d0
@@ -369,7 +369,7 @@ DLE_MZ3boss:
 
 loc_70D0:
 		move.w	#bgm_Boss,d0
-		bsr.w	QueueSound1	; play boss music
+		jsr		(QueueSound1).l	; play boss music
 		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w
 		moveq	#plcid_Boss,d0
@@ -434,7 +434,7 @@ DLE_SLZ3boss:
 
 loc_7144:
 		move.w	#bgm_Megalovania,d0
-		bsr.w	QueueSound1	; play boss music
+		jsr		(QueueSound1).l	; play boss music
 		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w
 		moveq	#plcid_Boss,d0
@@ -517,7 +517,7 @@ DLE_SYZ3boss:
 
 loc_71EC:
 		move.w	#bgm_Boss,d0
-		bsr.w	QueueSound1	; play boss music
+		jsr		(QueueSound1).l	; play boss music
 		move.b	#1,(f_lockscreen).w ; lock screen
 		moveq	#plcid_Boss,d0
 		bra.w	AddPLC		; load boss patterns
@@ -784,7 +784,7 @@ loc_6EB0BR:
 
 loc_6ED0BR:
 		move.w	#bgm_Boss,d0
-		bsr.w	QueueSound1	; play boss music
+		jsr		(QueueSound1).l	; play boss music
 		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w
 		moveq	#plcid_Boss,d0
