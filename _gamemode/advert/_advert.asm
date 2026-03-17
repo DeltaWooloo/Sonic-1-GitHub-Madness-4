@@ -144,8 +144,10 @@ GM_Advert:
 		tst.w	(v_generictimer).w
 		bne.s	.mainloop
 .mainexit:
+		if advertdebug==0
 		move.b	#bgm_Fade,d0
 		jsr	QueueSound2
+		endif
 		jsr	PaletteWhiteOut
 		;!@ GD: PCM SFX fix if in advert debugger
 		if advertdebug<0
@@ -177,6 +179,7 @@ GM_Advert:
 		;!@ GD: Sonic Soup adverts
 		advertdata 5,1,Ad_GenesisCan1.art,Ad_GenesisCan1.fg,Ad_GenesisCan1.pal,0,dGenesisCan1
 		advertdata 5,1,Ad_GenesisCan2.art,Ad_GenesisCan2.fg,Ad_GenesisCan2.pal,0,dGenesisCan2
+		advertdata 8,1,Ad_GenesisCan3.art,Ad_GenesisCan3.fg,Ad_GenesisCan3.pal,0,dGenesisCan3
 .tablee:
 .eyecatch1:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg1,Ad_Eyecatch.pal,0,dRightBack
 .eyecatch2:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg2,Ad_Eyecatch.pal,bgm_EuroSega,0
@@ -281,4 +284,9 @@ Ad_GenesisCan2:
 .pal:		binclude "_gamemode/advert/ad-GenesisCan2-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-GenesisCan2-map.eni"
 .art:		binclude "_gamemode/advert/ad-GenesisCan2-art.nem"
+		even
+Ad_GenesisCan3:
+.pal:		binclude "_gamemode/advert/ad-GenesisCan3-pal.unc"
+.fg:		binclude "_gamemode/advert/ad-GenesisCan3-map.eni"
+.art:		binclude "_gamemode/advert/ad-GenesisCan3-art.nem"
 		even
