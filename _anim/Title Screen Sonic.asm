@@ -2,5 +2,5 @@
 ; Animation script - Sonic on the title screen
 ; ---------------------------------------------------------------------------
 Ani_TSon:	dc.w byte_A706-Ani_TSon
-byte_A706:	dc.b 7,	0, 0, 0,	afBack, 1
+byte_A706:	dc.b 7,	0, 1, 1, 1, 2, 3,	afBack, 2
 		even

@@ -19,8 +19,8 @@ Nem_TitleFg:	binclude	"artnem/Title Screen Foreground.nem"
 		even
 Nem_TitleSonic:	binclude	"artnem/Title Screen Sonic.nem"
 		even
-Nem_TitleTM:	binclude	"artnem/Title Screen TM.nem"
-		even
+;Nem_TitleTM:	binclude	"artnem/Title Screen TM.nem"	; TM removed, rubs my belly - coni
+;		even
 Eni_JapNames:	binclude	"tilemaps/Hidden Japanese Credits.eni" ; Japanese credits (mappings)
 		even
 Nem_JapNames:	binclude	"artnem/Hidden Japanese Credits.nem"

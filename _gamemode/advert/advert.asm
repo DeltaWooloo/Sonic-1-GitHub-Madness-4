@@ -3,7 +3,7 @@ advertdata macro seconds,skipsec,art,map,pal,bgm,pcm
 	dc.b seconds,skipsec,bgm,pcm
 	endm
 advertdatasize equ 16
-advertdebug equ 0
+advertdebug equ -1
 ; ---------------------------------------------------------------------------
 GM_Advert:
 		move.b	#bgm_Stop,d0

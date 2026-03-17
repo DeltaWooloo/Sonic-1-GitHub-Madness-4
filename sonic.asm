@@ -2198,9 +2198,9 @@ FinalTitle:
 	if FixBugs
 		; Fix title screen position
 		; https://info.sonicretro.org/SCHG_How-to:Fix_the_Title_Screen_position_in_Sonic_1
-		copyTilemap	v_ram_start,vram_fg+$208,34,22
+		copyTilemap	v_ram_start,vram_fg,40,38
 	else
-		copyTilemap	v_ram_start,vram_fg+$206,34,22
+		copyTilemap	v_ram_start,vram_fg,40,38
 	endif
 
 		disable_ints
@@ -2210,9 +2210,10 @@ FinalTitle:
 		locVRAM	ArtTile_Title_Sonic*tile_size
 		lea	(Nem_TitleSonic).l,a0 ; load Sonic title screen patterns
 		bsr.w	NemDec
-		locVRAM	ArtTile_Title_Trademark*tile_size
-		lea	(Nem_TitleTM).l,a0 ; load "TM" patterns
-		bsr.w	NemDec
+;		locVRAM	ArtTile_Title_Trademark*tile_size
+;		lea	(Nem_TitleTM).l,a0 ; load "TM" patterns
+;		bsr.w	NemDec
+		; TM removed, rubs my belly - coni
 		enable_ints
 		
 		;!@ GenesisDoes
@@ -2222,7 +2223,7 @@ FinalTitle:
 		moveq	#palid_Title,d0	; load title screen palette
 		bsr.w	PalLoad_Fade
 		move.b	#0,(f_debugmode).w ; disable debug mode
-		move.w	#376,(v_generictimer).w ; run title screen for 376 frames
+		move.w	#60*540,(v_generictimer).w ; run title screen for NOT 376 frames
 		
 	if FixBugs
 		; Fix the Press Start Button text
@@ -2239,11 +2240,12 @@ FinalTitle:
 		move.b	#id_PSBTM,(v_pressstart).w ; load "PRESS START BUTTON" object
 		;clr.b	(v_pressstart+obRoutine).w ; The 'Mega Games 10' version of Sonic 1 added this line, to fix the 'PRESS START BUTTON' object not appearing
 
-		tst.b	(v_megadrive).w	; is console Japanese?
-		bpl.s	.isjap		; if yes, branch
-		move.b	#id_PSBTM,(v_titletm).w ; load "TM" object
-		move.b	#3,(v_titletm+obFrame).w
-.isjap:
+;		tst.b	(v_megadrive).w	; is console Japanese?
+;		bpl.s	.isjap		; if yes, branch
+;		move.b	#id_PSBTM,(v_titletm).w ; load "TM" object
+;		move.b	#3,(v_titletm+obFrame).w
+;.isjap:
+		; i feel like a rectangle cuz my rectangle is hard - rectangle from breakout (PS1)
 		move.b	#id_PSBTM,(v_ttlsonichide).w ; load object which hides part of Sonic
 		move.b	#2,(v_ttlsonichide+obFrame).w
 		jsr	(ExecuteObjects).l

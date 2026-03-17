@@ -688,7 +688,7 @@ ArtTile_Sega_Tiles:		equ $000
 ArtTile_Title_Japanese_Text:	equ $000
 ArtTile_Title_S2Font:		equ	$28	;!@ GenesisDoes
 ArtTile_Title_Foreground:	equ $200
-ArtTile_Title_Sonic:		equ $300
+ArtTile_Title_Sonic:		equ $400
 ArtTile_Title_Trademark:	equ $510
 ArtTile_Level_Select_Font:	equ $680
 
