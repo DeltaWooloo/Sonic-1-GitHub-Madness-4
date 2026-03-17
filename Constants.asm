@@ -328,6 +328,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Sunset
 	nextenum bgm_SonUnderground
 	nextenum bgm_Skinner
+	nextenum bgm_Danstar
 	; Keep this last
 	nextenum bgm__Last
 
