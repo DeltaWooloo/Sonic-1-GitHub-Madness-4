@@ -190,11 +190,12 @@ Lamp_LoadInfo:
 		move.w	(v_lamp_limitbtm).w,(v_limitbtm2).w
 		move.w	(v_lamp_limitbtm).w,(v_limitbtm1).w
 		; THIS WILL WORK - CONI
-		move.w	(v_lamp_limitleft).w,(v_limitleft2).w
-		move.w	(v_lamp_limitleft).w,(v_limitleft1).w
-		move.w	(v_lamp_limitright).w,(v_limitright2).w
-		move.w	(v_lamp_limitright).w,(v_limitright1).w
+;		move.w	(v_lamp_limitleft).w,(v_limitleft2).w
+;		move.w	(v_lamp_limitleft).w,(v_limitleft1).w
+;		move.w	(v_lamp_limitright).w,(v_limitright2).w
+;		move.w	(v_lamp_limitright).w,(v_limitright1).w
 		; I PROMISE - CONI
+		; NEVERMIND IT DIDN'T - CONI
 		move.w	(v_lamp_scrx).w,(v_screenposx).w
 		move.w	(v_lamp_scry).w,(v_screenposy).w
 		move.w	(v_lamp_bgscrx).w,(v_bgscreenposx).w
