@@ -151,12 +151,6 @@ GM_Advert:
 		move.b	#bgm_Fade,d0
 		jsr	QueueSound2
 		jsr	PaletteWhiteOut
-		;!@ GD: PCM SFX fix if in advert debugger
-		if advertdebug<0
-		move.b	#bgm_Stop,d0
-		jsr	QueueSound2
-		stopPCM
-		endif
 		move.l	(sp)+,a2
 		rts
 ; ---------------------------------------------------------------------------
@@ -164,29 +158,25 @@ GM_Advert:
 		advertdata 30,5,Ad_Lactose.art,Ad_Lactose.fg,Ad_Lactose.pal,bgm_ClintonFuck,0
 		advertdata 5,10,Ad_CRT.art,Ad_CRT.fg,Ad_CRT.pal,bgm_PuyoReject,0
 		advertdata 30,5,Ad_Deltarune.art,Ad_Deltarune.fg,Ad_Deltarune.pal,bgm_DeltaTale,0
-		advertdata 10,10,Ad_3SonicSonic.art,Ad_3SonicSonic.fg,Ad_3SonicSonic.pal,bgm_Danstar,0
+		advertdata 10,10,Ad_3SonicSonic.art,Ad_3SonicSonic.fg,Ad_3SonicSonic.pal,bgm_LG,0
 		advertdata 5,10,Ad_YuriPropaganda.art,Ad_YuriPropaganda.fg,Ad_YuriPropaganda.pal,bgm_LZ,0
 		advertdata 30,5,Ad_Eggblock.art,Ad_Eggblock.fg,Ad_Eggblock.pal,bgm_Continue,0
 		advertdata 30,5,Ad_Willys.art,Ad_Willys.fg,Ad_Willys.pal,bgm_GHZ,0
 		advertdata 15,5,Ad_GameStar.art,Ad_GameStar.fg,Ad_GameStar.pal,bgm_NewShop,0
-		advertdata 30,10,Ad_HK97.art,Ad_HK97.fg,Ad_HK97.pal,bgm_ILBT,0				
+		advertdata 30,10,Ad_HK97.art,Ad_HK97.fg,Ad_HK97.pal,bgm_ILBT,0
 		advertdata 10,10,Ad_Craig.art,Ad_Craig.fg,Ad_Craig.pal,bgm_LG,0
 		advertdata 30,10,Ad_Carbuncle.art,Ad_Carbuncle.fg,Ad_Carbuncle.pal,bgm_Sunset,0
 		advertdata 30,5,Ad_Support.art,Ad_Support.fg,Ad_Support.pal,bgm_ChickenDance,0
 		advertdata 12,5,Ad_Tonic.art,Ad_Tonic.fg,Ad_Tonic.pal,bgm_Elevator,0
 		advertdata 30,5,Ad_SonicUnderground.art,Ad_SonicUnderground.fg,Ad_SonicUnderground.pal,bgm_SonUnderground,0
 		advertdata 30,5,Ad_RaidShadowLegends.art,Ad_RaidShadowLegends.fg,Ad_RaidShadowLegends.pal,bgm_Easton,0
-		advertdata 30,10,Ad_TamperThingy.art,Ad_TamperThingy.fg,Ad_TamperThingy.pal,bgm_Basillica,0		
-		
-		;!@ GD: Sonic Soup adverts
-		advertdata 5,1,Ad_GenesisCan1.art,Ad_GenesisCan1.fg,Ad_GenesisCan1.pal,0,dGenesisCan1
-		advertdata 5,1,Ad_GenesisCan2.art,Ad_GenesisCan2.fg,Ad_GenesisCan2.pal,0,dGenesisCan2
-		
+		advertdata 30,10,Ad_TamperThingy.art,Ad_TamperThingy.fg,Ad_TamperThingy.pal,bgm_Basillica,0
 		advertdata 3,3,Ad_Intel.art,Ad_Intel.fg,Ad_Intel.pal,0,dIntel
 		advertdata 30,5,Ad_ElmLab.art,Ad_ElmLab.fg,Ad_ElmLab.pal,bgm_NewBarkTown,0
 		advertdata 5,10,Ad_VH.art,Ad_VH.fg,Ad_VH.pal,bgm_LZ,0
-		advertdata 3,8,Ad_SuperChallenges.art,Ad_SuperChallenges.fg,Ad_SuperChallenges.pal,bgm_Son1UP,0		
-		advertdata 5,10,Ad_IWBTH.art,Ad_IWBTH.fg,Ad_IWBTH.pal,bgm_GEMSHill,0		
+		advertdata 3,8,Ad_SuperChallenges.art,Ad_SuperChallenges.fg,Ad_SuperChallenges.pal,bgm_Son1UP,0
+		advertdata 5,10,Ad_IWBTH.art,Ad_IWBTH.fg,Ad_IWBTH.pal,bgm_GEMSHill,0
+		advertdata 30,5,Ad_Limited.art,Ad_Limited.fg,Ad_Limited.pal,bgm_SYZ,0
 .tablee:
 .eyecatch1:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg1,Ad_Eyecatch.pal,0,dRightBack
 .eyecatch2:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg2,Ad_Eyecatch.pal,bgm_EuroSega,0
@@ -280,18 +270,6 @@ Ad_HK97:
 .fg:		binclude "_gamemode/advert/ad-hong-kong-97-map.eni"
 .art:		binclude "_gamemode/advert/ad-hong-kong-97-art.nem"
 		even
-		
-;!@ GD: Sonic Soup advert
-Ad_GenesisCan1:
-.pal:		binclude "_gamemode/advert/ad-GenesisCan1-pal.unc"
-.fg:		binclude "_gamemode/advert/ad-GenesisCan1-map.eni"
-.art:		binclude "_gamemode/advert/ad-GenesisCan1-art.nem"
-		even
-Ad_GenesisCan2:
-.pal:		binclude "_gamemode/advert/ad-GenesisCan2-pal.unc"
-.fg:		binclude "_gamemode/advert/ad-GenesisCan2-map.eni"
-.art:		binclude "_gamemode/advert/ad-GenesisCan2-art.nem"
-		even
 
 Ad_Intel:
 .pal:		binclude "_gamemode/advert/ad-Intel-pal.unc"
@@ -321,3 +299,9 @@ Ad_IWBTH:
 .fg:		binclude "_gamemode/advert/ad-IWBTH-map.eni"
 .art:		binclude "_gamemode/advert/ad-IWBTH-art.nem"
 		even
+
+Ad_Limited:
+.pal:		binclude "_gamemode/advert/ad-Limited-pal.unc"
+.fg:		binclude "_gamemode/advert/ad-Limited-map.eni"
+.art:		binclude "_gamemode/advert/ad-Limited-art.nem"
+		even		
