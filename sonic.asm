@@ -7187,7 +7187,7 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 		include	"ContinueScreen/Continue.asm"
 
 		include "Splashes.asm"
-		include "_gamemode/advert/advert.asm"
+		include "_gamemode/advert/_advert.asm"
 		include	"_inc/GHM3Explode.asm"
 
 		include	"_gamemode/damn/damn.asm"
