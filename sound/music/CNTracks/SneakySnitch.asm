@@ -122,3 +122,4 @@ SnitchySneaks_DAC:
 	smpsJump		SnitchySneaks_DAC
 
 SnitchySneaks_Voices:
+	smpsFooterEndSong	"CNTracks\SneakySnitch.asm"

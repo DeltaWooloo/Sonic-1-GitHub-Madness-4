@@ -1698,4 +1698,5 @@ Elevator_Voices:
 	dc.b		$05,$30,$29,$20,$28,$22,$2A,$14,$00;			Voice 01
 	dc.b		$39,$0D,$02,$01,$01,$9F,$1F,$1F,$5F,$0A,$09,$09,$04,$08,$07,$07
 	dc.b		$07,$24,$24,$24,$28,$22,$24,$26,$00;			Voice 02
+	smpsFooterEndSong	"TG2000Tracks/Elevator (BACKUP IN CASE IF USED TRACK IS TOO BROKEN).asm"
 	even

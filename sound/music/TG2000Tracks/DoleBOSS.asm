@@ -15111,4 +15111,5 @@ DoleBOSS_Voices:
 	dc.b		$09,$0A,$6B,$38,$1C,$1B,$30,$15,$00;			Voice 09
 	dc.b		$3A,$01,$07,$01,$01,$8E,$8E,$8D,$53,$0E,$0E,$0E,$03,$00,$00,$00
 	dc.b		$00,$1F,$FF,$1F,$0F,$18,$28,$27,$00;			Voice 0A
+	smpsFooterEndSong	"TG2000Tracks/DoleBOSS.asm"
 	even

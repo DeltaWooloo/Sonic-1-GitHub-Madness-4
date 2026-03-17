@@ -712,3 +712,5 @@ Basilica_DAC_Jump:
 	smpsCall Basilica_DAC_06
 	smpsCall Basilica_DAC_06
 	smpsJump Basilica_DAC_Jump
+
+	smpsFooterEndSong	"HS_Tracks/Basillica.asm"

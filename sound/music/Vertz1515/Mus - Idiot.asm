@@ -41,3 +41,4 @@ BGM_Idiot_DAC:
 
 ; Song seems to not use any FM voices
 BGM_Idiot_Voices:
+	smpsFooterEndSong	"Vertz1515/Mus - Idiot.asm"

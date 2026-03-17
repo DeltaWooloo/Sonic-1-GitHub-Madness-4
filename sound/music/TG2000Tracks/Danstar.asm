@@ -5440,3 +5440,5 @@ Danstar_Voices:
 	dc.b		$34,$00,$02,$01,$01,$1F,$1F,$1F,$1F,$10,$06,$06,$06,$01,$06,$06
 	dc.b		$06,$35,$1A,$15,$1A,$10,$00,$18,$10;			Voice 04
 	even
+
+	smpsFooterEndSong	"TG2000Tracks\Danstar.asm"

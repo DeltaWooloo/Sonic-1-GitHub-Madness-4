@@ -995,3 +995,5 @@ GCV_2005_PSG3_Jump:
 	smpsCall GCV_2005_PSG3_02
 	smpsCall GCV_2005_PSG3_02
 	smpsJump GCV_2005_PSG3_Jump
+
+	smpsFooterEndSong	"HS_Tracks/GCV2005.asm"

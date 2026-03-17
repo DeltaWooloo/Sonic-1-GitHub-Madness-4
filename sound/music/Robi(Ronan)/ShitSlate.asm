@@ -296,3 +296,4 @@ CleanSlate_Voices:
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $00, $19, $00, $1E
 
+	smpsFooterEndSong	"Robi(Ronan)/ShitSlate.asm"

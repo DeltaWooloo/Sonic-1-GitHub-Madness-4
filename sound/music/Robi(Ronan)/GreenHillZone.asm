@@ -386,3 +386,4 @@ GHZ_Voices:
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $00, $17, $00, $16
 
+	smpsFooterEndSong	"Robi(Ronan)/GreenHillZone.asm"

@@ -14165,4 +14165,5 @@ OrangeSong_Voices:
 	dc.b		$00,$F4,$F2,$F3,$F6,$24,$1B,$22,$00;			Voice 01
 	dc.b		$3D,$01,$01,$01,$01,$93,$57,$17,$51,$08,$08,$0E,$03,$00,$00,$00
 	dc.b		$00,$15,$15,$17,$16,$1B,$07,$07,$00;			Voice 02
+	smpsFooterEndSong	"TG2000Tracks/OrangeSong.asm"
 	even

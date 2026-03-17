@@ -13851,3 +13851,4 @@ BGM_FunnyBook_Voices:
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $00, $1C, $11, $0E
 
+	smpsFooterEndSong	"Vertz1515/Mus - Some Funny Book.asm"

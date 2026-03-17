@@ -267,3 +267,5 @@ Sunset_Voices:
 	smpsVcDecayLevel    $00, $00, $00, $00
 	smpsVcReleaseRate   $0F, $0F, $0F, $00
 	smpsVcTotalLevel    $0C, $0C, $0C, $00
+	
+	smpsFooterEndSong	"CNTracks\Sunset.asm"
