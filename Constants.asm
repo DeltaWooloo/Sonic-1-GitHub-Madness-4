@@ -329,6 +329,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Sunset
 	nextenum bgm_SonUnderground
 	nextenum bgm_Skinner
+	nextenum bgm_Danstar
 	; Keep this last
 	nextenum bgm__Last
 
@@ -558,6 +559,7 @@ ArtTile_GHZ_Big_Flower_2:	equ ArtTile_Level+$390
 ArtTile_GHZ_Spike_Pole:		equ $398
 ArtTile_GHZ_Giant_Ball:		equ $3AA
 ArtTile_GHZ_Purple_Rock:	equ $3D0
+ArtTile_CBZ_Waterfall:		equ ArtTile_Level+$37C
 
 ; Marble Zone
 ArtTile_MZ_Block:		equ $2B8

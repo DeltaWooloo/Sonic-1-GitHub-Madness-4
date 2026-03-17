@@ -106,7 +106,8 @@ dLg					ds.b 1
 dSega2				ds.b 1
 dTwerkOf87			ds.b 1
 dGayNeil			ds.b 1
-dfunnyb_utthole			ds.b 1
+dfunnyb_utthole		ds.b 1
+dIntel				ds.b 1
 
 ;!@ GD: Maximum DAC sample (exclusive range). Used for enum/array bounds
 ;Please reserve this as last

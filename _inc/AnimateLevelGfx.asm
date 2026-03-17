@@ -20,13 +20,13 @@ AnimateLevelGfx:
 		rts
 
 ; ===========================================================================
-AniArt_Index:	dc.w AniArt_GHZ-AniArt_Index, AniArt_none-AniArt_Index
-		dc.w AniArt_MZ-AniArt_Index, AniArt_none-AniArt_Index
-		dc.w AniArt_none-AniArt_Index, AniArt_SBZ-AniArt_Index
+AniArt_Index:	dc.w AniArt_GHZ-AniArt_Index, AniArt_none-AniArt_Index		; GHZ, LZ
+		dc.w AniArt_MZ-AniArt_Index, AniArt_none-AniArt_Index		; MZ SLZ
+		dc.w AniArt_none-AniArt_Index, AniArt_SBZ-AniArt_Index		; SYZ, SBZ
 		zonewarning AniArt_Index,2
-		dc.w AniArt_Ending-AniArt_Index, AniArt_none-AniArt_Index
-		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
-		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
+		dc.w AniArt_Ending-AniArt_Index, AniArt_CBZ-AniArt_Index	; ENDZ, CBZ
+		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index		; WINZ, JOINTZ
+		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index		; DOLEZ, NOGALEZ
 		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
 		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
 		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
@@ -376,7 +376,6 @@ AniArt_Ending_Flower4:
 		lsl.w	#8,d0		; multiply by $100
 		add.w	d0,d0		; multiply by 2
 		locVRAM	ArtTile_GHZ_Flower_4*tile_size
-		lea	(v_256x256+$4F*chunk_size).w,a1 ; load special flower patterns from RAM (overwriting unused chunk RAM)
 		lea	(a1,d0.w),a1	; jump to appropriate tile
 		move.w	#.size-1,d1
 		bra.w	LoadTiles
@@ -385,6 +384,80 @@ AniArt_Ending_Flower4:
 .end:
 		rts
 ; ===========================================================================
+
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; Animated pattern routine - Cold Brew
+; ---------------------------------------------------------------------------
+
+AniArt_CBZ:
+
+AniArt_CBZ_Waterfall:
+
+.size		= 8	; number of tiles per frame
+
+		subq.b	#1,(v_lani0_time).w ; decrement timer
+		bpl.s	AniArt_CBZ_Bigflower ; branch if not 0
+
+		move.b	#6-1,(v_lani0_time).w ; time to display each frame
+		lea	(Art_GhzWater).l,a1 ; load waterfall patterns
+		move.b	(v_lani0_frame).w,d0
+		addq.b	#1,(v_lani0_frame).w ; increment frame counter
+		andi.w	#1,d0		; there are only 2 frames
+		beq.s	.isframe0	; branch if frame 0
+		lea	.size*tile_size(a1),a1 ; use graphics for frame 1
+
+.isframe0:
+		locVRAM	ArtTile_CBZ_Waterfall*tile_size		; VRAM address
+		move.w	#.size-1,d1	; number of 8x8 tiles
+		bra.w	LoadTiles
+; ===========================================================================
+
+AniArt_CBZ_Bigflower:
+
+.size		= 16	; number of tiles per frame
+
+		subq.b	#1,(v_lani1_time).w
+		bpl.s	AniArt_CBZ_Smallflower
+
+		move.b	#$10-1,(v_lani1_time).w
+		lea	(Art_GhzFlower1).l,a1 ; load big flower patterns
+		move.b	(v_lani1_frame).w,d0
+		addq.b	#1,(v_lani1_frame).w
+		andi.w	#1,d0
+		beq.s	.isframe0
+		lea	.size*tile_size(a1),a1
+
+.isframe0:
+		locVRAM	ArtTile_GHZ_Big_Flower_1*tile_size
+		move.w	#.size-1,d1
+		bra.w	LoadTiles
+; ===========================================================================
+
+AniArt_CBZ_Smallflower:
+
+.size		= 16	; number of tiles per frame
+
+		subq.b	#1,(v_lani2_time).w
+		bpl.s	.end
+
+		move.b	#4-1,(v_lani2_time).w
+		lea	(Art_CBZMushroom).l,a1 ; load small flower patterns
+		move.b	(v_lani2_frame).w,d0
+		addq.b	#1,(v_lani2_frame).w ; increment frame counter
+		cmpi.b	#30,(v_lani2_frame).w
+		bne.s	.cont
+		clr.b	(v_lani2_frame).w
+.cont:
+
+		mulu.w	#.size*tile_size,d0
+		lea	(a1,d0.w),a1
+		locVRAM	ArtTile_GHZ_Small_Flower*tile_size
+		move.w	#.size-1,d1
+		bsr.w	LoadTiles
+
+.end:
+		rts
 
 AniArt_none:
 		rts

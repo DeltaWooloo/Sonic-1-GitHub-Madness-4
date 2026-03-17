@@ -543,6 +543,8 @@ Art_MzTorch:	binclude	"artunc/MZ Background Torch.bin"
 		even
 Art_SbzSmoke:	binclude	"artunc/SBZ Background Smoke.bin"
 		even
+Art_CBZMushroom:	binclude	"artunc/CBZ Mushroom.bin"
+		even
 
 ; ---------------------------------------------------------------------------
 ; Level layout index
