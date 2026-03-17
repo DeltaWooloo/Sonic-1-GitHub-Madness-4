@@ -19,15 +19,18 @@ DeformLayers:
 		bsr.w	ScrollHoriz
 		bsr.w	ScrollVertical
 		bsr.w	DynamicLevelEvents
-		move.w	(v_screenposy).w,(v_scrposy_vdp).w
+
 		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
 		add.w	d0,d0
 		move.w	Deform_Index(pc,d0.w),d0
 		jsr	Deform_Index(pc,d0.w)
-		move.w	(v_scrposy_vdp).w,(v_scrposy_orig).w
-		bra.w	ShakeScreen
+		move.w	(v_screenposy).w,(v_scrposy_orig).w
+		bsr.w	ShakeScreen
+		move.w	(v_screenposy).w,(v_scrposy_vdp).w
+		move.w	(v_scrposy_orig).w,v_screenposy
+		rts
 ; End of function DeformLayers
 
 ; ===========================================================================
@@ -767,7 +770,7 @@ ShakeScreen:
 	beq.s   .Done
 	subq.w	#1,v_screenshaketime.w
 	asr.w   #2,d1
-	andi.w	#$1F,d1
+	andi.w	#$2F,d1
 
 	move.w	v_vbla_count+2.w,d2
 	move	d2,ccr			; you can tell i love this
@@ -775,7 +778,7 @@ ShakeScreen:
 	neg.w   d1
 .Odd:
 	add.w   d1,d0
-	move.w  d0,v_scrposy_vdp.w
+	move.w  d0,v_screenposy.w
 	rts
 .Done:
 	rts

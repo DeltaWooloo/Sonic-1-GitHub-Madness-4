@@ -317,4 +317,5 @@ ChaosFarm_Voices:
 	dc.b		$0B,$1F,$0F,$1F,$0F,$23,$15,$1D,$00;			Voice 00
 	dc.b		$3C,$31,$52,$50,$30,$52,$53,$52,$53,$08,$00,$08,$00,$04,$00,$04
 	dc.b		$00,$10,$07,$10,$07,$1A,$00,$16,$00;			Voice 01
+	smpsFooterEndSong	"TG2000Tracks/ChoasFarmBACKUP.asm"
 	even

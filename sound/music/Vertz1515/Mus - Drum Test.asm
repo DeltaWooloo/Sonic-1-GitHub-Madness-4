@@ -43,3 +43,4 @@ BGM_DrumTest_DAC:
 
 ; Song seems to not use any FM voices
 BGM_DrumTest_Voices:
+	smpsFooterEndSong	"Vertz1515/Mus - Drum Test.asm"

@@ -5060,4 +5060,5 @@ Skinner_Voices:
 	dc.b		$00,$1F,$1B,$1F,$18,$2C,$00,$1A,$00;			Voice 03
 	dc.b		$3C,$01,$02,$0F,$04,$8D,$52,$9F,$1F,$09,$00,$00,$0D,$00,$00,$00
 	dc.b		$00,$23,$08,$02,$F7,$15,$00,$1D,$08;			Voice 04
+	smpsFooterEndSong	"TG2000Tracks/Skinner.asm"
 	even

@@ -12141,4 +12141,7 @@ SonUnderground_Voices:
 	dc.b		$06,$44,$34,$54,$17,$19,$2D,$0F,$00;			Voice 01
 	dc.b		$22,$30,$72,$30,$17,$08,$1F,$D1,$1F,$0B,$1F,$15,$15,$01,$04,$00
 	dc.b		$00,$0B,$34,$07,$09,$05,$0D,$0B,$00;			Voice 02
+	smpsFooterEndSong	"TG2000Tracks/SonUnderground.asm"
 	even
+
+	

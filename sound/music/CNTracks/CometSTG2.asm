@@ -428,3 +428,5 @@ CometSTG2_Voices:
 	smpsVcDecayLevel    $01, $01, $00, $00
 	smpsVcReleaseRate   $06, $05, $06, $00
 	smpsVcTotalLevel    $00, $03, $00, $1E
+	
+	smpsFooterEndSong	"CNTracks\CometSTG2.asm"

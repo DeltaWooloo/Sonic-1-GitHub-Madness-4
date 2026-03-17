@@ -232,3 +232,5 @@ SATAN_Voices:
 	smpsVcDecayLevel    $03, $00, $00, $00
 	smpsVcReleaseRate   $03, $01, $02, $00
 	smpsVcTotalLevel    $00, $10, $20, $20
+	
+	smpsFooterEndSong	"CNTracks\TheCheetosChairRoom.asm"

@@ -11,3 +11,4 @@ WellBeRightBackDAC:
     smpsStop
 
 WellBeRightBackVoices:
+	smpsFooterEndSong	"TheWTracks/Mus - We'll Be Right Back.asm"
