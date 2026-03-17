@@ -342,6 +342,7 @@ DebuggerMenu_Act4EnablerTable:
 		dc.b	$0		; WIN
 		dc.b	$0		; JOINT
 		dc.b	$0		; DVZ
+		dc.b	$0		; ZONE
 		even
 		
 ; ---------------------------------------------------------------------------
@@ -503,6 +504,7 @@ ZoneNameTable:
 		dc.w	.ABC-.t
 		dc.w	.Joint-.t
 		dc.w	.DVZ-.t
+		dc.w	.Nogales -.t
 
 .GHZ:		dc.b	"PENILE HILLS    "
 .LZ:		dc.b	"AZURE RAINFOREST"
@@ -515,6 +517,7 @@ ZoneNameTable:
 .ABC:		dc.b	"WINDOWS         "
 .Joint:		dc.b	"THE JOINT       "
 .DVZ:		dc.b	"DOLEVILLE       "
+.Nogales:	dc.b	"NOGALES         "
 		even
 
 GamemodeNameTable:

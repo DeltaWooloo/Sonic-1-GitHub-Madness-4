@@ -3,7 +3,11 @@ advertdata macro seconds,skipsec,art,map,pal,bgm,pcm
 	dc.b seconds,skipsec,bgm,pcm
 	endm
 advertdatasize equ 16
+	ifdef __DEBUG__
 advertdebug equ -1
+	else
+advertdebug equ 0
+	endif
 ; ---------------------------------------------------------------------------
 GM_Advert:
 		move.b	#bgm_Stop,d0
@@ -148,7 +152,7 @@ GM_Advert:
 ; ---------------------------------------------------------------------------
 .table:	; seconds, seconds to skip, art, map, palette, SMPS sound ID, MPCM sound ID
 		advertdata 30,5,Ad_Lactose.art,Ad_Lactose.fg,Ad_Lactose.pal,bgm_ClintonFuck,0
-		advertdata 5,10,Art_CRT,Map_CRT,Pal_CRT,bgm_PuyoReject,0
+		advertdata 5,10,Ad_CRT.art,Ad_CRT.fg,Ad_CRT.pal,bgm_PuyoReject,0
 		advertdata 30,5,Ad_Deltarune.art,Ad_Deltarune.fg,Ad_Deltarune.pal,bgm_DeltaTale,0
 		advertdata 10,10,Ad_3SonicSonic.art,Ad_3SonicSonic.fg,Ad_3SonicSonic.pal,bgm_LG,0
 		advertdata 5,10,Ad_YuriPropaganda.art,Ad_YuriPropaganda.fg,Ad_YuriPropaganda.pal,bgm_LZ,0
@@ -178,6 +182,13 @@ Ad_Lactose:
 .fg:		binclude "_gamemode/advert/ad-lactose-map.eni"
 .art:		binclude "_gamemode/advert/ad-lactose-art.nem"
 		even
+
+Ad_CRT:
+.pal:		binclude "_gamemode/advert/ad-CRT-pal.unc"
+.fg:		binclude "_gamemode/advert/ad-CRT-map.eni"
+.art:		binclude "_gamemode/advert/ad-CRT-art.nem"
+		even
+
 Ad_Deltarune:
 .pal:		binclude "_gamemode/advert/ad-deltarune-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-deltarune-map.eni"
