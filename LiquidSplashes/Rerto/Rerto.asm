@@ -3,7 +3,21 @@
 ;
 ; you can fuck with this as much as you want by the way
 ; ---------------------------------------------------------------------------
+
+	ifdef __DEBUG__
+retrodebug equ -1
+	else
+retrodebug equ 0
+	endif
+
+; ---------------------------------------------------------------------------
 SonicRetro:
+	if retrodebug<0
+	move.w	#(.InitRoutinesEnd-.InitRoutines)/4,(v_pcyc_num).w
+
+.RetroLoop:
+	endif
+
 	move.b	#bgm_Fade,d0
 	jsr	(QueueSound2).l
 
@@ -47,6 +61,7 @@ SonicRetro:
 	moveq	#palid_SonicRetro, d0
 	jsr	PalLoad1
 
+	if retrodebug==0
 	; This randomizer sucks from the front rather then the back
 	jsr	RandomNumber
 	and.l	#$FFFF,d0			; clear high word, it's kinda funky with divu
@@ -54,19 +69,33 @@ SonicRetro:
 	swap	d0				; get modulo
 
 	lsl.w	#2,d0
-	jsr	.InitRoutines(pc, d0)
+	move.l	.InitRoutines(pc,d0.w),a2
+
+	elseif retrodebug<0
+	subi.w	#1,(v_pcyc_num).w
+	move.w	(v_pcyc_num).w,d0
+	lsl.w	#2,d0
+	move.l	.InitRoutines(pc,d0.w),a2
+
+	else
+	moveq	#0,d0
+	move.w	#(retrodebug-1)*4,d0
+	move.l	.InitRoutines(pc,d0.w),a2
+
+	endif
+	jsr	(a2)
 	jmp	.Loop
 
 ; ====================================================================================
 
 .InitRoutines:
-	bra.w	.EmeraldFall
-	bra.w	.EmeraldFall
-	bra.w	.Default
-	bra.w	.Default
-	bra.w	.SonisRetros
-	bra.w	.SonisRetros
-	bra.w	.RonicSetro
+	dc.l	.EmeraldFall
+	dc.l	.EmeraldFall
+	dc.l	.Default
+	dc.l	.Default
+	dc.l	.SonisRetros
+	dc.l	.SonisRetros
+	dc.l	.RonicSetro
 .InitRoutinesEnd:
 
 ; ====================================================================================
@@ -169,8 +198,8 @@ SonicRetro:
 	jsr	.ExecuteObjects
 	jsr	BuildSprites
 
-        andi.b	#btnStart, (v_jpadpress1).w 
-        bne.w   .Exit
+	andi.b	#btnStart, (v_jpadpress1).w 
+	bne.w	.Exit
 
 	tst.w	(v_generictimer).w
 	beq.w	.Exit
@@ -236,6 +265,12 @@ SonicRetro:
 	jsr	PaletteFadeOut
 	jsr	VDPSetupGame
 	enable_display
+	if retrodebug<0
+	tst.w	(v_pcyc_num).w
+	beq.s	.Done
+	bra.w	.RetroLoop
+.Done:
+	endif
 	rts
 
 ; ====================================================================================
