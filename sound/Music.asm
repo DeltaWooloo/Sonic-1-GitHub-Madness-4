@@ -110,8 +110,8 @@ ptr_mus5E:		dc.l Music5E
 ptr_mus5F:		dc.l Music5F
 ptr_mus60:		dc.l Music60
 ptr_mus61:		dc.l Music61
-;ptr_mus62:		dc.l Music62
-;ptr_mus63:		dc.l Music63
+ptr_mus62:		dc.l Music62
+ptr_mus63:		dc.l Music63
 ;ptr_mus64:		dc.l Music64
 ;ptr_mus65:		dc.l Music65
 ;ptr_mus66:		dc.l Music66
@@ -337,5 +337,7 @@ Music60:	include	"music/TG2000Tracks/Elevator.asm"
 Music61:	include	"music/CNTracks/SUNSET.asm"
 		even
 Music62:	include	"music/TG2000Tracks/SonUnderground.asm" 
+		even
+Music63:	include	"music/TG2000Tracks/Skinner.asm" 
 		even
 	END

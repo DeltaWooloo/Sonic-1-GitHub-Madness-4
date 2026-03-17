@@ -819,4 +819,46 @@ DLE_Joint:
 ; kys
 ; ---------------------------------------------------------------------------
 DLE_DVZ:
-		rts
+
+; ---------------------------------------------------------------------------
+; Nogales Zone direct port from ice cc remake :^)
+; ---------------------------------------------------------------------------
+
+DLE_NGZ:
+		moveq	#0,d0
+		move.b	(v_act).w,d0
+		add.w	d0,d0
+		move.w	DLE_NGZx(pc,d0.w),d0
+		jmp	DLE_NGZx(pc,d0.w)
+; ===========================================================================
+DLE_NGZx:	dc.w DLE_NGZ1-DLE_NGZx
+		dc.w DLE_NGZ2-DLE_NGZx
+		dc.w DLE_NGZ3-DLE_NGZx
+; ===========================================================================
+
+DLE_NGZ1:
+		move.w	#$200,(v_limitbtm1).w ; set lower y-boundary
+                 cmpi.b    #1,($FFFFF600).w
+                 beq.s    .locret_6E08
+                 NOP
+.locret_6E08:
+		rts	
+; ===========================================================================
+
+DLE_NGZ2:
+		move.w	#$200,(v_limitbtm1).w ; set lower y-boundary
+                 cmpi.b    #1,($FFFFF600).w
+                 beq.s    locret_POOPFART
+                 NOP
+locret_POOPFART:
+		rts		
+DLE_NGZ3:
+		move.w	#$200,(v_limitbtm1).w ; set lower y-boundary
+		;cmpi.w	#$E50,(v_screenposx).w
+		;bcs.s	locret_VOMITCOOKIE
+		;move.w	#$210,(v_limitbtm1).w
+                 cmpi.b    #1,($FFFFF600).w
+                 beq.s    locret_VOMITCOOKIE
+                 NOP
+locret_VOMITCOOKIE:
+		rts	

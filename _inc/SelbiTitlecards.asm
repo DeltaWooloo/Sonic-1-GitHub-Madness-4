@@ -69,6 +69,11 @@ TitleCard_DVZ2:	equ  "THE BIRTHPLACE"
 TitleCard_DVZ3:	equ  "THE SELF"
 TitleCard_DVZ4:	equ  "THE JIGGLYJOSH"
 
+TitleCard_NGZ1:	equ  "NOGALES"
+TitleCard_NGZ2:	equ  "NOGALES"
+TitleCard_NGZ3:	equ  "NOGALES"
+TitleCard_NGZ4:	equ  "NOGALES"
+
 TitleCard_Zone:	equ  "ZONE"
 TitleCard_UseLowerAct: equ 1	; 0 = ACT -- 1 = Act
 

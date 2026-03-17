@@ -439,6 +439,12 @@ Kos_DVZ:	binclude	"artkos/8x8 - DVZ.kos"	; DVZ	primary padded. pamperspoop
 		even
 Blk256_DVZ:	binclude	"map256/DVZ.kos"
 		even
+Blk16_NGZ:	binclude	"map16/NGZ.eni"
+		even
+Kos_NGZ:	binclude	"artkos/8x8 - NGZ.kos"	; nogales	#r&)*_@@@@@@@@u!#@*)eudq@(ewuiwdq*)dy&*#r&du(!@ido*u&#ft^*rd&(y*)u(rf
+		even
+Blk256_NGZ:	binclude	"map256/NGZ.kos"		
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - bosses and ending sequence
 ; ---------------------------------------------------------------------------
@@ -500,7 +506,9 @@ Col_WIN:	binclude	"collide/WIN.bin"	; WIN index
 		even
 Col_Joint:	binclude	"collide/Joint.bin"	; Joint index
 		even
-Col_DVZ:	binclude	"collide/DVZ.bin"	; Joint index
+Col_DVZ:	binclude	"collide/DVZ.bin"	; IDONT CARE
+		even
+Col_NGZ:	binclude	"collide/NGZ.bin"	; O,GOPOG9-I0=IG20=I=0IG4=0I
 		even
 ; ---------------------------------------------------------------------------
 ; Special Stage layouts
@@ -716,6 +724,14 @@ Level_DVZ3:	binclude	"levels/DVZ1.bin"
 		even
 Level_DVZbg:	;binclude	"levels/dvz.bin"
 		dc.l 0
+Level_NGZ1:	binclude	"levels/ngz1.bin"
+		even
+Level_NGZ2:	binclude	"levels/ngz2.bin"
+		even
+Level_NGZ3:	binclude	"levels/ngz3.bin"
+		even
+Level_NGZbg:	binclude	"levels/ngzbg.bin"
+		dc.l 0
 		even
 ; ---------------------------------------------------------------------------
 ; Uncompressed graphics - Giant Rings
@@ -890,6 +906,13 @@ ObjPos_DVZ2:	binclude	"objpos/dvz2.bin"
 		even
 ObjPos_DVZ3:	binclude	"objpos/dvz3.bin"
 		even
+ObjPos_NGZ1:	binclude	"objpos/ngz1.bin"
+		even
+ObjPos_NGZ2:	binclude	"objpos/ngz2.bin"
+		even
+ObjPos_NGZ3:	binclude	"objpos/ngz3.bin"
+		even
+
 ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 
 ; ===========================================================================

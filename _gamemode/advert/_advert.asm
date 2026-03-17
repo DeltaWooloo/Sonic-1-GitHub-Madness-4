@@ -155,11 +155,12 @@ GM_Advert:
 		advertdata 30,5,Ad_Eggblock.art,Ad_Eggblock.fg,Ad_Eggblock.pal,bgm_Continue,0
 		advertdata 30,5,Ad_Willys.art,Ad_Willys.fg,Ad_Willys.pal,bgm_GHZ,0
 		advertdata 15,5,Ad_GameStar.art,Ad_GameStar.fg,Ad_GameStar.pal,bgm_NewShop,0
+		advertdata 30,10,Ad_HK97.art,Ad_HK97.fg,Ad_HK97.pal,bgm_ILBT,0				
 		advertdata 10,10,Ad_Craig.art,Ad_Craig.fg,Ad_Craig.pal,bgm_LG,0
 		advertdata 30,10,Ad_Carbuncle.art,Ad_Carbuncle.fg,Ad_Carbuncle.pal,bgm_Sunset,0
 		advertdata 30,5,Ad_Support.art,Ad_Support.fg,Ad_Support.pal,bgm_ChickenDance,0
 		advertdata 12,5,Ad_Tonic.art,Ad_Tonic.fg,Ad_Tonic.pal,bgm_Elevator,0
-		advertdata 30,5,Ad_SonicUnderground.art,Ad_SonicUnderground.fg,Ad_SonicUnderground.pal,bgm_Continue,0
+		advertdata 30,5,Ad_SonicUnderground.art,Ad_SonicUnderground.fg,Ad_SonicUnderground.pal,bgm_SonUnderground,0
 		advertdata 30,5,Ad_RaidShadowLegends.art,Ad_RaidShadowLegends.fg,Ad_RaidShadowLegends.pal,bgm_Easton,0
 		advertdata 30,10,Ad_TamperThingy.art,Ad_TamperThingy.fg,Ad_TamperThingy.pal,bgm_Basillica,0
 .tablee:
@@ -242,4 +243,9 @@ Ad_SonicUnderground:
 .pal:		binclude "_gamemode/advert/ad-sonic-underground-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-sonic-underground-map.eni"
 .art:		binclude "_gamemode/advert/ad-sonic-underground-art.nem"
+		even
+Ad_HK97:
+.pal:		binclude "_gamemode/advert/ad-hong-kong-97-pal.unc"
+.fg:		binclude "_gamemode/advert/ad-hong-kong-97-map.eni"
+.art:		binclude "_gamemode/advert/ad-hong-kong-97-art.nem"
 		even

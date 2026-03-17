@@ -1990,7 +1990,7 @@ Pal_FelixDecision:	bincludeEndMarker	"ContinueScreen/Graphics/Tile/Decision/Pale
 Pal_FelixGameOver:	bincludeEndMarker	"ContinueScreen/Graphics/Tile/GameOver/Palette.bin"
 Pal_Joint:		bincludeEndMarker	"palette/Joint Zone.bin"
 Pal_DVZ:		bincludeEndMarker	"palette/DoleVille Zone.bin"
-
+Pal_NGZ:		bincludeEndMarker	"palette/Nogales Zone.bin"
 Pal_SplashPal:	bincludeEndMarker	"eurosega/pal.bin"
 Pal_ColdBrew:	bincludeEndMarker	"conimodes/cold brew/palette.bin"
 Pal_ColdBrewG:	bincludeEndMarker	"conimodes/cold brew/palette grayscale.bin"
@@ -7189,7 +7189,7 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 		include	"ContinueScreen/Continue.asm"
 
 		include "Splashes.asm"
-		include "_gamemode/advert/advert.asm"
+		include "_gamemode/advert/_advert.asm"
 		include	"_inc/GHM3Explode.asm"
 
 		include	"_gamemode/damn/damn.asm"

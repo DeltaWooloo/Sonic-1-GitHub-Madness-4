@@ -71,4 +71,7 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 	lhead	plcid_Joint,Kos_DVZ,plcid_Joint,Blk16_DVZ,Blk256_DVZ,bgm_FZ,palid_DVZ,Col_DVZ,ObjPos_DVZ3,Level_DVZ3,Level_DVZbg
 	lhead	plcid_Joint,Kos_DVZ,plcid_Joint,Blk16_DVZ,Blk256_DVZ,bgm_FZ,palid_DVZ,Col_DVZ,ObjPos_DVZ1,Level_DVZ1,Level_DVZbg
 
-;	* music and level gfx are actually set elsewhere, so these values are useless
+	lhead	plcid_NGZ,Kos_NGZ,plcid_NGZ,Blk16_NGZ,Blk256_NGZ,bgm_DoleDetective,palid_NGZ,Col_NGZ,ObjPos_NGZ1,Level_NGZ1,Level_NGZbg	
+	lhead	plcid_NGZ,Kos_NGZ,plcid_NGZ,Blk16_NGZ,Blk256_NGZ,bgm_FZ,palid_NGZ,Col_NGZ,ObjPos_NGZ2,Level_NGZ2,Level_NGZbg
+	lhead	plcid_NGZ,Kos_NGZ,plcid_NGZ,Blk16_NGZ,Blk256_NGZ,bgm_FZ,palid_NGZ,Col_NGZ,ObjPos_NGZ3,Level_NGZ3,Level_NGZbg
+	lhead	plcid_NGZ,Kos_NGZ,plcid_NGZ,Blk16_NGZ,Blk256_NGZ,bgm_FZ,palid_NGZ,Col_NGZ,ObjPos_NGZ1,Level_NGZ1,Level_NGZbg

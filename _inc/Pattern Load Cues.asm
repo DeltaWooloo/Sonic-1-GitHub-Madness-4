@@ -31,6 +31,8 @@ ptr_PLC_Joint:		dc.w PLC_Joint-ArtLoadCues
 ptr_PLC_Joint2:		dc.w PLC_Joint2-ArtLoadCues
 ptr_PLC_DVZ:		dc.w PLC_DVZ-ArtLoadCues
 ptr_PLC_DVZ2:		dc.w PLC_DVZ2-ArtLoadCues
+ptr_PLC_NGZ:		dc.w PLC_NGZ-ArtLoadCues
+ptr_PLC_NGZ2:		dc.w PLC_NGZ2-ArtLoadCues
 ptr_PLC_TitleCard:	dc.w PLC_TitleCard-ArtLoadCues
 ptr_PLC_Boss:		dc.w PLC_Boss-ArtLoadCues
 ptr_PLC_Signpost:	dc.w PLC_Signpost-ArtLoadCues
@@ -279,6 +281,24 @@ PLC_DVZ2:	dc.w ((PLC_DVZ2end-PLC_DVZ2-2)/6)-1
 		plcm	Nem_VSpring,    ArtTile_Spring_Vertical        ; vertical spring
 PLC_DVZ2end:
 ; ---------------------------------------------------------------------------
+; Pattern load cues - Nogales
+; ---------------------------------------------------------------------------
+PLC_NGZ:	dc.w ((PLC_NGZ2-PLC_NGZ-2)/6)-1
+		plcm	Nem_Stalk, $6B00/32	; flower stalk
+	;	plcm	Nem_Ballhog, $8000/32	; crabmeat enemy
+             ;   plcm    byte_2BBC2, $8300/32
+PLC_NGZ2:	dc.w ((PLC_NGZ2end-PLC_NGZ2-2)/6)-1
+		plcm	Nem_Bridge, $71C0/32	; bridge
+		plcm	Nem_Buzz, $8880/32	; buzz bomber enemy
+		plcm	Nem_Swing, $7000/32	; swinging platform
+		plcm	Nem_Chopper, $9360/32	; chopper enemy
+		plcm	Nem_Jaws, $8F60/32	; jaws enemy
+		plcm	Nem_SpikePole, $7300/32	; spiked pole
+		plcm	Nem_Ball, $7540/32	; giant	ball
+		plcm	Nem_GhzWall1, $A1E0/32	; breakable wall
+		plcm	Nem_GhzWall2, $6980/32	; normal wall
+PLC_NGZ2end:
+; ---------------------------------------------------------------------------
 ; Pattern load cues - title card
 ; ---------------------------------------------------------------------------
 PLC_TitleCard:	dc.w ((PLC_TitleCardend-PLC_TitleCard-2)/6)-1
@@ -498,6 +518,8 @@ plcid_Joint:		equ (ptr_PLC_Joint-ArtLoadCues)/2
 plcid_Joint2:		equ (ptr_PLC_Joint2-ArtLoadCues)/2
 plcid_DVZ:		equ (ptr_PLC_DVZ-ArtLoadCues)/2	
 plcid_DVZ2:		equ (ptr_PLC_DVZ2-ArtLoadCues)/2	
+plcid_NGZ:		equ (ptr_PLC_NGZ-ArtLoadCues)/2	
+plcid_NGZ2:		equ (ptr_PLC_NGZ2-ArtLoadCues)/2	
 plcid_TitleCard:	equ (ptr_PLC_TitleCard-ArtLoadCues)/2	
 plcid_Boss:		equ (ptr_PLC_Boss-ArtLoadCues)/2	
 plcid_Signpost:		equ (ptr_PLC_Signpost-ArtLoadCues)/2	
