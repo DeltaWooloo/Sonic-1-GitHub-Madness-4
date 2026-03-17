@@ -107,6 +107,7 @@ SampleTable:
 	dcSample	TYPE_PCM,	Foxy,		0, FLAGS_SFX		; $CD
 	dcSample	TYPE_PCM,	GayNeil,	0, FLAGS_SFX		; $CE
 	dcSample	TYPE_DPCM,	funnyb_utthole,	8000, FLAGS_SFX		; $CF
+	dcSample	TYPE_DPCM,	Intel,		16000, FLAGS_SFX		; $D0
 
 	; ADVISORY: If you're coming to this repo just to add samples,
 	; they are going to get removed. Sorry!
@@ -213,6 +214,7 @@ SampleTable:
 	;incdac	SM64_MM,"sound/dac/GenesisDoes/SM64_MM.dpcm"
 	incdac	SM64_MM,"sound/dac/dummy.dpcm"
 	incdac	Boost,"sound/dac/GenesisDoes/Boost.dpcm"
+	incdac	Intel,"sound/dac/Intel.dpcm"
 	
 	;!@ SAVE THIS AS (LAST SLOT-2)
 	incdac	dummy,"sound/dac/dummy.dpcm"
