@@ -33,6 +33,13 @@ Pause_Loop:
 ; ===========================================================================
 
 Pause_ChkBC:
+		if DickingAround=0
+		tst.w	(f_debugmode).w
+		bne.s	.debugmode
+		cmpi.b	#1,(v_lives).w
+		bls.s	Pause_ChkStart
+.debugmode:
+		endif
 		btst	#bitB,(v_jpadhold1).w ; is button B pressed?
 		bne.s	Pause_Restart	; if yes, branch
 
@@ -51,6 +58,12 @@ Pause_DoNothing:
 ; ===========================================================================
 
 Pause_Restart:
+		if DickingAround=0
+		tst.w	(f_debugmode).w
+		bne.s	.debugmode
+		subi.b	#1,(v_lives).w
+.debugmode:
+		endif
 		move.w	#1,(f_restart).w
 		bra.s	Pause_EndMusic
 ; End of function PauseGame
