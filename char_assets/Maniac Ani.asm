@@ -44,16 +44,20 @@ ManiacAni_Run:
 		even
 
 ManiacAni_Roll:	
-		dc.b $FE, $B, afEnd
+		dc.b $FE, $F, $10, $11, $12, $13, afEnd
 		even
 ManiacAni_Roll2:	
-		dc.b $FE, $B, afEnd
+		dc.b $FE, $F, $10, $11, $12, $13, afEnd
 		even
 ManiacAni_Push:	
 		dc.b $FF, 5, 6,	7, 6, afEnd
 		even
 ManiacAni_Wait:	
-		dc.b 5,2,3,4,3,afEnd
+		dc.b 5,1,1,1,1,1,1,1,1,1,1,1,1,1
+		dc.b 1,1,1,1,1,1,1,1,1,1,1,1,1,1
+		dc.b 1,1,1,1,1,1,1,1,1,1,1,1,1,1
+		dc.b 1,1,1,1,1,1,1,1,1,1,1,1,1,1
+		dc.b 2,3,4,3,afBack,4
 		even
 ManiacAni_Balance:
 
@@ -70,7 +74,8 @@ ManiacAni_Warp3:
 ManiacAni_Warp4:
 
 ManiacAni_Stop:	
-
+		dc.b 3,$D,$E,afEnd
+		even
 ManiacAni_Float1:
 
 ManiacAni_Float2:
@@ -80,9 +85,11 @@ ManiacAni_Spring:
 ManiacAni_Hang:	
 
 ManiacAni_Leap1:
-		
+		dc.b $FE, $B, afEnd
+		even		
 ManiacAni_Leap2:
-		
+		dc.b $FE, $B, afEnd
+		even			
 ManiacAni_Surf:	
 		
 ManiacAni_GetAir
@@ -92,7 +99,8 @@ ManiacAni_Burnt:
 ManiacAni_Drown:
 		
 ManiacAni_Death:
-		
+		dc.b 17, $A, afEnd
+		even			
 ManiacAni_Shrink
 		
 ManiacAni_Hurt:	
@@ -104,7 +112,8 @@ ManiacAni_WaterSlide:
 ManiacAni_Null:	
 		
 ManiacAni_Float3:
-		
+		dc.b $FE, $B, afEnd
+		even		
 ManiacAni_Float4:
 		dc.b 1,8,afEnd
 		even		
