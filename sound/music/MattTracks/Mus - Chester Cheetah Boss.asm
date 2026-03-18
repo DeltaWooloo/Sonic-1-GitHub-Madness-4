@@ -1,41 +1,41 @@
-BGM_BossMatt_Header:
+BGM_ChesterBoss_Header:
 	smpsHeaderStartSong 1, 1
-	smpsHeaderVoice     BGM_BossMatt_Voices
+	smpsHeaderVoice     BGM_ChesterBoss_Voices
 	smpsHeaderChan      $07, $03
 	smpsHeaderTempo     $01, $00
 
-	smpsHeaderDAC       BGM_BossMatt_DAC,	$00, $F2
-	smpsHeaderFM        BGM_BossMatt_FM1,	$00, $00
-	smpsHeaderFM        BGM_BossMatt_FM2,	$00, $00
-	smpsHeaderFM        BGM_BossMatt_FM3,	$00, $00
-	smpsHeaderFM        BGM_BossMatt_FM4,	$00, $00
-	smpsHeaderFM        BGM_BossMatt_FM5,	$00, $00
-	smpsHeaderFM        BGM_BossMatt_FM6,	$00, $00
-	smpsHeaderPSG       BGM_BossMatt_PSG1,	$00, $00, $00, $00
-	smpsHeaderPSG       BGM_BossMatt_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       BGM_BossMatt_PSG3,	$00, $00, $00, $00
+	smpsHeaderDAC       BGM_ChesterBoss_DAC,	$00, $F2
+	smpsHeaderFM        BGM_ChesterBoss_FM1,	$00, $00
+	smpsHeaderFM        BGM_ChesterBoss_FM2,	$00, $00
+	smpsHeaderFM        BGM_ChesterBoss_FM3,	$00, $00
+	smpsHeaderFM        BGM_ChesterBoss_FM4,	$00, $00
+	smpsHeaderFM        BGM_ChesterBoss_FM5,	$00, $00
+	smpsHeaderFM        BGM_ChesterBoss_FM6,	$00, $00
+	smpsHeaderPSG       BGM_ChesterBoss_PSG1,	$00, $00, $00, $00
+	smpsHeaderPSG       BGM_ChesterBoss_PSG2,	$00, $00, $00, $00
+	smpsHeaderPSG       BGM_ChesterBoss_PSG3,	$00, $00, $00, $00
 
 ; DAC Data
-BGM_BossMatt_DAC:
+BGM_ChesterBoss_DAC:
 ; FM1 Data
-BGM_BossMatt_FM1:
+BGM_ChesterBoss_FM1:
 ; PSG1 Data
-BGM_BossMatt_PSG1:
+BGM_ChesterBoss_PSG1:
 ; PSG2 Data
-BGM_BossMatt_PSG2:
+BGM_ChesterBoss_PSG2:
 ; PSG3 Data
-BGM_BossMatt_PSG3:
+BGM_ChesterBoss_PSG3:
 	smpsStop
 
 ; FM2 Data
-BGM_BossMatt_FM2:
+BGM_ChesterBoss_FM2:
 	smpsSetvoice        $01
 	smpsAlterVol        $06
 	smpsPan             panCenter, $00
 	dc.b	nRst, $7F, $10, nB3, $06, nRst, $0C, nB3, $06, nRst, $0C, nB3
 	dc.b	nB3, $18, nB3, nB3, nB3, nB3, nB3, nB3, $30
 
-BGM_BossMatt_Jump04:
+BGM_ChesterBoss_Jump04:
 	dc.b	nB3, $0C, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3
 	dc.b	nB3, nB3, $06, nRst, $0C, nB3, $06, nRst, $0C, nB3, nB3, nB3
 	dc.b	nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, $06
@@ -44,10 +44,10 @@ BGM_BossMatt_Jump04:
 	dc.b	nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3
 	dc.b	nB3, $30
 	smpsPan             panCenter, $00
-	smpsJump            BGM_BossMatt_Jump04
+	smpsJump            BGM_ChesterBoss_Jump04
 
 ; FM3 Data
-BGM_BossMatt_FM3:
+BGM_ChesterBoss_FM3:
 	smpsSetvoice        $02
 	smpsAlterVol        $0A
 	smpsPan             panCenter, $00
@@ -107,7 +107,7 @@ BGM_BossMatt_FM3:
 	dc.b	nDs4, $05, nRst, $01, nDs4, $05, nRst, $0D, nDs4, $05, nRst, $01
 	dc.b	nDs4, $05, nRst, $0D
 
-BGM_BossMatt_Jump03:
+BGM_ChesterBoss_Jump03:
 	smpsAlterNote       $0D
 	dc.b	nFs3, $09, smpsNoAttack
 	smpsAlterNote       $1B
@@ -224,10 +224,10 @@ BGM_BossMatt_Jump03:
 	dc.b	nDs4, $05, nRst, $01, nDs4, $05, nRst, $0D, nDs4, $05, nRst, $01
 	dc.b	nDs4, $05, nRst, $0D
 	smpsPan             panCenter, $00
-	smpsJump            BGM_BossMatt_Jump03
+	smpsJump            BGM_ChesterBoss_Jump03
 
 ; FM4 Data
-BGM_BossMatt_FM4:
+BGM_ChesterBoss_FM4:
 	smpsSetvoice        $02
 	smpsAlterVol        $0E
 	smpsPan             panCenter, $00
@@ -315,7 +315,7 @@ BGM_BossMatt_FM4:
 	dc.b	nAs3, $05, nRst, $01, nAs3, $05, nRst, $0D, nAs3, $05, nRst, $01
 	dc.b	nAs3, $05, nRst, $0D
 
-BGM_BossMatt_Jump02:
+BGM_ChesterBoss_Jump02:
 	dc.b	nCs3, $09, smpsNoAttack
 	smpsAlterNote       $0A
 	dc.b	nCs3, $01, smpsNoAttack
@@ -488,10 +488,10 @@ BGM_BossMatt_Jump02:
 	dc.b	nAs3, $05, nRst, $01, nAs3, $05, nRst, $0D, nAs3, $05, nRst, $01
 	dc.b	nAs3, $05, nRst, $0D
 	smpsPan             panCenter, $00
-	smpsJump            BGM_BossMatt_Jump02
+	smpsJump            BGM_ChesterBoss_Jump02
 
 ; FM5 Data
-BGM_BossMatt_FM5:
+BGM_ChesterBoss_FM5:
 	smpsSetvoice        $03
 	smpsAlterVol        $05
 	smpsPan             panCenter, $00
@@ -987,7 +987,7 @@ BGM_BossMatt_FM5:
 	smpsAlterNote       $05
 	dc.b	nD3
 
-BGM_BossMatt_Jump01:
+BGM_ChesterBoss_Jump01:
 	smpsSetvoice        $08
 	smpsAlterVol        $04
 	dc.b	nRst
@@ -2614,10 +2614,10 @@ BGM_BossMatt_Jump01:
 	dc.b	nD3
 	smpsPan             panCenter, $00
 	smpsAlterNote       $05
-	smpsJump            BGM_BossMatt_Jump01
+	smpsJump            BGM_ChesterBoss_Jump01
 
 ; FM6 Data
-BGM_BossMatt_FM6:
+BGM_ChesterBoss_FM6:
 	smpsSetvoice        $04
 	smpsAlterVol        $0E
 	smpsPan             panCenter, $00
@@ -2626,7 +2626,7 @@ BGM_BossMatt_FM6:
 	dc.b	nDs1, $05, nRst, $01, nDs1, $05, nRst, $0D, nDs1, $05, nRst, $01
 	dc.b	nDs1, $05, nRst, $0D
 
-BGM_BossMatt_Jump00:
+BGM_ChesterBoss_Jump00:
 	dc.b	nRst, $01
 	smpsAlterNote       $0D
 	dc.b	nFs0, $08, smpsNoAttack
@@ -2728,9 +2728,9 @@ BGM_BossMatt_Jump00:
 	dc.b	nDs1, $05, nRst, $01, nDs1, $05, nRst, $0D, nDs1, $05, nRst, $01
 	dc.b	nDs1, $05, nRst, $0D
 	smpsPan             panCenter, $00
-	smpsJump            BGM_BossMatt_Jump00
+	smpsJump            BGM_ChesterBoss_Jump00
 
-BGM_BossMatt_Voices:
+BGM_ChesterBoss_Voices:
 ;	Voice $00
 ;	$34
 ;	$0A, $0F, $6B, $6B, 	$1F, $1F, $1F, $1F, 	$00, $10, $03, $0D
@@ -2983,4 +2983,4 @@ BGM_BossMatt_Voices:
 	smpsVcReleaseRate   $0F, $08, $0C, $08
 	smpsVcTotalLevel    $00, $09, $1B, $0F
 
-	smpsFooterEndSong	"MattTracks/Mus - Boss (Matt).asm"
+	smpsFooterEndSong	"MattTracks/Mus - Chester Cheetah Boss.asm"
