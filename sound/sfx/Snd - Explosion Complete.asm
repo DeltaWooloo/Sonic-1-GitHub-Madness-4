@@ -48,3 +48,4 @@ Sound_4E_Voices:
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $00, $00, $00, $06
 
+	smpsFooterEndSong	"Snd - Explosion Complete.asm"

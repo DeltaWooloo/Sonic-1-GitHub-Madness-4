@@ -13,7 +13,7 @@ Sound_51_FM5:
 Sound_51_Loop00:
 	dc.b	nCs3, $03
 	smpsAlterPitch      $FF
-	smpsFMAlterVol      $02
+	smpsAlterVol        $02
 	smpsLoop            $00, $10, Sound_51_Loop00
 	smpsStop
 
@@ -36,3 +36,4 @@ Sound_51_Voices:
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $00, $00, $00, $20
 
+	smpsFooterEndSong	"Snd - Fall.asm"

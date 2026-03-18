@@ -5,8 +5,7 @@ ptr_SonicPlayer:	dc.l SonicPlayer	; $01
 ptr_Obj02:		dc.l NullObject
 ptr_Obj03:		dc.l NullObject
 ptr_Obj04:		dc.l NullObject
-;ptr_Obj05:		dc.l NullObject
-ptr_Obj05:		dc.l Obj_DaxKatterD
+ptr_DaxKatterD:		dc.l Obj_DaxKatterD
 ptr_ClintonFucker:	dc.l ClintonFucker
 ptr_Obj07:		dc.l GM_CNNicoJumpOBJ
 ptr_Splash:		dc.l Splash		; $08
@@ -75,7 +74,8 @@ ptr_MarbleBrick:	dc.l MarbleBrick
 ptr_Bumper:		dc.l Bumper
 ptr_BossBall:		dc.l BossBall		; $48
 ptr_WaterSound:		dc.l WaterSound
-ptr_VanishSonic:	dc.l NullObject	; REMOVE UNUSED DATA - CONI
+;ptr_WBomb:		dc.l Obj_WBomb
+ptr_WBomb:		dc.l NullObject		; Until I can get the SHC Screen working
 ptr_GiantRing:		dc.l GiantRing
 ptr_GeyserMaker:	dc.l GeyserMaker
 ptr_LavaGeyser:		dc.l LavaGeyser
@@ -150,7 +150,7 @@ id_SonicPlayer:		equ ((ptr_SonicPlayer-Obj_Index)/4)+1		; $01
 id_Obj02:		equ ((ptr_Obj02-Obj_Index)/4)+1
 id_Obj03:		equ ((ptr_Obj03-Obj_Index)/4)+1
 id_Obj04:		equ ((ptr_Obj04-Obj_Index)/4)+1
-id_Obj05:		equ ((ptr_Obj05-Obj_Index)/4)+1
+id_DaxKatterD:		equ ((ptr_DaxKatterD-Obj_Index)/4)+1
 id_ClintonFucker:	equ ((ptr_ClintonFucker-Obj_Index)/4)+1
 id_Obj07:		equ ((ptr_Obj07-Obj_Index)/4)+1
 id_Splash:		equ ((ptr_Splash-Obj_Index)/4)+1		; $08
@@ -219,7 +219,7 @@ id_MarbleBrick:		equ ((ptr_MarbleBrick-Obj_Index)/4)+1
 id_Bumper:		equ ((ptr_Bumper-Obj_Index)/4)+1
 id_BossBall:		equ ((ptr_BossBall-Obj_Index)/4)+1		; $48
 id_WaterSound:		equ ((ptr_WaterSound-Obj_Index)/4)+1
-id_VanishSonic:		equ ((ptr_VanishSonic-Obj_Index)/4)+1
+id_WBomb:		equ ((ptr_WBomb-Obj_Index)/4)+1
 id_GiantRing:		equ ((ptr_GiantRing-Obj_Index)/4)+1
 id_GeyserMaker:		equ ((ptr_GeyserMaker-Obj_Index)/4)+1
 id_LavaGeyser:		equ ((ptr_LavaGeyser-Obj_Index)/4)+1

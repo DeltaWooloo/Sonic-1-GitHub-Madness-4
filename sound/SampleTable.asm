@@ -20,6 +20,9 @@ SampleTable:
 	dcSample	TYPE_PCM,	Tom,		13714			; $8C S2 Floor-Tom
 
 	; SONIC 3 & KNUCKLES (AND 3D BLAST)
+	dcSample	TYPE_PCM,	SnareS3,	19090			; $8D
+	dcSample	TYPE_PCM,	KickS3,		19090			; $8D
+	dcSample	TYPE_PCM,	CrashCymbal,	16766			; $8D
 	dcSample	TYPE_PCM,	ElectricTom,	20513			; $8D
 	dcSample	TYPE_PCM,	ElectricTom,	15803			; $8E
 	dcSample	TYPE_PCM,	ElectricTom,	13482			; $8F
@@ -130,6 +133,9 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Sonic 3 Samples
+	incdac	SnareS3, "Sound/DAC/S3/SnareS3.pcm"
+	incdac	KickS3, "Sound/DAC/S3/KickS3.pcm"
+	incdac	CrashCymbal, "Sound/DAC/S3/CrashCymbal.pcm"
 	incdac	ElectricTom, "sound/dac/S3/ElectricTom.pcm"
 
 ; ---------------------------------------------------------------

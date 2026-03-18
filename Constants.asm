@@ -5,7 +5,8 @@
 ; define stuff from older disassemblies because eyes
 ;- CONI
 PlaySound	=		QueueSound1
-PlaySound_Special	=		QueueSound2
+PlaySound_Special	=	QueueSound2
+PlaySound_Unused	=	QueueSound3
 PalLoad1	=		PalLoad_Fade
 PalLoad2	=		PalLoad
 v_pal_dry	=		v_palette
@@ -330,6 +331,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_SonUnderground
 	nextenum bgm_Skinner
 	nextenum bgm_Danstar
+	nextenum bgm_SHCSplash
 	; Keep this last
 	nextenum bgm__Last
 
@@ -389,6 +391,8 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum sfx_TonicTongue
 	nextenum sfx_FCBlip
 	nextenum sfx_FCSelect
+	nextenum sfx_Fall
+	nextenum sfx_ExplodeDone
 	; Keep this last
 	nextenum	sfx__Last
 
