@@ -164,7 +164,7 @@ Music0A:	include "music/GuykeTracks/Mus - Smiling Bomb.asm"
 		even
 Music0B:	include "music/MattTracks/Mus - Ending.asm"
 		even
-Music0C:	include "music/MattTracks/Mus - Boss (Matt).asm"
+Music0C:	include "music/MattTracks/Mus - Chester Cheetah Boss.asm"
 		even
 Music0D:	include "music/Dawid/Extremely_intense_boss_song_for_someone.asm" ;very intense not really but eh idgaf
 		even

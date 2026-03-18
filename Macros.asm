@@ -369,6 +369,13 @@ pcm:	macro id,terminate
     endif
 	endm
 
+;!@ GD: (Attempts) to stop all MegaPCM, including DAC SFX
+stopPCM:	macro
+	jsr	(MegaPCM_StopPlayback).l
+	move.b	#dsfxSilence,d0
+	jsr	(MegaPCM_PlaySample).l
+	endm
+
 ; ---------------------------------------------------------------------------
 ; Macro to communicate with Sega CD
 ; THANK YOU THEBLAD!!!!

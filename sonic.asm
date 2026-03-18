@@ -3,7 +3,7 @@
 ;  =========================================================================
 ;
 ; Disassembly created by xx_THEULTIMATEGAMER_xx235
-; thanks to Bill Gates(the owner of fucking microsoft hes really bad), Clownancy(the) and Esrael Sonic Edtior Neato!
+; thanks to Bill Gates(the owner of fucking Microslop hes really bad), Clownancy(the) and Esrael Sonic Edtior Neato!
 ; ---------------------------------------------------------------------------
 ; NOTE:
 ; Set your editor's tab width to 8 characters wide for viewing this file.
@@ -2118,8 +2118,13 @@ Sega_GotoTitle:
 ; ---------------------------------------------------------------------------
 
 GM_Title:
-		move.b	#bgm_Fade,d0
-		bsr.w	QueueSound2 ; stop music
+		;move.b	#bgm_Fade,d0
+		;bsr.w	QueueSound2 ; stop music		
+		;GD: Bugfix to make Freddy sample play entirely from GH4 Title
+		move.b	#bgm_Stop,d0
+		bsr.w	QueueSound2
+		stopPCM
+		
 		bsr.w	ClearPLC
 		bsr.w	PaletteFadeOut
 		lea	(vdp_control_port).l,a6

@@ -69,13 +69,11 @@ SampleTable:
 	dcSample	TYPE_DPCM,	TheFourth,	16000,FLAGS_SFX		; $AF
 	dcSample	TYPE_DPCM,	eggmanLaugh,	16000,FLAGS_SFX	; $B0
 	dcSample	TYPE_DPCM,	GenesisDoes1,	16000			; $B1
-	dcSample	TYPE_PCM,	BeRightBack,	16000,			; $B2	
+	dcSample	TYPE_PCM,	BeRightBack,	16000,			; $B2		
+	dcSample	TYPE_DPCM,	GenesisCan1,16000,FLAGS_SFX		; $B3
+	dcSample	TYPE_DPCM,	GenesisCan2,16000,FLAGS_SFX		; $B4
 	;!@ DELETED - NOP'd out with dummy.wav
-	;dcSample	TYPE_DPCM,	GenesisCan1,16000,FLAGS_SFX		; $B3
-	;dcSample	TYPE_DPCM,	GenesisCan2,16000,FLAGS_SFX		; $B4
 	;dcSample	TYPE_DPCM,	SM64_MM,16000,FLAGS_SFX			; $B5
-	dcSample	TYPE_DPCM,	dummy,16000,FLAGS_SFX			; $B3
-	dcSample	TYPE_DPCM,	dummy,16000,FLAGS_SFX			; $B4
 	dcSample	TYPE_DPCM,	Boost,		16000,FLAGS_SFX		; $B5
 	
 	dcSample	TYPE_DPCM,	DAMN,		16000				; $B6
@@ -99,15 +97,18 @@ SampleTable:
 
 	dcSample	TYPE_DPCM,	ClintonHi,	20600,	FLAGS_SFX	; $C6
 	dcSample	TYPE_DPCM,	ClintonYeah,	20600,	FLAGS_SFX	; $C7
-	dcSample	TYPE_PCM,	QuakeJump,	0,	FLAGS_SFX	; $C8
+	dcSample	TYPE_PCM,	QuakeJump,	0,	FLAGS_SFX		; $C8
 	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX	; $C9
-	dcSample	TYPE_PCM,	letsgoeee,	0,	FLAGS_SFX	; $CA
-	dcSample	TYPE_PCM,	Lg,		16000, FLAGS_SFX	; $CB
+	dcSample	TYPE_PCM,	letsgoeee,	0,	FLAGS_SFX		; $CA
+	dcSample	TYPE_PCM,	Lg,		16000, FLAGS_SFX		; $CB
 	dcSample	TYPE_PCM,	Segay,		0, FLAGS_SFX		; $CC
 	dcSample	TYPE_PCM,	Foxy,		0, FLAGS_SFX		; $CD
 	dcSample	TYPE_PCM,	GayNeil,	0, FLAGS_SFX		; $CE
-	dcSample	TYPE_DPCM,	funnyb_utthole,	8000, FLAGS_SFX		; $CF
-	dcSample	TYPE_DPCM,	Intel,		16000, FLAGS_SFX		; $D0
+	dcSample	TYPE_DPCM,	funnyb_utthole,	8000, FLAGS_SFX	; $CF
+	dcSample	TYPE_DPCM,	Intel,		16000, FLAGS_SFX	; $D0
+	
+	;!@ GD: Last slot always reserved for PCM SFX Silence
+	dcSample	TYPE_DPCM,	dummy,	8000, FLAGS_SFX			; $D0
 
 	; ADVISORY: If you're coming to this repo just to add samples,
 	; they are going to get removed. Sorry!
@@ -208,9 +209,9 @@ SampleTable:
 	incdac	eggmanLaugh,"sound/dac/GenesisDoes/eggmanLaugh.dpcm"
 	incdac	GenesisDoes1,"sound/dac/GenesisDoes/GenesisDoes1.dpcm"
 	incdac	BeRightBack,"sound/dac/well-be-right-back.wav"	
+	incdac	GenesisCan1,"sound/dac/GenesisDoes/GenesisCan1.dpcm"
+	incdac	GenesisCan2,"sound/dac/GenesisDoes/GenesisCan2.dpcm"
 	;!@ DELETED - NOP'd out with Dummy.wav
-	;incdac	GenesisCan1,"sound/dac/GenesisDoes/GenesisCan1.dpcm"
-	;incdac	GenesisCan2,"sound/dac/GenesisDoes/GenesisCan2.dpcm"
 	;incdac	SM64_MM,"sound/dac/GenesisDoes/SM64_MM.dpcm"
 	incdac	SM64_MM,"sound/dac/dummy.dpcm"
 	incdac	Boost,"sound/dac/GenesisDoes/Boost.dpcm"

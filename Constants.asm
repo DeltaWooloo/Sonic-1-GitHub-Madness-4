@@ -228,7 +228,8 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 
 ; Background music
 	enumconf $1
-	enum	bgm__First=$1
+	enum	SNDMIN=$0				;!@ GD: Minimum sound ID (silence)
+	nextenum bgm__First
 	nextenum bgm_GHZ=bgm__First
 	nextenum bgm_LZ
 	nextenum bgm_MZ
@@ -403,6 +404,7 @@ bgm_Speedup:	equ ((ptr_flgE2-Sound_ExIndex)/4)+flg__First
 bgm_Slowdown:	equ ((ptr_flgE3-Sound_ExIndex)/4)+flg__First
 bgm_Stop:	equ ((ptr_flgE4-Sound_ExIndex)/4)+flg__First
 flg__Last:	equ ((ptr_flgend-Sound_ExIndex-4)/4)+flg__First
+SNDMAX:		equ	flg__Last	;!@ GD: Maximum sound ID
 
 	include "sound/SampleConstants.asm"
 
