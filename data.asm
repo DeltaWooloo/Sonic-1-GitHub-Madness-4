@@ -481,7 +481,7 @@ Eni_TheIdiotBros:	binclude	"tilemaps/Idiots.eni"
 ; ---------------------------------------------------------------------------
 ; Cold Brew
 ; ---------------------------------------------------------------------------
-Nem_EizaNorm:	binclude	"coniobjs/eiza/artNORM.bin"
+Nem_EizaNorm:	binclude	"coniobjs/eiza/artnorm.bin"
 Nem_EizaAtt:	binclude	"coniobjs/eiza/artATT.bin"
 		even
 ; ---------------------------------------------------------------------------

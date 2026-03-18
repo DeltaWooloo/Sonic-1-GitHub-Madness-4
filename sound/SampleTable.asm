@@ -133,9 +133,9 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Sonic 3 Samples
-	incdac	SnareS3, "Sound/DAC/S3/SnareS3.pcm"
-	incdac	KickS3, "Sound/DAC/S3/KickS3.pcm"
-	incdac	CrashCymbal, "Sound/DAC/S3/CrashCymbal.pcm"
+	incdac	SnareS3, "sound/dac/S3/SnareS3.pcm"
+	incdac	KickS3, "sound/dac/S3/KickS3.pcm"
+	incdac	CrashCymbal, "sound/dac/S3/CrashCymbal.pcm"
 	incdac	ElectricTom, "sound/dac/S3/ElectricTom.pcm"
 
 ; ---------------------------------------------------------------
