@@ -38,7 +38,15 @@ p_bwreplace:	ds.b 4		; GIO: RAM pointer to the first below water palette entry t
 p_pcyctarget:	ds.b 4		; GIO: ROM pointer to the palette cycle target palette. (4 bytes)
 v_palcycleram:	ds.b $20	; GIO: Buffer for the palette cycling data (as much RAM as you want)
 
-			ds.b	$1C6		; unused ($200 were freed up by the new DMA Queue) (and giovanni yoinked some lmao)
+
+vscroll_mode:	ds.w 1
+vscroll_buffer:	ds.b $C0	; buffer for vscroll column mode
+				; i don't think it needs nearly this much but i'm just being safe
+
+
+			ds.b	$104		; unused ($200 were freed up by the new DMA Queue) (and giovanni yoinked some lmao) 
+						; (kat (i) took $C0 for a vscroll buffer might free some of it later
+
 v_tracksonic:		ds.b	$100		; position tracking data for Sonic
 v_hscrolltablebuffer:	ds.b	$380		; scrolling table data
 v_hscrolltablebuffer_end:

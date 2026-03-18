@@ -436,6 +436,42 @@ CheckSumError:
 Art_Text:	binclude	"artunc/menutext.bin" ; text used in level select and debug mode
 Art_Text_End:	even
 
+
+; ---------------------------------------------------------------------------
+; Write VScroll buffer to VSRAM
+; ---------------------------------------------------------------------------
+
+VDPDATA = vdp_data_port			; i hate you
+VDPCTRL = vdp_control_port
+
+VScrollWrt:
+		lea	VDPDATA,a4
+		move.w	#$8B00+%0111,4(a4)
+		lea	vscroll_buffer,a3
+		move.l	#$40000010,(vdp_control_port).l	
+		; meh
+ 		move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                rts
+
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Vertical interrupt
@@ -446,9 +482,16 @@ VBlank:
 		movem.l	d0-a6,-(sp)
 		tst.b	(v_vbla_routine).w
 		beq.s	VBla_00
+		tst.b	vscroll_mode
+		beq.s	.normal
+		pea	.dovbla(pc)
+		bra.w	VScrollWrt
+.normal:
+		move.w	#$8B00+%0011,vdp_control_port
 		move.w	(vdp_control_port).l,d0
 		move.l	#$40000010,(vdp_control_port).l
 		move.l	(v_scrposy_vdp).w,(vdp_data_port).l ; send screen y-axis pos. to VSRAM
+.dovbla:
 		move.b	(v_vbla_routine).w,d0
 		move.b	#0,(v_vbla_routine).w
 		move.w	#1,(f_hbla_pal).w

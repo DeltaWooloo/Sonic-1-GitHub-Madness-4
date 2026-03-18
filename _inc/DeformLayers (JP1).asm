@@ -495,23 +495,76 @@ AppleScrMv:	equ   $FFFFA806
 ; ---------------------------------------------------------------------------
 
 Deform_SBZ:
+		move.b	#1,vscroll_mode
 		tst.b	(v_act).w
 		bne.w	Deform_SBZ2
-	; vertical scrolling
 		move.w	#0,v_bgscreenposy
 		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
-	; calculate background scroll buffer
 		lea	(v_hscrolltablebuffer).w,a1
-		add.w	#1,v_bgscroll_buffer
-		move.w	(v_bgscroll_buffer).w,d2
+		;add.w	#1,v_bgscroll_buffer
+		;move.w	(v_bgscroll_buffer).w,d2
 		move.w	(v_screenposx).w,d0
 		neg	d0
 		swap 	d0
-		move.w	d2,d0
+		;move.w	d2,d0
 		move.w	#256-1,d1
 	.buildingLoop:		
 		move.l	d0,(a1)+
 		dbf	d1,.buildingLoop
+
+		moveq	#0,d4
+		lea	vscroll_buffer,a1
+		add.w	#4,v_bgscroll_buffer+2
+		move.w	v_bgscreenposx,d2
+		andi.w	#$3F,d2
+		asr.w	#2,d2
+		andi.w	#$FE,d2
+		add.w	d2,a1
+
+		move.w	v_bgscroll_buffer+2,d0
+        	jsr     CalcSine
+        	tst.w	d0
+        	move.w	d0,d1
+		move.w	v_screenposy,d0
+		swap	d0
+		tst.w	d1
+		bpl.s	.bounce1
+		neg.w	d1
+		asr.w	#2,d1
+		bra.s	.bounce2
+.bounce1:
+		asr.w	#2,d1
+		move.w	d1,d0
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+.bounce2:
+		move.w	#0,d0
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.w	d1,d0
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.w	#0,d0
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.w	d1,d0
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.w	#0,d0
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
 		rts
 
 		; i'm not quite sure what this is going to be used for
