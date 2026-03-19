@@ -1,8 +1,33 @@
 {
     "Flex": 2,
     "name": "Sonic 1",
-    "node": "da472ab9-f363-45e6-8ee3-a83fd70d6d9c",
+    "node": "07038098-b10a-4ae9-9ccf-3d69f913dcc2",
     "objects": [
+        {
+            "uuid": "07038098-b10a-4ae9-9ccf-3d69f913dcc2",
+            "format": "Sonic 1.js",
+            "name": "ATGAMEPAL",
+            "palettes": [
+                {
+                    "path": "_gamemode\\advert\\Atgame.bin",
+                    "length": 4
+                }
+            ],
+            "art": {
+                "path": "",
+                "compression": "Uncompressed",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            }
+        },
         {
             "format": "Sonic 1.js",
             "name": "HUD",
