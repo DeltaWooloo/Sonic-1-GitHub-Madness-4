@@ -186,7 +186,7 @@ GM_Advert:
 		advertdata 3,8,Ad_SuperChallenges.art,Ad_SuperChallenges.fg,Ad_SuperChallenges.pal,bgm_Son1UP,0		
 		advertdata 5,10,Ad_IWBTH.art,Ad_IWBTH.fg,Ad_IWBTH.pal,bgm_GEMSHill,0
 		advertdata 30,5,Ad_Limited.art,Ad_Limited.fg,Ad_Limited.pal,bgm_LimitedYard,0				; I plan to change the song to Final Limit
-		advertdata 30,5,Ad_Atgame.art,Ad_Atgame.fg,Ad_Atgame.pal,bgm_musBomerDude,0
+		advertdata 30,5,Ad_Atgame.art,Ad_Atgame.fg,Ad_Atgame.pal,bgm_BomerDude,0
 .tablee:
 .eyecatch1:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg1,Ad_Eyecatch.pal,0,dRightBack
 .eyecatch2:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg2,Ad_Eyecatch.pal,bgm_EuroSega,0

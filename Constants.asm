@@ -310,8 +310,8 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Area5
 	nextenum bgm_CCLobby
 	nextenum bgm_Memories
-	nextenum bgm_musBomerDude
-	nextenum bgm_Continue2
+	nextenum bgm_BomerDude
+	nextenum bgm_S1Continue
 	nextenum bgm_Coffinman
 	nextenum bgm_ColdBrew
 	nextenum bgm_ChairRoom

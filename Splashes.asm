@@ -167,7 +167,7 @@ splash_turd macro routine
 	splash_solid	Compile,	$40, 0,	$00,		60*3
 	splash_solid	GenesisDoes1,	$40, 1,	dGenesisDoes1,	60*10
 	splash_solid	Blessed,	$40, 0,	sfx_SSGoal,	200
-	splash_solid	SonicBroke,	$20, 0,	bgm_Continue2,	480
+	splash_solid	SonicBroke,	$20, 0,	bgm_S1Continue,	480
 	splash_solid	Wait,		$60, 0,	bgm_PuyoDrown,	145
 	splash_solid	W,		$40, 0,	bgm_Win2K,	380
 
