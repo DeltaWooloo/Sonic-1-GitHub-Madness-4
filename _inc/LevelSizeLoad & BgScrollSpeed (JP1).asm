@@ -183,11 +183,15 @@ BgScroll_Index:	dc.w BgScroll_GHZ-BgScroll_Index, BgScroll_LZ-BgScroll_Index
 		dc.w BgScroll_SYZ-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
 		zonewarning BgScroll_Index,2
 		dc.w BgScroll_End-BgScroll_Index, BgScroll_GHZ-BgScroll_Index
-		dc.w BgScroll_MZ-BgScroll_Index, BgScroll_MZ-BgScroll_Index
-		dc.w BgScroll_MZ-BgScroll_Index, BgScroll_MZ-BgScroll_Index
+		dc.w BgScroll_Default-BgScroll_Index, BgScroll_Default-BgScroll_Index
+		dc.w BgScroll_Default-BgScroll_Index, BgScroll_Default-BgScroll_Index
 ; ===========================================================================
 
+BgScroll_Default:
+		move.b	#0,vscroll_mode
+		rts
 BgScroll_GHZ:
+		move.b	#0,vscroll_mode
 		clr.l	(v_bgscreenposx).w
 		clr.l	(v_bgscreenposy).w
 		clr.l	(v_bg2screenposy).w
@@ -200,15 +204,18 @@ BgScroll_GHZ:
 ; ===========================================================================
 
 BgScroll_LZ:
+		move.b	#0,vscroll_mode
 		clr.l	(v_bgscreenposy).w
 		rts
 ; ===========================================================================
 
 BgScroll_MZ: ; this is so intricate peak code ngl
+		move.b	#0,vscroll_mode
 		rts
 ; ===========================================================================
 
 BgScroll_SLZ:
+		move.b	#0,vscroll_mode
 		asr.l	#1,d0
 		addi.w	#$C0,d0
 		move.w	d0,(v_bgscreenposy).w
@@ -217,6 +224,7 @@ BgScroll_SLZ:
 ; ===========================================================================
 
 BgScroll_SYZ:
+		move.b	#0,vscroll_mode
 		asl.l	#4,d0
 		move.l	d0,d2
 		asl.l	#1,d0
@@ -235,6 +243,7 @@ BgScroll_SBZ:
 ; ===========================================================================
 
 BgScroll_End:
+		move.b	#0,vscroll_mode
 		move.w	(v_screenposx).w,d0
 		asr.w	#1,d0
 		move.w	d0,(v_bgscreenposx).w
