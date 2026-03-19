@@ -39,9 +39,9 @@ TitleCard_LZ2:	equ  "JUST AN ETRIAN"
 TitleCard_LZ3:	equ  "FOE FOE FOE FOE"
 TitleCard_LZ4:	equ  "PRONGLE PIT"	; LZ4 is SBZ3
 
-TitleCard_SLZ1:	equ  "MICRODICK HD"
-TitleCard_SLZ2:	equ  "MEIN KRAFT"
-TitleCard_SLZ3:	equ  "CLIPPY CLITORIS"
+TitleCard_SLZ1:	equ  "MEIN KRAFT"
+TitleCard_SLZ2:	equ  "PIGLIN SHAFT"
+TitleCard_SLZ3:	equ  "ENDERMAN PORN"
 TitleCard_SLZ4:	equ  "porn"
 
 TitleCard_SBZ1:	equ  "PRONGLE PLANT"

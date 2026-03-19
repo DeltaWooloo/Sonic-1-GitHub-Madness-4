@@ -153,6 +153,14 @@ GM_Advert:
 		jsr	QueueSound2
 ;		endif
 		jsr	PaletteWhiteOut
+		
+		;!@ GD: PCM SFX fix if in advert debugger
+		if advertdebug<0
+		move.b	#bgm_Stop,d0
+		jsr		(QueueSound2).l
+		stopPCM
+		endif
+		
 		move.l	(sp)+,a2
 		rts
 ; ---------------------------------------------------------------------------
@@ -178,7 +186,7 @@ GM_Advert:
 		advertdata 5,1,Ad_GenesisCan1.art,Ad_GenesisCan1.fg,Ad_GenesisCan1.pal,0,dGenesisCan1
 		advertdata 5,1,Ad_GenesisCan2.art,Ad_GenesisCan2.fg,Ad_GenesisCan2.pal,0,dGenesisCan2
 		advertdata 8,1,Ad_GenesisCan3.art,Ad_GenesisCan3.fg,Ad_GenesisCan3.pal,0,dGenesisCan3
-		advertdata 120,5,Ad_Nep5.art,Ad_Nep5.fg,Ad_Nep5.pal,bgm_NepAnime,dNep
+		advertdata 60+35,5,Ad_Nep5.art,Ad_Nep5.fg,Ad_Nep5.pal,bgm_NepAnime,0
 
 		advertdata 3,3,Ad_Intel.art,Ad_Intel.fg,Ad_Intel.pal,0,dIntel
 		advertdata 30,5,Ad_ElmLab.art,Ad_ElmLab.fg,Ad_ElmLab.pal,bgm_NewBarkTown,0
