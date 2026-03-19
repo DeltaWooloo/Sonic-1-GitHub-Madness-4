@@ -435,6 +435,9 @@ CheckSumError:
 
 Art_Text:	binclude	"artunc/menutext.bin" ; text used in level select and debug mode
 Art_Text_End:	even
+;!@ Variant with (C) replaced with [at] symbol
+Art_TextAT:	binclude	"artunc/menutextAT.bin" ; text used in level select and debug mode
+Art_TextAT_End:	even
 
 
 ; ---------------------------------------------------------------------------
