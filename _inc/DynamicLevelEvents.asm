@@ -336,7 +336,9 @@ locret_7072:
 
 DLE_MZ2:
 		move.w	#$500,(v_limitbtm1).w
-		cmpi.w	#$800,(v_screenposx).w
+		;!@ GD, Canada Act 2 DLE xpos fix
+		;cmpi.w	#$800,(v_screenposx).w
+		cmpi.w	#$0B00,(v_screenposx).w
 		blo.s	locret_7088
 		move.w	#$300,(v_limitbtm1).w
 
