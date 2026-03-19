@@ -20,6 +20,9 @@ SampleTable:
 	dcSample	TYPE_PCM,	Tom,		13714			; $8C S2 Floor-Tom
 
 	; SONIC 3 & KNUCKLES (AND 3D BLAST)
+	dcSample	TYPE_PCM,	SnareS3,	19090			; $8D
+	dcSample	TYPE_PCM,	KickS3,		19090			; $8D
+	dcSample	TYPE_PCM,	CrashCymbal,	16766			; $8D
 	dcSample	TYPE_PCM,	ElectricTom,	20513			; $8D
 	dcSample	TYPE_PCM,	ElectricTom,	15803			; $8E
 	dcSample	TYPE_PCM,	ElectricTom,	13482			; $8F
@@ -75,8 +78,6 @@ SampleTable:
 	dcSample	TYPE_DPCM,	GenesisCan3,16000,FLAGS_SFX		; $B5
 	dcSample	TYPE_DPCM,	nep,16000,FLAGS_SFX				; $B5
 	;!@ DELETED - NOP'd out with dummy.wav
-	;dcSample	TYPE_DPCM,	GenesisCan1,16000,FLAGS_SFX		; $B3
-	;dcSample	TYPE_DPCM,	GenesisCan2,16000,FLAGS_SFX		; $B4
 	;dcSample	TYPE_DPCM,	SM64_MM,16000,FLAGS_SFX			; $B5
 	dcSample	TYPE_DPCM,	Boost,		16000,FLAGS_SFX		; $B6
 	
@@ -101,10 +102,10 @@ SampleTable:
 
 	dcSample	TYPE_DPCM,	ClintonHi,	20600,	FLAGS_SFX	; $C6
 	dcSample	TYPE_DPCM,	ClintonYeah,	20600,	FLAGS_SFX	; $C7
-	dcSample	TYPE_PCM,	QuakeJump,	0,	FLAGS_SFX	; $C8
+	dcSample	TYPE_PCM,	QuakeJump,	0,	FLAGS_SFX		; $C8
 	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX	; $C9
-	dcSample	TYPE_PCM,	letsgoeee,	0,	FLAGS_SFX	; $CA
-	dcSample	TYPE_PCM,	Lg,		16000, FLAGS_SFX	; $CB
+	dcSample	TYPE_PCM,	letsgoeee,	0,	FLAGS_SFX		; $CA
+	dcSample	TYPE_PCM,	Lg,		16000, FLAGS_SFX		; $CB
 	dcSample	TYPE_PCM,	Segay,		0, FLAGS_SFX		; $CC
 	dcSample	TYPE_PCM,	Foxy,		0, FLAGS_SFX		; $CD
 	dcSample	TYPE_PCM,	GayNeil,	0, FLAGS_SFX		; $CE
@@ -134,6 +135,9 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Sonic 3 Samples
+	incdac	SnareS3, "sound/dac/S3/SnareS3.pcm"
+	incdac	KickS3, "sound/dac/S3/KickS3.pcm"
+	incdac	CrashCymbal, "sound/dac/S3/CrashCymbal.pcm"
 	incdac	ElectricTom, "sound/dac/S3/ElectricTom.pcm"
 
 ; ---------------------------------------------------------------

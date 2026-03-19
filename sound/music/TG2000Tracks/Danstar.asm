@@ -12,7 +12,7 @@ Danstar_Header:
 	smpsHeaderFM	Danstar_FM5,	smpsPitch00,	$00
 	smpsHeaderPSG       Danstar_PSG1,	$00, $00, $00, $00
 	smpsHeaderPSG       Danstar_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       Danstar_PSG3,	$00, $00, $00, $00
+	smpsHeaderPSG       Danstar_PSG3,	$0C, $00, $00, $00
 	dc.b		$00,	$00,	$00,	$00
 
 ; FM1 Data
@@ -5392,40 +5392,40 @@ Danstar_Jump08:
 
 ; DAC Data
 Danstar_DAC:
-	dc.b		dKick,	$1D,	dKick,	$1E,	dKick,	dKick,	dKick,	dKick
-	dc.b		$0F,	dKick,	$0A,	dKick,	$05,	dSnare,	$0A,	dSnare
-	dc.b		$05,	dKick,	$0A,	dKick,	$05,	dSnare,	$0A,	dSnare
-	dc.b		$05,	dSnare,	$0A,	dSnare,	$05
+	dc.b		dKickS3,	$1D,	dKickS3,	$1E,	dKickS3,	dKickS3,	dKickS3,	dKickS3
+	dc.b		$0F,	dKickS3,	$0A,	dKickS3,	$05,	dSnareS3,	$0A,	dSnareS3
+	dc.b		$05,	dKickS3,	$0A,	dKickS3,	$05,	dSnareS3,	$0A,	dSnareS3
+	dc.b		$05,	dSnareS3,	$0A,	dSnareS3,	$05
 Danstar_Jump09:
-	dc.b		dKick,	$0F,	dKick,	dSnare,	dKick,	$19,	dSnare,	$05
-	dc.b		dKick,	$0F,	dSnare,	dKick,	dKick,	dKick,	dSnare,	dKick
-	dc.b		$19,	dSnare,	$05,	dKick,	$0F,	dSnare,	dKick,	dKick
-	dc.b		dKick,	dSnare,	dKick,	$19,	dSnare,	$05,	dKick,	$0F
-	dc.b		dSnare,	dSnare,	$0A,	dSnare,	$05,	dKick,	$1E,	dKick
-	dc.b		dKick,	$0F,	dKick,	$0A,	dKick,	$05,	dSnare,	$0A
-	dc.b		dKick,	$05,	dSnare,	$0A,	dSnare,	$05,	dKick,	$0F
-	dc.b		dKick,	dSnare,	dKick,	$19,	dSnare,	$05,	dKick,	$0F
-	dc.b		dSnare,	dKick,	dKick,	dKick,	dSnare,	dKick,	$19,	dSnare
-	dc.b		$05,	dKick,	$0F,	dSnare,	dKick,	dKick,	dKick,	dSnare
-	dc.b		dKick,	$19,	dSnare,	$05,	dKick,	$0F,	dSnare,	dSnare
-	dc.b		$0A,	dSnare,	$05,	dKick,	$1E,	dKick,	dKick,	$0F
-	dc.b		dKick,	$0A,	dKick,	$05,	dSnare,	$0A,	dKick,	$05
-	dc.b		dSnare,	$0A,	dSnare,	$05,	dKick,	$0F,	dKick,	dSnare
-	dc.b		dKick,	$19,	dSnare,	$05,	dKick,	$0F,	dSnare,	dKick
-	dc.b		dKick,	dKick,	dSnare,	dKick,	$19,	dSnare,	$05,	dKick
-	dc.b		$0F,	dSnare,	dSnare,	$0A,	dSnare,	$05,	dKick,	$0F
-	dc.b		dKick,	dSnare,	dKick,	$19,	dSnare,	$05,	dKick,	$0F
-	dc.b		dSnare,	dKick,	dKick,	dKick,	dSnare,	dKick,	$19,	dSnare
-	dc.b		$05,	dKick,	$0F,	dSnare,	$0A,	dSnare,	$05,	dSnare
-	dc.b		$0A,	dSnare,	$05,	dKick,	$0F,	dKick,	dSnare,	dKick
-	dc.b		$19,	dSnare,	$05,	dKick,	$0F,	dSnare,	dKick,	dKick
-	dc.b		dKick,	dSnare,	dKick,	$19,	dSnare,	$05,	dKick,	$0F
-	dc.b		dSnare,	dSnare,	$0A,	dSnare,	$05,	dKick,	$0F,	dKick
-	dc.b		dSnare,	dKick,	$19,	dSnare,	$05,	dKick,	$0F,	dSnare
-	dc.b		$0A,	dSnare,	$05,	dSnare,	$0A,	dSnare,	$05,	dSnare
-	dc.b		$0A,	dSnare,	$05,	dKick,	$0A,	dKick,	$05,	dSnare
-	dc.b		$0A,	dSnare,	$05,	dKick,	$0A,	dKick,	$05,	dSnare
-	dc.b		$0F,	dSnare,	dSnare,	dSnare
+	dc.b		dKickS3,	$0F,	dKickS3,	dSnareS3,	dKickS3,	$19,	dSnareS3,	$05
+	dc.b		dKickS3,	$0F,	dSnareS3,	dKickS3,	dKickS3,	dKickS3,	dSnareS3,	dKickS3
+	dc.b		$19,	dSnareS3,	$05,	dKickS3,	$0F,	dSnareS3,	dKickS3,	dKickS3
+	dc.b		dKickS3,	dSnareS3,	dKickS3,	$19,	dSnareS3,	$05,	dKickS3,	$0F
+	dc.b		dSnareS3,	dSnareS3,	$0A,	dSnareS3,	$05,	dKickS3,	$1E,	dKickS3
+	dc.b		dKickS3,	$0F,	dKickS3,	$0A,	dKickS3,	$05,	dSnareS3,	$0A
+	dc.b		dKickS3,	$05,	dSnareS3,	$0A,	dSnareS3,	$05,	dKickS3,	$0F
+	dc.b		dKickS3,	dSnareS3,	dKickS3,	$19,	dSnareS3,	$05,	dKickS3,	$0F
+	dc.b		dSnareS3,	dKickS3,	dKickS3,	dKickS3,	dSnareS3,	dKickS3,	$19,	dSnareS3
+	dc.b		$05,	dKickS3,	$0F,	dSnareS3,	dKickS3,	dKickS3,	dKickS3,	dSnareS3
+	dc.b		dKickS3,	$19,	dSnareS3,	$05,	dKickS3,	$0F,	dSnareS3,	dSnareS3
+	dc.b		$0A,	dSnareS3,	$05,	dKickS3,	$1E,	dKickS3,	dKickS3,	$0F
+	dc.b		dKickS3,	$0A,	dKickS3,	$05,	dSnareS3,	$0A,	dKickS3,	$05
+	dc.b		dSnareS3,	$0A,	dSnareS3,	$05,	dKickS3,	$0F,	dKickS3,	dSnareS3
+	dc.b		dKickS3,	$19,	dSnareS3,	$05,	dKickS3,	$0F,	dSnareS3,	dKickS3
+	dc.b		dKickS3,	dKickS3,	dSnareS3,	dKickS3,	$19,	dSnareS3,	$05,	dKickS3
+	dc.b		$0F,	dSnareS3,	dSnareS3,	$0A,	dSnareS3,	$05,	dKickS3,	$0F
+	dc.b		dKickS3,	dSnareS3,	dKickS3,	$19,	dSnareS3,	$05,	dKickS3,	$0F
+	dc.b		dSnareS3,	dKickS3,	dKickS3,	dKickS3,	dSnareS3,	dKickS3,	$19,	dSnareS3
+	dc.b		$05,	dKickS3,	$0F,	dSnareS3,	$0A,	dSnareS3,	$05,	dSnareS3
+	dc.b		$0A,	dSnareS3,	$05,	dKickS3,	$0F,	dKickS3,	dSnareS3,	dKickS3
+	dc.b		$19,	dSnareS3,	$05,	dKickS3,	$0F,	dSnareS3,	dKickS3,	dKickS3
+	dc.b		dKickS3,	dSnareS3,	dKickS3,	$19,	dSnareS3,	$05,	dKickS3,	$0F
+	dc.b		dSnareS3,	dSnareS3,	$0A,	dSnareS3,	$05,	dKickS3,	$0F,	dKickS3
+	dc.b		dSnareS3,	dKickS3,	$19,	dSnareS3,	$05,	dKickS3,	$0F,	dSnareS3
+	dc.b		$0A,	dSnareS3,	$05,	dSnareS3,	$0A,	dSnareS3,	$05,	dSnareS3
+	dc.b		$0A,	dSnareS3,	$05,	dKickS3,	$0A,	dKickS3,	$05,	dSnareS3
+	dc.b		$0A,	dSnareS3,	$05,	dKickS3,	$0A,	dKickS3,	$05,	dSnareS3
+	dc.b		$0F,	dSnareS3,	dSnareS3,	dSnareS3
 	smpsJump	Danstar_Jump09
 
 Danstar_Voices:
@@ -5441,4 +5441,4 @@ Danstar_Voices:
 	dc.b		$06,$35,$1A,$15,$1A,$10,$00,$18,$10;			Voice 04
 	even
 
-	smpsFooterEndSong	"TG2000Tracks\Danstar.asm"
+	smpsFooterEndSong	"TG2000Tracks/Danstar.asm"

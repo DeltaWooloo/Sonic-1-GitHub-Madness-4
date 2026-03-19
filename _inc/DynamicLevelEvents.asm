@@ -153,7 +153,7 @@ loc_6EB0:
 
 loc_6ED0:
 		move.w	#bgm_Boss,d0
-		bsr.w	QueueSound1	; play boss music
+		jsr		(QueueSound1).l	; play boss music
 		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w
 		moveq	#plcid_Boss,d0
@@ -369,7 +369,7 @@ DLE_MZ3boss:
 
 loc_70D0:
 		move.w	#bgm_Boss,d0
-		bsr.w	QueueSound1	; play boss music
+		jsr		(QueueSound1).l	; play boss music
 		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w
 		moveq	#plcid_Boss,d0
@@ -434,7 +434,7 @@ DLE_SLZ3boss:
 
 loc_7144:
 		move.w	#bgm_Megalovania,d0
-		bsr.w	QueueSound1	; play boss music
+		jsr		(QueueSound1).l	; play boss music
 		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w
 		moveq	#plcid_Boss,d0
@@ -517,7 +517,7 @@ DLE_SYZ3boss:
 
 loc_71EC:
 		move.w	#bgm_Boss,d0
-		bsr.w	QueueSound1	; play boss music
+		jsr		(QueueSound1).l	; play boss music
 		move.b	#1,(f_lockscreen).w ; lock screen
 		moveq	#plcid_Boss,d0
 		bra.w	AddPLC		; load boss patterns
@@ -732,10 +732,9 @@ off_6E4ABR:	dc.w DLE_BREW3main-off_6E4ABR
 ; ===========================================================================
 
 EizaArtList:
-	dc.l	Nem_Clinton
-;	dc.l	Nem_Eiza
-	dc.w	$8000
-	dc.l	-1		; Was it that hard?
+	dc.l	Nem_EizaNorm
+	dc.w	$7080
+	dc.l	-1		; Load in her GFX, likely gobbling up all of obj vram
 
 DLE_BREW3main:
 		add.w	#1,(v_limitleft2).w
@@ -784,7 +783,7 @@ loc_6EB0BR:
 
 loc_6ED0BR:
 		move.w	#bgm_Boss,d0
-		bsr.w	QueueSound1	; play boss music
+		jsr		(QueueSound1).l	; play boss music
 		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w
 		moveq	#plcid_Boss,d0
@@ -819,7 +818,7 @@ DLE_Joint:
 ; kys
 ; ---------------------------------------------------------------------------
 DLE_DVZ:
-
+		rts
 ; ---------------------------------------------------------------------------
 ; Nogales Zone direct port from ice cc remake :^)
 ; ---------------------------------------------------------------------------

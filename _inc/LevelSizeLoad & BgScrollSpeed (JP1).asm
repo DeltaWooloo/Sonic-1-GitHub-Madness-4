@@ -145,12 +145,12 @@ LoopTileNums:
 		dc.b	$AA,	$B4,	$7F,	$7F	; Star Light
 		dc.b	$7F,	$7F,	$7F,	$7F	; Spring Yard
 		dc.b	$7F,	$7F,	$7F,	$7F	; Scrap Brain
-		zonewarning LoopTileNums,4
 		dc.b	$B5,	$7F,	$1F,	$20	; Ending (Green Hill)
 		dc.b	$B5,	$7F,	$1F,	$20	; BREW
 		dc.b	$AA,	$B4,	$7F,	$7F	; WIN
 		dc.b	$7F,	$7F,	$7F,	$7F	; Joint
 		dc.b	$7F,	$7F,	$7F,	$7F	; DVZ
+		dc.b	$7F,	$7F,	$7F,	$7F	; NGZ
 		even
 
 ; ---------------------------------------------------------------------------
@@ -229,6 +229,7 @@ BgScroll_SYZ:
 ; ===========================================================================
 
 BgScroll_SBZ:
+		move.w	#0,(v_bgscreenposy).w
 		rts
 ; ===========================================================================
 

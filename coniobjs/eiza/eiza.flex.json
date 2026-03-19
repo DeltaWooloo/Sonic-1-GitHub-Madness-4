@@ -5,7 +5,7 @@
     "objects": [
         {
             "format": "Sonic 1.js",
-            "name": "object",
+            "name": "Normal",
             "palettes": [
                 {
                     "path": "..\\..\\palette\\BREW Zone.bin",
@@ -13,12 +13,37 @@
                 }
             ],
             "art": {
-                "path": "art.bin",
+                "path": "artnorm.bin",
                 "compression": "Nemesis",
                 "offset": 0
             },
             "mappings": {
-                "path": "map.asm",
+                "path": "mapnorm.asm",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            },
+            "uuid": "e8787972-003a-4ffd-93ca-e276f6ea1877"
+        },
+        {
+            "format": "Sonic 1.js",
+            "name": "Attacking",
+            "palettes": [
+                {
+                    "path": "..\\..\\palette\\BREW Zone.bin",
+                    "length": 1
+                }
+            ],
+            "art": {
+                "path": "artATT.bin",
+                "compression": "Nemesis",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "mapATT.asm",
                 "label": ""
             },
             "dplcs": {

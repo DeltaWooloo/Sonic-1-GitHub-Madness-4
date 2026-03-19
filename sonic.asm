@@ -3,7 +3,7 @@
 ;  =========================================================================
 ;
 ; Disassembly created by xx_THEULTIMATEGAMER_xx235
-; thanks to Bill Gates(the owner of fucking microsoft hes really bad), Clownancy(the) and Esrael Sonic Edtior Neato!
+; thanks to Bill Gates(the owner of fucking Microslop hes really bad), Clownancy(the) and Esrael Sonic Edtior Neato!
 ; ---------------------------------------------------------------------------
 ; NOTE:
 ; Set your editor's tab width to 8 characters wide for viewing this file.
@@ -436,6 +436,42 @@ CheckSumError:
 Art_Text:	binclude	"artunc/menutext.bin" ; text used in level select and debug mode
 Art_Text_End:	even
 
+
+; ---------------------------------------------------------------------------
+; Write VScroll buffer to VSRAM
+; ---------------------------------------------------------------------------
+
+VDPDATA = vdp_data_port			; i hate you
+VDPCTRL = vdp_control_port
+
+VScrollWrt:
+		lea	VDPDATA,a4
+		move.w	#$8B00+%0111,4(a4)
+		lea	vscroll_buffer,a3
+		move.l	#$40000010,(vdp_control_port).l	
+		; meh
+ 		move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                rts
+
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Vertical interrupt
@@ -446,9 +482,16 @@ VBlank:
 		movem.l	d0-a6,-(sp)
 		tst.b	(v_vbla_routine).w
 		beq.s	VBla_00
+		tst.b	vscroll_mode
+		beq.s	.normal
+		pea	.dovbla(pc)
+		bra.w	VScrollWrt
+.normal:
+		move.w	#$8B00+%0011,vdp_control_port
 		move.w	(vdp_control_port).l,d0
 		move.l	#$40000010,(vdp_control_port).l
 		move.l	(v_scrposy_vdp).w,(vdp_data_port).l ; send screen y-axis pos. to VSRAM
+.dovbla:
 		move.b	(v_vbla_routine).w,d0
 		move.b	#0,(v_vbla_routine).w
 		move.w	#1,(f_hbla_pal).w
@@ -2118,8 +2161,13 @@ Sega_GotoTitle:
 ; ---------------------------------------------------------------------------
 
 GM_Title:
-		move.b	#bgm_Fade,d0
-		bsr.w	QueueSound2 ; stop music
+		;move.b	#bgm_Fade,d0
+		;bsr.w	QueueSound2 ; stop music		
+		;GD: Bugfix to make Freddy sample play entirely from GH4 Title
+		move.b	#bgm_Stop,d0
+		bsr.w	QueueSound2
+		stopPCM
+		
 		bsr.w	ClearPLC
 		bsr.w	PaletteFadeOut
 		lea	(vdp_control_port).l,a6
@@ -2546,6 +2594,17 @@ Level_NoMusicFade:
 		jsr	(TitleCards_LoadArt).l
 		moveq	#plcid_Main,d0
 		bsr.w	AddPLC			; load standard patterns
+		; load player hud lives art
+		move.w	#ch_hudlives,d0
+		jsr	(GetOtherPlayerData).l
+
+		add.l	#Nem_Lives,d0 ; use RAM for PLC
+		lea	(v_ram_start).l,a1
+		move.l	d0,(a1)
+		move.w	#ArtTile_Lives_Counter*$20,4(a1)
+		move.l	#-1,6(a1)
+		bsr.w	UserPLC
+
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
 		lsl.w	#7,d0
@@ -7237,12 +7296,6 @@ ART_NT:   incbin	"NMRTT/NM_ART.bin"
 MAP_NT:   incbin	"NMRTT/NM_MAP.bin"
         even
 	
-; ---------------------------------------------------------------------------
-; "GIOVANNI.GEN" Splash Screen Graphics
-; ---------------------------------------------------------------------------
-
-Nem_Giovanni:	incbin	"dotgen/Giovanni Logo Graphics.nem"
-
 ; end of 'ROM'
 		even
 ; ==============================================================

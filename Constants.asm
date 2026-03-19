@@ -5,7 +5,8 @@
 ; define stuff from older disassemblies because eyes
 ;- CONI
 PlaySound	=		QueueSound1
-PlaySound_Special	=		QueueSound2
+PlaySound_Special	=	QueueSound2
+PlaySound_Unused	=	QueueSound3
 PalLoad1	=		PalLoad_Fade
 PalLoad2	=		PalLoad
 v_pal_dry	=		v_palette
@@ -228,7 +229,8 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 
 ; Background music
 	enumconf $1
-	enum	bgm__First=$1
+	enum	SNDMIN=$0				;!@ GD: Minimum sound ID (silence)
+	nextenum bgm__First
 	nextenum bgm_GHZ=bgm__First
 	nextenum bgm_LZ
 	nextenum bgm_MZ
@@ -330,6 +332,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Skinner
 	nextenum bgm_Danstar
 	nextenum bgm_NepAnime
+	nextenum bgm_SHCSplash
 	; Keep this last
 	nextenum bgm__Last
 
@@ -389,6 +392,8 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum sfx_TonicTongue
 	nextenum sfx_FCBlip
 	nextenum sfx_FCSelect
+	nextenum sfx_Fall
+	nextenum sfx_ExplodeDone
 	; Keep this last
 	nextenum	sfx__Last
 
@@ -404,6 +409,7 @@ bgm_Speedup:	equ ((ptr_flgE2-Sound_ExIndex)/4)+flg__First
 bgm_Slowdown:	equ ((ptr_flgE3-Sound_ExIndex)/4)+flg__First
 bgm_Stop:	equ ((ptr_flgE4-Sound_ExIndex)/4)+flg__First
 flg__Last:	equ ((ptr_flgend-Sound_ExIndex-4)/4)+flg__First
+SNDMAX:		equ	flg__Last	;!@ GD: Maximum sound ID
 
 	include "sound/SampleConstants.asm"
 
@@ -559,6 +565,8 @@ ArtTile_GHZ_Spike_Pole:		equ $398
 ArtTile_GHZ_Giant_Ball:		equ $3AA
 ArtTile_GHZ_Purple_Rock:	equ $3D0
 ArtTile_CBZ_Waterfall:		equ ArtTile_Level+$37C
+ArtTile_CBZ_Eiza:		equ ArtTile_Level+$380
+
 
 ; Marble Zone
 ArtTile_MZ_Block:		equ $2B8
