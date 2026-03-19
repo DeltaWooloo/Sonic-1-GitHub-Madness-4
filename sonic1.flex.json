@@ -1,8 +1,37 @@
 {
     "Flex": 2,
     "name": "Sonic 1",
-    "node": "07038098-b10a-4ae9-9ccf-3d69f913dcc2",
+    "node": "2ca45948-ecdc-4372-85ce-0c08e021e8e9",
     "objects": [
+        {
+            "format": "Sonic 1.js",
+            "name": "Internet Explorer",
+            "palettes": [
+                {
+                    "path": "palette\\Sonic.bin",
+                    "length": 1
+                },
+                {
+                    "path": "palette\\WINDOWS Zone.bin",
+                    "length": 3
+                }
+            ],
+            "art": {
+                "path": "artnem\\Internet Explorer.nem",
+                "compression": "Nemesis",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "_maps\\Internet Explorer.bin",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            },
+            "uuid": "2ca45948-ecdc-4372-85ce-0c08e021e8e9"
+        },
         {
             "uuid": "07038098-b10a-4ae9-9ccf-3d69f913dcc2",
             "format": "Sonic 1.js",
