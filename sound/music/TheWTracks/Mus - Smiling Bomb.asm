@@ -1059,4 +1059,5 @@ SmilingBomb_Voices:
 	smpsVcReleaseRate   $09, $07, $0C, $02
 	smpsVcTotalLevel    $02, $10, $10, $22
 
-	smpsFooterEndSong	"TheWTracks/Mus - Smiling Bomb.asm""
+	smpsFooterEndSong	"TheWTracks/Mus - Smiling Bomb.asm"
+	even
