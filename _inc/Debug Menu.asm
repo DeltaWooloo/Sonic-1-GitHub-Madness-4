@@ -366,8 +366,8 @@ DebuggerMenu_LoadGame:
 
 DebuggerMenu_Act4EnablerTable:
 		dc.b	$0		; GHZ
-		dc.b	$0		; LZ
-		dc.b	$0		; MZ
+		dc.b	$1		; LZ
+		dc.b	$1		; MZ
 		dc.b	$0		; SLZ
 		dc.b	$0		; SYZ
 		dc.b	$0		; SBZ
