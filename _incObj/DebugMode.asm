@@ -185,7 +185,7 @@ Debug_ChgItem:
 		move.l	d1,(v_player+dgfxaddr).w
 		move.l	d2,(v_player+artaddr).w
 		move.w	#$780,(v_player+obGfx).w
-		move.b	d0,(v_player+obAnim).w
+		move.b	#1,(v_player+obAnim).w
 		move.w	d0,obX+2(a0)
 		move.w	d0,obY+2(a0)
 		move.w	(v_limittopdb).w,(v_limittop2).w ; restore level boundaries
