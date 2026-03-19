@@ -148,10 +148,10 @@ GM_Advert:
 		tst.w	(v_generictimer).w
 		bne.s	.mainloop
 .mainexit:
-		if advertdebug==0
+;		if advertdebug==0
 		move.b	#bgm_Fade,d0
 		jsr	QueueSound2
-		endif
+;		endif
 		jsr	PaletteWhiteOut
 		move.l	(sp)+,a2
 		rts
@@ -172,7 +172,7 @@ GM_Advert:
 		advertdata 12,5,Ad_Tonic.art,Ad_Tonic.fg,Ad_Tonic.pal,bgm_Elevator,0
 		advertdata 30,5,Ad_SonicUnderground.art,Ad_SonicUnderground.fg,Ad_SonicUnderground.pal,bgm_SonUnderground,0
 		advertdata 30,5,Ad_RaidShadowLegends.art,Ad_RaidShadowLegends.fg,Ad_RaidShadowLegends.pal,bgm_Easton,0
-		advertdata 30,10,Ad_TamperThingy.art,Ad_TamperThingy.fg,Ad_TamperThingy.pal,bgm_Basillica,0
+		advertdata 30,10,Ad_TamperThingy.art,Ad_TamperThingy.fg,Ad_TamperThingy.pal,bgm_PuyoReject,0
 		
 		;!@ GD: Sonic Soup adverts
 		advertdata 5,1,Ad_GenesisCan1.art,Ad_GenesisCan1.fg,Ad_GenesisCan1.pal,0,dGenesisCan1
