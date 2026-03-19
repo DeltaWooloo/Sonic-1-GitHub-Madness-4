@@ -206,7 +206,9 @@ SampleTable:
 	incdac	GenesisCan1,"sound/dac/GenesisDoes/GenesisCan1.dpcm"
 	incdac	GenesisCan2,"sound/dac/GenesisDoes/GenesisCan2.dpcm"
 	incdac	GenesisCan3,"sound/dac/GenesisDoes/GenesisCan3.dpcm"
-	incdac	nep,"sound/dac/GenesisDoes/nep.dpcm"
+	;!@ GD: NOP'd out/deleted
+	;incdac	nep,"sound/dac/GenesisDoes/nep.dpcm"
+	incdac	nep,"sound/dac/dummy.dpcm"
 	incdac	Intel,"sound/dac/Intel.dpcm"
 
 ; ---------------------------------------------------------------
