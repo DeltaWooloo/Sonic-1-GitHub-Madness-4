@@ -172,16 +172,16 @@ NEPU_DIMTRIP_Loop7:
 	smpsLoop		$00, $06, NEPU_DIMTRIP_Loop7
 	dc.b	nRst, nF2, $08, $04
 
-NEPU_DIMTRIP_Loo$8:
+NEPU_DIMTRIP_Loop8:
 	dc.b	nRst, nF2
-	smpsLoop		$00, $06, NEPU_DIMTRIP_Loo$8
+	smpsLoop		$00, $06, NEPU_DIMTRIP_Loop8
 	dc.b	nRst, nE2, $08, $04, nRst, $14, nE2, $08
 	dc.b	$04, nRst, $14, nD2, $08, $04, nRst, $14
 	dc.b	nA2, $08, $04, nRst, $14, nB2, $08, $04
 
-NEPU_DIMTRIP_Loo$9:
+NEPU_DIMTRIP_Loop9:
 	dc.b	nRst, nB2
-	smpsLoop		$00, $06, NEPU_DIMTRIP_Loo$9
+	smpsLoop		$00, $06, NEPU_DIMTRIP_Loop9
 	dc.b	nRst, nF2, $08, $04
 
 NEPU_DIMTRIP_Loop10:
@@ -538,7 +538,7 @@ NEPU_DIMTRIP_PSG2:
 	dc.b	nEb1, nB0, nB1, $08, nB0, $04, nA1, nB0
 	dc.b	nG1, nFs1, nB0, nA1, $08, nB0, $04, nB1
 
-NEPU_DIMTRIP_Jum$8:
+NEPU_DIMTRIP_Jump8:
 	dc.b	nB0, $04, nCs2, nE2, nRst, nEb2, $08, nRst
 	dc.b	$04, nE2, nRst, nFs2, nE2, nEb2, nB1, $10
 	dc.b	nRst, $7F, $7D
@@ -573,7 +573,7 @@ NEPU_DIMTRIP_Jum$8:
 	dc.b	nE1, $08, nB0, $04, nEb1, nB0, nCs1, nEb1
 	dc.b	nB0, nB1, $08, nB0, $04, nA1, nB0, nG1
 	dc.b	nFs1, nB0, nA1, $08, nB0, $04, nB1
-	smpsJump		NEPU_DIMTRIP_Jum$8
+	smpsJump		NEPU_DIMTRIP_Jump8
 
 NEPU_DIMTRIP_PSG3:
 	dc.b	nRst
@@ -582,7 +582,7 @@ NEPU_DIMTRIP_Loop46:
 	dc.b	$40
 	smpsLoop		$00, $08, NEPU_DIMTRIP_Loop46
 
-NEPU_DIMTRIP_Jum$9:
+NEPU_DIMTRIP_Jump9:
 	dc.b	nRst
 
 NEPU_DIMTRIP_Loop47:
@@ -598,7 +598,7 @@ NEPU_DIMTRIP_Loop47:
 	dc.b	$06, nRst, $02, nB1, $04, nBb1, nBb1, nAb1
 	dc.b	nBb1, nRst, nB1, $08, nB0, $04, nB1, nRst
 	dc.b	$7F, $7F, $7F, $63
-	smpsJump		NEPU_DIMTRIP_Jum$9
+	smpsJump		NEPU_DIMTRIP_Jump9
 
 NEPU_DIMTRIP_DAC:
 	dc.b	nRst, $04, dSpinSnare, dSpinSnare, dSpinSnare, dKick, $08
@@ -660,7 +660,7 @@ Nepu_DimTrip_DAC_Loop6:
 	dc.b	$08, $04, dSnare, $08, dKick, $04, $04, dSnare
 	dc.b	dKick, dTick, dKick, dKick, dSnare, dKick, dKick, dSnare
 	dc.b	dKick, dTick, dKick, dPokeKickCrashHi, dKick, dSnare, dHiTom, dMidTom
-	dc.b	pTomLow, $08, dKick, $04, dTick, $08, dSpinSnare, $04
+	dc.b	dLowTom, $08, dKick, $04, dTick, $08, dSpinSnare, $04
 	dc.b	$04, $04, dTick, $08, dKick, $04, dSnare, $08
 	dc.b	dKick, $04, $04, dSnare, dAmenCrash, $08, dKick, $04
 	dc.b	dSnare, $08, dKick, $04, $04, dSnare, dSpinSnare, $02
@@ -679,18 +679,18 @@ Nepu_DimTrip_DAC_Loop7:
 	dc.b	dSnare, $08, dKick, $04, $04, dSnare, dPokeKickCrashHi, $08
 	dc.b	dKick, $04, dSnare, dKick, dSpinSnare, dSpinSnare, dSpinSnare
 
-Nepu_DimTrip_DAC_Loo$8:
+Nepu_DimTrip_DAC_Loop8:
 	dc.b	dKick, $08, $04, dSnare, $08, dKick, $04, $04
 	dc.b	dSnare
-	smpsLoop		$00, $02, Nepu_DimTrip_DAC_Loo$8
+	smpsLoop		$00, $02, Nepu_DimTrip_DAC_Loop8
 	dc.b	dPokeKickCrashHi, $08, dKick, $04, dSnare, $08, dKick, $04
 	dc.b	$04, dSnare, dPokeKickCrashHi, $08, dKick, $04, dSnare, $08
 	dc.b	dKick, $04, dSpinSnare, $02, $02
 
-Nepu_DimTrip_DAC_Loo$9:
+Nepu_DimTrip_DAC_Loop9:
 	dc.b	dSnare, $04, dKick, $08, $04, dSnare, $08, $04
 	dc.b	dSpinKick, $02, dKick
-	smpsLoop		$00, $02, Nepu_DimTrip_DAC_Loo$9
+	smpsLoop		$00, $02, Nepu_DimTrip_DAC_Loop9
 	dc.b	dSnare, $04
 
 Nepu_DimTrip_DAC_Loop10:

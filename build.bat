@@ -62,6 +62,11 @@ cd "Nemesis"
 call recmp.bat
 cd ..\..\
 
+cd "char_assets"
+cd "hud"
+call recmp.bat
+cd ..\..\
+
 cd "clinton fucker"
 call recmp.bat
 cd ..
@@ -80,6 +85,12 @@ cd "splash"
 call recmp.bat
 cd ..
 cd "winxp"
+call recmp.bat
+cd ..\..
+
+cd "coniobjs"
+call recmp.bat
+cd "eiza"
 call recmp.bat
 cd ..\..
 
