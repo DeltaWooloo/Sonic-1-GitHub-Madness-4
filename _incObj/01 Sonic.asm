@@ -85,6 +85,7 @@ SonicPlayer:
 ; This is going to look confusing because Sonic Hackers are geniuses and
 ; decided to name the player object "Sonic" because there are definitely
 ; not any other playable characters in these games!
+; note: this is Sonic 1, the game with no other characters other than Sonic :P
 ;
 ; Sorry in advance. 
 ; ----------------------------------------------------------------------------
