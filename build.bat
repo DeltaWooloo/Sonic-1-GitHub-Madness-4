@@ -3,6 +3,7 @@ REM Also custom for selectively compiling SMPS2ASM files
 
 Set Recomp=0
 Set musiccomp=0
+Set fix=0
 IF %Recomp% EQU 0 GOTO SKIP
 
 cls

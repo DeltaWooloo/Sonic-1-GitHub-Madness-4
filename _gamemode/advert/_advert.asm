@@ -148,8 +148,10 @@ GM_Advert:
 		tst.w	(v_generictimer).w
 		bne.s	.mainloop
 .mainexit:
+		if advertdebug==0
 		move.b	#bgm_Fade,d0
 		jsr	QueueSound2
+		endif
 		jsr	PaletteWhiteOut
 		move.l	(sp)+,a2
 		rts
@@ -171,6 +173,13 @@ GM_Advert:
 		advertdata 30,5,Ad_SonicUnderground.art,Ad_SonicUnderground.fg,Ad_SonicUnderground.pal,bgm_SonUnderground,0
 		advertdata 30,5,Ad_RaidShadowLegends.art,Ad_RaidShadowLegends.fg,Ad_RaidShadowLegends.pal,bgm_Easton,0
 		advertdata 30,10,Ad_TamperThingy.art,Ad_TamperThingy.fg,Ad_TamperThingy.pal,bgm_Basillica,0
+		
+		;!@ GD: Sonic Soup adverts
+		advertdata 5,1,Ad_GenesisCan1.art,Ad_GenesisCan1.fg,Ad_GenesisCan1.pal,0,dGenesisCan1
+		advertdata 5,1,Ad_GenesisCan2.art,Ad_GenesisCan2.fg,Ad_GenesisCan2.pal,0,dGenesisCan2
+		advertdata 8,1,Ad_GenesisCan3.art,Ad_GenesisCan3.fg,Ad_GenesisCan3.pal,0,dGenesisCan3
+		advertdata 120,5,Ad_Nep5.art,Ad_Nep5.fg,Ad_Nep5.pal,bgm_NepAnime,dNep
+		
 		advertdata 3,3,Ad_Intel.art,Ad_Intel.fg,Ad_Intel.pal,0,dIntel
 		advertdata 30,5,Ad_ElmLab.art,Ad_ElmLab.fg,Ad_ElmLab.pal,bgm_NewBarkTown,0
 		advertdata 5,10,Ad_VH.art,Ad_VH.fg,Ad_VH.pal,bgm_LZ,0
@@ -294,6 +303,20 @@ Ad_SuperChallenges:
 .fg:		binclude "_gamemode/advert/ad-super-challenges-map.eni"
 .art:		binclude "_gamemode/advert/ad-super-challenges-art.nem"
 		even
+		
+Ad_GenesisCan3:
+.pal:		binclude "_gamemode/advert/ad-GenesisCan3-pal.unc"
+.fg:		binclude "_gamemode/advert/ad-GenesisCan3-map.eni"
+.art:		binclude "_gamemode/advert/ad-GenesisCan3-art.nem"
+		even
+
+;!@ Neptunia 5: The Next Dimension video game ad		
+Ad_Nep5:
+.pal:		binclude "_gamemode/advert/ad-nep5-pal.unc"
+.fg:		binclude "_gamemode/advert/ad-nep5-map.eni"
+.art:		binclude "_gamemode/advert/ad-nep5-art.nem"
+		even
+		
 Ad_IWBTH:
 .pal:		binclude "_gamemode/advert/ad-IWBTH-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-IWBTH-map.eni"
@@ -304,4 +327,4 @@ Ad_Limited:
 .pal:		binclude "_gamemode/advert/ad-Limited-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-Limited-map.eni"
 .art:		binclude "_gamemode/advert/ad-Limited-art.nem"
-		even		
+		even

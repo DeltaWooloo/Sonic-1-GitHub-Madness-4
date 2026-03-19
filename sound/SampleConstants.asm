@@ -78,6 +78,8 @@ dGenesisDoes1		ds.b 1
 dRightBack			ds.b 1
 dGenesisCan1		ds.b 1
 dGenesisCan2		ds.b 1
+dGenesisCan3		ds.b 1
+dNep				ds.b 1
 dSM64_MM			ds.b 1
 dBoostPower			ds.b 1
 
