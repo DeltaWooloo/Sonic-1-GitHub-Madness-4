@@ -13,7 +13,7 @@ GreenHills_Header:
 	smpsHeaderFM	GreenHills_FM6,	smpsPitch00,	$00
 	smpsHeaderPSG       GreenHills_PSG1,	$00, $00, $00, $00
 	smpsHeaderPSG       GreenHills_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       GreenHills_PSG3,	$00, $00, $00, $00
+	smpsHeaderPSG       GreenHills_PSG3,	$0C, $00, $00, $00
 	dc.b		$00,	$00,	$00,	$00
 	smpsStop
 

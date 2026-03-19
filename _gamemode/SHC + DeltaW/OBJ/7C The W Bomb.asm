@@ -21,7 +21,7 @@ Obj_WBomb_Main:	; Routine 0
 		move.w	#$60,obScreenY(a0)
 		move.l	#Map_WBomb,obMap(a0)
 		move.w	#$685,obGfx(a0)
-		move.w	#priority1,obPriority(a0)
+		move.w	#1,obPriority(a0)
 		clr.b	obRender(a0)
 		clr.b	obFrame(a0)
 		clr.w	obVelY(a0)
@@ -49,8 +49,8 @@ Obj_WBomb_Land:
 		move.w	#$F0,obScreenY(a0)
 		clr.w	obVelY(a0)
 
-		move.b	#1,obFrame(a0)		
-		move.w	#-1,(Glide_screen_shake).w
+		move.b	#1,obFrame(a0)
+;		move.w	#-1,(Glide_screen_shake).w
 		move.b	#bgm_Stop,d0
 		jsr	PlaySound_Unused		
 		move.w	#5,bomb_timer(a0)		; start spawning in 5 frames

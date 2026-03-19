@@ -10,8 +10,8 @@ UNOwenWasHer_Header:
 	smpsHeaderFM        UNOwenWasHer_FM3,	$00, $0E-$03
 	smpsHeaderFM        UNOwenWasHer_FM4,	$00, $0E-$03
 	smpsHeaderFM        UNOwenWasHer_FM5,	$00, $0E-$03
-	smpsHeaderPSG       UNOwenWasHer_PSG1,	$00, $02, $00, $00
-	smpsHeaderPSG       UNOwenWasHer_PSG2,	$00, $02, $00, $00
+	smpsHeaderPSG       UNOwenWasHer_PSG1,	$00, $01, $00, $00
+	smpsHeaderPSG       UNOwenWasHer_PSG2,	$00, $01, $00, $00
 	smpsHeaderPSG       UNOwenWasHer_PSG3,	$00, $05, $00, $00
 
 ; DAC Data

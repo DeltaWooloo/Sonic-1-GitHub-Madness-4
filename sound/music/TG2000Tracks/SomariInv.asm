@@ -12,7 +12,7 @@ SomariInv_Header:
 	smpsHeaderFM	SomariInv_FM5,	smpsPitch00,	$00
 	smpsHeaderPSG       SomariInv_PSG1,	$00, $00, $00, $00
 	smpsHeaderPSG       SomariInv_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       SomariInv_PSG3,	$00, $00, $00, $00
+	smpsHeaderPSG       SomariInv_PSG3,	$0C, $00, $00, $00
 	dc.b		$00,	$00,	$00,	$00
 
 ; PSG1 Data

@@ -13,7 +13,7 @@ WarnOfSon_Header:
 	smpsHeaderFM	WarnOfSon_FM6,	smpsPitch00,	$00
 	smpsHeaderPSG       WarnOfSon_PSG1,	$00, $00, $00, $00
 	smpsHeaderPSG       WarnOfSon_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       WarnOfSon_PSG3,	$00, $00, $00, $00
+	smpsHeaderPSG       WarnOfSon_PSG3,	$0C, $00, $00, $00
 	dc.b		$00,	$00,	$00,	$00
 
 ; PSG1 Data

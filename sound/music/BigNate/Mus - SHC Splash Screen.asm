@@ -223,3 +223,5 @@ BGM_SHC_Voices:
 	smpsVcDecayLevel    $00, $01, $0F, $01
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $00, $27, $28, $18
+
+	smpsFooterEndSong	"BigNate/Mus - SHC Splash Screen.asm"

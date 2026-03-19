@@ -12,7 +12,7 @@ BGM_AVGNInv_Header:
 	smpsHeaderFM        BGM_AVGNInv_FM5,	$00, $00
 	smpsHeaderPSG       BGM_AVGNInv_PSG1,	$00, $00, $00, $00
 	smpsHeaderPSG       BGM_AVGNInv_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       BGM_AVGNInv_PSG3,	$00, $00, $00, $00
+	smpsHeaderPSG       BGM_AVGNInv_PSG3,	$0C, $00, $00, $00
 
 ; PSG1 Data
 BGM_AVGNInv_PSG1:

@@ -309,13 +309,20 @@ Nem_Cater:	binclude	"artnem/Enemy Caterkiller.nem"
 		even
 
 ; ---------------------------------------------------------------------------
+; Compressed graphics - character hud
+; ---------------------------------------------------------------------------
+Nem_Lives:
+Nem_TonicLives: 	binclude	"char_assets/hud/Tonic Life Counter Icon.nem"
+		even
+Nem_ManiacLives:	binclude	"char_assets/hud/Maniac Life Counter Icon.nem"
+		even
+
+; ---------------------------------------------------------------------------
 ; Compressed graphics - various
 ; ---------------------------------------------------------------------------
 Nem_TitleCard:	binclude	"artnem/Title Cards.nem"
 		even
 Nem_Hud:	binclude	"artnem/HUD.nem"	; HUD (rings, time, score)
-		even
-Nem_Lives:	binclude	"artnem/HUD - Life Counter Icon.nem"
 		even
 Nem_Ring:	binclude	"artnem/Rings.nem"
 		even
@@ -481,7 +488,7 @@ Eni_TheIdiotBros:	binclude	"tilemaps/Idiots.eni"
 ; ---------------------------------------------------------------------------
 ; Cold Brew
 ; ---------------------------------------------------------------------------
-Nem_EizaNorm:	binclude	"coniobjs/eiza/artNORM.bin"
+Nem_EizaNorm:	binclude	"coniobjs/eiza/artnorm.bin"
 Nem_EizaAtt:	binclude	"coniobjs/eiza/artATT.bin"
 		even
 ; ---------------------------------------------------------------------------

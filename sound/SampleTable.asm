@@ -20,6 +20,9 @@ SampleTable:
 	dcSample	TYPE_PCM,	Tom,		13714			; $8C S2 Floor-Tom
 
 	; SONIC 3 & KNUCKLES (AND 3D BLAST)
+	dcSample	TYPE_PCM,	SnareS3,	19090			; $8D
+	dcSample	TYPE_PCM,	KickS3,		19090			; $8D
+	dcSample	TYPE_PCM,	CrashCymbal,	16766			; $8D
 	dcSample	TYPE_PCM,	ElectricTom,	20513			; $8D
 	dcSample	TYPE_PCM,	ElectricTom,	15803			; $8E
 	dcSample	TYPE_PCM,	ElectricTom,	13482			; $8F
@@ -72,28 +75,30 @@ SampleTable:
 	dcSample	TYPE_PCM,	BeRightBack,	16000,			; $B2		
 	dcSample	TYPE_DPCM,	GenesisCan1,16000,FLAGS_SFX		; $B3
 	dcSample	TYPE_DPCM,	GenesisCan2,16000,FLAGS_SFX		; $B4
+	dcSample	TYPE_DPCM,	GenesisCan3,16000,FLAGS_SFX		; $B5
+	dcSample	TYPE_DPCM,	nep,16000,FLAGS_SFX				; $B5
 	;!@ DELETED - NOP'd out with dummy.wav
 	;dcSample	TYPE_DPCM,	SM64_MM,16000,FLAGS_SFX			; $B5
-	dcSample	TYPE_DPCM,	Boost,		16000,FLAGS_SFX		; $B5
+	dcSample	TYPE_DPCM,	Boost,		16000,FLAGS_SFX		; $B6
 	
-	dcSample	TYPE_DPCM,	DAMN,		16000				; $B6
-	dcSample	TYPE_PCM,	QuakeRocket,	11297,			; $B7
-	dcSample	TYPE_PCM,	supbeaches,	11297,				; $B8
-	dcSample	TYPE_PCM,	CL_Penis,	11297,				; $B9
-	dcSample	TYPE_PCM,	CL_STFU,	11297,FLAGS_SFX		; $BA
-	dcSample	TYPE_PCM,	CL_Fuck,	11297,				; $BB
-	dcSample	TYPE_PCM,	CL_YouCanSuck,	11297,FLAGS_SFX	; $BC
-	dcSample	TYPE_PCM,	CL_DoYouSuck,	11297,FLAGS_SFX	; $BD
-	dcSample	TYPE_PCM,	CL_Dicks,	11297,				; $BE
-	dcSample	TYPE_PCM,	CL_OnTheBall,	11297,			; $BF
-	dcSample	TYPE_PCM,	EggNo,		11297,				; $C0
-	dcSample	TYPE_PCM,	BabyAlarm,	0,FLAGS_SFX			; $C1
+	dcSample	TYPE_DPCM,	DAMN,		16000				; $B7
+	dcSample	TYPE_PCM,	QuakeRocket,	11297,			; $B8
+	dcSample	TYPE_PCM,	supbeaches,	11297,				; $B9
+	dcSample	TYPE_PCM,	CL_Penis,	11297,				; $BA
+	dcSample	TYPE_PCM,	CL_STFU,	11297,FLAGS_SFX		; $BB
+	dcSample	TYPE_PCM,	CL_Fuck,	11297,				; $BC
+	dcSample	TYPE_PCM,	CL_YouCanSuck,	11297,FLAGS_SFX	; $BD
+	dcSample	TYPE_PCM,	CL_DoYouSuck,	11297,FLAGS_SFX	; $BE
+	dcSample	TYPE_PCM,	CL_Dicks,	11297,				; $BF
+	dcSample	TYPE_PCM,	CL_OnTheBall,	11297,			; $C0
+	dcSample	TYPE_PCM,	EggNo,		11297,				; $C1
+	dcSample	TYPE_PCM,	BabyAlarm,	0,FLAGS_SFX			; $C2
 
 	;Level end theme
-	dcSample	TYPE_DPCM,	BoingBoing,	16000,	FLAGS_SFX|FLAGS_LOOP	; $C2
-	dcSample	TYPE_PCM,	Boik,		5250,	FLAGS_SFX	; $C3
-	dcSample	TYPE_PCM,	Boioing,	5250,	FLAGS_SFX	; $C4
-	dcSample	TYPE_PCM,	OrngLaugh,	0,	FLAGS_SFX		; $C5
+	dcSample	TYPE_DPCM,	BoingBoing,	16000,	FLAGS_SFX|FLAGS_LOOP	; $C3
+	dcSample	TYPE_PCM,	Boik,		5250,	FLAGS_SFX	; $C4
+	dcSample	TYPE_PCM,	Boioing,	5250,	FLAGS_SFX	; $C5
+	dcSample	TYPE_DPCM,	OrngLaugh,	8000,	FLAGS_SFX		; $C6
 
 	dcSample	TYPE_DPCM,	ClintonHi,	20600,	FLAGS_SFX	; $C6
 	dcSample	TYPE_DPCM,	ClintonYeah,	20600,	FLAGS_SFX	; $C7
@@ -104,18 +109,18 @@ SampleTable:
 	dcSample	TYPE_PCM,	Segay,		0, FLAGS_SFX		; $CC
 	dcSample	TYPE_PCM,	Foxy,		0, FLAGS_SFX		; $CD
 	dcSample	TYPE_PCM,	GayNeil,	0, FLAGS_SFX		; $CE
-	dcSample	TYPE_DPCM,	funnyb_utthole,	8000, FLAGS_SFX	; $CF
-	dcSample	TYPE_DPCM,	Intel,		16000, FLAGS_SFX	; $D0
+	dcSample	TYPE_DPCM,	funnyb_utthole,	8000, FLAGS_SFX		; $CF
+	dcSample	TYPE_DPCM,	Intel,		16000, FLAGS_SFX		; $D0
 	
 	;!@ GD: Last slot always reserved for PCM SFX Silence
-	dcSample	TYPE_DPCM,	dummy,	8000, FLAGS_SFX			; $D0
+	dcSample	TYPE_DPCM,	dummy,	8000, FLAGS_SFX			; $D1
 
 	; ADVISORY: If you're coming to this repo just to add samples,
 	; they are going to get removed. Sorry!
 	; Wait until more important shit is implemented
 
 	; end 
-   	;dcSample	TYPE_PCM,	Stupid,		0, FLAGS_SFX	; $CF
+   	;dcSample	TYPE_PCM,	Stupid,		0, FLAGS_SFX	; $D2
 	dc.w	-1
 
 ; ---------------------------------------------------------------
@@ -130,6 +135,9 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Sonic 3 Samples
+	incdac	SnareS3, "sound/dac/S3/SnareS3.pcm"
+	incdac	KickS3, "sound/dac/S3/KickS3.pcm"
+	incdac	CrashCymbal, "sound/dac/S3/CrashCymbal.pcm"
 	incdac	ElectricTom, "sound/dac/S3/ElectricTom.pcm"
 
 ; ---------------------------------------------------------------
@@ -184,7 +192,7 @@ SampleTable:
 	incdac	BabyAlarm, "sound/dac/BabyAlarm.wav"
 	incdac	Boioing, "sound/dac/boioioing.wav"
 	incdac	Boik, "sound/dac/boik.wav"
-	incdac	OrngLaugh, "sound/dac/AnOrangesLaugh.wav"
+	incdac	OrngLaugh, "sound/dac/AnOrangesLaugh.dpcm"
 	incdac	ClintonHi, "sound/dac/clintonfucker_hi.dpcm"
 	incdac	ClintonYeah, "sound/dac/clintonfucker_yeah.dpcm"
 	incdac	QuakeJump, "sound/dac/quakejump.wav"
@@ -211,10 +219,14 @@ SampleTable:
 	incdac	BeRightBack,"sound/dac/well-be-right-back.wav"	
 	incdac	GenesisCan1,"sound/dac/GenesisDoes/GenesisCan1.dpcm"
 	incdac	GenesisCan2,"sound/dac/GenesisDoes/GenesisCan2.dpcm"
+	incdac	GenesisCan3,"sound/dac/GenesisDoes/GenesisCan3.dpcm"
+	incdac	nep,"sound/dac/GenesisDoes/nep.dpcm"
 	;!@ DELETED - NOP'd out with Dummy.wav
 	;incdac	SM64_MM,"sound/dac/GenesisDoes/SM64_MM.dpcm"
 	incdac	SM64_MM,"sound/dac/dummy.dpcm"
 	incdac	Boost,"sound/dac/GenesisDoes/Boost.dpcm"
+	
+	
 	incdac	Intel,"sound/dac/Intel.dpcm"
 	
 	;!@ SAVE THIS AS (LAST SLOT-2)

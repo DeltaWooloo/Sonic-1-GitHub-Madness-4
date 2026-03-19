@@ -172,6 +172,9 @@ SSRGScreen_Loop:
 		blt	SSRGScreen_Loop				; if not, loop
 
 SSRGScreen_Finish:
+		jsr	PaletteFadeOut
+		jsr	VDPSetupGame
+		enable_display
 		;RaiseError "SSRG finished"
 		;!@ move.b	#$04,($FFFFF600).w			; set the screen mode to Title Screen		
 		;!@ move.b	#id_Title,(v_gamemode).w			; set the screen mode to Title Screen

@@ -13,7 +13,7 @@ Carefree_Header:
 	smpsHeaderFM	Carefree_FM6,	smpsPitch00,	$00
 	smpsHeaderPSG       Carefree_PSG1,	$00, $00, $00, $00
 	smpsHeaderPSG       Carefree_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       Carefree_PSG3,	$00, $00, $00, $00
+	smpsHeaderPSG       Carefree_PSG3,	$0C, $00, $00, $00
 	dc.b		$00,	$00,	$00,	$00
 	smpsStop
 

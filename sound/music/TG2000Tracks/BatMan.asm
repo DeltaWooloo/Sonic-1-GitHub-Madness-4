@@ -13,7 +13,7 @@ BatMan_Header:
 	smpsHeaderFM	BatMan_FM5,	smpsPitch00,	$00
 	smpsHeaderPSG       BatMan_PSG1,	$00, $00, $00, $00
 	smpsHeaderPSG       BatMan_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       BatMan_PSG3,	$00, $00, $00, $00
+	smpsHeaderPSG       BatMan_PSG3,	$0C, $00, $00, $00
 	dc.b		$00,	$00,	$00,	$00
 
 ; FM1 Data

@@ -12,7 +12,7 @@ BGM_SwingSinners_Header:
 	smpsHeaderFM        BGM_SwingSinners_FM5,	$00, $00
 	smpsHeaderPSG       BGM_SwingSinners_PSG1,	$00, $00, $00, $00
 	smpsHeaderPSG       BGM_SwingSinners_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       BGM_SwingSinners_PSG3,	$00, $00, $00, $00
+	smpsHeaderPSG       BGM_SwingSinners_PSG3,	$0C, $00, $00, $00
 
 ; FM1 Data
 BGM_SwingSinners_FM1:

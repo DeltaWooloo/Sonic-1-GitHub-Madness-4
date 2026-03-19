@@ -123,6 +123,7 @@ locret_1AC6:
 
 
 PalCycle_SBZ:
+		rts	; restore with a check for act 1 disable if needed
 		lea	(Pal_SBZCycList1).l,a2
 		tst.b	(v_act).w
 		beq.s	loc_1ADA

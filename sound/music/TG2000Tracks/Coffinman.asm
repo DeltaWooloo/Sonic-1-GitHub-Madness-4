@@ -12,7 +12,7 @@ Coffinman2.0_Header:
 	smpsHeaderFM	Coffinman2.0_FM5,	smpsPitch00,	$00
 	smpsHeaderPSG       Coffinman2.0_PSG1,	$00, $00, $00, $00
 	smpsHeaderPSG       Coffinman2.0_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       Coffinman2.0_PSG3,	$00, $00, $00, $00
+	smpsHeaderPSG       Coffinman2.0_PSG3,	$0C, $00, $00, $00
 	dc.b		$00,	$00,	$00,	$00
 
 ; PSG3 Data

@@ -13,7 +13,7 @@ dTimpani			ds.b 1
 dHiTimpani			ds.b 1
 dMidTimpani			ds.b 1
 dLowTimpani			ds.b 1
-dVLowTimpani		ds.b 1
+dVLowTimpani			ds.b 1
 
 ; Sonic 2
 dHiTom				ds.b 1
@@ -22,10 +22,13 @@ dLowTom				ds.b 1
 dFloorTom			ds.b 1
 
 ; Sonic 3
-dElectricHighTom	ds.b 1
-dElectricMidTom		ds.b 1
-dElectricLowTom		ds.b 1
-dElectricFloorTom	ds.b 1
+dSnareS3			ds.b 1
+dKickS3				ds.b 1
+dCrashCymbal			ds.b 1
+dElectricHighTom		ds.b 1
+dElectricMidTom			ds.b 1
+dElectricLowTom			ds.b 1
+dElectricFloorTom		ds.b 1
 
 ; Sonic Spinball
 dSpinKick		ds.b 1
@@ -79,6 +82,8 @@ dGenesisDoes1		ds.b 1
 dRightBack			ds.b 1
 dGenesisCan1		ds.b 1
 dGenesisCan2		ds.b 1
+dGenesisCan3		ds.b 1
+dNep				ds.b 1
 dSM64_MM			ds.b 1
 dBoostPower			ds.b 1
 

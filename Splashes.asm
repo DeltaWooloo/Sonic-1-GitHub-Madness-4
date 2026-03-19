@@ -153,6 +153,7 @@ splash_turd macro routine
 	splash_liquid	MultiSplash_Init
 	splash_liquid	SonicRetro
 	splash_liquid	GM_SSRGScreen
+;	splash_liquid	GM_SHCSplash
 	splash_liquid	GM_EagleSoft
 	splash_liquid	GM_CNNicoJump
 	splash_liquid	GM_DaxKatter
@@ -245,6 +246,7 @@ splash_turd macro routine
 ; Files for liquid
 	include "LiquidSplashes/Rerto/Rerto.asm"
 	include "LiquidSplashes/SSRG/SSRG.asm"
+;	include "_gamemode/SHC + DeltaW/SHC Splash Screen.asm"
 	include "LiquidSplashes/EagleSoft/EagleSoft.asm"
 	include "DAX/Splash/DaxKatter Splash.asm"
 	include "_gamemode/vmss/_runcode.asm"

@@ -13,6 +13,9 @@ SHC_frame1	equ ($8000>>10)			; address of the 2nd splash screen animation frame 
 SHC_frame2	equ ($A000>>10)			; address of the 3rd splash screen animation frame (fully-lit sonic logo)
 
 SHC_gamePlnA	equ ($C000>>10)			; default address of the plane A nametable used in the main-line sonic games
+
+tiles_to_bytes function addr,((addr&$7FF)<<5)
+
 ; ---------------------------------------------------------------------------
 
 GM_SHCSplash:
@@ -20,7 +23,6 @@ GM_SHCSplash:
 		jsr	PlaySound_Special
 		jsr	PaletteFadeOut.w
 		jsr	ClearScreen.w
-		jsr	Clear_VSRAM
 		lea	(vdp_control_port).l,a6
 		move.w	#$8004,(a6)			; 8-color mode
 		move.w	#$8174,(a6)		
@@ -30,30 +32,22 @@ GM_SHCSplash:
 		
 		lea	SHC_Art.l,a1
 		moveq	#tiles_to_bytes(0),d2
-		jsr	Queue_KosPlus_Module.w
 
 		lea Art_WBomb.l,a1  
 		move.w #tiles_to_bytes($685),d2 
-		jsr Queue_KosPlus_Module.w
-		
-.waitLoad:
-		jsr	Process_KosPlus_Queue.w
-		jsr	ProcessDMAQueue.w
-		jsr	Process_KosPlus_Module_Queue.w
-		tst.w	(KosPlus_modules_left).w
-		bne.s	.waitLoad
+		jsr 	NemDec.w
 
 		lea	SHC_Map_Comp.l,a0
 		move.w	#$6000,d7
 		lea	(vdp_control_port).l,a6
-		bsr.w	SHC_CompDec	
+		bsr.w	SHC_CompDec
 
 		move.w	#$8200+SHC_frame0,d5
 		move.w	d5,(a6)				; set initial plane A address
 
 		; Load palette
 		lea	SHC_Pal.l,a0
-		lea	(v_pal_dry_dup).l,a1
+		lea	(v_palette_line_1).l,a1
 		moveq	#$F,d0	
 .palLoop:	
 		move.l	(a0)+,(a1)+
@@ -61,7 +55,7 @@ GM_SHCSplash:
 		dbf	d0,.palLoop
 
 		lea	(Pal_WBomb).l,a0
-		lea	(v_pal_dry_dup+$20).l,a1
+		lea	(v_palette_line_2).l,a1
 		moveq	#$F,d0
 		
 .bombpalloop:
@@ -70,7 +64,7 @@ GM_SHCSplash:
 		dbf	d0,.bombpalloop
 
 		lea	(Pal_Sonic).l,a0
-		lea	(v_pal_dry_dup+$40).l,a1
+		lea	(v_palette_line_3).l,a1
 		moveq	#$F,d0
 		
 .sonicpalloop:
@@ -88,10 +82,10 @@ GM_SHCSplash:
 		
 		move.b	#bgm_SHCSplash,d0
 		jsr	PlaySound_Unused
-		
+
 		lea	SHC_Anim(pc),a0
-		lea	($A10002+1).l,a1	; load the base address of the IO ports into a1
-		
+		lea	(port_1_data).l,a1	; load the base address of the IO ports into a1
+
 SHC_MainLoop:
 .loadAnim:
 		clr.w	d7				; clear frame duration counter
@@ -106,7 +100,6 @@ SHC_MainLoop:
 		movem.l	d0-d7/a0-a6,-(sp)		; save all registers
 		writeVRAM	v_spritetablebuffer,$280,vram_sprites
 		jsr	(ExecuteObjects).l
-		jsr	(Init_SpriteTable).l
 		jsr	(BuildSprites).l
 	
 		movem.l	(sp)+,d0-d7/a0-a6		; restore all registers		
@@ -134,22 +127,22 @@ SHC_MainLoop:
 		move.b	#sfx_ExplodeDone,d0			; play flash sound effect
 		jsr	PlaySound_Special	
 		jsr	PaletteWhiteOut.w		; flash to white
-		move.w	#90,(v_demolength).w		; set hold time to 1.5 second (90 frames at 60hz)
+		move.w	#90,(v_generictimer).w		; set hold time to 1.5 second (90 frames at 60hz)
 		
 .holdWhite:
 		move.b	#2,(v_vbla_routine).w		; set V-blank routine
 		jsr	WaitForVBla.w			; wait for V-blank
-		tst.w	(v_demolength).w		; has hold time finished?
+		tst.w	(v_generictimer).w		; has hold time finished?
 		bne.s	.holdWhite			; if not, keep holding
 
-.holdSkipped:		
-		move.b	#id_DWSplash,(v_gamemode).w	; go to DeltaW splash screen		
-		rts					; return to normal game execution	
+.holdSkipped:
+;		move.b	#id_DWSplash,(v_gamemode).w	; go to DeltaW splash screen
+		rts					; return to normal game execution
 ; ---------------------------------------------------------------------------
 SHC_UpdateScreen:	; no shaking yet
 		move.b	#2,(v_vbla_routine).w
 		jsr	WaitForVBla.w
-		
+
 		lea	(vdp_control_port).l,a6
 		move.w	d5,d1
 		ori.w	#$8200,d1
@@ -284,11 +277,11 @@ SHC_Anim:
 
 ; ---------------------------------------------------------------------------
 
-SHC_Art:	binclude "artkospm\SHC Splash Screen.bin"
+SHC_Art:	binclude "_gamemode\SHC + DeltaW\ART\SHC Splash Screen.nem"
 SHC_Art_end:	even
 
 SHC_Map_Comp:
-		binclude "tilemaps\SHC Splash Screen.bin"
+		binclude "_gamemode\SHC + DeltaW\TILEMAP\SHC Splash Screen.bin"
 		even
 
 SHC_Pal:
@@ -296,4 +289,15 @@ SHC_Pal:
 		dc.w	$000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000
 		dc.w	$000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000
 		dc.w	$000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000, $000
+		even
+
+		include "_gamemode\SHC + DeltaW\OBJ\7C The W Bomb.asm"
+
+Art_WBomb:	binclude "_gamemode\SHC + DeltaW\ART\The W Bomb.nem"
+Art_WBomb_end:
+		even
+
+Map_WBomb:	include "_gamemode\SHC + DeltaW\MAP\The W Bomb.asm"
+
+Pal_WBomb:	binclude "_gamemode\SHC + DeltaW\PAL\The W Bomb.bin"
 		even

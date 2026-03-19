@@ -66,7 +66,7 @@ plcm:	macro gfx,vram
 PLC_Main:	dc.w ((PLC_Mainend-PLC_Main-2)/6)-1
 		plcm	Nem_Lamp,   ArtTile_Lamppost      ; lamppost
 		plcm	Nem_Hud,    ArtTile_HUD           ; HUD
-		plcm	Nem_Lives,  ArtTile_Lives_Counter ; lives counter
+; 		plcm	Nem_Lives,  ArtTile_Lives_Counter ; lives counter
 		plcm	Nem_Ring,   ArtTile_Ring          ; rings
 		plcm	Nem_Monitors, ArtTile_Monitor       ; monitors
 PLC_Mainend:
