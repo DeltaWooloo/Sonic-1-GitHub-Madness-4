@@ -58,12 +58,7 @@ SampleTable:
 	dcSample	TYPE_PCM,	DAMN,		16000,FLAGS_SFX		; $A2
 	dcSample	TYPE_PCM,	Trevor,		0,FLAGS_SFX			; $A3
 	dcSample	TYPE_DPCM,	yume2kki,	16000,FLAGS_SFX		; $A4
-	dcSample	TYPE_PCM,	DooDoo,		8000,				; $A5
-	dcSample	TYPE_PCM,	dummy,		8000,				; $A6
-	dcSample	TYPE_PCM,	dummy,		8000,				; $A7
-	dcSample	TYPE_PCM,	dummy,		8000,				; $A8
-	dcSample	TYPE_PCM,	dummy,		8000,				; $A9
-	; !@GenesisDoes
+
 	dcSample	TYPE_DPCM,	EagleSoft_Song,	16000,FLAGS_SFX	; $AA
 	dcSample	TYPE_DPCM,	YoFreddy,	16000,FLAGS_SFX		; $AB
 	dcSample	TYPE_DPCM,	Github,		16000,FLAGS_SFX		; $AC
@@ -73,15 +68,12 @@ SampleTable:
 	dcSample	TYPE_DPCM,	eggmanLaugh,	16000,FLAGS_SFX	; $B0
 	dcSample	TYPE_DPCM,	GenesisDoes1,	16000			; $B1
 	dcSample	TYPE_PCM,	BeRightBack,	16000,			; $B2		
-	dcSample	TYPE_DPCM,	GenesisCan1,16000,FLAGS_SFX		; $B3
-	dcSample	TYPE_DPCM,	GenesisCan2,16000,FLAGS_SFX		; $B4
-	dcSample	TYPE_DPCM,	GenesisCan3,16000,FLAGS_SFX		; $B5
-	dcSample	TYPE_DPCM,	nep,16000,FLAGS_SFX				; $B5
-	;!@ DELETED - NOP'd out with dummy.wav
-	;dcSample	TYPE_DPCM,	SM64_MM,16000,FLAGS_SFX			; $B5
+	dcSample	TYPE_DPCM,	GenesisCan1,	16000,FLAGS_SFX		; $B3
+	dcSample	TYPE_DPCM,	GenesisCan2,	16000,FLAGS_SFX		; $B4
+	dcSample	TYPE_DPCM,	GenesisCan3,	16000,FLAGS_SFX		; $B5
+	dcSample	TYPE_DPCM,	nep,		16000,FLAGS_SFX				; $B5
 	dcSample	TYPE_DPCM,	Boost,		16000,FLAGS_SFX		; $B6
-	
-	dcSample	TYPE_DPCM,	DAMN,		16000				; $B7
+
 	dcSample	TYPE_PCM,	QuakeRocket,	11297,			; $B8
 	dcSample	TYPE_PCM,	supbeaches,	11297,				; $B9
 	dcSample	TYPE_PCM,	CL_Penis,	11297,				; $BA
@@ -179,7 +171,6 @@ SampleTable:
 	incdac	Trevor, "sound/dac/Trevor.wav"
 	incdac	yume2kki, "sound/dac/2kki.dpcm"
 	incdac	supbeaches, "sound/dac/supbeaches.wav"
-	incdac	DooDoo, "sound/dac/idk/doodoofeces.pcm"
 	incdac	QuakeRocket, "sound/dac/tankfire1.wav"
 	incdac	CL_Penis, "sound/dac/CL_Penis.wav"
 	incdac	CL_STFU, "sound/dac/CL_STFU.wav"
@@ -221,12 +212,7 @@ SampleTable:
 	incdac	GenesisCan2,"sound/dac/GenesisDoes/GenesisCan2.dpcm"
 	incdac	GenesisCan3,"sound/dac/GenesisDoes/GenesisCan3.dpcm"
 	incdac	nep,"sound/dac/GenesisDoes/nep.dpcm"
-	;!@ DELETED - NOP'd out with Dummy.wav
-	;incdac	SM64_MM,"sound/dac/GenesisDoes/SM64_MM.dpcm"
-	incdac	SM64_MM,"sound/dac/dummy.dpcm"
 	incdac	Boost,"sound/dac/GenesisDoes/Boost.dpcm"
-	
-	
 	incdac	Intel,"sound/dac/Intel.dpcm"
 	
 	;!@ SAVE THIS AS (LAST SLOT-2)

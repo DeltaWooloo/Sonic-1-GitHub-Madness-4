@@ -63,11 +63,6 @@ dTick:			ds.b 1
 dDAMN				ds.b 1
 dTrevor				ds.b 1
 d2kki				ds.b 1
-dDooDoo				ds.b 1
-dCrispBilly			ds.b 1
-dBlueLobster		ds.b 1
-dWinTwoK			ds.b 1
-dDeppaDig			ds.b 1
 
 ;!@ GenesisDoes
 dEagleSoftSong		ds.b 1
@@ -84,10 +79,9 @@ dGenesisCan1		ds.b 1
 dGenesisCan2		ds.b 1
 dGenesisCan3		ds.b 1
 dNep				ds.b 1
-dSM64_MM			ds.b 1
 dBoostPower			ds.b 1
 
-dQuakeRocket		ds.b 1
+dQuakeRocket			ds.b 1
 dsupbeaches			ds.b 1
 dPenis				ds.b 1
 dSTFU				ds.b 1

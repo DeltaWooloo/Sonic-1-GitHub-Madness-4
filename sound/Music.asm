@@ -114,7 +114,7 @@ ptr_mus62:		dc.l Music62
 ptr_mus63:		dc.l Music63
 ptr_mus64:		dc.l Music64
 ptr_mus65:		dc.l Music65
-;ptr_mus66:		dc.l Music66
+ptr_mus66:		dc.l Music66
 ;ptr_mus67:		dc.l Music67
 ;ptr_mus68:		dc.l Music68
 ;ptr_mus69:		dc.l Music69
