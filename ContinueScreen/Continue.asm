@@ -12,7 +12,7 @@ GM_Continue:
 	move.b	#02, (SMPS_RAM.v_main_tempo)	; slow current music to a crawl so it feels like the driver froze
 
 	jsr 	PaletteFadeOut
-
+	move.b	#0,vscroll_mode
 	lea	(vdp_control_port).l,a6
 	move.w	#$8004,(a6)			; 8 colour mode
 	move.w	#$8700,(a6)			; background colour
