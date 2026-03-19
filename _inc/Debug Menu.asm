@@ -13,6 +13,7 @@ dbugmenuFlag2	ds.b 1
 	!org -
 ; ---------------------------------------------------------------------------
 GM_DebugMenu:
+		move.b	#0,vscroll_mode
 		move.b	#bgm_Fade,d0
 		bsr.w	QueueSound2		; stop music
 		bsr.w	PaletteFadeOut

@@ -495,7 +495,7 @@ AppleScrMv:	equ   $FFFFA806
 ; ---------------------------------------------------------------------------
 
 Deform_SBZ:
-		move.b	#1,vscroll_mode
+
 		tst.b	(v_act).w
 		bne.w	Deform_SBZ2
 		move.w	#0,v_bgscreenposy
