@@ -77,8 +77,8 @@ EagleSoft_ClearObjects:
 		;load S2 font
 		lea	(vdp_data_port).l,a6
 		locVRAM	ArtTile_Level_Select_Font*tile_size,4(a6)
-		lea	(Art_Text).l,a5	; load level select font
-		move.w	#(Art_Text_End-Art_Text)/2-1,d1
+		lea	(Art_TextAT).l,a5	; load level select font
+		move.w	#(Art_TextAT_End-Art_TextAT)/2-1,d1
 Eagle_LoadText:
 		move.w	(a5)+,(a6)
 		dbf	d1,Eagle_LoadText
