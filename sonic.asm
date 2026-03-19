@@ -3199,7 +3199,7 @@ loc_47D4:
 		move.w	(v_rings).w,d0
 		mulu.w	#10,d0		; multiply rings by 10
 		move.w	d0,(v_ringbonus).w ; set rings bonus
-		move.w	#bgm_S1ActClear,d0
+		move.w	#bgm_Pac2,d0
 		jsr	(QueueSound2).l	 ; play end-of-level music
 
 		clearRAM v_objspace
@@ -4991,21 +4991,16 @@ Map_SSR:	mappingsTable
 	mappingsTableEntry.w	M_SSR_SpeStage	; "SPECIAL STAGE" text
 	mappingsTableEntry.w	M_SSR_GotAll	; "SONIC GOT THEM ALL" text
 
-M_SSR_Chaos:	spriteHeader	; CHAOS EMERALDS
-	spritePiece	-$70, -8, 2, 2, 8, 0, 0, 0, 0	; C
-	spritePiece	-$60, -8, 2, 2, $1C, 0, 0, 0, 0	; H
-	spritePiece	-$50, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	-$40, -8, 2, 2, $32, 0, 0, 0, 0	; O
-	spritePiece	-$30, -8, 2, 2, $3E, 0, 0, 0, 0	; S
-
-	spritePiece	-$10, -8, 2, 2, $10, 0, 0, 0, 0	; E
-	spritePiece	0, -8, 2, 2, $2A, 0, 0, 0, 0	; M
-	spritePiece	$10, -8, 2, 2, $10, 0, 0, 0, 0	; E
-	spritePiece	$20, -8, 2, 2, $3A, 0, 0, 0, 0	; R
-	spritePiece	$30, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	$40, -8, 2, 2, $26, 0, 0, 0, 0	; L
-	spritePiece	$50, -8, 2, 2, $C, 0, 0, 0, 0	; D
-	spritePiece	$60, -8, 2, 2, $3E, 0, 0, 0, 0	; S
+M_SSR_Chaos:	dc.b 9	;  PENTHANES
+		dc.b $F8, 5, 0, $36, $B8	; P
+		dc.b $F8, 5, 0, $10, $C8	; E
+		dc.b $F8, 5, 0, $2E, $D8	; N
+		dc.b $F8, 5, 0, $42, $E8	; T
+		dc.b $F8, 5, 0, $1C, $F8	; H
+		dc.b $F8, 5, 0, 0, $8		; A
+		dc.b $F8, 5, 0, $2E, $18	; N
+		dc.b $F8, 5, 0, $10, $28	; E
+		dc.b $F8, 5, 0, $3E, $38	; S
 M_SSR_Chaos_End
 
 M_SSR_Score:	spriteHeader	; Score tally
@@ -5047,41 +5042,32 @@ M_SSR_Continue:	spriteHeader	; Continue tally without mini Sonic
 	spritePiece	-$10, -8, 1, 2, -$1F, 0, 0, 0, 0; Small oval (right half)
 M_SSR_Continue_End
 
-M_SSR_SpeStage:	spriteHeader	; SPECIAL STAGE
-	spritePiece	-$64, -8, 2, 2, $3E, 0, 0, 0, 0	; S
-	spritePiece	-$54, -8, 2, 2, $36, 0, 0, 0, 0	; P
-	spritePiece	-$44, -8, 2, 2, $10, 0, 0, 0, 0	; E
-	spritePiece	-$34, -8, 2, 2, 8, 0, 0, 0, 0	; C
-	spritePiece	-$24, -8, 1, 2, $20, 0, 0, 0, 0	; I
-	spritePiece	-$1C, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	-$C, -8, 2, 2, $26, 0, 0, 0, 0	; L
-
-	spritePiece	$14, -8, 2, 2, $3E, 0, 0, 0, 0	; S
-	spritePiece	$24, -8, 2, 2, $42, 0, 0, 0, 0	; T
-	spritePiece	$34, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	$44, -8, 2, 2, $18, 0, 0, 0, 0	; G
-	spritePiece	$54, -8, 2, 2, $10, 0, 0, 0, 0	; E
+M_SSR_SpeStage:	dc.b 9	;  HOLY SHIT
+		dc.b $F8, 5, 0, $1C, $B0	; H
+		dc.b $F8, 5, 0, $32, $C0	; O
+		dc.b $F8, 5, 0, $26, $D0	; L
+		dc.b $F8, 5, 0, $4A, $E0	; Y
+		dc.b $F8, 0, 0, $56, $F0	; Space
+		dc.b $F8, 5, 0, $3E, $0	; S
+		dc.b $F8, 5, 0, $1C, $10	; H
+		dc.b $F8, 1, 0, $20, $20	; I
+		dc.b $F8, 5, 0, $42, $28	; T
 M_SSR_SpeStage_End
 
-M_SSR_GotAll:	spriteHeader	; SONIC GOT THEM ALL
-	spritePiece	-$78, -8, 2, 2, $3E, 0, 0, 0, 0	; S
-	spritePiece	-$68, -8, 2, 2, $32, 0, 0, 0, 0	; O
-	spritePiece	-$58, -8, 2, 2, $2E, 0, 0, 0, 0	; N
-	spritePiece	-$48, -8, 1, 2, $20, 0, 0, 0, 0	; I
-	spritePiece	-$40, -8, 2, 2, 8, 0, 0, 0, 0	; C
-
-	spritePiece	-$28, -8, 2, 2, $18, 0, 0, 0, 0	; G
-	spritePiece	-$18, -8, 2, 2, $32, 0, 0, 0, 0	; O
-	spritePiece	-8, -8, 2, 2, $42, 0, 0, 0, 0	; T
-
-	spritePiece	$10, -8, 2, 2, $42, 0, 0, 0, 0	; T
-	spritePiece	$20, -8, 2, 2, $1C, 0, 0, 0, 0	; H
-	spritePiece	$30, -8, 2, 2, $10, 0, 0, 0, 0	; E
-	spritePiece	$40, -8, 2, 2, $2A, 0, 0, 0, 0	; M
-
-	spritePiece	$58, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	$68, -8, 2, 2, $26, 0, 0, 0, 0	; L
-	spritePiece	$78, -8, 2, 2, $26, 0, 0, 0, 0	; L
+M_SSR_GotAll:	dc.b $D	;  SONIC HAS | I SHAT MYSELF
+		dc.b $F8, 1, 0, $20, $94	; I
+		dc.b $F8, 0, 0, $56, $9C	; Space
+		dc.b $F8, 5, 0, $3E, $AC	; S
+		dc.b $F8, 5, 0, $1C, $BC	; H
+		dc.b $F8, 5, 0, 0, $CC		; A
+		dc.b $F8, 5, 0, $42, $DC	; T
+		dc.b $F8, 0, 0, $56, $EC	; Space
+		dc.b $F8, 5, 0, $2A, $FC	; M
+		dc.b $F8, 5, 0, $4A, $C	; Y
+		dc.b $F8, 5, 0, $3E, $1C	; S
+		dc.b $F8, 5, 0, $10, $2C	; E
+		dc.b $F8, 5, 0, $26, $3C	; L
+		dc.b $F8, 5, 0, $14, $4C	; F
 M_SSR_GotAll_End
 	even
 
