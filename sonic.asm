@@ -2390,12 +2390,72 @@ Tit_ChkStartOrDemo:
 		tst.w	(v_generictimer).w	; has title screen timer expired?
 		beq.w	GotoDemo		; if yes, launch Demo mode
 		andi.b	#btnStart,(v_jpadpress1).w ; check if Start is pressed
-		beq.w	Tit_MainLoop		; if not, continue looping title screen
-
+		beq.w	Tit_MainLoop		; if not, continue looping title screen	
+		; hiii
+		move.w	#$40,d1			; Timer
+		move.b	#sfx_MenuConfirm,d0	; Mania "Ding!" SFX
+		bsr.w	QueueSound2		; Reproduce it		
+		
+AtoTimerLoop1:
+		move.b	#$08,(v_vbla_routine).w	;  )
+		bsr.w	WaitForVBla		 
+		dbf	d1,AtoTimerLoop1	
+		
+AtoWackyscr:	
+		move.w	#$80,d1			; Timer
+		move.b	#sfx_SSGoal,d0	; Warp SFX
+		bsr.w	QueueSound2		; play it
+		
+AtoTimerLoop2:
+        move.w  d1, -(sp)		
+		bsr.w   WackyScroll       
+		move.b  #$08, (v_vbla_routine).w
+		bsr.w   WaitForVBla   
+        move.w  (sp)+, d1		
+		dbf     d1, AtoTimerLoop2   ; Absolute trash code
+	    
 Tit_ChkLevSel:
 		move.b	#2,(v_continues).w 		; set continues to 2 for when it goes to level instead
 		move.b	#id_DebugMenu,(v_gamemode).w	; go to debug mode
 		rts
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; SCROLL RASTER
+; Code
+; ---------------------------------------------------------------------------	
+; ===========================================================================
+
+ATOscr1: equ	$FFFFA800	
+ATOscr2: equ	$FFFFA802
+		
+WackyScroll:		
+		lea     (v_hscrolltablebuffer).w,a1	
+		moveq	#0,d0
+		move.w	#223,d1   ; Size
+		
+WackyScr1:		
+		lea	    (ATOscr1).w,a2   ; Scroll move
+		addi.l	#$20000,(a2)+
+		move.w	(ATOscr1).w,d0
+		add.w	(v_screenposx).w,d0
+  		swap	d0
+ 		sub.w	#0,d1
+		
+WackyScr2:		
+		lea	    (ATOscr2).w,a2   ; Scroll move 2
+		addi.l	#$20000,(a2)+
+		move.w	(ATOscr2).w,d0
+		add.w	(v_screenposx).w,d0
+		neg.w	d0
+
+WackyScrLoop:
+ 		swap	d3                  
+		swap	d0 
+  		move.w	d0,d3  
+        addi.w  #3,d3    		
+ 		move.l	d3,(a1)+ 
+        dbf	d1,WackyScrLoop
+		rts			
 ; ---------------------------------------------------------------------------		
 		include "_inc/Debug Menu.asm"
 ; ===========================================================================
