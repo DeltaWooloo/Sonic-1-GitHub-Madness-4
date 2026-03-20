@@ -94,7 +94,7 @@ SampleTable:
 	; SEGA Samples
 	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX	; $C9
 	dcSample	TYPE_PCM,	Segay,		0,	FLAGS_SFX	; $CC
-
+	dcSample	TYPE_DPCM,	Chicken,	0,	FLAGS_SFX	; $CD if my oc dongles has been added, use this sound effect as a sfx_death replacement
 	; Unused
 ;	dcSample	TYPE_PCM,	CL_Penis,	11297,			; $BA
 ;	dcSample	TYPE_PCM,	Boioing,	5250,	FLAGS_SFX	; $C5
@@ -212,6 +212,8 @@ SampleTable:
 ;	incdac	ClintonYeah, "sound/dac/clintonfucker_yeah.dpcm"
 
 ; ---------------------------------------------------------------
+; Dongles' sound effects
+	incdac	Chicken, "sound/dac/Chicken.wav"
 	;!@ SAVE THIS AS (LAST SLOT-2)
 	incdac	dummy,"sound/dac/dummy.dpcm"
 
