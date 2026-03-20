@@ -39,12 +39,12 @@ Newt_Action:	; Routine 2
 ; ===========================================================================
 
 .chkdistance:
-		bset	#0,obStatus(a0)
-		move.w	(v_player+obX).w,d0
-		sub.w	obX(a0),d0
-		bcc.s	.sonicisright
-		neg.w	d0
-		bclr	#0,obStatus(a0)
+;		bset	#0,obStatus(a0)
+;		move.w	(v_player+obX).w,d0
+;		sub.w	obX(a0),d0
+;		bcc.s	.sonicisright
+;		neg.w	d0
+;		bclr	#0,obStatus(a0)
 
 .sonicisright:
 		cmpi.w	#$80,d0		; is Sonic within $80 pixels of the newtron?
@@ -66,11 +66,11 @@ Newt_Action:	; Routine 2
 .type00:
 		cmpi.b	#4,obFrame(a0)	; has "appearing" animation finished?
 		bhs.s	.fall		; is yes, branch
-		bset	#0,obStatus(a0)
-		move.w	(v_player+obX).w,d0
-		sub.w	obX(a0),d0
-		bcc.s	.sonicisright2
-		bclr	#0,obStatus(a0)
+;		bset	#0,obStatus(a0)
+;		move.w	(v_player+obX).w,d0
+;		sub.w	obX(a0),d0
+;		bcc.s	.sonicisright2
+;		bclr	#0,obStatus(a0)
 
 .sonicisright2:
 		rts
@@ -107,13 +107,13 @@ Newt_Action:	; Routine 2
 ; ===========================================================================
 
 .speed:
-		bset	#0,obStatus(a0)
-		move.w	(v_player+obX).w,d0
-		sub.w	obX(a0),d0
-		bcc.s	.sonicisright3
-		bclr	#0,obStatus(a0)
+;		bset	#0,obStatus(a0)
+;		move.w	(v_player+obX).w,d0
+;		sub.w	obX(a0),d0
+;		bcc.s	.sonicisright3
+;		bclr	#0,obStatus(a0)
 
-.sonicisright3:
+;.sonicisright3:
 		lea 	v_player, a1
 		move.w 	#$450, d0
 		move.w	#$30, d1

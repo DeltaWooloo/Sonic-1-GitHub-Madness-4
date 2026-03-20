@@ -415,6 +415,7 @@ ptr_SplashScreenSkipper:dc.l	GM_SplashScreenSkipper	; My Stupid Splash is here
 ptr_Advert:		dc.l	GM_Advert		; For all the reject splash screens I guess
 ;ptr_GM_RPGBattle:	dc.l	GM_RPGBattle		; RPG Battle (for Azure Rainforest) ($4C)
 ptr_GiovanniSplash:	dc.l	GiovanniSplash		; jo
+ptr_NewSSRG_Screen:	dc.l	NewSSRG_Screen		; Newer SSRG screenTM
 GameModeArray_End:
 ; ===========================================================================
 	if SkipChecksumCheck=0
@@ -7274,6 +7275,7 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 		include	"_inc/GHM3Explode.asm"
 
 		include	"_gamemode/damn/damn.asm"
+		include "_gamemode/#SSRG/SSRG_Screen.asm"		
 	if MSUEnabled
 		include "sound/MSU/MSU.asm"
 	endif
