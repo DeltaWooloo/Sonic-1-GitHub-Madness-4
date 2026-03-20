@@ -318,6 +318,8 @@ Nem_Orbinaut:	binclude	"artnem/Enemy Orbinaut.nem"
 		even
 Nem_Cater:	binclude	"artnem/Enemy Caterkiller.nem"
 		even
+Nem_IE:		binclude	"artnem/Internet Explorer.nem"
+		even
 
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - character hud
