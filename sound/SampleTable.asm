@@ -33,12 +33,12 @@ SampleTable:
 	dcSample	TYPE_PCM,	SpinSnare,	10400			; Snare (Spinball)
 
 	; CUSTOM SAMPLES
-	dcSample	TYPE_PCM,	ChunkyKick,	16000			; $91
-	dcSample	TYPE_PCM,	PokeSnare,	16864			; $92
-	dcSample	TYPE_PCM,	PokeKickCrash,	15300			; $93
-	dcSample	TYPE_PCM,	PokeTimpani,	15000			; $94
-	dcSample	TYPE_PCM,	PokeTimpani,	11297			; $95
-	dcSample	TYPE_PCM,	PokeTimpani,	7500			; $96
+	dcSample	TYPE_DPCM,	ChunkyKick,	16000			; $91
+	dcSample	TYPE_DPCM,	PokeSnare,	16864			; $92
+	dcSample	TYPE_DPCM,	PokeKickCrash,	15300			; $93
+	dcSample	TYPE_DPCM,	PokeTimpani,	15000			; $94
+	dcSample	TYPE_DPCM,	PokeTimpani,	11297			; $95
+	dcSample	TYPE_DPCM,	PokeTimpani,	7500			; $96
 
 	dcSample	TYPE_DPCM,	CTC1_Tick,	16000			; $A1
 
@@ -67,7 +67,7 @@ SampleTable:
 	dcSample	TYPE_DPCM,	ClintonHi,	20600,	FLAGS_SFX	; $C6
 	dcSample	TYPE_PCM,	CL_DoYouSuck,	11297,FLAGS_SFX		; $BE
 	dcSample	TYPE_PCM,	CL_OnTheBall,	11297,			; $C0
-	dcSample	TYPE_PCM,	DAMN,		16000,FLAGS_SFX		; $A2
+	dcSample	TYPE_DPCM,	DAMN,		16000,FLAGS_SFX		; $A2
 	dcSample	TYPE_PCM,	Foxy,		0, FLAGS_SFX		; $CD
 
 	; Title Screen Samples
@@ -139,10 +139,10 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Samples from Dax's Sample Set
-	incdac	ChunkyKick, "sound/dac/DAX/ChunkyKick.pcm"
-	incdac	PokeSnare, "sound/dac/DAX/PokeSnare.pcm"
-	incdac	PokeKickCrash, "sound/dac/DAX/PokeKickCrash.pcm"
-	incdac	PokeTimpani, "sound/dac/DAX/PokeTimpani.pcm"
+	incdac	ChunkyKick, "sound/dac/DAX/ChunkyKick.dpcm"
+	incdac	PokeSnare, "sound/dac/DAX/PokeSnare.dpcm"
+	incdac	PokeKickCrash, "sound/dac/DAX/PokeKickCrash.dpcm"
+	incdac	PokeTimpani, "sound/dac/DAX/PokeTimpani.dpcm"
 
 ; ---------------------------------------------------------------
 ; the singular sample file from conic 1 (idgaf if it counts as leaking)
@@ -179,7 +179,7 @@ SampleTable:
 	incdac	Boost,"sound/dac/GenesisDoes/Boost.dpcm"
 	incdac	ClintonHi, "sound/dac/clintonfucker_hi.dpcm"
 	incdac	CL_OnTheBall, "sound/dac/CL_OnTheBall.wav"
-	incdac	DAMN, "sound/dac/DAX/DAMN.pcm"
+	incdac	DAMN, "sound/dac/DAX/DAMN.dpcm"
 	incdac	Foxy, "sound/dac/Foxy.wav"
 
 ; ---------------------------------------------------------------
