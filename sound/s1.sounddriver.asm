@@ -227,8 +227,8 @@ UpdateMusic:
 		clr.b	SMPS_RAM.f_voice_selector(a6)
 		tst.b	SMPS_RAM.f_pausemusic(a6)		; is music paused?
 		bne.w	PauseMusic				; if yes, branch
-		subq.b	#1,SMPS_RAM.v_main_tempo_timeout(a6)	; Has main tempo timer expired?
-		bne.s	.skipdelay
+;		subq.b	#1,SMPS_RAM.v_main_tempo_timeout(a6)	; Has main tempo timer expired?
+;		bne.s	.skipdelay
 		jsr	TempoWait(pc)
 ; loc_71B9E:
 .skipdelay:
@@ -1799,15 +1799,38 @@ InitMusicPlayback:
 
 ; sub_7260C:
 TempoWait:
-		move.b	SMPS_RAM.v_main_tempo(a6),SMPS_RAM.v_main_tempo_timeout(a6)	; Reset main tempo timeout
+;		move.b	SMPS_RAM.v_main_tempo(a6),SMPS_RAM.v_main_tempo_timeout(a6)	; Reset main tempo timeout
+;		lea	SMPS_RAM.v_music_track_ram+SMPS_Track.DurationTimeout(a6),a0	; note timeout
+;		moveq	#SMPS_Track.len,d0
+;		moveq	#SMPS_MUSIC_TRACK_COUNT-1,d1	; 1 DAC + 6 FM + 3 PSG tracks
+; loc_7261A:
+;.tempoloop:
+;		addq.b	#1,(a0)	; Delay note by 1 frame
+;		adda.w	d0,a0	; Advance to next track
+;		dbf	d1,.tempoloop
+
+        tst.b    SMPS_RAM.v_main_tempo(a6)         ; Check to see if song's tempo exists.
+        beq.s    .return    ; If yes, then skip, otherwise branch.
+        move.b    SMPS_RAM.v_main_tempo(a6),d0    ; get Tempo Increment
+        add.b    d0,SMPS_RAM.v_main_tempo_timeout(a6)    ; add to current Tempo Counter
+        bhs.s    .return
 		lea	SMPS_RAM.v_music_track_ram+SMPS_Track.DurationTimeout(a6),a0	; note timeout
 		moveq	#SMPS_Track.len,d0
 		moveq	#SMPS_MUSIC_TRACK_COUNT-1,d1	; 1 DAC + 6 FM + 3 PSG tracks
-; loc_7261A:
-.tempoloop:
-		addq.b	#1,(a0)	; Delay note by 1 frame
-		adda.w	d0,a0	; Advance to next track
-		dbf	d1,.tempoloop
+
+.loop:
+        tst.b    SMPS_Track.PlaybackControl(a0)        ; Test to see if music is active.
+        beq.s    .delay        ; if that is false. Delay.
+        tst.b    SMPS_Track.PlaybackControl(a0)        ; Test to see if music is active.
+        bpl.s    .skip        ; if that is true. then skip.
+.delay:      
+        addq.b    #1,SMPS_Track.DurationTimeout(a0)    ; Delay note by 1 frame
+
+.skip:
+        adda.w    d0,a0        ; Advance to next track
+        dbf    d1,.loop        ; Loop 10 times!
+
+.return:
 
 		rts
 ; End of function TempoWait
