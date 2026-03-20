@@ -35,6 +35,7 @@ GM_DaxKatter:
 		clearRAM	v_levelvariables, v_levelvariables_end				; clear the camera RAM
 
 		; clear
+		moveq	#0,d0
 		move.b	d0,(f_wtr_state).w
 		move.b	d0,(f_water).w
 		move.b	d0,(v_d_anim_done).w
