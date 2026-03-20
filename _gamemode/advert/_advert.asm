@@ -195,6 +195,7 @@ GM_Advert:
 		advertdata 5,10,Ad_IWBTH.art,Ad_IWBTH.fg,Ad_IWBTH.pal,bgm_GEMSHill,0
 		advertdata 30,5,Ad_Limited.art,Ad_Limited.fg,Ad_Limited.pal,bgm_LimitedYard,0				; I plan to change the song to Final Limit
 		advertdata 30,5,Ad_Atgame.art,Ad_Atgame.fg,Ad_Atgame.pal,bgm_BomerDude,0 ;pls dont touch this very beautiful ad
+		advertdata 10,10,Ad_FartBaby.art,Ad_FartBaby.fg,Ad_FartBaby.pal,bgm_LG,0
 .tablee:
 .eyecatch1:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg1,Ad_Eyecatch.pal,0,dRightBack
 .eyecatch2:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg2,Ad_Eyecatch.pal,bgm_EuroSega,0
@@ -367,4 +368,10 @@ Ad_Atgame:
 .pal:		binclude "_gamemode/advert/Atgame.bin"
 .fg:		binclude "_gamemode/advert/Atgame.eni"
 .art:		binclude "_gamemode/advert/Atgame.nem"
+		even
+
+Ad_FartBaby:
+.pal:		binclude "_gamemode/advert/ad-FartBaby-pal.unc"
+.fg:		binclude "_gamemode/advert/ad-FartBaby-map.eni"
+.art:		binclude "_gamemode/advert/ad-FartBaby-art.nem"
 		even
