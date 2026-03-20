@@ -135,6 +135,12 @@ GM_Continue:
 	Continue_DrawText	.Text_DecisionContinue, $3, $8
 	Continue_DrawText	.Text_YesNo, $1A, $20
 
+	; Continues
+	move.l	#$409A0003, 4(a6)
+	move.w	#$6381, d0
+	add.b	(v_continues), d0
+	move.w 	d0, (a6)
+	
 	rts
 
 .DrawGameOver:
@@ -151,8 +157,8 @@ GM_Continue:
 	Continue_DrawMap	.GameOver_Map
 	
 	; Text
-	Continue_DrawText	.Text_GameOver1, $1, $7
-	Continue_DrawText	.Text_GameOver2, $1, $5
+	Continue_DrawText	.Text_GameOver1, $2, $8
+	Continue_DrawText	.Text_GameOver2, $4, $4
 
 	enable_display
 	rts
@@ -195,16 +201,16 @@ GM_Continue:
 .Text_YesNo:
 	dc.b	$08
 	dc.b	$05, $01, $00, $00, $00, $00, $0F, $06, $14
+	even
 
 ; Game over
 .Text_GameOver1:
 	dc.b	$03
-	dc.b	$0A, $04, $00, $00
+	dc.b	$0A, $04, $12, $01
 
 .Text_GameOver2:
 	dc.b	$07
-	dc.b	$05, $01, $00, $00, $00, $00, $0F, $06, $14
-	even
+	dc.b	$10, $0C, $10, $0F, $19, $06, $0F, $01
 
 ; ---------------------------------------------------------------------------
 ; Includes

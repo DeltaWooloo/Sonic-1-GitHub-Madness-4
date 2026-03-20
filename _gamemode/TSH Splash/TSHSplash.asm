@@ -26,7 +26,7 @@ GM_TheSunsetHacker:
 		clearRAM	v_objspace, v_snddriver_ram				; clear the object RAM
 
 		locVRAM	0
-		lea	(Nem_SegaLogo).l,a0	; load the logo tiles into a0 using longword.
+		lea	(Nem_TSHLogo).l,a0	; load the logo tiles into a0 using longword.
 		jsr	(NemDec).l		; decompress the Nemesis compressed art tiles (since the art is compressed to Nemesis.)
 
 		locVRAM	$6000
@@ -34,7 +34,7 @@ GM_TheSunsetHacker:
 		jsr	(NemDec).l
 
 		lea	(v_ram_start).l,a1
-		lea	(Eni_SegaLogo).l,a0		;Load the mappings for the logo
+		lea	(Eni_TSHLogo).l,a0		;Load the mappings for the logo
 		move.w	#make_art_tile(0,0,0),d0	; move 0 to d0, I still dont know what this does. 
 		jsr	(EniDec).l			; Decompress the Mappings because its compressed to the Enigma compression (used mainly for mappings.).
 
@@ -91,5 +91,22 @@ PalCycTSR:
 		rts
 ; ---------------------------------------------------------------------------
 Cyc_Logo:
-		incbin "_gamemode\TSH Splash\Pal\Cycle - Sega.bin"
+	binclude "_gamemode/TSH Splash/Pal/Cycle - Sega.bin"
+	even
+; ---------------------------------------------------------------------------
+	include "_gamemode/TSH Splash/OBJ/Obj_Sunset.asm"
+	even
+
+; ---------------------------------------------------------------------------
+Nem_TSHLogo:
+	binclude "_gamemode/TSH Splash/ART/TSH_Logo.nem"
+	even
+; ---------------------------------------------------------------------------
+Art_Sunset:
+	binclude "_gamemode/TSH Splash/ART/Sunset.nem"
+	even
+; ---------------------------------------------------------------------------
+Eni_TSHLogo:
+	binclude "_gamemode/TSH Splash/TILEMAP/TSH_Logo.eni"
+	even
 ; ---------------------------------------------------------------------------

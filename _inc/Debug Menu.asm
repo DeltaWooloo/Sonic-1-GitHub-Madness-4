@@ -579,6 +579,7 @@ GamemodeNameTable:
 		dc.w	.Skipper-.t
 		dc.w	.Advert-.t
 		dc.w	.Giovanni-.t
+		dc.w	.NewSSRG-.t		
 		rept ( (GameModeArray_End-GameModeArray)-(((*)-.t)*2) )/4
 		dc.w	.Placeholder-.t
 		endr
@@ -606,6 +607,7 @@ GamemodeNameTable:
 .Skipper:	dc.b	"SPLASH SKIPPER  "
 .Advert:	dc.b	"ADVERTISEMENTS  "
 .Giovanni:	dc.b	"GIOVANNI.GEN    "
+.NewSSRG:	dc.b	"NEW SSRG SCREEN "
 .Placeholder:	dc.b	"PLACEHOLDER NAME"
 		even
 

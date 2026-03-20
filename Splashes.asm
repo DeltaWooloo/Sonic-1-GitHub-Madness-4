@@ -152,6 +152,7 @@ splash_turd macro routine
 	splash_liquid	funnybutthole
 	splash_liquid	MultiSplash_Init
 	splash_liquid	SonicRetro
+	splash_liquid	NewSSRG_Screen		
 	splash_liquid	GM_SSRGScreen
 ;	splash_liquid	GM_SHCSplash
 	splash_liquid	GM_EagleSoft

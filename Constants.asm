@@ -96,6 +96,7 @@ id_DaxKatter:	equ ptr_GM_DaxKatter-GameModeArray
 id_SplashSkip:	equ ptr_SplashScreenSkipper-GameModeArray
 id_Advert:	equ ptr_Advert-GameModeArray
 id_GiovanniSpl:	equ ptr_GiovanniSplash-GameModeArray
+id_NewSSRGScreen:	equ ptr_NewSSRG_Screen-GameModeArray
 ;id_RPGBattle:	equ ptr_GM_RPGBattle-GameModeArray
 
 ; Levels
@@ -286,6 +287,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_PuyoDrown
 	nextenum bgm_Win2K
 	nextenum bgm_EuroSega
+	nextenum bgm_ChaosEmerald
 	nextenum bgm_PuyoReject
 	nextenum bgm_LG
 	nextenum bgm_ILBT
