@@ -452,7 +452,9 @@ PlayerAttackHandle:
 ; Tonic bullet spawn
 ; ----------------------------------------------------------------------------
 
-TonicAttack:
+TonicAttack:	
+		tst.b	attacking(a0)
+		bne.s	.nobullets
 		move.b	#25,attacking(a0)
 		move.b	#id_Attack,obAnim(a0)
 	;	move.b	#id_Attack,obPrevAni(a0)

@@ -118,9 +118,11 @@ PTonicAtt_Main:
 		beq.s	.notflip1
 		neg.w	d0
 		neg.w	d1
-		bset	#0,obStatus(a0)
 		bset	#0,obRender(a0)
+		bra.s	.skip2
 .notflip1:
+		bclr	#0,obRender(a0)
+.skip2
 		add.w	d1,obX(a0)
 		jsr	(CalcSine).w	; returns the sine in d0 and the cosine in d1
 		move.w	d0,d2
