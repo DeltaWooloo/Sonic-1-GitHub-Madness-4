@@ -2186,18 +2186,18 @@ GM_Title:
 
 		clearRAM v_objspace
 
-		locVRAM	ArtTile_Title_Japanese_Text*tile_size
-		lea	(Nem_JapNames).l,a0 ; load Japanese credits
-		bsr.w	NemDec
+;		locVRAM	ArtTile_Title_Japanese_Text*tile_size
+;		lea	(Nem_JapNames).l,a0 ; load Japanese credits
+;		bsr.w	NemDec
 		locVRAM	ArtTile_Sonic_Team_Font*tile_size
 		lea	(Nem_CreditText).l,a0 ; load alphabet
 		bsr.w	NemDec
-		lea	(v_ram_start).l,a1
-		lea	(Eni_JapNames).l,a0 ; load mappings for Japanese credits
-		move.w	#make_art_tile(ArtTile_Title_Japanese_Text,0,FALSE),d0
-		bsr.w	EniDec
+;		lea	(v_ram_start).l,a1
+;		lea	(Eni_JapNames).l,a0 ; load mappings for Japanese credits
+;		move.w	#make_art_tile(ArtTile_Title_Japanese_Text,0,FALSE),d0
+;		bsr.w	EniDec
 
-		copyTilemap	v_ram_start,vram_fg,40,28
+;		copyTilemap	v_ram_start,vram_fg,40,28
 
 		clearRAM v_palette_fading
 
