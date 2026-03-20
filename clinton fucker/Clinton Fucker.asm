@@ -147,7 +147,8 @@ CliFucker_Main:
 	move.w	(v_rings).w,d0	; load number of rings
 	mulu.w	#10,d0		; multiply by 10
 	move.w	d0,(v_ringbonus).w ; set ring bonus
-	pcm 	dBoingBoing
+	move.b	#bgm_ActClear,d0
+	jsr	(QueueSound2).l
 	jsr	GHM3Explode
 	move.b	#0,(a0)
 .ok:

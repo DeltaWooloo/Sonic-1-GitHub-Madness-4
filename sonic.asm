@@ -3697,8 +3697,8 @@ End_MainLoop:
 		beq.s	End_ChkEmerald	; if yes, branch
 
 		move.b	#id_Credits,(v_gamemode).w ; goto credits
-		move.b	#bgm_S1Credits,d0
-		bsr.w	QueueSound2 ; play credits music
+		move.b	#bgm_NewBarkTown,d0
+		bsr.w	QueueSound2		; play placeholder music
 		move.w	#0,(v_creditsnum).w ; set credits index number to 0
 		rts
 ; ===========================================================================

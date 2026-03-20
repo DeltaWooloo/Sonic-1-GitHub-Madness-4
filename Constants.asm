@@ -266,7 +266,8 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Continue
 	nextenum bgm_Ending
 	nextenum bgm_Jeopardy
-	nextenum bgm_S1ActClear
+	nextenum bgm_ActClear
+	nextenum bgm_Pac2
 	nextenum bgm_GameOver
 	nextenum bgm_ExtraLife
 	nextenum bgm_Drowning
@@ -274,6 +275,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Retro
 	nextenum bgm_RonicSetro
 	nextenum bgm_SHCSplash
+	nextenum bgm_S1ActClear
 	nextenum bgm_ConiJingle
 	nextenum bgm_TG2000Jingle
 	nextenum bgm_Donnie
@@ -321,7 +323,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Scrappy
 	nextenum bgm_WeAreTheSonic
 	nextenum bgm_Thomas
-	nextenum bgm_Pac2
 	nextenum bgm_CCLobby
 	nextenum bgm_ChairRoom
 	nextenum bgm_SneakySnitch
@@ -332,7 +333,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_SadMac
 	nextenum bgm_Folgers
 	nextenum bgm_MayoDed
-	nextenum bgm_S1Credits
 	; Keep this last
 	nextenum bgm__Last
 

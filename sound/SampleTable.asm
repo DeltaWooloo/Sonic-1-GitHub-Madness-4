@@ -29,8 +29,8 @@ SampleTable:
 	dcSample	TYPE_DPCM,	ElectricTom,	11274			; $90
 
 	; #SPINBALLSWEEP
-	dcSample	TYPE_PCM,	SpinKick,	10400			; Kick (Spinball)
-	dcSample	TYPE_PCM,	SpinSnare,	10400			; Snare (Spinball)
+	dcSample	TYPE_DPCM,	SpinKick,	10400			; Kick (Spinball)
+	dcSample	TYPE_DPCM,	SpinSnare,	10400			; Snare (Spinball)
 
 	; CUSTOM SAMPLES
 	dcSample	TYPE_DPCM,	ChunkyKick,	16000			; $91
@@ -45,10 +45,7 @@ SampleTable:
 	dcSample	TYPE_DPCM,	CF_DrumLoopA,	16000			; $9F
 	dcSample	TYPE_DPCM,	CF_DrumLoopB,	16000			; $A0
 
-	dcSample	TYPE_PCM,	Amen_Crash,	0					; $9E
-
-	; PCM Music Tracks (Should probably make this a sequence instead)
-	dcSample	TYPE_DPCM,	BoingBoing,	16000,	FLAGS_SFX|FLAGS_LOOP	; $C3
+	dcSample	TYPE_DPCM,	Amen_Crash,	11025			; $9E
 
 	; In-Game SFX SAMPLES
 	dcSample	TYPE_PCM,	letsgoeee,	0,	FLAGS_SFX	; This is the most important one!!! :fire: :fire: :fire:
@@ -134,8 +131,8 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Spinball Samples
-	incdac	SpinKick, "sound/dac/Spinball/SpinKick.pcm"
-	incdac	SpinSnare, "sound/dac/Spinball/SpinSnare.pcm"
+	incdac	SpinKick, "sound/dac/Spinball/SpinKick.dpcm"
+	incdac	SpinSnare, "sound/dac/Spinball/SpinSnare.dpcm"
 
 ; ---------------------------------------------------------------
 ; Samples from Dax's Sample Set
@@ -155,11 +152,13 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Amen Breaks -  for use in songs (sampled from cw_amen_classic on rhythmlab) ported by Saneway
-	incdac	Amen_Crash, "sound/dac/amenbreak/crash.wav"
+	incdac	Amen_Crash, "sound/dac/amenbreak/crash.dpcm"
 
 ; ---------------------------------------------------------------
 ; PCM Music Track
-	incdac	BoingBoing, "sound/dac/BoingBoing.dpcm"
+	incdac	BoingBoingA, "sound/dac/Boing Boing/BoingBoingA.dpcm"
+	incdac	BoingBoingB, "sound/dac/Boing Boing/BoingBoingB.dpcm"
+	incdac	BoingBoingC, "sound/dac/Boing Boing/BoingBoingC.dpcm"
 
 ; ---------------------------------------------------------------
 ; SFX Samples
