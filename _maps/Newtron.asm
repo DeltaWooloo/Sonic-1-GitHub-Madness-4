@@ -1,57 +1,57 @@
-Map_7f3f: mappingsTable
-	mappingsTableEntry.w	Map_7f3f_0
-	mappingsTableEntry.w	Map_7f3f_1
-	mappingsTableEntry.w	Map_7f3f_2
-	mappingsTableEntry.w	Map_7f3f_3
-	mappingsTableEntry.w	Map_7f3f_4
-	mappingsTableEntry.w	Map_7f3f_5
-	mappingsTableEntry.w	Map_7f3f_6
-	mappingsTableEntry.w	Map_7f3f_7
-	mappingsTableEntry.w	Map_7f3f_8
-	mappingsTableEntry.w	Map_7f3f_9
-	mappingsTableEntry.w	Map_7f3f_10
+Map_3fc1: mappingsTable
+	mappingsTableEntry.w	Map_3fc1_0
+	mappingsTableEntry.w	Map_3fc1_1
+	mappingsTableEntry.w	Map_3fc1_2
+	mappingsTableEntry.w	Map_3fc1_3
+	mappingsTableEntry.w	Map_3fc1_4
+	mappingsTableEntry.w	Map_3fc1_5
+	mappingsTableEntry.w	Map_3fc1_6
+	mappingsTableEntry.w	Map_3fc1_7
+	mappingsTableEntry.w	Map_3fc1_8
+	mappingsTableEntry.w	Map_3fc1_9
+	mappingsTableEntry.w	Map_3fc1_10
 
-Map_7f3f_0:	spriteHeader
+Map_3fc1_0:	spriteHeader
  spritePiece -$10, -$10, 4, 4, 0, 0, 0, 0, 0
-Map_7f3f_0_End
+Map_3fc1_0_End
 
-Map_7f3f_1:	spriteHeader
+Map_3fc1_1:	spriteHeader
  spritePiece -$10, -$10, 4, 4, $10, 0, 0, 0, 0
-Map_7f3f_1_End
+Map_3fc1_1_End
 
-Map_7f3f_2:	spriteHeader
+Map_3fc1_2:	spriteHeader
  spritePiece -$10, -$10, 4, 4, $10, 0, 0, 0, 0
-Map_7f3f_2_End
+Map_3fc1_2_End
 
-Map_7f3f_3:	spriteHeader
+Map_3fc1_3:	spriteHeader
  spritePiece -$10, -$10, 4, 4, $10, 0, 0, 0, 0
-Map_7f3f_3_End
+Map_3fc1_3_End
 
-Map_7f3f_4:	spriteHeader
+Map_3fc1_4:	spriteHeader
  spritePiece -$10, -$10, 4, 4, $10, 0, 0, 0, 0
-Map_7f3f_4_End
+Map_3fc1_4_End
 
-Map_7f3f_5:	spriteHeader
+Map_3fc1_5:	spriteHeader
  spritePiece -$10, -$10, 4, 4, $10, 0, 0, 0, 0
-Map_7f3f_5_End
+Map_3fc1_5_End
 
-Map_7f3f_6:	spriteHeader
+Map_3fc1_6:	spriteHeader
  spritePiece -$10, -$10, 4, 4, $10, 0, 0, 0, 0
-Map_7f3f_6_End
+Map_3fc1_6_End
 
-Map_7f3f_7:	spriteHeader
+Map_3fc1_7:	spriteHeader
  spritePiece -$10, -$10, 4, 4, $10, 0, 0, 0, 0
-Map_7f3f_7_End
+Map_3fc1_7_End
 
-Map_7f3f_8:	spriteHeader
+Map_3fc1_8:	spriteHeader
  spritePiece -$10, -$10, 4, 4, $10, 0, 0, 0, 0
-Map_7f3f_8_End
+Map_3fc1_8_End
 
-Map_7f3f_9:	spriteHeader
- spritePiece -$10, -$10, 4, 4, $10, 0, 0, 0, 0
-Map_7f3f_9_End
+Map_3fc1_9:	spriteHeader
+ spritePiece -$10, -$10, 4, 4, $10, 0, 0, 1, 0
+Map_3fc1_9_End
 
-Map_7f3f_10:	spriteHeader
-Map_7f3f_10_End
+Map_3fc1_10:	spriteHeader
+Map_3fc1_10_End
 
 	even
