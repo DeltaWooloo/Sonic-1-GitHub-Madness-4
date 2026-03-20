@@ -465,6 +465,12 @@ Kos_NGZ:	binclude	"artkos/8x8 - NGZ.kos"	; nogales	#r&)*_@@@@@@@@u!#@*)eudq@(ewu
 		even
 Blk256_NGZ:	binclude	"map256/NGZ.kos"		
 		even
+Blk16_HSZ:	binclude	"map16/HSZ.eni"
+		even
+Kos_HSZ:	binclude	"artkos/8x8 - HSZ.kos"
+		even
+Blk256_HSZ:	binclude	"map256/HSZ.kos"		
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - bosses and ending sequence
 ; ---------------------------------------------------------------------------
@@ -543,6 +549,8 @@ Col_Joint:	binclude	"collide/Joint.bin"	; Joint index
 Col_DVZ:	binclude	"collide/DVZ.bin"	; IDONT CARE
 		even
 Col_NGZ:	binclude	"collide/NGZ.bin"	; O,GOPOG9-I0=IG20=I=0IG4=0I
+		even
+Col_HSZ:	binclude	"collide/HSZ.bin"
 		even
 ; ---------------------------------------------------------------------------
 ; Special Stage layouts
@@ -754,7 +762,11 @@ Level_Joint1Unk:
 		dc.l 0
 Level_DVZ1:	binclude	"levels/DVZ1.bin"
 		even
-Level_DVZ2:	binclude	"levels/DVZ1.bin"
+;Level_DVZ2:	binclude	"levels/DVZ1.bin"
+;		even
+Level_HSZ:	binclude	"levels/HSZ.bin"
+		even
+Level_HSZbg:	binclude	"levels/HSZbg.bin"
 		even
 Level_DVZ3:	binclude	"levels/DVZ1.bin"
 		even
@@ -762,7 +774,7 @@ Level_DVZbg:	;binclude	"levels/dvz.bin"
 		dc.l 0
 Level_NGZ1:	binclude	"levels/ngz1.bin"
 		even
-Level_NGZ2:	binclude	"levels/ngz2.bin"
+Level_NGZ2:	binclude	"levels/hsz.bin"
 		even
 Level_NGZ3:	binclude	"levels/ngz3.bin"
 		even
@@ -944,11 +956,12 @@ ObjPos_DVZ3:	binclude	"objpos/dvz3.bin"
 		even
 ObjPos_NGZ1:	binclude	"objpos/ngz1.bin"
 		even
-ObjPos_NGZ2:	binclude	"objpos/ngz2.bin"
+ObjPos_NGZ2:	binclude	"objpos/hsz.bin"
 		even
 ObjPos_NGZ3:	binclude	"objpos/ngz3.bin"
 		even
-
+ObjPos_HSZ:	binclude	"objpos/hsz.bin"
+		even
 ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 
 ; ===========================================================================
