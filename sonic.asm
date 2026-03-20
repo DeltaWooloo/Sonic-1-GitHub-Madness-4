@@ -4721,6 +4721,10 @@ Map_Jaws:	include	"_maps/Jaws.asm"
 		include	"_anim/Burrobot.asm"
 Map_Burro:	include	"_maps/Burrobot.asm"
 
+		include	"_incObj/Internet Explorer.asm"
+		include	"_anim/Internet Explorer.asm"
+Map_IE:		include	"_maps/Internet Explorer.asm"
+
 		include	"_incObj/2F MZ Large Grassy Platforms.asm"
 		include	"_incObj/35 Burning Grass.asm"
 		include	"_anim/Burning Grass.asm"

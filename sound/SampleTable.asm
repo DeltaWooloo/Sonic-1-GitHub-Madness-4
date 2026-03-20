@@ -22,6 +22,7 @@ SampleTable:
 	; SONIC 3 & KNUCKLES (AND 3D BLAST)
 	dcSample	TYPE_DPCM,	KickS3,		19090			; $8D
 	dcSample	TYPE_DPCM,	SnareS3,	19090			; $8D
+	dcSample	TYPE_DPCM,	MuffledSnare,	19090			; $98	- Muffled Snare
 	dcSample	TYPE_DPCM,	CrashCymbal,	16766			; $8D
 	dcSample	TYPE_DPCM,	ElectricTom,	20513			; $8D
 	dcSample	TYPE_DPCM,	ElectricTom,	15803			; $8E
@@ -125,6 +126,7 @@ SampleTable:
 ; Sonic 3 Samples
 	incdac	KickS3, "sound/dac/S3/KickS3.dpcm"
 	incdac	SnareS3, "sound/dac/S3/SnareS3.dpcm"
+	incdac	MuffledSnare, "sound/dac/S3/MuffledSnare.dpcm"
 	incdac	CrashCymbal, "sound/dac/S3/CrashCymbal.dpcm"
 	incdac	ElectricTom, "sound/dac/S3/ElectricTom.dpcm"
 

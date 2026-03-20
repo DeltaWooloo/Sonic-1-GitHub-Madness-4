@@ -266,6 +266,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Memories
 	nextenum bgm_Continue
 	nextenum bgm_Ending
+	nextenum bgm_SSZ
 	nextenum bgm_Jeopardy
 	nextenum bgm_ActClear
 	nextenum bgm_Pac2
@@ -280,6 +281,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_ConiJingle
 	nextenum bgm_TG2000Jingle
 	nextenum bgm_Donnie
+	nextenum bgm_TSHLogo
 	nextenum bgm_S1Continue
 	nextenum bgm_PuyoDrown
 	nextenum bgm_Win2K
@@ -655,6 +657,7 @@ ArtTile_Newtron:		equ $49B
 ArtTile_Burrobot:		equ $4A6
 ArtTile_Basaran:		equ $4B8
 ArtTile_Roller:			equ $4B8
+ArtTile_IE:			equ $4E0
 ArtTile_Moto_Bug:		equ $4F0
 ArtTile_Button:			equ $50F
 ArtTile_Spikes:			equ $51B

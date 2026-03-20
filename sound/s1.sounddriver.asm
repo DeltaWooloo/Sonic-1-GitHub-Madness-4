@@ -52,6 +52,8 @@ PSG_Index:
 
 		dc.l PSG_SHC_01, PSG_SHC_02, PSG_SHC_03, PSG_SHC_04
 
+		dc.l PSG_S3_01
+
 PSG1:		dc.b 0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,$80
 	even
 
@@ -152,6 +154,9 @@ PSG_SHC_04:
 	dc.b	0,1,1,2,3,4,5,6,7,8,$80
 	even
 
+PSG_S3_01:
+	dc.b	2,$F,$80
+	even
 
 ; ---------------------------------------------------------------------------
 ; New tempos for songs during speed shoes

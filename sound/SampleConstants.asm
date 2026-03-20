@@ -24,6 +24,7 @@ dFloorTom			ds.b 1
 ; Sonic 3
 dKickS3				ds.b 1
 dSnareS3			ds.b 1
+dMuffledSnare			ds.b 1
 dCrashCymbal			ds.b 1
 dElectricHighTom		ds.b 1
 dElectricMidTom			ds.b 1
