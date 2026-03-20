@@ -734,7 +734,10 @@ loc_1309A:
 
 loc_130A6:
 		move.w	d0,obInertia(a0)
+		tst.b	attacking(a0)
+		bne.s	.skip
 		move.b	#id_Walk,obAnim(a0) ; use walking animation
+.skip
 		rts
 ; ----------------------------------------------------------------------------
 
@@ -780,7 +783,10 @@ loc_13104:
 
 loc_1310C:
 		move.w	d0,obInertia(a0)
+		tst.b	attacking(a0)
+		bne.s	.skip
 		move.b	#id_Walk,obAnim(a0) ; use walking animation
+.skip
 		rts
 ; ----------------------------------------------------------------------------
 
@@ -1921,17 +1927,17 @@ Player_Animate:
 		jmp 	.AniRoutTbl(pc,d0.w)
 ; ---------------------------------------------------------------------------
 .AniRoutTbl	
-		bra.w	Sonic_Animate
+		bra.w	Tonic_Animate
 		bra.w	Maniac_Animate	
-		bra.w	Sonic_Animate
-		bra.w	Sonic_Animate
-		bra.w	Sonic_Animate
+		bra.w	Tonic_Animate
+		bra.w	Tonic_Animate
+		bra.w	Tonic_Animate
 
 ; ---------------------------------------------------------------------------
 ; Sonic animation routine
 ; ---------------------------------------------------------------------------
-
-Sonic_Animate:
+Sonic_Animate: 	;kys
+Tonic_Animate:
 		lea	(Ani_Sonic).l,a1
 		moveq	#0,d0
 		move.b	obAnim(a0),d0
@@ -2151,7 +2157,7 @@ Sonic_Animate:
 		or.b	d1,obRender(a0)
 		bra.w	.loadframe
 
-; End of function Sonic_Animate
+; End of function Tonic_Animate
 ; ---------------------------------------------------------------------------
 ; Maniac animation routine
 ; ---------------------------------------------------------------------------
