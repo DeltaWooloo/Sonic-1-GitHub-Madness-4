@@ -2,9 +2,6 @@
 ; What is "cchhhet"?
 ; ---------------------------------------------------------------------------
 
-; to do:
-; - fix text in game over
-
 ; FUN FACT: AS doesn't allow you to use macros defined later. this assembler is so poopy
 	include "ContinueScreen/Macros.asm"
 
@@ -102,8 +99,16 @@ GM_Continue:
 
 ; Exit routines
 .ExitContinue:
+	moveq	#0,d0
+
 	subq.b 	#1, (v_continues)
 	move.b 	#3, (v_lives)
+
+	move.w	d0, (v_rings)
+	move.l	d0, (v_time)
+	move.l	d0, (v_score)
+	move.b	d0, (v_lastlamp)
+	
 	move.b	#2, (SMPS_RAM.v_main_tempo)	; this is still really funny
 	move.b 	#id_Level, (v_gamemode)
 	rts
