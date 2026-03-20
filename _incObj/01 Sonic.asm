@@ -1125,7 +1125,9 @@ Sonic_LevelBound:
 ; End of function Sonic_LevelBound
 
 reproduceSFX:
-        move.w	#sfx_Lamppost,d0
+        move.b	#dScream,d0	; Scream
+		jsr		(MegaPCM_PlaySample).l
+		move.w	#sfx_Lamppost,d0
 		jmp	(QueueSound2).l	; play lamppost sound
 
 ; ---------------------------------------------------------------------------
