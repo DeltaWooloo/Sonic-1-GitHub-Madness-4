@@ -470,7 +470,7 @@ TonicAttack:
 		move.w	#$600,bulletfactor(a1)
 		move.w	obX(a0), obX(a1)
 		move.w	obY(a0), obY(a1)
-		move.b	d1, obAngle(a1)
+	;	move.b	#1, obAngle(a1)
 	;	add.b	#$40, d1
 	;	dbf	d2, .makebullets
 

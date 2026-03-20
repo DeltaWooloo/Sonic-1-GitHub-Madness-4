@@ -44,6 +44,16 @@ Dgfx_Shield:	include		"_maps/Shield DGFX.asm"
 		even
 Art_Shield:	binclude	"artunc/Shield.bin"	
 		even
+
+; ---------------------------------------------------------------------------
+; Uncompressed graphics - Shield
+; ---------------------------------------------------------------------------	
+
+Map_Attacks:	include		"char_assets/CharAttacks Map.asm"	
+		even
+Dgfx_Attacks:	include		"char_assets/CharAttacks DGFX.asm"	
+		even
+Art_Attacks:	binclude	"char_assets/CharAttacks Art.bin"	
 ; ---------------------------------------------------------------------------
 ; Uncompressed graphics - Sonic (base)
 ; ---------------------------------------------------------------------------
