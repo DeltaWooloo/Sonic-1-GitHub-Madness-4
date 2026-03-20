@@ -84,35 +84,21 @@ s3TempotoS1 function n,s2TempotoS1(s2TempotoS3(n))
 s3TempotoS2 function n,s2TempotoS3(n)
 
 convertMainTempoMod macro mod
-	if ((SourceDriver>=3)&&(SonicDriverVer>=3))||(SonicDriverVer==SourceDriver)
-		dc.b	mod
-	elseif SourceDriver==1
+	if SourceDriver==1
 		if mod==1
 			fatal "Invalid main tempo of 1 in song from Sonic 1"
 		endif
-		if SonicDriverVer==2
-			dc.b	s1TempotoS2(mod)
-		else;if SonicDriverVer>=3
-			dc.b	s1TempotoS3(mod)
-		endif
+		dc.b	s1TempotoS3(mod)
 	elseif SourceDriver==2
 		if mod==0
 			fatal "Invalid main tempo of 0 in song from Sonic 2"
 		endif
-		if SonicDriverVer==1
-			dc.b	s2TempotoS1(mod)
-		else;if SonicDriverVer>=3
-			dc.b	s2TempotoS3(mod)
-		endif
+		dc.b	s2TempotoS3(mod)
 	else;if SourceDriver>=3
 		if mod==0
 			message "Performing approximate conversion of Sonic 3 main tempo modifier of 0"
 		endif
-		if SonicDriverVer==1
-			dc.b	s3TempotoS1(mod)
-		else;if SonicDriverVer==2
-			dc.b	s3TempotoS2(mod)
-		endif
+		dc.b	mod
 	endif
 	endm
 

@@ -227,8 +227,6 @@ UpdateMusic:
 		clr.b	SMPS_RAM.f_voice_selector(a6)
 		tst.b	SMPS_RAM.f_pausemusic(a6)		; is music paused?
 		bne.w	PauseMusic				; if yes, branch
-		subq.b	#1,SMPS_RAM.v_main_tempo_timeout(a6)	; Has main tempo timer expired?
-		bne.s	.skipdelay
 		jsr	TempoWait(pc)
 ; loc_71B9E:
 .skipdelay:
@@ -1799,7 +1797,10 @@ InitMusicPlayback:
 
 ; sub_7260C:
 TempoWait:
-		move.b	SMPS_RAM.v_main_tempo(a6),SMPS_RAM.v_main_tempo_timeout(a6)	; Reset main tempo timeout
+		move.b	SMPS_RAM.v_main_tempo(a6),d0
+		add.b	d0,SMPS_RAM.v_main_tempo_timeout(a6)
+		bcc.s	.skipdelay
+; delay them by 1 tick
 		lea	SMPS_RAM.v_music_track_ram+SMPS_Track.DurationTimeout(a6),a0	; note timeout
 		moveq	#SMPS_Track.len,d0
 		moveq	#SMPS_MUSIC_TRACK_COUNT-1,d1	; 1 DAC + 6 FM + 3 PSG tracks
@@ -1808,7 +1809,7 @@ TempoWait:
 		addq.b	#1,(a0)	; Delay note by 1 frame
 		adda.w	d0,a0	; Advance to next track
 		dbf	d1,.tempoloop
-
+.skipdelay:
 		rts
 ; End of function TempoWait
 
