@@ -564,8 +564,6 @@ ArtTile_GHZ_Big_Flower_2:	equ ArtTile_Level+$390
 ArtTile_GHZ_Spike_Pole:		equ $398
 ArtTile_GHZ_Giant_Ball:		equ $3AA
 ArtTile_GHZ_Purple_Rock:	equ $3D0
-ArtTile_CBZ_Waterfall:		equ ArtTile_Level+$37C
-ArtTile_CBZ_Eiza:		equ ArtTile_Level+$380
 
 
 ; Marble Zone
@@ -610,6 +608,7 @@ ArtTile_SLZ_Fan:		equ $3A0
 ArtTile_SLZ_Pylon:		equ $3CC
 ArtTile_SLZ_Swing:		equ $3DC
 ArtTile_SLZ_Orbinaut:		equ $429
+ArtTile_SLZ_RoadRoller:		equ $440
 ArtTile_SLZ_Fireball:		equ $480
 ArtTile_SLZ_Fireball_Launcher:	equ $4D8
 ArtTile_SLZ_Collapsing_Floor:	equ $4E0
@@ -674,6 +673,15 @@ ArtTile_Points:			equ $797
 ArtTile_Lamppost:		equ $7A0
 ArtTile_Ring:			equ $7B2
 ArtTile_Lives_Counter:		equ $7D4
+
+ArtTile_CBZ_Waterfall:		equ ArtTile_Level+$37C
+ArtTile_CBZ_IZ:			equ ArtTile_Level+$3AA
+ArtTile_CBZ_Eiza:		equ ArtTile_Level+$380
+ArtTile_CBZSpongy:		equ $40B
+ArtTile_CBZNewtron:		equ $456
+ArtTile_CBZBuzz_Bomber:		equ $476
+ArtTile_CBZLen:		equ $497
+ArtTile_CBZChopper:		equ $501
 
 ; Eggman
 ArtTile_Eggman:			equ $400

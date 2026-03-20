@@ -249,7 +249,8 @@ Nem_LzSwitch:	binclude	"artnem/Switch.nem"
 		even
 Nem_SyzSpike1:	binclude	"artnem/SYZ Large Spikeball.nem"
 		even
-
+Nem_RoadRoller:	binclude	"coniobjs/roadroller.bin"
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - SBZ stuff
 ; ---------------------------------------------------------------------------
@@ -498,7 +499,16 @@ Eni_TheIdiotBros:	binclude	"tilemaps/Idiots.eni"
 ; ---------------------------------------------------------------------------
 ; Cold Brew
 ; ---------------------------------------------------------------------------
+Nem_LenBro:	binclude	"coniobjs/lenart.bin"
+		even
+Nem_IZ:	binclude	"coniobjs/izart.bin"
+		even
+Nem_Spongy:	binclude	"coniobjs/spongyart.bin"
+		even
+Nem_ScareObj:	binclude	"coniobjs/scareobj.bin"
+		even
 Nem_EizaNorm:	binclude	"coniobjs/eiza/artnorm.bin"
+		even
 Nem_EizaAtt:	binclude	"coniobjs/eiza/artATT.bin"
 		even
 ; ---------------------------------------------------------------------------

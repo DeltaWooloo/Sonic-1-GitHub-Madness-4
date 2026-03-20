@@ -25,6 +25,7 @@ ptr_PLC_ENDZ:		dc.w PLC_GHZ-ArtLoadCues
 ptr_PLC_ENDZ2:		dc.w PLC_Ending-ArtLoadCues
 ptr_PLC_BREW:		dc.w PLC_BREW-ArtLoadCues
 ptr_PLC_BREW2:		dc.w PLC_BREW2-ArtLoadCues
+ptr_PLC_BREW3:		dc.w PLC_BREW3-ArtLoadCues
 ptr_PLC_WIN:		dc.w PLC_WIN-ArtLoadCues
 ptr_PLC_WIN2:		dc.w PLC_WIN2-ArtLoadCues
 ptr_PLC_Joint:		dc.w PLC_Joint-ArtLoadCues
@@ -153,6 +154,7 @@ PLC_SLZ:	dc.w ((PLC_SLZ2-PLC_SLZ-2)/6)-1
 ;		plcm	Nem_SLZ,       ArtTile_Level                    ; SLZ main patterns
 		plcm	Nem_Bomb,      ArtTile_Bomb                     ; bomb enemy
 		plcm	Nem_Orbinaut,  ArtTile_SLZ_Orbinaut             ; orbinaut enemy
+		plcm	Nem_RoadRoller,  ArtTile_SLZ_RoadRoller             ; road roller fuck you
 		plcm	Nem_MzFire,    ArtTile_SLZ_Fireball             ; fireballs
 		plcm	Nem_SlzBlock,  ArtTile_SLZ_Collapsing_Floor     ; block
 		plcm	Nem_SlzWall,   ArtTile_GHZ_SLZ_Smashable_Wall+4 ; breakable wall
@@ -225,25 +227,28 @@ PLC_SBZ2end:
 ; ---------------------------------------------------------------------------
 PLC_BREW:	dc.w ((PLC_BREW2-PLC_BREW-2)/6)-1
 ;		plcm	Nem_BREW,   ArtTile_Level                  ; GHZ main patterns
-		plcm	Nem_Stalk,     ArtTile_GHZ_Flower_Stalk       ; flower stalk
-		plcm	Nem_PplRock,   ArtTile_GHZ_Purple_Rock        ; purple rock
-		plcm	Nem_Crabmeat,  ArtTile_Crabmeat               ; crabmeat enemy
-		plcm	Nem_Buzz,      ArtTile_Buzz_Bomber            ; buzz bomber enemy
-		plcm	Nem_Chopper,   ArtTile_Chopper                ; chopper enemy
-		plcm	Nem_Newtron,   ArtTile_Newtron                ; newtron enemy
-		plcm	Nem_Motobug,   ArtTile_Moto_Bug               ; motobug enemy
+		plcm	Nem_Swing,     ArtTile_GHZ_MZ_Swing           ; swinging platform
+		plcm	Nem_Bridge,    ArtTile_GHZ_Bridge             ; bridge
+		plcm	Nem_SpikePole, ArtTile_GHZ_Spike_Pole         ; spiked pole
+		plcm	Nem_GhzWall1,  ArtTile_GHZ_SLZ_Smashable_Wall ; breakable wall
+;		plcm	Nem_GhzWall2,  ArtTile_GHZ_Edge_Wall          ; normal wall
+;		plcm	Nem_PplRock,   ArtTile_GHZ_Purple_Rock        ; purple rock
 		plcm	Nem_Spikes,    ArtTile_Spikes                 ; spikes
 		plcm	Nem_HSpring,   ArtTile_Spring_Horizontal      ; horizontal spring
 		plcm	Nem_VSpring,   ArtTile_Spring_Vertical        ; vertical spring
 
 PLC_BREW2:	dc.w ((PLC_BREW2end-PLC_BREW2-2)/6)-1
-		plcm	Nem_Swing,     ArtTile_GHZ_MZ_Swing           ; swinging platform
-		plcm	Nem_Bridge,    ArtTile_GHZ_Bridge             ; bridge
-		plcm	Nem_SpikePole, ArtTile_GHZ_Spike_Pole         ; spiked pole
-		plcm	Nem_Ball,      ArtTile_GHZ_Giant_Ball         ; giant ball
-		plcm	Nem_GhzWall1,  ArtTile_GHZ_SLZ_Smashable_Wall ; breakable wall
-		plcm	Nem_GhzWall2,  ArtTile_GHZ_Edge_Wall          ; normal wall
+		plcm	Nem_IZ,		   ArtTile_CBZ_IZ               ; IZ enemy
+		plcm	Nem_Spongy,	 ArtTile_CBZSpongy               ; Spongy enemy
+		plcm	Nem_Newtron,   ArtTile_CBZNewtron                ; newtron enemy
+		plcm	Nem_Buzz,   ArtTile_CBZBuzz_Bomber                ; Buzz enemy
+		plcm	Nem_LenBro,   ArtTile_CBZLen                ; Len enemy
+		plcm	Nem_Chopper,   ArtTile_CBZChopper                ; chopper enemy
 PLC_BREW2end:
+
+PLC_BREW3:	dc.w ((PLC_BREW3end-PLC_BREW3-2)/6)-1
+PLC_BREW3end:
+
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - WINDOWS
 ; ---------------------------------------------------------------------------
@@ -512,6 +517,7 @@ plcid_ENDZ:		equ (ptr_PLC_ENDZ-ArtLoadCues)/2
 plcid_ENDZ2:		equ (ptr_PLC_ENDZ2-ArtLoadCues)/2	
 plcid_BREW:		equ (ptr_PLC_BREW-ArtLoadCues)/2	
 plcid_BREW2:		equ (ptr_PLC_BREW2-ArtLoadCues)/2	
+plcid_BREW3:		equ (ptr_PLC_BREW3-ArtLoadCues)/2	
 plcid_WIN:		equ (ptr_PLC_WIN-ArtLoadCues)/2		
 plcid_WIN2:		equ (ptr_PLC_WIN-ArtLoadCues)/2		
 plcid_Joint:		equ (ptr_PLC_Joint-ArtLoadCues)/2	
