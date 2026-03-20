@@ -33,9 +33,9 @@ SampleTable:
 	dcSample	TYPE_DPCM,	SpinSnare,	10400			; Snare (Spinball)
 
 	; CUSTOM SAMPLES
-	dcSample	TYPE_DPCM,	ChunkyKick,	16000			; $91
+	dcSample	TYPE_PCM,	ChunkyKick,	16000			; $91
 	dcSample	TYPE_DPCM,	PokeSnare,	16864			; $92
-	dcSample	TYPE_DPCM,	PokeKickCrash,	15300			; $93
+	dcSample	TYPE_PCM,	PokeKickCrash,	15300			; $93
 	dcSample	TYPE_DPCM,	PokeTimpani,	15000			; $94
 	dcSample	TYPE_DPCM,	PokeTimpani,	11297			; $95
 	dcSample	TYPE_DPCM,	PokeTimpani,	7500			; $96
@@ -136,9 +136,9 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Samples from Dax's Sample Set
-	incdac	ChunkyKick, "sound/dac/DAX/ChunkyKick.dpcm"
+	incdac	ChunkyKick, "sound/dac/DAX/ChunkyKick.pcm"
 	incdac	PokeSnare, "sound/dac/DAX/PokeSnare.dpcm"
-	incdac	PokeKickCrash, "sound/dac/DAX/PokeKickCrash.dpcm"
+	incdac	PokeKickCrash, "sound/dac/DAX/PokeKickCrash.pcm"
 	incdac	PokeTimpani, "sound/dac/DAX/PokeTimpani.dpcm"
 
 ; ---------------------------------------------------------------
@@ -153,12 +153,6 @@ SampleTable:
 ; ---------------------------------------------------------------
 ; Amen Breaks -  for use in songs (sampled from cw_amen_classic on rhythmlab) ported by Saneway
 	incdac	Amen_Crash, "sound/dac/amenbreak/crash.dpcm"
-
-; ---------------------------------------------------------------
-; PCM Music Track
-	incdac	BoingBoingA, "sound/dac/Boing Boing/BoingBoingA.dpcm"
-	incdac	BoingBoingB, "sound/dac/Boing Boing/BoingBoingB.dpcm"
-	incdac	BoingBoingC, "sound/dac/Boing Boing/BoingBoingC.dpcm"
 
 ; ---------------------------------------------------------------
 ; SFX Samples
