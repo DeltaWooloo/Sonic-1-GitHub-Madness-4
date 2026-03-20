@@ -17,6 +17,10 @@ Newt_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_Newt,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Newtron,0,0),obGfx(a0)
+		cmpi.b	#id_CBZ,(v_zone).w		; is zone CBZ?
+		bne.s	.NotCBZ	; if not, branch
+		move.w	#make_art_tile(ArtTile_CBZNewtron,0,0),obGfx(a0)
+.NotCBZ:
 		move.b	#4,obRender(a0)
 		move.b	#4,obPriority(a0)
 		move.b	#$14,obActWid(a0)
@@ -55,6 +59,10 @@ Newt_Action:	; Routine 2
 		beq.s	.istype00	; if type is 00, branch
 
 		move.w	#make_art_tile(ArtTile_Newtron,1,0),obGfx(a0)
+		cmpi.b	#id_CBZ,(v_zone).w		; is zone CBZ?
+		bne.s	.NotCBZ	; if not, branch
+		move.w	#make_art_tile(ArtTile_CBZNewtron,1,0),obGfx(a0)
+.NotCBZ:
 		move.b	#6,ob2ndRout(a0) ; goto .type01 next
 		move.b	#4,obAnim(a0)	; use different animation
 

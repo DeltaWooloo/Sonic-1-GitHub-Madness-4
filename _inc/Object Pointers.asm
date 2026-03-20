@@ -36,7 +36,7 @@ ptr_Cannonball:		dc.l Cannonball		; $20
 ptr_HUD:		dc.l HUD
 ptr_BuzzBomber:		dc.l BuzzBomber
 ptr_Missile:		dc.l Missile
-ptr_MissileDissolve:	dc.l MissileDissolve
+ptr_MissileDissolve:	dc.l NullObject
 ptr_Rings:		dc.l Rings
 ptr_Monitor:		dc.l Monitor
 ptr_ExplosionItem:	dc.l ExplosionItem

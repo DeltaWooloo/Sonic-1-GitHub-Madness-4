@@ -44,6 +44,10 @@ Msl_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_Missile,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Buzz_Bomber,1,0),obGfx(a0)
+		cmpi.b	#id_CBZ,(v_zone).w		; is zone CBZ?
+		bne.s	.NotCBZ	; if not, branch
+		move.w	#make_art_tile(ArtTile_CBZBuzz_Bomber,1,0),obGfx(a0)
+.NotCBZ:
 		move.b	#4,obRender(a0)
 		move.b	#3,obPriority(a0)
 		move.b	#8,obActWid(a0)
@@ -127,9 +131,9 @@ Msl_FromBuzz:	; Routine 4
 ; ===========================================================================
 
 .explode:
-		_move.b	#id_MissileDissolve,obID(a0) ; change object to an explosion (Obj24)
-		move.b	#0,obRoutine(a0)
-		bra.w	MissileDissolve
+;		_move.b	#id_MissileDissolve,obID(a0) ; change object to an explosion (Obj24)
+;		move.b	#0,obRoutine(a0)
+;		bra.w	MissileDissolve
 ; ===========================================================================
 
 Msl_Delete:	; Routine 6

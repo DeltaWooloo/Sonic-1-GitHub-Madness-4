@@ -477,7 +477,11 @@ Obj09_GetCont:
 		blo.s	Obj09_NoCont
 		bset	#0,(v_lifecount).w
 		bne.s	Obj09_NoCont
+		cmpi.b 	#9,(v_continues)
+		bge.s 	.noadd
 		addq.b	#1,(v_continues).w ; add 1 to number of continues
+
+.noadd:
 		move.w	#sfx_Continue,d0
 		jsr	(QueueSound1).l	; play extra continue sound
 		pcm 	dOnTheBall

@@ -23,6 +23,10 @@ Buzz_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_Buzz,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Buzz_Bomber,0,0),obGfx(a0)
+		cmpi.b	#id_CBZ,(v_zone).w		; is zone CBZ?
+		bne.s	.NotCBZ	; if not, branch
+		move.w	#make_art_tile(ArtTile_CBZBuzz_Bomber,0,0),obGfx(a0)
+.NotCBZ:
 		move.b	#4,obRender(a0)
 		move.b	#3,obPriority(a0)
 		move.b	#8,obColType(a0)
