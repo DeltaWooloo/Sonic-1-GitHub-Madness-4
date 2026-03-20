@@ -1,7 +1,7 @@
 {
     "Flex": 2,
     "name": "Sonic 1",
-    "node": "2ca45948-ecdc-4372-85ce-0c08e021e8e9",
+    "node": "81e2ebfb-b25f-46f8-8425-cb76f0ea9b69",
     "objects": [
         {
             "format": "Sonic 1.js",
@@ -22,7 +22,7 @@
                 "offset": 0
             },
             "mappings": {
-                "path": "_maps\\Internet Explorer.asm",
+                "path": "_maps\\Internet Explorer.bin",
                 "label": ""
             },
             "dplcs": {
@@ -101,6 +101,59 @@
                 "label": ""
             },
             "uuid": "a44c6bca-b601-438f-a09d-8a749c725a07"
+        },
+        {
+            "name": "DVZ",
+            "children": [
+                {
+                    "format": "Sonic 1.js",
+                    "name": "Needlemouse",
+                    "palettes": [
+                        {
+                            "path": "char_assets\\Maniac Pal.bin",
+                            "length": 1
+                        }
+                    ],
+                    "art": {
+                        "path": "LiquidBosses\\Needlemouse\\NeedleArt.bin",
+                        "compression": "Uncompressed",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "LiquidBosses\\Needlemouse\\NeedleMappings.asm",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "uuid": "4381e2eb-fbb2-4f26-b804-25cb76f0ea9b"
+                },
+                {
+                    "format": "Sonic 1.js",
+                    "name": "Needlemouse Hammer",
+                    "palettes": [],
+                    "art": {
+                        "path": "LiquidBosses\\Needlemouse\\NeedleArt.bin",
+                        "compression": "Uncompressed",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "LiquidBosses\\Needlemouse\\NeedleHammerMappings.asm",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": false,
+                        "path": "",
+                        "label": ""
+                    },
+                    "uuid": "81e2ebfb-b25f-46f8-8425-cb76f0ea9b69"
+                }
+            ],
+            "isDirectory": true,
+            "expanded": true,
+            "uuid": "96c09600-0c75-4891-bd2c-afcdc2b13515"
         },
         {
             "name": "Common",
@@ -2555,7 +2608,7 @@
                 }
             ],
             "isDirectory": true,
-            "expanded": true,
+            "expanded": false,
             "uuid": "a1e8ddd8-1c53-4e89-aa36-5cd177686c63"
         },
         {
