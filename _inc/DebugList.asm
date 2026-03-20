@@ -213,7 +213,7 @@ dbug:	macro map,object,subtype,frame,vram
 		dbug	Map_IZ,	id_Crabmeat,	0,	0,	make_art_tile(ArtTile_CBZ_IZ,0,0)
 		dbug	Map_IZ,	id_Crabmeat,	1,	0,	make_art_tile(ArtTile_CBZ_IZ,0,0)
 		dbug	Map_Buzz,	id_BuzzBomber,	0,	0,	make_art_tile(ArtTile_CBZBuzz_Bomber,0,0)
-		dbug	Map_Chop,	id_Chopper,	0,	0,	make_art_tile(ArtTile_CBZChopper,0,0)
+		dbug	Map_ChopCBZ,	id_Chopper,	0,	0,	make_art_tile(ArtTile_CBZChopper,0,0)
 		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
 		dbug	Map_Plat_GHZ,	id_BasicPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
 ;		dbug	Map_PRock,	id_PurpleRock,	0,	0,	make_art_tile(ArtTile_GHZ_Purple_Rock,3,0)

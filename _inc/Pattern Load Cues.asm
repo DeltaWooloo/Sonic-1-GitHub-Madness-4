@@ -243,7 +243,7 @@ PLC_BREW2:	dc.w ((PLC_BREW2end-PLC_BREW2-2)/6)-1
 		plcm	Nem_Newtron,   ArtTile_CBZNewtron                ; newtron enemy
 		plcm	Nem_Buzz,   ArtTile_CBZBuzz_Bomber                ; Buzz enemy
 		plcm	Nem_LenBro,   ArtTile_CBZLen                ; Len enemy
-		plcm	Nem_Chopper,   ArtTile_CBZChopper                ; chopper enemy
+		plcm	Nem_ChopperCBZ,   ArtTile_CBZChopper                ; chopper enemy
 PLC_BREW2end:
 
 PLC_BREW3:	dc.w ((PLC_BREW3end-PLC_BREW3-2)/6)-1
