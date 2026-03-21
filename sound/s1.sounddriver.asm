@@ -780,20 +780,13 @@ PlaySoundID:
 		cmpi.b	#sfx__First,d7		; Is this after music but before sfx? (redundant check)
 		blo.w	.locret			; Return if yes
 		cmpi.b	#sfx__Last,d7		; Is this sfx ($A0-$CF)?
-		bls.w	Sound_PlaySFX		; Branch if yes
+		blo.w	Sound_PlaySFX		; Branch if yes
 		cmpi.b	#spec__First,d7		; Is this after sfx but before special sfx? (redundant check)
 		blo.w	.locret			; Return if yes
-	if FixBugs
 		cmpi.b	#spec__Last,d7		; Is this special sfx ($D0-$D0)?
-		bls.w	Sound_PlaySpecial	; Branch if yes
+		blo.w	Sound_PlaySpecial	; Branch if yes
 		cmpi.b	#flg__First,d7		; Is this after special sfx but before $E0?
 		blo.w	.locret			; Return if yes
-	else
-		; DANGER! Special SFXes end at $D0, yet this checks until $DF; attempting to
-		; play sounds $D1-$DF will cause a crash!
-		cmpi.b	#spec__Last+$10,d7	; Is this special sfx ($D0-$DF)?
-		blo.w	Sound_PlaySpecial	; Branch if yes
-	endif
 		cmpi.b	#flg__Last,d7		; Is this $E0-$E4?
 		bls.s	Sound_E0toE4		; Branch if yes
 ; locret_71F8C:
