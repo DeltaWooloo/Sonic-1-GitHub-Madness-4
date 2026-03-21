@@ -17,14 +17,15 @@ Moto_Index:	dc.w Moto_Main-Moto_Index
 Moto_Main:	; Routine 0
 		move.l	#Map_Moto,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Moto_Bug,0,0),obGfx(a0)
+		move.b	#4,obRender(a0)
+		move.b	#4,obPriority(a0)
+		move.b	#$14,obActWid(a0)
 		cmpi.b	#id_CBZ,(v_zone).w		; is zone CBZ?
 		bne.s	.NotCBZ	; if not, branch
 		move.l	#Map_MotoCBZ,obMap(a0)
 		move.w	#make_art_tile(ArtTile_CBZMoto_Bug,0,0),obGfx(a0)
+		move.b	#$E,obActWid(a0)
 .NotCBZ:
-		move.b	#4,obRender(a0)
-		move.b	#4,obPriority(a0)
-		move.b	#$14,obActWid(a0)
 		tst.b	obAnim(a0)	; is object a smoke trail?
 		bne.s	.smoke		; if yes, branch
 		move.b	#$E,obHeight(a0)
