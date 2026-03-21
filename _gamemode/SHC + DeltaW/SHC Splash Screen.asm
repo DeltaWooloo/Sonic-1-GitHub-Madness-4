@@ -39,12 +39,12 @@ GM_SHCSplash:
 		move.b	d0,(f_wtr_state).w
 		move.b	d0,(f_water).w
 
+		locVRAM 0
+		lea	(SHC_Art).l,a0
+		jsr 	NemDec.w
 
-		lea	(SHC_Art).l,a1
-		moveq	#tiles_to_bytes(0),d2
-
-		lea	(Art_WBomb).l,a1  
-		move.w	#tiles_to_bytes($685),d2 
+		locVRAM $685*$20
+		lea	(Art_WBomb).l,a0
 		jsr 	NemDec.w
 
 		lea	(SHC_Map_Comp).l,a0
