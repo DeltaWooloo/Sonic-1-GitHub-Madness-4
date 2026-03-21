@@ -11,7 +11,7 @@ HUD_Update:
 		beq.s	.chkrings	; if not, branch
 
 		clr.b	(f_scorecount).w
-		locVRAM	(ArtTile_HUD+$1A)*tile_size,d0	; set VRAM address
+		locVRAM	(ArtTile_HUD+20)*tile_size,d0	; set VRAM address
 		move.l	(v_score).w,d1	; load score
 		bsr.w	Hud_Score
 
@@ -23,7 +23,7 @@ HUD_Update:
 
 .notzero:
 		clr.b	(f_ringcount).w
-		locVRAM	(ArtTile_HUD+$30)*tile_size,d0	; set VRAM address
+		locVRAM	(ArtTile_HUD+31)*tile_size,d0	; set VRAM address
 		moveq	#0,d1
 		move.w	(v_rings).w,d1	; load number of rings
 		bsr.w	Hud_Rings
@@ -51,11 +51,11 @@ HUD_Update:
 		move.b	#9,(a1)		; keep as 9
 
 .updatetime:
-		locVRAM	(ArtTile_HUD+$28)*tile_size,d0
+		locVRAM	(ArtTile_HUD+27)*tile_size,d0
 		moveq	#0,d1
 		move.b	(v_timemin).w,d1 ; load minutes
 		bsr.w	Hud_Mins
-		locVRAM	(ArtTile_HUD+$2C)*tile_size,d0
+		locVRAM	(ArtTile_HUD+29)*tile_size,d0
 		moveq	#0,d1
 		move.b	(v_timesec).w,d1 ; load seconds
 		bsr.w	Hud_Secs
@@ -139,7 +139,7 @@ HudDebug:
 
 
 Hud_LoadZero:
-		locVRAM	(ArtTile_HUD+$30)*tile_size
+		locVRAM	(ArtTile_HUD+31)*tile_size
 		lea	Hud_TilesZero(pc),a2
 		move.w	#2,d2
 		bra.s	loc_1C83E
@@ -155,15 +155,15 @@ Hud_LoadZero:
 Hud_Base:
 		lea	(vdp_data_port).l,a6
 		bsr.w	Hud_Lives
-		locVRAM	(ArtTile_HUD+$18)*tile_size
+		locVRAM	(ArtTile_HUD+20)*tile_size
 		lea	Hud_TilesBase(pc),a2
-		move.w	#$E,d2
+		move.w	#15-1,d2
 
 loc_1C83E:
-		lea	Art_Hud(pc),a1
+		lea	Art_Text,a1
 
 loc_1C842:
-		move.w	#$F,d1
+		move.w	#8-1,d1
 		move.b	(a2)+,d0
 		bmi.s	loc_1C85E
 		ext.w	d0
@@ -188,8 +188,9 @@ loc_1C85E:
 ; End of function Hud_Base
 
 ; ===========================================================================
-Hud_TilesBase:	dc.b $16, $FF, $FF, $FF, $FF, $FF, $FF,	0, 0, $14, 0, 0
+Hud_TilesBase:	dc.b $FF, $FF, $FF, $FF, $FF, $FF, 0, 0, $C, 0, 0
 Hud_TilesZero:	dc.b $FF, $FF, 0, 0
+		even
 ; ---------------------------------------------------------------------------
 ; Subroutine to load debug mode numbers patterns
 ; ---------------------------------------------------------------------------
@@ -198,7 +199,7 @@ Hud_TilesZero:	dc.b $FF, $FF, 0, 0
 
 
 HudDb_XY:
-		locVRAM	(ArtTile_HUD+$18)*tile_size		; set VRAM address
+		locVRAM	(ArtTile_HUD+20)*tile_size		; set VRAM address
 		move.w	(v_screenposx).w,d1 ; load camera x-position
 		swap	d1
 		move.w	(v_player+obX).w,d1 ; load Sonic's x-position
@@ -269,7 +270,7 @@ Hud_Score:
 
 Hud_LoadArt:
 		moveq	#0,d4
-		lea	Art_Hud(pc),a1
+		lea	(Art_Text).l,a1
 
 Hud_ScoreLoop:
 		moveq	#0,d2
@@ -291,7 +292,7 @@ loc_1C8F4:
 loc_1C8FE:
 		tst.w	d4
 		beq.s	loc_1C92C
-		lsl.w	#6,d2
+		lsl.w	#5,d2
 		move.l	d0,4(a6)
 		lea	(a1,d2.w),a3
 		move.l	(a3)+,(a6)
@@ -302,17 +303,9 @@ loc_1C8FE:
 		move.l	(a3)+,(a6)
 		move.l	(a3)+,(a6)
 		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
 
 loc_1C92C:
-		addi.l	#$400000,d0
+		addi.l	#$200000,d0
 		dbf	d6,Hud_ScoreLoop
 
 		rts
@@ -332,7 +325,7 @@ ContScrCounter:
 		lea	(Hud_10).l,a2
 		moveq	#2-1,d6
 		moveq	#0,d4
-		lea	Art_Hud(pc),a1 ; load numbers patterns
+		lea	Art_Text,a1 ; load numbers patterns
 
 ContScr_Loop:
 		moveq	#0,d2
@@ -347,16 +340,8 @@ loc_1C95A:
 
 loc_1C962:
 		add.l	d3,d1
-		lsl.w	#6,d2
+		lsl.w	#5,d2
 		lea	(a1,d2.w),a3
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
 		move.l	(a3)+,(a6)
 		move.l	(a3)+,(a6)
 		move.l	(a3)+,(a6)
@@ -403,7 +388,7 @@ Hud_Secs:
 
 loc_1C9BA:
 		moveq	#0,d4
-		lea	Art_Hud(pc),a1
+		lea	Art_Text,a1
 
 Hud_TimeLoop:
 		moveq	#0,d2
@@ -423,7 +408,7 @@ loc_1C9CC:
 		move.w	#1,d4
 
 loc_1C9D6:
-		lsl.w	#6,d2
+		lsl.w	#5,d2
 		move.l	d0,4(a6)
 		lea	(a1,d2.w),a3
 		move.l	(a3)+,(a6)
@@ -434,15 +419,7 @@ loc_1C9D6:
 		move.l	(a3)+,(a6)
 		move.l	(a3)+,(a6)
 		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		addi.l	#$400000,d0
+		addi.l	#$200000,d0
 		dbf	d6,Hud_TimeLoop
 
 		rts
