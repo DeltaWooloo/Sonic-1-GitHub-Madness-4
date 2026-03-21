@@ -16,48 +16,6 @@ ChaosFarm_Header:
 	smpsHeaderPSG	ChaosFarm_PSG1,	$0C, $00, $00, uptone_01
 	smpsHeaderPSG	ChaosFarm_PSG2,	$0C, $00, $00, uptone_02
 
-ChaosFarm_Voices:
-;	FM Voice 00 -> 00: 16_chaos_emerald_41
-	smpsVcAlgorithm		$04
-	smpsVcFeedback		$00
-	smpsVcDetune		$00, $05, $07, $03
-	smpsVcCoarseFreq	$06, $04, $02, $05
-	smpsVcRateScale		$00, $00, $00, $00
-	smpsVcAttackRate	$1F, $1F, $1F, $1F
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$0D, $07, $0A, $07
-	smpsVcDecayRate2	$0B, $00, $0B, $00
-	smpsVcDecayLevel	$00, $01, $00, $01
-	smpsVcReleaseRate	$0F, $0F, $0F, $0F
-	smpsVcTotalLevel	$00, $1D, $14, $23
-
-;	FM Voice 01 -> 01: 04_spring_yard_zone_42
-	smpsVcAlgorithm		$04
-	smpsVcFeedback		$07
-	smpsVcDetune		$03, $05, $05, $03
-	smpsVcCoarseFreq	$00, $00, $02, $01
-	smpsVcRateScale		$01, $01, $01, $01
-	smpsVcAttackRate	$13, $12, $13, $12
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$00, $08, $00, $08
-	smpsVcDecayRate2	$00, $04, $00, $04
-	smpsVcDecayLevel	$00, $01, $00, $01
-	smpsVcReleaseRate	$07, $00, $07, $00
-	smpsVcTotalLevel	$00, $16, $00, $1A
-
-;	PSG Voice 02 -> uptone_01
-;	macros:
-;		vol: 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15
-
-;	PSG Voice 03 -> uptone_02
-;	macros:
-;		vol: 15 12 11 10 9 8 7 6 6 5 4 4 3 3 2 2 2 2 1 1 1 1 1 1 0 0 0 0 0 0 0 0
-
-	; Loop Pattern :  00
-	; End Pattern :  02
-	; End Place :  40
-
-
 ChaosFarm_FM1:
 	smpsSetvoice	$00
 	dc.b nA3, $06, nCs4, nE4, $04, nAb4, $08, nA4, nD5, $06, nCs5, nB4, $04, nCs5, $10
@@ -112,3 +70,34 @@ ChaosFarm_PSG2_Loop:
 	smpsPSGAlterVol	$04
 	smpsLoop	0,4,ChaosFarm_PSG2_Loop
 	smpsStop
+
+ChaosFarm_Voices:
+;	FM Voice 00 -> 00: 16_chaos_emerald_41
+	smpsVcAlgorithm		$04
+	smpsVcFeedback		$00
+	smpsVcDetune		$00, $05, $07, $03
+	smpsVcCoarseFreq	$06, $04, $02, $05
+	smpsVcRateScale		$00, $00, $00, $00
+	smpsVcAttackRate	$1F, $1F, $1F, $1F
+	smpsVcAmpMod		$00, $00, $00, $00
+	smpsVcDecayRate1	$0D, $07, $0A, $07
+	smpsVcDecayRate2	$0B, $00, $0B, $00
+	smpsVcDecayLevel	$00, $01, $00, $01
+	smpsVcReleaseRate	$0F, $0F, $0F, $0F
+	smpsVcTotalLevel	$00, $1D, $14, $23
+
+;	FM Voice 01 -> 01: 04_spring_yard_zone_42
+	smpsVcAlgorithm		$04
+	smpsVcFeedback		$07
+	smpsVcDetune		$03, $05, $05, $03
+	smpsVcCoarseFreq	$00, $00, $02, $01
+	smpsVcRateScale		$01, $01, $01, $01
+	smpsVcAttackRate	$13, $12, $13, $12
+	smpsVcAmpMod		$00, $00, $00, $00
+	smpsVcDecayRate1	$00, $08, $00, $08
+	smpsVcDecayRate2	$00, $04, $00, $04
+	smpsVcDecayLevel	$00, $01, $00, $01
+	smpsVcReleaseRate	$07, $00, $07, $00
+	smpsVcTotalLevel	$00, $16, $00, $1A
+
+	smpsFooterEndSong	"TG2000Tracks/ChaosFarm.asm"
