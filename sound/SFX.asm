@@ -69,6 +69,8 @@ ptr_sndD5:	dc.l SoundD5
 ptr_sndD6:	dc.l SoundD6
 ptr_sndD7:	dc.l SoundD7
 ptr_sndD8:	dc.l SoundD8
+ptr_sndD9:	dc.l SoundD9
+
 
 ; ---------------------------------------------------------------------------
 ; Sound effect data
@@ -186,5 +188,7 @@ SoundD6:	include "sfx/Snd - Fall.asm"
 SoundD7:	include "sfx/Snd - Explosion Complete.asm"
 		even
 SoundD8:	include "sfx/VehiRev.asm"
+		even
+SoundD9:	include "sfx/atgameybeepy.asm"
 		even
 	END

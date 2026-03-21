@@ -256,6 +256,8 @@ DebuggerMenu_Controls:
 
 .setsel:
 		move.w	d0,(v_levselitem).w
+		move.b	#sfx_beepy,d0;atgames
+		jsr	PlaySound_Special
 		bra.w	DebuggerMenu_Redraw
 
 .noinput:
