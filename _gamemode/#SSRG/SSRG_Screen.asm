@@ -760,7 +760,7 @@ Quad_WaitSonic:
 	move.l	#SSRG_Obj_Title,obj(a1)
 
 	; Play emerald collecting sound
-	moveq	#bgm_ChaosEmerald,d0
+	moveq	#bgm_MayoDed,d0
 	jsr	QueueSound2
 
 ; -----------------------------
