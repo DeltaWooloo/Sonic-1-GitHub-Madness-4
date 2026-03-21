@@ -214,6 +214,8 @@ dbug:	macro map,object,subtype,frame,vram
 ;			mappings	object		subtype	frame	VRAM setting
 		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
 		dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		dbug	Map_IZ,	id_Crabmeat,	0,	0,	make_art_tile(ArtTile_CBZ_IZ,1,0)
+		dbug	Map_IZ,	id_Crabmeat,	1,	0,	make_art_tile(ArtTile_CBZ_IZ,1,0)
 		dbug	Map_IZ,	id_Crabmeat,	0,	0,	make_art_tile(ArtTile_CBZ_IZ,0,0)
 		dbug	Map_IZ,	id_Crabmeat,	1,	0,	make_art_tile(ArtTile_CBZ_IZ,0,0)
 		dbug	Map_BuzzCBZ,	id_BuzzBomber,	0,	0,	make_art_tile(ArtTile_CBZBuzz_Bomber,0,0)
@@ -223,6 +225,8 @@ dbug:	macro map,object,subtype,frame,vram
 ;		dbug	Map_PRock,	id_PurpleRock,	0,	0,	make_art_tile(ArtTile_GHZ_Purple_Rock,3,0)
 		dbug	Map_MotoCBZ,	id_MotoBug,	0,	0,	make_art_tile(ArtTile_CBZMoto_Bug,0,0)
 		dbug	Map_Len,	id_Burrobot,	0,	0,	make_art_tile(ArtTile_CBZLen,0,0)
+		dbug	Map_Len,	id_Burrobot,	1,	0,	make_art_tile(ArtTile_CBZLen,1,0)
+		dbug	Map_Len,	id_Burrobot,	2,	0,	make_art_tile(ArtTile_CBZLen,3,0)
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
 		dbug	Map_Newt,	id_Newtron,	0,	0,	make_art_tile(ArtTile_CBZNewtron,1,0)
 		dbug	Map_Spongy,	id_Newtron,	0,	0,	make_art_tile(ArtTile_CBZSpongy,0,0)

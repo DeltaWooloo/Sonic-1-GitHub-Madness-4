@@ -20,6 +20,13 @@ Burro_Main:	; Routine 0
 		move.b	#8,obWidth(a0)
 		move.l	#Map_Len,obMap(a0)
 		move.w	#make_art_tile(ArtTile_CBZLen,0,0),obGfx(a0)
+		tst.b	obSubtype(a0)
+		beq.s	.notfuckedupbro
+		move.w	#make_art_tile(ArtTile_CBZLen,1,0),obGfx(a0)
+		cmpi.b	#2,obSubtype(a0)
+		bne.s	.notfuckedupbro
+		move.w	#make_art_tile(ArtTile_CBZLen,3,0),obGfx(a0)
+.notfuckedupbro:
 		ori.b	#4,obRender(a0)
 		move.b	#4,obPriority(a0)
 		move.b	#5,obColType(a0)
