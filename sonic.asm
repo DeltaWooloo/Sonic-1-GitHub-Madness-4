@@ -2042,6 +2042,7 @@ Pal_FelixDecision:	bincludeEndMarker	"ContinueScreen/Graphics/Tile/Decision/Pale
 Pal_FelixGameOver:	bincludeEndMarker	"ContinueScreen/Graphics/Tile/GameOver/Palette.bin"
 Pal_Joint:		bincludeEndMarker	"palette/Joint Zone.bin"
 Pal_DVZ:		bincludeEndMarker	"palette/DoleVille Zone.bin"
+Pal_HARDWARE:		bincludeEndMarker	"palette/Hardware Store.bin"
 Pal_NGZ:		bincludeEndMarker	"palette/Nogales Zone.bin"
 Pal_SplashPal:	bincludeEndMarker	"eurosega/pal.bin"
 Pal_ColdBrew:	bincludeEndMarker	"conimodes/cold brew/palette.bin"

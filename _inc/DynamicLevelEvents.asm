@@ -63,6 +63,7 @@ DLE_Index:	dc.w 	DLE_GHZ-DLE_Index
 		dc.w	DLE_WIN-DLE_Index
 		dc.w	DLE_Joint-DLE_Index
 		dc.w	DLE_DVZ-DLE_Index
+		dc.w	DLE_NGZ-DLE_Index
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Green Hill Zone dynamic level events
@@ -145,7 +146,7 @@ DLE_GHZ3boss:
 loc_6EB0:
 		cmpi.w	#boss_ghz_x,(v_screenposx).w
 		blo.s	locret_6EE8
-		bsr.w	FindFreeObj
+		jsr	FindFreeObj
 		bne.s	loc_6ED0
 		_move.b	#id_BossGreenHill,obID(a1) ; load GHZ boss object
 		move.w	#boss_ghz_x+$100,obX(a1)
@@ -194,7 +195,7 @@ DLE_LZ3:
 		bne.s	locret_6F64
 		cmpi.w	#boss_lz_x-$140,(v_screenposx).w
 		blo.s	locret_6F62
-		bsr.w	FindFreeObj
+		jsr	FindFreeObj
 		addq.b	#2,(v_dle_routine).w
 		moveq	#plcid_Boss,d0
 		bra.w	AddPLC		; load boss patterns
@@ -364,7 +365,7 @@ DLE_MZ3boss:
 		move.w	#boss_mz_y,(v_limitbtm1).w
 		cmpi.w	#boss_mz_x-$10,(v_screenposx).w
 		blo.s	locret_70E8
-		bsr.w	FindFreeObj
+		jsr	FindFreeObj
 		bne.s	loc_70D0
 		_move.b	#id_BossMarble,obID(a1) ; load MZ boss object
 		move.w	#boss_mz_x+$1F0,obX(a1)
@@ -403,7 +404,7 @@ DLE_MZ4chkboss:
 		move.w	#$140,(v_limitbtm1).w
 		cmpi.w	#Knight_X_Spawn,(v_screenposx).w
 		blo.s	locret_70E8
-		bsr.w	FindFreeObj
+		jsr	FindFreeObj
 		bne.s	.spawnfail
 		_move.b	#id_Roaring_Knight,obID(a1) ; load MZ boss object
 		move.w	#Knight_X_Spawn+$180,obX(a1)
@@ -411,7 +412,7 @@ DLE_MZ4chkboss:
 
 .spawnfail:
 		move.w	#bgm_Boss,d0
-		bsr.w	QueueSound1	; play boss music
+		jsr	QueueSound1	; play boss music
 		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w	
 
@@ -464,7 +465,7 @@ locret_7130:
 DLE_SLZ3boss:
 		cmpi.w	#boss_slz_x,(v_screenposx).w
 		blo.s	locret_715C
-		bsr.w	FindFreeObj
+		jsr	FindFreeObj
 		bne.s	loc_7144
 		move.b	#id_BossStarLight,obID(a1) ; load SLZ boss object
 
@@ -533,7 +534,7 @@ off_71B2:	dc.w DLE_SYZ3main-off_71B2
 DLE_SYZ3main:
 		cmpi.w	#boss_syz_x-$140,(v_screenposx).w
 		blo.s	locret_71CE
-		bsr.w	FindFreeObj
+		jsr	FindFreeObj
 		bne.s	locret_71CE
 		move.b	#id_BossBlock,obID(a1) ; load blocks that boss picks up
 		addq.b	#2,(v_dle_routine).w
@@ -546,7 +547,7 @@ DLE_SYZ3boss:
 		cmpi.w	#boss_syz_x,(v_screenposx).w
 		blo.s	locret_7200
 		move.w	#boss_syz_y,(v_limitbtm1).w
-		bsr.w	FindFreeObj
+		jsr	FindFreeObj
 		bne.s	loc_71EC
 		move.b	#id_BossSpringYard,obID(a1) ; load SYZ boss object
 		addq.b	#2,(v_dle_routine).w
@@ -624,7 +625,7 @@ locret_727A:
 DLE_SBZ2boss:
 		cmpi.w	#boss_sbz2_x-$1A0,(v_screenposx).w
 		blo.s	locret_7298
-		bsr.w	FindFreeObj
+		jsr	FindFreeObj
 		bne.s	locret_7298
 		move.b	#id_FalseFloor,obID(a1) ; load collapsing block object
 		addq.b	#2,(v_dle_routine).w
@@ -639,7 +640,7 @@ locret_7298:
 DLE_SBZ2boss2:
 		cmpi.w	#boss_sbz2_x-$F0,(v_screenposx).w
 		blo.s	loc_72B6
-		bsr.w	FindFreeObj
+		jsr	FindFreeObj
 		bne.s	loc_72B0
 		move.b	#id_ScrapEggman,obID(a1) ; load SBZ2 Eggman object
 		addq.b	#2,(v_dle_routine).w
@@ -678,7 +679,7 @@ DLE_FZmain:
 		blo.s	loc_72F4
 		addq.b	#2,(v_dle_routine).w
 		moveq	#plcid_FZBoss,d0
-		bsr.w	AddPLC		; load FZ boss patterns
+		jsr	AddPLC		; load FZ boss patterns
 
 loc_72F4:
 		bra.s	loc_72C2
@@ -687,7 +688,7 @@ loc_72F4:
 DLE_FZboss:
 		cmpi.w	#boss_fz_x-$150,(v_screenposx).w
 		blo.s	loc_7312
-		bsr.w	FindFreeObj
+		jsr	FindFreeObj
 		bne.s	loc_7312
 		move.b	#id_BossFinal,obID(a1) ; load FZ boss object
 		addq.b	#2,(v_dle_routine).w
@@ -811,7 +812,7 @@ DLE_BREW3boss:
 loc_6EB0BR:
 		cmpi.w	#boss_ghz_x,(v_screenposx).w
 		blo.s	locret_6EE8BR
-		bsr.w	FindFreeObj
+		jsr	FindFreeObj
 		bne.s	loc_6ED0BR
 		_move.b	#id_BossGreenHill,obID(a1) ; load BREW boss object
 		move.w	#boss_ghz_x+$100,obX(a1)

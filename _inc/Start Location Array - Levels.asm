@@ -55,7 +55,7 @@
 		dc.w	$80,$A8
 
 		binclude	"startpos/DVZ1.bin"
-		binclude	"startpos/DVZ1.bin"
+		binclude	"startpos/HSZ.bin"
 		binclude	"startpos/DVZ1.bin"
 		dc.w	$80,$A8
 		binclude	"startpos/ngz1.bin"
