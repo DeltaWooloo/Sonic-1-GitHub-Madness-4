@@ -16,7 +16,15 @@ SHC_gamePlnA	equ ($C000>>10)			; default address of the plane A nametable used i
 
 tiles_to_bytes function addr,((addr&$7FF)<<5)
 
-; ---------------------------------------------------------------------------
+SHCwriteVRAM:	macro source,length,destination
+		lea	(vdp_control_port).l,a5
+		move.l	#$94000000+(((length>>1)&$FF00)<<8)+$9300+((length>>1)&$FF),(a5)
+		move.l	#$96000000+(((source>>1)&$FF00)<<8)+$9500+((source>>1)&$FF),(a5)
+		move.w	#$9700+((((source>>1)&$FF0000)>>16)&$7F),(a5)
+		move.w	#$4000+(destination&$3FFF),(a5)
+		move.w	#$80+((destination&$C000)>>14),(v_vdp_buffer2).w
+		move.w	(v_vdp_buffer2).w,(a5)
+		endm; ---------------------------------------------------------------------------
 
 GM_SHCSplash:
 		move.b	#bgm_Stop,d0
@@ -112,7 +120,7 @@ SHC_MainLoop:
 		
 		; Save VDP registers
 		movem.l	d0-d7/a0-a6,-(sp)		; save all registers
-		writeVRAM	v_spritetablebuffer,$280,vram_sprites
+		SHCwriteVRAM	v_spritetablebuffer,$280,vram_sprites
 		jsr	(ExecuteObjects).l
 		jsr	(BuildSprites).l
 	

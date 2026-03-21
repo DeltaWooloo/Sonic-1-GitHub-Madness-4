@@ -71,7 +71,7 @@ Obj_WBomb_Stand:	; Routine 6
 		bls.s	.xOK
 		subi.w	#320,d1				; wrap around
 .xOK:
-		addi.b	#$80,d1
+;		addi.b	#$80,d1
 		move.w	d1,obX(a1)
 
 		jsr	(RandomNumber).w
@@ -80,7 +80,7 @@ Obj_WBomb_Stand:	; Routine 6
 		bls.s	.yOK
 		subi.w	#224,d0				; wrap around
 .yOK:
-		addi.b	#$80,d0
+;		addi.b	#$80,d0
 		move.w	d0,obY(a1)
 
 .noExplosion:
