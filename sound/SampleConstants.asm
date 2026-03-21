@@ -30,6 +30,9 @@ dElectricHighTom		ds.b 1
 dElectricMidTom			ds.b 1
 dElectricLowTom			ds.b 1
 dElectricFloorTom		ds.b 1
+dHiTimpaniS3			ds.b 1
+dMidTimpaniS3			ds.b 1
+dLowTimpaniS3			ds.b 1
 
 ; Sonic Spinball
 dSpinKick			ds.b 1

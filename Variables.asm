@@ -464,7 +464,9 @@ v_characterid:		ds.b	1
 v_zonemusic:		ds.b	1
 			ds.b	7		; unused
 MegaCDMode:		ds.b 	1
-			ds.b 	$C
+			ds.b 	$A
+v_quoteid:		ds.b 	1
+			ds.b 	1		; even
 v_random:		ds.l	1
 f_levselcheat:		ds.b	1		; level select cheat flag
 f_slomocheat:		ds.b	1		; slow motion & frame advance cheat flag

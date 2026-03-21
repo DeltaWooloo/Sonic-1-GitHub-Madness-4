@@ -299,6 +299,12 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_PuyoDrown
 	nextenum bgm_Win2K
 	nextenum bgm_EuroSega
+	nextenum bgm_DeltaWSplash
+	nextenum bgm_S3Continue
+	nextenum bgm_BlueBalls
+	nextenum bgm_ChaosEmerald
+	nextenum bgm_LimitedClear
+	nextenum bgm_Moonwalker
 
 	; Advertisement BGM
 	nextenum bgm_PuyoReject
@@ -355,7 +361,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Ding
 	nextenum bgm_SadMac
 	nextenum bgm_Folgers
-	nextenum bgm_ChaosEmerald
 	; Keep this last
 	nextenum bgm__Last
 

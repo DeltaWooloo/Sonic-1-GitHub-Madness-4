@@ -28,6 +28,9 @@ SampleTable:
 	dcSample	TYPE_DPCM,	ElectricTom,	15803			; $8E
 	dcSample	TYPE_DPCM,	ElectricTom,	13482			; $8F
 	dcSample	TYPE_DPCM,	ElectricTom,	11274			; $90
+	dcSample	TYPE_DPCM,	TimpaniS3,	12852			; $A9	- Hi-Timpani (S3)
+	dcSample	TYPE_DPCM,	TimpaniS3,	9358			; $AA	- Low-Timpani (S3)
+	dcSample	TYPE_DPCM,	TimpaniS3,	8492			; $AB	- Mid-Timpani (S3)
 
 	; #SPINBALLSWEEP
 	dcSample	TYPE_DPCM,	SpinKick,	10400			; Kick (Spinball)
@@ -130,6 +133,7 @@ SampleTable:
 	incdac	MuffledSnare, "sound/dac/S3/MuffledSnare.dpcm"
 	incdac	CrashCymbal, "sound/dac/S3/CrashCymbal.dpcm"
 	incdac	ElectricTom, "sound/dac/S3/ElectricTom.dpcm"
+	incdac	TimpaniS3, "sound/dac/S3/TimpaniS3.dpcm"
 
 ; ---------------------------------------------------------------
 ; Spinball Samples

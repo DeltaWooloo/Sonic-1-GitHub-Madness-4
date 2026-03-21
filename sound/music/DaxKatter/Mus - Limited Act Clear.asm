@@ -1,40 +1,40 @@
-BGM_Limited_Header:
+BGM_LimitedClear_Header:
 	smpsHeaderStartSong 1
-	smpsHeaderVoice     BGM_Limited_Voices
+	smpsHeaderVoice     BGM_LimitedClear_Voices
 	smpsHeaderChan      $06, $03
 	smpsHeaderTempo     $02, $03
 
-	smpsHeaderDAC       BGM_Limited_DAC
-	smpsHeaderFM        BGM_Limited_FM1,	$F4, $0A
-	smpsHeaderFM        BGM_Limited_FM2,	$DC, $0A
-	smpsHeaderFM        BGM_Limited_FM3,	$F4, $15
-	smpsHeaderFM        BGM_Limited_FM4,	$F4, $15
-	smpsHeaderFM        BGM_Limited_FM5,	$F4, $14
-	smpsHeaderPSG       BGM_Limited_PSG1,	$D0, $05, $00, fTone_05
-	smpsHeaderPSG       BGM_Limited_PSG2,	$DC, $07, $00, fTone_05
-	smpsHeaderPSG       BGM_Limited_PSG3,	$DC, $00, $00, fTone_04
+	smpsHeaderDAC       BGM_LimitedClear_DAC
+	smpsHeaderFM        BGM_LimitedClear_FM1,	$F4, $0A
+	smpsHeaderFM        BGM_LimitedClear_FM2,	$DC, $0A
+	smpsHeaderFM        BGM_LimitedClear_FM3,	$F4, $15
+	smpsHeaderFM        BGM_LimitedClear_FM4,	$F4, $15
+	smpsHeaderFM        BGM_LimitedClear_FM5,	$F4, $14
+	smpsHeaderPSG       BGM_LimitedClear_PSG1,	$D0, $05, $00, fTone_05
+	smpsHeaderPSG       BGM_LimitedClear_PSG2,	$DC, $07, $00, fTone_05
+	smpsHeaderPSG       BGM_LimitedClear_PSG3,	$DC, $00, $00, fTone_04
 
 ; FM1 Data
-BGM_Limited_FM1:
+BGM_LimitedClear_FM1:
 	smpsSetvoice        $00
-	smpsCall	BGM_Limited_Call00
+	smpsCall	BGM_LimitedClear_Call00
 	smpsModSet          $0C, $01, $08, $04
 	dc.b	nG6, $33
 	smpsStop
 
 ; PSG1 Data
-BGM_Limited_PSG1:
-	smpsCall	BGM_Limited_Call00
+BGM_LimitedClear_PSG1:
+	smpsCall	BGM_LimitedClear_Call00
 	dc.b	nG6, $33
 	smpsStop
 
-BGM_Limited_Call00:
+BGM_LimitedClear_Call00:
 	dc.b	nRst, $06, nG4, nG4, nG4, nG5, nG5, nG5, nG5, nG5, $0C, nG6
 	dc.b	$02, smpsNoAttack, nG7, $01, nG6, $03, nG6
 	smpsReturn
 
 ; FM2 Data
-BGM_Limited_FM2:
+BGM_LimitedClear_FM2:
 	smpsSetvoice        $01
 	smpsNoteFill        $0B
 	smpsNop             $01
@@ -46,7 +46,7 @@ BGM_Limited_FM2:
 	smpsStop
 
 ; FM3 Data
-BGM_Limited_FM3:
+BGM_LimitedClear_FM3:
 	smpsPan             panLeft, $00
 	smpsSetvoice        $02
 	smpsNoteFill        $06
@@ -57,7 +57,7 @@ BGM_Limited_FM3:
 	smpsStop
 
 ; FM4 Data
-BGM_Limited_FM4:
+BGM_LimitedClear_FM4:
 	smpsPan             panRight, $00
 	smpsSetvoice        $02
 	smpsNoteFill        $06
@@ -68,27 +68,27 @@ BGM_Limited_FM4:
 	smpsStop
 
 ; FM5 Data
-BGM_Limited_FM5:
+BGM_LimitedClear_FM5:
 	smpsSetvoice        $03
 	smpsModSet          $0D, $01, $02, $05
 
 ; PSG2 Data
-BGM_Limited_PSG2:
+BGM_LimitedClear_PSG2:
 	dc.b	nG5, $06, nG6, nG5, nG5, nG6, nG5, nG5, nG6, nG5, $0C, nG6
 	dc.b	$09, nG5, $33
 
 ; PSG3 Data
-BGM_Limited_PSG3:
+BGM_LimitedClear_PSG3:
 	smpsStop
 
 ; DAC Data
-BGM_Limited_DAC:
+BGM_LimitedClear_DAC:
 	dc.b	dSnare, $03, dSnare, dSnare, $06, dSnare, dSnare, $03, dSnare, dSnare, $06, dSnare
 	dc.b	dSnare, $03, dSnare, dSnare, dSnare, dSnare, dSnare, $03, dSnare, dSnare, dSnare, $09
 	dc.b	$33
 	smpsStop
 
-BGM_Limited_Voices:
+BGM_LimitedClear_Voices:
 ;	Voice $00
 ;	$3D
 ;	$01, $02, $00, $01, 	$1F, $0E, $0E, $0E, 	$07, $1F, $1F, $1F
@@ -180,4 +180,4 @@ BGM_Limited_Voices:
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $82, $82, $82, $1C
 
-	smpsFooterEndSong	"_gamemode/SHC + DeltaW/BGM/Mus - Limited Act Clear.asm"
+	smpsFooterEndSong	"DaxKatter/Mus - Limited Act Clear.asm"

@@ -57,19 +57,19 @@ SplashScreen_FM5:
 
 ; PSG1 Data
 SplashScreen_PSG1:
-	smpsPSGvoice        sTone_SA_0F
+	smpsPSGvoice        staTone_0F
 	dc.b	nA3, $60, smpsNoAttack
 	smpsJump            SplashScreen_Jump00
 
 ; PSG2 Data
 SplashScreen_PSG2:
-	smpsPSGvoice        sTone_SA_0F
+	smpsPSGvoice        staTone_0F
 	dc.b	nC4, $60, smpsNoAttack
 	smpsJump            SplashScreen_Jump00
 
 ; PSG3 Data
 SplashScreen_PSG3:
-	smpsPSGvoice        sTone_SA_0F
+	smpsPSGvoice        staTone_0F
 	dc.b	nG4, $60, smpsNoAttack
 	smpsJump            SplashScreen_Jump00
 

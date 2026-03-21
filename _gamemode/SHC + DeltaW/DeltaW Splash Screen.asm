@@ -8,7 +8,6 @@ GM_DWSplash:
 		jsr	PlaySound_Special
 		jsr	PaletteWhiteOut.w		; flash to white		
 		jsr	ClearScreen.w
-		jsr	Clear_VSRAM
 		lea	(vdp_control_port).l,a6
 		move.w	#$8004,(a6)			; 8-color mode
 		move.w	#$8174,(a6)		
@@ -16,35 +15,27 @@ GM_DWSplash:
 		move.w	#$9001,(a6)			; 64-cell horizontal size
 		move.w	#$9200,(a6)			; window vertical position
 		move.w	#$8200+SHC_gamePlnA,(vdp_control_port).l
-		
+
 		; Load art and mappings
-		ResetDMAQueue
-		writeVRAM Art_MenuFont,(Art_MenuFont_End-Art_MenuFont),$D080
+		writeVRAM	Art_MenuFont,$D080
 		
-		lea	(v_128x128).l,a1
-		lea	Eni_SplashScreen.l,a0
+		lea	(v_256x256).l,a1
+		lea	(Eni_SplashScreen).l,a0
 		move.w	#320,d0
-		jsr	EniDec.w
-		
-		lea	Nem_SplashScreen.l,a1
-		move.w	#tiles_to_bytes($0140),d2
-		jsr	Queue_KosPlus_Module.w
-		
-.loopKOSPLUSM:
-		jsr	Process_KosPlus_Queue.w
-		jsr	ProcessDMAQueue.w
-		jsr	Process_KosPlus_Module_Queue.w
-		tst.w	(KosPlus_modules_left).w
-		bne.s	.loopKOSPLUSM
-		
-		lea	(v_128x128).l,a1
+		jsr	(EniDec).w
+
+		locVRAM	$140*$20
+		lea	(Nem_SplashScreen).l,a0
+		jsr	(NemDec).w
+
+		lea	(v_256x256).l,a1
 		move.l	#$60000003,d0
 		moveq	#39,d1
 		moveq	#30,d2
-		jsr	TilemapToVRAM.w
-		
+		jsr	(TilemapToVRAM).w
+
 		lea	Pal_SplashScreen.l,a0
-		lea	(v_pal_dry_dup).l,a1
+		lea	(v_palette_fading_line_1).l,a1
 		moveq	#$F,d0	
 DW_PalLoop2:	
 		move.l	(a0)+,(a1)+
@@ -52,12 +43,12 @@ DW_PalLoop2:
 		dbf	d0,DW_PalLoop2
 		
 		lea	(Pal_MenuText).l,a1
-		lea	(v_pal_dry_dup+$20).l,a2
+		lea	(v_palette_fading_line_2).l,a2
 		moveq	#$F,d0
 -
 		move.l	(a1)+,(a2)+
 		dbf	d0,-
-		
+
 		bsr.w	TextInit_DeltaW_Text
 		
 		move.b	#2,(v_vbla_routine).w
@@ -67,27 +58,24 @@ DW_PalLoop2:
 		moveq	#0,d0
 		move.b	(v_quoteid).w,d0
 		move.b	QuoteSoundTable(pc,d0.w),d0
-		bsr.w	PlaySound_Special
+		jsr	(PlaySound_Special).l		; fade out music
 		move.w	#7*60,(v_demolength).w
-		
+
 DW_MainLoop:
 		move.b	#2,(v_vbla_routine).w
-		jsr	Process_KosPlus_Queue.w
-		jsr	WaitForVBla.w
-		jsr	Process_KosPlus_Module_Queue.w
+		jsr	(WaitForVBla).w
 		tst.b	(v_jpadpress1).w
 		bmi.s	DW_GotoTitle
 		tst.w	(v_demolength).w
 		bne.s	DW_MainLoop
 		
 DW_GotoTitle:
-		tst.b	(SRAM_ErrorCode).w
-		bne.s	.nosram
+		move.b	#bgm_Fade,d0
+		jsr	(PlaySound_Special).l		; fade out music
+		jsr	(PaletteFadeOut).w
+		jsr	VDPSetupGame
+		enable_display
 		move.b	#id_Title,(v_gamemode).w
-		rts
-		
-.nosram:
-		move.b	#id_SRAMError,(v_gamemode).w
 		rts
 
 ; ===========================================================================
@@ -114,14 +102,14 @@ QuoteSoundTable:
 		dc.b	bgm_DeltaWSplash	; 18
 		dc.b	bgm_NewBarkTown		; 19
 		dc.b	bgm_DeltaWSplash	; 20
-		dc.b	bgm_Continue		; 21
+		dc.b	bgm_S3Continue		; 21
 		dc.b	bgm_DeltaWSplash	; 22
 		dc.b	bgm_DeltaWSplash	; 23
 		dc.b	sfx_BreakItem		; 24
 		dc.b	bgm_DeltaWSplash	; 25
 		dc.b	bgm_DeltaWSplash	; 26
 		dc.b	bgm_DeltaWSplash	; 27
-		dc.b	bgm_GotThrough		; 28
+		dc.b	bgm_S1ActClear		; 28
 		dc.b	bgm_DeltaWSplash	; 29
 		dc.b	bgm_DeltaWSplash	; 30
 		dc.b	bgm_DeltaWSplash	; 31
@@ -176,7 +164,7 @@ QuoteSoundTable:
 		dc.b	bgm_DeltaWSplash	; 80
 		dc.b	bgm_DeltaWSplash	; 81
 		dc.b	bgm_DeltaWSplash	; 82
-		dc.b	bgm_Emerald		; 83
+		dc.b	bgm_ChaosEmerald	; 83
 		dc.b	bgm_DeltaWSplash	; 84
 		dc.b	bgm_DeltaWSplash	; 85
 		dc.b	bgm_DeltaWSplash	; 86
@@ -207,7 +195,7 @@ QuoteSoundTable:
 		dc.b	bgm_DeltaWSplash	; 111
 		dc.b	bgm_DeltaWSplash	; 112
 		dc.b	bgm_DeltaWSplash	; 113
-		dc.b	bgm_Limited		; 114
+		dc.b	bgm_LimitedClear	; 114
 		dc.b	bgm_DeltaWSplash	; 115
 		dc.b	bgm_DeltaWSplash	; 116
 		dc.b	bgm_DeltaWSplash	; 117
@@ -236,44 +224,20 @@ TextInit_DeltaW_Text:
 -
 		move.l	d4,4(a6)
 		moveq	#35,d2		; number of characters to be rendered in a line -1
-		bsr.w	SingleLineRender
+		jsr	(SingleLineRender).l
 		addi.l	#(1*$800000),d4  ; replace number to the left with desired distance between each line
 		dbf	d1,-
 		rts
 ; ===========================================================================
 QuoteRandomizer:
-		move.b	#1,(sram_port).l
-		
-	if AddressSRAM=3
-		lea	($200009).l,a0
-	else
-		lea	($200008).l,a0
-	endif
-		
-		tst.b	(v_firstboot).w		; check if we're loading for the first time
-		bne.s	.firstTime		; if so, load the top quote
-
-	.outofrange:
-		movep.l	sram_quoteseed(a0),d1
-		addi.l	d1,(v_random).w
 		jsr	(RandomNumber).w
 		andi.w	#$FF,d0
-		cmpi.b	#126,d0				; Check if >= 118  
-		bhs.s	.outofrange
+		cmpi.b	#(TextData_QuotePointers_End-TextData_QuotePointers)/2,d0	; Check greater than quote IDs
+		bhs.s	QuoteRandomizer
 
-		movep.l	d0,sram_quoteseed(a0)
-		move.b	#0,(sram_port).l		; Disable SRAM
-
-;		move.b	#125,d0				; DEBUG: Testing to make sure quotes play correct sound
 		move.b	d0,(v_quoteid).w		; Save the quote ID (we need it later)
 		rts
 
-.firstTime:
-		move.b	#0,(sram_port).l
-		clr.b	(v_firstboot).w
-		moveq	#0,d0				; Return quote 0
-		move.b	d0,(v_quoteid).w		; Save the quote ID (we need it later)
-		rts
 ; ===========================================================================
 TextData_QuotePointers:
 		dc.w	TextData_Quote0-TextData_QuotePointers
@@ -403,6 +367,7 @@ TextData_QuotePointers:
 		dc.w	TextData_Quote124-TextData_QuotePointers
 		dc.w	TextData_Quote125-TextData_QuotePointers
 		dc.w	TextData_Quote126-TextData_QuotePointers
+TextData_QuotePointers_End:
 		
 TextData_Quote0:	dc.b	"        A CERTIFIED W MOMENT        "
 TextData_Quote1:	dc.b	"           HAHA! HA! ONE!           "
@@ -533,3 +498,16 @@ TextData_Quote125:	dc.b	"     STRUCK BY A SMOOTH CRIMINAL    "
 TextData_Quote126:	dc.b	"         THAT'S ALL, FOLKS!         "
 ;TextData_Quote:	dc.b	"                                    "
 TextData_Quotes_End:	even
+
+; ===========================================================================
+Pal_SplashScreen:
+	binclude "_gamemode\SHC + DeltaW\PAL\DeltaW Splash Screen.bin"
+	even
+
+Eni_SplashScreen:
+	binclude "_gamemode\SHC + DeltaW\TILEMAP\DeltaW Splash Screen.bin"
+	even
+
+Nem_SplashScreen:
+	binclude "_gamemode\SHC + DeltaW\ART\DeltaW Splash Screen.nem"
+	even

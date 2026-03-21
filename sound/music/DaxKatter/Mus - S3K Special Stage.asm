@@ -12,7 +12,7 @@ BGM_BlueBalls_Header:
 	smpsHeaderFM        BGM_BlueBalls_FM5,	$00, $1F
 	smpsHeaderPSG       BGM_BlueBalls_PSG1,	$0C, $05, $00, sTone_0C
 	smpsHeaderPSG       BGM_BlueBalls_PSG2,	$0C, $05, $00, sTone_0C
-	smpsHeaderPSG       BGM_BlueBalls_PSG3,	$00, $04, $00, sTone_02
+	smpsHeaderPSG       BGM_BlueBalls_PSG3,	$00, $04, $00, fTone_02
 
 ; FM1 Data
 BGM_BlueBalls_FM1:
@@ -73,24 +73,24 @@ BGM_BlueBalls_PSG2:
 ; PSG3 Data
 BGM_BlueBalls_PSG3:
 	smpsPSGform         $E7
-	smpsPSGvoice        sTone_02
+	smpsPSGvoice        fTone_02
 	dc.b	nMaxPSG2, $06, nMaxPSG2
 	smpsPSGvoice        sTone_01
 	dc.b	nMaxPSG2, $0C
 
 BGM_BlueBalls_Loop12:
-	smpsPSGvoice        sTone_02
+	smpsPSGvoice        fTone_02
 	dc.b	nMaxPSG2, $06
 	smpsPSGvoice        sTone_01
 	dc.b	nMaxPSG2
-	smpsPSGvoice        sTone_02
+	smpsPSGvoice        fTone_02
 	dc.b	nMaxPSG2
 	smpsPSGvoice        sTone_01
 	dc.b	nMaxPSG2
 	smpsLoop            $00, $03, BGM_BlueBalls_Loop12
 
 BGM_BlueBalls_Loop13:
-	smpsPSGvoice        sTone_02
+	smpsPSGvoice        fTone_02
 	dc.b	nMaxPSG2, nMaxPSG2
 	smpsPSGAlterVol     $FC
 	dc.b	nMaxPSG2
@@ -101,9 +101,9 @@ BGM_BlueBalls_Loop13:
 
 ; DAC Data
 BGM_BlueBalls_DAC:
-	dc.b	dQuickLooseSnare, $06, dKickS3, $0C, dQuickLooseSnare, $06, dKickS3, $0C, dKickS3, dKickS3, dKickS3, dQuickLooseSnare
-	dc.b	dKickS3, dQuickLooseSnare, $06, dQuickLooseSnare, $0C, dQuickLooseSnare, $06, dKickS3, $0C, dQuickLooseSnare, $06, dQuickLooseSnare
-	dc.b	$0C, dKickS3, dKickS3, $06, dQuickLooseSnare, $0C, dQuickLooseSnare, $06, dQuickLooseSnare
+	dc.b	dSnareS3, $06, dKickS3, $0C, dSnareS3, $06, dKickS3, $0C, dKickS3, dKickS3, dKickS3, dSnareS3
+	dc.b	dKickS3, dSnareS3, $06, dSnareS3, $0C, dSnareS3, $06, dKickS3, $0C, dSnareS3, $06, dSnareS3
+	dc.b	$0C, dKickS3, dKickS3, $06, dSnareS3, $0C, dSnareS3, $06, dSnareS3
 	smpsStop
 
 BGM_BlueBalls_Voices:
@@ -161,4 +161,4 @@ BGM_BlueBalls_Voices:
 	smpsVcReleaseRate   $0A, $05, $05, $05
 	smpsVcTotalLevel    $00, $15, $16, $13
 
-	smpsFooterEndSong	"_gamemode/SHC + DeltaW/BGM/Mus - S3K Special Stage.asm"
+	smpsFooterEndSong	"DaxKatter/Mus - S3K Special Stage.asm"
