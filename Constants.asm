@@ -417,6 +417,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum sfx_FCSelect
 	nextenum sfx_Fall
 	nextenum sfx_ExplodeDone
+	nextenum sfx_VehiRev
 	; Keep this last
 	nextenum	sfx__Last
 
