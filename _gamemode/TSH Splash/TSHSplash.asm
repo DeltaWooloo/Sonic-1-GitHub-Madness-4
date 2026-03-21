@@ -21,6 +21,7 @@ GM_TheSunsetJester:
 		moveq	#0,d0
 		move.b	d0,(f_wtr_state).w
 		move.b	d0,(f_water).w
+		move.b	d0,(v_pcyc_time).w
 
 		clearRAM	v_ram_start, (v_ram_start+$2000)			; clear foreground buffers
 		clearRAM	v_objspace, v_snddriver_ram				; clear the object RAM
@@ -40,10 +41,20 @@ GM_TheSunsetJester:
 
 		copyTilemap	v_ram_start,vram_fg+$61C,12,4
 
-		moveq	#3,d0
-		jsr	(PalLoad).l
-		moveq	#3,d0			; Move the logo palette to d0
-		jsr	(PalLoad_Fade).l	; I forgot what this does
+		moveq	#16/2-1,d0
+		lea	(Pal_TSH).l,a1
+		lea	(v_palette_line_1).w,a2
+.loadpal:
+		move.l	(a1)+,(a2)+
+		dbf	d0,.loadpal
+
+		moveq	#16/2-1,d0
+		lea	(Pal_Sunset).l,a1
+		lea	(v_palette_line_2).w,a2
+.loadpal2:
+		move.l	(a1)+,(a2)+
+		dbf	d0,.loadpal2
+
 		move.b	#id_Sunset,(v_objspace+$40).w ; load Sunset object
 		move.b  #0,(v_objspace+$64).w	; set the routine 
 		jsr	(ExecuteObjects).l
@@ -91,6 +102,14 @@ PalCycTSR:
 
 .return:
 		rts
+; ---------------------------------------------------------------------------
+Pal_TSH:
+	binclude "_gamemode/TSH Splash/Pal/TSH TITLE.bin"
+	even
+; ---------------------------------------------------------------------------
+Pal_Sunset:
+	binclude "_gamemode/TSH Splash/Pal/TSH Sunset.bin"
+	even
 ; ---------------------------------------------------------------------------
 Cyc_Logo:
 	binclude "_gamemode/TSH Splash/Pal/Cycle - TSH.bin"

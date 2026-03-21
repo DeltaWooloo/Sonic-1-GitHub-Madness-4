@@ -13,7 +13,7 @@ retrodebug equ 0
 ; ---------------------------------------------------------------------------
 SonicRetro:
 	if retrodebug<0
-	move.w	#(.InitRoutinesEnd-.InitRoutines)/4,(v_pcyc_num).w
+	move.w	#(.InitRoutines_DBGEnd-.InitRoutines_DBG)/4,(v_pcyc_num).w
 
 .RetroLoop:
 	endif
@@ -75,12 +75,12 @@ SonicRetro:
 	subi.w	#1,(v_pcyc_num).w
 	move.w	(v_pcyc_num).w,d0
 	lsl.w	#2,d0
-	move.l	.InitRoutines(pc,d0.w),a2
+	move.l	.InitRoutines_DBG(pc,d0.w),a2
 
 	else
 	moveq	#0,d0
 	move.w	#(retrodebug-1)*4,d0
-	move.l	.InitRoutines(pc,d0.w),a2
+	move.l	.InitRoutines_DBG(pc,d0.w),a2
 
 	endif
 	jsr	(a2)
@@ -89,14 +89,24 @@ SonicRetro:
 ; ====================================================================================
 
 .InitRoutines:
-	dc.l	.EmeraldFall
-	dc.l	.EmeraldFall
 	dc.l	.Default
 	dc.l	.Default
+	dc.l	.Default
+	dc.l	.Default
+	dc.l	.EmeraldFall
+	dc.l	.EmeraldFall
+	dc.l	.EmeraldFall
 	dc.l	.SonisRetros
 	dc.l	.SonisRetros
 	dc.l	.RonicSetro
 .InitRoutinesEnd:
+
+.InitRoutines_DBG:
+	dc.l	.RonicSetro
+	dc.l	.SonisRetros
+	dc.l	.EmeraldFall
+	dc.l	.Default
+.InitRoutines_DBGEnd:
 
 ; ====================================================================================
 

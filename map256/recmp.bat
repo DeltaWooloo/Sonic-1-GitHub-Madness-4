@@ -1,6 +1,7 @@
 cls
 call KENSSharp.exe -r k "BREW.kos"
 call KENSSharp.exe -r k "DVZ.kos"
+call KENSSharp.exe -r k "DVZ3.kos"
 call KENSSharp.exe -r k "GHZ.kos"
 call KENSSharp.exe -r k "HSZ.kos"
 call KENSSharp.exe -r k "Joint.kos"
