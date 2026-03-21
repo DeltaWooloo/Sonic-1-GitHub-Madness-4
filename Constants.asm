@@ -291,6 +291,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_MayoDed
 	nextenum bgm_S1ActClear
 	nextenum bgm_SHCSplash
+	nextenum bgm_RetroBlast
 	nextenum bgm_ConiJingle
 	nextenum bgm_TG2000Jingle
 	nextenum bgm_Donnie
