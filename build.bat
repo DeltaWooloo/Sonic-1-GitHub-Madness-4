@@ -3,9 +3,9 @@ REM 1. Re-compress all art assets, for space saving$
 REM 2. Selectively compiling SMPS2ASM files
 REM 3. Post-build padding the ROM to the nearest MB, and fixing the checksum
 
-Set Recomp=1
-Set musiccomp=1
-Set fix=1
+Set Recomp=0
+Set musiccomp=0
+Set fix=0
 IF %Recomp% EQU 0 GOTO SKIP
 
 cls
@@ -148,6 +148,13 @@ cd "LiquidSplashes"
 cd "2kki"
 call recmp.bat
 cd ..
+cd "ATOownscreen"
+cd "Art"
+call recmp.bat
+cd ..
+cd "Eni"
+call recmp.bat
+cd ..\..\
 cd "EagleSoft"
 call recmp.bat
 cd ..

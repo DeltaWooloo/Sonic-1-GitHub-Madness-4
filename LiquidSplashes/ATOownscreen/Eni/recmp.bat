@@ -1,5 +1,3 @@
 cls
-call KENSSharp.exe -r e "marioteam.eni"
-call KENSSharp.exe -r e "rick teamheads.eni"
-call KENSSharp.exe -r e "TEAM TESTICLE.eni"
+call KENSSharp.exe -r e "Atolly.eni"
 REM pause

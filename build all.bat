@@ -153,6 +153,13 @@ cd "LiquidSplashes"
 cd "2kki"
 call recmp.bat
 cd ..
+cd "ATOownscreen"
+cd "Art"
+call recmp.bat
+cd ..
+cd "Eni"
+call recmp.bat
+cd ..\..\
 cd "EagleSoft"
 call recmp.bat
 cd ..
