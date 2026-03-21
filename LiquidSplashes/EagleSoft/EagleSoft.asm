@@ -20,9 +20,10 @@ GM_EagleSoft:
 		move.w	#bgm_Stop,d0											; Stop music
 		jsr		(PlaySound_Special).l
 
-		jsr		(ClearPLC).l											; clear pattern load cues list
-		jsr		(PaletteFadeOut).l										; fade palettes out
-		jsr		(ClearScreen).l											; clear the plane mappings
+		jsr	(ClearPLC).l											; clear pattern load cues list
+		jsr	(PaletteFadeOut).l										; fade palettes out
+		jsr	(VDPSetupGame).l
+		jsr	(ClearScreen).l											; clear the plane mappings
 
 		lea	(v_objspace).w,a1											; load object ram to a1		
 		moveq	#$00,d0													; clear d0
@@ -77,8 +78,8 @@ EagleSoft_ClearObjects:
 		;load S2 font
 		lea	(vdp_data_port).l,a6
 		locVRAM	ArtTile_Level_Select_Font*tile_size,4(a6)
-		lea	(Art_Text).l,a5	; load level select font
-		move.w	#(Art_Text_End-Art_Text)/2-1,d1
+		lea	(Art_TextAT).l,a5	; load level select font
+		move.w	#(Art_TextAT_End-Art_TextAT)/2-1,d1
 Eagle_LoadText:
 		move.w	(a5)+,(a6)
 		dbf	d1,Eagle_LoadText
@@ -100,11 +101,12 @@ Eagle_LoadText:
 		move.l	#mArtTile_EagleSoft_Spr,(a6)							; Load sprite offset into addr(vdp_data_ctrl)
 		jsr		(NemDec).l												; Do nem decomp
 
-
 		lea		(MapBG_EagleSoft).l,a0        							; Load S1SMS tilemap file into a0
 		lea		(v_256x256).l,a1										; a1 = BG addr(v_256x256)
 		jsr		(EniDec).l												; Decompress tilemap				
 		copyTilemap	v_256x256,vram_bg,40,28								; Copy 40x28 tilemap into vram_BG namespace
+
+		enable_display
 
 		;!@lea	Pal_EagleSoftp(pc),a0										; load palette address to a0
 		lea	(Pal_EagleSoftp).l,a0										; load palette address to a0
@@ -118,7 +120,6 @@ EagleSoft_DumpPal:
 		move.l	(a0)+,(a1)+
 		dbf	d7,EagleSoft_DumpPal										; repeat until done
 
-		
 		disable_ints
 		jsr		(PaletteFadeIn).l										; Palette fade in
 		enable_ints

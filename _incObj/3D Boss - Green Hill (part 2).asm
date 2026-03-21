@@ -112,6 +112,8 @@ loc_179E0:
 		clr.w	obVelY(a0)
         move.w	#sfx_Lamppost,d0
 		jsr	(QueueSound2).l	; play fall sound
+		move.b	#dScream,d0	; Scream
+		jsr		(MegaPCM_PlaySample).l
 		
 loc_179EE:
 		bsr.w	BossMove

@@ -35,6 +35,26 @@ Nem_TGTiles:	binclude	"TGSplash/tiles.bin"
 		even
 
 ; ---------------------------------------------------------------------------
+; Uncompressed graphics - Shield
+; ---------------------------------------------------------------------------	
+
+Map_Shield:	include		"_maps/Shield Map.asm"	
+		even
+Dgfx_Shield:	include		"_maps/Shield DGFX.asm"	
+		even
+Art_Shield:	binclude	"artunc/Shield.bin"	
+		even
+
+; ---------------------------------------------------------------------------
+; Uncompressed graphics - Shield
+; ---------------------------------------------------------------------------	
+
+Map_Attacks:	include		"char_assets/CharAttacks Map.asm"	
+		even
+Dgfx_Attacks:	include		"char_assets/CharAttacks DGFX.asm"	
+		even
+Art_Attacks:	binclude	"char_assets/CharAttacks Art.bin"	
+; ---------------------------------------------------------------------------
 ; Uncompressed graphics - Sonic (base)
 ; ---------------------------------------------------------------------------
 ;Map_Sonic:	include		"char_assets/Sonic Map.asm"
@@ -71,10 +91,10 @@ Pal_Maniac:	binclude	"char_assets/Maniac Pal.bin"
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - various
 ; ---------------------------------------------------------------------------
-Nem_Shield:	binclude	"artnem/Shield.nem"
-		even
-Nem_Stars:	binclude	"artnem/Invincibility Stars.nem"
-		even
+;Nem_Shield:	binclude	"artnem/Shield.nem"
+;		even
+;Nem_Stars:	binclude	"artnem/Invincibility Stars.nem"
+;		even
 
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - special stage
@@ -239,7 +259,8 @@ Nem_LzSwitch:	binclude	"artnem/Switch.nem"
 		even
 Nem_SyzSpike1:	binclude	"artnem/SYZ Large Spikeball.nem"
 		even
-
+Nem_RoadRoller:	binclude	"coniobjs/roadroller.bin"
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - SBZ stuff
 ; ---------------------------------------------------------------------------
@@ -307,6 +328,17 @@ Nem_Orbinaut:	binclude	"artnem/Enemy Orbinaut.nem"
 		even
 Nem_Cater:	binclude	"artnem/Enemy Caterkiller.nem"
 		even
+Nem_IE:		binclude	"artnem/Internet Explorer.nem"
+		even
+
+; ---------------------------------------------------------------------------
+; Compressed graphics - character hud
+; ---------------------------------------------------------------------------
+Nem_Lives:
+Nem_TonicLives: 	binclude	"char_assets/hud/Tonic Life Counter Icon.nem"
+		even
+Nem_ManiacLives:	binclude	"char_assets/hud/Maniac Life Counter Icon.nem"
+		even
 
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - various
@@ -314,8 +346,6 @@ Nem_Cater:	binclude	"artnem/Enemy Caterkiller.nem"
 Nem_TitleCard:	binclude	"artnem/Title Cards.nem"
 		even
 Nem_Hud:	binclude	"artnem/HUD.nem"	; HUD (rings, time, score)
-		even
-Nem_Lives:	binclude	"artnem/HUD - Life Counter Icon.nem"
 		even
 Nem_Ring:	binclude	"artnem/Rings.nem"
 		even
@@ -445,6 +475,12 @@ Kos_NGZ:	binclude	"artkos/8x8 - NGZ.kos"	; nogales	#r&)*_@@@@@@@@u!#@*)eudq@(ewu
 		even
 Blk256_NGZ:	binclude	"map256/NGZ.kos"		
 		even
+Blk16_HSZ:	binclude	"map16/HSZ.eni"
+		even
+Kos_HSZ:	binclude	"artkos/8x8 - HSZ.kos"
+		even
+Blk256_HSZ:	binclude	"map256/HSZ.kos"		
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - bosses and ending sequence
 ; ---------------------------------------------------------------------------
@@ -478,7 +514,27 @@ Nem_EndStH:	binclude	"artnem/Ending - StH Logo.nem"
 		even
 Eni_TheIdiotBros:	binclude	"tilemaps/Idiots.eni"
 		even
-
+; ---------------------------------------------------------------------------
+; Cold Brew
+; ---------------------------------------------------------------------------
+Nem_LenBro:	binclude	"coniobjs/lenart.bin"
+		even
+Nem_IZ:	binclude	"coniobjs/izart.bin"
+		even
+Nem_Spongy:	binclude	"coniobjs/spongyart.bin"
+		even
+;Nem_ScareObj:	binclude	"coniobjs/scareobj.bin"
+;		even
+Nem_BuzzCBZ:	binclude	"artnem/Enemy Buzz BomberCBZ.nem"
+		even
+Nem_ChopperCBZ:	binclude	"artnem/Enemy ChopperCBZ.nem"
+		even
+Nem_MotobugCBZ:	binclude	"artnem/Enemy MotobugCBZ.nem"
+		even
+Nem_EizaNorm:	binclude	"coniobjs/eiza/artnorm.bin"
+		even
+Nem_EizaAtt:	binclude	"coniobjs/eiza/artATT.bin"
+		even
 ; ---------------------------------------------------------------------------
 ; Collision data
 ; ---------------------------------------------------------------------------
@@ -509,6 +565,8 @@ Col_Joint:	binclude	"collide/Joint.bin"	; Joint index
 Col_DVZ:	binclude	"collide/DVZ.bin"	; IDONT CARE
 		even
 Col_NGZ:	binclude	"collide/NGZ.bin"	; O,GOPOG9-I0=IG20=I=0IG4=0I
+		even
+Col_HSZ:	binclude	"collide/HSZ.bin"
 		even
 ; ---------------------------------------------------------------------------
 ; Special Stage layouts
@@ -724,7 +782,11 @@ Level_Joint1Unk:
 		dc.l 0
 Level_DVZ1:	binclude	"levels/DVZ1.bin"
 		even
-Level_DVZ2:	binclude	"levels/DVZ1.bin"
+;Level_DVZ2:	binclude	"levels/DVZ1.bin"
+;		even
+Level_HSZ:	binclude	"levels/HSZ.bin"
+		even
+Level_HSZbg:	binclude	"levels/HSZbg.bin"
 		even
 Level_DVZ3:	binclude	"levels/DVZ1.bin"
 		even
@@ -732,7 +794,7 @@ Level_DVZbg:	;binclude	"levels/dvz.bin"
 		dc.l 0
 Level_NGZ1:	binclude	"levels/ngz1.bin"
 		even
-Level_NGZ2:	binclude	"levels/ngz2.bin"
+Level_NGZ2:	binclude	"levels/hsz.bin"
 		even
 Level_NGZ3:	binclude	"levels/ngz3.bin"
 		even
@@ -916,11 +978,12 @@ ObjPos_DVZ3:	binclude	"objpos/dvz3.bin"
 		even
 ObjPos_NGZ1:	binclude	"objpos/ngz1.bin"
 		even
-ObjPos_NGZ2:	binclude	"objpos/ngz2.bin"
+ObjPos_NGZ2:	binclude	"objpos/hsz.bin"
 		even
 ObjPos_NGZ3:	binclude	"objpos/ngz3.bin"
 		even
-
+ObjPos_HSZ:	binclude	"objpos/hsz.bin"
+		even
 ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 
 ; ===========================================================================

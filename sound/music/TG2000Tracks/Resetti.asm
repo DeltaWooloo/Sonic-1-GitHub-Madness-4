@@ -13,7 +13,7 @@ Resetti_Header:
 	smpsHeaderFM	Resetti_FM5,	smpsPitch00,	$00
 	smpsHeaderPSG       Resetti_PSG1,	$00, $00, $00, $00
 	smpsHeaderPSG       Resetti_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       Resetti_PSG3,	$00, $00, $00, $00
+	smpsHeaderPSG       Resetti_PSG3,	$0C, $00, $00, $00
 	dc.b		$00,	$00,	$00,	$00
 
 ; FM1 Data

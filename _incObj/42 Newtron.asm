@@ -17,6 +17,10 @@ Newt_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_Newt,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Newtron,0,0),obGfx(a0)
+		cmpi.b	#id_CBZ,(v_zone).w		; is zone CBZ?
+		bne.s	.NotCBZ	; if not, branch
+		move.w	#make_art_tile(ArtTile_CBZNewtron,0,0),obGfx(a0)
+.NotCBZ:
 		move.b	#4,obRender(a0)
 		move.b	#4,obPriority(a0)
 		move.b	#$14,obActWid(a0)
@@ -39,12 +43,12 @@ Newt_Action:	; Routine 2
 ; ===========================================================================
 
 .chkdistance:
-		bset	#0,obStatus(a0)
+;		bset	#0,obStatus(a0)
 		move.w	(v_player+obX).w,d0
 		sub.w	obX(a0),d0
 		bcc.s	.sonicisright
 		neg.w	d0
-		bclr	#0,obStatus(a0)
+;		bclr	#0,obStatus(a0)
 
 .sonicisright:
 		cmpi.w	#$80,d0		; is Sonic within $80 pixels of the newtron?
@@ -55,8 +59,12 @@ Newt_Action:	; Routine 2
 		beq.s	.istype00	; if type is 00, branch
 
 		move.w	#make_art_tile(ArtTile_Newtron,1,0),obGfx(a0)
+		cmpi.b	#id_CBZ,(v_zone).w		; is zone CBZ?
+		bne.s	.NotCBZ	; if not, branch
+		move.w	#make_art_tile(ArtTile_CBZNewtron,1,0),obGfx(a0)
+.NotCBZ:
 		move.b	#6,ob2ndRout(a0) ; goto .type01 next
-		move.b	#4,obAnim(a0)	; use different animation
+		move.b	#3,obAnim(a0)	; use different animation
 
 .outofrange:
 .istype00:
@@ -66,11 +74,11 @@ Newt_Action:	; Routine 2
 .type00:
 		cmpi.b	#4,obFrame(a0)	; has "appearing" animation finished?
 		bhs.s	.fall		; is yes, branch
-		bset	#0,obStatus(a0)
-		move.w	(v_player+obX).w,d0
-		sub.w	obX(a0),d0
-		bcc.s	.sonicisright2
-		bclr	#0,obStatus(a0)
+;		bset	#0,obStatus(a0)
+;		move.w	(v_player+obX).w,d0
+;		sub.w	obX(a0),d0
+;		bcc.s	.sonicisright2
+;		bclr	#0,obStatus(a0)
 
 .sonicisright2:
 		rts
@@ -82,19 +90,19 @@ Newt_Action:	; Routine 2
 		move.b	#$C,obColType(a0)
 
 .loc_DE42:
-		bsr.w	ObjectFall
-		bsr.w	ObjectFall	; loool
-		bsr.w	ObjFloorDist
-		tst.w	d1		; has newtron hit the floor?
-		bpl.s	.keepfalling	; if not, branch
+;		bsr.w	ObjectFall			; phanto does not act like that it immediately jumps onto you
+;		bsr.w	ObjectFall	; loool
+;		bsr.w	ObjFloorDist
+;		tst.w	d1		; has newtron hit the floor?
+;		bpl.s	.keepfalling	; if not, branch
 
-		add.w	d1,obY(a0)
-		move.w	#0,obVelY(a0)	; stop newtron falling
+;		add.w	d1,obY(a0)
+;		move.w	#0,obVelY(a0)	; stop newtron falling
 		addq.b	#2,ob2ndRout(a0)
 		move.b	#2,obAnim(a0)
-		btst	#5,obGfx(a0)
-		beq.s	.notgreen
-		addq.b	#1,obAnim(a0)
+;		btst	#5,obGfx(a0)		; they are only intended to display on sonic as far as im concerned
+;		beq.s	.notgreen			; even as someone who doesnt understand assembly sometimes what the fuck why isnt this noted to begin with
+;		addq.b	#1,obAnim(a0)		; im cumming ooowoahhhh		- coni
 
 .notgreen:
 		move.b	#$D,obColType(a0)
@@ -107,13 +115,13 @@ Newt_Action:	; Routine 2
 ; ===========================================================================
 
 .speed:
-		bset	#0,obStatus(a0)
-		move.w	(v_player+obX).w,d0
-		sub.w	obX(a0),d0
-		bcc.s	.sonicisright3
-		bclr	#0,obStatus(a0)
+;		bset	#0,obStatus(a0)
+;		move.w	(v_player+obX).w,d0
+;		sub.w	obX(a0),d0
+;		bcc.s	.sonicisright3
+;		bclr	#0,obStatus(a0)
 
-.sonicisright3:
+;.sonicisright3:
 		lea 	v_player, a1
 		move.w 	#$450, d0
 		move.w	#$30, d1

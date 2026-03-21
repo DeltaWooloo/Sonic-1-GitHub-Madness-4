@@ -145,12 +145,12 @@ LoopTileNums:
 		dc.b	$AA,	$B4,	$7F,	$7F	; Star Light
 		dc.b	$7F,	$7F,	$7F,	$7F	; Spring Yard
 		dc.b	$7F,	$7F,	$7F,	$7F	; Scrap Brain
-		zonewarning LoopTileNums,4
 		dc.b	$B5,	$7F,	$1F,	$20	; Ending (Green Hill)
 		dc.b	$B5,	$7F,	$1F,	$20	; BREW
 		dc.b	$AA,	$B4,	$7F,	$7F	; WIN
 		dc.b	$7F,	$7F,	$7F,	$7F	; Joint
 		dc.b	$7F,	$7F,	$7F,	$7F	; DVZ
+		dc.b	$7F,	$7F,	$7F,	$7F	; NGZ
 		even
 
 ; ---------------------------------------------------------------------------
@@ -183,11 +183,15 @@ BgScroll_Index:	dc.w BgScroll_GHZ-BgScroll_Index, BgScroll_LZ-BgScroll_Index
 		dc.w BgScroll_SYZ-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
 		zonewarning BgScroll_Index,2
 		dc.w BgScroll_End-BgScroll_Index, BgScroll_GHZ-BgScroll_Index
-		dc.w BgScroll_MZ-BgScroll_Index, BgScroll_MZ-BgScroll_Index
-		dc.w BgScroll_MZ-BgScroll_Index, BgScroll_MZ-BgScroll_Index
+		dc.w BgScroll_Default-BgScroll_Index, BgScroll_Default-BgScroll_Index
+		dc.w BgScroll_Default-BgScroll_Index, BgScroll_Default-BgScroll_Index
 ; ===========================================================================
 
+BgScroll_Default:
+		move.b	#0,vscroll_mode
+		rts
 BgScroll_GHZ:
+		move.b	#0,vscroll_mode
 		clr.l	(v_bgscreenposx).w
 		clr.l	(v_bgscreenposy).w
 		clr.l	(v_bg2screenposy).w
@@ -200,15 +204,18 @@ BgScroll_GHZ:
 ; ===========================================================================
 
 BgScroll_LZ:
+		move.b	#0,vscroll_mode
 		clr.l	(v_bgscreenposy).w
 		rts
 ; ===========================================================================
 
 BgScroll_MZ: ; this is so intricate peak code ngl
+		move.b	#0,vscroll_mode
 		rts
 ; ===========================================================================
 
 BgScroll_SLZ:
+		move.b	#0,vscroll_mode
 		asr.l	#1,d0
 		addi.w	#$C0,d0
 		move.w	d0,(v_bgscreenposy).w
@@ -217,6 +224,7 @@ BgScroll_SLZ:
 ; ===========================================================================
 
 BgScroll_SYZ:
+		move.b	#0,vscroll_mode
 		asl.l	#4,d0
 		move.l	d0,d2
 		asl.l	#1,d0
@@ -229,10 +237,13 @@ BgScroll_SYZ:
 ; ===========================================================================
 
 BgScroll_SBZ:
+		move.b	#1,vscroll_mode
+		move.w	#0,(v_bgscreenposy).w
 		rts
 ; ===========================================================================
 
 BgScroll_End:
+		move.b	#0,vscroll_mode
 		move.w	(v_screenposx).w,d0
 		asr.w	#1,d0
 		move.w	d0,(v_bgscreenposx).w

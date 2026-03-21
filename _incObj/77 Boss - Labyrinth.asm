@@ -272,7 +272,7 @@ loc_180F6:
 		move.b	#$32,objoff_3C(a0)
 
 loc_18112:
-		move.w	#bgm_LZ,d0
+		move.w	#bgm_Dungeon3,d0
 		jsr	(QueueSound1).l		; play LZ music
 		clr.b	(f_lockscreen).w
 		bset	#0,obStatus(a0)

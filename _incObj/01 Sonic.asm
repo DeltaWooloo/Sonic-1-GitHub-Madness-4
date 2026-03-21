@@ -15,7 +15,7 @@ shoetime:	equ $34	; time left for speed shoes (2 bytes)
 angleright:	equ $36	; angle of floor on Sonic's right side
 angleleft:	equ $37	; angle of floor on Sonic's left side
 sticktoconvex:	equ $38	; flag set while running on an SBZ gear
-;unused:	equ $39	; unused by Sonic
+attacking:	equ $39	; timset set while attacking
 restartime:	equ $3A	; time left before level restarts after dying (2 bytes)
 jumping:	equ $3C	; flag set while Sonic is jumping
 standonobject:	equ $3D	; object index Sonic stands on
@@ -29,6 +29,36 @@ locktime:	equ $3E	; temporary D-Pad control lock timer (2 bytes)
 chrid_tonic	equ 0
 chrid_maniac	equ 1
 chrid_last	equ 1
+
+; ----------------------------------------------------------------------------
+; Get player's data for things other than the object data.
+; Input: d0.w -> what variable to get
+
+; HipSnake: move this code to somewhere you fit I added this here cause I
+; didn't know where to put it.
+; ----------------------------------------------------------------------------
+
+GetOtherPlayerData:
+	moveq	#0,d1
+	move.b	(v_characterid).w,d1
+	chk	#chrid_last,d1
+
+	add.w	d1,d1
+	add.w	d1,d1 ; d0 + 4 * charid
+	add.w	d0,d1
+
+	moveq	#0,d0
+	move.w	OtherPlayerData(pc,d1.w),d0
+	rts
+
+	; HUD Life Icon Art, Damage SFX
+ch_hudlives	equ 0
+ch_hurtpcm	equ 2
+OtherPlayerData:
+	dc.w	Nem_TonicLives-Nem_Lives
+	dc.w	dFuck
+	dc.w	Nem_ManiacLives-Nem_Lives
+	dc.w	dGayNeil
 
 ; ---------------------------------------------------------------------------
 
@@ -55,6 +85,7 @@ SonicPlayer:
 ; This is going to look confusing because Sonic Hackers are geniuses and
 ; decided to name the player object "Sonic" because there are definitely
 ; not any other playable characters in these games!
+; note: this is Sonic 1, the game with no other characters other than Sonic :P
 ;
 ; Sorry in advance. 
 ; ----------------------------------------------------------------------------
@@ -159,74 +190,8 @@ Sonic_Control:	; Routine 2
 
 .ignorecontrols:
 		btst	#0,(f_playerctrl).w 		; are controls locked?
-		bne.w	.ignoremodes			; if yes, branch
-
-		cmpi.b	#chrid_maniac,v_characterid	; check if needle
-		bne.s	.Skipma				; skip if not
-		btst	#6,(v_jpadpress1)
-		beq.w	.nobullets
-
-; ----------------------------------------------------------------------------
-; needlemouse bullet spawn
-; ----------------------------------------------------------------------------
-
-		moveq   #3, d2
-		moveq   #0, d1
-		moveq   #0, d0
-		move.b	obAngle(a0), d1
-		btst	#0,obStatus(a0)
-		beq.s	.notflip1
-		add.b	#$80,d1
-.notflip1:
-		sub.w	#$C,d1
-
-.makebullets1:
-		bsr.w	FindFreeObj
-		bne.w	.nobullets
-
-		move.b	#id_PlayerBullet, obID(a1)
-		move.w	#$B00,bulletfactor(a1)
-		move.w	obX(a0), obX(a1)
-		move.w	obY(a0), obY(a1)
-		move.b	d1, obAngle(a1)
-		add.b	#$8, d1
-		dbf	d2, .makebullets1
-
-		move.w	#$F, v_screenshaketime		; tonic has insane firepower
-		move.w	#sfx_Bomb, d0
-		jsr	PlaySound_Special		
-		bra.w	.nobullets			; skip ahead
-
-; ----------------------------------------------------------------------------
-; needlemouse bullet spawn
-; ----------------------------------------------------------------------------
-
-.Skipma
-		btst	#6,(v_jpadpress1)
-		beq.s	.nobullets
-
-
-		moveq   #3, d2
-		moveq   #0, d1
-		moveq   #0, d0
-
-.makebullets:
-		bsr.w	FindFreeObj
-		bne.s	.nobullets
-
-		move.b	#id_PlayerBullet, obID(a1)
-		move.w	#$600,bulletfactor(a1)
-		move.w	obX(a0), obX(a1)
-		move.w	obY(a0), obY(a1)
-		move.b	d1, obAngle(a1)
-		add.b	#$40, d1
-		dbf	d2, .makebullets
-
-		move.w	#$25, v_screenshaketime		; tonic has insane firepower
-		move.w	#sfx_Bomb, d0
-		jsr	PlaySound_Special
-
-.nobullets:
+		bne.s	.ignoremodes			; if yes, branch
+		bsr.w	PlayerAttackHandle
 		moveq	#0,d0
 		move.b	obStatus(a0),d0
 		andi.w	#6,d0
@@ -234,6 +199,10 @@ Sonic_Control:	; Routine 2
 		jsr	Sonic_Modes(pc,d1.w)
 
 .ignoremodes:
+		tst.b	attacking(a0)
+		beq.s	.timeout
+		subq.b	#1,attacking(a0)
+.timeout:
 		bsr.s	Sonic_Display
 		bsr.w	Sonic_RecordPosition
 		bsr.w	Sonic_Water
@@ -458,6 +427,95 @@ Sonic_MdJump2:
 		bsr.w	Sonic_Floor
 		rts
 
+
+; ----------------------------------------------------------------------------
+; Subroutine for handling selected player's attack 
+; ----------------------------------------------------------------------------
+
+PlayerAttackHandle:
+		btst	#6,(v_jpadpress1)
+		beq.w	.nobullets
+		moveq	#0,d0
+		move.b	(v_characterid).w,d0
+		chk	#chrid_last,d0
+		lsl.w	#2,d0
+		move.l	.lut(pc,d0.w),a1
+		jmp	(a1)
+.nobullets:
+		rts
+; ----------------------------------------------------------------------------
+.lut:
+		dc.l	TonicAttack
+		dc.l	ManiacAttack
+
+; ----------------------------------------------------------------------------
+; Tonic bullet spawn
+; ----------------------------------------------------------------------------
+
+TonicAttack:	
+		tst.b	attacking(a0)
+		bne.s	.nobullets
+		move.b	#25,attacking(a0)
+		move.b	#id_Attack,obAnim(a0)
+	;	move.b	#id_Attack,obPrevAni(a0)
+
+	;	moveq   #3, d2
+		moveq   #0, d1
+		moveq   #0, d0
+
+.makebullets:
+		bsr.w	FindFreeObj
+	;	bne.s	.nobullets
+
+		move.b	#id_PlayerBullet, obID(a1)
+		move.b	#4, obRoutine(a1)
+		move.w	#$600,bulletfactor(a1)
+		move.w	obX(a0), obX(a1)
+		move.w	obY(a0), obY(a1)
+	;	move.b	#1, obAngle(a1)
+	;	add.b	#$40, d1
+	;	dbf	d2, .makebullets
+
+	;	move.w	#$25, v_screenshaketime		; tonic has insane firepower
+		move.w	#sfx_TonicTongue, d0
+		jmp	PlaySound_Special
+.nobullets:
+		rts
+
+; ----------------------------------------------------------------------------
+; Tonic bullet spawn
+; ----------------------------------------------------------------------------
+
+ManiacAttack:
+		moveq   #3, d2
+		moveq   #0, d1
+		moveq   #0, d0
+		move.b	obAngle(a0), d1
+		btst	#0,obStatus(a0)
+		beq.s	.notflip1
+		add.b	#$80,d1
+.notflip1:
+		sub.w	#$C,d1
+
+.makebullets1:
+		bsr.w	FindFreeObj
+		bne.w	.nobullets
+
+		move.b	#id_PlayerBullet, obID(a1)
+		move.w	#$B00,bulletfactor(a1)
+		move.w	obX(a0), obX(a1)
+		move.w	obY(a0), obY(a1)
+		move.b	d1, obAngle(a1)
+		add.b	#$8, d1
+		dbf	d2, .makebullets1
+
+		move.w	#$F, v_screenshaketime
+		move.w	#sfx_Bomb, d0
+		jmp	PlaySound_Special		
+.nobullets:
+		rts
+
+		
 ; ---------------------------------------------------------------------------
 ; Subroutine to make Sonic walk/run
 ; ---------------------------------------------------------------------------
@@ -489,7 +547,10 @@ Sonic_Move:
 		tst.w	obInertia(a0)	; is Sonic moving?
 		bne.w	Sonic_ResetScr	; if yes, branch
 		bclr	#5,obStatus(a0)
+		tst.b	attacking(a0)
+		bne.s	.attacking
 		move.b	#id_Wait,obAnim(a0) ; use "standing" animation
+.attacking:
 		btst	#3,obStatus(a0)
 		beq.s	Sonic_Balance
 		moveq	#0,d0
@@ -675,7 +736,10 @@ loc_1309A:
 
 loc_130A6:
 		move.w	d0,obInertia(a0)
+		tst.b	attacking(a0)
+		bne.s	.skip
 		move.b	#id_Walk,obAnim(a0) ; use walking animation
+.skip
 		rts
 ; ----------------------------------------------------------------------------
 
@@ -721,7 +785,10 @@ loc_13104:
 
 loc_1310C:
 		move.w	d0,obInertia(a0)
+		tst.b	attacking(a0)
+		bne.s	.skip
 		move.b	#id_Walk,obAnim(a0) ; use walking animation
+.skip
 		rts
 ; ----------------------------------------------------------------------------
 
@@ -1060,7 +1127,9 @@ Sonic_LevelBound:
 ; End of function Sonic_LevelBound
 
 reproduceSFX:
-        move.w	#sfx_Lamppost,d0
+        move.b	#dScream,d0	; Scream
+		jsr		(MegaPCM_PlaySample).l
+		move.w	#sfx_Lamppost,d0
 		jmp	(QueueSound2).l	; play lamppost sound
 
 ; ---------------------------------------------------------------------------
@@ -1862,17 +1931,17 @@ Player_Animate:
 		jmp 	.AniRoutTbl(pc,d0.w)
 ; ---------------------------------------------------------------------------
 .AniRoutTbl	
-		bra.w	Sonic_Animate
+		bra.w	Tonic_Animate
 		bra.w	Maniac_Animate	
-		bra.w	Sonic_Animate
-		bra.w	Sonic_Animate
-		bra.w	Sonic_Animate
+		bra.w	Tonic_Animate
+		bra.w	Tonic_Animate
+		bra.w	Tonic_Animate
 
 ; ---------------------------------------------------------------------------
 ; Sonic animation routine
 ; ---------------------------------------------------------------------------
-
-Sonic_Animate:
+Sonic_Animate: 	;kys
+Tonic_Animate:
 		lea	(Ani_Sonic).l,a1
 		moveq	#0,d0
 		move.b	obAnim(a0),d0
@@ -2092,7 +2161,7 @@ Sonic_Animate:
 		or.b	d1,obRender(a0)
 		bra.w	.loadframe
 
-; End of function Sonic_Animate
+; End of function Tonic_Animate
 ; ---------------------------------------------------------------------------
 ; Maniac animation routine
 ; ---------------------------------------------------------------------------

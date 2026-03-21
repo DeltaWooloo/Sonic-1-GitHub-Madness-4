@@ -27,6 +27,7 @@ GM_Damn:
 		jsr	QueueSound2
 		jsr	PaletteWhiteOut
 		move.w	#$2700,sr
+		move.b	#0,vscroll_mode
 		lea	vdpctrl,a6
 		lea	.vdpd(pc),a0
 .vdpinit:	move.w	(a0)+,(a6)

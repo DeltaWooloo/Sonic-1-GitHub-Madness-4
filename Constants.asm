@@ -5,7 +5,8 @@
 ; define stuff from older disassemblies because eyes
 ;- CONI
 PlaySound	=		QueueSound1
-PlaySound_Special	=		QueueSound2
+PlaySound_Special	=	QueueSound2
+PlaySound_Unused	=	QueueSound3
 PalLoad1	=		PalLoad_Fade
 PalLoad2	=		PalLoad
 v_pal_dry	=		v_palette
@@ -95,6 +96,7 @@ id_DaxKatter:	equ ptr_GM_DaxKatter-GameModeArray
 id_SplashSkip:	equ ptr_SplashScreenSkipper-GameModeArray
 id_Advert:	equ ptr_Advert-GameModeArray
 id_GiovanniSpl:	equ ptr_GiovanniSplash-GameModeArray
+id_NewSSRGScreen:	equ ptr_NewSSRG_Screen-GameModeArray
 ;id_RPGBattle:	equ ptr_GM_RPGBattle-GameModeArray
 
 ; Levels
@@ -228,61 +230,114 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 
 ; Background music
 	enumconf $1
-	enum	bgm__First=$1
-	nextenum bgm_GHZ=bgm__First
-	nextenum bgm_LZ
-	nextenum bgm_MZ
-	nextenum bgm_SLZ
-	nextenum bgm_SYZ
-	nextenum bgm_SBZ
-	nextenum bgm_Invincible
-	nextenum bgm_ExtraLife
-	nextenum bgm_SS
-	nextenum bgm_Title
-	nextenum bgm_Ending
+	enum	SNDMIN=$0				;!@ GD: Minimum sound ID (silence)
+	nextenum bgm__First
+	; Stage BGM
+	nextenum bgm_MWaterS=bgm__First		; Orange World	(Act 1)
+	nextenum bgm_OrangeSong			; 		(Act 2)
+	nextenum bgm_GreenHills			; 		(Act 3)
+	nextenum bgm_Dungeon3			; Azure Rainforest
+	nextenum bgm_LosTontos			; Alberta Canada	(Act 1)
+	nextenum bgm_Area5			; 			(Act 2)
+	nextenum bgm_Easton			; 			(Act 3)
+	nextenum bgm_Minecraft			; Minecraft	(Act 1)
+	nextenum bgm_Doom			; 		(Act 2)
+	nextenum bgm_BadEmerald			; 		(Act 3) + Cold Brew (Act 3)
+	nextenum bgm_TreasureCaves		; Spring Field	(Act 1)
+	nextenum bgm_CanCan			; 		(Act 2)
+	nextenum bgm_GCV2005			; 		(Act 3)
+	nextenum bgm_fightMID			; Prongle Plant	(Act 1)
+	nextenum bgm_Cheetah			; 		(Act 2)
+	nextenum bgm_REMansion			; 		(Act 3)
+	nextenum bgm_ColdBrew			; Cold Brew	(Act 1+2)
+	nextenum bgm_UNOwenWasHer		; Windows	(Act 1)
+	nextenum bgm_Passport			; 		(Act 2)
+	nextenum bgm_DoleDetective		; Doleville	(Act 1)
+	nextenum bgm_HardwareStore		; 		(Act 2)
+	nextenum bgm_Final			; DUMMY Level BGM
+	nextenum bgm_SS				; Special Stage
+
+	; Boss BGM
 	nextenum bgm_Boss
-	nextenum bgm_FZ
-	nextenum bgm_GotThrough
-	nextenum bgm_GameOver
+	nextenum bgm_ClintonFuck
+	nextenum bgm_Megalovania
+	nextenum bgm_DoleBOSS
+	nextenum bgm_Coffinman
+
+	; Power Up BGM
+	nextenum bgm_Invincible
+	nextenum bgm_AVGNInv
+
+	; UI + Scene BGM
+	nextenum bgm_Title
+	nextenum bgm_NewBarkTown
+	nextenum bgm_Memories
 	nextenum bgm_Continue
-	nextenum bgm_Credits
+	nextenum bgm_Ending
+	nextenum bgm_SSZ
+	nextenum bgm_Jeopardy
+
+	; In-Game Jingles
+	nextenum bgm_ActClear
+	nextenum bgm_Pac2
+	nextenum bgm_GameOver
+	nextenum bgm_ExtraLife
 	nextenum bgm_Drowning
 	nextenum bgm_Emerald
-	nextenum bgm_NewBarkTown
-	nextenum bgm_REMansion
-	nextenum bgm_Jeopardy
-	nextenum bgm_EuroSega
+
+	; Splash Screen BGM
 	nextenum bgm_Retro
+	nextenum bgm_RonicSetro
+	nextenum bgm_MayoDed
+	nextenum bgm_S1ActClear
+	nextenum bgm_SHCSplash
 	nextenum bgm_ConiJingle
-	nextenum bgm_VampKiller
+	nextenum bgm_TG2000Jingle
+	nextenum bgm_Donnie
+	nextenum bgm_TSHLogo
+	nextenum bgm_S1Continue
 	nextenum bgm_PuyoDrown
+	nextenum bgm_Win2K
+	nextenum bgm_EuroSega
+	nextenum bgm_DeltaWSplash
+	nextenum bgm_S3Continue
+	nextenum bgm_BlueBalls
+	nextenum bgm_ChaosEmerald
+	nextenum bgm_LimitedClear
+	nextenum bgm_Moonwalker
+
+	; Advertisement BGM
+	nextenum bgm_PuyoReject
+	nextenum bgm_LG
+	nextenum bgm_ILBT
+	nextenum bgm_Sunset
+	nextenum bgm_Elevator
+	nextenum bgm_SonUnderground
+	nextenum bgm_Son1UP
+	nextenum bgm_GEMSHill
+	nextenum bgm_LimitedYard
+	nextenum bgm_BomerDude
+
+	; Unused Full/Looping BGM
+	nextenum bgm_DeltaTale
+	nextenum bgm_NewShop
+	nextenum bgm_ChickenDance
+	nextenum bgm_NepAnime
+	nextenum bgm_VampKiller
 	nextenum bgm_Carefree
-	nextenum bgm_Doom
 	nextenum bgm_Dingaling
-	nextenum bgm_Megalovania
 	nextenum bgm_Aporia
 	nextenum bgm_Gadget
 	nextenum bgm_CanCanInv
 	nextenum bgm_TwoSteps
 	nextenum bgm_FurElise
-	nextenum bgm_Ding
-	nextenum bgm_GreenHills
-	nextenum bgm_Son1UP
-	nextenum bgm_SadMac
-	nextenum bgm_TG2000Jingle
 	nextenum bgm_SwingSinners
-	nextenum bgm_AVGNInv
-	nextenum bgm_Minuscule
-	nextenum bgm_Folgers
+	nextenum bgm_Miniscule
 	nextenum bgm_Rickroll
 	nextenum bgm_Wormy
 	nextenum bgm_Starman
-	nextenum bgm_MayoDed
-	nextenum bgm_PuyoReject
-	nextenum bgm_NewShop
 	nextenum bgm_JamesPond
 	nextenum bgm_AlexKiddEnd
-	nextenum bgm_Cheetah
 	nextenum bgm_DJKK
 	nextenum bgm_FuneralMarch
 	nextenum bgm_Levian
@@ -290,45 +345,22 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Peppa
 	nextenum bgm_Resetti
 	nextenum bgm_Spoopy
-	nextenum bgm_ChickenDance
-	nextenum bgm_CanCan
-	nextenum bgm_BadEmerald
 	nextenum bgm_SkyBase
-	nextenum bgm_UNOwenWasHer
 	nextenum bgm_Scrappy
 	nextenum bgm_WeAreTheSonic
-	nextenum bgm_LG
 	nextenum bgm_Thomas
-	nextenum bgm_ILBT
-	nextenum bgm_Basillica
-	nextenum bgm_ClintonFuck
-	nextenum bgm_GCV2005
-	nextenum bgm_DeltaTale
-	nextenum bgm_Pac2
-	nextenum bgm_Passport
-	nextenum bgm_music83
 	nextenum bgm_CCLobby
-	nextenum bgm_Memories
-	nextenum bgm_musBomerDude
-	nextenum bgm_Continue2
-	nextenum bgm_Coffinman
-	nextenum bgm_ColdBrew
 	nextenum bgm_ChairRoom
-	nextenum bgm_DoleBOSS
-	nextenum bgm_OrangeSong
-	nextenum bgm_TreasureCaves
-	nextenum bgm_DoleDetective
-	nextenum bgm_Win2K
-	nextenum bgm_Easton
 	nextenum bgm_SneakySnitch
-	nextenum bgm_GEMSHill
-	nextenum bgm_RonicSetro
-	nextenum bgm_Donnie
-	nextenum bgm_Elevator
-	nextenum bgm_Sunset
-	nextenum bgm_SonUnderground
 	nextenum bgm_Skinner
 	nextenum bgm_Danstar
+	nextenum bgm_Hidden
+	nextenum bgm_BossaNova
+
+	; Unused Jingle BGM
+	nextenum bgm_Ding
+	nextenum bgm_SadMac
+	nextenum bgm_Folgers
 	; Keep this last
 	nextenum bgm__Last
 
@@ -388,6 +420,9 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum sfx_TonicTongue
 	nextenum sfx_FCBlip
 	nextenum sfx_FCSelect
+	nextenum sfx_Fall
+	nextenum sfx_ExplodeDone
+	nextenum sfx_VehiRev
 	; Keep this last
 	nextenum	sfx__Last
 
@@ -403,6 +438,7 @@ bgm_Speedup:	equ ((ptr_flgE2-Sound_ExIndex)/4)+flg__First
 bgm_Slowdown:	equ ((ptr_flgE3-Sound_ExIndex)/4)+flg__First
 bgm_Stop:	equ ((ptr_flgE4-Sound_ExIndex)/4)+flg__First
 flg__Last:	equ ((ptr_flgend-Sound_ExIndex-4)/4)+flg__First
+SNDMAX:		equ	flg__Last	;!@ GD: Maximum sound ID
 
 	include "sound/SampleConstants.asm"
 
@@ -557,7 +593,7 @@ ArtTile_GHZ_Big_Flower_2:	equ ArtTile_Level+$390
 ArtTile_GHZ_Spike_Pole:		equ $398
 ArtTile_GHZ_Giant_Ball:		equ $3AA
 ArtTile_GHZ_Purple_Rock:	equ $3D0
-ArtTile_CBZ_Waterfall:		equ ArtTile_Level+$37C
+
 
 ; Marble Zone
 ArtTile_MZ_Block:		equ $2B8
@@ -601,6 +637,7 @@ ArtTile_SLZ_Fan:		equ $3A0
 ArtTile_SLZ_Pylon:		equ $3CC
 ArtTile_SLZ_Swing:		equ $3DC
 ArtTile_SLZ_Orbinaut:		equ $429
+ArtTile_SLZ_RoadRoller:		equ $440
 ArtTile_SLZ_Fireball:		equ $480
 ArtTile_SLZ_Fireball_Launcher:	equ $4D8
 ArtTile_SLZ_Collapsing_Floor:	equ $4E0
@@ -646,13 +683,14 @@ ArtTile_Newtron:		equ $49B
 ArtTile_Burrobot:		equ $4A6
 ArtTile_Basaran:		equ $4B8
 ArtTile_Roller:			equ $4B8
+ArtTile_IE:			equ $4E0
 ArtTile_Moto_Bug:		equ $4F0
 ArtTile_Button:			equ $50F
 ArtTile_Spikes:			equ $51B
 ArtTile_Spring_Horizontal:	equ $523
 ArtTile_Spring_Vertical:	equ $533
-ArtTile_Shield:			equ $541
-ArtTile_Invincibility:		equ $55C
+ArtTile_Shield:			equ $56E
+ArtTile_Invincibility:		equ $56E
 ArtTile_Game_Over:		equ $55E
 ArtTile_Title_Card:		equ $580
 ArtTile_Animal_1:		equ $580
@@ -665,6 +703,16 @@ ArtTile_Points:			equ $797
 ArtTile_Lamppost:		equ $7A0
 ArtTile_Ring:			equ $7B2
 ArtTile_Lives_Counter:		equ $7D4
+
+ArtTile_CBZ_Waterfall:		equ ArtTile_Level+$37C
+ArtTile_CBZ_IZ:			equ ArtTile_Level+$3AA
+ArtTile_CBZ_Eiza:		equ ArtTile_Level+$380
+ArtTile_CBZSpongy:		equ $40B
+ArtTile_CBZNewtron:		equ $456
+ArtTile_CBZBuzz_Bomber:		equ $476
+ArtTile_CBZLen:		equ $4C9
+ArtTile_CBZChopper:		equ $541
+ArtTile_CBZMoto_Bug:		equ $559
 
 ; Eggman
 ArtTile_Eggman:			equ $400

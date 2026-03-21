@@ -3,7 +3,7 @@
 ;  =========================================================================
 ;
 ; Disassembly created by xx_THEULTIMATEGAMER_xx235
-; thanks to Bill Gates(the owner of fucking microsoft hes really bad), Clownancy(the) and Esrael Sonic Edtior Neato!
+; thanks to Bill Gates(the owner of fucking Microslop hes really bad), Clownancy(the) and Esrael Sonic Edtior Neato!
 ; ---------------------------------------------------------------------------
 ; NOTE:
 ; Set your editor's tab width to 8 characters wide for viewing this file.
@@ -415,6 +415,9 @@ ptr_SplashScreenSkipper:dc.l	GM_SplashScreenSkipper	; My Stupid Splash is here
 ptr_Advert:		dc.l	GM_Advert		; For all the reject splash screens I guess
 ;ptr_GM_RPGBattle:	dc.l	GM_RPGBattle		; RPG Battle (for Azure Rainforest) ($4C)
 ptr_GiovanniSplash:	dc.l	GiovanniSplash		; jo
+ptr_NewSSRG_Screen:	dc.l	NewSSRG_Screen		; Newer SSRG screenTM
+ptr_AtollySplash:	dc.l	AtollySplash		; Atogk
+
 GameModeArray_End:
 ; ===========================================================================
 	if SkipChecksumCheck=0
@@ -435,6 +438,45 @@ CheckSumError:
 
 Art_Text:	binclude	"artunc/menutext.bin" ; text used in level select and debug mode
 Art_Text_End:	even
+;!@ Variant with (C) replaced with [at] symbol
+Art_TextAT:	binclude	"artunc/menutextAT.bin" ; text used in level select and debug mode
+Art_TextAT_End:	even
+
+
+; ---------------------------------------------------------------------------
+; Write VScroll buffer to VSRAM
+; ---------------------------------------------------------------------------
+
+VDPDATA = vdp_data_port			; i hate you
+VDPCTRL = vdp_control_port
+
+VScrollWrt:
+		lea	VDPDATA,a4
+		move.w	#$8B00+%0111,4(a4)
+		lea	vscroll_buffer,a3
+		move.l	#$40000010,(vdp_control_port).l	
+		; meh
+ 		move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                move.l  (a3)+,(a4)
+                rts
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -446,9 +488,16 @@ VBlank:
 		movem.l	d0-a6,-(sp)
 		tst.b	(v_vbla_routine).w
 		beq.s	VBla_00
+		tst.b	vscroll_mode
+		beq.s	.normal
+		pea	.dovbla(pc)
+		bra.w	VScrollWrt
+.normal:
+		move.w	#$8B00+%0011,vdp_control_port
 		move.w	(vdp_control_port).l,d0
 		move.l	#$40000010,(vdp_control_port).l
 		move.l	(v_scrposy_vdp).w,(vdp_data_port).l ; send screen y-axis pos. to VSRAM
+.dovbla:
 		move.b	(v_vbla_routine).w,d0
 		move.b	#0,(v_vbla_routine).w
 		move.w	#1,(f_hbla_pal).w
@@ -1012,6 +1061,9 @@ ClearScreen:
 .merge
 		clr.l	(v_scrposy_vdp).w
 		clr.l	(v_scrposx_vdp).w
+		clr.l	(v_screenposy).w
+		clr.l	(v_screenposx).w
+		clearRAM vscroll_buffer,vscroll_buffer_end
 		clearRAM v_spritetablebuffer,v_spritetablebuffer_end
 		clearRAM v_hscrolltablebuffer,v_hscrolltablebuffer_end_padded
 		ResetDMAQueue
@@ -2102,10 +2154,14 @@ Sega_GotoTitle:
 		bne.s	.skip
 		jmp	RunSplashes
 .skip
-		pcm 	dEggNo
+;		pcm 	dEggNo	; This doesn't even work due to the Sega sample having priority and the next screen ceasing sample playback
 		rts				; skip splash screens with heavy
 		
 		include	"ATOGKsplashesWIP/MAIN.asm"	; Code (simply ran by inclusion)
+	
+		include	"LiquidSplashes/ATOownscreen/MAIN.asm"	; Code 
+
+	
 	
 ; ===========================================================================
         include "NEEDLE.asm" ;le shitty code
@@ -2118,8 +2174,13 @@ Sega_GotoTitle:
 ; ---------------------------------------------------------------------------
 
 GM_Title:
-		move.b	#bgm_Fade,d0
-		bsr.w	QueueSound2 ; stop music
+		;move.b	#bgm_Fade,d0
+		;bsr.w	QueueSound2 ; stop music		
+		;GD: Bugfix to make Freddy sample play entirely from GH4 Title
+		move.b	#bgm_Stop,d0
+		bsr.w	QueueSound2
+		stopPCM
+		
 		bsr.w	ClearPLC
 		bsr.w	PaletteFadeOut
 		lea	(vdp_control_port).l,a6
@@ -2135,18 +2196,18 @@ GM_Title:
 
 		clearRAM v_objspace
 
-		locVRAM	ArtTile_Title_Japanese_Text*tile_size
-		lea	(Nem_JapNames).l,a0 ; load Japanese credits
-		bsr.w	NemDec
+;		locVRAM	ArtTile_Title_Japanese_Text*tile_size
+;		lea	(Nem_JapNames).l,a0 ; load Japanese credits
+;		bsr.w	NemDec
 		locVRAM	ArtTile_Sonic_Team_Font*tile_size
 		lea	(Nem_CreditText).l,a0 ; load alphabet
 		bsr.w	NemDec
-		lea	(v_ram_start).l,a1
-		lea	(Eni_JapNames).l,a0 ; load mappings for Japanese credits
-		move.w	#make_art_tile(ArtTile_Title_Japanese_Text,0,FALSE),d0
-		bsr.w	EniDec
+;		lea	(v_ram_start).l,a1
+;		lea	(Eni_JapNames).l,a0 ; load mappings for Japanese credits
+;		move.w	#make_art_tile(ArtTile_Title_Japanese_Text,0,FALSE),d0
+;		bsr.w	EniDec
 
-		copyTilemap	v_ram_start,vram_fg,40,28
+;		copyTilemap	v_ram_start,vram_fg,40,28
 
 		clearRAM v_palette_fading
 
@@ -2338,12 +2399,72 @@ Tit_ChkStartOrDemo:
 		tst.w	(v_generictimer).w	; has title screen timer expired?
 		beq.w	GotoDemo		; if yes, launch Demo mode
 		andi.b	#btnStart,(v_jpadpress1).w ; check if Start is pressed
-		beq.w	Tit_MainLoop		; if not, continue looping title screen
-
+		beq.w	Tit_MainLoop		; if not, continue looping title screen	
+		; hiii
+		move.w	#$40,d1			; Timer
+		move.b	#sfx_MenuConfirm,d0	; Mania "Ding!" SFX
+		bsr.w	QueueSound2		; Reproduce it		
+		
+AtoTimerLoop1:
+		move.b	#$08,(v_vbla_routine).w	;  )
+		bsr.w	WaitForVBla		 
+		dbf	d1,AtoTimerLoop1	
+		
+AtoWackyscr:	
+		move.w	#$80,d1			; Timer
+		move.b	#sfx_SSGoal,d0	; Warp SFX
+		bsr.w	QueueSound2		; play it
+		
+AtoTimerLoop2:
+        move.w  d1, -(sp)		
+		bsr.w   WackyScroll       
+		move.b  #$08, (v_vbla_routine).w
+		bsr.w   WaitForVBla   
+        move.w  (sp)+, d1		
+		dbf     d1, AtoTimerLoop2   ; Absolute trash code
+	    
 Tit_ChkLevSel:
 		move.b	#2,(v_continues).w 		; set continues to 2 for when it goes to level instead
 		move.b	#id_DebugMenu,(v_gamemode).w	; go to debug mode
 		rts
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; SCROLL RASTER
+; Code
+; ---------------------------------------------------------------------------	
+; ===========================================================================
+
+ATOscr1: equ	$FFFFA800	
+ATOscr2: equ	$FFFFA802
+		
+WackyScroll:		
+		lea     (v_hscrolltablebuffer).w,a1	
+		moveq	#0,d0
+		move.w	#223,d1   ; Size
+		
+WackyScr1:		
+		lea	    (ATOscr1).w,a2   ; Scroll move
+		addi.l	#$20000,(a2)+
+		move.w	(ATOscr1).w,d0
+		add.w	(v_screenposx).w,d0
+  		swap	d0
+ 		sub.w	#0,d1
+		
+WackyScr2:		
+		lea	    (ATOscr2).w,a2   ; Scroll move 2
+		addi.l	#$20000,(a2)+
+		move.w	(ATOscr2).w,d0
+		add.w	(v_screenposx).w,d0
+		neg.w	d0
+
+WackyScrLoop:
+ 		swap	d3                  
+		swap	d0 
+  		move.w	d0,d3  
+        addi.w  #3,d3    		
+ 		move.l	d3,(a1)+ 
+        dbf	d1,WackyScrLoop
+		rts			
 ; ---------------------------------------------------------------------------		
 		include "_inc/Debug Menu.asm"
 ; ===========================================================================
@@ -2516,6 +2637,7 @@ Demo_Levels:	binclude	"misc/Demo Level Order - Intro.bin"
 ; ---------------------------------------------------------------------------
 
 GM_Level:
+		move.b	#0,vscroll_mode
 		bset	#7,(v_gamemode).w ; add $80 to screen mode (for pre level sequence)
 		tst.w	(f_demo).w
 		bmi.s	Level_NoMusicFade
@@ -2546,6 +2668,17 @@ Level_NoMusicFade:
 		jsr	(TitleCards_LoadArt).l
 		moveq	#plcid_Main,d0
 		bsr.w	AddPLC			; load standard patterns
+		; load player hud lives art
+		move.w	#ch_hudlives,d0
+		jsr	(GetOtherPlayerData).l
+
+		add.l	#Nem_Lives,d0 ; use RAM for PLC
+		lea	(v_ram_start).l,a1
+		move.l	d0,(a1)
+		move.w	#ArtTile_Lives_Counter*$20,4(a1)
+		move.l	#-1,6(a1)
+		bsr.w	UserPLC
+
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
 		lsl.w	#7,d0
@@ -3141,7 +3274,7 @@ loc_47D4:
 		move.w	(v_rings).w,d0
 		mulu.w	#10,d0		; multiply rings by 10
 		move.w	d0,(v_ringbonus).w ; set rings bonus
-		move.w	#bgm_GotThrough,d0
+		move.w	#bgm_Pac2,d0
 		jsr	(QueueSound2).l	 ; play end-of-level music
 
 		clearRAM v_objspace
@@ -3636,8 +3769,8 @@ End_MainLoop:
 		beq.s	End_ChkEmerald	; if yes, branch
 
 		move.b	#id_Credits,(v_gamemode).w ; goto credits
-		move.b	#bgm_Credits,d0
-		bsr.w	QueueSound2 ; play credits music
+		move.b	#bgm_NewBarkTown,d0
+		bsr.w	QueueSound2		; play placeholder music
 		move.w	#0,(v_creditsnum).w ; set credits index number to 0
 		rts
 ; ===========================================================================
@@ -3789,8 +3922,8 @@ GM_Credits:
 		bsr.w	AddPLC		; load object graphics
 
 Cred_SkipObjGfx:
-		moveq	#plcid_Main2,d0
-		bsr.w	AddPLC		; load standard level graphics
+;		moveq	#plcid_Main2,d0
+;		bsr.w	AddPLC		; load standard level graphics
 		move.w	#120,(v_generictimer).w ; display a credit for 2 seconds
 		bsr.w	PaletteFadeIn
 
@@ -4066,8 +4199,8 @@ LevelDataLoad:
 		bsr.w	AddPLC		; load pattern load cues
 
 .skipPLC:
-		moveq	#plcid_Main2,d0
-		bra.w	AddPLC
+;		moveq	#plcid_Main2,d0
+;		bra.w	AddPLC
 
 ; ---------------------------------------------------------------------------
 ; Level layout loading subroutine
@@ -4596,7 +4729,7 @@ loc_8B48:
 		include	"_incObj/24, 27 & 3F Explosions.asm"
 		include	"_anim/Ball Hog.asm"
 Map_Hog:	include	"_maps/Ball Hog.asm"
-Map_MisDissolve:include	"_maps/Buzz Bomber Missile Dissolve.asm"
+;Map_MisDissolve:include	"_maps/Buzz Bomber Missile Dissolve.asm"
 		include	"_maps/Explosions.asm"
 
 		include	"_incObj/28 Animals.asm"
@@ -4617,6 +4750,8 @@ Map_Crab:	include	"_maps/Crabmeat.asm"
 		include	"_anim/Buzz Bomber Missile.asm"
 Map_Buzz:	include	"_maps/Buzz Bomber.asm"
 Map_Missile:	include	"_maps/Buzz Bomber Missile.asm"
+Map_BuzzCBZ:	include	"_maps/Buzz BomberCBZ.asm"
+Map_MissileCBZ:	include	"_maps/Buzz Bomber MissileCBZ.asm"
 
 		include	"_incObj/25 & 37 Rings.asm"
 		include	"_incObj/4B Giant Ring.asm"
@@ -4653,12 +4788,17 @@ Map_Eagle:			include	"_maps/Eagle.asm"
 		include	"_incObj/2B Chopper.asm"
 		include	"_anim/Chopper.asm"
 Map_Chop:	include	"_maps/Chopper.asm"
+Map_ChopCBZ:	include	"_maps/ChopperCBZ.asm"
 		include	"_incObj/2C Jaws.asm"
 		include	"_anim/Jaws.asm"
 Map_Jaws:	include	"_maps/Jaws.asm"
 		include	"_incObj/2D Burrobot.asm"
 		include	"_anim/Burrobot.asm"
 Map_Burro:	include	"_maps/Burrobot.asm"
+
+		include	"_incObj/Internet Explorer.asm"
+		include	"_anim/Internet Explorer.asm"
+Map_IE:		include	"_maps/Internet Explorer.asm"
 
 		include	"_incObj/2F MZ Large Grassy Platforms.asm"
 		include	"_incObj/35 Burning Grass.asm"
@@ -4933,21 +5073,16 @@ Map_SSR:	mappingsTable
 	mappingsTableEntry.w	M_SSR_SpeStage	; "SPECIAL STAGE" text
 	mappingsTableEntry.w	M_SSR_GotAll	; "SONIC GOT THEM ALL" text
 
-M_SSR_Chaos:	spriteHeader	; CHAOS EMERALDS
-	spritePiece	-$70, -8, 2, 2, 8, 0, 0, 0, 0	; C
-	spritePiece	-$60, -8, 2, 2, $1C, 0, 0, 0, 0	; H
-	spritePiece	-$50, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	-$40, -8, 2, 2, $32, 0, 0, 0, 0	; O
-	spritePiece	-$30, -8, 2, 2, $3E, 0, 0, 0, 0	; S
-
-	spritePiece	-$10, -8, 2, 2, $10, 0, 0, 0, 0	; E
-	spritePiece	0, -8, 2, 2, $2A, 0, 0, 0, 0	; M
-	spritePiece	$10, -8, 2, 2, $10, 0, 0, 0, 0	; E
-	spritePiece	$20, -8, 2, 2, $3A, 0, 0, 0, 0	; R
-	spritePiece	$30, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	$40, -8, 2, 2, $26, 0, 0, 0, 0	; L
-	spritePiece	$50, -8, 2, 2, $C, 0, 0, 0, 0	; D
-	spritePiece	$60, -8, 2, 2, $3E, 0, 0, 0, 0	; S
+M_SSR_Chaos:	dc.b 9	;  PENTHANES
+		dc.b $F8, 5, 0, $36, $B8	; P
+		dc.b $F8, 5, 0, $10, $C8	; E
+		dc.b $F8, 5, 0, $2E, $D8	; N
+		dc.b $F8, 5, 0, $42, $E8	; T
+		dc.b $F8, 5, 0, $1C, $F8	; H
+		dc.b $F8, 5, 0, 0, $8		; A
+		dc.b $F8, 5, 0, $2E, $18	; N
+		dc.b $F8, 5, 0, $10, $28	; E
+		dc.b $F8, 5, 0, $3E, $38	; S
 M_SSR_Chaos_End
 
 M_SSR_Score:	spriteHeader	; Score tally
@@ -4989,41 +5124,32 @@ M_SSR_Continue:	spriteHeader	; Continue tally without mini Sonic
 	spritePiece	-$10, -8, 1, 2, -$1F, 0, 0, 0, 0; Small oval (right half)
 M_SSR_Continue_End
 
-M_SSR_SpeStage:	spriteHeader	; SPECIAL STAGE
-	spritePiece	-$64, -8, 2, 2, $3E, 0, 0, 0, 0	; S
-	spritePiece	-$54, -8, 2, 2, $36, 0, 0, 0, 0	; P
-	spritePiece	-$44, -8, 2, 2, $10, 0, 0, 0, 0	; E
-	spritePiece	-$34, -8, 2, 2, 8, 0, 0, 0, 0	; C
-	spritePiece	-$24, -8, 1, 2, $20, 0, 0, 0, 0	; I
-	spritePiece	-$1C, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	-$C, -8, 2, 2, $26, 0, 0, 0, 0	; L
-
-	spritePiece	$14, -8, 2, 2, $3E, 0, 0, 0, 0	; S
-	spritePiece	$24, -8, 2, 2, $42, 0, 0, 0, 0	; T
-	spritePiece	$34, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	$44, -8, 2, 2, $18, 0, 0, 0, 0	; G
-	spritePiece	$54, -8, 2, 2, $10, 0, 0, 0, 0	; E
+M_SSR_SpeStage:	dc.b 9	;  HOLY SHIT
+		dc.b $F8, 5, 0, $1C, $B0	; H
+		dc.b $F8, 5, 0, $32, $C0	; O
+		dc.b $F8, 5, 0, $26, $D0	; L
+		dc.b $F8, 5, 0, $4A, $E0	; Y
+		dc.b $F8, 0, 0, $56, $F0	; Space
+		dc.b $F8, 5, 0, $3E, $0	; S
+		dc.b $F8, 5, 0, $1C, $10	; H
+		dc.b $F8, 1, 0, $20, $20	; I
+		dc.b $F8, 5, 0, $42, $28	; T
 M_SSR_SpeStage_End
 
-M_SSR_GotAll:	spriteHeader	; SONIC GOT THEM ALL
-	spritePiece	-$78, -8, 2, 2, $3E, 0, 0, 0, 0	; S
-	spritePiece	-$68, -8, 2, 2, $32, 0, 0, 0, 0	; O
-	spritePiece	-$58, -8, 2, 2, $2E, 0, 0, 0, 0	; N
-	spritePiece	-$48, -8, 1, 2, $20, 0, 0, 0, 0	; I
-	spritePiece	-$40, -8, 2, 2, 8, 0, 0, 0, 0	; C
-
-	spritePiece	-$28, -8, 2, 2, $18, 0, 0, 0, 0	; G
-	spritePiece	-$18, -8, 2, 2, $32, 0, 0, 0, 0	; O
-	spritePiece	-8, -8, 2, 2, $42, 0, 0, 0, 0	; T
-
-	spritePiece	$10, -8, 2, 2, $42, 0, 0, 0, 0	; T
-	spritePiece	$20, -8, 2, 2, $1C, 0, 0, 0, 0	; H
-	spritePiece	$30, -8, 2, 2, $10, 0, 0, 0, 0	; E
-	spritePiece	$40, -8, 2, 2, $2A, 0, 0, 0, 0	; M
-
-	spritePiece	$58, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	$68, -8, 2, 2, $26, 0, 0, 0, 0	; L
-	spritePiece	$78, -8, 2, 2, $26, 0, 0, 0, 0	; L
+M_SSR_GotAll:	dc.b $D	;  SONIC HAS | I SHAT MYSELF
+		dc.b $F8, 1, 0, $20, $94	; I
+		dc.b $F8, 0, 0, $56, $9C	; Space
+		dc.b $F8, 5, 0, $3E, $AC	; S
+		dc.b $F8, 5, 0, $1C, $BC	; H
+		dc.b $F8, 5, 0, 0, $CC		; A
+		dc.b $F8, 5, 0, $42, $DC	; T
+		dc.b $F8, 0, 0, $56, $EC	; Space
+		dc.b $F8, 5, 0, $2A, $FC	; M
+		dc.b $F8, 5, 0, $4A, $C	; Y
+		dc.b $F8, 5, 0, $3E, $1C	; S
+		dc.b $F8, 5, 0, $10, $2C	; E
+		dc.b $F8, 5, 0, $26, $3C	; L
+		dc.b $F8, 5, 0, $14, $4C	; F
 M_SSR_GotAll_End
 	even
 
@@ -5775,6 +5901,7 @@ Map_LWall:	include	"_maps/Wall of Lava.asm"
 		include	"_incObj/40 Moto Bug.asm" ; includes "_incObj/sub RememberState.asm"
 		include	"_anim/Moto Bug.asm"
 Map_Moto:	include	"_maps/Moto Bug.asm"
+Map_MotoCBZ:	include	"_maps/Moto BugCBZ.asm"
 		include	"_incObj/4F.asm"
 
 		include	"_incObj/50 Yadrin.asm"
@@ -5782,7 +5909,11 @@ Map_Moto:	include	"_maps/Moto Bug.asm"
 Map_Yad:	include	"_maps/Yadrin.asm"
 
 		include	"_incObj/sub SolidObject.asm"
-
+; CBZ BADNIKS
+Map_IZ:	include	"coniobjs/IZMap.asm"
+Map_Spongy:	include	"coniobjs/SpongyMap.asm"
+Map_Len:	include	"coniobjs/LenMap.asm"
+Map_RoadRoller:	include	"coniobjs/RoadRollerMap.asm"
 		include	"_incObj/51 Smashable Green Block.asm"
 Map_Smab:	include	"_maps/Smashable Green Block.asm"
 
@@ -5830,7 +5961,7 @@ Map_SSawBall:	include	"_maps/Seesaw Ball.asm"
 		include	"_incObj/5F Bomb Enemy.asm"
 		include	"_anim/Bomb Enemy.asm"
 Map_Bomb:	include	"_maps/Bomb Enemy.asm"
-
+		include	"_incObj/24 RoadRoller.asm"
 		include	"_incObj/60 Orbinaut.asm"
 		include	"_anim/Orbinaut.asm"
 Map_Orb:include	"_maps/Orbinaut.asm"
@@ -5895,7 +6026,7 @@ Map_Drown:	include	"_maps/Drowning Countdown.asm"
 ;		include	"_incObj/4A Special Stage Entry (Unused).asm"	; REMOVE UNUSED DATA - CONI
 		include	"_incObj/08 Water Splash.asm"
 		include	"_anim/Shield and Invincibility.asm"
-Map_Shield:	include	"_maps/Shield and Invincibility.asm"
+;Map_Shield:	include	"_maps/Shield and Invincibility.asm"
 ;		include	"_anim/Special Stage Entry (Unused).asm"	; REMOVE UNUSED DATA - CONI
 ;Map_Vanish:	include	"_maps/Special Stage Entry (Unused).asm"	; REMOVE UNUSED DATA - CONI
 		include	"_anim/Water Splash.asm"
@@ -5917,106 +6048,106 @@ Map_Splash:	include	"_maps/Water Splash.asm"
 ; Curiously, an example of the original 'raw' data that this was intended
 ; to process can be found in the J2ME version, in a file called 'blkcol.bct'.
 ; ---------------------------------------------------------------------------
-
-RawColBlocks		equ CollArray1
-ConvRowColBlocks	equ CollArray1
-
+;
+;RawColBlocks		equ CollArray1
+;ConvRowColBlocks	equ CollArray1
+;
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
-
-
-ConvertCollisionArray:
-		rts
+;
+;
+;ConvertCollisionArray:
+;		rts
 ; ---------------------------------------------------------------------------
-		; The raw format stores the collision data column by column for the normal collision array.
-		; This makes a copy of the data, but stored row by row, for the rotated collision array.
-		lea	(RawColBlocks).l,a1	; Source location of raw collision block data
-		lea	(ConvRowColBlocks).l,a2	; Destinatation location for row-converted collision block data
-
-		move.w	#$100-1,d3		; Number of blocks in collision data
-
-.blockLoop:
-		moveq	#16,d5			; Start on the 16th bit (the leftmost pixel)
-
-		move.w	#16-1,d2		; Width of a block in pixels
-
-.columnLoop:
-		moveq	#0,d4
-
-		move.w	#16-1,d1		; Height of a block in pixels
-
-.rowLoop:
-		move.w	(a1)+,d0		; Get row of collision bits
-		lsr.l	d5,d0			; Push the selected bit of this row into the 'eXtend' flag
-		addx.w	d4,d4			; Shift d4 to the left, and insert the selected bit into bit 0
-		dbf	d1,.rowLoop		; Loop for each row of pixels in a block
-
-		move.w	d4,(a2)+		; Store column of collision bits
-		suba.w	#2*16,a1		; Back to the start of the block
-		subq.w	#1,d5			; Get next bit in the row
-		dbf	d2,.columnLoop		; Loop for each column of pixels in a block
-
-		adda.w	#2*16,a1		; Next block
-		dbf	d3,.blockLoop		; Loop for each block in the raw collision block data
-
-		; This then converts the collision data into the final collision arrays
-		lea	(ConvRowColBlocks).l,a1
-		lea	(CollArray2).l,a2	; Convert the row-converted collision block data into final rotated collision array
-		bsr.s	.convertArray
-		lea	(RawColBlocks).l,a1
-		lea	(CollArray1).l,a2	; Convert the raw collision block data into final normal collision array
-
-
-.convertArray:
-		move.w	#$1000-1,d3		; Size of the collision array
-
-.processLoop:
-		moveq	#0,d2
-		move.w	#$F,d1
-		move.w	(a1)+,d0		; Get current column of collision pixels
-		beq.s	.noCollision		; Branch if there's no collision in this column
-		bmi.s	.topPixelSolid		; Branch if top pixel of collision is solid
-
-	; Here we count, starting from the bottom, how many pixels tall
-	; the collision in this column is.
-.processColumnLoop1:
-		lsr.w	#1,d0
-		bhs.s	.pixelNotSolid1
-		addq.b	#1,d2
-
-.pixelNotSolid1:
-		dbf	d1,.processColumnLoop1
-
-		bra.s	.columnProcessed
+;		; The raw format stores the collision data column by column for the normal collision array.
+;		; This makes a copy of the data, but stored row by row, for the rotated collision array.
+;		lea	(RawColBlocks).l,a1	; Source location of raw collision block data
+;		lea	(ConvRowColBlocks).l,a2	; Destinatation location for row-converted collision block data
+;
+;		move.w	#$100-1,d3		; Number of blocks in collision data
+;
+;.blockLoop:
+;		moveq	#16,d5			; Start on the 16th bit (the leftmost pixel)
+;
+;		move.w	#16-1,d2		; Width of a block in pixels
+;
+;.columnLoop:
+;		moveq	#0,d4
+;
+;		move.w	#16-1,d1		; Height of a block in pixels
+;
+;.rowLoop:
+;		move.w	(a1)+,d0		; Get row of collision bits
+;		lsr.l	d5,d0			; Push the selected bit of this row into the 'eXtend' flag
+;		addx.w	d4,d4			; Shift d4 to the left, and insert the selected bit into bit 0
+;		dbf	d1,.rowLoop		; Loop for each row of pixels in a block
+;
+;		move.w	d4,(a2)+		; Store column of collision bits
+;		suba.w	#2*16,a1		; Back to the start of the block
+;		subq.w	#1,d5			; Get next bit in the row
+;		dbf	d2,.columnLoop		; Loop for each column of pixels in a block
+;
+;		adda.w	#2*16,a1		; Next block
+;		dbf	d3,.blockLoop		; Loop for each block in the raw collision block data
+;
+;		; This then converts the collision data into the final collision arrays
+;		lea	(ConvRowColBlocks).l,a1
+;		lea	(CollArray2).l,a2	; Convert the row-converted collision block data into final rotated collision array
+;		bsr.s	.convertArray
+;		lea	(RawColBlocks).l,a1
+;		lea	(CollArray1).l,a2	; Convert the raw collision block data into final normal collision array
+;
+;
+;.convertArray:
+;		move.w	#$1000-1,d3		; Size of the collision array
+;
+;.processLoop:
+;		moveq	#0,d2
+;		move.w	#$F,d1
+;		move.w	(a1)+,d0		; Get current column of collision pixels
+;		beq.s	.noCollision		; Branch if there's no collision in this column
+;		bmi.s	.topPixelSolid		; Branch if top pixel of collision is solid
+;
+;	; Here we count, starting from the bottom, how many pixels tall
+;	; the collision in this column is.
+;.processColumnLoop1:
+;		lsr.w	#1,d0
+;		bhs.s	.pixelNotSolid1
+;		addq.b	#1,d2
+;
+;.pixelNotSolid1:
+;		dbf	d1,.processColumnLoop1
+;
+;		bra.s	.columnProcessed
 ; ===========================================================================
-
-.topPixelSolid:
-		cmpi.w	#$FFFF,d0		; Is entire column solid?
-		beq.s	.entireColumnSolid	; Branch if so
-
-	; Here we count, starting from the top, how many pixels tall
-	; the collision in this column is (the resulting number is negative).
-.processColumnLoop2:
-		lsl.w	#1,d0
-		bhs.s	.pixelNotSolid2
-		subq.b	#1,d2
-
-.pixelNotSolid2:
-		dbf	d1,.processColumnLoop2
-
-		bra.s	.columnProcessed
+;
+;.topPixelSolid:
+;		cmpi.w	#$FFFF,d0		; Is entire column solid?
+;		beq.s	.entireColumnSolid	; Branch if so
+;
+;	; Here we count, starting from the top, how many pixels tall
+;	; the collision in this column is (the resulting number is negative).
+;.processColumnLoop2:
+;		lsl.w	#1,d0
+;		bhs.s	.pixelNotSolid2
+;		subq.b	#1,d2
+;
+;.pixelNotSolid2:
+;		dbf	d1,.processColumnLoop2
+;
+;		bra.s	.columnProcessed
 ; ===========================================================================
-
-.entireColumnSolid:
-		move.w	#$10,d0
-
-.noCollision:
-		move.w	d0,d2
-
-.columnProcessed:
-		move.b	d2,(a2)+		; Store column collision height
-		dbf	d3,.processLoop
-
-		rts
+;
+;.entireColumnSolid:
+;		move.w	#$10,d0
+;
+;.noCollision:
+;		move.w	d0,d2
+;
+;.columnProcessed:
+;		move.b	d2,(a2)+		; Store column collision height
+;		dbf	d3,.processLoop
+;
+;		rts
 
 ; End of function ConvertCollisionArray
 
@@ -7229,6 +7360,7 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 		include	"_inc/GHM3Explode.asm"
 
 		include	"_gamemode/damn/damn.asm"
+		include "_gamemode/#SSRG/SSRG_Screen.asm"		
 	if MSUEnabled
 		include "sound/MSU/MSU.asm"
 	endif
@@ -7244,6 +7376,15 @@ ART_NT:   incbin	"NMRTT/NM_ART.bin"
 
 MAP_NT:   incbin	"NMRTT/NM_MAP.bin"
         even
+; Atolly splash
+
+
+Nem_Atolly:   binclude	"LiquidSplashes/ATOownscreen/art/Atolly.nem"
+        even
+
+Eni_Atolly:   binclude	"LiquidSplashes/ATOownscreen/eni/Atolly.eni"
+        even	
+	
 	
 ; end of 'ROM'
 		even

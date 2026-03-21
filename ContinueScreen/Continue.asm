@@ -2,9 +2,6 @@
 ; What is "cchhhet"?
 ; ---------------------------------------------------------------------------
 
-; to do:
-; - fix text in game over
-
 ; FUN FACT: AS doesn't allow you to use macros defined later. this assembler is so poopy
 	include "ContinueScreen/Macros.asm"
 
@@ -12,7 +9,7 @@ GM_Continue:
 	move.b	#02, (SMPS_RAM.v_main_tempo)	; slow current music to a crawl so it feels like the driver froze
 
 	jsr 	PaletteFadeOut
-
+	move.b	#0,vscroll_mode
 	lea	(vdp_control_port).l,a6
 	move.w	#$8004,(a6)			; 8 colour mode
 	move.w	#$8700,(a6)			; background colour
@@ -102,8 +99,16 @@ GM_Continue:
 
 ; Exit routines
 .ExitContinue:
+	moveq	#0,d0
+
 	subq.b 	#1, (v_continues)
 	move.b 	#3, (v_lives)
+
+	move.w	d0, (v_rings)
+	move.l	d0, (v_time)
+	move.l	d0, (v_score)
+	move.b	d0, (v_lastlamp)
+	
 	move.b	#2, (SMPS_RAM.v_main_tempo)	; this is still really funny
 	move.b 	#id_Level, (v_gamemode)
 	rts
@@ -135,6 +140,12 @@ GM_Continue:
 	Continue_DrawText	.Text_DecisionContinue, $3, $8
 	Continue_DrawText	.Text_YesNo, $1A, $20
 
+	; Continues
+	move.l	#$409A0003, 4(a6)
+	move.w	#$6381, d0
+	add.b	(v_continues), d0
+	move.w 	d0, (a6)
+	
 	rts
 
 .DrawGameOver:
@@ -151,8 +162,8 @@ GM_Continue:
 	Continue_DrawMap	.GameOver_Map
 	
 	; Text
-	Continue_DrawText	.Text_GameOver1, $1, $7
-	Continue_DrawText	.Text_GameOver2, $1, $5
+	Continue_DrawText	.Text_GameOver1, $2, $8
+	Continue_DrawText	.Text_GameOver2, $4, $4
 
 	enable_display
 	rts
@@ -195,16 +206,16 @@ GM_Continue:
 .Text_YesNo:
 	dc.b	$08
 	dc.b	$05, $01, $00, $00, $00, $00, $0F, $06, $14
+	even
 
 ; Game over
 .Text_GameOver1:
 	dc.b	$03
-	dc.b	$0A, $04, $00, $00
+	dc.b	$0A, $04, $12, $01
 
 .Text_GameOver2:
 	dc.b	$07
-	dc.b	$05, $01, $00, $00, $00, $00, $0F, $06, $14
-	even
+	dc.b	$10, $0C, $10, $0F, $19, $06, $0F, $01
 
 ; ---------------------------------------------------------------------------
 ; Includes

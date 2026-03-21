@@ -323,18 +323,24 @@ thantxt: macro txt
 	thantxt	"FREAKY BILLY"
 	thantxt	"ROJO MMX"
 	thantxt	"DAXKATTER"
-	thantxt	"MALACHI"		
+	thantxt	"MALACHI"
+	thantxt	"DAWID"
+    thantxt	"SANCHI"
 	thantxt	"ADD YOUR NAME HERE"
 	dc.b	1,1
-
+	
+	thantxt	"REAL-HW TESTING"
+	thantxt	"GENESISDOES"
+	thantxt	"DAXKATTER"
+	dc.b	1,1
 
 	thantxt	"SPECIAL THANKS"
 	dc.b	1
 	thantxt	"TEETH TONIC"
 	thantxt	"NOID MY GOAT"
-	thantxt	"S2 ARCHIVES"
-	thantxt	"AND HIS STUPID TEAM"
 	thantxt	"KRIKZZ FOR EVERDRIVE"
+	thantxt	"S2 ARCHIVES"
+	thantxt	"AND HIS STUPID TEAM"	
 	dc.b	1,1,1
 	thantxt	"AND YOUR MOM"
 	dc.b	0

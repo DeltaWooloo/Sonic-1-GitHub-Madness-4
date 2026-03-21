@@ -172,7 +172,7 @@ Giovanni_MainLoop:
 	bne.s   Giovanni_MainLoop			; if not, branch
 
 Giovanni_GotoTitle:
-	move.b  #id_Title,(v_gamemode).w      	; set the screen mode to Title Screen
+	move.b	#id_Title,(v_gamemode).w
 	rts						; return
 
 
@@ -244,13 +244,13 @@ Giovanni_ReformLoop:
 
 ;Nem_Giovanni
 Map_Giovanni:
-Map_GiovanniA:	incbin "dotgen\Giovanni Splash Tilemap A.bin"
+Map_GiovanniA:	incbin "dotgen/Giovanni Splash Tilemap A.bin"
 	even
-Map_GiovanniB:	incbin "dotgen\Giovanni Splash Tilemap B.bin"
+Map_GiovanniB:	incbin "dotgen/Giovanni Splash Tilemap B.bin"
 	even	
-Pal_Giovanni:	incbin "dotgen\Giovanni Splash Palette.bin"
+Pal_Giovanni:	incbin "dotgen/Giovanni Splash Palette.bin"
 	even
-Pal_SplashText:	incbin "dotgen\Giovanni Splash Text Palette.bin"
+Pal_SplashText:	incbin "dotgen/Giovanni Splash Text Palette.bin"
 	even
 Text_Giovanni: 
 	dc.b	"DID NOT GET HELD AT GUNPOINT AND HAS"

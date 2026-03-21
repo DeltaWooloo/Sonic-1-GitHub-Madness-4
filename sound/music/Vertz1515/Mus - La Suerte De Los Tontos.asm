@@ -26326,36 +26326,36 @@ BGM_LosTontos_PSG3:
 
 ; DAC Data
 BGM_LosTontos_DAC:
-	dc.b	dMidTimpani, $56, dFloorTom, $7F, nRst, $7F, $7F, $7F, nRst, $44, dLowTimpani, $1D
-	dc.b	dMidTom, $7F, nRst, $7F, $7F, $7F, $7F, nRst, $3A, dLowTimpani, $4D, dKick
-	dc.b	$0A, dTimpani, $09, dHiTimpani, $0A, dMidTimpani, dLowTimpani, $4C, dKick, $0A, dTimpani, dHiTimpani
-	dc.b	$09, dMidTimpani, $0A, dLowTimpani, $4D, dKick, $09, dTimpani, $0A, dHiTimpani, $09, dMidTimpani
-	dc.b	$0A, dLowTimpani, $1D, dSnare, $0F, dKick, $0E, dLowTimpani, $09, dHiTom, $0A, dHiTom
-	dc.b	$09, dLowTimpani, $0A, dHiTom, dHiTom, $09, dMidTom, $13, dKick, $0A, dKick, dHiTimpani
-	dc.b	$09, dMidTimpani, $0A, dKick, $09, dMidTimpani, $0A, dLowTimpani, dKick, $09, dSnare, $0A
-	dc.b	dSnare, $09, dLowTimpani, $1D, dKick, $0A, dHiTimpani, $09, dMidTimpani, $0A, dKick, dMidTimpani
-	dc.b	$09, dLowTimpani, $0A, dKick, $09, dHiTom, $0A, dHiTom, dMidTom, $13, dKick, $09
-	dc.b	dKick, $0A, dHiTimpani, dMidTimpani, $09, dKick, $0A, dMidTimpani, $09, dLowTimpani, $0A, dKick
-	dc.b	dSnare, $09, dSnare, $0A, dLowTimpani, $1D, dKick, $09, dHiTimpani, $0A, dMidTimpani, $09
-	dc.b	dKick, $0A, dMidTimpani, dLowTimpani, $09, dKick, $0A, dHiTom, $09, dHiTom, $0A, dMidTom
-	dc.b	$13, dKick, $0A, dKick, $09, dHiTimpani, $0A, dMidTimpani, dKick, $09, dMidTimpani, $0A
-	dc.b	dLowTimpani, $09, dKick, $0A, dSnare, dSnare, $09, dLowTimpani, $1D, dKick, $0A, dHiTimpani
-	dc.b	$09, dMidTimpani, $0A, dLowTimpani, $13, dLowTimpani, dLowTimpani, dMidTom, $14, dKick, $09, dKick
-	dc.b	$0A, dHiTimpani, $09, dMidTimpani, $0A, dKick, dMidTimpani, $09, dLowTimpani, $0A, dKick, $09
-	dc.b	dSnare, $0A, dSnare, dLowTimpani, $1C, dKick, $0A, dHiTimpani, dMidTimpani, $09, dKick, $0A
-	dc.b	dMidTimpani, $09, dLowTimpani, $0A, dKick, dHiTom, $09, dHiTom, $0A, dMidTom, $13, dKick
-	dc.b	$0A, dKick, $09, dHiTimpani, $0A, dMidTimpani, $09, dKick, $0A, dMidTimpani, dLowTimpani, $09
-	dc.b	dKick, $0A, dSnare, $09, dSnare, $0A, dLowTimpani, $1D, dKick, $09, dHiTimpani, $0A
-	dc.b	dMidTimpani, dKick, $09, dMidTimpani, $0A, dLowTimpani, $09, dKick, $0A, dHiTom, dHiTom, $09
-	dc.b	dMidTom, $13, dKick, $0A, dKick, dHiTimpani, $09, dMidTimpani, $0A, dKick, $09, dMidTimpani
-	dc.b	$0A, dLowTimpani, dKick, $09, dSnare, $0A, dSnare, $09, dLowTimpani, $1D, dKick, $0A
-	dc.b	dHiTimpani, $09, dMidTimpani, $0A, dKick, dMidTimpani, $09, dLowTimpani, $0A, dKick, $09, dHiTom
-	dc.b	$0A, dHiTom, dMidTom, $13, dKick, $09, dKick, $0A, dHiTimpani, dMidTimpani, $09, dKick
-	dc.b	$0A, dMidTimpani, $09, dLowTimpani, $0A, dKick, dSnare, $09, dSnare, $0A, dLowTimpani, $1D
-	dc.b	dKick, $09, dHiTimpani, $0A, dMidTimpani, $09, dKick, $0A, dMidTimpani, dLowTimpani, $09, dKick
-	dc.b	$0A, dHiTom, $09, dHiTom, $0A, dLowTimpani, $1D, dHiTom, $09, dHiTimpani, $0A, dMidTimpani
-	dc.b	dLowTimpani, $1C, dHiTom, $0A, dHiTom, dMidTimpani, $09, dLowTimpani, $13, dLowTimpani, $14, dLowTimpani
-	dc.b	$13, dLowTimpani, dLowTimpani, dLowTimpani, $12, nRst, $39
+	dc.b	dLowTimpani, $56, dPokeMidTimpani, $7F, nRst, $7F, $7F, $7F, nRst, $44, dVLowTimpani, $1D
+	dc.b	dPokeKickCrashHi, $7F, nRst, $7F, $7F, $7F, $7F, nRst, $3A, dVLowTimpani, $4D, dKick
+	dc.b	$0A, dHiTimpani, $09, dMidTimpani, $0A, dLowTimpani, dVLowTimpani, $4C, dKick, $0A, dHiTimpani, dMidTimpani
+	dc.b	$09, dLowTimpani, $0A, dVLowTimpani, $4D, dKick, $09, dHiTimpani, $0A, dMidTimpani, $09, dLowTimpani
+	dc.b	$0A, dVLowTimpani, $1D, dSnare, $0F, dKick, $0E, dVLowTimpani, $09, dPokeSnare, $0A, dPokeSnare
+	dc.b	$09, dVLowTimpani, $0A, dPokeSnare, dPokeSnare, $09, dPokeKickCrashHi, $13, dKick, $0A, dKick, dMidTimpani
+	dc.b	$09, dLowTimpani, $0A, dKick, $09, dLowTimpani, $0A, dVLowTimpani, dKick, $09, dSnare, $0A
+	dc.b	dSnare, $09, dVLowTimpani, $1D, dKick, $0A, dMidTimpani, $09, dLowTimpani, $0A, dKick, dLowTimpani
+	dc.b	$09, dVLowTimpani, $0A, dKick, $09, dPokeSnare, $0A, dPokeSnare, dPokeKickCrashHi, $13, dKick, $09
+	dc.b	dKick, $0A, dMidTimpani, dLowTimpani, $09, dKick, $0A, dLowTimpani, $09, dVLowTimpani, $0A, dKick
+	dc.b	dSnare, $09, dSnare, $0A, dVLowTimpani, $1D, dKick, $09, dMidTimpani, $0A, dLowTimpani, $09
+	dc.b	dKick, $0A, dLowTimpani, dVLowTimpani, $09, dKick, $0A, dPokeSnare, $09, dPokeSnare, $0A, dPokeKickCrashHi
+	dc.b	$13, dKick, $0A, dKick, $09, dMidTimpani, $0A, dLowTimpani, dKick, $09, dLowTimpani, $0A
+	dc.b	dVLowTimpani, $09, dKick, $0A, dSnare, dSnare, $09, dVLowTimpani, $1D, dKick, $0A, dMidTimpani
+	dc.b	$09, dLowTimpani, $0A, dVLowTimpani, $13, dVLowTimpani, dVLowTimpani, dPokeKickCrashHi, $14, dKick, $09, dKick
+	dc.b	$0A, dMidTimpani, $09, dLowTimpani, $0A, dKick, dLowTimpani, $09, dVLowTimpani, $0A, dKick, $09
+	dc.b	dSnare, $0A, dSnare, dVLowTimpani, $1C, dKick, $0A, dMidTimpani, dLowTimpani, $09, dKick, $0A
+	dc.b	dLowTimpani, $09, dVLowTimpani, $0A, dKick, dPokeSnare, $09, dPokeSnare, $0A, dPokeKickCrashHi, $13, dKick
+	dc.b	$0A, dKick, $09, dMidTimpani, $0A, dLowTimpani, $09, dKick, $0A, dLowTimpani, dVLowTimpani, $09
+	dc.b	dKick, $0A, dSnare, $09, dSnare, $0A, dVLowTimpani, $1D, dKick, $09, dMidTimpani, $0A
+	dc.b	dLowTimpani, dKick, $09, dLowTimpani, $0A, dVLowTimpani, $09, dKick, $0A, dPokeSnare, dPokeSnare, $09
+	dc.b	dPokeKickCrashHi, $13, dKick, $0A, dKick, dMidTimpani, $09, dLowTimpani, $0A, dKick, $09, dLowTimpani
+	dc.b	$0A, dVLowTimpani, dKick, $09, dSnare, $0A, dSnare, $09, dVLowTimpani, $1D, dKick, $0A
+	dc.b	dMidTimpani, $09, dLowTimpani, $0A, dKick, dLowTimpani, $09, dVLowTimpani, $0A, dKick, $09, dPokeSnare
+	dc.b	$0A, dPokeSnare, dPokeKickCrashHi, $13, dKick, $09, dKick, $0A, dMidTimpani, dLowTimpani, $09, dKick
+	dc.b	$0A, dLowTimpani, $09, dVLowTimpani, $0A, dKick, dSnare, $09, dSnare, $0A, dVLowTimpani, $1D
+	dc.b	dKick, $09, dMidTimpani, $0A, dLowTimpani, $09, dKick, $0A, dLowTimpani, dVLowTimpani, $09, dKick
+	dc.b	$0A, dPokeSnare, $09, dPokeSnare, $0A, dVLowTimpani, $1D, dPokeSnare, $09, dMidTimpani, $0A, dLowTimpani
+	dc.b	dVLowTimpani, $1C, dPokeSnare, $0A, dPokeSnare, dLowTimpani, $09, dVLowTimpani, $13, dVLowTimpani, $14, dVLowTimpani
+	dc.b	$13, dVLowTimpani, dVLowTimpani, dVLowTimpani, $12, nRst, $39
 	smpsJump            BGM_LosTontos_DAC
 
 BGM_LosTontos_Voices:

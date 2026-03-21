@@ -8,3 +8,9 @@ Ani_Buzz:	dc.w .fly1-Ani_Buzz
 .fly2:		dc.b 1,	2, 3, afEnd
 .fires:		dc.b 1,	4, 5, afEnd
 		even
+Ani_BuzzW:	dc.w .fly1W-Ani_BuzzW
+		dc.w .fly2W-Ani_BuzzW
+		dc.w .firesW-Ani_BuzzW
+.fly1W:		dc.b 4,	0, 1, afEnd
+.fly2W:		dc.b 4,	2, 3, afEnd
+.firesW:		dc.b 4,	4, 5, afEnd

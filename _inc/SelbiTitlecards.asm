@@ -39,9 +39,9 @@ TitleCard_LZ2:	equ  "JUST AN ETRIAN"
 TitleCard_LZ3:	equ  "FOE FOE FOE FOE"
 TitleCard_LZ4:	equ  "PRONGLE PIT"	; LZ4 is SBZ3
 
-TitleCard_SLZ1:	equ  "MICRODICK HD"
-TitleCard_SLZ2:	equ  "MEIN KRAFT"
-TitleCard_SLZ3:	equ  "CLIPPY CLITORIS"
+TitleCard_SLZ1:	equ  "MEIN KRAFT"
+TitleCard_SLZ2:	equ  "PIGLIN SHAFT"
+TitleCard_SLZ3:	equ  "ENDERMAN PORN"
 TitleCard_SLZ4:	equ  "porn"
 
 TitleCard_SBZ1:	equ  "PRONGLE PLANT"
@@ -130,15 +130,16 @@ TitleCards_LoadArt:
 		bsr.s	.writeletters
 
 		; letters
-		moveq	#0,d0
-		move.b	(v_zone).w,d0
-		lsl.w	#2,d0
-		add.b	(v_act).w,d0
-		lsl.b	#3,d0
-		addq.w	#4,d0			; letter array is second of the two longwords
-		lea	(TTL_ConData).l,a2
-		adda.w	d0,a2
-		movea.l	(a2),a2
+		moveq	#0,d0			; this code was updated from
+		move.b	(v_zone).w,d0		; its original version
+		lsl.w	#5,d0			
+		lea	(TTL_ConData).l,a2	; it seems slower
+		lea	(a2,d0.w),a2		; but doesn't break
+		moveq	#0,d0			; with extended zones
+		move.b	v_act.w,d0
+		lsl.w	#3,d0
+		lea	(a2,d0.w),a2 
+		movea.l	4(a2),a2
 		bsr.s	.writeletters
 		move.w	(sp)+,sr
 		rts
@@ -225,6 +226,11 @@ TTL_ConData:
 		dc.l TTLCard_DVZ1_ConData, TTLCard_DVZ1_Array	; DVZ1
 		dc.l TTLCard_DVZ2_ConData, TTLCard_DVZ2_Array	; DVZ2
 		dc.l TTLCard_DVZ3_ConData, TTLCard_DVZ3_Array	; DVZ3
+		dc.l 0, 0	; DVZ4		
+
+		dc.l TTLCard_NGZ1_ConData, TTLCard_NGZ1_Array	; DVZ1
+		dc.l TTLCard_NGZ2_ConData, TTLCard_NGZ2_Array	; DVZ2
+		dc.l TTLCard_NGZ3_ConData, TTLCard_NGZ3_Array	; DVZ3
 		dc.l 0, 0	; DVZ4		
 		even
 
@@ -411,6 +417,11 @@ Map_Card_Extended:	mappingsTable
 	mappingsTableEntry.w	TTLCard_DVZ3	; DVZ 3
 	mappingsTableEntry.w	TTLCard_DVZ4	; DVZ 4
 
+	mappingsTableEntry.w	TTLCard_NGZ1	; DVZ 1
+	mappingsTableEntry.w	TTLCard_NGZ2	; DVZ 2
+	mappingsTableEntry.w	TTLCard_NGZ3	; DVZ 3
+	mappingsTableEntry.w	TTLCard_NGZ4	; DVZ 4
+
 	mappingsTableEntry.w	TTLCard_Zone	; "ZONE" text
 	mappingsTableEntry.w	TTLCard_Act	; Act number
 	mappingsTableEntry.w	TTLCard_Oval	; Blue oval
@@ -456,6 +467,10 @@ TTLCard_DVZ1:	titlecard TitleCard_DVZ1,0,0
 TTLCard_DVZ2:	titlecard TitleCard_DVZ2,0,0
 TTLCard_DVZ3:	titlecard TitleCard_DVZ3,0,0
 TTLCard_DVZ4:	titlecard TitleCard_DVZ4,0,0
+TTLCard_NGZ1:	titlecard TitleCard_NGZ1,0,0
+TTLCard_NGZ2:	titlecard TitleCard_NGZ2,0,0
+TTLCard_NGZ3:	titlecard TitleCard_NGZ3,0,0
+TTLCard_NGZ4:	titlecard TitleCard_NGZ4,0,0
 
 TTLCard_Zone:	titlecard TitleCard_Zone,1,1 ; ZONE label (alternate tile offset)
 

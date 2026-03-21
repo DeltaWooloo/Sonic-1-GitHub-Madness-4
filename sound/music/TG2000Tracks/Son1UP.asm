@@ -12,7 +12,7 @@ Son1UP_Header:
 	smpsHeaderFM	Son1UP_FM5,	smpsPitch00,	$00
 	smpsHeaderPSG       Son1UP_PSG1,	$00, $00, $00, $00
 	smpsHeaderPSG       Son1UP_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       Son1UP_PSG3,	$00, $00, $00, $00
+	smpsHeaderPSG       Son1UP_PSG3,	$0C, $00, $00, $00
 	dc.b		$00,	$00,	$00,	$00
 	smpsStop
 

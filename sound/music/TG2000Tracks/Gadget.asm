@@ -12,7 +12,7 @@ Gadget_Header:
 	smpsHeaderFM	Gadget_FM5,	smpsPitch00,	$00
 	smpsHeaderPSG       Gadget_PSG1,	$00, $00, $00, $00
 	smpsHeaderPSG       Gadget_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       Gadget_PSG3,	$00, $00, $00, $00
+	smpsHeaderPSG       Gadget_PSG3,	$0C, $00, $00, $00
 	dc.b		$00,	$00,	$00,	$00
 
 ; FM1 Data

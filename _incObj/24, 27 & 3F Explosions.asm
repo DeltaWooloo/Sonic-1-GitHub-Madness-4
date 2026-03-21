@@ -2,39 +2,39 @@
 ; Object 24 - buzz bomber missile vanishing (unused?)
 ; ---------------------------------------------------------------------------
 
-MissileDissolve:
-		moveq	#0,d0
-		move.b	obRoutine(a0),d0
-		move.w	MDis_Index(pc,d0.w),d1
-		jmp	MDis_Index(pc,d1.w)
+;MissileDissolve:
+;		moveq	#0,d0
+;		move.b	obRoutine(a0),d0
+;		move.w	MDis_Index(pc,d0.w),d1
+;		jmp	MDis_Index(pc,d1.w)
 ; ===========================================================================
-MDis_Index:	dc.w MDis_Main-MDis_Index
-		dc.w MDis_Animate-MDis_Index
+;MDis_Index:	dc.w MDis_Main-MDis_Index
+;		dc.w MDis_Animate-MDis_Index
 ; ===========================================================================
-
-MDis_Main:	; Routine 0
-		addq.b	#2,obRoutine(a0)
-		move.l	#Map_MisDissolve,obMap(a0)
-		move.w	#make_art_tile(ArtTile_Missile_Disolve,0,0),obGfx(a0)
-		move.b	#4,obRender(a0)
-		move.b	#1,obPriority(a0)
-		move.b	#0,obColType(a0)
-		move.b	#$C,obActWid(a0)
-		move.b	#9,obTimeFrame(a0)
-		move.b	#0,obFrame(a0)
-		move.w	#sfx_A5,d0
-		jsr	(QueueSound2).l		 ; play sound
-
-MDis_Animate:	; Routine 2
-		subq.b	#1,obTimeFrame(a0) ; subtract 1 from frame duration
-		bpl.s	.display
-		move.b	#9,obTimeFrame(a0) ; set frame duration to 9 frames
-		addq.b	#1,obFrame(a0)	; next frame
-		cmpi.b	#4,obFrame(a0)	; has animation completed?
-		beq.w	DeleteObject	; if yes, branch
-
-.display:
-		bra.w	DisplaySprite
+;
+;MDis_Main:	; Routine 0
+;		addq.b	#2,obRoutine(a0)
+;		move.l	#Map_MisDissolve,obMap(a0)
+;		move.w	#make_art_tile(ArtTile_Missile_Disolve,0,0),obGfx(a0)
+;		move.b	#4,obRender(a0)
+;		move.b	#1,obPriority(a0)
+;;		move.b	#0,obColType(a0)
+;		move.b	#$C,obActWid(a0)
+;		move.b	#9,obTimeFrame(a0)
+;		move.b	#0,obFrame(a0)
+;		move.w	#sfx_A5,d0
+;		jsr	(QueueSound2).l		 ; play sound
+;
+;MDis_Animate:	; Routine 2
+;		subq.b	#1,obTimeFrame(a0) ; subtract 1 from frame duration
+;		bpl.s	.display
+;		move.b	#9,obTimeFrame(a0) ; set frame duration to 9 frames
+;		addq.b	#1,obFrame(a0)	; next frame
+;		cmpi.b	#4,obFrame(a0)	; has animation completed?
+;		beq.w	DeleteObject	; if yes, branch
+;
+;.display:
+;		bra.w	DisplaySprite
 ; ===========================================================================
 
 ; ---------------------------------------------------------------------------
@@ -146,3 +146,46 @@ ExBom_Main:	; Routine 0
 		move.b	#0,obFrame(a0)
 		move.w	#sfx_Bomb,d0
 		jmp	(QueueSound2).l	; play exploding bomb sound
+
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; Explosion from destroying the SHC screen
+; ---------------------------------------------------------------------------
+
+ExplosionSHC:
+		moveq	#0,d0
+		move.b	obRoutine(a0),d0
+		move.w	SHCBom_Index(pc,d0.w),d1
+		jmp	SHCBom_Index(pc,d1.w)
+; ===========================================================================
+SHCBom_Index:	dc.w SHCBom_Main-SHCBom_Index
+		dc.w SHCBom_Anim-SHCBom_Index
+; ===========================================================================
+
+SHCBom_Main:	; Routine 0
+		addq.b	#2,obRoutine(a0)
+		move.l	#Map_ExplodeSHC,obMap(a0)
+
+		move.w	#make_art_tile(ArtTile_Explosion,0,0),obGfx(a0)
+		move.b	#4,obRender(a0)
+		move.b	#1,obPriority(a0)
+		move.b	#0,obColType(a0)
+		move.b	#$C,obActWid(a0)
+		move.b	#7,obTimeFrame(a0)
+		move.b	#0,obFrame(a0)
+		move.w	#sfx_Bomb,d0
+		jmp	(QueueSound2).l	; play exploding bomb sound
+
+SHCBom_Anim:	; Routine 4 (2 for ExplosionBomb)
+		subq.b	#1,obTimeFrame(a0)	; subtract 1 from frame duration
+		bpl.s	.display
+		move.b	#7,obTimeFrame(a0)	; set frame duration to 7 frames
+		addq.b	#1,obFrame(a0)		; next frame
+		cmpi.b	#5,obFrame(a0)		; is the final frame (05) displayed?
+		beq.w	.delete			; if yes, branch
+
+.display:
+		jmp		DisplaySprite
+
+.delete:
+		jmp		DeleteObject

@@ -3,7 +3,7 @@
 ; ---------------------------------------------------------------------------
 DebugList:
 		dc.w .GHZ-DebugList
-		dc.w .SLZ-DebugList
+;		dc.w .SLZ-DebugList
 		dc.w .LZ-DebugList
 		dc.w .MZ-DebugList
 		dc.w .SLZ-DebugList
@@ -126,6 +126,8 @@ dbug:	macro map,object,subtype,frame,vram
 		dbug	Map_Scen,	id_Scenery,	0,	0,	make_art_tile(ArtTile_SLZ_Fireball_Launcher,2,0)
 		dbug	Map_Bomb,	id_Bomb,	0,	0,	make_art_tile(ArtTile_Bomb,0,0)
 		dbug	Map_Orb,	id_Orbinaut,	0,	0,	make_art_tile(ArtTile_SLZ_Orbinaut,1,0)
+		dbug	Map_RoadRoller,	id_RoadRoller,	0,	0,	make_art_tile(ArtTile_SLZ_RoadRoller,0,0)
+		dbug	Map_RoadRoller,	id_RoadRoller,	1,	0,	make_art_tile(ArtTile_SLZ_RoadRoller,0,0)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
 .SLZend:
 
@@ -210,20 +212,24 @@ dbug:	macro map,object,subtype,frame,vram
 ;			mappings	object		subtype	frame	VRAM setting
 		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
 		dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
-		dbug	Map_Crab,	id_Crabmeat,	0,	0,	make_art_tile(ArtTile_Crabmeat,0,0)
-		dbug	Map_Buzz,	id_BuzzBomber,	0,	0,	make_art_tile(ArtTile_Buzz_Bomber,0,0)
-		dbug	Map_Chop,	id_Chopper,	0,	0,	make_art_tile(ArtTile_Chopper,0,0)
+		dbug	Map_IZ,	id_Crabmeat,	0,	0,	make_art_tile(ArtTile_CBZ_IZ,0,0)
+		dbug	Map_IZ,	id_Crabmeat,	1,	0,	make_art_tile(ArtTile_CBZ_IZ,0,0)
+		dbug	Map_Buzz,	id_BuzzBomber,	0,	0,	make_art_tile(ArtTile_CBZBuzz_Bomber,0,0)
+		dbug	Map_ChopCBZ,	id_Chopper,	0,	0,	make_art_tile(ArtTile_CBZChopper,0,0)
 		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
 		dbug	Map_Plat_GHZ,	id_BasicPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
-		dbug	Map_PRock,	id_PurpleRock,	0,	0,	make_art_tile(ArtTile_GHZ_Purple_Rock,3,0)
-		dbug	Map_Moto,	id_MotoBug,	0,	0,	make_art_tile(ArtTile_Moto_Bug,0,0)
+;		dbug	Map_PRock,	id_PurpleRock,	0,	0,	make_art_tile(ArtTile_GHZ_Purple_Rock,3,0)
+		dbug	Map_Moto,	id_MotoBug,	0,	0,	make_art_tile(ArtTile_CBZMoto_Bug,0,0)
+		dbug	Map_Len,	id_MotoBug,	0,	0,	make_art_tile(ArtTile_CBZLen,0,0)
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
-		dbug	Map_Newt,	id_Newtron,	0,	0,	make_art_tile(ArtTile_Newtron,1,0)
-		dbug	Map_Edge,	id_EdgeWalls,	0,	0,	make_art_tile(ArtTile_GHZ_Edge_Wall,2,0)
-		dbug	Map_GBall,	id_Obj19,	0,	0,	make_art_tile(ArtTile_GHZ_Giant_Ball,2,0)
+		dbug	Map_Newt,	id_Newtron,	0,	0,	make_art_tile(ArtTile_CBZNewtron,1,0)
+		dbug	Map_Spongy,	id_Newtron,	0,	0,	make_art_tile(ArtTile_CBZSpongy,0,0)
+;		dbug	Map_Edge,	id_EdgeWalls,	0,	0,	make_art_tile(ArtTile_GHZ_Edge_Wall,2,0)
+;		dbug	Map_GBall,	id_Obj19,	0,	0,	make_art_tile(ArtTile_GHZ_Giant_Ball,2,0)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
 		dbug	Map_GRing,	id_GiantRing,	0,	0,	make_art_tile(ArtTile_Giant_Ring,1,0)
 		dbug	Map_Bonus,	id_HiddenBonus,	1,	1,	make_art_tile(ArtTile_Hidden_Points,0,1)
+;		dbug	Map_Animal5,id_Animals,	0,	2,	make_art_tile(ArtTile_Animal_1,0,0)
 .BREWend:
 
 .WIN:

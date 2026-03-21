@@ -217,4 +217,4 @@ HPZ_Voices:
 	smpsVcDecayLevel    $00, $00, $01, $01
 	smpsVcReleaseRate   $0A, $00, $00, $00
 	smpsVcTotalLevel    $00, $21, $11, $20
-
+	smpsFooterEndSong	"Dawid/Hidden.asm"

@@ -136,8 +136,6 @@ loc_DC56:
 		bclr	#5,obStatus(a1)
 		move.w	#sfx_Spring,d0
 		jsr	(QueueSound2).l	; play spring sound
-                move.b	#$C7, d0
-		jsr		(MegaPCM_PlaySample).l
 
 Spring_AniLR:	; Routine $A
 		lea	(Ani_Spring).l,a1

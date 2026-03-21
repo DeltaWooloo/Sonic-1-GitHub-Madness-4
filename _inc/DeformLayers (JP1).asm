@@ -289,44 +289,34 @@ Deform_MZ:
 	; calculate background scroll buffer
 		lea	(v_bgscroll_buffer).w,a1
 		move.w	(v_screenposx).w,d2
-		neg.w	d2
-		move.w	d2,d0
-		asr.w	#2,d0
-		sub.w	d2,d0
-		ext.l	d0
-		asl.l	#3,d0
-		divs.w	#5,d0
-		ext.l	d0
-		asl.l	#4,d0
-		asl.l	#8,d0
-		moveq	#0,d3
-		move.w	d2,d3
-		asr.w	#1,d3
-		move.w	#4,d1
-	.cloudLoop:		
-		move.w	d3,(a1)+
-		swap	d3
-		add.l	d0,d3
-		swap	d3
-		dbf	d1,.cloudLoop
+		move.w	#0,(a1)+
+		move.w	#0,(a1)+
+		move.w	#0,(a1)+
+		move.w	#0,(a1)+
 
 		move.w	(v_bg3screenposx).w,d0
 		neg.w	d0
-		move.w	#1,d1
-	.mountainLoop:		
+		
 		move.w	d0,(a1)+
-		dbf	d1,.mountainLoop
+		move.w	d0,(a1)+
+		move.w	d0,(a1)+
+		move.w	d0,(a1)+
+		move.w	d0,(a1)+
 
 		move.w	(v_bg2screenposx).w,d0
 		neg.w	d0
-		move.w	#8,d1
-	.bushLoop:		
 		move.w	d0,(a1)+
-		dbf	d1,.bushLoop
-
+		move.w	d0,d3
+		asr.w	#2,d3
+		add.w	d3,d0
+		move.w	d0,(a1)+
+		add.w	d3,d0
+		move.w	d0,(a1)+
+		move.w	d0,(a1)+
+		move.w	d0,(a1)+
 		move.w	(v_bgscreenposx).w,d0
 		neg.w	d0
-		move.w	#$F,d1
+		move.w	#17-1,d1
 	.interiorLoop:		
 		move.w	d0,(a1)+
 		dbf	d1,.interiorLoop
@@ -495,9 +485,82 @@ AppleScrMv:	equ   $FFFFA806
 ; ---------------------------------------------------------------------------
 
 Deform_SBZ:
+
 		tst.b	(v_act).w
 		bne.w	Deform_SBZ2
-	     move.w	(v_scrshiftx).w,d4
+		move.w	#0,v_bgscreenposy
+		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
+		lea	(v_hscrolltablebuffer).w,a1
+		;add.w	#1,v_bgscroll_buffer
+		;move.w	(v_bgscroll_buffer).w,d2
+		move.w	(v_screenposx).w,d0
+		neg	d0
+		swap 	d0
+		;move.w	d2,d0
+		move.w	#256-1,d1
+	.buildingLoop:		
+		move.l	d0,(a1)+
+		dbf	d1,.buildingLoop
+
+		moveq	#0,d4
+		lea	vscroll_buffer,a1
+		add.w	#4,v_bgscroll_buffer+2
+		move.w	v_bgscreenposx,d2
+		andi.w	#$3F,d2
+		asr.w	#2,d2
+		andi.w	#$FE,d2
+		add.w	d2,a1
+
+		move.w	v_bgscroll_buffer+2,d0
+        	jsr     CalcSine
+        	tst.w	d0
+        	move.w	d0,d1
+		move.w	v_screenposy,d0
+		swap	d0
+		tst.w	d1
+		bpl.s	.bounce1
+		neg.w	d1
+		asr.w	#2,d1
+		bra.s	.bounce2
+.bounce1:
+		asr.w	#2,d1
+		move.w	d1,d0
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+.bounce2:
+		move.w	#0,d0
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.w	d1,d0
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.w	#0,d0
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.w	d1,d0
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.w	#0,d0
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		rts
+
+		; i'm not quite sure what this is going to be used for
+		; code above is for act 1
+
+		move.w	(v_scrshiftx).w,d4
 		ext.l	d4
 		asl.l	#6,d4
 		move.w	(v_scrshifty).w,d5

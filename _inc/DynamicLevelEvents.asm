@@ -337,7 +337,9 @@ locret_7072:
 
 DLE_MZ2:
 		move.w	#$500,(v_limitbtm1).w
-		cmpi.w	#$800,(v_screenposx).w
+		;!@ GD, Canada Act 2 DLE xpos fix
+		;cmpi.w	#$800,(v_screenposx).w
+		cmpi.w	#$0B00,(v_screenposx).w
 		blo.s	locret_7088
 		move.w	#$300,(v_limitbtm1).w
 
@@ -766,10 +768,9 @@ off_6E4ABR:	dc.w DLE_BREW3main-off_6E4ABR
 ; ===========================================================================
 
 EizaArtList:
-	dc.l	Nem_Clinton
-;	dc.l	Nem_Eiza
-	dc.w	$8000
-	dc.l	-1		; Was it that hard?
+	dc.l	Nem_EizaNorm
+	dc.w	$7080
+	dc.l	-1		; Load in her GFX, likely gobbling up all of obj vram
 
 DLE_BREW3main:
 		add.w	#1,(v_limitleft2).w
@@ -822,7 +823,7 @@ loc_6ED0BR:
 		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w
 		moveq	#plcid_Boss,d0
-		bra.w	AddPLC		; load boss patterns
+		jmp	AddPLC		; load boss patterns
 ; ===========================================================================
 
 locret_6EE8BR:
@@ -853,7 +854,7 @@ DLE_Joint:
 ; kys
 ; ---------------------------------------------------------------------------
 DLE_DVZ:
-
+		rts
 ; ---------------------------------------------------------------------------
 ; Nogales Zone direct port from ice cc remake :^)
 ; ---------------------------------------------------------------------------

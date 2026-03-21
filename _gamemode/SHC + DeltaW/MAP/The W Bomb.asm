@@ -1,13 +1,17 @@
-Map_ccc2:
-Map_ccc2_0: 	dc.w Map_ccc2_4-Map_ccc2
-Map_ccc2_2: 	dc.w Map_ccc2_30-Map_ccc2
-Map_ccc2_4: 	dc.b $0, $7
-	dc.b $EC, $F, $20, $0, $FF, $DC
-	dc.b $C, $9, $20, $10, $FF, $DC
-	dc.b $E4, $3, $20, $16, $FF, $FC
-	dc.b $4, $A, $20, $1A, $FF, $FC
-	dc.b $EC, $A, $20, $23, $0, $4
-	dc.b $4, $0, $20, $2C, $0, $14
-	dc.b $EC, $1, $20, $2D, $0, $1C
-Map_ccc2_30: 	dc.b $0, $0
+WBomb_Map: mappingsTable
+	mappingsTableEntry.w	WBomb_Map_0
+	mappingsTableEntry.w	WBomb_Map_1
+
+WBomb_Map_0:	spriteHeader
+ spritePiece -$17, -$C, 4, 4, 0, 0, 0, 1, 0
+ spritePiece -$17, $14, 4, 1, $10, 0, 0, 1, 0
+ spritePiece -$F, -$14, 4, 1, $14, 0, 0, 1, 0
+ spritePiece -7, -$1C, 1, 1, $18, 0, 0, 1, 0
+ spritePiece 9, -$C, 1, 4, $19, 0, 0, 1, 0
+ spritePiece 9, $14, 1, 1, $1D, 0, 0, 1, 0
+WBomb_Map_0_End
+
+WBomb_Map_1:	spriteHeader
+WBomb_Map_1_End
+
 	even

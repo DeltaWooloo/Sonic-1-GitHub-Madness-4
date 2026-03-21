@@ -1,23 +1,34 @@
-Map_ExplodeBombSHC:
-Map_ExplodeBombSHC_0: 	dc.w Map_ExplodeBombSHC_A-Map_ExplodeBombSHC
-Map_ExplodeBombSHC_2: 	dc.w Map_ExplodeBombSHC_12-Map_ExplodeBombSHC
-Map_ExplodeBombSHC_4: 	dc.w Map_ExplodeBombSHC_1A-Map_ExplodeBombSHC
-Map_ExplodeBombSHC_6: 	dc.w Map_ExplodeBombSHC_22-Map_ExplodeBombSHC
-Map_ExplodeBombSHC_8: 	dc.w Map_ExplodeBombSHC_3C-Map_ExplodeBombSHC
-Map_ExplodeBombSHC_A: 	dc.b $0, $1
-	dc.b $F8, $9, $40, $0, $FF, $F4
-Map_ExplodeBombSHC_12: 	dc.b $0, $1
-	dc.b $F0, $F, $40, $40, $FF, $F0
-Map_ExplodeBombSHC_1A: 	dc.b $0, $1
-	dc.b $F0, $F, $40, $50, $FF, $F0
-Map_ExplodeBombSHC_22: 	dc.b $0, $4
-	dc.b $EC, $A, $40, $26, $FF, $EC
-	dc.b $EC, $5, $40, $2F, $0, $4
-	dc.b $4, $5, $58, $2F, $FF, $EC
-	dc.b $FC, $A, $58, $26, $FF, $FC
-Map_ExplodeBombSHC_3C: 	dc.b $0, $4
-	dc.b $EC, $A, $40, $33, $FF, $EC
-	dc.b $EC, $5, $40, $3C, $0, $4
-	dc.b $4, $5, $58, $3C, $FF, $EC
-	dc.b $FC, $A, $58, $33, $FF, $FC
+Map_ExplodeSHC_Index: mappingsTable
+	mappingsTableEntry.w	Map_ExplodeSHC_0
+	mappingsTableEntry.w	Map_ExplodeSHC_1
+	mappingsTableEntry.w	Map_ExplodeSHC_2
+	mappingsTableEntry.w	Map_ExplodeSHC_3
+	mappingsTableEntry.w	Map_ExplodeSHC_4
+
+Map_ExplodeSHC_0:	spriteHeader
+ spritePiece -$C, -8, 3, 2, 0, 0, 0, 2, 0
+Map_ExplodeSHC_0_End
+
+Map_ExplodeSHC_1:	spriteHeader
+ spritePiece -$10, -$10, 4, 4, $40, 0, 0, 2, 0
+Map_ExplodeSHC_1_End
+
+Map_ExplodeSHC_2:	spriteHeader
+ spritePiece -$10, -$10, 4, 4, $50, 0, 0, 2, 0
+Map_ExplodeSHC_2_End
+
+Map_ExplodeSHC_3:	spriteHeader
+ spritePiece -$14, -$14, 3, 3, $26, 0, 0, 2, 0
+ spritePiece 4, -$14, 2, 2, $2F, 0, 0, 2, 0
+ spritePiece -$14, 4, 2, 2, $2F, 1, 1, 2, 0
+ spritePiece -4, -4, 3, 3, $26, 1, 1, 2, 0
+Map_ExplodeSHC_3_End
+
+Map_ExplodeSHC_4:	spriteHeader
+ spritePiece -$14, -$14, 3, 3, $33, 0, 0, 2, 0
+ spritePiece 4, -$14, 2, 2, $3C, 0, 0, 2, 0
+ spritePiece -$14, 4, 2, 2, $3C, 1, 1, 2, 0
+ spritePiece -4, -4, 3, 3, $33, 1, 1, 2, 0
+Map_ExplodeSHC_4_End
+
 	even

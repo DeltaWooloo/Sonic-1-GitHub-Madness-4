@@ -13,6 +13,7 @@ dbugmenuFlag2	ds.b 1
 	!org -
 ; ---------------------------------------------------------------------------
 GM_DebugMenu:
+		move.b	#0,vscroll_mode
 		move.b	#bgm_Fade,d0
 		bsr.w	QueueSound2		; stop music
 		bsr.w	PaletteFadeOut
@@ -199,6 +200,7 @@ DebuggerMenu_Controls:
 		beq.s	.snd_checkB
 		move.b	(v_dbgmenu_sndid).w,d0
 		add.b	#$10,d0
+		bsr.w	.fixID			;!@GD: Fix bounds of new ID
 		move.b	d0,(v_dbgmenu_sndid).w
 		bra.w	DebuggerMenu_Redraw
 .snd_checkB:
@@ -206,6 +208,7 @@ DebuggerMenu_Controls:
 		beq.s	.checklr
 		move.b	(v_dbgmenu_sndid).w,d0
 		sub.b	#$10,d0
+		bsr.w	.fixID			;!@GD: Fix bounds of new ID
 		move.b	d0,(v_dbgmenu_sndid).w
 		bra.w	DebuggerMenu_Redraw
 
@@ -216,6 +219,7 @@ DebuggerMenu_Controls:
 		beq.s	.pcm_checkB
 		move.b	(v_dbgmenu_pcmid).w,d0
 		add.b	#$10,d0
+		bsr.w	.fixID			;!@GD: Fix bounds of new ID
 		move.b	d0,(v_dbgmenu_pcmid).w
 		bra.w	DebuggerMenu_Redraw
 .pcm_checkB:
@@ -223,6 +227,7 @@ DebuggerMenu_Controls:
 		beq.s	.checklr
 		move.b	(v_dbgmenu_pcmid).w,d0
 		sub.b	#$10,d0
+		bsr.w	.fixID					;!@GD: Fix bounds of new ID
 		move.b	d0,(v_dbgmenu_pcmid).w
 		bra.w	DebuggerMenu_Redraw
 .checklr:
@@ -299,6 +304,35 @@ DebuggerMenu_Controls:
 		bsr.w	DebuggerMenu_Redraw
 		rts
 		
+;!@ GD: Subroutine to ensure thingID is within bounds between min and max, especially for A/B +-10
+.fixID:
+		move.w	(v_levselitem).w,d1
+		mulu.w	#12,d1			; 12 bytes per entry
+		lea	Debugger_Data(pc),a1
+		adda.w	d1,a1
+		movea.l	(a1)+,a2		; RAM address
+		move.b	(a1)+,d5		; step
+		move.b	(a1)+,d6		; min
+		move.b	(a1)+,d7		; max
+				
+		;Check against lower bound ID
+		cmp.b	d6,d0			;Is new ID (d0) < min
+		blo.s	.fixlo			;If so, branch (fix)
+		
+		;Check against upper bound ID
+		cmp.b	d7,d0			;Is new ID (d0) >= MAXDAC?
+		bhi.s	.fixhi			;If so, branch (fix)
+		bra.s	.good			
+		
+.fixlo:
+		move.b	d6,d0			;Set ID to min
+		bra.s	.good
+		
+.fixhi:
+		move.b	d7,d0			;Set ID to max
+		;No adjustments to make; squidward smells GOOD
+.good:
+		rts
 ; End of function DebuggerMenu_Controls
 
 ; ---------------------------------------------------------------------------
@@ -332,7 +366,7 @@ DebuggerMenu_LoadGame:
 
 DebuggerMenu_Act4EnablerTable:
 		dc.b	$0		; GHZ
-		dc.b	$0		; LZ
+		dc.b	$1		; LZ
 		dc.b	$1		; MZ
 		dc.b	$0		; SLZ
 		dc.b	$0		; SYZ
@@ -354,7 +388,8 @@ DebuggerMenu_PlaySound:
 		bsr.w	QueueSound1
 		rts
 
-DebuggerMenu_PlayPCM:
+DebuggerMenu_PlayPCM:	
+		stopPCM
 		move.b	(v_dbgmenu_pcmid).w,d0
 		jmp	MegaPCM_PlaySample
 
@@ -393,11 +428,11 @@ Debugger_Data:
 		dc.l	0
 .soundtest:
 		dc.l	v_dbgmenu_sndid		; SOUND TEST (C=play, A=+$10, B=-$10)
-		dc.b	$01,$00,$FF,$00		; step 1, range 0-$FF
+		dc.b	$01,SNDMIN,SNDMAX,$00		; step 1, range SNDMIN to SNDMAX
 		dc.l	0
 .pcmtest:
-		dc.l	v_dbgmenu_pcmid		; SOUND TEST (C=play, A=+$10, B=-$10)
-		dc.b	$01,$81,$FF,$00		; step 1, range 0-$FF
+		dc.l	v_dbgmenu_pcmid			; SOUND TEST (C=play, A=+$10, B=-$10)
+		dc.b	$01,DACMIN,DACMAX,$00	; step 1, range DACMIN to DACMAX
 		dc.l	0
 .end:
 
@@ -544,6 +579,7 @@ GamemodeNameTable:
 		dc.w	.Skipper-.t
 		dc.w	.Advert-.t
 		dc.w	.Giovanni-.t
+		dc.w	.NewSSRG-.t		
 		rept ( (GameModeArray_End-GameModeArray)-(((*)-.t)*2) )/4
 		dc.w	.Placeholder-.t
 		endr
@@ -571,6 +607,7 @@ GamemodeNameTable:
 .Skipper:	dc.b	"SPLASH SKIPPER  "
 .Advert:	dc.b	"ADVERTISEMENTS  "
 .Giovanni:	dc.b	"GIOVANNI.GEN    "
+.NewSSRG:	dc.b	"NEW SSRG SCREEN "
 .Placeholder:	dc.b	"PLACEHOLDER NAME"
 		even
 

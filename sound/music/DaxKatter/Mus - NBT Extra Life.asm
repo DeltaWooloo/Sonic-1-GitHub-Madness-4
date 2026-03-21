@@ -1,8 +1,8 @@
 BGM_1UP_Header:
-	smpsHeaderStartSong	1
+	smpsHeaderStartSong	3
 	smpsHeaderVoice		BGM_1UP_Voices
 	smpsHeaderChan		$06, $03
-	smpsHeaderTempo		$02, $07
+	smpsHeaderTempo		$02, $24
 
 	smpsHeaderDAC	BGM_1UP_DAC
 	smpsHeaderFM	BGM_1UP_FM1,	$00, $08
@@ -10,9 +10,9 @@ BGM_1UP_Header:
 	smpsHeaderFM	BGM_1UP_FM3,	$00, $18
 	smpsHeaderFM	BGM_1UP_FM4,	$00, $18
 	smpsHeaderFM	BGM_1UP_FM5,	$00, $18
-	smpsHeaderPSG	BGM_1UP_PSG1,	$F4, $00, $00, uptone_01
-	smpsHeaderPSG	BGM_1UP_PSG2,	$F4, $06, $00, uptone_01
-	smpsHeaderPSG	BGM_1UP_PSG3,	$F4, $00, $00, uptone_03
+	smpsHeaderPSG	BGM_1UP_PSG1,	$00, $00, $00, uptone_01
+	smpsHeaderPSG	BGM_1UP_PSG2,	$00, $06, $00, uptone_01
+	smpsHeaderPSG	BGM_1UP_PSG3,	$00, $00, $00, uptone_03
 
 	; Loop Pattern :  FFFFFFFF
 	; End Pattern :  01

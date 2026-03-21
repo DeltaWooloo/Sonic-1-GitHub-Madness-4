@@ -306,7 +306,7 @@ loc_18566:
 
 loc_1856C:
 		clr.w	obVelY(a0)
-		move.w	#bgm_MZ,d0
+		move.w	#bgm_Easton,d0
 		jsr	(QueueSound1).l		; play MZ music
 
 loc_1857A:

@@ -204,7 +204,7 @@ Got_SBZ2:
 		bne.w	DeleteObject
 		addq.b	#2,obRoutine(a0)
 		clr.b	(f_lockctrl).w	; unlock controls
-		move.w	#bgm_FZ,d0
+		move.w	#bgm_Final,d0
 		jmp	(QueueSound1).l	; play FZ music
 ; ===========================================================================
 

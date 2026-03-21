@@ -139,7 +139,7 @@ loc_EC86:
 		addq.b	#2,obRoutine(a0)
 
 fuckyou76:
-                 tst.w	(v_debuguse).w	; is debug mode	on?
+		tst.w	(v_debuguse).w	; is debug mode	on?
 		 bne.w	locret_ECEE	; if yes, branch
 		 btst	#1,(v_player+obStatus).w
 		 bne.s	loc_EC70fuck
@@ -192,7 +192,8 @@ GotThroughAct:
 		move.w	(v_rings).w,d0	; load number of rings
 		mulu.w	#10,d0		; multiply by 10
 		move.w	d0,(v_ringbonus).w ; set ring bonus
-		pcm 	dBoingBoing
+		move.b	#bgm_ActClear,d0
+		jsr	(QueueSound2).l
 
 locret_ECEE:
 		rts

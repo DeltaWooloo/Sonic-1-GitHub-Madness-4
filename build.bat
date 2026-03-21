@@ -1,20 +1,46 @@
-REM Custom build process to re-compress all art assets, for space saving$
-REM Also custom for selectively compiling SMPS2ASM files
+REM Custom build process with features:
+REM 1. Re-compress all art assets, for space saving$
+REM 2. Selectively compiling SMPS2ASM files
+REM 3. Post-build padding the ROM to the nearest MB, and fixing the checksum
 
 Set Recomp=0
 Set musiccomp=0
+Set fix=0
 IF %Recomp% EQU 0 GOTO SKIP
 
 cls
 
 cd "_gamemode"
+cd "#SSRG"
+call recmp.bat
+cd ..
+cd "advert"
+call recmp.bat
+cd ..
 cd "damn"
 call recmp.bat
-cd ..\
-
-cd "ThanatosCredits"
+cd ..
+cd "SHC + DeltaW"
+cd "ART"
+call recmp.bat
+cd ..
+cd "TILEMAP"
 call recmp.bat
 cd ..\..\
+cd "Team Overload"
+call recmp.bat
+cd ..
+cd "ThanatosCredits"
+call recmp.bat
+cd ..
+cd "TSH Splash"
+cd "ART"
+call recmp.bat
+cd ..
+cd "TILEMAP"
+call recmp.bat
+cd ..\..\
+
 
 cd "artkos"
 call recmp.bat
@@ -47,6 +73,11 @@ cd "Nemesis"
 call recmp.bat
 cd ..\..\
 
+cd "char_assets"
+cd "hud"
+call recmp.bat
+cd ..\..\
+
 cd "clinton fucker"
 call recmp.bat
 cd ..
@@ -68,6 +99,17 @@ cd "winxp"
 call recmp.bat
 cd ..\..
 
+cd "coniobjs"
+call recmp.bat
+cd "eiza"
+call recmp.bat
+cd ..\..
+
+cd "coniobjs"
+cd "eiza"
+call recmp.bat
+cd ..\..
+
 cd "ContinueScreen"
 cd "Graphics\Tile"
 cd "Decision"
@@ -85,13 +127,18 @@ cd "Remi"
 call recmp.bat
 cd ..\..\
 
-cd "DAX_Splash"
+cd "DAX"
+cd "Splash"
 cd "Art"
 call recmp.bat
 cd ..
 cd "Maps"
 call recmp.bat
-cd ..\..\
+cd ..\..\..\
+
+cd "dotgen"
+call recmp.bat
+cd ..
 
 cd "eurosega"
 call recmp.bat
@@ -101,8 +148,18 @@ cd "LiquidSplashes"
 cd "2kki"
 call recmp.bat
 cd ..
+cd "ATOownscreen"
+cd "Art"
+call recmp.bat
+cd ..
+cd "Eni"
+call recmp.bat
+cd ..\..\
 cd "EagleSoft"
 call recmp.bat
+cd ..
+cd "funny butthole"
+call recmp.bat"
 cd ..
 cd "Rerto"
 cd "GFX"
@@ -128,6 +185,10 @@ cd "splash\data\"
 call recmp.bat
 cd ..\..\..
 
+cd "NMRTT"
+call recmp.bat
+cd ..
+
 cd "segadoodoo"
 call recmp.bat
 cd ..
@@ -143,18 +204,33 @@ cd ..
 cd "tilemaps"
 call recmp.bat
 cd ..
-
 :SKIP
 
-if %MusicComp% equ 0 goto skip2
+if %MusicComp% equ 0 goto SKIP2
 
 cd "sound"
 call compile_sound.bat
 cd ..
 
-:skip2
+:SKIP2
 
 @ECHO OFF
 REM // This file has been gutted and replaced with the Lua build script.
 REM // It has been kept around for ease-of-use for Windows users.
 "build_tools/Lua/lua.exe" build.lua || pause REM // Pause on Lua parse failure so that the user can read the error message.
+
+if %fix% equ 0 goto SKIP3
+REM Pad the ROMs to the nearest MB (real hardware)
+REM GD: NOT YET WORKING
+REM call rompad.exe "gm4built.gen" 0 0
+REM call rompad.exe "gm4built.prev.gen" 0 0
+REM call rompad.exe "gm4built.debug.gen" 0 0
+REM call rompad.exe "gm4built.debug.prev.gen" 0 0
+
+REM Fix the ROM checksum (real hardware TMSS/security) hardware)
+call fixheadr.exe "gm4built.gen"
+call fixheadr.exe "gm4built.prev.gen"
+call fixheadr.exe "gm4built.debug.gen"
+call fixheadr.exe "gm4built.debug.prev.gen"
+:SKIP3
+REM EOF

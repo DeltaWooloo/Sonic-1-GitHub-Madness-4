@@ -11,10 +11,10 @@
 ReactToItem_Other:
 		move.w	obX(a0), d2	; load host x-axis position
 		move.w	obY(a0), d3	; load host y-axis position
-		subq.w	#8,d2
+;		subq.w	#8,d2
 		moveq	#0,d5
 		move.b	obHeight(a0),d5	; load host height
-		subq.b	#3,d5
+;		subq.b	#3,d5
 		sub.w	d5,d3
 
 		
@@ -164,6 +164,8 @@ ReactToItem:
 .withiny:
 .chktype:
 		move.b	obColType(a1),d1 ; load collision type
+		cmpi.b	#$A2,d1		; is obColType $A2?
+		beq.w	KillSonic	; if yes, branch
 		andi.b	#$C0,d1		; is obColType $40 or higher?
 		beq.w	React_Enemy	; if not, branch
 		cmpi.b	#$C0,d1		; is obColType $C0 or higher?
@@ -380,29 +382,18 @@ HurtSonic:
 		move.w	#0,obInertia(a0)
 		move.b	#id_Hurt,obAnim(a0)
 		move.w	#120,flashtime(a0)	; set temp invincible time to 2 seconds
-		cmpi.b	#chrid_maniac,v_characterid
-		beq.s	.Maniac
-		pcm	dFuck
-		bra.s	.Skip
-.Maniac:	
-		pcm	dGayNeil
-	if FixBugs
-.Skip
+
+		; hurt pcm
+		move.w	#ch_hurtpcm,d0
+		jsr	(GetOtherPlayerData).l
+		jsr	(MegaPCM_PlaySample).l
+
 		move.w	#sfx_HitSpikes,d0
 		cmpi.b	#id_Spikes,obID(a2)	; was damage caused by spikes?
 		beq.s	.sound
 		cmpi.b	#id_Harpoon,obID(a2)	; was damage caused by LZ harpoon?
 		beq.s	.sound
 		move.w	#sfx_Death,d0
-	else
-		; This is bugged: the harpoon will never play the spike sound!
-		move.w	#sfx_Death,d0
-		cmpi.b	#id_Spikes,obID(a2)	; was damage caused by spikes?
-		bne.s	.sound
-		cmpi.b	#id_Harpoon,obID(a2)	; was damage caused by LZ harpoon?
-		bne.s	.sound
-		move.w	#sfx_HitSpikes,d0
-	endif
 
 .sound:
 		jsr	(QueueSound2).l
@@ -449,28 +440,18 @@ KillSonic:
 	endif
 		move.b	#id_Null,obAnim(a0)
 		bset	#7,obGfx(a0)
-		move.b	#dTrevor, d0
-		jsr	(MegaPCM_PlaySample).l
-		move.b	#$8, d1
-		jmp	(GHM3Explode_Custom).l
-		
-	if FixBugs
-		move.w	#sfx_HitSpikes,d0 ; play spikes death sound
+
+		move.b	#dChicken,d0		; play spikes death sound
 		cmpi.b	#id_Spikes,obID(a2)	; check if you were killed by spikes
 		beq.s	.sound
 		cmpi.b	#id_Harpoon,obID(a2)	; check if you were killed by a harpoon
 		beq.s	.sound
-		move.w	#sfx_Death,d0	; play normal death sound
-	else
-		; This fails to check for the harpoon object.
-		move.w	#sfx_Death,d0	; play normal death sound
-		cmpi.b	#id_Spikes,obID(a2)	; check if you were killed by spikes
-		bne.s	.sound
-		move.w	#sfx_HitSpikes,d0 ; play spikes death sound
-	endif
+		move.b	#dFannys, d0
 
 .sound:
-		jsr	(QueueSound2).l
+		jsr	(MegaPCM_PlaySample).l
+		move.b	#$8, d1
+		jmp	(GHM3Explode_Custom).l
 
 .dontdie:
 		moveq	#-1,d0

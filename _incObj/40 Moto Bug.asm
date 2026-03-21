@@ -20,6 +20,12 @@ Moto_Main:	; Routine 0
 		move.b	#4,obRender(a0)
 		move.b	#4,obPriority(a0)
 		move.b	#$14,obActWid(a0)
+		cmpi.b	#id_CBZ,(v_zone).w		; is zone CBZ?
+		bne.s	.NotCBZ	; if not, branch
+		move.l	#Map_MotoCBZ,obMap(a0)
+		move.w	#make_art_tile(ArtTile_CBZMoto_Bug,0,0),obGfx(a0)
+		move.b	#$E,obActWid(a0)
+.NotCBZ:
 		tst.b	obAnim(a0)	; is object a smoke trail?
 		bne.s	.smoke		; if yes, branch
 		move.b	#$E,obHeight(a0)
@@ -83,6 +89,8 @@ Moto_ActIndex:	dc.w .move-Moto_ActIndex
 		cmpi.w	#$C,d1
 		bge.s	.pause
 		add.w	d1,obY(a0)	; match object's position with the floor
+		cmpi.b	#id_CBZ,(v_zone).w		; is zone CBZ?
+		beq.s	.nosmoke	; if not, branch
 		subq.b	#1,.smokedelay(a0)
 		bpl.s	.nosmoke
 		move.b	#$F,.smokedelay(a0)

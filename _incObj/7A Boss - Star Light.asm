@@ -316,7 +316,7 @@ loc_18BAE:
 
 loc_18BB4:
 		clr.w	obVelY(a0)
-		move.w	#bgm_SLZ,d0
+		move.w	#bgm_BadEmerald,d0
 		jsr	(QueueSound1).l		; play SLZ music
 
 loc_18BC2:

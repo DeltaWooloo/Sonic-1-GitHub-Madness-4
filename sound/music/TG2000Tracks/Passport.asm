@@ -12,7 +12,7 @@ Passport_Header:
 	smpsHeaderFM	Passport_FM5,	smpsPitch00,	$00
 	smpsHeaderPSG       Passport_PSG1,	$00, $00, $00, $00
 	smpsHeaderPSG       Passport_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       Passport_PSG3,	$00, $00, $00, $00
+	smpsHeaderPSG       Passport_PSG3,	$0C, $00, $00, $00
 	dc.b		$00,	$00,	$00,	$00
 
 ; FM1 Data

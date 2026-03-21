@@ -2,6 +2,7 @@
 ; Object 38 - shield and invincibility stars
 ; ---------------------------------------------------------------------------
 
+shlastframe	= $34
 ShieldItem:
 		moveq	#0,d0
 		move.b	obRoutine(a0),d0
@@ -19,6 +20,8 @@ Shi_Main:	; Routine 0
 		move.b	#4,obRender(a0)
 		move.b	#1,obPriority(a0)
 		move.b	#$10,obActWid(a0)
+		move.b	#1,obFrame(a0)
+		move.b	#-1,shlastframe(a0)	; dgfx init
 		tst.b	obAnim(a0)	; is object a shield?
 		bne.s	.stars		; if not, branch
 		move.w	#make_art_tile(ArtTile_Shield,0,0),obGfx(a0)	; shield specific code
@@ -41,8 +44,8 @@ Shi_Shield:	; Routine 2
 		move.b	(v_player+obStatus).w,obStatus(a0)
 		lea	(Ani_Shield).l,a1
 		jsr	(AnimateSprite).l
-		jmp	(DisplaySprite).l
-
+		jsr	(DisplaySprite).l
+		bra	ShieldRunDGFX
 .remove:
 		rts
 
@@ -101,3 +104,21 @@ Shi_Stars:	; Routine 4
 
 Shi_Start_Delete:	
 		jmp	(DeleteObject).l
+
+; ---------------------------------------------------------------------------
+; Run shield DGFX script
+; ---------------------------------------------------------------------------
+
+ShieldRunDGFX:
+		moveq	#0,d0
+		moveq	#0,d4
+		move.b	obFrame(a0),d0			; get Sonic's current frame
+		cmp.b	shlastframe(a0),d0		; has the frame changed?
+		beq.s	.end				; if not, nothing to do
+		move.b	d0,shlastframe(a0)		; update cached frame number
+		move.l	#Dgfx_Shield,a2			; load Sonic DPLC table
+		move.w	#ArtTile_Shield*tile_size,d4	; starting VRAM tile
+		move.l	#Art_Shield,d6			; base Sonic art pointer
+		jmp	(LoadDynPLC).l			; load DPLC
+.end:
+		rts	

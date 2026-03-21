@@ -425,7 +425,7 @@ loc_194DA:
 
 loc_194E0:
 		clr.w	obVelY(a0)
-		move.w	#bgm_SYZ,d0
+		move.w	#bgm_GCV2005,d0
 		jsr	(QueueSound1).l		; play SYZ music
 
 loc_194EE:

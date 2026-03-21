@@ -148,35 +148,54 @@ GM_Advert:
 		tst.w	(v_generictimer).w
 		bne.s	.mainloop
 .mainexit:
+;		if advertdebug==0
 		move.b	#bgm_Fade,d0
 		jsr	QueueSound2
+;		endif
 		jsr	PaletteWhiteOut
+		
+		;!@ GD: PCM SFX fix if in advert debugger
+		if advertdebug<0
+		move.b	#bgm_Stop,d0
+		jsr		(QueueSound2).l
+		stopPCM
+		endif
+		
 		move.l	(sp)+,a2
 		rts
 ; ---------------------------------------------------------------------------
 .table:	; seconds, seconds to skip, art, map, palette, SMPS sound ID, MPCM sound ID
-		advertdata 30,5,Ad_Lactose.art,Ad_Lactose.fg,Ad_Lactose.pal,bgm_ClintonFuck,0
+;		advertdata 30,5,Ad_Lactose.art,Ad_Lactose.fg,Ad_Lactose.pal,bgm_ClintonFuck,0
 		advertdata 5,10,Ad_CRT.art,Ad_CRT.fg,Ad_CRT.pal,bgm_PuyoReject,0
-		advertdata 30,5,Ad_Deltarune.art,Ad_Deltarune.fg,Ad_Deltarune.pal,bgm_DeltaTale,0
+;		advertdata 30,5,Ad_Deltarune.art,Ad_Deltarune.fg,Ad_Deltarune.pal,bgm_DeltaTale,0
 		advertdata 10,10,Ad_3SonicSonic.art,Ad_3SonicSonic.fg,Ad_3SonicSonic.pal,bgm_LG,0
-		advertdata 5,10,Ad_YuriPropaganda.art,Ad_YuriPropaganda.fg,Ad_YuriPropaganda.pal,bgm_LZ,0
+;		advertdata 5,10,Ad_YuriPropaganda.art,Ad_YuriPropaganda.fg,Ad_YuriPropaganda.pal,bgm_Dungeon3,0
 		advertdata 30,5,Ad_Eggblock.art,Ad_Eggblock.fg,Ad_Eggblock.pal,bgm_Continue,0
-		advertdata 30,5,Ad_Willys.art,Ad_Willys.fg,Ad_Willys.pal,bgm_GHZ,0
-		advertdata 15,5,Ad_GameStar.art,Ad_GameStar.fg,Ad_GameStar.pal,bgm_NewShop,0
+;		advertdata 30,5,Ad_Willys.art,Ad_Willys.fg,Ad_Willys.pal,bgm_MWaterS,0
+;		advertdata 15,5,Ad_GameStar.art,Ad_GameStar.fg,Ad_GameStar.pal,bgm_NewShop,0
 		advertdata 30,10,Ad_HK97.art,Ad_HK97.fg,Ad_HK97.pal,bgm_ILBT,0
 		advertdata 10,10,Ad_Craig.art,Ad_Craig.fg,Ad_Craig.pal,bgm_LG,0
 		advertdata 30,10,Ad_Carbuncle.art,Ad_Carbuncle.fg,Ad_Carbuncle.pal,bgm_Sunset,0
-		advertdata 30,5,Ad_Support.art,Ad_Support.fg,Ad_Support.pal,bgm_ChickenDance,0
+;		advertdata 30,5,Ad_Support.art,Ad_Support.fg,Ad_Support.pal,bgm_ChickenDance,0
 		advertdata 12,5,Ad_Tonic.art,Ad_Tonic.fg,Ad_Tonic.pal,bgm_Elevator,0
 		advertdata 30,5,Ad_SonicUnderground.art,Ad_SonicUnderground.fg,Ad_SonicUnderground.pal,bgm_SonUnderground,0
-		advertdata 30,5,Ad_RaidShadowLegends.art,Ad_RaidShadowLegends.fg,Ad_RaidShadowLegends.pal,bgm_Easton,0
-		advertdata 30,10,Ad_TamperThingy.art,Ad_TamperThingy.fg,Ad_TamperThingy.pal,bgm_Basillica,0
-		advertdata 3,3,Ad_Intel.art,Ad_Intel.fg,Ad_Intel.pal,0,dIntel
+;		advertdata 30,5,Ad_RaidShadowLegends.art,Ad_RaidShadowLegends.fg,Ad_RaidShadowLegends.pal,bgm_Easton,0
+		advertdata 30,5,Ad_TamperThingy.art,Ad_TamperThingy.fg,Ad_TamperThingy.pal,bgm_PuyoReject,0
+		
+		;!@ GD: Sonic Soup adverts
+;		advertdata 5,1,Ad_GenesisCan1.art,Ad_GenesisCan1.fg,Ad_GenesisCan1.pal,0,dGenesisCan1
+;		advertdata 5,1,Ad_GenesisCan2.art,Ad_GenesisCan2.fg,Ad_GenesisCan2.pal,0,dGenesisCan2
+		advertdata 8,1,Ad_GenesisCan3.art,Ad_GenesisCan3.fg,Ad_GenesisCan3.pal,0,dGenesisCan3
+;		advertdata 60+35,5,Ad_Nep5.art,Ad_Nep5.fg,Ad_Nep5.pal,bgm_NepAnime,0
+
+;		advertdata 3,3,Ad_Intel.art,Ad_Intel.fg,Ad_Intel.pal,0,dIntel ;WHYYYYYYYYYYYYY
 		advertdata 30,5,Ad_ElmLab.art,Ad_ElmLab.fg,Ad_ElmLab.pal,bgm_NewBarkTown,0
-		advertdata 5,10,Ad_VH.art,Ad_VH.fg,Ad_VH.pal,bgm_LZ,0
-		advertdata 3,8,Ad_SuperChallenges.art,Ad_SuperChallenges.fg,Ad_SuperChallenges.pal,bgm_Son1UP,0
+		advertdata 5,10,Ad_VH.art,Ad_VH.fg,Ad_VH.pal,bgm_Dungeon3,0
+		advertdata 3,8,Ad_SuperChallenges.art,Ad_SuperChallenges.fg,Ad_SuperChallenges.pal,bgm_Son1UP,0		
 		advertdata 5,10,Ad_IWBTH.art,Ad_IWBTH.fg,Ad_IWBTH.pal,bgm_GEMSHill,0
-		advertdata 30,5,Ad_Limited.art,Ad_Limited.fg,Ad_Limited.pal,bgm_SYZ,0
+		advertdata 30,5,Ad_Limited.art,Ad_Limited.fg,Ad_Limited.pal,bgm_LimitedYard,0				; I plan to change the song to Final Limit
+		advertdata 30,5,Ad_Atgame.art,Ad_Atgame.fg,Ad_Atgame.pal,bgm_BomerDude,0 ;pls dont touch this very beautiful ad
+		advertdata 10,10,Ad_FartBaby.art,Ad_FartBaby.fg,Ad_FartBaby.pal,bgm_LG,0
 .tablee:
 .eyecatch1:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg1,Ad_Eyecatch.pal,0,dRightBack
 .eyecatch2:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg2,Ad_Eyecatch.pal,bgm_EuroSega,0
@@ -187,11 +206,11 @@ Ad_Eyecatch:
 .fg2:		binclude "_gamemode/advert/eyecatch-map2.eni"
 .art:		binclude "_gamemode/advert/eyecatch-art.nem"
 		even
-Ad_Lactose:
-.pal:		binclude "_gamemode/advert/ad-lactose-pal.unc"
-.fg:		binclude "_gamemode/advert/ad-lactose-map.eni"
-.art:		binclude "_gamemode/advert/ad-lactose-art.nem"
-		even
+;Ad_Lactose:
+;.pal:		binclude "_gamemode/advert/ad-lactose-pal.unc"
+;.fg:		binclude "_gamemode/advert/ad-lactose-map.eni"
+;.art:		binclude "_gamemode/advert/ad-lactose-art.nem"
+;		even
 
 Ad_CRT:
 .pal:		binclude "_gamemode/advert/ad-CRT-pal.unc"
@@ -199,101 +218,140 @@ Ad_CRT:
 .art:		binclude "_gamemode/advert/ad-CRT-art.nem"
 		even
 
-Ad_Deltarune:
-.pal:		binclude "_gamemode/advert/ad-deltarune-pal.unc"
-.fg:		binclude "_gamemode/advert/ad-deltarune-map.eni"
-.art:		binclude "_gamemode/advert/ad-deltarune-art.nem"
-		even
+;Ad_Deltarune:
+;.pal:		binclude "_gamemode/advert/ad-deltarune-pal.unc"
+;.fg:		binclude "_gamemode/advert/ad-deltarune-map.eni"
+;.art:		binclude "_gamemode/advert/ad-deltarune-art.nem"
+;		even
+
 Ad_3SonicSonic:
 .pal:		binclude "_gamemode/advert/ad-3ss-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-3ss-map.eni"
 .art:		binclude "_gamemode/advert/ad-3ss-art.nem"
 		even
-Ad_YuriPropaganda:
-.pal:		binclude "_gamemode/advert/ad-yuri-pal.unc"
-.fg:		binclude "_gamemode/advert/ad-yuri-map.eni"
-.art:		binclude "_gamemode/advert/ad-yuri-art.nem"
-		even
+
+;Ad_YuriPropaganda:
+;.pal:		binclude "_gamemode/advert/ad-yuri-pal.unc"
+;.fg:		binclude "_gamemode/advert/ad-yuri-map.eni"
+;.art:		binclude "_gamemode/advert/ad-yuri-art.nem"
+;		even
+
 Ad_Eggblock:
 .pal:		binclude "_gamemode/advert/ad-eggblock-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-eggblock-map.eni"
 .art:		binclude "_gamemode/advert/ad-eggblock-art.nem"
 		even
-Ad_Willys:
-.pal:		binclude "_gamemode/advert/ad-willys-pal.unc"
-.fg:		binclude "_gamemode/advert/ad-willys-map.eni"
-.art:		binclude "_gamemode/advert/ad-willys-art.nem"
-		even
-Ad_GameStar:
-.pal:		binclude "_gamemode/advert/ad-gamestar-pal.unc"
-.fg:		binclude "_gamemode/advert/ad-gamestar-map.eni"
-.art:		binclude "_gamemode/advert/ad-gamestar-art.nem"
-		even
+
+;Ad_Willys:
+;.pal:		binclude "_gamemode/advert/ad-willys-pal.unc"
+;.fg:		binclude "_gamemode/advert/ad-willys-map.eni"
+;.art:		binclude "_gamemode/advert/ad-willys-art.nem"
+;		even
+
+;Ad_GameStar:
+;.pal:		binclude "_gamemode/advert/ad-gamestar-pal.unc"
+;.fg:		binclude "_gamemode/advert/ad-gamestar-map.eni"
+;.art:		binclude "_gamemode/advert/ad-gamestar-art.nem"
+;		even
+
 Ad_Craig:
 .pal:		binclude "_gamemode/advert/ad-craig-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-craig-map.eni"
 .art:		binclude "_gamemode/advert/ad-craig-art.nem"
 		even
+
 Ad_Carbuncle:
 .pal:		binclude "_gamemode/advert/ad-carbuncle-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-carbuncle-map.eni"
 .art:		binclude "_gamemode/advert/ad-carbuncle-art.nem"
 		even
 
-Ad_Support:
-.pal:		binclude "_gamemode/advert/Pal - Support.bin"
-.fg:		binclude "_gamemode/advert/Map - Support.eni"
-.art:		binclude "_gamemode/advert/Art - Support.nem"
-		even
-Ad_RaidShadowLegends:
-.pal:		binclude "_gamemode/advert/ad-raidshadowlegends-pal.unc"
-.fg:		binclude "_gamemode/advert/ad-raidshadowlegends-map.eni"
-.art:		binclude "_gamemode/advert/ad-raidshadowlegends-art.nem"
-		even
+;Ad_Support:
+;.pal:		binclude "_gamemode/advert/Pal - Support.bin"
+;.fg:		binclude "_gamemode/advert/Map - Support.eni"
+;.art:		binclude "_gamemode/advert/Art - Support.nem"
+;		even
+
+;Ad_RaidShadowLegends:
+;.pal:		binclude "_gamemode/advert/ad-raidshadowlegends-pal.unc"
+;.fg:		binclude "_gamemode/advert/ad-raidshadowlegends-map.eni"
+;.art:		binclude "_gamemode/advert/ad-raidshadowlegends-art.nem"
+;		even
+
 Ad_TamperThingy:
 .pal:		binclude "_gamemode/advert/ad-TamperThingy-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-TamperThingy-map.eni"
 .art:		binclude "_gamemode/advert/ad-TamperThingy-art.nem"
 		even
+
 Ad_Tonic:
 .pal:		binclude "_gamemode/advert/Tonic Pal.bin"
 .fg:		binclude "_gamemode/advert/Tonic Map.eni"
 .art:		binclude "_gamemode/advert/Tonic Art.nem"
 		even
+
 Ad_SonicUnderground:
 .pal:		binclude "_gamemode/advert/ad-sonic-underground-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-sonic-underground-map.eni"
 .art:		binclude "_gamemode/advert/ad-sonic-underground-art.nem"
 		even
+
 Ad_HK97:
 .pal:		binclude "_gamemode/advert/ad-hong-kong-97-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-hong-kong-97-map.eni"
 .art:		binclude "_gamemode/advert/ad-hong-kong-97-art.nem"
 		even
 
-Ad_Intel:
-.pal:		binclude "_gamemode/advert/ad-Intel-pal.unc"
-.fg:		binclude "_gamemode/advert/ad-Intel-map.eni"
-.art:		binclude "_gamemode/advert/ad-Intel-art.nem"
-		even
+;!@ GD: Sonic Soup advert
+;Ad_GenesisCan1:
+;.pal:		binclude "_gamemode/advert/ad-GenesisCan1-pal.unc"
+;.fg:		binclude "_gamemode/advert/ad-GenesisCan1-map.eni"
+;.art:		binclude "_gamemode/advert/ad-GenesisCan1-art.nem"
+;		even
+
+;Ad_GenesisCan2:
+;.pal:		binclude "_gamemode/advert/ad-GenesisCan2-pal.unc"
+;.fg:		binclude "_gamemode/advert/ad-GenesisCan2-map.eni"
+;.art:		binclude "_gamemode/advert/ad-GenesisCan2-art.nem"
+;		even
+
+;Ad_Intel:
+;.pal:		binclude "_gamemode/advert/ad-Intel-pal.unc"
+;.fg:		binclude "_gamemode/advert/ad-Intel-map.eni"
+;.art:		binclude "_gamemode/advert/ad-Intel-art.nem"
+;		even
 
 Ad_ElmLab:
 .pal:		binclude "_gamemode/advert/ad-ElmLab-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-ElmLab-map.eni"
 .art:		binclude "_gamemode/advert/ad-ElmLab-art.nem"
 		even
-		
+
 Ad_VH:
 .pal:		binclude "_gamemode/advert/ad-VH-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-VH-map.eni"
 .art:		binclude "_gamemode/advert/ad-VH-art.nem"
 		even
-		
+
 Ad_SuperChallenges:
 .pal:		binclude "_gamemode/advert/ad-super-challenges-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-super-challenges-map.eni"
 .art:		binclude "_gamemode/advert/ad-super-challenges-art.nem"
 		even
+
+Ad_GenesisCan3:
+.pal:		binclude "_gamemode/advert/ad-GenesisCan3-pal.unc"
+.fg:		binclude "_gamemode/advert/ad-GenesisCan3-map.eni"
+.art:		binclude "_gamemode/advert/ad-GenesisCan3-art.nem"
+		even
+
+;!@ Neptunia 5: The Next Dimension video game ad
+;Ad_Nep5:
+;.pal:		binclude "_gamemode/advert/ad-nep5-pal.unc"
+;.fg:		binclude "_gamemode/advert/ad-nep5-map.eni"
+;.art:		binclude "_gamemode/advert/ad-nep5-art.nem"
+;		even
+
 Ad_IWBTH:
 .pal:		binclude "_gamemode/advert/ad-IWBTH-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-IWBTH-map.eni"
@@ -304,4 +362,16 @@ Ad_Limited:
 .pal:		binclude "_gamemode/advert/ad-Limited-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-Limited-map.eni"
 .art:		binclude "_gamemode/advert/ad-Limited-art.nem"
-		even		
+		even
+
+Ad_Atgame:
+.pal:		binclude "_gamemode/advert/Atgame.bin"
+.fg:		binclude "_gamemode/advert/Atgame.eni"
+.art:		binclude "_gamemode/advert/Atgame.nem"
+		even
+
+Ad_FartBaby:
+.pal:		binclude "_gamemode/advert/ad-FartBaby-pal.unc"
+.fg:		binclude "_gamemode/advert/ad-FartBaby-map.eni"
+.art:		binclude "_gamemode/advert/ad-FartBaby-art.nem"
+		even

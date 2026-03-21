@@ -102,7 +102,7 @@ treasurecaves_Loop07:
 	smpsPan             panCenter, $00
 	dc.b	nRst, $0B
 	smpsPan             panCenter, $00
-	smpsStop
+	smpsJump	treasurecaves_DAC
 
 ; FM1 Data
 treasurecaves_FM1:
@@ -190,7 +190,7 @@ treasurecaves_Loop13:
 	dc.b	$0B
 	smpsPan             panCenter, $00
 	smpsSetvoice        $01
-	smpsStop
+	smpsJump	treasurecaves_Loop10
 
 ; FM2 Data
 treasurecaves_FM2:
@@ -285,9 +285,7 @@ treasurecaves_Loop0E:
 	smpsPan             panCenter, $00
 	smpsSetvoice        $00
 	dc.b	$0B
-	smpsPan             panCenter, $00
-	smpsSetvoice        $00
-	smpsStop
+	smpsJump	treasurecaves_FM2
 
 ; FM3 Data
 treasurecaves_FM3:
@@ -349,9 +347,7 @@ treasurecaves_Loop0B:
 	smpsPan             panCenter, $00
 	smpsSetvoice        $02
 	dc.b	$0B
-	smpsPan             panCenter, $00
-	smpsSetvoice        $02
-	smpsStop
+	smpsJump	treasurecaves_FM3
 
 ; FM4 Data
 treasurecaves_FM4:
@@ -448,7 +444,8 @@ treasurecaves_Loop09:
 	dc.b	$0B
 	smpsPan             panCenter, $00
 	smpsSetvoice        $03
-	smpsStop
+	smpsAlterVol        $F7
+	smpsJump	treasurecaves_FM4
 
 ; PSG1 Data
 treasurecaves_PSG1:
@@ -476,10 +473,8 @@ treasurecaves_Loop1E:
 	dc.b	$04, nAb1, nB0, nF1, $03, nAb1, $04
 	smpsLoop            $00, $03, treasurecaves_Loop1E
 	dc.b	nRst, $7F, $7F, $7F, $54
-	smpsPSGvoice        $00
 	dc.b	$0B
-	smpsPSGvoice        $00
-	smpsStop
+	smpsJump	treasurecaves_PSG1
 
 ; PSG3 Data
 treasurecaves_PSG3:
@@ -575,7 +570,8 @@ treasurecaves_Loop19:
 	dc.b	$0B, $0C, $0B
 	smpsPSGAlterVol     $01
 	dc.b	$52
-	smpsStop
+	smpsPSGAlterVol     $FE
+	smpsJump	treasurecaves_PSG3
 
 ; PSG2 Data
 treasurecaves_PSG2:

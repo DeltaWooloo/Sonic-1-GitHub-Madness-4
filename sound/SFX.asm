@@ -66,6 +66,9 @@ ptr_sndD2:	dc.l SoundD2
 ptr_sndD3:	dc.l SoundD3
 ptr_sndD4:	dc.l SoundD4
 ptr_sndD5:	dc.l SoundD5
+ptr_sndD6:	dc.l SoundD6
+ptr_sndD7:	dc.l SoundD7
+ptr_sndD8:	dc.l SoundD8
 
 ; ---------------------------------------------------------------------------
 ; Sound effect data
@@ -177,5 +180,11 @@ SoundD3:	include "sfx/TonicTongue.asm"
 SoundD4:	include "sfx/FC Blip.asm"
 		even
 SoundD5:	include "sfx/FC Select.asm"
+		even
+SoundD6:	include "sfx/Snd - Fall.asm"
+		even
+SoundD7:	include "sfx/Snd - Explosion Complete.asm"
+		even
+SoundD8:	include "sfx/VehiRev.asm"
 		even
 	END

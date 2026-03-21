@@ -50,6 +50,10 @@ PSG_Index:
 
 		dc.l PSG_DD_01, PSG_DD_02
 
+		dc.l PSG_SHC_01, PSG_SHC_02, PSG_SHC_03, PSG_SHC_04
+
+		dc.l PSG_S3_01, PSG_S3_0C, PSG_SA_0F
+
 PSG1:		dc.b 0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,$80
 	even
 
@@ -131,6 +135,49 @@ PSG_DD_01:	dc.b 0,2,7,$D,$F,$80
 PSG_DD_02:	dc.b 1,0,0,0,0,1,2,$80
 	even
 
+PSG_SHC_01:
+	dc.b	0,1,3,7,$10,$80
+	even
+
+PSG_SHC_02:
+	dc.b	0,0,0,0,1,1,1,1,2,2,3,3,4,5,5,6
+	dc.b	7,8,8,9,$A,$A,$B,$C,$D,$E,$F,$80
+	even
+
+PSG_SHC_03:
+	dc.b	0,0,0,0,1,2,2,2,2,3,3,3,4,4,5,5
+	dc.b	5,6,6,7,7,7,8,8,8,8,9,9,$A,$A,$A,$B
+	dc.b	$B,$C,$C,$D,$D,$E,$E,$F,$80
+	even
+
+PSG_SHC_04:
+	dc.b	0,1,1,2,3,4,5,6,7,8,$80
+	even
+
+PSG_S3_01:
+	dc.b	2,$F,$80
+	even
+
+PSG_S3_0C:
+	dc.b	0,0,1,1,3,3,4,5,$F,$80
+
+PSG_SA_0F:
+	dc.b	$A,9,9,9,9,9,9,9,8,8,8,8,8,8,8,7
+	dc.b	7,7,7,7,7,7,7,6,6,6,6,6,6,6,5,5
+	dc.b	5,5,5,5,5,4,4,4,4,4,4,4,4,3,3,3
+	dc.b	3,3,3,3,2,2,2,2,2,2,2,1,1,1,1,1
+	dc.b	1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	dc.b	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	dc.b	0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1
+	dc.b	1,2,2,2,2,2,2,2,3,3,3,3,3,3,3,4
+	dc.b	4,4,4,4,4,4,5,5,5,5,5,5,6,6,6,6
+	dc.b	6,6,6,7,7,7,7,7,7,7,8,8,8,8,8,8
+	dc.b	8,9,9,9,9,9,9,9,$A,$A,$A,$A,$A,$A,$B,$B
+	dc.b	$B,$B,$B,$B,$B,$C,$C,$C,$C,$C,$C,$C,$D,$D,$D,$D
+	dc.b	$D,$D,$D,$E,$E,$E,$E,$E,$E,$E,$F,$80
+	even
+
 ; ---------------------------------------------------------------------------
 ; New tempos for songs during speed shoes
 ; ---------------------------------------------------------------------------
@@ -205,8 +252,6 @@ UpdateMusic:
 		clr.b	SMPS_RAM.f_voice_selector(a6)
 		tst.b	SMPS_RAM.f_pausemusic(a6)		; is music paused?
 		bne.w	PauseMusic				; if yes, branch
-		subq.b	#1,SMPS_RAM.v_main_tempo_timeout(a6)	; Has main tempo timer expired?
-		bne.s	.skipdelay
 		jsr	TempoWait(pc)
 ; loc_71B9E:
 .skipdelay:
@@ -501,8 +546,11 @@ NoteTimeoutUpdate:
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
+
 ; sub_71DC6:
 DoModulation:
+		btst	#1,SMPS_Track.PlaybackControl(a5)		; Is note playing?
+		bne.s	.locnoret	; no - return
 		btst	#3,SMPS_Track.PlaybackControl(a5)	; Is modulation active?
 		beq.s	.locnoret				; Return if not
 		subq.b	#1,SMPS_Track.ModulationWait(a5)	; Update wait timeout
@@ -1777,7 +1825,10 @@ InitMusicPlayback:
 
 ; sub_7260C:
 TempoWait:
-		move.b	SMPS_RAM.v_main_tempo(a6),SMPS_RAM.v_main_tempo_timeout(a6)	; Reset main tempo timeout
+		move.b	SMPS_RAM.v_main_tempo(a6),d0
+		add.b	d0,SMPS_RAM.v_main_tempo_timeout(a6)
+		bcc.s	.skipdelay
+; delay them by 1 tick
 		lea	SMPS_RAM.v_music_track_ram+SMPS_Track.DurationTimeout(a6),a0	; note timeout
 		moveq	#SMPS_Track.len,d0
 		moveq	#SMPS_MUSIC_TRACK_COUNT-1,d1	; 1 DAC + 6 FM + 3 PSG tracks
@@ -1786,7 +1837,7 @@ TempoWait:
 		addq.b	#1,(a0)	; Delay note by 1 frame
 		adda.w	d0,a0	; Advance to next track
 		dbf	d1,.tempoloop
-
+.skipdelay:
 		rts
 ; End of function TempoWait
 

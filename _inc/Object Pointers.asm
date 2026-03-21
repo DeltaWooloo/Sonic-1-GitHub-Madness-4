@@ -5,8 +5,7 @@ ptr_SonicPlayer:	dc.l SonicPlayer	; $01
 ptr_Obj02:		dc.l NullObject
 ptr_Obj03:		dc.l NullObject
 ptr_Obj04:		dc.l NullObject
-;ptr_Obj05:		dc.l NullObject
-ptr_Obj05:		dc.l Obj_DaxKatterD
+ptr_DaxKatterD:		dc.l Obj_DaxKatterD
 ptr_ClintonFucker:	dc.l ClintonFucker
 ptr_Obj07:		dc.l GM_CNNicoJumpOBJ
 ptr_Splash:		dc.l Splash		; $08
@@ -37,7 +36,7 @@ ptr_Cannonball:		dc.l Cannonball		; $20
 ptr_HUD:		dc.l HUD
 ptr_BuzzBomber:		dc.l BuzzBomber
 ptr_Missile:		dc.l Missile
-ptr_MissileDissolve:	dc.l MissileDissolve
+ptr_MissileDissolve:	dc.l RoadRoller
 ptr_Rings:		dc.l Rings
 ptr_Monitor:		dc.l Monitor
 ptr_ExplosionItem:	dc.l ExplosionItem
@@ -75,12 +74,13 @@ ptr_MarbleBrick:	dc.l MarbleBrick
 ptr_Bumper:		dc.l Bumper
 ptr_BossBall:		dc.l BossBall		; $48
 ptr_WaterSound:		dc.l WaterSound
-ptr_VanishSonic:	dc.l NullObject	; REMOVE UNUSED DATA - CONI
+ptr_WBomb:		dc.l Obj_WBomb
+;ptr_WBomb:		dc.l NullObject		; Until I can get the SHC Screen working
 ptr_GiantRing:		dc.l GiantRing
 ptr_GeyserMaker:	dc.l GeyserMaker
 ptr_LavaGeyser:		dc.l LavaGeyser
 ptr_LavaWall:		dc.l LavaWall
-ptr_Obj4F:		dc.l Obj4F
+ptr_InternetExplorer:	dc.l InternetExplorer
 ptr_Yadrin:		dc.l Yadrin		; $50
 ptr_SmashBlock:		dc.l SmashBlock
 ptr_MovingBlock:	dc.l MovingBlock
@@ -142,6 +142,7 @@ ptr_EndSTH:		dc.l EndSTH
 ptr_CreditsText:	dc.l CreditsText
 ptr_EndEggman:		dc.l EndEggman
 ptr_TryChaos:		dc.l TryChaos
+ptr_ExplosionSHC:	dc.l ExplosionSHC
 ptr_Roaring_Knight:	dc.l Obj_Roaring_Knight
 
 NullObject:
@@ -151,7 +152,7 @@ id_SonicPlayer:		equ ((ptr_SonicPlayer-Obj_Index)/4)+1		; $01
 id_Obj02:		equ ((ptr_Obj02-Obj_Index)/4)+1
 id_Obj03:		equ ((ptr_Obj03-Obj_Index)/4)+1
 id_Obj04:		equ ((ptr_Obj04-Obj_Index)/4)+1
-id_Obj05:		equ ((ptr_Obj05-Obj_Index)/4)+1
+id_DaxKatterD:		equ ((ptr_DaxKatterD-Obj_Index)/4)+1
 id_ClintonFucker:	equ ((ptr_ClintonFucker-Obj_Index)/4)+1
 id_Obj07:		equ ((ptr_Obj07-Obj_Index)/4)+1
 id_Splash:		equ ((ptr_Splash-Obj_Index)/4)+1		; $08
@@ -182,7 +183,7 @@ id_Cannonball:		equ ((ptr_Cannonball-Obj_Index)/4)+1		; $20
 id_HUD:			equ ((ptr_HUD-Obj_Index)/4)+1
 id_BuzzBomber:		equ ((ptr_BuzzBomber-Obj_Index)/4)+1
 id_Missile:		equ ((ptr_Missile-Obj_Index)/4)+1
-id_MissileDissolve:	equ ((ptr_MissileDissolve-Obj_Index)/4)+1
+id_RoadRoller:	equ ((ptr_MissileDissolve-Obj_Index)/4)+1
 id_Rings:		equ ((ptr_Rings-Obj_Index)/4)+1
 id_Monitor:		equ ((ptr_Monitor-Obj_Index)/4)+1
 id_ExplosionItem:	equ ((ptr_ExplosionItem-Obj_Index)/4)+1
@@ -220,12 +221,12 @@ id_MarbleBrick:		equ ((ptr_MarbleBrick-Obj_Index)/4)+1
 id_Bumper:		equ ((ptr_Bumper-Obj_Index)/4)+1
 id_BossBall:		equ ((ptr_BossBall-Obj_Index)/4)+1		; $48
 id_WaterSound:		equ ((ptr_WaterSound-Obj_Index)/4)+1
-id_VanishSonic:		equ ((ptr_VanishSonic-Obj_Index)/4)+1
+id_WBomb:		equ ((ptr_WBomb-Obj_Index)/4)+1
 id_GiantRing:		equ ((ptr_GiantRing-Obj_Index)/4)+1
 id_GeyserMaker:		equ ((ptr_GeyserMaker-Obj_Index)/4)+1
 id_LavaGeyser:		equ ((ptr_LavaGeyser-Obj_Index)/4)+1
 id_LavaWall:		equ ((ptr_LavaWall-Obj_Index)/4)+1
-id_Obj4F:		equ ((ptr_Obj4F-Obj_Index)/4)+1
+id_InternetExplorer:	equ ((ptr_InternetExplorer-Obj_Index)/4)+1
 id_Yadrin:		equ ((ptr_Yadrin-Obj_Index)/4)+1		; $50
 id_SmashBlock:		equ ((ptr_SmashBlock-Obj_Index)/4)+1
 id_MovingBlock:		equ ((ptr_MovingBlock-Obj_Index)/4)+1
@@ -287,4 +288,5 @@ id_EndSTH:		equ ((ptr_EndSTH-Obj_Index)/4)+1
 id_CreditsText:		equ ((ptr_CreditsText-Obj_Index)/4)+1
 id_EndEggman:		equ ((ptr_EndEggman-Obj_Index)/4)+1
 id_TryChaos:		equ ((ptr_TryChaos-Obj_Index)/4)+1
+id_ExplosionSHC:	equ ((ptr_ExplosionSHC-Obj_Index)/4)+1
 id_Roaring_Knight:	equ ((ptr_Roaring_Knight-Obj_Index)/4)+1

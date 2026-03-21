@@ -1,8 +1,8 @@
 BGM_DUNGEON3_Header:		; To clean up
-	smpsHeaderStartSong	1
+	smpsHeaderStartSong	3
 	smpsHeaderVoice		BGM_DUNGEON3_Voices
 	smpsHeaderChan		$07, $03
-	smpsHeaderTempo		$02, $04
+	smpsHeaderTempo		$02, $44
 
 ;	Given Tempo = 110.00 BPM
 ;	Approximated Tempo = 110.16 BPM
@@ -14,9 +14,9 @@ BGM_DUNGEON3_Header:		; To clean up
 	smpsHeaderFM	BGM_DUNGEON3_FM4,	$00, $13
 	smpsHeaderFM	BGM_DUNGEON3_FM5,	$00, $15
 	smpsHeaderFM	BGM_DUNGEON3_FM6,	$00, $1E
-	smpsHeaderPSG	BGM_DUNGEON3_PSG1,	$00, $03, $00, $00
-	smpsHeaderPSG	BGM_DUNGEON3_PSG2,	$00, $04, $00, $00
-	smpsHeaderPSG	BGM_DUNGEON3_PSG3,	$00, $06, $00, $00
+	smpsHeaderPSG	BGM_DUNGEON3_PSG1,	$0C, $03, $00, $00
+	smpsHeaderPSG	BGM_DUNGEON3_PSG2,	$0C, $04, $00, $00
+	smpsHeaderPSG	BGM_DUNGEON3_PSG3,	$0C, $06, $00, $00
 
 BGM_DUNGEON3_Voices:
 ;	FM Voice 00 -> 00: FM_DUN03_00
