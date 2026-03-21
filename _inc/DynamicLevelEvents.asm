@@ -400,14 +400,14 @@ DLE_MZ4_routines:	dc.w DLE_MZ4chkboss-DLE_MZ4_routines
 ; ===========================================================================
 		
 DLE_MZ4chkboss:
-		move.w	#$160,(v_limitbtm1).w
+		move.w	#$140,(v_limitbtm1).w
 		cmpi.w	#Knight_X_Spawn,(v_screenposx).w
 		blo.s	locret_70E8
 		bsr.w	FindFreeObj
 		bne.s	.spawnfail
 		_move.b	#id_Roaring_Knight,obID(a1) ; load MZ boss object
-		move.w	#Knight_X_Spawn+$80,obX(a1)
-		move.w	#Knight_Y_Spawn+$3C,obY(a1)
+		move.w	#Knight_X_Spawn+$180,obX(a1)
+		move.w	#Knight_Y_Spawn+$24,obY(a1)
 
 .spawnfail:
 		move.w	#bgm_Boss,d0
