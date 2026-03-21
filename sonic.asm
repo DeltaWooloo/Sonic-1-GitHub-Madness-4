@@ -7368,10 +7368,10 @@ MAP_NT:   incbin	"NMRTT/NM_MAP.bin"
 ; Atolly splash
 
 
-Nem_Atolly:   incbin	"LiquidSplashes/ATOownscreen/art/Atolly.nem"
+Nem_Atolly:   binclude	"LiquidSplashes/ATOownscreen/art/Atolly.nem"
         even
 
-Eni_Atolly:   incbin	"LiquidSplashes/ATOownscreen/eni/Atolly.eni"
+Eni_Atolly:   binclude	"LiquidSplashes/ATOownscreen/eni/Atolly.eni"
         even	
 	
 	
