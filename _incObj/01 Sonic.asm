@@ -259,7 +259,7 @@ Sonic_Display:
 		blo.s	.removeinvincible
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
-		cmpi.w	#(id_LZ<<8)+3,(v_zone).w ; check if level is SBZ3
+		cmpi.w	#(id_ARZ<<8)+3,(v_zone).w ; check if level is SBZ3
 		bne.s	.music
 		moveq	#5,d0		; play SBZ music
 
@@ -282,7 +282,7 @@ Sonic_Display:
 		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
 		move.b	#0,(v_shoes).w	; cancel speed shoes
 		move.b	(v_zone).w,d0
-		cmpi.w	#(id_LZ<<8)+3,(v_zone).w ; check if level is SBZ3
+		cmpi.w	#(id_ARZ<<8)+3,(v_zone).w ; check if level is SBZ3
 		bne.s	.music2
 		moveq	#5,d0		; play SBZ music
 
@@ -1095,13 +1095,13 @@ Sonic_LevelBound:
 ; ----------------------------------------------------------------------------
 		
 .bottom2:		
-		cmpi.w	#(id_SBZ<<8)+1,(v_zone).w ; is level SBZ2 ?
+		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w ; is level SBZ2 ?
 		bne.s	.JUMP_KillSonic	; if not, kill Sonic
 		cmpi.w	#$2000,(v_player+obX).w
 		blo.s	.JUMP_KillSonic
 		clr.b	(v_lastlamp).w	; clear lamppost counter
 		move.w	#1,(f_restart).w ; restart the level
-		move.w	#(id_LZ<<8)+3,(v_zone).w ; set level to SBZ3 (LZ4)
+		move.w	#(id_ARZ<<8)+3,(v_zone).w ; set level to SBZ3 (LZ4)
 		rts
 .JUMP_KillSonic:	
 		jmp (KillSonic).l

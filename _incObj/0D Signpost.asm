@@ -105,7 +105,7 @@ Sign_SparkPos:	dc.b -$18,-$10		; x-position, y-position
 
 
 Sign_SonicRun:	; Routine 6
-                cmpi.w	#(id_SBZ<<8)+1,(v_zone).w ; check if level is CLOCK WORK 2
+                cmpi.w	#(id_PPZ<<8)+1,(v_zone).w ; check if level is CLOCK WORK 2
                 beq.s	fuckyou76
 		tst.w	(v_debuguse).w	; is debug mode on?
 		bne.w	locret_ECEE	; if yes, branch

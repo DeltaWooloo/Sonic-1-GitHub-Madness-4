@@ -20,14 +20,14 @@ Plat_Main:	; Routine 0
 		move.w	#make_art_tile(ArtTile_Level,2,0),obGfx(a0)
 		move.l	#Map_Plat_GHZ,obMap(a0)
 		move.b	#$20,obActWid(a0)
-		cmpi.b	#id_SYZ,(v_zone).w ; check if level is SYZ
+		cmpi.b	#id_SFZ,(v_zone).w ; check if level is SYZ
 		bne.s	.notSYZ
 
 		move.l	#Map_Plat_SYZ,obMap(a0) ; SYZ specific code
 		move.b	#$20,obActWid(a0)
 
 .notSYZ:
-		cmpi.b	#id_SLZ,(v_zone).w ; check if level is SLZ
+		cmpi.b	#id_MCZ,(v_zone).w ; check if level is SLZ
 		bne.s	.notSLZ
 		move.l	#Map_Plat_SLZ,obMap(a0) ; SLZ specific code
 		move.b	#$20,obActWid(a0)

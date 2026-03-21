@@ -244,11 +244,11 @@ DoleBOSS_FM1_Jump:
 	smpsJump DoleBOSS_FM1_Jump
 
 DoleBOSS_FM1_03_0_64:
-	dc.b smpsNoAttack, $40
+	dc.b nRst, $40
 	smpsReturn
 
 DoleBOSS_FM1_04_0_64:
-	dc.b smpsNoAttack, $20
+	dc.b nRst, $20
 	smpsSetvoice	$03
 	dc.b nB2, $08, nA2, nG2
 	smpsSetvoice	$09
@@ -1004,7 +1004,7 @@ DoleBOSS_PSG2_Jump:
 	smpsJump DoleBOSS_PSG2_Jump
 
 DoleBOSS_PSG2_02_0_64:
-	dc.b smpsNoAttack, $04
+	dc.b nRst, $04
 	smpsPSGvoice	DoleTone_03
 	dc.b nE1, $10, nE2, $08, nBb1, $24
 	smpsReturn
@@ -1069,7 +1069,7 @@ DoleBOSS_PSG3_Jump:
 	smpsJump DoleBOSS_PSG3_Jump
 
 DoleBOSS_PSG3_03_0_64:
-	dc.b smpsNoAttack, $40
+	dc.b nRst, $40
 	smpsReturn
 
 DoleBOSS_PSG3_04_0_64:

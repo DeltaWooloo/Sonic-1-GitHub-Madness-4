@@ -2224,7 +2224,7 @@ GM_Title:
 		move.b	#0,(v_lastlamp).w ; clear lamppost counter
 		move.w	#0,(v_debuguse).w ; disable debug item placement mode
 		move.w	#0,(f_demo).w	; disable debug mode
-		move.w	#(id_GHZ<<8),(v_zone).w	; set level to GHZ (00)
+		move.w	#(id_OWZ<<8),(v_zone).w	; set level to GHZ (00)
 		move.w	#0,(v_pcyc_time).w ; disable palette cycling
 		include	"ATOGKTitle/MAIN.asm"	; Code (simply ran by inclusion)
 FinalTitle:
@@ -2654,9 +2654,9 @@ Level_NoMusicFade:
 		clearRAM v_levelvariables
 		clearRAM v_timingandscreenvariables
 ;		move.b	#0,(v_waterflag).w
-;		cmp.b	#id_GHZ,(v_zone).w
+;		cmp.b	#id_OWZ,(v_zone).w
 ;		beq.s	.yawata
-;		cmp.b	#id_LZ,(v_zone).w
+;		cmp.b	#id_ARZ,(v_zone).w
 ;		bne.s	.nowata
 .yawata:
 		move.b	#$80,(v_waterflag).w
@@ -3226,7 +3226,7 @@ SS_ChkEnd:
 		tst.w	(f_demo).w	; is demo mode on?
 		bne.w	SS_ToLevel
 		move.b	#id_Level,(v_gamemode).w ; set screen mode to $0C (level)
-		cmpi.w	#(id_SBZ<<8)+3,(v_zone).w ; is level number higher than FZ?
+		cmpi.w	#(id_PPZ<<8)+3,(v_zone).w ; is level number higher than FZ?
 		blo.s	SS_Finish	; if not, branch
 		clr.w	(v_zone).w	; set to GHZ1
 
@@ -4176,14 +4176,14 @@ LevelDataLoad:
 		bsr.w	LevelLayoutLoad
 		andi.w	#$FF,d5
 		move.w	d5,d0
-		cmpi.w	#(id_LZ<<8)+3,(v_zone).w	; is level SBZ3 (LZ4) ?
+		cmpi.w	#(id_ARZ<<8)+3,(v_zone).w	; is level SBZ3 (LZ4) ?
 		bne.s	.notSBZ3			; if not, branch
 		moveq	#palid_SBZ3,d0			; use SB3 palette
 
 .notSBZ3:
-		cmpi.w	#(id_SBZ<<8)+1,(v_zone).w	; is level SBZ2?
+		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w	; is level SBZ2?
 		beq.s	.isSBZorFZ			; if yes, branch
-		cmpi.w	#(id_SBZ<<8)+2,(v_zone).w	; is level FZ?
+		cmpi.w	#(id_PPZ<<8)+2,(v_zone).w	; is level FZ?
 		bne.s	.normalpal			; if not, branch
 
 .isSBZorFZ:
@@ -6007,7 +6007,7 @@ ResumeMusic:
 		tst.b	(f_lockscreen).w ; is Sonic at a boss?
 		beq.s	playselectedlele ; if not, branch
 		move.w	#bgm_Boss,d0
-		cmpi.w	#(id_SLZ<<8)+2,(v_zone).w ; ist das level mein?
+		cmpi.w	#(id_MCZ<<8)+2,(v_zone).w ; ist das level mein?
         bne.s   playselectedlele
         move.w  #$1F,d0 ; MEGALOVANIA BABY
 playselectedlele:

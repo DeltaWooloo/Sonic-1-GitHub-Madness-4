@@ -116,7 +116,7 @@ TitleCards_LoadArt:
 		lea	(Unc_TitleCard+TTL_Numbers).l,a1
 		moveq	#0,d0
 		move.b	(v_act).w,d0
-		cmpi.w	#(id_LZ<<8)+3,(v_zone).w ; is this specifically SBZ3?
+		cmpi.w	#(id_ARZ<<8)+3,(v_zone).w ; is this specifically SBZ3?
 		bne.s	.notsbz3		; if not, branch
 		subq.b	#1,d0			; force to use act 3 number instead
 	.notsbz3:

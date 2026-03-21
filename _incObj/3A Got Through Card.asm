@@ -119,7 +119,7 @@ Got_ChkBonus:
 		move.w	#sfx_Cash,d0
 		jsr	(QueueSound2).l	; play "ker-ching" sound
 		addq.b	#2,obRoutine(a0)
-		cmpi.w	#(id_SBZ<<8)+1,(v_zone).w
+		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w
 		bne.s	Got_SetDelay
 		addq.b	#4,obRoutine(a0)
 
