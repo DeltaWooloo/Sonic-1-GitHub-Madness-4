@@ -1089,28 +1089,7 @@ SSRG_Obj_Sonic:
 
 ; ---------------------------------------------------------------
 SSRG_Map_Sonic:
-	dc.w	2
-	
-.xdisp = -$20
-.ydisp = -$08
-
-	dc.b	$F
-;			YY   WH  Pal   TT   XX
-	dc.b	.ydisp+$E0, $0E, $00, $00, $F8+.xdisp
-	dc.b	.ydisp+$E0, $0A, $00, $0C, $18+.xdisp
-	dc.b	.ydisp+$E8, $05, $00, $15, $30+.xdisp
-	dc.b	.ydisp+$F8, $0F, $00, $19, $F8+.xdisp
-	dc.b	.ydisp+$F8, $0F, $00, $29, $18+.xdisp
-	dc.b	.ydisp+$F8, $02, $00, $39, $38+.xdisp
-	dc.b	.ydisp+$18, $04, $00, $3C, $F8+.xdisp
-	dc.b	.ydisp+$18, $0F, $00, $3E, $08+.xdisp
-	dc.b	.ydisp+$18, $03, $00, $4E, $28+.xdisp
-	dc.b	.ydisp+$F8, $0F, $20, $52, $E8+.xdisp
-	dc.b	.ydisp+$38, $0F, $20, $62, $10+.xdisp
-	dc.b	.ydisp+$20, $0B, $20, $72, $30+.xdisp
-	dc.b	.ydisp+$40, $07, $20, $7E, $30+.xdisp
-	dc.b	.ydisp+$58, $05, $20, $86, $18+.xdisp
-	dc.b	.ydisp+$F8, $0F, $20, $8A, $18+.xdisp
+	include	"_gamemode/#SSRG/SonicMap.asm"	
 	even
 
 ; ===============================================================

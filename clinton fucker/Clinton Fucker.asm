@@ -40,6 +40,11 @@ ClintonFucker:
 ; --------------------------------------------------------------
 
 CliFucker_Init:
+	tst.b	v_clintonfucker
+	beq.s	.ok
+	jmp	DeleteObject
+.ok
+	st	v_clintonfucker
 	addq.b	#2,obRoutine(a0)
 	move.l	(v_palette_line_1+20),(v_palette_line_2+20)
 	move.b	#bgm_Fade,d0
@@ -81,7 +86,6 @@ CliFucker_Init2:
 	move.w	#48,clifuck.Accel(a0)
 	move.w	#0,(v_limitleft1).w
 	move.w	#0,(v_limitleft2).w
-	st	v_clintonfucker
 .Exit:
 	rts
 
@@ -89,6 +93,7 @@ CliFucker_Main:
 	cmpi.w	#$50,v_screenposx
 	ble.w	.Exit
 	add.l	#$7000,clifuck.Speed(a0)
+	move.w	#$250,d3
 	lea 	v_player, a1
 	move.w	obX(a1),d0
 	move.w	obX(a0),d1
@@ -98,6 +103,10 @@ CliFucker_Main:
 	bra.s	.Skip
 .ToLeft
 	bclr	#0,obStatus(a0)
+	cmp.w	d3,d1
+	blt.s	.Skip
+	add.w	d0,d3
+	move.w	d3,obX(a0)
 .Skip
 	move.w 	clifuck.Speed(a0), d0
 	move.w	clifuck.Accel(a0), d1
