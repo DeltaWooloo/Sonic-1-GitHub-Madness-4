@@ -13,7 +13,20 @@ GM_Advert:
 		move.b	#bgm_Stop,d0
 		jsr	QueueSound2
 		jsr	ClearPLC
-		jsr	PaletteWhiteOut
+	;	jsr	PaletteWhiteOut
+		lea	(v_palette).w,a0
+		move.l	#$0EEE0EEE,d0
+		move.w	#4-1,d1
+.white:
+		move.l	d0,(a0)+
+		move.l	d0,(a0)+
+		move.l	d0,(a0)+
+		move.l	d0,(a0)+
+		move.l	d0,(a0)+
+		move.l	d0,(a0)+
+		move.l	d0,(a0)+
+		move.l	d0,(a0)+
+		dbf	d1,.white
 		disable_ints
 		disable_display
 		lea	(vdp_control_port).l,a6
