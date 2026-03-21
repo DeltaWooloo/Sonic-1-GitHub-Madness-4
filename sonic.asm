@@ -416,6 +416,8 @@ ptr_Advert:		dc.l	GM_Advert		; For all the reject splash screens I guess
 ;ptr_GM_RPGBattle:	dc.l	GM_RPGBattle		; RPG Battle (for Azure Rainforest) ($4C)
 ptr_GiovanniSplash:	dc.l	GiovanniSplash		; jo
 ptr_NewSSRG_Screen:	dc.l	NewSSRG_Screen		; Newer SSRG screenTM
+ptr_AtollySplash:	dc.l	AtollySplash		; Atogk
+
 GameModeArray_End:
 ; ===========================================================================
 	if SkipChecksumCheck=0
@@ -2156,6 +2158,10 @@ Sega_GotoTitle:
 		rts				; skip splash screens with heavy
 		
 		include	"ATOGKsplashesWIP/MAIN.asm"	; Code (simply ran by inclusion)
+	
+		include	"LiquidSplashes/ATOownscreen/MAIN.asm"	; Code 
+
+	
 	
 ; ===========================================================================
         include "NEEDLE.asm" ;le shitty code
@@ -7359,6 +7365,15 @@ ART_NT:   incbin	"NMRTT/NM_ART.bin"
 
 MAP_NT:   incbin	"NMRTT/NM_MAP.bin"
         even
+; Atolly splash
+
+
+Nem_Atolly:   incbin	"LiquidSplashes/ATOownscreen/art/Atolly.nem"
+        even
+
+Eni_Atolly:   incbin	"LiquidSplashes/ATOownscreen/eni/Atolly.eni"
+        even	
+	
 	
 ; end of 'ROM'
 		even
