@@ -32,7 +32,7 @@ Map_a652_3:	spriteHeader
 Map_a652_3_End
 
 Map_a652_4:	spriteHeader
- spritePiece -8, -$B, 2, 2, $1C, 0, 0, 0, 0
+ spritePiece -8, -$B, 2, 2, $154, 0, 0, 0, 0
  spritePiece -$10, -$11, 4, 4, 0, 0, 0, 0, 0
 Map_a652_4_End
 
