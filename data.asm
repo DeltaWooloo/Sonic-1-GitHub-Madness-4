@@ -469,6 +469,8 @@ Kos_DVZ:	binclude	"artkos/8x8 - DVZ.kos"	; DVZ	primary padded. pamperspoop
 		even
 Blk256_DVZ:	binclude	"map256/DVZ.kos"
 		even
+Blk256_DVZ3:	binclude	"map256/DVZ3.kos"
+		even
 Blk16_NGZ:	binclude	"map16/NGZ.eni"
 		even
 Kos_NGZ:	binclude	"artkos/8x8 - NGZ.kos"	; nogales	#r&)*_@@@@@@@@u!#@*)eudq@(ewuiwdq*)dy&*#r&du(!@ido*u&#ft^*rd&(y*)u(rf
@@ -788,10 +790,10 @@ Level_HSZ:	binclude	"levels/HSZ.bin"
 		even
 Level_HSZbg:	binclude	"levels/HSZbg.bin"
 		even
-Level_DVZ3:	binclude	"levels/DVZ1.bin"
+Level_DVZ3:	binclude	"levels/DVZ3.bin"
 		even
-Level_DVZbg:	;binclude	"levels/dvz.bin"
-		dc.l 0
+Level_DVZbg:	binclude	"levels/DVZbg.bin"
+		even
 Level_NGZ1:	binclude	"levels/ngz1.bin"
 		even
 Level_NGZ2:	binclude	"levels/hsz.bin"
@@ -972,18 +974,17 @@ ObjPos_Joint3:	binclude	"objpos/Joint3.bin"
 		even
 ObjPos_DVZ1:	binclude	"objpos/dvz1.bin"
 		even
-ObjPos_DVZ2:	binclude	"objpos/dvz2.bin"
+ObjPos_HSZ:	binclude	"objpos/hsz.bin"
 		even
 ObjPos_DVZ3:	binclude	"objpos/dvz3.bin"
 		even
 ObjPos_NGZ1:	binclude	"objpos/ngz1.bin"
 		even
-ObjPos_NGZ2:	binclude	"objpos/hsz.bin"
+ObjPos_NGZ2:	binclude	"objpos/ngz3.bin"
 		even
 ObjPos_NGZ3:	binclude	"objpos/ngz3.bin"
 		even
-ObjPos_HSZ:	binclude	"objpos/hsz.bin"
-		even
+
 ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 
 ; ===========================================================================
