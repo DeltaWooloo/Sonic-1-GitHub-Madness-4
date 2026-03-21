@@ -20,14 +20,14 @@ CFlo_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_CFlo,obMap(a0)
 		move.w	#make_art_tile(ArtTile_MZ_Block,2,0),obGfx(a0)
-		cmpi.b	#id_SLZ,(v_zone).w ; check if level is SLZ
+		cmpi.b	#id_MCZ,(v_zone).w ; check if level is SLZ
 		bne.s	.notSLZ
 
 		move.w	#make_art_tile(ArtTile_SLZ_Collapsing_Floor,2,0),obGfx(a0) ; SLZ specific code
 		addq.b	#2,obFrame(a0)
 
 .notSLZ:
-		cmpi.b	#id_SBZ,(v_zone).w ; check if level is SBZ
+		cmpi.b	#id_PPZ,(v_zone).w ; check if level is SBZ
 		bne.s	.notSBZ
 		move.w	#make_art_tile(ArtTile_SBZ_Collapsing_Floor,2,0),obGfx(a0) ; SBZ specific code
 

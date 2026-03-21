@@ -541,11 +541,11 @@ ZoneNameTable:
 		dc.w	.DVZ-.t
 		dc.w	.Nogales -.t
 
-.GHZ:		dc.b	"PENILE HILLS    "
+.GHZ:		dc.b	"ORANGE WORLD    "
 .LZ:		dc.b	"AZURE RAINFOREST"
 .MZ:		dc.b	"ALBERTA CANADA  "
-.SLZ:		dc.b	"MICROSLOP HQ    "
-.SYZ:		dc.b	"SPRING YARD     "
+.SLZ:		dc.b	"MEIN KRAFT      "
+.SYZ:		dc.b	"SPRING FIELD    "
 .SBZ:		dc.b	"PRONGLE PLANT   "
 .End:		dc.b	"ENDING          "
 .MSZ:		dc.b	"COLD BREW       "
@@ -579,7 +579,8 @@ GamemodeNameTable:
 		dc.w	.Skipper-.t
 		dc.w	.Advert-.t
 		dc.w	.Giovanni-.t
-		dc.w	.NewSSRG-.t		
+		dc.w	.NewSSRG-.t
+		dc.w	.Atollygk-.t
 		rept ( (GameModeArray_End-GameModeArray)-(((*)-.t)*2) )/4
 		dc.w	.Placeholder-.t
 		endr
@@ -608,6 +609,7 @@ GamemodeNameTable:
 .Advert:	dc.b	"ADVERTISEMENTS  "
 .Giovanni:	dc.b	"GIOVANNI.GEN    "
 .NewSSRG:	dc.b	"NEW SSRG SCREEN "
+.Atollygk:	dc.b	"ATOLLYGK SPLASH "
 .Placeholder:	dc.b	"PLACEHOLDER NAME"
 		even
 

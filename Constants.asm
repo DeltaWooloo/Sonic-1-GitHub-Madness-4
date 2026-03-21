@@ -100,12 +100,12 @@ id_NewSSRGScreen:	equ ptr_NewSSRG_Screen-GameModeArray
 ;id_RPGBattle:	equ ptr_GM_RPGBattle-GameModeArray
 
 ; Levels
-id_GHZ:		equ 0
-id_LZ:		equ 1
-id_MZ:		equ 2
-id_SLZ:		equ 3
-id_SYZ:		equ 4
-id_SBZ:		equ 5
+id_OWZ:		equ 0
+id_ARZ:		equ 1
+id_ACZ:		equ 2
+id_MCZ:		equ 3
+id_SFZ:		equ 4
+id_PPZ:		equ 5
 id_EndZ:	equ 6
 id_SS:		equ 6
 id_CBZ:		equ 7

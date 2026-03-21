@@ -216,7 +216,7 @@ DLE_SBZ3:
 		bhs.s	locret_6F8C	; if not, branch
 		clr.b	(v_lastlamp).w
 		move.w	#1,(f_restart).w ; restart level
-		move.w	#(id_SBZ<<8)+2,(v_zone).w ; set level number to 0502 (FZ)
+		move.w	#(id_PPZ<<8)+2,(v_zone).w ; set level number to 0502 (FZ)
 		move.b	#1,(f_playerctrl).w ; lock controls
 
 locret_6F8C:
@@ -630,7 +630,7 @@ DLE_SBZ2boss:
 		move.b	#id_FalseFloor,obID(a1) ; load collapsing block object
 		addq.b	#2,(v_dle_routine).w
 		moveq	#plcid_EggmanSBZ2,d0
-		bra.w	AddPLC		; load SBZ2 Eggman patterns
+		jsr	(AddPLC).l		; load SBZ2 Eggman patterns
 ; ===========================================================================
 
 locret_7298:

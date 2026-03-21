@@ -35,7 +35,7 @@ Sto_Main:	; Routine 0
 		move.b	d0,obFrame(a0)
 		move.l	#Map_Stomp,obMap(a0)
 		move.w	#make_art_tile(ArtTile_SBZ_Moving_Block_Short,1,0),obGfx(a0)
-		cmpi.b	#id_LZ,(v_zone).w ; check if level is LZ/SBZ3
+		cmpi.b	#id_ARZ,(v_zone).w ; check if level is LZ/SBZ3
 		bne.s	.isSBZ12	; if not, branch
 		bset	#0,(v_obj6B).w
 		beq.s	.isSBZ3
@@ -115,7 +115,7 @@ Sto_Action:	; Routine 2
 		jmp	(DisplaySprite).l
 
 .chkgone:
-		cmpi.b	#id_LZ,(v_zone).w
+		cmpi.b	#id_ARZ,(v_zone).w
 		bne.s	.delete
 		clr.b	(v_obj6B).w
 		lea	(v_objstate).w,a2

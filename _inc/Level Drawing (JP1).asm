@@ -179,7 +179,7 @@ locret_69F2:
 DrawBGScrollBlock2:
 		tst.b	(a2)
 		beq.w	locj_6DF2
-		cmpi.b	#id_SBZ,(v_zone).w
+		cmpi.b	#id_PPZ,(v_zone).w
 		beq.w	Draw_SBz
 		bclr	#0,(a2)
 		beq.s	locj_6DD2
@@ -277,7 +277,7 @@ locj_6E8C:
 DrawBGScrollBlock3:
 		tst.b	(a2)
 		beq.w	locj_6EF0
-		cmpi.b	#id_MZ,(v_zone).w
+		cmpi.b	#id_ACZ,(v_zone).w
 		beq.w	Draw_Mz
 		bclr	#0,(a2)
 		beq.s	locj_6ED0
@@ -679,9 +679,9 @@ LoadTilesFromStart:
 		move.w	#$6000,d2
 		tst.b	(v_zone).w
 		beq.w	Draw_GHz_Bg
-		cmpi.b	#id_MZ,(v_zone).w
+		cmpi.b	#id_ACZ,(v_zone).w
 		beq.w	Draw_Mz_Bg
-		;cmpi.w	#(id_SBZ<<8)+0,(v_zone).w
+		;cmpi.w	#(id_PPZ<<8)+0,(v_zone).w
 		;beq.w	Draw_SBz_Bg
 		cmpi.b	#id_EndZ,(v_zone).w
 		beq.w	Draw_GHz_Bg

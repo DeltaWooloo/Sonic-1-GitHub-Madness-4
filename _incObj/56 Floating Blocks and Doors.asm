@@ -31,7 +31,7 @@ FBlock_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_FBlock,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Level,2,0),obGfx(a0)
-		cmpi.b	#id_LZ,(v_zone).w ; check if level is LZ
+		cmpi.b	#id_ARZ,(v_zone).w ; check if level is LZ
 		bne.s	.notLZ
 		move.w	#make_art_tile(ArtTile_LZ_Door,2,0),obGfx(a0) ; LZ specific code
 
@@ -67,7 +67,7 @@ FBlock_Main:	; Routine 0
 		jmp	(DeleteObject).l
 .dontdelete:
 		moveq	#0,d0
-		cmpi.b	#id_LZ,(v_zone).w ; check if level is LZ
+		cmpi.b	#id_ARZ,(v_zone).w ; check if level is LZ
 		beq.s	.stillnotLZ
 		move.b	obSubtype(a0),d0 ; SYZ/SLZ specific code
 		andi.w	#$F,d0
@@ -206,7 +206,7 @@ FBlock_Action:	; Routine 2
 ; moves up when a switch is pressed
 		tst.b	objoff_38(a0)
 		bne.s	.loc_104A4
-		cmpi.w	#(id_LZ<<8)+0,(v_zone).w ; is level LZ1 ?
+		cmpi.w	#(id_ARZ<<8)+0,(v_zone).w ; is level LZ1 ?
 		bne.s	.aaa		; if not, branch
 		cmpi.b	#3,fb_type(a0)
 		bne.s	.aaa
@@ -222,7 +222,7 @@ FBlock_Action:	; Routine 2
 		move.b	fb_type(a0),d0
 		btst	#0,(a2,d0.w)
 		beq.s	.loc_104AE
-		cmpi.w	#(id_LZ<<8)+0,(v_zone).w ; is level LZ1 ?
+		cmpi.w	#(id_ARZ<<8)+0,(v_zone).w ; is level LZ1 ?
 		bne.s	.loc_1049E	; if not, branch
 		cmpi.b	#3,d0
 		bne.s	.loc_1049E

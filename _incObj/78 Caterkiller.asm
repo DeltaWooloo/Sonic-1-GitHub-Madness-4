@@ -35,7 +35,7 @@ Cat_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_Cat,obMap(a0)
 		move.w	#make_art_tile(ArtTile_SBZ_Caterkiller,0,0),obGfx(a0)
-		cmpi.b	#id_SBZ,(v_zone).w ; if level is SBZ, branch
+		cmpi.b	#id_PPZ,(v_zone).w ; if level is SBZ, branch
 		beq.s	.isscrapbrain
 		move.w	#($A0E0/$20),obGfx(a0) ; MZ/SYZ specific code
 
