@@ -152,7 +152,7 @@ splash_turd macro routine
 	splash_liquid	funnybutthole
 	splash_liquid	MultiSplash_Init
 	splash_liquid	SonicRetro
-	splash_liquid	NewSSRG_Screen		
+	splash_liquid	NewSSRG_Screen
 	splash_liquid	GM_SSRGScreen
 	splash_liquid	GM_SHCSplash
 	splash_liquid	GM_EagleSoft
@@ -163,6 +163,7 @@ splash_turd macro routine
 	splash_liquid	TeamOverload_Splash
 	splash_liquid	AtollySplash
 	splash_liquid	GM_NT
+	splash_liquid	GM_TheSunsetJester
 	splash_liquid	Yume2kki
 
 	;!@ GenesisDoes
@@ -206,6 +207,7 @@ splash_turd macro routine
 	include "_gamemode/SHC + DeltaW/DeltaW Splash Screen.asm"
 	include "dotgen/Giovanni Splash Screen.asm"
 	include "dotgen/DynPaletteTransition.asm"
+	include "_gamemode/TSH Splash/TSHSplash.asm"
 ; Files for turd
 	include "CrazyRemilia/Remi/Remi.asm"
 

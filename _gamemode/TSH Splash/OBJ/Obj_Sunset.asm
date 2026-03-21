@@ -3,7 +3,7 @@
 ; Object 10 - Sunset On Screen
 ; ---------------------------------------------------------------------------
 
-Obj10:					; XREF: Obj_Index
+ObjSunset:					; XREF: Obj_Index
 
 		moveq	#0,d0
 		move.b	$24(a0),d0
@@ -14,6 +14,7 @@ ObjSunset_Index:
 		dc.w ObjSunset1-ObjSunset_Index ;0
 		dc.w ObjSunset2-ObjSunset_Index ;2
 		dc.w ObjSunset3-ObjSunset_Index ;4
+		dc.w ObjSunset4-ObjSunset_Index
 ; ===========================================================================
 MoveDelay = $30
 
@@ -45,11 +46,14 @@ ObjSunset3:	; Routine 4
 		; Extra code from ConNight (Was removed)
 		cmpi.w	#$174,8(a0)		; has the object reached final position? (right edge)
 		blo.s	SpriteAnimateSun	; if not, branch
-		move.b	#dBoik,d0		; Boik
-		jsr		(MegaPCM_PlaySample).l
-		move.w	#$BE,d0
+		addq.b	#2,obRoutine(a0)
+;		move.b	#dBoik,d0		; Boik
+;		jsr	(MegaPCM_PlaySample).l
+		move.w	#sfx_Roll,d0
 		jsr	(PlaySound_Special).l ;	play rolling sound
 		move.b	#1,$1C(a0)	; Set Animation to 1 (Falling)
+
+ObjSunset4:
 		subq.w	#8,8(a0) ; move to the right
  	;	jsr	DeleteObject
 
@@ -57,8 +61,7 @@ SpriteAnimateSun:
 		lea	(Ani_Sunset).l,a1
 		jsr	(AnimateSprite).l
 		jmp	(DisplaySprite).l
-		rts	
-		
+
 Map_Sunset: ; MAPPING_$348F
 
 ; ---------------------------------------------------------------------------

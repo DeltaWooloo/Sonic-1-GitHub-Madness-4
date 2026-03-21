@@ -16,7 +16,7 @@ ptr_FlapDoor:		dc.l FlapDoor
 ptr_Signpost:		dc.l Signpost
 ptr_TitleSonic:		dc.l TitleSonic
 ptr_PSBTM:		dc.l PSBTM
-ptr_PlayerBullet:	dc.l PlayerBullet		; $10
+ptr_PlayerBullet:	dc.l PlayerBullet	; $10
 ptr_Bridge:		dc.l Bridge
 ptr_SpinningLight:	dc.l SpinningLight
 ptr_LavaMaker:		dc.l LavaMaker
@@ -75,7 +75,6 @@ ptr_Bumper:		dc.l Bumper
 ptr_BossBall:		dc.l BossBall		; $48
 ptr_WaterSound:		dc.l WaterSound
 ptr_WBomb:		dc.l Obj_WBomb
-;ptr_WBomb:		dc.l NullObject		; Until I can get the SHC Screen working
 ptr_GiantRing:		dc.l GiantRing
 ptr_GeyserMaker:	dc.l GeyserMaker
 ptr_LavaGeyser:		dc.l LavaGeyser
@@ -129,7 +128,7 @@ ptr_RingFlash:		dc.l RingFlash
 ptr_HiddenBonus:	dc.l HiddenBonus
 ptr_SSResult:		dc.l SSResult
 ptr_SSRChaos:		dc.l SSRChaos
-ptr_ContScrCur:	dc.l ContScrCur	; $80
+ptr_ContScrCur:		dc.l ContScrCur		; $80
 ptr_ContSonic:		dc.l ContSonic
 ptr_ScrapEggman:	dc.l ScrapEggman
 ptr_FalseFloor:		dc.l FalseFloor
@@ -144,6 +143,8 @@ ptr_EndEggman:		dc.l EndEggman
 ptr_TryChaos:		dc.l TryChaos
 ptr_ExplosionSHC:	dc.l ExplosionSHC
 ptr_Roaring_Knight:	dc.l Obj_Roaring_Knight
+ptr_Sunset:		dc.l ObjSunset
+;ptr_Sunset:		dc.l NullObject
 
 NullObject:
 		jmp	(DeleteObject).l	; It would be safer to have this instruction here, but instead it just falls through to ObjectFall
@@ -290,3 +291,4 @@ id_EndEggman:		equ ((ptr_EndEggman-Obj_Index)/4)+1
 id_TryChaos:		equ ((ptr_TryChaos-Obj_Index)/4)+1
 id_ExplosionSHC:	equ ((ptr_ExplosionSHC-Obj_Index)/4)+1
 id_Roaring_Knight:	equ ((ptr_Roaring_Knight-Obj_Index)/4)+1
+id_Sunset:		equ ((ptr_Sunset-Obj_Index)/4)+1
