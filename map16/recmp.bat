@@ -2,6 +2,7 @@ cls
 call KENSSharp.exe -r e "BREW.eni"
 call KENSSharp.exe -r e "DVZ.eni"
 call KENSSharp.exe -r e "GHZ.eni"
+call KENSSharp.exe -r e "HSZ.eni"
 call KENSSharp.exe -r e "Joint.eni"
 call KENSSharp.exe -r e "LZ.eni"
 call KENSSharp.exe -r e "MZ.eni"

@@ -17,6 +17,9 @@ IF %Recomp% EQU 0 GOTO SKIP
 cls
 
 cd "_gamemode"
+cd "#SSRG"
+call recmp.bat
+cd ..
 cd "advert"
 call recmp.bat
 cd ..
@@ -34,6 +37,13 @@ cd "Team Overload"
 call recmp.bat
 cd ..
 cd "ThanatosCredits"
+call recmp.bat
+cd ..
+cd "TSH Splash"
+cd "ART"
+call recmp.bat
+cd ..
+cd "TILEMAP"
 call recmp.bat
 cd ..\..\
 

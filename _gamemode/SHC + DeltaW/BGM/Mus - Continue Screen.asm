@@ -233,3 +233,4 @@ Snd_Continue_Jump05:
 	smpsStop
 	smpsStop
 
+	smpsFooterEndSong	"_gamemode/SHC + DeltaW/BGM/Mus - Continue Screen.asm"

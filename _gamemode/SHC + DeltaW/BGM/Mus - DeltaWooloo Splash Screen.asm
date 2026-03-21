@@ -96,3 +96,5 @@ SplashScreen_Voices:
 	smpsVcDecayLevel    $0F, $0F, $0F, $0F
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $00, $0C, $10, $19
+	
+	smpsFooterEndSong	"_gamemode/SHC + DeltaW/BGM/Mus - DeltaWooloo Splash Screen.asm"

@@ -160,3 +160,5 @@ BGM_BlueBalls_Voices:
 	smpsVcDecayLevel    $01, $02, $01, $03
 	smpsVcReleaseRate   $0A, $05, $05, $05
 	smpsVcTotalLevel    $00, $15, $16, $13
+
+	smpsFooterEndSong	"_gamemode/SHC + DeltaW/BGM/Mus - S3K Special Stage.asm"

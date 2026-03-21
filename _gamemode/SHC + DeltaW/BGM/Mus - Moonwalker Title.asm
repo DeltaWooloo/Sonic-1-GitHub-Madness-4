@@ -97,3 +97,4 @@ Moonwalker_Voices:
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $00, $1A, $18, $15
 
+	smpsFooterEndSong	"_gamemode/SHC + DeltaW/BGM/Mus - Moonwalker Title.asm"

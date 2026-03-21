@@ -3,14 +3,17 @@ REM 1. Re-compress all art assets, for space saving$
 REM 2. Selectively compiling SMPS2ASM files
 REM 3. Post-build padding the ROM to the nearest MB, and fixing the checksum
 
-Set Recomp=0
-Set musiccomp=0
-Set fix=0
+Set Recomp=1
+Set musiccomp=1
+Set fix=1
 IF %Recomp% EQU 0 GOTO SKIP
 
 cls
 
 cd "_gamemode"
+cd "#SSRG"
+call recmp.bat
+cd ..
 cd "advert"
 call recmp.bat
 cd ..
@@ -29,7 +32,15 @@ call recmp.bat
 cd ..
 cd "ThanatosCredits"
 call recmp.bat
+cd ..
+cd "TSH Splash"
+cd "ART"
+call recmp.bat
+cd ..
+cd "TILEMAP"
+call recmp.bat
 cd ..\..\
+
 
 cd "artkos"
 call recmp.bat

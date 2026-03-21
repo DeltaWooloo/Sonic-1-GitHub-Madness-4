@@ -179,3 +179,5 @@ BGM_Limited_Voices:
 	smpsVcDecayLevel    $01, $01, $01, $02
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $82, $82, $82, $1C
+
+	smpsFooterEndSong	"_gamemode/SHC + DeltaW/BGM/Mus - Limited Act Clear.asm"
