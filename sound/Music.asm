@@ -128,7 +128,7 @@ ptr_mus6E:		dc.l Music6E
 ptr_mus6F:		dc.l Music6F
 ptr_mus70:		dc.l Music70
 ptr_mus71:		dc.l Music71
-;ptr_mus72:		dc.l Music72
+ptr_mus72:		dc.l Music72
 ;ptr_mus73:		dc.l Music73
 ;ptr_mus74:		dc.l Music74
 ;ptr_mus75:		dc.l Music75
@@ -484,12 +484,15 @@ Music6E:
 		include	"music/TG2000Tracks/BossaNova.asm"
 		even
 Music6F:
-		include	"music/TG2000Tracks/Ding.asm"
+		include	"music/DSKTracks/dam_dariram_handmade.asm"
 		even
 Music70:
-		include	"music/TG2000Tracks/SadMac.asm"
+		include	"music/TG2000Tracks/Ding.asm"
 		even
 Music71:
+		include	"music/TG2000Tracks/SadMac.asm"
+		even
+Music72:
 		include	"music/TG2000Tracks/Folgers.asm"
 		even
 	END

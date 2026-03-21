@@ -135,7 +135,7 @@ Got_AddBonus:
 		move.b	(v_vbla_byte).w,d0
 		andi.b	#3,d0
 		bne.s	locret_C692
-		move.w	#sfx_Switch,d0
+		move.w	#sfx_FCSelect,d0
 		jmp	(QueueSound2).l	; play "blip" sound
 ; ===========================================================================
 
