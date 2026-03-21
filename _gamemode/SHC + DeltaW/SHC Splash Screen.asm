@@ -158,9 +158,7 @@ SHC_MainLoop:
 		bne.s	.holdWhite			; if not, keep holding
 
 .holdSkipped:
-		move.b	#id_Title,(v_gamemode).w	; go to DeltaW splash screen
-;		move.b	#id_DWSplash,(v_gamemode).w	; go to DeltaW splash screen
-		rts					; return to normal game execution
+		jmp	RetroBlast		; Was the only way to make it not fade to black
 ; ---------------------------------------------------------------------------
 SHC_UpdateScreen:	; no shaking yet
 		move.b	#2,(v_vbla_routine).w

@@ -193,6 +193,7 @@ splash_turd macro routine
 	include "LiquidSplashes/Rerto/Rerto.asm"
 	include "LiquidSplashes/SSRG/SSRG.asm"
 	include "_gamemode/SHC + DeltaW/SHC Splash Screen.asm"
+	include "_gamemode/RetroBlast/RetroBlast.asm"
 	include "LiquidSplashes/EagleSoft/EagleSoft.asm"
 	include "DAX/Splash/DaxKatter Splash.asm"
 	include "_gamemode/vmss/_runcode.asm"
