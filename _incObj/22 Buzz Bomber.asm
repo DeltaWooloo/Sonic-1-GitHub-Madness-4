@@ -56,12 +56,11 @@ Buzz_Main:	; Routine 0
 ;		move.b	(v_zone),d0
 ;		lsl.w	#7,d0
 		lea 	BuzzConfTable(pc),a1
-		move.w	(a1),(a2)
-		move.w	(a2)+,buzz_ConfMoveTime(a0)
-		move.w	(a2)+,buzz_ConfMoveTime2(a0)
-		move.w	(a2)+,buzz_ConfShotTime(a0)
-		move.w	(a2)+,buzz_ConfShot(a0)
-		move.w	(a2)+,buzz_ConfSpeed(a0)
+		move.w	(a1)+,buzz_ConfMoveTime(a0)
+		move.w	(a1)+,buzz_ConfMoveTime2(a0)
+		move.w	(a1)+,buzz_ConfShotTime(a0)
+		move.w	(a1)+,buzz_ConfShot(a0)
+		move.w	(a1)+,buzz_ConfSpeed(a0)
 
 Buzz_Action:	; Routine 2
 		moveq	#0,d0
