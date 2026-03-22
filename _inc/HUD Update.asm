@@ -100,13 +100,14 @@ HudDebug:
 
 .notzero:
 		clr.b	(f_ringcount).w
-		locVRAM	(ArtTile_HUD+45)*tile_size,d0	; set VRAM address
+		locVRAM	(ArtTile_HUD+36)*tile_size,d0	; set VRAM address
+
 		moveq	#0,d1
 		move.w	(v_rings).w,d1	; load number of rings
 		bsr.w	Hud_Rings
 
 .objcounter:
-		locVRAM	(ArtTile_HUD+41)*tile_size,d0	; set VRAM address
+		locVRAM	(ArtTile_HUD+39)*tile_size,d0	; set VRAM address
 		moveq	#0,d1
 		move.b	(v_spritecount).w,d1 ; load "number of objects" counter
 		bsr.w	Hud_Secs

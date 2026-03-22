@@ -583,6 +583,7 @@ GamemodeNameTable:
 		dc.w	.Giovanni-.t
 		dc.w	.NewSSRG-.t
 		dc.w	.Atollygk-.t
+		dc.w	.Earthbou-.t
 		rept ( (GameModeArray_End-GameModeArray)-(((*)-.t)*2) )/4
 		dc.w	.Placeholder-.t
 		endr
@@ -612,6 +613,7 @@ GamemodeNameTable:
 .Giovanni:	dc.b	"GIOVANNI.GEN    "
 .NewSSRG:	dc.b	"NEW SSRG SCREEN "
 .Atollygk:	dc.b	"ATOLLYGK SPLASH "
+.Earthbou:	dc.b	"EARTHBOUND BTL  "
 .Placeholder:	dc.b	"PLACEHOLDER NAME"
 		even
 
