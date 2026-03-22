@@ -373,7 +373,7 @@ PLC_SpeStageend:
 ; ---------------------------------------------------------------------------
 PLC_GHZAnimals:	dc.w ((PLC_GHZAnimalsend-PLC_GHZAnimals-2)/6)-1
 		plcm	Nem_Rin, ArtTile_Animal_1 ; rabbit
-		plcm	Nem_Flicky, ArtTile_Animal_2 ; flicky
+		plcm	Nem_AOrange, ArtTile_Animal_2 ; flicky
 PLC_GHZAnimalsend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - LZ animals

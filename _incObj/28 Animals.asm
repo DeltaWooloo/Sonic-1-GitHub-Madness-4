@@ -19,8 +19,8 @@ Anml_Index:
 		dc.w loc_9184-Anml_Index	; PICKY
 		dc.w loc_91C0-Anml_Index	; POCKY
 		dc.w loc_9184-Anml_Index	; RICKY
-		dc.w loc_91C0-Anml_Index	; RIN
-		dc.w loc_91C0-Anml_Index	; RIN
+		dc.w loc_9184-Anml_Index	; ORANGE
+		dc.w loc_9184-Anml_Index	; RIN
 Anml_BadnikIndexEnd:dc.w loc_9240-Anml_Index ; Anml_FromPrison (from hivebrain's 2022 disassembly)
 		dc.w loc_9260-Anml_Index ; ENDING 1
 		dc.w loc_9260-Anml_Index ; ENDING 2
@@ -35,7 +35,7 @@ Anml_BadnikIndexEnd:dc.w loc_9240-Anml_Index ; Anml_FromPrison (from hivebrain's
 		dc.w loc_92D6-Anml_Index ; ENDING 11
 Anml_CapsuleRoutID:		equ Anml_BadnikIndexEnd-Anml_Index
 
-Anml_VarIndex:	dc.b 8,	5 ; Green Hill Zone
+Anml_VarIndex:	dc.b 8,	7 ; Green Hill Zone
 		dc.b 2, 3 ; Labyrinth Zone
 		dc.b 6, 3 ; Marble Zone
 		dc.b 4, 5 ; Star Light Zone
@@ -74,9 +74,9 @@ Anml_Variables:
 		dc.w -$280, -$380
 		dc.l Map_Animal4
 	; CUSTOM ANIMALS ARE ADDED AFTERWARDS
-	; ORINGE
+	; ANNOYING ORANGE
 		dc.w -$180, -$300
-		dc.l Map_Animal5
+		dc.l Map_Animal6
 	; ORINGE
 		dc.w -$180, -$300
 		dc.l Map_Animal5
@@ -160,16 +160,16 @@ loc_90C0:
 		move.w	#-$400,obVelY(a0)
 		tst.b	(v_bossstatus).w
 		bne.s	loc_911C
-		bsr.w	FindFreeObj
-		bne.s	Anml_Display
-		_move.b	#id_Points,obID(a1) ; load points object
-		move.w	obX(a0),obX(a1)
-		move.w	obY(a0),obY(a1)
-		move.w	objoff_3E(a0),d0
-		lsr.w	#1,d0
-		move.b	d0,obFrame(a1)
+;		bsr.w	FindFreeObj
+;		bne.s	Anml_Display
+;		_move.b	#id_Points,obID(a1) ; load points object
+;		move.w	obX(a0),obX(a1)
+;		move.w	obY(a0),obY(a1)
+;		move.w	objoff_3E(a0),d0
+;		lsr.w	#1,d0
+;		move.b	d0,obFrame(a1)
 
-Anml_Display:
+;Anml_Display:
 		bra.w	DisplaySprite
 ; ===========================================================================
 

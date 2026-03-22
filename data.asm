@@ -353,8 +353,8 @@ Nem_Monitors:	binclude	"artnem/Monitors.nem"
 		even
 Nem_Explode:	binclude	"artnem/Explosion.nem"
 		even
-Nem_Points:	binclude	"artnem/Points.nem"	; points from destroyed enemy or object
-		even
+;Nem_Points:	binclude	"artnem/Points.nem"	; points from destroyed enemy or object
+;		even
 Nem_GameOver:	binclude	"artnem/Game Over.nem"	; game over / time over
 		even
 Nem_HSpring:	binclude	"artnem/Spring Horizontal.nem"
@@ -397,6 +397,8 @@ Nem_Flicky:	binclude	"artnem/Animal Flicky.nem"
 Nem_Squirrel:	binclude	"artnem/Animal Squirrel.nem"
 		even
 Nem_Rin:	binclude	"artnem/Animal Rin.nem"
+		even
+Nem_AOrange:	binclude	"artnem/Animal AOrange.nem"
 		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - primary patterns and block mappings

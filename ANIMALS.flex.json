@@ -205,6 +205,35 @@
                 "path": "",
                 "label": ""
             },
+            "uuid": "a16b4b6f-efbf-484a-b0b5-afe04cfc4c43"
+        },
+        {
+            "format": "Sonic 1.js",
+            "name": "A.Orange",
+            "palettes": [
+                {
+                    "path": "palette\\Sonic.bin",
+                    "length": 1
+                },
+                {
+                    "path": "palette\\Green Hill Zone.bin",
+                    "length": 3
+                }
+            ],
+            "art": {
+                "path": "artnem\\Animal AOrange.nem",
+                "compression": "Nemesis",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "_maps\\Animals 6.asm",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            },
             "uuid": "cac5de2e-89b2-4cef-a928-18d90956ae86"
         }
     ]
