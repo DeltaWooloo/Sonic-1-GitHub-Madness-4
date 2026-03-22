@@ -19,7 +19,7 @@ Rift_Index:	dc.w Rift_Main-Rift_Index
 Rift_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_Rift,obMap(a0)
-		move.w	#($8F60/$20),obGfx(a0) ; i hate the AS system
+		move.w	#($9760/$20),obGfx(a0) ; i hate the AS system
 		; dc.l    Nem_Rift		;  put this on plcs
 		; dc.w    $8F60	
 		ori.b	#4,obRender(a0)
