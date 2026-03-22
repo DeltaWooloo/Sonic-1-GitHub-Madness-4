@@ -2,9 +2,9 @@ DanStar_Header:
 	smpsHeaderStartSong 3
 	smpsHeaderVoice		DanStar_Voices
 	smpsHeaderChan		$06, $03
-	smpsHeaderTempo		$01, $80
-;	Given Tempo = 225.00 BPM
-;	Approximated Tempo = 225.00 BPM
+	smpsHeaderTempo		$02, $00
+;	Given Tempo = 150.00 BPM
+;	Approximated Tempo = 150.29 BPM
 
 	smpsHeaderDAC	DanStar_DAC
 	smpsHeaderFM	DanStar_FM1,	$00, $00
