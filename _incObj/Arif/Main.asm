@@ -36,7 +36,7 @@ ArifBoss:
 
 .Setup:
 		jsr 	FindFreeObj
-		move.w 	#id_Arif, (a1)
+		move.b 	#id_Arif, (a1)
 		move.b  #2, obSubtype(a1)
 		move.w  obX(a0), obX(a1)
 		move.w  obY(a0), obY(a1)
