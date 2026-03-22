@@ -2,7 +2,7 @@ ChickenDance_Header:
 	smpsHeaderStartSong 3
 	smpsHeaderVoice		ChickenDance_Voices
 	smpsHeaderChan		$06, $03
-	smpsHeaderTempo		$02, $25
+	smpsHeaderTempo		$02, $00
 ;	Given Tempo = 150.00 BPM
 ;	Approximated Tempo = 150.29 BPM
 
@@ -739,7 +739,7 @@ ChickenDance_DAC_Jump:
 	smpsJump ChickenDance_DAC_Jump
 
 ChickenDance_DAC_01_0_24:
-	dc.b smpsNoAttack, $10	; Effect not supported:
+	dc.b nRst, $10	; Effect not supported:
 	dc.b dSnare, $04, $04, dKick
 	smpsReturn
 
