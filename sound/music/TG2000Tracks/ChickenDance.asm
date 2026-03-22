@@ -275,7 +275,7 @@ ChickenDance_FM1_0B_0_64:
 	dc.b nC5, $03, nRst, $05, nA4, $03, nRst, $05, nG4, $03, nRst, $05, nE4, $03, nRst, $05
 	dc.b nC4, $03, nRst, $05
 	smpsSetvoice	$06
-	smpsModSet	$02, $01, $04, $03
+	smpsModSet	$02, $01, $02, $06
 	dc.b nG4, $08, nFs4, nF4
 	smpsReturn
 
@@ -740,7 +740,7 @@ ChickenDance_DAC_Jump:
 
 ChickenDance_DAC_01_0_24:
 	dc.b nRst, $10	; Effect not supported:
-	dc.b dSnare, $04, $04, dKick
+	dc.b dSnare, $04, $04
 	smpsReturn
 
 ChickenDance_DAC_00_0_64:
@@ -994,12 +994,12 @@ ChickenDance_PSG3_Jump:
 ChickenDance_PSG3_03_0_24:
 	dc.b nRst, $10
 	smpsPSGvoice	ChickenTone_03
-	dc.b nMaxPSG, $04, $04
+	dc.b nMaxPSG2, $04, $04
 	smpsReturn
 
 ChickenDance_PSG3_00_0_64_0F:
 	smpsPSGvoice	ChickenTone_03
-	dc.b nMaxPSG, $04
+	dc.b nMaxPSG2, $04
 	smpsPSGAlterVol	$03
 	dc.b $04
 	smpsPSGAlterVol	$FD
@@ -1035,7 +1035,7 @@ ChickenDance_PSG3_00_0_64_0F:
 ChickenDance_PSG3_04_0_64:
 	smpsPSGvoice	ChickenTone_03
 	smpsPSGAlterVol	$FD
-	dc.b nMaxPSG, $04
+	dc.b nMaxPSG2, $04
 	smpsPSGAlterVol	$03
 	dc.b $04
 	smpsPSGAlterVol	$FD
@@ -1071,7 +1071,7 @@ ChickenDance_PSG3_04_0_64:
 ChickenDance_PSG3_05_0_64:
 	smpsPSGvoice	ChickenTone_03
 	smpsPSGAlterVol	$FD
-	dc.b nMaxPSG, $04
+	dc.b nMaxPSG2, $04
 	smpsPSGAlterVol	$03
 	dc.b $04
 	smpsPSGAlterVol	$FD
@@ -1107,7 +1107,7 @@ ChickenDance_PSG3_05_0_64:
 ChickenDance_PSG3_06_0_64:
 	smpsPSGvoice	ChickenTone_03
 	smpsPSGAlterVol	$FD
-	dc.b nMaxPSG, $04
+	dc.b nMaxPSG2, $04
 	smpsPSGAlterVol	$03
 	dc.b $04
 	smpsPSGAlterVol	$FD
@@ -1143,7 +1143,7 @@ ChickenDance_PSG3_06_0_64:
 ChickenDance_PSG3_00_0_64:
 	smpsPSGvoice	ChickenTone_03
 	smpsPSGAlterVol	$FD
-	dc.b nMaxPSG, $04
+	dc.b nMaxPSG2, $04
 	smpsPSGAlterVol	$03
 	dc.b $04
 	smpsPSGAlterVol	$FD
@@ -1179,7 +1179,7 @@ ChickenDance_PSG3_00_0_64:
 ChickenDance_PSG3_07_0_64:
 	smpsPSGvoice	ChickenTone_03
 	smpsPSGAlterVol	$FD
-	dc.b nMaxPSG, $04
+	dc.b nMaxPSG2, $04
 	smpsPSGAlterVol	$03
 	dc.b $04
 	smpsPSGAlterVol	$FD
@@ -1215,7 +1215,7 @@ ChickenDance_PSG3_07_0_64:
 ChickenDance_PSG3_08_0_64:
 	smpsPSGvoice	ChickenTone_03
 	smpsPSGAlterVol	$FD
-	dc.b nMaxPSG, $04
+	dc.b nMaxPSG2, $04
 	smpsPSGAlterVol	$03
 	dc.b $04
 	smpsPSGAlterVol	$FD
@@ -1251,7 +1251,7 @@ ChickenDance_PSG3_08_0_64:
 ChickenDance_PSG3_09_0_64:
 	smpsPSGvoice	ChickenTone_03
 	smpsPSGAlterVol	$FD
-	dc.b nMaxPSG, $04
+	dc.b nMaxPSG2, $04
 	smpsPSGAlterVol	$03
 	dc.b $04
 	smpsPSGAlterVol	$FD
@@ -1287,7 +1287,7 @@ ChickenDance_PSG3_09_0_64:
 ChickenDance_PSG3_0A_0_64:
 	smpsPSGvoice	ChickenTone_03
 	smpsPSGAlterVol	$FD
-	dc.b nMaxPSG, $04
+	dc.b nMaxPSG2, $04
 	smpsPSGAlterVol	$03
 	dc.b $04
 	smpsPSGAlterVol	$FD
@@ -1323,7 +1323,7 @@ ChickenDance_PSG3_0A_0_64:
 ChickenDance_PSG3_0B_0_64:
 	smpsPSGvoice	ChickenTone_03
 	smpsPSGAlterVol	$FD
-	dc.b nMaxPSG, $04
+	dc.b nMaxPSG2, $04
 	smpsPSGAlterVol	$03
 	dc.b $04
 	smpsPSGAlterVol	$FD
@@ -1359,7 +1359,7 @@ ChickenDance_PSG3_0B_0_64:
 ChickenDance_PSG3_0C_0_64:
 	smpsPSGvoice	ChickenTone_03
 	smpsPSGAlterVol	$FD
-	dc.b nMaxPSG, $04
+	dc.b nMaxPSG2, $04
 	smpsPSGAlterVol	$03
 	dc.b $04
 	smpsPSGAlterVol	$FD
