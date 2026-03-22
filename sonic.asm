@@ -613,6 +613,7 @@ VBla_04:
 
 ; loc_C5E:
 VBla_06:
+		jsr	ProcessDMAQueue(pc)
 		bsr.w	VBla_StandardTransfers
 		rts
 

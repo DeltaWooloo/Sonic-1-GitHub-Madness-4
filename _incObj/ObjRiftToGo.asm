@@ -33,9 +33,9 @@ Rift_Action:	; Routine 2
 		move.w	Rift_2ndIndex(pc,d0.w),d1
 		jsr	Rift_2ndIndex(pc,d1.w) 
 		lea	(Ani_Rift).l,a1
-		bsr.w	AnimateSprite
-		bsr.w	DisplaySprite		
-		bra.w	RememberState
+		jsr	AnimateSprite
+		jsr	DisplaySprite		
+		jmp	RememberState
 ; ===========================================================================
 Rift_2ndIndex:	dc.w Rift_Normal-Rift_2ndIndex  
         dc.w Rift_ChkDist-Rift_2ndIndex 
@@ -80,7 +80,7 @@ Rift_PlaySnd:
 ; ===========================================================================
 
 Rift_Delete:	; Routine 6
-		bra.w	DeleteObject
+		jmp	DeleteObject
 ; ===========================================================================
 ; ARTDATA
 ; ===========================================================================

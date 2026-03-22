@@ -1,5 +1,7 @@
 
-ASCII_TILEDELTA = $680
+ASCII_VRAMADDR	= $D000
+ASCII_TILEDELTA	= $0660
+
 
 EarthboundBtl:
 	move.b	#bgm_Stop,d0
@@ -37,6 +39,8 @@ EarthboundBtl:
 
      	copyTilemap	v_ram_start,vram_bg,40,28
 
+     	bsr.w	AsciiArtLoad
+
 	lea	(v_palette).w,a0
 	lea	Pal_EBattle1,a1
 	move.l	#$0EEE0EEE,d0
@@ -52,7 +56,6 @@ EarthboundBtl:
 	dbf	d1,.loop
 
      	copyTilemap    Map_EBattle1,vram_fg+$84,24,6
-
 	enable_ints
 	enable_display
 
@@ -65,12 +68,25 @@ EarthboundBtl:
 
 	pea	*
 	move.b	#6,(v_vbla_routine).w
-	jsr	WaitForVBla.w
+	jsr	WaitForVBla
 	jmp	_dbugmenuSineSlide
 
 .strMsg:
 	dc.b	"HEMORRHOID HENRY",0
 	even
+
+
+; Input:
+; 	d1	Source address (in bytes, or in words if AssumeSourceAddressInBytes is
+; 		set to 0)
+; 	d2	Destination address
+; 	d3	Transfer length (in words)NIPPLE INSERTION PORN
+
+AsciiArtLoad:
+	move.l  #Art_ASCII,d1
+	move.w  #ASCII_VRAMADDR,d2
+	move.w  #(Art_ASCIISZ/2),d3
+	jmp	QueueDMATransfer
 
 ; ---------------------------------------------------------------------------
 ; Print a word value to a VDP nametable/address
@@ -158,3 +174,8 @@ Pal_EBattle1:	binclude	"EarthboundBtl/mainpal.bin"
 Nem_EBattle1:	binclude	"EarthboundBtl/main.nem"
 		even
 Map_EBattle1:	binclude	"EarthboundBtl/msg.map"
+		even
+Art_ASCII:	binclude	"EarthboundBtl/ASCII.BIN"
+		even
+Art_ASCIIE:
+Art_ASCIISZ = (Art_ASCIIE-Art_ASCII)
