@@ -106,7 +106,7 @@ PLC_GHZ:	dc.w ((PLC_GHZ2-PLC_GHZ-2)/6)-1
 		plcm	Nem_HSpring,   ArtTile_Spring_Horizontal      ; horizontal spring
 		plcm	Nem_VSpring,   ArtTile_Spring_Vertical        ; vertical spring
         dc.l    Nem_Rift		;  put this on plcs
-	    dc.w    $8F40	
+	    dc.w    $9760	
 
 PLC_GHZ2:	dc.w ((PLC_GHZ2end-PLC_GHZ2-2)/6)-1
 		plcm	Nem_Swing,     ArtTile_GHZ_MZ_Swing           ; swinging platform
