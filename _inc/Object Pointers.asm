@@ -18,7 +18,7 @@ ptr_TitleSonic:		dc.l TitleSonic
 ptr_PSBTM:		dc.l PSBTM
 ptr_PlayerBullet:	dc.l PlayerBullet	; $10
 ptr_Bridge:		dc.l Bridge
-ptr_SpinningLight:	dc.l SpinningLight
+ptr_Rift:		dc.l FortnitePortal   ; no light  
 ptr_LavaMaker:		dc.l LavaMaker
 ptr_LavaBall:		dc.l LavaBall
 ptr_SwingingPlatform:	dc.l SwingingPlatform
@@ -144,7 +144,6 @@ ptr_TryChaos:		dc.l TryChaos
 ptr_ExplosionSHC:	dc.l ExplosionSHC
 ptr_Roaring_Knight:	dc.l Obj_Roaring_Knight
 ptr_Sunset:		dc.l ObjSunset
-ptr_Rift:		dc.l FortnitePortal   ; $90  
 ;ptr_Sunset:		dc.l NullObject
 
 NullObject:
@@ -167,7 +166,7 @@ id_TitleSonic:		equ ((ptr_TitleSonic-Obj_Index)/4)+1
 id_PSBTM:		equ ((ptr_PSBTM-Obj_Index)/4)+1
 id_PlayerBullet:		equ ((ptr_PlayerBullet-Obj_Index)/4)+1			; $10
 id_Bridge:		equ ((ptr_Bridge-Obj_Index)/4)+1
-id_SpinningLight:	equ ((ptr_SpinningLight-Obj_Index)/4)+1
+id_Rift:		equ ((ptr_Rift-Obj_Index)/4)+1   ; Atolly
 id_LavaMaker:		equ ((ptr_LavaMaker-Obj_Index)/4)+1
 id_LavaBall:		equ ((ptr_LavaBall-Obj_Index)/4)+1
 id_SwingingPlatform:	equ ((ptr_SwingingPlatform-Obj_Index)/4)+1
@@ -293,5 +292,4 @@ id_TryChaos:		equ ((ptr_TryChaos-Obj_Index)/4)+1
 id_ExplosionSHC:	equ ((ptr_ExplosionSHC-Obj_Index)/4)+1
 id_Roaring_Knight:	equ ((ptr_Roaring_Knight-Obj_Index)/4)+1
 id_Sunset:		equ ((ptr_Sunset-Obj_Index)/4)+1
-id_Rift:		equ ((ptr_Rift-Obj_Index)/4)+1   ; Atolly
 

@@ -142,7 +142,6 @@ dbug:	macro map,object,subtype,frame,vram
 		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
 		dbug	Map_Roll,	id_Roller,	0,	0,	make_art_tile(ArtTile_Roller,0,0)
-		dbug	Map_Light,	id_SpinningLight, 0,	0,	make_art_tile(ArtTile_Level,0,0)
 		dbug	Map_Bump,	id_Bumper,	0,	0,	make_art_tile(ArtTile_SYZ_Bumper,0,0)
 		dbug	Map_Crab,	id_Crabmeat,	0,	0,	make_art_tile(ArtTile_Crabmeat,0,0)
 		dbug	Map_Buzz,	id_BuzzBomber,	0,	0,	make_art_tile(ArtTile_Buzz_Bomber,0,0)
