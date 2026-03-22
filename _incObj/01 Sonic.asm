@@ -7,7 +7,11 @@
 ; Object variables used by Sonic
 ; ---------------------------------------------------------------------------
 
-dgfxaddr:	equ $28 ; dgfx/"dplc" script address 
+playammo:	equ $28 	; THIS IS REALLY FUNNYT BECAUSE ITS A BYTE
+				; WE'RE REALLY BYTEBASHING THIS ONE MAN.
+
+dgfxaddr:	equ $28 ; dgfx/"dplc" script address (LONGWORD, DONT USE TOP BYTE)
+
 artaddr:	equ $2C ; art data address 
 flashtime:	equ $30	; time between flashes after getting hit (2 bytes)
 invtime:	equ $32	; time left for invincibility (2 bytes)
@@ -15,7 +19,7 @@ shoetime:	equ $34	; time left for speed shoes (2 bytes)
 angleright:	equ $36	; angle of floor on Sonic's right side
 angleleft:	equ $37	; angle of floor on Sonic's left side
 sticktoconvex:	equ $38	; flag set while running on an SBZ gear
-attacking:	equ $39	; timset set while attacking
+attacking:	equ $39	; timeset set while attacking
 restartime:	equ $3A	; time left before level restarts after dying (2 bytes)
 jumping:	equ $3C	; flag set while Sonic is jumping
 standonobject:	equ $3D	; object index Sonic stands on
@@ -165,6 +169,8 @@ Maniac_Init:
 		move.b	#2,obPriority(a0)
 		move.b	#$18,obActWid(a0)
 		move.b	#4,obRender(a0)
+		move.b	#10,playammo(a0)	; ammo start
+		or.b	#1,f_ammocount.w
 		move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
 		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
 		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
@@ -488,6 +494,14 @@ TonicAttack:
 ; ----------------------------------------------------------------------------
 
 ManiacAttack:
+		tst.b	playammo(a0)
+		bne.s	.go
+		or.b	#1,f_ammocount.w
+		move.w	#sfx_B8, d0
+		jmp	PlaySound_Special	
+.go:
+		sub.b	#1,playammo(a0)	; ammo start
+		or.b	#1,f_ammocount.w
 		moveq   #3, d2
 		moveq   #0, d1
 		moveq   #0, d0

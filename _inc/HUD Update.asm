@@ -2,23 +2,30 @@
 ; Subroutine to update the HUD
 ; ---------------------------------------------------------------------------
 
-; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
-
 HUD_Update:
 		tst.w	(f_debugmode).w	; is debug mode on?
 		bne.w	HudDebug	; if yes, branch
+
+	; --------------------------------------
+	; check score update
+	; --------------------------------------
+
 		tst.b	(f_scorecount).w ; does the score need updating?
 		beq.s	.chkrings	; if not, branch
-
 		clr.b	(f_scorecount).w
 		locVRAM	(ArtTile_HUD+17)*tile_size,d0	; set VRAM address
 		move.l	(v_score).w,d1	; load score
 		bsr.w	Hud_Score
 
+	; --------------------------------------
+	; check rings update
+	; --------------------------------------
+
 .chkrings:
 		tst.b	(f_ringcount).w	; does the ring counter need updating?
-		beq.s	.chktime	; if not, branch
+		beq.s	.chkammo	; if not, branch
 		bpl.s	.notzero
+		locVRAM	(ArtTile_HUD+28)*tile_size
 		bsr.w	Hud_LoadZero	; reset rings to 0 if Sonic is hit
 
 .notzero:
@@ -27,6 +34,27 @@ HUD_Update:
 		moveq	#0,d1
 		move.w	(v_rings).w,d1	; load number of rings
 		bsr.w	Hud_Rings
+
+	; --------------------------------------
+	; check ammo update
+	; --------------------------------------
+
+.chkammo
+		tst.b	f_ammocount.w
+		beq.s	.chktime	; if not, branch
+		bpl.s	.notzero2
+		locVRAM	(ArtTile_HUD+31)*tile_size
+		bsr.w	Hud_LoadZero	; reset rings to 0 if Sonic is hit
+.notzero2:
+		clr.b	(f_ammocount).w
+		locVRAM	(ArtTile_HUD+31)*tile_size,d0	; set VRAM address
+		moveq	#0,d1
+		move.b	(v_player+playammo).w,d1	; load number of rings
+		bsr.w	Hud_Ammo	
+
+	; --------------------------------------
+	; check time update
+	; --------------------------------------
 
 .chktime:
 		tst.b	(f_timecount).w	; does the time need updating?
@@ -59,6 +87,10 @@ HUD_Update:
 		moveq	#0,d1
 		move.b	(v_timesec).w,d1 ; load seconds
 		bsr.w	Hud_Secs
+
+	; --------------------------------------
+	; check lives update
+	; --------------------------------------
 
 .chklives:
 		tst.b	(f_lifecount).w ; does the lives counter need updating?
@@ -139,7 +171,6 @@ HudDebug:
 
 
 Hud_LoadZero:
-		locVRAM	(ArtTile_HUD+28)*tile_size
 		lea	Hud_TilesZero(pc),a2
 		move.w	#2,d2
 		bra.s	loc_1C83E
@@ -311,7 +342,67 @@ loc_1C92C:
 
 		rts
 
-; End of function Hud_Score
+; ---------------------------------------------------------------------------
+; Subroutine to print ammo numbers
+; ---------------------------------------------------------------------------
+
+
+Hud_Ammo:
+		lea	(Hud_100).l,a2
+		moveq	#2,d6
+		moveq	#0,d4
+		lea	(Art_Text).l,a1
+
+.Hud_AmmoLoop:
+		moveq	#0,d2
+		move.l	(a2)+,d3
+
+.loc_1C8EC:
+		sub.l	d3,d1
+		bcs.s	.loc_1C8F4
+		addq.w	#1,d2
+		bra.s	.loc_1C8EC
+; ===========================================================================
+
+.loc_1C8F4:
+		add.l	d3,d1
+		tst.w	d2
+		beq.s	.loc_1C8FE
+		move.w	#1,d4
+
+.loc_1C8FE:
+		tst.w	d6
+		beq.s	.skip
+		tst.w	d4
+		beq.s	.loc_1C92C
+.skip:
+		lsl.w	#5,d2
+		move.l	d0,4(a6)
+		lea	(a1,d2.w),a3
+		move.l	(a3)+,(a6)
+		move.l	(a3)+,(a6)
+		move.l	(a3)+,(a6)
+		move.l	(a3)+,(a6)
+		move.l	(a3)+,(a6)
+		move.l	(a3)+,(a6)
+		move.l	(a3)+,(a6)
+		move.l	(a3)+,(a6)
+		addi.l	#$200000,d0
+		dbf	d6,.Hud_AmmoLoop
+		rts
+.loc_1C92C:
+		move.l	d0,4(a6)
+		move.l	#0,(a6)
+		move.l	#0,(a6)
+		move.l	#0,(a6)
+		move.l	#0,(a6)
+		move.l	#0,(a6)
+		move.l	#0,(a6)
+		move.l	#0,(a6)
+		move.l	#0,(a6)
+		addi.l	#$200000,d0
+		dbf	d6,.Hud_AmmoLoop
+		rts
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to load countdown numbers on the continue screen
