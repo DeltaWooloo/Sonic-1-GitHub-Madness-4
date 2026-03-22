@@ -42,7 +42,6 @@ GooglePlayStock_Chords:
 	smpsPan			 panCenter, $00
 	dc.b	nRst, $20, nRst, $20, nRst, $20, nRst, $20
 	dc.b	nRst, $20, nRst, $20, nRst, $20, nRst, $20
-	dc.b	nRst, $20, nRst, $20, nRst, $20, nRst, $20
 	dc.b	nRst, $04
 GooglePlayStock_Chords_Loop:
 	dc.b	nG4, $04, nRst, $08, nG4, $08, nG4, $04, nG4, $04
@@ -82,6 +81,7 @@ GooglePlayStock_PSG_Arpeggio:
 	dc.b	nRst, $01
 GooglePlayStock_PSG_Arpeggio2:
 	smpsPSGvoice		 $00
+	dc.b	nRst, $20, nRst, $20, nRst, $20, nRst, $20
 	dc.b	nRst, $20, nRst, $20, nRst, $20, nRst, $20
 	dc.b	nRst, $20, nRst, $20, nRst, $20, nRst, $20
 GooglePlayStock_PSG_Loop:
