@@ -196,7 +196,7 @@ QuoteSoundTable:
 		dc.b	bgm_DeltaWSplash	; 112
 		dc.b	bgm_DeltaWSplash	; 113
 		dc.b	bgm_LimitedClear	; 114
-		dc.b	bgm_DeltaWSplash	; 115
+		dc.b	bgm_CleanSlate		; 115
 		dc.b	bgm_DeltaWSplash	; 116
 		dc.b	bgm_DeltaWSplash	; 117
 		dc.b	bgm_DeltaWSplash	; 118
