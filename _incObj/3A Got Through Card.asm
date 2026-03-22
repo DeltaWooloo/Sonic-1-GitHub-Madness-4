@@ -226,13 +226,13 @@ Got_Config:	dc.w 0,		$120,	$C0			; "SONIC HAS"
 		dc.w $400,	$120,	$E0			; "ACT" 1/2/3
 		dc.b 				2,	6
 
-		dc.w $520,	$120,	$EC			; score
+		dc.w $520,	$120,	$F0			; score
 		dc.b 				2,	2
 
-		dc.w $540,	$120,	$FC			; time bonus
+		dc.w $540,	$120,	$100			; time bonus
 		dc.b 				2,	3
 
-		dc.w $560,	$120,	$10C			; ring bonus
+		dc.w $560,	$120,	$110			; ring bonus
 		dc.b 				2,	4
 
 		dc.w $200,	$120,	$A0			; oval

@@ -54,7 +54,7 @@ Bump_Hit:	; Routine 2
 		addq.b	#1,2(a2,d0.w)
 
 .addscore:
-		moveq	#1,d0
+		move.w	#991,d0
 		jsr	(AddPoints).l	; add 10 to score
 		bsr.w	FindFreeObj
 		bne.s	.display

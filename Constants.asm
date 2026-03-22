@@ -701,7 +701,8 @@ ArtTile_Animal_1:		equ $580
 ArtTile_Animal_2:		equ $592
 ArtTile_Explosion:		equ $5A0
 ArtTile_Monitor:		equ $680
-ArtTile_HUD:			equ $6CA
+ArtTile_HUD:			equ $6C0
+ArtTile_SpecialAttack:	equ $6EA
 ArtTile_Sonic:			equ $780
 ArtTile_Points:			equ $797
 ArtTile_Lamppost:		equ $7A0
@@ -733,7 +734,7 @@ ArtTile_Prison_Capsule:		equ $49D
 ArtTile_Hidden_Points:		equ $4B6
 ArtTile_Warp:			equ $541
 ArtTile_Mini_Sonic:		equ $551
-ArtTile_Bonuses:		equ $570
+ArtTile_Bonuses:		equ $6E2
 ArtTile_Signpost:		equ $680
 
 ; Sega Screen

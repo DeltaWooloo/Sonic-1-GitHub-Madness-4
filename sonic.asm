@@ -4826,159 +4826,144 @@ Map_Push:	include	"_maps/Pushable Blocks.asm"
 		include	"_incObj/7F SS Result Chaos Emeralds.asm"
 
 ; ---------------------------------------------------------------------------
-; Sprite mappings - zone title cards
+; Sprite mappings - zone title cards			- none of this is used so it's all commented, uhm.. pilk. - coni
 ; ---------------------------------------------------------------------------
-Map_Card:	mappingsTable
-	mappingsTableEntry.w	M_Card_GHZ	; Green Hill Zone
-	mappingsTableEntry.w	M_Card_LZ	; Labyrinth Zone
-	mappingsTableEntry.w	M_Card_MZ	; Marble Zone
-	mappingsTableEntry.w	M_Card_SLZ	; Star Light Zone
-	mappingsTableEntry.w	M_Card_SYZ	; Spring Yard Zone
-	mappingsTableEntry.w	M_Card_SBZ	; Scrap Brain Zone
-	mappingsTableEntry.w	M_Card_Zone	; "ZONE" text
-	mappingsTableEntry.w	M_Card_Act1	; Act number 1
-	mappingsTableEntry.w	M_Card_Act2	; Act number 2
-	mappingsTableEntry.w	M_Card_Act3	; Act number 3
-	mappingsTableEntry.w	M_Card_Oval	; Blue oval
-	mappingsTableEntry.w	M_Card_FZ	; Final Zone
+;Map_Card:	mappingsTable
+;	mappingsTableEntry.w	M_Card_GHZ	; Green Hill Zone
+;	mappingsTableEntry.w	M_Card_LZ	; Labyrinth Zone
+;	mappingsTableEntry.w	M_Card_MZ	; Marble Zone
+;	mappingsTableEntry.w	M_Card_SLZ	; Star Light Zone
+;	mappingsTableEntry.w	M_Card_SYZ	; Spring Yard Zone
+;	mappingsTableEntry.w	M_Card_SBZ	; Scrap Brain Zone
+;	mappingsTableEntry.w	M_Card_Zone	; "ZONE" text
+;	mappingsTableEntry.w	M_Card_Act1	; Act number 1
+;	mappingsTableEntry.w	M_Card_Act2	; Act number 2
+;	mappingsTableEntry.w	M_Card_Act3	; Act number 3
+;	mappingsTableEntry.w	M_Card_Oval	; Blue oval
+;	mappingsTableEntry.w	M_Card_FZ	; Final Zone
+;
+;M_Card_GHZ:	spriteHeader	; GREEN HILL
+;	spritePiece	-$4C, -8, 2, 2, $18, 0, 0, 0, 0	; G
+;	spritePiece	-$3C, -8, 2, 2, $3A, 0, 0, 0, 0	; R
+;	spritePiece	-$2C, -8, 2, 2, $10, 0, 0, 0, 0	; E
+;	spritePiece	-$1C, -8, 2, 2, $10, 0, 0, 0, 0	; E
+;	spritePiece	-$C, -8, 2, 2, $2E, 0, 0, 0, 0	; N
+;
+;	spritePiece	$14, -8, 2, 2, $1C, 0, 0, 0, 0	; H
+;	spritePiece	$24, -8, 1, 2, $20, 0, 0, 0, 0	; I
+;	spritePiece	$2C, -8, 2, 2, $26, 0, 0, 0, 0	; L
+;	spritePiece	$3C, -8, 2, 2, $26, 0, 0, 0, 0	; L
+;M_Card_GHZ_End
+;	even
+;
+;M_Card_LZ:	spriteHeader	; LABYRINTH
+;	spritePiece	-$78, -8, 2, 2, 0, 0, 0, 0, 0	; A
+;	spritePiece	-$68, -8, 2, 2, $4E, 0, 0, 0, 0	; Z
+;	spritePiece	-$58, -8, 2, 2, $46, 0, 0, 0, 0	; U
+;	spritePiece	-$48, -8, 2, 2, $3A, 0, 0, 0, 0	; R
+;	spritePiece	-$38, -8, 2, 2, $10, 0, 0, 0, 0	; E
+;
+;	spritePiece	-$20, -8, 2, 2, $3A, 0, 0, 0, 0	; R
+;	spritePiece	-$10, -8, 2, 2, 0, 0, 0, 0, 0	; A
+;	spritePiece	0, -8, 1, 2, $20, 0, 0, 0, 0	; I
+;	spritePiece	8, -8, 2, 2, $2E, 0, 0, 0, 0	; N
+;	spritePiece	$18, -8, 2, 2, $14, 0, 0, 0, 0	; F
+;	spritePiece	$28, -8, 2, 2, $32, 0, 0, 0, 0	; O
+;	spritePiece	$38, -8, 2, 2, $3A, 0, 0, 0, 0	; R
+;	spritePiece	$48, -8, 2, 2, $10, 0, 0, 0, 0	; E
+;	spritePiece	$58, -8, 2, 2, $3E, 0, 0, 0, 0	; S
+;	spritePiece	$68, -8, 2, 2, $42, 0, 0, 0, 0	; T
+;M_Card_LZ_End
+;	even
 
-M_Card_GHZ:	spriteHeader	; GREEN HILL
-	spritePiece	-$4C, -8, 2, 2, $18, 0, 0, 0, 0	; G
-	spritePiece	-$3C, -8, 2, 2, $3A, 0, 0, 0, 0	; R
-	spritePiece	-$2C, -8, 2, 2, $10, 0, 0, 0, 0	; E
-	spritePiece	-$1C, -8, 2, 2, $10, 0, 0, 0, 0	; E
-	spritePiece	-$C, -8, 2, 2, $2E, 0, 0, 0, 0	; N
+;M_Card_MZ:	spriteHeader	; MARBLE
+;	spritePiece	-$31, -8, 2, 2, $2A, 0, 0, 0, 0	; M
+;	spritePiece	-$20, -8, 2, 2, 0, 0, 0, 0, 0	; A
+;	spritePiece	-$10, -8, 2, 2, $3A, 0, 0, 0, 0	; R
+;	spritePiece	 0, -8, 2, 2, 4, 0, 0, 0, 0	; B
+;	spritePiece	 $10, -8, 2, 2, $26, 0, 0, 0, 0	; L
+;	spritePiece	 $20, -8, 2, 2, $10, 0, 0, 0, 0	; E
+;M_Card_MZ_End
+;	even
 
-	spritePiece	$14, -8, 2, 2, $1C, 0, 0, 0, 0	; H
-	spritePiece	$24, -8, 1, 2, $20, 0, 0, 0, 0	; I
-	spritePiece	$2C, -8, 2, 2, $26, 0, 0, 0, 0	; L
-	spritePiece	$3C, -8, 2, 2, $26, 0, 0, 0, 0	; L
-M_Card_GHZ_End
-	even
+;M_Card_SLZ:	; STAR LIGHT
+;		dc.b 9	; MICROSLOP
+;		dc.b $F8, $05, $00, $2A, $BB	; M
+;		dc.b $F8, $01, $00, $20, $CC	; I
+;		dc.b $F8, $05, $00, $08, $D4	; C
+;		dc.b $F8, $05, $00, $3A, $E4	; R
+;		dc.b $F8, $05, $00, $32, $F4	; O
+;		dc.b $F8, $05, $00, $3E, $04	; S
+;		dc.b $F8, $05, $00, $26, $14	; L
+;		dc.b $F8, $05, $00, $32, $24	; O
+;		dc.b $F8, $05, $00, $36, $34	; P
+;		even
+;M_Card_SLZ_End
+;	even
 
-M_Card_LZ:	spriteHeader	; LABYRINTH
-	spritePiece	-$78, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	-$68, -8, 2, 2, $4E, 0, 0, 0, 0	; Z
-	spritePiece	-$58, -8, 2, 2, $46, 0, 0, 0, 0	; U
-	spritePiece	-$48, -8, 2, 2, $3A, 0, 0, 0, 0	; R
-	spritePiece	-$38, -8, 2, 2, $10, 0, 0, 0, 0	; E
-
-	spritePiece	-$20, -8, 2, 2, $3A, 0, 0, 0, 0	; R
-	spritePiece	-$10, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	0, -8, 1, 2, $20, 0, 0, 0, 0	; I
-	spritePiece	8, -8, 2, 2, $2E, 0, 0, 0, 0	; N
-	spritePiece	$18, -8, 2, 2, $14, 0, 0, 0, 0	; F
-	spritePiece	$28, -8, 2, 2, $32, 0, 0, 0, 0	; O
-	spritePiece	$38, -8, 2, 2, $3A, 0, 0, 0, 0	; R
-	spritePiece	$48, -8, 2, 2, $10, 0, 0, 0, 0	; E
-	spritePiece	$58, -8, 2, 2, $3E, 0, 0, 0, 0	; S
-	spritePiece	$68, -8, 2, 2, $42, 0, 0, 0, 0	; T
-M_Card_LZ_End
-	even
-
-M_Card_MZ:	spriteHeader	; MARBLE
-	spritePiece	-$31, -8, 2, 2, $2A, 0, 0, 0, 0	; M
-	spritePiece	-$20, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	-$10, -8, 2, 2, $3A, 0, 0, 0, 0	; R
-	spritePiece	 0, -8, 2, 2, 4, 0, 0, 0, 0	; B
-	spritePiece	 $10, -8, 2, 2, $26, 0, 0, 0, 0	; L
-	spritePiece	 $20, -8, 2, 2, $10, 0, 0, 0, 0	; E
-M_Card_MZ_End
-	even
-
-M_Card_SLZ:	; STAR LIGHT
-		dc.b 9	; MICROSLOP
-		dc.b $F8, $05, $00, $2A, $BB	; M
-		dc.b $F8, $01, $00, $20, $CC	; I
-		dc.b $F8, $05, $00, $08, $D4	; C
-		dc.b $F8, $05, $00, $3A, $E4	; R
-		dc.b $F8, $05, $00, $32, $F4	; O
-		dc.b $F8, $05, $00, $3E, $04	; S
-		dc.b $F8, $05, $00, $26, $14	; L
-		dc.b $F8, $05, $00, $32, $24	; O
-		dc.b $F8, $05, $00, $36, $34	; P
-		even
-M_Card_SLZ_End
-	even
-
-M_Card_SYZ:	spriteHeader	; SPRING YARD
-	spritePiece	-$54, -8, 2, 2, $3E, 0, 0, 0, 0	; S
-	spritePiece	-$44, -8, 2, 2, $36, 0, 0, 0, 0	; P
-	spritePiece	-$34, -8, 2, 2, $3A, 0, 0, 0, 0	; R
-	spritePiece	-$24, -8, 1, 2, $20, 0, 0, 0, 0	; I
-	spritePiece	-$1C, -8, 2, 2, $2E, 0, 0, 0, 0	; N
-	spritePiece	-$C, -8, 2, 2, $18, 0, 0, 0, 0	; G
-
-	spritePiece	$14, -8, 2, 2, $4A, 0, 0, 0, 0	; Y
-	spritePiece	$24, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	$34, -8, 2, 2, $3A, 0, 0, 0, 0	; R
-	spritePiece	$44, -8, 2, 2, $C, 0, 0, 0, 0	; D
-M_Card_SYZ_End
-	even
-
-M_Card_SBZ:	spriteHeader	; SCRAP BRAIN
-	spritePiece	-$54, -8, 2, 2, $3E, 0, 0, 0, 0	; S
-	spritePiece	-$44, -8, 2, 2, 8, 0, 0, 0, 0	; C
-	spritePiece	-$34, -8, 2, 2, $3A, 0, 0, 0, 0	; R
-	spritePiece	-$24, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	-$14, -8, 2, 2, $36, 0, 0, 0, 0	; P
-
-	spritePiece	$C, -8, 2, 2, 4, 0, 0, 0, 0	; B
-	spritePiece	$1C, -8, 2, 2, $3A, 0, 0, 0, 0	; R
-	spritePiece	$2C, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	$3C, -8, 1, 2, $20, 0, 0, 0, 0	; I
-	spritePiece	$44, -8, 2, 2, $2E, 0, 0, 0, 0	; N
-M_Card_SBZ_End
-	even
-
-M_Card_Zone:	spriteHeader	; ZONE
-	spritePiece	-$20, -8, 2, 2, $4E, 0, 0, 0, 0	; Z
-	spritePiece	-$10, -8, 2, 2, $32, 0, 0, 0, 0	; O
-	spritePiece	0, -8, 2, 2, $2E, 0, 0, 0, 0	; N
-	spritePiece	$10, -8, 2, 2, $10, 0, 0, 0, 0	; E
-M_Card_Zone_End
-	even
-
-M_Card_Act1:	spriteHeader	; Act number 1
-	spritePiece	-$14, 4, 4, 1, $53, 0, 0, 0, 0	; "ACT"
-	spritePiece	$C, -$C, 1, 3, $57, 0, 0, 0, 0	; 1
-M_Card_Act1_End
-
-M_Card_Act2:	spriteHeader	; Act number 2
-	spritePiece	-$14, 4, 4, 1, $53, 0, 0, 0, 0	; "ACT"
-	spritePiece	8, -$C, 2, 3, $5A, 0, 0, 0, 0	; 2
-M_Card_Act2_End
-
-M_Card_Act3:	spriteHeader	; Act number 3
-	spritePiece	-$14, 4, 4, 1, $53, 0, 0, 0, 0	; "ACT"
-	spritePiece	8, -$C, 2, 3, $60, 0, 0, 0, 0	; 3
-M_Card_Act3_End
-
-M_Card_Oval:	spriteHeader	; Blue oval
-	spritePiece	-$C, -$1C, 4, 1, $70, 0, 0, 0, 0
-	spritePiece	$14, -$1C, 1, 3, $74, 0, 0, 0, 0
-	spritePiece	-$14, -$14, 2, 1, $77, 0, 0, 0, 0
-	spritePiece	-$1C, -$C, 2, 2, $79, 0, 0, 0, 0
-	spritePiece	-$14, $14, 4, 1, $70, 1, 1, 0, 0
-	spritePiece	-$1C, 4, 1, 3, $74, 1, 1, 0, 0
-	spritePiece	4, $C, 2, 1, $77, 1, 1, 0, 0
-	spritePiece	$C, -4, 2, 2, $79, 1, 01, 0, 0
-	spritePiece	-4, -$14, 3, 1, $7D, 0, 0, 0, 0
-	spritePiece	-$C, -$C, 4, 1, $7C, 0, 0, 0, 0
-	spritePiece	-$C, -4, 3, 1, $7C, 0, 0, 0, 0
-	spritePiece	-$14, 4, 4, 1, $7C, 0, 0, 0, 0
-	spritePiece	-$14, $C, 3, 1, $7C, 0, 0, 0, 0
-M_Card_Oval_End
-	even
-
-M_Card_FZ:	spriteHeader	; FINAL
-	spritePiece	-$24, -8, 2, 2, $14, 0, 0, 0, 0	; F
-	spritePiece	-$14, -8, 1, 2, $20, 0, 0, 0, 0	; I
-	spritePiece	-$C, -8, 2, 2, $2E, 0, 0, 0, 0	; N
-	spritePiece	4, -8, 2, 2, 0, 0, 0, 0, 0	; A
-	spritePiece	$14, -8, 2, 2, $26, 0, 0, 0, 0	; L
-M_Card_FZ_End
-	even
+;M_Card_SYZ:	spriteHeader	; SPRING YARD
+;	spritePiece	-$54, -8, 2, 2, $3E, 0, 0, 0, 0	; S
+;	spritePiece	-$44, -8, 2, 2, $36, 0, 0, 0, 0	; P
+;	spritePiece	-$34, -8, 2, 2, $3A, 0, 0, 0, 0	; R
+;	spritePiece	-$24, -8, 1, 2, $20, 0, 0, 0, 0	; I
+;	spritePiece	-$1C, -8, 2, 2, $2E, 0, 0, 0, 0	; N
+;	spritePiece	-$C, -8, 2, 2, $18, 0, 0, 0, 0	; G
+;
+;	spritePiece	$14, -8, 2, 2, $4A, 0, 0, 0, 0	; Y
+;	spritePiece	$24, -8, 2, 2, 0, 0, 0, 0, 0	; A
+;	spritePiece	$34, -8, 2, 2, $3A, 0, 0, 0, 0	; R
+;	spritePiece	$44, -8, 2, 2, $C, 0, 0, 0, 0	; D
+;M_Card_SYZ_End
+;	even
+;
+;M_Card_SBZ:	spriteHeader	; SCRAP BRAIN
+;	spritePiece	-$54, -8, 2, 2, $3E, 0, 0, 0, 0	; S
+;	spritePiece	-$44, -8, 2, 2, 8, 0, 0, 0, 0	; C
+;	spritePiece	-$34, -8, 2, 2, $3A, 0, 0, 0, 0	; R
+;	spritePiece	-$24, -8, 2, 2, 0, 0, 0, 0, 0	; A
+;	spritePiece	-$14, -8, 2, 2, $36, 0, 0, 0, 0	; P
+;
+;	spritePiece	$C, -8, 2, 2, 4, 0, 0, 0, 0	; B
+;	spritePiece	$1C, -8, 2, 2, $3A, 0, 0, 0, 0	; R
+;	spritePiece	$2C, -8, 2, 2, 0, 0, 0, 0, 0	; A
+;	spritePiece	$3C, -8, 1, 2, $20, 0, 0, 0, 0	; I
+;	spritePiece	$44, -8, 2, 2, $2E, 0, 0, 0, 0	; N
+;M_Card_SBZ_End
+;	even
+;
+;M_Card_Zone:	spriteHeader	; ZONE
+;	spritePiece	-$20, -8, 2, 2, $4E, 0, 0, 0, 0	; Z
+;	spritePiece	-$10, -8, 2, 2, $32, 0, 0, 0, 0	; O
+;	spritePiece	0, -8, 2, 2, $2E, 0, 0, 0, 0	; N
+;	spritePiece	$10, -8, 2, 2, $10, 0, 0, 0, 0	; E
+;M_Card_Zone_End
+;	even
+;
+;M_Card_Act1:	spriteHeader	; Act number 1
+;	spritePiece	-$14, 4, 4, 1, $53, 0, 0, 0, 0	; "ACT"
+;	spritePiece	$C, -$C, 1, 3, $57, 0, 0, 0, 0	; 1
+;M_Card_Act1_End
+;
+;M_Card_Act2:	spriteHeader	; Act number 2
+;	spritePiece	-$14, 4, 4, 1, $53, 0, 0, 0, 0	; "ACT"
+;	spritePiece	8, -$C, 2, 3, $5A, 0, 0, 0, 0	; 2
+;M_Card_Act2_End
+;
+;M_Card_Act3:	spriteHeader	; Act number 3
+;	spritePiece	-$14, 4, 4, 1, $53, 0, 0, 0, 0	; "ACT"
+;	spritePiece	8, -$C, 2, 3, $60, 0, 0, 0, 0	; 3
+;M_Card_Act3_End
+;
+; oval moved to special stage
+;
+;M_Card_FZ:	spriteHeader	; FINAL
+;	spritePiece	-$24, -8, 2, 2, $14, 0, 0, 0, 0	; F
+;	spritePiece	-$14, -8, 1, 2, $20, 0, 0, 0, 0	; I
+;	spritePiece	-$C, -8, 2, 2, $2E, 0, 0, 0, 0	; N
+;	spritePiece	4, -8, 2, 2, 0, 0, 0, 0, 0	; A
+;	spritePiece	$14, -8, 2, 2, $26, 0, 0, 0, 0	; L
+;M_Card_FZ_End
+;	even
 
 ; ===========================================================================
 
@@ -4987,86 +4972,105 @@ Map_Over:	include	"_maps/Game Over.asm"
 ; ---------------------------------------------------------------------------
 ; Sprite mappings - "SONIC HAS PASSED" title card
 ; ---------------------------------------------------------------------------
-Map_Got:	dc.w M_Got_SonicHas-Map_Got
-		dc.w M_Got_Passed-Map_Got
-		dc.w M_Got_Score-Map_Got
-		dc.w M_Got_TBonus-Map_Got
-		dc.w M_Got_RBonus-Map_Got
-		dc.w M_Got_Oval-Map_Got
-		dc.w M_Got_Act1-Map_Got
-		dc.w M_Got_Act2-Map_Got
-		dc.w M_Got_Act3-Map_Got
-M_Got_SonicHas:	dc.b 4			; YOU'RE
-		dc.b $F8, $D, $0, $0, $D4
-		dc.b $F8, $5, $0, $8, $F4
-		dc.b $F8, $0, $0, $C, $4
-		dc.b $F8, $D, $0, $D, $C
-M_Got_Passed:	dc.b 6			; WINNER
-		dc.b $F8, $9, $0, $15, $D0
-		dc.b $F8, $5, $0, $1B, $E8
-		dc.b $F8, $5, $0, $1F, $F8
-		dc.b $F8, $5, $0, $23, $8
-		dc.b $F8, $5, $0, $27, $18
-		dc.b $F8, $1, $0, $2B, $28
-M_Got_Score:	dc.b 6			; SCORE
-		dc.b $F8, $D, 1, $4A, $B0
-		dc.b $F8, 1, 1,	$62, $D0
-		dc.b $F8, 9, 1,	$64, $18
-		dc.b $F8, $D, 1, $6A, $30
-		dc.b $F7, 4, 0,	$6E, $CD
-		dc.b $FF, 4, $18, $6E, $CD
-M_Got_TBonus:	dc.b 7			; TIME BONUS
-		dc.b $F8, $D, 1, $5A, $B0
-		dc.b $F8, $D, 0, $66, $D9
-		dc.b $F8, 1, 1,	$4A, $F9
-		dc.b $F7, 4, 0,	$6E, $F6
-		dc.b $FF, 4, $18, $6E, $F6
-		dc.b $F8, $D, $FF, $F0,	$28
-		dc.b $F8, 1, 1,	$70, $48
-M_Got_RBonus:	dc.b 7			; RING BONUS
-		dc.b $F8, $D, 1, $52, $B0
-		dc.b $F8, $D, 0, $66, $D9
-		dc.b $F8, 1, 1,	$4A, $F9
-		dc.b $F7, 4, 0,	$6E, $F6
-		dc.b $FF, 4, $18, $6E, $F6
-		dc.b $F8, $D, $FF, $F8,	$28
-		dc.b $F8, 1, 1,	$70, $48
-M_Got_Oval:	dc.b 5			; TROPHY
-		dc.b $E0, $F, $20, $2D, $E8
-		dc.b $E0, $7, $20, $3D, $8
-		dc.b $0, $C, $20, $46, $F4
-		dc.b $8, $E, $0, $4A, $F0
-		dc.b $8, $2, $0, $56, $10
-M_Got_Act1:	dc.b 6			; IN ACT.1
-		dc.b $F8, $9, $0, $59, $CC
-		dc.b $0, $0, $0, $65, $1C
-		dc.b $F8, $5, $0, $5F, $EC
-		dc.b $F8, $5, $0, $70, $FC
-		dc.b $F8, $5, $0, $74, $C
-		dc.b $F8, $1, $0, $63, $24
-M_Got_Act2:	dc.b 6			; IN ACT.2
-		dc.b $F8, $9, $0, $59, $CC
-		dc.b $0, $0, $0, $65, $1C
-		dc.b $F8, $5, $0, $5F, $EC
-		dc.b $F8, $5, $0, $70, $FC
-		dc.b $F8, $5, $0, $74, $C
-		dc.b $F8, $5, $0, $78, $24
-M_Got_Act3:	dc.b 6			; IN ACT.3
-		dc.b $F8, $9, $0, $59, $CC
-		dc.b $0, $0, $0, $65, $1C
-		dc.b $F8, $5, $0, $5F, $EC
-		dc.b $F8, $5, $0, $70, $FC
-		dc.b $F8, $5, $0, $74, $C
-		dc.b $F8, $5, $0, $7C, $24
-		even
+Map_Got: mappingsTable
+	mappingsTableEntry.w	M_Got_SonicHas
+	mappingsTableEntry.w	M_Got_Passed
+	mappingsTableEntry.w	M_Got_Score
+	mappingsTableEntry.w	M_Got_TBonus
+	mappingsTableEntry.w	M_Got_RBonus
+	mappingsTableEntry.w	M_Got_Oval
+	mappingsTableEntry.w	M_Got_Act1
+	mappingsTableEntry.w	M_Got_Act2
+	mappingsTableEntry.w	M_Got_Act3
+
+M_Got_SonicHas:	spriteHeader
+ spritePiece -$2C, -8, 4, 2, 0, 0, 0, 0, 0
+ spritePiece -$C, -8, 2, 2, 8, 0, 0, 0, 0
+ spritePiece 4, -8, 1, 1, $C, 0, 0, 0, 0
+ spritePiece $C, -8, 4, 2, $D, 0, 0, 0, 0
+M_Got_SonicHas_End
+
+M_Got_Passed:	spriteHeader
+ spritePiece -$30, -8, 3, 2, $15, 0, 0, 0, 0
+ spritePiece -$18, -8, 2, 2, $1B, 0, 0, 0, 0
+ spritePiece -8, -8, 2, 2, $1F, 0, 0, 0, 0
+ spritePiece 8, -8, 2, 2, $23, 0, 0, 0, 0
+ spritePiece $18, -8, 2, 2, $27, 0, 0, 0, 0
+ spritePiece $28, -8, 1, 2, $2B, 0, 0, 0, 0
+M_Got_Passed_End
+
+M_Got_Score:	spriteHeader
+ spritePiece -$50, -8, 4, 1, $140, 0, 0, 0, 0
+ spritePiece -$30, -8, 1, 1, $144, 0, 0, 0, 0
+ spritePiece $18, -8, 3, 1, $151, 0, 0, 0, 0
+ spritePiece $30, -8, 4, 1, $154, 0, 0, 0, 0
+ spritePiece -$33, -9, 2, 1, $6E, 0, 0, 0, 0
+ spritePiece -$33, -1, 2, 1, $6E, 1, 1, 0, 0
+M_Got_Score_End
+
+M_Got_TBonus:	spriteHeader
+ spritePiece -$50, -8, 4, 1, $145, 0, 0, 0, 0
+ spritePiece -$27, -8, 4, 1, $66, 0, 0, 0, 0
+ spritePiece -7, -8, 1, 1, $140, 0, 0, 0, 0
+ spritePiece -$A, -9, 2, 1, $6E, 0, 0, 0, 0
+ spritePiece -$A, -1, 2, 1, $6E, 1, 1, 0, 0
+ spritePiece $28, -8, 4, 1, $162, 0, 0, 0, 0
+ spritePiece $48, -8, 1, 1, $157, 0, 0, 0, 0
+M_Got_TBonus_End
+
+M_Got_RBonus:	spriteHeader
+ spritePiece -$50, -8, 4, 1, $149, 0, 0, 0, 0
+ spritePiece -$27, -8, 4, 1, $66, 0, 0, 0, 0
+ spritePiece -7, -8, 1, 1, $140, 0, 0, 0, 0
+ spritePiece -$A, -9, 2, 1, $6E, 0, 0, 0, 0
+ spritePiece -$A, -1, 2, 1, $6E, 1, 1, 0, 0
+ spritePiece $28, -8, 4, 1, $166, 0, 0, 0, 0
+ spritePiece $48, -8, 1, 1, $157, 0, 0, 0, 0
+M_Got_RBonus_End
+
+M_Got_Oval:	spriteHeader
+ spritePiece -$18, -$20, 4, 4, $2D, 0, 0, 1, 0
+ spritePiece 8, -$20, 2, 4, $3D, 0, 0, 1, 0
+ spritePiece -$C, 0, 4, 1, $46, 0, 0, 1, 0
+ spritePiece -$10, 8, 4, 3, $4A, 0, 0, 0, 0
+ spritePiece $10, 8, 1, 3, $56, 0, 0, 0, 0
+M_Got_Oval_End
+
+M_Got_Act1:	spriteHeader
+ spritePiece -$34, -8, 3, 2, $59, 0, 0, 0, 0
+ spritePiece $1C, 0, 1, 1, $65, 0, 0, 0, 0
+ spritePiece -$14, -8, 2, 2, $5F, 0, 0, 0, 0
+ spritePiece -4, -8, 2, 2, $70, 0, 0, 0, 0
+ spritePiece $C, -8, 2, 2, $74, 0, 0, 0, 0
+ spritePiece $24, -8, 1, 2, $63, 0, 0, 0, 0
+M_Got_Act1_End
+
+M_Got_Act2:	spriteHeader
+ spritePiece -$34, -8, 3, 2, $59, 0, 0, 0, 0
+ spritePiece $1C, 0, 1, 1, $65, 0, 0, 0, 0
+ spritePiece -$14, -8, 2, 2, $5F, 0, 0, 0, 0
+ spritePiece -4, -8, 2, 2, $70, 0, 0, 0, 0
+ spritePiece $C, -8, 2, 2, $74, 0, 0, 0, 0
+ spritePiece $24, -8, 2, 2, $78, 0, 0, 0, 0
+M_Got_Act2_End
+
+M_Got_Act3:	spriteHeader
+ spritePiece -$34, -8, 3, 2, $59, 0, 0, 0, 0
+ spritePiece $1C, 0, 1, 1, $65, 0, 0, 0, 0
+ spritePiece -$14, -8, 2, 2, $5F, 0, 0, 0, 0
+ spritePiece -4, -8, 2, 2, $70, 0, 0, 0, 0
+ spritePiece $C, -8, 2, 2, $74, 0, 0, 0, 0
+ spritePiece $24, -8, 2, 2, $7C, 0, 0, 0, 0
+M_Got_Act3_End
+	even
 
 ; ---------------------------------------------------------------------------
 ; Sprite mappings - special stage results screen
 ; ---------------------------------------------------------------------------
 Map_SSR:	mappingsTable
 	mappingsTableEntry.w	M_SSR_Chaos	; "CHAOS EMERLADS" text
-	mappingsTableEntry.w	M_SSR_Score	; Score tally
-	mappingsTableEntry.w	M_SSR_Ring	; Ring Bonus tally
+	mappingsTableEntry.w	M_Got_Score	; Score tally
+	mappingsTableEntry.w	M_Got_RBonus	; Ring Bonus tally
 	mappingsTableEntry.w	M_Card_Oval	; Blue oval (cross-referended from the regular title card mappings)
 	mappingsTableEntry.w	M_SSR_ContSon1	; Continue tally with mini Sonic (foot down)
 	mappingsTableEntry.w	M_SSR_ContSon2	; Continue tally with mini Sonic (foot up)
@@ -5086,24 +5090,40 @@ M_SSR_Chaos:	dc.b 9	;  PENTHANES
 		dc.b $F8, 5, 0, $3E, $38	; S
 M_SSR_Chaos_End
 
-M_SSR_Score:	spriteHeader	; Score tally
-	spritePiece	-$50, -8, 4, 2, $14A, 0, 0, 0, 0; "SCOR"
-	spritePiece	-$30, -8, 1, 2, $162, 0, 0, 0, 0; "E"
-	spritePiece	$18, -8, 3, 2, $164, 0, 0, 0, 0	; Tally (first four digits)
-	spritePiece	$30, -8, 4, 2, $16A, 0, 0, 0, 0	; Tally (second four digits)
-	spritePiece	-$33, -9, 2, 1, $6E, 0, 0, 0, 0	; Small oval (upper half)
-	spritePiece	-$33, -1, 2, 1, $6E, 1, 1, 0, 0	; Small oval (lower half)
-M_SSR_Score_End
+;M_SSR_Score:	spriteHeader	; Score tally
+;	spritePiece	-$50, -8, 4, 1, $14A, 0, 0, 0, 0; "SCOR"
+;	spritePiece	-$30, -8, 1, 1, $160, 0, 0, 0, 0; "E"
+;	spritePiece	$18, -8, 3, 2, $164, 0, 0, 0, 0	; Tally (first four digits)
+;	spritePiece	$30, -8, 4, 2, $16A, 0, 0, 0, 0	; Tally (second four digits)
+;	spritePiece	-$33, -9, 2, 1, $6E, 0, 0, 0, 0	; Small oval (upper half)
+;	spritePiece	-$33, -1, 2, 1, $6E, 1, 1, 0, 0	; Small oval (lower half)
+;M_SSR_Score_End
+;
+;M_SSR_Ring:	spriteHeader	; Ring Bonus tally
+; spritePiece -$50, -8, 4, 1, $149, 0, 0, 0, 0
+; spritePiece -$27, -8, 4, 1, $66, 0, 0, 0, 0
+; spritePiece -7, -8, 1, 1, $140, 0, 0, 0, 0
+; spritePiece -$A, -9, 2, 1, $6E, 0, 0, 0, 0
+; spritePiece -$A, -1, 2, 1, $6E, 1, 1, 0, 0
+; spritePiece $28, -8, 4, 1, $166, 0, 0, 0, 0
+; spritePiece $48, -8, 1, 1, $157, 0, 0, 0, 0
+;M_SSR_Ring_End
 
-M_SSR_Ring:	spriteHeader	; Ring Bonus tally
-	spritePiece	-$50, -8, 4, 2, $152, 0, 0, 0, 0; "RING"
-	spritePiece	-$27, -8, 4, 2, $66, 0, 0, 0, 0	; "BONU"
-	spritePiece	-7, -8, 1, 2, $14A, 0, 0, 0, 0	; "S"
-	spritePiece	-$A, -9, 2, 1, $6E, 0, 0, 0, 0	; Small oval (upper half)
-	spritePiece	-$A, -1, 2, 1, $6E, 1, 1, 0, 0	; Small oval (lower half)
-	spritePiece	$28, -8, 4, 2, -8, 0, 0, 0, 0	; Tally (first four digits)
-	spritePiece	$48, -8, 1, 2, $170, 0, 0, 0, 0	; Tally (second four digits)
-M_SSR_Ring_End
+M_Card_Oval:	spriteHeader	; Blue oval
+	spritePiece	-$C, -$1C, 4, 1, $70, 0, 0, 0, 0
+	spritePiece	$14, -$1C, 1, 3, $74, 0, 0, 0, 0
+	spritePiece	-$14, -$14, 2, 1, $77, 0, 0, 0, 0
+	spritePiece	-$1C, -$C, 2, 2, $79, 0, 0, 0, 0
+	spritePiece	-$14, $14, 4, 1, $70, 1, 1, 0, 0
+	spritePiece	-$1C, 4, 1, 3, $74, 1, 1, 0, 0
+	spritePiece	4, $C, 2, 1, $77, 1, 1, 0, 0
+	spritePiece	$C, -4, 2, 2, $79, 1, 01, 0, 0
+	spritePiece	-4, -$14, 3, 1, $7D, 0, 0, 0, 0
+	spritePiece	-$C, -$C, 4, 1, $7C, 0, 0, 0, 0
+	spritePiece	-$C, -4, 3, 1, $7C, 0, 0, 0, 0
+	spritePiece	-$14, 4, 4, 1, $7C, 0, 0, 0, 0
+	spritePiece	-$14, $C, 3, 1, $7C, 0, 0, 0, 0
+M_Card_Oval_End
 
 M_SSR_ContSon1:	spriteHeader	; Continue tally with mini Sonic (foot down)
 	spritePiece	-$50, -8, 4, 2, -$2F, 0, 0, 0, 0; "CONT"

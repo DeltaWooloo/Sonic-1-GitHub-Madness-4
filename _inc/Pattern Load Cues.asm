@@ -34,7 +34,7 @@ ptr_PLC_DVZ:		dc.w PLC_DVZ-ArtLoadCues
 ptr_PLC_DVZ2:		dc.w PLC_DVZ2-ArtLoadCues
 ptr_PLC_NGZ:		dc.w PLC_NGZ-ArtLoadCues
 ptr_PLC_NGZ2:		dc.w PLC_NGZ2-ArtLoadCues
-ptr_PLC_TitleCard:	dc.w PLC_TitleCard-ArtLoadCues
+ptr_PLC_WINNERCard:	dc.w PLC_WINNERCard-ArtLoadCues
 ptr_PLC_Boss:		dc.w PLC_Boss-ArtLoadCues
 ptr_PLC_Signpost:	dc.w PLC_Signpost-ArtLoadCues
 ptr_PLC_Warp:		dc.w PLC_Warp-ArtLoadCues
@@ -56,7 +56,6 @@ ptr_PLC_Ending:		dc.w PLC_Ending-ArtLoadCues
 ptr_PLC_TryAgain:	dc.w PLC_TryAgain-ArtLoadCues
 ptr_PLC_EggmanSBZ2:	dc.w PLC_EggmanSBZ2-ArtLoadCues
 ptr_PLC_FZBoss:		dc.w PLC_FZBoss-ArtLoadCues
-ptr_PLC_WINNERCard:	dc.w PLC_WINNERCard-ArtLoadCues
 plcm:	macro gfx,vram
 		dc.w (gfx>>16)&$FF,gfx&$FFFF,vram*32
 		endm
@@ -312,11 +311,11 @@ PLC_NGZ2:	dc.w ((PLC_NGZ2end-PLC_NGZ2-2)/6)-1
 		plcm	Nem_GhzWall2, $6980/32	; normal wall
 PLC_NGZ2end:
 ; ---------------------------------------------------------------------------
-; Pattern load cues - title card
+; Pattern load cues - WINNER card
 ; ---------------------------------------------------------------------------
-PLC_TitleCard:	dc.w ((PLC_TitleCardend-PLC_TitleCard-2)/6)-1
-		plcm	Nem_TitleCard, ArtTile_Title_Card
-PLC_TitleCardend:
+PLC_WINNERCard:	dc.w ((PLC_WINNERCardend-PLC_WINNERCard-2)/6)-1
+		plcm	Nem_WINNERCard, ArtTile_Title_Card
+PLC_WINNERCardend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - act 3 boss
 ; ---------------------------------------------------------------------------
@@ -495,12 +494,6 @@ PLC_FZBoss:	dc.w ((PLC_FZBossend-PLC_FZBoss-2)/6)-1
 		plcm	Nem_Sbz2Eggman, ArtTile_FZ_Eggman_No_Vehicle ; Eggman without ship
 		plcm	Nem_Exhaust,    ArtTile_Eggman_Exhaust       ; exhaust flame
 PLC_FZBossend:
-; ---------------------------------------------------------------------------
-; Pattern load cues - WINNER card
-; ---------------------------------------------------------------------------
-PLC_WINNERCard:	dc.w ((PLC_WINNERCardend-PLC_WINNERCard-2)/6)-1
-		plcm	Nem_WINNERCard, ArtTile_Title_Card
-PLC_WINNERCardend:
 
 ; ---------------------------------------------------------------------------
 ; Pattern load cue IDs
@@ -534,7 +527,7 @@ plcid_DVZ:		equ (ptr_PLC_DVZ-ArtLoadCues)/2
 plcid_DVZ2:		equ (ptr_PLC_DVZ2-ArtLoadCues)/2	
 plcid_NGZ:		equ (ptr_PLC_NGZ-ArtLoadCues)/2	
 plcid_NGZ2:		equ (ptr_PLC_NGZ2-ArtLoadCues)/2	
-plcid_TitleCard:	equ (ptr_PLC_TitleCard-ArtLoadCues)/2	
+plcid_WINNERCard:	equ (ptr_PLC_WINNERCard-ArtLoadCues)/2	
 plcid_Boss:		equ (ptr_PLC_Boss-ArtLoadCues)/2	
 plcid_Signpost:		equ (ptr_PLC_Signpost-ArtLoadCues)/2	
 plcid_Warp:		equ (ptr_PLC_Warp-ArtLoadCues)/2	
@@ -553,4 +546,3 @@ plcid_Ending:		equ (ptr_PLC_Ending-ArtLoadCues)/2
 plcid_TryAgain:		equ (ptr_PLC_TryAgain-ArtLoadCues)/2	
 plcid_EggmanSBZ2:	equ (ptr_PLC_EggmanSBZ2-ArtLoadCues)/2	
 plcid_FZBoss:		equ (ptr_PLC_FZBoss-ArtLoadCues)/2	
-plcid_WINNERCard:	equ (ptr_PLC_WINNERCard-ArtLoadCues)/2	
