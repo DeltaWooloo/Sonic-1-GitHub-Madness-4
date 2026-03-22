@@ -144,6 +144,7 @@ ptr_TryChaos:		dc.l TryChaos
 ptr_ExplosionSHC:	dc.l ExplosionSHC
 ptr_Roaring_Knight:	dc.l Obj_Roaring_Knight
 ptr_Sunset:		dc.l ObjSunset
+ptr_Rift:		dc.l FortnitePortal   ; $90  
 ;ptr_Sunset:		dc.l NullObject
 
 NullObject:
@@ -292,3 +293,5 @@ id_TryChaos:		equ ((ptr_TryChaos-Obj_Index)/4)+1
 id_ExplosionSHC:	equ ((ptr_ExplosionSHC-Obj_Index)/4)+1
 id_Roaring_Knight:	equ ((ptr_Roaring_Knight-Obj_Index)/4)+1
 id_Sunset:		equ ((ptr_Sunset-Obj_Index)/4)+1
+id_Rift:		equ ((ptr_Rift-Obj_Index)/4)+1   ; Atolly
+
