@@ -142,7 +142,8 @@ DLE_GHZ3boss:
 		cmpi.w	#$960,(v_screenposx).w
 		bhs.s	loc_6EB0
 		subq.b	#2,(v_dle_routine).w
-
+		rts
+		
 loc_6EB0:
 		cmpi.w	#boss_ghz_x,(v_screenposx).w
 		blo.s	locret_6EE8
