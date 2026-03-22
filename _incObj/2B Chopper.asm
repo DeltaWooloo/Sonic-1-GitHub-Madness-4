@@ -54,7 +54,7 @@ Chop_ChgSpeed:	; Routine 2
 		move.b	#2,obAnim(a0)	; use stationary animation
 
 .nochg:
-		jsr 	ReactToItem_Other
+		jsr	(ReactToItem_Other).l
 		rts
 
 Chop_Callback:

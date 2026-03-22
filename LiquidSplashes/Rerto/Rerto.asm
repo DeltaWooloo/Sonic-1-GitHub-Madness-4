@@ -21,9 +21,9 @@ SonicRetro:
 	move.b	#bgm_Fade,d0
 	jsr	(QueueSound2).l
 
-	jsr	PaletteFadeOut
-	jsr	ClearScreen
-	jsr	ClearPLC
+	jsr	(PaletteFadeOut).w
+	jsr	(ClearScreen).w
+	jsr	(ClearPLC).w
 
 	lea	(v_objspace).w, a0
 	move.l	#$7FF, d0
@@ -39,31 +39,31 @@ SonicRetro:
 	; Logo
 	locVRAM $0
 	lea	(.LogoArt).l, a0
-	jsr	NemDec
+	jsr	(NemDec).w
 
 	; Emerald
 	locVRAM $100*$20
 	lea	(.EmeraldArt).l, a0
-	jsr	NemDec
+	jsr	(NemDec).w
 
 	; Sonic
 	locVRAM $172*$20
 	lea	(.SonicArt).l, a0
-	jsr	NemDec
+	jsr	(NemDec).w
 
 	; Old Man
 	locVRAM $295*$20
 	lea	(.OldManArt).l, a0
-	jsr	NemDec
+	jsr	(NemDec).w
 	move.l	#$6AE00000, (vdp_control_port).l
 
 	; Palette
 	moveq	#palid_SonicRetro, d0
-	jsr	PalLoad1
+	jsr	(PalLoad1).w
 
 	if retrodebug==0
 	; This randomizer sucks from the front rather then the back
-	jsr	RandomNumber
+	jsr	(RandomNumber).w
 	and.l	#$FFFF,d0			; clear high word, it's kinda funky with divu
 	divu.w	#(.InitRoutinesEnd-.InitRoutines)/4,d0
 	swap	d0				; get modulo
@@ -84,7 +84,7 @@ SonicRetro:
 
 	endif
 	jsr	(a2)
-	jmp	.Loop
+	bra.w	.Loop
 
 ; ====================================================================================
 
@@ -117,15 +117,15 @@ SonicRetro:
 	move.b	#3,(v_objspace+$40*3).w	; 「ソニック・レトロ」
 
 	; Initialize
-	lea	.LogoMappings, a0
+	lea	(.LogoMappings).l, a0
 	bsr.w	.DrawLogo
 
 	move.b	#bgm_Retro,d0
-	jsr	QueueSound2
+	jsr	(QueueSound2).w
 
-	jsr	.ExecuteObjects
-	jsr	BuildSprites
-	jsr	PaletteFadeIn
+	bsr.w	.ExecuteObjects
+	jsr	(BuildSprites).l
+	jsr	(PaletteFadeIn).w
 
 	move.w	#13*60, (v_generictimer).w
 	rts
@@ -138,18 +138,18 @@ SonicRetro:
 	move.b	#1,(v_objspace+$40*3+$1A)	; ^ Frame
 
 	; Initialize
-	lea	.SonisLogoMappings, a0
+	lea	(.SonisLogoMappings).l, a0
 	bsr.w	.DrawLogo
 
 	moveq	#palid_SonicRetro, d0
-	jsr	PalLoad1
+	jsr	(PalLoad1).w
 
 	move.b	#bgm_Retro,d0
-	jsr	QueueSound2
+	jsr	(QueueSound2).w
 
-	jsr	.ExecuteObjects
-	jsr	BuildSprites
-	jsr	PaletteFadeIn
+	bsr.w	.ExecuteObjects
+	jsr	(BuildSprites).l
+	jsr	(PaletteFadeIn).w
 
 	move.w	#13*60, (v_generictimer).w
 	rts
@@ -165,15 +165,15 @@ SonicRetro:
 	move.b	#2,(v_objspace+$40*4+$1A)	; ^ Frame
 
 	; Initialize
-	lea	.LogoMappings, a0
+	lea	(.LogoMappings).l, a0
 	bsr.w	.DrawLogo
 
 	move.b	#bgm_Retro,d0
-	jsr	QueueSound2
+	jsr	(QueueSound2).w
 
-	jsr	.ExecuteObjects
-	jsr	BuildSprites
-	jsr	PaletteFadeIn
+	bsr.w	.ExecuteObjects
+	jsr	(BuildSprites).l
+	jsr	(PaletteFadeIn).w
 
 	move.w	#13*60,(v_generictimer).w
 	rts
@@ -185,18 +185,18 @@ SonicRetro:
 	move.b	#6,(v_objspace+$40*4).w		; Old Man
 
 	; Initialize
-	lea	.RonicLogoMappings, a0
+	lea	(.RonicLogoMappings).l, a0
 	bsr.w	.DrawLogo
 
 	moveq	#palid_SonicRetro, d0
-	jsr	PalLoad1
+	jsr	(PalLoad1).w
 
 	move.b	#bgm_RonicSetro,d0
-	jsr	QueueSound2
+	jsr	(QueueSound2).w
 
-	jsr	.ExecuteObjects
-	jsr	BuildSprites
-	jsr	PaletteFadeIn
+	bsr.w	.ExecuteObjects
+	jsr	(BuildSprites).l
+	jsr	(PaletteFadeIn).w
 
 	move.w	#13*60, (v_generictimer).w
 	rts
@@ -204,9 +204,9 @@ SonicRetro:
 
 .Loop:
 	move.b	#$4,(v_vbla_routine).w
-	jsr	WaitForVBla
-	jsr	.ExecuteObjects
-	jsr	BuildSprites
+	jsr	(WaitForVBla).w
+	bsr.w	.ExecuteObjects
+	jsr	(BuildSprites).l
 
 	andi.b	#btnStart, (v_jpadpress1).w 
 	bne.w	.Exit
@@ -257,14 +257,14 @@ SonicRetro:
 ; ====================================================================================
 
 .DrawLogo:
-	lea	($FF0000),a1			; The location to decompress in a1
+	lea	(v_ram_start),a1			; The location to decompress in a1
 	move.w	#0, d0				; VRAM 0ffset (not per-tile)
-	jsr	EniDec.w			; Decompress!
+	jsr	(EniDec).w			; Decompress!
 
 	move.l	#$60000003,d0			; What plane? BG B!
 	moveq	#39, d1				; Width
 	moveq	#30, d2				; Height
-	jsr	TilemapToVRAM			; And we're good to go~
+	jsr	(TilemapToVRAM).w		; And we're good to go~
 	rts
 
 ; ====================================================================================
@@ -272,8 +272,8 @@ SonicRetro:
 .Exit:
 	move.b	#bgm_Stop,d0
 	jsr	(QueueSound2).l		; stop music
-	jsr	PaletteFadeOut
-	jsr	VDPSetupGame
+	jsr	(PaletteFadeOut).w
+	jsr	(VDPSetupGame).w
 	enable_display
 	if retrodebug<0
 	tst.w	(v_pcyc_num).w

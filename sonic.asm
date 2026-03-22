@@ -364,7 +364,7 @@ GameInit:
 		move.w	#opcode_jmpabslong,(v_vintcode.jmp).w
 		move.l	#VBlank,(v_vintcode.addr).w
 		move.w	#opcode_rte,(v_hintcode.jmp).w
-		jsr	(InitDMAQueue).l
+		bsr.w	InitDMAQueue
 		bsr.w	VDPSetupGame
 		bsr.w	JoypadInit
 		bsr.w	Init_MegaPCM
@@ -576,7 +576,7 @@ VBla_14:
 
 VBla_04:
 		bsr.w	VBla_StandardTransfers
-		jsr 	LoadTilesAsYouMove_BGOnly
+		bsr.w	LoadTilesAsYouMove_BGOnly
 
 		tst.b 	(v_flashtimer).w
 		beq.s 	.noflash
@@ -867,7 +867,7 @@ HBlank:
 Init_MegaPCM:
 		jsr	(MegaPCM_LoadDriver).l
 		lea	(SampleTable).l,a0
-		jsr	MegaPCM_LoadSampleTable
+		jsr	(MegaPCM_LoadSampleTable).l
 		tst.w	d0
 		beq.s	.SampleTableOk
 		nop		; hack to prevent isssue - coni
@@ -2227,7 +2227,9 @@ GM_Title:
 		move.w	#0,(f_demo).w	; disable debug mode
 		move.w	#(id_OWZ<<8),(v_zone).w	; set level to GHZ (00)
 		move.w	#0,(v_pcyc_time).w ; disable palette cycling
+
 		include	"ATOGKTitle/MAIN.asm"	; Code (simply ran by inclusion)
+
 FinalTitle:
 		bsr.w	PaletteWhiteOut
 		bsr.w	ClearPLC	
@@ -2304,10 +2306,10 @@ FinalTitle:
 		;clr.b	(v_pressstart+obRoutine).w ; The 'Mega Games 10' version of Sonic 1 added this line, to fix the 'PRESS START BUTTON' object not appearing
 
 ;		tst.b	(v_megadrive).w	; is console Japanese?
-;		bpl.s	.isjap		; if yes, branch
+;		bpl.s	.isjpn		; if yes, branch
 ;		move.b	#id_PSBTM,(v_titletm).w ; load "TM" object
 ;		move.b	#3,(v_titletm+obFrame).w
-;.isjap:
+;.isjpn:
 		; i feel like a rectangle cuz my rectangle is hard - rectangle from breakout (PS1)
 		move.b	#id_PSBTM,(v_ttlsonichide).w ; load object which hides part of Sonic
 		move.b	#2,(v_ttlsonichide+obFrame).w
@@ -2328,7 +2330,7 @@ Tit_MainLoop:
 		bsr.w	WaitForVBla		; wait for V-Blank to finish
 		jsr	(ExecuteObjects).l	; execute title screen objects
 ;		bsr.w	DeformLayers		; run background deformation
-		jsr	(BuildSprites).l	; display sprites
+		jsr	(BuildSprites).l		; display sprites
 		bsr.w	PalCycle_Title		; run title screen palette cycle
 		bsr.w	RunPLC			; run any potential PLC
 ; NOTE BY CONI - i commented a majority of the code, you'll need to add new routines for deform and such
@@ -2645,7 +2647,7 @@ GM_Level:
 		bmi.s	Level_NoMusicFade
 		move.b	#bgm_Fade,d0
 		bsr.w	QueueSound2 ; fade out music
-		jsr     MegaPCM_StopPlayback
+		jsr	(MegaPCM_StopPlayback).l
 
 Level_NoMusicFade:
 		bsr.w	ClearPLC
@@ -2727,14 +2729,14 @@ Level_NoMusicFade:
 
 Level_LoadPal:
 		move.b	#dLetsGOO, d0
-		jsr	MegaPCM_PlaySample
+		jsr	(MegaPCM_PlaySample).l
 		; hiii
 		move.w	#30,(v_air).w
 		enable_ints
 
 		; load player palette
 
-		jsr	GetPlayerData
+		jsr	(GetPlayerData).l
 		move.l	d3,a0
 		lea	v_palette,a1
 
@@ -2901,11 +2903,11 @@ Level_DelayLoop:
 
 Level_ClrCardArt:
 		moveq	#plcid_Explode,d0
-		jsr	(AddPLC).l	; load explosion gfx
+		bsr.w	AddPLC			; load explosion gfx
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
 		addi.w	#plcid_GHZAnimals,d0
-		jsr	(AddPLC).l	; load animal gfx (level no. + $15)
+		bsr.w	AddPLC			; load animal gfx (level no. + $15)
 
 Level_StartGame:
 		bclr	#7,(v_gamemode).w ; subtract $80 from mode to end pre-level stuff
@@ -3277,7 +3279,7 @@ loc_47D4:
 		mulu.w	#10,d0		; multiply rings by 10
 		move.w	d0,(v_ringbonus).w ; set rings bonus
 		move.w	#bgm_Pac2,d0
-		jsr	(QueueSound2).l	 ; play end-of-level music
+		bsr.w	QueueSound2	 ; play end-of-level music
 
 		clearRAM v_objspace
 
@@ -4130,7 +4132,7 @@ LoadZoneTiles:
 		lsl.w	#5,d2
 		move.l	#$FFFFFF,d1
 		move.w	d2,d1
-		jsr		(QueueDMATransfer).l
+		bsr.w	QueueDMATransfer
 		move.w	d7,-(sp)
 		move.b	#$C,(v_vbla_routine).w
 		bsr.w	WaitForVBla
@@ -6029,12 +6031,14 @@ ResumeMusic:
 .notinvinc:
 		tst.b	(f_lockscreen).w ; is Sonic at a boss?
 		beq.s	playselectedlele ; if not, branch
-		move.w	#bgm_Boss,d0
+		move.b	#bgm_Boss,d0
 		cmpi.w	#(id_MCZ<<8)+2,(v_zone).w ; ist das level mein?
-        bne.s   playselectedlele
-        move.w  #$1F,d0 ; MEGALOVANIA BABY
+		bne.s	playselectedlele
+		move.b	#bgm_Megalovania,d0 ; MEGALOVANIA BABY (FUCKING CONSTANTS FFS)
+
 playselectedlele:
-		jsr	(QueueSound1).l
+		jsr	(QueueSound1).w
+
 over12yo:
 		move.w	#30,(v_air).w	; reset air to 30 seconds
 		clr.b	(v_sonicbubbles+objoff_32).w

@@ -4,16 +4,16 @@
 ; Still incomplete but it displays
 ; ---------------------------------------------------------------------------
 GM_SplashScreenSkipper:
-		jsr 	PaletteFadeOut
+		jsr 	(PaletteFadeOut).w
 		disable_ints
 		move.b	#bgm_Fade,d0
-		jsr	(PlaySound_Special).l  ; stop music
+		jsr	(PlaySound_Special).w	; stop music
 		jsr	(MegaPCM_StopPlayback).l
 		move.w	(v_vdp_buffer1).w,d0
 		ori.b	#$BF,d0
 		move.w	d0,(vdp_control_port).l
-		jsr	(ClearScreen).l
-		jsr	(ClearPLC).l
+		jsr	(ClearScreen).w
+		jsr	(ClearPLC).w
 
 		lea	(vdp_control_port).l,a6
 		move.w	#$8004,(a6)	; use 8-colour mode
@@ -33,20 +33,20 @@ GM_SplashScreenSkipper:
 		; Background art
 		locVRAM	0
 		lea	(Nem_SplScrSkiBack).l,a0		; load Splash Screen Skipper's sprites
-		jsr	(NemDec).l
+		jsr	(NemDec).w
 
 		; Background's mapping
 		lea	(v_ram_start).l,a1
 		lea	(Eni_SplScrSkiBack).l,a0	; Splash Screen Skipper's Mappings
 		moveq	#0,d0
-		jsr	(EniDec).l
+		jsr	(EniDec).w
 		copyTilemap	v_ram_start,vram_fg,$28,$1B
 		copyTilemap	v_ram_start,vram_bg,$28,$1B ; very lazy fix
 
 		; Load text font
 		locVRAM	($680*$20)
 		lea	(Nem_SplScrSkiFont).l,a0	; load Splash Screen Skipper's font
-		jsr	(NemDec).l
+		jsr	(NemDec).w
 
 		; Foreground text
 		move.w	#make_art_tile($680,0,1),d3  ; addr,pal,pri
@@ -66,20 +66,20 @@ GM_SplashScreenSkipper:
 
 		; Load palette and fade
 		move.w	#palid_SplScrSki,d0
-		jsr 	(PalLoad_Fade).l
-		jsr 	(PaletteFadeIn).l
+		jsr 	(PalLoad_Fade).w
+		jsr 	(PaletteFadeIn).w
 		
 .GM_SplashScreenSkipper_Main:
 		move.b	#$16,(v_vbla_routine).w
 		jsr 	WaitForVBla
-		cmpi.b  #btnStart,(v_jpadpress1).w		; is Start Button Pressed?
+		cmpi.b	#btnStart,(v_jpadpress1).w		; is Start Button Pressed?
 		beq.s	.GM_SplashScreenSkipper_Main						; if yes, branch
-		move.b  #id_Title,(v_gamemode).w		; go to the Title Screen
+		move.b	#id_Title,(v_gamemode).w		; go to the Title Screen
 		cmpi.b	#btnB,(v_jpadpress1).w			; is B Button Pressed?
 		bne.s	.GM_SplashScreenSkipper_Main
 		move.b  #id_ColdBrew,(v_gamemode).w		; go to the ColdBrew Splash
 		rts
-		bra.s   .GM_SplashScreenSkipper_Main
+		bra.s	.GM_SplashScreenSkipper_Main
 		
 SplScrSkiText: ;SingleLineRender
 	dc.b	"DO YOU WISH TO SKIP THE SPLASH SCREENS?"

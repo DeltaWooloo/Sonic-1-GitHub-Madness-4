@@ -37,4 +37,4 @@ RetroSonic:
 
 .DisplayGo:
         move.b  .NextFrame(a0), obFrame(a0)
-        jmp     DisplaySprite
+        jmp     (DisplaySprite).l

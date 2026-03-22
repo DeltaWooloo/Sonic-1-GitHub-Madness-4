@@ -2,10 +2,10 @@
 ; Project Yume2kki
 ; ---------------------------------------------------------------------------
 Yume2kki:
-	jsr	PaletteFadeOut
-	jsr	ClearScreen
+	jsr	(PaletteFadeOut).w
+	jsr	(ClearScreen).w
 	
-	lea	$FFFF0000, a0
+	lea	(v_ram_start).l, a0
 	move.l	#(($8000)/4)-1, d0
 	moveq	#0, d1
 
@@ -17,25 +17,25 @@ Yume2kki:
 	move.w	#$9011, (a6)
 
 	move.b	#bgm_Stop,d0
-	jsr	(QueueSound2).l
+	jsr	(QueueSound2).w
 
-	lea	($FF0000), a1 ; load background here
-	lea	.Mappings, a0
+	lea	(v_ram_start).l, a1 ; load background here
+	lea	(.Mappings).l, a0
 	move.w #320, d0
-	jsr	EniDec.w
+	jsr	(EniDec).w
 
-	lea	($FF0000), a1
+	lea	(v_ram_start).l, a1
 	move.l	#$60000003, d0
 	moveq	#39, d1
 	moveq	#30, d2
-	jsr   	TilemapToVRAM 	; mappings -> vram
+	jsr	(TilemapToVRAM).w	; mappings -> vram
 
-	move.l	#$68000000, ($FFC00004).l
-	lea	.Art, a0
-	jsr	NemDec
+	move.l	#$68000000, (vdp_control_port).l
+	lea	(.Art).l, a0
+	jsr	(NemDec).w
 
-	lea 	.Palette, a0
-	lea 	(v_palette_fading), a1
+	lea 	(.Palette).l, a0
+	lea 	(v_palette_fading).l, a1
 	move.w  #$1F, d0
 
 .PaletteLoop:
@@ -43,18 +43,18 @@ Yume2kki:
 	dbf 	d0, .PaletteLoop
 
 	move.b	#d2kki, d0
-	jsr	MegaPCM_PlaySample
+	jsr	(MegaPCM_PlaySample).l
 
 	move.w	#60*9, (v_generictimer).w
 
-	jsr	PaletteFadeIn
+	jsr	(PaletteFadeIn).w
 
 .Loop:
 	move.b	#$4,(v_vbla_routine).w
-	jsr	WaitForVBla
+	jsr	(WaitForVBla).w
 
-        andi.b	#btnStart, (v_jpadpress1).w 
-        bne.w   .Exit
+	andi.b	#btnStart, (v_jpadpress1).w 
+	bne.w	.Exit
 
 	tst.w	(v_generictimer).w
 	beq.w	.Exit

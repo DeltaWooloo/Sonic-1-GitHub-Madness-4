@@ -145,18 +145,18 @@ Spik_Type02:
 
 Spik_Wait:
 		tst.w	objoff_38(a0)		; is time delay = zero?
-		beq.w	loc_CFA4	; if yes, branch
+		beq.w	loc_CFA4		; if yes, branch
 		subq.w	#1,objoff_38(a0)	; subtract 1 from time delay
 		bne.w	locret_CFE6
 		tst.b	obRender(a0)
 		bpl.w	locret_CFE6
 		move.w	#sfx_SpikesMove,d0
-		jsr	(QueueSound2).l	; play "spikes moving" sound
+		jsr	(QueueSound2).w		; play "spikes moving" sound
 		bra.w	locret_CFE6
 
 Spik_Type03:
 		tst.b	obRender(a0)
-		bpl.w	locret_CFE6
+		bpl.s	locret_CFE6
 
 		tst.b	spik_shooting(a0)
 		beq.s 	.shoot

@@ -41,7 +41,7 @@ RoadRollerRight:
 		move.w	#$F00,obVelX(a0) ; move object to the right
 		move.b	#$A2,obColType(a0)
 		move.w	#sfx_VehiRev,d0
-		jsr	(PlaySound_Special).l		; play RoadRoller sound
+		jsr	(PlaySound_Special).w		; play RoadRoller sound
 
 .noRoadRoller03x:
 		addq.l	#4,sp
@@ -51,7 +51,7 @@ RoadRollerRight:
 ; ===========================================================================
 
 .here03:
-		jsr	(SpeedToPos).l
+		bsr.w	SpeedToPos
 		move.w	obX(a0),RoadRoller_origX(a0)
 		bra.w	RoadRollerDisp
 ; ===========================================================================
@@ -69,7 +69,7 @@ RoadRollerGoLeft:
 
 ;		move.b	#2,obFrame(a0)
 		move.w	#sfx_VehiRev,d0
-		jsr	(PlaySound_Special).l		; play RoadRoller sound
+		jsr	(PlaySound_Special).w		; play RoadRoller sound
 
 .noRoadRoller04x:
 		addq.l	#4,sp
@@ -79,12 +79,13 @@ RoadRollerGoLeft:
 ; ===========================================================================
 
 .here04:
-		jsr	(SpeedToPos).l
+		bsr.w	SpeedToPos
 		move.w	obX(a0),RoadRoller_origX(a0)
+
 RoadRollerDisp:
 		out_of_range.s	.delete,RoadRoller_origX(a0)
-		jmp	(DisplaySprite).l
+		bra.w	DisplaySprite
 
 .delete:
-		jmp	(DeleteObject).l
+		bra.w	DeleteObject
 

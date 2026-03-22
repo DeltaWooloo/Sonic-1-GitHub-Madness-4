@@ -129,7 +129,7 @@ Anml_Ending:	; Routine 0
 
 Anml_FromEnemy:
 		addq.b	#2,obRoutine(a0)
-		jsr	RandomNumber
+		jsr	(RandomNumber).w
 		andi.w	#1,d0
 		moveq	#0,d1
 		move.b	(v_zone).w,d1
@@ -160,7 +160,7 @@ loc_90C0:
 		move.w	#-$400,obVelY(a0)
 		tst.b	(v_bossstatus).w
 		bne.s	loc_911C
-		jsr	FindFreeObj
+		bsr.w	FindFreeObj
 		bne.s	Anml_Display
 		_move.b	#id_Points,obID(a1) ; load points object
 		move.w	obX(a0),obX(a1)
@@ -182,7 +182,7 @@ loc_911C:	; THIS is the routine for capsules, thank you hivebrain (his 2022 disa
 loc_912A:
 		tst.b	obRender(a0)
 		bpl.w	DeleteObject
-		jsr	ObjectFall
+		bsr.w	ObjectFall
 		tst.w	obVelY(a0)
 		bmi.s	loc_9180
 		jsr	(ObjFloorDist).l
@@ -208,7 +208,7 @@ loc_9180:
 ; ===========================================================================
 
 loc_9184:
-		jsr	ObjectFall
+		bsr.w	ObjectFall
 		move.b	#1,obFrame(a0)
 		tst.w	obVelY(a0)
 		bmi.s	loc_91AE
@@ -228,7 +228,7 @@ loc_91AE:
 ; ===========================================================================
 
 loc_91C0:
-		jsr	SpeedToPos
+		bsr.w	SpeedToPos
 		addi.w	#$18,obVelY(a0)
 		tst.w	obVelY(a0)
 		bmi.s	loc_91FC
@@ -285,7 +285,7 @@ loc_925C:
 ; ===========================================================================
 
 loc_9260:
-		jsr	sub_9404
+		bsr.w	sub_9404
 		bcc.s	loc_927C
 		move.w	objoff_32(a0),obVelX(a0)
 		move.w	objoff_34(a0),obVelY(a0)
@@ -298,7 +298,7 @@ loc_927C:
 ; ===========================================================================
 
 loc_9280:
-		jsr	sub_9404
+		bsr.w	sub_9404
 		bpl.s	loc_92B6
 		clr.w	obVelX(a0)
 		clr.w	objoff_32(a0)

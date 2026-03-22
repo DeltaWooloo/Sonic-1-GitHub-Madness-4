@@ -49,15 +49,15 @@ GM_SHCSplash:
 
 		locVRAM 0
 		lea	(SHC_Art).l,a0
-		jsr 	NemDec.w
+		jsr 	(NemDec).w
 
 		locVRAM	$5A0*$20
 		lea	(Nem_Explode_SHC).l,a0
-		jsr 	NemDec.w
+		jsr 	(NemDec).w
 
 		locVRAM $685*$20
 		lea	(Art_WBomb).l,a0
-		jsr 	NemDec.w
+		jsr 	(NemDec).w
 
 		lea	(SHC_Map_Comp).l,a0
 		move.w	#$6000,d7
@@ -103,7 +103,7 @@ GM_SHCSplash:
 		jsr	(PaletteFadeIn).w
 
 		move.b	#bgm_SHCSplash,d0
-		jsr	PlaySound_Unused
+		jsr	(PlaySound_Unused).w
 
 		lea	SHC_Anim(pc),a0
 		lea	(port_1_data).l,a1	; load the base address of the IO ports into a1
@@ -147,22 +147,22 @@ SHC_MainLoop:
 		
 .endAnim:
 		move.b	#sfx_ExplodeDone,d0			; play flash sound effect
-		jsr	PlaySound_Special	
-		jsr	PaletteWhiteOut.w		; flash to white
+		jsr	(PlaySound_Special).w
+		jsr	(PaletteWhiteOut).w		; flash to white
 		move.w	#90,(v_generictimer).w		; set hold time to 1.5 second (90 frames at 60hz)
 		
 .holdWhite:
 		move.b	#2,(v_vbla_routine).w		; set V-blank routine
-		jsr	WaitForVBla.w			; wait for V-blank
+		jsr	(WaitForVBla).w			; wait for V-blank
 		tst.w	(v_generictimer).w		; has hold time finished?
 		bne.s	.holdWhite			; if not, keep holding
 
 .holdSkipped:
-		jmp	RetroBlast		; Was the only way to make it not fade to black
+		jmp	(RetroBlast).l		; Was the only way to make it not fade to black
 ; ---------------------------------------------------------------------------
 SHC_UpdateScreen:	; no shaking yet
 		move.b	#2,(v_vbla_routine).w
-		jsr	WaitForVBla.w
+		jsr	(WaitForVBla).w
 
 		lea	(vdp_control_port).l,a6
 		move.w	d5,d1

@@ -24,7 +24,7 @@ RetroRunningSonic:
 
 .Main:
         lea	(.Animation).l, a1
-        jsr     AnimateSprite
+        jsr     (AnimateSprite).l
 
         cmpi.w  #740, (v_generictimer).w
         bgt.s   .Display
@@ -32,8 +32,8 @@ RetroRunningSonic:
         cmpi.w  #$190, obX(a0)
         bgt.s   .Kill
 
-        jsr     SpeedToPos
-        jsr     .Display
+        jsr     (SpeedToPos).l
+        bsr.s     .Display
 
         rts
 
@@ -51,10 +51,10 @@ RetroRunningSonic:
         cmpi.w  #$190, obScreenY(a0)
         bgt.s   .Display
 
-        jsr     ScreenObjectFall
+        jsr     (ScreenObjectFall).l
 
 .Display:
-        jmp     DisplaySprite
+        jmp     (DisplaySprite).l
 
 ; ====================================================================================
 

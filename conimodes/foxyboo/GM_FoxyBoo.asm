@@ -38,32 +38,32 @@ GM_Foxy_ClrObjRam:
 ;		jsr		(PlaySound_Special).l  ; play memories music
 
 		locVRAM	0
-		lea     (Nem_FoxyBoo).l,a0
-		jsr		(NemDec).l	
+		lea	(Nem_FoxyBoo).l,a0
+		jsr	(NemDec).w
 
 		moveq	#palid_Foxy,d0
 		jsr		(PalLoad2).l		; load palette
 
-		move.w  #$8,(v_demolength).w
+		move.w	#$8,(v_demolength).w
 		move.b	#dTwerkOf87,d0
 		jsr		(MegaPCM_PlaySample).l
 GM_Foxy_Loop:
 		move.b	#2,(v_vbla_routine).w
 		jsr		(WaitForVBla).l
-		cmpi.b  #$E,(v_foxyframe).w
-		beq.s   GM_Foxy_End
-		tst.w   (v_demolength).w
-		bne.s   GM_Foxy_Loop
-		move.w  #$8,(v_demolength).w
-		lea	($FF0000).l,a1
+		cmpi.b	#$E,(v_foxyframe).w
+		beq.s	GM_Foxy_End
+		tst.w	(v_demolength).w
+		bne.s	GM_Foxy_Loop
+		move.w	#$8,(v_demolength).w
+		lea	(v_ram_start).l,a1
 		moveq	#0,d0
 		move.b	(v_foxyframe).w,d0
 		lsl.w	#2,d0
 		lea 	FoxyBooFrames(pc),a0
 		move.l	(a0,d0.w),a0
 		move.w	#0,d0
-		jsr	EniDec
-		lea	($FF0000).l,a1
+		jsr	(EniDec).w
+		lea	(v_ram_start).l,a1
 		locVRAM	$E000,d0
 		moveq	#$1F,d1
 		moveq	#$1B,d2
@@ -74,9 +74,9 @@ GM_Foxy_End:
 		bsr.w	WinXP_CLearPal
 		lea	(vdp_control_port).l,a6
 		move.w	#$8C81,(a6)	; set to next screen mode
-		cmpi.b  #id_FoxyBoo,(v_gamemode).w	; oh...
-		bne.s   GM_Foxy_KickBack		; that's a test version of the jumpscare..
-		move.b  #id_DebugMenu,(v_gamemode).w	; to the debug menu you go..
+		cmpi.b	#id_FoxyBoo,(v_gamemode).w	; oh...
+		bne.s	GM_Foxy_KickBack		; that's a test version of the jumpscare..
+		move.b	#id_DebugMenu,(v_gamemode).w	; to the debug menu you go..
 		rts
 GM_Foxy_KickBack:
 		subq.b	#1,(v_lives).w	; subtract 1 from number of lives

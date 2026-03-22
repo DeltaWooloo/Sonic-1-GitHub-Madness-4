@@ -106,7 +106,7 @@ PalThanatosCredits:	bincludeEndMarker "_gamemode/ThanatosCredits/Palette.pal"
 	jsr	(PaletteFadeIn).l
 
 -	move.b	#2,(v_vbla_routine).w
-	jsr	WaitForVBla
+	jsr	(WaitForVBla).w
 	add.w	#1,(v_scrposy_vdp).w
 	subq.b	#1,(than_next_blit).l
 	bne.s	-
@@ -222,7 +222,7 @@ Thanatos_EndLoop:
 	move.b	#1,(than_next_blit).l
 -	; end stuff (loop forever for now)
 	move.b	#2,(v_vbla_routine).w
-	jsr	WaitForVBla
+	jsr	(WaitForVBla).w
 	tst.w	(v_generictimer).w
 	ble.s	+
 

@@ -84,7 +84,7 @@ loc_5B8C:
 		move.b	obDelayAni(a0),obTimeFrame(a0)
 
 loc_5B96:
-		jsr	(CalcSine).l
+		bsr.w	CalcSine
 		moveq	#0,d4
 		move.b	objoff_3C(a0),d4
 		muls.w	d4,d1

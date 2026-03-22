@@ -86,7 +86,7 @@ Bom_Action:	; Routine 2
 		subq.w	#1,bom_time(a0)	; subtract 1 from time delay
 		bpl.s	.noexplode	; if time remains, branch
 		_move.b	#id_ExplosionBomb,obID(a0) ; change bomb into an explosion
-		jsr 	GHM3Explode
+		jsr	(GHM3Explode).l
 		move.b	#0,obRoutine(a0)
 
 .noexplode:

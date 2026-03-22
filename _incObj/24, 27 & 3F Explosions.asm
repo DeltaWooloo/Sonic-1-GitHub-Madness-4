@@ -59,7 +59,7 @@ ExplItem_Init:
 		move.w	obX(a0),expl.BaseX(a0)
 		move.w	obY(a0),expl.BaseY(a0)
 		move.w	#$800,expl.Factor(a0)
-		jsr	RandomNumber
+		bsr.w	RandomNumber
 		move.w	d0,obAngle(a0)		; use angle as sin cntr
 ddd		;move.w	obX(a0),obX(a1)
 		;move.w	obY(a0),obY(a1)
@@ -74,17 +74,17 @@ ddd		;move.w	obX(a0),obX(a1)
 		move.b	#$E,$1E(a0)	; GMZ
 		move.b	#0,$1A(a0)
  
-		tst.b	(v_invinc).w	; you have invincibility?
+		tst.b	(v_invinc).w		; you have invincibility?
 		beq.s	ExplItem_NormalSFX	; so no, jump it
 		move.w	#$CB,d0
-		jsr	(PlaySound_Special).l ;	play odd explosion sfx
-; i hate "PlaySound_Special" name, i prefer to use "SetSound" - atolly
-        bra.w   ExplItem_stupidjump
-		
+		jsr	(PlaySound_Special).w	; play odd explosion sfx
+						; i hate "PlaySound_Special" name, i prefer to use "SetSound" - atolly
+		bra.s	ExplItem_stupidjump
+
 ExplItem_NormalSFX:				;29_Index	
 		move.w	#sfx_Bomb,d0
-		jsr	(PlaySound_Special).l ;	play breaking enemy sound
-		
+		jsr	(PlaySound_Special).w ;	play breaking enemy sound
+
 ExplItem_stupidjump:
 		move.w  #$25, v_screenshaketime.w
 		
@@ -95,7 +95,7 @@ ExplItem_Main:
 		addq.b	#1,$1A(a0)	; next frame
 +		cmpi.b	#5,$1A(a0)	; is the final frame (05) displayed?
 		beq.w	DeleteObject	; if yes, branch
-        	bsr.s   ExplItem_GetVelocity
+		bsr.s	ExplItem_GetVelocity
 		bra.w	DisplaySprite
 
 ; ===========================================================================
@@ -109,7 +109,7 @@ ExplItem_GetVelocity:
 		move.w	expl.BaseY(a0),d3
 		addi.w	#8,obAngle(a0)
 		move.w	obAngle(a0),d0
-		jsr	CalcSine
+		bsr.w	CalcSine
 		asr.w	d4,d0
 		asr.w	d4,d1
 		add.w	d1, d2

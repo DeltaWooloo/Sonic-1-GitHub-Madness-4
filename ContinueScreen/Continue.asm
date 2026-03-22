@@ -6,93 +6,93 @@
 	include "ContinueScreen/Macros.asm"
 
 GM_Continue:
-	move.b	#02, (SMPS_RAM.v_main_tempo)	; slow current music to a crawl so it feels like the driver froze
+	move.b	#02, (SMPS_RAM.v_main_tempo).w	; slow current music to a crawl so it feels like the driver froze
 
-	jsr 	PaletteFadeOut
+	jsr 	(PaletteFadeOut).w
 	move.b	#0,vscroll_mode
 	lea	(vdp_control_port).l,a6
 	move.w	#$8004,(a6)			; 8 colour mode
 	move.w	#$8700,(a6)			; background colour
 
-	jsr	ClearScreen
-	jsr	ClearPLC
+	jsr	(ClearScreen).w
+	jsr	(ClearPLC).w
 
 	clearRAM v_objspace
 
 	; Decompress + DMA cursor art
 	locVRAM $8000
 	lea	(.Cursor_Art).l, a0
-	jsr	NemDec
+	jsr	(NemDec).w
 	
 	; Play Joel's PTSD Music
 	move.b	#bgm_Continue, d0
-	jsr	QueueSound2
+	jsr	(QueueSound2).w
 
 	; Add cursor object
-	move.b 	#id_ContScrCur, (v_objspace)
-	move.b	#5, (v_objspace+$32)
+	move.b 	#id_ContScrCur, (v_objspace).w
+	move.b	#5, (v_objspace+$32).w
 
 	; Draw stuff to screen
 	bsr.w 	ContinueText_Init		; initialize text renderer
 	bsr.w 	.DrawContinue			; draw main continue screen
-	jsr	PaletteFadeIn
+	jsr	(PaletteFadeIn).w
 
 ; Continue screen routine
 .ContinueScreenLoop:
-	move.b	#$12, (v_vbla_routine)
-	jsr	WaitForVBla
+	move.b	#$12, (v_vbla_routine).w
+	jsr	(WaitForVBla).w
 
 	; Check start input
-	move.b 	(v_jpadpress1), d0
+	move.b 	(v_jpadpress1).w, d0
 	andi.b	#btnStart, d0
 	bne.s	.DecisionMade
 
 	; Force game over if 0 continues
-	tst.b	(v_continues)
+	tst.b	(v_continues).w
 	bne.s 	.HasContinues
 
-	move.b	#$FF, (v_objspace+$33)
+	move.b	#$FF, (v_objspace+$33).w
 	bra.s 	.NoLR
 	
 .HasContinues
 	; Check left/right input
-	andi.b	#btnL+btnR, (v_jpadpress1)
+	andi.b	#btnL+btnR, (v_jpadpress1).w
 	beq.s	.NoLR
 
 	; L/R button pressed, change state
-	not.b 	(v_objspace+$33)
+	not.b 	(v_objspace+$33).w
 
 .NoLR:
-	jsr	ExecuteObjects
-	jsr 	BuildSprites
+	jsr	(ExecuteObjects).l
+	jsr 	(BuildSprites).l
 	
 	bra.s 	.ContinueScreenLoop
 
 .DecisionMade:
-	tst.b 	(v_objspace+$33)		; check state for yes/no
+	tst.b 	(v_objspace+$33).w		; check state for yes/no
 	beq.s 	.ExitContinue			; if 0, exit to level. fallthrough to game over if 1
 
 ; Game over screen, you're fucked
 .GameOver:
-	move.w 	#$2EE, (v_generictimer)		; timer until exit
+	move.w 	#$2EE, (v_generictimer).w	; timer until exit
 
-	jsr 	PaletteFadeOut
+	jsr 	(PaletteFadeOut).w
 
-	jsr 	ClearScreen
+	jsr 	(ClearScreen).w
 	bsr.w 	.DrawGameOver			; KILL
-	jsr	PaletteFadeIn
+	jsr	(PaletteFadeIn).w
 
 	move.b	#bgm_GameOver, d0
-	jsr	QueueSound2
+	jsr	(QueueSound2).w
 
 .GameOverLoop:
 	move.b	#$12, (v_vbla_routine)
-	jsr	WaitForVBla
+	jsr	(WaitForVBla).w
 
 	tst.w	(v_generictimer).w
 	beq.s	.ExitGameOver
 	
-	andi.b	#btnStart, (v_jpadpress1)
+	andi.b	#btnStart, (v_jpadpress1).w
 	bne.s	.ExitGameOver
 
 	bra.s 	.GameOverLoop
@@ -101,22 +101,21 @@ GM_Continue:
 .ExitContinue:
 	moveq	#0,d0
 
-	subq.b 	#1, (v_continues)
-	move.b 	#3, (v_lives)
+	subq.b 	#1, (v_continues).w
+	move.b 	#3, (v_lives).w
 
-	move.w	d0, (v_rings)
-	move.l	d0, (v_time)
-	move.l	d0, (v_score)
-	move.b	d0, (v_lastlamp)
+	move.w	d0, (v_rings).w
+	move.l	d0, (v_time).w
+	move.l	d0, (v_score).w
+	move.b	d0, (v_lastlamp).w
 	
-	move.b	#2, (SMPS_RAM.v_main_tempo)	; this is still really funny
-	move.b 	#id_Level, (v_gamemode)
+	move.b	#2, (SMPS_RAM.v_main_tempo).w	; this is still really funny
+	move.b 	#id_Level, (v_gamemode).w
 	rts
 
 .ExitGameOver:
-	move.b	#2, (SMPS_RAM.v_main_tempo)	; yeah
-	move.b 	#id_Title, (v_gamemode)
-
+	move.b	#2, (SMPS_RAM.v_main_tempo).w	; yeah
+	move.b 	#id_Title, (v_gamemode).w
 	rts
 
 ; ---------------------------------------------------------------------------
@@ -125,12 +124,12 @@ GM_Continue:
 .DrawContinue:
 	; Palette
 	moveq	#palid_FelixDecision, d0
-	jsr	PalLoad_Fade
+	jsr	(PalLoad_Fade).w
 
 	; Tiles
 	locVRAM $0
 	lea	(.Decision_Art).l, a0
-	jsr	NemDec
+	jsr	(NemDec).w
 
 	; Tilemap
 	Continue_DrawMap	.Decision_Map
@@ -143,7 +142,7 @@ GM_Continue:
 	; Continues
 	move.l	#$409A0003, 4(a6)
 	move.w	#$6381, d0
-	add.b	(v_continues), d0
+	add.b	(v_continues).w, d0
 	move.w 	d0, (a6)
 	
 	rts
@@ -151,12 +150,12 @@ GM_Continue:
 .DrawGameOver:
 	; Palette
 	moveq	#palid_FelixGameOver, d0
-	jsr	PalLoad_Fade
+	jsr	(PalLoad_Fade).w
 
 	; Tiles
 	locVRAM $0
 	lea	(.GameOver_Art).l, a0
-	jsr	NemDec
+	jsr	(NemDec).w
 
 	; Tilemap
 	Continue_DrawMap	.GameOver_Map

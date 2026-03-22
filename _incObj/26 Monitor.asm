@@ -149,7 +149,7 @@ Mon_BreakOpen:	; Routine 4
 		move.b	obAnim(a0),obAnim(a1)
 
 Mon_Explode:
-		jsr	GHM3Explode
+		jsr	(GHM3Explode).l
 
 		lea	(v_objstate).w,a2
 		moveq	#0,d0

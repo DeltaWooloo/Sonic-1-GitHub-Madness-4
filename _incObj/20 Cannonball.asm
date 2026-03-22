@@ -30,7 +30,7 @@ Cbal_Main:	; Routine 0
 		move.b	#4,obFrame(a0)
 
 Cbal_Bounce:	; Routine 2
-		jsr	(ObjectFall).l
+		bra.w	ObjectFall
 		tst.w	obVelY(a0)
 		bmi.s	Cbal_ChkExplode
 		jsr	(ObjFloorDist).l

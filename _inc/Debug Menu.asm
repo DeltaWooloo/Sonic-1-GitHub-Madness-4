@@ -35,29 +35,28 @@ GM_DebugMenu:
 		clr.b	(f_nobgscroll).w
 		clr.w	(v_levselitem).w
 		clearRAM v_palette_fading
-		
+
 		ResetDMAQueue
 
 		writeVRAM	Art_MenuFont,$D080
 
 		; added
+		locVRAM	ArtTile_Title_Japanese_Text*tile_size
+		lea	(Nem_JapNames).l,a0 ; load Japanese credits
+		bsr.w	NemDec
+		lea	(v_ram_start).l,a1
+		lea	(Eni_JapNames).l,a0 ; load mappings for Japanese credits
+		move.w	#make_art_tile(ArtTile_Title_Japanese_Text,0,FALSE),d0
+		bsr.w	EniDec
 
-     		locVRAM		ArtTile_Title_Japanese_Text*tile_size
-       		lea		(Nem_JapNames).l,a0 ; load Japanese credits
-       		bsr.w		NemDec
-      		lea		(v_ram_start).l,a1
-     		lea		(Eni_JapNames).l,a0 ; load mappings for Japanese credits
-     		move.w		#make_art_tile(ArtTile_Title_Japanese_Text,0,FALSE),d0
-     		bsr.w		EniDec
+		copyTilemap	v_ram_start,vram_bg,40,28
 
-     		copyTilemap    v_ram_start,vram_bg,40,28
-		
 		enable_display
 		lea	(v_hscrolltablebuffer).w,a1
 		moveq	#0,d0
 		move.w	#$DF,d1
 
-	DebugMenu_ClrScroll1:
+DebugMenu_ClrScroll1:
 		move.l	d0,(a1)+
 		dbf	d1,DebugMenu_ClrScroll1	; clear scroll data (in RAM)
 
@@ -79,21 +78,23 @@ GM_DebugMenu:
 		clr.b	dbugmenuFlag2
 
 		bsr.w	DebuggerMenu_Redraw
-	;	moveq	#plcid_Main,d0
-	;	bsr.w	NewPLC
+;		moveq	#plcid_Main,d0
+;		bsr.w	NewPLC
 		lea	(Pal_MenuText).l,a1
 		lea	(v_palette_fading+$20).l,a2
 		moveq	#16-1,d0
+
 .LoadLoopText
 		move.l	(a1)+,(a2)+
 		dbf	d0,.LoadLoopText
 		lea	(Pal_Sega2+(16*2)).l,a1
 		lea	(v_palette_fading).l,a2
 		moveq	#5-1,d0	; fucking lol
+
 .LoadLoopBg
 		move.l	(a1)+,(a2)+
 		dbf	d0,.LoadLoopBg
-		
+
 		move.b	#bgm_NewBarkTown,d0
 		bsr.w	QueueSound1
 		bsr.w	PaletteFadeIn
@@ -109,68 +110,68 @@ DebuggerMenu_Loop:
 		beq.s	DebuggerMenu_Loop
 		rts
 _dbugmenuSineSlide:
-        lea     v_hscrolltablebuffer,a1
-	eor.b	#1,dbugmenuFlag2
-	bne.s	.lol	
-	add.w	#4,a1
+		lea	v_hscrolltablebuffer,a1
+		eor.b	#1,dbugmenuFlag2
+		bne.s	.lol	
+		add.w	#4,a1
 .lol
-        add.l   #$6000,dbugmenuScrCnt.w
-        moveq   #240/4,d7
-        moveq   #0,d2
+		add.l	#$6000,dbugmenuScrCnt.w
+		moveq	#240/4,d7
+		moveq	#0,d2
 
-	btst.b	#0,dbugmenuFlag
-	bne.s	.Decrement
+		btst.b	#0,dbugmenuFlag
+		bne.s	.Decrement
 
-        add.l	#$9000,dbugmenuFactor
-        move.w  dbugmenuFactor,d2
-        cmpi.w	#$FF,dbugmenuFactor
-        blt.s	.Ok
-       	add.b	#1,dbugmenuFlag
-       	bra.s	.Ok
+		add.l	#$9000,dbugmenuFactor
+		move.w	dbugmenuFactor,d2
+		cmpi.w	#$FF,dbugmenuFactor
+		blt.s	.Ok
+		add.b	#1,dbugmenuFlag
+		bra.s	.Ok
 
 .Decrement
-        sub.l	#$9000,dbugmenuFactor
-        move.w  dbugmenuFactor,d2
-        cmpi.w	#-$FF,dbugmenuFactor
-        bgt.s	.Ok
-       	add.b	#1,dbugmenuFlag
+		sub.l	#$9000,dbugmenuFactor
+		move.w	dbugmenuFactor,d2
+		cmpi.w	#-$FF,dbugmenuFactor
+		bgt.s	.Ok
+		add.b	#1,dbugmenuFlag
 .Ok
 	move.w	#0,dbugmenuSinCntr.w
 
 .ScrLoop:
-	add.w   #1,dbugmenuSinCntr.w
-       	move.w  dbugmenuSinCntr.w,d0
-        jsr     CalcSine
-        mulu.w  d2,d0
-        move.w	d2,d3
-        asr.w	#3,d3
-        add.w	d2,d3
-        asr.w   #7,d0
-        move.w  #0,(a1)+
-        move.w  d0,(a1)+
-	add.w   #1,dbugmenuSinCntr.w
-       	move.w  dbugmenuSinCntr.w,d0
-        jsr     CalcSine
-        mulu.w  d3,d0
-        asr.w   #7,d0
-        move.w  #0,(a1)+
-        move.w  d0,(a1)+
-	add.w   #1,dbugmenuSinCntr.w
-       	move.w  dbugmenuSinCntr.w,d0
-        jsr     CalcSine
-        mulu.w  d2,d0
-        asr.w   #7,d0
-        move.w  #0,(a1)+
-        move.w  d0,(a1)+
-	add.w   #1,dbugmenuSinCntr.w
-       	move.w  dbugmenuSinCntr.w,d0
-        jsr     CalcSine
-        mulu.w  d3,d0
-        asr.w   #7,d0
-        move.w  #0,(a1)+
-        move.w  d0,(a1)+
-        dbf     d7,.ScrLoop
-        rts
+		add.w	#1,dbugmenuSinCntr.w
+		move.w	dbugmenuSinCntr.w,d0
+		bsr.w	CalcSine
+		mulu.w	d2,d0
+		move.w	d2,d3
+		asr.w	#3,d3
+		add.w	d2,d3
+		asr.w	#7,d0
+		move.w	#0,(a1)+
+		move.w	d0,(a1)+
+		add.w	#1,dbugmenuSinCntr.w
+		move.w	dbugmenuSinCntr.w,d0
+		bsr.w	CalcSine
+		mulu.w	d3,d0
+		asr.w	#7,d0
+		move.w	#0,(a1)+
+		move.w	d0,(a1)+
+		add.w	#1,dbugmenuSinCntr.w
+		move.w	dbugmenuSinCntr.w,d0
+		bsr.w	CalcSine
+		mulu.w	d2,d0
+		asr.w	#7,d0
+		move.w	#0,(a1)+
+		move.w	d0,(a1)+
+		add.w	#1,dbugmenuSinCntr.w
+		move.w	dbugmenuSinCntr.w,d0
+		bsr.w	CalcSine
+		mulu.w	d3,d0
+		asr.w	#7,d0
+		move.w	#0,(a1)+
+		move.w	d0,(a1)+
+		dbf	d7,.ScrLoop
+		rts
 
 ; ===========================================================================
 
@@ -257,7 +258,7 @@ DebuggerMenu_Controls:
 .setsel:
 		move.w	d0,(v_levselitem).w
 		move.b	#sfx_beepy,d0;atgames
-		jsr	PlaySound_Special
+		bsr.w	PlaySound_Special
 		bra.w	DebuggerMenu_Redraw
 
 .noinput:

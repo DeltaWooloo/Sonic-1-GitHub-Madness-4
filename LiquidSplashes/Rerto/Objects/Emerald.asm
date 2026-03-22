@@ -35,15 +35,15 @@ RetroEmerald:
         cmpi.w  #$102, obScreenY(a0)
         bgt.s   .Bloody
 
-        jsr     ScreenObjectFall
-        jsr     SpeedToPos
-        jmp     .Display
+		jsr	(ScreenObjectFall).l
+		jsr     (SpeedToPos).l
+		bra.s   .Display
 
 .Bloody:
         move.b  #3, obFrame(a0)
 
 .Display:
-        jmp     DisplaySprite
+        jmp     (DisplaySprite).l
 
 ; ====================================================================================
 

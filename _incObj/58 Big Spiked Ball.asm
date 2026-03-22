@@ -94,7 +94,7 @@ BBall_Move:	; Routine 2
 		move.w	bball_speed(a0),d0
 		add.w	d0,obAngle(a0)
 		move.b	obAngle(a0),d0
-		jsr	(CalcSine).l
+		jsr	(CalcSine).w
 		move.w	bball_origY(a0),d2
 		move.w	bball_origX(a0),d3
 		moveq	#0,d4

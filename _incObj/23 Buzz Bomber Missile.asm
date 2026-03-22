@@ -26,8 +26,8 @@ Msl_Init:
 		sub.w	obX(a0), d1
 		move.w	obY(a3), d2
 		sub.w	obY(a0), d2
-		jsr	CalcAngle
-		jsr	CalcSine
+		jsr	(CalcAngle).w
+		jsr	(CalcSine).w
 		muls.w	#$800, d0
 		muls.w	#$800, d1
 		asr.l	#8, d0
@@ -56,14 +56,14 @@ Msl_Main:	; Routine 0
 		cmpi.b	#id_CBZ,(v_zone).w		; is zone CBZ?
 		beq.s	.wandastart	; if not, branch
 		move.w	#sfx_Bomb,d0
-		jsr	(PlaySound_Special).l ;	play breaking enemy sound
+		jsr	(PlaySound_Special).w		; play breaking enemy sound
 		move.w  #$15, v_screenshaketime.w
 
 		pcm 	dDicks
 		bra.s	.wandaend
 .wandastart:
 		move.w	#sfx_FCBlip,d0
-		jsr	(PlaySound_Special).l ;	play Blip sound
+		jsr	(PlaySound_Special).w		; play Blip sound
 .wandaend:
 		tst.b	obSubtype(a0)	; was object created by a Newtron?
 		beq.s	Msl_Animate	; if not, branch

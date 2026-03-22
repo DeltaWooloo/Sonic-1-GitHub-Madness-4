@@ -118,7 +118,7 @@ SBall_Move:	; Routine 2
 		move.w	sball_speed(a0),d0
 		add.w	d0,obAngle(a0)
 		move.b	obAngle(a0),d0
-		jsr	(CalcSine).l
+		jsr	(CalcSine).w
 		move.w	sball_origY(a0),d2
 		move.w	sball_origX(a0),d3
 		lea	sball_childs(a0),a2

@@ -1,7 +1,7 @@
 GM_ButtcrackMan:
-	jsr	PaletteFadeOut
-	jsr	ClearScreen
-	jsr	ClearPLC
+	jsr	(PaletteFadeOut).w
+	jsr	(ClearScreen).w
+	jsr	(ClearPLC).w
 
 	lea	(v_objspace).w, a0
 	move.l	#$7FF, d0

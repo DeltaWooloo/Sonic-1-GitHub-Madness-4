@@ -13,13 +13,10 @@ VDP_Data_Splash:
 
 RunSplashes:
 		move.b	#bgm_Stop,d0
-		jsr	PlaySound_Special ; stop music
-		jsr	ClearPLC
-		jsr	PaletteFadeOut
+		jsr	(PlaySound_Special).w ; stop music
+		jsr	(ClearPLC).w
+		jsr	(PaletteFadeOut).w
 		disable_ints
-
-
-
 
 ; 	if SkipSplash = 1
 ; 		move.b	#id_Title,(v_gamemode).w ; PLEASESKIPTHISSHITPLEASEPLEASE
@@ -30,7 +27,7 @@ RunSplashes:
 	.load_next_splash:
 		tst.w	(a2)+
 		bne.w	.liquid_splash
-		jsr	ClearScreen
+		jsr	(ClearScreen).w
 
 		clr.b	(f_wtr_state).w
 
@@ -45,13 +42,13 @@ RunSplashes:
 
 		locVRAM 0
 		move.l	(a2)+,a0 ; art
-		jsr	NemDec
+		jsr	(NemDec).w
 
-		lea	($FF0000).l,a1
+		lea	(v_ram_start).l,a1
 		move.l	(a2)+,a0 ; tilemap
 		clr.w	d0
 		move.l	a2,-(sp)
-		jsr	EniDec
+		jsr	(EniDec).w
 		move.l	(sp)+,a2
 
 		copyTilemap	$FF0000,$C000,$28,$1B
@@ -69,19 +66,19 @@ RunSplashes:
 		move.b	(a2)+,d0 	; is this a pcm or a sound id?
 		bne.s	.sampleid	; if pcm flag set, jump to pcm playback
 		move.b	(a2)+,d0 	; get sound id
-		jsr	PlaySound_Special
+		jsr	(PlaySound_Special).w
 		bra.s	.musicid
 
 	.sampleid:
 		move.b	(a2)+,d0	; get pcm id
-		jsr	MegaPCM_PlaySample
+		jsr	(MegaPCM_PlaySample).l
 
 	.musicid:
 		move.w	(a2)+,(v_generictimer).w ; duration in seconds
-		jsr	PaletteFadeIn
+		jsr	(PaletteFadeIn).w
 	.loop:
 		move.b	#4,(v_vbla_routine).w
-		jsr	WaitForVBla
+		jsr	(WaitForVBla).w
 
 		tst.w	(v_generictimer).w
 		beq.s	.time_over
@@ -90,10 +87,10 @@ RunSplashes:
 		beq.s	.loop	; if not, branch
 
 	.time_over:
-		jsr	PaletteFadeOut
+		jsr	(PaletteFadeOut).w
 
 		move.b	#bgm_Stop,d0
-		jsr	PlaySound_Special ; stop music
+		jsr	(PlaySound_Special).w ; stop music
 
 		tst.l	(a2)
 		bpl.w	.load_next_splash

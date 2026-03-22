@@ -12,24 +12,24 @@ neonOST = 	v_objspace+$140
 GM_SSRGScreen:
 		;!@ moveq	#$FFFFFFE4,d0				; set music ID to "stop music"
 		;!@ moveq	#bgm_Stop,d0				; set music ID to "stop music"
-		move.w		#bgm_Stop,d0
-		jsr	PlaySound_Special
-		
+		move.w	#bgm_Stop,d0
+		jsr	(PlaySound_Special).w
+
 ;!@ Stop music, then play Act Clear music
 		move.w	#($3C * $02),(v_demolength).w
 SSRG_Wait:
 		move.b	#2,(v_vbla_routine).w
 		;!@bsr.w	WaitForVBla
-		jsr		(WaitForVBla).l
+		jsr	(WaitForVBla).l
 		tst.w	(v_demolength).w
 		bne.s	SSRG_Wait
 		
-		move.w		#bgm_S1ActClear,d0
-		jsr	PlaySound_Special			; play ID
-		jsr	ClearPLC				; clear pattern load cues list
+		move.w	#bgm_S1ActClear,d0
+		jsr	(PlaySound_Special).w			; play ID
+		jsr	(ClearPLC).w				; clear pattern load cues list
 		;!@ jsr	Pal_FadeFrom				; fade palettes out
-		jsr	(PaletteFadeOut).l				; fade palettes out
-		jsr	ClearScreen				; clear the plane mappings
+		jsr	(PaletteFadeOut).w				; fade palettes out
+		jsr	(ClearScreen).w				; clear the plane mappings
 		;!@ lea	($FFFFD000).w,a1			; load object ram address to a1
 		lea	(v_objspace).w,a1			; load object ram to a1		
 		moveq	#$00,d0					; clear d0
@@ -52,35 +52,35 @@ SRG_ClearObjects:
 		;!@ move.l	#$40200000,($C00004).l			; set VDP to V-Ram write mode with address
 		move.l	#$40200000,(vdp_control_port).l			; set VDP to V-Ram write mode with address
 		lea	ArtMain_SSRG(pc),a0			; load compressed art address
-		jsr	NemDec					; decompress and dump
+		jsr	(NemDec).w					; decompress and dump
 		;!@ move.l	#$40000001,($C00004).l			; set VDP to V-Ram write mode with address
 		move.l	#$40000001,(vdp_control_port).l			; set VDP to V-Ram write mode with address
 		lea	ArtSquare_SSRG(pc),a0			; load compressed art address
-		jsr	NemDec					; decompress and dump
+		jsr	(NemDec).w					; decompress and dump
 		;!@ move.l	#$40000002,($C00004).l			; set VDP to V-Ram write mode with address
 		move.l	#$40000002,(vdp_control_port).l			; set VDP to V-Ram write mode with address		
 		lea	ArtSonic_SSRG(pc),a0			; load compressed art address
-		jsr	NemDec					; decompress and dump
+		jsr	(NemDec).w					; decompress and dump
 		;!@ move.l	#$50000002,($C00004).l			; set VDP to V-Ram write mode with address
 		move.l	#$50000002,(vdp_control_port).l			; set VDP to V-Ram write mode with address
 		lea	ArtLink_SSRG(pc),a0			; load compressed art address
-		jsr	NemDec					; decompress and dump
+		jsr	(NemDec).w					; decompress and dump
 		
 		lea	MapLink_SSRG(pc),a0			; load compressed mappings address
 		;!@ lea	($FFFF0000).l,a1			; set temporary ram space to dump to
 		lea	(v_ram_start).l,a1			; set temporary ram space to dump to
-		jsr	KosDec					; decompress and dump
+		jsr	(KosDec).w					; decompress and dump
 		;!@ lea	($FFFF0000).l,a5			; load mappings to read
 		lea	(v_ram_start).l,a5			; set temporary ram space to dump to
 		moveq	#$1F,d0					; set number of columns
 		moveq	#$00,d1					; set number of rows
 		move.l	#$4C080003,d2				; set to write to FG plane
-		bsr	MapScreen				; write to the map plane
+		bsr.w	MapScreen				; write to the map plane
 		
 		;!@ EagleSoft Ltd. link
 		lea	MapLink2_SSRG(pc),a0			; load compressed mappings address
 		lea	(v_ram_start).l,a1			; set temporary ram space to dump to
-		jsr	KosDec					; decompress and dump
+		jsr	(KosDec).w					; decompress and dump
 		lea	(v_ram_start).l,a5			; load mappings to read
 		moveq	#$1C,d0					; set number of columns
 		moveq	#$00,d1					; set number of rows
@@ -89,16 +89,16 @@ SRG_ClearObjects:
 		;planeLocH40 function col,line,(($80 * line) + (2 * col))
 		;move.l $4 & Base_Value & $0003
 		move.l	#$4C880003,d2				; set to write to FG plane
-		bsr	MapScreen				; write to the map plane
+		bsr.w	MapScreen				; write to the map plane
 		
 		lea	MapMain_SSRG(pc),a0			; load compressed mappings address
 		;!@ lea	($FFFF0000).l,a1			; set temporary ram space to dump to
 		lea	(v_ram_start).l,a1			; set temporary ram space to dump to
-		jsr	KosDec					; decompress and dump
+		jsr	(KosDec).w					; decompress and dump
 		lea	MapSquare_SSRG(pc),a0			; load compressed mappings address
 		;!@ lea	($FFFF4000).l,a1			; set temporary ram space to dump to
 		lea	(v_ram_start+$4000).l,a1			; set temporary ram space to dump to
-		jsr	KosDec					; decompress and dump
+		jsr	(KosDec).w					; decompress and dump
 		lea	Pal_SSRG(pc),a0				; load palette address to a0
 		;!@ lea	($FFFFFB80).w,a1			; load palette buffer address to a1
 		lea	(v_palette_fading).w,a1			; load palette buffer address to a1		
@@ -119,7 +119,7 @@ SRG_DumpPal:
 		;!@move	#$2300,sr				; set IRQ's (Enable interrupts)
 		;!@ jsr	Pal_FadeTo				; fade palettes in
 		disable_ints
-		jsr		(PaletteFadeIn).l
+		jsr	(PaletteFadeIn).l
 		moveq	#$00,d0					; clear d0
 		;!@
 		;move.l	d0,($FFFF7800).l			; reset SSRG timer/flags
@@ -143,21 +143,21 @@ SSRGScreen_Loop:
 		
 		;!@ lea	($FFFFD000).w,a0			; load "S" object ram
 		lea	(v_objspace).w,a0			; load "S" object ram
-		bsr	ObjectLetters				; run "S"
+		bsr.w	ObjectLetters				; run "S"
 		lea	$40(a0),a0				; load "S" object ram
-		bsr	ObjectLetters				; run "S"
+		bsr.w	ObjectLetters				; run "S"
 		lea	$40(a0),a0				; load "R" object ram
-		bsr	ObjectLetters				; run "R"
+		bsr.w	ObjectLetters				; run "R"
 		lea	$40(a0),a0				; load "G" object ram
-		bsr	ObjectLetters				; run "G"
+		bsr.w	ObjectLetters				; run "G"
 		lea	$40(a0),a0				; load Square object ram
-		bsr	ObjectSquare				; run Square
+		bsr.w	ObjectSquare				; run Square
 		;!@lea	($FFFFD140).w,a0			; load Neon Sonic object ram
 		lea	(neonOST).w,a0			; load Neon Sonic object ram
-		bsr	ObjectSonicNeon				; run Neon Sonic
-		bsr	SRG_ScrollFG				; scroll the FG plane correctly
-		bsr	SRG_DrawFG				; draw the FG plane correctly
-		jsr	BuildSprites				; present all object sprites on screen
+		bsr.w	ObjectSonicNeon				; run Neon Sonic
+		bsr.w	SRG_ScrollFG				; scroll the FG plane correctly
+		bsr.w	SRG_DrawFG				; draw the FG plane correctly
+		jsr	(BuildSprites).l			; present all object sprites on screen
 		
 		;!@
 		;tst.b	($FFFFF605).w				; has player 1 pressed start button?
@@ -169,11 +169,11 @@ SSRGScreen_Loop:
 		
 		;!@cmpi.w	#$0200,($FFFF7800).l			; has timer finished?
 		cmpi.w	#$0200,(timer1).l			; has timer finished?
-		blt	SSRGScreen_Loop				; if not, loop
+		blt.s	SSRGScreen_Loop				; if not, loop
 
 SSRGScreen_Finish:
-		jsr	PaletteFadeOut
-		jsr	VDPSetupGame
+		jsr	(PaletteFadeOut).w
+		jsr	(VDPSetupGame).w
 		enable_display
 		;RaiseError "SSRG finished"
 		;!@ move.b	#$04,($FFFFF600).w			; set the screen mode to Title Screen		
@@ -194,7 +194,7 @@ SRG_ScrollFG:
 		move.w	(timer1).l,d0			; load timer as position
 		addi.w	#$0030,d0				; increase to scroll in sooner
 		cmpi.w	#$00F7,d0				; has timer reached finish?
-		bge	SRG_FinFGScroll				; if not, branch
+		bge.s	SRG_FinFGScroll				; if not, branch
 		add.w	d0,d0					; multiply by 2
 		neg.w	d0					; negate to move left insted
 		swap	d0					; send left for FG
@@ -229,7 +229,7 @@ SRG_DrawFG:
 		add.w	d0,d0					; multiply by 2
 		subi.w	#$0040,d0				; subtract starting point
 		cmpi.w	#$0110,d0				; has the scrolling surpassed the starting or ending par?
-		bhi	SRG_DFG_FlashOn				; if so, branch
+		bhi.s	SRG_DFG_FlashOn				; if so, branch
 		;!@move	#$2700,sr				; set IRQ's (Disable interrupts)
 		;!@ lea	($FFFF0000).l,a4			; load map buffer space address to a4
 		;!@ lea	($C00000).l,a5				; load VDP data port address to a5
@@ -265,14 +265,14 @@ SRG_DrawFG:
 
 SRG_DFG_FlashOn:
 		subi.w	#$0170,d0				; minus starting point
-		bmi	SRG_DFG_NoDraw				; if not reached the starting point, branch
+		bmi.s	SRG_DFG_NoDraw				; if not reached the starting point, branch
 		moveq	#$00,d5					; set tile add value (Light)
 		cmpi.w	#$0060,d0				; has it reached PASSED the ending point?
-		bhi	SRG_DFG_NoDraw				; if so, branch to skip the lot
+		bhi.s	SRG_DFG_NoDraw				; if so, branch to skip the lot
 		cmpi.w	#$0050,d0				; has it reached the ending point?
-		bhi	SRG_DFG_DrawFlash			; if so, branch for lights on
+		bhi.s	SRG_DFG_DrawFlash			; if so, branch for lights on
 		andi.b	#$08,d0					; get within 8
-		beq	SRG_DFG_DrawFlash			; if from 0 to 7 insted of 8 to F, branch
+		beq.s	SRG_DFG_DrawFlash			; if from 0 to 7 insted of 8 to F, branch
 		move.w	#$2000,d5				; set tile add value (Faded)
 
 SRG_DFG_DrawFlash:		
@@ -297,7 +297,7 @@ SRG_DFG_NoDraw:
 
 ObjectSonicNeon:
 		tst.b	$24(a0)					; has the object alread been setup?
-		bne	OSN_SetupDone				; if so, branch
+		bne.s	OSN_SetupDone				; if so, branch
 		move.b	#$01,(a0)				; engine doesn't like the ID being null
 		move.w	#$6400,$02(a0)				; set V-Ram address read
 		move.l	#ObjSonNeonMap,$04(a0)			; set mappings to use
@@ -310,27 +310,27 @@ ObjectSonicNeon:
 
 OSN_SetupDone:
 		tst.w	$2A(a0)					; has timer finished?
-		beq	OSN_MoveIn				; if not, branch
+		beq.s	OSN_MoveIn				; if not, branch
 		subq.w	#$01,$2A(a0)				; decrease timer
 		rts						; return
 
 OSN_MoveIn:
 		cmpi.b	#$02,$24(a0)				; is the routine counter still at sonic moving?
-		bgt	OSN_NoStop				; if not, branch
+		bgt.s	OSN_NoStop				; if not, branch
 		cmpi.w	#$00DE,$08(a0)				; has sonic moved to the square yet?
-		blt	OSN_NoStop				; if not, branch
+		blt.s	OSN_NoStop				; if not, branch
 		move.w	#$00DE,$08(a0)				; set him directly at the square
 		clr.w	$10(a0)					; stop sonic moving (no X speed)
 		;!@ moveq	#$FFFFFFBE,d0				; set to play spinning SFX
 		move.w	#sfx_Roll,d0		
-		jsr	PlaySound_Special			; play SFX
+		jsr	(PlaySound_Special).w			; play SFX
 		addq.b	#$02,$24(a0)				; increase routine counter
 
 OSN_NoStop:
 		addi.w	#$0040,$2C(a0)				; increase map speed
 		move.b	$2C(a0),d0				; load current map speed
 		cmpi.b	#$06,d0					; has the map ID supassed 5?
-		blt	OSN_NoResetAni				; if not, branch
+		blt.s	OSN_NoResetAni				; if not, branch
 		moveq	#$00,d0					; reset to 0
 		move.w	d0,$2C(a0)				; reset map speed
 
@@ -339,7 +339,7 @@ OSN_NoResetAni:
 		;!@move.w	($FFFF7800).l,d0			; load timer
 		move.w	(timer1).l,d0			; load timer
 		andi.b	#$07,d0					; keep within 8 frames
-		bne	OSN_NoCyclePalette			; if it's not been 8 frames, branch
+		bne.s	OSN_NoCyclePalette			; if it's not been 8 frames, branch
 		
 		;!@ lea	($FFFFFB68).w,a1			; load palette green buffer address to a1
 		lea	(v_palette+$68).w,a1			; load palette green buffer address to a1
@@ -351,8 +351,8 @@ OSN_NoResetAni:
 		move.w	d0,(a1)					; save first colour as last
 
 OSN_NoCyclePalette:
-		bsr	SpeedToPosHud				; convert speed to position
-		jmp	DisplaySprite				; save object for displaying
+		bsr.w	SpeedToPosHud				; convert speed to position
+		jmp	(DisplaySprite).l			; save object for displaying
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -418,7 +418,7 @@ OS_Startup:
 		move.l	#$FF400020,$08(a0)			; set starting X and Y positions
 		move.w	#$00A0,$2A(a0)				; set time to wait for
 		move.l	#$08000000,$10(a0)			; set X and Y starting speeds
-		bra	UpdateScrollPositions			; update positions
+		bra.w	UpdateScrollPositions			; update positions
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -429,7 +429,7 @@ OS_PlaySound:
 		addq.b	#$02,$24(a0)				; increase routine counter
 		;!@moveq	#$FFFFFFBC,d0				; set to play spin release SFX
 		move.w	#sfx_Teleport,d0				; set to play spin release SFX
-		jsr	PlaySound_Special			; play SFX
+		jsr	(PlaySound_Special).w			; play SFX
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -440,12 +440,12 @@ OS_SpinIn:
 		addq.w	#$02,$2A(a0)				; increase spin counter
 		move.w	$08(a0),d0				; load X position
 		cmpi.w	#$0060,d0				; has the square hit the letters?
-		blt	OS_Display					; if not, branch
+		blt.w	OS_Display					; if not, branch
 		addq.b	#$02,$24(a0)			; increase routine counter
 		;!@ moveq	#$FFFFFFBD,d0		; set to play spiked chandelier SFX
 		move.w	#sfx_WallSmash,d0		; set the ugly explosion sfx
 
-		jsr	PlaySound_Special			; play SFX
+		jsr	(PlaySound_Special).w			; play SFX
 		move.l	#$FF00FC00,$10(a0)			; set X and Y bounce off speeds
 		;!@ lea	($FFFFD010).l,a1			; load object ram's X and Y speeds
 		lea	(v_objspace+$10).l,a1			; load object ram's X and Y speeds
@@ -453,7 +453,7 @@ OS_SpinIn:
 		move.l	#$0300FD00,$40(a1)			; save "S" X and Y speeds
 		move.l	#$0300FE00,$80(a1)			; save "R" X and Y speeds
 		move.l	#$0300FF00,$C0(a1)			; save "G" X and Y speeds
-		bra	OS_Display				; continue
+		bra.s	OS_Display				; continue
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -463,15 +463,15 @@ OS_SpinIn:
 OS_UpAndLand:
 		subq.w	#$08,$2A(a0)				; increase spin counter
 		addi.w	#$0020,$12(a0)				; increase gravity
-		bmi	OS_Display				; if not going down, branch
+		bmi.s	OS_Display				; if not going down, branch
 		cmpi.w	#$0020,$0A(a0)				; has the square hit the ground?
-		blt	OS_Display				; if not, branch
+		blt.s	OS_Display				; if not, branch
 		move.w	#$0020,$0A(a0)				; set to the ground
 		moveq	#$00,d0					; clear d0
 		move.l	d0,$10(a0)				; clear X and Y speeds
 		addq.b	#$02,$24(a0)				; increase routine counter
 		move.w	#$0A40,$2C(a0)				; set speed of spin
-		bra	OS_Display				; continue
+		bra.s	OS_Display				; continue
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -480,19 +480,19 @@ OS_UpAndLand:
 
 OS_FinishSpin:
 		move.w	$2C(a0),d0				; has spin speed finished?
-		bpl	OS_NoFinish				; if not, branch
+		bpl.s	OS_NoFinish				; if not, branch
 		;!@ lea	($FFFFFB62).w,a1			; load palette buffer address
 		lea	(v_palette+$62).w,a1			; load palette buffer address		
 		cmpi.w	#$0E0E,(a1)				; has the colour finished changing?
-		beq	OS_NoColour01				; if so, branch
+		beq.s	OS_NoColour01				; if so, branch
 		addi.w	#$0202,(a1)				; increase the colour
 
 OS_NoColour01:
 		addq.w	#$04,a1					; goto next 2nd colour
 		cmpi.w	#$0404,(a1)				; has the colour finished changing?
-		beq	OS_Display				; if so, branch
+		beq.s	OS_Display				; if so, branch
 		subi.w	#$0202,(a1)				; decrease the colour
-		bra	OS_Display				; continue
+		bra.s	OS_Display				; continue
 
 OS_NoFinish:
 		subi.w	#$18,d0					; decrease spin speed
@@ -507,8 +507,8 @@ OS_NoFinish:
 ; ---------------------------------------------------------------------------
 
 OS_Display:
-		jsr	SpeedToPosHud				; convert speed to position
-		bsr	UpdateScrollPositions			; update positions
+		bsr.w	SpeedToPosHud			; convert speed to position
+		bsr.s	UpdateScrollPositions			; update positions
 
 OS_DiplayEnd:
 		move.w	$2A(a0),-(sp)				; store spin counter
@@ -518,7 +518,7 @@ OS_DiplayEnd:
 		moveq	#$10,d1					; set number of rows
 		move.l	#$60000003,d2				; set to write to BG plane
 		moveq	#$00,d5					; set blank tile
-		bsr	MapScreenSingle				; write to the map plane
+		bsr.w	MapScreenSingle				; write to the map plane
 		move.w	(sp)+,d0				; load spin counter
 		andi.w	#$0018,d0				; keep in range
 		add.w	d0,d0					; multiply by 2
@@ -527,7 +527,7 @@ OS_DiplayEnd:
 		move.l	(a4)+,d2				; load V-Ram address
 		move.w	(a4)+,d0				; load X draw amount
 		move.w	(a4)+,d1				; load Y draw amount
-		bsr	MapScreen				; write to the map plane
+		bsr.w	MapScreen				; write to the map plane
 		;!@move	#$2300,sr				; set IRQ's (Enable interrupts)
 		disable_ints
 		rts						; return
@@ -627,16 +627,16 @@ OL_Startup:
 
 OL_WaitTime:
 		subq.w	#$01,$2A(a0)				; decrease timer
-		bne	OL_WT_Wait				; if not finished, branch
+		bne.s	OL_WT_Wait				; if not finished, branch
 		
 		;!@ Spring sfx
 		move.b	#dBoik,d0	; Boik
-		jsr		(MegaPCM_PlaySample).l
+		jsr	(MegaPCM_PlaySample).l
 		
 		addq.b	#$02,$24(a0)				; increase routine counter
 
 OL_WT_Wait:
-		jmp	DisplaySprite				; save object for displaying
+		jmp	(DisplaySprite).l			; save object for displaying
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -644,16 +644,16 @@ OL_WT_Wait:
 ; ---------------------------------------------------------------------------
 
 OL_FlyUp:
-		jsr	SpeedToPosHud				; convert speed to position
+		bsr.w	SpeedToPosHud			; convert speed to position
 		addi.w	#$0040,$12(a0)				; increase speed
-		bmi	OL_NoStopDown				; if still moving up, branch
+		bmi.s	OL_NoStopDown				; if still moving up, branch
 		move.w	#$00F0,d0				; set Y speed to check
 		cmp.w	$0A(a0),d0				; has the letter dropped to the landing line?
-		bge	OL_NoStopDown				; if not, branch
+		bge.s	OL_NoStopDown				; if not, branch
 		addq.b	#$02,$24(a0)				; increase routine counter
 
 OL_NoStopDown:
-		jmp	DisplaySprite				; save object for displaying
+		jmp	(DisplaySprite).l			; save object for displaying
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -661,18 +661,18 @@ OL_NoStopDown:
 ; ---------------------------------------------------------------------------
 
 OL_Spring:
-		jsr	SpeedToPosHud				; convert speed to position
+		bsr.w	SpeedToPosHud				; convert speed to position
 		subi.w	#$0080,$12(a0)				; decrease speed
-		bpl	OL_NoStopUp				; if still moving down, branch
+		bpl.s	OL_NoStopUp				; if still moving down, branch
 		move.w	#$00E8,d0				; set Y speed to check
 		cmp.w	$0A(a0),d0				; has the letter moved up to the landing line?
-		blt	OL_NoStopUp				; if not, branch
+		blt.s	OL_NoStopUp				; if not, branch
 		clr.w	$12(a0)					; set no Y speed
 		clr.w	$2A(a0)					; clear timer
 		addq.b	#$02,$24(a0)				; increase routine counter
 
 OL_NoStopUp:
-		jmp	DisplaySprite				; save object for displaying
+		jmp	(DisplaySprite).l				; save object for displaying
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -681,26 +681,26 @@ OL_NoStopUp:
 
 OL_SlowDown:
 		tst.w	$10(a0)					; is there any left movement on X?
-		bpl	OL_NoMove				; if not, branch
-		jsr	SpeedToPosHud				; convert speed to position
+		bpl.s	OL_NoMove				; if not, branch
+		bsr	SpeedToPosHud				; convert speed to position
 		addi.w	#$0020,$10(a0)				; increase X speed to slow down to move right
-		jmp	DisplaySprite				; save object for displaying
+		jmp	(DisplaySprite).l				; save object for displaying
 
 OL_NoMove:
 		addi.b	#$01,$2A(a0)				; increase timer
 		move.b	$2A(a0),d0				; load timer
 		andi.b	#$01,d0					; get only the odd bit
-		beq	OL_Idle					; if null, branch to skip (Slows the flash down)
+		beq.s	OL_Idle					; if null, branch to skip (Slows the flash down)
 		moveq	#$40,d0					; set colour line to check value on
 		cmp.b	$02(a0),d0				; has colour line reached last?
-		bgt	OL_NoFinish				; if not, branch
+		bgt.s	OL_NoFinish				; if not, branch
 		andi.b	#$9F,$02(a0)				; reset colour line to first
 		addq.b	#$02,$24(a0)				; increase routine counter
 		moveq	#$00,d0					; clear d0
 		move.l	d0,$10(a0)				; clear X and Y speeds
 		andi.w	#$01FF,$0A(a0)				; reset Y position range correctly
 		move.w	#$00E4,$0A(a0)				; set Y position
-		jmp	DisplaySprite				; save object for displaying
+		jmp	(DisplaySprite).l				; save object for displaying
 
 OL_NoFinish:
 		; !@ play glass block sound
@@ -714,13 +714,13 @@ OL_NoFinish:
 ; ---------------------------------------------------------------------------
 
 OL_Idle:
-		bsr	SpeedToPosHud				; convert speed to position
+		bsr.w	SpeedToPosHud				; convert speed to position
 		cmpi.w	#$00E4,$0A(a0)				; has the letter moved up to the landing line?
-		beq	OL_CheckXSpeed				; if so, branch
-		blt	OL_CheckYSpeed				; if not, branch
+		beq.s	OL_CheckXSpeed				; if so, branch
+		blt.s	OL_CheckYSpeed				; if not, branch
 		clr.w	$12(a0)					; set no Y speed
 		move.w	#$00E4,$0A(a0)				; set Y position
-		bra	OL_CheckXSpeed				; continue
+		bra.s	OL_CheckXSpeed				; continue
 
 OL_CheckYSpeed:
 		addi.w	#$0080,$12(a0)				; increase gravity
@@ -728,15 +728,15 @@ OL_CheckYSpeed:
 OL_CheckXSpeed:
 		move.w	#$0040,d0				; set speed decrease
 		tst.w	$10(a0)					; is there any X speed?
-		beq	OL_Display				; if not, branch
-		bpl	OL_DecreaseRight			; if it's moving right, branch
+		beq.s	OL_Display				; if not, branch
+		bpl.s	OL_DecreaseRight			; if it's moving right, branch
 		neg.w	d0					; negate decreasing speed
 
 OL_DecreaseRight:
 		sub.w	d0,$10(a0)				; decrease speed
 
 OL_Display:
-		jmp	DisplaySprite				; save object for displaying
+		jmp	(DisplaySprite).l				; save object for displaying
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------

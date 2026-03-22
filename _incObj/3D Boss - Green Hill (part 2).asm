@@ -121,7 +121,7 @@ loc_179EE:
 ; ===========================================================================
 
 loc_179F6:
-		jsr  	ScreenObjectFall
+		jsr	(ScreenObjectFall).l
 		cmpi.w	#boss_ghz_end,(v_limitright2).w
 		beq.s	loc_17A10
 		addq.w	#2,(v_limitright2).w

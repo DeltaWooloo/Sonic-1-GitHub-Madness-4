@@ -34,12 +34,12 @@ Jaws_Main:	; Routine 0
 		beq.s	Jaws_Turn	; if yes, branch
 		neg.w	obVelX(a0)	; move Jaws to the right
 		move.w	#sfx_Electric,d0
-		jsr	(QueueSound2).l	
+		jsr	(QueueSound2).w
 
 Jaws_Turn:	; Routine 2
-        move.w	#sfx_Electric,d0
-		jsr	(QueueSound2).l	
-        addi.w	#$20,obVelX(a0)	
+		move.w	#sfx_Electric,d0
+		jsr	(QueueSound2).w
+		addi.w	#$20,obVelX(a0)	
 		subq.w	#1,jaws_timecount(a0) ; subtract 1 from turn delay time
 		bpl.s	.animate	; if time remains, branch
 		move.w	jaws_timedelay(a0),jaws_timecount(a0) ; reset turn delay time

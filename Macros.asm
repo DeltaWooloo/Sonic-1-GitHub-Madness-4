@@ -98,7 +98,7 @@ scrollVDPPlanes_set:	macro	vBLA,bgxpos,bgypos,fgxpos,fgypos
 		
 		;Wait until upload into VRAM
 		move.b	#vBLA,(v_vbla_routine).w
-		jsr		(WaitForVBla).l
+		jsr	(WaitForVBla).w
 		endm
 
 ; ---------------------------------------------------------------------------

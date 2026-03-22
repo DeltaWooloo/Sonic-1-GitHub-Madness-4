@@ -39,11 +39,11 @@ Sign_Touch:	; Routine 2
 		cmpi.w	#$20,d0		; is Sonic within $20 pixels of the signpost?
 		bhs.s	.notouch	; if not, branch
 		move.w	#sfx_Signpost,d0
-		jsr	(QueueSound1).l	; play signpost sound
+		jsr	(QueueSound1).w	; play signpost sound
 		clr.b	(f_timecount).w	; stop time counter
 		move.w	(v_limitright2).w,(v_limitleft2).w ; lock screen position
 		move.w	#bgm_Stop,d0
-		jsr	(QueueSound2).l	; stop music		
+		jsr	(QueueSound2).w	; stop music		
 		addq.b	#2,obRoutine(a0)
 
 .notouch:
@@ -105,8 +105,8 @@ Sign_SparkPos:	dc.b -$18,-$10		; x-position, y-position
 
 
 Sign_SonicRun:	; Routine 6
-                cmpi.w	#(id_PPZ<<8)+1,(v_zone).w ; check if level is CLOCK WORK 2
-                beq.s	fuckyou76
+		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w ; check if level is CLOCK WORK 2
+		beq.s	fuckyou76
 		tst.w	(v_debuguse).w	; is debug mode on?
 		bne.w	locret_ECEE	; if yes, branch
 	if FixBugs
@@ -140,22 +140,22 @@ loc_EC86:
 
 fuckyou76:
 		tst.w	(v_debuguse).w	; is debug mode	on?
-		 bne.w	locret_ECEE	; if yes, branch
-		 btst	#1,(v_player+obStatus).w
-		 bne.s	loc_EC70fuck
-		 move.b	#1,(f_lockctrl).w ; lock controls
-		 move.w	#btnR<<8,(v_jpadhold2).w ; make Sonic run to the right
+		bne.w	locret_ECEE	; if yes, branch
+		btst	#1,(v_player+obStatus).w
+		bne.s	loc_EC70fuck
+		move.b	#1,(f_lockctrl).w ; lock controls
+		move.w	#btnR<<8,(v_jpadhold2).w ; make Sonic run to the right
 
 loc_EC70fuck:
-		 tst.b	(v_player).w
-		 beq.s	loc_EC869
-		 move.w	(v_player+obX).w,d0
-		 move.w	(v_limitright2).w,d1
-		 addi.w	#$128,d1
-		 cmp.w	d1,d0
-		 bcs.w	locret_ECEE
+		tst.b	(v_player).w
+		beq.s	loc_EC869
+		move.w	(v_player+obX).w,d0
+		move.w	(v_limitright2).w,d1
+		addi.w	#$128,d1
+		cmp.w	d1,d0
+		bcs.w	locret_ECEE
 loc_EC869:
-              addq.b #2,obRoutine(a0);absolute fucking cinema
+		addq.b #2,obRoutine(a0);absolute fucking cinema
 ;NMRTT SBZ2 shittery fixer
 ; ---------------------------------------------------------------------------
 ; Subroutine to set up bonuses at the end of an act
@@ -172,7 +172,7 @@ GotThroughAct:
 		clr.b	(f_timecount).w	; stop time counter
 		move.b	#id_GotThroughCard,(v_endcard).w
 		moveq	#plcid_WINNERCard,d0
-		jsr	(NewPLC).l	; load title card patterns
+		jsr	(NewPLC).w	; load title card patterns
 		move.b	#1,(f_endactbonus).w
 		moveq	#0,d0
 		move.b	(v_timemin).w,d0
@@ -193,7 +193,7 @@ GotThroughAct:
 		mulu.w	#10,d0		; multiply by 10
 		move.w	d0,(v_ringbonus).w ; set ring bonus
 		move.b	#bgm_ActClear,d0
-		jsr	(QueueSound2).l
+		jsr	(QueueSound2).w
 
 locret_ECEE:
 		rts

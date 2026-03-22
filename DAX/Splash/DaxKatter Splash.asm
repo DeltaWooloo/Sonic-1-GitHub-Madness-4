@@ -10,8 +10,8 @@ v_splash_logo = v_objspace
 
 GM_DaxKatter:
 		move.b	#bgm_Stop,d0
-		jsr	(PlaySound_Special).l		; fade out music
-		jsr	(ClearPLC).l
+		jsr	(PlaySound_Special).w		; fade out music
+		jsr	(ClearPLC).w
 		jsr	(PaletteFadeOut).w
 		disable_ints
 		disable_display
@@ -43,11 +43,11 @@ GM_DaxKatter:
 		; load art
 		locVRAM	$20
 		lea	(ArtNem_DaxKatter_D).l,a0
-		jsr	(NemDec).l
+		jsr	(NemDec).w
 
 		locVRAM	$1000
 		lea	(ArtNem_DaxKatter_Text).l,a0
-		jsr	(NemDec).l
+		jsr	(NemDec).w
 
 		lea	(EniMap_DaxKatterText).l,a0
 		lea	(v_ram_start).l,a1
@@ -79,7 +79,7 @@ GM_DaxKatter:
 		jsr	(ExecuteObjects).l
 		jsr	(BuildSprites).l
 		enable_display
-		jsr	(PaletteFadeIn).l
+		jsr	(PaletteFadeIn).w
 
 .main
 		move.b	#2,(v_vbla_routine).w
@@ -107,7 +107,7 @@ GM_DaxKatter:
 
 .flash
 		move.b	#sfx_Dash,d0
-		jsr	(PlaySound_Special).l		; play Spindash Release SFX
+		jsr	(PlaySound_Special).w		; play Spindash Release SFX
 		jsr	(PaletteWhiteOut).w
 
 		moveq	#16/2-1,d0
@@ -128,7 +128,7 @@ GM_DaxKatter:
 		dbf	d0,.loadpal3
 
 		move.b	#sfx_MenuConfirm,d0
-		jsr	(PlaySound_Special).l		; play Menu Confirmation SFX
+		jsr	(PlaySound_Special).w		; play Menu Confirmation SFX
 		move.w	#$202F,(v_pfade_start).w ; set start position = 0; size = $40
 		jsr	(PalFadeIn_Alt).w
 		move.w	#5*30,(v_generictimer).w
@@ -145,9 +145,9 @@ GM_DaxKatter:
 
 .done
 		move.b	#bgm_Fade,d0
-		jsr	(PlaySound_Special).l		; fade out music
+		jsr	(PlaySound_Special).w		; fade out music
 		jsr	(PaletteFadeOut).w
-		jsr	VDPSetupGame
+		jsr	(VDPSetupGame).w
 		enable_display
 		move.b	#id_Title,(v_gamemode).w	; go to title screen if not in Splashes
 		rts
@@ -190,7 +190,7 @@ Obj_DaxD_Move:
 		addq.b	#2,obRoutine(a0)
 		move.w	#$80+40,obX(a0)
 		move.b	#sfx_Thud,d0
-		jsr	(PlaySound_Special).l
+		jsr	(PlaySound_Special).w
 		move.b	#1,obAnim(a0)
 
 Obj_DaxD_TestobAnim:
@@ -218,15 +218,15 @@ Ani_DaxKatterD:
 
 DKSS_Scroll:
 ; render
-	lea	(v_hscrolltablebuffer).w,a0
-	move.w	(v_screenposx).w,d0		; Plane A uses this
-	swap	d0
-	clr.w	d0			; Plane B uses this
-	move.w	#224-1,d1
+		lea	(v_hscrolltablebuffer).w,a0
+		move.w	(v_screenposx).w,d0		; Plane A uses this
+		swap	d0
+		clr.w	d0			; Plane B uses this
+		move.w	#224-1,d1
 .loop:
-	move.l	d0,(a0)+
-	dbf	d1,.loop
-	rts
+		move.l	d0,(a0)+
+		dbf	d1,.loop
+		rts
 
 Dax_PlaneMap:
 		move.l	#vdpCommDelta(planeLoc(128,0,1)),d4			; row increment value

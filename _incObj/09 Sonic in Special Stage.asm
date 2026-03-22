@@ -25,7 +25,7 @@ Obj09_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.b	#$E,obHeight(a0)
 		move.b	#7,obWidth(a0)
-		jsr	GetPlayerData
+		jsr	(GetPlayerData).l
 		move.l	d0,obMap(a0)
 		move.l	d1,dgfxaddr(a0)
 		move.l	d2,artaddr(a0)

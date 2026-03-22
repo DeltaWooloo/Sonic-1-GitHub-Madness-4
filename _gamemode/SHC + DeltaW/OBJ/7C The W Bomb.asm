@@ -6,7 +6,7 @@ Obj_WBomb:
 		move.b	obRoutine(a0),d0
 		move.w	Obj_WBomb_Index(pc,d0.w),d1
 		jsr	Obj_WBomb_Index(pc,d1.w)
-		jmp	DisplaySprite
+		jmp	(DisplaySprite).l
 ; ===========================================================================
 Obj_WBomb_Index:	dc.w Obj_WBomb_Main-Obj_WBomb_Index
 			dc.w Obj_WBomb_Wait-Obj_WBomb_Index
@@ -51,7 +51,7 @@ Obj_WBomb_Land:
 		move.b	#1,obFrame(a0)
 ;		move.w	#-1,(Glide_screen_shake).w
 		move.b	#bgm_Stop,d0
-		jsr	PlaySound_Unused
+		jsr	(PlaySound_Unused).w
 		move.w	#5,bomb_timer(a0)		; start spawning in 5 frames
 
 Obj_WBomb_Stand:	; Routine 6

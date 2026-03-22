@@ -35,7 +35,7 @@ SolidObject:
 
 .stand:
 		move.w	d4,d2
-		jsr	MvSonicOnPtfm
+		bsr.w	MvSonicOnPtfm
 		moveq	#0,d4
 		rts
 ; ===========================================================================
@@ -64,7 +64,7 @@ SolidObject71:
 
 .stand:
 		move.w	d4,d2
-		jsr	MvSonicOnPtfm
+		bsr.w	MvSonicOnPtfm
 		moveq	#0,d4
 		rts
 ; ===========================================================================
@@ -312,7 +312,7 @@ Solid_ResetFloor:
 		beq.s	.notinair	; if not, branch
 		move.l	a0,-(sp)
 		movea.l	a1,a0
-		jsr	(Sonic_ResetOnFloor).l ; reset Sonic as if on floor
+		bsr.w	Sonic_ResetOnFloor	; reset Sonic as if on floor
 		movea.l	(sp)+,a0
 
 .notinair:

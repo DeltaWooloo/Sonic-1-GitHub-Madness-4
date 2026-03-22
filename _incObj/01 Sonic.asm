@@ -243,7 +243,7 @@ Sonic_Display:
 		bcc.s	.chkinvincible
 
 .display:
-		jsr	(DisplaySprite).l
+		bsr.w	DisplaySprite
 
 .chkinvincible:
 		tst.b	(v_invinc).w	; does Sonic have invincibility?
@@ -266,7 +266,7 @@ Sonic_Display:
 
 .music:
 		move.b	(v_zonemusic).w,d0
-		jsr	(QueueSound1).l	; play normal music
+		jsr	(QueueSound1).w	; play normal music
 
 .removeinvincible:
 		move.b	#0,(v_invinc).w ; cancel invincibility
@@ -373,7 +373,7 @@ Sonic_MdNormal:
 		bsr.w	Sonic_Move
 		bsr.w	Sonic_Roll
 		bsr.w	Sonic_LevelBound
-		jsr	(SpeedToPos).l
+		bsr.w	SpeedToPos
 		bsr.w	FootCollision
 		bsr.w	Sonic_SlopeRepel
 		rts
@@ -384,7 +384,7 @@ Sonic_MdJump:
 		bsr.w	Sonic_JumpHeight
 		bsr.w	Sonic_JumpDirection
 		bsr.w	Sonic_LevelBound
-		jsr	(ObjectFall).l
+		bsr.w	ObjectFall
 		btst	#6,obStatus(a0)
 		beq.s	.notunderwater
 		subi.w	#$28,obVelY(a0)
@@ -402,7 +402,7 @@ Sonic_MdRoll:
 		bsr.w	Sonic_RollRepel
 		bsr.w	Sonic_RollSpeed
 		bsr.w	Sonic_LevelBound
-		jsr	(SpeedToPos).l
+		bsr.w	SpeedToPos
 		bsr.w	FootCollision
 		bsr.w	Sonic_SlopeRepel
 		rts
@@ -413,7 +413,7 @@ Sonic_MdJump2:
 		bsr.w	Sonic_JumpHeight
 		bsr.w	Sonic_JumpDirection
 		bsr.w	Sonic_LevelBound
-		jsr	(ObjectFall).l
+		bsr.w	ObjectFall
 		btst	#6,obStatus(a0)
 		beq.s	.notunderwater
 		subi.w	#$28,obVelY(a0)
@@ -576,7 +576,7 @@ Sonic_Move:
 ; ----------------------------------------------------------------------------
 
 Sonic_Balance:
-		jsr	(ObjFloorDist).l
+		bsr.w	ObjFloorDist
 		cmpi.w	#$C,d1
 		blt.s	Sonic_LookUp
 		cmpi.b	#3,angleright(a0)
@@ -655,7 +655,7 @@ loc_12FEA:
 
 loc_12FEE:
 		move.b	obAngle(a0),d0
-		jsr	(CalcSine).l
+		jsr	(CalcSine).w
 		muls.w	obInertia(a0),d1
 		asr.l	#8,d1
 		move.w	d1,obVelX(a0)
@@ -760,7 +760,7 @@ loc_130BA:
 		move.b	#id_Stop,obAnim(a0) ; use "stopping" animation
 		bclr	#0,obStatus(a0)
 		move.w	#sfx_Skid,d0
-		jsr	(QueueSound2).l	; play stopping sound
+		jsr	(QueueSound2).w	; play stopping sound
 
 locret_130E8:
 		rts
@@ -809,7 +809,7 @@ loc_13120:
 		move.b	#id_Stop,obAnim(a0) ; use "stopping" animation
 		bset	#0,obStatus(a0)
 		move.w	#sfx_Skid,d0
-		jsr	(QueueSound2).l	; play stopping sound
+		jsr	(QueueSound2).w	; play stopping sound
 
 locret_1314E:
 		rts
@@ -874,7 +874,7 @@ loc_131AA:
 
 loc_131CC:
 		move.b	obAngle(a0),d0
-		jsr	(CalcSine).l
+		jsr	(CalcSine).w
 		muls.w	obInertia(a0),d0
 		asr.l	#8,d0
 		move.w	d0,obVelY(a0)
@@ -1122,16 +1122,16 @@ Sonic_LevelBound:
 		move.w	#0,obX+2(a0)
 		move.w	#0,obInertia(a0)
 		move.w	#-$200,obVelY(a0)
-		move.b	#dBoik,d0	; Boik
-		jsr		(MegaPCM_PlaySample).l
+		move.b	#dBoik,d0		; Boik
+		jsr	(MegaPCM_PlaySample).l
 		bra.w	.chkbottom
 ; End of function Sonic_LevelBound
 
 reproduceSFX:
-        move.b	#dScream,d0	; Scream
-		jsr		(MegaPCM_PlaySample).l
+		move.b	#dScream,d0	; Scream
+		jsr	(MegaPCM_PlaySample).l
 		move.w	#sfx_Lamppost,d0
-		jmp	(QueueSound2).l	; play lamppost sound
+		jmp	(QueueSound2).w	; play lamppost sound
 
 ; ---------------------------------------------------------------------------
 ; Subroutine allowing Sonic to roll when he's moving
@@ -1176,7 +1176,7 @@ Sonic_ChkRoll:
 		move.b	#id_Roll,obAnim(a0) ; use "rolling" animation
 		addq.w	#5,obY(a0)
 		move.w	#sfx_Roll,d0
-		jsr	(QueueSound2).l	; play rolling sound
+		jsr	(QueueSound2).w	; play rolling sound
 		tst.w	obInertia(a0)
 		bne.s	.ismoving
 		move.w	#$200,obInertia(a0) ; set inertia if 0
@@ -1235,7 +1235,7 @@ Sonic_Jump:
 		moveq	#0,d0
 		move.b	obAngle(a0),d0
 		subi.b	#$40,d0
-		jsr	(CalcSine).l	; find the direction Sonic should jump.
+		jsr	(CalcSine).w	; find the direction Sonic should jump.
 		muls.w	d2,d1	; apply jump force to the cosine angle.
 		asr.l	#8,d1
 		add.w	d1,obVelX(a0)	; apply to X speed.
@@ -1248,7 +1248,7 @@ Sonic_Jump:
 		move.b	#1,jumping(a0)	; set jump flag.
 		clr.b	sticktoconvex(a0)
 		move.b	#dQuakeJump,d0
-		jsr	MegaPCM_PlaySample
+		jsr	(MegaPCM_PlaySample).l
 		move.b	#$13,obHeight(a0)	; set Sonic's hitbox to standing size. This is a leftover from the victory animation in prototypes.
 		move.b	#9,obWidth(a0)
 		btst	#2,obStatus(a0)	; is Sonic already in a ball state?
@@ -1315,7 +1315,7 @@ Sonic_SlopeResist:
 		cmpi.b	#$C0,d0
 		bhs.s	locret_13508
 		move.b	obAngle(a0),d0
-		jsr	(CalcSine).l
+		jsr	(CalcSine).w
 		muls.w	#$20,d0
 		asr.l	#8,d0
 		tst.w	obInertia(a0)
@@ -1349,7 +1349,7 @@ Sonic_RollRepel:
 		cmpi.b	#-$40,d0
 		bhs.s	locret_13544
 		move.b	obAngle(a0),d0
-		jsr	(CalcSine).l
+		jsr	(CalcSine).w
 		muls.w	#$50,d0
 		asr.l	#8,d0
 		tst.w	obInertia(a0)
@@ -1452,7 +1452,7 @@ Sonic_JumpAngle:
 Sonic_Floor:
 		move.w	obVelX(a0),d1
 		move.w	obVelY(a0),d2
-		jsr	(CalcAngle).l
+		jsr	(CalcAngle).w
 ;		move.b	d0,(v_unused3).w
 		subi.b	#$20,d0
 ;		move.b	d0,(v_unused4).w
@@ -1686,7 +1686,7 @@ Sonic_ResetOnFloor:
 
 ; Obj01_Hurt:
 Sonic_Hurt:	; Routine 4
-		jsr	(SpeedToPos).l
+		bsr.w	SpeedToPos
 		addi.w	#$20,obVelY(a0)
 		btst	#6,obStatus(a0)
 		beq.s	.notunderwater
@@ -1698,7 +1698,7 @@ Sonic_Hurt:	; Routine 4
 		bsr.w	Sonic_RecordPosition
 		bsr.w	Player_Animate
 		bsr.w	Sonic_LoadGfx
-		jmp	(DisplaySprite).l
+		bra.w	DisplaySprite
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to stop Sonic falling after he's been hurt
@@ -1745,11 +1745,11 @@ locret_13860:
 ; Obj01_Death:
 Sonic_Death:	; Routine 6
 		bsr.w	GameOver
-		jsr	(ObjectFall).l
+		bsr.w	ObjectFall
 		bsr.w	Sonic_RecordPosition
 		bsr.w	Player_Animate
 		bsr.w	Sonic_LoadGfx
-		jmp	(DisplaySprite).l
+		bra.w	DisplaySprite
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 

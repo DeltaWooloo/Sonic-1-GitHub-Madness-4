@@ -30,8 +30,8 @@ Bump_Hit:	; Routine 2
 		move.w	obY(a0),d2
 		sub.w	obX(a1),d1
 		sub.w	obY(a1),d2
-		jsr	(CalcAngle).l
-		jsr	(CalcSine).l
+		jsr	(CalcAngle).w
+		jsr	(CalcSine).w
 		muls.w	#-$800,d1
 		asr.l	#8,d1
 		move.w	d1,obVelX(a1)	; bounce Sonic away
@@ -44,7 +44,7 @@ Bump_Hit:	; Routine 2
 		clr.b	jumping(a1)
 		move.b	#1,obAnim(a0)	; use "hit" animation
 		move.b	#dBoik,d0	; Boik
-		jsr		(MegaPCM_PlaySample).l
+		jsr	(MegaPCM_PlaySample).l
 		lea	(v_objstate).w,a2
 		moveq	#0,d0
 		move.b	obRespawnNo(a0),d0

@@ -22,7 +22,7 @@ RetroBlast:
 
 		locVRAM $0
 		lea	(ArtNem_RetroBlast),a0
-		jsr	(NemDec).l
+		jsr	(NemDec).w
 
 		lea	(MapEni_RetroBlast).l,a0
 		lea	(v_ram_start).l,a1

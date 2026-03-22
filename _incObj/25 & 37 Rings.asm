@@ -221,7 +221,7 @@ RLoss_Count:	; Routine 0
 		tst.w	d4
 		bmi.s	.loc_9D62
 		move.w	d4,d0
-		jsr	CalcSine
+		jsr	(CalcSine).w
 		move.w	d4,d2
 		lsr.w	#8,d2
 		asl.w	d2,d0
@@ -254,7 +254,7 @@ RLoss_Count:	; Routine 0
 		move.b	d0,(v_ani3_time).w	; Move d0 to old timer (for animated purposes)
 	endif
 		move.w	#sfx_RingLoss,d0
-		jsr	(QueueSound2).l	; play ring loss sound
+		jsr	(QueueSound2).w		; play ring loss sound
 
 RLoss_Bounce:	; Routine 2
 		move.b	(v_ani3_frame).w,obFrame(a0)

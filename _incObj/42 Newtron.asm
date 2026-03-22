@@ -122,10 +122,10 @@ Newt_Action:	; Routine 2
 ;		bclr	#0,obStatus(a0)
 
 ;.sonicisright3:
-		lea 	v_player, a1
+		lea 	(v_player).w, a1
 		move.w 	#$450, d0
 		move.w	#$30, d1
-		jsr	ChaseObject
+		bsr.w	ChaseObject
 		bsr.w	SpeedToPos
 		rts
 ; ===========================================================================
