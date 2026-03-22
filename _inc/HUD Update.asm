@@ -435,7 +435,7 @@ Hud_TimeRingBonus:
 		lea	(Hud_1000).l,a2
 		moveq	#3,d6
 		moveq	#0,d4
-		lea	Art_Hud(pc),a1
+		lea	Art_Text,a1
 
 Hud_BonusLoop:
 		moveq	#0,d2
@@ -457,7 +457,7 @@ loc_1CA26:
 loc_1CA30:
 		tst.w	d4
 		beq.s	Hud_ClrBonus
-		lsl.w	#6,d2
+		lsl.w	#5,d2
 		lea	(a1,d2.w),a3
 		move.l	(a3)+,(a6)
 		move.l	(a3)+,(a6)
@@ -467,14 +467,14 @@ loc_1CA30:
 		move.l	(a3)+,(a6)
 		move.l	(a3)+,(a6)
 		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
-		move.l	(a3)+,(a6)
+;		move.l	(a3)+,(a6)
+;		move.l	(a3)+,(a6)
+;		move.l	(a3)+,(a6)
+;		move.l	(a3)+,(a6)
+;		move.l	(a3)+,(a6)
+;		move.l	(a3)+,(a6)
+;		move.l	(a3)+,(a6)
+;		move.l	(a3)+,(a6)
 
 loc_1CA5A:
 		dbf	d6,Hud_BonusLoop ; repeat 3 more times
@@ -483,7 +483,7 @@ loc_1CA5A:
 ; ===========================================================================
 
 Hud_ClrBonus:
-		moveq	#$F,d5
+		moveq	#7,d5
 
 Hud_ClrBonusLoop:
 		move.l	#0,(a6)
