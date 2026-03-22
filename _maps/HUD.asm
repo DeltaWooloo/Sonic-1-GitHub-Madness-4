@@ -1,83 +1,72 @@
-Map_fd84: mappingsTable
-	mappingsTableEntry.w	Map_fd84_0
-	mappingsTableEntry.w	Map_fd84_1
-	mappingsTableEntry.w	Map_fd84_2
-	mappingsTableEntry.w	Map_fd84_3
-	mappingsTableEntry.w	Map_fd84_4
-
-Map_fd84_0:	spriteHeader
- spritePiece 0, -$80, 4, 1, 0, 0, 0, 0, 1
- spritePiece $20, -$80, 1, 1, 4, 0, 0, 0, 1
- spritePiece $2C, -$80, 4, 1, $11, 0, 0, 0, 1
- spritePiece $4C, -$80, 3, 1, $15, 0, 0, 0, 1
- spritePiece 0, -$73, 4, 1, 5, 0, 0, 0, 1
- spritePiece $2C, -$73, 4, 1, $18, 0, 0, 0, 1
- spritePiece 0, -$66, 4, 1, 9, 0, 0, 0, 1
- spritePiece $20, -$66, 1, 1, 0, 0, 0, 0, 1
- spritePiece $2C, -$66, 3, 1, $1C, 0, 0, 0, 1
- spritePiece 0, -$59, 4, 1, $D, 0, 0, 0, 1
- spritePiece $2C, -$59, 3, 1, $1F, 0, 0, 0, 1
- spritePiece 0, $40, 2, 2, $114, 0, 0, 0, 1
- spritePiece $10, $40, 4, 2, $118, 0, 0, 0, 1
-Map_fd84_0_End
-
-Map_fd84_1:	spriteHeader
- spritePiece 0, -$80, 4, 1, 0, 0, 0, 0, 1
- spritePiece $20, -$80, 1, 1, 4, 0, 0, 0, 1
- spritePiece $2C, -$80, 4, 1, $11, 0, 0, 0, 1
- spritePiece $4C, -$80, 3, 1, $15, 0, 0, 0, 1
- spritePiece 0, -$73, 4, 1, 5, 0, 0, 0, 1
- spritePiece $2C, -$73, 4, 1, $18, 0, 0, 0, 1
- spritePiece 0, -$66, 4, 1, 9, 0, 0, 1, 1
- spritePiece $20, -$66, 1, 1, 0, 0, 0, 1, 1
- spritePiece $2C, -$66, 3, 1, $1C, 0, 0, 0, 1
- spritePiece 0, -$59, 4, 1, $D, 0, 0, 0, 1
- spritePiece $2C, -$59, 3, 1, $1F, 0, 0, 0, 1
- spritePiece 0, $40, 2, 2, $114, 0, 0, 0, 1
- spritePiece $10, $40, 4, 2, $118, 0, 0, 0, 1
-Map_fd84_1_End
-
-Map_fd84_2:	spriteHeader
- spritePiece 0, -$80, 4, 1, 0, 0, 0, 0, 1
- spritePiece $20, -$80, 1, 1, 4, 0, 0, 0, 1
- spritePiece $2C, -$80, 4, 1, $11, 0, 0, 0, 1
- spritePiece $4C, -$80, 3, 1, $15, 0, 0, 0, 1
- spritePiece 0, -$73, 4, 1, 5, 0, 0, 1, 1
- spritePiece $2C, -$73, 4, 1, $18, 0, 0, 0, 1
- spritePiece 0, -$66, 4, 1, 9, 0, 0, 0, 1
- spritePiece $20, -$66, 1, 1, 0, 0, 0, 0, 1
- spritePiece $2C, -$66, 3, 1, $1C, 0, 0, 0, 1
- spritePiece 0, -$59, 4, 1, $D, 0, 0, 0, 1
- spritePiece $2C, -$59, 3, 1, $1F, 0, 0, 0, 1
- spritePiece 0, $40, 2, 2, $114, 0, 0, 0, 1
- spritePiece $10, $40, 4, 2, $118, 0, 0, 0, 1
-Map_fd84_2_End
-
-Map_fd84_3:	spriteHeader
- spritePiece 0, -$80, 4, 1, 0, 0, 0, 0, 1
- spritePiece $20, -$80, 1, 1, 4, 0, 0, 0, 1
- spritePiece $2C, -$80, 4, 1, $11, 0, 0, 0, 1
- spritePiece $4C, -$80, 3, 1, $15, 0, 0, 0, 1
- spritePiece 0, -$73, 4, 1, 5, 0, 0, 1, 1
- spritePiece $2C, -$73, 4, 1, $18, 0, 0, 0, 1
- spritePiece 0, -$66, 4, 1, 9, 0, 0, 1, 1
- spritePiece $20, -$66, 1, 1, 0, 0, 0, 1, 1
- spritePiece $2C, -$66, 3, 1, $1C, 0, 0, 0, 1
- spritePiece 0, -$59, 4, 1, $D, 0, 0, 0, 1
- spritePiece $2C, -$59, 3, 1, $1F, 0, 0, 0, 1
- spritePiece 0, $40, 2, 2, $114, 0, 0, 0, 1
- spritePiece $10, $40, 4, 2, $118, 0, 0, 0, 1
-Map_fd84_3_End
-
-Map_fd84_4:	spriteHeader
- spritePiece 0, -$80, 4, 1, $11, 0, 0, 0, 1
- spritePiece $24, -$80, 4, 1, $15, 0, 0, 0, 1
- spritePiece 0, -$73, 4, 1, $19, 0, 0, 0, 1
- spritePiece $24, -$73, 4, 1, $1D, 0, 0, 0, 1
- spritePiece $10, -$66, 2, 1, $21, 0, 0, 0, 1
- spritePiece $24, -$66, 3, 1, $23, 0, 0, 0, 1
- spritePiece 0, $40, 2, 2, $114, 0, 0, 0, 1
- spritePiece $10, $40, 4, 2, $118, 0, 0, 0, 1
-Map_fd84_4_End
-
+Map_c152:
+Map_c152_0: 	dc.w Map_c152_A-Map_c152
+Map_c152_2: 	dc.w Map_c152_4C-Map_c152
+Map_c152_4: 	dc.w Map_c152_8E-Map_c152
+Map_c152_6: 	dc.w Map_c152_D0-Map_c152
+Map_c152_8: 	dc.w Map_c152_112-Map_c152
+Map_c152_A: 	dc.b $D
+	dc.b $80, $C, $80, $0, $0
+	dc.b $80, $0, $80, $4, $20
+	dc.b $80, $C, $80, $11, $2C
+	dc.b $80, $8, $80, $15, $4C
+	dc.b $8D, $C, $80, $5, $0
+	dc.b $8D, $C, $80, $18, $2C
+	dc.b $9A, $C, $80, $9, $0
+	dc.b $9A, $0, $80, $0, $20
+	dc.b $9A, $8, $80, $1C, $34
+	dc.b $A7, $C, $80, $D, $0
+	dc.b $A7, $8, $80, $1F, $34
+	dc.b $40, $5, $81, $14, $0
+	dc.b $40, $D, $81, $18, $10
+Map_c152_4C: 	dc.b $D
+	dc.b $80, $C, $80, $0, $0
+	dc.b $80, $0, $80, $4, $20
+	dc.b $80, $C, $80, $11, $2C
+	dc.b $80, $8, $80, $15, $4C
+	dc.b $8D, $C, $80, $5, $0
+	dc.b $8D, $C, $80, $18, $2C
+	dc.b $9A, $C, $A0, $9, $0
+	dc.b $9A, $0, $A0, $0, $20
+	dc.b $9A, $8, $80, $1C, $34
+	dc.b $A7, $C, $80, $D, $0
+	dc.b $A7, $8, $80, $1F, $34
+	dc.b $40, $5, $81, $14, $0
+	dc.b $40, $D, $81, $18, $10
+Map_c152_8E: 	dc.b $D
+	dc.b $80, $C, $80, $0, $0
+	dc.b $80, $0, $80, $4, $20
+	dc.b $80, $C, $80, $11, $2C
+	dc.b $80, $8, $80, $15, $4C
+	dc.b $8D, $C, $A0, $5, $0
+	dc.b $8D, $C, $80, $18, $2C
+	dc.b $9A, $C, $80, $9, $0
+	dc.b $9A, $0, $80, $0, $20
+	dc.b $9A, $8, $80, $1C, $34
+	dc.b $A7, $C, $80, $D, $0
+	dc.b $A7, $8, $80, $1F, $34
+	dc.b $40, $5, $81, $14, $0
+	dc.b $40, $D, $81, $18, $10
+Map_c152_D0: 	dc.b $D
+	dc.b $80, $C, $80, $0, $0
+	dc.b $80, $0, $80, $4, $20
+	dc.b $80, $C, $80, $11, $2C
+	dc.b $80, $8, $80, $15, $4C
+	dc.b $8D, $C, $A0, $5, $0
+	dc.b $8D, $C, $80, $18, $2C
+	dc.b $9A, $C, $A0, $9, $0
+	dc.b $9A, $0, $A0, $0, $20
+	dc.b $9A, $8, $80, $1C, $34
+	dc.b $A7, $C, $80, $D, $0
+	dc.b $A7, $8, $80, $1F, $34
+	dc.b $40, $5, $81, $14, $0
+	dc.b $40, $D, $81, $18, $10
+Map_c152_112: 	dc.b $8
+	dc.b $80, $C, $80, $11, $0
+	dc.b $80, $C, $80, $15, $24
+	dc.b $8D, $C, $80, $19, $0
+	dc.b $8D, $C, $80, $1D, $24
+	dc.b $9A, $4, $80, $21, $10
+	dc.b $9A, $8, $80, $23, $24
+	dc.b $40, $5, $81, $14, $0
+	dc.b $40, $D, $81, $18, $10
 	even

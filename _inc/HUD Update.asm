@@ -157,7 +157,7 @@ Hud_Base:
 		bsr.w	Hud_Lives
 		locVRAM	(ArtTile_HUD+17)*tile_size
 		lea	Hud_TilesBase(pc),a2
-		move.w	#15-1,d2
+		move.w	#17-1,d2
 
 loc_1C83E:
 		lea	Art_Text,a1
@@ -188,8 +188,10 @@ loc_1C85E:
 ; End of function Hud_Base
 
 ; ===========================================================================
-Hud_TilesBase:	dc.b $FF, $FF, $FF, $FF, $FF, $FF, 0, 0, $C, 0, 0
-Hud_TilesZero:	dc.b $FF, $FF, 0, 0
+Hud_TilesBase:	dc.b $FF, $FF, $FF, $FF, $FF, $FF, 0 
+Hud_TilesTIME:	dc.b 0, $C, 0, 0
+Hud_TilesZero:	dc.b $FF, $FF, 0
+Hud_TilesAMMO:	dc.b $1B, $2F, $E
 		even
 ; ---------------------------------------------------------------------------
 ; Subroutine to load debug mode numbers patterns
