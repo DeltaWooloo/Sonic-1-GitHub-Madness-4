@@ -192,8 +192,8 @@ SoundD8:	include "sfx/VehiRev.asm"
 		even
 SoundD9:	include "sfx/atgameybeepy.asm"
 		even
-SoundDA:	include "sfx/RiftNormal.asm"
-		even		
-SoundDB:	include "sfx/RiftBreakSky.asm"
-		even			
+SoundDA:	include "sfx/SFX - Rift.asm"
+		even
+SoundDB:	include "sfx/SFX - Rift Sky Break.asm"
+		even
 	END

@@ -44,10 +44,10 @@ Rift_2ndIndex:	dc.w Rift_Normal-Rift_2ndIndex
 
 Rift_Normal:
 		move.b	#0,obAnim(a0)
-		addq.b	#2,ob2ndRout(a0) ; run "Rift_CheckDist" routine
-        move.w	#sfx_RiftNormal,d0    ; Add this DAX!
- 		jmp	(QueueSound1).l	; play rift normal sound	
-        rts		
+		addq.b	#2,ob2ndRout(a0)	; run "Rift_CheckDist" routine
+		move.w	#sfx_Rift,d0		; Done and Dusted
+ 		jmp	(QueueSound1).l		; play rift normal sound
+		rts
 ; ===========================================================================
 		
 Rift_ChkDist:
@@ -67,15 +67,15 @@ Rift_Return:
 ; ===========================================================================
 
 Rift_Collect:	; Routine 4
-		tst.b	obColProp(a0)	; you has touched the rift?
-		beq.w	Rift_Return	   ; if not, branch
+		tst.b	obColProp(a0)		; you has touched the rift?
+		beq.w	Rift_Return		; if not, branch
 		clr.b	obColProp(a0)
 		move.b  #0,obColType(a0)
 
  
 Rift_PlaySnd:
-		move.w	#RiftSkyBreak,d0    ; and this too 
-		jsr	(QueueSound1).l	; play riftsky sound
+		move.w	#sfx_RiftSky,d0		; and this too 
+		jsr	(QueueSound1).l		; play riftsky sound
 		rts
 ; ===========================================================================
 

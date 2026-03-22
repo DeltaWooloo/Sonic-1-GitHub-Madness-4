@@ -11,7 +11,7 @@ SmilingBomb_Header:
 	smpsHeaderFM        SmilingBomb_FM4,	$00, $11
 	smpsHeaderFM        SmilingBomb_FM5,	$00, $11
 	smpsHeaderPSG       SmilingBomb_PSG1,	$DC, $02, $00, $00
-	smpsHeaderPSG       SmilingBomb_PSG2,	$DC, $05, $00, $00
+	smpsHeaderPSG       SmilingBomb_PSG2,	$DC, $02, $00, $00
 	smpsHeaderPSG       SmilingBomb_PSG3,	$00, $03, $00, fTone_02
 
 ; FM1 Data
