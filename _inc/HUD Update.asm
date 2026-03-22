@@ -100,13 +100,13 @@ HudDebug:
 
 .notzero:
 		clr.b	(f_ringcount).w
-		locVRAM	(ArtTile_HUD+17)*tile_size,d0	; set VRAM address
+		locVRAM	(ArtTile_HUD+35)*tile_size,d0	; set VRAM address
 		moveq	#0,d1
 		move.w	(v_rings).w,d1	; load number of rings
 		bsr.w	Hud_Rings
 
 .objcounter:
-		locVRAM	(ArtTile_HUD+26)*tile_size,d0	; set VRAM address
+		locVRAM	(ArtTile_HUD+33)*tile_size,d0	; set VRAM address
 		moveq	#0,d1
 		move.b	(v_spritecount).w,d1 ; load "number of objects" counter
 		bsr.w	Hud_Secs
@@ -200,13 +200,13 @@ Hud_TilesZero:	dc.b $FF, $FF, 0, 0
 
 HudDb_XY:
 		locVRAM	(ArtTile_HUD+17)*tile_size		; set VRAM address
-		move.w	(v_screenposx).w,d1 ; load camera x-position
-		swap	d1
 		move.w	(v_player+obX).w,d1 ; load Sonic's x-position
 		bsr.s	HudDb_XY2
-		move.w	(v_screenposy).w,d1 ; load camera y-position
-		swap	d1
 		move.w	(v_player+obY).w,d1 ; load Sonic's y-position
+		bsr.s	HudDb_XY2
+		move.w	(v_screenposx).w,d1 ; load camera y-position
+		bsr.s	HudDb_XY2
+		move.w	(v_screenposy).w,d1 ; load camera y-position
 ; End of function HudDb_XY
 
 
@@ -214,7 +214,7 @@ HudDb_XY:
 
 
 HudDb_XY2:
-		moveq	#7,d6
+		moveq	#3,d6
 		lea	(Art_Text).l,a1
 
 HudDb_XYLoop:
@@ -225,7 +225,7 @@ HudDb_XYLoop:
 		blo.s	loc_1C8B2
 		;!@ GD: Bugfix for new S2 font to proper show hex chars
 		;addq.w	#7,d2
-		addq.w	#7-3,d2
+		addq.w	#4,d2
 
 loc_1C8B2:
 		lsl.w	#5,d2
@@ -238,9 +238,8 @@ loc_1C8B2:
 		move.l	(a3)+,(a6)
 		move.l	(a3)+,(a6)
 		move.l	(a3)+,(a6)
-		swap	d1
+;		swap	d1
 		dbf	d6,HudDb_XYLoop	; repeat 7 more times
-
 		rts
 ; End of function HudDb_XY2
 
