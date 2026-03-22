@@ -37,7 +37,7 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 	lhead	plcid_SLZ,Kos_SLZ,plcid_SLZ2,Blk16_SLZ,Blk256_SLZ,bgm_Minecraft,palid_SLZ,Col_SLZ,ObjPos_Null,Level_SLZ1,Level_SLZbg
 
 	lhead	plcid_SYZ,Kos_SYZ,plcid_SYZ2,Blk16_SYZ,Blk256_SYZ,bgm_TreasureCaves,palid_SYZ,Col_SYZ,ObjPos_SYZ1,Level_SYZ1,Level_SYZbg
-	lhead	plcid_SYZ,Kos_SYZ,plcid_SYZ2,Blk16_SYZ,Blk256_SYZ,bgm_CanCan,palid_SYZ,Col_SYZ,ObjPos_SYZ2,Level_SYZ2,Level_SYZbg
+	lhead	plcid_SYZ,Kos_SYZ,plcid_SYZ2,Blk16_SYZ,Blk256_SYZ,bgm_Danstar,palid_SYZ,Col_SYZ,ObjPos_SYZ2,Level_SYZ2,Level_SYZbg
 	lhead	plcid_SYZ,Kos_SYZ,plcid_SYZ2,Blk16_SYZ,Blk256_SYZ,bgm_GCV2005,palid_SYZ,Col_SYZ,ObjPos_SYZ3,Level_SYZ3,Level_SYZbg
 	lhead	plcid_SYZ,Kos_SYZ,plcid_SYZ2,Blk16_SYZ,Blk256_SYZ,bgm_TreasureCaves,palid_SYZ,Col_SYZ,ObjPos_Null,Level_SYZ1,Level_SYZbg
 

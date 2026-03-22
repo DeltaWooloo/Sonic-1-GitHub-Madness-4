@@ -63,7 +63,7 @@ nMaxPSG2			EQU nB6
 	nextenum	SHCTone_02,SHCTone_03,SHCTone_04,sTone_01,sTone_0C
 	nextenum	staTone_0F,smb1Tone,DoleTone_01,DoleTone_02,DoleTone_03,DoleTone_04
 	nextenum	dskTone_01,dskTone_02,ChickenTone_01,ChickenTone_02,ChickenTone_03
-	nextenum	DJTone_01,DJTone_02,DJTone_03,DJTone_04
+	nextenum	DanTone_01,DanTone_02,DanTone_03,DanTone_04
 ; ---------------------------------------------------------------------------
 
 ; Channel IDs for SFX

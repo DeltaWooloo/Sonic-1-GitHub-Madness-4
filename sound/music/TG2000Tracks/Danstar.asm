@@ -1,5444 +1,953 @@
-Danstar_Header:
-	smpsHeaderStartSong 1
-	smpsHeaderVoice	Danstar_Voices
-	smpsHeaderChan	$06,	$03
-	smpsHeaderTempo	$01,	$00
+DanStar_Header:
+	smpsHeaderStartSong 3
+	smpsHeaderVoice		DanStar_Voices
+	smpsHeaderChan		$06, $03
+	smpsHeaderTempo		$02, $10
+;	Given Tempo = 112.50 BPM
+;	Approximated Tempo = 112.50 BPM
 
-	smpsHeaderDAC	Danstar_DAC
-	smpsHeaderFM	Danstar_FM1,	smpsPitch00,	$00
-	smpsHeaderFM	Danstar_FM2,	smpsPitch00,	$00
-	smpsHeaderFM	Danstar_FM3,	smpsPitch00,	$00
-	smpsHeaderFM	Danstar_FM4,	smpsPitch00,	$00
-	smpsHeaderFM	Danstar_FM5,	smpsPitch00,	$00
-	smpsHeaderPSG       Danstar_PSG1,	$00, $00, $00, $00
-	smpsHeaderPSG       Danstar_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       Danstar_PSG3,	$0C, $00, $00, $00
-	dc.b		$00,	$00,	$00,	$00
+	smpsHeaderDAC	DanStar_DAC
+	smpsHeaderFM	DanStar_FM1,	$00, $00
+	smpsHeaderFM	DanStar_FM2,	$00, $00
+	smpsHeaderFM	DanStar_FM3,	$00, $0F
+	smpsHeaderFM	DanStar_FM4,	$00, $03
+	smpsHeaderFM	DanStar_FM5,	$00, $03
+	smpsHeaderPSG	DanStar_PSG1,	$0C, $05, $00, $00
+	smpsHeaderPSG	DanStar_PSG2,	$0C, $0A, $00, $00
+	smpsHeaderPSG	DanStar_PSG3,	$0C, $00, $00, $00
 
-; FM1 Data
-Danstar_FM1:
-	smpsPan		panCentre,	$00
-	dc.b		nRst,	$7F,	$70
-Danstar_Jump01:
-	smpsFMvoice	$02
+DanStar_Voices:
+;	PSG Voice 00 -> DanTone_01
+;	macros:
+;		vol: 15 15 14 13 12 12 11 10 10 9 8 8 7 7 6 5 4 3 2 1 1 0 0 0 0 0 0 0 0 0 0 0
+
+;	FM Voice 01 -> 00: 12_Carnival_Night_Zone_2_3
+	smpsVcAlgorithm		$03
+	smpsVcFeedback		$07
+	smpsVcDetune		$00, $00, $00, $00
+	smpsVcCoarseFreq	$02, $03, $02, $0C
+	smpsVcRateScale		$00, $00, $00, $01
+	smpsVcAttackRate	$1F, $1E, $1C, $19
+	smpsVcAmpMod		$00, $00, $00, $00
+	smpsVcDecayRate1	$07, $08, $04, $0C
+	smpsVcDecayRate2	$04, $03, $03, $02
+	smpsVcDecayLevel	$0D, $0D, $0D, $0E
+	smpsVcReleaseRate	$0F, $0F, $0F, $0F
+	smpsVcTotalLevel	$05, $2A, $2A, $27
+
+;	FM Voice 02 -> 01: 05_labyrinth_zone_7
+	smpsVcAlgorithm		$00
+	smpsVcFeedback		$03
+	smpsVcDetune		$03, $03, $03, $03
+	smpsVcCoarseFreq	$01, $00, $00, $07
+	smpsVcRateScale		$02, $00, $03, $02
+	smpsVcAttackRate	$1C, $1C, $1C, $1E
+	smpsVcAmpMod		$00, $00, $00, $00
+	smpsVcDecayRate1	$01, $04, $06, $0D
+	smpsVcDecayRate2	$05, $03, $0A, $08
+	smpsVcDecayLevel	$02, $03, $0B, $0B
+	smpsVcReleaseRate	$0F, $0F, $0F, $0F
+	smpsVcTotalLevel	$0A, $14, $22, $2C
+
+;	PSG Voice 03 -> DanTone_02
+;	macros:
+;		vol: 15 15 14 13 13 13 12 12 11 11 10 10 10 10 9 9 8 8 7 7 6 6 5 5 4 4 4 3 3 2 1 0
+
+;	FM Voice 04 -> 02: 35_Bonus_Stage_1_Pinball_Machine_121
+	smpsVcAlgorithm		$03
+	smpsVcFeedback		$07
+	smpsVcDetune		$07, $01, $01, $07
+	smpsVcCoarseFreq	$01, $00, $01, $03
+	smpsVcRateScale		$00, $00, $00, $00
+	smpsVcAttackRate	$1F, $1F, $1F, $1F
+	smpsVcAmpMod		$00, $00, $00, $00
+	smpsVcDecayRate1	$02, $0A, $09, $0C
+	smpsVcDecayRate2	$07, $04, $06, $00
+	smpsVcDecayLevel	$0E, $0F, $0E, $01
+	smpsVcReleaseRate	$0F, $0F, $0F, $0F
+	smpsVcTotalLevel	$0E, $13, $26, $21
+
+;	FM Voice 05 -> 03: 04_spring_yard_zone_42
+	smpsVcAlgorithm		$04
+	smpsVcFeedback		$07
+	smpsVcDetune		$03, $05, $05, $03
+	smpsVcCoarseFreq	$00, $00, $02, $01
+	smpsVcRateScale		$01, $01, $01, $01
+	smpsVcAttackRate	$13, $12, $13, $12
+	smpsVcAmpMod		$00, $00, $00, $00
+	smpsVcDecayRate1	$00, $08, $00, $08
+	smpsVcDecayRate2	$00, $04, $00, $04
+	smpsVcDecayLevel	$00, $01, $00, $01
+	smpsVcReleaseRate	$07, $00, $07, $00
+	smpsVcTotalLevel	$0B, $16, $0D, $1A
+
+;	FM Voice 06 -> 04: 36_bonus_stage_2_slot_machine_130
+	smpsVcAlgorithm		$02
+	smpsVcFeedback		$07
+	smpsVcDetune		$00, $07, $02, $03
+	smpsVcCoarseFreq	$01, $03, $05, $01
+	smpsVcRateScale		$02, $00, $00, $01
+	smpsVcAttackRate	$1C, $1F, $1F, $1F
+	smpsVcAmpMod		$00, $00, $00, $00
+	smpsVcDecayRate1	$1E, $04, $05, $08
+	smpsVcDecayRate2	$06, $02, $04, $03
+	smpsVcDecayLevel	$00, $01, $02, $02
+	smpsVcReleaseRate	$0F, $0F, $0F, $0F
+	smpsVcTotalLevel	$08, $1F, $1E, $29
+
+;	FM Voice 07 -> 05: 13_staff_roll_21
+	smpsVcAlgorithm		$04
+	smpsVcFeedback		$05
+	smpsVcDetune		$03, $03, $07, $07
+	smpsVcCoarseFreq	$04, $04, $04, $04
+	smpsVcRateScale		$00, $00, $00, $00
+	smpsVcAttackRate	$1F, $1F, $12, $1F
+	smpsVcAmpMod		$00, $00, $00, $00
+	smpsVcDecayRate1	$00, $00, $00, $00
+	smpsVcDecayRate2	$01, $00, $01, $00
+	smpsVcDecayLevel	$03, $00, $03, $00
+	smpsVcReleaseRate	$0F, $0F, $0F, $0F
+	smpsVcTotalLevel	$14, $17, $14, $16
+
+;	FM Voice 08 -> 06: 13_staff_roll_37
+	smpsVcAlgorithm		$04
+	smpsVcFeedback		$00
+	smpsVcDetune		$00, $07, $07, $03
+	smpsVcCoarseFreq	$09, $07, $02, $07
+	smpsVcRateScale		$00, $00, $00, $00
+	smpsVcAttackRate	$1F, $1F, $1F, $1F
+	smpsVcAmpMod		$00, $00, $00, $00
+	smpsVcDecayRate1	$0D, $07, $0A, $07
+	smpsVcDecayRate2	$00, $00, $00, $00
+	smpsVcDecayLevel	$00, $01, $00, $01
+	smpsVcReleaseRate	$07, $00, $07, $00
+	smpsVcTotalLevel	$0C, $23, $19, $23
+
+;	FM Voice 09 -> 07: 04_spring_yard_zone_53
+	smpsVcAlgorithm		$05
+	smpsVcFeedback		$07
+	smpsVcDetune		$00, $00, $00, $00
+	smpsVcCoarseFreq	$02, $02, $02, $01
+	smpsVcRateScale		$00, $00, $00, $00
+	smpsVcAttackRate	$10, $10, $10, $1F
+	smpsVcAmpMod		$00, $00, $00, $00
+	smpsVcDecayRate1	$1F, $1F, $1F, $07
+	smpsVcDecayRate2	$00, $00, $00, $00
+	smpsVcDecayLevel	$00, $00, $00, $01
+	smpsVcReleaseRate	$0F, $0F, $0F, $0F
+	smpsVcTotalLevel	$1B, $20, $1D, $17
+
+;	PSG Voice 0A -> DanTone_03
+;	macros:
+;		vol: 14 14 14 14 14 14 12 12 12 11 11 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10
+;		duty: 3 3 3 3 3 3 3 3 3 3
+
+;	PSG Voice 0B -> DanTone_04
+;	macros:
+;		vol: 13 13 14 14 14 14 14 15 15 15 15 15 15 15 15 15 15 15 15 15 15 14 14 14 14 14 14 14 14 14 14 13
+
+	; Loop Pattern :  02
+	; End Pattern :  11
+	; End Place :  3F
+
+
+DanStar_FM1:
+	smpsCall DanStar_FM1_00_0_64
+	smpsCall DanStar_FM1_01_0_64
+
+DanStar_FM1_Jump:
+	smpsCall DanStar_FM1_02_0_64
+	smpsCall DanStar_FM1_03_0_64
+	smpsCall DanStar_FM1_02_0_64
+	smpsCall DanStar_FM1_10_0_64
+	smpsCall DanStar_FM1_02_0_64
+	smpsCall DanStar_FM1_03_0_64
+	smpsCall DanStar_FM1_04_0_64
+	smpsCall DanStar_FM1_05_0_64
+	smpsCall DanStar_FM1_06_0_64
+	smpsCall DanStar_FM1_07_0_64
+	smpsCall DanStar_FM1_08_0_64
+	smpsCall DanStar_FM1_09_0_64
+	smpsCall DanStar_FM1_08_0_64
+	smpsCall DanStar_FM1_0A_0_64
+	smpsCall DanStar_FM1_0B_0_64
+	smpsCall DanStar_FM1_0C_0_64
+	smpsJump DanStar_FM1_Jump
+
+DanStar_FM1_00_0_64:
+	smpsSetvoice	$05
+	dc.b nAb2, $01, nG2, $04, nD3, $03, nRst, $05, nA3, $01, $02, nG3, $03, nRst, $05, nAb2
+	dc.b $01, nG2, $04, nD3, $03, nRst, $05, nBb3, $01, nA3, $02, nG3, $03, nRst, $05, nBb3
+	dc.b $01, nA3, $03, nRst, $04, nAb3, $01, nG3, $03, nRst, $04
+	smpsReturn
+
+DanStar_FM1_01_0_64:
+	smpsSetvoice	$05
+	dc.b nAb2, $01, nG2, $04, nCs3, $03, nRst, $05, nBb3, $01, nA3, $02, nG3, $03, nRst, $05
+	dc.b nFs3, nE3, $0B, nRst, $0D, nFs3, $03, nE3, $04, nRst, $01
+	smpsSetvoice	$03
+	dc.b nB4, $03
+	smpsReturn
+
+DanStar_FM1_02_0_64:
+	smpsSetvoice	$03
+	dc.b nRst, $04, $01, nD5, $07, nRst, $04, nB4, nRst, nD5, nRst, nFs5, $05, nE5, $03, nRst
+	dc.b $05, nE5, $03, nRst, $10
+	smpsReturn
+
+DanStar_FM1_03_0_64:
+	dc.b smpsNoAttack, $05
+	smpsSetvoice	$03
+	dc.b nA5, nRst, $01, $01, $04, nA5
+	smpsModSet	$02, $01, $05, $02
+	dc.b smpsNoAttack, $04
+	smpsModOff
+	dc.b nG5, nRst, nG5, $08, nFs5, $04, nRst, nE5
+	smpsModSet	$02, $01, $05, $02
+	dc.b smpsNoAttack, $04
+	smpsModOff
+	dc.b nD5, nRst, $01, nB4, $03
+	smpsReturn
+
+DanStar_FM1_10_0_64:
+	dc.b smpsNoAttack, $3D, nB4, $03
+	smpsReturn
+
+DanStar_FM1_04_0_64:
+	smpsSetvoice	$03
+	dc.b nRst, $04, $01, nD5, $07, nRst, $04, nB4, nRst, nD5, nRst, nFs5, $05, nG5, $03, nRst
+	dc.b $05, nE5, $03, nRst, $10
+	smpsReturn
+
+DanStar_FM1_05_0_64:
+	dc.b smpsNoAttack, $28
+	smpsSetvoice	$06
+	dc.b nA4, $08, nB4, $05, nCs5, nRst, $03, nD5
+	smpsReturn
+
+DanStar_FM1_06_0_64:
+	dc.b smpsNoAttack, $08, nRst, $04, $04, nD5, $0D, nC5, $03, nRst, $05, nC5, $03, nBb4, $08, nA4
+	dc.b nBb4, $04, nRst
+	smpsReturn
+
+DanStar_FM1_07_0_64:
+	dc.b nD5, $0D, nC5, $03, nRst, $08, nA4, $04, nRst, nD5, $0D, nC5, $03, nRst, $10
+	smpsReturn
+
+DanStar_FM1_08_0_64:
+	dc.b nRst, $08, nD5, $04, nRst, nD5, $03, nRst, $02, nD5, $03, nRst, $05, nC5, $03, nRst
+	dc.b $05, nC5, $03, nBb4, $08, nA4, nBb4, $04, nRst
+	smpsReturn
+
+DanStar_FM1_09_0_64:
+	dc.b nD5, $0D, nC5, $03, nRst, $08, nA4, $04, nRst, nF5, $08, nRst, $05, nC5, $08, nRst
+	dc.b $03, nA4, $08
+	smpsReturn
+
+DanStar_FM1_0A_0_64:
+	dc.b nD5, $0D, nC5, $03, nRst, $08, nA4, $04, nRst, nD5, $0D, nC5, $03, nRst, $08, nA4
+	dc.b $03, nRst, $05
+	smpsReturn
+
+DanStar_FM1_0B_0_64:
+	dc.b nG4, $0A, nRst, $03, nA4, $08, nRst, $03, nBb4, $05, nRst, $03, nD5, $0A, nRst, $03
+	dc.b nF5, $09, nRst, $02, nE5, $04, nRst, $01, nF5, $03
+	smpsReturn
+
+DanStar_FM1_0C_0_64:
+	dc.b smpsNoAttack, $02, nRst, nRst, $04, $28, $0D
+	smpsSetvoice	$03
+	dc.b nB4, $03
+	smpsReturn
+
+DanStar_FM2:
+	smpsCall DanStar_FM2_00_0_64
+	smpsCall DanStar_FM2_01_0_64
+
+DanStar_FM2_Jump:
+	smpsCall DanStar_FM2_02_0_64
+	smpsCall DanStar_FM2_03_0_64
+	smpsCall DanStar_FM2_0C_0_64
+	smpsCall DanStar_FM2_03_0_64
+	smpsCall DanStar_FM2_0C_0_64
+	smpsCall DanStar_FM2_03_0_64
+	smpsCall DanStar_FM2_0C_0_64
+	smpsCall DanStar_FM2_06_0_64
+	smpsCall DanStar_FM2_07_0_64
+	smpsCall DanStar_FM2_08_0_64
+	smpsCall DanStar_FM2_07_0_64
+	smpsCall DanStar_FM2_08_0_64
+	smpsCall DanStar_FM2_07_0_64
+	smpsCall DanStar_FM2_09_0_64
+	smpsCall DanStar_FM2_0A_0_64
+	smpsCall DanStar_FM2_0B_0_64
+	smpsJump DanStar_FM2_Jump
+
+DanStar_FM2_00_0_64:
+	smpsSetvoice	$01
+	dc.b nE2, $0D, nE3, $03, nRst, $18, nE2, $08, nE3, $05, nRst, $03, nE2, $05, nRst, $03
+	smpsReturn
+
+DanStar_FM2_01_0_64:
+	smpsSetvoice	$01
+	dc.b nA2, $04, nRst, nA2, nRst, nB2, nRst, nB2, nRst, nC3, nRst, nC3, nRst, $01, $03, nCs3
+	dc.b $04, nRst, nCs3, nRst, $01, nE2, $03
+	smpsReturn
+
+DanStar_FM2_02_0_64:
+	smpsModSet	$00, $01, $FC, $80
+	dc.b nRst, $04, $01
+	smpsSetvoice	$01
+	dc.b nE2, $0B, nE3, $04, nRst, nE2, $05, nRst, $03, nE3, $05, nRst, $03, nE2, $04, nRst
+	dc.b nD3, $05, nE3, $03, nRst, $05, nE2, $03
+	smpsReturn
+
+DanStar_FM2_03_0_64:
+	dc.b nRst, $05
+	smpsSetvoice	$01
+	dc.b nA2, $0B, nB2, $05, nRst, $03, nB2, $05, nRst, $03, nCs3, $05, nRst, $03, nCs3, $08
+	dc.b nA2, $0D, nE2, $03
+	smpsReturn
+
+DanStar_FM2_0C_0_64:
+	dc.b nRst, $05, nE2, $0B
+	smpsSetvoice	$01
+	dc.b nE3, $04, nRst, nE2, $05, nRst, $03, nE3, $05, nRst, $03, nE2, $04, nRst, nD3, $05
+	dc.b nE3, $03, nRst, $05, nE2, $03
+	smpsReturn
+
+DanStar_FM2_06_0_64:
+	smpsSetvoice	$01
+	dc.b nA2, $04, nRst, nA2, nRst, nA2, nRst, nA2, nRst, nA2, nRst, $19, nBb2, $03
+	smpsReturn
+
+DanStar_FM2_07_0_64:
+	smpsSetvoice	$01
+	dc.b nRst, $05, nBb2, $0B, nC3, $04, nRst, nBb2, nRst, nA2, nRst, $0C, nBb2, $05, nA2, $08
+	dc.b nC3, $03
+	smpsReturn
+
+DanStar_FM2_08_0_64:
+	smpsSetvoice	$01
+	dc.b nRst, $05, nC3, $0B, $04, nRst, nBb2, nRst, nA2, nRst, nF2, nRst, nG2, $05, nA2, $08
+	dc.b nBb2, $03
+	smpsReturn
+
+DanStar_FM2_09_0_64:
+	smpsSetvoice	$01
+	dc.b nRst, $05, nC3, $0B, $04, nRst, nBb2, nRst, nA2, nRst, nF2, nRst, nG2, $05, nF2, $08
+	dc.b nE2, $03
+	smpsReturn
+
+DanStar_FM2_0A_0_64:
+	dc.b nRst, $05
+	smpsSetvoice	$01
+	dc.b nE2, $0B, $04, nRst, nE2, nRst, nC3, $0C, nRst, $04, nC3, $0D, nF2, $03
+	smpsReturn
+
+DanStar_FM2_0B_0_64:
+	dc.b nRst, $3D
+	smpsSetvoice	$01
+	dc.b nE2, $03
+	smpsReturn
+
+DanStar_FM3:
+	smpsCall DanStar_FM3_00_0_64
+	smpsCall DanStar_FM3_01_0_64
+
+DanStar_FM3_Jump:
+	smpsCall DanStar_FM3_02_0_64_70
+	smpsCall DanStar_FM3_03_0_64
+	smpsCall DanStar_FM3_02_0_64
+	smpsCall DanStar_FM3_10_0_64
+	smpsCall DanStar_FM3_02_0_64
+	smpsCall DanStar_FM3_03_0_64
+	smpsCall DanStar_FM3_04_0_64
+	smpsCall DanStar_FM3_05_0_64
+	smpsCall DanStar_FM3_06_0_64
+	smpsCall DanStar_FM3_07_0_64
+	smpsCall DanStar_FM3_08_0_64
+	smpsCall DanStar_FM3_09_0_64
+	smpsCall DanStar_FM3_06_0_64
+	smpsCall DanStar_FM3_0A_0_64
+	smpsCall DanStar_FM3_0B_0_64
+	smpsCall DanStar_FM3_0C_0_64
+	smpsAlterVol	$F9
+	smpsJump DanStar_FM3_Jump
+
+DanStar_FM3_00_0_64:
+	dc.b smpsNoAttack, $04
+	smpsSetvoice	$05
+	smpsPan		panRight, $00
+	dc.b nG2, $05, nD3, $03, nRst, $05, nA3, $03, nG3, nRst, $05, nG2, nD3, $03, nRst, $05
+	dc.b nA3, $03, nG3, nRst, $05, nA3, $04, nRst, nG3
+	smpsReturn
+
+DanStar_FM3_01_0_64:
+	dc.b smpsNoAttack, $04, nG2, $05, nCs3, $03, nRst, $05, nA3, $03, nG3, nRst, $05, nFs3, nE3, $18
+	dc.b nFs3, $03, nE3, $04
+	smpsReturn
+
+DanStar_FM3_02_0_64_70:
+	dc.b smpsNoAttack, $04
+	smpsSetvoice	$03
 	smpsAlterVol	$07
-	dc.b		nB3,	$08,	nRst,	$07,	nD4,	$08,	nRst,	$07
-	dc.b		nB3,	$08,	nRst,	$07,	nD4,	$08,	nRst,	$07
-	dc.b		nFs4,	$0A,	nE4,	$05,	nRst,	$0A,	nE4,	$05
-	dc.b		nRst,	$2D,	nA4,	$08,	nRst,	$04,	nAb4,	$03
-	dc.b		nA4,	$0F,	nG4,	$08,	nRst,	$07,	nG4,	$0F
-	dc.b		nFs4,	$08,	nRst,	$07,	nE4,	$0F,	nD4,	$08
-	dc.b		nRst,	$07,	nB3,	$08,	nRst,	$07,	nD4,	$08
-	dc.b		nRst,	$07,	nB3,	$08,	nRst,	$07,	nD4,	$08
-	dc.b		nRst,	$07,	nFs4,	$0A,	nE4,	$05,	nRst,	$0A
-	dc.b		nE4,	$05,	nRst,	$7F,	$17,	nB3,	$08,	nRst
-	dc.b		$07,	nD4,	$08,	nRst,	$07,	nB3,	$08,	nRst
-	dc.b		$07,	nD4,	$08,	nRst,	$07,	nFs4,	$0A,	nE4
-	dc.b		$05,	nRst,	$0A,	nE4,	$05,	nRst,	$2D,	nA4
-	dc.b		$08,	nRst,	$04,	nAb4,	$03,	nA4,	$0F,	nG4
-	dc.b		$08,	nRst,	$07,	nG4,	$0F,	nFs4,	$08,	nRst
-	dc.b		$07,	nE4,	$0F,	nD4,	$08,	nRst,	$07,	nB3
-	dc.b		$08,	nRst,	$07,	nD4,	$08,	nRst,	$07,	nB3
-	dc.b		$08,	nRst,	$07,	nD4,	$08,	nRst,	$07,	nFs4
-	dc.b		$0A,	nG4,	$05,	nRst,	$0A,	nE4,	$05,	nRst
-	dc.b		$69
-	smpsFMvoice	$04
-	smpsAlterVol	$01
-	dc.b		nA5,	$0F,	nB5,	nCs6,	nD6,	$17,	nRst,	$07
-	dc.b		nD6,	$19,	nC6,	$05,	nRst,	$0A,	nC6,	$05
-	dc.b		nBb5,	$0F,	nA5,	nBb5,	$08,	nRst,	$06,	nC6
-	dc.b		$01,	nD6,	$19,	nC6,	$05,	nRst,	$0F,	nA5
-	dc.b		$08,	nRst,	$07,	nD6,	$19,	nC6,	$05,	nRst
-	dc.b		$2D,	nD6,	$08,	nRst,	$07,	nD6,	$06,	nRst
-	dc.b		$04,	nD6,	$05,	nRst,	$0A,	nC6,	$05,	nRst
-	dc.b		$0A,	nC6,	$05,	nBb5,	$0F,	nA5,	nBb5,	$08
-	dc.b		nRst,	$07,	nD6,	$19,	nC6,	$05,	nRst,	$0F
-	dc.b		nA5,	$08,	nRst,	$07,	nF6,	$0F,	nRst,	$0A
-	dc.b		nC6,	$0F,	nRst,	$05,	nA5,	$0F,	nD6,	$17
-	dc.b		nRst,	$07,	nD6,	$19,	nC6,	$05,	nRst,	$0A
-	dc.b		nC6,	$05,	nBb5,	$0F,	nA5,	nBb5,	$08,	nRst
-	dc.b		$05,	nC6,	$02,	nD6,	$19,	nC6,	$05,	nRst
-	dc.b		$0F,	nA5,	$08,	nRst,	$07,	nD6,	$19,	nC6
-	dc.b		$05,	nRst,	$0F,	nA5,	$06,	nRst,	$09,	nG5
-	dc.b		$13,	nRst,	$06,	nA5,	$0F,	nRst,	$05,	nBb5
-	dc.b		$0A,	nRst,	$05,	nD6,	$13,	nRst,	$04,	nE6
-	dc.b		$02,	nF6,	$11,	nRst,	$03,	nE6,	$0A,	nRst
-	dc.b		$05,	nF6,	$5A,	nRst,	$1E
-	smpsAlterVol	$F8
-	smpsPan		panCentre,	$00
-	smpsJump	Danstar_Jump01
+	dc.b nB4, nRst, nD5, nRst, nB4, nRst, nD5, nRst, nFs5, $05, nE5, $03, nRst, $05, nE5, $03
+	dc.b nRst, $0C
+	smpsReturn
 
-; FM2 Data
-Danstar_FM2:
-	smpsFMvoice	$00
-	smpsAlterVol	$04
-	smpsPan		panCentre,	$00
-	dc.b		nE2,	$18,	nE3,	$05,	nRst,	$2D,	nE2,	$0F
-	dc.b		nE3,	$0A,	nRst,	$05,	nE2,	$0A,	nRst,	$05
-	dc.b		nA2,	$19,	nA3,	$05,	nRst,	$2D,	nA2,	$0A
-	dc.b		nRst,	$05,	nA3,	$08,	smpsNoAttack
-	smpsAlterNote	$1D
-	dc.b		nAb3,	$01,	smpsNoAttack
-	smpsAlterNote	$FD
-	dc.b		nAb3,	$01,	smpsNoAttack
-	smpsAlterNote	$16
-	dc.b		nG3,	smpsNoAttack
-	smpsAlterNote	$F6
-	dc.b		nG3,	$01,	smpsNoAttack
-	smpsAlterNote	$0D
-	dc.b		nFs3,	smpsNoAttack
-	smpsAlterNote	$ED
-	dc.b		nFs3,	$01,	smpsNoAttack
-	smpsAlterNote	$00
-	dc.b		nF3,	smpsNoAttack
-	smpsAlterNote	$F0
-	dc.b		nE3,	smpsNoAttack
-	smpsAlterNote	$FD
-	dc.b		nEb3,	smpsNoAttack
-	smpsAlterNote	$08
-	dc.b		nD3,	smpsNoAttack
-	smpsAlterNote	$11
-	dc.b		nCs3,	smpsNoAttack
-	smpsAlterNote	$F1
-	dc.b		nCs3,	$02,	smpsNoAttack
-	smpsAlterNote	$00
-	dc.b		nC3,	$01,	smpsNoAttack
-	smpsAlterNote	$08
-	dc.b		nB2,	smpsNoAttack
-	smpsAlterNote	$E8
-	dc.b		nB2,	$01,	smpsNoAttack
-	smpsAlterNote	$0C
-	dc.b		nBb2,	smpsNoAttack
-	smpsAlterNote	$EC
-	dc.b		nBb2,	$01,	smpsNoAttack
-	smpsAlterNote	$0C
-	dc.b		nA2,	smpsNoAttack
-	smpsAlterNote	$EC
-	dc.b		nA2,	$01,	smpsNoAttack
-	smpsAlterNote	$09
-	dc.b		nAb2,	smpsNoAttack
-	smpsAlterNote	$E9
-	dc.b		nAb2,	$01
-Danstar_Jump02:
-	smpsAlterNote	$00
-	dc.b		nE3,	$0F,	nE2,	$0A,	nE3,	$05,	nRst,	$0A
-	dc.b		nE2,	$05,	nE3,	$0A,	nRst,	$0F,	nE2,	nE3
-	dc.b		$05,	nRst,	$0A,	nE3,	$05,	nE2,	$0F,	nA2
-	dc.b		$0A,	nRst,	$05,	nA2,	$0F,	nB2,	$0A,	nRst
-	dc.b		$05,	nB2,	$0F,	nCs3,	$0A,	nRst,	$05,	nCs3
-	dc.b		$0A,	nCs3,	$05,	nRst,	$0A,	nA2,	$14,	nE3
-	dc.b		$0F,	nE2,	$0A,	nE3,	$05,	nRst,	$0A,	nE2
-	dc.b		$05,	nE3,	$0A,	nRst,	$0F,	nE2,	nE3,	$05
-	dc.b		nRst,	$0A,	nE3,	$05,	nE2,	$0F,	nA2,	$0A
-	dc.b		nRst,	$05,	nA2,	$0F,	nB2,	$0A,	nRst,	$05
-	dc.b		nB2,	$0F,	nCs3,	$0A,	nRst,	$05,	nCs3,	$0A
-	dc.b		nCs3,	$05,	nRst,	$0A,	nA2,	$14,	nE3,	$0F
-	dc.b		nE2,	$0A,	nE3,	$05,	nRst,	$0A,	nE2,	$0F
-	dc.b		nE3,	$05,	nRst,	$0A,	nE2,	$05,	nE3,	$0A
-	dc.b		nE2,	$05,	nRst,	$0A,	nE3,	$0F,	nE2,	$05
-	dc.b		nA2,	$0A,	nRst,	$05,	nA2,	$0F,	nB2,	$0A
-	dc.b		nRst,	$05,	nB2,	$0F,	nCs3,	$0A,	nRst,	$05
-	dc.b		nCs3,	$0A,	nCs3,	$05,	nRst,	$0A,	nA2,	$14
-	dc.b		nE3,	$0F,	nE2,	$0A,	nE3,	$05,	nRst,	$0A
-	dc.b		nE2,	$0F,	nE3,	nE2,	nE3,	$05,	nRst,	$0A
-	dc.b		nE3,	$05,	nE2,	$0F,	nA2,	$4B,	nE3,	$0F
-	dc.b		nA3,	nA2,	nG2,	nG3,	$0A,	nG2,	$05,	nRst
-	dc.b		$0A,	nG2,	$05,	nG3,	$0F,	nC3,	$19,	nC4
-	dc.b		$05,	nRst,	$0A,	nC4,	$05,	nC3,	$0F,	nF3
-	dc.b		nF4,	$06,	nRst,	$04,	nE2,	$0F,	nE3,	$05
-	dc.b		nRst,	$0A,	nD2,	$0F,	nD2,	$05,	nD2,	$0A
-	dc.b		nD3,	$05,	nRst,	$0A,	nD3,	$05,	nA2,	$0F
-	dc.b		nG2,	nG3,	$0A,	nG2,	$05,	nRst,	$0A,	nG2
-	dc.b		$05,	nG3,	$0F,	nC3,	nC4,	$0A,	nC3,	$05
-	dc.b		nRst,	$0A,	nC4,	$05,	nC3,	$0F,	nF2,	nF3
-	dc.b		$08,	nRst,	$07,	nF2,	$0F,	nF3,	nD2,	nD3
-	dc.b		$08,	nRst,	$07,	nA2,	$0F,	nA3,	nG2,	nG3
-	dc.b		$0A,	nG2,	$05,	nRst,	$0A,	nG2,	$05,	nG3
-	dc.b		$0F,	nC3,	$19,	nC4,	$05,	nRst,	$0A,	nC4
-	dc.b		$05,	nC3,	$0F,	nF3,	nF4,	$06,	nRst,	$04
-	dc.b		nE2,	$0F,	nE3,	$05,	nRst,	$0A,	nD2,	$0F
-	dc.b		nD2,	$05,	nD2,	$0A,	nD3,	$05,	nRst,	$0A
-	dc.b		nD3,	$05,	nA2,	$0F,	nG2,	nG3,	$0A,	nG2
-	dc.b		$05,	nRst,	$0A,	nG2,	$05,	nG3,	$0F,	nC3
-	dc.b		nC4,	$0A,	nC3,	$05,	nRst,	$0A,	nC4,	$05
-	dc.b		nC3,	$0F,	nF4,	$17,	nEb3,	$16,	nE3,	$0F
-	dc.b		nF3,	$08,	smpsNoAttack
-	smpsAlterNote	$10
-	dc.b		nE3,	$01,	smpsNoAttack
-	smpsAlterNote	$F0
-	dc.b		nE3,	$01,	smpsNoAttack
-	smpsAlterNote	$FD
-	dc.b		nEb3,	smpsNoAttack
-	smpsAlterNote	$08
-	dc.b		nD3,	smpsNoAttack
-	smpsAlterNote	$F1
-	dc.b		nCs3,	$02,	smpsNoAttack
-	smpsAlterNote	$00
-	dc.b		nC3,	$01,	nA2,	$0F,	nA3,	nA2,	$08,	smpsNoAttack
-	smpsAlterNote	$1D
-	dc.b		nAb2,	$01,	smpsNoAttack
-	smpsAlterNote	$FD
-	dc.b		nAb2,	$01,	smpsNoAttack
-	smpsAlterNote	$16
-	dc.b		nG2,	smpsNoAttack
-	smpsAlterNote	$F6
-	dc.b		nG2,	$01,	smpsNoAttack
-	smpsAlterNote	$ED
-	dc.b		nFs2,	smpsNoAttack
-	smpsAlterNote	$00
-	dc.b		nF2,	smpsNoAttack
-	smpsAlterNote	$10
-	dc.b		nE2
-	smpsPan		panCentre,	$00
-	smpsAlterNote	$E9
-	smpsJump	Danstar_Jump02
+DanStar_FM3_03_0_64:
+	dc.b smpsNoAttack, $0C
+	smpsSetvoice	$03
+	dc.b nA5, $04, nRst, nA5, $08, nG5, $04, nRst, nG5, $08, nFs5, $04, nRst, nE5, $08, nD5
+	dc.b $04
+	smpsReturn
 
-; FM3 Data
-Danstar_FM3:
-	smpsPan		panCentre,	$00
-	dc.b		nRst,	$7F,	$70
-Danstar_Jump03:
-	dc.b		nRst,	$08
-	smpsFMvoice	$02
-	smpsAlterVol	$15
-	dc.b		nB3,	$07,	nRst,	$08,	nD4,	$07,	nRst,	$08
-	dc.b		nB3,	$07,	nRst,	$08,	nD4,	$07,	nRst,	$08
-	dc.b		nFs4,	$09,	nE4,	$06,	nRst,	$09,	nE4,	$06
-	dc.b		nRst,	$2D,	nA4,	$07,	nRst,	$08,	nA4,	$0F
-	dc.b		nG4,	$07,	nRst,	$08,	nG4,	$0F,	nFs4,	$07
-	dc.b		nRst,	$08,	nE4,	$0F,	nD4,	nB3,	$07,	nRst
-	dc.b		$08,	nD4,	$07,	nRst,	$08,	nB3,	$07,	nRst
-	dc.b		$08,	nD4,	$07,	nRst,	$08,	nFs4,	$09,	nE4
-	dc.b		$06,	nRst,	$09,	nE4,	$06,	nRst,	$7F,	$17
-	dc.b		nB3,	$07,	nRst,	$08,	nD4,	$07,	nRst,	$08
-	dc.b		nB3,	$07,	nRst,	$08,	nD4,	$07,	nRst,	$08
-	dc.b		nFs4,	$09,	nE4,	$06,	nRst,	$09,	nE4,	$06
-	dc.b		nRst,	$2D,	nA4,	$07,	nRst,	$08,	nA4,	$0F
-	dc.b		nG4,	$07,	nRst,	$08,	nG4,	$0F,	nFs4,	$07
-	dc.b		nRst,	$08,	nE4,	$0F,	nD4,	nB3,	$07,	nRst
-	dc.b		$08,	nD4,	$07,	nRst,	$08,	nB3,	$07,	nRst
-	dc.b		$08,	nD4,	$07,	nRst,	$08,	nFs4,	$09,	nG4
-	dc.b		$06,	nRst,	$09,	nE4,	$06,	nRst,	$69
-	smpsFMvoice	$04
-	smpsAlterVol	$01
-	dc.b		nA5,	$0F,	nB5,	nCs6,	nD6,	$16,	nRst,	$08
-	dc.b		nD6,	$18,	nC6,	$06,	nRst,	$09,	nC6,	$06
-	dc.b		nBb5,	$0F,	nA5,	nBb5,	nD6,	$18,	nC6,	$06
-	dc.b		nRst,	$0F,	nA5,	$07,	nRst,	$08,	nD6,	$18
-	dc.b		nC6,	$06,	nRst,	$2D,	nD6,	$07,	nRst,	$08
-	dc.b		nD6,	$05,	nRst,	$04,	nD6,	$06,	nRst,	$09
-	dc.b		nC6,	$06,	nRst,	$09,	nC6,	$06,	nBb5,	$0F
-	dc.b		nA5,	nBb5,	nD6,	$18,	nC6,	$06,	nRst,	$0F
-	dc.b		nA5,	$07,	nRst,	$08,	nF6,	$18,	nC6,	$0F
-	dc.b		nRst,	$06,	nA5,	$0F,	nD6,	$16,	nRst,	$08
-	dc.b		nD6,	$18,	nC6,	$06,	nRst,	$09,	nC6,	$06
-	dc.b		nBb5,	$0F,	nA5,	nBb5,	nD6,	$18,	nC6,	$06
-	dc.b		nRst,	$0F,	nA5,	$07,	nRst,	$08,	nD6,	$18
-	dc.b		nC6,	$06,	nRst,	$0F,	nA5,	$05,	nRst,	$0A
-	dc.b		nG5,	$13,	nRst,	$05,	nA5,	$0F,	nRst,	$06
-	dc.b		nBb5,	$09,	nRst,	$06,	nD6,	$13,	nRst,	$05
-	dc.b		nF6,	$11,	nRst,	$04,	nE6,	$0F,	nF6,	$5A
-	dc.b		nRst,	$16
-	smpsAlterVol	$EA
-	smpsPan		panCentre,	$00
-	smpsJump	Danstar_Jump03
+DanStar_FM3_02_0_64:
+	dc.b smpsNoAttack, $04
+	smpsSetvoice	$03
+	dc.b nB4, nRst, nD5, nRst, nB4, nRst, nD5, nRst, nFs5, $05, nE5, $03, nRst, $05, nE5, $03
+	dc.b nRst, $0C
+	smpsReturn
 
-; FM4 Data
-Danstar_FM4:
-	smpsFMvoice	$01
-	smpsAlterVol	$06
-	smpsPan		panCentre,	$00
-	dc.b		nG4,	$09,	nD5,	$05,	nRst,	$0A,	nA5,	$05
-	dc.b		nG5,	$06,	nRst,	$09,	nG4,	$0A,	nD5,	$05
-	dc.b		nRst,	$0A,	nA5,	$05,	nG5,	$06,	nRst,	$09
-	dc.b		nA5,	$08,	nRst,	$07,	nG5,	$08,	nRst,	$07
-	dc.b		nG4,	$0A,	nCs5,	$05,	nRst,	$0A,	nA5,	$05
-	dc.b		nG5,	$06,	nRst,	$09,	nFs5,	$0A,	nE5,	$2D
-	dc.b		nFs5,	$05,	nE5,	$08,	nRst,	$07
-Danstar_Jump04:
-	dc.b		nRst,	$0F
-	smpsFMvoice	$03
-	smpsAlterVol	$0E
-	smpsPan		panRight,	$00
-	dc.b		nB5,	$06,	nRst,	$0B
-	smpsAlterVol	$10
-	dc.b		nB5,	$08
-	smpsAlterVol	$F0
-	dc.b		nB5,	$05,	nRst,	$08
-	smpsAlterVol	$10
-	dc.b		nB5,	$07
-	smpsAlterVol	$F0
-	dc.b		nB5,	$06,	nRst,	$0B
-	smpsAlterVol	$10
-	dc.b		nB5,	$08
-	smpsAlterVol	$F0
-	dc.b		nB5,	$05,	nRst,	$08
-	smpsAlterVol	$10
-	dc.b		nB5,	$07
-	smpsAlterVol	$F0
-	dc.b		nB5,	$06,	nRst,	$11
-	smpsAlterVol	$10
-	dc.b		nB5,	$07
-	smpsAlterVol	$F0
-	dc.b		nA5,	$06,	nRst,	$04,	nA5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nA5,	$08
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nA5,	$08
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nA5,	$08
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nA5,	$08
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nG5,	$0F,	nA5,	$08,	nRst,	$07
-	smpsAlterVol	$10
-	dc.b		nA5,	$0F
-	smpsAlterVol	$F0
-	dc.b		nB5,	$06,	nRst,	$0B
-	smpsAlterVol	$10
-	dc.b		nB5,	$08
-	smpsAlterVol	$F0
-	dc.b		nB5,	$05,	nRst,	$08
-	smpsAlterVol	$10
-	dc.b		nB5,	$07
-	smpsAlterVol	$F0
-	dc.b		nB5,	$06,	nRst,	$0B
-	smpsAlterVol	$10
-	dc.b		nB5,	$08
-	smpsAlterVol	$F0
-	dc.b		nB5,	$05,	nRst,	$08
-	smpsAlterVol	$10
-	dc.b		nB5,	$07
-	smpsAlterVol	$F0
-	dc.b		nB5,	$06,	nRst,	$11
-	smpsAlterVol	$10
-	dc.b		nB5,	$07
-	smpsAlterVol	$F0
-	dc.b		nA5,	$06,	nRst,	$04,	nA5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nA5,	$08
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nA5,	$08
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nA5,	$08
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nA5,	$08
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nB5,	$0F,	nA5,	$08,	nRst,	$07
-	smpsAlterVol	$10
-	dc.b		nA5,	$0F
-	smpsAlterVol	$F0
-	dc.b		nB5,	$06,	nRst,	$0B
-	smpsAlterVol	$10
-	dc.b		nB5,	$08
-	smpsAlterVol	$F0
-	dc.b		nB5,	$05,	nRst,	$08
-	smpsAlterVol	$10
-	dc.b		nB5,	$07
-	smpsAlterVol	$F0
-	dc.b		nB5,	$06,	nRst,	$0B
-	smpsAlterVol	$10
-	dc.b		nB5,	$08
-	smpsAlterVol	$F0
-	dc.b		nB5,	$05,	nRst,	$08
-	smpsAlterVol	$10
-	dc.b		nB5,	$07
-	smpsAlterVol	$F0
-	dc.b		nB5,	$06,	nRst,	$11
-	smpsAlterVol	$10
-	dc.b		nB5,	$07
-	smpsAlterVol	$F0
-	dc.b		nA5,	$06,	nRst,	$04,	nA5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nA5,	$08
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nA5,	$08
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nA5,	$08
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nA5,	$08
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nG5,	$0F,	nA5,	$08,	nRst,	$07
-	smpsAlterVol	$10
-	dc.b		nA5,	$0F
-	smpsAlterVol	$F0
-	dc.b		nB5,	$06,	nRst,	$0B
-	smpsAlterVol	$10
-	dc.b		nB5,	$08
-	smpsAlterVol	$F0
-	dc.b		nB5,	$05,	nRst,	$08
-	smpsAlterVol	$10
-	dc.b		nB5,	$07
-	smpsAlterVol	$F0
-	dc.b		nB5,	$06,	nRst,	$0B
-	smpsAlterVol	$10
-	dc.b		nB5,	$08
-	smpsAlterVol	$F0
-	dc.b		nB5,	$05,	nRst,	$08
-	smpsAlterVol	$10
-	dc.b		nB5,	$07
-	smpsAlterVol	$F0
-	dc.b		nB5,	$06,	nRst,	$11
-	smpsAlterVol	$10
-	dc.b		nB5,	$07
-	smpsAlterVol	$F0
-	dc.b		nA5,	$06,	nRst,	$04,	nA5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nA5,	$08
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nA5,	$08
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nG5,	$1E,	nA5,	nBb5,	$3C,	nC6
-	dc.b		nD6,	$06,	nRst,	$09
-	smpsAlterVol	$10
-	dc.b		nD6,	$0A
-	smpsAlterVol	$F0
-	dc.b		nC6,	$05,	nRst,	$0A
-	smpsAlterVol	$10
-	dc.b		nC6,	$05,	nRst,	$0F
-	smpsAlterVol	$F0
-	dc.b		nD6,	$06,	nRst,	$09
-	smpsAlterVol	$10
-	dc.b		nD6,	$0A
-	smpsAlterVol	$F0
-	dc.b		nC6,	$05,	nRst,	$0A
-	smpsAlterVol	$10
-	dc.b		nC6,	$05,	nRst,	$0F
-	smpsAlterVol	$F0
-	dc.b		nBb5,	$3C,	nC6,	nD6,	$06,	nRst,	$09
-	smpsAlterVol	$10
-	dc.b		nD6,	$0A
-	smpsAlterVol	$F0
-	dc.b		nC6,	$05,	nRst,	$0A
-	smpsAlterVol	$10
-	dc.b		nC6,	$05
-	smpsAlterVol	$F0
-	dc.b		nC6,	$06,	nRst,	$04
-	smpsAlterVol	$10
-	dc.b		nC6,	$05
-	smpsAlterVol	$F0
-	dc.b		nA5,	$17,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nA5,	$05
-	smpsAlterVol	$F0
-	dc.b		nC6,	$17,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nC6,	$05
-	smpsAlterVol	$F0
-	dc.b		nBb5,	$3C,	nC6,	nD6,	$06,	nRst,	$09
-	smpsAlterVol	$10
-	dc.b		nD6,	$0A
-	smpsAlterVol	$F0
-	dc.b		nC6,	$05,	nRst,	$0A
-	smpsAlterVol	$10
-	dc.b		nC6,	$05,	nRst,	$0F
-	smpsAlterVol	$F0
-	dc.b		nD6,	$06,	nRst,	$09
-	smpsAlterVol	$10
-	dc.b		nD6,	$0A
-	smpsAlterVol	$F0
-	dc.b		nC6,	$05,	nRst,	$0A
-	smpsAlterVol	$10
-	dc.b		nC6,	$05,	nRst,	$0F
-	smpsAlterVol	$F0
-	dc.b		nBb4,	$3C,	nBb5,	nF6,	$06,	nRst,	$09
-	smpsAlterVol	$10
-	dc.b		nF6,	$08
-	smpsAlterVol	$F0
-	dc.b		nF6,	$05,	nRst,	$0A
-	smpsAlterVol	$10
-	dc.b		nF6,	$07
-	smpsAlterVol	$F0
-	dc.b		nF6,	$06,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nF6,	$07
-	smpsAlterVol	$F0
-	dc.b		nF6,	$06,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nF6,	$07,	nRst,	$2D
-	smpsFMvoice	$01
-	smpsAlterVol	$E2
-	smpsPan		panCentre,	$00
-	smpsJump	Danstar_Jump04
+DanStar_FM3_10_0_64:
+	dc.b smpsNoAttack, $40
+	smpsReturn
 
-; FM5 Data
-Danstar_FM5:
-	smpsPan		panCentre,	$00
-	dc.b		nRst,	$07
-	smpsFMvoice	$01
-	smpsAlterVol	$14
-	smpsPan		panRight,	$00
-	dc.b		nG4,	$09,	nD5,	$06,	nRst,	$09,	nA5,	$06
-	dc.b		nG5,	nRst,	$09,	nG4,	nD5,	$06,	nRst,	$09
-	dc.b		nA5,	$06,	nG5,	nRst,	$09,	nA5,	$07,	nRst
-	dc.b		$08,	nG5,	$0F,	nG4,	$09,	nCs5,	$06,	nRst
-	dc.b		$09,	nA5,	$06,	nG5,	nRst,	$09,	nFs5,	nE5
-	dc.b		$2D,	nFs5,	$06,	nE5,	$07
-Danstar_Jump05:
-	dc.b		nRst,	$0F
-	smpsFMvoice	$03
-	smpsPan		panLeft,	$00
-	dc.b		nG5,	$06,	nRst,	$0B
-	smpsAlterVol	$10
-	dc.b		nG5,	$08
-	smpsAlterVol	$F0
-	dc.b		nG5,	$05,	nRst,	$08
-	smpsAlterVol	$10
-	dc.b		nG5,	$07
-	smpsAlterVol	$F0
-	dc.b		nG5,	$06,	nRst,	$0B
-	smpsAlterVol	$10
-	dc.b		nG5,	$08
-	smpsAlterVol	$F0
-	dc.b		nG5,	$05,	nRst,	$08
-	smpsAlterVol	$10
-	dc.b		nG5,	$07
-	smpsAlterVol	$F0
-	dc.b		nG5,	$06,	nRst,	$11
-	smpsAlterVol	$10
-	dc.b		nG5,	$07
-	smpsAlterVol	$F0
-	dc.b		nE5,	$06,	nRst,	$04,	nE5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nE5,	$08
-	smpsAlterVol	$F0
-	dc.b		nE5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nE5,	$08
-	smpsAlterVol	$F0
-	dc.b		nE5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nE5,	$08
-	smpsAlterVol	$F0
-	dc.b		nE5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nE5,	$08
-	smpsAlterVol	$F0
-	dc.b		nE5,	$05,	nD5,	$0F,	nE5,	$08,	nRst,	$07
-	smpsAlterVol	$10
-	dc.b		nE5,	$0F
-	smpsAlterVol	$F0
-	dc.b		nG5,	$06,	nRst,	$0B
-	smpsAlterVol	$10
-	dc.b		nG5,	$08
-	smpsAlterVol	$F0
-	dc.b		nG5,	$05,	nRst,	$08
-	smpsAlterVol	$10
-	dc.b		nG5,	$07
-	smpsAlterVol	$F0
-	dc.b		nG5,	$06,	nRst,	$0B
-	smpsAlterVol	$10
-	dc.b		nG5,	$08
-	smpsAlterVol	$F0
-	dc.b		nG5,	$05,	nRst,	$08
-	smpsAlterVol	$10
-	dc.b		nG5,	$07
-	smpsAlterVol	$F0
-	dc.b		nG5,	$06,	nRst,	$11
-	smpsAlterVol	$10
-	dc.b		nG5,	$07
-	smpsAlterVol	$F0
-	dc.b		nE5,	$06,	nRst,	$04,	nE5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nE5,	$08
-	smpsAlterVol	$F0
-	dc.b		nE5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nE5,	$08
-	smpsAlterVol	$F0
-	dc.b		nE5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nE5,	$08
-	smpsAlterVol	$F0
-	dc.b		nE5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nE5,	$08
-	smpsAlterVol	$F0
-	dc.b		nE5,	$05,	nE5,	$0F,	nE5,	$08,	nRst,	$07
-	smpsAlterVol	$10
-	dc.b		nE5,	$0F
-	smpsAlterVol	$F0
-	dc.b		nG5,	$06,	nRst,	$0B
-	smpsAlterVol	$10
-	dc.b		nG5,	$08
-	smpsAlterVol	$F0
-	dc.b		nG5,	$05,	nRst,	$08
-	smpsAlterVol	$10
-	dc.b		nG5,	$07
-	smpsAlterVol	$F0
-	dc.b		nG5,	$06,	nRst,	$0B
-	smpsAlterVol	$10
-	dc.b		nG5,	$08
-	smpsAlterVol	$F0
-	dc.b		nG5,	$05,	nRst,	$08
-	smpsAlterVol	$10
-	dc.b		nG5,	$07
-	smpsAlterVol	$F0
-	dc.b		nG5,	$06,	nRst,	$11
-	smpsAlterVol	$10
-	dc.b		nG5,	$07
-	smpsAlterVol	$F0
-	dc.b		nE5,	$06,	nRst,	$04,	nE5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nE5,	$08
-	smpsAlterVol	$F0
-	dc.b		nE5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nE5,	$08
-	smpsAlterVol	$F0
-	dc.b		nE5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nE5,	$08
-	smpsAlterVol	$F0
-	dc.b		nE5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nE5,	$08
-	smpsAlterVol	$F0
-	dc.b		nE5,	$05,	nD5,	$0F,	nE5,	$08,	nRst,	$07
-	smpsAlterVol	$10
-	dc.b		nE5,	$0F
-	smpsAlterVol	$F0
-	dc.b		nG5,	$06,	nRst,	$0B
-	smpsAlterVol	$10
-	dc.b		nG5,	$08
-	smpsAlterVol	$F0
-	dc.b		nG5,	$05,	nRst,	$08
-	smpsAlterVol	$10
-	dc.b		nG5,	$07
-	smpsAlterVol	$F0
-	dc.b		nG5,	$06,	nRst,	$0B
-	smpsAlterVol	$10
-	dc.b		nG5,	$08
-	smpsAlterVol	$F0
-	dc.b		nG5,	$05,	nRst,	$08
-	smpsAlterVol	$10
-	dc.b		nG5,	$07
-	smpsAlterVol	$F0
-	dc.b		nG5,	$06,	nRst,	$11
-	smpsAlterVol	$10
-	dc.b		nG5,	$07
-	smpsAlterVol	$F0
-	dc.b		nE5,	$06,	nRst,	$04,	nE5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nE5,	$08
-	smpsAlterVol	$F0
-	dc.b		nE5,	$05,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nE5,	$08
-	smpsAlterVol	$F0
-	dc.b		nE5,	$05,	nD5,	$1E,	nE5,	nF5,	$3C,	nG5
-	dc.b		nA5,	$06,	nRst,	$09
-	smpsAlterVol	$10
-	dc.b		nA5,	$0A
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nRst,	$0A
-	smpsAlterVol	$10
-	dc.b		nA5,	$05,	nRst,	$0F
-	smpsAlterVol	$F0
-	dc.b		nA5,	$06,	nRst,	$09
-	smpsAlterVol	$10
-	dc.b		nA5,	$0A
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nRst,	$0A
-	smpsAlterVol	$10
-	dc.b		nA5,	$05,	nRst,	$0F
-	smpsAlterVol	$F0
-	dc.b		nF5,	$3C,	nG5,	nA5,	$06,	nRst,	$09
-	smpsAlterVol	$10
-	dc.b		nA5,	$0A
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nRst,	$0A
-	smpsAlterVol	$10
-	dc.b		nA5,	$05
-	smpsAlterVol	$F0
-	dc.b		nA5,	$06,	nRst,	$04
-	smpsAlterVol	$10
-	dc.b		nA5,	$05
-	smpsAlterVol	$F0
-	dc.b		nC5,	$17,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nC5,	$05
-	smpsAlterVol	$F0
-	dc.b		nC5,	$17,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nC5,	$05
-	smpsAlterVol	$F0
-	dc.b		nF5,	$3C,	nG5,	nA5,	$06,	nRst,	$09
-	smpsAlterVol	$10
-	dc.b		nA5,	$0A
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nRst,	$0A
-	smpsAlterVol	$10
-	dc.b		nA5,	$05,	nRst,	$0F
-	smpsAlterVol	$F0
-	dc.b		nA5,	$06,	nRst,	$09
-	smpsAlterVol	$10
-	dc.b		nA5,	$0A
-	smpsAlterVol	$F0
-	dc.b		nA5,	$05,	nRst,	$0A
-	smpsAlterVol	$10
-	dc.b		nA5,	$05,	nRst,	$0F
-	smpsAlterVol	$F0
-	dc.b		nD5,	$3C,	nE5,	nC6,	$06,	nRst,	$09
-	smpsAlterVol	$10
-	dc.b		nC6,	$08
-	smpsAlterVol	$F0
-	dc.b		nC6,	$05,	nRst,	$0A
-	smpsAlterVol	$10
-	dc.b		nC6,	$07
-	smpsAlterVol	$F0
-	dc.b		nC6,	$06,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nC6,	$07
-	smpsAlterVol	$F0
-	dc.b		nC6,	$06,	nRst,	$02
-	smpsAlterVol	$10
-	dc.b		nC6,	$07,	nRst,	$2D
-	smpsFMvoice	$01
-	smpsAlterVol	$F0
-	smpsPan		panRight,	$00
-	smpsJump	Danstar_Jump05
+DanStar_FM3_04_0_64:
+	dc.b smpsNoAttack, $04
+	smpsSetvoice	$03
+	dc.b nB4, nRst, nD5, nRst, nB4, nRst, nD5, nRst, nFs5, $05, nG5, $03, nRst, $05, nE5, $03
+	dc.b nRst, $0C
+	smpsReturn
 
-; PSG1 Data
-Danstar_PSG1:
-	smpsPSGAlterVol	$04
-	dc.b		nG1,	$05
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$05,	nRst,	$0A,	nA2,	$05,	nG2,	$06
-	dc.b		nRst,	$09,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$05,	nRst,	$0A,	nA2,	$05,	nG2,	$06
-	dc.b		nRst,	$09,	nA2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nA2,	$02,	nRst,	$07
-	smpsPSGAlterVol	$FE
-	dc.b		nG2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02,	nRst,	$07
-	smpsPSGAlterVol	$FE
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nCs2,	$05,	nRst,	$0A
-	smpsAlterNote	$00
-	dc.b		nA2,	$05,	nG2,	$06,	nRst,	$09,	nFs2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nFs2,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nFs2,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nE2,	$05
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nE2,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$05
-	smpsAlterNote	$00
-	dc.b		nE2,	$01
-	smpsAlterNote	$01
-	dc.b		nE2
-	smpsAlterNote	$02
-	dc.b		nE2
-	smpsAlterNote	$03
-	dc.b		nE2
-	smpsAlterNote	$02
-	dc.b		nE2
-	smpsAlterNote	$00
-	dc.b		nE2
-	smpsAlterNote	$01
-	dc.b		nE2
-	smpsAlterNote	$02
-	dc.b		nE2
-	smpsAlterNote	$03
-	dc.b		nE2
-	smpsAlterNote	$02
-	dc.b		nE2
-	smpsAlterNote	$01
-	dc.b		nE2
-	smpsAlterNote	$00
-	dc.b		nE2
-	smpsAlterNote	$01
-	dc.b		nE2
-	smpsAlterNote	$02
-	dc.b		nE2
-	smpsAlterNote	$03
-	dc.b		nE2
-	smpsAlterNote	$02
-	dc.b		nE2
-	smpsAlterNote	$01
-	dc.b		nE2
-	smpsAlterNote	$00
-	dc.b		nE2
-	smpsAlterNote	$01
-	dc.b		nE2
-	smpsAlterNote	$02
-	dc.b		nE2
-	smpsAlterNote	$03
-	dc.b		nE2
-	smpsAlterNote	$02
-	dc.b		nE2
-	smpsAlterNote	$01
-	dc.b		nE2
-	smpsAlterNote	$00
-	dc.b		nE2
-	smpsAlterNote	$01
-	dc.b		nE2
-	smpsAlterNote	$02
-	dc.b		nE2
-	smpsAlterNote	$03
-	dc.b		nE2
-	smpsAlterNote	$02
-	dc.b		nE2
-	smpsAlterNote	$01
-	dc.b		nE2
-	smpsAlterNote	$00
-	dc.b		nE2
-	smpsPSGAlterVol	$FC
-	dc.b		nFs2,	$05
-	smpsAlterNote	$01
-	dc.b		nE2,	$06
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nE2,	$02,	nRst,	$07
-Danstar_Jump06:
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$00
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$00
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$05,	nRst,	$0A,	nA2,	$05,	nG2,	$06
-	dc.b		nRst,	$09,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$05,	nRst,	$0A,	nA2,	$05,	nG2,	$06
-	dc.b		nRst,	$09,	nA2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nA2,	$02,	nRst,	$07
-	smpsPSGAlterVol	$FE
-	dc.b		nG2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02,	nRst,	$07
-	smpsPSGAlterVol	$FE
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nCs2,	$05,	nRst,	$0A
-	smpsAlterNote	$00
-	dc.b		nA2,	$05,	nG2,	$06,	nRst,	$09,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nCs2,	$05,	nRst,	$0A
-	smpsAlterNote	$00
-	dc.b		nA2,	$05,	nG2,	$06,	nRst,	$09,	nA2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nA2,	$02,	nRst,	$07
-	smpsPSGAlterVol	$FE
-	dc.b		nG2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02,	nRst,	$07
-	smpsPSGAlterVol	$FE
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$05,	nRst,	$0A,	nA2,	$05,	nG2,	$06
-	dc.b		nRst,	$09,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$05,	nRst,	$0A,	nA2,	$05,	nG2,	$06
-	dc.b		nRst,	$09,	nA2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nA2,	$02,	nRst,	$07
-	smpsPSGAlterVol	$FE
-	dc.b		nG2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02,	nRst,	$07
-	smpsPSGAlterVol	$FE
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nCs2,	$05,	nRst,	$0A
-	smpsAlterNote	$00
-	dc.b		nA2,	$05,	nG2,	$06,	nRst,	$09,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nCs2,	$05,	nRst,	$0A
-	smpsAlterNote	$00
-	dc.b		nA2,	$05,	nG2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG2,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nA2,	$05,	nG2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG2,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nFs2,	$05
-	smpsAlterNote	$01
-	dc.b		nE2,	$06
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nE2,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$04
-	smpsPSGAlterVol	$FC
-	smpsAlterNote	$00
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$00
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$05,	nRst,	$0A,	nA2,	$05,	nG2,	$06
-	dc.b		nRst,	$09,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$05,	nRst,	$0A,	nA2,	$05,	nG2,	$06
-	dc.b		nRst,	$09,	nA2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nA2,	$02,	nRst,	$07
-	smpsPSGAlterVol	$FE
-	dc.b		nG2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02,	nRst,	$07
-	smpsPSGAlterVol	$FE
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nCs2,	$05,	nRst,	$0A
-	smpsAlterNote	$00
-	dc.b		nA2,	$05,	nG2,	$06,	nRst,	$09,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nCs2,	$05,	nRst,	$0A
-	smpsAlterNote	$00
-	dc.b		nA2,	$05,	nG2,	$06,	nRst,	$09,	nA2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nA2,	$02,	nRst,	$07
-	smpsPSGAlterVol	$FE
-	dc.b		nG2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02,	nRst,	$07
-	smpsPSGAlterVol	$FE
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$05,	nRst,	$0A,	nA2,	$05,	nG2,	$06
-	dc.b		nRst,	$09,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$05,	nRst,	$0A,	nA2,	$05,	nG2,	$06
-	dc.b		nRst,	$09,	nA2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nA2,	$02,	nRst,	$07
-	smpsPSGAlterVol	$FE
-	dc.b		nG2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02,	nRst,	$07
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nE2,	$06
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nE2,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$00
-	dc.b		nF2,	$05
-	smpsAlterNote	$01
-	dc.b		nE2,	$06
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nE2,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nCs2,	$05
-	smpsAlterNote	$00
-	dc.b		nD2,	$06
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$00
-	dc.b		nD2,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nD2,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nCs2,	$05,	nB1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nB1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nB1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$00
-	dc.b		nA1,	$05
-	smpsAlterNote	$01
-	dc.b		nB1,	$06
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nB1,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nB1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$00
-	dc.b		nA1,	$05,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nA1,	$05
-	smpsPSGAlterVol	$02
-	dc.b		nA1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nA1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nA1,	$04
-	smpsAlterNote	$FF
-	dc.b		nA1,	$02
-	smpsAlterNote	$00
-	dc.b		nA1,	$01
-	smpsAlterNote	$02
-	dc.b		nA1,	$02
-	smpsAlterNote	$FF
-	dc.b		nA1
-	smpsAlterNote	$00
-	dc.b		nA1,	$01
-	smpsAlterNote	$02
-	dc.b		nA1,	$02
-	smpsAlterNote	$01
-	dc.b		nA1,	$01
-	smpsAlterNote	$00
-	dc.b		nA1
-	smpsAlterNote	$FF
-	dc.b		nA1,	$02
-	smpsAlterNote	$01
-	dc.b		nA1,	$01
-	smpsAlterNote	$02
-	dc.b		nA1,	$02
-	smpsAlterNote	$00
-	dc.b		nA1,	$01
-	smpsAlterNote	$FF
-	dc.b		nA1,	$02
-	smpsAlterNote	$02
-	dc.b		nA1,	$01
-	smpsPSGAlterVol	$FA
-	smpsAlterNote	$00
-	dc.b		nD2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nD2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nD2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nD2,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nD2,	$1F
-	smpsAlterNote	$01
-	dc.b		nE2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nE2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nE2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$1F
-	smpsAlterNote	$00
-	dc.b		nF2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nF2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nF2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nF2,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nF2,	$2E,	nA2,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nA2,	$05
-	smpsPSGAlterVol	$FF
-	dc.b		nA2,	$08
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nG2,	$05
-	smpsPSGAlterVol	$FF
-	dc.b		nG2,	$08
-	smpsPSGAlterVol	$02
-	dc.b		nA2,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nA2,	$05
-	smpsPSGAlterVol	$FF
-	dc.b		nA2,	$08
-	smpsPSGAlterVol	$02
-	dc.b		nD2,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nD2,	$05
-	smpsPSGAlterVol	$FF
-	dc.b		nD2,	$0D
-	smpsPSGAlterVol	$01
-	dc.b		nD2,	$09
-	smpsPSGAlterVol	$01
-	dc.b		nD2,	$1F
-	smpsAlterNote	$01
-	dc.b		nE2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nE2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nE2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$1F
-	smpsAlterNote	$00
-	dc.b		nF2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nF2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nF2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nF2,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nF2,	$1F,	nEb2,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nEb2,	$05
-	smpsPSGAlterVol	$FF
-	dc.b		nEb2,	$0D
-	smpsPSGAlterVol	$01
-	dc.b		nEb2,	$09
-	smpsPSGAlterVol	$01
-	dc.b		nEb2,	$1F,	nD2,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nD2,	$05
-	smpsPSGAlterVol	$FF
-	dc.b		nD2,	$0D
-	smpsPSGAlterVol	$01
-	dc.b		nD2,	$09
-	smpsPSGAlterVol	$01
-	dc.b		nD2,	$1F
-	smpsAlterNote	$01
-	dc.b		nE2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nE2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nE2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$1F
-	smpsAlterNote	$00
-	dc.b		nF2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nF2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nF2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nF2,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nF2,	$2E,	nA2,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nA2,	$05
-	smpsPSGAlterVol	$FF
-	dc.b		nA2,	$08
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nG2,	$05
-	smpsPSGAlterVol	$FF
-	dc.b		nG2,	$08
-	smpsPSGAlterVol	$02
-	dc.b		nA2,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nA2,	$05
-	smpsPSGAlterVol	$FF
-	dc.b		nA2,	$08
-	smpsPSGAlterVol	$02
-	dc.b		nD2,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nD2,	$05
-	smpsPSGAlterVol	$FF
-	dc.b		nD2,	$0D
-	smpsPSGAlterVol	$01
-	dc.b		nD2,	$09
-	smpsPSGAlterVol	$01
-	dc.b		nD2,	$1F
-	smpsAlterNote	$01
-	dc.b		nE2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nE2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nE2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$1F
-	smpsAlterNote	$00
-	dc.b		nF2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nF2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nF2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nF2,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nA2,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nA2,	$04
-	smpsPSGAlterVol	$FF
-	dc.b		nA2,	$0D
-	smpsPSGAlterVol	$01
-	dc.b		nA2,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nC3,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nC3,	$05
-	smpsPSGAlterVol	$FF
-	dc.b		nC3,	$08
-	smpsPSGAlterVol	$02
-	dc.b		nF3,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nF3,	$05
-	smpsPSGAlterVol	$FF
-	dc.b		nF3,	$0D
-	smpsPSGAlterVol	$01
-	dc.b		nF3,	$09
-	smpsPSGAlterVol	$01
-	dc.b		nF3,	nRst,	$16
-	smpsPSGAlterVol	$04
-	smpsJump	Danstar_Jump06
+DanStar_FM3_05_0_64:
+	dc.b smpsNoAttack, $2C
+	smpsSetvoice	$06
+	dc.b nA4, $08, nB4, nCs5, $04
+	smpsReturn
 
-; PSG2 Data
-Danstar_PSG2:
-	dc.b		nRst,	$07
-	smpsPSGAlterVol	$07
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$06,	nRst,	$09,	nA2,	$06,	nG2,	nRst
-	dc.b		$09,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$06,	nRst,	$09,	nA2,	$06,	nG2,	nRst
-	dc.b		$09,	nA2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nA2,	$01,	nRst,	$08
-	smpsPSGAlterVol	$FE
-	dc.b		nG2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG2
-	smpsPSGAlterVol	$01
-	dc.b		nG2,	$05
-	smpsPSGAlterVol	$FC
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nCs2,	$06,	nRst,	$09
-	smpsAlterNote	$00
-	dc.b		nA2,	$06,	nG2,	nRst,	$09,	nFs2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nFs2,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nFs2,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nE2,	$06
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nE2,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$22
-	smpsPSGAlterVol	$FC
-	smpsAlterNote	$00
-	dc.b		nFs2,	$06
-	smpsAlterNote	$01
-	dc.b		nE2
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nE2,	$02
-Danstar_Jump07:
-	dc.b		nE2,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$05
-	smpsPSGAlterVol	$FC
-	smpsAlterNote	$00
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$00
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$06,	nRst,	$09,	nA2,	$06,	nG2,	nRst
-	dc.b		$09,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$06,	nRst,	$09,	nA2,	$06,	nG2,	nRst
-	dc.b		$09,	nA2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nA2,	$01,	nRst,	$08
-	smpsPSGAlterVol	$FE
-	dc.b		nG2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG2
-	smpsPSGAlterVol	$01
-	dc.b		nG2,	$05
-	smpsPSGAlterVol	$FC
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nCs2,	$06,	nRst,	$09
-	smpsAlterNote	$00
-	dc.b		nA2,	$06,	nG2,	nRst,	$09,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nCs2,	$06,	nRst,	$09
-	smpsAlterNote	$00
-	dc.b		nA2,	$06,	nG2,	nRst,	$09,	nA2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nA2,	$01,	nRst,	$08
-	smpsPSGAlterVol	$FE
-	dc.b		nG2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG2
-	smpsPSGAlterVol	$01
-	dc.b		nG2,	$05
-	smpsPSGAlterVol	$FC
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$06,	nRst,	$09,	nA2,	$06,	nG2,	nRst
-	dc.b		$09,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$06,	nRst,	$09,	nA2,	$06,	nG2,	nRst
-	dc.b		$09,	nA2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nA2,	$01,	nRst,	$08
-	smpsPSGAlterVol	$FE
-	dc.b		nG2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG2
-	smpsPSGAlterVol	$01
-	dc.b		nG2,	$05
-	smpsPSGAlterVol	$FC
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nCs2,	$06,	nRst,	$09
-	smpsAlterNote	$00
-	dc.b		nA2,	$06,	nG2,	nRst,	$09,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nCs2,	$06,	nRst,	$09
-	smpsAlterNote	$00
-	dc.b		nA2,	$06,	nG2
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG2,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nA2,	$06,	nG2
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG2,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nFs2,	$06
-	smpsAlterNote	$01
-	dc.b		nE2
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nE2,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$05
-	smpsPSGAlterVol	$FC
-	smpsAlterNote	$00
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$00
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$06,	nRst,	$09,	nA2,	$06,	nG2,	nRst
-	dc.b		$09,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$06,	nRst,	$09,	nA2,	$06,	nG2,	nRst
-	dc.b		$09,	nA2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nA2,	$01,	nRst,	$08
-	smpsPSGAlterVol	$FE
-	dc.b		nG2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG2
-	smpsPSGAlterVol	$01
-	dc.b		nG2,	$05
-	smpsPSGAlterVol	$FC
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nCs2,	$06,	nRst,	$09
-	smpsAlterNote	$00
-	dc.b		nA2,	$06,	nG2,	nRst,	$09,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nCs2,	$06,	nRst,	$09
-	smpsAlterNote	$00
-	dc.b		nA2,	$06,	nG2,	nRst,	$09,	nA2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nA2,	$01,	nRst,	$08
-	smpsPSGAlterVol	$FE
-	dc.b		nG2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG2
-	smpsPSGAlterVol	$01
-	dc.b		nG2,	$05
-	smpsPSGAlterVol	$FC
-	dc.b		nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$06,	nRst,	$09,	nA2,	$06,	nG2,	nRst
-	dc.b		$09,	nG1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nD2,	$06,	nRst,	$09,	nA2,	$06,	nG2,	nRst
-	dc.b		$09,	nA2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nA2,	$01,	nRst,	$08
-	smpsPSGAlterVol	$FE
-	dc.b		nG2,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nG2,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG2
-	smpsPSGAlterVol	$01
-	dc.b		nG2,	$05
-	smpsPSGAlterVol	$FC
-	smpsAlterNote	$01
-	dc.b		nE2,	$06
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nE2,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$00
-	dc.b		nF2,	$06
-	smpsAlterNote	$01
-	dc.b		nE2
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nE2,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nE2,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nCs2,	$06
-	smpsAlterNote	$00
-	dc.b		nD2
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$00
-	dc.b		nD2,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nD2,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nCs2,	$06,	nB1
-	smpsPSGAlterVol	$02
-	dc.b		nB1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nB1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$00
-	dc.b		nA1,	$06
-	smpsAlterNote	$01
-	dc.b		nB1
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nB1,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nB1,	$01
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$00
-	dc.b		nA1,	$06,	nG1
-	smpsPSGAlterVol	$02
-	dc.b		nG1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nG1,	$01
-	smpsPSGAlterVol	$FD
-	dc.b		nA1,	$06
-	smpsPSGAlterVol	$02
-	dc.b		nA1,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nA1,	$02
-	smpsPSGAlterVol	$01
-	dc.b		nA1,	$11
-	smpsPSGAlterVol	$FA
-	smpsAlterNote	$01
-	dc.b		nBb1,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nBb1,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nBb1,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nBb1,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nBb1,	$1F
-	smpsAlterNote	$00
-	dc.b		nC2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$21
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$2E,	nF2,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nF2,	$05
-	smpsPSGAlterVol	$FF
-	dc.b		nF2,	$08
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nE2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nE2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nE2,	$08
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$00
-	dc.b		nF2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nF2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nF2,	$08
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nBb1,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nBb1,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nBb1,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nBb1,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nBb1,	$1F
-	smpsAlterNote	$00
-	dc.b		nC2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$21
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$21
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$1F
-	smpsAlterNote	$01
-	dc.b		nBb1,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nBb1,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nBb1,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nBb1,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nBb1,	$1F
-	smpsAlterNote	$00
-	dc.b		nC2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$21
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$2E,	nF2,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nF2,	$05
-	smpsPSGAlterVol	$FF
-	dc.b		nF2,	$08
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nE2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nE2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nE2,	$08
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$00
-	dc.b		nF2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nF2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nF2,	$08
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nBb1,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nBb1,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$01
-	dc.b		nBb1,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nBb1,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nBb1,	$1F
-	smpsAlterNote	$00
-	dc.b		nC2,	$02
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$09
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$21
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$05
-	smpsPSGAlterVol	$FF
-	smpsAlterNote	$00
-	dc.b		nC2,	$0D
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$00
-	dc.b		nC2,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nF2,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nF2,	$04
-	smpsPSGAlterVol	$FF
-	dc.b		nF2,	$0D
-	smpsPSGAlterVol	$01
-	dc.b		nF2,	$03
-	smpsPSGAlterVol	$01
-	dc.b		nA2,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nA2,	$05
-	smpsPSGAlterVol	$FF
-	dc.b		nA2,	$08
-	smpsPSGAlterVol	$02
-	dc.b		nC3,	$02
-	smpsPSGAlterVol	$FF
-	dc.b		nC3,	$05
-	smpsPSGAlterVol	$FF
-	dc.b		nC3,	$0D
-	smpsPSGAlterVol	$01
-	dc.b		nC3,	$09
-	smpsPSGAlterVol	$01
-	dc.b		nC3,	nRst,	$16
-	smpsPSGAlterVol	$02
-	smpsJump	Danstar_Jump07
+DanStar_FM3_06_0_64:
+	dc.b smpsNoAttack, $04, nD5, $0C, nRst, $04, nD5, $0D, nC5, $03, nRst, $05, nC5, $03, nBb4, $08
+	dc.b nA4, nBb4, $04
+	smpsReturn
 
-; PSG3 Data
-Danstar_PSG3:
-	smpsPSGform	$E7
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-Danstar_Jump08:
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$04
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F2
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F7
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$04
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$3C
-	smpsPSGAlterVol	$F2
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$04
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01,	nRst
-	smpsPSGAlterVol	$F3
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$04
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01,	nRst,	$3D
-	smpsPSGAlterVol	$F3
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$04
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$03
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01,	nRst
-	smpsPSGAlterVol	$F3
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$FD
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5
-	smpsPSGAlterVol	$F6
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$06
-	smpsPSGAlterVol	$FE
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
-	smpsPSGAlterVol	$02
-	smpsAlterNote	$01
-	dc.b		nA5,	$01
-	smpsPSGAlterVol	$01
-	smpsAlterNote	$01
-	dc.b		nA5,	$02
+DanStar_FM3_07_0_64:
+	dc.b smpsNoAttack, $04, nD5, $0D, nC5, $03, nRst, $08, nA4, $04, nRst, nD5, $0D, nC5, $03, nRst
+	dc.b $0C
+	smpsReturn
+
+DanStar_FM3_08_0_64:
+	dc.b smpsNoAttack, $0C, nD5, $04, nRst, nD5, $03, nRst, $02, nD5, $03, nRst, $05, nC5, $03, nRst
+	dc.b $05, nC5, $03, nBb4, $08, nA4, nBb4, $04
+	smpsReturn
+
+DanStar_FM3_09_0_64:
+	dc.b smpsNoAttack, $04, nD5, $0D, nC5, $03, nRst, $08, nA4, $04, nRst, nF5, $0D, nC5, $08, nRst
+	dc.b $03, nA4, $04
+	smpsReturn
+
+DanStar_FM3_0A_0_64:
+	dc.b smpsNoAttack, $04, nD5, $0D, nC5, $03, nRst, $08, nA4, $04, nRst, nD5, $0D, nC5, $03, nRst
+	dc.b $08, nA4, $04
+	smpsReturn
+
+DanStar_FM3_0B_0_64:
+	dc.b smpsNoAttack, $04, nG4, $0A, nRst, $03, nA4, $08, nRst, $03, nBb4, $05, nRst, $03, nD5, $0A
+	dc.b nRst, $03, nF5, $09, nRst, $02, nE5, $04
+	smpsReturn
+
+DanStar_FM3_0C_0_64:
+	dc.b nF5, $06, nRst, nRst, $28, $0C
+	smpsReturn
+
+DanStar_FM4:
+	smpsCall DanStar_FM4_00_0_64
+	smpsCall DanStar_FM4_01_0_64
+
+DanStar_FM4_Jump:
+	smpsCall DanStar_FM4_02_0_64
+	smpsCall DanStar_FM4_03_0_64
+	smpsCall DanStar_FM4_02_0_64
+	smpsCall DanStar_FM4_05_0_64
+	smpsCall DanStar_FM4_02_0_64
+	smpsCall DanStar_FM4_03_0_64
+	smpsCall DanStar_FM4_02_0_64
+	smpsCall DanStar_FM4_06_0_64
+	smpsCall DanStar_FM4_07_0_64
+	smpsCall DanStar_FM4_08_0_64_7C
+	smpsCall DanStar_FM4_07_0_64_69
+	smpsCall DanStar_FM4_09_0_64_7C
+	smpsCall DanStar_FM4_07_0_64_69
+	smpsCall DanStar_FM4_08_0_64_7C
+	smpsCall DanStar_FM4_0A_0_64_69
+	smpsCall DanStar_FM4_0B_0_64
+	smpsJump DanStar_FM4_Jump
+
+DanStar_FM4_00_0_64:
+	dc.b smpsNoAttack, $40
+	smpsReturn
+
+DanStar_FM4_01_0_64:
+	dc.b smpsNoAttack, $40
+	smpsReturn
+
+DanStar_FM4_02_0_64:
+	smpsSetvoice	$07
+	dc.b nB5, $30, nC6, $08, nD6
+	smpsReturn
+
+DanStar_FM4_03_0_64:
+	smpsSetvoice	$07
+	dc.b nA5, $30, nFs5, $08, nA5
+	smpsReturn
+
+DanStar_FM4_05_0_64:
+	dc.b smpsNoAttack, $08
+	smpsSetvoice	$07
+	dc.b nA5, $04, nRst, $0C, nG5, $04, nRst, $0C, nFs5, $04, nRst, nFs5, nRst, $01, nG5, $03
+	dc.b nFs5, $04, nRst
+	smpsReturn
+
+DanStar_FM4_06_0_64:
+	smpsSetvoice	$07
+	dc.b nA5, $04, nRst, nA5, nRst, nA5, nRst, nA5, nRst, nA5, nRst, $1C
+	smpsReturn
+
+DanStar_FM4_07_0_64:
+	smpsSetvoice	$07
+	dc.b nBb5, $20, nC6
+	smpsReturn
+
+DanStar_FM4_08_0_64_7C:
+	smpsSetvoice	$07
+	dc.b nD6, $03, nRst, $05
+	smpsAlterVol	$13
+	dc.b nD6
+	smpsAlterVol	$ED
+	dc.b nC6, $03, nRst, $05
+	smpsAlterVol	$13
+	dc.b nC6, $03, nRst, $08
+	smpsAlterVol	$ED
+	dc.b nD6, $03, nRst, $05
+	smpsAlterVol	$13
+	dc.b nD6
+	smpsAlterVol	$ED
+	dc.b nC6, $03, nRst, $05
+	smpsAlterVol	$13
+	dc.b nC6, $03, nRst, $08
+	smpsReturn
+
+DanStar_FM4_07_0_64_69:
+	smpsSetvoice	$07
+	smpsAlterVol	$ED
+	dc.b nBb5, $20, nC6
+	smpsReturn
+
+DanStar_FM4_09_0_64_7C:
+	smpsSetvoice	$07
+	dc.b nD6, $03, nRst, $05
+	smpsAlterVol	$13
+	dc.b nD6
+	smpsAlterVol	$ED
+	dc.b nC6, $03, nRst, $05
+	smpsAlterVol	$13
+	dc.b nC6, $03
+	smpsAlterVol	$ED
+	dc.b $03, nRst, $02
+	smpsAlterVol	$13
+	dc.b nC6, $03
+	smpsAlterVol	$ED
+	dc.b nA5, $0C, nRst, $01
+	smpsAlterVol	$13
+	dc.b nA5, $03
+	smpsAlterVol	$ED
+	dc.b nC6, $0C, nRst, $01
+	smpsAlterVol	$13
+	dc.b nC6, $03
+	smpsReturn
+
+DanStar_FM4_0A_0_64_69:
+	smpsSetvoice	$07
+	smpsAlterVol	$ED
+	dc.b nBb4, $20, nBb5
+	smpsReturn
+
+DanStar_FM4_0B_0_64:
+	dc.b nF5, $08, nRst, $38
+	smpsReturn
+
+DanStar_FM5:
+	smpsCall DanStar_FM5_00_0_64
+	smpsCall DanStar_FM5_01_0_64
+
+DanStar_FM5_Jump:
+	smpsCall DanStar_FM5_02_0_64
+	smpsCall DanStar_FM5_03_0_64
+	smpsCall DanStar_FM5_02_0_64
+	smpsCall DanStar_FM5_05_0_64
+	smpsCall DanStar_FM5_02_0_64
+	smpsCall DanStar_FM5_03_0_64
+	smpsCall DanStar_FM5_02_0_64
+	smpsCall DanStar_FM5_06_0_64
+	smpsCall DanStar_FM5_07_0_64
+	smpsCall DanStar_FM5_08_0_64_7C
+	smpsCall DanStar_FM5_07_0_64_69
+	smpsCall DanStar_FM5_09_0_64_7C
+	smpsCall DanStar_FM5_07_0_64_69
+	smpsCall DanStar_FM5_08_0_64_7C
+	smpsCall DanStar_FM5_0A_0_64_69
+	smpsCall DanStar_FM5_0B_0_64
+	smpsJump DanStar_FM5_Jump
+
+DanStar_FM5_00_0_64:
+	dc.b smpsNoAttack, $40
+	smpsReturn
+
+DanStar_FM5_01_0_64:
+	dc.b smpsNoAttack, $40
+	smpsReturn
+
+DanStar_FM5_02_0_64:
+	smpsSetvoice	$07
+	smpsPan		panLeft, $00
+	dc.b nG5, $30, nA5, $08, nB5
+	smpsReturn
+
+DanStar_FM5_03_0_64:
+	smpsSetvoice	$07
+	dc.b nE5, $30, nD5, $08, nFs5
+	smpsReturn
+
+DanStar_FM5_05_0_64:
+	dc.b smpsNoAttack, $08
+	smpsSetvoice	$07
+	dc.b nFs5, $04, nRst, $0C, nE5, $04, nRst, $0C, nD5, $04, nRst, nD5, nRst, $01, nE5, $03
+	dc.b nD5, $04, nRst
+	smpsReturn
+
+DanStar_FM5_06_0_64:
+	smpsSetvoice	$07
+	dc.b nE5, $04, nRst, nE5, nRst, nE5, nRst, nE5, nRst, nE5, nRst, $1C
+	smpsReturn
+
+DanStar_FM5_07_0_64:
+	smpsSetvoice	$07
+	dc.b nF5, $20, nG5
+	smpsReturn
+
+DanStar_FM5_08_0_64_7C:
+	smpsSetvoice	$07
+	dc.b nA5, $03, nRst, $05
+	smpsAlterVol	$13
+	dc.b nA5
+	smpsAlterVol	$ED
+	dc.b nA5, $03, nRst, $05
+	smpsAlterVol	$13
+	dc.b nA5, $03, nRst, $08
+	smpsAlterVol	$ED
+	dc.b nA5, $03, nRst, $05
+	smpsAlterVol	$13
+	dc.b nA5
+	smpsAlterVol	$ED
+	dc.b nA5, $03, nRst, $05
+	smpsAlterVol	$13
+	dc.b nA5, $03, nRst, $08
+	smpsReturn
+
+DanStar_FM5_07_0_64_69:
+	smpsSetvoice	$07
+	smpsAlterVol	$ED
+	dc.b nF5, $20, nG5
+	smpsReturn
+
+DanStar_FM5_09_0_64_7C:
+	smpsSetvoice	$07
+	dc.b nA5, $03, nRst, $05
+	smpsAlterVol	$13
+	dc.b nA5
+	smpsAlterVol	$ED
+	dc.b nA5, $03, nRst, $05
+	smpsAlterVol	$13
+	dc.b nA5, $03
+	smpsAlterVol	$ED
+	dc.b $03, nRst, $02
+	smpsAlterVol	$13
+	dc.b nA5, $03
+	smpsAlterVol	$ED
+	dc.b nC5, $0C, nRst, $01
+	smpsAlterVol	$13
+	dc.b nC5, $03
+	smpsAlterVol	$ED
+	dc.b $0C, nRst, $01
+	smpsAlterVol	$13
+	dc.b nC5, $03
+	smpsReturn
+
+DanStar_FM5_0A_0_64_69:
+	smpsSetvoice	$07
+	smpsAlterVol	$ED
+	dc.b nD5, $20, nE5
+	smpsReturn
+
+DanStar_FM5_0B_0_64:
+	dc.b nA5, $08, nRst, $38
+	smpsReturn
+
+DanStar_DAC:
+	smpsCall DanStar_DAC_00_0_64
+	smpsCall DanStar_DAC_01_0_64
+
+DanStar_DAC_Jump:
+	smpsCall DanStar_DAC_02_0_64
+	smpsCall DanStar_DAC_02_0_64
+	smpsCall DanStar_DAC_02_0_64
+	smpsCall DanStar_DAC_03_0_64
+	smpsCall DanStar_DAC_02_0_64
+	smpsCall DanStar_DAC_02_0_64
+	smpsCall DanStar_DAC_02_0_64
+	smpsCall DanStar_DAC_05_0_64
+	smpsCall DanStar_DAC_02_0_64
+	smpsCall DanStar_DAC_02_0_64
+	smpsCall DanStar_DAC_02_0_64
+	smpsCall DanStar_DAC_03_0_64
+	smpsCall DanStar_DAC_02_0_64
+	smpsCall DanStar_DAC_02_0_64
+	smpsCall DanStar_DAC_02_0_64
+	smpsCall DanStar_DAC_08_0_64
+	smpsJump DanStar_DAC_Jump
+
+DanStar_DAC_00_0_64:	; Effect not supported:
+	dc.b dKick, $10, $10, $10, $10
+	smpsReturn
+
+DanStar_DAC_01_0_64:
+	dc.b dSnare, $08, $08, $08, $08, $08, $08, $05, $03, $05, dKick, $03
+	smpsReturn
+
+DanStar_DAC_02_0_64:
+	dc.b dKick, $05, $03, $08, dSnare, dKick, dKick, $10, dSnare, $0D, dKick, $03
+	smpsReturn
+
+DanStar_DAC_03_0_64:
+	dc.b smpsNoAttack, $05, dKick, $03, $08, dSnare, dKick, dKick, dSnare, dSnare, dSnare, $05, dKick, $03
+	smpsReturn
+
+DanStar_DAC_05_0_64:
+	dc.b dSnare, $08, $08, $08, $08, $08, dKick, dKick, $05, dSnare, $03, $05, dKick, $03
+	smpsReturn
+
+DanStar_DAC_08_0_64:
+	dc.b dKick, $05, $03, $08, dSnare, $0D, dKick, $03, dSnare, $08, $08, $08, $08
+	smpsReturn
+
+DanStar_PSG1:
+	smpsCall DanStar_PSG1_00_0_64
+	smpsCall DanStar_PSG1_01_0_64
+
+DanStar_PSG1_Jump:
+	smpsCall DanStar_PSG1_00_0_64
+	smpsCall DanStar_PSG1_02_0_64
+	smpsCall DanStar_PSG1_00_0_64
+	smpsCall DanStar_PSG1_0B_0_64
+	smpsCall DanStar_PSG1_00_0_64
+	smpsCall DanStar_PSG1_02_0_64
+	smpsCall DanStar_PSG1_00_0_64
+	smpsCall DanStar_PSG1_05_0_64
+	smpsCall DanStar_PSG1_06_0_64_0A
+	smpsCall DanStar_PSG1_07_0_64
+	smpsCall DanStar_PSG1_06_0_64
+	smpsCall DanStar_PSG1_08_0_64
+	smpsCall DanStar_PSG1_06_0_64
+	smpsCall DanStar_PSG1_07_0_64
+	smpsCall DanStar_PSG1_06_0_64
+	smpsCall DanStar_PSG1_09_0_64
 	smpsPSGAlterVol	$05
-	smpsJump	Danstar_Jump08
+	smpsJump DanStar_PSG1_Jump
 
-; DAC Data
-Danstar_DAC:
-	dc.b		dKickS3,	$1D,	dKickS3,	$1E,	dKickS3,	dKickS3,	dKickS3,	dKickS3
-	dc.b		$0F,	dKickS3,	$0A,	dKickS3,	$05,	dSnareS3,	$0A,	dSnareS3
-	dc.b		$05,	dKickS3,	$0A,	dKickS3,	$05,	dSnareS3,	$0A,	dSnareS3
-	dc.b		$05,	dSnareS3,	$0A,	dSnareS3,	$05
-Danstar_Jump09:
-	dc.b		dKickS3,	$0F,	dKickS3,	dSnareS3,	dKickS3,	$19,	dSnareS3,	$05
-	dc.b		dKickS3,	$0F,	dSnareS3,	dKickS3,	dKickS3,	dKickS3,	dSnareS3,	dKickS3
-	dc.b		$19,	dSnareS3,	$05,	dKickS3,	$0F,	dSnareS3,	dKickS3,	dKickS3
-	dc.b		dKickS3,	dSnareS3,	dKickS3,	$19,	dSnareS3,	$05,	dKickS3,	$0F
-	dc.b		dSnareS3,	dSnareS3,	$0A,	dSnareS3,	$05,	dKickS3,	$1E,	dKickS3
-	dc.b		dKickS3,	$0F,	dKickS3,	$0A,	dKickS3,	$05,	dSnareS3,	$0A
-	dc.b		dKickS3,	$05,	dSnareS3,	$0A,	dSnareS3,	$05,	dKickS3,	$0F
-	dc.b		dKickS3,	dSnareS3,	dKickS3,	$19,	dSnareS3,	$05,	dKickS3,	$0F
-	dc.b		dSnareS3,	dKickS3,	dKickS3,	dKickS3,	dSnareS3,	dKickS3,	$19,	dSnareS3
-	dc.b		$05,	dKickS3,	$0F,	dSnareS3,	dKickS3,	dKickS3,	dKickS3,	dSnareS3
-	dc.b		dKickS3,	$19,	dSnareS3,	$05,	dKickS3,	$0F,	dSnareS3,	dSnareS3
-	dc.b		$0A,	dSnareS3,	$05,	dKickS3,	$1E,	dKickS3,	dKickS3,	$0F
-	dc.b		dKickS3,	$0A,	dKickS3,	$05,	dSnareS3,	$0A,	dKickS3,	$05
-	dc.b		dSnareS3,	$0A,	dSnareS3,	$05,	dKickS3,	$0F,	dKickS3,	dSnareS3
-	dc.b		dKickS3,	$19,	dSnareS3,	$05,	dKickS3,	$0F,	dSnareS3,	dKickS3
-	dc.b		dKickS3,	dKickS3,	dSnareS3,	dKickS3,	$19,	dSnareS3,	$05,	dKickS3
-	dc.b		$0F,	dSnareS3,	dSnareS3,	$0A,	dSnareS3,	$05,	dKickS3,	$0F
-	dc.b		dKickS3,	dSnareS3,	dKickS3,	$19,	dSnareS3,	$05,	dKickS3,	$0F
-	dc.b		dSnareS3,	dKickS3,	dKickS3,	dKickS3,	dSnareS3,	dKickS3,	$19,	dSnareS3
-	dc.b		$05,	dKickS3,	$0F,	dSnareS3,	$0A,	dSnareS3,	$05,	dSnareS3
-	dc.b		$0A,	dSnareS3,	$05,	dKickS3,	$0F,	dKickS3,	dSnareS3,	dKickS3
-	dc.b		$19,	dSnareS3,	$05,	dKickS3,	$0F,	dSnareS3,	dKickS3,	dKickS3
-	dc.b		dKickS3,	dSnareS3,	dKickS3,	$19,	dSnareS3,	$05,	dKickS3,	$0F
-	dc.b		dSnareS3,	dSnareS3,	$0A,	dSnareS3,	$05,	dKickS3,	$0F,	dKickS3
-	dc.b		dSnareS3,	dKickS3,	$19,	dSnareS3,	$05,	dKickS3,	$0F,	dSnareS3
-	dc.b		$0A,	dSnareS3,	$05,	dSnareS3,	$0A,	dSnareS3,	$05,	dSnareS3
-	dc.b		$0A,	dSnareS3,	$05,	dKickS3,	$0A,	dKickS3,	$05,	dSnareS3
-	dc.b		$0A,	dSnareS3,	$05,	dKickS3,	$0A,	dKickS3,	$05,	dSnareS3
-	dc.b		$0F,	dSnareS3,	dSnareS3,	dSnareS3
-	smpsJump	Danstar_Jump09
+DanStar_PSG1_00_0_64:
+	smpsPSGvoice	DanTone_03
+	dc.b nG1, $05, nD2, $03, nRst, $05, nA2, $03, nG2, nRst, $05, nG1, nD2, $03, nRst, $05
+	dc.b nA2, $03, nG2, nRst, $05, nA2, $04, nRst, nG2, nRst
+	smpsReturn
 
-Danstar_Voices:
-	dc.b		$33,$54,$50,$11,$11,$DF,$5F,$1F,$1F,$0C,$0D,$01,$01,$00,$00,$00
-	dc.b		$00,$FF,$FF,$FF,$FF,$22,$17,$22,$00;			Voice 00
-	dc.b		$3B,$73,$11,$10,$71,$1F,$1F,$1F,$1F,$0C,$09,$0A,$02,$00,$06,$04
-	dc.b		$07,$1F,$EF,$FF,$EF,$21,$26,$13,$00;			Voice 01
-	dc.b		$35,$61,$01,$61,$71,$10,$11,$50,$D1,$06,$01,$01,$01,$08,$00,$09
-	dc.b		$00,$8F,$FF,$FF,$FF,$17,$00,$0C,$0C;			Voice 02
-	dc.b		$3D,$01,$01,$01,$01,$94,$19,$19,$19,$0F,$0D,$0D,$0D,$07,$04,$04
-	dc.b		$04,$25,$1A,$1A,$1A,$15,$00,$00,$00;			Voice 03
-	dc.b		$34,$00,$02,$01,$01,$1F,$1F,$1F,$1F,$10,$06,$06,$06,$01,$06,$06
-	dc.b		$06,$35,$1A,$15,$1A,$10,$00,$18,$10;			Voice 04
-	even
+DanStar_PSG1_01_0_64:
+	dc.b nG1, $05, nCs2, $03, nRst, $05, nA2, $03, nG2, nRst, $05, nFs2, nE2, $07
+	smpsModSet	$02, $01, $02, $02
+	dc.b smpsNoAttack, $11
+	smpsModOff
+	dc.b nFs2, $03, nE2, $04, nRst
+	smpsReturn
 
-	smpsFooterEndSong	"TG2000Tracks/Danstar.asm"
+DanStar_PSG1_02_0_64:
+	smpsPSGvoice	DanTone_03
+	dc.b nG1, $05, nCs2, $03, nRst, $05, nA2, $03, nG2, nRst, $05, nG1, nCs2, $03, nRst, $05
+	dc.b nA2, $03, nG2, nRst, $05, nA2, $04, nRst, nG2, nRst
+	smpsReturn
+
+DanStar_PSG1_0B_0_64:
+	dc.b smpsNoAttack, $40
+	smpsReturn
+
+DanStar_PSG1_05_0_64:
+	smpsPSGvoice	DanTone_03
+	dc.b nE2, $05, nF2, $03, nE2, $05, nCs2, $03, nD2, $05, nCs2, $03, nB1, $05, nA1, $03
+	dc.b nB1, $05, nA1, $03, nG1, $05, nA1, $07
+	smpsModSet	$02, $01, $02, $02
+	dc.b smpsNoAttack, $0C
+	smpsReturn
+
+DanStar_PSG1_06_0_64_0A:
+	smpsPSGvoice	DanTone_04
+	smpsModOff
+	smpsPSGAlterVol	$FB
+	dc.b nD2, $20, nE2
+	smpsReturn
+
+DanStar_PSG1_07_0_64:
+	smpsPSGvoice	DanTone_04
+	dc.b nF2, $28, nA2, $08, nG2, nA2
+	smpsReturn
+
+DanStar_PSG1_06_0_64:
+	smpsPSGvoice	DanTone_04
+	smpsModOff
+	dc.b nD2, $20, nE2
+	smpsReturn
+
+DanStar_PSG1_08_0_64:
+	smpsPSGvoice	DanTone_04
+	dc.b nF2, $20, nDs2
+	smpsReturn
+
+DanStar_PSG1_09_0_64:
+	dc.b nF2, $08, nRst, $38
+	smpsReturn
+
+DanStar_PSG2:
+	smpsCall DanStar_PSG2_00_0_64
+	smpsCall DanStar_PSG2_01_0_64
+
+DanStar_PSG2_Jump:
+	smpsCall DanStar_PSG2_00_0_64
+	smpsCall DanStar_PSG2_02_0_64_05
+	smpsCall DanStar_PSG2_00_0_64_09
+	smpsCall DanStar_PSG2_0A_0_64
+	smpsCall DanStar_PSG2_00_0_64
+	smpsCall DanStar_PSG2_02_0_64_05
+	smpsCall DanStar_PSG2_00_0_64_09
+	smpsCall DanStar_PSG2_05_0_64
+	smpsCall DanStar_PSG2_06_0_64_05
+	smpsCall DanStar_PSG2_07_0_64
+	smpsCall DanStar_PSG2_06_0_64
+	smpsCall DanStar_PSG2_08_0_64
+	smpsCall DanStar_PSG2_06_0_64
+	smpsCall DanStar_PSG2_07_0_64
+	smpsCall DanStar_PSG2_06_0_64
+	smpsCall DanStar_PSG2_09_0_64
+	smpsPSGAlterVol	$07
+	smpsJump DanStar_PSG2_Jump
+
+DanStar_PSG2_00_0_64:
+	dc.b smpsNoAttack, $04
+	smpsPSGvoice	DanTone_03
+	dc.b nG1, $05, nD2, $03, nRst, $05, nA2, $03, nG2, nRst, $05, nG1, nD2, $03, nRst, $05
+	dc.b nA2, $03, nG2, nRst, $05, nA2, $04, nRst, nG2
+	smpsReturn
+
+DanStar_PSG2_01_0_64:
+	dc.b smpsNoAttack, $04, nG1, $05, nCs2, $03, nRst, $05, nA2, $03, nG2, nRst, $05, nFs2, nE2, $18
+	dc.b nFs2, $03, nE2, $04
+	smpsReturn
+
+DanStar_PSG2_02_0_64_05:
+	dc.b smpsNoAttack, $04
+	smpsPSGvoice	DanTone_03
+	smpsPSGAlterVol	$FC
+	dc.b nG1, $05, nCs2, $03, nRst, $05, nA2, $03, nG2, nRst, $05, nG1, nCs2, $03, nRst, $05
+	dc.b nA2, $03, nG2, nRst, $05, nA2, $04, nRst, nG2
+	smpsReturn
+
+DanStar_PSG2_00_0_64_09:
+	dc.b smpsNoAttack, $04
+	smpsPSGvoice	DanTone_03
+	smpsPSGAlterVol	$04
+	dc.b nG1, $05, nD2, $03, nRst, $05, nA2, $03, nG2, nRst, $05, nG1, nD2, $03, nRst, $05
+	dc.b nA2, $03, nG2, nRst, $05, nA2, $04, nRst, nG2
+	smpsReturn
+
+DanStar_PSG2_0A_0_64:
+	dc.b smpsNoAttack, $40
+	smpsReturn
+
+DanStar_PSG2_05_0_64:
+	dc.b smpsNoAttack, $04
+	smpsPSGvoice	DanTone_03
+	dc.b nE2, $05, nF2, $03, nE2, $05, nCs2, $03, nD2, $05, nCs2, $03, nB1, $05, nA1, $03
+	dc.b nB1, $05, nA1, $03, nG1, $05, nA1, $0F
+	smpsReturn
+
+DanStar_PSG2_06_0_64_05:
+	smpsPSGvoice	DanTone_04
+	smpsPSGAlterVol	$F9
+	dc.b nBb1, $20, nC2
+	smpsReturn
+
+DanStar_PSG2_07_0_64:
+	smpsPSGvoice	DanTone_04
+	dc.b nC2, $28, nF2, $08, nE2, nF2
+	smpsReturn
+
+DanStar_PSG2_06_0_64:
+	smpsPSGvoice	DanTone_04
+	dc.b nBb1, $20, nC2
+	smpsReturn
+
+DanStar_PSG2_08_0_64:
+	smpsPSGvoice	DanTone_04
+	dc.b nC2, $20, $20
+	smpsReturn
+
+DanStar_PSG2_09_0_64:
+	dc.b nA2, $08, nRst, $38
+	smpsReturn
+
+DanStar_PSG3:
+	smpsPSGform	$E7
+	smpsCall DanStar_PSG3_00_0_64
+	smpsCall DanStar_PSG3_01_0_64
+
+DanStar_PSG3_Jump:
+	smpsCall DanStar_PSG3_00_0_64
+	smpsCall DanStar_PSG3_00_0_64
+	smpsCall DanStar_PSG3_00_0_64
+	smpsCall DanStar_PSG3_00_0_64
+	smpsCall DanStar_PSG3_00_0_64
+	smpsCall DanStar_PSG3_00_0_64
+	smpsCall DanStar_PSG3_00_0_64
+	smpsCall DanStar_PSG3_00_0_64
+	smpsCall DanStar_PSG3_00_0_64
+	smpsCall DanStar_PSG3_00_0_64
+	smpsCall DanStar_PSG3_00_0_64
+	smpsCall DanStar_PSG3_00_0_64
+	smpsCall DanStar_PSG3_00_0_64
+	smpsCall DanStar_PSG3_00_0_64
+	smpsCall DanStar_PSG3_00_0_64
+	smpsCall DanStar_PSG3_00_0_64
+	smpsJump DanStar_PSG3_Jump
+
+DanStar_PSG3_00_0_64:
+	smpsPSGvoice	DanTone_02
+	dc.b nMaxPSG, $01, nRst, $04, nMaxPSG, $01, nRst, $02, nMaxPSG, $01, nRst, $04, nMaxPSG, $01, nRst, $02
+	dc.b nMaxPSG, $01, nRst, $04, nMaxPSG, $01, nRst, $02, nMaxPSG, $01, nRst, $04, nMaxPSG, $01, nRst, $02
+	dc.b nMaxPSG, $01, nRst, $04, nMaxPSG, $01, nRst, $02, nMaxPSG, $01, nRst, $04, nMaxPSG, $01, nRst, $02
+	dc.b nMaxPSG, $01, nRst, $04, nMaxPSG, $01, nRst, $02, nMaxPSG, $01, nRst, $04, nMaxPSG, $01, nRst, $02
+	smpsReturn
+
+DanStar_PSG3_01_0_64:
+	smpsPSGvoice	DanTone_02
+	dc.b nMaxPSG, $01, nRst, $04, nMaxPSG, $01, nRst, $02, nMaxPSG, $01, nRst, $04, nMaxPSG, $01, nRst, $02
+	dc.b nMaxPSG, $01, nRst, $04, nMaxPSG, $01, nRst, $02, nMaxPSG, $01, nRst, $04, nMaxPSG, $01, nRst, $02
+	dc.b nMaxPSG, $01, nRst, $04, nMaxPSG, $01, nRst, $02, nMaxPSG, $01, nRst, nRst, $03, nMaxPSG, $01, nRst
+	dc.b $02, nMaxPSG, $01, nRst, $04, nMaxPSG, $01, nRst, $02, nMaxPSG, $01, nRst, $07
+	smpsReturn

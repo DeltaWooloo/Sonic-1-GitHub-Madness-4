@@ -178,7 +178,7 @@ Music0B:
 		include	"music/PikaNoob/treasurecaves.asm" 
 		even
 Music0C:
-		include	"music/TG2000Tracks/CanCan.asm"
+		include	"music/TG2000Tracks/Danstar.asm"
 		even
 Music0D:
 		include	"music/HS_Tracks/GCV2005.asm"
@@ -475,7 +475,7 @@ Music6B:
 		include	"music/TG2000Tracks/Skinner.asm" 
 		even
 Music6C:
-		include	"music/TG2000Tracks/Danstar.asm" 
+		include	"music/TG2000Tracks/CanCan.asm" 
 		even
 Music6D:
 		include	"music/Dawid/Hidden.asm" 
