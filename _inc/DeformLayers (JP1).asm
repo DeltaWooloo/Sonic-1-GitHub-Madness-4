@@ -245,8 +245,9 @@ Lz_Scroll_Data:
 
 Deform_MZ:
 		move.w  (v_zone).w,d0
-		cmpi.w  #(id_ACZ<<8)+3,d0
-		beq.w   Deform_MZ4
+; GIO: i'm turning this off for now. please don't touch MZ4
+;		cmpi.w  #(id_ACZ<<8)+3,d0
+;		beq.w   Deform_MZ4
 		
 Deform_MZNormal:	
 		move.w	(v_scrshiftx).w,d4
