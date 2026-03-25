@@ -36,7 +36,7 @@ Obj_Roaring_Knight:
 RKnight_Index:	
 	dc.w RKnight_Init-RKnight_Index		; Initialization routine
 	dc.w RKnight_Phase1-RKnight_Index	; Main logic for phase 1
-	dc.w RKnight_Null-RKnight_Index		; Phase 1 to Phase 2 transition
+	dc.w RKnight_Defeat-RKnight_Index	; Phase 1 to Phase 2 transition
 	dc.w RKnight_Null-RKnight_Index		; Main logic for phase 2
 	dc.w RKnight_Defeat-RKnight_Index	; Defeat and cleanup logic
 	dc.w RKnight_Bullets-RKnight_Index	; Knight bullet objects
@@ -54,8 +54,11 @@ RKnight_Init:
 	ori.b	#%00000100,obRender(a0)					; Define render settings
 	move.b	#$48,obActWid(a0)					; Define render width
 	move.b	#2,obPriority(a0)					; Define sprite render priority
+	move.b	#$F,obColType(a0)
+	move.b	#8,obColProp(a0) ; set number of hits to 8	
 	clr.b	Knight_Previous_Frame(a0)				; Set previous frame to 0
 	move.b	#1,obFrame(a0)						; Set current frame to 1. This guarantees correct graphics initialization. TODO: Proper animation routine.
+	move.b	#60,objoff_3E(a0)					; Give the Knight invincibility frames.
 	move.w	#Knight_X_Spawn+$120,Knight_X_Target(a0)		; Set Knight's initial destination
 	lea	(KnightBullets_ArtList).l,a1				; Get instructions for UserPLC
 	jsr	(UserPLC).l
@@ -72,7 +75,15 @@ RKnight_Phase1:
 	move.w	RKPhase1_Index(pc,d0.w),d1	; Get indexed routine
 	jsr	RKPhase1_Index(pc,d1.w)		; Jump to code
 	bsr.w	RKPhase1_Orientation		; Change Knight's orientation
-	bsr.w	RKnight_LoadGfx
+	bsr.w	RKnight_HandleHits		; Handle the Knight getting hit
+	bsr.w	RKnight_LoadGfx			; Load graphics from DPLC to VRAM
+	tst.b	obColType(a0)			; Is the Knight invincible?
+	bne.s	.display			; If not, display normally.
+	btst	#3,objoff_3E(a0)		; Otherwise, once every 8 frames...
+	beq.s	.display			; ...choose whether to display the Knight's sprite or not.
+	rts
+	
+.display:	
 	jmp	(DisplaySprite).l		; Display object
 
 ; ===========================================================================
@@ -183,22 +194,22 @@ RKPhase1_Attack:
 	bne.s	.nobullet				; sorry, the datacenters bought all of it :(
 	
 	; Pick bullet
-	move.l	(v_vbla_count).w,(v_random).w		; why do i have to do this myself.
+	move.l	(v_vbla_count).w,(v_random).w		; Set a seed for the randomizer.
 	jsr	(RandomNumber).l			; Get a random number
 	andi.l	#7,d1					; Number must be within 0-7.
 	adda.l	d1,a2					; Point to selection.
 	
 	; Summon bullet
-	move.b	#id_Roaring_Knight,(a1)			; make new object
-	move.b	#$A,obRoutine(a1)			; object is a bullet
+	move.b	#id_Roaring_Knight,(a1)			; Make new object
+	move.b	#$A,obRoutine(a1)			; Object is a bullet
 	clr.b	ob2ndRout(a1)
-	move.w	d2,obVelX(a1)				; give the object speed
-	move.w	obX(a0),obX(a1)				; copy X position
-	move.w	obY(a0),obY(a1)				; copy Y position
-	move.b	(a2),obSubtype(a1)			; set object subtype
+	move.w	d2,obVelX(a1)				; Give the object speed
+	move.w	obX(a0),obX(a1)				; Copy X position
+	move.w	obY(a0),obY(a1)				; Copy Y position
+	move.b	(a2),obSubtype(a1)			; Set object subtype
+	move.w  a0,Knight_Parent(a1)
 	
 .nobullet:		
-	jsr	(RandomNumber).l			; sure, i'll just shuffle the seed.
 	; make the Knight attack
 	bra.w	RKPhase1_MoveToYTarget
 	
@@ -250,7 +261,14 @@ RKPhase1_Idle:
 ; ===========================================================================	
 
 RKnight_Defeat:
-	jmp	(DeleteObject).l	; Delete instance from memory
+	addi.b	#2,(v_dle_routine).w		; The level's DLE code will handle what to do next!
+	move.w	#100,d0				; set bonus to 1000	
+	bsr.w	AddPoints	
+	move.b	#$8, d1
+	jsr	(GHM3Explode_Custom).l
+	lea	(Capsule_ArtList).l,a1				; Get instructions for UserPLC
+	jsr	(UserPLC).l	
+	jmp	(DeleteObject).l	
 
 ; ===========================================================================	
 ; Knight bullet objects
@@ -265,8 +283,10 @@ RKnight_Defeat:
 RKnight_Bullets:
 	movea.l	#-1,a1
 	movea.w	Knight_Parent(a0),a1	; Get RAM location of parent.
-	tst.b	(a1)			; Check if the parent is loaded.
-	jeq	(DeleteObject).l	; Delete object if it isn't.
+	cmpi.b	#id_Roaring_Knight,(a1)	; Check if the parent is loaded and is the Roaring Knight.
+	beq.s	.skip			; Delete object if it isn't.
+	jmp	(DeleteObject).l
+.skip:	
 	tst.b	ob2ndRout(a0)		; Has the object already gone through initialization?
 	bne.s	.skipInit		; If so, branch.
 	
@@ -336,6 +356,30 @@ RKnight_LoadGfx:
 	jmp	(LoadDynPLC).l				; load DPLC
 .end:
 	rts						; return
+
+; ===========================================================================
+; Suboutine to handle damage
+;
+; Used by: Roaring Knight (All phases)
+; ===========================================================================
+
+RKnight_HandleHits:
+	tst.b	obColType(a0)				; Does the Knight presently have a hitbox?
+	bne.s	.return					; If so, no action is required.
+	
+	btst	#7,obStatus(a0)				; Has the Knight taken all possible damage?
+	beq.s	.normalhit				; If so, branch.
+	addq.b	#2,obRoutine(a0)			; Else, phase is complete. Go to next routine.
+	rts
+	
+	.normalhit:
+	sub.b	#1,objoff_3E(a0)			; Decrement the Knight's invincibility frames.
+	bne.s	.return					; If not 0, return.
+	move.b	#$F,obColType(a0)			; Restore the Knight's hitbox.
+	move.b	#60,objoff_3E(a0)			; Restore the Knight's invincibility frames for later.
+
+.return:
+	rts
 
 ; ===========================================================================
 ; Load the Knight bullet properties.
@@ -497,6 +541,13 @@ KnightBullets_ArtList:
 	dc.w	ArtTile_Knight_Weapons*tile_size
 	dc.l	-1		
 	even
+	
+Capsule_ArtList:
+	dc.l	Nem_Prison
+	dc.w	ArtTile_Prison_Capsule*tile_size
+	dc.l	-1		
+	even
+	
 
 ; ===========================================================================
 ; Sprite mappings and DPLC

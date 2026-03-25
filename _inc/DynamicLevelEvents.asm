@@ -409,12 +409,14 @@ DLE_MZ4:
 ; ===========================================================================
 DLE_MZ4_routines:	dc.w DLE_MZ4chkboss-DLE_MZ4_routines
 			dc.w DLE_MZ4end-DLE_MZ4_routines
+			dc.w DLE_MZ4afterboss-DLE_MZ4_routines
+			dc.w DLE_MZ4_return-DLE_MZ4_routines
 ; ===========================================================================
 		
 DLE_MZ4chkboss:
 		move.w	#$140,(v_limitbtm1).w
 		cmpi.w	#Knight_X_Spawn,(v_screenposx).w
-		blo.s	locret_70E8
+		blo.s	DLE_MZ4_return
 		jsr	(FindFreeObj).l
 		bne.s	.spawnfail
 		_move.b	#id_Roaring_Knight,obID(a1) ; load MZ boss object
@@ -429,6 +431,16 @@ DLE_MZ4chkboss:
 
 DLE_MZ4end:
 		move.w	(v_screenposx).w,(v_limitleft2).w
+		rts
+		
+DLE_MZ4afterboss:
+		
+		addi.w	#$200,(v_limitright2).w
+		addq.b	#2,(v_dle_routine).w
+		move.w	#bgm_LosTontos,d0
+		jmp	(QueueSound1).w	; play level music
+
+DLE_MZ4_return:
 		rts
 		
 ; ===========================================================================
