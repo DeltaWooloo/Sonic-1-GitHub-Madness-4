@@ -57,7 +57,7 @@ RKnight_Init:
 	move.b	#$F,obColType(a0)
 	move.b	#8,obColProp(a0) ; set number of hits to 8	
 	clr.b	Knight_Previous_Frame(a0)				; Set previous frame to 0
-	move.b	#1,obFrame(a0)						; Set current frame to 1. This guarantees correct graphics initialization. TODO: Proper animation routine.
+	move.b	#2,obFrame(a0)						; Set current frame. This guarantees correct graphics initialization. TODO: Proper animation routine.
 	move.b	#60,objoff_3E(a0)					; Give the Knight invincibility frames.
 	move.w	#Knight_X_Spawn+$120,Knight_X_Target(a0)		; Set Knight's initial destination
 	lea	(KnightBullets_ArtList).l,a1				; Get instructions for UserPLC
@@ -69,7 +69,6 @@ RKnight_Init:
 ; ===========================================================================		
 	
 RKnight_Phase1:
-	move.b	#1,obFrame(a0)			; TO-DO: "Animation" for phase 1. The Knight won't need elaborate scripts in this phase, so the moves themselves can handle how they're displayed.
 	moveq	#0,d0
 	move.b	ob2ndRout(a0),d0		; Get routine ID
 	move.w	RKPhase1_Index(pc,d0.w),d1	; Get indexed routine
@@ -97,6 +96,7 @@ RKPhase1_Index:
 	dc.w RKPhase1_Attack-RKPhase1_Index		; Moves the Knight down and makes it attack.
 	dc.w RKPhase1_AfterAttack-RKPhase1_Index	; Sets up the Knight to go back up
 	dc.w RKPhase1_MoveToYTarget-RKPhase1_Index	; Moves the Knight back up
+	dc.w RKPhase1_ResetSprite-RKPhase1_Index	; Resets the Knight's sprite back to the default one
 	dc.w RKPhase1_Wait-RKPhase1_Index		; Wait for an amount decided by the previous routine
 	dc.w RKPhase1_TargetAfterReturn-RKPhase1_Index	; Moves the Knight to a different target
 	dc.w RKPhase1_MoveToXTarget-RKPhase1_Index	
@@ -167,6 +167,7 @@ RKPhase1_MoveToYTarget:
 ; ===========================================================================
 	
 RKPhase1_Attack_Setup:
+	move.b	#3,obFrame(a0)
 	addq.b	#2,ob2ndRout(a0)			; Advance to next routine.
 	move.w	#1,Knight_Timer(a0)			; Set internal timer. Will be used by attack routine.
 	move.w	#Knight_Y_Spawn+$A4,Knight_Y_Target(a0)	; Set target location
@@ -225,7 +226,16 @@ RKPhase1_AfterAttack:
 	bra.w	RKPhase1_MoveToYTarget
 	
 ; ===========================================================================
-; Make the Knight go down and attack once every third of a second
+; After the Knight finished going back up
+; ===========================================================================		
+	
+RKPhase1_ResetSprite:
+	addq.b	#2,ob2ndRout(a0)
+	move.b	#2,obFrame(a0)
+	rts
+	
+; ===========================================================================
+; Make the Knight move to the opposite side of the screen
 ; ===========================================================================	
 	
 RKPhase1_TargetAfterReturn:
@@ -424,7 +434,7 @@ KBullets_LoadProperties:
 ; - Render flags (1 byte)
 ; - Collision type and size from obColType array (1 byte)
 ; - Actual sprite width for rendering (1 byte)
-; - Static frame (1 byte) (gets overridden by the animation if specified.
+; - Static frame (1 byte) (gets overridden by the animation if specified.+
 ; ===========================================================================
 
 
@@ -433,7 +443,7 @@ Knight_BulletProperties:
 	dc.b	$0			; Animation ID (set to 0 to not use)
 	dc.b	%00000100		; Render flags (mostly for flipping)
 	dc.b	$8B			; obColType (to determine the hitbox)
-	dc.b	$0			; obActWid
+	dc.b	$10			; obActWid
 	dc.b	$1			; static frame (if an animation wasn't specified)
 	dc.b	$0			; Unused
 
@@ -441,7 +451,7 @@ Knight_BulletProperties:
 	dc.b	$0			; Animation
 	dc.b	%00000101		; Render flags (mostly for flipping)
 	dc.b	$8B			; obColType (to determine the hitbox)
-	dc.b	$0			; obActWid
+	dc.b	$10			; obActWid
 	dc.b	$1			; static frame (if an animation wasn't specified)
 	dc.b	$0			; Unused
 	
@@ -449,7 +459,7 @@ Knight_BulletProperties:
 	dc.b	$0			; Animation
 	dc.b	%00000100		; Render flags (mostly for flipping)
 	dc.b	$A7			; obColType (to determine the hitbox)
-	dc.b	$0			; obActWid
+	dc.b	$20			; obActWid
 	dc.b	$2			; static frame (if an animation wasn't specified)	
 	dc.b	$0			; Unused
 
@@ -457,7 +467,7 @@ Knight_BulletProperties:
 	dc.b	$0			; Animation
 	dc.b	%00000101		; Render flags (mostly for flipping)
 	dc.b	$A7			; obColType (to determine the hitbox)
-	dc.b	$0			; obActWid
+	dc.b	$20			; obActWid
 	dc.b	$2			; static frame (if an animation wasn't specified)	
 	dc.b	$0			; Unused
 
@@ -465,7 +475,7 @@ Knight_BulletProperties:
 	dc.b	$0			; Animation
 	dc.b	%00000100		; Render flags (mostly for flipping)
 	dc.b	$A8			; obColType (to determine the hitbox)
-	dc.b	$0			; obActWid
+	dc.b	$10			; obActWid
 	dc.b	$3			; static frame (if an animation wasn't specified)	
 	dc.b	$0			; Unused
 
@@ -473,7 +483,7 @@ Knight_BulletProperties:
 	dc.b	$0			; Animation
 	dc.b	%00000110		; Render flags (mostly for flipping)
 	dc.b	$A8			; obColType (to determine the hitbox)
-	dc.b	$0			; obActWid
+	dc.b	$10			; obActWid
 	dc.b	$3			; static frame (if an animation wasn't specified)	
 	dc.b	$0			; Unused
 
@@ -481,7 +491,7 @@ Knight_BulletProperties:
 	dc.b	$0			; Animation
 	dc.b	%00000100		; Render flags (mostly for flipping)
 	dc.b	$A5			; obColType (to determine the hitbox)
-	dc.b	$0			; obActWid
+	dc.b	$18			; obActWid
 	dc.b	$4			; static frame (if an animation wasn't specified)	
 	dc.b	$0			; Unused
 
@@ -489,7 +499,7 @@ Knight_BulletProperties:
 	dc.b	$0			; Animation
 	dc.b	%00000101		; Render flags (mostly for flipping)
 	dc.b	$A5			; obColType (to determine the hitbox)
-	dc.b	$0			; obActWid
+	dc.b	$18			; obActWid
 	dc.b	$4			; static frame (if an animation wasn't specified)	
 	dc.b	$0			; Unused
 
@@ -497,7 +507,7 @@ Knight_BulletProperties:
 	dc.b	$0			; Animation
 	dc.b	%00000100		; Render flags (mostly for flipping)
 	dc.b	$A6			; obColType (to determine the hitbox)
-	dc.b	$0			; obActWid
+	dc.b	$10			; obActWid
 	dc.b	$5			; static frame (if an animation wasn't specified)	
 	dc.b	$0			; Unused
 
@@ -505,7 +515,7 @@ Knight_BulletProperties:
 	dc.b	$0			; Animation
 	dc.b	%00000110		; Render flags (mostly for flipping)
 	dc.b	$A6			; obColType (to determine the hitbox)
-	dc.b	$0			; obActWid
+	dc.b	$10			; obActWid
 	dc.b	$5			; static frame (if an animation wasn't specified)	
 	dc.b	$0			; Unused
 
