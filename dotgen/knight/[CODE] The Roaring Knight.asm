@@ -205,6 +205,8 @@ RKPhase1_Attack:
 	clr.b	ob2ndRout(a1)
 	move.w	d2,obVelX(a1)				; Give the object speed
 	move.w	obX(a0),obX(a1)				; Copy X position
+	asr.w	#3,d2
+	sub.w	d2,obX(a1)				; Make it spawn slightly off screen
 	move.w	obY(a0),obY(a1)				; Copy Y position
 	move.b	(a2),obSubtype(a1)			; Set object subtype
 	move.w  a0,Knight_Parent(a1)
@@ -446,7 +448,7 @@ Knight_BulletProperties:
 	; Sword 1 (facing right)
 	dc.b	$0			; Animation
 	dc.b	%00000100		; Render flags (mostly for flipping)
-	dc.b	$8B			; obColType (to determine the hitbox)
+	dc.b	$A7			; obColType (to determine the hitbox)
 	dc.b	$0			; obActWid
 	dc.b	$2			; static frame (if an animation wasn't specified)	
 	dc.b	$0			; Unused
@@ -454,7 +456,7 @@ Knight_BulletProperties:
 	; Sword 1 (facing left)
 	dc.b	$0			; Animation
 	dc.b	%00000101		; Render flags (mostly for flipping)
-	dc.b	$8B			; obColType (to determine the hitbox)
+	dc.b	$A7			; obColType (to determine the hitbox)
 	dc.b	$0			; obActWid
 	dc.b	$2			; static frame (if an animation wasn't specified)	
 	dc.b	$0			; Unused
@@ -462,7 +464,7 @@ Knight_BulletProperties:
 	; Sword 1 (facing down)
 	dc.b	$0			; Animation
 	dc.b	%00000100		; Render flags (mostly for flipping)
-	dc.b	$8B			; obColType (to determine the hitbox)
+	dc.b	$A8			; obColType (to determine the hitbox)
 	dc.b	$0			; obActWid
 	dc.b	$3			; static frame (if an animation wasn't specified)	
 	dc.b	$0			; Unused
@@ -470,7 +472,7 @@ Knight_BulletProperties:
 	; Sword 1 (facing up)
 	dc.b	$0			; Animation
 	dc.b	%00000110		; Render flags (mostly for flipping)
-	dc.b	$8B			; obColType (to determine the hitbox)
+	dc.b	$A8			; obColType (to determine the hitbox)
 	dc.b	$0			; obActWid
 	dc.b	$3			; static frame (if an animation wasn't specified)	
 	dc.b	$0			; Unused
@@ -478,7 +480,7 @@ Knight_BulletProperties:
 	; Sword 2 (facing right)
 	dc.b	$0			; Animation
 	dc.b	%00000100		; Render flags (mostly for flipping)
-	dc.b	$8B			; obColType (to determine the hitbox)
+	dc.b	$A5			; obColType (to determine the hitbox)
 	dc.b	$0			; obActWid
 	dc.b	$4			; static frame (if an animation wasn't specified)	
 	dc.b	$0			; Unused
@@ -486,7 +488,7 @@ Knight_BulletProperties:
 	; Sword 2 (facing left)
 	dc.b	$0			; Animation
 	dc.b	%00000101		; Render flags (mostly for flipping)
-	dc.b	$8B			; obColType (to determine the hitbox)
+	dc.b	$A5			; obColType (to determine the hitbox)
 	dc.b	$0			; obActWid
 	dc.b	$4			; static frame (if an animation wasn't specified)	
 	dc.b	$0			; Unused
@@ -494,7 +496,7 @@ Knight_BulletProperties:
 	; Sword 2 (facing down)
 	dc.b	$0			; Animation
 	dc.b	%00000100		; Render flags (mostly for flipping)
-	dc.b	$8B			; obColType (to determine the hitbox)
+	dc.b	$A6			; obColType (to determine the hitbox)
 	dc.b	$0			; obActWid
 	dc.b	$5			; static frame (if an animation wasn't specified)	
 	dc.b	$0			; Unused
@@ -502,7 +504,7 @@ Knight_BulletProperties:
 	; Sword 2 (facing up)
 	dc.b	$0			; Animation
 	dc.b	%00000110		; Render flags (mostly for flipping)
-	dc.b	$8B			; obColType (to determine the hitbox)
+	dc.b	$A6			; obColType (to determine the hitbox)
 	dc.b	$0			; obActWid
 	dc.b	$5			; static frame (if an animation wasn't specified)	
 	dc.b	$0			; Unused
