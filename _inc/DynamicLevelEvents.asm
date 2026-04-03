@@ -952,7 +952,7 @@ DLE_DVZ3:
 		move.w  #$2000,d2
 		move.w  #(NEEDLESCRARTSZ/2),d3
 		jsr	QueueDMATransfer.l
-		copyTilemap	MapScr_NeedleScr,vram_bg+$800,58,12
+		copyTilemap	MapScr_NeedleScr,vram_bg+$700,58,14
 		addq.b	#4,v_dle_routine.w
 		add.w	#256,v_limitright2.w		
 		rts

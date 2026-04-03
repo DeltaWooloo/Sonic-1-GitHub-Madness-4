@@ -887,8 +887,12 @@ Deform_DVZ:
 .CheckerFloor:
 		move.w	v_screenposx.w,d0
 		move.w	d0,d3
-		asr.w	#2,d3
+		asr.w	#1,d0
+;		move.w	d3,d4
+;		asr.w	#1,d4
+;		add.w	d4,d3
 		add.w	d3,d0
+
 		andi.w	#$FF,d0
 		cmpi.w	#$7F,d0
 		bgt.s	.Skip
@@ -906,7 +910,7 @@ Deform_DVZ:
 		neg.w	d0
 
 		lea	v_hscrolltablebuffer,a1
-		move.w	#128-1,d1
+		move.w	#112-1,d1
 
 		; temp
 
@@ -915,17 +919,20 @@ Deform_DVZ:
 		dbf	d1,.WriteTop
 		move.w	v_bgscreenposx.w,d0
 		asr.w	#2,d0
+		move.w	d0,d3
+		asr.w	#2,d3
+		sub.w	d3,d0
 		move.w	v_bgscreenposx.w,d2
 ;		addi.w	#-$200,d2
 		sub.w	d0,d2
 		ext.l	d2
 		asl.l	#8,d2
-		divs.w	#96,d2
+		divs.w	#104,d2
 		ext.l	d2
 		asl.l	#8,d2
 		moveq	#0,d3
 		move.w	d0,d3
-		move.w	#96-1,d1
+		move.w	#104-1,d1
 
 .loc_6384:
 		move.w	d3,d0
@@ -935,6 +942,17 @@ Deform_DVZ:
 		add.l	d2,d3
 		swap	d3
 		dbf	d1,.loc_6384
+
+		;	do last tile
+		
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+		
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
 		rts
 
 ; ---------------------------------------------------------------------------
