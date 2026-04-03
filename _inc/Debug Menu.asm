@@ -70,7 +70,7 @@ DebugMenu_ClrScroll1:
 
 		move.l	d0,(v_scrposy_vdp).w
 
-		move.b	#$0C,(v_gamemode).w	; set game mode to Level
+		move.b	#id_Level,(v_gamemode).w	; set game mode to Level
 		move.b	#0,(v_zone).w		; zone 0 (GHZ)
 		move.b	#0,(v_act).w		; act 1
 		move.b	#0,(v_emeralds).w	; 0 emeralds
@@ -366,15 +366,22 @@ DebuggerMenu_LoadGame:
 		move.b	#2,(v_continues).w ; set continues to 2 for the accurate felix experience		
 		move.l	#5000,(v_scorelife).w ; extra life is awarded at 50000 points
 		move.b	#1,(v_dbgmenu_exit).w
-		cmpi.b	#$08,(v_gamemode).w	; is game mode demo?
-		bne.s	.Act4			; if not, branch
+		
+		;!@ GD: Check if clinton mode, and change submode based on Emerald count
+		;cmpi.b	#id_ClintonScr,(v_gamemode).w	; is game mode Clinton?
+		;bne.s	.notClinton						; if not, branch
+		;move.b	(v_emeralds).w,(submode).w
+		
+.notClinton:
+		cmpi.b	#id_Demo,(v_gamemode).w	; is game mode demo?
+		bne.s	.Act4					; if not, branch
 ;		jsr		(DemoSetup).l
-		move.w	#1,(f_demo).w ; set demo mode flag on
+		move.w	#1,(f_demo).w 			; set demo mode flag on
 .Act4:
-		cmpi.b	#3,(v_act).w		; is act 4?
-		bne.s	.KeepAsAct4			; if not, keep act
-;DebuggerMenu_AntiAct4:			; support act 4, but ensure if the zone does not have one (if not, set to 3) - CONI
-		move.b	(v_zone).w,d1	; send zone id to d0
+		cmpi.b	#3,(v_act).w			; is act 4?
+		bne.s	.KeepAsAct4				; if not, keep act
+;DebuggerMenu_AntiAct4:					; support act 4, but ensure if the zone does not have one (if not, set to 3) - CONI
+		move.b	(v_zone).w,d1			; send zone id to d0
 		move.b	DebuggerMenu_Act4EnablerTable(pc,d1.w),d0	; reference a table
 		tst.b	d0
 		bne.s	.KeepAsAct4
@@ -382,6 +389,7 @@ DebuggerMenu_LoadGame:
 .KeepAsAct4:
 		rts
 
+;!@ GenesisDoes: PLEASE UPDATE THIS TABLE!
 DebuggerMenu_Act4EnablerTable:
 		dc.b	$0		; GHZ
 		dc.b	$1		; LZ
@@ -395,6 +403,7 @@ DebuggerMenu_Act4EnablerTable:
 		dc.b	$0		; JOINT
 		dc.b	$1		; DVZ
 		dc.b	$0		; ZONE
+		zonewarning DebuggerMenu_Act4EnablerTable,1
 		even
 		
 ; ---------------------------------------------------------------------------
@@ -597,33 +606,34 @@ GamemodeNameTable:
 		dc.w	.Advert-.t
 		dc.w	.Earthbou-.t
 		dc.w	.Screensaver-.t
-		dc.w	.Placeholder-.t	; ClintonScreens
+		dc.w	.Clinton-.t	; ClintonScreens
 		dc.w	.OllieMaster-.t
 		rept ( (GameModeArray_End-GameModeArray)-(((*)-.t)*2) )/4
 		dc.w	.Placeholder-.t
 		endr
 
-.Sega:		dc.b	"SEGA SCREEN     "
-.Tittle:	dc.b	"TITTLE SCREEN   "
-.Demo:		dc.b	"LEVEL DEMO      "
-.Level:		dc.b	"LEVEL           "
-.Special:	dc.b	"SPECIAL STAGE   "
-.Continue:	dc.b	"CONTINUE        "
-.Ending:	dc.b	"ENDING          "
-.CreditsS1:	dc.b	"CREDITS SONIC 1 "
-.ColdBrew:	dc.b	"COLD BREW       "
-.FoxyScare:	dc.b	"FOXY JUMPSCARE  "
-.DebugMenu:	dc.b	"DEBUG MENU      "
-.Thanatos:	dc.b	"THANATOS CREDITS"
+.Sega:			dc.b	"SEGA SCREEN     "
+.Tittle:		dc.b	"TITLE SCREEN    "
+.Demo:			dc.b	"LEVEL DEMO      "
+.Level:			dc.b	"LEVEL           "
+.Special:		dc.b	"SPECIAL STAGE   "
+.Continue:		dc.b	"CONTINUE        "
+.Ending:		dc.b	"ENDING          "
+.CreditsS1:		dc.b	"CREDITS SONIC 1 "
+.ColdBrew:		dc.b	"COLD BREW       "
+.FoxyScare:		dc.b	"FOXY JUMPSCARE  "
+.DebugMenu:		dc.b	"DEBUG MENU      "
+.Thanatos:		dc.b	"THANATOS CREDITS"
 .ButtcrackMan:	dc.b	"BUTTCRACK MAN   "
 .TryAgainTest:	dc.b	"TRY AGAIN/END   "
 .Difficulty:	dc.b	"DIFFICULTY      "
 .DamnScreen:	dc.b	"DAMN!!!!!!!!!!!!"
-.Skipper:	dc.b	"SPLASH SKIPPER  "
-.Advert:	dc.b	"ADVERTISEMENTS  "
-.Earthbou:	dc.b	"EARTHBOUND BTL  "
+.Skipper:		dc.b	"SPLASH SKIPPER  "
+.Advert:		dc.b	"ADVERTISEMENTS  "
+.Earthbou:		dc.b	"EARTHBOUND BTL  "
 .Screensaver:	dc.b	"SCREENSAVER     "
 .OllieMaster:	dc.b	"MASTERPIECE RPG "
+.Clinton:		dc.b	"CLINTON         "
 .Placeholder:	dc.b	"PLACEHOLDER NAME"
 		even
 
