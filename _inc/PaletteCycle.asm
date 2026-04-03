@@ -29,7 +29,7 @@ PalCycle_Index:	dc.w PalCycle_GHZ-PalCycle_Index
 		dc.w PalCycle_MZ-PalCycle_Index
 		dc.w PalCycle_MZ-PalCycle_Index
 		dc.w PalCycle_MZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
+		dc.w PalCycle_DVZ-PalCycle_Index
 		dc.w PalCyc_Nogales-PalCycle_Index
 		dc.w PalCycle_MZ-PalCycle_Index
 		dc.w PalCycle_MZ-PalCycle_Index
@@ -54,6 +54,7 @@ PalCycle_LZ:
 
 ; ===========================================================================
 PCycLZ_Seq:	dc.b 1,	0, 0, 1, 0, 0, 1, 0
+		even
 ; ===========================================================================
 
 PalCycle_MZ:
@@ -191,7 +192,39 @@ loc_1B52:
 
 locret_1B64:
 		rts
-; End of function PalCycle_SBZ
+
+; ---------------------------------------------------------------------------
+
+PalCycle_DVZ:
+	move.b	v_clintonfucker,d0
+	bpl.s	.Exit
+	lea	.Cycle(pc),a0
+	lea	(v_pal_dry+98).w,a1
+	moveq	#0,d0
+	move.b	v_pcyc_num.w,d0
+	cmpi.b	#14*2,d0
+	ble.s	.Skip
+	move.b	#0,v_pcyc_num.w
+.Skip
+	adda.l	d0,a0
+	move.l	(a0)+,(a1)+
+	move.l	(a0)+,(a1)+
+	move.l	(a0)+,(a1)+
+	move.l	(a0)+,(a1)+
+	move.l	(a0)+,(a1)+
+	move.l	(a0)+,(a1)+
+	move.l	(a0)+,(a1)+
+.Exit:
+	rts
+; ---------------------------------------------------------------------------
+
+.Cycle:
+	dc.w $222,$222,$222,$222,$222,$222,$222
+	dc.w $EEE,$EEE,$EEE,$EEE,$EEE,$EEE,$EEE
+	dc.w $222,$222,$222,$222,$222,$222,$222
+	dc.w $EEE,$EEE,$EEE,$EEE,$EEE,$EEE,$EEE
+
+; ---------------------------------------------------------------------------
 
 PalCyc_Nogales:
 		lea	.Cycle(pc),a0

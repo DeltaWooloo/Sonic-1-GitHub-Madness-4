@@ -43,7 +43,7 @@ Deform_Index:	dc.w Deform_GHZ-Deform_Index, Deform_LZ-Deform_Index
 		zonewarning Deform_Index,2
 		dc.w Deform_GHZ-Deform_Index, Deform_CBZ-Deform_Index
 		dc.w Deform_WZ-Deform_Index, Deform_Joint-Deform_Index
-		dc.w Deform_LZ-Deform_Index,Deform_NGZ-Deform_Index
+		dc.w Deform_DVZ-Deform_Index,Deform_NGZ-Deform_Index
 		dc.w Deform_LZ-Deform_Index,Deform_LZ-Deform_Index
 ; ---------------------------------------------------------------------------
 ; Green Hill Zone background layer deformation code
@@ -859,6 +859,82 @@ Deform_CBZ:
 	.waterLoop:			; trees
 		move.l	d0,(a1)+
 		dbf	d1,.waterLoop
+		rts
+
+; ---------------------------------------------------------------------------
+; DoleVille whatever the fuck people call this code
+; ---------------------------------------------------------------------------
+
+Deform_DVZ:
+		move.b	v_clintonfucker,d0
+		bmi.s	.CheckerFloor
+
+		clr.l   v_bgscreenposy.w
+		lea	v_hscrolltablebuffer.w,a1
+		move.w	#224-1,d1
+		move.w	v_screenposx.w,d0
+		neg.w	d0
+		swap	d0
+;		move.w	v_bgscreenposy.w,d0
+		move.w	#0,d0
+		neg.w	d0
+
+.WriteHScroll:
+		move.l	d0,(a1)+
+		dbf	d1,.WriteHScroll
+		rts
+
+.CheckerFloor:
+		move.w	v_screenposx.w,d0
+		move.w	d0,d3
+		asr.w	#2,d3
+		add.w	d3,d0
+		andi.w	#$FF,d0
+		cmpi.w	#$7F,d0
+		bgt.s	.Skip
+		move.b	#7*2,v_pcyc_num.w
+		bra.s	.Go
+.Skip:
+		move.b	#0,v_pcyc_num.w
+.Go:
+		andi.w	#$7F,d0				; this is a fucking mess i know
+		move.w	d0,v_bgscreenposx.w
+
+		neg.w	d0
+		swap	d0
+		
+		neg.w	d0
+
+		lea	v_hscrolltablebuffer,a1
+		move.w	#128-1,d1
+
+		; temp
+
+.WriteTop:
+		move.l	d0,(a1)+
+		dbf	d1,.WriteTop
+		move.w	v_bgscreenposx.w,d0
+		asr.w	#2,d0
+		move.w	v_bgscreenposx.w,d2
+;		addi.w	#-$200,d2
+		sub.w	d0,d2
+		ext.l	d2
+		asl.l	#8,d2
+		divs.w	#96,d2
+		ext.l	d2
+		asl.l	#8,d2
+		moveq	#0,d3
+		move.w	d0,d3
+		move.w	#96-1,d1
+
+.loc_6384:
+		move.w	d3,d0
+		neg.w	d0
+		move.l	d0,(a1)+
+		swap	d3
+		add.l	d2,d3
+		swap	d3
+		dbf	d1,.loc_6384
 		rts
 
 ; ---------------------------------------------------------------------------

@@ -69,6 +69,7 @@ ObjNeedleBoss:
 ; ----------------------------------------------------------------------------
 
 NeedleBoss_Init:
+	st.b	v_bossstatus.w
 	move.b	#0,obFrame(a0)
 	move.b	#0,obAnim(a0)
 	tst.l	v_plc_buffer.w
@@ -132,10 +133,13 @@ NeedleBoss_ChargeInit:
 	bsr.w	_needleMoveToY
 	bra.w	_needleShake
 .Go:
+	move.b	#-1,v_clintonfucker.w
+	addq.b	#4,v_dle_routine.w
 	addq.b	#2,obRoutine(a0)
 	move.b	#3,obAnim(a0)
 	move.w	#$400,obVelY(a0)
 	move.w	#-$100,obVelX(a0)
+	move.w	obY(a0),needle.YOrg(a0)
 	move.b	#sfx_GiantRing,d0
 	jmp	QueueSound2.l
 
@@ -153,7 +157,7 @@ _needleShake:
 	move.w	obX(a0),needle.XOrg(a0)
 	move.w	obY(a0),needle.YOrg(a0)	
 	jsr	RandomNumber.l
-	andi.l	#$000F000F,d0
+	andi.l	#$001F001F,d0
 	move.b	obAngle(a0),d1
 	and.b	d1,d0
 	add.w	d0,obX(a0)
@@ -163,6 +167,7 @@ _needleShake:
 	rts
 
 NeedleBoss_FlyOut:
+
 	subi.w	#$50,obVelY(a0)
 	jmp	SpeedToPos.l
 

@@ -10,7 +10,11 @@ GM_FoxyBoo:
 		jsr	(MegaPCM_StopPlayback).l
 		bsr.w	WinXP_CLearPal
 
+		move.b	#2,(v_vbla_routine).w
+		jsr		(WaitForVBla).l
+
 		disable_display
+		disable_ints
 
 		jsr	(ClearScreen).l
 
@@ -36,15 +40,13 @@ GM_FoxyBoo:
 GM_Foxy_ClrObjRam:
 		move.l	d0,(a1)+
 		dbf	d1,GM_Foxy_ClrObjRam ; clear object RAM
-;		move.b	#bgm_Memories,d0
-;		jsr		(PlaySound_Special).l  ; play memories music
-
-		move.b	#2,(v_vbla_routine).w
-		jsr		(WaitForVBla).l
 
 		locVRAM	0
 		lea	(Nem_FoxyBoo).l,a0
 		jsr	(NemDec).l
+
+		move.b	#2,(v_vbla_routine).w
+		jsr		(WaitForVBla).l
 
 		moveq	#palid_Foxy,d0
 		jsr		(PalLoad2).l		; load palette

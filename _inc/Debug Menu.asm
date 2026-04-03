@@ -312,7 +312,8 @@ DebuggerMenu_Controls:
 
 ;GD: Commit with SFX
 .commit:
-		beep
+		nop
+;		beep
 ;GD: Commit without SFX
 .commit2:
 		move.b	d3,(a2)
@@ -607,7 +608,6 @@ GamemodeNameTable:
 		dc.w	.Earthbou-.t
 		dc.w	.Screensaver-.t
 		dc.w	.Clinton-.t	; ClintonScreens
-		dc.w	.OllieMaster-.t
 		rept ( (GameModeArray_End-GameModeArray)-(((*)-.t)*2) )/4
 		dc.w	.Placeholder-.t
 		endr
@@ -632,7 +632,6 @@ GamemodeNameTable:
 .Advert:		dc.b	"ADVERTISEMENTS  "
 .Earthbou:		dc.b	"EARTHBOUND BTL  "
 .Screensaver:	dc.b	"SCREENSAVER     "
-.OllieMaster:	dc.b	"MASTERPIECE RPG "
 .Clinton:		dc.b	"CLINTON         "
 .Placeholder:	dc.b	"PLACEHOLDER NAME"
 		even

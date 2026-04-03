@@ -1,3 +1,0 @@
-PLEASE don't touch these files unless there's something like out of range errors, or else i will kill you (not really)
-
-yes, this means please don't add the recmp.bat stuff in here, i'll handle that sort of thing on my own once i get things more optimized. otherwise, it's just extra maintenance work with no real substantial benefits.

@@ -2386,7 +2386,7 @@ Maniac_Animate:
 .belowmax3:
 		lsr.w	#6,d2
 		move.b	d2,obTimeFrame(a0) ; modify frame duration
-		lea	(SonAni_Push).l,a1
+		lea	(ManiacAni_Push).l,a1
 		move.b	obStatus(a0),d1
 		andi.b	#1,d1
 		andi.b	#$FC,obRender(a0)

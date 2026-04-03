@@ -908,6 +908,8 @@ DLE_DVZ3:
 		bra.w	.BgmSet
 		bra.w	.Fade
 		bra.w	.Exit
+		bra.w	.LoadBg
+		bra.w	.Exit
 ; ---------------------------------------------------------------------------
 .InitBoss:
 		cmpi.w	#$380,v_screenposx.w
@@ -927,6 +929,7 @@ DLE_DVZ3:
 
 .BgmSet:
 		move.b	#20,v_palfadecntr.w
+		addq.b	#4,v_dle_routine.w
 .Fade:
 		subq.b	#1,v_palfadecntr.w
 		bne.s	.Go
@@ -935,6 +938,25 @@ DLE_DVZ3:
 		move.w	#$401F,v_pfade_start.w
 		jsr	FadeOut_ToBlack.l
 		rts
+.LoadBg:
+		moveq	#0,d0
+		move.w	d0,(v_bgscreenposy).w
+		move.w	d0,(v_bg2screenposy).w
+		move.w	d0,(v_bgscreenposx).w
+		move.w	d0,(v_bg2screenposx).w
+		move.w	d0,(v_bg3screenposx).w
+		move.w	d0,v_bgscreenposy.w
+
+		fillVRAM	0, vram_fg, vram_fg+plane_size_64x32 ; clear foreground namespace
+		move.l  #Art_NeedleScr,d1
+		move.w  #$2000,d2
+		move.w  #(NEEDLESCRARTSZ/2),d3
+		jsr	QueueDMATransfer.l
+		copyTilemap	MapScr_NeedleScr,vram_bg+$800,58,12
+		addq.b	#4,v_dle_routine.w
+		add.w	#256,v_limitright2.w		
+		rts
+
 ; ---------------------------------------------------------------------------
 ; Nogales Zone direct port from ice cc remake :^)
 ; ---------------------------------------------------------------------------

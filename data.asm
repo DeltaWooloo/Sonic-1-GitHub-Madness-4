@@ -492,6 +492,12 @@ Kos_HSZ:	binclude	"artkos/8x8 - HSZ.kos"
 		even
 Blk256_HSZ:	binclude	"map256/HSZ.kos"		
 		even
+Blk16_BSZ:	binclude	"map16/BSZ.bin";sTOP
+		even
+Kos_BSZ:	binclude	"artkos/8x8 - BSZ.kos"
+		even
+Blk256_BSZ:	binclude	"map256/BSZ.bin"		
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - bosses and ending sequence
 ; ---------------------------------------------------------------------------
@@ -578,6 +584,8 @@ Col_DVZ:	binclude	"collide/DVZ.bin"	; IDONT CARE
 Col_NGZ:	binclude	"collide/NGZ.bin"	; O,GOPOG9-I0=IG20=I=0IG4=0I
 		even
 Col_HSZ:	binclude	"collide/HSZ.bin"
+		even
+Col_BSZ:	binclude	"collide/BSZ.bin"
 		even
 ; ---------------------------------------------------------------------------
 ; Special Stage layouts
@@ -814,6 +822,14 @@ Level_NGZ2:	binclude	"levels/ngz2.bin"
 Level_NGZ3:	binclude	"levels/ngz3.bin"
 		even
 Level_NGZbg:	binclude	"levels/ngzbg.bin"
+;AH YEAH BLUESCAPE ZONE
+Level_BSZ1:	binclude	"levels/bsz1.bin"
+		even
+Level_BSZ2:	binclude	"levels/bsz2.bin"
+		even
+Level_BSZ3:	binclude	"levels/bsz3.bin"
+		even
+Level_BSZbg:	binclude	"levels/bszbg.bin"
 		dc.l 0
 		even
 ; ---------------------------------------------------------------------------
@@ -999,6 +1015,12 @@ ObjPos_NGZ2:	binclude	"objpos/ngz2.bin"
 		even
 ObjPos_NGZ3:	binclude	"objpos/ngz3.bin"
 		even
+ObjPos_BSZ1:	binclude	"objpos/bsz1.bin"
+		even
+ObjPos_BSZ2:	binclude	"objpos/bsz2.bin"
+		even
+ObjPos_BSZ3:	binclude	"objpos/bsz3.bin"
+		even
 
 ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 
@@ -1046,6 +1068,7 @@ Art_ClintonFail:
 		even
 Art_ClintonFailE:
 CLINTONFAILARTSZ = Art_ClintonFailE-Art_ClintonFail
+
 Pal_ClintonFail:
 		incbin	"palette/Clinton Fail.bin"
 		even
@@ -1061,3 +1084,14 @@ Art_ClintonWin:
 		even
 Art_ClintonWinE:
 CLINTONWINARTSZ = Art_ClintonWinE-Art_ClintonWin
+
+
+Art_NeedleScr:
+	incbin	"_incObj/NeedleBoss/scroll.art"
+	even
+Art_NeedleScrE:
+NEEDLESCRARTSZ = Art_NeedleScrE-Art_NeedleScr
+
+MapScr_NeedleScr:
+	incbin	"_incObj/NeedleBoss/scroll.map"
+	even

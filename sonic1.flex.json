@@ -1,8 +1,33 @@
 {
     "Flex": 2,
     "name": "Sonic 1",
-    "node": "dc8b239f-fad3-43d6-9adc-5436f91725eb",
+    "node": "f9beba2a-c8e7-449d-9a05-940db22b224f",
     "objects": [
+        {
+            "uuid": "f9beba2a-c8e7-449d-9a05-940db22b224f",
+            "format": "Sonic 1.js",
+            "name": "BLUESCAPE pally",
+            "palettes": [
+                {
+                    "path": "palette\\BlueScape.bin",
+                    "length": 3
+                }
+            ],
+            "art": {
+                "path": "",
+                "compression": "Uncompressed",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            }
+        },
         {
             "format": "Sonic 1.js",
             "name": "Internet Explorer",

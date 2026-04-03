@@ -306,25 +306,83 @@ PSG_Chicken_03:
 ; their "correct" sped-up main tempos to the list.
 ; byte_71A94:
 SpeedUpIndex:
-		dc.b 7		; GHZ
-		dc.b $72	; LZ
-		dc.b $73	; MZ
-		dc.b $26	; SLZ
-		dc.b $15	; SYZ
-		dc.b 8		; SBZ
-		dc.b $FF	; Invincibility
-		dc.b 5		; Extra Life
-		;dc.b ?		; Special Stage
-		;dc.b ?		; Title Screen
-		;dc.b ?		; Ending
-		;dc.b ?		; Boss
-		;dc.b ?		; FZ
-		;dc.b ?		; Sonic Got Through
-		;dc.b ?		; Game Over
-		;dc.b ?		; Continue Screen
-		;dc.b ?		; Credits
-		;dc.b ?		; Drowning
-		;dc.b ?		; Get Emerald
+		dc.b $45	; Mega Man: The Wily Wars - Mega Water S
+		dc.b 1		; ??? - Orange Song				; VGM2SMPS Slop, don't speed up tempo
+		dc.b 1		; ??? - Green Hills				; VGM2SMPS Slop, don't speed up tempo
+		dc.b $34	; Etrian Odyssey - Azure Rainforest
+		dc.b 1		; Vertz151 - La Suerte de Los Tontos		; VGM2SMPS Slop, don't speed up tempo
+		dc.b 1		; Task Force Harrier EX - Area 5		; VGM2SMPS Slop, don't speed up tempo
+		dc.b $66	; Super Mario Land - Underground
+		dc.b 1		; Minecraft - Sweden 				; VGM2SMPS Slop, don't speed up tempo
+		dc.b 1		; Super Mario World - Cave			; Doesn't support speed tempo
+		dc.b $70	; Doom - At Doom's Gate
+		dc.b $45	; Touhou - Bad Apple
+		dc.b 1		; Wild Woody - Treasure Caves
+		dc.b $70	; ??? - Danstar
+		dc.b $70	; Melty Blood - GCV 2005 - Neco Arc
+		dc.b $10	; The 3D Adventures of Sailor Moon - fight.mid
+		dc.b $20	; Action 52 - Cheetahmen
+		dc.b $23	; Resident Evil: Director's Cut Dualshock Edition - Mansion Basement
+		dc.b 4		; Comet Summoner - Stage 2
+		dc.b 1		; Touhou - UNOwen Was Her			; Doesn't support speed tempo
+		dc.b 1		; Windows - Passport
+		dc.b $45	; Katsushimi - Dole Detective
+		dc.b $5E	; Weird Al - Hardware Store
+		dc.b $45	; Sonic 1 - Green Hill Zone
+		dc.b $40	; Team Fortress 2 - ???
+		dc.b $70	; Sonic 1 - Boss (but slow)
+		dc.b 1		; Tecmo Super Bowl II - Track 3			; VGM2SMPS Slop, don't speed up tempo
+		dc.b 1		; Chester Cheetah: Too Cool For Fool - Boss	; VGM2SMPS Slop, don't speed up tempo
+		dc.b $20	; Katsushimi - Clinton Fucker			; Uses Drum loop, don't speed up tempo
+		dc.b 1		; Undertale - Megalovania			; VGM2SMPS Slop, don't speed up tempo
+		dc.b $24	; TheGamer2000 - Dole Boss
+		dc.b $55	; ??? - Coffinman
+		dc.b 1		; Somari - Invincibility			; VGM2SMPS Slop, don't speed up
+		dc.b $50	; Angry Video Game Nerd - Main Theme
+		dc.b $25	; Yuu Yuu Hakusho: Makyo Touitsusen - Smiling Bomb (Instruction Ver.)
+		dc.b $A		; Pokemon Gold/Silver/Crystal - New Bark Town
+		dc.b $33	; Puyo Puyo (PC-88) - Memories of Puyo Puyo
+		dc.b 1		; ??? - Uwol Menu
+		dc.b $33	; ??? - Ending
+		dc.b 4		; Sonic Superstars - Golden Capital Zone (Act 1)
+		dc.b $70	; Jeopardy - ???
+		dc.b $25	; ??? - Homero
+		dc.b 1		; Pacman 2 - I Won't Be Long
+		dc.b $55	; Pokemon Gold/Silver/Crystal - New Bark Town (Game Over)
+		dc.b $24	; Pokemon Gold/Silver/Crystal - New Bark Town (Extra Life)
+		dc.b 1		; AC/DC - Thunderstruck
+		dc.b $45	; ??? - ???
+		dc.b $55	; Rent-A-Hero - Space Harrier Main Theme
+		dc.b 0		; PikaNoob - Ronic Setro
+		dc.b 1		; Super Mario Bros - Death
+		dc.b $55	; Sonic 1 - Act Clear
+		dc.b 8		; BigNate60 - SHC Jingle
+		dc.b $90	; Super Mario Bros - Game Over
+		dc.b 1		; ConiNight - Jingle
+		dc.b 1		; TheGamer2000 - Jingle
+		dc.b $25	; ArcaniaCQ - Donnie Invincibility
+		dc.b $1C	; TheSunsetHacker - Jingle
+		dc.b $25	; Sonic 1 - Continue
+		dc.b 1		; Puyo Puyo/Sonic 1 - Warning of Sonic
+		dc.b 1		; Windows 2000 - Bootup Jingle
+		dc.b 1		; Super Mario Bros/Sonic 1 - 1-UP Emerald
+		dc.b $68	; DeltaW - Splash Screen
+		dc.b $58	; Sonic 3K - Continue
+		dc.b $25	; Sonic 3K - Special Stage (jingle)
+		dc.b $35	; Sonic 1 - Chaos Emerald
+		dc.b $55	; LimitedSonic - Act Clear
+		dc.b 1		; MJ's Moonwalker - Title Screen
+		dc.b $33	; RobiWanKenobi - Shit Slate
+		dc.b 1		; Puyo Puyo - Reject of Puyo Puyo
+		dc.b 1		; LG Washing Machine - Jingle
+		dc.b 1		; Hong Kong 97 - I Love Beijing Tianmen
+		dc.b $40	; Puyo Puyo (PC-88) - Sunset of Puyo Puyo
+		dc.b 1		; Elevator Music
+		dc.b 1		; Sonic Underground - Main Theme
+		dc.b 1		; Sonic 1 - Extra Life/Chaos Emerald
+		dc.b $55	; Sonic 1 - Green Hill Zone (GEMS)
+		dc.b $A0	; Too LimitedSonic - Final Limit
+		dc.b 1		; Whatever the fuck this is
 
 ; ---------------------------------------------------------------------------
 ; Priority of sound. New music or SFX must have a priority higher than or equal

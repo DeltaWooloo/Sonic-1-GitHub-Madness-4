@@ -22,6 +22,10 @@ LoadTilesAsYouMove_BGOnly:
 
 
 LoadTilesAsYouMove:
+		move.b	v_clintonfucker,d0
+		bpl.s	.Go
+		rts
+.Go:
 		lea	(vdp_control_port).l,a5
 		lea	(vdp_data_port).l,a6
 		; First, update the background

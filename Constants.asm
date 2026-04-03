@@ -93,7 +93,6 @@ id_SplashSkip:	equ ptr_SplashScreenSkipper-GameModeArray
 id_Advert:	equ ptr_Advert-GameModeArray
 id_Battle:	equ ptr_EarthboundBtl-GameModeArray
 id_ClintonScr:	equ ptr_ClintonScreens-GameModeArray
-id_OllieMaster:	equ ptr_OllieMasterpiece-GameModeArray
 
 ; Levels
 id_OWZ:		equ 0
@@ -238,6 +237,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Area5			; 			(Act 2)
 	nextenum bgm_Easton			; 			(Act 3)
 	nextenum bgm_Minecraft			; Minecraft	(Act 1 - Part 1)
+	nextenum bgm_SMWCave			; Minecraft	(Act 1 - Part 2)
 	nextenum bgm_Doom			; 		(Act 2)
 	nextenum bgm_BadEmerald			; 		(Act 3) + Cold Brew (Act 3)
 	nextenum bgm_TreasureCaves		; Spring Field	(Act 1)
@@ -251,15 +251,19 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Passport			; 		(Act 2)
 	nextenum bgm_DoleDetective		; Doleville	(Act 1)
 	nextenum bgm_HardwareStore		; 		(Act 2)
+	nextenum bgm_GHZ			; Nogales Zone
+	nextenum bgm_TF2			; Bluescapes			; Dax: Interesting song choice for this :/
 	nextenum bgm_Final			; DUMMY Level BGM
 	nextenum bgm_SS				; Special Stage
 
 	; Boss BGM
-	nextenum bgm_Boss
-	nextenum bgm_ClintonFuck
-	nextenum bgm_Megalovania
-	nextenum bgm_DoleBOSS
-	nextenum bgm_Coffinman
+	nextenum bgm_Boss			; Regular Boss
+	nextenum bgm_ClintonFuck		; Bill Clinton Boss
+	nextenum bgm_Coffinman			; Alberta Canada Boss
+	nextenum bgm_Aporia			; Spring Field Boss
+	nextenum bgm_Megalovania		; MeinKraft Boss
+	nextenum bgm_DoleBOSS			; Doleville Boss
+	nextenum bgm_PizzaPopBoss		; A Boss of Some kind???
 
 	; Power Up BGM
 	nextenum bgm_Invincible
@@ -269,9 +273,10 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Title
 	nextenum bgm_NewBarkTown
 	nextenum bgm_Memories
+	nextenum bgm_Dingaling
 	nextenum bgm_Continue
 	nextenum bgm_Ending
-	nextenum bgm_SSZ
+	nextenum bgm_SkySanctuary
 	nextenum bgm_Jeopardy
 
 	; In-Game Jingles
@@ -290,12 +295,13 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_SHCSplash
 	nextenum bgm_RetroBlast
 	nextenum bgm_ConiJingle
+	nextenum Bgm_GooglePlayStock
+	nextenum bgm_SneakySnitch
 	nextenum bgm_TG2000Jingle
 	nextenum bgm_Donnie
 	nextenum bgm_TSHLogo
 	nextenum bgm_S1Continue
 	nextenum bgm_PuyoDrown
-	nextenum bgm_Win2K
 	nextenum bgm_EuroSega
 	nextenum bgm_DeltaWSplash
 	nextenum bgm_S3Continue
@@ -324,8 +330,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_NepAnime
 	nextenum bgm_VampKiller
 	nextenum bgm_Carefree
-	nextenum bgm_Dingaling
-	nextenum bgm_Aporia
 	nextenum bgm_Gadget
 	nextenum bgm_CanCanInv
 	nextenum bgm_TwoSteps
@@ -350,28 +354,20 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Thomas
 	nextenum bgm_CCLobby
 	nextenum bgm_ChairRoom
-	nextenum bgm_SneakySnitch
 	nextenum bgm_Skinner
 	nextenum bgm_CanCan
 	nextenum bgm_Hidden
 	nextenum bgm_BossaNova
 	nextenum bgm_dam_dariram
-	nextenum Bgm_GooglePlayStock
 
 	; Unused Jingle BGM
 	nextenum bgm_Ding
 	nextenum bgm_SadMac
 	nextenum bgm_Folgers
 	nextenum bgm_CrazyMario
-
-	; nogales. i'm not renaming like 50 track labels man
-	nextenum bgm_GreenHill
-	nextenum bgm_SMWCave			; Minecraft	(Act 1 - Part 2)
-
-	;More Garbage 
-	nextenum bgm_TF2
-	nextenum bgm_PizzaPopBoss
+	nextenum bgm_Win2K
 	nextenum bgm_MJWin
+
 	; Keep this last
 	nextenum bgm__Last
 

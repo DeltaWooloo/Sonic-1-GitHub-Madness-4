@@ -42,8 +42,8 @@ Ledge_Touch:	; Routine 2
 .slope:
 		move.w	#$30,d1
 		lea	(Ledge_SlopeData).l,a2
-		bsr.w	SlopeObject
-		bra.w	RememberState
+		jsr	SlopeObject
+		jmp	RememberState
 ; ===========================================================================
 
 Ledge_Collapse:	; Routine 4
@@ -57,12 +57,12 @@ Ledge_Collapse:	; Routine 4
 
 Ledge_WalkOff:	; Routine $A
 		move.w	#$30,d1
-		bsr.w	ExitPlatform
+		jsr	ExitPlatform
 		move.w	#$30,d1
 		lea	(Ledge_SlopeData).l,a2
 		move.w	obX(a0),d2
-		bsr.w	SlopeObject2
-		bra.w	RememberState
+		jsr	SlopeObject2
+		jmp	RememberState
 ; End of function Ledge_WalkOff
 
 ; ===========================================================================
@@ -73,12 +73,12 @@ Ledge_Display:	; Routine 6
 		tst.b	ledge_collapse_flag(a0)	; is ledge collapsing?
 		bne.w	loc_82D0	; if yes, branch
 		subq.b	#1,ledge_timedelay(a0) ; subtract 1 from time
-		bra.w	DisplaySprite
+		jmp	DisplaySprite
 ; ===========================================================================
 
 loc_82D0:
 		subq.b	#1,ledge_timedelay(a0)
-		bsr.w	Ledge_WalkOff
+		jsr	Ledge_WalkOff
 		lea	(v_player).w,a1
 		btst	#3,obStatus(a1)
 		beq.s	loc_82FC
@@ -97,13 +97,13 @@ locret_8308:
 ; ===========================================================================
 
 Ledge_TimeZero:
-		bsr.w	ObjectFall
-		bsr.w	DisplaySprite
+		jsr	ObjectFall
+		jsr	DisplaySprite
 		tst.b	obRender(a0)
 		bpl.s	Ledge_Delete
 		rts
 ; ===========================================================================
 
 Ledge_Delete:	; Routine 8
-		bsr.w	DeleteObject
+		jsr	DeleteObject
 		rts

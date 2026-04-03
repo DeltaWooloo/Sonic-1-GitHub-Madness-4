@@ -12,544 +12,430 @@ SonicDriverVer = 1 ; Tell SMPS2ASM that we're using Sonic 1's driver.
 ; Music Pointers
 ; ---------------------------------------------------------------------------
 MusicIndex:
-ptr_mus01:		dc.l Music01
-ptr_mus02:		dc.l Music02
-ptr_mus03:		dc.l Music03
-ptr_mus04:		dc.l Music04
-ptr_mus05:		dc.l Music05
-ptr_mus06:		dc.l Music06
-ptr_mus07:		dc.l Music07
-ptr_mus08:		dc.l Music08
-ptr_mus09:		dc.l Music09
-ptr_mus0A:		dc.l Music0A
-ptr_mus0B:		dc.l Music0B
-ptr_mus0C:		dc.l Music0C
-ptr_mus0D:		dc.l Music0D
-ptr_mus0E:		dc.l Music0E
-ptr_mus0F:		dc.l Music0F
-ptr_mus10:		dc.l Music10
-ptr_mus11:		dc.l Music11
-ptr_mus12:		dc.l Music12
-ptr_mus13:		dc.l Music13
-ptr_mus14:		dc.l Music14
-ptr_mus15:		dc.l Music15
-ptr_mus16:		dc.l Music16
-ptr_mus17:		dc.l Music17
-ptr_mus18:		dc.l Music18
-ptr_mus19:		dc.l Music19
-ptr_mus1A:		dc.l Music1A
-ptr_mus1B:		dc.l Music1B
-ptr_mus1C:		dc.l Music1C
-ptr_mus1D:		dc.l Music1D
-ptr_mus1E:		dc.l Music1E
-ptr_mus1F:		dc.l Music1F
-ptr_mus_NBT:		dc.l Music_NBT
-ptr_mus21:		dc.l Music21
-ptr_mus22:		dc.l Music22
-ptr_mus23:		dc.l Music23
-ptr_mus24:		dc.l Music24
-ptr_mus25:		dc.l Music25
-ptr_mus26:		dc.l Music26
-ptr_mus27:		dc.l Music27
-ptr_mus28:		dc.l Music28
-ptr_mus29:		dc.l Music29
-ptr_mus2A:		dc.l Music2A
-ptr_mus2B:		dc.l Music2B
+	dc.l	Mus_MWaterS
+	dc.l	Mus_OrangeSong
+	dc.l	Mus_GreenHills
+	dc.l	Mus_DUNGEON3
+	dc.l	Mus_LosTontos
+	dc.l	Mus_Area5
+	dc.l	Mus_Easton
+	dc.l	Mus_Sweden
+	dc.l	Mus_SMWCave
+	dc.l	Mus_Doom
+	dc.l	Mus_BadEmerald
+	dc.l	Mus_TreasureCaves
+	dc.l	Mus_Danstar
+	dc.l	Mus_GCV2005
+	dc.l	Mus_fightMID
+	dc.l	Mus_Cheetah
+	dc.l	Mus_REMansion
+	dc.l	Mus_ColdBrew
+	dc.l	Mus_UNOwenWasHer
+	dc.l	Mus_Passport
+	dc.l	Mus_DoleDetective
+	dc.l	Mus_HardwareStore
+	dc.l	Mus_GHZ
+	dc.l	Mus_TF2
+	dc.l	Mus_Final
+	dc.l	Mus_SS
 
-ptr_mus_Retro:		dc.l Music_Retro
-ptr_mus_Setro:		dc.l Music_Setro
-ptr_mus2E:		dc.l Music2E
-ptr_mus2F:		dc.l Music2F
-ptr_mus30:		dc.l Music30
-ptr_mus31:		dc.l Music31
-ptr_mus32:		dc.l Music32
-ptr_mus33:		dc.l Music33
-ptr_mus34:		dc.l Music34
-ptr_mus35:		dc.l Music35
-ptr_mus36:		dc.l Music36
-ptr_mus37:		dc.l Music37
-ptr_mus38:		dc.l Music38
-ptr_mus39:		dc.l Music39
-ptr_mus3A:		dc.l Music3A
-ptr_mus3B:		dc.l Music3B
-ptr_mus3C:		dc.l Music3C
-ptr_mus3D:		dc.l Music3D
-ptr_mus3E:		dc.l Music3E
-ptr_mus3F:		dc.l Music3F
-ptr_mus40:		dc.l Music40
+	dc.l	Mus_Boss
+	dc.l	Mus_ClintonFuck
+	dc.l	Mus_Coffinman
+	dc.l	Mus_Aporia
+	dc.l	Mus_Megalovania
+	dc.l	Mus_DoleBOSS
+	dc.l	Mus_PizzaPopBoss
 
-ptr_mus41:		dc.l Music41
-ptr_mus42:		dc.l Music42
-ptr_mus43:		dc.l Music43
-ptr_mus44:		dc.l Music44
-ptr_mus45:		dc.l Music45
-ptr_mus46:		dc.l Music46
-ptr_mus47:		dc.l Music47
-ptr_mus48:		dc.l Music48
-ptr_mus49:		dc.l Music49
-ptr_mus4A:		dc.l Music4A
+	dc.l	Mus_Invincible
+	dc.l	Mus_AVGNInv
 
-ptr_mus4B:		dc.l Music4B
-ptr_mus4C:		dc.l Music4C
-ptr_mus4D:		dc.l Music4D
-ptr_mus4E:		dc.l Music4E
-ptr_mus4F:		dc.l Music4F
-ptr_mus50:		dc.l Music50
-ptr_mus51:		dc.l Music51
-ptr_mus52:		dc.l Music52
-ptr_mus53:		dc.l Music53
-ptr_mus54:		dc.l Music54
-ptr_mus55:		dc.l Music55
-ptr_mus56:		dc.l Music56
-ptr_mus57:		dc.l Music57
-ptr_mus58:		dc.l Music58
-ptr_mus59:		dc.l Music59
-ptr_mus5A:		dc.l Music5A
-ptr_mus5B:		dc.l Music5B
-ptr_mus5C:		dc.l Music5C
-ptr_mus5D:		dc.l Music5D
-ptr_mus5E:		dc.l Music5E
-ptr_mus5F:		dc.l Music5F
-ptr_mus60:		dc.l Music60
-ptr_mus61:		dc.l Music61
-ptr_mus62:		dc.l Music62
-ptr_mus63:		dc.l Music63
-ptr_mus64:		dc.l Music64
-ptr_mus65:		dc.l Music65
-ptr_mus66:		dc.l Music66
-ptr_mus67:		dc.l Music67
-ptr_mus68:		dc.l Music68
-ptr_mus69:		dc.l Music69
-ptr_mus6A:		dc.l Music6A
-ptr_mus6B:		dc.l Music6B
-ptr_mus6C:		dc.l Music6C
-ptr_mus6D:		dc.l Music6D
-ptr_mus6E:		dc.l Music6E
-ptr_mus6F:		dc.l Music6F
-ptr_mus70:		dc.l Music70
-ptr_mus71:		dc.l Music71
-ptr_mus72:		dc.l Music72
-ptr_mus73:		dc.l Music73
-ptr_mus74:		dc.l Music74
-ptr_mus75:		dc.l Music75
-ptr_mus76:		dc.l Music76
-ptr_mus77:		dc.l Music77
-ptr_mus78:		dc.l Music78
-ptr_mus79:		dc.l Music79
-ptr_mus7A:		dc.l Music7A
-;ptr_mus7B:		dc.l Music7B
-;ptr_mus7C:		dc.l Music7C
-;ptr_mus7D:		dc.l Music7D
-;ptr_mus7E:		dc.l Music7E
-;ptr_mus7F:		dc.l Music7F
-;ptr_mus80:		dc.l Music80
-;ptr_mus81:		dc.l Music81
-;ptr_mus82:		dc.l Music82
-;ptr_mus83:		dc.l Music83
-;ptr_mus84:		dc.l Music84
-;ptr_mus85:		dc.l Music85
-;ptr_mus86:		dc.l Music86
-;ptr_mus87:		dc.l Music87
-;ptr_mus88:		dc.l Music88
-;ptr_mus89:		dc.l Music89
-;ptr_mus8A:		dc.l Music8A
-;ptr_mus8B:		dc.l Music8B
-;ptr_mus8C:		dc.l Music8C
-;ptr_mus8D:		dc.l Music8D
-;ptr_mus8E:		dc.l Music8E
-;ptr_mus8F:		dc.l Music8F
-;ptr_mus90:		dc.l Music90
-;ptr_mus91:		dc.l Music91
-;ptr_mus92:		dc.l Music92
-;ptr_mus93:		dc.l Music93
-;ptr_mus94:		dc.l Music94
-;ptr_mus95:		dc.l Music95
-;ptr_mus96:		dc.l Music96
-;ptr_mus97:		dc.l Music97
-;ptr_mus98:		dc.l Music98
-;ptr_mus99:		dc.l Music99
-;ptr_mus9A:		dc.l Music9A
-;ptr_mus9B:		dc.l Music9B
-;ptr_mus9C:		dc.l Music9C
-;ptr_mus9D:		dc.l Music9D
-;ptr_mus9E:		dc.l Music9E
-;ptr_mus9F:		dc.l Music9F
-	dc.l 0	; i had to do this because for some reason it wouldnt play the final track otherwise - coni
+	dc.l	Mus_Title
+	dc.l	Mus_NewBarkTown
+	dc.l	Mus_Memories
+	dc.l	Mus_Dingaling
+	dc.l	Mus_Continue
+	dc.l	Mus_Ending
+	dc.l	Mus_SkySanctuary
+	dc.l	Mus_Jeopardy
 
-Music01:
-		include "music/LiquidTracks/Mus - Mega Water S.asm"
-		even
-Music02:
-		include	"music/TG2000Tracks/OrangeSong.asm" 
-		even
-Music03:
-		include	"music/TG2000Tracks/GreenHills.asm"
-		even
-Music04:
-		include "music/DaxKatter/Mus - Azure Rainforest.asm"
-		even
-Music05:
-		include "music/Vertz1515/Mus - La Suerte De Los Tontos.asm"
-		even
-Music06:
-		include	"music/GuykeTracks/Mus - Area 5.asm"
-		even
-Music07:
-		include	"music/TG2000Tracks/Easton.asm" 
-		even
-Music08:
-		;include "music/Dawid/Mus - Minecraft.asm"
-		include "music/Hame/Sweden MC.asm"
-		even
-Music09:
-		include	"music/TG2000Tracks/DoomGate.asm"
-		even
-Music0A:
-		include	"music/TG2000Tracks/BadEmerald.asm"
-		even
-Music0B:
-		include	"music/PikaNoob/treasurecaves.asm" 
-		even
-Music0C:
-		include	"music/TG2000Tracks/Danstar.asm"
-		even
-Music0D:
-		include	"music/HS_Tracks/GCV2005.asm"
-		even
-Music0E:
-		include "music/CNTracks/Mus - fight.mid.asm"
-		even
-Music0F:
-		include	"music/TG2000Tracks/Cheetah.asm"
-		even
-Music10:
-		include "music/CNTracks/RE Mansion.asm"
-		even
-Music11:
-		include	"music/CNTracks/CometSTG2.asm"
-		even
-Music12:
-		include	"music/TheWTracks/Mus - UnOwenWasHer.asm"
-		even
-Music13:
-		include	"music/TG2000Tracks/Passport.asm"
-		even
-Music14:
-		include	"music/Kat/Mus - Dole Detective.asm"
-		even
-Music15:
-		include	"music/MattTracks/Mus - Hardware Store.asm"
-		even
-Music16:
-		include "music/Dawid/Extremely_intense_boss_song_for_someone.asm" ;very intense not really but eh idgaf
-		even
-Music17:
-		include "music/LiquidTracks/Mus - Special Stage.asm"
-		even
-Music18:
-		include "music/MattTracks/Mus - Chester Cheetah Boss.asm"
-		even
-Music19:
-		include	"music/Kat/Mus - Clinton Fucker.asm"
-		even
-Music1A:
-		include	"music/TG2000Tracks/Megalovania.asm"
-		even
-Music1B:
-		include	"music/TG2000Tracks/DoleBOSS.asm"	;Boss Track
-		even
-Music1C:
-		include	"music/TG2000Tracks/Coffinman.asm"	;Boss Track
-		even
-Music1D:
-		include "music/TG2000Tracks/SomariInv.asm"
-		even
-Music1E:
-		include	"music/TG2000Tracks/Mus - AVGN Invincibility.asm"
-		even
-Music1F:
-		include "music/TheWTracks/Mus - Smiling Bomb.asm"
-		even
-Music_NBT:
-		include "music/DaxKatter/Mus - New Bark Town.asm"
-		even
-Music21:
-		include	"music/CNTracks/MEMORIES.asm"
-		even
-Music22:
-		include "music/LiquidTracks/Mus - Uwol Menu.asm"
-		even
-Music23:
-		include "music/MattTracks/Mus - Ending.asm"
-		even
-Music24:
-		include	"music/DaxKatter/Mus - Golden Sanctuary.asm"
-		even
-Music25:
-		include "music/CNTracks/Jeopardy.asm"
-		even
-Music26:
-		include	"music/CNTracks/Homero.asm"		; homero
-		even
-Music27:
-		include	"music/TG2000Tracks/Pac2.asm"		; Dawids track btw but eh
-		even
-Music28:
-		include "music/DaxKatter/Mus - NBT Game Over.asm"
-		even
-Music29:
-		include "music/DaxKatter/Mus - NBT Extra Life.asm"
-		even
-Music2A:
-		include "music/TG2000Tracks/Thundersink.asm"
-		even
-Music2B;
-		include	"music/TG2000Tracks/ChaosFarm.asm" 
-		even
+	dc.l	Mus_ActClear
+	dc.l	Mus_Pac2
+	dc.l	Mus_GameOver
+	dc.l	Mus_ExtraLife
+	dc.l	Mus_Drowning
+	dc.l	Mus_Emerald
+
+	dc.l	Mus_Retro
+	dc.l	Mus_Setro
+	dc.l	Mus_MayoDed
+	dc.l	Mus_S1ActClear
+	dc.l	Mus_SHCSplash
+	dc.l	Mus_RetroBlast
+	dc.l	Mus_ConiJingle
+	dc.l	Mus_GooglePlayStock
+	dc.l	Mus_SneakySnitch
+	dc.l	Mus_TG2000Jingle
+	dc.l	Mus_Donnie
+	dc.l	Mus_TSHLogo
+	dc.l	Mus_S1Continue
+	dc.l	Mus_PuyoDrown
+	dc.l	Mus_EuroSega
+	dc.l	Mus_DeltaWSplash
+	dc.l	Mus_S3Continue
+	dc.l	Mus_BlueBalls
+	dc.l	Mus_ChaosEmerald
+	dc.l	Mus_LimitedClear
+	dc.l	Mus_Moonwalker
+	dc.l	Mus_CleanSlate
+
+	dc.l	Mus_PuyoReject
+	dc.l	Mus_LG
+	dc.l	Mus_ILBT
+	dc.l	Mus_Sunset
+	dc.l	Mus_Elevator
+	dc.l	Mus_SonUnderground
+	dc.l	Mus_Son1UP
+	dc.l	Mus_GEMSHill
+	dc.l	Mus_LimitedEgg
+	dc.l	Mus_BomerDude
+
+	dc.l	Mus_CanCan
+	dc.l	Mus_ChickenDance
+	dc.l	Mus_DeltaTale
+	dc.l	Mus_Carefree
+	dc.l	Mus_FurElise
+	dc.l	Mus_SwingSinners
+	dc.l	Mus_Miniscule
+	dc.l	Mus_Rickroll
+	dc.l	Mus_FuneralMarch
+	dc.l	Mus_BatMan
+	dc.l	Mus_Resetti
+	dc.l	Mus_Spoopy
+	dc.l	Mus_NewShop
+	dc.l	Mus_NepAnime
+	dc.l	Mus_VampKiller
+	dc.l	Mus_Gadget
+	dc.l	Mus_CanCanInv
+	dc.l	Mus_TwoSteps
+	dc.l	Mus_Wormy
+	dc.l	Mus_Starman
+	dc.l	Mus_JamesPond
+	dc.l	Mus_AlexKiddEnd
+	dc.l	Mus_DJKK
+	dc.l	Mus_Levian
+	dc.l	Mus_Peppa
+	dc.l	Mus_SkyBase
+	dc.l	Mus_Scrappy
+	dc.l	Mus_WeAreTheSonic
+	dc.l	Mus_Thomas
+	dc.l	Mus_CCLobby
+	dc.l	Mus_ChairRoom
+	dc.l	Mus_Skinner
+	dc.l	Mus_Hidden
+	dc.l	Mus_BossaNova
+	dc.l	Mus_dam_dariram
+
+	dc.l	Mus_CrazyMario
+	dc.l	Mus_Ding
+	dc.l	Mus_SadMac
+	dc.l	Mus_Win2K
+	dc.l	Mus_Folgers
+	dc.l	Mus_MJWin
+
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+;	BGMDEF	Mus_
+
+Mus_MWaterS:		include "music/LiquidTracks/Mus - Mega Water S.asm"
+	even
+Mus_OrangeSong:		include	"music/TG2000Tracks/OrangeSong.asm" 
+	even
+Mus_GreenHills:		include	"music/TG2000Tracks/GreenHills.asm"
+	even
+Mus_DUNGEON3:		include "music/DaxKatter/Mus - Azure Rainforest.asm"
+	even
+Mus_LosTontos:		include "music/Vertz1515/Mus - La Suerte De Los Tontos.asm"
+	even
+Mus_Area5:		include	"music/GuykeTracks/Mus - Area 5.asm"
+	even
+Mus_Easton:		include	"music/TG2000Tracks/Easton.asm" 
+	even
+Mus_Sweden:		include "music/Hame/Sweden MC.asm"
+	even
+Mus_SMWCave:		include "music/CNTracks/SMWCave.asm"
+	even
+Mus_Doom:		include	"music/TG2000Tracks/DoomGate.asm"
+	even
+Mus_BadEmerald:		include	"music/TG2000Tracks/BadEmerald.asm"
+	even
+Mus_TreasureCaves:	include	"music/PikaNoob/treasurecaves.asm" 
+	even
+Mus_Danstar:		include	"music/TG2000Tracks/Danstar.asm"
+	even
+Mus_GCV2005:		include	"music/HS_Tracks/GCV2005.asm"
+	even
+Mus_fightMID:		include "music/CNTracks/Mus - fight.mid.asm"
+	even
+Mus_Cheetah:		include	"music/TG2000Tracks/Cheetah.asm"
+	even
+Mus_REMansion:		include "music/CNTracks/RE Mansion.asm"
+	even
+Mus_ColdBrew:		include	"music/CNTracks/CometSTG2.asm"
+	even
+Mus_UNOwenWasHer:	include	"music/TheWTracks/Mus - UnOwenWasHer.asm"
+	even
+Mus_Passport:		include	"music/TG2000Tracks/Passport.asm"
+	even
+Mus_DoleDetective:	include	"music/Kat/Mus - Dole Detective.asm"
+	even
+Mus_HardwareStore:	include	"music/MattTracks/Mus - Hardware Store.asm"
+	even
+Mus_GHZ:		include "music/Kat/ghz.asm"
+	even
+Mus_TF2:		include	"music/TG2000Tracks/TF2.asm"
+	even
+Mus_Final:		include "music/Dawid/Extremely_intense_boss_song_for_someone.asm" ;very intense not really but eh idgaf
+	even
+Mus_SS:			include "music/LiquidTracks/Mus - Special Stage.asm"
+	even
+Mus_Boss:		include "music/MattTracks/Mus - Chester Cheetah Boss.asm"
+	even
+Mus_ClintonFuck:	include	"music/Kat/Mus - Clinton Fucker.asm"
+	even
+Mus_Aporia:		include	"music/TG2000Tracks/Aporia.asm"
+	even
+Mus_Megalovania:	include	"music/TG2000Tracks/Megalovania.asm"
+	even
+Mus_DoleBOSS:		include	"music/TG2000Tracks/DoleBOSS.asm"	;Boss Track
+	even
+Mus_Coffinman:		include	"music/TG2000Tracks/Coffinman.asm"	;Boss Track
+	even
+Mus_PizzaPopBoss:	include "music/CNTracks/CheetahFakeout.asm"
+	even
+Mus_Invincible:		include "music/TG2000Tracks/SomariInv.asm"
+	even
+Mus_AVGNInv:		include	"music/TG2000Tracks/Mus - AVGN Invincibility.asm"
+	even
+Mus_Title:		include "music/TheWTracks/Mus - Smiling Bomb.asm"
+	even
+Mus_NewBarkTown:	include "music/DaxKatter/Mus - New Bark Town.asm"
+	even
+Mus_Memories:		include	"music/CNTracks/MEMORIES.asm"
+	even
+Mus_Dingaling:		include	"music/TG2000Tracks/Dingaling.asm"
+	even
+Mus_Continue:		include "music/LiquidTracks/Mus - Uwol Menu.asm"
+	even
+Mus_Ending:		include "music/MattTracks/Mus - Ending.asm"
+	even
+Mus_SkySanctuary:	include	"music/DaxKatter/Mus - Golden Sanctuary.asm"
+	even
+Mus_Jeopardy:		include "music/CNTracks/Jeopardy.asm"
+	even
+Mus_ActClear:		include	"music/CNTracks/Homero.asm"
+	even
+Mus_Pac2:		include	"music/TG2000Tracks/Pac2.asm"
+	even
+Mus_GameOver:		include "music/DaxKatter/Mus - NBT Game Over.asm"
+	even
+Mus_ExtraLife:		include "music/DaxKatter/Mus - NBT Extra Life.asm"
+	even
+Mus_Drowning:		include "music/TG2000Tracks/Thundersink.asm"
+	even
+Mus_Emerald:		include	"music/TG2000Tracks/ChaosFarm.asm" 
+	even
 
 ; Used for Splash Screens
 
-Music_Retro:
-		include "music/LiquidTracks/Mus - Sonic Retro.asm"
-		even
-Music_Setro:
-		include	"music/PikaNoob/Mus - Ronic Setro.asm"
-		even
-Music2E:
-		include	"music/TG2000Tracks/MayoDed.asm"
-		even
-Music2F:
-		include "music/Mus8E - Sonic Got Through.asm"
-		even
-Music30:
-		include	"music/BigNate/Mus - SHC Splash Screen.asm" 
-		even
-Music31:
-		include	"music/DaxKatter/Mus - SMB1 Game Over.asm" 
-		even
-Music32:
-		include "music/CNTracks/Mus - Coni Jingle.asm"
-		even
-Music33:
-		include	"music/TG2000Tracks/TG2000Jingle.asm"
-		even
-Music34:
-		include	"music/NiaTracks/Mus - Donnie1.asm"
-		even
-Music35:
-		include	"music/TSHTracks/Mus - TSH Logo.asm"
-		even
-Music36:
-		include	"music/Mus90 - Continue Screen.asm"
-		even
-Music37:
-		include	"music/TG2000Tracks/WarnOfSon.asm"
-		even
-Music38:
-		include "music/Dawid/WINDOWS2000.asm"		;you got a windows 2000 product activation key!!!!!!!!! (or you used kgen you fucking idiot)
-		even
-Music39:
-		include "music/TG2000Tracks/1UPEmerald.asm"
-		even
-Music3A:
-		include "music/TheWTracks/Mus - DeltaWooloo Splash Screen.asm"
-		even
-Music3B:
-		include "music/DaxKatter/Mus - S3 Continue.asm"
-		even
-Music3C:
-		include "music/DaxKatter/Mus - S3K Special Stage.asm"
-		even
-Music3D:
-		include "music/TheWTracks/Chaos Emerald.asm"
-		even
-Music3E:
-		include "music/DaxKatter/Mus - Limited Act Clear.asm"
-		even
-Music3F:
-		include "music/TheWTracks/Mus - Moonwalker Title.asm"
-		even
-Music40:
-		include	"music/Robi/ShitSlate.asm"
-		even
+Mus_Retro:		include "music/LiquidTracks/Mus - Sonic Retro.asm"
+	even
+Mus_Setro:		include	"music/PikaNoob/Mus - Ronic Setro.asm"
+	even
+Mus_MayoDed:		include	"music/TG2000Tracks/MayoDed.asm"
+	even
+Mus_S1ActClear:		include "music/Mus8E - Sonic Got Through.asm"
+	even
+Mus_SHCSplash:		include	"music/BigNate/Mus - SHC Splash Screen.asm" 
+	even
+Mus_RetroBlast:		include	"music/DaxKatter/Mus - SMB1 Game Over.asm" 
+	even
+Mus_ConiJingle:		include "music/CNTracks/Mus - Coni Jingle.asm"
+	even
+Mus_GooglePlayStock:	include	"music/Robi/FunkyMusic.asm"
+	even
+Mus_SneakySnitch:	include	"music/CNTracks/SneakySnitch.asm"
+	even
+Mus_TG2000Jingle:	include	"music/TG2000Tracks/TG2000Jingle.asm"
+	even
+Mus_Donnie:		include	"music/NiaTracks/Mus - Donnie1.asm"
+	even
+Mus_TSHLogo:		include	"music/TSHTracks/Mus - TSH Logo.asm"
+	even
+Mus_S1Continue:		include	"music/Mus90 - Continue Screen.asm"
+	even
+Mus_PuyoDrown:		include	"music/TG2000Tracks/WarnOfSon.asm"
+	even
+Mus_EuroSega:		include "music/TG2000Tracks/1UPEmerald.asm"
+	even
+Mus_DeltaWSplash:	include "music/TheWTracks/Mus - DeltaWooloo Splash Screen.asm"
+	even
+Mus_S3Continue:		include "music/DaxKatter/Mus - S3 Continue.asm"
+	even
+Mus_BlueBalls:		include "music/DaxKatter/Mus - S3K Special Stage.asm"
+	even
+Mus_ChaosEmerald:	include "music/TheWTracks/Chaos Emerald.asm"
+	even
+Mus_LimitedClear:	include "music/DaxKatter/Mus - Limited Act Clear.asm"
+	even
+Mus_Moonwalker:		include "music/TheWTracks/Mus - Moonwalker Title.asm"
+	even
+Mus_CleanSlate:		include	"music/Robi/ShitSlate.asm"
+	even
 
 ; Used for Commericals
 
-Music41:
-		include	"music/TG2000Tracks/PuyoReject.asm"
-		even
-Music42:
-		include	"music/TG2000Tracks/LG.asm"
-		even
-Music43:
-		include	"music/TG2000Tracks/ILBT.asm"
-		even
-Music44:
-		include	"music/CNTracks/SUNSET.asm"
-		even
-Music45:
-		include	"music/TG2000Tracks/Elevator.asm" 
-		even
-Music46:
-		include	"music/TG2000Tracks/SonUnderground.asm" 
-		even
-Music47:
-		include	"music/TG2000Tracks/Son1UP.asm"
-		even
-Music48:
-		include	"music/AburtosTracks/Mus - GEMS Hill.asm"
-		even
-Music49:
-		include "music/DaxKatter/Mus - Limited Egg.asm"
-		even
-Music4A:
-		include	"music/Dawid/Mus - Bomer Dude.asm"	;i have no idea too
-		even
+Mus_PuyoReject:		include	"music/TG2000Tracks/PuyoReject.asm"
+	even
+Mus_LG:			include	"music/TG2000Tracks/LG.asm"
+	even
+Mus_ILBT:		include	"music/TG2000Tracks/ILBT.asm"
+	even
+Mus_Sunset:		include	"music/CNTracks/SUNSET.asm"
+	even
+Mus_Elevator:		include	"music/TG2000Tracks/Elevator.asm" 
+	even
+Mus_SonUnderground:	include	"music/TG2000Tracks/SonUnderground.asm" 
+	even
+Mus_Son1UP:		include	"music/TG2000Tracks/Son1UP.asm"
+	even
+Mus_GEMSHill:		include	"music/AburtosTracks/Mus - GEMS Hill.asm"
+	even
+Mus_LimitedEgg:		include "music/DaxKatter/Mus - Limited Egg.asm"
+	even
+Mus_BomerDude:		include	"music/Dawid/Mus - Bomer Dude.asm"	;i have no idea too
+	even
 
 ; Unused Tracks (so far)
 
-Music4B:
-		include	"music/Dawid/DeltaTale fighte.asm"
-		even
-Music4C:
-		include	"music/TG2000Tracks/NewShop.asm"
-		even
-Music4D:
-		include	"music/TG2000Tracks/ChickenDance.asm"
-		even
-Music4E:
-		include	"music/GenesisDoes/NepAnime.asm" 
-		even
-Music4F:
-		include	"music/TG2000Tracks/VampireKiller.asm"
-		even
-Music50:
-		include	"music/TG2000Tracks/Carefree.asm"
-		even
-Music51:
-		include	"music/TG2000Tracks/Dingaling.asm"
-		even
-Music52:
-		include	"music/TG2000Tracks/Aporia.asm"
-		even
-Music53:
-		include	"music/TG2000Tracks/Gadget.asm"
-		even
-Music54:
-		include	"music/TG2000Tracks/CanCanInv.asm"
-		even
-Music55:
-		include	"music/TG2000Tracks/TwoSteps.asm"
-		even
-Music56:
-		include	"music/TG2000Tracks/FurElise.asm"
-		even
-Music57:
-		include	"music/TG2000Tracks/Mus - Swing Sinners.asm"
-		even
-Music58:
-		include	"music/TG2000Tracks/Minuscule.asm"
-		even
-Music59:
-		include	"music/TG2000Tracks/Rickroll.asm"
-		even
-Music5A:
-		include	"music/TG2000Tracks/Wormy.asm"
-		even
-Music5B:
-		include	"music/TG2000Tracks/Starman.asm"
-		even
-Music5C:
-		include	"music/TG2000Tracks/JamesPond.asm"
-		even
-Music5D:
-		include	"music/TG2000Tracks/AlexKiddEnd.asm"
-		even
-Music5E:
-		include	"music/TG2000Tracks/DJKK.asm"
-		even
-Music5F:
-		include	"music/TG2000Tracks/FuneralMarch.asm"
-		even
-Music60:
-		include	"music/TG2000Tracks/Levian.asm"
-		even
-Music61:
-		include	"music/TG2000Tracks/BatMan.asm"
-		even
-Music62:
-		include	"music/TG2000Tracks/Peppa.asm"
-		even
-Music63:
-		include	"music/TG2000Tracks/Resetti.asm"
-		even
-Music64:
-		include	"music/TG2000Tracks/Spoopy.asm"
-		even
-Music65:
-		include	"music/TG2000Tracks/SkyBase.asm"
-		even
-Music66:
-		include	"music/TG2000Tracks/Scrappy.asm"
-		even
-Music67:
-		include	"music/TG2000Tracks/WeAreTheSonic.asm"
-		even
-Music68:
-		include	"music/TG2000Tracks/Thomas.asm"
-		even
-Music69:
-		include	"music/LiquidTracks/Mus - CCLobby.asm"
-		even
-Music6A:
-		include	"music/CNTracks/TheCheetosChairRoom.asm"
-		even
-Music6B:
-		include	"music/CNTracks/SneakySnitch.asm"
-		even
-Music6C:
-		include	"music/TG2000Tracks/Skinner.asm" 
-		even
-Music6D:
-		include	"music/TG2000Tracks/CanCan.asm" 
-		even
-Music6E:
-		include	"music/Dawid/Hidden.asm" 
-		even
-Music6F:
-		include	"music/TG2000Tracks/BossaNova.asm"
-		even
-Music70:
-		include	"music/DSKTracks/dam_dariram_handmade.asm"
-		even
-Music71:
-		include	"music/Robi/FunkyMusic.asm"
-		even
-Music72:
-		include	"music/TG2000Tracks/Ding.asm"
-		even
-Music73:
-		include	"music/TG2000Tracks/SadMac.asm"
-		even
-Music74:
-		include	"music/TG2000Tracks/Folgers.asm"
-		even
-Music75:
-		include	"music/Dawid/crazymario.asm"		; Uhhh, what did I just listen to?
-		even		
-Music76:	
-		include "music/Kat/ghz.asm"
-		even
-Music77:	
-		include "music/CNTracks/SMWCave.asm"
-		even
-Music78:
-		include	"music/TG2000Tracks/TF2.asm"
-		even
-Music79:	
-		include "music/CNTracks/CheetahFakeout.asm"
-		even
-Music7A:
-		include	"music/TG2000Tracks/MJ.asm"
-		even
+Mus_CanCan:		include	"music/TG2000Tracks/CanCan.asm" 
+	even
+
+Mus_ChickenDance:	include	"music/TG2000Tracks/ChickenDance.asm"
+	even
+Mus_DeltaTale:		include	"music/Dawid/DeltaTale fighte.asm"
+	even
+Mus_Carefree:		include	"music/TG2000Tracks/Carefree.asm"
+	even
+Mus_FurElise:		include	"music/TG2000Tracks/FurElise.asm"
+	even
+Mus_SwingSinners:	include	"music/TG2000Tracks/Mus - Swing Sinners.asm"
+	even
+Mus_Miniscule:		include	"music/TG2000Tracks/Minuscule.asm"
+	even
+Mus_Rickroll:		include	"music/TG2000Tracks/Rickroll.asm"
+	even
+Mus_FuneralMarch:	include	"music/TG2000Tracks/FuneralMarch.asm"
+	even
+Mus_BatMan:		include	"music/TG2000Tracks/BatMan.asm"
+	even
+Mus_Resetti:		include	"music/TG2000Tracks/Resetti.asm"
+	even
+Mus_Spoopy:		include	"music/TG2000Tracks/Spoopy.asm"
+	even
+
+Mus_NewShop:		include	"music/TG2000Tracks/NewShop.asm"
+	even
+Mus_NepAnime:		include	"music/GenesisDoes/NepAnime.asm" 
+	even
+
+Mus_VampKiller:		include	"music/TG2000Tracks/VampireKiller.asm"
+	even
+Mus_Gadget:		include	"music/TG2000Tracks/Gadget.asm"
+	even
+Mus_CanCanInv:		include	"music/TG2000Tracks/CanCanInv.asm"
+	even
+Mus_TwoSteps:		include	"music/TG2000Tracks/TwoSteps.asm"
+	even
+Mus_Wormy:		include	"music/TG2000Tracks/Wormy.asm"
+	even
+Mus_Starman:		include	"music/TG2000Tracks/Starman.asm"
+	even
+Mus_JamesPond:		include	"music/TG2000Tracks/JamesPond.asm"
+	even
+Mus_AlexKiddEnd:	include	"music/TG2000Tracks/AlexKiddEnd.asm"
+	even
+Mus_DJKK:		include	"music/TG2000Tracks/DJKK.asm"
+	even
+Mus_Levian:		include	"music/TG2000Tracks/Levian.asm"
+	even
+Mus_Peppa:		include	"music/TG2000Tracks/Peppa.asm"
+	even
+Mus_SkyBase:		include	"music/TG2000Tracks/SkyBase.asm"
+	even
+Mus_Scrappy:		include	"music/TG2000Tracks/Scrappy.asm"
+	even
+Mus_WeAreTheSonic:	include	"music/TG2000Tracks/WeAreTheSonic.asm"
+	even
+Mus_Thomas:		include	"music/TG2000Tracks/Thomas.asm"
+	even
+Mus_CCLobby:		include	"music/LiquidTracks/Mus - CCLobby.asm"
+	even
+Mus_ChairRoom:		include	"music/CNTracks/TheCheetosChairRoom.asm"
+	even
+Mus_Skinner:		include	"music/TG2000Tracks/Skinner.asm" 
+	even
+Mus_Hidden:		include	"music/Dawid/Hidden.asm" 
+	even
+Mus_BossaNova:		include	"music/TG2000Tracks/BossaNova.asm"
+	even
+Mus_dam_dariram:	include	"music/DSKTracks/dam_dariram_handmade.asm"
+	even
+
+Mus_CrazyMario:		include	"music/Dawid/crazymario.asm"
+	even
+Mus_Ding:		include	"music/TG2000Tracks/Ding.asm"
+	even
+Mus_SadMac:		include	"music/TG2000Tracks/SadMac.asm"
+	even
+Mus_Win2K:		include "music/Dawid/WINDOWS2000.asm"
+	even
+Mus_Folgers:		include	"music/TG2000Tracks/Folgers.asm"
+	even
+Mus_MJWin:		include	"music/TG2000Tracks/MJ.asm"
+	even
 	END

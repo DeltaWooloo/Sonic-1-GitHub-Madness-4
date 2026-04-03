@@ -214,7 +214,7 @@ v_limittop2:		ds.w	1		; top level boundary
 v_limitbtm2:		ds.w	1		; bottom level boundary
 v_unused11:		ds.w	1		; unused
 v_limitleft3:		ds.w	1		; left level boundary, at the end of an act
-v_clintonfucker		ds.b	1		; clintonfucker flag
+v_clintonfucker:	ds.b	1		; clintonfucker flag
 v_waterflag:		ds.b	1
 v_scrposy_orig:		ds.b	4		; stored y screen pos
 v_scrshiftx:		ds.w	1		; x-screen shift (new - last) * $100
