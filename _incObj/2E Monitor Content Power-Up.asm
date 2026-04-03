@@ -179,25 +179,75 @@ Pow_Randomiser:
 		dc.l	.nothing
 		dc.l	.nothing
 		dc.l	.nothing
-		dc.l	.superlucky
-		dc.l	Pow_GetLife
+		dc.l	.nothing
+		dc.l	.nothing
 		dc.l	.getrings
-		dc.l	Pow_Invinciblity
-		dc.l	Pow_SpeedShoes
-		dc.l	Pow_Shield
-		dc.l	.getcontinue
-		dc.l	.gaintime
-		dc.l	.getammo
-		dc.l	.addelay
-		dc.l	.Loseammo
-		dc.l	.losetime
+		dc.l	.getrings
+		dc.l	.getrings
+		dc.l	.getrings
+		dc.l	.getrings
+		dc.l	.loserings
+		dc.l	.loserings
+		dc.l	.loserings
+		dc.l	.loserings
 		dc.l	.loserings
 		dc.l	.gambashield
+		dc.l	.gambashield
+		dc.l	.gambashield
+		dc.l	.gambashield
+		dc.l	.gambashield
+		dc.l	.getammo
+		dc.l	.getammo
+		dc.l	.getammo
+		dc.l	.getammo
+		dc.l	.getammo
+		dc.l	Pow_GetLife
+		dc.l	Pow_GetLife
+		dc.l	Pow_GetLife
+		dc.l	Pow_Invinciblity
+		dc.l	Pow_Invinciblity
+		dc.l	Pow_Invinciblity
+		dc.l	Pow_Invinciblity
+		dc.l	Pow_SpeedShoes
+		dc.l	Pow_SpeedShoes
+		dc.l	Pow_SpeedShoes
+		dc.l	Pow_SpeedShoes
+		dc.l	Pow_Shield
+		dc.l	Pow_Shield
+		dc.l	Pow_Shield
+		dc.l	Pow_Shield
+		dc.l	.getcontinue
+		dc.l	.getcontinue
+		dc.l	.getcontinue
+		dc.l	.gaintime
+		dc.l	.gaintime
+		dc.l	.gaintime
+		dc.l	.gaintime
+		dc.l	.addelay
+		dc.l	.addelay
+		dc.l	.Loseammo
+		dc.l	.Loseammo
+		dc.l	.Loseammo
+		dc.l	.Loseammo
+		dc.l	.losetime
+		dc.l	.losetime
+		dc.l	.losetime
+		dc.l	.losetime
+		dc.l	Pow_GetHurt
+		dc.l	Pow_GetHurt
 		dc.l	Pow_GetHurt
 		dc.l	.nopowerforu
+		dc.l	.nopowerforu
+		dc.l	.nopowerforu
+		dc.l	.lolrestart
+		dc.l	.lolrestart
 		dc.l	.lolrestart
 		dc.l	.timeforads
+		dc.l	.timeforads
 		dc.l	.die
+		dc.l	.die
+		dc.l	.superlucky
+		dc.l	.superlucky
 		dc.l	.getjumpscared
 		dc.l	.toolimited
 .powtableend:
