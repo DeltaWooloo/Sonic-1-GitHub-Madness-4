@@ -32,6 +32,12 @@ Moto_Main:	; Routine 0
 		move.w	#make_art_tile(ArtTile_Villager,0,0),obGfx(a0)
 		move.b	#$E,obActWid(a0)
 .NotMCZ:
+		cmpi.b	#id_WIN,(v_zone).w		; is zone windows?
+		bne.s	.NotWIN	; if not, branch
+		move.l	#Map_Mouse,obMap(a0)
+		move.w	#make_art_tile(ArtTile_Villager,0,0),obGfx(a0)
+		move.b	#$E,obActWid(a0)
+.NotWIN
 		tst.b	obAnim(a0)	; is object a smoke trail?
 		bne.s	.smoke		; if yes, branch
 		move.b	#$E,obHeight(a0)

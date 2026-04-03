@@ -6070,6 +6070,8 @@ Map_MotoMCZ:	include	"_maps/villergar.asm";villy
 Map_Yad:	include	"_maps/Yadrin.asm"
 
 		include	"_incObj/sub SolidObject.asm"
+Map_Mouse:	include	"_maps/Mouse.asm"
+
 ; CBZ BADNIKS
 Map_IZ:	include	"coniobjs/IZMap.asm"
 Map_Spongy:	include	"coniobjs/SpongyMap.asm"

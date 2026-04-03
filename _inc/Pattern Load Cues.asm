@@ -265,7 +265,7 @@ PLC_BREW3end:
 PLC_WIN:	dc.w ((PLC_WIN2-PLC_WIN-2)/6)-1
 ;		plcm	Nem_WIN,       ArtTile_Level                    ; SLZ main patterns
 		plcm	Nem_HSpring,   ArtTile_Spring_Horizontal        ; horizontal spring
-		         
+		plcm	Nem_Mouse,   ArtTile_Villager                   ; Mouse the computer mouse controller		         
 		plcm	Nem_IE,        ArtTile_IE                       ; Internet Explorer enemy
 
 PLC_WIN2:	dc.w ((PLC_WIN2end-PLC_WIN2-2)/6)-1

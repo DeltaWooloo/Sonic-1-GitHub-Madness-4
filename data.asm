@@ -334,6 +334,8 @@ Nem_IE:		binclude	"artnem/Internet Explorer.nem"
 		even
 Nem_Villager:		binclude	"artnem/Villager.nem"
 		even
+Nem_Mouse:		binclude	"artnem/Mouse.nem"
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - character hud
 ; ---------------------------------------------------------------------------
