@@ -304,8 +304,13 @@ Pow_Randomiser:
 		move.b	d0,(v_invinc).w			; remove the shoes
 		move.w	d0,(v_player+shoetime).w	; time limit for the power-up
 		move.w	d0,(v_player+invtime).w		; time limit for the power-up
+		move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
+		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
+		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
 		move.b	#dClintonFail,d0
-		jmp	(MegaPCM_PlaySample).l		; as placeholder
+		jsr	(MegaPCM_PlaySample).l		; as placeholder
+		move.b	(v_zonemusic).w,d0
+		jmp	(QueueSound1).l			; play normal music
 
 ; ===========================================================================
 .lolrestart:	; GHM4 ran into an error and needs to restart your level
