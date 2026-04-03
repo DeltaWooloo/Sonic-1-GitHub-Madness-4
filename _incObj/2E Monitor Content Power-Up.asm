@@ -360,6 +360,7 @@ Pow_Randomiser:
 		bne.s	.NoMusic			; if yes, branch
 		cmpi.w	#$C,(v_air).w
 		bls.s	.NoMusic
+		pcm	dBoostPower
 		move.w	#bgm_Invincible,d0
 		jmp	(QueueSound1).l			; play invincibility music
 
