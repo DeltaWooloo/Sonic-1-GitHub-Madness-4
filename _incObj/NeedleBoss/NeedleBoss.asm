@@ -38,6 +38,8 @@
 ;REND.RAW	= 5
 ;REND.BEHIND	= 6
 ;REND.TOGGLE	= 7
+; ===========================================================================
+
 
 ; ----------------------------------------------------------------------------
 NEEDLB_VRAM	= $8000
@@ -50,7 +52,20 @@ needle.Timer	= $34	;.w
 needle.XTarg	= $36	;.l	; lerp needs extra precision
 needle.YTarg	= $3A	;.l
 
-ObjNeedleBoss:
+ExObjNeedle:
+	moveq	#0, d0
+	move.b	obSubtype(a0),d0
+	jmp	.ExObj(pc,d0.w)
+
+; ----------------------------------------------------------------------------
+.ExObj:
+	bra.w	ObjNeedleIntro
+	bra.w	ObjNeedleIntro
+	bra.w	ObjNeedleIntro
+	rts
+; ----------------------------------------------------------------------------
+
+ObjNeedleIntro:
 	moveq	#0,d0
 	move.b	obRoutine(a0),d0
 	move.w	.Index(pc,d0.w),d1
@@ -61,14 +76,14 @@ ObjNeedleBoss:
 
 ; ----------------------------------------------------------------------------
 .Index	
-	dc.w	NeedleBoss_Init-.Index
-	dc.w	NeedleBoss_WalkIn-.Index
-	dc.w	NeedleBoss_Stand-.Index
-	dc.w	NeedleBoss_ChargeInit-.Index
-	dc.w	NeedleBoss_FlyOut-.Index
+	dc.w	NeedleIntro_Init-.Index
+	dc.w	NeedleIntro_WalkIn-.Index
+	dc.w	NeedleIntro_Stand-.Index
+	dc.w	NeedleIntro_ChargeInit-.Index
+	dc.w	NeedleIntro_FlyOut-.Index
 ; ----------------------------------------------------------------------------
 
-NeedleBoss_Init:
+NeedleIntro_Init:
 	st.b	v_bossstatus.w
 	move.b	#0,obFrame(a0)
 	move.b	#0,obAnim(a0)
@@ -98,7 +113,7 @@ NeedleBoss_Init:
 	move.l	(a2)+,(a1)+
 	endr
 
-NeedleBoss_WalkIn:
+NeedleIntro_WalkIn:
 	sub.w	#2,obX(a0)
 	cmpi.w	#$480,obX(a0)
 	bgt.s	.Skip
@@ -108,7 +123,7 @@ NeedleBoss_WalkIn:
 .Skip:
 	rts
 
-NeedleBoss_Stand:
+NeedleIntro_Stand:
 	subq.b	#1,needle.Timer(a0)
 	bne.s	.Skip
 	addq.b	#2,obRoutine(a0)
@@ -125,7 +140,7 @@ NeedleBoss_Stand:
 .Skip:
 	rts
 
-NeedleBoss_ChargeInit:
+NeedleIntro_ChargeInit:
 	move.w	needle.XOrg(a0),obX(a0)
 	move.w	needle.YOrg(a0),obY(a0)
 	subq.b	#1,needle.Timer(a0)
@@ -133,11 +148,12 @@ NeedleBoss_ChargeInit:
 	bsr.w	_needleMoveToY
 	bra.w	_needleShake
 .Go:
+;	move.b	#24,submode.w
 	move.b	#-1,v_clintonfucker.w
 	addq.b	#4,v_dle_routine.w
 	addq.b	#2,obRoutine(a0)
 	move.b	#3,obAnim(a0)
-	move.w	#$400,obVelY(a0)
+	move.w	#$700,obVelY(a0)
 	move.w	#-$100,obVelX(a0)
 	move.w	obY(a0),needle.YOrg(a0)
 	move.b	#sfx_GiantRing,d0
@@ -166,11 +182,15 @@ _needleShake:
 	add.w	d0,obY(a0)
 	rts
 
-NeedleBoss_FlyOut:
-
+NeedleIntro_FlyOut:
 	subi.w	#$50,obVelY(a0)
-	jmp	SpeedToPos.l
-
+	subi.w	#$10,obVelX(a0)
+	jsr	SpeedToPos.l
+	tst.w	obX(a0)
+	bmi.s	.Del
+	rts
+.Del:
+	jmp	DeleteObject
 ; ----------------------------------------------------------------------------
 ; Needle Boss Anim scripts
 ; ----------------------------------------------------------------------------
