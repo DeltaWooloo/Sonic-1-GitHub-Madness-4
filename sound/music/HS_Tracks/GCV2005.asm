@@ -17,12 +17,12 @@ GCV_2005_Header:
 	smpsHeaderChan		$04, $03
 	smpsHeaderTempo		$03, $02
 	smpsHeaderDAC	GCV_2005_DAC
-	smpsHeaderFM	GCV_2005_FM1,	$00, $00
-	smpsHeaderFM	GCV_2005_FM2,	$00, $00
-	smpsHeaderFM	GCV_2005_FM3,	$00, $00
-	smpsHeaderPSG	GCV_2005_PSG1,	$F4, $03, $00, $00
+	smpsHeaderFM	GCV_2005_FM1,	$00, $04
+	smpsHeaderFM	GCV_2005_FM2,	$00, $04
+	smpsHeaderFM	GCV_2005_FM3,	$00, $04
+	smpsHeaderPSG	GCV_2005_PSG1,	$F4, $05, $00, $00
 	smpsHeaderPSG	GCV_2005_Empty,	$00, $00, $00, $00
-	smpsHeaderPSG	GCV_2005_PSG3,	$F4, $00, $00, $00
+	smpsHeaderPSG	GCV_2005_PSG3,	$F4, $02, $00, $00
 
 ; ===========================================================================
 ; Voices
@@ -575,29 +575,29 @@ GCV_2005_FM3_Jump:
 ; ===========================================================================
 
 GCV_2005_DAC_00:
-	dc.b smpsNoAttack, $1B, dKick, $01, dSnare, dSnare, dSnare, dSnare
+	dc.b nRst, $1B, dSMPSKick, $01, dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare
 	; $20
 	smpsReturn
 
 GCV_2005_DAC_01:
-	dc.b smpsNoAttack, $20
+	dc.b nRst, $20
 	; $20
 	smpsReturn
 
 GCV_2005_DAC_02:
-	dc.b smpsNoAttack, $1C, dSnare, $01, $01, $01, $01
+	dc.b nRst, $1C, dSMPSSnare, $01, $01, $01, $01
 	; $20
 	smpsReturn
 
 GCV_2005_DAC_03:
-	dc.b dKick, $03, $01, dSnare, $02, dKick, dKick, $03, $01, dSnare, $02, dHiTimpani, $01, dMidTimpani, dKick, $03
-	dc.b $01, dSnare, $02, dKick, dKick, $03, $01, dSnare, $02, $01, $01
+	dc.b dSMPSKick, $03, $01, dSMPSSnare, $02, dSMPSKick, dSMPSKick, $03, $01, dSMPSSnare, $02, dHiTom, $01, dMidTom, dSMPSKick, $03
+	dc.b $01, dSMPSSnare, $02, dSMPSKick, dSMPSKick, $03, $01, dSMPSSnare, $02, $01, $01
 	; $20
 	smpsReturn
 
 GCV_2005_DAC_04:
-	dc.b dKick, $03, $01, dSnare, $02, dKick, dKick, $03, $01, dSnare, $02, dHiTimpani, $01, dMidTimpani, dKick, dSnare
-	dc.b dSnare, dSnare, dSnare, dSnare, dSnare, dSnare, dSnare, $08
+	dc.b dSMPSKick, $03, $01, dSMPSSnare, $02, dSMPSKick, dSMPSKick, $03, $01, dSMPSSnare, $02, dHiTom, $01, dMidTom, dSMPSKick, dSMPSSnare
+	dc.b dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare, $08
 	; $20
 	smpsReturn
 ; ---------------------------------------------------------------------------

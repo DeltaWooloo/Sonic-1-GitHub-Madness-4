@@ -5,14 +5,14 @@ SonUnderground_Header:
 	smpsHeaderTempo	$01,	$00
 
 	smpsHeaderDAC	SonUnderground_DAC
-	smpsHeaderFM	SonUnderground_FM1,	smpsPitch00,	$00
-	smpsHeaderFM	SonUnderground_FM2,	smpsPitch00,	$00
-	smpsHeaderFM	SonUnderground_FM3,	smpsPitch00,	$00
-	smpsHeaderFM	SonUnderground_FM4,	smpsPitch00,	$00
-	smpsHeaderFM	SonUnderground_FM5,	smpsPitch00,	$00
-	smpsHeaderPSG       SonUnderground_PSG1,	$00, $00, $00, $00
-	smpsHeaderPSG       SonUnderground_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       SonUnderground_PSG3,	$0C, $00, $00, $00
+	smpsHeaderFM	SonUnderground_FM1,	smpsPitch00,	$08
+	smpsHeaderFM	SonUnderground_FM2,	smpsPitch00,	$08
+	smpsHeaderFM	SonUnderground_FM3,	smpsPitch00,	$08
+	smpsHeaderFM	SonUnderground_FM4,	smpsPitch00,	$08
+	smpsHeaderFM	SonUnderground_FM5,	smpsPitch00,	$08
+	smpsHeaderPSG       SonUnderground_PSG1,	$00, $04, $00, $00
+	smpsHeaderPSG       SonUnderground_PSG2,	$00, $04, $00, $00
+	smpsHeaderPSG       SonUnderground_PSG3,	$0C, $04, $00, $00
 	dc.b		$00,	$00,	$00,	$00
 
 ; FM1 Data
@@ -12080,58 +12080,58 @@ SonUnderground_PSG3:
 
 ; DAC Data
 SonUnderground_DAC:
-	dc.b		dKick,	$0F,	dKick,	$05,	dSnare,	$0A,	dKick,	$14
-	dc.b		dKick,	$0A,	dSnare,	dKick,	dKick,	$0F,	dKick,	$05
-	dc.b		dSnare,	$0A,	dKick,	$14,	dKick,	$0A,	dSnare,	dKick
-	dc.b		dKick,	$0F,	dKick,	$05,	dSnare,	$0A,	dKick,	$14
-	dc.b		dKick,	$0A,	dSnare,	dKick,	dKick,	$0F,	dKick,	$05
-	dc.b		dSnare,	$0A,	dKick,	$14,	dKick,	$0A,	dSnare,	dSnare
-	dc.b		$05,	dSnare,	dKick,	$0F,	dKick,	$05,	dSnare,	$0A
-	dc.b		dKick,	$14,	dKick,	$0A,	dSnare,	dKick,	dKick,	$0F
-	dc.b		dKick,	$05,	dSnare,	$0A,	dKick,	$14,	dKick,	$0A
-	dc.b		dSnare,	dKick,	dKick,	$0F,	dKick,	$05,	dSnare,	$0A
-	dc.b		dKick,	$14,	dKick,	$0A,	dSnare,	dKick,	dKick,	dKick
-	dc.b		dSnare,	dKick,	$05,	dSnare,	$0A,	dKick,	$05,	dKick
-	dc.b		$0A,	dSnare,	dSnare,	$05,	dSnare,	dKick,	$0F,	dKick
-	dc.b		$05,	dSnare,	$0A,	dKick,	$14,	dKick,	$0A,	dSnare
-	dc.b		dKick,	dKick,	$0F,	dKick,	$05,	dSnare,	$0A,	dKick
-	dc.b		$14,	dKick,	$0A,	dSnare,	dKick,	dKick,	$0F,	dKick
-	dc.b		$05,	dSnare,	$0A,	dKick,	$14,	dKick,	$0A,	dSnare
-	dc.b		dKick,	dKick,	$0F,	dKick,	$05,	dSnare,	$0A,	dKick
-	dc.b		$14,	dKick,	$0A,	dSnare,	dSnare,	$05,	dSnare,	dKick
-	dc.b		$0F,	dKick,	$05,	dSnare,	$0A,	dKick,	$14,	dKick
-	dc.b		$0A,	dSnare,	dKick,	dKick,	$0F,	dKick,	$05,	dSnare
-	dc.b		$0A,	dKick,	$14,	dKick,	$0A,	dSnare,	dKick,	dKick
-	dc.b		$0F,	dKick,	$05,	dSnare,	$0A,	dKick,	$14,	dKick
-	dc.b		$0A,	dSnare,	dSnare,	$05,	dSnare,	dSnare,	dSnare,	dKick
-	dc.b		dKick,	dSnare,	dSnare,	dKick,	dKick,	dSnare,	dSnare,	dSnare
-	dc.b		dSnare,	dSnare,	dSnare,	dSnare,	dSnare,	dKick,	$0F,	dKick
-	dc.b		$05,	dSnare,	$0A,	dKick,	$14,	dKick,	$0A,	dSnare
-	dc.b		dKick,	dKick,	$0F,	dKick,	$05,	dSnare,	$0A,	dKick
-	dc.b		$14,	dKick,	$0A,	dSnare,	dKick,	dKick,	$0F,	dKick
-	dc.b		$05,	dSnare,	$0A,	dKick,	$14,	dKick,	$0A,	dSnare
-	dc.b		dKick,	dKick,	$0F,	dKick,	$05,	dSnare,	$0A,	dKick
-	dc.b		$14,	dKick,	$0A,	dSnare,	dSnare,	$05,	dSnare,	dKick
-	dc.b		$0F,	dKick,	$05,	dSnare,	$0A,	dKick,	$14,	dKick
-	dc.b		$0A,	dSnare,	dKick,	dKick,	$0F,	dKick,	$05,	dSnare
-	dc.b		$0A,	dKick,	$14,	dKick,	$0A,	dSnare,	dKick,	dKick
-	dc.b		$0F,	dKick,	$05,	dSnare,	$0A,	dKick,	$14,	dKick
-	dc.b		$0A,	dSnare,	dKick,	dKick,	dKick,	dSnare,	dKick,	$05
-	dc.b		dSnare,	$0A,	dKick,	$05,	dKick,	$0A,	dSnare,	dSnare
-	dc.b		$05,	dSnare,	dKick,	$0F,	dKick,	$05,	dSnare,	$0A
-	dc.b		dKick,	$14,	dKick,	$0A,	dSnare,	dKick,	dKick,	$0F
-	dc.b		dKick,	$05,	dSnare,	$0A,	dKick,	$14,	dKick,	$0A
-	dc.b		dSnare,	dKick,	dKick,	$0F,	dKick,	$05,	dSnare,	$0A
-	dc.b		dKick,	$14,	dKick,	$0A,	dSnare,	dKick,	dKick,	$0F
-	dc.b		dKick,	$05,	dSnare,	$0A,	dKick,	$14,	dKick,	$0A
-	dc.b		dSnare,	dSnare,	$05,	dSnare,	dKick,	$0F,	dKick,	$05
-	dc.b		dSnare,	$0A,	dKick,	$14,	dKick,	$0A,	dSnare,	dKick
-	dc.b		dKick,	$0F,	dKick,	$05,	dSnare,	$0A,	dKick,	$14
-	dc.b		dKick,	$0A,	dSnare,	dKick,	dKick,	$0F,	dKick,	$05
-	dc.b		dSnare,	$0A,	dKick,	$14,	dKick,	$0A,	dSnare,	dSnare
-	dc.b		$05,	dSnare,	dSnare,	dSnare,	dKick,	dKick,	dSnare,	dSnare
-	dc.b		dKick,	dKick,	dSnare,	dSnare,	dSnare,	dSnare,	dSnare,	dSnare
-	dc.b		dSnare,	dSnare
+	dc.b		dSMPSKick,	$0F,	dSMPSKick,	$05,	dSMPSSnare,	$0A,	dSMPSKick,	$14
+	dc.b		dSMPSKick,	$0A,	dSMPSSnare,	dSMPSKick,	dSMPSKick,	$0F,	dSMPSKick,	$05
+	dc.b		dSMPSSnare,	$0A,	dSMPSKick,	$14,	dSMPSKick,	$0A,	dSMPSSnare,	dSMPSKick
+	dc.b		dSMPSKick,	$0F,	dSMPSKick,	$05,	dSMPSSnare,	$0A,	dSMPSKick,	$14
+	dc.b		dSMPSKick,	$0A,	dSMPSSnare,	dSMPSKick,	dSMPSKick,	$0F,	dSMPSKick,	$05
+	dc.b		dSMPSSnare,	$0A,	dSMPSKick,	$14,	dSMPSKick,	$0A,	dSMPSSnare,	dSMPSSnare
+	dc.b		$05,	dSMPSSnare,	dSMPSKick,	$0F,	dSMPSKick,	$05,	dSMPSSnare,	$0A
+	dc.b		dSMPSKick,	$14,	dSMPSKick,	$0A,	dSMPSSnare,	dSMPSKick,	dSMPSKick,	$0F
+	dc.b		dSMPSKick,	$05,	dSMPSSnare,	$0A,	dSMPSKick,	$14,	dSMPSKick,	$0A
+	dc.b		dSMPSSnare,	dSMPSKick,	dSMPSKick,	$0F,	dSMPSKick,	$05,	dSMPSSnare,	$0A
+	dc.b		dSMPSKick,	$14,	dSMPSKick,	$0A,	dSMPSSnare,	dSMPSKick,	dSMPSKick,	dSMPSKick
+	dc.b		dSMPSSnare,	dSMPSKick,	$05,	dSMPSSnare,	$0A,	dSMPSKick,	$05,	dSMPSKick
+	dc.b		$0A,	dSMPSSnare,	dSMPSSnare,	$05,	dSMPSSnare,	dSMPSKick,	$0F,	dSMPSKick
+	dc.b		$05,	dSMPSSnare,	$0A,	dSMPSKick,	$14,	dSMPSKick,	$0A,	dSMPSSnare
+	dc.b		dSMPSKick,	dSMPSKick,	$0F,	dSMPSKick,	$05,	dSMPSSnare,	$0A,	dSMPSKick
+	dc.b		$14,	dSMPSKick,	$0A,	dSMPSSnare,	dSMPSKick,	dSMPSKick,	$0F,	dSMPSKick
+	dc.b		$05,	dSMPSSnare,	$0A,	dSMPSKick,	$14,	dSMPSKick,	$0A,	dSMPSSnare
+	dc.b		dSMPSKick,	dSMPSKick,	$0F,	dSMPSKick,	$05,	dSMPSSnare,	$0A,	dSMPSKick
+	dc.b		$14,	dSMPSKick,	$0A,	dSMPSSnare,	dSMPSSnare,	$05,	dSMPSSnare,	dSMPSKick
+	dc.b		$0F,	dSMPSKick,	$05,	dSMPSSnare,	$0A,	dSMPSKick,	$14,	dSMPSKick
+	dc.b		$0A,	dSMPSSnare,	dSMPSKick,	dSMPSKick,	$0F,	dSMPSKick,	$05,	dSMPSSnare
+	dc.b		$0A,	dSMPSKick,	$14,	dSMPSKick,	$0A,	dSMPSSnare,	dSMPSKick,	dSMPSKick
+	dc.b		$0F,	dSMPSKick,	$05,	dSMPSSnare,	$0A,	dSMPSKick,	$14,	dSMPSKick
+	dc.b		$0A,	dSMPSSnare,	dSMPSSnare,	$05,	dSMPSSnare,	dSMPSSnare,	dSMPSSnare,	dSMPSKick
+	dc.b		dSMPSKick,	dSMPSSnare,	dSMPSSnare,	dSMPSKick,	dSMPSKick,	dSMPSSnare,	dSMPSSnare,	dSMPSSnare
+	dc.b		dSMPSSnare,	dSMPSSnare,	dSMPSSnare,	dSMPSSnare,	dSMPSSnare,	dSMPSKick,	$0F,	dSMPSKick
+	dc.b		$05,	dSMPSSnare,	$0A,	dSMPSKick,	$14,	dSMPSKick,	$0A,	dSMPSSnare
+	dc.b		dSMPSKick,	dSMPSKick,	$0F,	dSMPSKick,	$05,	dSMPSSnare,	$0A,	dSMPSKick
+	dc.b		$14,	dSMPSKick,	$0A,	dSMPSSnare,	dSMPSKick,	dSMPSKick,	$0F,	dSMPSKick
+	dc.b		$05,	dSMPSSnare,	$0A,	dSMPSKick,	$14,	dSMPSKick,	$0A,	dSMPSSnare
+	dc.b		dSMPSKick,	dSMPSKick,	$0F,	dSMPSKick,	$05,	dSMPSSnare,	$0A,	dSMPSKick
+	dc.b		$14,	dSMPSKick,	$0A,	dSMPSSnare,	dSMPSSnare,	$05,	dSMPSSnare,	dSMPSKick
+	dc.b		$0F,	dSMPSKick,	$05,	dSMPSSnare,	$0A,	dSMPSKick,	$14,	dSMPSKick
+	dc.b		$0A,	dSMPSSnare,	dSMPSKick,	dSMPSKick,	$0F,	dSMPSKick,	$05,	dSMPSSnare
+	dc.b		$0A,	dSMPSKick,	$14,	dSMPSKick,	$0A,	dSMPSSnare,	dSMPSKick,	dSMPSKick
+	dc.b		$0F,	dSMPSKick,	$05,	dSMPSSnare,	$0A,	dSMPSKick,	$14,	dSMPSKick
+	dc.b		$0A,	dSMPSSnare,	dSMPSKick,	dSMPSKick,	dSMPSKick,	dSMPSSnare,	dSMPSKick,	$05
+	dc.b		dSMPSSnare,	$0A,	dSMPSKick,	$05,	dSMPSKick,	$0A,	dSMPSSnare,	dSMPSSnare
+	dc.b		$05,	dSMPSSnare,	dSMPSKick,	$0F,	dSMPSKick,	$05,	dSMPSSnare,	$0A
+	dc.b		dSMPSKick,	$14,	dSMPSKick,	$0A,	dSMPSSnare,	dSMPSKick,	dSMPSKick,	$0F
+	dc.b		dSMPSKick,	$05,	dSMPSSnare,	$0A,	dSMPSKick,	$14,	dSMPSKick,	$0A
+	dc.b		dSMPSSnare,	dSMPSKick,	dSMPSKick,	$0F,	dSMPSKick,	$05,	dSMPSSnare,	$0A
+	dc.b		dSMPSKick,	$14,	dSMPSKick,	$0A,	dSMPSSnare,	dSMPSKick,	dSMPSKick,	$0F
+	dc.b		dSMPSKick,	$05,	dSMPSSnare,	$0A,	dSMPSKick,	$14,	dSMPSKick,	$0A
+	dc.b		dSMPSSnare,	dSMPSSnare,	$05,	dSMPSSnare,	dSMPSKick,	$0F,	dSMPSKick,	$05
+	dc.b		dSMPSSnare,	$0A,	dSMPSKick,	$14,	dSMPSKick,	$0A,	dSMPSSnare,	dSMPSKick
+	dc.b		dSMPSKick,	$0F,	dSMPSKick,	$05,	dSMPSSnare,	$0A,	dSMPSKick,	$14
+	dc.b		dSMPSKick,	$0A,	dSMPSSnare,	dSMPSKick,	dSMPSKick,	$0F,	dSMPSKick,	$05
+	dc.b		dSMPSSnare,	$0A,	dSMPSKick,	$14,	dSMPSKick,	$0A,	dSMPSSnare,	dSMPSSnare
+	dc.b		$05,	dSMPSSnare,	dSMPSSnare,	dSMPSSnare,	dSMPSKick,	dSMPSKick,	dSMPSSnare,	dSMPSSnare
+	dc.b		dSMPSKick,	dSMPSKick,	dSMPSSnare,	dSMPSSnare,	dSMPSSnare,	dSMPSSnare,	dSMPSSnare,	dSMPSSnare
+	dc.b		dSMPSSnare,	dSMPSSnare
 	smpsJump	SonUnderground_DAC
 
 SonUnderground_Voices:
