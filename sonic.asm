@@ -2273,8 +2273,9 @@ GM_Title:
 		bsr.w	ClearScreen
 
 		clearRAM	v_ram_start, (v_ram_start+$2000)			; clear foreground buffers
-		clearRAM	v_objspace, v_objspace_end
-		clearRAM	v_levelvariables, v_levelvariables_end				; clear the camera RAM
+		clearRAM	v_bgscroll_buffer, (v_bgscroll_buffer+$200)		; clear scroll buffers
+		clearRAM	v_objspace, v_objspace_end				; clear object RAM
+		clearRAM	v_levelvariables, v_levelvariables_end			; clear the camera RAM
 
 ;		locVRAM	ArtTile_Title_Japanese_Text*tile_size
 ;		lea	(Nem_JapNames).l,a0 ; load Japanese credits
@@ -2504,7 +2505,7 @@ Tit_NoDemo:	; GMZ
 		move.w	#$40,d1			; Timer
 		move.b	#sfx_MenuConfirm,d0	; Mania "Ding!" SFX
 		bsr.w	QueueSound2		; Reproduce it		
-		
+
 AtoTimerLoop1:
 		move.b	#$08,(v_vbla_routine).w	;  )
 		bsr.w	WaitForVBla		 
@@ -2516,11 +2517,11 @@ AtoWackyscr:
 		bsr.w	QueueSound2		; play it
 		
 AtoTimerLoop2:
-        move.w  d1, -(sp)		
-		bsr.w   WackyScroll       
+		move.w  d1, -(sp)
+		bsr.w	WackyScroll
 		move.b  #$08, (v_vbla_routine).w
-		bsr.w   WaitForVBla   
-        move.w  (sp)+, d1		
+		bsr.w   WaitForVBla
+		move.w  (sp)+, d1		
 		dbf     d1, AtoTimerLoop2   ; Absolute trash code
 	    
 Tit_ChkLevSel:
@@ -2534,8 +2535,8 @@ Tit_ChkLevSel:
 ; ---------------------------------------------------------------------------	
 ; ===========================================================================
 
-ATOscr1: equ	$FFFFA800	
-ATOscr2: equ	$FFFFA802
+ATOscr1: equ	v_bgscroll_buffer
+ATOscr2: equ	v_bgscroll_buffer+2
 		
 WackyScroll:		
 		lea     (v_hscrolltablebuffer).w,a1	
