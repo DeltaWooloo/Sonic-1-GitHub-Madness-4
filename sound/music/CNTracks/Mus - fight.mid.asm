@@ -397,53 +397,53 @@ fight.mid_PSG3Loop:
 fight.mid_DAC:
 	dc.b	nRst, $18
 fight.mid_DACL:
-	dc.b	dProtoSnare, $06, dSMPSKick
+	dc.b	dSnareS3, $06, dKickS3
 	smpsLoop            $00, $07, fight.mid_DACL
 fight.mid_DACL1:
-	dc.b	dFloorTom, $03
+	dc.b	dTick, $03
 	smpsLoop            $00, $08, fight.mid_DACL1
 fight.mid_DACL2:
-	dc.b	dProtoSnare, $06, dSMPSKick
+	dc.b	dSnareS3, $06, dKickS3
 	smpsLoop            $00, $07, fight.mid_DACL2
 fight.mid_DACL3:
-	dc.b	dHiTom, dSMPSKick, dMidTom, dSMPSKick
+	dc.b	dElectricHiTom, dKickS3, dElectricMidTom, dKickS3
 	smpsLoop            $00, $02, fight.mid_DACL3
 fight.mid_DACL4:
-	dc.b	dProtoSnare, dSMPSKick
+	dc.b	dSnareS3, dKickS3
 	smpsLoop            $00, $04, fight.mid_DACL4
 	smpsCall		fight.mid_DACClimax
-	dc.b	dFloorTom, $0C, dProtoSnare, $06, dSMPSKick, $06, dSMPSKick, $0C, dProtoSnare, $0C
+	dc.b	dCrashCymbal, $0C, dSnareS3, $06, dKickS3, $06, dKickS3, $0C, dSnareS3, $0C
 fight.mid_DACL5:
 	smpsCall		fight.mid_DACC2
 	smpsLoop            $00, $0A, fight.mid_DACL5
-	dc.b	dSMPSKick, $0C, dProtoSnare, $06, dSMPSKick, $06
+	dc.b	dKickS3, $0C, dSnareS3, $06, dKickS3, $06
 	smpsCall		fight.mid_DACClimax
 fight.mid_DACL6:
 	smpsCall		fight.mid_DACC2
 	smpsLoop            $00, $03, fight.mid_DACL6
-	dc.b	dSMPSKick, $0C, dProtoSnare, $06, dProtoSnare, $03, dProtoSnare, dSMPSKick, $18
+	dc.b	dKickS3, $0C, dSnareS3, $06, dSnareS3, $03, dSnareS3, dKickS3, $18
 	smpsJump            fight.mid_DACL
 
 fight.mid_DACClimax:
-	dc.b	dHiTom, $03, dHiTom, $06, dMidTom, $03, dMidTom, $06, dFloorTom, $0C, dSMPSKick, $06, dSMPSKick, dSMPSKick, $0C, dSMPSKick, $06, dProtoSnare, $0C
+	dc.b	dElectricHiTom, $03, dElectricHiTom, $06, dElectricMidTom, $03, dElectricMidTom, $06, dCrashCymbal, $0C, dKickS3, $06, dKickS3, dKickS3, $0C, dKickS3, $06, dSnareS3, $0C
 fight.mid_DACCL1:
 	smpsCall		fight.mid_DACC1
-	dc.b	dProtoSnare, $0C
+	dc.b	dSnareS3, $0C
 	smpsLoop            $00, $02, fight.mid_DACCL1
 	smpsCall		fight.mid_DACC1
-	dc.b	dProtoSnare, $06, dProtoSnare, $03, dProtoSnare
+	dc.b	dSnareS3, $06, dSnareS3, $03, dSnareS3
 	smpsCall		fight.mid_DACC1
-	dc.b	dProtoSnare, $0C
-	dc.b	dSMPSKick, $06, dSMPSKick, $03, dSMPSKick, dSMPSKick, $06, dSMPSKick, $09, dHiTom, $03, dHiTom, $06
-	dc.b	dMidTom, $03, dMidTom, dLowTom, $06
+	dc.b	dSnareS3, $0C
+	dc.b	dKickS3, $06, dKickS3, $03, dKickS3, dKickS3, $06, dKickS3, $09, dElectricHiTom, $03, dElectricHiTom, $06
+	dc.b	dElectricMidTom, $03, dElectricMidTom, dElectricLowTom, $06
 	smpsReturn
 	
 fight.mid_DACC1:
-	dc.b	dSMPSKick, $06, dSMPSKick, dSMPSKick, dSMPSKick, $0C, dSMPSKick, $06
+	dc.b	dKickS3, $06, dKickS3, dKickS3, dKickS3, $0C, dKickS3, $06
 	smpsReturn
 
 fight.mid_DACC2:
-	dc.b	dSMPSKick, $0C, dProtoSnare, $06, dSMPSKick, dSMPSKick, $0C, dProtoSnare
+	dc.b	dKickS3, $0C, dSnareS3, $06, dKickS3, dKickS3, $0C, dSnareS3
 	smpsReturn
 
 fight.mid_Voices:
