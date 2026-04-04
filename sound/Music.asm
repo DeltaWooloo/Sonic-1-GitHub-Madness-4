@@ -135,6 +135,7 @@ MusicIndex:
 	dc.l	Mus_Hidden
 	dc.l	Mus_BossaNova
 	dc.l	Mus_dam_dariram
+	dc.l	Mus_SmilingBomb
 
 	dc.l	Mus_CrazyMario
 	dc.l	Mus_Ding
@@ -251,7 +252,7 @@ Mus_Invincible:		include "music/TG2000Tracks/SomariInv.asm"
 	even
 Mus_AVGNInv:		include	"music/TG2000Tracks/Mus - AVGN Invincibility.asm"
 	even
-Mus_Title:		include "music/TheWTracks/Mus - Smiling Bomb.asm"
+Mus_Title:		include "music/TG2000Tracks/Mus - The GHM4 Song.asm"
 	even
 Mus_NewBarkTown:	include "music/DaxKatter/Mus - New Bark Town.asm"
 	even
@@ -424,6 +425,8 @@ Mus_Hidden:		include	"music/Dawid/Hidden.asm"
 Mus_BossaNova:		include	"music/TG2000Tracks/BossaNova.asm"
 	even
 Mus_dam_dariram:	include	"music/DSKTracks/dam_dariram_handmade.asm"
+	even
+Mus_SmilingBomb:	include "music/TheWTracks/Mus - Smiling Bomb.asm"
 	even
 
 Mus_CrazyMario:		include	"music/Dawid/crazymario.asm"

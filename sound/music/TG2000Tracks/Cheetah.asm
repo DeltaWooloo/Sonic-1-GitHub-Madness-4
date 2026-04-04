@@ -12,8 +12,8 @@ Cheetah_Header:
 	smpsHeaderFM	Cheetah_FM3,	$00, $07
 	smpsHeaderFM	Cheetah_FM4,	$00, $00
 	smpsHeaderFM	Cheetah_FM5,	$00, $00
-	smpsHeaderPSG	Cheetah_PSG1,	$0C, $00, $00, $00
-	smpsHeaderPSG	Cheetah_PSG2,	$0C, $00, $00, $00
+	smpsHeaderPSG	Cheetah_PSG1,	$0C, $02, $00, $00
+	smpsHeaderPSG	Cheetah_PSG2,	$0C, $02, $00, $00
 	smpsHeaderPSG	Cheetah_PSG3,	$0C, $00, $00, $00
 
 Cheetah_Voices:
@@ -1549,7 +1549,6 @@ Cheetah_PSG1_01_0_32:
 	smpsReturn
 
 Cheetah_PSG1_02_0_32:
-	smpsPSGvoice	CheetahTone
 	dc.b nC3, $04, nRst, $02, nAb2, nRst, $04, nF2, nRst, $10
 	smpsReturn
 
@@ -1616,7 +1615,6 @@ Cheetah_PSG1_0F_0_32:
 	smpsReturn
 
 Cheetah_PSG1_10_0_32:
-	smpsPSGvoice	CheetahTone
 	dc.b nF2, $02, nRst, nF2, nRst, $06, nC3, $02, nRst, $0E, nF2, $02, nRst
 	smpsReturn
 
@@ -1625,7 +1623,6 @@ Cheetah_PSG1_12_0_32:
 	smpsReturn
 
 Cheetah_PSG1_13_0_32:
-	smpsPSGvoice	CheetahTone
 	dc.b nDs2, $02, nRst, nDs2, nRst, $06, nC3, $02, nRst, $0E, nDs2, $02, nRst
 	smpsReturn
 
@@ -1634,7 +1631,6 @@ Cheetah_PSG1_14_0_32:
 	smpsReturn
 
 Cheetah_PSG1_15_0_32:
-	smpsPSGvoice	CheetahTone
 	dc.b nCs2, $02, nRst, nCs2, nRst, $06, nC3, $02, nRst, $0E, nCs2, $02, nRst
 	smpsReturn
 
@@ -1742,7 +1738,6 @@ Cheetah_PSG2_01_0_32:
 	smpsReturn
 
 Cheetah_PSG2_02_0_32:
-	smpsPSGvoice	CheetahTone
 	dc.b nC4, $04, nRst, $02, nAb3, nRst, $04, nF3, nRst, $10
 	smpsReturn
 
@@ -1809,7 +1804,6 @@ Cheetah_PSG2_0F_0_32:
 	smpsReturn
 
 Cheetah_PSG2_10_0_32:
-	smpsPSGvoice	CheetahTone
 	dc.b nF3, $02, nRst, nF3, nRst, $06, nC4, $02, nRst, $0E, nF3, $02, nRst
 	smpsReturn
 
@@ -1818,7 +1812,6 @@ Cheetah_PSG2_12_0_32:
 	smpsReturn
 
 Cheetah_PSG2_13_0_32:
-	smpsPSGvoice	CheetahTone
 	dc.b nDs3, $02, nRst, nDs3, nRst, $06, nC4, $02, nRst, $0E, nDs3, $02, nRst
 	smpsReturn
 
@@ -1827,7 +1820,6 @@ Cheetah_PSG2_14_0_32:
 	smpsReturn
 
 Cheetah_PSG2_15_0_32:
-	smpsPSGvoice	CheetahTone
 	dc.b nCs3, $02, nRst, nCs3, nRst, $06, nC4, $02, nRst, $0E, nCs3, $02, nRst
 	smpsReturn
 

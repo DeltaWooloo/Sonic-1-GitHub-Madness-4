@@ -211,10 +211,6 @@ Bad_Apple_Voices:
 	smpsVcReleaseRate	$06, $05, $06, $00
 	smpsVcTotalLevel	$0F, $20, $1D, $1E
 
-;	PSG Voice 10 -> AppleTone_04
-;	macros:
-;		vol: 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15
-
 	; Loop Pattern :  00
 	; End Pattern :  13
 	; End Place :  3F
@@ -1096,19 +1092,16 @@ Bad_Apple_PSG1_06_0_64:
 
 Bad_Apple_PSG1_07_0_64:
 	dc.b nRst, $30
-	smpsPSGvoice	AppleTone_04
 	dc.b nD3, $02, nRst, nDs3, nD3, $06, nRst, $04
 	smpsReturn
 
 Bad_Apple_PSG1_08_0_64:
 	dc.b smpsNoAttack, $20
-	smpsPSGvoice	AppleTone_04
 	dc.b nFs2, $02, nRst, nFs2, $08, nDs2, $02, nRst, $12
 	smpsReturn
 
 Bad_Apple_PSG1_0A_0_64:
 	dc.b nRst, $30
-	smpsPSGvoice	AppleTone_04
 	dc.b nD3, $02, nRst, nDs3, nD3, $06, nRst, $04
 	smpsReturn
 
@@ -1186,19 +1179,16 @@ Bad_Apple_PSG2_06_0_64:
 
 Bad_Apple_PSG2_07_0_64:
 	dc.b nRst, $30
-	smpsPSGvoice	AppleTone_04
 	dc.b nD4, $02, nRst, nDs4, nD4, $06, nRst, $04
 	smpsReturn
 
 Bad_Apple_PSG2_08_0_64:
 	dc.b smpsNoAttack, $20
-	smpsPSGvoice	AppleTone_04
 	dc.b nFs3, $02, nRst, nFs3, $08, nDs3, $02, nRst, $12
 	smpsReturn
 
 Bad_Apple_PSG2_0A_0_64:
 	dc.b nRst, $30
-	smpsPSGvoice	AppleTone_04
 	dc.b nD4, $02, nRst, nDs4, nD4, $06, nRst, $04
 	smpsReturn
 

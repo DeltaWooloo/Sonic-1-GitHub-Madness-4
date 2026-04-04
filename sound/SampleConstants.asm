@@ -38,6 +38,10 @@ dLowTimpaniS3		ds.b 1
 dSpinKick			ds.b 1
 dSpinSnare			ds.b 1
 
+; Generic SMPS
+dSMPSKick			ds.b 1
+dSMPSSnare			ds.b 1
+
 ; Dax Sample Set
 dChunkyKick			ds.b 1
 dPokeSnare			ds.b 1
