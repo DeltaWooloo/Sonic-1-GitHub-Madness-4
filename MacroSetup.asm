@@ -88,6 +88,11 @@ ds macro
 	endif
    endm
 
+; alias dc[] as dcb from asm68k compiler
+dcb macro fill,byte
+	dc.ATTRIBUTE [fill]byte
+	endm
+
 ; define a trace macro
 ; lets you easily check what address a location in this disassembly assembles to
 trace macro optionalMessageWithoutQuotes
