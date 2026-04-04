@@ -334,6 +334,8 @@ Nem_IE:		binclude	"artnem/Internet Explorer.nem"
 		even
 Nem_Villager:		binclude	"artnem/Villager.nem"
 		even
+Nem_Mouse:		binclude	"artnem/Mouse.nem"
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - character hud
 ; ---------------------------------------------------------------------------
@@ -498,6 +500,13 @@ Kos_BSZ:	binclude	"artkos/8x8 - BSZ.kos"
 		even
 Blk256_BSZ:	binclude	"map256/BSZ.bin"		
 		even
+
+Blk16_BTZ:	binclude	"map16/BTZ.eni";sTOP
+		even
+Kos_BTZ:	binclude	"artkos/8x8 - BTZ.kos"
+		even
+Blk256_BTZ:	binclude	"map256/BTZ.kos"		
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - bosses and ending sequence
 ; ---------------------------------------------------------------------------
@@ -586,6 +595,8 @@ Col_NGZ:	binclude	"collide/NGZ.bin"	; O,GOPOG9-I0=IG20=I=0IG4=0I
 Col_HSZ:	binclude	"collide/HSZ.bin"
 		even
 Col_BSZ:	binclude	"collide/BSZ.bin"
+		even
+Col_BTZ:	binclude	"collide/BTZ.bin"
 		even
 ; ---------------------------------------------------------------------------
 ; Special Stage layouts
@@ -830,7 +841,15 @@ Level_BSZ2:	binclude	"levels/bsz2.bin"
 Level_BSZ3:	binclude	"levels/bsz3.bin"
 		even
 Level_BSZbg:	binclude	"levels/bszbg.bin"
-		dc.l 0
+		even
+
+Level_BTZ1:	binclude	"levels/btz1.bin"
+		even
+Level_BTZ2:	binclude	"levels/btz2.bin"
+		even
+Level_BTZ3:	binclude	"levels/btz3.bin"
+		even
+Level_BTZbg:	binclude	"levels/btzbg.bin"
 		even
 ; ---------------------------------------------------------------------------
 ; Uncompressed graphics - Giant Rings
@@ -1020,6 +1039,12 @@ ObjPos_BSZ1:	binclude	"objpos/bsz1.bin"
 ObjPos_BSZ2:	binclude	"objpos/bsz2.bin"
 		even
 ObjPos_BSZ3:	binclude	"objpos/bsz3.bin"
+		even
+ObjPos_BTZ1:	binclude	"objpos/btz1.bin"
+		even
+ObjPos_BTZ2:	binclude	"objpos/btz2.bin"
+		even
+ObjPos_BTZ3:	binclude	"objpos/btz3.bin"
 		even
 
 ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0

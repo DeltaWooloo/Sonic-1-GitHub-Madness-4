@@ -106,8 +106,8 @@ Pow_ChkEggman:
 		bne.s	Pow_ChkSonic
 
 Pow_GetHurt:
-		move.w	obX(a0),spik_origX(a0)	; needed to display the icon properly
-		jmp	(Spik_Hurt).l		; use spikes to hurt Sonic
+		lea	(v_player).w,a0
+		jsr	(React_ChkHurt).l	; Hurt player as an exchangc
 
 ; ===========================================================================
 
@@ -337,15 +337,18 @@ Pow_Randomiser:
 		move.w	#sfx_HitSpikes,d0
 		jmp	(QueueSound2).l	; play ring sound
 
-		
 ; ===========================================================================
 .loserings:	; You lost the game!
 		subi.w	#10,(v_rings).w		; take 10 rings from the player because you don't need them
 		bhs.s	.greaterthanzero	; branch if you had more than 10
 		clr.w	(v_rings).w		; oh wait, you didn't have enough, well fuck you, takes all your rings
+		move.b	#$80,(f_ringcount).w ; update ring counter
+		bra.s	.norings
 
-.greaterthanzero
+.greaterthanzero:
 		ori.b	#1,(f_ringcount).w	; update the ring counter
+
+.norings:
 		move.w	#sfx_Bumper,d0
 		jmp	(QueueSound2).l	; play ring sound
 
@@ -386,8 +389,13 @@ Pow_Randomiser:
 		move.b	d0,(v_invinc).w			; remove the shoes
 		move.w	d0,(v_player+shoetime).w	; time limit for the power-up
 		move.w	d0,(v_player+invtime).w		; time limit for the power-up
+		move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
+		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
+		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
 		move.b	#dClintonFail,d0
-		jmp	(MegaPCM_PlaySample).l		; as placeholder
+		jsr	(MegaPCM_PlaySample).l		; as placeholder
+		move.b	(v_zonemusic).w,d0
+		jmp	(QueueSound1).l			; play normal music
 
 ; ===========================================================================
 .lolrestart:	; GHM4 ran into an error and needs to restart your level
@@ -649,6 +657,7 @@ Pow_Randomiser:
 		bne.s	.NoMusic			; if yes, branch
 		cmpi.w	#$C,(v_air).w
 		bls.s	.NoMusic
+		pcm	dBoostPower
 		move.w	#bgm_Invincible,d0
 		jmp	(QueueSound1).l			; play invincibility music
 

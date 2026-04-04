@@ -119,12 +119,12 @@ Mus8C_Boss_DAC:
 	dc.b	dHiTimpani, $06, dLowTimpani, dHiTimpani, dLowTimpani, dHiTimpani, dLowTimpani, dHiTimpani, dLowTimpani
 
 Mus8C_Boss_Loop00:
-	dc.b	dSnare, $0C, dSnare, $04, dSnare, dSnare, dSnare, $06, dSnare, $0C, dSnare, $06
-	dc.b	dSnare, $12, dSnare, $06, dSnare, $0C, dSnare, $0C
+	dc.b	dProtoSnare, $0C, dProtoSnare, $04, dProtoSnare, dProtoSnare, dProtoSnare, $06, dProtoSnare, $0C, dProtoSnare, $06
+	dc.b	dProtoSnare, $12, dProtoSnare, $06, dProtoSnare, $0C, dProtoSnare, $0C
 	smpsLoop            $00, $03, Mus8C_Boss_Loop00
-	dc.b	dSnare, $0C, dSnare, $04, dSnare, dSnare, dSnare, $06, dSnare, $0C, dSnare, $06
-	dc.b	dSnare, $06, dSnare, $0C, dSnare, $06, dSnare, $06, dSnare, $0C, dSnare, $06
-	dc.b	dSnare, $01, dHiTimpani, $05, dLowTimpani, $06, dHiTimpani, dLowTimpani, dHiTimpani, dLowTimpani, dHiTimpani, dLowTimpani
+	dc.b	dProtoSnare, $0C, dProtoSnare, $04, dProtoSnare, dProtoSnare, dProtoSnare, $06, dProtoSnare, $0C, dProtoSnare, $06
+	dc.b	dProtoSnare, $06, dProtoSnare, $0C, dProtoSnare, $06, dProtoSnare, $06, dProtoSnare, $0C, dProtoSnare, $06
+	dc.b	dProtoSnare, $01, dHiTimpani, $05, dLowTimpani, $06, dHiTimpani, dLowTimpani, dHiTimpani, dLowTimpani, dHiTimpani, dLowTimpani
 	smpsJump            Mus8C_Boss_DAC
 
 Mus8C_Boss_Voices:

@@ -39,7 +39,10 @@ IE_Action:	; Routine 2
 		jsr	.index(pc,d1.w)
 		lea	(Ani_IE).l,a1
 		bsr.w	AnimateSprite
-		bra.w	RememberState
+		bsr.w	RememberState
+;		move.b	#$8,(v_vbla_routine).w	; uncomment this for lag :)
+;		jmp	WaitForVBla
+		rts
 ; ===========================================================================
 .index:		dc.w IE_Wait-.index
 		dc.w IE_Hop-.index

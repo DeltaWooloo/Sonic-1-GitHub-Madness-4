@@ -51,9 +51,9 @@ PSG_Index:
 		dc.l PSG_Dole04, PSG_DSK01, PSG_DSK02
 		dc.l PSG_Chicken_01, PSG_Chicken_02, PSG_Chicken_03
 		dc.l PSG_Danstar_01, PSG_Danstar_02, PSG_Danstar_03, PSG_Danstar_04
-		dc.l PSG_TF1, PSG_TF2
-		dc.l PSG_Apple1, PSG_Apple2, PSG_Apple3, PSG_Apple4
-		dc.l PSG_Scrap1, PSG_Scrap2, PSG_Cheetah, PSG_Coffin, PSG_Doom
+		dc.l PSG_TF1, PSG_TF2, PSG_Apple1, PSG_Apple2, PSG_Apple3
+		dc.l PSG_Scrap1, PSG_Scrap2, PSG_Coffin, PSG_Doom
+		dc.l PSG_GHM4_01
 
 PSG1:		dc.b 0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,$80
 	even
@@ -226,77 +226,72 @@ PSG_Chicken_03:
 	dc.b	$B,$C,$C,$C,$C,$D,$D,$D,$E,$E,$E,$F,$80
 	even
 
-	PSG_Danstar_01:
+PSG_Danstar_01:
 	dc.b	0,0,1,2,3,3,4,5,5,6,7,7,8,8,9,$A,$B,$C,$D
 	dc.b	$E,$E,$F,$80
 	even
 
-	PSG_Danstar_02:
+PSG_Danstar_02:
 	dc.b	0,0,1,2,2,2,3,3,4,4,5,5,5,5,6,6,7,7,8,8,9,9
 	dc.b	$A,$A,$B,$B,$B,$C,$C,$D,$E,$80
 	even
 
-	PSG_Danstar_03:
+PSG_Danstar_03:
 	dc.b	1,1,1,1,1,1,3,3,3,4,4,5,$80
 	even
 
-	PSG_Danstar_04:
+PSG_Danstar_04:
 	dc.b	2,2,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 	dc.b	1,1,1,1,1,1,1,1,1,2,$80
 	even
 	
-	PSG_TF1:
+PSG_TF1:
 	dc.b	0,1,2,3,4,5,6,6,7,7,8,8,9,9,$A,$A,$B,$B,$C
 	dc.b	$C,$D,$D,$D,$E,$E,$E,$F,$80
 	even
 
-	PSG_TF2:
+PSG_TF2:
 	dc.b	0,1,2,3,3,4,5,5,6,7,8,8,9,9,$A,$A,$A,$B,$B
 	dc.b	$C,$C,$C,$C,$D,$D,$D,$E,$E,$E,$F,$80
 	even
 	
-	PSG_Apple1:
+PSG_Apple1:
 	dc.b	0,1,2,3,5,5,6,6,7,8,8,9,9,$A,$A,$B,$B,$C,$C
 	dc.b	$D,$D,$E,$F,$80
 	even
 
-	PSG_Apple2:
+PSG_Apple2:
 	dc.b	0,1,1,2,3,3,3,4,4,5,5,5,6,7,7,7,8,8,8,9,9,9
 	dc.b	$A,$A,$A,$A,$B,$B,$B,$B,$B,$C,$80
 	even
 
-	PSG_Apple3:
+PSG_Apple3:
 	dc.b	5,3,2,2,2,2,1,1,1,1,1,1,1,2,2,2,3,3,3,3,3,3
 	dc.b	3,3,3,3,3,4,$80
 	even
 
-	PSG_Apple4:
-	dc.b	0,$80
-	even
-
-	PSG_Scrap1:
+PSG_Scrap1:
 	dc.b	0,1,1,2,2,2,2,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4
 	dc.b	4,5,$80
 	even
 
-	PSG_Scrap2:
+PSG_Scrap2:
 	dc.b	4,3,2,2,2,2,1,1,1,1,1,0,$80
 	even
 
-	PSG_Cheetah:
-	dc.b	2,$80
-	even
-
-	PSG_Coffin:
+PSG_Coffin:
 	dc.b	7,6,5,4,4,3,3,2,2,1,0,0,0,0,0,0,0,1,1,2,2,2
 	dc.b	2,3,3,4,4,5,5,6,6,7,$80
 	even
 
-	PSG_Doom:
+PSG_Doom:
 	dc.b	0,0,0,0,0,0,0,0,1,2,2,3,3,3,4,5,5,6,6,7,7,7
 	dc.b	8,8,8,9,9,9,9,$A,$80
 	even
 
+PSG_GHM4_01:
+	dc.b	0,0,0,1,2,3,3,4,4,4,5,$80
+	even
 
 ; ---------------------------------------------------------------------------
 ; New tempos for songs during speed shoes

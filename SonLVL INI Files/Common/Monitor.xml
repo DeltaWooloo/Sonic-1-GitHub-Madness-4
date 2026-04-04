@@ -33,7 +33,7 @@
       <ArtFile filename="../artnem/Monitors.nem" />
       <MapFile type="ASM" filename="../_maps/Monitor.asm" frame="8" startpal="0" />
     </ImageFromMappings>
-    <ImageFromMappings id="toolimited">
+    <ImageFromMappings id="random">
       <ArtFile filename="../artnem/Monitors.nem" />
       <MapFile type="ASM" filename="../_maps/Monitor.asm" frame="9" startpal="0" />
     </ImageFromMappings>
@@ -54,7 +54,7 @@
     <Subtype id="04" name="Shield" image="shield" />
     <Subtype id="05" name="Invincibility" image="invincibility" />
     <Subtype id="06" name="Rings" image="rings" />
-    <Subtype id="07" name="S" image="s" />
+    <Subtype id="07" name="Random" image="random" />
     <Subtype id="08" name="Goggles" image="goggles" />
     <Subtype id="09" name="Broken" image="broken" />
   </Subtypes>
@@ -70,7 +70,7 @@
       <EnumMember name="Shield" />
       <EnumMember name="Invincibility" />
       <EnumMember name="Rings" />
-      <EnumMember name="S" />
+      <EnumMember name="Random" />
       <EnumMember name="Goggles" />
       <EnumMember name="Broken" />
     </Enum>

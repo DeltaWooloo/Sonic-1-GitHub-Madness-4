@@ -202,10 +202,19 @@ PalCycle_DVZ:
 	lea	(v_pal_dry+98).w,a1
 	moveq	#0,d0
 	move.b	v_pcyc_num.w,d0
+
+		btst	#6,(v_jpadhold1).w	; dev
+		beq.w	.NoHeld
+		addq.b	#1,v_pcyc_num+1.w
+.NoHeld
+	andi.b	#$FE,d0		; no odd addresses
+	adda.l	d0,a0
+	move.b	v_pcyc_num+1.w,d0
 	cmpi.b	#14*2,d0
-	ble.s	.Skip
-	move.b	#0,v_pcyc_num.w
-.Skip
+	ble.s	.Skip2
+	move.b	#0,v_pcyc_num+1.w
+.Skip2:
+	andi.b	#$FE,d0
 	adda.l	d0,a0
 	move.l	(a0)+,(a1)+
 	move.l	(a0)+,(a1)+
@@ -219,11 +228,10 @@ PalCycle_DVZ:
 ; ---------------------------------------------------------------------------
 
 .Cycle:
+	rept 3
 	dc.w $222,$222,$222,$222,$222,$222,$222
 	dc.w $EEE,$EEE,$EEE,$EEE,$EEE,$EEE,$EEE
-	dc.w $222,$222,$222,$222,$222,$222,$222
-	dc.w $EEE,$EEE,$EEE,$EEE,$EEE,$EEE,$EEE
-
+	endr
 ; ---------------------------------------------------------------------------
 
 PalCyc_Nogales:

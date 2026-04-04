@@ -160,22 +160,6 @@ RomEndLoc:	dc.l EndOfRom-1		; End address of ROM
 EndOfHeader:
 
 ; ===========================================================================
-; The entirety of Osomatsu-kun (with the header stripped out)
-
-Init_TooLimited:		= $382
-H_Int_2LS:		= $AE4
-V_Int_2LS:		= $3E2
-
-
-	binclude	"_bonusgames/Too LimitedSonic/Too_LimitedSonic.bin"	; Welp, the DMA Queue is gonna be problematic
-	even
-
-	align	$8000
-
-		binclude "rom manual.txt"
-		even
-
-; ===========================================================================
 ; Crash/Freeze the 68000. Unlike Sonic 2, Sonic 1 uses the 68000 for playing music, so it stops too
 
 ErrorTrap:
@@ -762,7 +746,7 @@ VBla_08:
 
 ; Demo_Time:
 VBla_UpdateScreen:
-		bsr.w	LoadTilesAsYouMove	; update level tiles while screen is moving
+		jsr	(LoadTilesAsYouMove).l	; update level tiles while screen is moving
 		jsr	(AnimateLevelGfx).l	; updated animated tiles
 		jsr	(HUD_Update).l		; update HUD data
 		bra.w	ProcessDPLC_3Tiles	; run a bit of PLC decompression
@@ -811,7 +795,7 @@ VBla_18:
 		movem.l	d0-d7,(v_screenposx_dup).w
 		movem.l	(v_fg_scroll_flags).w,d0-d1
 		movem.l	d0-d1,(v_fg_scroll_flags_dup).w
-		bsr.w	LoadTilesAsYouMove
+		jsr	(LoadTilesAsYouMove).l
 		jsr	(AnimateLevelGfx).l
 		jsr	(HUD_Update).l
 		bra.w	ProcessDPLC_9Tiles
@@ -2148,6 +2132,7 @@ Pal_DVZ:		bincludeEndMarker	"palette/DoleVille Zone.bin"
 Pal_HARDWARE:		bincludeEndMarker	"palette/Hardware Store.bin"
 Pal_NGZ:		bincludeEndMarker	"palette/Nogales Zone.bin"
 Pal_BSZ:		bincludeEndMarker	"palette/BlueScape.bin"
+Pal_BTZ:		bincludeEndMarker	"palette/BlueStone.bin"
 Pal_SplashPal:	bincludeEndMarker	"eurosega/pal.bin"
 Pal_ColdBrew:	bincludeEndMarker	"conimodes/cold brew/palette.bin"
 Pal_ColdBrewG:	bincludeEndMarker	"conimodes/cold brew/palette grayscale.bin"
@@ -2302,7 +2287,10 @@ GM_Title:
 		clr.b	(f_wtr_state).w
 		bsr.w	ClearScreen
 
-		clearRAM v_objspace
+		clearRAM	v_ram_start, (v_ram_start+$2000)			; clear foreground buffers
+		clearRAM	v_bgscroll_buffer, (v_bgscroll_buffer+$200)		; clear scroll buffers
+		clearRAM	v_objspace, v_objspace_end				; clear object RAM
+		clearRAM	v_levelvariables, v_levelvariables_end			; clear the camera RAM
 
 ;		locVRAM	ArtTile_Title_Japanese_Text*tile_size
 ;		lea	(Nem_JapNames).l,a0 ; load Japanese credits
@@ -2341,7 +2329,7 @@ GM_Title:
 
 FinalTitle:
 		bsr.w	PaletteWhiteOut
-		bsr.w	ClearPLC	
+		bsr.w	ClearPLC
 		bsr.w	ClearScreen
 ;		bsr.w	LevelSizeLoad
 ;		bsr.w	DeformLayers
@@ -2377,7 +2365,7 @@ FinalTitle:
 		copyTilemap	v_ram_start,vram_fg,40,38
 	endif
 
-		disable_ints
+;		disable_ints
 		locVRAM	ArtTile_Title_Foreground*tile_size
 		lea	(Nem_TitleFg).l,a0 ; load title screen patterns
 		bsr.w	NemDec
@@ -2388,11 +2376,11 @@ FinalTitle:
 ;		lea	(Nem_TitleTM).l,a0 ; load "TM" patterns
 ;		bsr.w	NemDec
 		; TM removed, rubs my belly - coni
-		enable_ints
+;		enable_ints
 		
 		;!@ GenesisDoes
-		move.b	#dEggmanLaugh, d0
-		jsr		(MegaPCM_PlaySample).l
+;		move.b	#dEggmanLaugh, d0
+;		jsr		(MegaPCM_PlaySample).l
 
 		moveq	#palid_Title,d0	; load title screen palette
 		bsr.w	PalLoad_Fade
@@ -2423,7 +2411,7 @@ FinalTitle:
 		move.b	#id_PSBTM,(v_ttlsonichide).w ; load object which hides part of Sonic
 		move.b	#2,(v_ttlsonichide+obFrame).w
 		jsr	(ExecuteObjects).l
-		bsr.w	DeformLayers
+		jsr	(DeformLayers).l
 		jsr	(BuildSprites).l
 		move.w	#0,(v_title_dcount).w
 		move.w	#0,(v_title_ccount).w
@@ -2532,7 +2520,7 @@ Tit_NoDemo:	; GMZ
 		move.w	#$40,d1			; Timer
 		move.b	#sfx_MenuConfirm,d0	; Mania "Ding!" SFX
 		bsr.w	QueueSound2		; Reproduce it		
-		
+
 AtoTimerLoop1:
 		move.b	#$08,(v_vbla_routine).w	;  )
 		bsr.w	WaitForVBla		 
@@ -2544,11 +2532,11 @@ AtoWackyscr:
 		bsr.w	QueueSound2		; play it
 		
 AtoTimerLoop2:
-        move.w  d1, -(sp)		
-		bsr.w   WackyScroll       
+		move.w  d1, -(sp)
+		bsr.w	WackyScroll
 		move.b  #$08, (v_vbla_routine).w
-		bsr.w   WaitForVBla   
-        move.w  (sp)+, d1		
+		bsr.w   WaitForVBla
+		move.w  (sp)+, d1		
 		dbf     d1, AtoTimerLoop2   ; Absolute trash code
 	    
 Tit_ChkLevSel:
@@ -2562,8 +2550,8 @@ Tit_ChkLevSel:
 ; ---------------------------------------------------------------------------	
 ; ===========================================================================
 
-ATOscr1: equ	$FFFFA800	
-ATOscr2: equ	$FFFFA802
+ATOscr1: equ	v_bgscroll_buffer
+ATOscr2: equ	v_bgscroll_buffer+2
 		
 WackyScroll:		
 		lea     (v_hscrolltablebuffer).w,a1	
@@ -2925,12 +2913,12 @@ Level_TtlCardLoop:
 Level_SkipTtlCard:
 		moveq	#palid_Sonic,d0
 		bsr.w	PalLoad_Fade	; load Sonic's palette
-		bsr.w	LevelSizeLoad
-		bsr.w	DeformLayers
+		jsr	(LevelSizeLoad).l
+		jsr	(DeformLayers).l
 		bset	#2,(v_fg_scroll_flags).w
-		bsr.w	LoadZoneTiles	; load art
-		bsr.w	LevelDataLoad ; load block mappings and palettes
-		bsr.w	LoadTilesFromStart
+		jsr	(LoadZoneTiles).l	; load art
+		jsr	(LevelDataLoad).l	; load block mappings and palettes
+		jsr	(LoadTilesFromStart).l
 		;jsr	(ConvertCollisionArray).l
 		;bsr.w	ColIndexLoad
 		bsr.w	LZWaterFeatures
@@ -3073,7 +3061,7 @@ Level_MainLoop:
 		bhs.s	Level_SkipScroll ; if yes, branch
 
 Level_DoScroll:
-		bsr.w	DeformLayers
+		jsr	(DeformLayers).l
 
 Level_SkipScroll:
 		jsr	(BuildSprites).l
@@ -3846,12 +3834,12 @@ End_LoadData:
 		moveq	#plcid_Ending,d0
 		bsr.w	QuickPLC	; load ending sequence patterns
 		jsr	(Hud_Base).l
-		bsr.w	LevelSizeLoad
-		bsr.w	DeformLayers
+		jsr	(LevelSizeLoad).l
+		jsr	(DeformLayers).l
 		bset	#2,(v_fg_scroll_flags).w
-		bsr.w	LoadZoneTiles	; load art
-		bsr.w	LevelDataLoad
-		bsr.w	LoadTilesFromStart
+		jsr	(LoadZoneTiles).l	; load art
+		jsr	(LevelDataLoad).l
+		jsr	(LoadTilesFromStart).l
 		move.l	#Col_GHZ,(v_collindex).w ; load collision index
 		enable_ints
 		lea	(Kos_EndFlowers).l,a0 ; load extra flower patterns
@@ -3908,7 +3896,7 @@ End_MainLoop:
 		addq.w	#1,(v_framecount).w
 		bsr.w	End_MoveSonic
 		jsr	(ExecuteObjects).l
-		bsr.w	DeformLayers
+		jsr	(DeformLayers).l
 		jsr	(BuildSprites).l
 		jsr	(ObjPosLoad).l
 		bsr.w	PaletteCycle
@@ -3939,7 +3927,7 @@ End_AllEmlds:
 		addq.w	#1,(v_framecount).w
 		bsr.w	End_MoveSonic
 		jsr	(ExecuteObjects).l
-		bsr.w	DeformLayers
+		jsr	(DeformLayers).l
 		jsr	(BuildSprites).l
 		jsr	(ObjPosLoad).l
 		bsr.w	OscillateNumDo
@@ -3959,7 +3947,7 @@ End_SlowFade:
 		lea	(v_screenposx).w,a3
 		lea	(v_lvllayout).w,a4
 		move.w	#$4000,d2
-		bsr.w	DrawChunks
+		jsr	(DrawChunks).l
 		moveq	#palid_Ending,d0
 		bsr.w	PalLoad_Fade	; load ending palette
 		bsr.w	PaletteWhiteIn
@@ -4220,6 +4208,22 @@ TryAg_Exit:
 		include	"_incObj/8C Try Again Emeralds.asm"
 Map_EEgg:	include	"_maps/Try Again & End Eggman.asm"
 
+	dcb.b	$8000-(*), $69		; if data exceeds this byte, Too LimitedSonic will not work properly
+
+; ===========================================================================
+; The entirety of Too LimitedSonic (with the header stripped out)
+
+Init_TooLimited:	= $8160
+H_Int_2LS:		= $88A0
+V_Int_2LS:		= $819E
+
+
+	binclude	"_bonusgames/Too LimitedSonic/Too_LimitedSonic.bin"	; Welp, the DMA Queue is gonna be problematic
+	even
+
+	binclude	"rom manual.txt"
+	even
+
 ; ---------------------------------------------------------------------------
 ; Ending sequence demos
 ; ---------------------------------------------------------------------------
@@ -4264,7 +4268,7 @@ LoadZoneTiles:
 		andi.l	#$FFFFFF,d0 ; 8x8 tile pointer
 		movea.l	d0,a0
 		lea	($FF0000).l,a1
-		bsr.w	KosDec
+		jsr	(KosDec).w
 		move.w	a1,d3
 		move.w	d3,d7
 		andi.w	#$FFF,d3
@@ -4280,8 +4284,8 @@ LoadZoneTiles:
 		jsr	QueueDMATransfer
 		move.w	d7,-(sp)
 		move.b	#$C,(v_vbla_routine).w
-		bsr.w	WaitForVBla
-		bsr.w	RunPLC
+		jsr	(WaitForVBla).w
+		jsr	(RunPLC).w
 		move.w	(sp)+,d7
 		move.w	#$800,d3
 		dbf		d7,.loop
@@ -4310,10 +4314,10 @@ LevelDataLoad:
 		movea.l	(a2)+,a0
 		lea	(v_16x16).w,a1	; RAM address for 16x16 mappings
 		move.w	#make_art_tile(ArtTile_Level,0,FALSE),d0
-		bsr.w	EniDec
+		jsr	(EniDec).w
 		movea.l	(a2)+,a0
 		lea	(v_256x256).l,a1 ; RAM address for 256x256 mappings
-		bsr.w	KosDec
+		jsr	(KosDec).w
 		move.w	(a2)+,d5
 		move.w	(a2)+,d5
 		move.l	(a2)+,v_collindex
@@ -4338,14 +4342,14 @@ LevelDataLoad:
 		moveq	#palid_SBZ2,d0		; use SBZ2/FZ palette
 
 .normalpal:
-		bsr.w	PalLoad_Fade		; load palette (based on d0)
+		jsr	(PalLoad_Fade).w	; load palette (based on d0)
 
 		movea.l	(sp)+,a2	; restore from like  way before
 		addq.w	#4,a2		; read number for 2nd PLC
 		moveq	#0,d0
 		move.b	(a2),d0
 		beq.s	.skipPLC	; if 2nd PLC is 0 (i.e. the ending sequence), branch
-		bsr.w	AddPLC		; load pattern load cues
+		jsr	(AddPLC).w	; load pattern load cues
 
 .skipPLC:
 ;		moveq	#plcid_Main2,d0
@@ -6089,6 +6093,8 @@ Map_MotoMCZ:	include	"_maps/villergar.asm";villy
 Map_Yad:	include	"_maps/Yadrin.asm"
 
 		include	"_incObj/sub SolidObject.asm"
+Map_Mouse:	include	"_maps/Mouse.asm"
+
 ; CBZ BADNIKS
 Map_IZ:	include	"coniobjs/IZMap.asm"
 Map_Spongy:	include	"coniobjs/SpongyMap.asm"

@@ -110,6 +110,8 @@ id_WIN:		equ $08
 id_Joint:	equ $09
 id_DVZ:		equ $0A
 id_Nogales:	equ $0B
+id_BSZ:		equ $0C
+id_BTZ:		equ $0D
 
 ; Colours
 cBlack:		equ $000		; colour black
@@ -361,6 +363,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Hidden
 	nextenum bgm_BossaNova
 	nextenum bgm_dam_dariram
+	nextenum bgm_smilingbomb
 
 	; Unused Jingle BGM
 	nextenum bgm_Ding

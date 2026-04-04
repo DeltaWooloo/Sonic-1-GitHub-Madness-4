@@ -1,8 +1,33 @@
 {
     "Flex": 2,
     "name": "Sonic 1",
-    "node": "f9beba2a-c8e7-449d-9a05-940db22b224f",
+    "node": "8848ce8b-f5d7-46a6-ac22-eafcbefd5056",
     "objects": [
+        {
+            "uuid": "8848ce8b-f5d7-46a6-ac22-eafcbefd5056",
+            "format": "Sonic 1.js",
+            "name": "MOUSE",
+            "palettes": [
+                {
+                    "path": "palette\\Sonic.bin",
+                    "length": 1
+                }
+            ],
+            "art": {
+                "path": "artnem\\Mouse.nem",
+                "compression": "Nemesis",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "_maps\\Mouse.asm",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            }
+        },
         {
             "uuid": "f9beba2a-c8e7-449d-9a05-940db22b224f",
             "format": "Sonic 1.js",

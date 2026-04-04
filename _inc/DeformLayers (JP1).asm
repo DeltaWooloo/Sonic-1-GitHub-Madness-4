@@ -552,7 +552,7 @@ Deform_SBZ:
 		add.w	d2,a1
 
 		move.w	v_bgscroll_buffer+2,d0
-		bsr.w	CalcSine
+		jsr	(CalcSine).w
 		tst.w	d0
 		move.w	d0,d1
 		move.w	v_screenposy,d0
@@ -887,8 +887,11 @@ Deform_DVZ:
 .CheckerFloor:
 		move.w	v_screenposx.w,d0
 		move.w	d0,d3
-		asr.w	#2,d3
+		asr.w	#1,d0
 		add.w	d3,d0
+
+		move.w	d0,d5
+
 		andi.w	#$FF,d0
 		cmpi.w	#$7F,d0
 		bgt.s	.Skip
@@ -897,6 +900,7 @@ Deform_DVZ:
 .Skip:
 		move.b	#0,v_pcyc_num.w
 .Go:
+
 		andi.w	#$7F,d0				; this is a fucking mess i know
 		move.w	d0,v_bgscreenposx.w
 
@@ -906,7 +910,7 @@ Deform_DVZ:
 		neg.w	d0
 
 		lea	v_hscrolltablebuffer,a1
-		move.w	#128-1,d1
+		move.w	#112-1,d1
 
 		; temp
 
@@ -915,26 +919,53 @@ Deform_DVZ:
 		dbf	d1,.WriteTop
 		move.w	v_bgscreenposx.w,d0
 		asr.w	#2,d0
+		move.w	d0,d3
+		asr.w	#2,d3
+		sub.w	d3,d0
+
+		move.w	v_screenposx.w,d5
+		asr.w	#2,d5
+		move.w	d5,d3
+		asr.w	#2,d3
+		sub.w	d3,d5
+
+		move.w	d5,v_bg3screenposx.w
+		move.w	v_limitleft2.w,d3
+;		asr.w	#1,d3
+		subi.w	#64,d3
+		add.w	d3,v_bg3screenposx.w
+		move.w	v_screenposy.w,v_bg3screenposy.w
+
 		move.w	v_bgscreenposx.w,d2
-;		addi.w	#-$200,d2
 		sub.w	d0,d2
 		ext.l	d2
 		asl.l	#8,d2
-		divs.w	#96,d2
+		divs.w	#104,d2
 		ext.l	d2
 		asl.l	#8,d2
 		moveq	#0,d3
 		move.w	d0,d3
-		move.w	#96-1,d1
+		move.w	#104-1,d1
 
-.loc_6384:
+.ShearLoop:
 		move.w	d3,d0
 		neg.w	d0
 		move.l	d0,(a1)+
 		swap	d3
 		add.l	d2,d3
 		swap	d3
-		dbf	d1,.loc_6384
+		dbf	d1,.ShearLoop
+
+		;	do last tile
+		
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+		
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
+		move.l	d0,(a1)+
 		rts
 
 ; ---------------------------------------------------------------------------
@@ -996,14 +1027,14 @@ Deform_NGZ:
 		move.w	#$47,d1
 		add.w	d4,d1
 
-.loc_6384:
+.ShearLoop:
 		move.w	d3,d0
 		neg.w	d0
 		move.l	d0,(a1)+
 		swap	d3
 		add.l	d2,d3
 		swap	d3
-		dbf	d1,.loc_6384
+		dbf	d1,.ShearLoop
 		rts
 
 ; ---------------------------------------------------------------------------

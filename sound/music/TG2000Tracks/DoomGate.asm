@@ -7,11 +7,11 @@ DoomGate_Header:
 ;	Approximated Tempo = 225.00 BPM
 
 	smpsHeaderDAC	DoomGate_DAC
-	smpsHeaderFM	DoomGate_FM1,	$00, $00
-	smpsHeaderFM	DoomGate_FM2,	$00, $00
-	smpsHeaderFM	DoomGate_FM3,	$00, $00
-	smpsHeaderFM	DoomGate_FM4,	$00, $00
-	smpsHeaderFM	DoomGate_FM5,	$00, $00
+	smpsHeaderFM	DoomGate_FM1,	$00, $04
+	smpsHeaderFM	DoomGate_FM2,	$00, $04
+	smpsHeaderFM	DoomGate_FM3,	$00, $04
+	smpsHeaderFM	DoomGate_FM4,	$00, $04
+	smpsHeaderFM	DoomGate_FM5,	$00, $04
 	smpsHeaderPSG	DoomGate_Empty,	$00, $00, $00, $00
 	smpsHeaderPSG	DoomGate_Empty,	$00, $00, $00, $00
 	smpsHeaderPSG	DoomGate_PSG3,	$0C, $00, $00, $00
@@ -808,53 +808,53 @@ DoomGate_DAC_Jump:
 	smpsJump DoomGate_DAC_Jump
 
 DoomGate_DAC_0B_0_64:	; Effect not supported:
-	dc.b nD0, $40
+	dc.b dPokeKickCrashHi, $40
 	smpsReturn
 
 DoomGate_DAC_01_0_64:	; Effect not supported:
-	dc.b nD0, $40
+	dc.b dPokeKickCrashHi, $40
 	smpsReturn
 
 DoomGate_DAC_00_0_64:	; Effect not supported:
-	dc.b nD0, $40
+	dc.b dPokeKickCrashHi, $40
 	smpsReturn
 
 DoomGate_DAC_02_0_64:	; Effect not supported:
-	dc.b nD0, $20, dSnare, $04, dKick, dSnare, dKick, dSnare, $02, $02, $02, $02, $02, $02, $02, $02
+	dc.b dPokeKickCrashHi, $20, dPokeSnare, $04, dChunkyKick, dPokeSnare, dChunkyKick, dPokeSnare, $02, $02, $02, $02, $02, $02, $02, $02
 	smpsReturn
 
 DoomGate_DAC_03_0_64:
-	dc.b dKick, $08, dSnare, dKick, $04, $04, dSnare, $08, dKick, dSnare, dKick, $04, $04, dSnare, $08
+	dc.b dChunkyKick, $08, dPokeSnare, dChunkyKick, $04, $04, dPokeSnare, $08, dChunkyKick, dPokeSnare, dChunkyKick, $04, $04, dPokeSnare, $08
 	smpsReturn
 
 DoomGate_DAC_04_0_64:
-	dc.b dKick, $08, dSnare, dKick, $04, $04, dSnare, $08, dKick, dSnare, dKick, dSnare
+	dc.b dChunkyKick, $08, dPokeSnare, dChunkyKick, $04, $04, dPokeSnare, $08, dChunkyKick, dPokeSnare, dChunkyKick, dPokeSnare
 	smpsReturn
 
 DoomGate_DAC_05_0_64:
-	dc.b dKick, $08, dSnare, dKick, $04, $04, dSnare, $08, $04, dKick, dSnare, dKick, dSnare, $02, $02, $02
+	dc.b dChunkyKick, $08, dPokeSnare, dChunkyKick, $04, $04, dPokeSnare, $08, $04, dChunkyKick, dPokeSnare, dChunkyKick, dPokeSnare, $02, $02, $02
 	dc.b $02, $02, $02, $02, $02
 	smpsReturn
 
 DoomGate_DAC_06_0_64:
-	dc.b dKick, $08, dSnare, dKick, $04, $04, dSnare, $08, dKick, dSnare, dKick, $04, $04, dSnare, $08
+	dc.b dChunkyKick, $08, dPokeSnare, dChunkyKick, $04, $04, dPokeSnare, $08, dChunkyKick, dPokeSnare, dChunkyKick, $04, $04, dPokeSnare, $08
 	smpsReturn
 
 DoomGate_DAC_07_0_64:
-	dc.b dKick, $08, dSnare, dKick, $04, $04, dSnare, $08, dKick, dSnare, dKick, dSnare
+	dc.b dChunkyKick, $08, dPokeSnare, dChunkyKick, $04, $04, dPokeSnare, $08, dChunkyKick, dPokeSnare, dChunkyKick, dPokeSnare
 	smpsReturn
 
 DoomGate_DAC_08_0_64:
-	dc.b dKick, $08, dSnare, dKick, $04, $04, dSnare, $08, $04, dKick, dSnare, dKick, dSnare, $02, $02, $02
+	dc.b dChunkyKick, $08, dPokeSnare, dChunkyKick, $04, $04, dPokeSnare, $08, $04, dChunkyKick, dPokeSnare, dChunkyKick, dPokeSnare, $02, $02, $02
 	dc.b $02, $02, $02, $02, $02
 	smpsReturn
 
 DoomGate_DAC_09_0_64:
-	dc.b dKick, $08, dSnare, dKick, $04, $04, dSnare, $08, dKick, dSnare, dKick, $04, $04, dSnare, dSnare
+	dc.b dChunkyKick, $08, dPokeSnare, dChunkyKick, $04, $04, dPokeSnare, $08, dChunkyKick, dPokeSnare, dChunkyKick, $04, $04, dPokeSnare, dPokeSnare
 	smpsReturn
 
 DoomGate_DAC_0A_0_64:
-	dc.b dKick, $08, dSnare, dKick, $04, $04, dSnare, dSnare, dSnare, $20
+	dc.b dChunkyKick, $08, dPokeSnare, dChunkyKick, $04, $04, dPokeSnare, dPokeSnare, dPokeSnare, $20
 	smpsReturn
 
 DoomGate_PSG3:

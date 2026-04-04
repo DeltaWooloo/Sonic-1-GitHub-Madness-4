@@ -65,6 +65,7 @@ DLE_Index:	dc.w 	DLE_GHZ-DLE_Index
 		dc.w	DLE_DVZ-DLE_Index
 		dc.w	DLE_NGZ-DLE_Index
 		dc.w	DLE_BSZ-DLE_Index
+		dc.w	DLE_BTZ-DLE_Index
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Green Hill Zone dynamic level events
@@ -952,7 +953,7 @@ DLE_DVZ3:
 		move.w  #$2000,d2
 		move.w  #(NEEDLESCRARTSZ/2),d3
 		jsr	QueueDMATransfer.l
-		copyTilemap	MapScr_NeedleScr,vram_bg+$800,58,12
+		copyTilemap	MapScr_NeedleScr,vram_bg+$700,58,14
 		addq.b	#4,v_dle_routine.w
 		add.w	#256,v_limitright2.w		
 		rts
@@ -1005,4 +1006,10 @@ locret_VOMITCOOKIE:
 ; ---------------------------------------------------------------------------
 
 DLE_BSZ:
+       rts
+; ---------------------------------------------------------------------------
+; BlueStone
+; ---------------------------------------------------------------------------
+
+DLE_BTZ:
        rts

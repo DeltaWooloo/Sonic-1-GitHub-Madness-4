@@ -348,8 +348,9 @@ DebuggerMenu_Controls:
 		move.b	d7,d0			;Set ID to max		
 		bra.s	.end			;Don't play SFX if capped
 ;No adjustments to make; squidward smells GOOD
-.good:		
-		beep					;Play beep sfx
+.good:
+		nop
+;		beep					;Play beep sfx
 .end:
 		rts
 ; End of function DebuggerMenu_Controls
@@ -432,7 +433,7 @@ Debugger_Data:
 		dc.l	GamemodeNameTable
 
 		dc.l	v_zone			; ZONE ID
-		dc.b	$01,$00,12,$00		; step 1, range 0-5
+		dc.b	$01,$00,13,$00		; step 1, range 0-5
 		dc.l	ZoneNameTable
 
 		dc.l	v_act			; ACT ID
@@ -569,6 +570,7 @@ ZoneNameTable:
 		dc.w	.DVZ-.t
 		dc.w	.Nogales -.t
 		dc.w	.BS -.t
+		dc.w	.BT -.t
 
 .GHZ:		dc.b	"ORANGE WORLD    "
 .LZ:		dc.b	"AZURE RAINFOREST"
@@ -583,7 +585,7 @@ ZoneNameTable:
 .DVZ:		dc.b	"DOLEVILLE       "
 .Nogales:	dc.b	"NOGALES         "
 .BS:	    dc.b	"BLUESCAPE       "
-
+.BT:	    dc.b	"BLUESTONE       "
 		even
 
 GamemodeNameTable:

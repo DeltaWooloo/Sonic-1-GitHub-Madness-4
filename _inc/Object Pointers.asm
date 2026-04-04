@@ -146,7 +146,7 @@ ptr_Roaring_Knight:	dc.l Obj_Roaring_Knight
 ptr_Sunset:		dc.l ObjSunset
 ptr_RobiWK:		dc.l OBJ_RobiWK_Logo
 ;ptr_Sunset:		dc.l NullObject
-prt_NeedleBoss		dc.l ObjNeedleBoss
+prt_NeedleBoss		dc.l ExObjNeedle
 
 NullObject:
 		jmp	(DeleteObject).l	; It would be safer to have this instruction here, but instead it just falls through to ObjectFall

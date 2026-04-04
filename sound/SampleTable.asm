@@ -36,6 +36,10 @@ SampleTable:
 	dcSample	TYPE_DPCM,	SpinKick,	10400					; $98 Kick (Spinball)
 	dcSample	TYPE_DPCM,	SpinSnare,	10400					; $99 Snare (Spinball)
 
+	; Generic SMPS
+	dcSample	TYPE_DPCM,	SMPSKick,	10400					; $98 Kick (Spinball)
+	dcSample	TYPE_DPCM,	SMPSSnare,	8000					; $99 Snare (Spinball)
+
 	; CUSTOM SAMPLES
 	dcSample	TYPE_PCM,	ChunkyKick,	16000					; $9A
 	dcSample	TYPE_DPCM,	PokeSnare,	16864					; $9B
@@ -152,6 +156,11 @@ SampleTable:
 ; Spinball Samples
 	incdac	SpinKick, "sound/dac/Spinball/SpinKick.dpcm"
 	incdac	SpinSnare, "sound/dac/Spinball/SpinSnare.dpcm"
+
+; ---------------------------------------------------------------
+; Generic SMPS Samples
+	incdac	SMPSKick, "sound/dac/Generic SMPS/SMPSKick.dpcm"
+	incdac	SMPSSnare, "sound/dac/Generic SMPS/SMPSSnare.dpcm"
 
 ; ---------------------------------------------------------------
 ; Samples from Dax's Sample Set

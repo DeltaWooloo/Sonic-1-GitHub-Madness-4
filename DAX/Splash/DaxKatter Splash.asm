@@ -32,7 +32,7 @@ GM_DaxKatter:
 		move.w	#$9200,(a6)				; set window V position at default
 
 		clearRAM	v_ram_start, (v_ram_start+$2000)			; clear foreground buffers
-		clearRAM	v_objspace, v_snddriver_ram				; clear the object RAM
+		clearRAM	v_objspace, v_objspace_end				; clear the object RAM
 		clearRAM	v_levelvariables, v_levelvariables_end				; clear the camera RAM
 
 		; clear
