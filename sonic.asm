@@ -2311,7 +2311,7 @@ GM_Title:
 
 FinalTitle:
 		bsr.w	PaletteWhiteOut
-		bsr.w	ClearPLC	
+		bsr.w	ClearPLC
 		bsr.w	ClearScreen
 ;		bsr.w	LevelSizeLoad
 ;		bsr.w	DeformLayers
@@ -2347,7 +2347,7 @@ FinalTitle:
 		copyTilemap	v_ram_start,vram_fg,40,38
 	endif
 
-		disable_ints
+;		disable_ints
 		locVRAM	ArtTile_Title_Foreground*tile_size
 		lea	(Nem_TitleFg).l,a0 ; load title screen patterns
 		bsr.w	NemDec
@@ -2358,11 +2358,11 @@ FinalTitle:
 ;		lea	(Nem_TitleTM).l,a0 ; load "TM" patterns
 ;		bsr.w	NemDec
 		; TM removed, rubs my belly - coni
-		enable_ints
+;		enable_ints
 		
 		;!@ GenesisDoes
-		move.b	#dEggmanLaugh, d0
-		jsr		(MegaPCM_PlaySample).l
+;		move.b	#dEggmanLaugh, d0
+;		jsr		(MegaPCM_PlaySample).l
 
 		moveq	#palid_Title,d0	; load title screen palette
 		bsr.w	PalLoad_Fade
