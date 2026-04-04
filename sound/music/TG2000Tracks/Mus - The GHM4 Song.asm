@@ -486,7 +486,7 @@ BGM_GHM4Title_DAC_Call01:
 	smpsReturn
 
 BGM_GHM4Title_DAC_Call02:
-	dc.b dSMPSKick, $10, dSMPSSnare, $08, dSMPSKick
+	dc.b	dSMPSKick, $10, dSMPSSnare, $08, dSMPSKick
 	smpsReturn
 
 BGM_GHM4Title_DAC_Call03:
@@ -494,7 +494,7 @@ BGM_GHM4Title_DAC_Call03:
 	smpsReturn
 
 BGM_GHM4Title_DAC_Call04:
-	dc.b dSMPSKick, $04, $04, $04, $04, $04, $04, $04, $04
+	dc.b	dSMPSKick, $04, $04, $04, $04, $04, $04, $04, $04
 	smpsReturn
 
 ; =====================================================================

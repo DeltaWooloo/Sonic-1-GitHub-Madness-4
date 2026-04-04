@@ -2,16 +2,16 @@ Cheetah_Header:
 	smpsHeaderStartSong 3
 	smpsHeaderVoice		Cheetah_Voices
 	smpsHeaderChan		$06, $03
-	smpsHeaderTempo		$02, $30
+	smpsHeaderTempo		$02, $54
 ;	Given Tempo = 225.00 BPM
 ;	Approximated Tempo = 225.00 BPM
 
 	smpsHeaderDAC	Cheetah_DAC
-	smpsHeaderFM	Cheetah_FM1,	$00, $00
-	smpsHeaderFM	Cheetah_FM2,	$00, $00
-	smpsHeaderFM	Cheetah_FM3,	$00, $07
-	smpsHeaderFM	Cheetah_FM4,	$00, $00
-	smpsHeaderFM	Cheetah_FM5,	$00, $00
+	smpsHeaderFM	Cheetah_FM1,	$00, $04
+	smpsHeaderFM	Cheetah_FM2,	$00, $04
+	smpsHeaderFM	Cheetah_FM3,	$00, $0B
+	smpsHeaderFM	Cheetah_FM4,	$00, $04
+	smpsHeaderFM	Cheetah_FM5,	$00, $04
 	smpsHeaderPSG	Cheetah_PSG1,	$0C, $02, $00, $00
 	smpsHeaderPSG	Cheetah_PSG2,	$0C, $02, $00, $00
 	smpsHeaderPSG	Cheetah_PSG3,	$0C, $00, $00, $00
@@ -1436,23 +1436,23 @@ Cheetah_DAC_Jump:
 	smpsJump Cheetah_DAC_Jump
 
 Cheetah_DAC_00_0_32:	; Effect not supported:
-	dc.b dKick, $08, $08, $08, $08
+	dc.b dSpinKick, $08, $08, $08, $08
 	smpsReturn
 
 Cheetah_DAC_01_0_32:
-	dc.b dKick, $08, $08, $04, $04, dSnare, dSnare, $02, $02
+	dc.b dSpinKick, $08, $08, $04, $04, dSpinSnare, dSpinSnare, $02, $02
 	smpsReturn
 
 Cheetah_DAC_02_0_32:
-	dc.b dKick, $08, dSnare, dKick, dSnare
+	dc.b dSpinKick, $08, dSpinSnare, dSpinKick, dSpinSnare
 	smpsReturn
 
 Cheetah_DAC_03_0_32:
-	dc.b dKick, $08, dSnare, dKick, $04, dSnare, dSnare, $08
+	dc.b dSpinKick, $08, dSpinSnare, dSpinKick, $04, dSpinSnare, dSpinSnare, $08
 	smpsReturn
 
 Cheetah_DAC_04_0_32:
-	dc.b dKick, $08, dSnare, dKick, $04, dSnare, dSnare, dSnare, $02, $02
+	dc.b dSpinKick, $08, dSpinSnare, dSpinKick, $04, dSpinSnare, dSpinSnare, dSpinSnare, $02, $02
 	smpsReturn
 
 Cheetah_PSG1:

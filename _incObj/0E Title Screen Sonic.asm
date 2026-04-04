@@ -42,6 +42,10 @@ TSon_Move:	; Routine 4
 		cmpi.w	#$62,obY(a0) ; has Sonic reached final position?
 		bne.s	TSon_Animate	; if not, branch
 		addq.b	#2,obRoutine(a0)
+		move.l	a0,-(sp)
+		lea	(v_ttlsonichide).w,a0
+		jsr	(DeleteObject).l
+		move.l	(sp)+,a0
 
 ; ===========================================================================
 

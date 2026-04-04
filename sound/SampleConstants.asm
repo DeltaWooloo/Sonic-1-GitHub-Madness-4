@@ -27,6 +27,7 @@ dSnareS3			ds.b 1
 dMuffledSnare		ds.b 1
 dCrashCymbal		ds.b 1
 dElectricHighTom	ds.b 1
+dElectricHiTom = dElectricHighTom
 dElectricMidTom		ds.b 1
 dElectricLowTom		ds.b 1
 dElectricFloorTom	ds.b 1

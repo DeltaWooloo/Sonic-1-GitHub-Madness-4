@@ -348,8 +348,9 @@ DebuggerMenu_Controls:
 		move.b	d7,d0			;Set ID to max		
 		bra.s	.end			;Don't play SFX if capped
 ;No adjustments to make; squidward smells GOOD
-.good:		
-		beep					;Play beep sfx
+.good:
+		nop
+;		beep					;Play beep sfx
 .end:
 		rts
 ; End of function DebuggerMenu_Controls

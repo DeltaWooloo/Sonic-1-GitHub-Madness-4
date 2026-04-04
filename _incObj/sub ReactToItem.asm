@@ -323,6 +323,8 @@ React_Caterkiller:
 		bset	#7,obStatus(a1)
 
 React_ChkHurt:
+		tst.b	(v_gambashield).w	; does Sonic have a shield?
+		bne.s	.notinvincible
 		tst.b	(v_invinc).w	; is Sonic invincible?
 		beq.s	.notinvincible	; if not, branch
 

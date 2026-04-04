@@ -552,7 +552,7 @@ Deform_SBZ:
 		add.w	d2,a1
 
 		move.w	v_bgscroll_buffer+2,d0
-		bsr.w	CalcSine
+		jsr	(CalcSine).w
 		tst.w	d0
 		move.w	d0,d1
 		move.w	v_screenposy,d0
