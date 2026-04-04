@@ -322,7 +322,7 @@ ArifBoss_Arif:
 		move.w	#$10, d1
 		jsr	(ChaseObject).l
 
-		move.w	0, obVelY(a0)
+		move.w	#0, obVelY(a0)
 		rts
 
 ; why is CAT drawing PINESS. why they HATE me.

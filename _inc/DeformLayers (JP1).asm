@@ -923,6 +923,7 @@ Deform_DVZ:
 		asr.w	#2,d3
 		sub.w	d3,d0
 
+		move.w	v_screenposx.w,d5
 		asr.w	#2,d5
 		move.w	d5,d3
 		asr.w	#2,d3
@@ -930,10 +931,9 @@ Deform_DVZ:
 
 		move.w	d5,v_bg3screenposx.w
 		move.w	v_limitleft2.w,d3
-		move.w	d3,d4
-		asr.w	#2,d4
-		add.w	d3,d4
-		add.w	d4,v_bg3screenposx.w
+;		asr.w	#1,d3
+		subi.w	#64,d3
+		add.w	d3,v_bg3screenposx.w
 		move.w	v_screenposy.w,v_bg3screenposy.w
 
 		move.w	v_bgscreenposx.w,d2
