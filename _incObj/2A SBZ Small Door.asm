@@ -56,7 +56,8 @@ ADoor_Animate:
 		move.w	d2,d3
 		addq.w	#1,d3
 		move.w	obX(a0),d4
-		bsr.w	SolidObject
+		;!@ bsr.w	SolidObject
+		jsr		(SolidObject).l
 
 .remember:
 		bra.w	RememberState

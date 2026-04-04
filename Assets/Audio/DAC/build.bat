@@ -1,5 +1,6 @@
 cls
 copy /y "Boost\Boost.wav" "..\..\..\sound\DAC\GenesisDoes\Boost.wav"
+copy /y "Deaths\windows-xp-shutdown.wav" "..\..\..\sound\DAC\GenesisDoes\shutdown.wav"
 copy /y "Four\4.wav" "..\..\..\sound\DAC\GenesisDoes\Four.wav"
 copy /y "GenesisCan\GenesisCan1.wav" "..\..\..\sound\DAC\GenesisDoes\GenesisCan1.wav"
 copy /y "GenesisCan\GenesisCan2.wav" "..\..\..\sound\DAC\GenesisDoes\GenesisCan2.wav"
@@ -10,5 +11,6 @@ copy /y "MMZ_BF_Jap\git-hub.wav" "..\..\..\sound\DAC\GenesisDoes\git-hub.wav"
 copy /y "MMZ_BF_Jap\Madness.wav" "..\..\..\sound\DAC\GenesisDoes\Madness.wav"
 copy /y "MMZ_BF_Jap\MadnessR.wav" "..\..\..\sound\DAC\GenesisDoes\MadnessR.wav"
 copy /y "WinZone_Die\windie.wav" "..\..\..\sound\DAC\GenesisDoes\windie.wav"
+copy /y "WinZone_Die\chord16.wav" "..\..\..\sound\DAC\GenesisDoes\chord16.wav"
 copy /y "MMZ_BF_Jap\YoFreddy_Rendered.wav" "..\..\..\sound\DAC\GenesisDoes\YoFreddy.wav"
 REM pause

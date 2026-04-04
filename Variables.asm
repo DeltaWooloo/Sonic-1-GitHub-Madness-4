@@ -156,7 +156,9 @@ v_pfade_size:		ds.b	1		; palette fading - number of colours
 
 v_misc_variables:
 v_vbla_0e_counter:	ds.b	1		; tracks how many times vertical interrupts routine 0E occured (pretty much unused because routine 0E is unused)
-			ds.b	1		; unused
+;!@					;ds.b	1		; unused
+f_hangSMPS:			ds.b	1		; !@ GenesisDoes: If set, hangs the sound driver (stop running UpdateMusic in Vblank)
+					
 v_vbla_routine:		ds.b	1		; VBlank - routine counter
 			ds.b	1		; unused
 v_spritecount:		ds.b	1		; number of sprites on-screen

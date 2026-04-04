@@ -1858,9 +1858,24 @@ locret_13900:
 ; Obj01_ResetLevel:
 Sonic_ResetLevel:; Routine 8
 		tst.w	restartime(a0)
-		beq.s	.return
+		beq.s	GotoBSOD.return
 		subq.w	#1,restartime(a0)	; subtract 1 from time delay
-		bne.s	.return
+		bne.s	GotoBSOD.return
+;!@ GD: New function to display BSOD if death (not gameover in Windows zone)
+.check_WinBSOD:
+		;Check if positive lives (NOT gameover)
+		tst.b	(v_lives).w			;Have lives?
+		beq.s	GotoBSOD.restart	;If not, branch
+		
+		cmpi.b	#id_WIN,(v_zone).w	;Is zone Windows zone?
+		bne.s	GotoBSOD.restart	;If not, branch
+GotoBSOD:		
+		;We are in Windows zone and NOT gameover. Do BSOD
+		move.b	#id_BSOD,(v_gamemode).w ; Set BSOD mode
+		jsr		(GM_BSOD).l				;Goto BSOD
+		move.b	#id_Level,(v_gamemode).w ;goto Level on restart
+		
+.restart:
 		move.w	#1,(f_restart).w ; restart the level
 
 .return:

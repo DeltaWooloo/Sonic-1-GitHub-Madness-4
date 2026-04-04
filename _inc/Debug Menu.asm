@@ -608,6 +608,7 @@ GamemodeNameTable:
 		dc.w	.Earthbou-.t
 		dc.w	.Screensaver-.t
 		dc.w	.Clinton-.t	; ClintonScreens
+		dc.w	.BSOD-.t
 		rept ( (GameModeArray_End-GameModeArray)-(((*)-.t)*2) )/4
 		dc.w	.Placeholder-.t
 		endr
@@ -633,6 +634,7 @@ GamemodeNameTable:
 .Earthbou:		dc.b	"EARTHBOUND BTL  "
 .Screensaver:	dc.b	"SCREENSAVER     "
 .Clinton:		dc.b	"CLINTON         "
+.BSOD:			dc.b	"WINDOWS BSOD    "
 .Placeholder:	dc.b	"PLACEHOLDER NAME"
 		even
 

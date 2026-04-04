@@ -184,8 +184,9 @@ enable_ints:	macro
 ; ---------------------------------------------------------------------------
 
 disable_display:	macro
+		moveq	#0,d0						; Clear d0
 		move.w	(v_vdp_buffer1).w,d0		; get buffered copy of VDP register $81
-		andi.b	#%10111111,d0			; clear bit 6 (disable display; fill with background color)
+		andi.b	#%10111111,d0				; clear bit 6 (disable display; fill with background color)
 		move.w	d0,(vdp_control_port).l		; write to VDP
 		endm
 
@@ -370,6 +371,15 @@ pcm:	macro id,terminate
     else
 	jmp	(MegaPCM_PlaySample).l
     endif
+	endm
+	
+;!@ GD: Hang the sound driver
+hangSMPS:	macro
+	move.b	#1,(f_hangSMPS).w
+	endm
+	
+resumeSMPS:	macro
+	move.b	#0,(f_hangSMPS).w
 	endm
 
 ;!@ GD: (Attempts) to stop all MegaPCM, including DAC SFX

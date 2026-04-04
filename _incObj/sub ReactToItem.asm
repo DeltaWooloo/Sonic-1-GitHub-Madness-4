@@ -392,6 +392,7 @@ HurtSonic:
 ;		move.w	#ch_hurtpcm,d0
 		jsr	(GetOtherPlayerData).l
 		move.w	pdat.hurtsnd(a5),d0
+.playDeath:
 		jsr	(MegaPCM_PlaySample).l
 
 		move.w	#sfx_HitSpikes,d0
@@ -420,7 +421,7 @@ HurtSonic:
 
 KillSonic:
 		tst.w	(v_debuguse).w	; is debug mode active?
-		bne.s	.dontdie	; if yes, branch
+		bne.w	.dontdie	; if yes, branch
 ;		tst.b	(v_enablefox).w
 ;		beq.s	.NotFoxy
 		move.l	#'FOXY',d1	; seed
@@ -446,16 +447,22 @@ KillSonic:
 	endif
 		move.b	#id_Death,obAnim(a0)
 		bset	#7,obGfx(a0)
-
+		
+		;!@ GD: Play shutdown if in Windows Zone (doesn't interrupt Windows BSOD PCM samples)
+		cmpi.b	#id_WIN,(v_zone).w		;Is zone Windows?
+		bne.s	.notWindows				;If not, branch
+		move.b	#dShutdown, d0
+		bra.s	.sound
+.notWindows:
 		move.b	#dChicken,d0		; play spikes death sound
 		cmpi.b	#id_Spikes,obID(a2)	; check if you were killed by spikes
 		beq.s	.sound
 		cmpi.b	#id_Harpoon,obID(a2)	; check if you were killed by a harpoon
-		beq.s	.sound
+		beq.s	.sound				
 		move.b	#dFannys, d0
-
 .sound:
 		jsr	(MegaPCM_PlaySample).l
+.explode:
 		move.b	#$8, d1
 		jmp	(GHM3Explode_Custom).l
 

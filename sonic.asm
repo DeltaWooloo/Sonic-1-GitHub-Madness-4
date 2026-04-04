@@ -397,6 +397,9 @@ Init_GHM4:
 		endif
 
 MainGameLoop:
+		;!@GD: Fix VDP registers if mode changed
+		jsr		(Pow_vdp_fixRegs).l
+
 		move.b	(v_gamemode).w,d0			; load Game Mode
 		andi.w	#$7C,d0					; limit Game Mode value to $1C max (change to a maximum of 7C to add more game modes)
 		chk	#GameModeArray_End-GameModeArray-4,d0	; bounds check
@@ -409,27 +412,28 @@ MainGameLoop:
 ; ---------------------------------------------------------------------------
 
 GameModeArray:
-ptr_GM_Sega:		dc.l	GM_Sega			; Sega Screen ($00)
-ptr_GM_Title:		dc.l	GM_Title		; Title Screen ($04)
-ptr_GM_Demo:		dc.l	GM_Level		; Demo Mode ($08)
-ptr_GM_Level:		dc.l	GM_Level		; Normal Level ($0C)
-ptr_GM_Special:		dc.l	GM_Special		; Special Stage ($10)
-ptr_GM_Cont:		dc.l	GM_Continue		; Continue Screen ($14)
-ptr_GM_Ending:		dc.l	GM_Ending		; End of game sequence ($18)
-ptr_GM_Credits:		dc.l	GM_Credits		; Credits ($1C)
-ptr_GM_ColdBrew:	dc.l	GM_ColdBrew		; Cold Brew ($20)
-ptr_GM_FoxyBoo:		dc.l	GM_FoxyBoo		; Foxy Scare ($24)
-ptr_GM_DebugMode:	dc.l	GM_DebugMenu		; Debug Menu ($28)
-ptr_GM_ThanatosCredits:	dc.l	GM_ThanatosCredits	; Credits - Thanatos ver. ($2C)
-ptr_GM_ButtcrackMan:	dc.l	GM_ButtcrackMan		; BUTTCRACK MAN ($30)
-ptr_GM_TryAgainEnd:	dc.l	TryAgainEnd		; Testable TRY AGAIN/END screen ($38)
-ptr_GM_Fetus:		dc.l	GM_Fetus		; Difficulty Select screen out of spite ($3C)
-ptr_GM_Damn:		dc.l	GM_Damn			; DAMN!!!!!!!!!!!!!!!!!!!!!!!
-ptr_SplashScreenSkipper:dc.l	GM_SplashScreenSkipper	; My Stupid Splash is here
-ptr_Advert:		dc.l	GM_Advert		; For all the reject splash screens I guess
-ptr_EarthboundBtl:	dc.l	EarthboundBtl		; earthbound battle stuff
-ptr_SonicTheScreensaver:	dc.l	GM_SonicTheScreensaver	; GMZ - DVD Screensaver
-ptr_ClintonScreens:	dc.l	GM_ClintonScreens
+ptr_GM_Sega:				dc.l	GM_Sega					; Sega Screen 								($00)
+ptr_GM_Title:				dc.l	GM_Title				; Title Screen								($04)
+ptr_GM_Demo:				dc.l	GM_Level				; Demo Mode									($08)
+ptr_GM_Level:				dc.l	GM_Level				; Normal Level								($0C)
+ptr_GM_Special:				dc.l	GM_Special				; Special Stage								($10)
+ptr_GM_Cont:				dc.l	GM_Continue				; Continue Screen							($14)
+ptr_GM_Ending:				dc.l	GM_Ending				; End of game sequence						($18)
+ptr_GM_Credits:				dc.l	GM_Credits				; Credits 									($1C)
+ptr_GM_ColdBrew:			dc.l	GM_ColdBrew				; Cold Brew 								($20)
+ptr_GM_FoxyBoo:				dc.l	GM_FoxyBoo				; Foxy Scare 								($24)
+ptr_GM_DebugMode:			dc.l	GM_DebugMenu			; Debug Menu 								($28)
+ptr_GM_ThanatosCredits:		dc.l	GM_ThanatosCredits		; Credits - Thanatos ver. 					($2C)
+ptr_GM_ButtcrackMan:		dc.l	GM_ButtcrackMan			; BUTTCRACK MAN 							($30)
+ptr_GM_TryAgainEnd:			dc.l	TryAgainEnd				; Testable TRY AGAIN/END screen 			($34)
+ptr_GM_Fetus:				dc.l	GM_Fetus				; Difficulty Select screen out of spite 	($38)
+ptr_GM_Damn:				dc.l	GM_Damn					; DAMN!!!!!!!!!!!!!!!!!!!!!!!				($3C)
+ptr_SplashScreenSkipper:	dc.l	GM_SplashScreenSkipper	; My Stupid Splash is here 					($40)
+ptr_Advert:					dc.l	GM_Advert				; For all the reject splash screens I guess ($44)
+ptr_EarthboundBtl:			dc.l	EarthboundBtl			; earthbound battle stuff					($48)
+ptr_SonicTheScreensaver:	dc.l	GM_SonicTheScreensaver	; GMZ - DVD Screensaver						($4C)
+ptr_ClintonScreens:			dc.l	GM_ClintonScreens		; Clinton fail/win 							($50)
+ptr_BSOD:					dc.l	GM_BSOD					; !@ GD: Windows zone BSOD (on death)		($54)
 GameModeArray_End:
 ; ===========================================================================
 	if SkipChecksumCheck=0
@@ -579,7 +583,11 @@ VBlank:
 		jsr	VBla_Index(pc,d0.w)
 VBla_Music:
 		enable_ints
+		;!@ GD: f_hangSMPS flag. If set, then stop update music (hang sound driver)
+		tst.b	(f_hangSMPS).w
+		bne.s	.skip
 		jsr	(UpdateMusic).l
+	.skip:
 		jsr	(RandomNumber).l
 		addq.l	#1,(v_vbla_count).w
 		movem.l	(sp)+,d0-a6
@@ -3081,6 +3089,7 @@ Level_Restarted:
 		bne.s	NotFoxy
 		jsr	(GM_FoxyBoo).l
 NotFoxy:
+		jsr	(Pow_vdp_fixRegs).l	;!@GD: Undo random monitor powerups (VDP register fuckery)
 		bra.w	GM_Level
 ; ===========================================================================
 
@@ -3242,7 +3251,7 @@ SignpostArtLoad:
 		bne.w	.exit		; if yes, branch
 		cmpi.b	#2,(v_act).w	; is act number 02 (act 3)?
 		beq.s	.exit		; if yes, branch
-		cmpi.w	#$0203,(v_zone).w	; is this giovanni's test level?
+		cmpi.w	#(id_ACZ<<8)+3,(v_zone).w	; is this giovanni's test level?
 		beq.s	.exit		; if yes, branch
 
 		move.w	(v_screenposx).w,d0
@@ -7540,6 +7549,14 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 ; ---------------------------------------------------------------------------
 
 		include	"GMZ/DVD Screensaver.asm"	; GMZ - GM_SonicTheScreensaver:
+
+; !@
+; ---------------------------------------------------------------------------
+; GenesisDoes' Windows BSOD screen
+; ---------------------------------------------------------------------------
+
+		include	"_gamemode/winBSOD/bsod.asm"	; GenesisDoes - GM_BSOD:		
+		
 ; ---------------------------------------------------------------------------
 ; NEEDLEMOUSE SHITTERY  Team Splash Screen files
 ; ---------------------------------------------------------------------------

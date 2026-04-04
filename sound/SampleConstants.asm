@@ -89,7 +89,9 @@ dMadness			ds.b 1
 dMadnessR			ds.b 1
 dTheFourth			ds.b 1
 dEggmanLaugh		ds.b 1
-dwinDie				ds.b 1
+dBSOD				ds.b 1
+dShutdown			ds.b 1
+dChord16			ds.b 1
 
 ; Splash Screen Samples
 dEggNo				ds.b 1
