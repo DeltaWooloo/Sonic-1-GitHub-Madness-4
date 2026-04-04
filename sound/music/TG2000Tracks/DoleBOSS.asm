@@ -7,14 +7,14 @@ DoleBOSS_Header:
 ;	Approximated Tempo = 150.29 BPM
 
 	smpsHeaderDAC	DoleBOSS_DAC
-	smpsHeaderFM	DoleBOSS_FM1,	$00, $00
-	smpsHeaderFM	DoleBOSS_FM2,	$00, $04
-	smpsHeaderFM	DoleBOSS_FM3,	$00, $00
-	smpsHeaderFM	DoleBOSS_FM4,	$00, $04
-	smpsHeaderFM	DoleBOSS_FM5,	$00, $04
-	smpsHeaderPSG	DoleBOSS_PSG1,	$0C, $00, $00, $00
-	smpsHeaderPSG	DoleBOSS_PSG2,	$0C, $07, $00, $00
-	smpsHeaderPSG	DoleBOSS_PSG3,	$00, $00, $00, $00
+	smpsHeaderFM	DoleBOSS_FM1,	$00, $04
+	smpsHeaderFM	DoleBOSS_FM2,	$00, $08
+	smpsHeaderFM	DoleBOSS_FM3,	$00, $04
+	smpsHeaderFM	DoleBOSS_FM4,	$00, $08
+	smpsHeaderFM	DoleBOSS_FM5,	$00, $08
+	smpsHeaderPSG	DoleBOSS_PSG1,	$0C, $02, $00, $00
+	smpsHeaderPSG	DoleBOSS_PSG2,	$0C, $09, $00, $00
+	smpsHeaderPSG	DoleBOSS_PSG3,	$00, $02, $00, $00
 
 DoleBOSS_Voices:
 ;	FM Voice 00 -> 00: 02_picnic_2
@@ -852,49 +852,49 @@ DoleBOSS_DAC_03_0_64:
 
 DoleBOSS_DAC_04_0_64:
 	dc.b nRst, $20	; Effect not supported:
-	dc.b dSnare, $02, $02, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dSnare
-	dc.b dSnare
+	dc.b dSMPSSnare, $02, $02, dSMPSKick, dSMPSKick, dSMPSSnare, dSMPSSnare, dSMPSKick, dSMPSKick, dSMPSSnare, dSMPSSnare, dSMPSKick, dSMPSKick, dSMPSSnare, dSMPSSnare, dSMPSSnare
+	dc.b dSMPSSnare
 	smpsReturn
 
 DoleBOSS_DAC_05_0_64:
-	dc.b dKick, $04, $02, $02, dSnare, $04, dKick, $02, $02, $04, $02, $02, dSnare, $04, dKick, $02
-	dc.b $02, $04, $02, $02, dSnare, $04, dKick, $02, $02, $04, $02, $02, dSnare, $04, dKick, $02
+	dc.b dSMPSKick, $04, $02, $02, dSMPSSnare, $04, dSMPSKick, $02, $02, $04, $02, $02, dSMPSSnare, $04, dSMPSKick, $02
+	dc.b $02, $04, $02, $02, dSMPSSnare, $04, dSMPSKick, $02, $02, $04, $02, $02, dSMPSSnare, $04, dSMPSKick, $02
 	dc.b $02
 	smpsReturn
 
 DoleBOSS_DAC_06_0_64:
-	dc.b dKick, $04, $02, $02, dSnare, $04, dKick, $02, $02, $04, $02, $02, dSnare, $04, dKick, $02
-	dc.b $02, $04, $02, $02, dSnare, $04, dKick, $02, $02, $04, dSnare, $02, dKick, dSnare, $04, $02
+	dc.b dSMPSKick, $04, $02, $02, dSMPSSnare, $04, dSMPSKick, $02, $02, $04, $02, $02, dSMPSSnare, $04, dSMPSKick, $02
+	dc.b $02, $04, $02, $02, dSMPSSnare, $04, dSMPSKick, $02, $02, $04, dSMPSSnare, $02, dSMPSKick, dSMPSSnare, $04, $02
 	dc.b $02
 	smpsReturn
 
 DoleBOSS_DAC_08_0_64:
-	dc.b dKick, $04, $02, $02, dSnare, $04, dKick, $02, $02, $04, $02, $02, dSnare, $04, $02, $02
+	dc.b dSMPSKick, $04, $02, $02, dSMPSSnare, $04, dSMPSKick, $02, $02, $04, $02, $02, dSMPSSnare, $04, $02, $02
 	dc.b $10, $04, $04, $02, $02, $02, $02
 	smpsReturn
 
 DoleBOSS_DAC_07_0_64:
-	dc.b dKick, $04, $02, $02, dSnare, $04, dKick, $02, $02, $04, $02, $02, dSnare, $04, dKick, $02
-	dc.b $02, $04, $02, $02, dSnare, $04, dKick, $02, $02, $04, dSnare, $02, dKick, dSnare, dSnare, dSnare
-	dc.b dSnare
+	dc.b dSMPSKick, $04, $02, $02, dSMPSSnare, $04, dSMPSKick, $02, $02, $04, $02, $02, dSMPSSnare, $04, dSMPSKick, $02
+	dc.b $02, $04, $02, $02, dSMPSSnare, $04, dSMPSKick, $02, $02, $04, dSMPSSnare, $02, dSMPSKick, dSMPSSnare, dSMPSSnare, dSMPSSnare
+	dc.b dSMPSSnare
 	smpsReturn
 
 DoleBOSS_DAC_09_0_64:
-	dc.b dKick, $08, $08, $08, $08, $08, $08, $08, $08
+	dc.b dSMPSKick, $08, $08, $08, $08, $08, $08, $08, $08
 	smpsReturn
 
 DoleBOSS_DAC_0A_0_64:
-	dc.b dKick, $08, $08, $08, $08, $08, $08, $08, $04, dSnare, $02, $02
+	dc.b dSMPSKick, $08, $08, $08, $08, $08, $08, $08, $04, dSMPSSnare, $02, $02
 	smpsReturn
 
 DoleBOSS_DAC_0B_0_64:
-	dc.b dKick, $04, $04, dSnare, dKick, $02, $02, $04, $04, dSnare, dKick, dKick, dKick, dSnare, dKick, $02
-	dc.b $02, $04, $04, dSnare, dKick
+	dc.b dSMPSKick, $04, $04, dSMPSSnare, dSMPSKick, $02, $02, $04, $04, dSMPSSnare, dSMPSKick, dSMPSKick, dSMPSKick, dSMPSSnare, dSMPSKick, $02
+	dc.b $02, $04, $04, dSMPSSnare, dSMPSKick
 	smpsReturn
 
 DoleBOSS_DAC_0C_0_64:
-	dc.b dKick, $04, $04, dSnare, dKick, $02, $02, $04, $04, dSnare, dSnare, $02, $02	; Effect not supported:
-	dc.b $02, $02, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dSnare, dSnare
+	dc.b dSMPSKick, $04, $04, dSMPSSnare, dSMPSKick, $02, $02, $04, $04, dSMPSSnare, dSMPSSnare, $02, $02	; Effect not supported:
+	dc.b $02, $02, dSMPSKick, dSMPSKick, dSMPSSnare, dSMPSSnare, dSMPSKick, dSMPSKick, dSMPSSnare, dSMPSSnare, dSMPSKick, dSMPSKick, dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare
 	smpsReturn
 
 DoleBOSS_PSG1:

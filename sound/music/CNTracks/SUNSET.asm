@@ -161,20 +161,20 @@ Sunset_DAC:
 	smpsLoop            $00, $03, Sunset_DAC
 	smpsCall			Sunset_DACC1
 	dc.b	dTick
-	dc.b	dKick, $06, dTick, dKick, dTick, $03, dTick, dSnare, dSnare, dLowTimpani, $06, dSnare, dSnare, $03, dSnare
+	dc.b	dSMPSKick, $06, dTick, dSMPSKick, dTick, $03, dTick, dSMPSSnare, dSMPSSnare, dLowTimpani, $06, dSMPSSnare, dSMPSSnare, $03, dSMPSSnare
 Sunset_DACL:
 	smpsCall			Sunset_DACC2
-	dc.b	dSnare, dTick
+	dc.b	dSMPSSnare, dTick
 	smpsCall			Sunset_DACC2
-	dc.b	dSnare, $06, $03, dSnare
+	dc.b	dSMPSSnare, $06, $03, dSMPSSnare
 	smpsJump				Sunset_DACL
 
 Sunset_DACC1:
-	dc.b	dKick, $06, dTick, dKick, dTick, $03, dTick, dKick, dTick, dTick, $06, dSnare
+	dc.b	dSMPSKick, $06, dTick, dSMPSKick, dTick, $03, dTick, dSMPSKick, dTick, dTick, $06, dSMPSSnare
 	smpsReturn
 
 Sunset_DACC2:
-	dc.b	dKick, $06, dTick, dSnare, dTick, $03, dTick, dKick, dTick, dTick, $06
+	dc.b	dSMPSKick, $06, dTick, dSMPSSnare, dTick, $03, dTick, dSMPSKick, dTick, dTick, $06
 	smpsReturn
 
 Sunset_Voices:

@@ -5,11 +5,11 @@ CometSTG2_Header:
 	smpsHeaderTempo     $02, $0D
 
 	smpsHeaderDAC       CometSTG2_DAC
-	smpsHeaderFM        CometSTG2_FM1,	$00, $10
-	smpsHeaderFM        CometSTG2_FM2,	$00, $08
-	smpsHeaderFM        CometSTG2_FM3,	$F4, $10
-	smpsHeaderFM        CometSTG2_FM4,	$F4, $10
-	smpsHeaderFM        CometSTG2_FM5,	$F4, $10
+	smpsHeaderFM        CometSTG2_FM1,	$00, $12
+	smpsHeaderFM        CometSTG2_FM2,	$00, $0A
+	smpsHeaderFM        CometSTG2_FM3,	$F4, $12
+	smpsHeaderFM        CometSTG2_FM4,	$F4, $12
+	smpsHeaderFM        CometSTG2_FM5,	$F4, $12
 	smpsHeaderPSG       CometSTG2_PSG1,	$00, $02, $00, $08
 	smpsHeaderPSG       CometSTG2_PSG2,	$00, $02, $00, $08
 	smpsHeaderPSG       CometSTG2_PSG3,	$00, $03, $00, $00
@@ -313,7 +313,7 @@ CometSTG2_Loop11:
 ; DAC Data
 CometSTG2_DAC:
 ;	smpsStop
-	dc.b	dSnare, $03, dSnare, dSnare, dSnare, $06, $06, $1B
+	dc.b	dSMPSSnare, $03, dSMPSSnare, dSMPSSnare, dSMPSSnare, $06, $06, $1B
 CometSTG2_DACJ:
 CometSTG2_Loop00:
 	smpsCall            CometSTG2_DACC1
@@ -325,7 +325,7 @@ CometSTG2_Loop01:
 	smpsCall            CometSTG2_DACC1
 	smpsLoop            $00, $07, CometSTG2_Loop01
 	smpsCall            CometSTG2_DACC2
-	dc.b	dSnare, dSnare, dSnare, dSnare, $06, $03, dSnare, dSnare, dSnare
+	dc.b	dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare, $06, $03, dSMPSSnare, dSMPSSnare, dSMPSSnare
 
 
 CometSTG2_Loop02:
@@ -339,21 +339,21 @@ CometSTG2_Loop03:
 	smpsLoop            $00, $03, CometSTG2_Loop03
 	smpsCall            CometSTG2_DACC2
 CometSTG2_Loop04:
-	dc.b	dSnare
+	dc.b	dSMPSSnare
 	smpsLoop            $00, $09, CometSTG2_Loop04
 	smpsJump				CometSTG2_DACJ
 
 CometSTG2_DACC1:
-	dc.b	dKick, $03, dKick, dKick, dKick, dSnare, dKick, dKick, dKick, dKick, dKick, dKick, $06
-	dc.b	dSnare, dKick, $03, dKick
+	dc.b	dSMPSKick, $03, dSMPSKick, dSMPSKick, dSMPSKick, dSMPSSnare, dSMPSKick, dSMPSKick, dSMPSKick, dSMPSKick, dSMPSKick, dSMPSKick, $06
+	dc.b	dSMPSSnare, dSMPSKick, $03, dSMPSKick
 	smpsReturn
 
 CometSTG2_DACC2:
-	dc.b	dKick, dKick, dKick, dKick, dSnare, dKick, dKick
+	dc.b	dSMPSKick, dSMPSKick, dSMPSKick, dSMPSKick, dSMPSSnare, dSMPSKick, dSMPSKick
 	smpsReturn
 
 CometSTG2_DACC3:
-	dc.b	dKick, dKick, dKick, dKick, $06, dSnare, $03, dSnare, dSnare, dSnare
+	dc.b	dSMPSKick, dSMPSKick, dSMPSKick, dSMPSKick, $06, dSMPSSnare, $03, dSMPSSnare, dSMPSSnare, dSMPSSnare
 	smpsReturn
 
 CometSTG2_Voices:

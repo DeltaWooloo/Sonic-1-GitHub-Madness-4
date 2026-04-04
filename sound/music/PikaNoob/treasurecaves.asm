@@ -16,89 +16,89 @@ treasurecaves_Header:
 ; DAC Data
 treasurecaves_DAC:
 	smpsPan             panCenter, $00
-	dc.b	dKick
+	dc.b	dSMPSKick
 
 treasurecaves_Loop00:
-	dc.b	$08, dSnare, $03, dKick, $04, $04, dSnare, dKick, $07, dSnare, $04, dKick
-	dc.b	dKick, $03, $04, $04, dLowTimpani, $85, $07, dKick, $04, $04, $0F, $07
-	dc.b	dSnare, $04, dKick, dKick, $03, dSnare, $04, dKick, $08, dSnare, $03, dKick
-	dc.b	$04, $04, $04, $03, dLowTimpani, $04, $85, $08, dKick, $03, $04, $0F
+	dc.b	$08, dSMPSSnare, $03, dSMPSKick, $04, $04, dSMPSSnare, dSMPSKick, $07, dSMPSSnare, $04, dSMPSKick
+	dc.b	dSMPSKick, $03, $04, $04, dMidTom, dLowTom, $07, dSMPSKick, $04, $04, $0F, $07
+	dc.b	dSMPSSnare, $04, dSMPSKick, dSMPSKick, $03, dSMPSSnare, $04, dSMPSKick, $08, dSMPSSnare, $03, dSMPSKick
+	dc.b	$04, $04, $04, $03, dMidTom, $04, dLowTom, $08, dSMPSKick, $03, $04, $0F
 	smpsLoop            $00, $02, treasurecaves_Loop00
-	dc.b	$08, dSnare, $03, dKick, $04, $04, $04, dSnare, $07, dKick, $04, $07
-	dc.b	$85, $04, dKick, $08, dSnare, $03, dKick, $04, $04, dSnare, dKick, $07
-	dc.b	dSnare, $04, dKick, dKick, $03, $04, $04, dLowTimpani, $85, $07, dKick, $04
-	dc.b	$04, $0F, $07, dSnare, $04, dKick, dKick, $03, dSnare, $04, dKick, $08
-	dc.b	dSnare, $03, dKick, $04, $04, $04, $03, dLowTimpani, $04, $85, $08, dKick
-	dc.b	$03, $04, $0F, $08, dSnare, $03, dKick, $04, $04, dSnare, dKick, $07
-	dc.b	dSnare, $04, dKick, dKick, $03, dSnare, $04, dLowTimpani, dLowTimpani, $85, $07, dLowTimpani
-	dc.b	$04, $04, $0F, dKick, $07, dSnare, $04, dKick, dKick, $03, dSnare, $04
-	dc.b	dKick, $08, dSnare, $03, dKick, $04, $04, $04, $03, dLowTimpani, $04, $85
-	dc.b	$08, dLowTimpani, $03, dKick, $04, dLowTimpani, $0F, dKick, $08, dSnare, $03, dKick
-	dc.b	$04, $04, $04, dSnare, $07, dKick, $04, $0B, $85, $08, dSnare, $03
-	dc.b	dKick, $08, dSnare, $04, dKick, $07, dSnare, $04, dKick, $07, dSnare, $04
-	dc.b	dKick, $08, dSnare, $03, dKick, $08, dSnare, $04, dKick, $07, dSnare, $04
-	dc.b	dKick, $0B, $08, dSnare, $03, dKick, $04, $04, dSnare, dKick, $07, dSnare
-	dc.b	$04, dKick, dKick, $03, $04, $04, dLowTimpani, $85, $07, dKick, $04, $04
-	dc.b	$0F, $07, dSnare, $04, dKick, dKick, $03, dSnare, $04, dKick, $08, dSnare
-	dc.b	$03, dKick, $04, $04, $04, $03, dLowTimpani, $04, $85, $08, dKick, $03
-	dc.b	$04, $0F, $08, dSnare, $03, dKick, $04, $04, dSnare, dKick, $07, dSnare
-	dc.b	$04, dKick, dKick, $03, $04, $04, dLowTimpani, $85, $07, dKick, $04, $04
-	dc.b	$0F, $07, dSnare, $04, dKick, dKick, $03, dSnare, $04, dKick, $08, dSnare
-	dc.b	$03, dKick, $04, $04, $04, $03, dLowTimpani, $04, $85, $08, dLowTimpani, $03
-	dc.b	dKick, $04, $0F, $08, dSnare, $03, dKick, $04, $04, $04, dSnare, $07
-	dc.b	dKick, $04
+	dc.b	$08, dSMPSSnare, $03, dSMPSKick, $04, $04, $04, dSMPSSnare, $07, dSMPSKick, $04, $07
+	dc.b	dLowTom, $04, dSMPSKick, $08, dSMPSSnare, $03, dSMPSKick, $04, $04, dSMPSSnare, dSMPSKick, $07
+	dc.b	dSMPSSnare, $04, dSMPSKick, dSMPSKick, $03, $04, $04, dMidTom, dLowTom, $07, dSMPSKick, $04
+	dc.b	$04, $0F, $07, dSMPSSnare, $04, dSMPSKick, dSMPSKick, $03, dSMPSSnare, $04, dSMPSKick, $08
+	dc.b	dSMPSSnare, $03, dSMPSKick, $04, $04, $04, $03, dMidTom, $04, dLowTom, $08, dSMPSKick
+	dc.b	$03, $04, $0F, $08, dSMPSSnare, $03, dSMPSKick, $04, $04, dSMPSSnare, dSMPSKick, $07
+	dc.b	dSMPSSnare, $04, dSMPSKick, dSMPSKick, $03, dSMPSSnare, $04, dMidTom, dMidTom, dLowTom, $07, dMidTom
+	dc.b	$04, $04, $0F, dSMPSKick, $07, dSMPSSnare, $04, dSMPSKick, dSMPSKick, $03, dSMPSSnare, $04
+	dc.b	dSMPSKick, $08, dSMPSSnare, $03, dSMPSKick, $04, $04, $04, $03, dMidTom, $04, dLowTom
+	dc.b	$08, dMidTom, $03, dSMPSKick, $04, dMidTom, $0F, dSMPSKick, $08, dSMPSSnare, $03, dSMPSKick
+	dc.b	$04, $04, $04, dSMPSSnare, $07, dSMPSKick, $04, $0B, dLowTom, $08, dSMPSSnare, $03
+	dc.b	dSMPSKick, $08, dSMPSSnare, $04, dSMPSKick, $07, dSMPSSnare, $04, dSMPSKick, $07, dSMPSSnare, $04
+	dc.b	dSMPSKick, $08, dSMPSSnare, $03, dSMPSKick, $08, dSMPSSnare, $04, dSMPSKick, $07, dSMPSSnare, $04
+	dc.b	dSMPSKick, $0B, $08, dSMPSSnare, $03, dSMPSKick, $04, $04, dSMPSSnare, dSMPSKick, $07, dSMPSSnare
+	dc.b	$04, dSMPSKick, dSMPSKick, $03, $04, $04, dMidTom, dLowTom, $07, dSMPSKick, $04, $04
+	dc.b	$0F, $07, dSMPSSnare, $04, dSMPSKick, dSMPSKick, $03, dSMPSSnare, $04, dSMPSKick, $08, dSMPSSnare
+	dc.b	$03, dSMPSKick, $04, $04, $04, $03, dMidTom, $04, dLowTom, $08, dSMPSKick, $03
+	dc.b	$04, $0F, $08, dSMPSSnare, $03, dSMPSKick, $04, $04, dSMPSSnare, dSMPSKick, $07, dSMPSSnare
+	dc.b	$04, dSMPSKick, dSMPSKick, $03, $04, $04, dMidTom, dLowTom, $07, dSMPSKick, $04, $04
+	dc.b	$0F, $07, dSMPSSnare, $04, dSMPSKick, dSMPSKick, $03, dSMPSSnare, $04, dSMPSKick, $08, dSMPSSnare
+	dc.b	$03, dSMPSKick, $04, $04, $04, $03, dMidTom, $04, dLowTom, $08, dMidTom, $03
+	dc.b	dSMPSKick, $04, $0F, $08, dSMPSSnare, $03, dSMPSKick, $04, $04, $04, dSMPSSnare, $07
+	dc.b	dSMPSKick, $04
 
 treasurecaves_Loop01:
 	dc.b	$0B, $0B, $0C, $0B, $0B, $08, $03, $08, $04, $0B
 	smpsLoop            $00, $03, treasurecaves_Loop01
-	dc.b	$0B, $0B, $0C, $0B, $0B, $08, $03, dSnare, $04, dKick, dSnare, dSnare
-	dc.b	$03, dKick, $04, $04, dSnare, dKick, $03, dSnare, $04, $85
+	dc.b	$0B, $0B, $0C, $0B, $0B, $08, $03, dSMPSSnare, $04, dSMPSKick, dSMPSSnare, dSMPSSnare
+	dc.b	$03, dSMPSKick, $04, $04, dSMPSSnare, dSMPSKick, $03, dSMPSSnare, $04, dLowTom
 
 treasurecaves_Loop02:
-	dc.b	$08, dSnare, $03, dKick, $04, $04, dSnare, dKick, $07, dSnare, $04, dKick
-	dc.b	dKick, $03, dSnare, $04, $85, $0B, dKick, $0C, $0B, $0B
+	dc.b	$08, dSMPSSnare, $03, dSMPSKick, $04, $04, dSMPSSnare, dSMPSKick, $07, dSMPSSnare, $04, dSMPSKick
+	dc.b	dSMPSKick, $03, dSMPSSnare, $04, dLowTom, $0B, dSMPSKick, $0C, $0B, $0B
 	smpsLoop            $00, $02, treasurecaves_Loop02
-	dc.b	$08, dSnare, $03, $85, $04, dKick, dSnare, dKick, $07, dSnare, $04, dKick
-	dc.b	dKick, $03, dSnare, $04, dKick, $08, dSnare, $03, dKick, $04, $04, dSnare
-	dc.b	dKick, $07, dSnare, $04, dKick, dKick, $03, $04, $04, dLowTimpani, $85, $07
-	dc.b	dKick, $04, $04, $0F, $07, dSnare, $04, dKick, dKick, $03, dSnare, $04
-	dc.b	dKick, $08, dSnare, $03, dKick, $04, $04, $04, $03, dLowTimpani, $04, $85
-	dc.b	$08, dKick, $03, $04, $0F, $08, dSnare, $03, dKick, $04, $04, dSnare
-	dc.b	dKick, $07, dSnare, $04, dKick, dKick, $03, $04, dLowTimpani, dLowTimpani, $85, $07
-	dc.b	dKick, $04, dLowTimpani, dKick, $0F, $07, dSnare, $04, dKick, dKick, $03, dSnare
-	dc.b	$04, dKick, $08, dSnare, $03, dKick, $04, $04, $04, dLowTimpani, $03, $04
-	dc.b	$85, $08, dLowTimpani, $03, dKick, $04, $0F, $08, dSnare, $03, dKick, $04
-	dc.b	$04, $04, dSnare, $07, dKick, $04, $0B, $85, $08, dSnare, $03, dKick
-	dc.b	$08, $04, dSnare, $0B, $85
+	dc.b	$08, dSMPSSnare, $03, dLowTom, $04, dSMPSKick, dSMPSSnare, dSMPSKick, $07, dSMPSSnare, $04, dSMPSKick
+	dc.b	dSMPSKick, $03, dSMPSSnare, $04, dSMPSKick, $08, dSMPSSnare, $03, dSMPSKick, $04, $04, dSMPSSnare
+	dc.b	dSMPSKick, $07, dSMPSSnare, $04, dSMPSKick, dSMPSKick, $03, $04, $04, dMidTom, dLowTom, $07
+	dc.b	dSMPSKick, $04, $04, $0F, $07, dSMPSSnare, $04, dSMPSKick, dSMPSKick, $03, dSMPSSnare, $04
+	dc.b	dSMPSKick, $08, dSMPSSnare, $03, dSMPSKick, $04, $04, $04, $03, dMidTom, $04, dLowTom
+	dc.b	$08, dSMPSKick, $03, $04, $0F, $08, dSMPSSnare, $03, dSMPSKick, $04, $04, dSMPSSnare
+	dc.b	dSMPSKick, $07, dSMPSSnare, $04, dSMPSKick, dSMPSKick, $03, $04, dMidTom, dMidTom, dLowTom, $07
+	dc.b	dSMPSKick, $04, dMidTom, dSMPSKick, $0F, $07, dSMPSSnare, $04, dSMPSKick, dSMPSKick, $03, dSMPSSnare
+	dc.b	$04, dSMPSKick, $08, dSMPSSnare, $03, dSMPSKick, $04, $04, $04, dMidTom, $03, $04
+	dc.b	dLowTom, $08, dMidTom, $03, dSMPSKick, $04, $0F, $08, dSMPSSnare, $03, dSMPSKick, $04
+	dc.b	$04, $04, dSMPSSnare, $07, dSMPSKick, $04, $0B, dLowTom, $08, dSMPSSnare, $03, dSMPSKick
+	dc.b	$08, $04, dSMPSSnare, $0B, dLowTom
 
 treasurecaves_Loop03:
-	dc.b	dKick, $08, dSnare, $03, dKick, $04, $04, dSnare, dKick, $07, dSnare, $04
-	dc.b	dKick, dKick, $03, dSnare, $04
+	dc.b	dSMPSKick, $08, dSMPSSnare, $03, dSMPSKick, $04, $04, dSMPSSnare, dSMPSKick, $07, dSMPSSnare, $04
+	dc.b	dSMPSKick, dSMPSKick, $03, dSMPSSnare, $04
 	smpsLoop            $00, $03, treasurecaves_Loop03
-	dc.b	$85, $08, dSnare, $03, dKick, $08, $04, dSnare, $0B, dKick
+	dc.b	dLowTom, $08, dSMPSSnare, $03, dSMPSKick, $08, $04, dSMPSSnare, $0B, dSMPSKick
 
 treasurecaves_Loop04:
-	dc.b	dKick, $08, dSnare, $03, dKick, $04, $04, dSnare, dKick, $07, dSnare, $04
-	dc.b	dKick, dKick, $03, dSnare, $04
+	dc.b	dSMPSKick, $08, dSMPSSnare, $03, dSMPSKick, $04, $04, dSMPSSnare, dSMPSKick, $07, dSMPSSnare, $04
+	dc.b	dSMPSKick, dSMPSKick, $03, dSMPSSnare, $04
 	smpsLoop            $00, $03, treasurecaves_Loop04
-	dc.b	dKick, $08, dSnare, $03, dKick, $08, $04, dSnare, $0B, $85
+	dc.b	dSMPSKick, $08, dSMPSSnare, $03, dSMPSKick, $08, $04, dSMPSSnare, $0B, dLowTom
 	smpsLoop            $01, $02, treasurecaves_Loop04
 
 treasurecaves_Loop05:
-	dc.b	dKick
+	dc.b	dSMPSKick
 
 treasurecaves_Loop06:
-	dc.b	$08, dSnare, $03, dKick, $04, $04, dSnare, dKick, $07, dSnare, $04, dKick
-	dc.b	dKick, $03, dSnare, $04
+	dc.b	$08, dSMPSSnare, $03, dSMPSKick, $04, $04, dSMPSSnare, dSMPSKick, $07, dSMPSSnare, $04, dSMPSKick
+	dc.b	dSMPSKick, $03, dSMPSSnare, $04
 	smpsLoop            $00, $03, treasurecaves_Loop05
-	dc.b	dKick, $08, dSnare, $03, dKick, $08, $04, dSnare, $0B, dKick
+	dc.b	dSMPSKick, $08, dSMPSSnare, $03, dSMPSKick, $08, $04, dSMPSSnare, $0B, dSMPSKick
 	smpsLoop            $01, $02, treasurecaves_Loop06
 
 treasurecaves_Loop07:
-	dc.b	dKick, $08, dSnare, $03, dKick, $04, $04, dSnare, dKick, $07, dSnare, $04
-	dc.b	dKick, dKick, $03, dSnare, $04
+	dc.b	dSMPSKick, $08, dSMPSSnare, $03, dSMPSKick, $04, $04, dSMPSSnare, dSMPSKick, $07, dSMPSSnare, $04
+	dc.b	dSMPSKick, dSMPSKick, $03, dSMPSSnare, $04
 	smpsLoop            $00, $03, treasurecaves_Loop07
-	dc.b	dKick, $08, dSnare, $03, dKick, $08, $04, dSnare, $0B, dKick, $47
+	dc.b	dSMPSKick, $08, dSMPSSnare, $03, dSMPSKick, $08, $04, dSMPSSnare, $0B, dSMPSKick, $47
 	smpsPan             panCenter, $00
 	dc.b	nRst, $0B
 	smpsPan             panCenter, $00
