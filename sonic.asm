@@ -753,7 +753,7 @@ VBla_08:
 
 ; Demo_Time:
 VBla_UpdateScreen:
-		bsr.w	LoadTilesAsYouMove	; update level tiles while screen is moving
+		jsr	(LoadTilesAsYouMove).l	; update level tiles while screen is moving
 		jsr	(AnimateLevelGfx).l	; updated animated tiles
 		jsr	(HUD_Update).l		; update HUD data
 		bra.w	ProcessDPLC_3Tiles	; run a bit of PLC decompression
@@ -2133,6 +2133,7 @@ Pal_DVZ:		bincludeEndMarker	"palette/DoleVille Zone.bin"
 Pal_HARDWARE:		bincludeEndMarker	"palette/Hardware Store.bin"
 Pal_NGZ:		bincludeEndMarker	"palette/Nogales Zone.bin"
 Pal_BSZ:		bincludeEndMarker	"palette/BlueScape.bin"
+Pal_BTZ:		bincludeEndMarker	"palette/BlueStone.bin"
 Pal_SplashPal:	bincludeEndMarker	"eurosega/pal.bin"
 Pal_ColdBrew:	bincludeEndMarker	"conimodes/cold brew/palette.bin"
 Pal_ColdBrewG:	bincludeEndMarker	"conimodes/cold brew/palette grayscale.bin"

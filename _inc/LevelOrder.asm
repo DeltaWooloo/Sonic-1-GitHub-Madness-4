@@ -59,7 +59,7 @@
 		; Joint Zone
 		dc.b id_Joint, 1	; Act 1
 		dc.b id_Joint, 2	; Act 2
-		dc.b id_PPZ, 0	; Act 3
+		dc.b id_DVZ, 0	; Act 3
 		dc.b 0, 0
 
 		; Doleville Zone
@@ -73,5 +73,18 @@
 		dc.b id_Nogales, 2	; Act 2
 		dc.b id_PPZ, 0	; Act 3
 		dc.b 0, 0
+		even
 
+		; BlueScape Zone
+		dc.b id_BSZ, 1	; Act 1
+		dc.b id_BSZ, 2	; Act 2
+		dc.b id_BTZ, 0	; Act 3
+		dc.b 0, 0
+		even
+
+		; BlueStone Zone
+		dc.b id_BTZ, 1	; Act 1
+		dc.b id_BTZ, 2	; Act 2
+		dc.b id_BTZ, 0	; Act 3
+		dc.b 0, 0
 		even

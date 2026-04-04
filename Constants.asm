@@ -106,8 +106,10 @@ id_SS:		equ 6
 id_CBZ:		equ 7
 id_WIN:		equ 8
 id_Joint:	equ 9
-id_DVZ:		equ 10
-id_Nogales:	equ 11
+id_DVZ:		equ 10 ; $A
+id_Nogales:	equ 11 ; $B
+id_BSZ:		equ 12 ; $C
+id_BTZ:		equ 13 ; $D
 
 ; Colours
 cBlack:		equ $000		; colour black

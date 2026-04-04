@@ -152,6 +152,7 @@ LoopTileNums:
 		dc.b	$7F,	$7F,	$7F,	$7F	; DVZ
 		dc.b	$7F,	$7F,	$7F,	$7F	; NGZ
 		dc.b	$7F,	$7F,	$7F,	$7F	; BSZ
+		dc.b	$7F,	$7F,	$7F,	$7F	; BTZ
 		even
 
 ; ---------------------------------------------------------------------------
@@ -186,6 +187,7 @@ BgScroll_Index:	dc.w BgScroll_GHZ-BgScroll_Index, BgScroll_LZ-BgScroll_Index
 		dc.w BgScroll_End-BgScroll_Index, BgScroll_GHZ-BgScroll_Index
 		dc.w BgScroll_Default-BgScroll_Index, BgScroll_Default-BgScroll_Index
 		dc.w BgScroll_NGZ-BgScroll_Index, BgScroll_NGZ-BgScroll_Index
+		dc.w BgScroll_Default-BgScroll_Index, BgScroll_Default-BgScroll_Index
 		dc.w BgScroll_Default-BgScroll_Index, BgScroll_Default-BgScroll_Index
 ; ===========================================================================
 
