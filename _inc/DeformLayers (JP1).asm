@@ -888,10 +888,9 @@ Deform_DVZ:
 		move.w	v_screenposx.w,d0
 		move.w	d0,d3
 		asr.w	#1,d0
-;		move.w	d3,d4
-;		asr.w	#1,d4
-;		add.w	d4,d3
 		add.w	d3,d0
+
+		move.w	d0,d5
 
 		andi.w	#$FF,d0
 		cmpi.w	#$7F,d0
@@ -901,6 +900,7 @@ Deform_DVZ:
 .Skip:
 		move.b	#0,v_pcyc_num.w
 .Go:
+
 		andi.w	#$7F,d0				; this is a fucking mess i know
 		move.w	d0,v_bgscreenposx.w
 
@@ -922,8 +922,21 @@ Deform_DVZ:
 		move.w	d0,d3
 		asr.w	#2,d3
 		sub.w	d3,d0
+
+		asr.w	#2,d5
+		move.w	d5,d3
+		asr.w	#2,d3
+		sub.w	d3,d5
+
+		move.w	d5,v_bg3screenposx.w
+		move.w	v_limitleft2.w,d3
+		move.w	d3,d4
+		asr.w	#2,d4
+		add.w	d3,d4
+		add.w	d4,v_bg3screenposx.w
+		move.w	v_screenposy.w,v_bg3screenposy.w
+
 		move.w	v_bgscreenposx.w,d2
-;		addi.w	#-$200,d2
 		sub.w	d0,d2
 		ext.l	d2
 		asl.l	#8,d2
@@ -934,14 +947,14 @@ Deform_DVZ:
 		move.w	d0,d3
 		move.w	#104-1,d1
 
-.loc_6384:
+.ShearLoop:
 		move.w	d3,d0
 		neg.w	d0
 		move.l	d0,(a1)+
 		swap	d3
 		add.l	d2,d3
 		swap	d3
-		dbf	d1,.loc_6384
+		dbf	d1,.ShearLoop
 
 		;	do last tile
 		
@@ -1014,14 +1027,14 @@ Deform_NGZ:
 		move.w	#$47,d1
 		add.w	d4,d1
 
-.loc_6384:
+.ShearLoop:
 		move.w	d3,d0
 		neg.w	d0
 		move.l	d0,(a1)+
 		swap	d3
 		add.l	d2,d3
 		swap	d3
-		dbf	d1,.loc_6384
+		dbf	d1,.ShearLoop
 		rts
 
 ; ---------------------------------------------------------------------------
