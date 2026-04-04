@@ -97,9 +97,9 @@ Vectors:
 		dc.l ErrorTrap			; IRQ level 1
 		dc.l COP_SBlast			; IRQ level 2 (Copera soundblaster FM)
 		dc.l PCO_ADPCM			; IRQ level 3 (28)
-		dc.l v_hintcode				; IRQ level 4 (horizontal retrace interrupt)
-		dc.l v_hintcode				; IRQ level 5 (horizontal retrace interrupt/Pico). GenesisDoes: This allows for Model 2 Sega Pico compatibility
-		dc.l v_vintcode				; IRQ level 6 (vertical retrace interrupt)
+		dc.l v_hintcode			; IRQ level 4 (horizontal retrace interrupt)
+		dc.l v_hintcode			; IRQ level 5 (horizontal retrace interrupt/Pico). !@ GenesisDoes: This allows for Model 2 Sega Pico compatibility
+		dc.l v_vintcode			; IRQ level 6 (vertical retrace interrupt)
 		dc.l ErrorTrap			; IRQ level 7 (32)
 		
 		dc.l ErrorTrap			; TRAP #00 exception
@@ -137,7 +137,7 @@ Vectors:
 		dc.b "SEGA MEGA DRIVE " ; Hardware system ID (Console name)
 		dc.b "SONICGM4 2026.04" ; Copyright holder and release date (generally year)
 		dc.b "I WILL BANISH YOU TO THAT TOWN IN JOHTO         " ; Domestic name
-		dc.b "GITHUB MADNESS 4: RETURN OF THE FEVERDREAM      " ; International name
+		dc.b "GITHUB MADNESS IV: RETURN OF THE FEVERDREAM     " ; International name
 		dc.b "GM 00042069-25" ; Serial/version number (Rev non-0)
 Checksum:
 		dc.w 0
@@ -2000,7 +2000,7 @@ loc_20BC:
 
 Pal_Sega1:	binclude	"palette/Sega1.bin"
 Pal_Sega2:	binclude	"palette/Sega2.bin"
-		dc.w		$AA4,$CC6	; KILL YOURSELF
+		dc.w		$AA4,$CC6
 
 ; ---------------------------------------------------------------------------
 ; Load a direct palette into somewhere in RAM.

@@ -27,22 +27,22 @@ writeCRAM_bg:	macro	pal
 ; ---------------------------------------------------------------------------
 GM_BSOD:
 		;move.b	#bgm_Stop,d0
-		jsr	QueueSound2
+		;jsr	QueueSound2
 		jsr	ClearPLC
 	;	jsr	PaletteWhiteOut
-		lea	(v_palette).w,a0
-		move.l	#$0EEE0EEE,d0
-		move.w	#4-1,d1
-.white:
-		move.l	d0,(a0)+
-		move.l	d0,(a0)+
-		move.l	d0,(a0)+
-		move.l	d0,(a0)+
-		move.l	d0,(a0)+
-		move.l	d0,(a0)+
-		move.l	d0,(a0)+
-		move.l	d0,(a0)+
-		dbf	d1,.white
+		; lea	(v_palette).w,a0
+		; move.l	#$0EEE0EEE,d0
+		; move.w	#4-1,d1
+; .white:
+		; move.l	d0,(a0)+
+		; move.l	d0,(a0)+
+		; move.l	d0,(a0)+
+		; move.l	d0,(a0)+
+		; move.l	d0,(a0)+
+		; move.l	d0,(a0)+
+		; move.l	d0,(a0)+
+		; move.l	d0,(a0)+
+		; dbf	d1,.white
 		disable_ints
 		disable_display
 		lea	(vdp_control_port).l,a6
@@ -90,7 +90,7 @@ GM_BSOD:
 		subq.w	#1,(v_pcyc_num).w
 		bne.s	.bsodsloop
 	else
-		; Specific ad
+		; Specific bsod
 		lea	((bsodDebug-1)*bsodDatasize)+BSOD_table(pc),a2
 		bsr.s	.render
 	endif
@@ -138,12 +138,17 @@ GM_BSOD:
 		tst.l	(v_plc_buffer).l
 		bne.s	.loadloop
 		move.l	(sp)+,a2
-
+				
+		;move.l	(a2)+,a0
+		;lea	(v_palette_fading).w,a1
+		;moveq	#64/2-1,d0
+;.palinit:	move.l	(a0)+,(a1)+
+		;dbf	d0,.palinit
+		;Directly load palette into CRAM
 		move.l	(a2)+,a0
-		lea	(v_palette_fading).w,a1
-		moveq	#64/2-1,d0
-.palinit:	move.l	(a0)+,(a1)+
-		dbf	d0,.palinit
+		lea		(v_palette).l,a1
+		move.b	#$40-1,d7
+		jsr		(PalLoadUser).l
 		
 		;!@ Load BG color
 		move.w	(a2)+,d0
@@ -163,7 +168,7 @@ GM_BSOD:
 		move.w	d0,(v_generictimer).w
 		move.w	d1,(v_pcyc_time).w
 		;move.b	#bgm_Stop,d0
-		jsr	QueueSound2
+		;jsr	QueueSound2
 		move.b	#2,(v_vbla_routine).w
 		jsr	WaitForVBla
 
@@ -184,7 +189,7 @@ GM_BSOD:
 .nopcm:
 
 		move.l	a2,-(sp)
-		jsr	PaletteWhiteIn
+		;jsr	PaletteWhiteIn
 .mainloop:
 		move.b	#2,(v_vbla_routine).w
 		jsr	WaitForVBla

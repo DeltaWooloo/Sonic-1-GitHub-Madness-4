@@ -1877,7 +1877,8 @@ GotoBSOD:
 		
 .restart:
 		move.w	#1,(f_restart).w ; restart the level
-
+		;jmp		(Level_MainLoop).l
+		jmp		(MainGameLoop).l
 .return:
 		rts
 ; End of function Sonic_ResetLevel
