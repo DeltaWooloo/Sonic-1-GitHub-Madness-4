@@ -55,9 +55,22 @@ GRing_Collect:	; Routine 4
 		bset	#0,obRender(a1)	; reverse flash object
 
 GRing_PlaySnd:
+		;!@ GD: Force GotThroughAct (for BigRing spawn from Random Monitor) if subType is $01 (spawned from RandomMonitor)
+		;(For random monitor spawn)
+		cmpi.b	#$0,obSubtype(a0)		; Is subtype $0 (NOT spawned from RandomMonitor)?
+		beq.s	.skip					; if so, branch				
+		;!@ New code for spawned variant
+		;!@ GD TODO: None of this music works
+		move.w	#bgm_Stop,d0			; stop music		
+		jsr		(QueueSound1).l	
+		move.b	#bgm_ActClear,d0		;Play Act clear song
+		jsr		(QueueSound1).l
+		jsr		(GotThroughAct2).l		; Goto GotThroughAct2 (variant)
+.skip:
 		move.w	#sfx_GiantRing,d0
 		jsr	(QueueSound1).l		; play giant ring sound
-		bra.s	GRing_Animate
+		;bra.s	GRing_Animate
+		bra.w	GRing_Animate
 ; ===========================================================================
 
 GRing_Delete:	; Routine 6

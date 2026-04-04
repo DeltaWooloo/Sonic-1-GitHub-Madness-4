@@ -97,19 +97,19 @@ id_ClintonScr:		equ ptr_ClintonScreens-GameModeArray		; $50
 id_BSOD:			equ ptr_BSOD-GameModeArray					; $54 !@ GD
 
 ; Levels
-id_OWZ:		equ 0
-id_ARZ:		equ 1
-id_ACZ:		equ 2
-id_MCZ:		equ 3
-id_SFZ:		equ 4
-id_PPZ:		equ 5
-id_EndZ:	equ 6
-id_SS:		equ 6
-id_CBZ:		equ 7
-id_WIN:		equ 8
-id_Joint:	equ 9
-id_DVZ:		equ 10
-id_Nogales:	equ 11
+id_OWZ:		equ $00
+id_ARZ:		equ $01
+id_ACZ:		equ $02
+id_MCZ:		equ $03
+id_SFZ:		equ $04
+id_PPZ:		equ $05
+id_EndZ:	equ $06
+id_SS:		equ $06
+id_CBZ:		equ $07
+id_WIN:		equ $08
+id_Joint:	equ $09
+id_DVZ:		equ $0A
+id_Nogales:	equ $0B
 
 ; Colours
 cBlack:		equ $000		; colour black
@@ -372,6 +372,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 
 	; Keep this last
 	nextenum bgm__Last
+	bgm__LastPow2:		equ	$7F		;!@ Manually update me	
 
 ; Sound effects
 	enum	sfx__First=$A0

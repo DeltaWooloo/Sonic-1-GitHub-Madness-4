@@ -41,7 +41,14 @@ Sign_Touch:	; Routine 2
 		move.w	#sfx_Signpost,d0
 		jsr	(QueueSound1).l	; play signpost sound
 		clr.b	(f_timecount).w	; stop time counter
+		
+		;!@ GD: New code to skip limit lock if subtype $1 (spawned by RandomMonitor)
+		cmpi.b	#0,obSubtype(a0)	;If subtype 0?
+		bne.s	.skip				;IF NOT, branch (skip if spawned by random monitor)
+		
 		move.w	(v_limitright2).w,(v_limitleft2).w ; lock screen position
+	
+	.skip:
 		move.w	#bgm_Stop,d0
 		jsr	(QueueSound2).l	; stop music		
 		addq.b	#2,obRoutine(a0)
@@ -167,7 +174,16 @@ loc_EC869:
 GotThroughAct:
 		tst.b	(v_endcard).w
 		bne.s	locret_ECEE
+		
+		;!@ GD:  New code to skip edge lock if subType $1 (spawned from RandomMonitor)
+		cmpi.b	#0,obSubtype(a0)		;Is subType 0?
+		bne.s	GotThroughAct2			;If NOT (spawned from random monitor), then branch
+		
+		; This line here
 		move.w	(v_limitright2).w,(v_limitleft2).w
+		
+		;!@ GD: Variant of GotThroughAct without v_endcard check and limit set; for GiantRing spawned from random monitor
+GotThroughAct2:
 		clr.b	(v_invinc).w	; disable invincibility
 		clr.b	(f_timecount).w	; stop time counter
 		move.b	#id_GotThroughCard,(v_endcard).w

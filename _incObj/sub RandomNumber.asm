@@ -23,3 +23,29 @@ RandomNumber:
 		swap	d1
 		move.l	d1,(v_random).w
 		rts
+
+; ---------------------------------------------------------------------------
+; !@ GenesisDoes
+; Subroutine to generate a random address from valid ROM space, in d0
+; Uses: d0-d2
+; Inputs: d2 maxROM size
+; Outputs: 	d0
+; ---------------------------------------------------------------------------
+
+; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
+
+RandomAddress:
+		movem.l	d1,-(sp)			; Push d1 onto stack
+	.loop:
+		bsr.s	RandomNumber		; Pop rnd# into d0
+		andi.l	#$7FFFFFF,d0		; Limit d0 to 27-bit ROM address
+		;Limit d0 to d2 ROM size
+		cmp.l	d2,d0	; Is d0 <= d2 RomSize?
+		bls.s	.nofix				; if so, branch
+		;We have exceed this ROM size; loop until valid addr found
+		bra.s	.loop
+	.nofix:
+		;We have found a valid address! Pop into d0
+		movem.l	(sp)+,d1			; Pop d1 from stack
+		rts
+		

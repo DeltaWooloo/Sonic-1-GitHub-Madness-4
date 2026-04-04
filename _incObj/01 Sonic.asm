@@ -7,6 +7,9 @@
 ; Object variables used by Sonic
 ; ---------------------------------------------------------------------------
 
+; See "Sonic-specific" SSTs
+; in https://info.sonicretro.org/SCHG:Sonic_the_Hedgehog_(16-bit)/RAM_Editing
+;
 playammo:	equ $28 	; THIS IS REALLY FUNNYT BECAUSE ITS A BYTE
 				; WE'RE REALLY BYTEBASHING THIS ONE MAN.
 
@@ -20,7 +23,12 @@ angleright:	equ $36	; angle of floor on Sonic's right side
 angleleft:	equ $37	; angle of floor on Sonic's left side
 sticktoconvex:	equ $38	; flag set while running on an SBZ gear
 attacking:	equ $39	; timeset set while attacking
+
+;!@ GD: Ambigiously used for both restartTime (word), Random Monitor VDP FX (word), and ExtraJumpUsed (low byte)
 restartime:	equ $3A	; time left before level restarts after dying (2 bytes)
+ExtraJumpUsed:		equ  $3B
+vdpFXTime:	equ	restartime
+
 jumping:	equ $3C	; flag set while Sonic is jumping
 standonobject:	equ $3D	; object index Sonic stands on
 locktime:	equ $3E	; temporary D-Pad control lock timer (2 bytes)
@@ -301,11 +309,11 @@ Sonic_Display:
 
 .chkshoes:
 		tst.b	(v_shoes).w	; does Sonic have speed shoes?
-		beq.s	.exit		; if not, branch
+		beq.s	.chkFX		; if not, branch
 		tst.w	shoetime(a0)	; check time remaining
-		beq.s	.exit
+		beq.s	.chkFX
 		subq.w	#1,shoetime(a0)	; subtract 1 from time
-		bne.s	.exit
+		bne.s	.chkFX
 		move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
 		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
 		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
@@ -319,6 +327,28 @@ Sonic_Display:
 		move.b	(v_zonemusic).w,d0
 		jmp	(QueueSound1).l	; run music at normal speed
 
+;!@ GD: New checks for RandomMonitor VDP FX
+.chkFX:		
+		tst.b	(v_vdp_fx).w	; does Sonic have VDP FX?
+		beq.s	.exit		; if not, branch
+		tst.w	vdpFXTime(a0)	; check time remaining
+		beq.s	.exit
+		subq.w	#1,vdpFXTime(a0)	; subtract 1 from time
+		bne.s	.exit
+		
+		;!@ Undo FX, reload level pal
+		moveq	#1,d0
+		jsr		(Pow_vdp_fixRegs).l
+		
+		move.b	#0,(v_vdp_fx).w	; cancel VDP FX
+		move.b	(v_zone).w,d0
+		cmpi.w	#(id_ARZ<<8)+3,(v_zone).w ; check if level is SBZ3
+		bne.s	.music3
+		moveq	#5,d0		; play SBZ music
+.music3:
+		move.b	(v_zonemusic).w,d0
+		jmp	(QueueSound1).l	; run music at normal speed
+		
 .exit:
 		rts
 
@@ -1223,7 +1253,7 @@ Sonic_ChkRoll:
 		rts
 ; End of function Sonic_Roll
 
-ExtraJumpUsed:		equ  $3b
+
 
 ; ----------------------------------------------------------------------------
 ; ---------------------------------------------------------------------------
@@ -1232,6 +1262,10 @@ ExtraJumpUsed:		equ  $3b
 ; ----------------------------------------------------------------------------
 
 Sonic_ExtraJump:
+		;!@ GD: Do not allow extra jump while VDP FX is enabled, due to ambigious SSTs. Sorry :(
+		tst.b	(v_vdp_fx).w	; does Sonic have VDP FX?
+		bne.s	ExtraJumpReturn		; if so, branch
+
 		tst.b   ExtraJumpUsed(a0)   
 		bne.s   ExtraJumpReturn
 		move.b  (v_jpadpress2).w,d0    ; Is ABC pressed? 
@@ -1254,7 +1288,13 @@ ExtraJumpReturn:
 
 
 Sonic_Jump:
+		;!@ GD: Do not clear extra jump while VDP FX is enabled, due to ambigious SSTs. Sorry :(
+		tst.b	(v_vdp_fx).w		; does Sonic have VDP FX?
+		bne.s	.skip				; if so, branch
+		
 		clr.b   ExtraJumpUsed(a0)
+	
+	.skip:
 		move.b	(v_jpadpress2).w,d0
 		andi.b	#btnB|btnC,d0	; is B or C pressed?
 		beq.w	.return	; if not, branch
@@ -1837,6 +1877,8 @@ GameOver:
 ; ----------------------------------------------------------------------------
 
 loc_138D4:
+		;!@ GD: Undo VDP_FX vars
+		move.b	#0,(v_vdp_fx).w	; cancel VDP FX		
 		move.w	#60,restartime(a0)	; set time delay to 1 second
 		tst.b	(f_timeover).w	; is TIME OVER tag set?
 		beq.s	locret_13900	; if not, branch

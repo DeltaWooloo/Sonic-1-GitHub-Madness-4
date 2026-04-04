@@ -398,6 +398,7 @@ Init_GHM4:
 
 MainGameLoop:
 		;!@GD: Fix VDP registers if mode changed
+		moveq	#0,d0
 		jsr		(Pow_vdp_fixRegs).l
 
 		move.b	(v_gamemode).w,d0			; load Game Mode
@@ -2010,10 +2011,16 @@ Pal_Sega2:	binclude	"palette/Sega2.bin"
 ; ---------------------------------------------------------------------------
 
 PalLoadUser:
-	andi.l	#$FF,d7
+	move.w  d0, -(sp)		;Push d0 onto stack
+	andi.l	#$FF,d7			;Limit d7 to $FF (byte) iterations
 .LoadToQueue:
-	move.w	(a0)+,(a1)+
-	dbf	d7,.LoadToQueue
+	move.w	(a0)+,d0		;Move palette value at a0 into d0, increment a0	
+	andi.w	#$0EEE,d0		;Only keep valid palette bits in d0 (0%0000BBB0GGG0RRR0)
+							;https://segaretro.org/Sega_Mega_Drive/Palettes_and_CRAM#Format
+	move.w	d0,(a1)+		;Move adjusted d0 palette value into a1, increment a1
+	;move.w	(a0)+,(a1)+
+	dbf	d7,.LoadToQueue		;Loop for d7 iterations
+	move.w  (sp)+,d0		;Pop d0 from stack
 	rts
 
 ; ---------------------------------------------------------------------------
@@ -2846,7 +2853,7 @@ Level_NoMusicFade:
 		move.b	#1,(f_water).w	; enable water
 
 Level_LoadPal:
-		cmpi.w	#$A03,v_zone.w	; skip over dvz act 4
+		cmpi.w	#(id_DVZ<<8)+3,(v_zone).w	; skip over dvz act 4
 		beq.s	.cont
 		move.b	#dLetsGOO, d0
 		jsr	(MegaPCM_PlaySample).l
@@ -3089,6 +3096,7 @@ Level_Restarted:
 		bne.s	NotFoxy
 		jsr	(GM_FoxyBoo).l
 NotFoxy:
+		moveq	#0,d0
 		jsr	(Pow_vdp_fixRegs).l	;!@GD: Undo random monitor powerups (VDP register fuckery)
 		bra.w	GM_Level
 ; ===========================================================================
@@ -3246,24 +3254,26 @@ SyncEnd:
 
 SignpostArtLoad:
 		tst.b	v_clintonfucker
-		bne.s	.exit
+		bne.s	SignpostArtLoad2.exit
 		tst.w	(v_debuguse).w	; is debug mode being used?
-		bne.w	.exit		; if yes, branch
+		bne.w	SignpostArtLoad2.exit		; if yes, branch
 		cmpi.b	#2,(v_act).w	; is act number 02 (act 3)?
-		beq.s	.exit		; if yes, branch
+		beq.s	SignpostArtLoad2.exit		; if yes, branch
 		cmpi.w	#(id_ACZ<<8)+3,(v_zone).w	; is this giovanni's test level?
-		beq.s	.exit		; if yes, branch
+		beq.s	SignpostArtLoad2.exit		; if yes, branch
 
 		move.w	(v_screenposx).w,d0
 		move.w	(v_limitright2).w,d1
 		subi.w	#$100,d1
 		cmp.w	d1,d0		; has Sonic reached the edge of the level?
-		blt.s	.exit		; if not, branch
+		blt.s	SignpostArtLoad2.exit		; if not, branch
 		tst.b	(f_timecount).w
-		beq.s	.exit
+		beq.s	SignpostArtLoad2.exit
 		cmp.w	(v_limitleft2).w,d1
-		beq.s	.exit
+		beq.s	SignpostArtLoad2.exit
 		move.w	d1,(v_limitleft2).w ; move left boundary to current screen position
+		;!@ GD: Variant that will forcibly load the artwork (RandomMonitor spawn)
+SignpostArtLoad2:
 		moveq	#plcid_Signpost,d0
 		bra.w	NewPLC		; load signpost patterns
 

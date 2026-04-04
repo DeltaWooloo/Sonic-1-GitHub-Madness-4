@@ -195,9 +195,28 @@ disable_display:	macro
 ; ---------------------------------------------------------------------------
 
 enable_display:	macro
+		moveq	#0,d0						; Clear d0
 		move.w	(v_vdp_buffer1).w,d0		; get buffered copy of VDP register $81
-		ori.b	#%01000000,d0			; set bit 6 (enable display)
+		ori.b	#%01000000,d0				; set bit 6 (enable display)
 		move.w	d0,(vdp_control_port).l		; write to VDP
+		endm
+
+; ---------------------------------------------------------------------------
+; enable display + ints
+; ---------------------------------------------------------------------------		
+;!@ GD: Disable both ints and display
+enableD:	macro
+		enable_ints
+		enable_display
+		endm
+		
+; ---------------------------------------------------------------------------
+; display display + ints
+; ---------------------------------------------------------------------------		
+;!@ GD: Disable both ints and display
+disableD:	macro
+		disable_ints
+		disable_display
 		endm
 
 ; ---------------------------------------------------------------------------
