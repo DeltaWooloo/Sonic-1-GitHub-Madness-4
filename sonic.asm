@@ -2272,7 +2272,9 @@ GM_Title:
 		clr.b	(f_wtr_state).w
 		bsr.w	ClearScreen
 
-		clearRAM v_objspace
+		clearRAM	v_ram_start, (v_ram_start+$2000)			; clear foreground buffers
+		clearRAM	v_objspace, v_objspace_end
+		clearRAM	v_levelvariables, v_levelvariables_end				; clear the camera RAM
 
 ;		locVRAM	ArtTile_Title_Japanese_Text*tile_size
 ;		lea	(Nem_JapNames).l,a0 ; load Japanese credits
