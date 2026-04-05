@@ -831,3 +831,5 @@ Coffinman_PSG3_04_0_64:
 Coffinman_PSG3_05_0_64:
 	dc.b smpsNoAttack, $06, nFs1, $10, $08, nA2, nAb2, nA2, nAb2, nA2, $02
 	smpsReturn
+
+	smpsFooterEndSong	"TG2000Tracks/Coffinman.asm"

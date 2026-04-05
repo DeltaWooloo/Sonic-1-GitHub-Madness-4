@@ -71,3 +71,5 @@ BGM_ClintonYears_Voices:
 	smpsVcDecayLevel	$00, $00, $00, $00
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$02, $31, $40, $22
+
+	smpsFooterEndSong	"DaxKatter/Mus - Clinton Years.asm"
