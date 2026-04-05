@@ -775,5 +775,5 @@ NEPU_DIMTRIP_Patches:
 	dc.b	$04, $06, $04, $08,	$00, $01, $03, $00
 	dc.b	$16, $17, $16, $A6,	$25, $2F, $25, $00
 
-	smpsFooterEndSong	"GenesisDoes\NepAnime.asm"
+	smpsFooterEndSong	"GenesisDoes/NepAnime.asm"
 	even

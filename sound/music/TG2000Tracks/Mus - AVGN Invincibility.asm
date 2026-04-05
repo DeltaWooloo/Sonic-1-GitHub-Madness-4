@@ -791,3 +791,5 @@ AVGNInv_PSG3_09_0_32:
 	smpsPSGvoice	TFTone_01
 	dc.b nMaxPSG, $08, $08, $08, $08
 	smpsReturn
+
+	smpsFooterEndSong	"TG2000Tracks/Mus - AVGN Invincibility.asm"

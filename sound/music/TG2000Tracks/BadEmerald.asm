@@ -1297,3 +1297,5 @@ Bad_Apple_PSG3_0A_0_64:
 	smpsPSGvoice	AppleTone_01
 	dc.b nMaxPSG, $02, $06, $02, $06, $02, $06, $02, $02, $08, $08, $08, $04, $02, $02
 	smpsReturn
+
+	smpsFooterEndSong	"TG2000Tracks/BadEmerald.asm"

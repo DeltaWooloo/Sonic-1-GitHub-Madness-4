@@ -359,7 +359,6 @@ Mus_ClintonYears:	include	"music/DaxKatter/Mus - Clinton Years.asm"
 
 Mus_CanCan:		include	"music/TG2000Tracks/CanCan.asm" 
 	even
-
 Mus_ChickenDance:	include	"music/TG2000Tracks/ChickenDance.asm"
 	even
 Mus_DeltaTale:		include	"music/Dawid/DeltaTale fighte.asm"
@@ -445,6 +444,6 @@ Mus_Win2K:		include "music/Dawid/WINDOWS2000.asm"
 	even
 Mus_Folgers:		include	"music/TG2000Tracks/Folgers.asm"
 	even
-Mus_MJWin:		include	"music/TG2000Tracks/MJ.asm"
+Mus_MJWin:		include	"music/DaxKatter/Mus - Moonwalker Clear.asm"
 	even
 	END

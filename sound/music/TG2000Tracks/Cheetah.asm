@@ -1993,3 +1993,5 @@ Cheetah_PSG3_01_0_32:
 	smpsPSGAlterVol	$02
 	dc.b $02, $02
 	smpsReturn
+
+	smpsFooterEndSong	"TG2000Tracks/Cheetah.asm"
