@@ -7524,15 +7524,7 @@ Art_LivesNums:	binclude	"artunc/Lives Counter Numbers.bin" ; 8x8 pixel numbers o
 		include "dotgen/knight/[CODE] The Roaring Knight.asm"
 		
 ; ===========================================================================
-		include	"data.asm"		; data includes in here
-; ===========================================================================
-
-		include	"sound/MegaPCM.asm"
-		include	"sound/SampleTable.asm"
 		include	"_inc/SelbiTitlecards.asm"
-
-SoundDriver:	include "sound/s1.sounddriver.asm"
-
 		include "conimodes/cold brew/GM_ColdBrew.asm"
 		include "conimodes/winxp/GM_NTOSKRNL.asm"
 		include "conimodes/splash/GM_CNNicoJump.asm"
@@ -7548,10 +7540,7 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 		include	"_inc/GHM3Explode.asm"
 
 		include	"_gamemode/damn/damn.asm"
-		include "_gamemode/#SSRG/SSRG_Screen.asm"		
-	if MSUEnabled
-		include "sound/MSU/MSU.asm"
-	endif
+		include "_gamemode/#SSRG/SSRG_Screen.asm"
 
 		include "_incObj/clinton fucker/Clinton Fucker.asm"
 		include	"_incObj/10 Player Bullet.asm"
@@ -7572,7 +7561,12 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 ; ---------------------------------------------------------------------------
 
 		include	"_gamemode/winBSOD/bsod.asm"	; GenesisDoes - GM_BSOD:		
-		
+
+		include	"EarthboundBtl/MAIN.ASM"
+
+FortnitePortal:
+		include	"_incObj/ObjRiftToGo.asm"
+
 ; ---------------------------------------------------------------------------
 ; NEEDLEMOUSE SHITTERY  Team Splash Screen files
 ; ---------------------------------------------------------------------------
@@ -7593,23 +7587,32 @@ Eni_Atolly:   binclude	"LiquidSplashes/ATOownscreen/Eni/Atolly.eni"
 ; ---------------------------------------------------------------------------
 ; FORTNITE RIFT - that shit 
 ; ---------------------------------------------------------------------------
-	
-FortnitePortal:		  
-		  include	"_incObj/ObjRiftToGo.asm"
+
 Nem_Rift:	binclude	"artnem/RiftToGo.nem"
-            even			
+		even
 
 ; ---------------------------------------------------------------------------
 ; WARIO - that shit  2
 ; ---------------------------------------------------------------------------
 	
 Nem_Wario:	binclude	"artnem/Wario.nem"
-            even	
+		even	
 	include	"_incObj/Katsi.asm"	
 ; end of 'ROM'
 
-        include	"EarthboundBtl/MAIN.ASM"
 	
+		include	"data.asm"		; data includes in here
+; ===========================================================================
+
+	if MSUEnabled
+		include "sound/MSU/MSU.asm"
+	endif
+
+		include	"sound/MegaPCM.asm"
+		include	"sound/SampleTable.asm"
+
+SoundDriver:	include "sound/s1.sounddriver.asm"
+
 ; ---------------------------------------------------------------------------
 ; It's soo limited!
 ; ---------------------------------------------------------------------------
