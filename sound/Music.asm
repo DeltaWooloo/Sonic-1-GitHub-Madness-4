@@ -136,6 +136,7 @@ MusicIndex:
 	dc.l	Mus_BossaNova
 	dc.l	Mus_dam_dariram
 	dc.l	Mus_SmilingBomb
+	dc.l	Mus_VirusAlert
 
 	dc.l	Mus_CrazyMario
 	dc.l	Mus_Ding
@@ -427,6 +428,8 @@ Mus_BossaNova:		include	"music/TG2000Tracks/BossaNova.asm"
 Mus_dam_dariram:	include	"music/DSKTracks/dam_dariram_handmade.asm"
 	even
 Mus_SmilingBomb:	include "music/TheWTracks/Mus - Smiling Bomb.asm"
+	even
+Mus_VirusAlert:		include	"music/TG2000Tracks/VirusAlert.asm"
 	even
 
 Mus_CrazyMario:		include	"music/Dawid/crazymario.asm"
