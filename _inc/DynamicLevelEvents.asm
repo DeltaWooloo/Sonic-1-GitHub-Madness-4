@@ -1008,8 +1008,27 @@ locret_VOMITCOOKIE:
 DLE_BSZ:
        rts
 ; ---------------------------------------------------------------------------
-; BlueStone
+; BlueStone WIP
 ; ---------------------------------------------------------------------------
 
 DLE_BTZ:
-       rts
+       move.w	#$140,(v_limitbtm1).w
+		cmpi.w	#Knight_X_Spawn,(v_screenposx).w  ; WIP 
+		blo.s	DLE_BTZ_Returntofreddy
+		jsr	(FindFreeObj).l
+		bne.s	.BTZspawnfail
+		_move.b	#id_Roaring_Knight,obID(a1) ; load MZ boss object
+		move.w	#Knight_X_Spawn+$180,obX(a1)
+		move.w	#Knight_Y_Spawn+$24,obY(a1)
+
+.BTZspawnfail:
+		move.w	#bgm_Boss,d0
+		jsr	(QueueSound1).l	; play boss music
+		move.b	#1,(f_lockscreen).w ; lock screen
+		addq.b	#2,(v_dle_routine).w	
+
+DLE_BTZend:
+		move.w	(v_screenposx).w,(v_limitleft2).w
+DLE_BTZ_Returntofreddy:		
+		rts
+		
