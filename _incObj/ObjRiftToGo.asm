@@ -48,8 +48,7 @@ Rift_2ndIndex:	dc.w Rift_Normal-Rift_2ndIndex
 Rift_Normal:
 		move.b	#0,obAnim(a0)
 		addq.b	#2,ob2ndRout(a0)	; run "Rift_CheckDist" routine
-		move.w	#sfx_Rift,d0		; Done and Dusted
- 		jmp	(QueueSound2).l		; play rift normal sound
+		 rts
 ; ===========================================================================
 
 Rift_ChkDist:
@@ -78,10 +77,10 @@ Rift_GoToSky:
 		move.w	v_limittop1.w,(v_player+obY).w 
 		bset	#4,(v_player+obStatus).w
 		bset	#2,(v_player+obStatus).w
-		move.w	#sfx_RiftSky,d0
-		jsr	(QueueSound2).l		; play riftsky sound
 		addq.b	#2,obRoutine(a0)
-
+		move.b	#dRift,d0		; Rift
+		jsr	(MegaPCM_PlaySample).l
+		
 Rift_Return2:
 		rts
 ; ===========================================================================
