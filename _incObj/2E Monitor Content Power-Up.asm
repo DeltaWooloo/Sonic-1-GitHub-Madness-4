@@ -11,7 +11,7 @@ monLong	equ	4		;Length of each random monitor entry in table (long = 4 bytes)
 monDebug equ -1
 	else
 ;If NOT debug mode, then skip
-monDebug equ 0			
+monDebug equ -1
 	endif
 
 ;Random monitor debugging
@@ -21,7 +21,7 @@ monDebug equ 0
 msgDebug equ -1
 	else
 ;If NOT debug mode, then skip
-msgDebug equ 0			
+msgDebug equ -1
 	endif
 
 ;!@ GD: Macros
@@ -255,7 +255,7 @@ Pow_Randomiser:
 		lsl.w	#2,d0
 	;!@ GenesisDoes: Random monitor testing
 	;Force to particular type as needed
-	if monDebug>0
+	if monDebug>=0
 		move.w	#monDebug,d0
 	endif
 		move.l	.powtable(pc,d0.w),a2
@@ -779,7 +779,7 @@ Pow_GetErrorMsg:
 		lsl.w	#2,d0
 	;!@ GenesisDoes: Random monitor testing
 	;Force to particular type as needed
-	if msgDebug>0
+	if msgDebug>=0
 		move.w	#msgDebug,d0
 	endif
 		move.l	.msgtable(pc,d0.w),a2
