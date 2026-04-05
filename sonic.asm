@@ -2216,15 +2216,15 @@ Sega_WaitPal:
 		bsr.w	WaitForVBla
 		bsr.w	PalCycle_Sega
 		bne.s	Sega_WaitPal
-		tst.b   (v_megadrive).w		; is the region japan 
-		bne.s   .segajap		; if not branch, idk how it works but it plays the first one
-		pcm	dSega2			; SEEGAY
-		bra.s 	.Continue		; branch this useless shit
+;		tst.b   (v_megadrive).w		; is the region japan 
+;		bne.s   .segajap		; if not branch, idk how it works but it plays the first one
+;		pcm	dSega2			; SEEGAY
+;		bra.s 	.Continue		; branch this useless shit
 		
-.segajap:
+.;segajap:
 		pcm 	dSega			; WHAT THE FUUUUUUUUUUUUUU
 
-.Continue:
+;.Continue:
 		move.b	#$14,(v_vbla_routine).w
 		bsr.w	WaitForVBla
 		move.w	#3*60,(v_generictimer).w

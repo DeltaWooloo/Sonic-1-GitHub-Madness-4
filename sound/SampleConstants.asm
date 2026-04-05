@@ -91,34 +91,34 @@ dScream				ds.b 1
 dYoFreddy			ds.b 1
 dGithub				ds.b 1
 dMadness			ds.b 1
-dMadnessR			ds.b 1
 dTheFourth			ds.b 1
-dEggmanLaugh		ds.b 1
 dBSOD				ds.b 1
 dShutdown			ds.b 1
 dChord16			ds.b 1
 
 ; Splash Screen Samples
 dEggNo				ds.b 1
-dfunnyb_utthole		ds.b 1
+dfunnyb_utthole			ds.b 1
 d2kki				ds.b 1
-dEagleSoftSong		ds.b 1
-dGenesisDoes1		ds.b 1
+dEagleSoftSong			ds.b 1
+dGenesisDoes1			ds.b 1
 dsupbeaches			ds.b 1
 
 ; Commercial Samples
 dRightBack			ds.b 1
-dGenesisCan3		ds.b 1
+dGenesisCan3			ds.b 1
 
 ; Ollie Samples
-dOllieGameTap		ds.b 1
+dOllieGameTap			ds.b 1
 dOllieWahoo			ds.b 1
 
 ; SEGA Samples
 dSega				ds.b 1
-dSega2				ds.b 1
+;dSega2				ds.b 1
 
 ; UNUSED
+;dMadnessR			ds.b 1
+;dEggmanLaugh		ds.b 1
 ;dPenis				ds.b 1
 ;dBoioing			ds.b 1
 ;dOrangeLaugh		ds.b 1

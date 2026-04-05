@@ -394,11 +394,12 @@ BGM_GHM4Title_FM5_Loop03:
 	smpsAlterVol	$FC
 	smpsLoop	0,3,BGM_GHM4Title_FM5_Loop03
 	smpsSetvoice	$01
-	smpsAlterVol	$FA
+	smpsAlterVol	$F6
 	smpsCall	BGM_GHM4Title_Call01
 	dc.b	nRst, $20
 	smpsCall	BGM_GHM4Title_Call01
 	smpsCall	BGM_GHM4Title_FM5_Call00
+	smpsAlterVol	$04
 	smpsJump	BGM_GHM4Title_FM5_Jump
 
 BGM_GHM4Title_FM5_Call00:

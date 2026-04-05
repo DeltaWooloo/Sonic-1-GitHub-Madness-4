@@ -78,15 +78,13 @@ SampleTable:
 	dcSample	TYPE_PCM,	CL_OnTheBall,	11297				; $B7
 	dcSample	TYPE_DPCM,	DAMN,		16000,	FLAGS_SFX		; $B8
 	dcSample	TYPE_PCM,	Foxy,		0,	FLAGS_SFX			; $B9
-	dcSample	TYPE_PCM,	Scream,	8000,	FLAGS_SFX			; $BA
+	dcSample	TYPE_PCM,	Scream,		8000,	FLAGS_SFX			; $BA
 
 	; Title Screen Samples
 	dcSample	TYPE_DPCM,	YoFreddy,	16000,	FLAGS_SFX		; $BB
 	dcSample	TYPE_DPCM,	Github,		16000,	FLAGS_SFX		; $BC
 	dcSample	TYPE_DPCM,	Madness,	16000,	FLAGS_SFX		; $BD
-	dcSample	TYPE_DPCM,	MadnessR,	16000,	FLAGS_SFX		; $BE
 	dcSample	TYPE_DPCM,	TheFourth,	16000,	FLAGS_SFX		; $BF
-	dcSample	TYPE_DPCM,	eggmanLaugh,	16000,	FLAGS_SFX	; $C0
 	dcSample	TYPE_DPCM,	BSOD,		16000,	FLAGS_SFX		; $C1
 	dcSample	TYPE_DPCM,	shutdown,	16000,	FLAGS_SFX		; $C2
 	dcSample	TYPE_DPCM,	chord16,	16000,	FLAGS_SFX		; $C3
@@ -111,8 +109,6 @@ SampleTable:
 	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX		; $CE
 
 	; Unused
-
-
 ;	dcSample	TYPE_PCM,	Segay,		0,	FLAGS_SFX			; $CF
 ;	dcSample	TYPE_PCM,	CL_Penis,	11297					; $D0
 ;	dcSample	TYPE_PCM,	Boioing,	5250,	FLAGS_SFX		; $D1
@@ -121,6 +117,8 @@ SampleTable:
 ;	dcSample	TYPE_DPCM,	GenesisCan1,	16000,FLAGS_SFX		; $D4
 ;	dcSample	TYPE_DPCM,	GenesisCan2,	16000,FLAGS_SFX		; $D5
 ;	dcSample	TYPE_DPCM,	Intel,		16000, FLAGS_SFX		; $D6
+;	dcSample	TYPE_DPCM,	MadnessR,	16000,	FLAGS_SFX		; $BE
+;	dcSample	TYPE_DPCM,	eggmanLaugh,	16000,	FLAGS_SFX	; $C0
 
 	
 	;!@ GD: Last slot always reserved for PCM SFX Silence
@@ -214,9 +212,7 @@ SampleTable:
 	incdac	YoFreddy, "sound/dac/GenesisDoes/YoFreddy.dpcm"
 	incdac	Github, "sound/dac/GenesisDoes/git-hub.dpcm"
 	incdac	Madness, "sound/dac/GenesisDoes/Madness.dpcm"
-	incdac	MadnessR, "sound/dac/GenesisDoes/MadnessR.dpcm"
 	incdac	TheFourth, "sound/dac/GenesisDoes/Four.dpcm"
-	incdac	eggmanLaugh, "sound/dac/GenesisDoes/eggmanLaugh.dpcm"
 	incdac	BSOD, "sound/dac/GenesisDoes/windie.dpcm"
 	incdac	shutdown, "sound/dac/GenesisDoes/shutdown.dpcm"
 	incdac	chord16, "sound/dac/GenesisDoes/chord16.dpcm"
@@ -232,11 +228,8 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Advertisement Samples
-	incdac	BeRightBack,"sound/dac/well-be-right-back.dpcm"	
-	incdac	GenesisCan1,"sound/dac/GenesisDoes/GenesisCan1.dpcm"
-	incdac	GenesisCan2,"sound/dac/GenesisDoes/GenesisCan2.dpcm"
+	incdac	BeRightBack,"sound/dac/well-be-right-back.dpcm"
 	incdac	GenesisCan3,"sound/dac/GenesisDoes/GenesisCan3.dpcm"
-;	incdac	Intel,"sound/dac/Intel.dpcm"
 
 ; ---------------------------------------------------------------
 ; Ollie Samples
@@ -244,15 +237,21 @@ SampleTable:
 	incdac	OllieWahoo,"sound/dac/ollie/wahoo.dpcm"
 
 ; ---------------------------------------------------------------
+; Whatever you want the Sega sound to be
+	incdac	SegaPCM, "sound/dac/sega.wav"
+
+; ---------------------------------------------------------------
+	;!@ SAVE THIS AS (LAST SLOT-2)
+	incdac	dummy,"sound/dac/dummy.dpcm"
+
+; ---------------------------------------------------------------
 ; Unused Samples (Commented Out)
 ;	incdac	CL_Penis, "sound/dac/CL_Penis.wav"
 ;	incdac	Boioing, "sound/dac/boioioing.wav"
 ;	incdac	OrngLaugh, "sound/dac/AnOrangesLaugh.dpcm"
 ;	incdac	ClintonYeah, "sound/dac/Clinton Fucker/yeah.dpcm"
-
-	;!@ SAVE THIS AS (LAST SLOT-2)
-	incdac	dummy,"sound/dac/dummy.dpcm"
-
-; ---------------------------------------------------------------
-; Whatever you want the Sega sound to be
-	incdac	SegaPCM, "sound/dac/sega.wav"
+;	incdac	MadnessR, "sound/dac/GenesisDoes/MadnessR.dpcm"
+;	incdac	eggmanLaugh, "sound/dac/GenesisDoes/eggmanLaugh.dpcm"
+;	incdac	GenesisCan1,"sound/dac/GenesisDoes/GenesisCan1.dpcm"
+;	incdac	GenesisCan2,"sound/dac/GenesisDoes/GenesisCan2.dpcm"
+;	incdac	Intel,"sound/dac/Intel.dpcm"
