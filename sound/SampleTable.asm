@@ -93,13 +93,13 @@ SampleTable:
 	dcSample	TYPE_PCM,	EggNo,		11297					; $C4
 	dcSample	TYPE_DPCM,	funnyb_utthole,	8000,	FLAGS_SFX	; $C5
 	dcSample	TYPE_DPCM,	yume2kki,	16000,	FLAGS_SFX		; $C6
-	dcSample	TYPE_DPCM,	EagleSoft_Song,	16000,	FLAGS_SFX	; $C7
-	dcSample	TYPE_DPCM,	GenesisDoes1,	16000				; $C8
+	dcSample	TYPE_DPCM,	EagleSoft_Song,	8000,	FLAGS_SFX	; $C7
+	dcSample	TYPE_DPCM,	GenesisDoes1,	8000				; $C8
 	dcSample	TYPE_DPCM,	supbeaches,	8000					; $C9
 
 	; Commercial Samples
 	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $CA
-	dcSample	TYPE_DPCM,	GenesisCan3,	16000,FLAGS_SFX		; $CB
+	dcSample	TYPE_DPCM,	GenesisCan3,	8000,FLAGS_SFX		; $CB
 
 	; Ollie Samples
 	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $CC
