@@ -3,70 +3,9 @@
 ; OBJECT CODE
 ; RiftToGo 
 ;
+	rept 63
 ; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
-; Why was it programmed like this? Why was it programmed like this? 
+	endr
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
 
