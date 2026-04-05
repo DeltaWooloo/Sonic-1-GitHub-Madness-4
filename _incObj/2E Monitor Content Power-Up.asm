@@ -534,8 +534,8 @@ Pow_Randomiser:
 
 ; Corrupt all dry/water palette colors
 .funkyColors:
-		nop
-		bra.w	.nothing		; since this crashes the game, dummy it out for now
+;		nop
+;		bra.w	.nothing		; since this crashes the game, dummy it out for now
 		;disableD
 		
 		;Push d0-d2, d7, and a0-a1 onto stack

@@ -99,6 +99,7 @@ MusicIndex:
 	dc.l	Mus_GEMSHill
 	dc.l	Mus_LimitedEgg
 	dc.l	Mus_BomerDude
+	dc.l	Mus_ClintonYears
 
 	dc.l	Mus_CanCan
 	dc.l	Mus_ChickenDance
@@ -350,6 +351,8 @@ Mus_GEMSHill:		include	"music/AburtosTracks/Mus - GEMS Hill.asm"
 Mus_LimitedEgg:		include "music/DaxKatter/Mus - Limited Egg.asm"
 	even
 Mus_BomerDude:		include	"music/Dawid/Mus - Bomer Dude.asm"	;i have no idea too
+	even
+Mus_ClintonYears:	include	"music/DaxKatter/Mus - Clinton Years.asm"
 	even
 
 ; Unused Tracks (so far)
