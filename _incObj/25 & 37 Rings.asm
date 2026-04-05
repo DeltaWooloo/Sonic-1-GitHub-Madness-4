@@ -121,6 +121,10 @@ Ring_Collect:	; Routine 4
 		lea	(v_objstate).w,a2
 		moveq	#0,d0
 		move.b	obRespawnNo(a0),d0
+		; !@ S1 Debug fixes:
+		; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-10#post-95225
+		beq.s Ring_Sparkle			
+		
 		move.b	objoff_34(a0),d1
 		bset	d1,2(a2,d0.w)
 

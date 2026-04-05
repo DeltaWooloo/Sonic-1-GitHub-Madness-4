@@ -167,9 +167,11 @@ v_palfadecntr		ds.b	1		; counter for palette fading
 v_pcyc_num:		ds.w	1		; palette cycling - current reference number
 v_pcyc_time:		ds.w	1		; palette cycling - time until the next change
 			ds.l	1		; pseudo random number buffer
-f_pause:		ds.w	1		; flag set to pause the game
-			ds.b	4		; unused
-v_vdp_buffer2:		ds.w	1		; VDP instruction buffer
+f_pause:				ds.w	1		; flag set to pause the game
+;!@
+v_playerClone:			ds.l	1		; !@ GD: Address to v_player clone (Random Monitor)
+						;ds.b	4		; unused
+v_vdp_buffer2:			ds.w	1		; VDP instruction buffer
 v_dbgmenu_sndid:		ds.b 	1
 v_dbgmenu_pcmid:		ds.b 	1
 v_dbgmenu_exit:			ds.b	1

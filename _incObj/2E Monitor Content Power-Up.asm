@@ -40,12 +40,19 @@ writeVDP_reg	macro
 ;Macro to spawn an object in Random monitor code
 ;Inputs: object Type ID, subType, PCM to play (if any)
 spawnObj	macro	objID,subType,dac
+spawnObj	macro	objID,subType,dac,newObjPop
 	movem.l	d0,-(sp)				; Push d0 onto stack
 	movem.l	a1,-(sp)				; Push a1 onto stack
+	if ("newObjPop"<>"")
+	move.l	#0,newObjPop
+	endif
 	jsr	(FindFreeObj).l				; Find free object
 	beq.s	*+4						; If object exists, goto .yes
 	rts								; Failure
 ;.yes:	
+	if ("newObjPop"<>"")
+	move.l	a1,newObjPop
+	endif
 	move.b	#subType,obSubtype(a1)	; Setup subtype
 	move.b	#objID,obID(a1) 		; load object Type ID
 	move.w	obX(a0),obX(a1)			; Spawn at this posn
@@ -116,10 +123,18 @@ Pow_ChkSonic:
 		bne.s	Pow_ChkShoes
 
 Pow_GetLife:
+		bsr.s	Pow_GetLife2
+		bsr.s	Pow_GetLife3
+		rts
+
+Pow_GetLife2:
 		addq.b	#1,(v_lives).w	; add 1 to the number of lives you have
 		addq.b	#1,(f_lifecount).w ; update the lives counter
+		rts
+Pow_GetLife3:
 		move.w	#bgm_ExtraLife,d0
-		jmp	(QueueSound1).l	; play extra life music
+		jsr		(QueueSound1).l	; play extra life music
+		rts
 ; ===========================================================================
 
 Pow_ChkShoes:
@@ -519,8 +534,8 @@ Pow_Randomiser:
 
 ; Corrupt all dry/water palette colors
 .funkyColors:
-		nop
-		bra.w	.nothing		; since this crashes the game, dummy it out for now
+;		nop
+;		bra.w	.nothing		; since this crashes the game, dummy it out for now
 		;disableD
 		
 		;Push d0-d2, d7, and a0-a1 onto stack
@@ -588,8 +603,9 @@ Pow_Randomiser:
 
 ; Spawn a clone, play let's go SFX
 .spawnPlayer:
-		spawnObj	id_SonicPlayer,$00,dLetsGOO
-		bsr.w		Pow_GetLife					;Give a 1up
+		spawnObj	id_SonicPlayer,$00,dLetsGOO,(v_playerClone).w
+		bsr.w		Pow_GetLife2					;Give a 1up
+		bsr.w		.zapSetFX_Timer
 		rts
 ; ===========================================================================
 		
@@ -622,14 +638,15 @@ Pow_Randomiser:
 ; ===========================================================================
 ;Spawn another random monitor. LOL!
 .monitorInception:
-		spawnObj	id_Monitor,$07,dEggNo	;Random monitor subtype (if this monitor is broken, following monitors will also be broken, be aware of that)
+		spawnObj	id_Monitor,$07,dEggNo	;Random monitor subtype
 		rts
 
 ; ===========================================================================
 		
 ;Spawn a lamppost
 .lampoil:		;Rope, bombs, you want it? It's yours my friend; as long as you have enough rings
-		spawnObj	id_Lamppost,$7F,dOllieWahoo	;Subtype $7F to chump all other IDs (only works once)
+		clr.b	(v_lastlamp).w					;Reset lamppost, for new one
+		spawnObj	id_Lamppost,$7F,dOllieWahoo	;Subtype $7F to chump all other IDs
 		rts
 ;===========================================================================
 
@@ -690,6 +707,9 @@ Pow_Randomiser:
 ; ===========================================================================
 Pow_vdp_fixRegs:
 		;disableD
+		movem.l	a0,-(sp)				; Push a0 onto stack
+		movem.l	a6,-(sp)				; Push a6 onto stack
+		movem.l	d1,-(sp)				; Push d1 onto stack
 		lea		(vdp_control_port).l,a6
 		moveq	#0,d1			; Clear d1
 		move.w	$8004,d1		; VDP Register $00 base		
@@ -712,12 +732,25 @@ Pow_vdp_fixRegs:
 		move.w	#$8C81,(a6)		; 40-cell display mode
 		move.w	#$9001,(a6)		; 64-cell hscroll size
 		
+		;!@ CHeck if clone alive; if so deleteObject
+		tst.b	(v_playerClone).w
+		beq.s	.skip
+		lea		(v_playerClone),a0
+		movea.l	(a0),a0
+		jsr		(DeleteObject).l		
+		
+	.skip:		
 		cmpi.b	#0,d0			; CHeck d0 input param. Is it 0?
-		beq.s	.skip			; If so, branch
+		beq.s	.skip2			; If so, branch
 		;Param is set; reload level pal
 		bsr.s	Level_LoadPal2
-	.skip:
+	.skip2:
 		;enableD
+		movem.l	(sp)+,d1		; Pop d1 from stack
+		movem.l	(sp)+,a6		; Pop a6 from stack
+		movem.l	(sp)+,a0		; Pop a0 from stack
+		
+		
 		rts
 ; ===========================================================================
 

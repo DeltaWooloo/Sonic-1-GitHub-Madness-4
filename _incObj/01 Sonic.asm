@@ -1786,6 +1786,17 @@ Sonic_ResetOnFloor:
 
 ; Obj01_Hurt:
 Sonic_Hurt:	; Routine 4
+		; !@ S1 Debug fixes:
+		; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-10#post-95225
+		tst.w   (f_debugmode).w
+        beq.s   .hurtCont
+        btst    #bitB,(v_jpadpress1).w
+        beq.s   .hurtCont
+        move.w  #1,(v_debuguse).w
+        clr.b   (f_lockctrl).w
+        rts
+
+.hurtCont:		
 		bsr.w	SpeedToPos
 		addi.w	#$20,obVelY(a0)
 		btst	#6,obStatus(a0)
@@ -1838,6 +1849,17 @@ locret_13860:
 
 ; Obj01_Death:
 Sonic_Death:	; Routine 6
+		; !@ S1 Debug fixes:
+		; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-10#post-95225
+		tst.w   (f_debugmode).w
+        beq.s   .doDeath
+        btst    #bitB,(v_jpadpress1).w
+        beq.s   .doDeath
+        move.w  #1,(v_debuguse).w
+        clr.b   (f_lockctrl).w
+        rts
+
+.doDeath:
 		bsr.w	GameOver
 		bsr.w	ObjectFall
 		bsr.w	Sonic_RecordPosition

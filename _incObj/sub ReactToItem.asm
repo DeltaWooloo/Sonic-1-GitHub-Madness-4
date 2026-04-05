@@ -357,7 +357,10 @@ HurtSonic:
 
 .ignoreshield:
 		tst.w	(v_rings).w	; does Sonic have any rings?
-		beq.w	.norings	; if not, branch
+		; !@ S1 Debug fixes:
+		; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-10#post-95225
+		;beq.w	.norings	; if not, branch
+		beq.w	KillSonic
 
 		jsr	(FindFreeObj).l
 		bne.s	.hasshield
@@ -410,9 +413,11 @@ HurtSonic:
 		rts
 ; ===========================================================================
 
-.norings:
-		tst.w	(f_debugmode).w	; is debug mode cheat on?
-		bne.w	.hasshield	; if yes, branch
+; !@ S1 Debug fixes:
+; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-10#post-95225
+;.norings:
+		;tst.w	(f_debugmode).w	; is debug mode cheat on?
+		;bne.w	.hasshield	; if yes, branch
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to kill Sonic

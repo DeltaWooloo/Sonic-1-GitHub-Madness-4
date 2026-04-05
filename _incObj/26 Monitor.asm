@@ -27,6 +27,10 @@ Mon_Main:	; Routine 0
 		lea	(v_objstate).w,a2
 		moveq	#0,d0
 		move.b	obRespawnNo(a0),d0
+		; !@ S1 Debug fixes:
+		; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-10#post-95225
+		beq.s .notbroken
+		
 		bclr	#7,2(a2,d0.w)
 		btst	#0,2(a2,d0.w)	; has monitor been broken?
 		beq.s	.notbroken	; if not, branch
