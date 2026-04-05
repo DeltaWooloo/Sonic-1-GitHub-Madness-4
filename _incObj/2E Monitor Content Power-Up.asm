@@ -39,7 +39,6 @@ writeVDP_reg	macro
 	
 ;Macro to spawn an object in Random monitor code
 ;Inputs: object Type ID, subType, PCM to play (if any)
-spawnObj	macro	objID,subType,dac
 spawnObj	macro	objID,subType,dac,newObjPop
 	movem.l	d0,-(sp)				; Push d0 onto stack
 	movem.l	a1,-(sp)				; Push a1 onto stack
