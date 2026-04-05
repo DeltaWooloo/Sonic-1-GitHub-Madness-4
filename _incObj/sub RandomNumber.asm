@@ -27,8 +27,9 @@ RandomNumber:
 ; ---------------------------------------------------------------------------
 ; !@ GenesisDoes
 ; Subroutine to generate a random address from valid ROM space, in d0
-; Uses: d0-d2
+; Uses: d0-d3
 ; Inputs: d2 maxROM size
+;		  d3 0=ensure even address; else dont' care
 ; Outputs: 	d0
 ; ---------------------------------------------------------------------------
 
@@ -39,6 +40,12 @@ RandomAddress:
 	.loop:
 		bsr.s	RandomNumber		; Pop rnd# into d0
 		andi.l	#$7FFFFFF,d0		; Limit d0 to 27-bit ROM address
+		
+		;Ensure even address, if d3 param reset
+		cmpi.b	#0,d3				;Is d3 0?
+		bne.s	.skipEven			;if not, branch (don't care)
+		bclr	#0,d0				;Reset 0th bit (make even)
+	.skipEven:
 		;Limit d0 to d2 ROM size
 		cmp.l	d2,d0	; Is d0 <= d2 RomSize?
 		bls.s	.nofix				; if so, branch

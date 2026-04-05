@@ -278,9 +278,10 @@ Pow_Randomiser:
 		dc.l	.BigRing			;x $23 / $8C - 	~			Giant Ring + give 50 rings
 		dc.l	.monitorInception	;x $24 / $90 - 	~			Another random monitor
 		dc.l	.lampoil			;x $25 / $94 - 	~			New lamppost
+		dc.l	.rAndCRiftApart		;x $26 / $98 -	~			RiftToGo
 		;!@ GenesisDoes: Other
-		dc.l	.crash				;x $26 / $98 - 	Crash the game (illegal); Task fails successfully!
-		dc.l	.jukebox			;x $27 / $9C - 	Play random song
+		dc.l	.crash				;x $27 / $9C - 	Crash the game (illegal); Task fails successfully!
+		dc.l	.jukebox			;x $28 / $A0 - 	Play random song
 .powtableend:
 
 ; ===========================================================================
@@ -523,46 +524,48 @@ Pow_Randomiser:
 		;disableD
 		
 		;Push d0-d2, d7, and a0-a1 onto stack
-;		movem.l	d0-d2,-(sp)
-;		movem.l	d7,-(sp)
-;		movem.l	a0-a1,-(sp)
+		movem.l	d0-d3,-(sp)
+		movem.l	d7,-(sp)
+		movem.l	a0-a1,-(sp)
 		
 		;Directly load garbage palette from random ROM address into dry v_palette 
 		;Clear d0-d1,d7, and a0-a1 registers
-;		moveq	#0,d0
-;		moveq	#0,d1
-;		moveq	#0,d2
-;		moveq	#0,d7
-;		movea.l	#0,a0
-;		movea.l	#0,a1				
-;		move.l	#(EndOfRom-1)-($80-1),d2	; Limit random ROM addr to within $40*2 bytes of max
-;		jsr		(RandomAddress).l			; Pop random addr into d0
-;		movea.l	d0,a0						; Move addr in d0 into a0 (source param)
-;		lea		(v_palette).l,a1			; Load dry v_palette addr into a1 (dest param)
-;		move.b	#$40-1,d7					; Load $40 palette words from source into dest
-;		jsr		(PalLoadUser).l				; Dew the load. Dew it, Palpatine said
+		moveq	#0,d0
+		moveq	#0,d1
+		moveq	#0,d2
+		moveq	#0,d3
+		moveq	#0,d7
+		movea.l	#0,a0
+		movea.l	#0,a1				
+		move.l	#(EndOfRom-1)-($80-1),d2	; Limit random ROM addr to within $40*2 bytes of max
+		jsr		(RandomAddress).l			; Pop random addr into d0
+		movea.l	d0,a0						; Move addr in d0 into a0 (source param)
+		lea		(v_palette).l,a1			; Load dry v_palette addr into a1 (dest param)
+		move.b	#$40-1,d7					; Load $40 palette words from source into dest
+		jsr		(PalLoadUser).l				; Dew the load. Dew it, Palpatine said
 		
-;		;Again for wet v_palette_water
-;		moveq	#0,d0
-;		moveq	#0,d1
-;		moveq	#0,d2
-;		moveq	#0,d7
-;		movea.l	#0,a0
-;		movea.l	#0,a1
-;		move.l	#(EndOfRom-1)-($80-1),d2	; Limit random ROM addr to within $40*2 bytes of max
-;		jsr		(RandomAddress).l
-;		movea.l	d0,a0
-;		lea		(v_palette_water).l,a1
-;		move.b	#$40-1,d7
-;		jsr		(PalLoadUser).l
-;		
-;		;Pop d0-d2, d7, and a0-a1 from stack		
-;		movem.l	(sp)+,a0-a1
-;		movem.l	(sp)+,d7
-;		movem.l	(sp)+,d0-d2
+		;Again for wet v_palette_water
+		moveq	#0,d0
+		moveq	#0,d1
+		moveq	#0,d2
+		moveq	#0,d3
+		moveq	#0,d7
+		movea.l	#0,a0
+		movea.l	#0,a1				
+		move.l	#(EndOfRom-1)-($80-1),d2
+		jsr		(RandomAddress).l
+		movea.l	d0,a0
+		lea		(v_palette_water).l,a1
+		move.b	#$40-1,d7
+		jsr		(PalLoadUser).l
 		
-;		;Mess with BG color too
-;		bra.w	Pow_Randomiser.vdp07_bg0_reg
+		;Pop d0-d2, d7, and a0-a1 from stack		
+		movem.l	(sp)+,a0-a1
+		movem.l	(sp)+,d7
+		movem.l	(sp)+,d0-d3
+		
+		;Mess with BG color too
+		bra.w	Pow_Randomiser.vdp07_bg0_reg
 		rts
 
 ;Subroutine to enable_itns/display, play zap SFX, and setup timer for VDP FX
@@ -586,6 +589,7 @@ Pow_Randomiser:
 ; Spawn a clone, play let's go SFX
 .spawnPlayer:
 		spawnObj	id_SonicPlayer,$00,dLetsGOO
+		bsr.w		Pow_GetLife					;Give a 1up
 		rts
 ; ===========================================================================
 		
@@ -626,6 +630,12 @@ Pow_Randomiser:
 ;Spawn a lamppost
 .lampoil:		;Rope, bombs, you want it? It's yours my friend; as long as you have enough rings
 		spawnObj	id_Lamppost,$7F,dOllieWahoo	;Subtype $7F to chump all other IDs (only works once)
+		rts
+;===========================================================================
+
+;Spawn a rift
+.rAndCRiftApart:		;Rachet and Clank: Arif-tapart
+		spawnObj	id_Rift,$00,dOllieGameTap
 		rts
 ;===========================================================================
  
