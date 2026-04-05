@@ -21,6 +21,19 @@ Debug_Main:	; Routine 0
 		andi.w	#$7FF,(v_player+obY).w
 		andi.w	#$7FF,(v_screenposy).w
 		andi.w	#$3FF,(v_bgscreenposy).w
+		
+		; !@ S1 Debug fixes:
+		; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-10#post-95225
+		bset    #1,obStatus(a0)    ; force airborne state when entering debug mode
+        clr.b   (f_nobgscroll).w
+        bclr    #6,obStatus(a0)    ; Clear underwater status
+        jsr     (ResumeMusic).l
+        beq.s   .skipReset
+        move.w  #$600,(v_sonspeedmax).w ; restore Sonic's speed
+        move.w  #$C,(v_sonspeedacc).w ; restore Sonic's acceleration
+        move.w  #$80,(v_sonspeeddec).w ; restore Sonic's deceleration
+.skipReset:
+
 		move.b	#0,obFrame(a0)
 		move.b	#id_Walk,obAnim(a0)
 		cmpi.b	#id_Special,(v_gamemode).w ; is game mode $10 (special stage)?
@@ -185,9 +198,15 @@ Debug_ChgItem:
 		move.l	d1,(v_player+dgfxaddr).w
 		move.l	d2,(v_player+artaddr).w
 		move.w	#$780,(v_player+obGfx).w
-		move.b	#1,(v_player+obAnim).w
-		move.w	d0,obX+2(a0)
-		move.w	d0,obY+2(a0)
+		
+		; !@ S1 Debug fixes:
+		; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-10#post-95225
+		;move.b	#1,(v_player+obAnim).w
+		;move.w	d0,obX+2(a0)
+		;move.w	d0,obY+2(a0)		
+		moveq	#0,d0
+		bsr.w   Debug_ResetPlayerStats
+
 		move.w	(v_limittopdb).w,(v_limittop2).w ; restore level boundaries
 		move.w	(v_limitbtmdb).w,(v_limitbtm1).w
 		cmpi.b	#id_Special,(v_gamemode).w ; are you in the special stage?
@@ -206,6 +225,25 @@ Debug_ChgItem:
 
 .stayindebug:
 		rts
+		
+; !@ S1 Debug fixes:
+; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-10#post-95225
+; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
+Debug_ResetPlayerStats:
+        move.b  d0,(v_player+obAnim).w
+        move.w  d0,obX+2(a0)
+        move.w  d0,obY+2(a0)
+        move.b  d0,(f_playerctrl).w
+        ; In case you implemented the spindash, uncomment the following line below.
+        ;move.b  d0,spindash_flag(a0)
+        move.w  d0,obVelX(a0)
+        move.w  d0,obVelY(a0)
+        move.w  d0,obInertia(a0)
+        andi.b  #6,obStatus(a0)
+        ori.b   #2,obStatus(a0)
+        move.b  #2,obRoutine(a0)
+        rts
+; End of function Debug_ResetPlayerStats
 
 Debug_ShowItem:
 		moveq	#0,d0
