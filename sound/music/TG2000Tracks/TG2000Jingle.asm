@@ -5,7 +5,7 @@ TheGamer2000Jingle_Header:
 	smpsHeaderTempo		$01, $00
 
 	smpsHeaderDAC	TheGamer2000Jingle_DAC
-	smpsHeaderFM	TheGamer2000Jingle_FM1, $00, $00
+	smpsHeaderFM	TheGamer2000Jingle_FM1, $00, $07
 
 TheGamer2000Jingle_DAC:
 	smpsStop
@@ -13,7 +13,6 @@ TheGamer2000Jingle_DAC:
 ; FM1 Data
 TheGamer2000Jingle_FM1:
 	smpsSetvoice	$00
-	smpsPan		panCentre, $00
 	dc.b		nC4, $06, nE4, nG4, nE4, nG4, nC5, $42
 	smpsStop
 
