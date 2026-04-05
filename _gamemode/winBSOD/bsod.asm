@@ -1,16 +1,23 @@
 bgm_hang:	equ	$FF
 bgm_gen:	equ	bgm_hang	;!@ TODO: Port over Genesis song (SLZ from Genesis 1 Mini, from Sonic 1 Pico?)
 bgm_scd:	equ	bgm_hang	;!@ TODO: Port over Genesis SMPS remix of US Sega CD BIOS v2 (base it off Sonic 1 Remastered?)
+art_null:	equ	$FFFFFFFF
 
-;bsodData macro seconds,skipsec,art,map,pal,bgm,pcm
-bsodData macro seconds,skipsec,fg,bg,map,pal,tclr,bgm,pcm
-	;dc.l art,map,pal
-	dc.l fg,bg,map,pal
+ArtTile_Home0:			equ $000
+ArtTile_Home1:			equ $001
+ArtTile_bsod_w311_art2:	equ	$061
+
+bsodData macro seconds,skipsec,art1,artoff1,art2,artoff2,fg,bg,pal,tclr,bgm,pcm
+	dc.l art1
+	dc.w artoff1
+	dc.l art2
+	dc.w artoff2
+	dc.l fg,bg,pal
 	dc.w ($8700|tclr)
 	dc.b seconds,skipsec,bgm,pcm
 	endm
 ;bsodDatasize equ 16
-bsodDatasize equ 22
+bsodDatasize equ 30
 	ifdef __DEBUG__
 bsodDebug equ -1
 	else
@@ -103,31 +110,26 @@ GM_BSOD:
 		rts
 
 .render:
-		move.l	(a2)+,a0
+		;dc.l art1,art2
+		;dc.l fg,bg,pal
+		;dc.w ($8700|tclr)
+		;dc.b seconds,skipsec,bgm,pcm
+
+		move.l	(a2)+,a0		;tiles-art1
+		move.w	(a2)+,d0		;artoff1
+		cmpi.l	#art_null,a0
+		beq.s	.loadart2
 		move.l	a2,-(sp)
+		move.l	d0,-(sp)
 		jsr	ClearPLC
+		move.l	(sp)+,d0
 		lea	v_plc_buffer.w,a1
 		move.l	a0,(a1)+
-		move.w	#1<<5,(a1)+
+		lsl.w	#5,d0
+		move.w	d0,(a1)+
 		move.l	(sp)+,a2
-
-		move.l	(a2)+,a0
-		lea	(v_ram_start).l,a1
-		moveq	#1,d0
-		move.l	a2,-(sp)
-		jsr	EniDec
-		copyTilemap	v_ram_start,vram_fg,40,28
-		move.l	(sp)+,a2
-	
-		;Do BG too
-		move.l	(a2)+,a0
-		lea	(v_ram_start).l,a1
-		moveq	#1,d0
-		move.l	a2,-(sp)
-		jsr	EniDec
-		copyTilemap	v_ram_start,vram_bg,40,28
-		move.l	(sp)+,a2			
-
+		
+		;Load tiles into VRAM?
 		enable_display
 		enable_ints
 		move.l	a2,-(sp)
@@ -138,6 +140,51 @@ GM_BSOD:
 		tst.l	(v_plc_buffer).l
 		bne.s	.loadloop
 		move.l	(sp)+,a2
+		
+.loadart2:
+		move.l	(a2)+,a0		;tiles-art2
+		move.w	(a2)+,d0		;artoff2
+		cmpi.l	#art_null,a0
+		beq.s	.loadmapFG
+		move.l	a2,-(sp)
+		move.l	d0,-(sp)
+		jsr	ClearPLC
+		move.l	(sp)+,d0
+		lea	v_plc_buffer.w,a1
+		move.l	a0,(a1)+
+		lsl.w	#5,d0
+		move.w	d0,(a1)+
+		move.l	(sp)+,a2
+		
+		;Load tiles into VRAM?
+		enable_display
+		enable_ints
+		move.l	a2,-(sp)
+.loadloop2:
+		move.b	#$12,(v_vbla_routine).w
+		jsr	WaitForVBla
+		jsr	RunPLC
+		tst.l	(v_plc_buffer).l
+		bne.s	.loadloop2
+		move.l	(sp)+,a2
+
+.loadmapFG:
+		move.l	(a2)+,a0		;fg-map
+		lea	(v_ram_start).l,a1
+		moveq	#1,d0
+		move.l	a2,-(sp)
+		jsr	EniDec
+		copyTilemap	v_ram_start,vram_fg,40,28
+		move.l	(sp)+,a2
+	
+		;Do BG too				;bg-map
+		move.l	(a2)+,a0
+		lea	(v_ram_start).l,a1
+		moveq	#1,d0
+		move.l	a2,-(sp)
+		jsr	EniDec
+		copyTilemap	v_ram_start,vram_bg,40,28
+		move.l	(sp)+,a2
 				
 		;move.l	(a2)+,a0
 		;lea	(v_palette_fading).w,a1
@@ -145,20 +192,20 @@ GM_BSOD:
 ;.palinit:	move.l	(a0)+,(a1)+
 		;dbf	d0,.palinit
 		;Directly load palette into CRAM
-		move.l	(a2)+,a0
+		move.l	(a2)+,a0		;pal
 		lea		(v_palette).l,a1
 		move.b	#$40-1,d7
 		jsr		(PalLoadUser).l
 		
-		;!@ Load BG color
+		;!@ Load BG color			; TCLR
 		move.w	(a2)+,d0
 		writeCRAM_bg
 		
 		;Do start/skip timing
 		moveq	#5,d0
 		moveq	#5,d1
-		move.b	(a2)+,d0
-		move.b	(a2)+,d1
+		move.b	(a2)+,d0			;seconds
+		move.b	(a2)+,d1			;skipsec
 		moveq	#60,d2
 		btst	#6,(v_megadrive).w
 		beq.s	.ntsc
@@ -172,7 +219,7 @@ GM_BSOD:
 		move.b	#2,(v_vbla_routine).w
 		jsr	WaitForVBla
 
-		move.b	(a2)+,d0
+		move.b	(a2)+,d0			;bgm
 		beq.s	.nobgm
 		
 		;!@ GD: Handle f_hangSMPS if bgm_hang
@@ -183,7 +230,7 @@ GM_BSOD:
 .dobgm:		
 		jsr	QueueSound1
 .nobgm:
-		move.b	(a2)+,d0
+		move.b	(a2)+,d0			;pcm
 		beq.s	.nopcm
 		jsr	MegaPCM_PlaySample
 .nopcm:
@@ -223,7 +270,7 @@ GM_BSOD:
 		move.l	(sp)+,a2
 		rts
 ; ---------------------------------------------------------------------------
-sec_std:		equ	5
+sec_std:		equ	10
 secSkip_std:	equ	3
 sec_gen:		equ	sec_std
 secSkip_gen:	equ	secSkip_std
@@ -231,17 +278,24 @@ sec_CD:			equ	sec_gen
 secSkip_CD:		equ	secSkip_gen
 
 BSOD_table:	; seconds, seconds to skip, art, map, palette, SMPS sound ID, MPCM sound ID
-		bsodData		sec_std,	secSkip_std,	bsod_95.art,		bsod_95.fg,			bsod_95.bg,			bsod_95.pal,		TCLR(1,0),	bgm_hang,	dBSOD
-		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscu.art,	bsod_gen_ntscu.fg,	bsod_gen_ntscu.bg,	bsod_gen_ntscu.pal,	TCLR(1,0),	bgm_gen,	dBSOD
-		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscj.art,	bsod_gen_ntscj.fg,	bsod_gen_ntscj.bg,	bsod_gen_ntscj.pal,	TCLR(1,0),	bgm_gen,	dBSOD
-		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscuj.art,bsod_gen_ntscuj.fg,	bsod_gen_ntscuj.bg,	bsod_gen_ntscuj.pal,TCLR(1,0),	bgm_gen,	dBSOD
-		bsodData		sec_gen,	secSkip_gen,	bsod_gen_pal.art,	bsod_gen_pal.fg,	bsod_gen_pal.bg,	bsod_gen_pal.pal,	TCLR(1,0),	bgm_gen,	dBSOD
-		bsodData		sec_CD,		secSkip_CD,		bsod_scd_ntscu.art,	bsod_scd_ntscu.fg,	bsod_scd_ntscu.bg,	bsod_scd_ntscu.pal,	TCLR(1,0),	bgm_scd,	dBSOD
-		bsodData		sec_CD,		secSkip_CD,		bsod_scd_ntscj.art,	bsod_scd_ntscj.fg,	bsod_scd_ntscj.bg,	bsod_scd_ntscj.pal,	TCLR(1,0),	bgm_scd,	dBSOD
-		bsodData		sec_CD,		secSkip_CD,		bsod_scd_pale.art,	bsod_scd_pale.fg,	bsod_scd_pale.bg,	bsod_scd_pale.pal,	TCLR(1,0),	bgm_scd,	dBSOD
-		bsodData		sec_CD,		secSkip_CD,		bsod_scd_pala.art,	bsod_scd_pala.fg,	bsod_scd_pala.bg,	bsod_scd_pala.pal,	TCLR(1,0),	bgm_scd,	dBSOD
-		bsodData		sec_std,	secSkip_std,	bsod_32x.art,		bsod_32x.fg,		bsod_32x.bg,		bsod_32x.pal,		TCLR(1,0),	bgm_Passport,	dShutdown
+		bsodData		sec_std,	secSkip_std,	bsod_w311.art1,			ArtTile_Home1,	bsod_w311.art2,	ArtTile_bsod_w311_art2,	bsod_w311.fg,		bsod_w311.bg,		bsod_w311.pal,		TCLR(0,0),	bgm_Passport,	dChord16
+		bsodData		sec_std,	secSkip_std,	bsod_95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_95.fg,			bsod_95.bg,			bsod_95.pal,		TCLR(1,0),	bgm_hang,		dBSOD
+		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscu.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_gen_ntscu.fg,	bsod_gen_ntscu.bg,	bsod_gen_ntscu.pal,	TCLR(1,0),	bgm_gen,		dBSOD
+		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_gen_ntscj.fg,	bsod_gen_ntscj.bg,	bsod_gen_ntscj.pal,	TCLR(1,0),	bgm_gen,		dBSOD
+		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscuj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_gen_ntscuj.fg,	bsod_gen_ntscuj.bg,	bsod_gen_ntscuj.pal,TCLR(1,0),	bgm_gen,		dBSOD
+		bsodData		sec_gen,	secSkip_gen,	bsod_gen_pal.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_gen_pal.fg,	bsod_gen_pal.bg,	bsod_gen_pal.pal,	TCLR(1,0),	bgm_gen,		dBSOD
+		bsodData		sec_CD,		secSkip_CD,		bsod_scd_ntscu.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_scd_ntscu.fg,	bsod_scd_ntscu.bg,	bsod_scd_ntscu.pal,	TCLR(1,0),	bgm_scd,		dBSOD
+		bsodData		sec_CD,		secSkip_CD,		bsod_scd_ntscj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_scd_ntscj.fg,	bsod_scd_ntscj.bg,	bsod_scd_ntscj.pal,	TCLR(1,0),	bgm_scd,		dBSOD
+		bsodData		sec_CD,		secSkip_CD,		bsod_scd_pale.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_scd_pale.fg,	bsod_scd_pale.bg,	bsod_scd_pale.pal,	TCLR(1,0),	bgm_scd,		dBSOD
+		bsodData		sec_CD,		secSkip_CD,		bsod_scd_pala.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_scd_pala.fg,	bsod_scd_pala.bg,	bsod_scd_pala.pal,	TCLR(1,0),	bgm_scd,		dBSOD
+		bsodData		sec_std,	secSkip_std,	bsod_32x.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_32x.fg,		bsod_32x.bg,		bsod_32x.pal,		TCLR(1,0),	bgm_Passport,	dShutdown
 BSOD_table_end:
+
+bsod_w311:
+.fg:		binclude "_gamemode/winBSOD/bsod_w311-mapFG.eni"
+			even
+.bg:		binclude "_gamemode/winBSOD/bsod_w311-mapBG.eni"
+			even
 
 bsod_95:
 .fg:		binclude "_gamemode/winBSOD/bsod_95-mapFG.eni"
@@ -280,6 +334,7 @@ bsod_32x:
 bsod_std.bg:
 			binclude "_gamemode/winBSOD/bsod_std-mapBG.eni"
 			even
+
 bsod_gen_ntscu.bg:
 bsod_gen_ntscj.bg:
 bsod_gen_ntscuj.bg:	
@@ -292,20 +347,29 @@ bsod_32x.bg:
 bsod_std.bg2:
 			binclude "_gamemode/winBSOD/bsod_std-mapBG2.eni"
 			even
+			
+bsod_w311.art2:
+			binclude "_gamemode/winBSOD/bsod_w311-art2.nem"
+			even
 
-bsod_95.art:
-bsod_gen_ntscu.art:
-bsod_gen_ntscj.art:
-bsod_gen_ntscuj.art:
-bsod_gen_pal.art:
-bsod_scd_ntscu.art:
-bsod_scd_ntscj.art:
-bsod_scd_pale.art:
-bsod_scd_pala.art:
-bsod_32x.art:
-bsod_std.art:
+bsod_w311.art1:
+bsod_95.art1:
+bsod_gen_ntscu.art1:
+bsod_gen_ntscj.art1:
+bsod_gen_ntscuj.art1:
+bsod_gen_pal.art1:
+bsod_scd_ntscu.art1:
+bsod_scd_ntscj.art1:
+bsod_scd_pale.art1:
+bsod_scd_pala.art1:
+bsod_32x.art1:
+bsod_std.art1:
 			binclude "_gamemode/winBSOD/bsod_std-art.nem"
 			even
+			
+bsod_w311.pal:
+			binclude "_gamemode/winBSOD/bsod_w311-pal.bin"
+			even		
 
 bsod_95.pal:
 bsod_gen_ntscu.pal:
