@@ -39,7 +39,6 @@ writeVDP_reg	macro
 	
 ;Macro to spawn an object in Random monitor code
 ;Inputs: object Type ID, subType, PCM to play (if any)
-spawnObj	macro	objID,subType,dac
 spawnObj	macro	objID,subType,dac,newObjPop
 	movem.l	d0,-(sp)				; Push d0 onto stack
 	movem.l	a1,-(sp)				; Push a1 onto stack
@@ -131,10 +130,11 @@ Pow_GetLife2:
 		addq.b	#1,(v_lives).w	; add 1 to the number of lives you have
 		addq.b	#1,(f_lifecount).w ; update the lives counter
 		rts
+
 Pow_GetLife3:
 		move.w	#bgm_ExtraLife,d0
-		jsr		(QueueSound1).l	; play extra life music
-		rts
+		jmp	(QueueSound1).l	; play extra life music
+
 ; ===========================================================================
 
 Pow_ChkShoes:
@@ -604,9 +604,9 @@ Pow_Randomiser:
 ; Spawn a clone, play let's go SFX
 .spawnPlayer:
 		spawnObj	id_SonicPlayer,$00,dLetsGOO,(v_playerClone).w
-		bsr.w		Pow_GetLife2					;Give a 1up
-		bsr.w		.zapSetFX_Timer
-		rts
+		bsr.w		Pow_GetLife2		;Give a 1up
+		bra.w		.zapSetFX_Timer
+
 ; ===========================================================================
 		
 ; Your winner! Spawn a signpost
@@ -670,9 +670,8 @@ Pow_Randomiser:
 		jsr	(QueueSound2).l
 		move.b	#2,(v_vbla_routine).w	; set routine 2 in V-Int
 		jsr	(WaitForVBla).w		; wait for V-Blank to finish
-		pcm	dShutdown			;Play Shutdown PCM		
-		RaiseError	"YOU LOST THE GAME!"	;ERROR!
-		rts
+		pcm	dShutdown			;Play Shutdown PCM
+		bra.w	Pow_GetErrorMsg
 
 ; ===========================================================================
 .superlucky:	; Congrats, you get all power-ups
