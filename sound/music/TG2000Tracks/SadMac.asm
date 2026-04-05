@@ -1,81 +1,60 @@
 SadMac_Header:
-	smpsHeaderStartSong 1
-	smpsHeaderVoice	SadMac_Voices
-	smpsHeaderChan	$07,	$03
-	smpsHeaderTempo	$01,	$00
+	smpsHeaderStartSong	3
+	smpsHeaderVoice		SadMac_Voices
+	smpsHeaderChan		$05, $00
+	smpsHeaderTempo		$02, $80
 
-	smpsHeaderDAC	SadMac_DAC
-	smpsHeaderFM	SadMac_FM1,	smpsPitch00,	$00
-	smpsHeaderFM	SadMac_FM2,	smpsPitch00,	$00
-	smpsHeaderFM	SadMac_FM3,	smpsPitch00,	$00
-	smpsHeaderFM	SadMac_FM4,	smpsPitch00,	$00
-	smpsHeaderFM	SadMac_FM5,	smpsPitch00,	$00
-	smpsHeaderFM	SadMac_FM6,	smpsPitch00,	$00
-	smpsHeaderPSG       SadMac_PSG1,	$00, $00, $00, $00
-	smpsHeaderPSG       SadMac_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       SadMac_PSG3,	$00, $00, $00, $00
-	dc.b		$00,	$00,	$00,	$00	
-
-; DAC Data
-SadMac_DAC:
-
-; FM6 Data
-SadMac_FM6:
-
-; FM5 Data
-SadMac_FM5:
-
-; PSG1 Data
-SadMac_PSG1:
-	smpsStop
-; PSG2 Data
-SadMac_PSG2:
-	smpsStop
-; PSG3 Data
-SadMac_PSG3:
-	smpsStop
+	smpsHeaderDAC		SadMac_DAC
+	smpsHeaderFM		SadMac_FM1, $00, $07
+	smpsHeaderFM		SadMac_FM2, $00, $07
+	smpsHeaderFM		SadMac_FM3, $00, $07
+	smpsHeaderFM		SadMac_FM4, $00, $07
 
 ; FM1 Data
 SadMac_FM1:
 	smpsFMvoice	$00
-	smpsAlterVol	$07
-	smpsPan		panCentre,	$00
-	dc.b		nF4,	$60,	nA4,	$7F,	smpsNoAttack,	$11,	nRst,	$7F
-	dc.b		$11
+	dc.b	nF4, $18, nA4, $38
 	smpsStop
 
 ; FM2 Data
 SadMac_FM2:
-	smpsPan		panCentre,	$00
-	dc.b		nRst,	$10
 	smpsFMvoice	$00
-	smpsAlterVol	$07
-	dc.b		nA4,	$60,	nBb4,	$7F,	smpsNoAttack,	$01,	nRst,	$7F
-	dc.b		$11
+	dc.b	nRst, $04, nA4, $18, nBb4, $34
 	smpsStop
 
 ; FM3 Data
 SadMac_FM3:
-	smpsPan		panCentre,	$00
-	dc.b		nRst,	$20
 	smpsFMvoice	$00
-	smpsAlterVol	$07
-	dc.b		nC5,	$60,	nA4,	$70,	nRst,	$7F,	$11
+	dc.b	nRst, $08, nC5, $18, nA4, $30
 	smpsStop
 
 ; FM4 Data
 SadMac_FM4:
-	smpsPan		panCentre,	$00
-	dc.b		nRst,	$30
 	smpsFMvoice	$00
-	smpsAlterVol	$07
-	dc.b		nF5,	$50,	nRst,	$10,	nFs4,	$60,	nRst,	$7F
-	dc.b		$11
+	dc.b	nRst, $0C, nF5, $18, nFs4, $2C
+
+; DAC Data
+SadMac_DAC:
 	smpsStop
 
 SadMac_Voices:
-	dc.b		$04,$05,$01,$0A,$01,$56,$59,$5C,$58,$0E,$0F,$14,$0F,$09,$09,$01
-	dc.b		$09,$44,$32,$36,$31,$1F,$00,$33,$04;			Voice 00
+;	Voice $00
+;	$3C
+;	$05, $01, $0A, $01, 	$56, $59, $5C, $58, 	$0E, $0F, $14, $0F
+;	$09, $09, $06, $09, 	$46, $35, $36, $35, 	$1F, $00, $33, $0C
+	smpsVcAlgorithm     $04
+	smpsVcFeedback      $07
+	smpsVcUnusedBits    $00
+	smpsVcDetune        $00, $00, $00, $00
+	smpsVcCoarseFreq    $01, $0A, $01, $05
+	smpsVcRateScale     $01, $01, $01, $01
+	smpsVcAttackRate    $18, $1C, $19, $16
+	smpsVcAmpMod        $00, $00, $00, $00
+	smpsVcDecayRate1    $0F, $14, $0F, $0E
+	smpsVcDecayRate2    $09, $06, $09, $09
+	smpsVcDecayLevel    $03, $03, $03, $04
+	smpsVcReleaseRate   $05, $06, $05, $07
+	smpsVcTotalLevel    $0C, $33, $00, $1F
 	
 	smpsFooterEndSong	"TG2000Tracks/SadMac.asm"
 	even
