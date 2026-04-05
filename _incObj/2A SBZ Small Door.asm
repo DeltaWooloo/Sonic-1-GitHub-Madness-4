@@ -60,4 +60,4 @@ ADoor_Animate:
 		jsr		(SolidObject).l
 
 .remember:
-		bra.w	RememberState
+		jmp	(RememberState).l

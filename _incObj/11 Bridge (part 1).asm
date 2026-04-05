@@ -35,7 +35,7 @@ Bri_Main:	; Routine 0
 		bcs.s	Bri_Action	; don't make more if bridge has only 1 log
 
 .buildloop:
-		bsr.w	FindFreeObj
+		jsr	(FindFreeObj).l
 		bne.s	Bri_Action
 		addq.b	#1,obSubtype(a0)
 		cmp.w	obX(a0),d3	; is this log the leftmost one?
