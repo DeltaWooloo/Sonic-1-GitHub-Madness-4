@@ -10,8 +10,8 @@ SCAA_Header:
 	smpsHeaderFM        SCAA_FM3,	$F4, $10
 	smpsHeaderFM        SCAA_FM4,	$00, $18
 	smpsHeaderFM        SCAA_FM5,	$00, $18
-	smpsHeaderPSG       SCAA_PSG1,	$DC, $01, $00, fTone_01
-	smpsHeaderPSG       SCAA_PSG2,	$DC, $01, $00, fTone_01
+	smpsHeaderPSG       SCAA_PSG1,	$F4, $01, $00, fTone_01
+	smpsHeaderPSG       SCAA_PSG2,	$F4, $01, $00, fTone_01
 	smpsHeaderPSG       SCAA_PSG3,	$DC, $01, $00, fTone_01
 
 ; FM1 Data
@@ -34,6 +34,8 @@ SCAA_FM3:
 SCAA_FM4:
 	smpsPan			panLeft, $00
 	smpsSetvoice		$02
+
+SCAA_PSG1:
 	dc.b	nD2, $03, nC2, nD2, $08, $03, nC2, $03, nD2, $0B
 	smpsStop
 
@@ -41,17 +43,9 @@ SCAA_FM4:
 SCAA_FM5:
 	smpsPan			panRight, $00
 	smpsSetvoice		$02
-	dc.b	nF2, $03, nEb2, nF2, $08, $03, nEb2, $03, nE0, $0B
-	smpsStop
 
-; PSG1 Data
-SCAA_PSG1:
-	dc.b	nD4, $03, nC4, nD4, $08, $03, nC4, $03, nD4, $0B
-	smpsStop
-
-; PSG2 Data
 SCAA_PSG2:
-	dc.b	nF4, $03, nEb4, nF4, $08, $03, nEb4, $03, nF4, $0B
+	dc.b	nF2, $03, nEb2, nF2, $08, $03, nEb2, $03, nE0, $0B
 	smpsStop
 
 ; PSG3 Data

@@ -27,8 +27,6 @@ ChaosFarm_FM2:
 	dc.b nCs5, $06, $06, $04, nE5, $08, nCs5, nB4, $06, $06, $04, nA4, $08
 	smpsStop
 
-ChaosFarm_FM2_00_0_64:
-
 ChaosFarm_FM3:
 	smpsSetvoice	$00
 	dc.b nE3, $06, nAb3, nB3, $04, nDs4, $08, nE4, nA4, $06, nAb4, nFs4, $04, nA4, $10
@@ -44,14 +42,16 @@ ChaosFarm_FM5:
 	dc.b nE5, $06, $06, $04, nAb5, $08, nE5, nD5, $06, $06, $04, nCs5, $08
 	smpsStop
 
-ChaosFarm_DAC:
-	smpsStop
-
 ChaosFarm_FM6:
 	smpsSetvoice	$01
 	smpsPan		panLeft, $00
 	dc.b nA4, $06, $06, $04, nCs5, $08, nA4, nAb4, $06, $06, $04, nE4, $08
+
+ChaosFarm_DAC:
 	smpsStop
+
+ChaosFarm_PSG2:
+	dc.b nRst, $01
 
 ChaosFarm_PSG1:
 	dc.b nRst, $30
@@ -60,15 +60,6 @@ ChaosFarm_PSG1_Loop:
 	dc.b nA4, $03, nE4, nCs4, nA3
 	smpsPSGAlterVol	$04
 	smpsLoop	0,4,ChaosFarm_PSG1_Loop
-	smpsStop
-
-ChaosFarm_PSG2:
-	dc.b nRst, $31
-
-ChaosFarm_PSG2_Loop:
-	dc.b nA4, $03, nE4, nCs4, nA3
-	smpsPSGAlterVol	$04
-	smpsLoop	0,4,ChaosFarm_PSG2_Loop
 	smpsStop
 
 ChaosFarm_Voices:

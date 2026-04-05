@@ -8,7 +8,7 @@ BGM_Donnie1_Header:
 	smpsHeaderFM        BGM_Donnie1_FM1,	$00, $13
 	smpsHeaderFM        BGM_Donnie1_FM2,	$00, $13
 	smpsHeaderFM        BGM_Donnie1_FM3,	$00, $13
-	smpsHeaderFM        BGM_Donnie1_FM4,	$00, $13
+	smpsHeaderFM        BGM_Donnie1_FM4,	$0C, $13
 	smpsHeaderFM        BGM_Donnie1_FM5,	$00, $13
 	smpsHeaderPSG       BGM_Donnie1_PSG1,	$00, $04, $00, $00
 	smpsHeaderPSG       BGM_Donnie1_PSG2,	$00, $00, $00, $00
@@ -16,865 +16,100 @@ BGM_Donnie1_Header:
 
 ; DAC Data
 BGM_Donnie1_DAC:
-	smpsPan             panCenter, $00
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18, dKick, $18
-	dc.b	dKick, $18, dKick, $18
-	smpsPan             panCenter, $00
-	smpsStop
-
-; FM1 Data
-BGM_Donnie1_FM1:
-	smpsPan             panCenter, $00
-	smpsSetvoice        $00
-	dc.b	nC3, $30, nE3, $30, nD3, $30, nG3, $30, nC3, $30, nE3, $30
-	dc.b	nD3, $30, nG3, $30, nC3, $30, nE3, $30, nD3, $30, nG3, $30
-	dc.b	nC3, $30, nE3, $30, nD3, $30, nG3, $30, nC3, $30, nE3, $30
-	dc.b	nD3, $30, nG3, $30, nC3, $30, nE3, $30, nD3, $30, nG3, $30
-	dc.b	nC3, $30, nE3, $30, nD3, $30, nG3, $30, nC3, $30, nE3, $30
-	dc.b	nD3, $30, nG3, $30, nC3, $30, nE3, $30, nD3, $30, nG3, $30
-	dc.b	nC3, $30, nE3, $30, nD3, $30, nG3, $30, nC3, $30, nE3, $30
-	dc.b	nD3, $30, nG3, $30, nC3, $30, nE3, $30, nD3, $30, nG3, $30
-	dc.b	nC3, $30, nE3, $30, nD3, $30, nG3, $30, nC3, $30, nE3, $30
-	dc.b	nD3, $30, nG3, $30, nC3, $30, nE3, $30, nD3, $30, nG3, $30
-	dc.b	nC3, $30, nE3, $30, nD3, $30, nG3, $30
-	smpsPan             panCenter, $00
-	smpsSetvoice        $00
-	smpsStop
-
-; FM2 Data
-BGM_Donnie1_FM2:
-	smpsPan             panCenter, $00
-	smpsSetvoice        $02
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06
-	dc.b	nE4, $06, nG4, $06, nE4, $06, nG4, $06, nF4, $06, nD4, $06
-	dc.b	nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06
-	dc.b	nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06
-	dc.b	nD4, $06, nG4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06, nG4, $06
-	dc.b	nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06
-	dc.b	nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06
-	dc.b	nF4, $06, nD4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06
-	dc.b	nD4, $06, nG4, $06, nD4, $06, nG4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06
-	dc.b	nE4, $06, nG4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06
-	dc.b	nF4, $06, nD4, $06, nF4, $06, nD4, $06, nD4, $06, nG4, $06
-	dc.b	nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06
-	dc.b	nE4, $06, nG4, $06, nE4, $06, nG4, $06, nF4, $06, nD4, $06
-	dc.b	nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06
-	dc.b	nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06
-	dc.b	nD4, $06, nG4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06, nG4, $06
-	dc.b	nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06
-	dc.b	nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06
-	dc.b	nF4, $06, nD4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06
-	dc.b	nD4, $06, nG4, $06, nD4, $06, nG4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06
-	dc.b	nE4, $06, nG4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06
-	dc.b	nF4, $06, nD4, $06, nF4, $06, nD4, $06, nD4, $06, nG4, $06
-	dc.b	nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06
-	dc.b	nE4, $06, nG4, $06, nE4, $06, nG4, $06, nF4, $06, nD4, $06
-	dc.b	nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06
-	dc.b	nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06
-	dc.b	nD4, $06, nG4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06, nG4, $06
-	dc.b	nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06
-	dc.b	nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06
-	dc.b	nF4, $06, nD4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06
-	dc.b	nD4, $06, nG4, $06, nD4, $06, nG4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06
-	dc.b	nE4, $06, nG4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06
-	dc.b	nF4, $06, nD4, $06, nF4, $06, nD4, $06, nD4, $06, nG4, $06
-	dc.b	nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06
-	dc.b	nE4, $06, nG4, $06, nE4, $06, nG4, $06, nF4, $06, nD4, $06
-	dc.b	nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06
-	dc.b	nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06
-	dc.b	nD4, $06, nG4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06, nG4, $06
-	dc.b	nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06
-	dc.b	nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06
-	dc.b	nF4, $06, nD4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06
-	dc.b	nD4, $06, nG4, $06, nD4, $06, nG4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06
-	dc.b	nE4, $06, nG4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06
-	dc.b	nF4, $06, nD4, $06, nF4, $06, nD4, $06, nD4, $06, nG4, $06
-	dc.b	nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06
-	dc.b	nE4, $06, nG4, $06, nE4, $06, nG4, $06, nF4, $06, nD4, $06
-	dc.b	nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06
-	dc.b	nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06
-	dc.b	nD4, $06, nG4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06, nG4, $06
-	dc.b	nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06
-	dc.b	nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06
-	dc.b	nF4, $06, nD4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06
-	dc.b	nD4, $06, nG4, $06, nD4, $06, nG4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06
-	dc.b	nE4, $06, nG4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06
-	dc.b	nF4, $06, nD4, $06, nF4, $06, nD4, $06, nD4, $06, nG4, $06
-	dc.b	nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06
-	dc.b	nE4, $06, nC4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06
-	dc.b	nE4, $06, nG4, $06, nE4, $06, nG4, $06, nF4, $06, nD4, $06
-	dc.b	nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06
-	dc.b	nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06
-	dc.b	nD4, $06, nG4, $06
-	smpsPan             panCenter, $00
-	smpsSetvoice        $02
-	smpsStop
-
-; FM3 Data
-BGM_Donnie1_FM3:
-	smpsPan             panCenter, $00
-	smpsSetvoice        $01
-	dc.b	nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06
-	dc.b	nC4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nG4, $06, nE4, $06, nD4, $06, nF4, $06
-	dc.b	nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06
-	dc.b	nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06
-	dc.b	nG4, $06, nD4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06
-	dc.b	nC4, $06, nE4, $06, nC4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06
-	dc.b	nD4, $06, nF4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06
-	dc.b	nG4, $06, nD4, $06, nG4, $06, nD4, $06, nC4, $06, nE4, $06
-	dc.b	nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06
-	dc.b	nD4, $06, nF4, $06, nD4, $06, nF4, $06, nG4, $06, nD4, $06
-	dc.b	nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06
-	dc.b	nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06
-	dc.b	nC4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nG4, $06, nE4, $06, nD4, $06, nF4, $06
-	dc.b	nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06
-	dc.b	nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06
-	dc.b	nG4, $06, nD4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06
-	dc.b	nC4, $06, nE4, $06, nC4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06
-	dc.b	nD4, $06, nF4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06
-	dc.b	nG4, $06, nD4, $06, nG4, $06, nD4, $06, nC4, $06, nE4, $06
-	dc.b	nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06
-	dc.b	nD4, $06, nF4, $06, nD4, $06, nF4, $06, nG4, $06, nD4, $06
-	dc.b	nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06
-	dc.b	nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06
-	dc.b	nC4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nG4, $06, nE4, $06, nD4, $06, nF4, $06
-	dc.b	nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06
-	dc.b	nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06
-	dc.b	nG4, $06, nD4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06
-	dc.b	nC4, $06, nE4, $06, nC4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06
-	dc.b	nD4, $06, nF4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06
-	dc.b	nG4, $06, nD4, $06, nG4, $06, nD4, $06, nC4, $06, nE4, $06
-	dc.b	nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06
-	dc.b	nD4, $06, nF4, $06, nD4, $06, nF4, $06, nG4, $06, nD4, $06
-	dc.b	nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06
-	dc.b	nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06
-	dc.b	nC4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nG4, $06, nE4, $06, nD4, $06, nF4, $06
-	dc.b	nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06
-	dc.b	nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06
-	dc.b	nG4, $06, nD4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06
-	dc.b	nC4, $06, nE4, $06, nC4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06
-	dc.b	nD4, $06, nF4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06
-	dc.b	nG4, $06, nD4, $06, nG4, $06, nD4, $06, nC4, $06, nE4, $06
-	dc.b	nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06
-	dc.b	nD4, $06, nF4, $06, nD4, $06, nF4, $06, nG4, $06, nD4, $06
-	dc.b	nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06
-	dc.b	nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06
-	dc.b	nC4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nG4, $06, nE4, $06, nD4, $06, nF4, $06
-	dc.b	nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06
-	dc.b	nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06
-	dc.b	nG4, $06, nD4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06
-	dc.b	nC4, $06, nE4, $06, nC4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06
-	dc.b	nD4, $06, nF4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06
-	dc.b	nG4, $06, nD4, $06, nG4, $06, nD4, $06, nC4, $06, nE4, $06
-	dc.b	nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06
-	dc.b	nD4, $06, nF4, $06, nD4, $06, nF4, $06, nG4, $06, nD4, $06
-	dc.b	nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06
-	dc.b	nC4, $06, nE4, $06, nC4, $06, nE4, $06, nC4, $06, nE4, $06
-	dc.b	nC4, $06, nE4, $06, nG4, $06, nE4, $06, nG4, $06, nE4, $06
-	dc.b	nG4, $06, nE4, $06, nG4, $06, nE4, $06, nD4, $06, nF4, $06
-	dc.b	nD4, $06, nF4, $06, nD4, $06, nF4, $06, nD4, $06, nF4, $06
-	dc.b	nG4, $06, nD4, $06, nG4, $06, nD4, $06, nG4, $06, nD4, $06
-	dc.b	nG4, $06, nD4, $06
-	smpsPan             panCenter, $00
-	smpsSetvoice        $01
-	smpsStop
+	dc.b	dKick, $18
+	smpsJump	BGM_Donnie1_DAC
 
 ; FM4 Data
 BGM_Donnie1_FM4:
-	smpsPan             panCenter, $00
-	smpsSetvoice        $03
-	dc.b	nC4, $30, nE4, $30, nD4, $30, nG4, $30, nC4, $30, nE4, $30
-	dc.b	nD4, $30, nG4, $30, nC4, $30, nE4, $30, nD4, $30, nG4, $30
-	dc.b	nC4, $30, nE4, $30, nD4, $30, nG4, $30, nC4, $30, nE4, $30
-	dc.b	nD4, $30, nG4, $30, nC4, $30, nE4, $30, nD4, $30, nG4, $30
-	dc.b	nC4, $30, nE4, $30, nD4, $30, nG4, $30, nC4, $30, nE4, $30
-	dc.b	nD4, $30, nG4, $30, nC4, $30, nE4, $30, nD4, $30, nG4, $30
-	dc.b	nC4, $30, nE4, $30, nD4, $30, nG4, $30, nC4, $30, nE4, $30
-	dc.b	nD4, $30, nG4, $30, nC4, $30, nE4, $30, nD4, $30, nG4, $30
-	dc.b	nC4, $30, nE4, $30, nD4, $30, nG4, $30, nC4, $30, nE4, $30
-	dc.b	nD4, $30, nG4, $30, nC4, $30, nE4, $30, nD4, $30, nG4, $30
-	dc.b	nC4, $30, nE4, $30, nD4, $30, nG4, $30
-	smpsPan             panCenter, $00
-	smpsSetvoice        $03
-	smpsStop
+	smpsSetvoice	$03
+	smpsJump	BGM_Donnie1_Jump00
+
+; FM1 Data
+BGM_Donnie1_FM1:
+	smpsSetvoice	$00
+
+BGM_Donnie1_Jump00:
+	dc.b	nC3, $30, nE3, nD3, nG3
+	smpsJump	BGM_Donnie1_Jump00
+
+; FM2 Data
+BGM_Donnie1_FM2:
+	smpsSetvoice	$02
+
+BGM_Donnie1_FM2_Loop00:
+	dc.b	nE4, $06, nC4
+	smpsLoop	0,4,BGM_Donnie1_FM2_Loop00
+
+BGM_Donnie1_FM2_Loop01:
+	dc.b	nE4, nG4
+	smpsLoop	0,4,BGM_Donnie1_FM2_Loop01
+
+BGM_Donnie1_FM2_Loop02:
+	dc.b	nF4, nD4
+	smpsLoop	0,4,BGM_Donnie1_FM2_Loop02
+
+BGM_Donnie1_FM2_Loop03:
+	dc.b	nD4, nG4
+	smpsLoop	0,4,BGM_Donnie1_FM2_Loop03
+	smpsJump	BGM_Donnie1_FM2_Loop00
+
+; FM3 Data
+BGM_Donnie1_FM3:
+	smpsSetvoice	$01
+
+BGM_Donnie1_FM3_Loop00:
+	dc.b	nC4, $06, nE4
+	smpsLoop	0,4,BGM_Donnie1_FM3_Loop00
+
+BGM_Donnie1_FM3_Loop01:
+	dc.b	nG4, nE4
+	smpsLoop	0,4,BGM_Donnie1_FM3_Loop01
+
+BGM_Donnie1_FM3_Loop02:
+	dc.b	nD4, nF4
+	smpsLoop	0,4,BGM_Donnie1_FM3_Loop02
+
+BGM_Donnie1_FM3_Loop03:
+	dc.b	nG4, nD4
+	smpsLoop	0,4,BGM_Donnie1_FM3_Loop03
+	smpsJump	BGM_Donnie1_FM3_Loop00
 
 ; FM5 Data
 BGM_Donnie1_FM5:
-	smpsPan             panCenter, $00
-	smpsSetvoice        $03
-	dc.b	nG4, $30, nB4, $30, nA4, $30, nB4, $30, nG4, $30, nB4, $30
-	dc.b	nA4, $30, nB4, $30, nG4, $30, nB4, $30, nA4, $30, nB4, $30
-	dc.b	nG4, $30, nB4, $30, nA4, $30, nB4, $30, nG4, $30, nB4, $30
-	dc.b	nA4, $30, nB4, $30, nG4, $30, nB4, $30, nA4, $30, nB4, $30
-	dc.b	nG4, $30, nB4, $30, nA4, $30, nB4, $30, nG4, $30, nB4, $30
-	dc.b	nA4, $30, nB4, $30, nG4, $30, nB4, $30, nA4, $30, nB4, $30
-	dc.b	nG4, $30, nB4, $30, nA4, $30, nB4, $30, nG4, $30, nB4, $30
-	dc.b	nA4, $30, nB4, $30, nG4, $30, nB4, $30, nA4, $30, nB4, $30
-	dc.b	nG4, $30, nB4, $30, nA4, $30, nB4, $30, nG4, $30, nB4, $30
-	dc.b	nA4, $30, nB4, $30, nG4, $30, nB4, $30, nA4, $30, nB4, $30
-	dc.b	nG4, $30, nB4, $30, nA4, $30, nB4, $30
-	smpsPan             panCenter, $00
-	smpsSetvoice        $03
-	smpsStop
+	smpsSetvoice	$03
+	dc.b	nG4, $30, nB4, nA4, nB4
+	smpsJump	BGM_Donnie1_FM5
 
 ; PSG1 Data
 BGM_Donnie1_PSG1:
-	dc.b	nF2, $06, nE2, $06, nC2, $0C, nD2, $06, nE2, $06, nF2, $0C
-	dc.b	nG2, $06, nE2, $06, nF2, $0C, nD2, $06, nF2, $06, nE2, $0C
-	dc.b	nF2, $06, nE2, $06, nC2, $06, nF2, $06, nE2, $06, nC2, $06
-	dc.b	nD2, $0C, nG2, $06, nF2, $06, nD2, $0C, nE2, $06, nF2, $06
-	dc.b	nG2, $0C, nF2, $06, nE2, $06, nC2, $0C, nD2, $06, nE2, $06
-	dc.b	nF2, $0C, nG2, $06, nE2, $06, nF2, $0C, nD2, $06, nF2, $06
-	dc.b	nE2, $0C, nF2, $06, nE2, $06, nC2, $06, nF2, $06, nE2, $06
-	dc.b	nC2, $06, nD2, $0C, nG2, $06, nF2, $06, nD2, $0C, nE2, $06
-	dc.b	nF2, $06, nG2, $0C, nF2, $06, nE2, $06, nC2, $0C, nD2, $06
-	dc.b	nE2, $06, nF2, $0C, nG2, $06, nE2, $06, nF2, $0C, nD2, $06
-	dc.b	nF2, $06, nE2, $0C, nF2, $06, nE2, $06, nC2, $06, nF2, $06
-	dc.b	nE2, $06, nC2, $06, nD2, $0C, nG2, $06, nF2, $06, nD2, $0C
-	dc.b	nE2, $06, nF2, $06, nG2, $0C, nF2, $06, nE2, $06, nC2, $0C
-	dc.b	nD2, $06, nE2, $06, nF2, $0C, nG2, $06, nE2, $06, nF2, $0C
-	dc.b	nD2, $06, nF2, $06, nE2, $0C, nF2, $06, nE2, $06, nC2, $06
-	dc.b	nF2, $06, nE2, $06, nC2, $06, nD2, $0C, nG2, $06, nF2, $06
-	dc.b	nD2, $0C, nE2, $06, nF2, $06, nG2, $0C, nF2, $06, nE2, $06
-	dc.b	nG2, $0C, nD2, $06, nE2, $06, nF2, $0C, nG2, $06, nE2, $06
-	dc.b	nF2, $0C, nD2, $06, nF2, $06, nE2, $0C, nF2, $06, nE2, $06
-	dc.b	nC2, $06, nF2, $06, nE2, $06, nC2, $06, nD2, $0C, nG2, $06
-	dc.b	nF2, $06, nD2, $06, nG2, $06, nF2, $06, nD2, $06, nE2, $0C
-	dc.b	nF2, $06, nE2, $06, nG2, $0C, nD2, $06, nE2, $06, nF2, $0C
-	dc.b	nG2, $06, nE2, $06, nF2, $0C, nD2, $06, nF2, $06, nE2, $0C
-	dc.b	nF2, $06, nE2, $06, nC2, $06, nF2, $06, nE2, $06, nC2, $06
-	dc.b	nD2, $0C, nG2, $06, nF2, $06, nD2, $06, nG2, $06, nF2, $06
-	dc.b	nD2, $06, nE2, $0C, nF2, $06, nE2, $06, nG2, $0C, nD2, $06
-	dc.b	nE2, $06, nF2, $0C, nG2, $06, nE2, $06, nF2, $0C, nD2, $06
-	dc.b	nF2, $06, nE2, $0C, nF2, $06, nE2, $06, nC2, $06, nF2, $06
-	dc.b	nE2, $06, nC2, $06, nD2, $0C, nG2, $06, nF2, $06, nD2, $06
-	dc.b	nG2, $06, nF2, $06, nD2, $06, nE2, $0C, nF2, $06, nE2, $06
-	dc.b	nG2, $0C, nD2, $06, nE2, $06, nF2, $0C, nG2, $06, nE2, $06
-	dc.b	nF2, $0C, nD2, $06, nF2, $06, nE2, $0C, nF2, $06, nE2, $06
-	dc.b	nC2, $06, nF2, $06, nE2, $06, nC2, $06, nD2, $0C, nG2, $06
-	dc.b	nF2, $06, nD2, $06, nG2, $06, nF2, $06, nD2, $06, nE2, $0C
-	dc.b	nF2, $06, nE2, $06, nC2, $0C, nD2, $06, nE2, $06, nF2, $0C
-	dc.b	nG2, $06, nE2, $06, nF2, $0C, nD2, $06, nF2, $06, nE2, $0C
-	dc.b	nF2, $06, nE2, $06, nC2, $06, nF2, $06, nE2, $06, nC2, $06
-	dc.b	nD2, $0C, nG2, $06, nF2, $06, nD2, $0C, nE2, $06, nF2, $06
-	dc.b	nG2, $0C, nF2, $06, nE2, $06, nC2, $0C, nD2, $06, nE2, $06
-	dc.b	nF2, $0C, nG2, $06, nE2, $06, nF2, $0C, nD2, $06, nF2, $06
-	dc.b	nE2, $0C, nF2, $06, nE2, $06, nC2, $06, nF2, $06, nE2, $06
-	dc.b	nC2, $06, nD2, $0C, nG2, $06, nF2, $06, nD2, $0C, nE2, $06
-	dc.b	nF2, $06, nG2, $0C, nF2, $06, nE2, $06, nC2, $0C, nD2, $06
-	dc.b	nE2, $06, nF2, $0C, nG2, $06, nE2, $06, nF2, $0C, nD2, $06
-	dc.b	nF2, $06, nE2, $0C, nF2, $06, nE2, $06, nC2, $06, nF2, $06
-	dc.b	nE2, $06, nC2, $06, nD2, $0C, nG2, $06, nF2, $06, nD2, $0C
-	dc.b	nE2, $06, nF2, $06, nG2, $0C, nF2, $06, nE2, $06, nC2, $0C
-	dc.b	nD2, $06, nE2, $06, nF2, $0C, nG2, $06, nE2, $06, nF2, $0C
-	dc.b	nD2, $06, nF2, $06, nE2, $0C, nF2, $06, nE2, $06, nC2, $06
-	dc.b	nF2, $06, nE2, $06, nC2, $06, nD2, $0C, nG2, $06, nF2, $06
-	dc.b	nD2, $0C, nE2, $06, nF2, $06, nG2, $0C, nF2, $06, nE2, $06
-	dc.b	nG2, $0C, nD2, $06, nE2, $06, nF2, $0C, nG2, $06, nE2, $06
-	dc.b	nF2, $0C, nD2, $06, nF2, $06, nE2, $0C, nF2, $06, nE2, $06
-	dc.b	nC2, $06, nF2, $06, nE2, $06, nC2, $06, nD2, $0C, nG2, $06
-	dc.b	nF2, $06, nD2, $06, nG2, $06, nF2, $06, nD2, $06, nE2, $0C
-	dc.b	nF2, $06, nE2, $06, nG2, $0C, nD2, $06, nE2, $06, nF2, $0C
-	dc.b	nG2, $06, nE2, $06, nF2, $0C, nD2, $06, nF2, $06, nE2, $0C
-	dc.b	nF2, $06, nE2, $06, nC2, $06, nF2, $06, nE2, $06, nC2, $06
-	dc.b	nD2, $0C, nG2, $06, nF2, $06, nD2, $06, nG2, $06, nF2, $06
-	dc.b	nD2, $06, nE2, $0C, nF2, $06, nE2, $06, nG2, $0C, nD2, $06
-	dc.b	nE2, $06, nF2, $0C, nG2, $06, nE2, $06, nF2, $0C, nD2, $06
-	dc.b	nF2, $06, nE2, $0C, nF2, $06, nE2, $06, nC2, $06, nF2, $06
-	dc.b	nE2, $06, nC2, $06, nD2, $0C, nG2, $06, nF2, $06, nD2, $06
-	dc.b	nG2, $06, nF2, $06, nD2, $06, nE2, $0C, nF2, $06, nE2, $06
-	dc.b	nG2, $0C, nD2, $06, nE2, $06, nF2, $0C, nG2, $06, nE2, $06
-	dc.b	nF2, $0C, nD2, $06, nF2, $06, nE2, $0C, nF2, $06, nE2, $06
-	dc.b	nC2, $06, nF2, $06, nE2, $06, nC2, $06, nD2, $0C, nG2, $06
-	dc.b	nF2, $06, nD2, $06, nG2, $06, nF2, $06, nD2, $06, nE2, $0C
-	smpsPSGvoice        $00
-	smpsStop
+	dc.b	nF2, $06, nE2, nC2, $0C
+	smpsCall	BGM_Donnie1_PSG1_Call
+	dc.b	nD2, $0C, nE2, $06, nF2, nG2, $0C
+	smpsLoop	0,4,BGM_Donnie1_PSG1
+
+BGM_Donnie1_PSG1_Loop:
+	dc.b	nF2, $06, nE2, nG2, $0C
+	smpsCall	BGM_Donnie1_PSG1_Call
+	dc.b	nD2, nG2, nF2, nD2, nE2, $0C
+	smpsLoop	0,4,BGM_Donnie1_PSG1_Loop
+	smpsJump	BGM_Donnie1_PSG1
+
+BGM_Donnie1_PSG1_Call:
+	dc.b	nD2, $06, nE2, nF2, $0C, nG2, $06, nE2, nF2, $0C, nD2, $06
+	dc.b	nF2, nE2, $0C, nF2, $06, nE2, nC2, nF2, nE2, nC2, nD2, $0C
+	dc.b	nG2, $06, nF2
+	smpsReturn
 
 ; PSG3 Data
 BGM_Donnie1_PSG3:
 	smpsPSGform         $E7
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
+
+BGM_Donnie1_PSG3_Jump:
+	dc.b	nMaxPSG, $06, $06, $06, $03
 	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
+	dc.b	$03
 	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $06, nMaxPSG, $03
-	smpsPSGvoice        fTone_01
-	dc.b	nMaxPSG, $03
-	smpsStop
+	smpsJump	BGM_Donnie1_PSG3_Jump
 
 ; PSG2 Data
 BGM_Donnie1_PSG2:
