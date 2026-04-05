@@ -861,7 +861,7 @@ Pow_GetErrorMsg:
 	rts
 
 .programmernap:
-	RaiseError	"The Programmer Has a Nap! %<endl>Hold out Programmer!"
+	RaiseError	"The programmer has a nap! %<endl>Hold out programmer!"
 	rts
 
 .askdlc:
