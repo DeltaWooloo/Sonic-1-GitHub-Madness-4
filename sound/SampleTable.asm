@@ -48,14 +48,14 @@ SampleTable:
 	dcSample	TYPE_DPCM,	PokeTimpani,	11297				; $9F
 	dcSample	TYPE_DPCM,	PokeTimpani,	7500				; $A0
 
-	dcSample	TYPE_DPCM,	CTC1_Tick,	16000					; $A1
+	dcSample	TYPE_DPCM,	CTC1_Tick,	16000				; $A1
 
 	dcSample	TYPE_DPCM,	CF_DrumLoopA,	15900				; $A2
 	dcSample	TYPE_DPCM,	CF_DrumLoopB,	15900				; $A3
 
-	dcSample	TYPE_DPCM,	Amen_Crash,	11025					; $A4
+	dcSample	TYPE_DPCM,	Amen_Crash,	11025				; $A4
 
-	dcSample	TYPE_PCM,	Homero,	16000						; $A5
+	dcSample	TYPE_DPCM,	Homero,		16000				; $A5
 
 	; In-Game SFX SAMPLES
 	dcSample	TYPE_PCM,	letsgoeee,	8000,	FLAGS_SFX		; $A6
@@ -182,7 +182,7 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Homero
-	incdac	Homero, "sound/dac/homero.wav"
+	incdac	Homero, "sound/dac/homero.dpcm"
 
 ; ---------------------------------------------------------------
 ; SFX Samples
