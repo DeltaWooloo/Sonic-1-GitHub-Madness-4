@@ -5,11 +5,11 @@ Homero_Header:
 	smpsHeaderTempo     $02, $07
 
 	smpsHeaderDAC       Homero_DAC
-	smpsHeaderFM        Homero_FM1,	$00, $0A
-	smpsHeaderFM        Homero_FM2,	$00, $0A
-	smpsHeaderFM        Homero_FM3,	$00, $0A
-	smpsHeaderFM        Homero_FM4,	$00, $1A
-	smpsHeaderFM        Homero_FM5,	$00, $1A
+	smpsHeaderFM        Homero_FM1,	$00, $0C
+	smpsHeaderFM        Homero_FM2,	$00, $0C
+	smpsHeaderFM        Homero_FM3,	$00, $0C
+	smpsHeaderFM        Homero_FM4,	$00, $1C
+	smpsHeaderFM        Homero_FM5,	$00, $1C
 	smpsHeaderPSG       Homero_PSG1,	$00, $04, $00, $01
 	smpsHeaderPSG       Homero_PSG2,	$00, $01, $00, $01
 	smpsHeaderPSG       Homero_PSG3,	$0C, $03, $00, $04
