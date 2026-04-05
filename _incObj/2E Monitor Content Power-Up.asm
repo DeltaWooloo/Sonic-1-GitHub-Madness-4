@@ -801,7 +801,17 @@ Pow_GetErrorMsg:
 		dc.l	.nullreference			;$0B / $2C
 		dc.l	.programmernap			;$0C / $30
 		dc.l	.askdlc				;$0D / $34
-		dc.l	.toolimited			;$0E / $38
+		dc.l	.mildanner			;$0E / $38
+		dc.l	.piracy				;$0F / $3C
+		dc.l	.overheat			;$10 / $40
+		dc.l	.yourlose			;$10 / $40
+		dc.l	.patrat				;$10 / $40
+		dc.l	.errornoexcept			;$10 / $40
+		dc.l	.taskfailed			;$10 / $40
+		dc.l	.littletimmy			;$10 / $40
+		dc.l	.touchgrass			;$10 / $40
+		dc.l	.zerowing			;$10 / $40
+		dc.l	.toolimited			;$11 / $44
 .msgtableend:
 
 ; ===========================================================================
@@ -866,6 +876,46 @@ Pow_GetErrorMsg:
 
 .askdlc:
 	RaiseError	"For this powerup monitor, please %<endl>install the Monitor DLC!"
+	rts
+
+.mildanner:
+	RaiseError	"ROM hack security breached by Mildanner!"
+	rts
+
+.piracy:
+	RaiseError	"Illegal Pirated ROM detected"
+	rts
+
+.overheat:
+	RaiseError	"This game is too hot for your system. %<endl>Please cool it down"
+	rts
+
+.yourlose:
+	RaiseError	"You're lose!"
+	rts
+
+.patrat:
+	RaiseError	"Patrat infestation detected!"
+	rts
+
+.errornoexcept:
+	RaiseError	"Error, No Exceptions"
+	rts
+
+.taskfailed:
+	RaiseError	"Task failed successfully"
+	rts
+
+.littletimmy:
+	RaiseError	"Little Timmy said it's his turn on the %,endl>Sega now!"
+	rts
+
+.touchgrass:
+	RaiseError	"Grass Error!%<endl>To return, please touch some grass!"
+	rts
+
+.zerowing:
+	RaiseError	"All your game belong to us!"
 	rts
 
 .toolimited:
