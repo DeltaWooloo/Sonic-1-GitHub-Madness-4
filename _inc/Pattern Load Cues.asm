@@ -64,9 +64,6 @@ ptr_PLC_Ending:		dc.w PLC_Ending-ArtLoadCues
 ptr_PLC_TryAgain:	dc.w PLC_TryAgain-ArtLoadCues
 ptr_PLC_EggmanSBZ2:	dc.w PLC_EggmanSBZ2-ArtLoadCues
 ptr_PLC_FZBoss:		dc.w PLC_FZBoss-ArtLoadCues
-ptr_PLC_DioDanner:	dc.w PLC_DioDanner-ArtLoadCues
-ptr_PLC_DioDannerBOSS:	dc.w PLC_DioDannerBOSS-ArtLoadCues
-ptr_PLC_DioDannerDEAD:	dc.w PLC_DioDannerDEAD-ArtLoadCues
 plcm:	macro gfx,vram
 		dc.w (gfx>>16)&$FF,gfx&$FFFF,vram*32
 		endm
@@ -541,21 +538,7 @@ PLC_FZBoss:	dc.w ((PLC_FZBossend-PLC_FZBoss-2)/6)-1
 		plcm	Nem_Sbz2Eggman, ArtTile_FZ_Eggman_No_Vehicle ; Eggman without ship
 		plcm	Nem_Exhaust,    ArtTile_Eggman_Exhaust       ; exhaust flame
 PLC_FZBossend:
-; ---------------------------------------------------------------------------
-; Pattern load cues - boss BLUESCAPO (mildanner)
-; ---------------------------------------------------------------------------
-PLC_DioDanner:	dc.w ((PLC_DioDannerend-PLC_DioDanner-2)/6)-1
-		plcm	Nem_DioDanner_Intro, $6620	; intro
-	PLC_DioDannerend:
-		even
-PLC_DioDannerBOSS:	dc.w ((PLC_DioDannerBOSSend-PLC_DioDannerBOSS-2)/6)-1
-		plcm	Nem_DioDanner_Boss, $80	; boss
-	PLC_DioDannerBOSSend:
-		even
-PLC_DioDannerDEAD:	dc.w ((PLC_DioDannerDEADend-PLC_DioDannerDEAD-2)/6)-1
-		plcm	Nem_DioDanner_Dead, $13C0	; dead
-	PLC_DioDannerDEADend:
-		even;physicfor
+
 ; ---------------------------------------------------------------------------
 ; Pattern load cue IDs
 ; ---------------------------------------------------------------------------
@@ -615,6 +598,3 @@ plcid_Ending:		equ (ptr_PLC_Ending-ArtLoadCues)/2
 plcid_TryAgain:		equ (ptr_PLC_TryAgain-ArtLoadCues)/2	
 plcid_EggmanSBZ2:	equ (ptr_PLC_EggmanSBZ2-ArtLoadCues)/2	
 plcid_FZBoss:		equ (ptr_PLC_FZBoss-ArtLoadCues)/2	
-plcid_DioDanner:		equ (ptr_PLC_DioDanner-ArtLoadCues)/2	; $20
-plcid_DioDannerBOSS:	equ (ptr_PLC_DioDannerBOSS-ArtLoadCues)/2	; $21
-plcid_DioDannerDEAD:	equ (ptr_PLC_DioDannerDEAD-ArtLoadCues)/2	; $22
