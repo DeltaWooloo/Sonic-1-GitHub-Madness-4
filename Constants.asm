@@ -341,7 +341,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_FurElise
 	nextenum bgm_SwingSinners
 	nextenum bgm_Miniscule
-	nextenum bgm_Rickroll
 	nextenum bgm_Wormy
 	nextenum bgm_Starman
 	nextenum bgm_JamesPond

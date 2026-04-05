@@ -108,7 +108,6 @@ MusicIndex:
 	dc.l	Mus_FurElise
 	dc.l	Mus_SwingSinners
 	dc.l	Mus_Miniscule
-	dc.l	Mus_Rickroll
 	dc.l	Mus_FuneralMarch
 	dc.l	Mus_BatMan
 	dc.l	Mus_Resetti
@@ -370,8 +369,6 @@ Mus_FurElise:		include	"music/TG2000Tracks/FurElise.asm"
 Mus_SwingSinners:	include	"music/TG2000Tracks/Mus - Swing Sinners.asm"
 	even
 Mus_Miniscule:		include	"music/TG2000Tracks/Minuscule.asm"
-	even
-Mus_Rickroll:		include	"music/TG2000Tracks/Rickroll.asm"
 	even
 Mus_FuneralMarch:	include	"music/TG2000Tracks/FuneralMarch.asm"
 	even
