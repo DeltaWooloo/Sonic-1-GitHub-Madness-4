@@ -2,19 +2,19 @@ CanCan_Header:
 	smpsHeaderStartSong 3
 	smpsHeaderVoice		CanCan_Voices
 	smpsHeaderChan		$06, $03
-	smpsHeaderTempo		$02, $24
+	smpsHeaderTempo		$02, $27
 ;	Given Tempo = 162.50 BPM
 ;	Approximated Tempo = 162.60 BPM
 
 	smpsHeaderDAC	CanCan_DAC
-	smpsHeaderFM	CanCan_FM1,	$00, $00
-	smpsHeaderFM	CanCan_FM2,	$00, $15
-	smpsHeaderFM	CanCan_FM3,	$00, $05
-	smpsHeaderFM	CanCan_FM4,	$00, $05
-	smpsHeaderFM	CanCan_FM5,	$00, $00
-	smpsHeaderPSG	CanCan_PSG1,	$0C, $00, $00, $00
-	smpsHeaderPSG	CanCan_PSG2,	$0C, $05, $00, $00
-	smpsHeaderPSG	CanCan_PSG3,	$0C, $05, $00, $00
+	smpsHeaderFM	CanCan_FM1,	$00, $04
+	smpsHeaderFM	CanCan_FM2,	$00, $19
+	smpsHeaderFM	CanCan_FM3,	$00, $09
+	smpsHeaderFM	CanCan_FM4,	$00, $09
+	smpsHeaderFM	CanCan_FM5,	$00, $04
+	smpsHeaderPSG	CanCan_PSG1,	$0C, $02, $00, $00
+	smpsHeaderPSG	CanCan_PSG2,	$0C, $07, $00, $00
+	smpsHeaderPSG	CanCan_PSG3,	$0C, $04, $00, $00
 
 CanCan_Voices:
 ;	FM Voice 00 -> 00: 14_Invincibility_0
@@ -241,7 +241,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$13, $2F, $2D, $2D
 
-;	PSG Voice 10 -> DoomTone
+;	PSG Voice 10 -> TFTone_01
 ;	macros:
 ;		vol: 15 15 14 13 12 11 10 9 9 8 7 7 6 6 6 5 4 4 4 4 4 3 2 2 2 1 1 1 0 0 0 0
 
@@ -604,8 +604,8 @@ CanCan_FM1_Jump:
 	smpsCall CanCan_FM1_17_0_64
 	smpsCall CanCan_FM1_18_0_64
 	smpsCall CanCan_FM1_19_0_64
-	smpsCall CanCan_FM1_1A_0_64
-	smpsJump CanCan_FM1_Jump
+	dc.b	nD6, $14, nRst, $2C
+	smpsStop
 
 CanCan_FM1_00_0_64:
 	smpsSetvoice	$06
@@ -715,7 +715,7 @@ CanCan_FM1_0B_0_64:
 CanCan_FM1_0C_0_64:
 	smpsSetvoice	$17
 	smpsModOff
-	dc.b nA4, $04, nC5, nB4, nA4, nG4, nD5, nA4, nB4, nG4, $08, nD4, nG4
+	dc.b nA4, $04, nC5, nB4, nA4, nG4, nD5, nA4, nB4, nG4, nRst, nD4, $08, nG4
 	smpsModSet	$02, $01, $07, $02
 	dc.b smpsNoAttack, $08
 	smpsReturn
@@ -723,9 +723,9 @@ CanCan_FM1_0C_0_64:
 CanCan_FM1_0D_0_48:
 	smpsSetvoice	$17
 	smpsModOff
-	dc.b nA4, $04, nC5, nB4, nA4, nG4, nD5, nA4, nB4, nG4, $08
+	dc.b nA4, $04, nC5, nB4, nA4, nG4, nD5, nA4, nB4, nG4, nRst
 	smpsSetvoice	$0D
-	dc.b nB3, nG4
+	dc.b nB3, $08
 	smpsReturn
 
 CanCan_FM1_0F_0_64:
@@ -789,7 +789,7 @@ CanCan_FM1_13_0_64:
 
 CanCan_FM1_14_0_64:
 	smpsSetvoice	$17
-	dc.b nD4, $04, nA4, nE4, nFs4, nD4, $08, nA3, nD4
+	dc.b nD4, $04, nA4, nE4, nFs4, nD4, nRst, nA3, $08, nD4
 	smpsModSet	$02, $01, $07, $02
 	dc.b smpsNoAttack, $08
 	smpsModOff
@@ -861,10 +861,6 @@ CanCan_FM1_19_0_64:
 	dc.b nD5, $06, nRst, $02, $08, nFs5, $06, nRst, $02, $08, nD5, $20
 	smpsReturn
 
-CanCan_FM1_1A_0_64:
-	dc.b nD6, $14, nRst, $2C
-	smpsStop
-
 CanCan_FM2:
 
 CanCan_FM2_Jump:
@@ -909,9 +905,9 @@ CanCan_FM2_Jump:
 	smpsCall CanCan_FM2_18_0_64
 	smpsCall CanCan_FM2_19_0_64
 	smpsCall CanCan_FM2_1A_0_64
-	smpsCall CanCan_FM2_1B_0_64
-	smpsAlterVol	$15
-	smpsJump CanCan_FM2_Jump
+	smpsSetvoice	$00
+	dc.b	nD2, $20, nRst, $08, $10, $08
+	smpsStop
 
 CanCan_FM2_00_0_64:
 	dc.b smpsNoAttack, $08
@@ -1046,7 +1042,11 @@ CanCan_FM2_08_0_64:
 	smpsPan		panLeft, $00
 	dc.b nA2
 	smpsPan		panCenter, $00
-	dc.b nD3, $10, nG2, $04, nG3, nD2, nD3
+	dc.b nD3, $08
+	smpsModSet	$00, $01, $FC, $80
+	dc.b smpsNoAttack, $07
+	smpsModSet	$00, $01, $FC, $80
+	dc.b smpsNoAttack, $01, nG2, $04, nG3, nD2, nD3
 	smpsReturn
 
 CanCan_FM2_09_0_64:
@@ -1070,7 +1070,7 @@ CanCan_FM2_0B_0_64:
 CanCan_FM2_0C_0_48:
 	dc.b nA2, $04, nA3, nD2, nD3, $02
 	smpsSetvoice	$00
-	dc.b nG3, nG2, $04, nG3, nE3, nFs3, nG3, $08, nB2, nG2
+	dc.b nG3, nG2, $04, nG3, nE3, nFs3, nG3, $08, nB2
 	smpsReturn
 
 CanCan_FM2_0E_0_64:
@@ -1452,11 +1452,6 @@ CanCan_FM2_1A_0_64:
 	dc.b $01
 	smpsReturn
 
-CanCan_FM2_1B_0_64:
-	smpsSetvoice	$00
-	dc.b nD2, $20, nRst, $08, $10, $08
-	smpsStop
-
 CanCan_FM3:
 
 CanCan_FM3_Jump:
@@ -1501,9 +1496,8 @@ CanCan_FM3_Jump:
 	smpsCall CanCan_FM3_14_0_64
 	smpsCall CanCan_FM3_15_0_64
 	smpsCall CanCan_FM3_16_0_64
-	smpsCall CanCan_FM3_17_0_64
-	smpsAlterVol	$05
-	smpsJump CanCan_FM3_Jump
+	dc.b	nD3, $10, nRst, $30
+	smpsStop
 
 CanCan_FM3_00_0_64:
 	smpsSetvoice	$01
@@ -1672,11 +1666,6 @@ CanCan_FM3_16_0_64:
 	dc.b nFs2, $04, nRst, nRst, $08, nA2, $04, nRst, nRst, $08, nFs2, $20
 	smpsReturn
 
-CanCan_FM3_17_0_64:
-	smpsSetvoice	$0B
-	dc.b nD3, $10, nRst, $30
-	smpsStop
-
 CanCan_FM4:
 
 CanCan_FM4_Jump:
@@ -1721,9 +1710,8 @@ CanCan_FM4_Jump:
 	smpsCall CanCan_FM4_14_0_64
 	smpsCall CanCan_FM4_15_0_64
 	smpsCall CanCan_FM4_16_0_64
-	smpsCall CanCan_FM4_17_0_64
-	smpsAlterVol	$05
-	smpsJump CanCan_FM4_Jump
+	dc.b	nFs3, $10, nRst, $30
+	smpsStop
 
 CanCan_FM4_00_0_64:
 	smpsSetvoice	$01
@@ -1890,11 +1878,6 @@ CanCan_FM4_16_0_64:
 	dc.b nA2, $04, nRst, nRst, $08, nD3, $04, nRst, nRst, $08, nA2, $20
 	smpsReturn
 
-CanCan_FM4_17_0_64:
-	smpsSetvoice	$0B
-	dc.b nFs3, $10, nRst, $30
-	smpsStop
-
 CanCan_FM5:
 
 CanCan_FM5_Jump:
@@ -1909,7 +1892,7 @@ CanCan_FM5_Jump:
 	smpsCall CanCan_FM5_06_0_64
 	smpsCall CanCan_FM5_02_0_64
 	smpsCall CanCan_FM5_09_0_64
-	smpsCall CanCan_FM5_0A_0_64
+	smpsCall CanCan_FM5_0A_0_64_7F
 	smpsCall CanCan_FM5_0B_0_64
 	smpsCall CanCan_FM5_0C_0_64
 	smpsCall CanCan_FM5_0B_0_64
@@ -1921,7 +1904,7 @@ CanCan_FM5_Jump:
 	smpsCall CanCan_FM5_04_0_64
 	smpsCall CanCan_FM5_03_0_64
 	smpsCall CanCan_FM5_04_0_64
-	smpsCall CanCan_FM5_10_0_64
+	smpsCall CanCan_FM5_10_0_64_77
 	smpsCall CanCan_FM5_11_0_64
 	smpsCall CanCan_FM5_12_0_64
 	smpsCall CanCan_FM5_13_0_64
@@ -1939,8 +1922,8 @@ CanCan_FM5_Jump:
 	smpsCall CanCan_FM5_16_0_64
 	smpsCall CanCan_FM5_17_0_64
 	smpsCall CanCan_FM5_19_0_64
-	smpsCall CanCan_FM5_1A_0_64
-	smpsJump CanCan_FM5_Jump
+	dc.b	nD6, $10, nRst, $30
+	smpsStop
 
 CanCan_FM5_00_0_64:
 	smpsSetvoice	$0A
@@ -2121,10 +2104,11 @@ CanCan_FM5_09_0_64:
 	dc.b nD6, nD6, nRst, nD6, nD6, nD6, nRst, nD6
 	smpsReturn
 
-CanCan_FM5_0A_0_64:
+CanCan_FM5_0A_0_64_7F:
 	dc.b nD6, $02, $02, nRst, nD6, nD6, nD6, nRst, nD6, nD6, nD6, nRst, nD6, nD6, nD6, nRst
 	dc.b nD6, nD6, nD6, nRst, $04
 	smpsSetvoice	$19
+	smpsAlterVol	$08
 	dc.b nD5, $08, nG5, $10
 	smpsReturn
 
@@ -2137,21 +2121,20 @@ CanCan_FM5_0C_0_64:
 	smpsReturn
 
 CanCan_FM5_0D_0_64:
-	dc.b nA5, $04, nC6, nB5, nA5, nG5, nD6, nA5, nB5, nG5, $06, nRst, $02, nD5, $08, nG5
-	dc.b $10
+	dc.b nA5, $04, nC6, nB5, nA5, nG5, nD6, nA5, nB5, nG5, $08, nD5, nG5, $10
 	smpsReturn
 
 CanCan_FM5_0E_0_48:
-	dc.b nA5, $04, nC6, nB5, nA5, nG5, nD6, nA5, nB5, nG5, $06, nRst, $02
+	dc.b nA5, $04, nC6, nB5, nA5, nG5, nD6, nA5, nB5, nG5, $08
 	smpsSetvoice	$05
-	dc.b nB4, $08, nG5
+	dc.b nB4
 	smpsReturn
 
-CanCan_FM5_10_0_64:
+CanCan_FM5_10_0_64_77:
 	dc.b nRst, $02
 	smpsSetvoice	$1A
 	smpsPan		panRight, $00
-	smpsAlterVol	$0A
+	smpsAlterVol	$02
 	dc.b nB5, nRst
 	smpsPan		panCenter, $00
 	dc.b nA5, nRst
@@ -2277,7 +2260,7 @@ CanCan_FM5_14_0_64:
 	smpsReturn
 
 CanCan_FM5_15_0_64:
-	dc.b nD5, $04, nA5, nE5, nFs5, nD5, $06, nRst, $02, nA4, $08
+	dc.b nD5, $04, nA5, nE5, nFs5, nD5, $08, nA4
 	smpsSetvoice	$19
 	dc.b nD5, $10, nE5, $04, nG5, nFs5, nE5
 	smpsReturn
@@ -2321,10 +2304,6 @@ CanCan_FM5_17_0_64:
 CanCan_FM5_19_0_64:
 	dc.b nD5, $04, nRst, $0C, nFs5, $04, nRst, $0C, nD5, $20
 	smpsReturn
-
-CanCan_FM5_1A_0_64:
-	dc.b nD6, $10, nRst, $30
-	smpsStop
 
 CanCan_DAC:
 
@@ -2370,164 +2349,134 @@ CanCan_DAC_Jump:
 	smpsCall CanCan_DAC_16_0_64
 	smpsCall CanCan_DAC_17_0_64
 	smpsCall CanCan_DAC_18_0_64
-	smpsCall CanCan_DAC_19_0_64
-	smpsJump CanCan_DAC_Jump
+	dc.b	dSMPSSnare, $40
+	smpsStop
 
 CanCan_DAC_00_0_64:	; Effect not supported:
-	dc.b dKick, $08, $08, $08, $08, $08, $08, $08, $08
+	dc.b dKickS3, $08, $08, $08, $08, $08, $08, $08, $08
 	smpsReturn
 
 CanCan_DAC_01_0_64:	; Effect not supported:
-	dc.b dKick, $08, $08, $08, $08, dSnare, $04, dKick, dSnare, dKick, dSnare, $02, $02, dKick, dKick, dSnare
-	dc.b dSnare, dSnare, dSnare
+	dc.b dKickS3, $08, $08, $08, $08, dSMPSSnare, $04, dKickS3, dSMPSSnare, dKickS3, dSMPSSnare, $02, $02, dKickS3, dKickS3, dSMPSSnare
+	dc.b dSMPSSnare, dSMPSSnare, dSMPSSnare
 	smpsReturn
 
 CanCan_DAC_02_0_64:
-	dc.b dKick, $08, dSnare, dKick, dSnare, dKick, dSnare, dKick, dSnare
+	dc.b dKickS3, $08, dSMPSSnare, dKickS3, dSMPSSnare, dKickS3, dSMPSSnare, dKickS3, dSMPSSnare
 	smpsReturn
 
 CanCan_DAC_03_0_64:
-	dc.b dKick, $08, dSnare, dKick, dSnare, $04, dKick, $02, $02, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick
-	dc.b dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dSnare, dSnare
+	dc.b dKickS3, $08, dSMPSSnare, dKickS3, dSMPSSnare, $04, dKickS3, $02, $02, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3
+	dc.b dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare
 	smpsReturn
 
 CanCan_DAC_04_0_64:
-	dc.b dSnare, $08, $08, $08, $08, dKick, dSnare, $04, dKick, $02, $02, dSnare, $04, $04, $04, $04
+	dc.b dSMPSSnare, $08, $08, $08, $08, dKickS3, dSMPSSnare, $04, dKickS3, $02, $02, dSMPSSnare, $04, $04, $04, $04
 	smpsReturn
 
 CanCan_DAC_05_0_64:
-	dc.b dSnare, $08, $08, $08, $08, dKick, dSnare, $04, dKick, $02, $02, dSnare, $04, dKick, dSnare, dKick
+	dc.b dSMPSSnare, $08, $08, $08, $08, dKickS3, dSMPSSnare, $04, dKickS3, $02, $02, dSMPSSnare, $04, dKickS3, dSMPSSnare, dKickS3
 	smpsReturn
 
 CanCan_DAC_06_0_64:
-	dc.b dSnare, $04, dKick, dSnare, dKick, dSnare, dKick, dSnare, dKick, dSnare, dKick, dSnare, dKick, dSnare, $02, $02
-	dc.b $02, dKick, dSnare, dSnare, dKick, dKick
+	dc.b dSMPSSnare, $04, dKickS3, dSMPSSnare, dKickS3, dSMPSSnare, dKickS3, dSMPSSnare, dKickS3, dSMPSSnare, dKickS3, dSMPSSnare, dKickS3, dSMPSSnare, $02, $02
+	dc.b $02, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3
 	smpsReturn
 
 CanCan_DAC_07_0_64:
-	dc.b dSnare, $02, $02, $02, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dSnare, dSnare, dSnare, dSnare, dSnare
-	dc.b dSnare, dSnare, dSnare, dSnare, dSnare, dSnare, $01, $01, $01, $01, $01, $01, $01, $01, dKick, $08
-	dc.b dSnare
+	dc.b dSMPSSnare, $02, $02, $02, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare
+	dc.b dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare, $01, $01, $01, $01, $01, $01, $01, $01, dKickS3, $08
+	dc.b dSMPSSnare
 	smpsReturn
 
 CanCan_DAC_08_0_64:
-	dc.b dKick, $08, dSnare, dKick, dSnare, dKick, $04, dSnare, $02, $02, $04, $04, dKick, $08, dSnare
+	dc.b dKickS3, $08, dSMPSSnare, dKickS3, dSMPSSnare, dKickS3, $04, dSMPSSnare, $02, $02, $04, $04, dKickS3, $08, dSMPSSnare
 	smpsReturn
 
 CanCan_DAC_09_0_64:
-	dc.b dKick, $08, dSnare, $04, $02, $02, $04, $04, $04, $04, $04, dKick, $02, $02, dSnare, $04
-	dc.b $02, $02, dKick, $08, dSnare
+	dc.b dKickS3, $08, dSMPSSnare, $04, $02, $02, $04, $04, $04, $04, $04, dKickS3, $02, $02, dSMPSSnare, $04
+	dc.b $02, $02, dKickS3, $08, dSMPSSnare
 	smpsReturn
 
 CanCan_DAC_0A_0_48:
-	dc.b dKick, $08, dSnare, $04, $02, $02, $04, $04, $04, $04, $04, dKick, $02, $02, dSnare, $04
-	dc.b $02, $02, dKick
+	dc.b dKickS3, $08, dSMPSSnare, $04, $02, $02, $04, $04, $04, $04, $04, dKickS3, $02, $02, dSMPSSnare, $04
+	dc.b $02, $02
 	smpsReturn
 
 CanCan_DAC_0C_0_64:
-	dc.b dSnare, $02, $02, dKick, $04, $04, $04, dSnare, $02, $02, dKick, $04, $04, $04, dSnare, $02
-	dc.b $02, dKick, $04, $04, $04, dSnare, $02, $02, dKick, $04, dSnare, dKick
+	dc.b dSMPSSnare, $02, $02, dKickS3, $04, $04, $04, dSMPSSnare, $02, $02, dKickS3, $04, $04, $04, dSMPSSnare, $02
+	dc.b $02, dKickS3, $04, $04, $04, dSMPSSnare, $02, $02, dKickS3, $04, dSMPSSnare, dKickS3
 	smpsReturn
 
 CanCan_DAC_0D_0_64:
-	dc.b dSnare, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $01, $01, $01
-	dc.b $01, $01, $01, $01, $01, dKick, $08, dSnare, dKick, dSnare
+	dc.b dSMPSSnare, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $01, $01, $01
+	dc.b $01, $01, $01, $01, $01, dKickS3, $08, dSMPSSnare, dKickS3, dSMPSSnare
 	smpsReturn
 
 CanCan_DAC_0E_0_64:
-	dc.b dKick, $08, dSnare, dKick, dSnare, dKick, dSnare, dKick, dSnare
+	dc.b dKickS3, $08, dSMPSSnare, dKickS3, dSMPSSnare, dKickS3, dSMPSSnare, dKickS3, dSMPSSnare
 	smpsReturn
 
 CanCan_DAC_0F_0_64:
-	dc.b dKick, $08, dSnare, dKick, $04, dSnare, $02, $02, $04, $04, dKick, $08, dSnare, dKick, dSnare
+	dc.b dKickS3, $08, dSMPSSnare, dKickS3, $04, dSMPSSnare, $02, $02, $04, $04, dKickS3, $08, dSMPSSnare, dKickS3, dSMPSSnare
 	smpsReturn
 
 CanCan_DAC_10_0_64:
-	dc.b dSnare, $04, $04, $04, $04, $04, dKick, $02, $02, dSnare, $04, $02, $02, dKick, $08, dSnare
-	dc.b dKick, dSnare
+	dc.b dSMPSSnare, $04, $04, $04, $04, $04, dKickS3, $02, $02, dSMPSSnare, $04, $02, $02, dKickS3, $08, dSMPSSnare
+	dc.b dKickS3, dSMPSSnare
 	smpsReturn
 
 CanCan_DAC_11_0_64:
-	dc.b dKick, $08, dSnare, dKick, dSnare, dKick, dSnare, dKick, dSnare, $04, $02, $02
+	dc.b dKickS3, $08, dSMPSSnare, dKickS3, dSMPSSnare, dKickS3, dSMPSSnare, dKickS3, dSMPSSnare, $04, $02, $02
 	smpsReturn
 
 CanCan_DAC_12_0_64:
-	dc.b dKick, $04, $04, dSnare, dKick, $02, dSnare, dKick, $04, $04, dSnare, dKick, dKick, dKick, dSnare, dKick
-	dc.b $02, dSnare, dKick, $04, $04, dSnare, dSnare, $02, $02
+	dc.b dKickS3, $04, $04, dSMPSSnare, dKickS3, $02, dSMPSSnare, dKickS3, $04, $04, dSMPSSnare, dKickS3, dKickS3, dKickS3, dSMPSSnare, dKickS3
+	dc.b $02, dSMPSSnare, dKickS3, $04, $04, dSMPSSnare, dSMPSSnare, $02, $02
 	smpsReturn
 
 CanCan_DAC_0B_0_64:
-	dc.b dKick, $04, $04, dSnare, dKick, $02, dSnare, dKick, $04, $04, dSnare, dKick, dKick, dKick, dSnare, dKick
-	dc.b $02, dSnare, dKick, $04, $04, dSnare, dKick
+	dc.b dKickS3, $04, $04, dSMPSSnare, dKickS3, $02, dSMPSSnare, dKickS3, $04, $04, dSMPSSnare, dKickS3, dKickS3, dKickS3, dSMPSSnare, dKickS3
+	dc.b $02, dSMPSSnare, dKickS3, $04, $04, dSMPSSnare, dKickS3
 	smpsReturn
 
 CanCan_DAC_13_0_64:
-	dc.b dSnare, $02, $02, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick
-	dc.b dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick
-	dc.b dKick
+	dc.b dSMPSSnare, $02, $02, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3
+	dc.b dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3
+	dc.b dKickS3
 	smpsReturn
 
 CanCan_DAC_14_0_64:
-	dc.b dSnare, $02, $02, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick
-	dc.b dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dSnare, dSnare, dSnare, $01, $01
+	dc.b dSMPSSnare, $02, $02, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3
+	dc.b dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare, dSMPSSnare, $01, $01
 	dc.b $01, $01, $01, $01, $01, $01
 	smpsReturn
 
 CanCan_DAC_15_0_64:
-	dc.b dSnare, $04, dKick, dSnare, dKick, dSnare, dKick, dSnare, dKick, $02, $02, dSnare, $04, dKick, dSnare, dKick
-	dc.b dSnare, dKick, dSnare, dSnare, $02, $02
+	dc.b dSMPSSnare, $04, dKickS3, dSMPSSnare, dKickS3, dSMPSSnare, dKickS3, dSMPSSnare, dKickS3, $02, $02, dSMPSSnare, $04, dKickS3, dSMPSSnare, dKickS3
+	dc.b dSMPSSnare, dKickS3, dSMPSSnare, dSMPSSnare, $02, $02
 	smpsReturn
 
 CanCan_DAC_16_0_64:
-	dc.b dSnare, $02, $02, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick
-	dc.b dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dSnare
-	dc.b dSnare
+	dc.b dSMPSSnare, $02, $02, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3
+	dc.b dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dSMPSSnare
+	dc.b dSMPSSnare
 	smpsReturn
 
 CanCan_DAC_17_0_64:
-	dc.b dSnare, $02, $02, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick, dKick, dSnare, dSnare, dKick
-	dc.b dKick, dSnare, $10, $10
+	dc.b dSMPSSnare, $02, $02, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3, dKickS3, dSMPSSnare, dSMPSSnare, dKickS3
+	dc.b dKickS3, dSMPSSnare, $10, $10
 	smpsReturn
 
 CanCan_DAC_18_0_64:
-	dc.b dSnare, $10, $10
+	dc.b dSMPSSnare, $10, $10
+	smpsChanTempoDiv	$04
+CanCan_DAC_Loop:
 	dc.b $01
-	dc.b smpsNoAttack, $01
-	dc.b $01
-	dc.b smpsNoAttack, $01
-	dc.b $01
-	dc.b smpsNoAttack, $01
-	dc.b $01
-	dc.b smpsNoAttack, $01
-	dc.b $01
-	dc.b smpsNoAttack, $01
-	dc.b $01
-	dc.b smpsNoAttack, $01
-	dc.b $01
-	dc.b smpsNoAttack, $01
-	dc.b $01
-	dc.b smpsNoAttack, $01
-	dc.b $01
-	dc.b $01
-	dc.b $01
-	dc.b $01
-	dc.b $01
-	dc.b $01
-	dc.b $01
-	dc.b $01
-	dc.b $01
-	dc.b $01
-	dc.b $01
-	dc.b $01
-	dc.b $01
-	dc.b $01
-	dc.b $01
-	dc.b $01
+	smpsLoop	0,8,CanCan_DAC_Loop
+	smpsChanTempoDiv	$02
+	smpsLoop	1,2,CanCan_DAC_Loop
 	smpsReturn
-
-CanCan_DAC_19_0_64:
-	dc.b dSnare, $40
-	smpsStop
 
 CanCan_PSG1:
 
@@ -2573,8 +2522,8 @@ CanCan_PSG1_Jump:
 	smpsCall CanCan_PSG1_19_0_64
 	smpsCall CanCan_PSG1_1A_0_64_08
 	smpsCall CanCan_PSG1_1B_0_64
-	smpsCall CanCan_PSG1_1C_0_64
-	smpsJump CanCan_PSG1_Jump
+	dc.b	nD3, $14, nRst, $04, $28
+	smpsStop
 
 CanCan_PSG1_00_0_64:
 	smpsPSGvoice	AppleTone_02
@@ -2703,13 +2652,13 @@ CanCan_PSG1_0B_0_64:
 	smpsReturn
 
 CanCan_PSG1_0C_0_64:
-	dc.b nA2, $04, nC3, nB2, nA2, nG2, nD3, nA2, nB2, nG2, $08, nD2, nG2, $10
+	dc.b nA2, $04, nC3, nB2, nA2, nG2, nD3, nA2, nB2, nG2, nRst, nD2, $08, nG2, $10
 	smpsReturn
 
 CanCan_PSG1_0D_0_48:
-	dc.b nA2, $04, nC3, nB2, nA2, nG2, nD3, nA2, nB2, nG2, $08
+	dc.b nA2, $04, nC3, nB2, nA2, nG2, nD3, nA2, nB2, nG2, nRst
 	smpsPSGvoice	AppleTone_02
-	dc.b nB1, nG2
+	dc.b nB1, $08
 	smpsReturn
 
 CanCan_PSG1_02_0_64_0E:
@@ -2750,7 +2699,7 @@ CanCan_PSG1_12_0_64:
 	smpsReturn
 
 CanCan_PSG1_13_0_64:
-	dc.b nD2, $04, nA2, nE2, nFs2, nD2, $08, nA1
+	dc.b nD2, $04, nA2, nE2, nFs2, nD2, nRst, nA1, $08
 	smpsPSGvoice	DoleTone_03
 	smpsModSet	$00, $01, $04, $7F
 	dc.b nD2, $10, nE2, $04, nG2, nFs2, nE2
@@ -2778,7 +2727,7 @@ CanCan_PSG1_14_0_64:
 	smpsReturn
 
 CanCan_PSG1_17_0_64_0F:
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	dc.b nA2, $02
 	smpsPSGAlterVol	$07
 	dc.b nD2
@@ -2845,7 +2794,7 @@ CanCan_PSG1_17_0_64_0F:
 	smpsReturn
 
 CanCan_PSG1_19_0_64:
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	smpsPSGAlterVol	$F9
 	dc.b nMaxPSG, $02
 	smpsPSGAlterVol	$07
@@ -2956,10 +2905,6 @@ CanCan_PSG1_1B_0_64:
 	dc.b nD2, nFs2, nD2, nFs2, nD2, nFs2, nD2, nFs2, nD2
 	smpsReturn
 
-CanCan_PSG1_1C_0_64:
-	dc.b nD3, $14, nRst, $04, $28
-	smpsStop
-
 CanCan_PSG2:
 
 CanCan_PSG2_Jump:
@@ -3004,9 +2949,9 @@ CanCan_PSG2_Jump:
 	smpsCall CanCan_PSG2_19_0_64
 	smpsCall CanCan_PSG2_1A_0_64_08
 	smpsCall CanCan_PSG2_1B_0_64
-	smpsCall CanCan_PSG2_1C_0_64
-	smpsPSGAlterVol	$05
-	smpsJump CanCan_PSG2_Jump
+	dc.b	nA2, $14, nRst, $04, $28
+	smpsStop
+
 
 CanCan_PSG2_00_0_64_0A:
 	dc.b smpsNoAttack, $04
@@ -3188,7 +3133,7 @@ CanCan_PSG2_14_0_64:
 	smpsReturn
 
 CanCan_PSG2_17_0_64_0F:
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	dc.b nA1, $02
 	smpsPSGAlterVol	$07
 	dc.b nD1
@@ -3255,7 +3200,7 @@ CanCan_PSG2_17_0_64_0F:
 	smpsReturn
 
 CanCan_PSG2_19_0_64:
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	smpsPSGAlterVol	$F9
 	dc.b nA3, $02
 	smpsPSGAlterVol	$07
@@ -3366,10 +3311,6 @@ CanCan_PSG2_1B_0_64:
 	dc.b nFs2, nA2, nFs2, nA2, nFs2, nA2, nFs2, nA2, nFs2
 	smpsReturn
 
-CanCan_PSG2_1C_0_64:
-	dc.b nA2, $14, nRst, $04, $28
-	smpsStop
-
 CanCan_PSG3:
 	smpsPSGform	$E7
 
@@ -3407,7 +3348,7 @@ CanCan_PSG3_Jump:
 	smpsCall CanCan_PSG3_0B_0_64
 	smpsCall CanCan_PSG3_0C_0_64
 	smpsCall CanCan_PSG3_0B_0_64
-	smpsCall CanCan_PSG3_08_0_64
+	smpsCall CanCan_PSG3_08_0_64_0C
 	smpsCall CanCan_PSG3_08_0_64
 	smpsCall CanCan_PSG3_08_0_64
 	smpsCall CanCan_PSG3_08_0_64
@@ -3415,13 +3356,13 @@ CanCan_PSG3_Jump:
 	smpsCall CanCan_PSG3_0E_0_64
 	smpsCall CanCan_PSG3_0F_0_64
 	smpsCall CanCan_PSG3_10_0_64
-	smpsCall CanCan_PSG3_11_0_64
-	smpsPSGAlterVol	$05
-	smpsJump CanCan_PSG3_Jump
+	dc.b	nMaxPSG, $40
+	smpsStop
+
 
 CanCan_PSG3_00_0_64:
 	dc.b nRst, $04
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	dc.b nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG
 	dc.b $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02
 	dc.b $02, nRst, $04, nMaxPSG, $02, $02
@@ -3429,7 +3370,7 @@ CanCan_PSG3_00_0_64:
 
 CanCan_PSG3_01_0_64:
 	dc.b nRst, $04
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	dc.b nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG
 	dc.b $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02
 	dc.b $02, nRst, $04, nMaxPSG, $02, $02
@@ -3437,21 +3378,21 @@ CanCan_PSG3_01_0_64:
 
 CanCan_PSG3_02_0_64:
 	dc.b nMaxPSG, $08, $08, $08, $08, nRst, $04
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	dc.b nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG
 	dc.b $02, $02
 	smpsReturn
 
 CanCan_PSG3_03_0_64:
 	dc.b nMaxPSG, $08, $08, $08, $08, nRst, $04
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	dc.b nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG
 	dc.b $02, $02
 	smpsReturn
 
 CanCan_PSG3_04_0_64:
 	dc.b nRst, $04
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	dc.b nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG
 	dc.b $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02
 	dc.b $02, nRst, $04, nMaxPSG, $02, $02
@@ -3459,14 +3400,14 @@ CanCan_PSG3_04_0_64:
 
 CanCan_PSG3_05_0_64:
 	dc.b nRst, $04
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	dc.b nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG
 	dc.b $02, $02, $10, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02
 	smpsReturn
 
 CanCan_PSG3_06_0_64:
 	dc.b nRst, $04
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	dc.b nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG
 	dc.b $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02
 	dc.b $02, nRst, $04, nMaxPSG, $02, $02
@@ -3474,9 +3415,9 @@ CanCan_PSG3_06_0_64:
 
 CanCan_PSG3_07_0_48:
 	dc.b nRst, $04
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	dc.b nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG
-	dc.b $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst
+	dc.b $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02
 	smpsReturn
 
 CanCan_PSG3_09_0_64:
@@ -3486,13 +3427,13 @@ CanCan_PSG3_09_0_64:
 CanCan_PSG3_0A_0_64:
 	dc.b nMaxPSG, $04, $04, $04, $04, $04, $04, $04, $04, nRst, nMaxPSG, $02, $02, nRst, $04, nMaxPSG
 	dc.b $02, $02, nRst, $04
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	dc.b nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02
 	smpsReturn
 
 CanCan_PSG3_0B_0_64:
 	dc.b nRst, $04
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	dc.b nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG
 	dc.b $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02
 	dc.b $02, nRst, $04, nMaxPSG, $02, $02
@@ -3500,7 +3441,7 @@ CanCan_PSG3_0B_0_64:
 
 CanCan_PSG3_0C_0_64:
 	dc.b nRst, $04
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	dc.b nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG
 	dc.b $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02
 	dc.b $02, nRst, $04, nMaxPSG, $02, $02
@@ -3508,17 +3449,26 @@ CanCan_PSG3_0C_0_64:
 
 CanCan_PSG3_0D_0_64:
 	dc.b nRst, $04
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	dc.b nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG
 	dc.b $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02, $02, nRst, $04, nMaxPSG, $02
 	dc.b $02, nRst, $04, nMaxPSG, $02, $02
+	smpsReturn
+
+CanCan_PSG3_08_0_64_0C:
+	smpsPSGvoice	AppleTone_02
+	smpsPSGAlterVol	$FD
+	dc.b nMaxPSG, $08
+	smpsPSGvoice	TFTone_01
+	smpsPSGAlterVol	$05
+	dc.b $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04
 	smpsReturn
 
 CanCan_PSG3_08_0_64:
 	smpsPSGvoice	AppleTone_02
 	smpsPSGAlterVol	$FB
 	dc.b nMaxPSG, $08
-	smpsPSGvoice	DoomTone
+	smpsPSGvoice	TFTone_01
 	smpsPSGAlterVol	$05
 	dc.b $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04, $04
 	smpsReturn
@@ -3536,6 +3486,4 @@ CanCan_PSG3_10_0_64:
 	dc.b nMaxPSG, $10, $10, $20
 	smpsReturn
 
-CanCan_PSG3_11_0_64:
-	dc.b nMaxPSG, $40
-	smpsStop
+	smpsFooterEndSong	"TG2000Tracks/CanCan.asm"
