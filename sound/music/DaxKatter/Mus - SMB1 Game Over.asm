@@ -7,7 +7,7 @@ BGM_SMB1Over_Header:
 ;	Approximated Tempo = 150.00 BPM
 
 	smpsHeaderDAC	BGM_SMB1Over_DAC
-	smpsHeaderFM	BGM_SMB1Over_FM1,	$00, $07
+	smpsHeaderFM	BGM_SMB1Over_FM1,	$0C, $09
 	smpsHeaderPSG	BGM_SMB1Over_PSG1,	$0C, $00, $00, smb1Tone
 	smpsHeaderPSG	BGM_SMB1Over_PSG2,	$0C, $00, $00, smb1Tone
 
@@ -17,9 +17,6 @@ BGM_SMB1Over_FM1:
 
 BGM_SMB1Over_DAC:
 	smpsStop
-
-BGM_SMB1Over_FM1_00_0_96:
-	smpsReturn
 
 BGM_SMB1Over_PSG1:
 	dc.b	nE1, $04, nRst, $08, nC1, $04, nRst, $08, nG0, nF1, $10, $18, nE1, $04, nD1, nE1
@@ -32,18 +29,18 @@ BGM_SMB1Over_PSG2:
 	smpsStop
 
 BGM_SMB1Over_Voices:
-;	FM Voice 01 -> 00: Saw
+;	FM Voice 00 -> 00: nes-tri
 	smpsVcAlgorithm		$03
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$01, $02, $01, $00
+	smpsVcCoarseFreq	$00, $01, $00, $0F
 	smpsVcRateScale		$00, $00, $00, $00
 	smpsVcAttackRate	$1F, $1F, $1F, $1F
 	smpsVcAmpMod		$00, $00, $00, $00
 	smpsVcDecayRate1	$00, $00, $00, $00
-	smpsVcDecayRate2	$1F, $1F, $1F, $1F
-	smpsVcDecayLevel	$0F, $0F, $0F, $0F
+	smpsVcDecayRate2	$00, $00, $00, $00
+	smpsVcDecayLevel	$00, $00, $00, $00
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
-	smpsVcTotalLevel	$00, $33, $38, $0F
+	smpsVcTotalLevel	$02, $31, $40, $22
 
 	smpsFooterEndSong	"DaxKatter/Mus - SMB1 Game Over.asm"

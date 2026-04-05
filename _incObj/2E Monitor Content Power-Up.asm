@@ -879,7 +879,7 @@ Pow_GetErrorMsg:
 	rts
 
 .mildanner:
-	RaiseError	"ROM hack security breached by Mildanner!"
+	RaiseError	"ROM hack security breached by %<endl>Mildanner!"
 	rts
 
 .piracy:
@@ -907,7 +907,7 @@ Pow_GetErrorMsg:
 	rts
 
 .littletimmy:
-	RaiseError	"Little Timmy said it's his turn on the %,endl>Sega now!"
+	RaiseError	"Little Timmy said it's his turn on the %<endl>Sega now!"
 	rts
 
 .touchgrass:
