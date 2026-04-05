@@ -2,7 +2,7 @@ Passport_Header:
 	smpsHeaderStartSong 3
 	smpsHeaderVoice		Passport_Voices
 	smpsHeaderChan		$06, $03
-	smpsHeaderTempo		$02, $25
+	smpsHeaderTempo		$02, $30
 ;	Given Tempo = 150.00 BPM
 ;	Approximated Tempo = 150.29 BPM
 
@@ -795,7 +795,7 @@ Passport_FM3_Jump:
 	smpsJump Passport_FM3_Jump
 
 Passport_FM3_00_0_64:
-	dc.b smpsNoAttack, $40
+	dc.b nRst, $40
 	smpsReturn
 
 Passport_FM3_01_0_64:
@@ -1012,7 +1012,7 @@ Passport_FM4_Jump:
 	smpsJump Passport_FM4_Jump
 
 Passport_FM4_00_0_64:
-	dc.b smpsNoAttack, $40
+	dc.b nRst, $40
 	smpsReturn
 
 Passport_FM4_01_0_64_7F:
@@ -1330,7 +1330,7 @@ Passport_FM5_Jump:
 	smpsJump Passport_FM5_Jump
 
 Passport_FM5_00_0_64:
-	dc.b smpsNoAttack, $40
+	dc.b nRst, $40
 	smpsReturn
 
 Passport_FM5_01_0_64:
@@ -2348,3 +2348,5 @@ Passport_PSG3_0F_0_64:
 	smpsPSGAlterVol	$03
 	dc.b $02
 	smpsReturn
+
+	smpsFooterEndSong	"TG2000Tracks/Passport.asm"
