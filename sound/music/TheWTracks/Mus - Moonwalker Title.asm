@@ -1,81 +1,81 @@
 Moonwalker_Header:
-	smpsHeaderStartSong 1
-	smpsHeaderVoice     Moonwalker_Voices
-	smpsHeaderChan      $06, $00
-	smpsHeaderTempo     $02, $FF
+	smpsHeaderStartSong	1
+	smpsHeaderVoice		Moonwalker_Voices
+	smpsHeaderChan		$06, $00
+	smpsHeaderTempo		$02, $FF
 
-	smpsHeaderDAC       Moonwalker_DAC
-	smpsHeaderFM        Moonwalker_FM1,	$0C, $10
-	smpsHeaderFM        Moonwalker_FM2,	$F4, $0E
-	smpsHeaderFM        Moonwalker_FM3,	$0C, $10
-	smpsHeaderFM        Moonwalker_FM4,	$F4, $10
-	smpsHeaderFM        Moonwalker_FM5,	$F4, $10
+	smpsHeaderDAC		Moonwalker_DAC
+	smpsHeaderFM		Moonwalker_FM1,	$0C, $10
+	smpsHeaderFM		Moonwalker_FM2,	$F4, $0E
+	smpsHeaderFM		Moonwalker_FM3,	$0C, $10
+	smpsHeaderFM		Moonwalker_FM4,	$F4, $10
+	smpsHeaderFM		Moonwalker_FM5,	$F4, $10
 
 ; FM1 Data
 Moonwalker_FM1:
-	smpsPan             panLeft, $00
-	smpsSetvoice        $00
-	smpsModSet          $32, $01, $04, $02
+	smpsPan		panLeft, $00
+	smpsSetvoice	$00
+	smpsModSet	$32, $01, $04, $02
 	dc.b	nE3, $1E, smpsNoAttack
 
 Moonwalker_Loop04:
 	dc.b	nE3, $14, smpsNoAttack
-	smpsAlterVol        $01
-	smpsLoop            $00, $0D, Moonwalker_Loop04
+	smpsAlterVol	$01
+	smpsLoop	$00, $0D, Moonwalker_Loop04
 	smpsStop
 
 ; FM2 Data
 Moonwalker_FM2:
-	smpsSetvoice        $00
-	smpsModSet          $32, $01, $04, $02
+	smpsSetvoice	$00
+	smpsModSet	$32, $01, $04, $02
 	dc.b	nE2, $14, smpsNoAttack
 
 Moonwalker_Loop03:
 	dc.b	nE2, $14, smpsNoAttack
-	smpsAlterVol        $01
-	smpsLoop            $00, $0D, Moonwalker_Loop03
+	smpsAlterVol	$01
+	smpsLoop	$00, $0D, Moonwalker_Loop03
 	smpsStop
 
 ; FM3 Data
 Moonwalker_FM3:
-	smpsPan             panRight, $00
-	smpsSetvoice        $00
-	smpsModSet          $32, $01, $04, $02
+	smpsPan	panRight, $00
+	smpsSetvoice	$00
+	smpsModSet	$32, $01, $04, $02
 	dc.b	nRst, $01
 
 Moonwalker_Loop02:
 	dc.b	nB2, $14, smpsNoAttack
-	smpsAlterVol        $FF
-	smpsLoop            $00, $09, Moonwalker_Loop02
+	smpsAlterVol	$FF
+	smpsLoop	$00, $09, Moonwalker_Loop02
 	dc.b	nB2, $6E
 	smpsStop
 
 ; FM4 Data
 Moonwalker_FM4:
-	smpsSetvoice        $00
+	smpsSetvoice	$00
 	dc.b	nRst, $02, nE4, $1E, smpsNoAttack
 
 Moonwalker_Loop01:
 	dc.b	nE4, $14, smpsNoAttack
-	smpsAlterVol        $01
-	smpsLoop            $00, $0D, Moonwalker_Loop01
+	smpsAlterVol	$01
+	smpsLoop	$00, $0D, Moonwalker_Loop01
 	smpsStop
 
 ; FM5 Data
 Moonwalker_FM5:
-	smpsSetvoice        $00
-	smpsModSet          $32, $01, $04, $02
+	smpsSetvoice	$00
+	smpsModSet	$32, $01, $04, $02
 	dc.b	nRst, $03, nB3, $1E, smpsNoAttack
 
 Moonwalker_Loop00:
 	dc.b	nB3, $14, smpsNoAttack
-	smpsAlterVol        $01
-	smpsLoop            $00, $0D, Moonwalker_Loop00
+	smpsAlterVol	$01
+	smpsLoop	$00, $0D, Moonwalker_Loop00
 	smpsStop
 
 ; DAC Data
 Moonwalker_DAC:
-	dc.b	$86, $0C
+	dc.b	dSMPSKick, $0C
 	smpsStop
 
 Moonwalker_Voices:
