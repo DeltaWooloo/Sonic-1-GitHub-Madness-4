@@ -3,6 +3,7 @@
 ; ---------------------------------------------------------------------------
 ;Random monitor debug data/consts
 monLong	equ	4		;Length of each random monitor entry in table (long = 4 bytes)
+
 ;Random monitor debugging
 	ifdef __DEBUG__
 ;If DEBUG mode, then force to your designated entry for quick testing (= ID * monLong)
@@ -11,6 +12,16 @@ monDebug equ -1
 	else
 ;If NOT debug mode, then skip
 monDebug equ 0			
+	endif
+
+;Random monitor debugging
+	ifdef __DEBUG__
+;If DEBUG mode, then force to your designated entry for quick testing (= ID * monLong)
+;monDebug equ $1D * monLong
+msgDebug equ -1
+	else
+;If NOT debug mode, then skip
+msgDebug equ 0			
 	endif
 
 ;!@ GD: Macros
@@ -130,10 +141,11 @@ Pow_GetLife2:
 		addq.b	#1,(v_lives).w	; add 1 to the number of lives you have
 		addq.b	#1,(f_lifecount).w ; update the lives counter
 		rts
+
 Pow_GetLife3:
 		move.w	#bgm_ExtraLife,d0
-		jsr		(QueueSound1).l	; play extra life music
-		rts
+		jmp	(QueueSound1).l	; play extra life music
+
 ; ===========================================================================
 
 Pow_ChkShoes:
@@ -603,9 +615,9 @@ Pow_Randomiser:
 ; Spawn a clone, play let's go SFX
 .spawnPlayer:
 		spawnObj	id_SonicPlayer,$00,dLetsGOO,(v_playerClone).w
-		bsr.w		Pow_GetLife2					;Give a 1up
-		bsr.w		.zapSetFX_Timer
-		rts
+		bsr.w		Pow_GetLife2		;Give a 1up
+		bra.w		.zapSetFX_Timer
+
 ; ===========================================================================
 		
 ; Your winner! Spawn a signpost
@@ -669,9 +681,8 @@ Pow_Randomiser:
 		jsr	(QueueSound2).l
 		move.b	#2,(v_vbla_routine).w	; set routine 2 in V-Int
 		jsr	(WaitForVBla).w		; wait for V-Blank to finish
-		pcm	dShutdown			;Play Shutdown PCM		
-		RaiseError	"YOU LOST THE GAME!"	;ERROR!
-		rts
+		pcm	dShutdown			;Play Shutdown PCM
+		bra.w	Pow_GetErrorMsg
 
 ; ===========================================================================
 .superlucky:	; Congrats, you get all power-ups
@@ -756,3 +767,109 @@ Pow_vdp_fixRegs:
 Level_LoadPal2:
 		;!@ GD TODO: Reload Sonic/level dry+wet palettes
 		rts
+
+; ===========================================================================
+
+Pow_GetErrorMsg:
+		moveq	#0,d0
+		jsr	(RandomNumber).l	; get a random number
+		and.l	#$FFFF,d0		; strip high word
+		divu.w	#(.msgtableend-.msgtable)/4,d0
+		swap	d0
+		lsl.w	#2,d0
+	;!@ GenesisDoes: Random monitor testing
+	;Force to particular type as needed
+	if msgDebug>0
+		move.w	#msgDebug,d0
+	endif
+		move.l	.msgtable(pc,d0.w),a2
+		jmp	(a2)
+
+; ===========================================================================
+.msgtable:							;Subtype / subtype*4
+		dc.l	.lostthegame			;$00 / $00
+		dc.l	.addressnot			;$01 / $04
+		dc.l	.legal				;$02 / $08
+		dc.l	.feltlikeit			;$03 / $0C
+		dc.l	.stfu				;$04 / $10
+		dc.l	.mangrasp			;$05 / $14
+		dc.l	.megadrive			;$06 / $18
+		dc.l	.entryerror			;$07 / $1C
+		dc.l	.errorerror			;$08 / $20
+		dc.l	.oopsydaisys			;$09 / $24
+		dc.l	.waitthatsnot			;$0A / $28
+		dc.l	.nullreference			;$0B / $2C
+		dc.l	.programmernap			;$0C / $30
+		dc.l	.askdlc				;$0D / $34
+		dc.l	.toolimited			;$0E / $38
+.msgtableend:
+
+; ===========================================================================
+.lostthegame:
+	RaiseError	"YOU LOST THE GAME!"	;ERROR!
+	rts
+
+.addressnot:
+	RaiseError	"ADDRESSN'T ERROR"	;ERROR!
+	rts
+
+.legal:
+	RaiseError	"LEGAL INSTRUCTION"	;ERROR!
+	rts
+
+.feltlikeit:
+	RaiseError	"CAUSE I FELT LIKE IT"	;ERROR!
+	rts
+.stfu:
+	RaiseError	"LINE 1111 STFU"	;ERROR!
+	rts
+
+.mangrasp:
+	RaiseError	"ILLEGAL MANGRASP"	;ERROR!
+	rts
+
+.megadrive:
+	move.b	(v_megadrive).w,d0	; Get Region
+	andi.b	#$C0,d0			; Strip System Version Bytes
+	cmpi.b	#$80,d0			; Is the system a US Sega Genesis Console?
+	beq.s	.yankeesys		; The yanks get their own message, lucky bastards
+	RaiseError	"YOUR MEGA DRIVE HAS RAN INTO A %<endl>PROBLEM AND NEEDS TO RESTART"	;ERROR!
+	rts
+
+.yankeesys:
+	RaiseError	"YOUR SEGA GENESIS HAS RAN INTO A %<endl>PROBLEM AND NEEDS TO RESTART"	;ERROR!
+	rts
+
+.entryerror:
+	RaiseError	"ENTRY ERROR"
+	rts
+
+.errorerror:
+	RaiseError	"ERROR ERROR"
+	rts
+
+.oopsydaisys:
+	RaiseError	"OOPSIE DAISIES"
+	rts
+
+.waitthatsnot:
+	RaiseError	"WAIT, THAT'S NOT THE BUTTON TO %<endl>GIVE A POWERUP"
+	rts
+
+.nullreference:
+	RaiseError	"NullReferenceException"
+	rts
+
+.programmernap:
+	RaiseError	"The Programmer Has a Nap! %<endl>Hold out Programmer!"
+	rts
+
+.askdlc:
+	RaiseError	"For this powerup monitor, please %<endl>install the Monitor DLC!"
+	rts
+
+.toolimited:
+	move.b	#1,(v_curgame).w	; set the current game to Too LimitedSonic
+	RaiseError	"That's it, you're going to %<endl>Too Limited Sonic!"
+	rts
+; ===========================================================================
