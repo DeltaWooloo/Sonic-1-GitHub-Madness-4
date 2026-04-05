@@ -17,32 +17,23 @@ BGM_LimitedClear_Header:
 ; FM1 Data
 BGM_LimitedClear_FM1:
 	smpsSetvoice        $00
-	smpsCall	BGM_LimitedClear_Call00
-	smpsModSet          $0C, $01, $08, $04
-	dc.b	nG6, $33
-	smpsStop
 
 ; PSG1 Data
 BGM_LimitedClear_PSG1:
-	smpsCall	BGM_LimitedClear_Call00
-	dc.b	nG6, $33
-	smpsStop
-
-BGM_LimitedClear_Call00:
 	dc.b	nRst, $06, nG4, nG4, nG4, nG5, nG5, nG5, nG5, nG5, $0C, nG6
 	dc.b	$02, smpsNoAttack, nG7, $01, nG6, $03, nG6
-	smpsReturn
+	smpsModSet          $0C, $01, $08, $04
+	dc.b	nG6, $33
+	smpsStop
 
 ; FM2 Data
 BGM_LimitedClear_FM2:
 	smpsSetvoice        $01
 	smpsNoteFill        $0B
-	smpsNop             $01
 	dc.b	nG5, $03, nG5, nG4, $06, nG4, nG5, $03, nG5, nG4, $06, nG4
 	dc.b	nG5, $03, nG5, nRst, $06, nRst, $0C, nG4, $09
 	smpsNoteFill        $00
 	dc.b	nG4, $33
-	smpsNop             $01
 	smpsStop
 
 ; FM3 Data
@@ -83,9 +74,8 @@ BGM_LimitedClear_PSG3:
 
 ; DAC Data
 BGM_LimitedClear_DAC:
-	dc.b	dSnare, $03, dSnare, dSnare, $06, dSnare, dSnare, $03, dSnare, dSnare, $06, dSnare
-	dc.b	dSnare, $03, dSnare, dSnare, dSnare, dSnare, dSnare, $03, dSnare, dSnare, dSnare, $09
-	dc.b	$33
+	dc.b	dSnare, $03, $03, $06, $06, $03, $03, $06, $06
+	dc.b	$03, $03, $03, $03, $03, $03, $03, $03, $09, $33
 	smpsStop
 
 BGM_LimitedClear_Voices:
