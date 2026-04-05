@@ -227,11 +227,11 @@ Pow_Randomiser:
 		divu.w	#(.powtableend-.powtable)/4,d0
 		swap	d0
 		lsl.w	#2,d0
-		;!@ GenesisDoes: Random monitor testing
-		;Force to particular type as needed
-		if monDebug>0
+	;!@ GenesisDoes: Random monitor testing
+	;Force to particular type as needed
+	if monDebug>0
 		move.w	#monDebug,d0
-		endif		
+	endif
 		move.l	.powtable(pc,d0.w),a2
 		jmp	(a2)
 
@@ -518,49 +518,51 @@ Pow_Randomiser:
 
 ; Corrupt all dry/water palette colors
 .funkyColors:
+		nop
+		bra.w	.nothing		; since this crashes the game, dummy it out for now
 		;disableD
 		
 		;Push d0-d2, d7, and a0-a1 onto stack
-		movem.l	d0-d2,-(sp)
-		movem.l	d7,-(sp)
-		movem.l	a0-a1,-(sp)
+;		movem.l	d0-d2,-(sp)
+;		movem.l	d7,-(sp)
+;		movem.l	a0-a1,-(sp)
 		
 		;Directly load garbage palette from random ROM address into dry v_palette 
 		;Clear d0-d1,d7, and a0-a1 registers
-		moveq	#0,d0
-		moveq	#0,d1
-		moveq	#0,d2
-		moveq	#0,d7
-		movea.l	#0,a0
-		movea.l	#0,a1				
-		move.l	#(EndOfRom-1)-($80-1),d2	; Limit random ROM addr to within $40*2 bytes of max
-		jsr		(RandomAddress).l			; Pop random addr into d0
-		movea.l	d0,a0						; Move addr in d0 into a0 (source param)
-		lea		(v_palette).l,a1			; Load dry v_palette addr into a1 (dest param)
-		move.b	#$40-1,d7					; Load $40 palette words from source into dest
-		jsr		(PalLoadUser).l				; Dew the load. Dew it, Palpatine said
+;		moveq	#0,d0
+;		moveq	#0,d1
+;		moveq	#0,d2
+;		moveq	#0,d7
+;		movea.l	#0,a0
+;		movea.l	#0,a1				
+;		move.l	#(EndOfRom-1)-($80-1),d2	; Limit random ROM addr to within $40*2 bytes of max
+;		jsr		(RandomAddress).l			; Pop random addr into d0
+;		movea.l	d0,a0						; Move addr in d0 into a0 (source param)
+;		lea		(v_palette).l,a1			; Load dry v_palette addr into a1 (dest param)
+;		move.b	#$40-1,d7					; Load $40 palette words from source into dest
+;		jsr		(PalLoadUser).l				; Dew the load. Dew it, Palpatine said
 		
-		;Again for wet v_palette_water
-		moveq	#0,d0
-		moveq	#0,d1
-		moveq	#0,d2
-		moveq	#0,d7
-		movea.l	#0,a0
-		movea.l	#0,a1
-		move.l	#(EndOfRom-1)-($80-1),d2	; Limit random ROM addr to within $40*2 bytes of max
-		jsr		(RandomAddress).l
-		movea.l	d0,a0
-		lea		(v_palette_water).l,a1
-		move.b	#$40-1,d7
-		jsr		(PalLoadUser).l
+;		;Again for wet v_palette_water
+;		moveq	#0,d0
+;		moveq	#0,d1
+;		moveq	#0,d2
+;		moveq	#0,d7
+;		movea.l	#0,a0
+;		movea.l	#0,a1
+;		move.l	#(EndOfRom-1)-($80-1),d2	; Limit random ROM addr to within $40*2 bytes of max
+;		jsr		(RandomAddress).l
+;		movea.l	d0,a0
+;		lea		(v_palette_water).l,a1
+;		move.b	#$40-1,d7
+;		jsr		(PalLoadUser).l
+;		
+;		;Pop d0-d2, d7, and a0-a1 from stack		
+;		movem.l	(sp)+,a0-a1
+;		movem.l	(sp)+,d7
+;		movem.l	(sp)+,d0-d2
 		
-		;Pop d0-d2, d7, and a0-a1 from stack		
-		movem.l	(sp)+,a0-a1
-		movem.l	(sp)+,d7
-		movem.l	(sp)+,d0-d2
-		
-		;Mess with BG color too
-		bra.w	Pow_Randomiser.vdp07_bg0_reg
+;		;Mess with BG color too
+;		bra.w	Pow_Randomiser.vdp07_bg0_reg
 		rts
 
 ;Subroutine to enable_itns/display, play zap SFX, and setup timer for VDP FX
@@ -594,10 +596,17 @@ Pow_Randomiser:
 		rts
 ; ===========================================================================
 
-;Spawn a red spring. Boing!
+;Launch Sonic up into the air like a spring
 .springTime:
-		spawnObj	id_Springs,$00,dBoik
-		rts
+		lea	(v_player).w,a0
+		move.w	#-$1000,obVelY(a0)	; needs fixing
+		bset	#1,obStatus(a0)
+		bclr	#3,obStatus(a0)
+		move.b	#id_Spring,obAnim(a0) ; use "bouncing" animation
+		move.b	#2,obRoutine(a0)
+		move.w	#sfx_Spring,d0
+		jmp	(QueueSound2).l	; play spring sound
+
 ; ===========================================================================
 		
 ;Spawn a Giant Ring, and award 50 rings to ride
@@ -609,14 +618,14 @@ Pow_Randomiser:
 ; ===========================================================================
 ;Spawn another random monitor. LOL!
 .monitorInception:
-		spawnObj	id_Monitor,$07,dEggNo	;Random monitor subtype
+		spawnObj	id_Monitor,$07,dEggNo	;Random monitor subtype (if this monitor is broken, following monitors will also be broken, be aware of that)
 		rts
-		
+
 ; ===========================================================================
 		
 ;Spawn a lamppost
 .lampoil:		;Rope, bombs, you want it? It's yours my friend; as long as you have enough rings
-		spawnObj	id_Lamppost,$7F,dOllieWahoo	;Subtype $7F to chump all other IDs
+		spawnObj	id_Lamppost,$7F,dOllieWahoo	;Subtype $7F to chump all other IDs (only works once)
 		rts
 ;===========================================================================
  
@@ -630,9 +639,11 @@ Pow_Randomiser:
  
  ;Your under arrest. ILLEGAL
 .crash:		;Bandicoot, duh
-		move.b	#bgm_Stop,d0				; stop the music
+		move.b	#bgm_Stop,d0			; stop the music
 		jsr	(QueueSound2).l
-		pcm	dShutdown						;Play Shutdown PCM		
+		move.b	#2,(v_vbla_routine).w	; set routine 2 in V-Int
+		jsr	(WaitForVBla).w		; wait for V-Blank to finish
+		pcm	dShutdown			;Play Shutdown PCM		
 		RaiseError	"YOU LOST THE GAME!"	;ERROR!
 		rts
 
