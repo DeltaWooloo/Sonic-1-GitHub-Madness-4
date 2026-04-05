@@ -55,6 +55,7 @@ PSG_Index:
 		dc.l PSG_Scrap1, PSG_Scrap2, PSG_Coffin, PSG_Doom, PSG_GHM4_01
 		dc.l PSG_Virus01, PSG_Virus02, PSG_Virus03, PSG_Virus04 
 		dc.l PSG_ClintonYr, PSG_Pass1, PSG_Pass2, PSG_Pass3, PSG_Pass4
+		dc.l PSG_Mega1, PSG_Mega2, PSG_Mega3, PSG_Mega4
 
 PSG1:		dc.b 0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,$80
 	even
@@ -333,6 +334,22 @@ PSG_Pass3:
 
 PSG_Pass4:
 	dc.b	0,0,4,$80
+	even
+
+PSG_Mega1:
+	dc.b	0,1,2,4,4,4,4,5,$80
+	even
+
+PSG_Mega2:
+	dc.b	1,2,3,3,4,5,6,6,7,7,7,8,$80
+	even
+
+PSG_Mega3:
+	dc.b	4,3,3,2,2,3,4,5,5,6,6,7,$80
+	even
+
+PSG_Mega4:
+	dc.b	0,0,0,0,1,2,$80
 	even
 
 
