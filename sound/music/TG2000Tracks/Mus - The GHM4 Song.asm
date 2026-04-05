@@ -394,7 +394,7 @@ BGM_GHM4Title_FM5_Loop03:
 	smpsAlterVol	$FC
 	smpsLoop	0,3,BGM_GHM4Title_FM5_Loop03
 	smpsSetvoice	$01
-	smpsAlterVol	$F6
+	smpsAlterVol	$FA
 	smpsCall	BGM_GHM4Title_Call01
 	dc.b	nRst, $20
 	smpsCall	BGM_GHM4Title_Call01
@@ -718,3 +718,4 @@ BGM_GHM4Title_Voices:
 	smpsVcReleaseRate	$0C, $0A, $0A, $04
 	smpsVcTotalLevel	$00, $0E, $00, $21
 
+	smpsFooterEndSong	"TG2000Tracks/Mus - The GHM4 Song.asm"
