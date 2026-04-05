@@ -879,7 +879,7 @@ Pow_GetErrorMsg:
 	rts
 
 .mildanner:
-	RaiseError	"ROM hack security breached by %<endl>Mildanner!"
+	RaiseError	"HackROM security breached by %<endl>Mildanner!"
 	rts
 
 .piracy:

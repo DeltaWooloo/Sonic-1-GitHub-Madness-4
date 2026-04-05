@@ -104,8 +104,6 @@ Clinton_ShowScr:
 	jsr	SynchroAnimate.l
 	bra.s	Clinton_ShowScr
 .leave:
-	;!@ GD: Bugfix to start next level at startpos instead of previous lamppost
-	clr.b	(v_lastlamp).w	; clear lamppost counter
 	move.b	#0,submode.w
 	move.b	#id_Level,v_gamemode.w
 	jmp	GM_Level

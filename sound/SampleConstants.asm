@@ -69,7 +69,7 @@ dLetsGOO			ds.b 1
 dBoik				ds.b 1
 dQuakeJump			ds.b 1
 dFannys				ds.b 1
-dQuakeRocket			ds.b 1
+dQuakeRocket		ds.b 1
 dSTFU				ds.b 1
 dFuck				ds.b 1
 dChicken			ds.b 1
@@ -80,7 +80,7 @@ dYouCanSuck			ds.b 1
 dBoostPower			ds.b 1
 dClintonHi			ds.b 1
 dClintonWin			ds.b 1
-dClintonFail			ds.b 1
+dClintonFail		ds.b 1
 dDoYouSuck			ds.b 1
 dOnTheBall			ds.b 1
 dDAMN				ds.b 1
@@ -93,23 +93,24 @@ dGithub				ds.b 1
 dMadness			ds.b 1
 dTheFourth			ds.b 1
 dBSOD				ds.b 1
-dShutdown			ds.b 1
-dChord16			ds.b 1
 
 ; Splash Screen Samples
+dShutdown			ds.b 1
+dChord16			ds.b 1
 dEggNo				ds.b 1
-dfunnyb_utthole			ds.b 1
+dfunnyb_utthole		ds.b 1
 d2kki				ds.b 1
-dEagleSoftSong			ds.b 1
-dGenesisDoes1			ds.b 1
+dEagleSoftSong		ds.b 1
+dGenesisDoes1		ds.b 1
+dVirus				ds.b 1
 dsupbeaches			ds.b 1
 
 ; Commercial Samples
 dRightBack			ds.b 1
-dGenesisCan3			ds.b 1
+dGenesisCan3		ds.b 1
 
 ; Ollie Samples
-dOllieGameTap			ds.b 1
+dOllieGameTap		ds.b 1
 dOllieWahoo			ds.b 1
 
 ; SEGA Samples
