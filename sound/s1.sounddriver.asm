@@ -52,9 +52,9 @@ PSG_Index:
 		dc.l PSG_Chicken_01, PSG_Chicken_02, PSG_Chicken_03
 		dc.l PSG_Danstar_01, PSG_Danstar_02, PSG_Danstar_03, PSG_Danstar_04
 		dc.l PSG_TF1, PSG_TF2, PSG_Apple1, PSG_Apple2, PSG_Apple3
-		dc.l PSG_Scrap1, PSG_Scrap2, PSG_Coffin, PSG_Doom
-		dc.l PSG_GHM4_01
+		dc.l PSG_Scrap1, PSG_Scrap2, PSG_Coffin, PSG_Doom, PSG_GHM4_01
 		dc.l PSG_Virus01, PSG_Virus02, PSG_Virus03, PSG_Virus04 
+		dc.l PSG_ClintonYr
 
 PSG1:		dc.b 0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,$80
 	even
@@ -310,7 +310,12 @@ PSG_Virus03
 PSG_Virus04
 	dc.b	0,0,0,0,0,3,$80
 	even
-
+PSG_ClintonYr:
+	dc.b	1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1
+	dc.b	2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3
+	dc.b	4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5
+	dc.b	6,6,6,6,6,6,6,6,6,6,7,$80
+	even
 
 ; ---------------------------------------------------------------------------
 ; New tempos for songs during speed shoes

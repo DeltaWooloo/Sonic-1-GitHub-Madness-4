@@ -209,6 +209,7 @@ GM_Advert:
 		advertdata 30,5,Ad_Limited.art,Ad_Limited.fg,Ad_Limited.pal,bgm_LimitedEgg,0		; It is now Final Limit
 		advertdata 30,5,Ad_Atgame.art,Ad_Atgame.fg,Ad_Atgame.pal,bgm_BomerDude,0		;pls dont touch this very beautiful ad
 		advertdata 10,10,Ad_FartBaby.art,Ad_FartBaby.fg,Ad_FartBaby.pal,bgm_LG,0
+		advertdata 12,12,Ad_ClintonYears.art,Ad_ClintonYears.fg,Ad_ClintonYears.pal,bgm_ClintonYears,0
 .tablee:
 .eyecatch1:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg1,Ad_Eyecatch.pal,0,dRightBack
 .eyecatch2:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg2,Ad_Eyecatch.pal,bgm_EuroSega,0
@@ -387,4 +388,10 @@ Ad_FartBaby:
 .pal:		binclude "_gamemode/advert/ad-FartBaby-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-FartBaby-map.eni"
 .art:		binclude "_gamemode/advert/ad-FartBaby-art.nem"
+		even
+
+Ad_ClintonYears:
+.pal:		binclude "_gamemode/advert/ad-ClintonYears-pal.unc"
+.fg:		binclude "_gamemode/advert/ad-ClintonYears-map.eni"
+.art:		binclude "_gamemode/advert/ad-ClintonYears-art.nem"
 		even
