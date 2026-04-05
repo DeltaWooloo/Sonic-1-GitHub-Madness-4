@@ -437,3 +437,13 @@ MCDSend macro	id, arg, arg2
 	beq.s	.wait2
 .skip
     endm
+; ---------------------------------------------------------------------------
+; GKATO: mildanner boss VRAM
+; ---------------------------------------------------------------------------
+
+Dilmanner:	macro
+		move.l	#Map_Eggman,obMap(a1)
+		move.w	#($7E00/$20),obGfx(a1)
+		endm
+		
+		

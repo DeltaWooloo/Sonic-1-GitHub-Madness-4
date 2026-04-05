@@ -1,8 +1,28 @@
 {
     "Flex": 2,
     "name": "Sonic 1",
-    "node": "8848ce8b-f5d7-46a6-ac22-eafcbefd5056",
+    "node": "eae0ced4-d239-490f-b3be-8978f1f4df6c",
     "objects": [
+        {
+            "uuid": "eae0ced4-d239-490f-b3be-8978f1f4df6c",
+            "format": "Sonic 1.js",
+            "name": "kys",
+            "palettes": [],
+            "art": {
+                "path": "",
+                "compression": "Uncompressed",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "_incObj\\DioMildanner\\Map - Intro.asm",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            }
+        },
         {
             "uuid": "8848ce8b-f5d7-46a6-ac22-eafcbefd5056",
             "format": "Sonic 1.js",
