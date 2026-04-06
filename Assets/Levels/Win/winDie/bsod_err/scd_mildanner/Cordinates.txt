@@ -1,0 +1,12 @@
+Tilemap total: 40x28
+
+col/row
+Msgbox: 29x6
+Eggman: 10x5 (x6 overlap)
+Box total: 29x11
+
+col/row
+TL corner of whole box = 5,8
+TL corner of eggman = 13,8
+TL corner of eggman (padded horiz) = 15,8
+TL corner of msgbox = 10,8
