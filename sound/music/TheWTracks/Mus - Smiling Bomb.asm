@@ -5,14 +5,14 @@ SmilingBomb_Header:
 	smpsHeaderTempo     $01, $07
 
 	smpsHeaderDAC       SmilingBomb_DAC
-	smpsHeaderFM        SmilingBomb_FM1,	$00, $10
-	smpsHeaderFM        SmilingBomb_FM2,	$00, $16
-	smpsHeaderFM        SmilingBomb_FM3,	$00, $11
-	smpsHeaderFM        SmilingBomb_FM4,	$00, $11
-	smpsHeaderFM        SmilingBomb_FM5,	$00, $11
-	smpsHeaderPSG       SmilingBomb_PSG1,	$DC, $02, $00, $00
-	smpsHeaderPSG       SmilingBomb_PSG2,	$DC, $02, $00, $00
-	smpsHeaderPSG       SmilingBomb_PSG3,	$00, $03, $00, fTone_02
+	smpsHeaderFM        SmilingBomb_FM1,	$00, $12
+	smpsHeaderFM        SmilingBomb_FM2,	$00, $18
+	smpsHeaderFM        SmilingBomb_FM3,	$00, $13
+	smpsHeaderFM        SmilingBomb_FM4,	$00, $13
+	smpsHeaderFM        SmilingBomb_FM5,	$00, $13
+	smpsHeaderPSG       SmilingBomb_PSG1,	$DC, $03, $00, $00
+	smpsHeaderPSG       SmilingBomb_PSG2,	$DC, $03, $00, $00
+	smpsHeaderPSG       SmilingBomb_PSG3,	$00, $04, $00, fTone_02
 
 ; FM1 Data
 SmilingBomb_FM1:
@@ -697,59 +697,59 @@ SmilingBomb_Loop0A:
 
 ; DAC Data
 SmilingBomb_DAC:
-	dc.b	dKick, $24, $24, $24, dSnare, $06, $06, $06, $06, $06, $06, dKick
-	dc.b	$24, $24, $24, nRst, $0C, dMidTimpani, $06, dSnare, $12
+	dc.b	dSMPSKick, $24, $24, $24, dSMPSSnare, $06, $06, $06, $06, $06, $06, dSMPSKick
+	dc.b	$24, $24, $24, nRst, $0C, dMidTom, $06, dSMPSSnare, $12
 
 SmilingBomb_Loop00:
-	dc.b	dKick, $12, dSnare, dKick, dSnare
+	dc.b	dSMPSKick, $12, dSMPSSnare, dSMPSKick, dSMPSSnare
 	smpsLoop            $00, $07, SmilingBomb_Loop00
-	dc.b	dKick, $12, dSnare, dKick, $0C, dLowTimpani, $06, dSnare, $12
+	dc.b	dSMPSKick, $12, dSMPSSnare, dSMPSKick, $0C, dLowTom, $06, dSMPSSnare, $12
 
 SmilingBomb_Loop01:
-	dc.b	dKick, $12, dSnare, dKick, $0C, dLowTimpani, $06, dSnare, $12, dKick, $12, dSnare
-	dc.b	dKick, $0C, dSnare, $03, $03, $12, dKick, $0C, dSnare, $12, dKick, $06
-	dc.b	dSnare, $0C, dKick, $06, dSnare, $12, dKick, $0C, dSnare, $03, $03, dSnare
-	dc.b	$12, dKick, $0C, dSnare, $18
+	dc.b	dSMPSKick, $12, dSMPSSnare, dSMPSKick, $0C, dLowTom, $06, dSMPSSnare, $12, dSMPSKick, $12, dSMPSSnare
+	dc.b	dSMPSKick, $0C, dSMPSSnare, $03, $03, $12, dSMPSKick, $0C, dSMPSSnare, $12, dSMPSKick, $06
+	dc.b	dSMPSSnare, $0C, dSMPSKick, $06, dSMPSSnare, $12, dSMPSKick, $0C, dSMPSSnare, $03, $03, dSMPSSnare
+	dc.b	$12, dSMPSKick, $0C, dSMPSSnare, $18
 	smpsLoop            $00, $02, SmilingBomb_Loop01
 
 SmilingBomb_Loop02:
-	dc.b	dKick, $12, dSnare, dKick, dSnare
+	dc.b	dSMPSKick, $12, dSMPSSnare, dSMPSKick, dSMPSSnare
 	smpsLoop            $00, $07, SmilingBomb_Loop02
-	dc.b	dKick, $12, dSnare, dKick, $0C, dLowTimpani, $06, dSnare, $12, dKick, $12, dSnare
-	dc.b	dKick, $0C, dLowTimpani, $06, dSnare, $12, dKick, $12, dSnare, dKick, $0C, dSnare
-	dc.b	$03, $03, $12, dKick, $0C, dSnare, $12, dKick, $06, dSnare, $0C, dKick
-	dc.b	$06, dSnare, $12, dKick, $0C, dSnare, $03, $03, dSnare, $12, dKick, $0C
-	dc.b	dSnare, $18, dKick, $12, dSnare, $0C, dKick, $12, dLowTimpani, $06, dSnare, $12
-	dc.b	dKick, $0C, $06, dSnare, $0C, dSnare, $0C, dKick, $06, dSnare, $03, $03
+	dc.b	dSMPSKick, $12, dSMPSSnare, dSMPSKick, $0C, dLowTom, $06, dSMPSSnare, $12, dSMPSKick, $12, dSMPSSnare
+	dc.b	dSMPSKick, $0C, dLowTom, $06, dSMPSSnare, $12, dSMPSKick, $12, dSMPSSnare, dSMPSKick, $0C, dSMPSSnare
+	dc.b	$03, $03, $12, dSMPSKick, $0C, dSMPSSnare, $12, dSMPSKick, $06, dSMPSSnare, $0C, dSMPSKick
+	dc.b	$06, dSMPSSnare, $12, dSMPSKick, $0C, dSMPSSnare, $03, $03, dSMPSSnare, $12, dSMPSKick, $0C
+	dc.b	dSMPSSnare, $18, dSMPSKick, $12, dSMPSSnare, $0C, dSMPSKick, $12, dLowTom, $06, dSMPSSnare, $12
+	dc.b	dSMPSKick, $0C, $06, dSMPSSnare, $0C, dSMPSSnare, $0C, dSMPSKick, $06, dSMPSSnare, $03, $03
 	dc.b	$12, nRst, $48, nRst, $4E
 
 SmilingBomb_Loop03:
-	dc.b	dKick, $12, dSnare, dKick, dSnare
+	dc.b	dSMPSKick, $12, dSMPSSnare, dSMPSKick, dSMPSSnare
 	smpsLoop            $00, $03, SmilingBomb_Loop03
-	dc.b	dKick, $12, dSnare, dKick, $0C, $06, dSnare, $12
+	dc.b	dSMPSKick, $12, dSMPSSnare, dSMPSKick, $0C, $06, dSMPSSnare, $12
 
 SmilingBomb_Loop04:
-	dc.b	dKick, $12, dSnare, dKick, dSnare
+	dc.b	dSMPSKick, $12, dSMPSSnare, dSMPSKick, dSMPSSnare
 	smpsLoop            $00, $03, SmilingBomb_Loop04
-	dc.b	dKick, $0C, dSnare, $06, nRst, $0C, dSnare, $06, dKick, $0C, dSnare, $06
-	dc.b	dLowTimpani, $12
+	dc.b	dSMPSKick, $0C, dSMPSSnare, $06, nRst, $0C, dSMPSSnare, $06, dSMPSKick, $0C, dSMPSSnare, $06
+	dc.b	dLowTom, $12
 
 SmilingBomb_Loop05:
-	dc.b	dKick, $12, dSnare, dKick, dSnare
+	dc.b	dSMPSKick, $12, dSMPSSnare, dSMPSKick, dSMPSSnare
 	smpsLoop            $00, $03, SmilingBomb_Loop05
-	dc.b	dKick, $12, dSnare, dKick, $0C, $06, dSnare, $12
+	dc.b	dSMPSKick, $12, dSMPSSnare, dSMPSKick, $0C, $06, dSMPSSnare, $12
 
 SmilingBomb_Loop06:
-	dc.b	dKick, $12, dSnare, dKick, dSnare
+	dc.b	dSMPSKick, $12, dSMPSSnare, dSMPSKick, dSMPSSnare
 	smpsLoop            $00, $03, SmilingBomb_Loop06
-	dc.b	dKick, $0C, dSnare, $06, nRst, $0C, dSnare, $06, dKick, $0C, dSnare, $06
-	dc.b	dLowTimpani, $12
+	dc.b	dSMPSKick, $0C, dSMPSSnare, $06, nRst, $0C, dSMPSSnare, $06, dSMPSKick, $0C, dSMPSSnare, $06
+	dc.b	dLowTom, $12
 
 SmilingBomb_Loop07:
-	dc.b	dKick, $12, dSnare, dKick, dSnare
+	dc.b	dSMPSKick, $12, dSMPSSnare, dSMPSKick, dSMPSSnare
 	smpsLoop            $00, $03, SmilingBomb_Loop07
-	dc.b	dKick, $0C, dMidTimpani, $06, dSnare, $12, dKick, $1E, $06, dLowTimpani, $0C, dSnare
-	dc.b	$06, dMidTimpani, $12, dSnare, $0C, dKick, $03, $03, dSnare, $12
+	dc.b	dSMPSKick, $0C, dMidTom, $06, dSMPSSnare, $12, dSMPSKick, $1E, $06, dLowTom, $0C, dSMPSSnare
+	dc.b	$06, dMidTom, $12, dSMPSSnare, $0C, dSMPSKick, $03, $03, dSMPSSnare, $12
 	smpsJump            SmilingBomb_Loop00
 
 SmilingBomb_Voices:
@@ -791,7 +791,7 @@ SmilingBomb_Voices:
 
 ;	Voice $02
 ;	$3A
-;	$01, $01, $01, $02, 	dMidTimpani, $07, $07, $52, 	$09, $00, $00, $03
+;	$01, $01, $01, $02, 	$8D, $07, $07, $52, 	$09, $00, $00, $03
 ;	$01, $02, $02, $00, 	$52, $02, $02, $28, 	$18, $22, $18, $80
 	smpsVcAlgorithm     $02
 	smpsVcFeedback      $07
@@ -899,7 +899,7 @@ SmilingBomb_Voices:
 
 ;	Voice $08
 ;	$3A
-;	$01, $01, $01, $02, 	dMidTimpani, $07, $07, $52, 	$09, $00, $00, $03
+;	$01, $01, $01, $02, 	$8D, $07, $07, $52, 	$09, $00, $00, $03
 ;	$01, $02, $02, $00, 	$52, $02, $02, $28, 	$18, $22, $18, $80
 	smpsVcAlgorithm     $02
 	smpsVcFeedback      $07
@@ -935,7 +935,7 @@ SmilingBomb_Voices:
 
 ;	Voice $0A
 ;	$3A
-;	$00, $01, $00, $00, 	dMidTimpani, $14, $0F, $10, 	$19, $10, $00, $10
+;	$00, $01, $00, $00, 	$8D, $14, $0F, $10, 	$19, $10, $00, $10
 ;	$11, $15, $08, $07, 	$52, $02, $02, $18, 	$1C, $20, $06, $80
 	smpsVcAlgorithm     $02
 	smpsVcFeedback      $07
@@ -971,7 +971,7 @@ SmilingBomb_Voices:
 
 ;	Voice $0C
 ;	$3A
-;	$01, $01, $01, $03, 	dMidTimpani, $07, $07, $52, 	$09, $00, $00, $0A
+;	$01, $01, $01, $03, 	$8D, $07, $07, $52, 	$09, $00, $00, $0A
 ;	$01, $02, $02, $09, 	$52, $02, $02, $28, 	$1A, $25, $10, $80
 	smpsVcAlgorithm     $02
 	smpsVcFeedback      $07
@@ -989,7 +989,7 @@ SmilingBomb_Voices:
 
 ;	Voice $0D
 ;	$3A
-;	$01, $01, $01, $03, 	dMidTimpani, $07, $07, $52, 	$09, $00, $00, $0A
+;	$01, $01, $01, $03, 	$8D, $07, $07, $52, 	$09, $00, $00, $0A
 ;	$01, $02, $02, $09, 	$52, $02, $02, $28, 	$1A, $25, $10, $80
 	smpsVcAlgorithm     $02
 	smpsVcFeedback      $07
