@@ -14,7 +14,7 @@ bsodData macro seconds,skipsec,art1,artoff1,art2,artoff2,fg,bg,pal,tclr,bgm,pcm
 	dc.w artoff2
 	dc.l fg,bg,pal
 	dc.w ($8700|tclr)
-	dc.b seconds,skipsec,bgm,pcm
+	dc.b seconds,skipsec,pcm,bgm
 	endm
 ;bsodDatasize equ 16
 bsodDatasize equ 30
@@ -130,8 +130,7 @@ GM_BSOD:
 		move.l	(sp)+,a2
 		
 		;Load tiles into VRAM?
-		enable_display
-		enable_ints
+		enableD
 		move.l	a2,-(sp)
 .loadloop:
 		move.b	#$12,(v_vbla_routine).w
@@ -157,8 +156,7 @@ GM_BSOD:
 		move.l	(sp)+,a2
 		
 		;Load tiles into VRAM?
-		enable_display
-		enable_ints
+		enableD
 		move.l	a2,-(sp)
 .loadloop2:
 		move.b	#$12,(v_vbla_routine).w
@@ -169,6 +167,8 @@ GM_BSOD:
 		move.l	(sp)+,a2
 
 .loadmapFG:
+		;This line added, in case both art1 AND art2 don't load (e.g. TMSS_RSOD)
+		enableD
 		move.l	(a2)+,a0		;fg-map
 		lea	(v_ram_start).l,a1
 		moveq	#1,d0
@@ -219,6 +219,10 @@ GM_BSOD:
 		move.b	#2,(v_vbla_routine).w
 		jsr	WaitForVBla
 
+		move.b	(a2)+,d0			;pcm
+		beq.s	.nopcm
+		jsr	MegaPCM_PlaySample
+.nopcm:
 		move.b	(a2)+,d0			;bgm
 		beq.s	.nobgm
 		
@@ -230,10 +234,6 @@ GM_BSOD:
 .dobgm:		
 		jsr	QueueSound1
 .nobgm:
-		move.b	(a2)+,d0			;pcm
-		beq.s	.nopcm
-		jsr	MegaPCM_PlaySample
-.nopcm:
 
 		move.l	a2,-(sp)
 		;jsr	PaletteWhiteIn

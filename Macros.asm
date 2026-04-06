@@ -206,8 +206,8 @@ enable_display:	macro
 ; ---------------------------------------------------------------------------		
 ;!@ GD: Disable both ints and display
 enableD:	macro
-		enable_ints
 		enable_display
+		enable_ints
 		endm
 		
 ; ---------------------------------------------------------------------------
