@@ -8,7 +8,7 @@ Mus8E_Sonic_Got_Through_Header:
 	smpsHeaderFM        Mus8E_Sonic_Got_Through_FM1,	$F4, $0A
 	smpsHeaderFM        Mus8E_Sonic_Got_Through_FM2,	$DC, $0A
 	smpsHeaderFM        Mus8E_Sonic_Got_Through_FM3,	$F4, $15
-	smpsHeaderFM        Mus8E_Sonic_Got_Through_FM4,	$F4, $15
+	smpsHeaderFM        Mus8E_Sonic_Got_Through_FM4,	$F1, $15
 	smpsHeaderFM        Mus8E_Sonic_Got_Through_FM5,	$F4, $14
 	smpsHeaderPSG       Mus8E_Sonic_Got_Through_PSG1,	$D0, $05, $00, fTone_05
 	smpsHeaderPSG       Mus8E_Sonic_Got_Through_PSG2,	$DC, $07, $00, fTone_05
@@ -30,34 +30,31 @@ Mus8E_Sonic_Got_Through_PSG1:
 Mus8E_Sonic_Got_Through_FM2:
 	smpsSetvoice        $01
 	smpsNoteFill        $0B
-	smpsNop             $01
-	dc.b	nG5, $03, nG5, nG4, $06, nG4, nG5, $03, nG5, nG4, $06, nG4
-	dc.b	nG5, $03, nG5, nRst, $06, nRst, $0C, nG4, $09
+
+Mus8E_Sonic_Got_Through_Loop:
+	dc.b	nG5, $03, nG5, nG4, $06, nG4
+	smpsLoop	0,2,Mus8E_Sonic_Got_Through_Loop
+	dc.b	nG5, $03, nG5, nRst, $12
+	dc.b	nG4, $09
 	smpsNoteFill        $00
 	dc.b	nA4, $33
-	smpsNop             $01
 	smpsStop
 
 ; FM3 Data
 Mus8E_Sonic_Got_Through_FM3:
 	smpsPan             panLeft, $00
-	smpsSetvoice        $02
-	smpsNoteFill        $06
-	dc.b	nC6, $03, nC6, nRst, $0C, nC6, $03, nC6, nRst, $0C, nC6, $03
-	dc.b	nC6, nRst, $12
-	smpsNoteFill        $00
-	dc.b	nC6, $09, nD6, $33
-	smpsStop
+	smpsJump	Mus8E_Sonic_Got_Through_Jump
 
 ; FM4 Data
 Mus8E_Sonic_Got_Through_FM4:
 	smpsPan             panRight, $00
+
+Mus8E_Sonic_Got_Through_Jump:
 	smpsSetvoice        $02
 	smpsNoteFill        $06
-	dc.b	nA5, $03, nA5, nRst, $0C, nA5, $03, nA5, nRst, $0C, nA5, $03
-	dc.b	nA5, nRst, $12
+	dc.b	nC6, $03, $0F, $03, $0F, $03, $15
 	smpsNoteFill        $00
-	dc.b	nA5, $09, nB5, $33
+	dc.b	$09, nD6, $33
 	smpsStop
 
 ; FM5 Data

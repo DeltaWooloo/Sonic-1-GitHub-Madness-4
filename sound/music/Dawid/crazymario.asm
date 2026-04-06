@@ -1,21 +1,17 @@
 zecrazymario_Header:
-	smpsHeaderStartSong 1
-	smpsHeaderVoice     zecrazymario_Voices
-	smpsHeaderChan      $06, $03
-	smpsHeaderTempo     $01, $00
+	smpsHeaderStartSong 3
+	smpsHeaderVoice		zecrazymario_Voices
+	smpsHeaderChan		$04, $02
+	smpsHeaderTempo		$02, $54
 
-	smpsHeaderDAC       zecrazymario_DAC
-	smpsHeaderFM        zecrazymario_FM1,	$00, $00
-	smpsHeaderFM        zecrazymario_FM2,	$00, $00
-	smpsHeaderFM        zecrazymario_FM3,	$00, $00
-	smpsHeaderFM        zecrazymario_FM4,	$00, $00
-	smpsHeaderFM        zecrazymario_FM5,	$00, $00
-	smpsHeaderPSG       zecrazymario_PSG1,	$00, $00, $00, $00
-	smpsHeaderPSG       zecrazymario_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       zecrazymario_PSG3,	$00, $00, $00, $00
+	smpsHeaderDAC		zecrazymario_DAC
+	smpsHeaderFM		zecrazymario_FM1,	$00, $0A
+	smpsHeaderFM		zecrazymario_FM2,	$00, $0B
+	smpsHeaderFM		zecrazymario_FM3,	$00, $12
+	smpsHeaderPSG		zecrazymario_PSG1,	$0C, $00, $00, $00
+	smpsHeaderPSG		zecrazymario_PSG2,	$0E, $00, $00, $00
 
 ; FM3 Data
-zecrazymario_FM3:
 ; FM4 Data
 zecrazymario_FM4:
 ; PSG3 Data
@@ -24,53 +20,54 @@ zecrazymario_PSG3:
 
 ; FM1 Data
 zecrazymario_FM1:
-	smpsSetvoice        $00
-	smpsAlterVol        $0A
 	smpsPan             panCenter, $00
-	dc.b	nE4, $09, nE4, $0F, nE4, nC4, $09, nE4, $0F, nG4, $21, nG3
-	dc.b	$24, nC4, $18, nG3, $1B, nE3, nA3, $0F, nB3, $12, nBb3, $09
-	dc.b	nA3, $12, nG3, $0C, nE4, nG4, nA4, $0F, nF4, $09, nG4, $12
-	dc.b	nE4, $0F, nC4, $09, nD4, $0C, nB3, $7F, smpsNoAttack, $59
+	smpsSetvoice        $00
+	dc.b	nE4, $03, $05, $05, nC4, $03, nE4, $05, nG4, $0B, nG3, $0C
+	dc.b	nC4, $08, nG3, $09, nE3, nA3, $05, nB3, $06, nBb3, $03
+	dc.b	nA3, $06, nG3, $04, nE4, nG4, nA4, $05, nF4, $03, nG4, $06
+	dc.b	nE4, $05, nC4, $03, nD4, $04, nB3, $48
 	smpsStop
 
 ; FM2 Data
 zecrazymario_FM2:
-	smpsPan             panCenter, $00
-	dc.b	nRst, $7F, $7F, $7F, $63
 	smpsSetvoice        $01
-	smpsAlterVol        $0B
-	dc.b	nBb2, $0C, nAb2, nFs2, $15, nFs2, $06, nG3, nAb2, $03, nG3, nAb2
-	dc.b	nG3, nG3, nAb2, nAb2, nG3, nAb2, nG3, nAb2, nG3, nAb2, nG3, $15
-	dc.b	nG3, $03
+	dc.b	nRst, $50, nRst
+	dc.b	nBb2, $04, nAb2, nFs2, $07, nFs2, $02, nG3, nAb2, $01, nG3, nAb2
+	dc.b	nG3, nG3, nAb2, nAb2, nG3, nAb2, nG3, nAb2, nG3, nAb2, nG3, $07
+	dc.b	nG3, $01
 	smpsStop
 
 ; FM5 Data
-zecrazymario_FM5:
-	smpsPan             panCenter, $00
-	dc.b	nRst, $7F, $7F, $7F, $6F
+zecrazymario_FM3:
 	smpsSetvoice        $02
-	smpsAlterVol        $12
-	dc.b	nAb3, $15, nF3, $3F, nBb4, $09, nD5, $03, nC6, nAb6, $09
+	dc.b	nRst, $52, nRst
+	dc.b	nAb3, $07, nF3, $15, nBb4, $03, nD5, $01, nC6, nAb6, $03
 	smpsStop
 
 ; PSG1 Data
 zecrazymario_PSG1:
-	dc.b	nRst, $7F, $7F, $7F, $1B, nB2, $7F, $41
-	smpsStop
-
-; PSG2 Data
 zecrazymario_PSG2:
-	dc.b	nRst, $7F, $7F, $7F, $1B, nCs3, $7F, $41
+	dc.b	nRst, $44, nRst, nB2, $40
 	smpsStop
 
 ; DAC Data
 zecrazymario_DAC:
-	dc.b	dKick, $09, dSnare, $0F, dSnare, dKick, $09, dSnare, $0F, dSnare, $21, dKick
-	dc.b	$7F, nRst, $7F, nRst, $37, dKick, $03, dSnare, dKick, dSnare, dSnare, dKick
-	dc.b	dSnare, dKick, dSnare, dKick, dSnare, dKick, dSnare, dSnare, dKick, dSnare, dKick, dSnare
-	dc.b	dKick, dSnare, dKick, dSnare, dSnare, dKick, dSnare, $36, dSnare, $03, dSnare, dSnare
-	dc.b	dSnare, dSnare, dSnare, dSnare, dSnare, $30
+	dc.b	dKick, $03, dSnare, $05, dSnare, dKick, $03, dSnare, $05, dSnare, $0B, dKick, $67
+	smpsCall	zecrazymario_DAC_Call
+	dc.b	dSnare, dKick, dSnare
+	smpsCall	zecrazymario_DAC_Call
+	dc.b	dSnare, dKick, dSnare
+	smpsCall	zecrazymario_DAC_Call
+	dc.b	dSnare, $12
+
+zecrazymario_DAC_Loop02:
+	dc.b	$01
+	smpsLoop	0,8,zecrazymario_DAC_Loop02
 	smpsStop
+
+zecrazymario_DAC_Call:
+	dc.b	$01, dSnare, dKick, dSnare, dSnare, dKick
+	smpsReturn
 
 zecrazymario_Voices:
 ;	Voice $00
