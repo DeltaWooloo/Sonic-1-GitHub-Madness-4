@@ -20,22 +20,24 @@ Snd_GameOver_FM5:
 
 ; FM1 Data
 Snd_GameOver_FM1:
-	smpsPan			panCenter, $00
 	smpsSetvoice		$00
 	smpsModSet		$07, $01, $01, $02
 	dc.b	nC4, $08, nD4, $04, nE4, $0C, nRst, nG4, nRst, $08, nF4, $10, nE4, $0C
-	dc.b	nD4, $08, nRst, $04, nF4, $08, nRst, $04
+	dc.b	nD4, $06, nRst, nF4, nRst
 	smpsModSet		$28, $01, $18, $05
 	dc.b	nDs4, $60
 	smpsStop
 
 ; FM2 Data
 Snd_GameOver_FM2:
-	smpsPan			panCenter, $00
 	smpsSetvoice		$01
-	dc.b	nRst, $0C, nC3, $04, nRst, $10, nC3, $04, nRst, $0C, nC3, $04, nRst
-	dc.b	nC3, $04, $0C, $04, nRst, $08, nG2, $04, nRst, $08
-	dc.b	nC3, $04, nRst, $08
+	smpsNoteFill		$06
+	dc.b	nRst, $0C, nC3, $14, $10, $08
+	smpsNoteFill		$00
+	dc.b	$04, $0C
+	smpsNoteFill		$06
+	dc.b	$0C, nG2, nC3
+	smpsNoteFill		$00
 	smpsModSet		$28, $01, $04, $05
 	dc.b	nGs2, $60
 	smpsStop
@@ -51,11 +53,11 @@ Snd_GameOver_FM3:
 	smpsNoteFill		$0E
 	dc.b	nG5, $08
 	smpsNoteFill		$07
-	dc.b	nG5, $04, nC5, $08, $0C, nE5, $04, nC5, $08, $04
-	smpsNoteFill		$0E
-	dc.b	nGs5, $08
-	smpsNoteFill		$07
-	dc.b	nGs5, $04, nG5, $08, nG5, $04
+	dc.b	nG5, $04, nC5, $08, $0C, nE5, $04, nC5, $0C
+	smpsNoteFill		$0F
+	dc.b	nGs5, $0C
+	smpsNoteFill		$08
+	dc.b	nG5, $0C
 	smpsNoteFill		$00
 	dc.b	nFs5, $2C
 	smpsStop
@@ -64,32 +66,19 @@ Snd_GameOver_FM3:
 Snd_GameOver_FM4:
 	smpsPan			panLeft, $00
 	smpsSetvoice		$02
-	smpsDetune		$FD
+	smpsDetune		$FC
 	smpsNoteFill		$08
 	dc.b	nRst, $0C, nE5, nC5
 	smpsNoteFill		$0F
 	dc.b	nG5
 	smpsNoteFill		$08
-	dc.b	nC5, $14, nE5, $04
-	smpsNoteFill		$0F
-	dc.b	nC5, $0C, nGs5
-	smpsNoteFill		$08
-	dc.b	nG5
+	dc.b	nC5, $14, nE5, $04, nC5, $08, $04
+	smpsNoteFill		$0E
+	dc.b	nGs5, $08
+	smpsNoteFill		$07
+	dc.b	$04, nG5, $08, $04
 	smpsNoteFill		$00
 	dc.b	nFs5, $30
-	smpsStop
-
-Snd_GameOver_Call00:
-	dc.b	nE5, $04, nC5, nRst, nC5, nG5, $08, nG5
-	smpsReturn
-
-Snd_GameOver_Call01:
-	dc.b	nC5, $04, nRst, $08, nE5, $04
-	smpsReturn
-	
-Snd_GameOver_Call02:
-	dc.b	nE5, $04, nC5, nRst, nC5, nE5, nRst, nC5, nEb5
-	smpsReturn
 
 ; PSG1 Data
 Snd_GameOver_PSG1:
@@ -101,10 +90,12 @@ Snd_GameOver_PSG2:
 Snd_GameOver_PSG3:
 	smpsPSGform		$E7
 	dc.b	nRst, $0C
+	smpsNoteFill		$03
 
 Snd_GameOver_LoopPSG3:
-	dc.b	nMaxPSG, $02, nRst, $06, nMaxPSG, $02, nRst
+	dc.b	nMaxPSG, $08, $04
 	smpsLoop		$00, $08, Snd_GameOver_LoopPSG3
+	smpsNoteFill		$00
 	smpsPSGvoice	goTone_01
 	dc.b	nMaxPSG-12, $18
 	smpsStop

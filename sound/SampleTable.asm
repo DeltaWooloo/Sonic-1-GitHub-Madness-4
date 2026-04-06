@@ -50,8 +50,8 @@ SampleTable:
 
 	dcSample	TYPE_DPCM,	CTC1_Tick,	16000					; $A2
 
-	dcSample	TYPE_DPCM,	CF_DrumLoopA,	15900				; $A3
-	dcSample	TYPE_DPCM,	CF_DrumLoopB,	15900				; $A4
+	dcSample	TYPE_DPCM,	CF_DrumLoopA,	15830				; $A3
+	dcSample	TYPE_DPCM,	CF_DrumLoopB,	15880				; $A4
 
 	dcSample	TYPE_DPCM,	Homero,		16000					; $A6
 

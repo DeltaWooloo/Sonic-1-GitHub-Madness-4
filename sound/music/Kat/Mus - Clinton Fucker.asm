@@ -2,13 +2,13 @@
 ; Arranged by Katsushimi
 
 BGM_Clinton_Header:
-	smpsHeaderStartSong 1
+	smpsHeaderStartSong	3
 	smpsHeaderVoice		BGM_Clinton_Voices
 	smpsHeaderChan		$05, $03
-	smpsHeaderTempo		$03, $08
+	smpsHeaderTempo		$03, $21
 	smpsHeaderDAC		BGM_Clinton_DAC
-	smpsHeaderFM		BGM_Clinton_FM1,	$00, $04
-	smpsHeaderFM		BGM_Clinton_FM2,	$0C, $09
+	smpsHeaderFM		BGM_Clinton_FM1,	$00, $05
+	smpsHeaderFM		BGM_Clinton_FM2,	$0C, $0A
 	smpsHeaderFM		BGM_Clinton_FM3,	$00, $11
 	smpsHeaderFM		BGM_Clinton_FM4,	$00, $11
 	smpsHeaderPSG		BGM_Clinton_PSG1,	$E8, $00, $00, cfTone_02
@@ -22,7 +22,7 @@ BGM_Clinton_FM1:
 BGM_Clinton_FM1_Jump:
 	smpsCall	BGM_Clinton_FM1_Call00
 	smpsCall	BGM_Clinton_FM1_2_Call
-	dc.b	nRst, 4, nB1, nD2, nRst
+	dc.b	nRst, nB1, nD2, nRst
 	smpsCall	BGM_Clinton_FM1_Call01
 	smpsLoop	0, 2, BGM_Clinton_FM1_Jump
 	smpsCall	BGM_Clinton_FM1_Call00
@@ -31,12 +31,12 @@ BGM_Clinton_FM1_Jump:
 
 BGM_Clinton_FM1_Call00
 	smpsCall	BGM_Clinton_FM1_2_Call
-	dc.b	nB1, 4, nRst, nD2, nRst
+	dc.b	nB1, nRst, nD2, nRst
 	smpsCall	BGM_Clinton_FM1_Call01
 	smpsReturn
 
 BGM_Clinton_FM1_Call01:
-	dc.b	nE2, 4, nF2, 2, nRst, nE2, 4, nD2
+	dc.b	nE2, nF2, 2, nRst, nE2, 4, nD2
 	smpsReturn
 
 ; FM2 Data
@@ -47,7 +47,7 @@ BGM_Clinton_FM2:
 BGM_Clinton_FM2_Jump:
 	smpsCall	BGM_Clinton_FM2_Call00
 	smpsCall	BGM_Clinton_FM1_2_Call
-	dc.b	nRst, 4, nB1, nD2, nRst
+	dc.b	nRst, nB1, nD2, nRst
 	smpsCall	BGM_Clinton_FM2_Call01
 	smpsLoop	0, 2, BGM_Clinton_FM2_Jump
 	smpsCall	BGM_Clinton_FM2_Call00
@@ -56,12 +56,12 @@ BGM_Clinton_FM2_Jump:
 
 BGM_Clinton_FM2_Call00
 	smpsCall	BGM_Clinton_FM1_2_Call
-	dc.b	nB1, 4, nRst, nD2, nRst
+	dc.b	nB1, nRst, nD2, nRst
 	smpsCall	BGM_Clinton_FM2_Call01
 	smpsReturn
 
 BGM_Clinton_FM2_Call01:
-	dc.b	nE2, 4, nF2, nE2, nD2
+	dc.b	nE2, nF2, nE2, nD2
 	smpsReturn
 
 BGM_Clinton_FM1_2_Call:
@@ -79,7 +79,7 @@ BGM_Clinton_FM3_Jump:
 BGM_Clinton_FM3_Loop00:
 	dc.b	nRst, 4
 	smpsCall	BGM_Clinton_FM3_PSG1_Call
-	dc.b	nGs4, 2, nGs4, nRst, 4
+	dc.b	nGs4, 2, 2, nRst, 4
 	smpsCall	BGM_Clinton_FM3_PSG1_Call
 	dc.b	nGs4, 4
 	smpsLoop	0, 4, BGM_Clinton_FM3_Loop00
@@ -92,7 +92,7 @@ BGM_Clinton_PSG1:
 BGM_Clinton_PSG1_Loop00:
 	dc.b	nRst, 4
 	smpsCall	BGM_Clinton_FM3_PSG1_Call
-	dc.b	nGs4, 2, nGs4, 6
+	dc.b	nGs4, 2, 6
 	smpsCall	BGM_Clinton_FM3_PSG1_Call
 	dc.b	nGs4, 4
 	smpsLoop	0, 4, BGM_Clinton_PSG1_Loop00
@@ -113,7 +113,7 @@ BGM_Clinton_FM4_Jump:
 BGM_Clinton_FM4_Loop00:
 	dc.b	nRst, 4
 	smpsCall	BGM_Clinton_FM4_PSG2_Call
-	dc.b	nE4, 2, nE4, nRst, 4
+	dc.b	nE4, 2, 2, nRst, 4
 	smpsCall	BGM_Clinton_FM4_PSG2_Call
 	dc.b	nE4, 4
 	smpsLoop	0, 4, BGM_Clinton_FM4_Loop00
@@ -126,7 +126,7 @@ BGM_Clinton_PSG2:
 BGM_Clinton_PSG2_Loop00:
 	dc.b	nRst, 4
 	smpsCall	BGM_Clinton_FM4_PSG2_Call
-	dc.b	nE4, 2, nE4, 6
+	dc.b	nE4, 2, 6
 	smpsCall	BGM_Clinton_FM4_PSG2_Call
 	dc.b	nE4, 4
 	smpsLoop	0, 4, BGM_Clinton_PSG2_Loop00
@@ -148,7 +148,7 @@ BGM_Clinton_PSG3:
 	smpsPSGform	$E7
 
 BGM_Clinton_PSG3_Jump:
-	dc.b	nMaxPSG, 4, 2, 2, 4, 2, 2, 4, 4, 4, 4
+	dc.b	nMaxPSG2, 4, 2, 2, 4, 2, 2, 4, 4, 4, 4
 	smpsJump	BGM_Clinton_PSG3_Jump
 
 BGM_Clinton_Voices:
