@@ -1,7 +1,7 @@
 BGM_LimitedClear_Header:
 	smpsHeaderStartSong 1
 	smpsHeaderVoice     BGM_LimitedClear_Voices
-	smpsHeaderChan      $06, $03
+	smpsHeaderChan      $06, $02
 	smpsHeaderTempo     $02, $03
 
 	smpsHeaderDAC       BGM_LimitedClear_DAC
@@ -12,27 +12,30 @@ BGM_LimitedClear_Header:
 	smpsHeaderFM        BGM_LimitedClear_FM5,	$F4, $14
 	smpsHeaderPSG       BGM_LimitedClear_PSG1,	$D0, $05, $00, fTone_05
 	smpsHeaderPSG       BGM_LimitedClear_PSG2,	$DC, $07, $00, fTone_05
-	smpsHeaderPSG       BGM_LimitedClear_PSG3,	$DC, $00, $00, fTone_04
 
 ; FM1 Data
 BGM_LimitedClear_FM1:
-	smpsSetvoice        $00
+	smpsSetvoice	$00
 
 ; PSG1 Data
 BGM_LimitedClear_PSG1:
 	dc.b	nRst, $06, nG4, nG4, nG4, nG5, nG5, nG5, nG5, nG5, $0C, nG6
 	dc.b	$02, smpsNoAttack, nG7, $01, nG6, $03, nG6
-	smpsModSet          $0C, $01, $08, $04
+	smpsModSet	$0C, $01, $08, $04
 	dc.b	nG6, $33
 	smpsStop
 
 ; FM2 Data
 BGM_LimitedClear_FM2:
-	smpsSetvoice        $01
-	smpsNoteFill        $0B
-	dc.b	nG5, $03, nG5, nG4, $06, nG4, nG5, $03, nG5, nG4, $06, nG4
-	dc.b	nG5, $03, nG5, nRst, $12, nG4, $09
-	smpsNoteFill        $00
+	smpsSetvoice	$01
+	smpsNoteFill	$0B
+
+BGM_LimitedClear_FM2_Loop:
+	dc.b	nG5, $03, nG5, nG4, $06, nG4
+	smpsLoop	0, 2, BGM_LimitedClear_FM2_Loop
+	dc.b	nG5, $03, nG5, nRst, $12
+	dc.b	nG4, $09
+	smpsNoteFill	$00
 	dc.b	nG4, $33
 	smpsStop
 
@@ -46,32 +49,31 @@ BGM_LimitedClear_FM4:
 	smpsPan             panRight, $00
 
 BGM_LimitedClear_Jump:
-	smpsSetvoice        $02
-	smpsNoteFill        $06
-	dc.b	nC6, $03, nC6, nRst, $0C, nC6, $03, nC6, nRst, $0C, nC6, $03
-	dc.b	nC6, nRst, $12
-	smpsNoteFill        $00
-	dc.b	nC6, $09, nC6, $33
+	smpsSetvoice	$02
+	smpsNoteFill	$06
+	dc.b	nC6, $03, $0F, $03, $0F, $03, $15
+	smpsNoteFill	$00
+	dc.b	$09, $33
 	smpsStop
 
 ; FM5 Data
 BGM_LimitedClear_FM5:
-	smpsSetvoice        $03
-	smpsModSet          $0D, $01, $02, $05
+	smpsSetvoice	$03
+	smpsModSet	$0D, $01, $02, $05
 
 ; PSG2 Data
 BGM_LimitedClear_PSG2:
 	dc.b	nG5, $06, nG6, nG5, nG5, nG6, nG5, nG5, nG6, nG5, $0C, nG6
 	dc.b	$09, nG5, $33
-
-; PSG3 Data
-BGM_LimitedClear_PSG3:
 	smpsStop
 
 ; DAC Data
 BGM_LimitedClear_DAC:
 	dc.b	dSnare, $03, $03, $06, $06, $03, $03, $06, $06
-	dc.b	$03, $03, $03, $03, $03, $03, $03, $03, $09, $33
+BGM_LimitedClear_DAC_Loop:
+	dc.b	$03
+	smpsLoop	0, 8, BGM_LimitedClear_DAC_Loop
+	dc.b	$09, $33
 	smpsStop
 
 BGM_LimitedClear_Voices:

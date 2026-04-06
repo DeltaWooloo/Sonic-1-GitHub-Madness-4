@@ -1,18 +1,14 @@
 Mus90_Continue_Screen_Header:
 	smpsHeaderStartSong 1
 	smpsHeaderVoice     Mus90_Continue_Screen_Voices
-	smpsHeaderChan      $06, $03
+	smpsHeaderChan      $05, $00
 	smpsHeaderTempo     $01, $07
 
 	smpsHeaderDAC       Mus90_Continue_Screen_DAC
 	smpsHeaderFM        Mus90_Continue_Screen_FM1,	$E5, $08
-	smpsHeaderFM        Mus90_Continue_Screen_FM2,	$E8, $08
+	smpsHeaderFM        Mus90_Continue_Screen_FM2,	$DC, $0A
 	smpsHeaderFM        Mus90_Continue_Screen_FM3,	$F4, $0F
 	smpsHeaderFM        Mus90_Continue_Screen_FM4,	$F4, $0F
-	smpsHeaderFM        Mus90_Continue_Screen_FM5,	$F4, $0A
-	smpsHeaderPSG       Mus90_Continue_Screen_PSG1,	$D0, $03, $00, fTone_05
-	smpsHeaderPSG       Mus90_Continue_Screen_PSG2,	$DC, $06, $00, fTone_05
-	smpsHeaderPSG       Mus90_Continue_Screen_PSG3,	$DC, $00, $00, fTone_04
 
 ; FM1 Data
 Mus90_Continue_Screen_FM1:
@@ -31,9 +27,6 @@ Mus90_Continue_Screen_Loop04:
 ; FM2 Data
 Mus90_Continue_Screen_FM2:
 	smpsSetvoice        $01
-	smpsAlterVol        $02
-	smpsAlterPitch      $F4
-	smpsNop             $01
 	dc.b	nA5, $0C, nAb5, nG5, nFs5
 	smpsAlterVol        $FE
 	smpsAlterPitch      $0C
@@ -47,43 +40,41 @@ Mus90_Continue_Screen_Loop03:
 	smpsAlterPitch      $FD
 	dc.b	nB4, $06, nRst, nB4, nRst, nFs4, nRst, nFs4, nRst, nE5, $0C, nRst
 	dc.b	$06, nEb5, $4E
-	smpsNop             $01
 	smpsStop
 
 ; FM3 Data
 Mus90_Continue_Screen_FM3:
-	smpsSetvoice        $03
+	smpsSetvoice	$03
 	dc.b	nRst, $30
 
 Mus90_Continue_Screen_Loop02:
-	dc.b	nE6, $06, nRst, nE6, nRst, nCs6, nRst, nCs6, nRst, nD6, $12, nD6
-	dc.b	$1E
-	smpsLoop            $00, $03, Mus90_Continue_Screen_Loop02
-	dc.b	nE6, $06, nRst, nE6, nRst, nCs6, nRst, nCs6, nRst, nG6, $0C, nRst
-	dc.b	$06, nG6, $1E, smpsNoAttack, $30
+	smpsCall	Mus90_Continue_Screen_FM3_Call
+	dc.b	nD6, $12, $1E
+	smpsLoop	$00, $03, Mus90_Continue_Screen_Loop02
+	smpsCall	Mus90_Continue_Screen_FM3_Call
+	dc.b	nG6, $0C, nRst, $06, nG6, $4E
 	smpsStop
+
+Mus90_Continue_Screen_FM3_Call:
+	dc.b	nE6, $06, nRst, nE6, nRst, nCs6, nRst, nCs6, nRst
+	smpsReturn
 
 ; FM4 Data
 Mus90_Continue_Screen_FM4:
-	smpsSetvoice        $03
+	smpsSetvoice	$03
 	dc.b	nRst, $30
 
 Mus90_Continue_Screen_Loop01:
-	dc.b	nCs6, $06, nRst, nCs6, nRst, nA5, nRst, nA5, nRst, nB5, $12, nB5
-	dc.b	$1E
-	smpsLoop            $00, $03, Mus90_Continue_Screen_Loop01
-	dc.b	nCs6, $06, nRst, nCs6, nRst, nA5, nRst, nA5, nRst, nD6, $0C, nRst
-	dc.b	$06, nD6, $4E
-
-; FM5 Data
-Mus90_Continue_Screen_FM5:
-; PSG1 Data
-Mus90_Continue_Screen_PSG1:
-; PSG2 Data
-Mus90_Continue_Screen_PSG2:
-; PSG3 Data
-Mus90_Continue_Screen_PSG3:
+	smpsCall	Mus90_Continue_Screen_FM4_Call
+	dc.b	nB5, $12, $1E
+	smpsLoop	$00, $03, Mus90_Continue_Screen_Loop01
+	smpsCall	Mus90_Continue_Screen_FM4_Call
+	dc.b	nD6, $0C, nRst, $06, nD6, $4E
 	smpsStop
+
+Mus90_Continue_Screen_FM4_Call:
+	dc.b	nCs6, $06, nRst, nCs6, nRst, nA5, nRst, nA5, nRst
+	smpsReturn
 
 ; DAC Data
 Mus90_Continue_Screen_DAC:
@@ -91,7 +82,7 @@ Mus90_Continue_Screen_DAC:
 
 Mus90_Continue_Screen_Loop00:
 	dc.b	dKick, $0C, dSnare
-	smpsLoop            $00, $0E, Mus90_Continue_Screen_Loop00
+	smpsLoop	$00, $0E, Mus90_Continue_Screen_Loop00
 	dc.b	dKick, $0C, dSnare, $06, dKick, $0C
 	smpsStop
 

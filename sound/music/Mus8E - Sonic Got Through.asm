@@ -1,7 +1,7 @@
 Mus8E_Sonic_Got_Through_Header:
 	smpsHeaderStartSong 1
 	smpsHeaderVoice     Mus8E_Sonic_Got_Through_Voices
-	smpsHeaderChan      $06, $03
+	smpsHeaderChan      $06, $02
 	smpsHeaderTempo     $02, $03
 
 	smpsHeaderDAC       Mus8E_Sonic_Got_Through_DAC
@@ -12,7 +12,6 @@ Mus8E_Sonic_Got_Through_Header:
 	smpsHeaderFM        Mus8E_Sonic_Got_Through_FM5,	$F4, $14
 	smpsHeaderPSG       Mus8E_Sonic_Got_Through_PSG1,	$D0, $05, $00, fTone_05
 	smpsHeaderPSG       Mus8E_Sonic_Got_Through_PSG2,	$DC, $07, $00, fTone_05
-	smpsHeaderPSG       Mus8E_Sonic_Got_Through_PSG3,	$DC, $00, $00, fTone_04
 
 ; FM1 Data
 Mus8E_Sonic_Got_Through_FM1:
@@ -33,7 +32,7 @@ Mus8E_Sonic_Got_Through_FM2:
 
 Mus8E_Sonic_Got_Through_Loop:
 	dc.b	nG5, $03, nG5, nG4, $06, nG4
-	smpsLoop	0,2,Mus8E_Sonic_Got_Through_Loop
+	smpsLoop	0, 2, Mus8E_Sonic_Got_Through_Loop
 	dc.b	nG5, $03, nG5, nRst, $12
 	dc.b	nG4, $09
 	smpsNoteFill        $00
@@ -66,9 +65,6 @@ Mus8E_Sonic_Got_Through_FM5:
 Mus8E_Sonic_Got_Through_PSG2:
 	dc.b	nG5, $06, nC6, nB5, nG5, nC6, nB5, nG5, nC6, nB5, $0C, nC6
 	dc.b	$09, nB5, $33
-
-; PSG3 Data
-Mus8E_Sonic_Got_Through_PSG3:
 	smpsStop
 
 ; DAC Data
