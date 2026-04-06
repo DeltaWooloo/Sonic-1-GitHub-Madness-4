@@ -14,7 +14,7 @@ bsodData macro seconds,skipsec,art1,artoff1,art2,artoff2,fg,bg,pal,tclr,bgm,pcm
 	dc.w artoff2
 	dc.l fg,bg,pal
 	dc.w ($8700|tclr)
-	dc.b seconds,skipsec,bgm,pcm
+	dc.b seconds,skipsec,pcm,bgm
 	endm
 ;bsodDatasize equ 16
 bsodDatasize equ 30
@@ -130,8 +130,7 @@ GM_BSOD:
 		move.l	(sp)+,a2
 		
 		;Load tiles into VRAM?
-		enable_display
-		enable_ints
+		enableD
 		move.l	a2,-(sp)
 .loadloop:
 		move.b	#$12,(v_vbla_routine).w
@@ -157,8 +156,7 @@ GM_BSOD:
 		move.l	(sp)+,a2
 		
 		;Load tiles into VRAM?
-		enable_display
-		enable_ints
+		enableD
 		move.l	a2,-(sp)
 .loadloop2:
 		move.b	#$12,(v_vbla_routine).w
@@ -169,6 +167,8 @@ GM_BSOD:
 		move.l	(sp)+,a2
 
 .loadmapFG:
+		;This line added, in case both art1 AND art2 don't load (e.g. TMSS_RSOD)
+		enableD
 		move.l	(a2)+,a0		;fg-map
 		lea	(v_ram_start).l,a1
 		moveq	#1,d0
@@ -219,6 +219,10 @@ GM_BSOD:
 		move.b	#2,(v_vbla_routine).w
 		jsr	WaitForVBla
 
+		move.b	(a2)+,d0			;pcm
+		beq.s	.nopcm
+		jsr	MegaPCM_PlaySample
+.nopcm:
 		move.b	(a2)+,d0			;bgm
 		beq.s	.nobgm
 		
@@ -230,10 +234,6 @@ GM_BSOD:
 .dobgm:		
 		jsr	QueueSound1
 .nobgm:
-		move.b	(a2)+,d0			;pcm
-		beq.s	.nopcm
-		jsr	MegaPCM_PlaySample
-.nopcm:
 
 		move.l	a2,-(sp)
 		;jsr	PaletteWhiteIn
@@ -280,10 +280,12 @@ secSkip_CD:		equ	secSkip_gen
 BSOD_table:	; seconds, seconds to skip, art, map, palette, SMPS sound ID, MPCM sound ID
 		bsodData		sec_std,	secSkip_std,	bsod_w311.art1,			ArtTile_Home1,	bsod_w311.art2,	ArtTile_bsod_w311_art2,	bsod_w311.fg,		bsod_w311.bg,		bsod_w311.pal,		TCLR(0,0),	bgm_Passport,	dChord16
 		bsodData		sec_std,	secSkip_std,	bsod_95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_95.fg,			bsod_95.bg,			bsod_95.pal,		TCLR(1,0),	bgm_hang,		dBSOD
+		bsodData		sec_gen,	secSkip_gen,	art_null,				ArtTile_Home0,	art_null,		ArtTile_Home0,			bsod_tmssrsod.fg,	bsod_tmssrsod.bg,	bsod_tmssrsod.pal,	TCLR(0,0),	bgm_hang,		dVirus
 		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscu.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_gen_ntscu.fg,	bsod_gen_ntscu.bg,	bsod_gen_ntscu.pal,	TCLR(1,0),	bgm_gen,		dBSOD
 		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_gen_ntscj.fg,	bsod_gen_ntscj.bg,	bsod_gen_ntscj.pal,	TCLR(1,0),	bgm_gen,		dBSOD
 		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscuj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_gen_ntscuj.fg,	bsod_gen_ntscuj.bg,	bsod_gen_ntscuj.pal,TCLR(1,0),	bgm_gen,		dBSOD
 		bsodData		sec_gen,	secSkip_gen,	bsod_gen_pal.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_gen_pal.fg,	bsod_gen_pal.bg,	bsod_gen_pal.pal,	TCLR(1,0),	bgm_gen,		dBSOD
+		bsodData		sec_CD,		secSkip_CD,		bsod_scdm.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_scdm.fg,		bsod_scdm.bg,		bsod_scdm.pal,		TCLR(0,0),	bgm_VirusAlert,	dVirus
 		bsodData		sec_CD,		secSkip_CD,		bsod_scd_ntscu.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_scd_ntscu.fg,	bsod_scd_ntscu.bg,	bsod_scd_ntscu.pal,	TCLR(1,0),	bgm_scd,		dBSOD
 		bsodData		sec_CD,		secSkip_CD,		bsod_scd_ntscj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_scd_ntscj.fg,	bsod_scd_ntscj.bg,	bsod_scd_ntscj.pal,	TCLR(1,0),	bgm_scd,		dBSOD
 		bsodData		sec_CD,		secSkip_CD,		bsod_scd_pale.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_scd_pale.fg,	bsod_scd_pale.bg,	bsod_scd_pale.pal,	TCLR(1,0),	bgm_scd,		dBSOD
@@ -303,6 +305,13 @@ bsod_95:
 .bg:		binclude "_gamemode/winBSOD/bsod_95-mapBG.eni"
 			even
 			
+bsod_tmssrsod:
+.fg:		binclude "_gamemode/winBSOD/bsod_tmssrsod_mapFG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_tmssrsod-pal.bin"
+			even
+
+			
 bsod_gen_ntscu:
 .fg:		binclude "_gamemode/winBSOD/bsod_gen_ntscu-mapFG.eni"
 			even
@@ -318,6 +327,17 @@ bsod_gen_pal:
 bsod_scd_ntscu:
 .fg:		binclude "_gamemode/winBSOD/bsod_scd_ntscu-mapFG.eni"
 			even
+			
+
+bsod_scdm:
+.art1:
+			binclude "_gamemode/winBSOD/bsod_scdm-art1.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_scdm-mapFG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_scdm-pal.bin"
+			even
+
 bsod_scd_ntscj:
 .fg:		binclude "_gamemode/winBSOD/bsod_scd_ntscj-mapFG.eni"
 			even
@@ -327,18 +347,22 @@ bsod_scd_pale:
 bsod_scd_pala:
 .fg:		binclude "_gamemode/winBSOD/bsod_scd_pala-mapFG.eni"
 			even
+
 bsod_32x:
 .fg:		binclude "_gamemode/winBSOD/bsod_32x-mapFG.eni"
 			even
+
 
 bsod_std.bg:
 			binclude "_gamemode/winBSOD/bsod_std-mapBG.eni"
 			even
 
+bsod_tmssrsod.bg:
 bsod_gen_ntscu.bg:
 bsod_gen_ntscj.bg:
 bsod_gen_ntscuj.bg:	
 bsod_gen_pal.bg:	
+bsod_scdm.bg:
 bsod_scd_ntscu.bg:	
 bsod_scd_ntscj.bg:	
 bsod_scd_pale.bg:	

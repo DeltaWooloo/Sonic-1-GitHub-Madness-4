@@ -1901,7 +1901,12 @@ GameOver:
 loc_138D4:
 		;!@ GD: Undo VDP_FX vars
 		move.b	#0,(v_vdp_fx).w	; cancel VDP FX		
-		move.w	#60,restartime(a0)	; set time delay to 1 second
+		
+		move.w	#60,restartime(a0)		; set time delay to 1 second
+		cmpi.b	#id_WIN,(v_zone).w		;Is zone Windows zone?
+		bne.s	.skipWin				;If not, branch
+		move.w	#60*2,restartime(a0)	; set time delay to 3 seconds (so that shutdown PCM can finish, so that BSOD PCMs can play)		
+.skipWin:
 		tst.b	(f_timeover).w	; is TIME OVER tag set?
 		beq.s	locret_13900	; if not, branch
 		move.w	#0,restartime(a0)
