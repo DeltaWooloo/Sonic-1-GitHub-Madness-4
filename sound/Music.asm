@@ -36,6 +36,7 @@ MusicIndex:
 	dc.l	Mus_HardwareStore
 	dc.l	Mus_GHZ
 	dc.l	Mus_TF2
+	dc.l	Mus_Blue
 	dc.l	Mus_Final
 	dc.l	Mus_SS
 
@@ -51,6 +52,7 @@ MusicIndex:
 	dc.l	Mus_AVGNInv
 
 	dc.l	Mus_Title
+	dc.l	Mus_SmilingBomb
 	dc.l	Mus_NewBarkTown
 	dc.l	Mus_Memories
 	dc.l	Mus_Dingaling
@@ -88,6 +90,7 @@ MusicIndex:
 	dc.l	Mus_LimitedClear
 	dc.l	Mus_Moonwalker
 	dc.l	Mus_CleanSlate
+	dc.l	Mus_VirusAlert
 
 	dc.l	Mus_PuyoReject
 	dc.l	Mus_LG
@@ -135,9 +138,6 @@ MusicIndex:
 	dc.l	Mus_Hidden
 	dc.l	Mus_BossaNova
 	dc.l	Mus_dam_dariram
-	dc.l	Mus_SmilingBomb
-	dc.l	Mus_VirusAlert
-	dc.l	Mus_Blue
 
 	dc.l	Mus_CrazyMario
 	dc.l	Mus_Ding
@@ -145,44 +145,6 @@ MusicIndex:
 	dc.l	Mus_Win2K
 	dc.l	Mus_Folgers
 	dc.l	Mus_MJWin
-
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
-;	BGMDEF	Mus_
 
 Mus_MWaterS:		include "music/LiquidTracks/Mus - Mega Water S.asm"
 	even
@@ -232,10 +194,13 @@ Mus_GHZ:		include "music/Kat/ghz.asm"
 	even
 Mus_TF2:		include	"music/TG2000Tracks/TF2.asm"
 	even
+Mus_Blue:		include	"music/TG2000Tracks/Blue.asm"
+	even
 Mus_Final:		include "music/Dawid/Extremely_intense_boss_song_for_someone.asm" ;very intense not really but eh idgaf
 	even
 Mus_SS:			include "music/LiquidTracks/Mus - Special Stage.asm"
 	even
+
 Mus_Boss:		include "music/MattTracks/Mus - Chester Cheetah Boss.asm"
 	even
 Mus_ClintonFuck:	include	"music/Kat/Mus - Clinton Fucker.asm"
@@ -250,11 +215,15 @@ Mus_Coffinman:		include	"music/TG2000Tracks/Coffinman.asm"	;Boss Track
 	even
 Mus_PizzaPopBoss:	include "music/CNTracks/CheetahFakeout.asm"
 	even
+
 Mus_Invincible:		include "music/TG2000Tracks/SomariInv.asm"
 	even
 Mus_AVGNInv:		include	"music/TG2000Tracks/Mus - AVGN Invincibility.asm"
 	even
+
 Mus_Title:		include "music/TG2000Tracks/Mus - The GHM4 Song.asm"
+	even
+Mus_SmilingBomb:	include "music/TheWTracks/Mus - Smiling Bomb.asm"
 	even
 Mus_NewBarkTown:	include "music/DaxKatter/Mus - New Bark Town.asm"
 	even
@@ -270,6 +239,7 @@ Mus_SkySanctuary:	include	"music/DaxKatter/Mus - Golden Sanctuary.asm"
 	even
 Mus_Jeopardy:		include "music/CNTracks/Jeopardy.asm"
 	even
+
 Mus_ActClear:		include	"music/CNTracks/Homero.asm"
 	even
 Mus_Pac2:		include	"music/TG2000Tracks/Pac2.asm"
@@ -328,6 +298,8 @@ Mus_LimitedClear:	include "music/DaxKatter/Mus - Limited Act Clear.asm"
 Mus_Moonwalker:		include "music/TheWTracks/Mus - Moonwalker Title.asm"
 	even
 Mus_CleanSlate:		include	"music/Robi/ShitSlate.asm"
+	even
+Mus_VirusAlert:		include	"music/TG2000Tracks/VirusAlert.asm"
 	even
 
 ; Used for Commericals
@@ -426,12 +398,6 @@ Mus_Hidden:		include	"music/Dawid/Hidden.asm"
 Mus_BossaNova:		include	"music/TG2000Tracks/BossaNova.asm"
 	even
 Mus_dam_dariram:	include	"music/DSKTracks/dam_dariram_handmade.asm"
-	even
-Mus_SmilingBomb:	include "music/TheWTracks/Mus - Smiling Bomb.asm"
-	even
-Mus_VirusAlert:		include	"music/TG2000Tracks/VirusAlert.asm"
-	even
-Mus_Blue:		include	"music/TG2000Tracks/Blue.asm"
 	even
 
 Mus_CrazyMario:		include	"music/Dawid/crazymario.asm"

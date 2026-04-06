@@ -58,9 +58,6 @@ dTick:				ds.b 1
 dClintLoopA:		ds.b 1
 dClintLoopB:		ds.b 1
 
-; Amen Break Sample Set
-dAmenCrash:			ds.b 1
-
 ; HOMERO
 dHomero:			ds.b 1
 

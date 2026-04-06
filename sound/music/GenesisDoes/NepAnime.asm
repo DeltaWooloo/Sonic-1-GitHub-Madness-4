@@ -662,7 +662,7 @@ Nepu_DimTrip_DAC_Loop6:
 	dc.b	dKick, dTick, dKick, dPokeKickCrashHi, dKick, dSnare, dHiTom, dMidTom
 	dc.b	dLowTom, $08, dKick, $04, dTick, $08, dSpinSnare, $04
 	dc.b	$04, $04, dTick, $08, dKick, $04, dSnare, $08
-	dc.b	dKick, $04, $04, dSnare, dAmenCrash, $08, dKick, $04
+	dc.b	dKick, $04, $04, dSnare, dCrashCymbal, $08, dKick, $04
 	dc.b	dSnare, $08, dKick, $04, $04, dSnare, dSpinSnare, $02
 	dc.b	dSnare, dTick, $0C, dKick, $04, dSnare, $0C, dKick
 	dc.b	$08, dSnare, $04, dKick, dKick, dTick, dKick, dSnare

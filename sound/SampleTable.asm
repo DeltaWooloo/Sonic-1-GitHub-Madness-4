@@ -53,8 +53,6 @@ SampleTable:
 	dcSample	TYPE_DPCM,	CF_DrumLoopA,	15900				; $A3
 	dcSample	TYPE_DPCM,	CF_DrumLoopB,	15900				; $A4
 
-	dcSample	TYPE_DPCM,	Amen_Crash,	11025					; $A5
-
 	dcSample	TYPE_DPCM,	Homero,		16000					; $A6
 
 	; In-Game SFX SAMPLES
@@ -176,10 +174,6 @@ SampleTable:
 ; Clinton Fuckerdrum beat
 	incdac	CF_DrumLoopA, "sound/dac/Clinton Fucker/DRUMS_A.dpcm"
 	incdac	CF_DrumLoopB, "sound/dac/Clinton Fucker/DRUMS_B.dpcm"
-
-; ---------------------------------------------------------------
-; Amen Breaks -  for use in songs (sampled from cw_amen_classic on rhythmlab) ported by Saneway
-	incdac	Amen_Crash, "sound/dac/amenbreak/crash.dpcm"
 
 ; ---------------------------------------------------------------
 ; Homero

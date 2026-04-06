@@ -257,7 +257,8 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_DoleDetective		; Doleville	(Act 1)
 	nextenum bgm_HardwareStore		; 		(Act 2)
 	nextenum bgm_GHZ			; Nogales Zone
-	nextenum bgm_TF2			; Bluescapes			; Dax: Interesting song choice for this :/
+	nextenum bgm_TF2			; Bluescapes	(Act 1)		; Dax: Interesting song choice for this :/
+	nextenum bgm_Blue			;		(Act 2)
 	nextenum bgm_Final			; DUMMY Level BGM
 	nextenum bgm_SS				; Special Stage
 
@@ -276,6 +277,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 
 	; UI + Scene BGM
 	nextenum bgm_Title
+	nextenum bgm_smilingbomb
 	nextenum bgm_NewBarkTown
 	nextenum bgm_Memories
 	nextenum bgm_Dingaling
@@ -315,6 +317,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_LimitedClear
 	nextenum bgm_Moonwalker
 	nextenum bgm_CleanSlate
+	nextenum bgm_VirusAlert
 
 	; Advertisement BGM
 	nextenum bgm_PuyoReject
@@ -364,9 +367,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Hidden
 	nextenum bgm_BossaNova
 	nextenum bgm_dam_dariram
-	nextenum bgm_smilingbomb
-	nextenum bgm_VirusAlert
-	nextenum bgm_Blue
 
 	; Unused Jingle BGM
 	nextenum bgm_Ding

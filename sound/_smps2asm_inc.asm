@@ -67,7 +67,7 @@ nMaxPSG2			EQU nB6
 	nextenum	AppleTone_01,AppleTone_02,AppleTone_03,ScrapTone_01,ScrapTone_02
 	nextenum	CoffinTone,DoomTone,ghm4Tone_01,VirusTone01,VirusTone02,VirusTone03
 	nextenum	VirusTone04,clintTone_00,PassTone1,PassTone2,PassTone3,PassTone4
-	nextenum	MegaTone1,MegaTone2,MegaTone3,MegaTone4
+	nextenum	MegaTone1,MegaTone2,MegaTone3,MegaTone4,AporiaTone_01
 
 ; ---------------------------------------------------------------------------
 
