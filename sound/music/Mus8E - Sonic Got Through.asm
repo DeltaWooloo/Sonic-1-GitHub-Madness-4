@@ -73,9 +73,10 @@ Mus8E_Sonic_Got_Through_PSG3:
 
 ; DAC Data
 Mus8E_Sonic_Got_Through_DAC:
-	dc.b	dSnare, $03, dSnare, dKick, $06, dKick, dSnare, $03, dSnare, dKick, $06, dKick
-	dc.b	dSnare, $03, dSnare, dHiTimpani, dHiTimpani, dVLowTimpani, dVLowTimpani, $03, dVLowTimpani, dVLowTimpani, dSnare, $09
-	dc.b	$33
+	dc.b	dSnare, $03, dSnare, dKick, $06, dKick
+	smpsLoop	0,2,Mus8E_Sonic_Got_Through_DAC
+	dc.b	dSnare, $03, dSnare, dHiTimpani, dHiTimpani, dVLowTimpani, dVLowTimpani, dVLowTimpani, dVLowTimpani
+	dc.b	dSnare, $09, $33
 	smpsStop
 
 Mus8E_Sonic_Got_Through_Voices:
