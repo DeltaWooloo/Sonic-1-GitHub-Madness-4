@@ -157,8 +157,7 @@ PLC_MZ2:	dc.w ((PLC_MZ2end-PLC_MZ2-2)/6)-1
 		plcm	Nem_MzSwitch, ArtTile_Button+4           ; switch
 		plcm	Nem_Spikes,   ArtTile_Spikes             ; spikes
 		plcm	Nem_HSpring,  ArtTile_Spring_Horizontal  ; horizontal spring
-		plcm	Nem_VSpring,  ArtTile_Spring_Vertical    
-		plcm	Nem_MzBlock,  ArtTile_MZ_Block           ; green stone block
+ 		plcm	Nem_MzBlock,  ArtTile_MZ_Block           ; green stone block
 PLC_MZ2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - Star Light
@@ -231,8 +230,7 @@ PLC_SBZ2:	dc.w ((PLC_SBZ2end-PLC_SBZ2-2)/6)-1
 		plcm	Nem_LzSwitch,   ArtTile_Button                 ; switch
 		plcm	Nem_Spikes,     ArtTile_Spikes                 ; spikes
 		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal      ; horizontal spring
-		plcm	Nem_VSpring,    ArtTile_Spring_Vertical        
-		plcm	Nem_BallHogH,   ArtTile_Ball_HogH                ; ball hog enemy
+ 		plcm	Nem_BallHogH,   ArtTile_Ball_HogH                ; ball hog enemy
 		plcm	Nem_BallHogV,   ArtTile_Ball_HogV                ; ball hog enemy
 		plcm	Nem_ProtoExplosion, ArtTile_Proto_Explosion 	; explosion
 PLC_SBZ2end:
@@ -283,7 +281,7 @@ PLC_Joint:	dc.w ((PLC_Joint2-PLC_Joint-2)/6)-1
 PLC_Joint2:	dc.w ((PLC_Joint2end-PLC_Joint2-2)/6)-1
 		plcm	Nem_Spikes,     ArtTile_Spikes                 ; spikes
 		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal      ; horizontal spring
-		plcm	Nem_VSpring,    ArtTile_Spring_Vertical        
+		     
 PLC_Joint2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - DoleVille
@@ -299,7 +297,7 @@ PLC_DVZ:	dc.w ((PLC_DVZ2-PLC_DVZ-2)/6)-1
 PLC_DVZ2:	dc.w ((PLC_DVZ2end-PLC_DVZ2-2)/6)-1
 		plcm	Nem_Spikes,     ArtTile_Spikes                 ; spikes
 		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal      ; horizontal spring
-		plcm	Nem_VSpring,    ArtTile_Spring_Vertical        
+		     
 PLC_DVZ2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - Nogales
@@ -332,7 +330,7 @@ PLC_BSZ:	dc.w ((PLC_BSZ2-PLC_BSZ-2)/6)-1
              ;   plcm    byte_2BBC2, $8300/32
 PLC_BSZ2:	dc.w ((PLC_BSZ2end-PLC_BSZ2-2)/6)-1
 		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal      ; horizontal spring
-		plcm	Nem_VSpring,    ArtTile_Spring_Vertical    
+		 
 PLC_BSZ2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - BlueStone
@@ -345,7 +343,7 @@ PLC_BTZ:	dc.w ((PLC_BTZ2-PLC_BTZ-2)/6)-1
              ;   plcm    byte_2BBC2, $8300/32
 PLC_BTZ2:	dc.w ((PLC_BTZ2end-PLC_BTZ2-2)/6)-1
 		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal      ; horizontal spring
-		plcm	Nem_VSpring,    ArtTile_Spring_Vertical    
+		 
 PLC_BTZ2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - WINNER card
