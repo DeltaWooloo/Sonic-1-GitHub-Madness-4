@@ -18,16 +18,25 @@ LoadTilesAsYouMove_BGOnly:
 ; Subroutine to display correct tiles as you move
 ; ---------------------------------------------------------------------------
 
-; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
-
+CAMDR_NONE	= 0
+CAMDR_ABC	= 4
 
 LoadTilesAsYouMove:
-		move.b	v_clintonfucker,d0
-		bpl.s	.Go
-		rts
-.Go:
 		lea	(vdp_control_port).l,a5
 		lea	(vdp_data_port).l,a6
+		move.b	v_cameraroutine,d0
+		andi.w	#$C,d0
+		jmp	.Index(pc,d0.w)
+.Index
+		rts	; no draw
+		nop
+
+		bra.w	.DrawABC
+		bra.w	.DrawABC
+		bra.w	.DrawA
+		; add whatever here
+		
+.DrawABC:
 		; First, update the background
 		lea	(v_bg1_scroll_flags_dup).w,a2	; Scroll block 1 scroll flags
 		lea	(v_bgscreenposx_dup).w,a3	; Scroll block 1 X coordinate
@@ -42,6 +51,7 @@ LoadTilesAsYouMove:
 		lea	(v_bg3_scroll_flags_dup).w,a2	; Scroll block 3 scroll flags
 		lea	(v_bg3screenposx_dup).w,a3	; Scroll block 3 X coordinate
 		bsr.w	DrawBGScrollBlock3
+.DrawA:
 		; Then, update the foreground
 		lea	(v_fg_scroll_flags_dup).w,a2	; Foreground scroll flags
 		lea	(v_screenposx_dup).w,a3		; Foreground X coordinate

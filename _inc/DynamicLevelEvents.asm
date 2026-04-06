@@ -940,6 +940,7 @@ DLE_DVZ3:
 		jsr	FadeOut_ToBlack.l
 		rts
 .LoadBg:
+		move.w	#CAMDR_NONE,v_cameraroutine.w
 		moveq	#0,d0
 		move.w	d0,(v_bgscreenposy).w
 		move.w	d0,(v_bg2screenposy).w
