@@ -23,7 +23,9 @@ Snd_GameOver_FM1:
 	smpsSetvoice		$00
 	smpsModSet		$07, $01, $01, $02
 	dc.b	nC4, $08, nD4, $04, nE4, $0C, nRst, nG4, nRst, $08, nF4, $10, nE4, $0C
-	dc.b	nD4, $06, nRst, nF4, nRst
+	smpsNoteFill	$0A
+	dc.b	nD4, nF4
+	smpsNoteFill	$00
 	smpsModSet		$28, $01, $18, $05
 	dc.b	nDs4, $60
 	smpsStop
