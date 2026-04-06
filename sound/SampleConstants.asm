@@ -98,6 +98,7 @@ dBSOD				ds.b 1
 ; Splash Screen Samples
 dShutdown			ds.b 1
 dChord16			ds.b 1
+dW98IPC				ds.b 1
 dEggNo				ds.b 1
 dfunnyb_utthole		ds.b 1
 d2kki				ds.b 1

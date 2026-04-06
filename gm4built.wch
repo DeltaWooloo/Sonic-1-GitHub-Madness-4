@@ -1,6 +1,7 @@
 0
-4
+5
 00000	00FFD03A	w	h	0	vdpFXTime
 00001	00FFF63C	d	h	0	v_playerClone
 00002	00FFFE2D	b	h	0	v_vdp_fx
 00003	00FFF629	b	h	0	f_hangSMPS
+00004	00FFF62A	w	h	0	v_vbla_routine

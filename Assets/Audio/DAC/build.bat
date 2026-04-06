@@ -9,9 +9,10 @@ copy /y "MMZ_BF_Jap\eggmanLaugh.wav" "..\..\..\sound\DAC\GenesisDoes\eggmanLaugh
 copy /y "MMZ_BF_Jap\git-hub.wav" "..\..\..\sound\DAC\GenesisDoes\git-hub.wav"
 copy /y "MMZ_BF_Jap\Madness.wav" "..\..\..\sound\DAC\GenesisDoes\Madness.wav"
 copy /y "MMZ_BF_Jap\MadnessR.wav" "..\..\..\sound\DAC\GenesisDoes\MadnessR.wav"
-copy /y "WinZone_Die\windie.wav" "..\..\..\sound\DAC\GenesisDoes\windie.wav"
 copy /y "WinZone_Die\chord16.wav" "..\..\..\sound\DAC\GenesisDoes\chord16.wav"
 copy /y "WinZone_Die\Virus_Alert.wav" "..\..\..\sound\DAC\GenesisDoes\Virus_Alert.wav"
+copy /y "WinZone_Die\w98ipc.wav" "..\..\..\sound\DAC\GenesisDoes\w98ipc.wav"
+copy /y "WinZone_Die\windie.wav" "..\..\..\sound\DAC\GenesisDoes\windie.wav"
 copy /y "WinZone_Die\windows-xp-shutdown.wav" "..\..\..\sound\DAC\GenesisDoes\shutdown.wav"
 copy /y "MMZ_BF_Jap\YoFreddy_Rendered.wav" "..\..\..\sound\DAC\GenesisDoes\YoFreddy.wav"
 REM pause

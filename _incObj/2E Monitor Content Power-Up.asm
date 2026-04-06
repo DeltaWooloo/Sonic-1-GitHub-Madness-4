@@ -787,7 +787,7 @@ Pow_GetErrorMsg:
 
 ; ===========================================================================
 .msgtable:							;Subtype / subtype*4
-		dc.l	.lostthegame			;$00 / $00
+		dc.l	.lostthegame		;$00 / $00
 		dc.l	.addressnot			;$01 / $04
 		dc.l	.legal				;$02 / $08
 		dc.l	.feltlikeit			;$03 / $0C
@@ -796,22 +796,22 @@ Pow_GetErrorMsg:
 		dc.l	.megadrive			;$06 / $18
 		dc.l	.entryerror			;$07 / $1C
 		dc.l	.errorerror			;$08 / $20
-		dc.l	.oopsydaisys			;$09 / $24
-		dc.l	.waitthatsnot			;$0A / $28
-		dc.l	.nullreference			;$0B / $2C
-		dc.l	.programmernap			;$0C / $30
+		dc.l	.oopsydaisys		;$09 / $24
+		dc.l	.waitthatsnot		;$0A / $28
+		dc.l	.nullreference		;$0B / $2C
+		dc.l	.programmernap		;$0C / $30
 		dc.l	.askdlc				;$0D / $34
 		dc.l	.mildanner			;$0E / $38
 		dc.l	.piracy				;$0F / $3C
 		dc.l	.overheat			;$10 / $40
-		dc.l	.yourlose			;$10 / $40
-		dc.l	.patrat				;$10 / $40
-		dc.l	.errornoexcept			;$10 / $40
-		dc.l	.taskfailed			;$10 / $40
-		dc.l	.littletimmy			;$10 / $40
-		dc.l	.touchgrass			;$10 / $40
-		dc.l	.zerowing			;$10 / $40
-		dc.l	.toolimited			;$11 / $44
+		dc.l	.yourlose			;$11 / $44
+		dc.l	.patrat				;$12 / $48
+		dc.l	.errornoexcept		;$13 / $4C
+		dc.l	.taskfailed			;$14 / $50
+		dc.l	.littletimmy		;$15 / $54
+		dc.l	.touchgrass			;$16 / $58
+		dc.l	.zerowing			;$17 / $5C
+		dc.l	.toolimited			;$18 / $60
 .msgtableend:
 
 ; ===========================================================================
