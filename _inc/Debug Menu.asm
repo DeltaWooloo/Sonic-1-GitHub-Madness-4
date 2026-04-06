@@ -405,7 +405,22 @@ DebuggerMenu_Act4EnablerTable:
 		dc.b	$0		; JOINT
 		dc.b	$1		; DVZ
 		dc.b	$0		; ZONE
-		zonewarning DebuggerMenu_Act4EnablerTable,1
+		dc.b	$0
+		dc.b	$0
+		dc.b	$0
+		dc.b	$0
+		dc.b	$0
+		dc.b	$0
+		dc.b	$0
+		dc.b	$0
+		dc.b	$0
+		dc.b	$0
+		dc.b	$0
+		dc.b	$0
+		dc.b	$0
+		dc.b	$0
+		dc.b	$0	; whjo even fucking cares
+;		zonewarning DebuggerMenu_Act4EnablerTable,1
 		even
 		
 ; ---------------------------------------------------------------------------

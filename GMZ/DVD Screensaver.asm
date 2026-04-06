@@ -109,7 +109,7 @@ Screensa_MainLoop:
 		bra	Screensa_MainLoop
 
 Screensa_BackToSega:
-		move.b	#ptr_GM_Sega-GameModeArray,v_gamemode
+		move.b	#id_Sega,v_gamemode
 		rts
 
 ManageScreensaSonic:

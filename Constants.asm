@@ -72,29 +72,30 @@ tile_size:	equ 8*8/2	; size of a single 8x8 tile
 chunk_size:	equ $200	; size of a single 256x256 chunk
 plane_size_64x32: equ 64*32*2	; size of plane in 512x256 mode
 
-; Game modes
-id_Sega:			equ ptr_GM_Sega-GameModeArray				; $00
-id_Title:			equ ptr_GM_Title-GameModeArray				; $04
-id_Demo:			equ ptr_GM_Demo-GameModeArray				; $08
-id_Level:			equ ptr_GM_Level-GameModeArray				; $0C
-id_Special:			equ ptr_GM_Special-GameModeArray			; $10
-id_Continue:		equ ptr_GM_Cont-GameModeArray				; $14
-id_Ending:			equ ptr_GM_Ending-GameModeArray				; $18
-id_Credits:			equ ptr_GM_Credits-GameModeArray			; $1C
-id_ColdBrew:		equ ptr_GM_ColdBrew-GameModeArray			; $20
-id_FoxyBoo:			equ ptr_GM_FoxyBoo-GameModeArray			; $24
-id_DebugMenu:		equ ptr_GM_DebugMode-GameModeArray			; $28
-id_Thanatos:		equ ptr_GM_ThanatosCredits-GameModeArray	; $2C
-id_ButtcrackMan:	equ ptr_GM_ButtcrackMan-GameModeArray 		; $30
-id_TryAgainEnd:		equ ptr_GM_TryAgainEnd-GameModeArray		; $34
-id_Fetus:			equ ptr_GM_Fetus-GameModeArray				; $38
-id_Damn:			equ ptr_GM_Damn-GameModeArray 				; $3C
-id_SplashSkip:		equ ptr_SplashScreenSkipper-GameModeArray	; $40
-id_Advert:			equ ptr_Advert-GameModeArray				; $44
-id_Battle:			equ ptr_EarthboundBtl-GameModeArray			; $48
-id_Screensaver:		equ ptr_SonicTheScreensaver-GameModeArray	; $4C
-id_ClintonScr:		equ ptr_ClintonScreens-GameModeArray		; $50
-id_BSOD:			equ ptr_BSOD-GameModeArray					; $54 !@ GD
+; Game modes (Deprecated, moved to sonic.asm->GameModeArray)
+
+;id_Sega:			equ ptr_GM_Sega-GameModeArray				; $00
+;id_Title:			equ ptr_GM_Title-GameModeArray				; $04
+;id_Demo:			equ ptr_GM_Demo-GameModeArray				; $08
+;id_Level:			equ ptr_GM_Level-GameModeArray				; $0C
+;id_Special:			equ ptr_GM_Special-GameModeArray			; $10
+;id_Continue:		equ ptr_GM_Cont-GameModeArray				; $14
+;id_Ending:			equ ptr_GM_Ending-GameModeArray				; $18
+;id_Credits:			equ ptr_GM_Credits-GameModeArray			; $1C
+;id_ColdBrew:		equ ptr_GM_ColdBrew-GameModeArray			; $20
+;id_FoxyBoo:			equ ptr_GM_FoxyBoo-GameModeArray			; $24
+;id_DebugMenu:		equ ptr_GM_DebugMode-GameModeArray			; $28
+;id_Thanatos:		equ ptr_GM_ThanatosCredits-GameModeArray	; $2C
+;id_ButtcrackMan:	equ ptr_GM_ButtcrackMan-GameModeArray 		; $30
+;id_TryAgainEnd:		equ ptr_GM_TryAgainEnd-GameModeArray		; $34
+;id_Fetus:			equ ptr_GM_Fetus-GameModeArray				; $38
+;id_Damn:			equ ptr_GM_Damn-GameModeArray 				; $3C
+;id_SplashSkip:		equ ptr_SplashScreenSkipper-GameModeArray	; $40
+;id_Advert:			equ ptr_Advert-GameModeArray				; $44
+;id_Battle:			equ ptr_EarthboundBtl-GameModeArray			; $48
+;id_Screensaver:		equ ptr_SonicTheScreensaver-GameModeArray	; $4C
+;id_ClintonScr:		equ ptr_ClintonScreens-GameModeArray		; $50
+;id_BSOD:			equ ptr_BSOD-GameModeArray					; $54 !@ GD
 
 ; Levels
 id_OWZ:		equ $00

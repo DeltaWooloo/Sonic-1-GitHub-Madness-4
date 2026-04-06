@@ -391,35 +391,46 @@ MainGameLoop:
 		move.l	GameModeArray(pc,d0.w),a0
 		jsr	(a0)					; jump to apt location in ROM
 		bra.s	MainGameLoop				; loop indefinitely
-; ===========================================================================
+
 ; ---------------------------------------------------------------------------
-; Main game mode array
-; ---------------------------------------------------------------------------
+; macro to define gamemodes and their ID
+
+GAMEMODE	macro	addr, id
+id	= *	
+		dc.l	addr
+	endm
+
+; ---------------------------------------------------------------------------    
+; Game Mode table
+; --------------------------------------------------------------------------- 
 
 GameModeArray:
-ptr_GM_Sega:				dc.l	GM_Sega					; Sega Screen 								($00)
-ptr_GM_Title:				dc.l	GM_Title				; Title Screen								($04)
-ptr_GM_Demo:				dc.l	GM_Level				; Demo Mode									($08)
-ptr_GM_Level:				dc.l	GM_Level				; Normal Level								($0C)
-ptr_GM_Special:				dc.l	GM_Special				; Special Stage								($10)
-ptr_GM_Cont:				dc.l	GM_Continue				; Continue Screen							($14)
-ptr_GM_Ending:				dc.l	GM_Ending				; End of game sequence						($18)
-ptr_GM_Credits:				dc.l	GM_Credits				; Credits 									($1C)
-ptr_GM_ColdBrew:			dc.l	GM_ColdBrew				; Cold Brew 								($20)
-ptr_GM_FoxyBoo:				dc.l	GM_FoxyBoo				; Foxy Scare 								($24)
-ptr_GM_DebugMode:			dc.l	GM_DebugMenu			; Debug Menu 								($28)
-ptr_GM_ThanatosCredits:		dc.l	GM_ThanatosCredits		; Credits - Thanatos ver. 					($2C)
-ptr_GM_ButtcrackMan:		dc.l	GM_ButtcrackMan			; BUTTCRACK MAN 							($30)
-ptr_GM_TryAgainEnd:			dc.l	TryAgainEnd				; Testable TRY AGAIN/END screen 			($34)
-ptr_GM_Fetus:				dc.l	GM_Fetus				; Difficulty Select screen out of spite 	($38)
-ptr_GM_Damn:				dc.l	GM_Damn					; DAMN!!!!!!!!!!!!!!!!!!!!!!!				($3C)
-ptr_SplashScreenSkipper:	dc.l	GM_SplashScreenSkipper	; My Stupid Splash is here 					($40)
-ptr_Advert:					dc.l	GM_Advert				; For all the reject splash screens I guess ($44)
-ptr_EarthboundBtl:			dc.l	EarthboundBtl			; earthbound battle stuff					($48)
-ptr_SonicTheScreensaver:	dc.l	GM_SonicTheScreensaver	; GMZ - DVD Screensaver						($4C)
-ptr_ClintonScreens:			dc.l	GM_ClintonScreens		; Clinton fail/win 							($50)
-ptr_BSOD:					dc.l	GM_BSOD					; !@ GD: Windows zone BSOD (on death)		($54)
+	phase	0
+	GAMEMODE	GM_Sega,		id_Sega		; Sega Screen 							
+	GAMEMODE	GM_Title,		id_Title	; Title Screen							
+	GAMEMODE	GM_Level,		id_Demo		; Demo Mode								
+	GAMEMODE	GM_Level,		id_Level	; Normal Level							
+	GAMEMODE	GM_Special,		id_Special	; Special Stage							
+	GAMEMODE	GM_Continue,		id_Continue	; Continue Screen						
+	GAMEMODE	GM_Ending,		id_Ending	; End of game sequence					
+	GAMEMODE	GM_Credits,		id_Credits	; Credits 								
+	GAMEMODE	GM_ColdBrew,		id_ColdBrew	; Cold Brew 							
+	GAMEMODE	GM_FoxyBoo,		id_FoxyBoo	; Foxy Scare 							
+	GAMEMODE	GM_DebugMenu,		id_DebugMenu	; Debug Menu
+	GAMEMODE	GM_ThanatosCredits,	id_Thanatos	; Credits - Thanatos ver. 				
+	GAMEMODE	GM_ButtcrackMan,	id_ButtcrackMa	; BUTTCRACK MAN 						
+	GAMEMODE	TryAgainEnd,		id_TryAgainEnd	; Testable TRY AGAIN/END screen 		
+	GAMEMODE	GM_Fetus,		id_Fetus	; Difficulty Select screen out of spite 
+	GAMEMODE	GM_Damn,		id_Damn		; DAMN!!!!!!!!!!!!!!!!!!!!!!!			
+	GAMEMODE	GM_SplashScreenSkipper,	id_SplashSkip	; My Stupid Splash is here 				
+	GAMEMODE	GM_Advert,		id_Advert	; For all the reject splash screens I guess
+	GAMEMODE	EarthboundBtl,		id_Battle	; earthbound battle stuff				
+	GAMEMODE	GM_SonicTheScreensaver,	id_Screensaver	; GMZ - DVD Screensaver					
+	GAMEMODE	GM_ClintonScreens,	id_ClintonScr	; Clinton fail/win 						
+	GAMEMODE	GM_BSOD,		id_BSOD		; !@ GD: Windows zone BSOD (on death)
+	dephase
 GameModeArray_End:
+
 ; ===========================================================================
 	if SkipChecksumCheck=0
 CheckSumError:
@@ -2504,7 +2515,7 @@ Tit_ChkStartOrDemo:
 		tst.w	(v_generictimer).w	; GMZ - Has the title screen timer expired?
 		bne.s	Tit_NoDemo	; GMZ - If not, branch
 		eori.w	#1,titleGoToScreensaver
-		move.b	#ptr_SonicTheScreensaver-GameModeArray,v_gamemode
+		move.b	#id_Screensaver,v_gamemode
 		rts
 
 Tit_ChkStartOrDemo_Cont:
