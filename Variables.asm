@@ -216,7 +216,7 @@ v_limitleft2:		ds.w	1		; left level boundary
 v_limitright2:		ds.w	1		; right level boundary
 v_limittop2:		ds.w	1		; top level boundary
 v_limitbtm2:		ds.w	1		; bottom level boundary
-v_cameraroutine:	ds.w	1		; unused
+v_cameraroutine:	ds.w	1		; camera routine selector
 v_limitleft3:		ds.w	1		; left level boundary, at the end of an act
 v_clintonfucker:	ds.b	1		; clintonfucker flag
 v_waterflag:		ds.b	1
