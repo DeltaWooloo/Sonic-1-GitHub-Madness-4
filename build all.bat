@@ -271,3 +271,4 @@ call fixheadr.exe "gm4built.debug.gen"
 call fixheadr.exe "gm4built.debug.prev.gen"
 :SKIP3
 REM EOF
+pause

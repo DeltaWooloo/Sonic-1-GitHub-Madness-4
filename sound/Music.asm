@@ -168,7 +168,7 @@ Mus_Doom:		include	"music/TG2000Tracks/DoomGate.asm"
 	even
 Mus_BadEmerald:		include	"music/TG2000Tracks/BadEmerald.asm"
 	even
-Mus_TreasureCaves:	include	"music/PikaNoob/treasurecaves.asm" 
+Mus_TreasureCaves:	include	"music/PikaNoob/Mus - Treasure Caves.asm" 
 	even
 Mus_Danstar:		include	"music/TG2000Tracks/Danstar.asm"
 	even
@@ -190,7 +190,7 @@ Mus_DoleDetective:	include	"music/Kat/Mus - Dole Detective.asm"
 	even
 Mus_HardwareStore:	include	"music/MattTracks/Mus - Hardware Store.asm"
 	even
-Mus_GHZ:		include "music/Kat/ghz.asm"
+Mus_GHZ:		include "music/Kat/Mus - Green Hill Zone.asm"
 	even
 Mus_TF2:		include	"music/TG2000Tracks/TF2.asm"
 	even
@@ -291,7 +291,7 @@ Mus_S3Continue:		include "music/DaxKatter/Mus - S3 Continue.asm"
 	even
 Mus_BlueBalls:		include "music/DaxKatter/Mus - S3K Special Stage.asm"
 	even
-Mus_ChaosEmerald:	include "music/TheWTracks/Chaos Emerald.asm"
+Mus_ChaosEmerald:	include "music/TheWTracks/Mus - S1 Chaos Emerald.asm"
 	even
 Mus_LimitedClear:	include "music/DaxKatter/Mus - Limited Act Clear.asm"
 	even

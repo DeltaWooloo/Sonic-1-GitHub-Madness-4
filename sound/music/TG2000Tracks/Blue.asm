@@ -1399,3 +1399,5 @@ Blue_PSG3_0E_0_64:
 	smpsPSGAlterVol	$03
 	dc.b nMaxPSG, $04
 	smpsReturn
+
+	smpsFooterEndSong	"TG2000Tracks/Blue.asm"

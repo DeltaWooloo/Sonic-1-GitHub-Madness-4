@@ -1,6 +1,3 @@
-
-
-
 Nogales_Header:
 	smpsHeaderStartSong 1
 	smpsHeaderVoice		Nogales_Voices
@@ -633,4 +630,4 @@ Nogales_Voices:
 	smpsVcReleaseRate	$08, $00, $08, $00
 	smpsVcTotalLevel	$00, $17, $00, $16
 	
-	smpsFooterEndSong	"Kat/ghz.asm"
+	smpsFooterEndSong	"Kat/Mus - Green Hill Zone.asm"

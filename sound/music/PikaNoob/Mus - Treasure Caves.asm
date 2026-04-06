@@ -650,4 +650,4 @@ treasurecaves_Voices:
 	smpsVcReleaseRate   $09, $06, $05, $06
 	smpsVcTotalLevel    $00, $0A, $13, $14
 
-	smpsFooterEndSong	"PikaNoob/treasurecaves.asm"
+	smpsFooterEndSong	"PikaNoob/Mus - Treasure Caves.asm"
