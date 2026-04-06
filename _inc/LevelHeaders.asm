@@ -77,7 +77,7 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 	lhead	plcid_NGZ,Kos_NGZ,plcid_NGZ2,Blk16_NGZ,Blk256_NGZ,bgm_GHZ,palid_NGZ,Col_NGZ,ObjPos_NGZ1,Level_NGZ1,Level_NGZbg
 	
 	lhead	plcid_BSZ,Kos_BSZ,plcid_BSZ2,Blk16_BSZ,Blk256_BSZ,bgm_TF2,palid_BSZ,Col_BSZ,ObjPos_BSZ1,Level_BSZ1,Level_BSZbg;todo add BLUESCAPE assets
-	lhead	plcid_BSZ,Kos_BSZ,plcid_BSZ2,Blk16_BSZ,Blk256_BSZ,bgm_TF2,palid_BSZ,Col_BSZ,ObjPos_BSZ2,Level_BSZ2,Level_BSZbg
+	lhead	plcid_BSZ,Kos_BSZ,plcid_BSZ2,Blk16_BSZ,Blk256_BSZ,bgm_Blue,palid_BSZ,Col_BSZ,ObjPos_BSZ2,Level_BSZ2,Level_BSZbg
 	lhead	plcid_BSZ,Kos_BSZ,plcid_BSZ2,Blk16_BSZ,Blk256_BSZ,bgm_TF2,palid_BSZ,Col_BSZ,ObjPos_BSZ3,Level_BSZ3,Level_BSZbg
 	lhead	plcid_BSZ,Kos_BSZ,plcid_BSZ2,Blk16_BSZ,Blk256_BSZ,bgm_TF2,palid_BSZ,Col_BSZ,ObjPos_BSZ1,Level_BSZ1,Level_BSZbg
 

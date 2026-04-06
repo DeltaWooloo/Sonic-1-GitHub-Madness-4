@@ -366,6 +366,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_dam_dariram
 	nextenum bgm_smilingbomb
 	nextenum bgm_VirusAlert
+	nextenum bgm_Blue
 
 	; Unused Jingle BGM
 	nextenum bgm_Ding
