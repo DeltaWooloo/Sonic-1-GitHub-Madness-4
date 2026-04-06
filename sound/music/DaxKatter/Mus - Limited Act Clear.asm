@@ -8,7 +8,7 @@ BGM_LimitedClear_Header:
 	smpsHeaderFM        BGM_LimitedClear_FM1,	$F4, $0A
 	smpsHeaderFM        BGM_LimitedClear_FM2,	$DC, $0A
 	smpsHeaderFM        BGM_LimitedClear_FM3,	$F4, $15
-	smpsHeaderFM        BGM_LimitedClear_FM4,	$F4, $15
+	smpsHeaderFM        BGM_LimitedClear_FM4,	$F1, $15
 	smpsHeaderFM        BGM_LimitedClear_FM5,	$F4, $14
 	smpsHeaderPSG       BGM_LimitedClear_PSG1,	$D0, $05, $00, fTone_05
 	smpsHeaderPSG       BGM_LimitedClear_PSG2,	$DC, $07, $00, fTone_05
@@ -31,31 +31,27 @@ BGM_LimitedClear_FM2:
 	smpsSetvoice        $01
 	smpsNoteFill        $0B
 	dc.b	nG5, $03, nG5, nG4, $06, nG4, nG5, $03, nG5, nG4, $06, nG4
-	dc.b	nG5, $03, nG5, nRst, $06, nRst, $0C, nG4, $09
+	dc.b	nG5, $03, nG5, nRst, $12, nG4, $09
 	smpsNoteFill        $00
 	dc.b	nG4, $33
 	smpsStop
 
 ; FM3 Data
 BGM_LimitedClear_FM3:
-	smpsPan             panLeft, $00
+	smpsPan		panLeft, $00
+	smpsJump	BGM_LimitedClear_Jump
+
+; FM4 Data
+BGM_LimitedClear_FM4:
+	smpsPan             panRight, $00
+
+BGM_LimitedClear_Jump:
 	smpsSetvoice        $02
 	smpsNoteFill        $06
 	dc.b	nC6, $03, nC6, nRst, $0C, nC6, $03, nC6, nRst, $0C, nC6, $03
 	dc.b	nC6, nRst, $12
 	smpsNoteFill        $00
 	dc.b	nC6, $09, nC6, $33
-	smpsStop
-
-; FM4 Data
-BGM_LimitedClear_FM4:
-	smpsPan             panRight, $00
-	smpsSetvoice        $02
-	smpsNoteFill        $06
-	dc.b	nA5, $03, nA5, nRst, $0C, nA5, $03, nA5, nRst, $0C, nA5, $03
-	dc.b	nA5, nRst, $12
-	smpsNoteFill        $00
-	dc.b	nA5, $09, nA5, $33
 	smpsStop
 
 ; FM5 Data
