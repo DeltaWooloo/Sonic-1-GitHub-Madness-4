@@ -14,10 +14,11 @@ bsodData macro seconds,skipsec,art1,artoff1,art2,artoff2,fg,bg,pal,tclr,bgm,pcm
 	dc.w artoff2
 	dc.l fg,bg,pal
 	dc.w ($8700|tclr)
-	dc.b seconds,skipsec,pcm,bgm
+	dc.w seconds,skipsec
+	dc.b pcm,bgm
 	endm
 ;bsodDatasize equ 16
-bsodDatasize equ 30
+bsodDatasize equ 32
 	ifdef __DEBUG__
 bsodDebug equ -1
 	else
@@ -204,8 +205,8 @@ GM_BSOD:
 		;Do start/skip timing
 		moveq	#5,d0
 		moveq	#5,d1
-		move.b	(a2)+,d0			;seconds
-		move.b	(a2)+,d1			;skipsec
+		move.w	(a2)+,d0			;seconds
+		move.w	(a2)+,d1			;skipsec
 		moveq	#60,d2
 		btst	#6,(v_megadrive).w
 		beq.s	.ntsc
@@ -272,24 +273,38 @@ GM_BSOD:
 ; ---------------------------------------------------------------------------
 sec_std:		equ	10
 secSkip_std:	equ	3
+sec_sms:		equ	13*60
+secSkip_sms:	equ	secSkip_std
+sec_gg:			equ	sec_sms
+secSkip_gg:		equ	secSkip_sms
 sec_gen:		equ	sec_std
 secSkip_gen:	equ	secSkip_std
 sec_CD:			equ	sec_gen
 secSkip_CD:		equ	secSkip_gen
 
 BSOD_table:	; seconds, seconds to skip, art, map, palette, SMPS sound ID, MPCM sound ID
+		;Windows-based
 		bsodData		sec_std,	secSkip_std,	bsod_w311.art1,			ArtTile_Home1,	bsod_w311.art2,	ArtTile_bsod_w311_art2,	bsod_w311.fg,		bsod_w311.bg,		bsod_w311.pal,		TCLR(0,0),	bgm_Passport,	dChord16
-		bsodData		sec_std,	secSkip_std,	bsod_95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_95.fg,			bsod_95.bg,			bsod_95.pal,		TCLR(1,0),	bgm_hang,		dBSOD
+		bsodData		sec_std,	secSkip_std,	bsod_95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_95.fg,			bsod_95.bg,			bsod_95.pal,		TCLR(1,0),	bgm_hang,		dBSOD		
+		;SMS-based
+		bsodData		sec_sms,	secSkip_sms,	bsod_sms1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_sms1.fg,		bsod_sms1.bg,		bsod_sms1.pal,		TCLR(0,0),	bgm_Retro,		dChord16
+		bsodData		sec_sms,	secSkip_sms,	bsod_sms2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_sms2.fg,		bsod_sms2.bg,		bsod_sms2.pal,		TCLR(0,0),	bgm_Retro,		dChord16
+		;GG-based
+		bsodData		sec_gg,		secSkip_gg,		bsod_gg1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_gg1.fg,		bsod_gg1.bg,		bsod_gg1.pal,		TCLR(0,0),	bgm_Retro,		dChord16
+		bsodData		sec_gg,		secSkip_gg,		bsod_gg2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_gg2.fg,		bsod_gg2.bg,		bsod_gg2.pal,		TCLR(0,0),	bgm_Retro,		dChord16
+		;Genesis-based
 		bsodData		sec_gen,	secSkip_gen,	art_null,				ArtTile_Home0,	art_null,		ArtTile_Home0,			bsod_tmssrsod.fg,	bsod_tmssrsod.bg,	bsod_tmssrsod.pal,	TCLR(0,0),	bgm_hang,		dVirus
 		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscu.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_gen_ntscu.fg,	bsod_gen_ntscu.bg,	bsod_gen_ntscu.pal,	TCLR(1,0),	bgm_gen,		dBSOD
 		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_gen_ntscj.fg,	bsod_gen_ntscj.bg,	bsod_gen_ntscj.pal,	TCLR(1,0),	bgm_gen,		dBSOD
 		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscuj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_gen_ntscuj.fg,	bsod_gen_ntscuj.bg,	bsod_gen_ntscuj.pal,TCLR(1,0),	bgm_gen,		dBSOD
 		bsodData		sec_gen,	secSkip_gen,	bsod_gen_pal.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_gen_pal.fg,	bsod_gen_pal.bg,	bsod_gen_pal.pal,	TCLR(1,0),	bgm_gen,		dBSOD
+		;Sonic CD/Sega CD-based
 		bsodData		sec_CD,		secSkip_CD,		bsod_scdm.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_scdm.fg,		bsod_scdm.bg,		bsod_scdm.pal,		TCLR(0,0),	bgm_VirusAlert,	dVirus
 		bsodData		sec_CD,		secSkip_CD,		bsod_scd_ntscu.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_scd_ntscu.fg,	bsod_scd_ntscu.bg,	bsod_scd_ntscu.pal,	TCLR(1,0),	bgm_scd,		dBSOD
 		bsodData		sec_CD,		secSkip_CD,		bsod_scd_ntscj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_scd_ntscj.fg,	bsod_scd_ntscj.bg,	bsod_scd_ntscj.pal,	TCLR(1,0),	bgm_scd,		dBSOD
 		bsodData		sec_CD,		secSkip_CD,		bsod_scd_pale.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_scd_pale.fg,	bsod_scd_pale.bg,	bsod_scd_pale.pal,	TCLR(1,0),	bgm_scd,		dBSOD
 		bsodData		sec_CD,		secSkip_CD,		bsod_scd_pala.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_scd_pala.fg,	bsod_scd_pala.bg,	bsod_scd_pala.pal,	TCLR(1,0),	bgm_scd,		dBSOD
+		;Sega 32x-based
 		bsodData		sec_std,	secSkip_std,	bsod_32x.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,			bsod_32x.fg,		bsod_32x.bg,		bsod_32x.pal,		TCLR(1,0),	bgm_Passport,	dShutdown
 BSOD_table_end:
 
@@ -303,6 +318,36 @@ bsod_95:
 .fg:		binclude "_gamemode/winBSOD/bsod_95-mapFG.eni"
 			even
 .bg:		binclude "_gamemode/winBSOD/bsod_95-mapBG.eni"
+			even
+			
+bsod_sms1:
+.art1:		binclude "_gamemode/winBSOD/bsod_sms1-art1.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_sms1-mapFG.eni"
+			even
+bsod_sms2:
+.art1:		binclude "_gamemode/winBSOD/bsod_sms2-art1.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_sms2-mapFG.eni"
+			even
+bsod_sms1.pal:
+bsod_sms2.pal:
+.pal:		binclude "_gamemode/winBSOD/bsod_sms-pal.bin"
+			even
+
+bsod_gg1:
+.fg:		binclude "_gamemode/winBSOD/bsod_gg1-mapFG.eni"
+			even
+bsod_gg2:
+.fg:		binclude "_gamemode/winBSOD/bsod_gg2-mapFG.eni"
+			even						
+bsod_gg1.art1:
+bsod_gg2.art1:
+			binclude "_gamemode/winBSOD/bsod_gg-art1.nem"
+			even
+bsod_gg1.pal:
+bsod_gg2.pal:
+			binclude "_gamemode/winBSOD/bsod_gg-pal.bin"
 			even
 			
 bsod_tmssrsod:
@@ -357,6 +402,10 @@ bsod_std.bg:
 			binclude "_gamemode/winBSOD/bsod_std-mapBG.eni"
 			even
 
+bsod_sms1.bg:
+bsod_sms2.bg:
+bsod_gg1.bg:
+bsod_gg2.bg:
 bsod_tmssrsod.bg:
 bsod_gen_ntscu.bg:
 bsod_gen_ntscj.bg:
