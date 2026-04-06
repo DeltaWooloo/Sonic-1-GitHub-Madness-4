@@ -75,7 +75,7 @@ BGM_1UP_PSG3:
 	smpsPSGvoice		uptone_03
 	smpsNoteFill		$05
 	smpsPSGAlterVol		$FE
-	dc.b	$02, $02, $02, $06, $02, $02, $02, $03
+	dc.b	$02, $02, $02, $06, $02, $02, $02, $06
 	smpsStop
 
 BGM_1UP_DAC:

@@ -144,7 +144,7 @@ Got_NextLevel:	; Routine $A
 
 GotoNextLevel:
 		move.b	(v_zone).w,d0
-		andi.w	#7,d0
+;		andi.w	#7,d0		; DAX: WHAT THE FUCK?!
 		lsl.w	#3,d0
 		move.b	(v_act).w,d1
 		andi.w	#3,d1

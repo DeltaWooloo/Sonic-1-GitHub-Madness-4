@@ -1007,15 +1007,42 @@ locret_VOMITCOOKIE:
 ; ---------------------------------------------------------------------------
 
 DLE_BSZ:
-       rts
+		rts
 ; ---------------------------------------------------------------------------
 ; BlueStone WIP
 ; ---------------------------------------------------------------------------
 
 DLE_BTZ:
-       move.w	#$140,(v_limitbtm1).w
+		moveq	#0,d0
+		move.b	(v_act).w,d0
+		add.w	d0,d0
+		move.w	DLE_BTZx(pc,d0.w),d0
+		jmp	DLE_BTZx(pc,d0.w)
+; ===========================================================================
+DLE_BTZx:	dc.w DLE_BTZ1-DLE_BTZx
+		dc.w DLE_BTZ2-DLE_BTZx
+		dc.w DLE_BTZ3-DLE_BTZx
+; ===========================================================================
+
+DLE_BTZ1:	; placeholder
+DLE_BTZ2:
+		rts
+
+DLE_BTZ3:
+		moveq	#0,d0
+		move.b	(v_dle_routine).w,d0
+		move.w	DLE_BTZ3Index(pc,d0.w),d0
+		jmp	DLE_BTZ3Index(pc,d0.w)
+; ===========================================================================
+DLE_BTZ3Index:	dc.w DLE_BTZ3main-DLE_BTZ3Index
+		dc.w DLE_BTZ3_Returntofreddy-DLE_BTZ3Index
+		dc.w DLE_BTZ3end-DLE_BTZ3Index
+; ===========================================================================
+
+DLE_BTZ3main:
+		move.w	#$140,(v_limitbtm1).w
 		cmpi.w	#Knight_X_Spawn,(v_screenposx).w  ; WIP 
-		blo.s	DLE_BTZ_Returntofreddy
+		blo.s	DLE_BTZ3_Returntofreddy
 		jsr	(FindFreeObj).l
 		bne.s	.BTZspawnfail
 		_move.b	#id_Roaring_Knight,obID(a1) ; load MZ boss object
@@ -1028,8 +1055,9 @@ DLE_BTZ:
 		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w	
 
-DLE_BTZend:
+DLE_BTZ3end:
 		move.w	(v_screenposx).w,(v_limitleft2).w
-DLE_BTZ_Returntofreddy:		
+
+DLE_BTZ3_Returntofreddy:
 		rts
 		

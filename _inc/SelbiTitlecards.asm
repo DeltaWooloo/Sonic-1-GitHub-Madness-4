@@ -35,11 +35,11 @@ TitleCard_SYZ3:	equ  "HOMERS"
 TitleCard_SYZ4:	equ  "porn"
 
 TitleCard_LZ1:	equ  "AZURE RAINFOREST"
-TitleCard_LZ2:	equ  "JUST AN ETRIAN"
+TitleCard_LZ2:	equ  "AZURE PAINFOREST"
 TitleCard_LZ3:	equ  "FOE FOE FOE FOE"
 TitleCard_LZ4:	equ  "PRONGLE PIT"	; LZ4 is SBZ3
 
-TitleCard_SLZ1:	equ  "MEIN KRAFT";/give Tonic enchanted_golden_apple[enchantments:{sharpness:255},max_stack_size:99] 99
+TitleCard_SLZ1:	equ  "MEIN KRAFT"		;/give Tonic enchanted_golden_apple[enchantments:{sharpness:255},max_stack_size:99] 99
 TitleCard_SLZ2:	equ  "PIGLIN SHAFT"
 TitleCard_SLZ3:	equ  "ENDERMAN PORN"
 TitleCard_SLZ4:	equ  "porn"
@@ -241,7 +241,8 @@ TTL_ConData:
 		dc.l TTLCard_NGZ1_ConData, TTLCard_NGZ1_Array	; DVZ1
 		dc.l TTLCard_NGZ2_ConData, TTLCard_NGZ2_Array	; DVZ2
 		dc.l TTLCard_NGZ3_ConData, TTLCard_NGZ3_Array	; DVZ3
-		
+		dc.l 0, 0
+
 		dc.l TTLCard_BSZ1_ConData, TTLCard_BSZ1_Array	; {SCAPE}
 		dc.l TTLCard_BSZ2_ConData, TTLCard_BSZ2_Array	; BLUE
 		dc.l TTLCard_BSZ3_ConData, TTLCard_BSZ3_Array	; BS3
@@ -390,22 +391,27 @@ Map_Card_Extended:	mappingsTable
 	mappingsTableEntry.w	TTLCard_GHZ2	; Green Hill Zone 2
 	mappingsTableEntry.w	TTLCard_GHZ3	; Green Hill Zone 3
 	mappingsTableEntry.w	TTLCard_GHZ4	; Green Hill Zone 4
+
 	mappingsTableEntry.w	TTLCard_LZ1	; Labyrinth Zone 1
 	mappingsTableEntry.w	TTLCard_LZ2	; Labyrinth Zone 2
 	mappingsTableEntry.w	TTLCard_LZ3	; Labyrinth Zone 3
 	mappingsTableEntry.w	TTLCard_LZ4	; Labyrinth Zone 4 (Scrap Brain Zone 3)
+
 	mappingsTableEntry.w	TTLCard_MZ1	; Marble Zone 1
 	mappingsTableEntry.w	TTLCard_MZ2	; Marble Zone 2
 	mappingsTableEntry.w	TTLCard_MZ3	; Marble Zone 3
 	mappingsTableEntry.w	TTLCard_MZ4	; Marble Zone 4
+
 	mappingsTableEntry.w	TTLCard_SLZ1	; Star Light Zone 1
 	mappingsTableEntry.w	TTLCard_SLZ2	; Star Light Zone 2
 	mappingsTableEntry.w	TTLCard_SLZ3	; Star Light Zone 3
 	mappingsTableEntry.w	TTLCard_SLZ4	; Star Light Zone 4
+
 	mappingsTableEntry.w	TTLCard_SYZ1	; Spring Yard Zone 1
 	mappingsTableEntry.w	TTLCard_SYZ2	; Spring Yard Zone 2
 	mappingsTableEntry.w	TTLCard_SYZ3	; Spring Yard Zone 3
 	mappingsTableEntry.w	TTLCard_SYZ4	; Spring Yard Zone 4
+
 	mappingsTableEntry.w	TTLCard_SBZ1	; Scrap Brain Zone 1
 	mappingsTableEntry.w	TTLCard_SBZ2	; Scrap Brain Zone 2
 	mappingsTableEntry.w	TTLCard_SBZ3	; Scrap Brain Zone 3 (Final Zone)

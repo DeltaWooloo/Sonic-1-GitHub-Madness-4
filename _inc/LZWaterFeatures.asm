@@ -34,17 +34,20 @@ LZWaterFeatures:
 ; Initial water heights
 ; ---------------------------------------------------------------------------
 WaterHeight:
-		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_GHZ
-		dc.w $0110,$0110,$0110,$0228	; id_LZ
-		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
-		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
-		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
-		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
-		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
-		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
-		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
-		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
-		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_LZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_OWZ
+		dc.w $0110,$0110,$0110,$0228	; id_ARZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_ACZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_MCZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_SFZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_PPZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_End
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_Brew
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_Windows
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_Joint
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_DVZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_NGZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_BSZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_BTZ
 		even
 ; ===========================================================================
 

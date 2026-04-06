@@ -25,7 +25,7 @@ Card_CheckSBZ3:	; Routine 0
 		move.b	d0,d2
 		lsl.w	#2,d0
 		add.b	(v_act).w,d0
-		lsl.b	#3,d0
+		lsl.w	#3,d0
 		lea	(TTL_ConData).l,a3
 		adda.w	d0,a3
 		movea.l	(a3),a3
@@ -43,7 +43,7 @@ Card_Loop:
 		move.b	(a2)+,d0
 		bne.s	Card_MakeSprite
 		move.b	d2,d0
-		lsl.b	#2,d0
+		lsl.w	#2,d0
 		add.b	(v_act).w,d0
 
 Card_MakeSprite:
