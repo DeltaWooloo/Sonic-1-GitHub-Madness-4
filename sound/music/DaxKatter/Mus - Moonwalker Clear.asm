@@ -16,43 +16,37 @@ BGM_MoonwalkerClear_Header:
 
 ; FM1 Data
 BGM_MoonwalkerClear_FM1:
-	smpsSetvoice        $00
 	smpsModSet          $14, $01, $06, $04
+
+; FM5 Data
+BGM_MoonwalkerClear_FM5:
+	smpsSetvoice        $00
 	dc.b	nA4, $03, nA4, nC5, $06, $06, $06, $03, nA4, nRst, nA4, nA4, $06
-	dc.b	$06, $03, $03, nC5, $06, $06, $06, $03, nA4, nRst, $12
+	dc.b	$06, $03, $03, nC5, $06, $06, $06, $03, nA4
 	smpsStop
 
 ; FM2 Data
 BGM_MoonwalkerClear_FM2:
 	smpsSetvoice        $01
 	dc.b	nC4, $06, nA3, $0C, nC4, nD4, nEb4, $06, nE4, nA3, $0C, nC4
-	dc.b	$09, nD4, $03, nRst, $06
+	dc.b	$09, nD4, $03
 	smpsStop
 
 ; FM3 Data
 BGM_MoonwalkerClear_FM3:
 	smpsPan             panLeft, $00
 	smpsSetvoice        $00
-	dc.b	nFs5, $03, nFs5, nG5, $06, $06, $06, $03, nFs5, $03, nRst, nFs5
-	dc.b	nFs5, $06, nFs5, $06, nFs5, $03, nFs5, nG5, $06, $06, $06, $03
-	dc.b	nFs5, nRst, $06
+	dc.b	nFs5, $03, nFs5, nG5, $06, $06, $06, $03, nFs5, nRst, nFs5, nFs5, $06
+	dc.b	$06, $03, $03, nG5, $06, $06, $06, $03, nFs5
 	smpsStop
 
 ; FM4 Data
 BGM_MoonwalkerClear_FM4:
 	smpsPan             panRight, $00
 	smpsSetvoice        $00
-	dc.b	nD5, $03, nD5, nE5, $06, $06, $06, $03, nD5, $03, nRst, nD5
-	dc.b	nD5, $06, nD5, $06, nD5, $03, nD5, nE5, $06, $06, $06, $03
-	dc.b	nD5, nRst, $06
+	dc.b	nD5, $03, nD5, nE5, $06, $06, $06, $03, nD5, nRst, nD5, nD5, $06
+	dc.b	$06, $03, $03, nE5, $06, $06, $06, $03, nD5
 	smpsStop
-
-; FM5 Data
-BGM_MoonwalkerClear_FM5:
-	smpsSetvoice        $00
-	dc.b	nA4, $03, nA4, nC5, $06, $06, $06, $03, nA4, $03, nRst, nA4
-	dc.b	nA4, $06, nA4, $06, nA4, $03, nA4, nC5, $06, $06, $06, $03
-	dc.b	nA4, nRst, $06
 
 ; PSG1 Data
 BGM_MoonwalkerClear_PSG1:
@@ -67,20 +61,6 @@ BGM_MoonwalkerClear_PSG3:
 	dc.b	nMaxPSG, $03, $03
 
 BGM_MoonwalkerClear_Loop00:
-	smpsCall            BGM_MoonwalkerClear_Call00
-	smpsLoop            $00, $03, BGM_MoonwalkerClear_Loop00
-	smpsNoteFill        $01
-	smpsPSGAlterVol     $FF
-	dc.b	nMaxPSG, $03
-	smpsPSGAlterVol     $01
-	dc.b	$03, $06
-	smpsPSGAlterVol     $FF
-	smpsNoteFill        $00
-	dc.b	$06
-	smpsStop
-
-BGM_MoonwalkerClear_Call00:
-	smpsNoteFill        $01
 	smpsPSGAlterVol     $FF
 	dc.b	nMaxPSG, $03
 	smpsPSGAlterVol     $01
@@ -91,6 +71,17 @@ BGM_MoonwalkerClear_Call00:
 	smpsPSGAlterVol     $01
 	smpsNoteFill        $01
 	dc.b	$03, $03, $03
+	smpsLoop            $00, $03, BGM_MoonwalkerClear_Loop00
+	smpsPSGAlterVol     $FF
+	dc.b	nMaxPSG, $03
+	smpsPSGAlterVol     $01
+	dc.b	$03, $06
+	smpsPSGAlterVol     $FF
+	smpsNoteFill        $00
+	dc.b	$06
+	smpsStop
+
+BGM_MoonwalkerClear_Call00:
 	smpsReturn
 
 ; DAC Data

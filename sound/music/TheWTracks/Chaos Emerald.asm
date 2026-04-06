@@ -1,7 +1,7 @@
 Snd_Emerald_Header:
 	smpsHeaderStartSong 3, 1
 	smpsHeaderVoice     Snd_Emerald_Voices
-	smpsHeaderChan      $07, $03
+	smpsHeaderChan      $07, $02
 	smpsHeaderTempo     $01, $35
 
 	smpsHeaderDAC       Snd_Emerald_DAC
@@ -13,7 +13,6 @@ Snd_Emerald_Header:
 	smpsHeaderFM        Snd_Emerald_FM6,	$F4, $16
 	smpsHeaderPSG       Snd_Emerald_PSG1,	$F4, $02, $00, fTone_03
 	smpsHeaderPSG       Snd_Emerald_PSG2,	$F4, $02, $00, fTone_01
-	smpsHeaderPSG       Snd_Emerald_PSG3,	$F4, $00, $00, fTone_03
 
 ; FM3 Data
 Snd_Emerald_FM3:
@@ -34,23 +33,24 @@ Snd_Emerald_FM2:
 ; FM4 Data
 Snd_Emerald_FM4:
 	smpsSetvoice        $01
-	dc.b	nE5, $0C, nE5, $06, nG5, $06, nRst, nG5, nRst, nC6, $2A
+	dc.b	nE5, $0C, nE5, $06, nG5, nRst, nG5, nRst, nC6, $2A
 	smpsStop
 
 ; FM5 Data
 Snd_Emerald_FM5:
 	smpsSetvoice        $01
-	dc.b	nC6, $0C, nC6, $06, nE6, $06, nRst, nE6, nRst, nG6, $2A
+	dc.b	nC6, $0C, nC6, $06, nE6, nRst, nE6, nRst, nG6, $2A
 	smpsStop
 
 ; FM6 Data
-; There is FM channel 6 data in this song, however the Sonic & Knuckles sound driver doesn't support FM on channel 6, causing it to be silent
-; This is likely a left over from Sonic 1 and 2 where those game's sound drivers do support FM on channel 6
 Snd_Emerald_FM6:
 	smpsSetvoice        $01
-	dc.b	nG5, $0C, nG5, $06, nC6, $06, nRst, nC6, nRst, nE6, $2A
+	dc.b	nG5, $0C, nG5, $06, nC6, nRst, nC6, nRst, nE6, $2A
 	smpsStop
 
+; PSG1 Data
+Snd_Emerald_PSG1:
+	dc.b	nRst, $02
 ; PSG2 Data
 Snd_Emerald_PSG2:
 	dc.b	nRst, $2D
@@ -61,20 +61,8 @@ Snd_Emerald_Loop01:
 	smpsLoop            $00, $04, Snd_Emerald_Loop01
 	smpsStop
 
-; PSG1 Data
-Snd_Emerald_PSG1:
-	smpsNop             $01
-	dc.b	nRst, $02, nRst, $2D
-
-Snd_Emerald_Loop00:
-	dc.b	nG5, $06, nF5, nE5, nD5
-	smpsPSGAlterVol     $03
-	smpsLoop            $00, $04, Snd_Emerald_Loop00
-
 ; DAC Data
 Snd_Emerald_DAC:
-; PSG3 Data
-Snd_Emerald_PSG3:
 	smpsStop
 
 Snd_Emerald_Voices:

@@ -18,14 +18,14 @@ SMWUnderground_Header:
 
 ; FM2 Data
 SMWUnderground_FM2:
-	smpsAlterNote       $03
+	smpsAlterNote		$03
 	dc.b	nRst, $0C
 ; FM1 Data
 SMWUnderground_FM1:
-	smpsSetvoice        $00
-	dc.b	nD3, $06, nRst, nF3, nRst, nEb3, nRst, nG3, nRst
-	dc.b	nD3, nRst, nF3, nRst, nC3, nRst, nCs3, nRst
-	smpsJump				SMWUnderground_FM1
+	smpsNoteFill		$07
+	smpsSetvoice		$00 
+	dc.b	nD3, $0C, nF3, nEb3, nG3, nD3, nF3, nC3, nCs3
+	smpsJump		SMWUnderground_FM1
 
 ; FM3 Data
 SMWUnderground_FM3:
@@ -33,9 +33,9 @@ SMWUnderground_FM3:
 ; FM4 Data
 SMWUnderground_FM4:
 	dc.b	nRst, $06
-	smpsPan             panLeft, $00
-	smpsAlterNote       $FD
-	smpsJump				SMWUnderground_FM1
+	smpsPan			panLeft, $00
+	smpsAlterNote		$FD
+	smpsJump		SMWUnderground_FM1
 
 ; FM5 Data
 SMWUnderground_FM5:
@@ -43,36 +43,38 @@ SMWUnderground_FM5:
 ; FM6 Data
 SMWUnderground_FM6:
 	dc.b	nRst, $09
-	smpsPan             panRight, $00
-	smpsAlterNote       $03
-	smpsJump				SMWUnderground_FM1
+	smpsPan			panRight, $00
+	smpsAlterNote		$03
+	smpsJump		SMWUnderground_FM1
 
 ; PSG1 Data
 SMWUnderground_PSG1:
 	dc.b	nRst, $0C
 ; PSG2 Data
 SMWUnderground_PSG2:
-	smpsModSet          $06, $01, $03, $02
+	smpsModSet		$06, $01, $03, $02
 	dc.b	nRst, $60
-	smpsLoop            $00, $04, SMWUnderground_PSG2
+	smpsLoop		$00, $04, SMWUnderground_PSG2
 
 SMWUnderground_PSG2L:
 	dc.b	nRst, $18, nAb1, nF1, $24, nC1, $0C, nD1, nF1, $54
 	dc.b	nRst, $18, nC1, nF1, $0C, nC2, $24, nAb1, $60
+
 SMWUnderground_PSG2L1:
 	dc.b	nRst, $30
-	smpsLoop            $00, $07, SMWUnderground_PSG2L1
-	smpsLoop            $01, $02, SMWUnderground_PSG2L
+	smpsLoop		$00, $07, SMWUnderground_PSG2L1
+	smpsLoop		$01, $02, SMWUnderground_PSG2L
+
 SMWUnderground_PSG2L2:
-	dc.b	nRst, $18, nAb1, $18, nF1, $24, nC1, $0C, nAb1, $18, nF1, $48
+	dc.b	nRst, $18, nAb1, nF1, $24, nC1, $0C, nAb1, $18, nF1, $48
 	dc.b	nG1, $0C, nE1, nC1, nAb1, $18, nG1, $60, nRst, $24
-	smpsLoop            $00, $02, SMWUnderground_PSG2L2
-	smpsJump				SMWUnderground_PSG2L
+	smpsLoop		$00, $02, SMWUnderground_PSG2L2
+	smpsJump		SMWUnderground_PSG2L
 
 SMWUnderground_PSG3:
-	smpsPSGform         $E7
+	smpsPSGform		$E7
 	dc.b	nG1, $0C
-	smpsJump				SMWUnderground_PSG3
+	smpsJump		SMWUnderground_PSG3
 
 ; DAC Data
 SMWUnderground_DAC:
