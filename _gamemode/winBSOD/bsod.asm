@@ -309,6 +309,9 @@ BSOD_table:	; seconds, seconds to skip, art, map, palette, SMPS sound ID, MPCM s
 		bsodData		sec_CD,		secSkip_CD,		bsod_scd_pala.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd_pala.fg,	bsod_scd_pala.bg,	bsod_scd_pala.pal,	TCLR(1,0),	bgm_scd,		dBSOD
 		;Sega 32x-based
 		bsodData		sec_std,	secSkip_std,	bsod_32x.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x.fg,		bsod_32x.bg,		bsod_32x.pal,		TCLR(1,0),	bgm_Passport,	dShutdown
+		bsodData		sec_std,	secSkip_std,	bsod_32x_nbajte.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x_nbajte.fg,	bsod_32x_nbajte.bg,	bsod_32x_nbajte.pal,TCLR(0,0),	bgm_hang,		dShutdown
+		bsodData		sec_std,	secSkip_std,	bsod_32x_xmen.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x_xmen.fg,	bsod_32x_xmen.bg,	bsod_32x_xmen.pal,	TCLR(0,0),	bgm_hang,		dShutdown
+		bsodData		sec_std,	secSkip_std,	bsod_32x_zx2k.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x_zx2k.fg,	bsod_32x_zx2k.bg,	bsod_32x_zx2k.pal,	TCLR(0,0),	bgm_hang,		dShutdown
 BSOD_table_end:
 
 bsod_w311:
@@ -409,6 +412,30 @@ bsod_scd_pala:
 bsod_32x:
 .fg:		binclude "_gamemode/winBSOD/bsod_32x-mapFG.eni"
 			even
+bsod_32x_nbajte:
+.art1:
+			binclude "_gamemode/winBSOD/bsod_32x_nbajte-art1.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_32x_nbajte-mapFG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_32x_nbajte-pal.bin"
+			even
+bsod_32x_xmen:
+.art1:
+			binclude "_gamemode/winBSOD/bsod_32x_xmen-art1.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_32x_xmen-mapFG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_32x_xmen-pal.bin"
+			even
+bsod_32x_zx2k:
+.art1:
+			binclude "_gamemode/winBSOD/bsod_32x_zx2k-art1.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_32x_zx2k-mapFG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_32x_zx2k-pal.bin"
+			even
 
 
 bsod_std.bg:
@@ -430,6 +457,9 @@ bsod_scd_ntscj.bg:
 bsod_scd_pale.bg:	
 bsod_scd_pala.bg:	
 bsod_32x.bg:
+bsod_32x_nbajte.bg:
+bsod_32x_xmen.bg:
+bsod_32x_zx2k.bg:
 bsod_std.bg2:
 			binclude "_gamemode/winBSOD/bsod_std-mapBG2.eni"
 			even
