@@ -7,7 +7,7 @@ VirusAlert_Header:
 ;	Approximated Tempo = 150.29 BPM
 
 	smpsHeaderDAC	VirusAlert_DAC
-	smpsHeaderFM	VirusAlert_FM1,	$00, $02
+	smpsHeaderFM	VirusAlert_FM1,	$00, $00
 	smpsHeaderFM	VirusAlert_FM2,	$00, $07
 	smpsHeaderFM	VirusAlert_FM3,	$00, $0B
 	smpsHeaderFM	VirusAlert_FM4,	$00, $0A
@@ -69,33 +69,33 @@ VirusAlert_Voices:
 	smpsVcReleaseRate	$0F, $00, $00, $00
 	smpsVcTotalLevel	$03, $1B, $25, $1A
 
-;	FM Voice 05 -> 03: Aco Code
+;	FM Voice 05 -> 03: 11_volcano_valley_zone_1_0
 	smpsVcAlgorithm		$06
-	smpsVcFeedback		$00
-	smpsVcDetune		$07, $07, $03, $03
-	smpsVcCoarseFreq	$0F, $01, $08, $01
-	smpsVcRateScale		$01, $00, $01, $00
-	smpsVcAttackRate	$1F, $12, $0F, $0F
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$0A, $00, $06, $00
-	smpsVcDecayRate2	$1F, $19, $1A, $00
-	smpsVcDecayLevel	$09, $03, $0C, $00
-	smpsVcReleaseRate	$0F, $0F, $0F, $0F
-	smpsVcTotalLevel	$0D, $15, $00, $1C
-
-;	FM Voice 06 -> 04: Less Obnoxious
-	smpsVcAlgorithm		$05
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$01, $01, $01, $01
+	smpsVcCoarseFreq	$0A, $02, $01, $07
 	smpsVcRateScale		$00, $00, $00, $00
 	smpsVcAttackRate	$1F, $1F, $1F, $1F
 	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$09, $09, $0E, $08
+	smpsVcDecayRate1	$00, $00, $06, $03
+	smpsVcDecayRate2	$0C, $07, $06, $08
+	smpsVcDecayLevel	$00, $00, $00, $01
+	smpsVcReleaseRate	$0A, $0A, $0A, $05
+	smpsVcTotalLevel	$1A, $16, $0A, $20
+
+;	FM Voice 06 -> 04: 11_volcano_valley_zone_1_2
+	smpsVcAlgorithm		$04
+	smpsVcFeedback		$07
+	smpsVcDetune		$00, $05, $02, $00
+	smpsVcCoarseFreq	$06, $01, $01, $06
+	smpsVcRateScale		$00, $00, $00, $00
+	smpsVcAttackRate	$0F, $14, $14, $12
+	smpsVcAmpMod		$00, $00, $00, $00
+	smpsVcDecayRate1	$06, $06, $06, $0A
 	smpsVcDecayRate2	$00, $00, $00, $00
-	smpsVcDecayLevel	$0F, $0F, $0F, $0F
-	smpsVcReleaseRate	$0F, $0F, $0F, $0F
-	smpsVcTotalLevel	$0D, $04, $06, $18
+	smpsVcDecayLevel	$01, $02, $02, $02
+	smpsVcReleaseRate	$0B, $0B, $0B, $0B
+	smpsVcTotalLevel	$16, $18, $0A, $19
 
 ;	FM Voice 07 -> 05: 26_the_doomsday_zone_75
 	smpsVcAlgorithm		$02
@@ -288,77 +288,7 @@ VirusAlert_Voices:
 	smpsVcReleaseRate	$0A, $08, $09, $09
 	smpsVcTotalLevel	$05, $1E, $23, $14
 
-;	FM Voice 16 -> 12: 08_mega_man__iceman_stage_110
-	smpsVcAlgorithm		$05
-	smpsVcFeedback		$07
-	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$02, $02, $02, $02
-	smpsVcRateScale		$00, $00, $00, $02
-	smpsVcAttackRate	$19, $19, $19, $14
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$0D, $0D, $0D, $0F
-	smpsVcDecayRate2	$01, $01, $01, $04
-	smpsVcDecayLevel	$01, $01, $01, $02
-	smpsVcReleaseRate	$0A, $0A, $0A, $05
-	smpsVcTotalLevel	$06, $06, $06, $15
-
-;	FM Voice 17 -> 13: Bumper
-	smpsVcAlgorithm		$04
-	smpsVcFeedback		$07
-	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$02, $0A, $02, $06
-	smpsVcRateScale		$01, $01, $01, $01
-	smpsVcAttackRate	$1C, $1C, $1C, $16
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$11, $11, $11, $0E
-	smpsVcDecayRate2	$0A, $06, $0A, $09
-	smpsVcDecayLevel	$03, $03, $03, $04
-	smpsVcReleaseRate	$0F, $0F, $0F, $0F
-	smpsVcTotalLevel	$00, $2B, $00, $1F
-
-;	FM Voice 18 -> 14: 11_volcano_valley_zone_1_0
-	smpsVcAlgorithm		$06
-	smpsVcFeedback		$07
-	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$0A, $02, $01, $07
-	smpsVcRateScale		$00, $00, $00, $00
-	smpsVcAttackRate	$1F, $1F, $1F, $1F
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$00, $00, $06, $03
-	smpsVcDecayRate2	$0C, $07, $06, $08
-	smpsVcDecayLevel	$00, $00, $00, $01
-	smpsVcReleaseRate	$0A, $0A, $0A, $05
-	smpsVcTotalLevel	$1A, $16, $0A, $20
-
-;	FM Voice 19 -> 15: Aco Code
-	smpsVcAlgorithm		$04
-	smpsVcFeedback		$04
-	smpsVcDetune		$07, $07, $03, $03
-	smpsVcCoarseFreq	$04, $04, $08, $06
-	smpsVcRateScale		$01, $00, $01, $00
-	smpsVcAttackRate	$11, $0F, $11, $0F
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$06, $00, $06, $00
-	smpsVcDecayRate2	$01, $01, $01, $00
-	smpsVcDecayLevel	$01, $00, $01, $00
-	smpsVcReleaseRate	$0C, $0C, $0C, $0C
-	smpsVcTotalLevel	$0D, $15, $00, $1C
-
-;	FM Voice 1A -> 16: 11_volcano_valley_zone_1_2
-	smpsVcAlgorithm		$04
-	smpsVcFeedback		$07
-	smpsVcDetune		$00, $05, $02, $00
-	smpsVcCoarseFreq	$06, $01, $01, $06
-	smpsVcRateScale		$00, $00, $00, $00
-	smpsVcAttackRate	$0F, $14, $14, $12
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$06, $06, $06, $0A
-	smpsVcDecayRate2	$00, $00, $00, $00
-	smpsVcDecayLevel	$01, $02, $02, $02
-	smpsVcReleaseRate	$0B, $0B, $0B, $0B
-	smpsVcTotalLevel	$16, $18, $0A, $19
-
-;	FM Voice 1B -> 17: 01_title_theme_1
+;	FM Voice 16 -> 12: 01_title_theme_1
 	smpsVcAlgorithm		$02
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $00, $00, $00
@@ -372,21 +302,7 @@ VirusAlert_Voices:
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$06, $27, $28, $17
 
-;	FM Voice 1C -> 18: 01_title_theme_1
-	smpsVcAlgorithm		$02
-	smpsVcFeedback		$07
-	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$02, $02, $07, $05
-	smpsVcRateScale		$01, $02, $02, $02
-	smpsVcAttackRate	$1F, $1F, $1F, $1F
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$03, $0E, $0E, $0E
-	smpsVcDecayRate2	$00, $00, $00, $00
-	smpsVcDecayLevel	$00, $01, $0F, $01
-	smpsVcReleaseRate	$0F, $0F, $0F, $0F
-	smpsVcTotalLevel	$06, $27, $28, $17
-
-;	FM Voice 1D -> 19: 45_emerald_144
+;	FM Voice 17 -> 13: 45_emerald_144
 	smpsVcAlgorithm		$07
 	smpsVcFeedback		$00
 	smpsVcDetune		$00, $05, $07, $03
@@ -676,7 +592,7 @@ VirusAlert_FM1_07_0_64:
 	dc.b smpsNoAttack, $34, nRst, $04
 	smpsSetvoice	$12
 	smpsModOff
-	dc.b nDs3, nE3
+	dc.b nDs4, nE4
 	smpsReturn
 
 VirusAlert_FM1_08_0_64:
@@ -695,7 +611,7 @@ VirusAlert_FM1_08_0_64:
 	dc.b smpsNoAttack, $06, nRst, $02
 	smpsSetvoice	$12
 	smpsModOff
-	dc.b nE3, $04, nFs3
+	dc.b nE4, $04, nFs4
 	smpsReturn
 
 VirusAlert_FM1_0A_0_64:
@@ -712,7 +628,7 @@ VirusAlert_FM1_0A_0_64:
 	dc.b smpsNoAttack, $06, nRst, $02
 	smpsSetvoice	$12
 	smpsModOff
-	dc.b nDs3, $04, nE3
+	dc.b nDs4, $04, nE4
 	smpsReturn
 
 VirusAlert_FM1_0B_0_64:
@@ -758,15 +674,15 @@ VirusAlert_FM1_0D_0_16:
 VirusAlert_FM1_0E_0_64:
 	smpsSetvoice	$12
 	smpsModOff
-	dc.b nFs3, $08
+	dc.b nFs4, $08
 	smpsModSet	$02, $01, $04, $03
 	dc.b smpsNoAttack, $08
 	smpsModOff
-	dc.b nF3, $06, nRst, $02
+	dc.b nF4, $06, nRst, $02
 	smpsModOff
-	dc.b nAb3, $04
+	dc.b nAb4, $04
 	smpsModOff
-	dc.b nFs3, $06, nRst, $02
+	dc.b nFs4, $06, nRst, $02
 	smpsSetvoice	$03
 	dc.b nCs4, $04, nB3, nBb3, nAb3, nFs3, nF3, nDs3
 	smpsReturn
@@ -822,7 +738,7 @@ VirusAlert_FM1_10_0_64:
 	smpsReturn
 
 VirusAlert_FM1_11_0_64:
-	smpsSetvoice	$19
+	smpsSetvoice	$13
 	smpsModOff
 	dc.b nDs4, $04, nCs4, nB3, nAb3, $08, nDs3, $04, nCs3, nB2, nCs3, $08, nB3, nBb3, nAb3
 	smpsReturn
@@ -870,8 +786,7 @@ VirusAlert_FM2_Jump:
 	smpsCall VirusAlert_FM2_05_0_64
 	smpsCall VirusAlert_FM2_06_0_64
 	smpsCall VirusAlert_FM2_09_0_64
-	smpsCall VirusAlert_FM2_15_0_64_7C
-	smpsAlterVol	$03
+	smpsCall VirusAlert_FM2_15_0_64
 	smpsJump VirusAlert_FM2_Jump
 
 VirusAlert_FM2_00_0_64:
@@ -887,7 +802,7 @@ VirusAlert_FM2_01_0_64:
 VirusAlert_FM2_02_0_64_78:
 	dc.b nFs5, $04, nCs5, nCs5, nCs5, $08, $04, nFs4, nFs4, nDs5, nDs5, nDs5, nDs5, $08, $04
 	smpsSetvoice	$10
-	smpsAlterVol	$FC
+	smpsAlterVol	$F9
 	dc.b nB2, nC3
 	smpsReturn
 
@@ -976,8 +891,8 @@ VirusAlert_FM2_0C_0_16:
 
 VirusAlert_FM2_0D_0_64:
 	smpsSetvoice	$10
-	dc.b nFs2, $08, $04, nFs3, nCs2, nRst, nCs2, nFs2, nRst, nCs3, $02, $02, nB2, $04, nBb2, nAb2
-	dc.b nFs2, nF2, nDs2
+	dc.b nFs2, $04, nFs3, nFs2, nFs2, $02, $02, nCs2, $04, nRst, nCs2, nFs2, nRst, nCs3, $02, $02
+	dc.b nB2, $04, nBb2, nAb2, nFs2, nF2, nDs2
 	smpsReturn
 
 VirusAlert_FM2_0E_0_64:
@@ -999,9 +914,8 @@ VirusAlert_FM2_14_0_64:
 	dc.b nCs3, $02, $02, nCs2, $04, nCs3
 	smpsReturn
 
-VirusAlert_FM2_15_0_64_7C:
+VirusAlert_FM2_15_0_64:
 	smpsSetvoice	$10
-	smpsAlterVol	$FD
 	dc.b nCs3, $04, nAb2, $02, $02, nCs3, $04, nCs2, $02, $02, nCs3, $04, nCs2, nCs2, nAb2, $02
 	dc.b $02, nCs3, $04, $04, $04, nAb2, $02, $02, nCs3, $04, nF3, nCs3, nF3
 	smpsReturn
@@ -1030,7 +944,7 @@ VirusAlert_FM3_Jump:
 	smpsCall VirusAlert_FM3_0E_0_64
 	smpsCall VirusAlert_FM3_0F_0_64
 	smpsCall VirusAlert_FM3_10_0_64_7E
-	smpsCall VirusAlert_FM3_04_0_64_65
+	smpsCall VirusAlert_FM3_04_0_64_75
 	smpsCall VirusAlert_FM3_05_0_64
 	smpsCall VirusAlert_FM3_06_0_64
 	smpsCall VirusAlert_FM3_12_0_64
@@ -1103,7 +1017,7 @@ VirusAlert_FM3_15_0_64:
 VirusAlert_FM3_07_0_64:
 	dc.b smpsNoAttack, $34, nRst, $04
 	smpsSetvoice	$12
-	dc.b nFs3, nAb3
+	dc.b nFs4, nAb4
 	smpsReturn
 
 VirusAlert_FM3_08_0_64:
@@ -1111,7 +1025,7 @@ VirusAlert_FM3_08_0_64:
 	smpsSetvoice	$04
 	dc.b nAb4, $04, $04, $04, $08, $04, $04, $04, nFs4, nE4, nAb4, $0C
 	smpsSetvoice	$12
-	dc.b nAb3, $04, nBb3
+	dc.b $04, nBb4
 	smpsReturn
 
 VirusAlert_FM3_09_0_64:
@@ -1119,7 +1033,7 @@ VirusAlert_FM3_09_0_64:
 	smpsSetvoice	$04
 	dc.b nBb4, $04, $04, $04, $04, $04, $04, $04, $04, nAb4, nFs4, nBb4, $0C
 	smpsSetvoice	$12
-	dc.b nFs3, $04, nAb3
+	dc.b nFs4, $04, nAb4
 	smpsReturn
 
 VirusAlert_FM3_0A_0_64:
@@ -1138,7 +1052,7 @@ VirusAlert_FM3_0C_0_16:
 
 VirusAlert_FM3_0D_0_64:
 	smpsSetvoice	$12
-	dc.b nBb3, $10, nAb3, $06, nRst, $02, nB3, $04, nBb3, $06, nRst, $02
+	dc.b nBb4, $10, nAb4, $06, nRst, $02, nB4, $04, nBb4, $06, nRst, $02
 	smpsSetvoice	$04
 	dc.b nCs5, $04, nB4, nBb4, nAb4, nFs4, nF4, nDs4
 	smpsReturn
@@ -1152,25 +1066,24 @@ VirusAlert_FM3_0F_0_64:
 	smpsReturn
 
 VirusAlert_FM3_10_0_64_7E:
-	smpsSetvoice	$00
-	dc.b nRst, $01
-	smpsAlterVol	$71
-	dc.b smpsNoAttack, $01
-	smpsSetvoice	$19
-	smpsAlterVol	$19
+	smpsSetvoice	$13
+	dc.b nRst, $02
+	smpsAlterVol	$09
 	dc.b nDs4, $04, nCs4, nB3, nAb3, $08, nDs3, $04, nCs3, nB2, nCs3, $08, nB3, nBb3, nAb3, $06
 	smpsReturn
 
-VirusAlert_FM3_04_0_64_65:
+VirusAlert_FM3_04_0_64_75:
 	smpsSetvoice	$04
-	smpsAlterVol	$E7
+	smpsAlterVol	$F7
 	dc.b nCs5, $0C, nFs4, $08, nAb4, $04, nA4, $0C, nFs4, $08, nAb4, $04, nA4, $08, nB4, $04
 	dc.b nA4
 	smpsReturn
 
 VirusAlert_FM3_12_0_64:
 	smpsSetvoice	$04
-	dc.b nCs5, $0C, nD5, $04, nCs5, $0C, nD5, $04, nCs5, nD5, nCs5, nD5, nCs5, nB4, nA4, nAb4
+	dc.b nCs5, $0C, nD5, $04, nCs5, $0C, nD5, $04, nCs5, nD5, nCs5, nD5, nCs5, nB4, nA4
+	smpsSetvoice	$03
+	dc.b nAb3
 	smpsReturn
 
 VirusAlert_FM4:
@@ -2755,3 +2668,5 @@ VirusAlert_PSG3_0A_0_64_0F:
 	smpsPSGAlterVol	$05
 	dc.b $04
 	smpsReturn
+
+	smpsFooterEndSong	"TG2000Tracks/VirusAlert.asm"
