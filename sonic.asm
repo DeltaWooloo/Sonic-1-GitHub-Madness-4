@@ -4219,8 +4219,6 @@ TryAg_Exit:
 		include	"_incObj/8C Try Again Emeralds.asm"
 Map_EEgg:	include	"_maps/Try Again & End Eggman.asm"
 
-	dcb.b	$8000-(*), $69		; if data exceeds this byte, Too LimitedSonic will not work properly
-
 ; ===========================================================================
 ; The entirety of Too LimitedSonic (with the header stripped out)
 
@@ -4228,9 +4226,22 @@ Init_TooLimited:	= $8160
 H_Int_2LS:		= $88A0
 V_Int_2LS:		= $819E
 
+	dcb.b	$7FD0-(*), $69
+	
+	dc.b	"  AND NOW... A  "
+	dc.b	"  VERY LIMITED  "
+	dc.b	"  EXPERIENCE!!  "
+
 
 	binclude	"_bonusgames/Too LimitedSonic/Too_LimitedSonic.bin"	; Welp, the DMA Queue is gonna be problematic
 	even
+
+	ALIGN	$10
+	
+	dc.b	" END OF LIMITED "
+	dc.b	"   EXPERIENCE   "
+
+; ---------------------------------------------------------------------------
 
 	binclude	"rom manual.txt"
 	even

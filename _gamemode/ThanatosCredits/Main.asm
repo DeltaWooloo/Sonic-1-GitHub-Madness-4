@@ -338,6 +338,7 @@ thantxt: macro txt
 	dc.b	1
 	thantxt	"GENESISDOES"
 	thantxt	"DAXKATTER"
+	thantxt	"CONINIGHT"
 	dc.b	1,1
 	
 	thantxt	"BUILD PROCESS"
@@ -359,9 +360,9 @@ thantxt: macro txt
 	thantxt	"CARDS AG HUMANITY"
 	thantxt	"PRONGLES"
 	thantxt	"MICROSLOP CORP"
-	thantxt	"KRIKZZ FOR EVERDRIVE"	
+	thantxt	"KRIKZZ FOR EVERDRIVE"
 	thantxt	"S2 ARCHIVES"
-	thantxt	"AND HIS STUPID TEAM"	
+	thantxt	"AND HIS STUPID TEAM"
 	dc.b	1,1,1
 	thantxt	"AND YOUR MOM"
 	dc.b	0
