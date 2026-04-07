@@ -424,7 +424,7 @@ GameModeArray:
 	GAMEMODE	GM_Damn,		id_Damn		; DAMN!!!!!!!!!!!!!!!!!!!!!!!			
 	GAMEMODE	GM_SplashScreenSkipper,	id_SplashSkip	; My Stupid Splash is here 				
 	GAMEMODE	GM_Advert,		id_Advert	; For all the reject splash screens I guess
-	GAMEMODE	EarthboundBtl,		id_Battle	; earthbound battle stuff				
+	GAMEMODE	GM_Cutscene,		id_Cutscene	; 		
 	GAMEMODE	GM_SonicTheScreensaver,	id_Screensaver	; GMZ - DVD Screensaver					
 	GAMEMODE	GM_ClintonScreens,	id_ClintonScr	; Clinton fail/win 						
 	GAMEMODE	GM_BSOD,		id_BSOD		; !@ GD: Windows zone BSOD (on death)
@@ -7573,8 +7573,8 @@ Art_LivesNums:	binclude	"artunc/Lives Counter Numbers.bin" ; 8x8 pixel numbers o
 
 		include	"_gamemode/winBSOD/bsod.asm"	; GenesisDoes - GM_BSOD:		
 
-		include	"EarthboundBtl/MAIN.ASM"
-
+;		include	"EarthboundBtl/MAIN.ASM"
+		include	"_gamemode/cutscene/cutscene.asm"
 FortnitePortal:
 		include	"_incObj/ObjRiftToGo.asm"
 
