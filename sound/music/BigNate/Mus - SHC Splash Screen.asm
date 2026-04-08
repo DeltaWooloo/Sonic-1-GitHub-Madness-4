@@ -1,18 +1,18 @@
 BGM_SHC_Header:
-	smpsHeaderStartSong 3
-	smpsHeaderVoice     BGM_SHC_Voices
-	smpsHeaderChan      $06, $03
-	smpsHeaderTempo     $01, $08
+	smpsHeaderStartSong	3
+	smpsHeaderVoice		BGM_SHC_Voices
+	smpsHeaderChan		$06, $03
+	smpsHeaderTempo		$01, $08
 
-	smpsHeaderDAC       BGM_SHC_DAC
-	smpsHeaderFM        BGM_SHC_FM1,	$00, $08
-	smpsHeaderFM        BGM_SHC_FM2,	$F4, $06
-	smpsHeaderFM        BGM_SHC_FM3,	$F4, $0A
-	smpsHeaderFM        BGM_SHC_FM4,	$00, $0E
-	smpsHeaderFM        BGM_SHC_FM5,	$00, $0E
-	smpsHeaderPSG       BGM_SHC_PSG1,	$F4, $00, $00, SHCTone_04
-	smpsHeaderPSG       BGM_SHC_PSG2,	$F4, $00, $00, SHCTone_04
-	smpsHeaderPSG       BGM_SHC_PSG3,	$00, $01, $00, SHCTone_01
+	smpsHeaderDAC		BGM_SHC_DAC
+	smpsHeaderFM		BGM_SHC_FM1,	$00, $08
+	smpsHeaderFM		BGM_SHC_FM2,	$F4, $06
+	smpsHeaderFM		BGM_SHC_FM3,	$F4, $0A
+	smpsHeaderFM		BGM_SHC_FM4,	$00, $0E
+	smpsHeaderFM		BGM_SHC_FM5,	$F9, $0E
+	smpsHeaderPSG		BGM_SHC_PSG1,	$F4, $03, $00, SHCTone_04
+	smpsHeaderPSG		BGM_SHC_PSG2,	$FD, $03, $00, SHCTone_04
+	smpsHeaderPSG		BGM_SHC_PSG3,	$00, $01, $00, SHCTone_01
 
 ; DAC Data
 BGM_SHC_DAC:
@@ -23,150 +23,108 @@ BGM_SHC_DAC:
 
 ; FM1 Data
 BGM_SHC_FM1:
-	smpsSetvoice        $00
+	smpsSetvoice	$00
 	smpsCall	BGM_SHC_Call01
-	dc.b	nE2, $06, nRst, nE2, nRst
-	smpsCall	BGM_SHC_Call01	
-	dc.b	nE2, $06, nE3, $04, nRst, $02, nE2, $06, nRst
+	dc.b	nRst, nE2, nRst
 	smpsCall	BGM_SHC_Call01
-	dc.b	nE2, $06, nRst
+	dc.b	nE3, $04, nRst, $02, nE2, $06, nRst
+	smpsCall	BGM_SHC_Call01
+	dc.b	nRst
 	dc.b	nB2, $0C, nRst, nA2, $78
 	dc.b	nE2, $06, nA2, nB2, nD3
-	smpsCall	BGM_SHC_Call02
-	smpsFMAlterVol      $08
-	smpsCall	BGM_SHC_Call02
-	smpsFMAlterVol      $08
-	smpsCall	BGM_SHC_Call02
-	smpsFMAlterVol      $08
-	smpsCall	BGM_SHC_Call02
-	smpsStop
-
-BGM_SHC_Call01:
-	dc.b	nD3, $06, nE3, $04, nRst, $02
-	smpsReturn
 
 BGM_SHC_Call02:
 	dc.b	nE3, $08, nRst, $04
-	smpsReturn
-
-; FM2 Data
-BGM_SHC_FM2:
-	smpsSetvoice        $01
-	smpsCall	BGM_SHC_Call03
-	smpsCall	BGM_SHC_Call04
-	smpsModSet          $03, $01, $05, $05
-	smpsCall	BGM_SHC_Call05
+	smpsAlterVol	$08
+	smpsLoop	0, 4, BGM_SHC_Call02
 	smpsStop
 
-BGM_SHC_Call03:
-	dc.b	nRst, $48, nRst, $0C
-	smpsReturn
-
-BGM_SHC_Call04:
-	dc.b	nFs4, $03, nA4, nB4, nD5, nE5, $0C
-	dc.b	nE4, $03, nA4, nB4, nE5
-	smpsReturn
-
-BGM_SHC_Call05:
-	dc.b	nAb5, $78
+BGM_SHC_Call01:
+	dc.b	nD3, $06, nE3, $04, nRst, $02, nE2, $06
 	smpsReturn
 
 ; FM3 Data
 BGM_SHC_FM3:
 	smpsPan		panRight, $00
-	smpsModSet          $03, $01, $09, $05
-	smpsSetvoice        $01
-	smpsCall	BGM_SHC_Call03
+	smpsModSet	$03, $01, $09, $05
 	dc.b	nRst, $06
-	smpsCall	BGM_SHC_Call04
-	smpsCall	BGM_SHC_Call05
+	smpsJump	BGM_SHC_Jump00
+
+; FM2 Data
+BGM_SHC_FM2:
+	smpsModSet	$03, $01, $05, $05
+
+BGM_SHC_Jump00:
+	smpsSetvoice	$01
+	dc.b	nRst, $54
+	dc.b	nFs4, $03, nA4, nB4, nD5, nE5, $0C
+	dc.b	nE4, $03, nA4, nB4, nE5, nAb5, $78
 	smpsStop
+
+; FM5 Data
+BGM_SHC_FM5:
+	smpsPan		panRight, $00
+	smpsJump	BGM_SHC_Jump01
 
 ; FM4 Data
 BGM_SHC_FM4:
-	smpsSetvoice        $02
 	smpsPan		panLeft, $00
-	smpsCall	BGM_SHC_Call06
+
+BGM_SHC_Jump01:
+	smpsSetvoice	$02
+	dc.b	nRst, $60
 	smpsCall	BGM_SHC_Call07
-	smpsFMAlterVol      $08
+	smpsAlterVol	$08
 	smpsCall	BGM_SHC_Call07
-	smpsFMAlterVol      $F7
-	smpsModSet          $03, $01, $06, $05
+	smpsAlterVol	$F7
+	smpsModSet	$03, $01, $06, $05
 	dc.b	nB4, $78
 	smpsStop
-
-BGM_SHC_Call06:
-	dc.b	nRst, $60
-	smpsReturn
 
 BGM_SHC_Call07:
 	dc.b	nAb4, $08, nRst, $04
 	smpsReturn
 
-; FM5 Data
-BGM_SHC_FM5:
-	smpsSetvoice        $02
-	smpsPan		panRight, $00
-	smpsCall	BGM_SHC_Call06
-	smpsCall	BGM_SHC_Call08
-	smpsFMAlterVol      $08
-	smpsCall	BGM_SHC_Call08
-	smpsFMAlterVol      $F7
-	smpsModSet          $03, $01, $06, $05
-	dc.b	nE4, $78
+BGM_SHC_PSG1:
+	smpsCall	BGM_SHC_Call03
+	dc.b	nA3, $78
+
+BGM_SHC_Jump02:
+	smpsModSet	$00, $00, $00, $FF
+	dc.b	nE4, $03, nFs4, nAb4, nA4, nB4, nC5, nCs5, nD5
+
+BGM_SHC_PSG1_Loop:
+	dc.b	nE5, $06, nRst
+	smpsPSGAlterVol	$06
+	smpsLoop	0, 3, BGM_SHC_PSG1_Loop
 	smpsStop
 
-BGM_SHC_Call08:
-	dc.b	nCs4, $08, nRst, $04
+BGM_SHC_PSG2:
+	smpsCall	BGM_SHC_Call03
+	smpsAlterPitch	$F7
+	dc.b	nB4, $78, nRst, $09
+	smpsPSGAlterVol	$05
+	smpsJump 	BGM_SHC_Jump02
+
+BGM_SHC_Call03:
+	smpsNoteFill	$03
+	dc.b	nRst, $0C, nB3, $06, $06
+	dc.b	nRst, $0C, nB3, $06, $06
+	dc.b	nRst, nB3, nB3
+	dc.b	nRst, nB3, nB3, nRst, $0C
+	smpsNoteFill	$00
+	dc.b	nB3, $0C, nRst
+	smpsModSet	$0C, $01, $02, $05
+	smpsPSGAlterVol	$FD
 	smpsReturn
 
-BGM_SHC_PSG1:
-	smpsPSGAlterVol     $03
-	dc.b	nRst, $0C, nB3, $03, nRst, nB3, nRst
-	dc.b	nRst, $0C, nB3, $03, nRst, nB3, nRst
-	dc.b	nRst, $06, nB3, $03, nRst, nB3
-	dc.b	nRst, $09, nB3, $03, nRst, nB3, nRst, $0F
-	dc.b	nB3, $0C, nRst
-	smpsModSet          $0C, $01, $02, $05
-	smpsPSGAlterVol     -$03
-	dc.b	nA3, $78
-	smpsModSet          $00, $00, $00, $FF
-	dc.b	nE4, $03, nFs4, nAb4, nA4, nB4, nC5, nCs5, nD5
-	dc.b	nE5, $06, nRst
-	smpsPSGAlterVol     $07
-	dc.b	nE5, $06, nRst
-	smpsPSGAlterVol     $03
-	dc.b	nE5, $06, nRst
-	smpsStop
-	
-BGM_SHC_PSG2:
-	smpsPSGAlterVol     $03
-	dc.b	nRst, $0C, nAb4, $03, nRst, nAb4, nRst
-	dc.b	nRst, $0C, nAb4, $03, nRst, nAb4, nRst
-	dc.b	nRst, $06, nAb4, $03, nRst, nAb4
-	dc.b	nRst, $09, nAb4, $03, nRst, nAb4, nRst, $0F
-	dc.b	nAb4, $0C, nRst
-	smpsModSet          $0C, $01, $02, $05
-	smpsPSGAlterVol     -$03
-	dc.b	nB4, $78
-	smpsModSet          $00, $00, $00, $FF
-	smpsPSGAlterVol     $05
-	smpsDetune		$00
-	dc.b	nRst, $03, nRst, nRst, nE4, nFs4, nAb4, nA4, nB4, nC5, nCs5, nD5
-	dc.b	nE5, $06, nRst
-	smpsPSGAlterVol     $05
-	dc.b	nE5, $06, nRst
-	smpsPSGAlterVol     $03
-	dc.b	nE5, $06, nRst
-	smpsStop
-
 BGM_SHC_PSG3:
-	smpsPSGform         $E7
-	dc.b	nMaxPSG1, $18, nMaxPSG1, nMaxPSG1, $0C, nMaxPSG1, $06, nMaxPSG1, nMaxPSG1, $18
-	smpsPSGvoice        SHCTone_02
-	dc.b	nMaxPSG1, $18, nMaxPSG1, $78
-	smpsPSGvoice        SHCTone_03
-	dc.b	nMaxPSG1, $0C, nMaxPSG1, nMaxPSG1, $30
+	smpsPSGform	$E7
+	dc.b	nMaxPSG1, $18, $18, $0C, $06, $06, $18
+	smpsPSGvoice	SHCTone_02
+	dc.b	$18, $78
+	smpsPSGvoice	SHCTone_03
+	dc.b	$0C, $0C, $30
 	smpsStop
 
 BGM_SHC_Voices:
