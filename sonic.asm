@@ -4725,7 +4725,7 @@ loc_84EE:
 loc_84F2:
 		bsr.w	DisplaySprite
 		move.w	#sfx_Fireball,d0
-		jsr	(QueueSound2).l	; play lava ball sound
+		jmp	(QueueSound2).l	; play lava ball sound
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Disintegration data for collapsing ledges (MZ, SLZ, SBZ)
