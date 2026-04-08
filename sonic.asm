@@ -2296,6 +2296,7 @@ GM_Title:
 		move.w	#$9001,(a6)	; 64-cell hscroll size
 		move.w	#$9200,(a6)	; window vertical position
 		move.w	#$8B03,(a6)
+		move.w	#$8B07,(a6)   ; The 16x16 vscr move
 		move.w	#$8720,(a6)	; set background colour (palette line 2, entry 0)
 		clr.b	(f_wtr_state).w
 		bsr.w	ClearScreen
@@ -2341,6 +2342,8 @@ GM_Title:
 		include	"ATOGKTitle/MAIN.asm"	; Code (simply ran by inclusion)
 
 FinalTitle:
+		move.w	#sfx_Fireball,d0
+		jsr	(QueueSound2).l	; play lava ball sound
 		bsr.w	PaletteWhiteOut
 		bsr.w	ClearPLC
 		bsr.w	ClearScreen
@@ -2538,11 +2541,12 @@ AtoTimerLoop1:
 		move.b	#$08,(v_vbla_routine).w	;  )
 		bsr.w	WaitForVBla		 
 		dbf	d1,AtoTimerLoop1	
+
 		
 AtoWackyscr:	
 		move.w	#$80,d1			; Timer
-		move.b	#sfx_SSGoal,d0	; Warp SFX
-		bsr.w	QueueSound2		; play it
+		move.b	#bgm_Fade,d0	; Fade out
+		bsr.w	QueueSound1		; play it	
 		
 AtoTimerLoop2:
 		move.w  d1, -(sp)
