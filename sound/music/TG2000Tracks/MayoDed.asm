@@ -1,25 +1,14 @@
 MayoDed_Header:
-	smpsHeaderStartSong 1
-	smpsHeaderVoice	MayoDed_Voices
-	smpsHeaderChan	$06,	$03
-	smpsHeaderTempo	$01,	$00
+	smpsHeaderStartSong	1
+	smpsHeaderVoice		MayoDed_Voices
+	smpsHeaderChan		$05, $00
+	smpsHeaderTempo		$01, $00
 
-	smpsHeaderDAC	MayoDed_DAC
-	smpsHeaderFM	MayoDed_FM1,	smpsPitch00,	$00
-	smpsHeaderFM	MayoDed_FM2,	smpsPitch00,	$00
-	smpsHeaderFM	MayoDed_FM3,	smpsPitch00,	$00
-	smpsHeaderFM	MayoDed_FM4,	smpsPitch00,	$00
-	smpsHeaderFM	MayoDed_FM5,	smpsPitch00,	$00
-	smpsHeaderPSG       MayoDed_PSG1,	$00, $00, $00, $00
-	smpsHeaderPSG       MayoDed_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       MayoDed_PSG3,	$00, $00, $00, $00
-	dc.b		$00,	$00,	$00,	$00
-
-; PSG1 Data
-MayoDed_PSG1:
-
-; PSG2 Data
-MayoDed_PSG2:
+	smpsHeaderDAC		MayoDed_DAC
+	smpsHeaderFM		MayoDed_FM1, $00, $00
+	smpsHeaderFM		MayoDed_FM2, $00, $00
+	smpsHeaderFM		MayoDed_FM3, $00, $00
+	smpsHeaderFM		MayoDed_FM4, $00, $00
 
 ; DAC Data
 MayoDed_DAC:
@@ -29,7 +18,6 @@ MayoDed_DAC:
 MayoDed_FM1:
 	smpsFMvoice	$00
 	smpsAlterVol	$0F
-	smpsPan		panCentre,	$00
 	dc.b		nRst,	$0D
 	smpsFMvoice	$04
 	smpsAlterVol	$70
@@ -46,7 +34,6 @@ MayoDed_FM1:
 MayoDed_FM2:
 	smpsFMvoice	$01
 	smpsAlterVol	$1C
-	smpsPan		panCentre,	$00
 	dc.b		nRst,	$0D
 	smpsFMvoice	$05
 	smpsAlterVol	$63
@@ -63,7 +50,6 @@ MayoDed_FM2:
 MayoDed_FM3:
 	smpsFMvoice	$02
 	smpsAlterVol	$0D
-	smpsPan		panCentre,	$00
 	dc.b		nRst,	$0D
 	smpsFMvoice	$06
 	smpsAlterVol	$72
@@ -80,7 +66,6 @@ MayoDed_FM3:
 MayoDed_FM4:
 	smpsFMvoice	$01
 	smpsAlterVol	$1C
-	smpsPan		panCentre,	$00
 	dc.b		nRst,	$0D
 	smpsFMvoice	$05
 	smpsAlterVol	$63
@@ -93,27 +78,6 @@ MayoDed_FM4:
 	dc.b		nC3,	$07,	nRst,	$02,	nG2,	$07,	nRst,	$02
 	dc.b		nE2,	$07,	nRst,	$01,	nG2,	$07,	nRst,	$02
 	dc.b		nC2,	$10,	nRst,	$01
-	smpsStop
-
-; FM5 Data
-MayoDed_FM5:
-	smpsFMvoice	$03
-	smpsAlterVol	$0B
-	smpsPan		panCentre,	$00
-	dc.b		nRst,	$0D
-	smpsFMvoice	$07
-	smpsAlterVol	$74
-	dc.b		smpsNoAttack,	nRst,	$01
-	smpsFMvoice	$03
-	smpsAlterVol	$8C
-	dc.b		smpsNoAttack,	nRst,	$7A
-	smpsStop
-
-; PSG3 Data
-MayoDed_PSG3:
-	dc.b		nRst,	$0D
-	smpsPSGform	$E7
-	dc.b		nRst,	$7B
 	smpsStop
 
 MayoDed_Voices:
