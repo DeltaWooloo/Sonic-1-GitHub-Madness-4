@@ -2886,19 +2886,13 @@ FMSlotMask:	dc.b 8,	8, 8, 8, $A, $E, $E, $F
 SendVoiceTL:
 		btst	#2,SMPS_Track.PlaybackControl(a5)	; Is SFX overriding?
 		bne.s	.locret					; Return if so
+		movea.l	SMPS_Track.VoicePtr(a5),a1		; track voice pointer
 		moveq	#0,d0
-		move.b	SMPS_Track.VoiceIndex(a5),d0		; Current voice
-		subq.w	#1,d0
-		bmi.s	.gotvoice
-		move.w	#25,d1
-; loc_72CE0:
-.voicemultiply:
-		adda.w	d1,a1
-		dbf	d0,.voicemultiply
-; loc_72CE6:
-.gotvoice:
-		movea.l	SMPS_Track.VoicePtr(a5),a1
-		adda.w	#21,a1				; Want TL
+		move.b	SMPS_Track.VoiceIndex(a5),d0		; voiceptr+(id*25)
+		mulu.w	#25,d0					; TODO: mulu is faster then a loop, but ideally we'd use something even faster
+		adda.w	d0,a1
+
+		adda.w	#21,a1					; Want TL
 		lea	FMInstrumentTLTable(pc),a2
 		move.b	SMPS_Track.FeedbackAlgo(a5),d0	; Get feedback/algorithm
 		andi.w	#7,d0				; Want only algorithm
