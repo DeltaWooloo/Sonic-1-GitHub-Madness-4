@@ -3,14 +3,17 @@ ASCII_VRAMADDR	= $D000
 ASCII_TILEDELTA	= $0660
 
 
-	phase v_sonspeedacc
-stringaddr	ds.l 1
-stringvramline	ds.w 1      
-stringvram	ds.w 1
-		ds.l 1
-stringtimer	ds.b 1	
-stringtime	ds.b 1
+	phase	v_sonspeedacc
+stringaddr	ds.l	1
+stringvramline	ds.w	1      
+stringvram	ds.w	1
+		ds.l	1
+stringtimer	ds.b	1	
+stringtime	ds.b	1
+cutsceneno	ds.b	1
+subsceneno	ds.b	1
 	dephase
+
 GM_Cutscene:
 	moveq	#0,d0
 	move.b	submode.w,d0
@@ -39,22 +42,82 @@ Cutscene_Init:
 	move.w	#$8720,(a6)	; set background colour (palette line 2, entry 0)
 	
 	bsr	AsciiArtLoad
+	bsr	InitCutsceneData
 
-	; DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV 
-	lea	($FF0000), 	a1	; funny butthole
-	lea	funnybutthole.Funny, a1
-	move.l	#$40000003, d0
-	moveq	#40-1, d1
-	moveq	#28-1, d2
-	jsr   	TilemapToVRAM		; funny butthole
+	enable_ints
+	enable_display
 
-	move.l	#$40000000, ($FFC00004).l	; funny butthole
-	lea	funnybutthole.Butt, a0	; funny butthole
-	jsr	NemDec
-	; DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV 
+	addq.b	#8,submode.w
+;	move.l	#StringTest,stringaddr.w
+	move.b	#8,stringtime.w
+	jsr	PalFadeIn
 
-	lea	(v_palette).w,a0
-	lea	Pal_Sonic,a1
+Cutscene_Main:
+	move.b	#6,(v_vbla_routine).w
+	jsr	WaitForVBla
+;	bsr.w	script here idfk
+	jsr	RunPLC
+	rts
+
+Cutscene_Print:
+	move.b	#6,(v_vbla_routine).w
+	jsr	WaitForVBla
+	bsr.w   PrintMsgTimed
+	jsr	RunPLC
+	rts
+	
+Str_ManiacIntro1:
+	dc.b	"MANIAC SAT WATCHING FUNNY SHORT CLIP",-1
+	dc.b	"AND COLONOSCOPY TUTORIALS ON HIS CRT",-1
+	dc.b	"HOOKED UP TO A FUCKING ROKU BOX",0
+	even
+
+StringTest:
+	dc.b	"GAYNIPPLES GAYNIPPLES GAYNIPPLES ",-1
+	dc.b	"GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES ",-1
+	dc.b	"GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES ",0
+	even
+
+InitCutsceneData:
+	moveq	#0,d0
+	moveq	#0,d1
+	moveq	#0,d2
+	move.w  #$AA84,stringvram.w
+	move.w	#$AA84,stringvramline.w
+;	move.b	cutsceneno,d0
+;	lsl.w	#4,d0
+	lea	CutsceneInitTbl,a0
+;	add.w	d0,a0
+
+	move.l	(a0)+,stringaddr
+
+	move.l	(a0)+,a1
+	jsr	UserPLC	; I HATE YOU I FUCKING HATE YOU DIE
+
+	move.l	(a0)+,a1
+	move.b	(a1)+,d1
+	move.b	(a1)+,d2
+	move.l	(a1)+,d0
+	jsr	TilemapToVRAM
+
+	moveq	#0,d0
+	moveq	#0,d1
+	moveq	#0,d2
+
+	move.l	(a0)+,a1
+	move.b	(a1)+,d1
+	move.b	(a1)+,d2
+	move.l	(a1)+,d0
+	jsr	TilemapToVRAM
+
+	moveq	#0,d0
+	move.b	cutsceneno,d0
+
+	lea	CutscenePalTbl,a0
+	; put stuyff here idk
+	move.l	(a0),a1
+
+	lea	(v_palette_fading).w,a0
 	move.w	#4-1,d1
 .loop	move.l	(a1)+,(a0)+
 	move.l	(a1)+,(a0)+
@@ -65,34 +128,28 @@ Cutscene_Init:
 	move.l	(a1)+,(a0)+
 	move.l	(a1)+,(a0)+
 	dbf	d1,.loop
-
-	enable_ints
-	enable_display
-
-	addq.b	#8,submode.w
-	move.w  #$AA84,stringvram.w
-	move.w	#$AA84,stringvramline.w
-	move.l	#StringTest,stringaddr.w
-	move.b	#8,stringtime.w
-
-Cutscene_Main:
-	move.b	#6,(v_vbla_routine).w
-	jsr	WaitForVBla
-;	bsr.w	script here idfk
-
 	rts
 
-Cutscene_Print:
-	move.b	#6,(v_vbla_routine).w
-	jsr	WaitForVBla
-	bsr.w   PrintMsgTimed
-	rts
-	
-StringTest:
-	dc.b	"MANIAC SAT WATCHING FUNNY SHORT CLIP",-1
-	dc.b	"AND COLONOSCOPY TUTORIALS ON HIS CRT",-1
-	dc.b	"HOOKED UP TO A FUCKING ROKU BOX",0
-	even
+CutsceneInitTbl:
+	dc.l	Str_ManiacIntro1
+	dc.l	ArtList_ManiacIntro1
+	dc.l	MapScr_ManiacIntro1A
+	dc.l	MapScr_ManiacIntro1A
+
+CutscenePalTbl:
+	dc.l	Pal_ManiacIntro1
+
+ArtList_ManiacIntro1:
+	dc.l	Nem_ManiacIntro1A
+	dc.w	$0000
+	dc.l	Nem_ManiacIntro1A
+	dc.w	$4000
+	dc.l	-1
+
+
+
+
+
 
 ; ---------------------------------------------------------------------------
 
@@ -228,4 +285,18 @@ PrintMsg:
 Art_ASCII:	binclude	"_gamemode/cutscene/ASCII.BIN"
 		even
 Art_ASCIIE:
+
+Pal_ManiacIntro1:
+		binclude	"_gamemode/cutscene/data/maniaccutscene1.pal"
+		binclude	"_gamemode/cutscene/data/maniaccutscene1.pal"	; temp
+		binclude	"_gamemode/cutscene/data/maniaccutscene1.pal"
+		binclude	"_gamemode/cutscene/data/maniaccutscene1.pal"
+Nem_ManiacIntro1A:
+		binclude	"_gamemode/cutscene/data/maniaccutscene1.nem"
+		even
+MapScr_ManiacIntro1A:
+		dc.b	24-1,	20-1	; height, width
+		dc.l	$40000003
+		binclude	"_gamemode/cutscene/data/maniaccutscene1.map"
+		even
 Art_ASCIISZ = (Art_ASCIIE-Art_ASCII)

@@ -694,7 +694,7 @@ VBla_04:
 VBla_06:
 		jsr	ProcessDMAQueue(pc)
 		bsr.w	VBla_StandardTransfers
-		rts
+		bra.w	ProcessDPLC_9Tiles
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -1518,7 +1518,7 @@ Pal_SBZCyc10:	binclude	"palette/Cycle - SBZ 10.bin"
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
-
+PalFadeIn:	;kys
 PaletteFadeIn:
 		move.w	#$003F,(v_pfade_start).w ; set start position = 0; size = $40
 

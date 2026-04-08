@@ -59,7 +59,7 @@ TitleCard_WIN2:	equ  "Insert Tit"
 TitleCard_WIN3:	equ  "AGGA"
 TitleCard_WIN4:	equ  "AGGA"
 
-TitleCard_Joint1:	equ  "The Joint"
+TitleCard_Joint1:	equ  "Inside Tonics Body"
 TitleCard_Joint2:	equ  "Ten years in the"
 TitleCard_Joint3:	equ  "Made you a fuckin"
 TitleCard_Joint4:	equ  "porn"
