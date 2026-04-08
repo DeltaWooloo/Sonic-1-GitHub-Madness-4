@@ -2893,21 +2893,7 @@ Level_WaterPal:
 		move.b	(v_lamp_wtrstat).w,(f_wtr_state).w
 
 Level_GetBgm:
-		tst.w	(f_demo).w
-		bmi.s	Level_SkipTtlCard
-		moveq	#0,d0
-		moveq	#0,d0
-		move.b	(v_zone).w,d0
-		lsl.w	#7,d0
-		lea	(LevelHeaders).l,a2
-		lea	(a2,d0.w),a2
-		moveq	#0,d0
-		move.b	v_act.w,d0
-		lsl.w	#5,d0
-		lea	(a2,d0.w),a2 
-		move.b	13(a2),d0
-		move.b	d0,(v_zonemusic).w
-		bsr.w	QueueSound1	; play music
+		bsr.w  Reproduce_BGM
 		move.b	#id_TitleCard,(v_titlecard).w ; load title card object
 
 Level_TtlCardLoop:
@@ -3159,6 +3145,34 @@ ColIndexLoad:
 		move.l	ColPointers(pc,d0.w),(v_collindex).w
 		rts
 ; End of function ColIndexLoad
+
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; STAGE MUSIC
+; ---------------------------------------------------------------------------
+
+Reproduce_BGM:
+        tst.w	(f_demo).w	; Is demo mode on?
+		bne.s	BGMDemo
+		moveq	#0,d0
+		moveq	#0,d0
+		move.b	(v_zone).w,d0
+		lsl.w	#7,d0
+		lea	(LevelHeaders).l,a2
+		lea	(a2,d0.w),a2
+		moveq	#0,d0
+		move.b	v_act.w,d0
+		lsl.w	#5,d0
+		lea	(a2,d0.w),a2 
+		move.b	13(a2),d0
+		move.b	d0,(v_zonemusic).w
+		bsr.w	QueueSound1	; play music		
+        rts
+		
+BGMDemo:
+        move.b	#bgm_ActClear,d0
+		jsr	(QueueSound2).l
+		rts
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
