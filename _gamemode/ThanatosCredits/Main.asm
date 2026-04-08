@@ -349,6 +349,11 @@ thantxt: macro txt
 	thantxt	"DAXKATTER"
 	thantxt	"KATSUSHIMI"
 	dc.b	1,1
+	
+	thantxt	"PROTOTASTIC"
+	dc.b	1
+	thantxt	"GAMERGIL THE GOAT"
+	dc.b	1,1
 
 	thantxt	"SPECIAL THANKS"
 	dc.b	1
@@ -363,6 +368,9 @@ thantxt: macro txt
 	thantxt	"KRIKZZ FOR EVERDRIVE"
 	thantxt	"S2 ARCHIVES"
 	thantxt	"AND HIS STUPID TEAM"
+	thantxt	"STEVE JOBS BECAUSE"
+	thantxt	"VMWARE"
+    thantxt	"HOMER";leave this shit last
 	dc.b	1,1,1
 	thantxt	"AND YOUR MOM"
 	dc.b	0
