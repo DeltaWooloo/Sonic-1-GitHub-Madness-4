@@ -1251,10 +1251,9 @@ Sound_PlayBGM:
 		lsl.w	#2,d7
 		movea.l	(a4,d7.w),a4		; a4 now points to (uncompressed) song data
 		adda.l	#MusicIndex,a4
-		moveq	#0,d0
-		move.w	(a4),d0			; load voice pointer
-		add.l	a4,d0			; It is a relative pointer
-		move.l	d0,SMPS_RAM.v_voice_ptr(a6)
+		moveq	#0,d1
+		move.w	(a4),d1			; load voice pointer
+		add.l	a4,d1			; It is a relative pointer
 		move.b	5(a4),d0		; load tempo
 		move.b	d0,SMPS_RAM.v_tempo_mod(a6)
 		tst.b	SMPS_RAM.f_speedup(a6)
@@ -1264,10 +1263,8 @@ Sound_PlayBGM:
 .nospeedshoes:
 		move.b	d0,SMPS_RAM.v_main_tempo(a6)
 		move.b	d0,SMPS_RAM.v_main_tempo_timeout(a6)
-		moveq	#0,d1
 		movea.l	a4,a3
 		addq.w	#6,a4			; Point past header
-	if FixBugs
 		; Fix the 0FM/DAC fade-in bug
 		; https://info.sonicretro.org/SCHG_How-to:Fix_Song_Restoration_Bugs_in_Sonic_1%27s_Sound_Driver
 		move.b	4(a3),d4		; load tempo dividing timing
@@ -1277,17 +1274,6 @@ Sound_PlayBGM:
 		move.b	2(a3),d7		; load number of FM+DAC tracks
 		beq.w	.bgm_fmdone		; branch if zero
 		subq.b	#1,d7
-		move.b	#$C0,d1			; Default AMS+FMS+Panning
-	else
-		moveq	#0,d7
-		move.b	2(a3),d7		; load number of FM+DAC tracks
-		beq.w	.bgm_fmdone		; branch if zero
-		subq.b	#1,d7
-		move.b	#$C0,d1			; Default AMS+FMS+Panning
-		move.b	4(a3),d4		; load tempo dividing timing
-		moveq	#SMPS_Track.len,d6
-		move.b	#1,d5			; Note duration for first "note"
-	endif
 		lea	SMPS_RAM.v_music_fmdac_tracks(a6),a1
 		lea	FMDACInitBytes(pc),a2
 ; loc_72098:
@@ -1296,8 +1282,9 @@ Sound_PlayBGM:
 		move.b	(a2)+,SMPS_Track.VoiceControl(a1)	; Voice control bits
 		move.b	d4,SMPS_Track.TempoDivider(a1)
 		move.b	d6,SMPS_Track.StackPointer(a1)		; set "gosub" (coord flag $F8) stack init value
-		move.b	d1,SMPS_Track.AMSFMSPan(a1)		; Set AMS/FMS/Panning
 		move.b	d5,SMPS_Track.DurationTimeout(a1)	; Set duration of first "note"
+		move.b	#$C0,SMPS_Track.AMSFMSPan(a1)		; Set AMS/FMS/Panning
+		move.l	d1,SMPS_Track.VoicePtr(a1)		; Set FM voices (...even for the DAC)
 		moveq	#0,d0
 		move.w	(a4)+,d0				; load DAC/FM pointer
 		add.l	a3,d0					; Relative pointer
@@ -1583,10 +1570,9 @@ Sound_PlaySpecial:
 		movea.l	(a0,d7.w),a3
 		adda.l	#SpecSoundIndex,a3
 		movea.l	a3,a1
-		moveq	#0,d0
-		move.w	(a1)+,d0				; Voice pointer
-		add.l	a3,d0					; Relative pointer
-		move.l	d0,SMPS_RAM.v_special_voice_ptr(a6)	; Store voice pointer
+		moveq	#0,d1
+		move.w	(a1)+,d1				; Voice pointer
+		add.l	a3,d1					; Relative pointer
 		move.b	(a1)+,d5				; Dividing timing
 	if FixBugs
 		moveq	#0,d7
@@ -1631,6 +1617,7 @@ Sound_PlaySpecial:
 		tst.b	d4					; Is this a PSG channel?
 		bmi.s	.sfxpsginitdone				; Branch if yes
 		move.b	#$C0,SMPS_Track.AMSFMSPan(a5)		; AMS/FMS/Panning
+		move.l	d1,SMPS_Track.VoicePtr(a5)		; Voice pointer
 ; loc_72396:
 .sfxpsginitdone:
 		dbf	d7,.sfxloadloop
@@ -1707,7 +1694,6 @@ StopSFX:
 		; is playing its sound!
 	endif
 		lea	SMPS_RAM.v_spcsfx_fm4_track(a6),a5
-		movea.l	SMPS_RAM.v_special_voice_ptr(a6),a1	; Get special voice pointer
 		bra.s	.gotfmpointer
 ; ===========================================================================
 ; loc_72416:
@@ -1717,19 +1703,10 @@ StopSFX:
 		lea	SFX_BGMChannelRAM(pc),a0
 		movea.l	a5,a3
 		movea.l	(a0,d3.w),a5
-		movea.l	SMPS_RAM.v_voice_ptr(a6),a1		; Get music voice pointer
 ; loc_72428:
 .gotfmpointer:
 		bclr	#2,SMPS_Track.PlaybackControl(a5)	; Clear 'SFX is overriding' bit
 		bset	#1,SMPS_Track.PlaybackControl(a5)	; Set 'track at rest' bit
-	if FixBugs
-		moveq	#0,d0
-	else
-		; DANGER! `SetVoice` expects d0 to be a word, but it's only passed
-		; as a byte below. This may result in restoring invalid/broken FM
-		; voices during fade out sequence if upper byte of d0 was trashed.
-	endif
-		move.b	SMPS_Track.VoiceIndex(a5),d0		; Current voice
 		jsr	SetVoice(pc)
 		movea.l	a3,a5
 		bra.s	.nexttrack
@@ -1784,15 +1761,6 @@ StopSpecialSFX:
 		bset	#1,SMPS_Track.PlaybackControl(a5)	; Set 'track at rest' bit
 		tst.b	SMPS_Track.PlaybackControl(a5)		; Is track playing?
 		bpl.s	.fadedfm				; Branch if not
-		movea.l	SMPS_RAM.v_voice_ptr(a6),a1		; Voice pointer
-	if FixBugs
-		moveq	#0,d0
-	else
-		; DANGER! `SetVoice` expects d0 to be a word, but it's only passed
-		; as a byte below. This may result in restoring invalid/broken FM
-		; voices during fade out sequence if upper byte of d0 was trashed.
-	endif
-		move.b	SMPS_Track.VoiceIndex(a5),d0		; Current voice
 		jsr	SetVoice(pc)
 ; loc_724AE:
 .fadedfm:
@@ -2222,22 +2190,32 @@ SendFMNoteOff:
 		moveq	#$28,d0				; Note on/off register
 		move.b	SMPS_Track.VoiceControl(a5),d1	; Note off to this channel
 		bra.w	WriteFMI
+; End of function FMNoteOff
 ; ===========================================================================
-
+FMSilence:
+		btst	#2,SMPS_Track.PlaybackControl(a5)	; Is SFX overriding?
+		bne.s	.exit					; Return if yes
+		bsr.s	SendFMNoteOff
+		moveq	#$40,d4					; Set TL on FM channels
+		moveq	#$7F,d1					; To total attenuation
+		bsr.s	.start
+		moveq	#-$80,d4				; Set release
+		moveq	#$0F,d1					; To max
+.start:
+		moveq	#4-1,d3					; 4 operators per channel
+.loop:		move.b	d4,d0
+		bsr.s	WriteFMIorII
+		addq.b	#4,d4					; Next TL operator
+		dbf	d3,.loop
+.exit:
 locret_72714:
 		rts
-; End of function FMNoteOff
-
 ; ===========================================================================
 ; loc_72716:
 WriteFMIorIIMain:
 		btst	#2,SMPS_Track.PlaybackControl(a5)	; Is track being overriden by sfx?
-		bne.s	.locret					; Return if yes
-		bra.w	WriteFMIorII
-; ===========================================================================
-; locret_72720:
-.locret:
-		rts
+		bne.s	locret_72714				; Return if yes
+;		bra.w	WriteFMIorII
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
@@ -2519,6 +2497,7 @@ VolEnvHold:
 
 ; sub_729A0:
 PSGNoteOff:
+PSGSilence:
 		btst	#2,SMPS_Track.PlaybackControl(a5)	; Is SFX overriding?
 		bne.s	locret_729B4				; Return if so
 ; loc_729A6:
@@ -2740,9 +2719,6 @@ cfFadeInToPrevious:
 		add.b	d6,SMPS_Track.Volume(a5)		; Apply current volume fade-in
 		btst	#2,SMPS_Track.PlaybackControl(a5)	; Is SFX overriding?
 		bne.s	.nextfm					; Branch if yes
-		moveq	#0,d0
-		move.b	SMPS_Track.VoiceIndex(a5),d0		; Get voice
-		movea.l	SMPS_RAM.v_voice_ptr(a6),a1		; Voice pointer
 		jsr	SetVoice(pc)
 ; loc_72B5C:
 .nextfm:
@@ -2838,52 +2814,33 @@ cfStopSpecialFM4:
 		bmi.s	.locexit					; Branch if yes
 		movea.l	a5,a3
 		lea	SMPS_RAM.v_music_fm4_track(a6),a5
-		movea.l	SMPS_RAM.v_voice_ptr(a6),a1		; Voice pointer
 		bclr	#2,SMPS_Track.PlaybackControl(a5)	; Clear 'SFX is overriding' bit
 		bset	#1,SMPS_Track.PlaybackControl(a5)	; Set 'track at rest' bit
-	if FixBugs
-		moveq	#0,d0
-	else
-		; DANGER! `SetVoice` expects d0 to be a word, but it's only passed
-		; as a byte below. This may result in restoring invalid/broken FM
-		; voices during fade out sequence if upper byte of d0 was trashed.
-	endif
-		move.b	SMPS_Track.VoiceIndex(a5),d0		; Current voice
 		jsr	SetVoice(pc)
 		movea.l	a3,a5
 ; loc_72C22:
 .locexit:
 		addq.w	#8,sp	; Tamper with return value so we don't return to caller
+
+locret_72CAA:
 		rts
 ; ===========================================================================
 ; loc_72C26:
 cfSetVoice:
-		moveq	#0,d0
-		move.b	(a4)+,d0				; Get new voice
-		move.b	d0,SMPS_Track.VoiceIndex(a5)		; Store it
+		move.b	(a4)+,SMPS_Track.VoiceIndex(a5)		; Store new voice
 		btst	#2,SMPS_Track.PlaybackControl(a5)	; Is SFX overriding this track?
-		bne.w	locret_72CAA				; Return if yes
-		movea.l	SMPS_RAM.v_voice_ptr(a6),a1		; Music voice pointer
-		tst.b	SMPS_RAM.f_voice_selector(a6)		; Are we updating a music track?
-		beq.s	SetVoice				; If yes, branch
-		movea.l	SMPS_Track.VoicePtr(a5),a1		; SFX track voice pointer
-		tst.b	SMPS_RAM.f_voice_selector(a6)		; Are we updating a SFX track?
-		bmi.s	SetVoice				; If yes, branch
-		movea.l	SMPS_RAM.v_special_voice_ptr(a6),a1	; Special SFX voice pointer
+		bne.s	locret_72CAA				; Return if yes
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 ; sub_72C4E:
 SetVoice:
-		subq.w	#1,d0
-		bmi.s	.havevoiceptr
-		move.w	#25,d1
-; loc_72C56:
-.voicemultiply:
-		adda.w	d1,a1
-		dbf	d0,.voicemultiply
-; loc_72C5C:
-.havevoiceptr:
+		movea.l	SMPS_Track.VoicePtr(a5),a1		; track voice pointer
+		moveq	#0,d0
+		move.b	SMPS_Track.VoiceIndex(a5),d0		; voiceptr+(id*25)
+		mulu.w	#25,d0					; TODO: mulu is faster then a loop, but ideally we'd use something even faster
+		adda.w	d0,a1
+
 		move.b	(a1)+,d1			; feedback/algorithm
 		move.b	d1,SMPS_Track.FeedbackAlgo(a5)	; Save it to track RAM
 		move.b	d1,d4
@@ -2916,10 +2873,7 @@ SetVoice:
 		
 		move.b	#$B4,d0				; Register for AMS/FMS/Panning
 		move.b	SMPS_Track.AMSFMSPan(a5),d1	; Value to send
-		jsr	WriteFMIorII(pc)		; (It would be better if this were a jmp)
-
-locret_72CAA:
-		rts
+		jmp	WriteFMIorII(pc)		; (It would be better if this were a jmp)
 ; End of function SetVoice
 
 ; ===========================================================================
@@ -2934,22 +2888,6 @@ SendVoiceTL:
 		bne.s	.locret					; Return if so
 		moveq	#0,d0
 		move.b	SMPS_Track.VoiceIndex(a5),d0		; Current voice
-		movea.l	SMPS_RAM.v_voice_ptr(a6),a1		; Voice pointer
-		tst.b	SMPS_RAM.f_voice_selector(a6)
-		beq.s	.gotvoiceptr
-	if FixBugs
-		movea.l	SMPS_Track.VoicePtr(a5),a1
-	else
-		; DANGER! This uploads the wrong voice! It should have been a5 instead of a6!
-		; In Sonic 1's prototype, TrackVoicePtr was a global variable instead of a
-		; per-track variable, explaining why this uses a6 instead of a5.
-		movea.l	SMPS_Track.VoicePtr(a6),a1
-	endif
-		tst.b	SMPS_RAM.f_voice_selector(a6)
-		bmi.s	.gotvoiceptr
-		movea.l	SMPS_RAM.v_special_voice_ptr(a6),a1
-; loc_72CD8:
-.gotvoiceptr:
 		subq.w	#1,d0
 		bmi.s	.gotvoice
 		move.w	#25,d1
@@ -2959,6 +2897,7 @@ SendVoiceTL:
 		dbf	d0,.voicemultiply
 ; loc_72CE6:
 .gotvoice:
+		movea.l	SMPS_Track.VoicePtr(a5),a1
 		adda.w	#21,a1				; Want TL
 		lea	FMInstrumentTLTable(pc),a2
 		move.b	SMPS_Track.FeedbackAlgo(a5),d0	; Get feedback/algorithm
@@ -3042,12 +2981,12 @@ cfStopTrack:
 		bmi.s	.stoppsg				; Branch if yes
 		tst.b	SMPS_RAM.f_updating_dac(a6)		; Is this the DAC we are updating?
 		bmi.w	.locexit				; Exit if yes
-		jsr	FMNoteOff(pc)
+		jsr	FMSilence(pc)
 		bra.s	.stoppedchannel
 ; ===========================================================================
 ; loc_72D74:
 .stoppsg:
-		jsr	PSGNoteOff(pc)
+		jsr	PSGSilence(pc)
 ; loc_72D78:
 .stoppedchannel:
 		tst.b	SMPS_RAM.f_voice_selector(a6)	; Are we updating SFX?
@@ -3063,7 +3002,6 @@ cfStopTrack:
 		tst.b	SMPS_RAM.v_spcsfx_fm4_track.PlaybackControl(a6)	; Is special SFX playing?
 		bpl.s	.getpointer					; Branch if not
 		lea	SMPS_RAM.v_spcsfx_fm4_track(a6),a5
-		movea.l	SMPS_RAM.v_special_voice_ptr(a6),a1		; Get voice pointer
 		bra.s	.gotpointer
 ; ===========================================================================
 ; loc_72DA8:
@@ -3073,12 +3011,10 @@ cfStopTrack:
 		movea.l	(a0,d0.w),a5
 		tst.b	SMPS_Track.PlaybackControl(a5)	; Is track playing?
 		bpl.s	.novoiceupd			; Branch if not
-		movea.l	SMPS_RAM.v_voice_ptr(a6),a1	; Get voice pointer
 ; loc_72DB8:
 .gotpointer:
 		bclr	#2,SMPS_Track.PlaybackControl(a5)	; Clear 'SFX overriding' bit
 		bset	#1,SMPS_Track.PlaybackControl(a5)	; Set 'track at rest' bit
-		move.b	SMPS_Track.VoiceIndex(a5),d0		; Current voice
 		jsr	SetVoice(pc)
 ; loc_72DC8:
 .novoiceupd:
