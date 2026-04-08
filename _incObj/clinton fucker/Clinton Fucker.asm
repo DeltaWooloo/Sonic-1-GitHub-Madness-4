@@ -18,9 +18,17 @@ GM_ClintonScreens:
 Clinton_FailInit:
 Clinton_WinInit:
 	move.l	#60*2,v_generictimer.w
-	fillVRAM	0, 0, $40 ; clear first two tiles
+
+	stopZ80
+;	moveq	#10,d0
+;	dbf	d0,*
+
+;	fillVRAM	0, 0, $40 ; clear first two tiles
 	fillVRAM	0, vram_fg, vram_fg+plane_size_64x32 ; clear foreground namespace
 	fillVRAM	0, vram_bg, vram_bg+plane_size_64x32 ; clear background namespace
+;
+	startZ80
+
 	clr.l	(v_scrposy_vdp).w
 	clr.l	(v_scrposx_vdp).w
 	lea	(v_palette+32).w,a0
@@ -53,6 +61,7 @@ Clinton_WinInit:
 	clearRAM vscroll_buffer,vscroll_buffer_end
 	clearRAM v_spritetablebuffer,v_spritetablebuffer_end
 	clearRAM v_hscrolltablebuffer,v_hscrolltablebuffer_end_padded
+
 	cmpi.b	#4,submode
 	bne.s	.Fail
 	pcm	dClintonWin
@@ -98,7 +107,7 @@ Clinton_ShowScr:
 	bne.s	.leave
 	jsr	(ExecuteObjects).l
 	jsr	(BuildSprites).l
-	jsr	(ObjPosLoad).l
+;	jsr	(ObjPosLoad).l
 	jsr	RunPLC.l
 	jsr	OscillateNumDo.l
 	jsr	SynchroAnimate.l

@@ -879,8 +879,10 @@ VBla_StandardTransfers:
 ; FUCKING  EXIT THE LEVEL PROPERLY FROM CLINTON FUCKER I GUESS
 ; ---------------------------------------------------------------------------
 VBla_1A:
+		stopZ80
 		jsr	ProcessDMAQueue(pc)
 		bsr.w	VBla_StandardTransfers
+		startZ80
 		tst.w	(v_generictimer).w
 		beq.w	.end
 		subq.w	#1,(v_generictimer).w
