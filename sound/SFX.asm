@@ -105,7 +105,7 @@ SoundAC:	include "sfx/SndAC - Hit Boss.asm"
 		even
 SoundAD:	include "sfx/SndAD - Get Bubble.asm"
 		even
-SoundAE:	include "sfx/SndAE - Fireball.asm"
+SoundAE:	include "sfx/Fart.asm"
 		even
 SoundAF:	include "sfx/SndAF - Shield.asm"
 		even
