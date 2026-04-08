@@ -1,22 +1,22 @@
 BGM_BlueBalls_Header:
-	smpsHeaderStartSong 3
-	smpsHeaderVoice     BGM_BlueBalls_Voices
-	smpsHeaderChan      $06, $03
-	smpsHeaderTempo     $01, $25
+	smpsHeaderStartSong	3
+	smpsHeaderVoice		BGM_BlueBalls_Voices
+	smpsHeaderChan		$06, $03
+	smpsHeaderTempo		$01, $25
 
-	smpsHeaderDAC       BGM_BlueBalls_DAC
-	smpsHeaderFM        BGM_BlueBalls_FM1,	$00, $17
-	smpsHeaderFM        BGM_BlueBalls_FM2,	$00, $0F
-	smpsHeaderFM        BGM_BlueBalls_FM3,	$00, $17
-	smpsHeaderFM        BGM_BlueBalls_FM4,	$00, $17
-	smpsHeaderFM        BGM_BlueBalls_FM5,	$00, $1F
-	smpsHeaderPSG       BGM_BlueBalls_PSG1,	$0C, $05, $00, sTone_0C
-	smpsHeaderPSG       BGM_BlueBalls_PSG2,	$0C, $05, $00, sTone_0C
-	smpsHeaderPSG       BGM_BlueBalls_PSG3,	$00, $04, $00, fTone_02
+	smpsHeaderDAC		BGM_BlueBalls_DAC
+	smpsHeaderFM		BGM_BlueBalls_FM1,	$00, $17
+	smpsHeaderFM		BGM_BlueBalls_FM2,	$00, $0F
+	smpsHeaderFM		BGM_BlueBalls_FM3,	$F4, $17
+	smpsHeaderFM		BGM_BlueBalls_FM4,	$00, $17
+	smpsHeaderFM		BGM_BlueBalls_FM5,	$00, $1F
+	smpsHeaderPSG		BGM_BlueBalls_PSG1,	$0C, $05, $00, sTone_0C
+	smpsHeaderPSG		BGM_BlueBalls_PSG2,	$00, $05, $00, sTone_0C
+	smpsHeaderPSG		BGM_BlueBalls_PSG3,	$00, $04, $00, fTone_02
 
 ; FM1 Data
 BGM_BlueBalls_FM1:
-	smpsSetvoice        $01
+	smpsSetvoice	$01
 	dc.b	nE5, $06, nRst, $0C, nE4, $06, nB3, nRst, nE4, nRst, nFs4, nRst
 	dc.b	nAb4, nRst, nB4, nRst, nD5, nRst, nE5, nE5, nRst, nE5, nE5, nRst
 	dc.b	nE5, nE5, nRst, nD5, nRst, nD5, nD5, $0C, nE5
@@ -24,33 +24,29 @@ BGM_BlueBalls_FM1:
 
 ; FM2 Data
 BGM_BlueBalls_FM2:
-	smpsSetvoice        $00
-	dc.b	nRst, $12, nA2, $06, nE2, nRst, nA2, nRst, nB2, nRst, nCs3, nRst
-	dc.b	nE2, nRst, nFs2, nRst, nA2, nA2, nE3, nA3, nA3, nRst, nA3, nA3
+	smpsSetvoice	$00
+	smpsCall	BGM_BlueBalls_Call00
+	dc.b	nFs2, nRst, nA2, nA2, nE3, nA3, nA3, nRst, nA3, nA3
 	dc.b	nRst, nG3, nRst, nG3, nG2, nD3, nG3, $0C
 	smpsStop
 
 ; FM3 Data
 BGM_BlueBalls_FM3:
-	smpsSetvoice        $01
-	smpsPan             panRight, $00
-	dc.b	nA4, $06, nRst, $0C, nA3, $06, nE3, nRst, nA3, nRst, nB3, nRst
-	dc.b	nCs4, nRst, nE4, nRst, nG4, nRst, nA4, nA4, nRst, nA4, nA4, nRst
-	dc.b	nA4, nA4, nRst, nG4, nRst, nG4, nG4, $0C, nA4
-	smpsStop
-
-; FM4 Data
-BGM_BlueBalls_FM4:
-	smpsSetvoice        $01
-	smpsPan             panLeft, $00
-	dc.b	nA5, $06, nRst, $0C, nA4, $06, nE4, nRst, nA4, nRst, nB4, nRst
-	dc.b	nCs5, nRst, nE5, nRst, nG5, nRst, nA5, nA5, nRst, nA5, nA5, nRst
-	dc.b	nA5, nA5, nRst, nG5, nRst, nG5, nG5, $0C, nA5
-	smpsStop
+	smpsSetvoice	$01
+	smpsPan		panRight, $00
+	smpsJump	BGM_BlueBalls_Jump00
 
 ; FM5 Data
 BGM_BlueBalls_FM5:
-	smpsSetvoice        $02
+	smpsSetvoice	$02
+	smpsJump	BGM_BlueBalls_Jump00
+
+; FM4 Data
+BGM_BlueBalls_FM4:
+	smpsSetvoice	$01
+	smpsPan		panLeft, $00
+
+BGM_BlueBalls_Jump00:
 	dc.b	nA5, $06, nRst, $0C, nA4, $06, nE4, nRst, nA4, nRst, nB4, nRst
 	dc.b	nCs5, nRst, nE5, nRst, nG5, nRst, nA5, nA5, nRst, nA5, nA5, nRst
 	dc.b	nA5, nA5, nRst, nG5, nRst, nG5, nG5, $0C, nA5
@@ -58,52 +54,53 @@ BGM_BlueBalls_FM5:
 
 ; PSG1 Data
 BGM_BlueBalls_PSG1:
-	dc.b	nRst, $12, nA2, $06, nE2, nRst, nA2, nRst, nB2, nRst, nCs3, nRst
-	dc.b	nE3, nRst, nG3, nRst, nA3, nA3, nRst, nA3, nA3, nRst, nA3, nA3
-	dc.b	nRst, nG3, nRst, nG3, nG3, $0C, nA3
+	smpsCall	BGM_BlueBalls_Call00
+	dc.b	nG3, nRst, nA3, nA3, nRst, nA3, nA3, nRst, nA3, nA3, nRst
+	dc.b	nG3, nRst, nG3, nG3, $0C, nA3
 	smpsStop
 
 ; PSG2 Data
 BGM_BlueBalls_PSG2:
-	dc.b	nRst, $12, nA1, $06, nE1, nRst, nA1, nRst, nB1, nRst, nCs2, nRst
-	dc.b	nE2, nRst, nG2, nRst, nE2, nE2, nRst, nE2, nE2, nRst, nE2, nE2
-	dc.b	nRst, nD2, nRst, nD2, nD2, $0C, nE2
+	smpsCall	BGM_BlueBalls_Call00
+	smpsAlterPitch	$0C
+	dc.b	nG2, nRst, nE2, nE2, nRst, nE2, nE2, nRst, nE2, nE2, nRst
+	dc.b	nD2, nRst, nD2, nD2, $0C, nE2
 	smpsStop
+
+BGM_BlueBalls_Call00:
+	dc.b	nRst, $12, nA2, $06, nE2, nRst, nA2, nRst, nB2, nRst, nCs3, nRst
+	dc.b	nE3, nRst
+	smpsReturn
 
 ; PSG3 Data
 BGM_BlueBalls_PSG3:
-	smpsPSGform         $E7
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG2, $06, nMaxPSG2
-	smpsPSGvoice        sTone_01
-	dc.b	nMaxPSG2, $0C
+	smpsPSGform	$E7
+	dc.b	nMaxPSG2, $06, $06
+	smpsPSGvoice	sTone_01
+	dc.b	$0C
 
 BGM_BlueBalls_Loop12:
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG2, $06
-	smpsPSGvoice        sTone_01
-	dc.b	nMaxPSG2
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG2
-	smpsPSGvoice        sTone_01
-	dc.b	nMaxPSG2
-	smpsLoop            $00, $03, BGM_BlueBalls_Loop12
+	smpsPSGvoice	fTone_02
+	dc.b	$06
+	smpsPSGvoice	sTone_01
+	dc.b	$06
+	smpsLoop	0, 6, BGM_BlueBalls_Loop12
 
 BGM_BlueBalls_Loop13:
-	smpsPSGvoice        fTone_02
-	dc.b	nMaxPSG2, nMaxPSG2
-	smpsPSGAlterVol     $FC
-	dc.b	nMaxPSG2
-	smpsPSGAlterVol     $04
-	dc.b	nMaxPSG2
-	smpsLoop            $00, $04, BGM_BlueBalls_Loop13
+	smpsPSGvoice	fTone_02
+	dc.b	$06, $06
+	smpsPSGAlterVol	$FC
+	dc.b	$06
+	smpsPSGAlterVol	$04
+	dc.b	$06
+	smpsLoop	0, 4, BGM_BlueBalls_Loop13
 	smpsStop
 
 ; DAC Data
 BGM_BlueBalls_DAC:
 	dc.b	dSnareS3, $06, dKickS3, $0C, dSnareS3, $06, dKickS3, $0C, dKickS3, dKickS3, dKickS3, dSnareS3
-	dc.b	dKickS3, dSnareS3, $06, dSnareS3, $0C, dSnareS3, $06, dKickS3, $0C, dSnareS3, $06, dSnareS3
-	dc.b	$0C, dKickS3, dKickS3, $06, dSnareS3, $0C, dSnareS3, $06, dSnareS3
+	dc.b	dKickS3, dSnareS3, $06, $0C, $06, dKickS3, $0C, dSnareS3, $06, $0C
+	dc.b	dKickS3, dKickS3, $06, dSnareS3, $0C, $06, $06
 	smpsStop
 
 BGM_BlueBalls_Voices:
