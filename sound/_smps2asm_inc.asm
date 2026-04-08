@@ -818,7 +818,16 @@ smpsVcTotalLevel macro op1,op2,op3,op4
 	smpsDcb	(vcUnusedBits<<6)+(vcFeedback<<3)+vcAlgorithm
 ;   0     1     2     3     4     5     6     7
 ;%1000,%1000,%1000,%1000,%1010,%1110,%1110,%1111
-	if SourceSMPS2ASM==0
+	if (SourceDriver<3)
+		eval vcTLMask4,((vcAlgorithm==7)<<7)
+		eval vcTLMask3,((vcAlgorithm>=4)<<7)
+		eval vcTLMask2,((vcAlgorithm>=5)<<7)
+		eval vcTLMask1,128
+		eval vcTL1,vcTL1&127
+		eval vcTL2,vcTL2&127
+		eval vcTL3,vcTL3&127
+		eval vcTL4,vcTL4&127
+	elseif (SourceSMPS2ASM==0)
 		eval vcTLMask4,((vcAlgorithm==7)<<7)
 		eval vcTLMask3,((vcAlgorithm>=4)<<7)
 		eval vcTLMask2,((vcAlgorithm>=5)<<7)
@@ -828,37 +837,17 @@ smpsVcTotalLevel macro op1,op2,op3,op4
 		eval vcTLMask3,0
 		eval vcTLMask2,0
 		eval vcTLMask1,0
-	endif
-
-	if (SonicDriverVer>=3)&&(SourceDriver<3)
-		eval vcTLMask4,((vcAlgorithm==7)<<7)
-		eval vcTLMask3,((vcAlgorithm>=4)<<7)
-		eval vcTLMask2,((vcAlgorithm>=5)<<7)
-		eval vcTLMask1,128
-		eval vcTL1,vcTL1&127
-		eval vcTL2,vcTL2&127
-		eval vcTL3,vcTL3&127
-		eval vcTL4,vcTL4&127
-	elseif (SonicDriverVer<3)&&(SourceDriver>=3)&&((((vcTL1|vcTLMask1)&128)<>128)||(((vcTL2|vcTLMask2)&128)<>((vcAlgorithm>=5)<<7))||(((vcTL3|vcTLMask3)&128)<>((vcAlgorithm>=4)<<7))||(((vcTL4|vcTLMask4)&128)<>((vcAlgorithm==7)<<7)))
+		if ((((vcTL1)&128)<>128)) || ((((vcTL2)&128)<>((vcAlgorithm>=5)<<7))) || ((((vcTL3)&128)<>((vcAlgorithm>=4)<<7))) || ((((vcTL4)&128)<>((vcAlgorithm==7)<<7)))
 		if MOMPASS=1
-			message "Voice at 0x\{*} has TL bits that do not match its algorithm setting. This voice will not work in S1/S2 drivers."
+		message "WARNING - Voice at 0x\{*} has TL bits that do not match S1/S2s intended TL settings. Is this intentional?"
+		endif
 		endif
 	endif
-
-	if SonicDriverVer==2
-		smpsDcb	(vcDT4<<4)+vcCF4       ,(vcDT2<<4)+vcCF2       ,(vcDT3<<4)+vcCF3       ,(vcDT1<<4)+vcCF1
-		smpsDcb	(vcRS4<<6)+vcAR4       ,(vcRS2<<6)+vcAR2       ,(vcRS3<<6)+vcAR3       ,(vcRS1<<6)+vcAR1
-		smpsDcb	vcAM4|vcD1R4|vcD1R4Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM1|vcD1R1|vcD1R1Unk
-		smpsDcb	vcD2R4                 ,vcD2R2                 ,vcD2R3                 ,vcD2R1
-		smpsDcb	(vcDL4<<4)+vcRR4       ,(vcDL2<<4)+vcRR2       ,(vcDL3<<4)+vcRR3       ,(vcDL1<<4)+vcRR1
-		smpsDcb	vcTL4|vcTLMask4        ,vcTL2|vcTLMask2        ,vcTL3|vcTLMask3        ,vcTL1|vcTLMask1
-	else
 		smpsDcb	(vcDT4<<4)+vcCF4       ,(vcDT3<<4)+vcCF3       ,(vcDT2<<4)+vcCF2       ,(vcDT1<<4)+vcCF1
 		smpsDcb	(vcRS4<<6)+vcAR4       ,(vcRS3<<6)+vcAR3       ,(vcRS2<<6)+vcAR2       ,(vcRS1<<6)+vcAR1
 		smpsDcb	vcAM4|vcD1R4|vcD1R4Unk ,vcAM3|vcD1R3|vcD1R3Unk ,vcAM2|vcD1R2|vcD1R2Unk ,vcAM1|vcD1R1|vcD1R1Unk
 		smpsDcb	vcD2R4                 ,vcD2R3                 ,vcD2R2                 ,vcD2R1
 		smpsDcb	(vcDL4<<4)+vcRR4       ,(vcDL3<<4)+vcRR3       ,(vcDL2<<4)+vcRR2       ,(vcDL1<<4)+vcRR1
 		smpsDcb	vcTL4|vcTLMask4        ,vcTL3|vcTLMask3        ,vcTL2|vcTLMask2        ,vcTL1|vcTLMask1
-	endif
 	endm
 

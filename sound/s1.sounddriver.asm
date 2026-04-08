@@ -2846,46 +2846,45 @@ SetVoice:
 		move.b	d1,d4
 		move.b	#$B0,d0				; Command to write feedback/algorithm
 		jsr	WriteFMIorII(pc)
+
+		move.b	#$B4,d0				; Register for AMS/FMS/Panning
+		move.b	SMPS_Track.AMSFMSPan(a5),d1	; Value to send
+		jsr	WriteFMIorII(pc)
+
 		lea	FMInstrumentOperatorTable(pc),a2
 		moveq	#(FMInstrumentOperatorTable_End-FMInstrumentOperatorTable)-1,d3	; Don't want to send TL yet
-; loc_72C72:
 .sendvoiceloop:
 		move.b	(a2)+,d0
 		move.b	(a1)+,d1
 		jsr	WriteFMIorII(pc)
 		dbf	d3,.sendvoiceloop
-
-		moveq	#(FMInstrumentTLTable_End-FMInstrumentTLTable)-1,d5
-		andi.w	#7,d4				; Get algorithm
-		move.b	FMSlotMask(pc,d4.w),d4		; Get slot mask for algorithm
-		move.b	SMPS_Track.Volume(a5),d3	; Track volume attenuation
-; loc_72C8C:
+.handletl:
+		move.b	SMPS_Track.Volume(a5),d3
+;		bmi.s	.locret
+		lea	FMInstrumentTLTable(pc),a2
+		moveq	#(FMInstrumentTLTable_End-FMInstrumentTLTable)-1,d4
 .sendtlloop:
 		move.b	(a2)+,d0
 		move.b	(a1)+,d1
-		lsr.b	#1,d4	; Is bit set for this operator in the mask?
-		bcc.s	.sendtl	; Branch if not
-		add.b	d3,d1	; Include additional attenuation
-; loc_72C96:
-.sendtl:
+;		bpl.s	.sent_tl
+		bpl.s	.send_tl
+		add.b	d3,d1
+;		bcs.s	.sent_tl
+		bcc.s	.send_tl
+		moveq	#$7F,d1
+.send_tl:
 		jsr	WriteFMIorII(pc)
-		dbf	d5,.sendtlloop
-		
-		move.b	#$B4,d0				; Register for AMS/FMS/Panning
-		move.b	SMPS_Track.AMSFMSPan(a5),d1	; Value to send
-		jmp	WriteFMIorII(pc)		; (It would be better if this were a jmp)
+.sent_tl:
+		dbf	d4,.sendtlloop
+.locret:
+		rts
 ; End of function SetVoice
-
-; ===========================================================================
-; byte_72CAC:
-FMSlotMask:	dc.b 8,	8, 8, 8, $A, $E, $E, $F
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
-; sub_72CB4:
 SendVoiceTL:
 		btst	#2,SMPS_Track.PlaybackControl(a5)	; Is SFX overriding?
-		bne.s	.locret					; Return if so
+		bne.s	SetVoice.locret				; Return if so
 		movea.l	SMPS_Track.VoicePtr(a5),a1		; track voice pointer
 		moveq	#0,d0
 		move.b	SMPS_Track.VoiceIndex(a5),d0		; voiceptr+(id*25)
@@ -2893,28 +2892,7 @@ SendVoiceTL:
 		adda.w	d0,a1
 
 		adda.w	#21,a1					; Want TL
-		lea	FMInstrumentTLTable(pc),a2
-		move.b	SMPS_Track.FeedbackAlgo(a5),d0	; Get feedback/algorithm
-		andi.w	#7,d0				; Want only algorithm
-		move.b	FMSlotMask(pc,d0.w),d4		; Get slot mask
-		move.b	SMPS_Track.Volume(a5),d3	; Get track volume attenuation
-		bmi.s	.locret				; If negative, stop
-		moveq	#(FMInstrumentTLTable_End-FMInstrumentTLTable)-1,d5
-; loc_72D02:
-.sendtlloop:
-		move.b	(a2)+,d0
-		move.b	(a1)+,d1
-		lsr.b	#1,d4		; Is bit set for this operator in the mask?
-		bcc.s	.senttl		; Branch if not
-		add.b	d3,d1		; Include additional attenuation
-		bcs.s	.senttl		; Branch on overflow
-		jsr	WriteFMIorII(pc)
-; loc_72D12:
-.senttl:
-		dbf	d5,.sendtlloop
-; locret_72D16:
-.locret:
-		rts
+		bra.s	SetVoice.handletl
 ; End of function SendVoiceTL
 
 ; ===========================================================================
