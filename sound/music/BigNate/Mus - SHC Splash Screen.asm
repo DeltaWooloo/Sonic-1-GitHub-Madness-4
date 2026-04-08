@@ -48,17 +48,20 @@ BGM_SHC_FM3:
 	smpsPan		panRight, $00
 	smpsModSet	$03, $01, $09, $05
 	dc.b	nRst, $06
-	smpsJump	BGM_SHC_Jump00
+	smpsCall	BGM_SHC_Call04
+	dc.b	nAb5, $78
+	smpsStop
 
 ; FM2 Data
 BGM_SHC_FM2:
+	smpsCall	BGM_SHC_Call04
 	smpsModSet	$03, $01, $05, $05
+	dc.b	nAb5, $78
 
-BGM_SHC_Jump00:
+BGM_SHC_Call04:
 	smpsSetvoice	$01
-	dc.b	nRst, $54
-	dc.b	nFs4, $03, nA4, nB4, nD5, nE5, $0C
-	dc.b	nE4, $03, nA4, nB4, nE5, nAb5, $78
+	dc.b	nRst, $54, nFs4, $03, nA4, nB4, nD5, nE5, $0C
+	dc.b	nE4, $03, nA4, nB4, nE5
 	smpsStop
 
 ; FM5 Data
@@ -73,24 +76,20 @@ BGM_SHC_FM4:
 BGM_SHC_Jump01:
 	smpsSetvoice	$02
 	dc.b	nRst, $60
-	smpsCall	BGM_SHC_Call07
+	dc.b	nAb4, $08, nRst, $04
 	smpsAlterVol	$08
-	smpsCall	BGM_SHC_Call07
+	dc.b	nAb4, $08, nRst, $04
 	smpsAlterVol	$F7
 	smpsModSet	$03, $01, $06, $05
 	dc.b	nB4, $78
 	smpsStop
-
-BGM_SHC_Call07:
-	dc.b	nAb4, $08, nRst, $04
-	smpsReturn
 
 BGM_SHC_PSG1:
 	smpsCall	BGM_SHC_Call03
 	dc.b	nA3, $78
 
 BGM_SHC_Jump02:
-	smpsModSet	$00, $00, $00, $FF
+	smpsModOff
 	dc.b	nE4, $03, nFs4, nAb4, nA4, nB4, nC5, nCs5, nD5
 
 BGM_SHC_PSG1_Loop:
