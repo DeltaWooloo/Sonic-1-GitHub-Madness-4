@@ -57,12 +57,13 @@ BGM_SHC_FM2:
 	smpsCall	BGM_SHC_Call04
 	smpsModSet	$03, $01, $05, $05
 	dc.b	nAb5, $78
+	smpsStop
 
 BGM_SHC_Call04:
 	smpsSetvoice	$01
 	dc.b	nRst, $54, nFs4, $03, nA4, nB4, nD5, nE5, $0C
 	dc.b	nE4, $03, nA4, nB4, nE5
-	smpsStop
+	smpsReturn
 
 ; FM5 Data
 BGM_SHC_FM5:
