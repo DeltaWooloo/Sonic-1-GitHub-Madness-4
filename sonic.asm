@@ -2897,6 +2897,8 @@ Level_WaterPal:
 		move.b	(v_lamp_wtrstat).w,(f_wtr_state).w
 
 Level_GetBgm:
+		tst.w	(f_demo).w	; Is demo mode on?
+		bcs.s	Level_SkipTtlCard
 		bsr.w  Reproduce_BGM
 		move.b	#id_TitleCard,(v_titlecard).w ; load title card object
 
