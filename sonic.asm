@@ -4026,13 +4026,40 @@ Map_ECha:	include	"_maps/Ending Sequence Emeralds.asm"
 Map_ESth:	include	"_maps/Ending Sequence STH.asm"
 
 ; ===========================================================================
+; The entirety of Too LimitedSonic (with the header stripped out)
+
+Init_TooLimited:	= $8160
+H_Int_2LS:		= $88A0
+V_Int_2LS:		= $819E
+
+	dcb.b	$7FD0-(*), $69
+	
+	dc.b	"  AND NOW... A  "
+	dc.b	"  VERY LIMITED  "
+	dc.b	"  EXPERIENCE!!  "
+
+
+	binclude	"_bonusgames/Too LimitedSonic/Too_LimitedSonic.bin"	; Welp, the DMA Queue is gonna be problematic
+	even
+
+	ALIGN	$10
+	
+	dc.b	" END OF LIMITED "
+	dc.b	"   EXPERIENCE   "
+
+; ---------------------------------------------------------------------------
+
+	binclude	"rom manual.txt"
+	even
+
+; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Credits ending sequence
 ; ---------------------------------------------------------------------------
 
 GM_Credits:
-		bsr.w	ClearPLC
-		bsr.w	PaletteFadeOut
+		jsr	(ClearPLC).w
+		jsr	(PaletteFadeOut).w
 		lea	(vdp_control_port).l,a6
 		move.w	#$8004,(a6)		; 8-colour mode
 		move.w	#$8200+(vram_fg>>10),(a6) ; set foreground nametable address
@@ -4042,18 +4069,18 @@ GM_Credits:
 		move.w	#$8B03,(a6)		; line scroll mode
 		move.w	#$8720,(a6)		; set background colour (line 3; colour 0)
 		clr.b	(f_wtr_state).w
-		bsr.w	ClearScreen
+		jsr	(ClearScreen).w
 
 		clearRAM v_objspace
 
 		locVRAM	ArtTile_Credits_Font*tile_size
 		lea	(Nem_CreditText).l,a0 ; load credits alphabet patterns
-		bsr.w	NemDec
+		jsr	(NemDec).w
 
 		clearRAM v_palette_fading
 
 		moveq	#palid_Sonic,d0
-		bsr.w	PalLoad_Fade	; load Sonic's palette
+		jsr	(PalLoad_Fade).l	; load Sonic's palette
 		move.b	#id_CreditsText,(v_credits).w ; load credits object
 		jsr	(ExecuteObjects).l
 		jsr	(BuildSprites).l
@@ -4069,18 +4096,18 @@ GM_Credits:
 		lea	(a2,d0.w),a2 
 		move.b	(a2),d0
 		beq.s	Cred_SkipObjGfx
-		bsr.w	AddPLC		; load object graphics
+		jsr	(AddPLC).w		; load object graphics
 
 Cred_SkipObjGfx:
 ;		moveq	#plcid_Main2,d0
 ;		bsr.w	AddPLC		; load standard level graphics
 		move.w	#120,(v_generictimer).w ; display a credit for 2 seconds
-		bsr.w	PaletteFadeIn
+		jsr	(PaletteFadeIn).w
 
 Cred_WaitLoop:
 		move.b	#4,(v_vbla_routine).w
-		bsr.w	WaitForVBla
-		bsr.w	RunPLC
+		jsr	(WaitForVBla).w
+		jsr	(RunPLC).w
 		tst.w	(v_generictimer).w ; have 2 seconds elapsed?
 		bne.s	Cred_WaitLoop	; if not, branch
 		tst.l	(v_plc_buffer).w ; have level gfx finished decompressing?
@@ -4154,8 +4181,8 @@ EndDemo_LampVar_End:
 ; ---------------------------------------------------------------------------
 
 TryAgainEnd:
-		bsr.w	ClearPLC
-		bsr.w	PaletteFadeOut
+		jsr	(ClearPLC).w
+		jsr	(PaletteFadeOut).w
 		lea	(vdp_control_port).l,a6
 		move.w	#$8004,(a6)	; use 8-colour mode
 		move.w	#$8200+(vram_fg>>10),(a6) ; set foreground nametable address
@@ -4166,37 +4193,37 @@ TryAgainEnd:
 		move.w	#$8720,(a6)	; set background colour (line 3; colour 0)
 		move.w	#$8C00,(a6)	; set to H32 mode - running bit in my changes - coni
 		clr.b	(f_wtr_state).w
-		bsr.w	ClearScreen
+		jsr	(ClearScreen).w
 
 		clearRAM v_objspace
 
 		moveq	#plcid_TryAgain,d0
-		bsr.w	QuickPLC	; load "TRY AGAIN" or "END" patterns
+		jsr	(QuickPLC).w	; load "TRY AGAIN" or "END" patterns
 		lea	(v_ram_start).l,a1
 		lea	(Eni_TheIdiotBros).l,a0 ; load mappings for Japanese credits
 		move.w	#make_art_tile(ArtTile_Try_Again_Eggman,0,FALSE),d0
-		bsr.w	EniDec
+		jsr	(EniDec).w
 
 		copyTilemap	v_ram_start,vram_fg+$310,17,12
 		clearRAM v_palette_fading
 
 		moveq	#palid_TryAgain,d0
-		bsr.w	PalLoad_Fade	; load ending palette
+		jsr	(PalLoad_Fade).w	; load ending palette
 		clr.w	(v_palette_fading+$40).w
 		move.b	#id_EndEggman,(v_endeggman).w ; load Eggman object
 		jsr	(ExecuteObjects).l
 		jsr	(BuildSprites).l
 		move.w	#60*60,(v_generictimer).w ; show screen for a minute
-		bsr.w	PaletteFadeIn
+		jsr	(PaletteFadeIn).w
 		move.w	#bgm_Jeopardy,d0	; "you fucking idiot"
-		bsr.w	QueueSound1	; play ending sequence music
+		jsr	(QueueSound1).w		; play ending sequence music
 ; ---------------------------------------------------------------------------
 ; "TRY AGAIN" and "END" screen main loop
 ; ---------------------------------------------------------------------------
 TryAg_MainLoop:
-		bsr.w	PauseGame
+		jsr	(PauseGame).w
 		move.b	#4,(v_vbla_routine).w
-		bsr.w	WaitForVBla
+		jsr	(WaitForVBla).w
 		jsr	(ExecuteObjects).l
 		jsr	(BuildSprites).l
 		andi.b	#btnStart,(v_jpadpress1).w ; is Start button pressed?
@@ -4208,7 +4235,7 @@ TryAg_MainLoop:
 		bra.s	TryAg_MainLoop
 
 TryAg_Exit:
-		bsr.w	PaletteFadeOut
+		jsr	(PaletteFadeOut).w
 		lea	(vdp_control_port).l,a6
 		move.w	#$8C81,(a6)	; set to H40 mode - hacky fix - coni
 		move.b	#id_Sega,(v_gamemode).w ; goto Sega screen
@@ -4220,33 +4247,6 @@ TryAg_Exit:
 		include "_anim/Try Again & End Eggman.asm"
 		include	"_incObj/8C Try Again Emeralds.asm"
 Map_EEgg:	include	"_maps/Try Again & End Eggman.asm"
-
-; ===========================================================================
-; The entirety of Too LimitedSonic (with the header stripped out)
-
-Init_TooLimited:	= $8160
-H_Int_2LS:		= $88A0
-V_Int_2LS:		= $819E
-
-	dcb.b	$7FD0-(*), $69
-	
-	dc.b	"  AND NOW... A  "
-	dc.b	"  VERY LIMITED  "
-	dc.b	"  EXPERIENCE!!  "
-
-
-	binclude	"_bonusgames/Too LimitedSonic/Too_LimitedSonic.bin"	; Welp, the DMA Queue is gonna be problematic
-	even
-
-	ALIGN	$10
-	
-	dc.b	" END OF LIMITED "
-	dc.b	"   EXPERIENCE   "
-
-; ---------------------------------------------------------------------------
-
-	binclude	"rom manual.txt"
-	even
 
 ; ---------------------------------------------------------------------------
 ; Ending sequence demos
