@@ -367,6 +367,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Hidden
 	nextenum bgm_BossaNova
 	nextenum bgm_dam_dariram
+	nextenum bgm_WillTell
 
 	; Unused Jingle BGM
 	nextenum bgm_Ding
@@ -378,7 +379,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 
 	; Keep this last
 	nextenum bgm__Last
-	bgm__LastPow2:		equ	$7F		;!@ Manually update me	
+	bgm__LastPow2:		equ	$79		;!@ Manually update me	
 
 ; Sound effects
 	enum	sfx__First=$A0
