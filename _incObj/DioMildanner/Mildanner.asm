@@ -137,7 +137,7 @@ BossDioMildanner_IntroMain:
 		move.b	#0,obAnim(a0) ; @idle
 		subi.w	#34,obY(a0) ; go up due to size
 
-		move.b	#bgm_Spoopy,d0
+		move.b	#bgm_DJKK,d0
 		jsr	(PlaySound_Special)
 
 		; size initially is 20x40
