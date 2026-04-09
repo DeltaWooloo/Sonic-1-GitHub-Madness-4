@@ -54,9 +54,9 @@ TitleCard_Brew2:	equ  "HOT BREW"
 TitleCard_Brew3:	equ  "Roast Brew"
 TitleCard_Brew4:	equ  "Hostile Soul"
 
-TitleCard_WIN1:	equ  "Insert Title"
-TitleCard_WIN2:	equ  "Insert Tit"
-TitleCard_WIN3:	equ  "AGGA"
+TitleCard_WIN1:	equ  "MICROSLOP HQ"
+TitleCard_WIN2:	equ  "WINDOWS XP"
+TitleCard_WIN3:	equ  "CLIPPY CLITORIS"
 TitleCard_WIN4:	equ  "AGGA"
 
 TitleCard_Joint1:	equ  "Inside Tonics Body"
