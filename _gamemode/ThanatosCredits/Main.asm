@@ -311,6 +311,7 @@ thantxt: macro txt
 	thantxt	"GHM IV DEV TEAM" ;Originally "Members," but I thought this would be more formal. ~TG2000
 	dc.b	1
 	thantxt	"KATSUSHIMI"
+	thantxt	"BLINGUS"		; created maniac intro art
 	thantxt	"ATOLLY GUYKE"
 	thantxt	"KGL"
 	thantxt	"GENESISDOES"

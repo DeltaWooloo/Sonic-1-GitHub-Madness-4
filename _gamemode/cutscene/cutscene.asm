@@ -2,6 +2,7 @@
 ASCII_VRAMADDR	= $D000
 ASCII_TILEDELTA	= $0660
 
+cutscene	= v_zone
 
 	phase	v_sonspeedacc
 stringaddr	ds.l	1
@@ -10,9 +11,10 @@ stringvram	ds.w	1
 		ds.l	1
 stringtimer	ds.b	1	
 stringtime	ds.b	1
-cutsceneno	ds.b	1
-subsceneno	ds.b	1
+subscene	ds.b	1
+		ds.b	1
 	dephase
+
 
 GM_Cutscene:
 	moveq	#0,d0
@@ -46,11 +48,11 @@ Cutscene_Init:
 	enable_ints
 	enable_display
 
+	move.b	#0,subscene.w
 	addq.b	#4,submode.w
 ;	move.l	#StringTest,stringaddr.w
 ;	move.b	#8,stringtime.w
-	move.w	#bgm_Aporia,d0
-	jsr	QueueSound2
+
 .Wait:
 	move.b	#$1C,(v_vbla_routine).w
 	jsr	WaitForVBla
@@ -58,12 +60,12 @@ Cutscene_Init:
 	tst.l	v_plc_buffer
 	bne.s	.Wait
 
-	jsr	PalFadeIn
+;	jsr	PalFadeIn
 
 Cutscene_Main:
 	bsr.w	_cutsceneSub
 	bsr.w	PrintMsgTimed
-;	bsr.w	script here idfk
+	bsr.w	Cutscene_ManiacIntro
 
 	rts
 
@@ -81,12 +83,7 @@ VBLANK_CUTSCENE:
 	jsr	VBla_StandardTransfers
 	jmp	ProcessDPLC_9Tiles
 
-Str_ManiacIntro1:
-	dc.b	"MANIAC SAT WATCHING FUNNY SHORT CLIP",-1
-	dc.b	"AND COLONOSCOPY TUTORIALS ON HIS CRT",-1
-	dc.b	"HOOKED UP TO A FUCKING ROKU BOX",-1
-	dc.b	"(it's how its intended to be viewed)",0
-	even
+
 
 
 InitCutsceneData:
@@ -101,6 +98,9 @@ InitCutsceneData:
 ;	add.w	d0,a0
 	move.b	(a0),stringtime
 	move.l	(a0)+,stringaddr
+
+	move.b	(a0),d0
+	jsr	QueueSound2
 
 	move.l	(a0)+,a1
 	jsr	UserPLC	; I HATE YOU I FUCKING HATE YOU DIE
@@ -122,7 +122,7 @@ InitCutsceneData:
 	jsr	DrawTileMap_Addr
 
 	moveq	#0,d0
-	move.b	cutsceneno,d0
+	move.b	cutscene,d0
 
 	lea	CutscenePalTbl,a0
 	; put stuyff here idk
@@ -143,7 +143,7 @@ InitCutsceneData:
 
 CutsceneInitTbl:
 	dc.l	Str_ManiacIntro1+(4<<24)
-	dc.l	ArtList_ManiacIntro1
+	dc.l	ArtList_ManiacIntro1+(bgm_Aporia<<24)
 	dc.l	MapScr_ManiacIntro1A
 	dc.l	MapScr_ManiacIntro1B
 
@@ -293,9 +293,11 @@ PrintMsg:
 .Done:
 	rts
 
+	include		"_gamemode/cutscene/maniac_intro.asm"
 Art_ASCII:	binclude	"_gamemode/cutscene/ASCII.BIN"
 		even
 Art_ASCIIE:
+Art_ASCIISZ = (Art_ASCIIE-Art_ASCII)
 
 Pal_ManiacIntro1:
 		binclude	"_gamemode/cutscene/data/maniaccutscene1.pal"	; the way i authored these was Very Tired Very Slow head so
@@ -319,4 +321,3 @@ MapScr_ManiacIntro1B:
 		dc.w	$E000
 		binclude	"_gamemode/cutscene/data/maniaccutscene1b.map"
 		even
-Art_ASCIISZ = (Art_ASCIIE-Art_ASCII)
