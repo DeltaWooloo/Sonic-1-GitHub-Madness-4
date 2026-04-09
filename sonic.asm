@@ -603,8 +603,11 @@ VBla_Index:	dc.w VBla_00-VBla_Index	; (lag frame)
 		dc.w VBla_16-VBla_Index	; Continue Screen
 		dc.w VBla_18-VBla_Index	; Ending Sequence
 		dc.w VBla_1A-VBla_Index	; kys
+		dc.w VBla_1C-VBla_Index	; gfy
 ; ===========================================================================
 
+VBla_1C:
+		jmp	VBLANK_CUTSCENE
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; VBlank 00 - Lag frame (VBlank occured before call to WaitForVBla)
@@ -1178,8 +1181,14 @@ ClearScreen:
 ; ---------------------------------------------------------------------------
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
-
-
+DrawTileMap_Addr:
+		moveq	#0,d3		; Make VDPCMD from value in d1
+		move.w	d0,d3
+		lsl.l	#2,d3
+		lsr.w	#2,d3
+		ori.w	#$4000,d3
+		swap	d3
+		move.l	d3,d0
 TilemapToVRAM:
 		lea	(vdp_data_port).l,a6
 		move.l	#$800000,d4

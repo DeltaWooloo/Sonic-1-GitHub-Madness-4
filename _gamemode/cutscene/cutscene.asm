@@ -21,7 +21,6 @@ GM_Cutscene:
 .Index
 	bra.w	Cutscene_Init
 	bra.w	Cutscene_Main
-	bra.w	Cutscene_Print
 
 Cutscene_Init:
 	move.b	#bgm_Stop,d0
@@ -47,36 +46,48 @@ Cutscene_Init:
 	enable_ints
 	enable_display
 
-	addq.b	#8,submode.w
+	addq.b	#4,submode.w
 ;	move.l	#StringTest,stringaddr.w
-	move.b	#8,stringtime.w
+;	move.b	#8,stringtime.w
+	move.w	#bgm_Aporia,d0
+	jsr	QueueSound2
+.Wait:
+	move.b	#$1C,(v_vbla_routine).w
+	jsr	WaitForVBla
+	jsr	RunPLC
+	tst.l	v_plc_buffer
+	bne.s	.Wait
+
 	jsr	PalFadeIn
 
 Cutscene_Main:
-	move.b	#6,(v_vbla_routine).w
-	jsr	WaitForVBla
+	bsr.w	_cutsceneSub
+	bsr.w	PrintMsgTimed
 ;	bsr.w	script here idfk
-	jsr	RunPLC
+
 	rts
 
-Cutscene_Print:
-	move.b	#6,(v_vbla_routine).w
+_cutsceneSub:
+	move.b	#$1C,(v_vbla_routine).w
 	jsr	WaitForVBla
-	bsr.w   PrintMsgTimed
-	jsr	RunPLC
-	rts
-	
+	jmp	RunPLC
+
+; ---------------------------------------------------------------------------
+; VBLANK
+; ---------------------------------------------------------------------------
+
+VBLANK_CUTSCENE:
+	jsr	ProcessDMAQueue
+	jsr	VBla_StandardTransfers
+	jmp	ProcessDPLC_9Tiles
+
 Str_ManiacIntro1:
 	dc.b	"MANIAC SAT WATCHING FUNNY SHORT CLIP",-1
 	dc.b	"AND COLONOSCOPY TUTORIALS ON HIS CRT",-1
-	dc.b	"HOOKED UP TO A FUCKING ROKU BOX",0
+	dc.b	"HOOKED UP TO A FUCKING ROKU BOX",-1
+	dc.b	"(it's how its intended to be viewed)",0
 	even
 
-StringTest:
-	dc.b	"GAYNIPPLES GAYNIPPLES GAYNIPPLES ",-1
-	dc.b	"GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES ",-1
-	dc.b	"GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES GAYNIPPLES ",0
-	even
 
 InitCutsceneData:
 	moveq	#0,d0
@@ -88,7 +99,7 @@ InitCutsceneData:
 ;	lsl.w	#4,d0
 	lea	CutsceneInitTbl,a0
 ;	add.w	d0,a0
-
+	move.b	(a0),stringtime
 	move.l	(a0)+,stringaddr
 
 	move.l	(a0)+,a1
@@ -97,8 +108,8 @@ InitCutsceneData:
 	move.l	(a0)+,a1
 	move.b	(a1)+,d1
 	move.b	(a1)+,d2
-	move.l	(a1)+,d0
-	jsr	TilemapToVRAM
+	move.w	(a1)+,d0
+	jsr	DrawTileMap_Addr
 
 	moveq	#0,d0
 	moveq	#0,d1
@@ -107,8 +118,8 @@ InitCutsceneData:
 	move.l	(a0)+,a1
 	move.b	(a1)+,d1
 	move.b	(a1)+,d2
-	move.l	(a1)+,d0
-	jsr	TilemapToVRAM
+	move.w	(a1)+,d0
+	jsr	DrawTileMap_Addr
 
 	moveq	#0,d0
 	move.b	cutsceneno,d0
@@ -131,10 +142,10 @@ InitCutsceneData:
 	rts
 
 CutsceneInitTbl:
-	dc.l	Str_ManiacIntro1
+	dc.l	Str_ManiacIntro1+(4<<24)
 	dc.l	ArtList_ManiacIntro1
 	dc.l	MapScr_ManiacIntro1A
-	dc.l	MapScr_ManiacIntro1A
+	dc.l	MapScr_ManiacIntro1B
 
 CutscenePalTbl:
 	dc.l	Pal_ManiacIntro1
@@ -142,7 +153,7 @@ CutscenePalTbl:
 ArtList_ManiacIntro1:
 	dc.l	Nem_ManiacIntro1A
 	dc.w	$0000
-	dc.l	Nem_ManiacIntro1A
+	dc.l	Nem_ManiacIntro1B
 	dc.w	$4000
 	dc.l	-1
 
@@ -230,6 +241,8 @@ PrintMsgTimed:
 	beq.s	.Break
 	add.w	d4,d3
 	move.w	d3,VDPDATA
+	move.w	#sfx_FCBlip,d0
+	jsr	QueueSound2.l
 	move.l	a0,stringaddr.w
 	add.w	#2,stringvram.w
 .Exit
@@ -238,9 +251,7 @@ PrintMsgTimed:
 	add.w	#$80,stringvramline.w
 	move.w	stringvramline.w,stringvram.w
 	move.l	a0,stringaddr.w
-	rts
 .Done:
-	subq.b	#4,submode.w
 	rts
 
 
@@ -287,16 +298,25 @@ Art_ASCII:	binclude	"_gamemode/cutscene/ASCII.BIN"
 Art_ASCIIE:
 
 Pal_ManiacIntro1:
-		binclude	"_gamemode/cutscene/data/maniaccutscene1.pal"
-		binclude	"_gamemode/cutscene/data/maniaccutscene1.pal"	; temp
-		binclude	"_gamemode/cutscene/data/maniaccutscene1.pal"
-		binclude	"_gamemode/cutscene/data/maniaccutscene1.pal"
+		binclude	"_gamemode/cutscene/data/maniaccutscene1.pal"	; the way i authored these was Very Tired Very Slow head so
+		binclude	"_gamemode/cutscene/data/maniaccutscene1b.pal"	; temp
+		dc.w		0	; bg color temp
 Nem_ManiacIntro1A:
 		binclude	"_gamemode/cutscene/data/maniaccutscene1.nem"
 		even
+Nem_ManiacIntro1B:
+		binclude	"_gamemode/cutscene/data/maniaccutscene1b.nem"
+		even
+
 MapScr_ManiacIntro1A:
-		dc.b	24-1,	20-1	; height, width
-		dc.l	$40000003
+		dc.b	24-1,	20-1	; width, height
+		dc.w	$C000
 		binclude	"_gamemode/cutscene/data/maniaccutscene1.map"
+		even
+
+MapScr_ManiacIntro1B:
+		dc.b	64-1,	20-1	; width, height
+		dc.w	$E000
+		binclude	"_gamemode/cutscene/data/maniaccutscene1b.map"
 		even
 Art_ASCIISZ = (Art_ASCIIE-Art_ASCII)
