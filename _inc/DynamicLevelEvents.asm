@@ -1029,17 +1029,16 @@ DLE_BSZx:	dc.w DLE_BSZ1-DLE_BSZx
 		dc.w DLE_BSZ2-DLE_BSZx
 		dc.w DLE_BSZ3-DLE_BSZx
 ; ===========================================================================
-DLE_BSZ1:
-        rts
 DLE_BSZ2:
 		rts
 
 DLE_BSZ3:;Damn fuck
+        rts
+DLE_BSZ1:
         moveq	#0,d0
 		move.b	(v_dle_routine).w,d0
 		move.w	DLE_SBZ1_Boss(pc,d0.w),d0
 		jmp	DLE_SBZ1_Boss(pc,d0.w)
-
 
 DLE_SBZ1_Boss:
 		dc.w DLE_SBZ1_PreBoss-DLE_SBZ1_Boss
