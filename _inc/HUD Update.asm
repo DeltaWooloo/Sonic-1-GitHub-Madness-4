@@ -219,7 +219,8 @@ loc_1C85E:
 ; End of function Hud_Base
 
 ; ===========================================================================
-Hud_TilesBase:	dc.b $FF, $FF, $FF, $FF, $FF, $FF, 0 
+Hud_TilesBase:	; dc.b $FF, $FF, $FF, $FF, $FF, $FF, 0	; GMZ - Commented
+		dc.b $FF, 0, 0, 0, 0, 0, 0	; GMZ - Start the score HUD with 6 zeroes
 Hud_TilesTIME:	dc.b 0, $C, 0, 0
 Hud_TilesZero:	dc.b $FF, $FF, 0
 Hud_TilesAMMO:	dc.b $1B, $2F, $E
