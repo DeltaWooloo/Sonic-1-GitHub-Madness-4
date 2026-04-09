@@ -31,7 +31,7 @@ BossDioMildanner:
 
 BossDioMildanner_SetFadeOut:
 		move.w	#0,(v_pal_dry+$40).w ; bg is black
-		move.w	#$600F,(v_pfade_start).w ; start position = $60; size = $10
+		move.w	#$500F,(v_pfade_start).w ; start position = $60; size = $10
 		move.b	#$15,$1A(a0)
 		addq.b	#2,	obRoutine(a0)
 BossDioMildanner_SetFadeOut_rts:
