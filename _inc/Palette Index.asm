@@ -61,5 +61,7 @@ palid_NGZ:		makePalEntry	Pal_NGZ,		v_palette_line_2
 palid_HARDWARE:		makePalEntry	Pal_HARDWARE,		v_palette_line_2
 palid_BSZ:		makePalEntry	Pal_BSZ,		v_palette_line_2
 palid_BTZ:		makePalEntry	Pal_BTZ,		v_palette_line_2
+palid_DioMildanner:	makePalEntry	Pal_DioMildanner,v_pal_dry+$20, $10	; KONO PALETTE SWAP DA!
+
 
 	even

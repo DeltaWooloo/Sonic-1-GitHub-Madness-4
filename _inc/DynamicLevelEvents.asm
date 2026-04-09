@@ -1019,7 +1019,80 @@ locret_VOMITCOOKIE:
 ; ---------------------------------------------------------------------------
 
 DLE_BSZ:
+		moveq	#0,d0
+		move.b	(v_act).w,d0
+		add.w	d0,d0
+		move.w	DLE_BSZx(pc,d0.w),d0
+		jmp	DLE_BSZx(pc,d0.w)
+; ===========================================================================
+DLE_BSZx:	dc.w DLE_BSZ1-DLE_BSZx
+		dc.w DLE_BSZ2-DLE_BSZx
+		dc.w DLE_BSZ3-DLE_BSZx
+; ===========================================================================
+DLE_BSZ1:
+        rts
+DLE_BSZ2:
 		rts
+
+DLE_BSZ3:;Damn fuck
+        moveq	#0,d0
+		move.b	(v_dle_routine).w,d0
+		move.w	DLE_SBZ1_Boss(pc,d0.w),d0
+		jmp	DLE_SBZ1_Boss(pc,d0.w)
+
+
+DLE_SBZ1_Boss:
+		dc.w DLE_SBZ1_PreBoss-DLE_SBZ1_Boss
+		dc.w DLE_SBZ1_Boss_Setup-DLE_SBZ1_Boss
+		dc.w DLE_SBZ1_return-DLE_SBZ1_Boss ; wait until palette fades in mildanner object
+		dc.w DLE_SBZ1_return-DLE_SBZ1_Boss
+		dc.w DLE_SBZ1_BossEnd-DLE_SBZ1_Boss
+		dc.w DLE_SBZ1_return-DLE_SBZ1_Boss
+DLE_SBZ1_PreBoss:
+		move.w	#$2700,(v_limitright1).w
+		move.w	#$2700,(v_limitright2).w
+		move.w	#$720,(v_limitbtm1).w
+		cmpi.w	#$1880,(v_screenposx).w
+		bcs.s	DLE_SBZ1_return
+		move.w	#$620,(v_limitbtm1).w
+		cmpi.w	#$2000,(v_screenposx).w
+		bcs.s	DLE_SBZ1_return
+		move.w	#$2A0,(v_limitbtm1).w
+
+		cmpi.w	#$2200,(v_screenposx).w
+		bcs.s	DLE_SBZ1_return
+
+		addq.b	#2,(v_dle_routine).w
+
+
+DLE_SBZ1_return:
+		rts
+DLE_SBZ1_BossEnd:
+		move.w	#$2700,(v_limitright1).w
+		move.w	#$2700,(v_limitright2).w
+		rts
+DLE_SBZ1_Boss_Setup:
+
+
+		move.w	#$2A0,(v_limitbtm1).w
+		move.w	#$2A0,(v_limitbtm2).w
+
+		move.w	#$2300-64,(v_limitright1).w
+		move.w	#$2300-64,(v_limitright2).w ; limit screen
+
+		move.w	#$2200,(v_limitleft1).w
+		move.w	#$2200,(v_limitleft2).w ; can't go back
+		addq.b	#2,(v_dle_routine).w
+
+		jsr	FindFreeObj
+		bne.s	.noobj
+		move.b	#$49,(a1) ; load boss
+		;turning the most useless ass object into the most useful
+	.noobj:
+		move.w	#bgm_Fade,d0
+		jsr PlaySound	; play boss music
+		move.w	#palid_DioMildanner,d0
+		jmp (PalLoad2).l
 ; ---------------------------------------------------------------------------
 ; BlueStone WIP
 ; ---------------------------------------------------------------------------

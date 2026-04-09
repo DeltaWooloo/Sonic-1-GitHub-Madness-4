@@ -2163,6 +2163,7 @@ PAL_NT:   bincludeEndMarker	"NMRTT/NM_PAL.bin"
 Pal_SonicRetro: bincludeEndMarker "LiquidSplashes/Rerto/Palette.bin"
 Pal_SonisRetro: bincludeEndMarker "LiquidSplashes/Rerto/PaletteSonis.bin"
 Pal_MenuText:		bincludeEndMarker	"palette/Menu Font.bin"
+Pal_DioMildanner:	bincludeEndMarker	"_incObj/DioMildanner/Palette.bin"
     even
 Pal_Black:		bincludeEndMarker	"palette/Black.bin"
 
@@ -6948,6 +6949,7 @@ Map_Plasma:	include	"_maps/Plasma Balls.asm"
 Map_Pri:	include	"_maps/Prison Capsule.asm"
 
 		include	"_incObj/sub ReactToItem.asm"
+		include "_incObj/DioMildanner/Mildanner.asm"
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to show the special stage layout

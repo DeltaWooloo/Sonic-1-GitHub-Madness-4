@@ -461,6 +461,8 @@ v_fg_scroll_flags_dup:	ds.w	1
 v_bg1_scroll_flags_dup:	ds.w	1
 v_bg2_scroll_flags_dup:	ds.w	1
 v_bg3_scroll_flags_dup:	ds.w	1
+Saved_music: equ $FFFFFFCB ; byte
+
 			ds.b 	1
 			ds.b	$43		; unused
 v_timingandscreenvariables_end:

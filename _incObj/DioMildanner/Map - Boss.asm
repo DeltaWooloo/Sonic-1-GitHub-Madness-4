@@ -1,21 +1,21 @@
-@internal:
-@internal_0: 	dc.w @internal_20-@internal
-@internal_2: 	dc.w @internal_5D-@internal
-@internal_4: 	dc.w @internal_A4-@internal
-@internal_6: 	dc.w @internal_E1-@internal
-@internal_8: 	dc.w @internal_123-@internal
-@internal_A: 	dc.w @internal_174-@internal
-@internal_C: 	dc.w @internal_1CF-@internal
-@internal_E: 	dc.w @internal_211-@internal
-@internal_10: 	dc.w @internal_23F-@internal
-@internal_12: 	dc.w @internal_281-@internal
-@internal_14: 	dc.w @internal_2C8-@internal
-@internal_16: 	dc.w @internal_30A-@internal
-@internal_18: 	dc.w @internal_36A-@internal
-@internal_1A: 	dc.w @internal_3CF-@internal
-@internal_1C: 	dc.w @internal_420-@internal
-@internal_1E: 	dc.w @internal_476-@internal
-@internal_20: 	dc.b $C
+.internal:
+.internal_0: 	dc.w .internal_20-.internal
+.internal_2: 	dc.w .internal_5D-.internal
+.internal_4: 	dc.w .internal_A4-.internal
+.internal_6: 	dc.w .internal_E1-.internal
+.internal_8: 	dc.w .internal_123-.internal
+.internal_A: 	dc.w .internal_174-.internal
+.internal_C: 	dc.w .internal_1CF-.internal
+.internal_E: 	dc.w .internal_211-.internal
+.internal_10: 	dc.w .internal_23F-.internal
+.internal_12: 	dc.w .internal_281-.internal
+.internal_14: 	dc.w .internal_2C8-.internal
+.internal_16: 	dc.w .internal_30A-.internal
+.internal_18: 	dc.w .internal_36A-.internal
+.internal_1A: 	dc.w .internal_3CF-.internal
+.internal_1C: 	dc.w .internal_420-.internal
+.internal_1E: 	dc.w .internal_476-.internal
+.internal_20: 	dc.b $C
 	dc.b $D4, $F, $0, $0, $E0
 	dc.b $CC, $C, $0, $10, $E8
 	dc.b $F4, $C, $0, $14, $E8
@@ -28,7 +28,7 @@
 	dc.b $2C, $1, $0, $47, $8
 	dc.b $FC, $2, $0, $49, $10
 	dc.b $E4, $5, $0, $4C, $18
-@internal_5D: 	dc.b $E
+.internal_5D: 	dc.b $E
 	dc.b $E2, $B, $0, $50, $FC
 	dc.b $EA, $7, $0, $5C, $EC
 	dc.b $EA, $3, $0, $64, $14
@@ -43,7 +43,7 @@
 	dc.b $2A, $1, $0, $94, $D4
 	dc.b $2A, $1, $0, $96, $14
 	dc.b $32, $4, $0, $98, $4
-@internal_A4: 	dc.b $C
+.internal_A4: 	dc.b $C
 	dc.b $D4, $F, $0, $9A, $E0
 	dc.b $CC, $C, $0, $AA, $E8
 	dc.b $F4, $C, $0, $AE, $E8
@@ -56,7 +56,7 @@
 	dc.b $2C, $1, $0, $E1, $8
 	dc.b $FC, $2, $0, $E3, $10
 	dc.b $E4, $5, $0, $E6, $18
-@internal_E1: 	dc.b $D
+.internal_E1: 	dc.b $D
 	dc.b $21, $C, $0, $EA, $E7
 	dc.b $31, $C, $0, $EE, $E7
 	dc.b $F1, $F, $0, $F2, $EF
@@ -70,7 +70,7 @@
 	dc.b $F1, $7, $1, $21, $F
 	dc.b $D9, $0, $1, $29, $17
 	dc.b $19, $0, $1, $2A, $17
-@internal_123: 	dc.b $10
+.internal_123: 	dc.b $10
 	dc.b $23, $6, $1, $2B, $C6
 	dc.b $1B, $C, $1, $31, $CE
 	dc.b $13, $C, $1, $35, $D6
@@ -87,7 +87,7 @@
 	dc.b $DB, $0, $1, $77, $1E
 	dc.b $FB, $2, $1, $78, $26
 	dc.b $EB, $2, $1, $7B, $2E
-@internal_174: 	dc.b $12
+.internal_174: 	dc.b $12
 	dc.b $E4, $F, $1, $7E, $1
 	dc.b $E4, $3, $1, $8E, $21
 	dc.b $EC, $3, $1, $92, $F9
@@ -106,7 +106,7 @@
 	dc.b $2C, $0, $1, $D0, $C9
 	dc.b $2C, $0, $1, $D1, $19
 	dc.b $2C, $0, $1, $D2, $29
-@internal_1CF: 	dc.b $D
+.internal_1CF: 	dc.b $D
 	dc.b $E3, $F, $1, $D3, $1
 	dc.b $EB, $3, $1, $E3, $F9
 	dc.b $EB, $3, $1, $E7, $21
@@ -120,7 +120,7 @@
 	dc.b $13, $1, $2, $E, $F1
 	dc.b $23, $C, $2, $10, $1
 	dc.b $2B, $5, $2, $14, $F9
-@internal_211: 	dc.b $9
+.internal_211: 	dc.b $9
 	dc.b $E7, $F, $2, $18, $F8
 	dc.b $EF, $A, $2, $28, $18
 	dc.b $F7, $3, $2, $31, $F0
@@ -130,7 +130,7 @@
 	dc.b $17, $2, $2, $4F, $F0
 	dc.b $1F, $6, $2, $52, $E0
 	dc.b $27, $8, $2, $58, $F8
-@internal_23F: 	dc.b $D
+.internal_23F: 	dc.b $D
 	dc.b $C6, $B, $2, $5B, $F5
 	dc.b $CE, $7, $2, $67, $E5
 	dc.b $DE, $3, $2, $6F, $DD
@@ -144,7 +144,7 @@
 	dc.b $E, $2, $2, $A6, $ED
 	dc.b $16, $1, $2, $A9, $E5
 	dc.b $26, $5, $2, $AB, $F5
-@internal_281: 	dc.b $E
+.internal_281: 	dc.b $E
 	dc.b $FF, $F, $2, $AF, $D8
 	dc.b $F7, $C, $2, $BF, $E0
 	dc.b $EF, $C, $2, $C3, $E8
@@ -159,7 +159,7 @@
 	dc.b $F, $3, $2, $E6, $10
 	dc.b $17, $2, $2, $EA, $18
 	dc.b $1F, $1, $2, $ED, $20
-@internal_2C8: 	dc.b $D
+.internal_2C8: 	dc.b $D
 	dc.b $E2, $C, $2, $EF, $D4
 	dc.b $DA, $4, $2, $F3, $DC
 	dc.b $EA, $E, $2, $F5, $DC
@@ -173,7 +173,7 @@
 	dc.b $A, $9, $3, $26, $4
 	dc.b $1A, $B, $3, $2C, $C
 	dc.b $2A, $0, $3, $38, $24
-@internal_30A: 	dc.b $13
+.internal_30A: 	dc.b $13
 	dc.b $CE, $D, $3, $39, $DC
 	dc.b $B6, $A, $3, $41, $E4
 	dc.b $DE, $C, $3, $4A, $E4
@@ -193,7 +193,7 @@
 	dc.b $F6, $1, $3, $93, $14
 	dc.b $E6, $0, $3, $95, $1C
 	dc.b $E, $0, $3, $96, $1C
-@internal_36A: 	dc.b $14
+.internal_36A: 	dc.b $14
 	dc.b $C4, $D, $3, $97, $DC
 	dc.b $BC, $C, $3, $9F, $E4
 	dc.b $D4, $D, $3, $A3, $E4
@@ -214,7 +214,7 @@
 	dc.b $AC, $1, $3, $F0, $14
 	dc.b $EC, $3, $3, $F2, $14
 	dc.b $B4, $0, $3, $F6, $1C
-@internal_3CF: 	dc.b $10
+.internal_3CF: 	dc.b $10
 	dc.b $A2, $F, $3, $F7, $F5
 	dc.b $AA, $3, $4, $7, $ED
 	dc.b $AA, $2, $4, $B, $15
@@ -231,7 +231,7 @@
 	dc.b $1A, $A, $4, $48, $ED
 	dc.b $22, $0, $4, $51, $E5
 	dc.b $32, $4, $4, $52, $F5
-@internal_420: 	dc.b $11
+.internal_420: 	dc.b $11
 	dc.b $CC, $A, $4, $54, $FB
 	dc.b $D4, $F, $4, $5D, $CB
 	dc.b $D4, $7, $4, $6D, $EB
@@ -249,7 +249,7 @@
 	dc.b $C, $7, $4, $A3, $3
 	dc.b $2C, $4, $4, $AB, $3
 	dc.b $34, $0, $4, $AD, $3
-@internal_476: 	dc.b $D
+.internal_476: 	dc.b $D
 	dc.b $CE, $F, $4, $AE, $E2
 	dc.b $CE, $5, $4, $BE, $2
 	dc.b $D6, $A, $4, $C2, $CA
@@ -264,3 +264,4 @@
 	dc.b $16, $7, $4, $F4, $2
 	dc.b $1E, $0, $4, $FC, $12
 	even
+	;poopy

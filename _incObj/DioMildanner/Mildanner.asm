@@ -67,7 +67,7 @@ BossDioMildanner_SetupBoss:
 		move.b	#1,obStatus(a0)
 
 		move.l	#Map_DioDanner_Intro,obMap(a0)
-		move.w	#$A331,obGfx(a0)
+		move.w	#$400,obGfx(a0)
 		move.b	#0,obFrame(a0)
 
 		; size initially is 20x40
@@ -132,12 +132,12 @@ BossDioMildanner_IntroMain:
 		jmp	(DisplaySprite).l
 	.loadboss:
 		move.l	#Map_DioDanner_Boss,obMap(a0)
-		move.w	#$A004,obGfx(a0)
+		move.w	#$80,obGfx(a0)
 		move.b	#0,obFrame(a0)
 		move.b	#0,obAnim(a0) ; @idle
 		subi.w	#34,obY(a0) ; go up due to size
 
-		move.b	#bgm_AtDoomsGate,d0
+		move.b	#bgm_Spoopy,d0
 		jsr	(PlaySound_Special)
 
 		; size initially is 20x40
@@ -431,7 +431,7 @@ DeadDioMildanner_AwaitPLCDead:
 
 		move.l	#Map_DioDanner_Dead,obMap(a0)
 		addq.b	#2,(v_dle_routine).w ; go to next screen routine
-		move.w	#$A09E,obGfx(a0)
+		move.w	#$700,obGfx(a0)
 		move.b	#0,obFrame(a0)
 		move.b	#0,obAnim(a0) ; @idle
 		addq.b	#2,obRoutine(a0)
@@ -442,7 +442,7 @@ DeadDioMildanner_AwaitPLCDead:
         bra.s	.boss_play
 
 .boss_invinc:
-        jsr (GetInvincibleMusic).l
+		move.w	#bgm_Invincible,d0
 
 .boss_play:
         jsr (PlaySound).l

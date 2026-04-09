@@ -821,6 +821,10 @@ ArtTile_SS_Zone_4:		equ $797
 ArtTile_SS_Zone_5:		equ $7A0
 ArtTile_SS_Zone_6:		equ $7A9
 
+;MILD danner
+FartDanner:		equ $400
+SudoAptInstall:		equ $80
+Mildfucker:		equ $700
 ; Special Stage Results
 ArtTile_SS_Results_Emeralds:	equ $541
 
