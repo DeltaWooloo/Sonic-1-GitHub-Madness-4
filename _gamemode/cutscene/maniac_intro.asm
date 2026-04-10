@@ -34,6 +34,15 @@ MmIntro_Init:
 	move.b	#20,stringtimer.w
 	addq.b	#1,subscene.w
 	move.w	#172,cameraAPosX.w
+        move.l #$40000002,VDPCTRL         ; Set VRAM write address
+        move.w  #(8*32)-1,d7
+
+.FillStatic:
+        jsr     RandomNumber
+        move.l  d0,VDPDATA
+        add.l   d0,d1
+        move.l  d1,VDPDATA
+        dbf     d7,.FillStatic
 	rts
 
 MmIntro_FadeIn:
@@ -41,10 +50,19 @@ MmIntro_FadeIn:
 	jmp	PalFadeIn
 
 MmIntro_Main:
+
+	; draw static tiles from VRAM generated earlier
+
+	move.l	#$62A40003,d3      		; d3 = initial address
+        move.w  #9-1,d4                    ; d4 = width / 2
+        move.w  #7-1,d5                        ; d5 = height
+        bsr.w	_beebushDrawStatic
+
 	sub.l	#$8500,cameraAPosX.w
 	tst.w	cameraAPosX.w
 	bne.s	.Exit
 	addq.b	#1,subscene.w
+
 .Exit:
 	rts
 
@@ -64,6 +82,30 @@ ScrollManiacIntro:
 	move.l	d0,(a1)+
 	dbf	d1,.WriteHScroll
 	rts
+
+; ---------------------------------------------------------------------------
+; Draw tilemap static for transitory sequences
+; Draws 2 "random" tiles out of a memory space location (document later idk)
+; ---------------------------------------------------------------------------
+
+_beebushDrawStatic:
+        lea     VDPDATA,a6                      ; a6 = VDPDATA        
+        move.l  #$800000,d6                     ; d6 = cmd row delta 
+
+.LoopRow:                              
+        move.l  d3,VDPCTRL-VDPDATA(a6)          ; set addr
+        move.w  d4,d7                           ; copy width to d7
+
+.LoopColumn:            
+        jsr     RandomNumber                    ; get rand
+        andi.w  #$003F,d0                       ; mask high bits of tile no.
+        ori.w   #$2200,d0                       ; set line 2 and id $1XX
+        move.w  d0,(a6)                         ; write 1 tile
+
+        dbf     d7,.LoopColumn                  ; loop for width
+        add.l   d6,d3                           ; move to next row
+        dbf     d5,.LoopRow                     ; loop for height
+        rts
 
 Str_ManiacIntro1:
 	dc.b	"MANIAC SAT WATCHING FUNNY SHORT CLIP",-1

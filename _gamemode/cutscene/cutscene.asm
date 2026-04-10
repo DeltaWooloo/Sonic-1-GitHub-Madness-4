@@ -83,7 +83,9 @@ VBLANK_CUTSCENE:
 	jsr	VBla_StandardTransfers
 	jmp	ProcessDPLC_9Tiles
 
-
+; ---------------------------------------------------------------------------
+; Cutscene Init code
+; ---------------------------------------------------------------------------
 
 
 InitCutsceneData:
@@ -92,13 +94,14 @@ InitCutsceneData:
 	moveq	#0,d2
 	move.w  #$AA84,stringvram.w
 	move.w	#$AA84,stringvramline.w
-;	move.b	cutsceneno,d0
-;	lsl.w	#4,d0
+	move.b	cutscene,d0
+	lsl.w	#4,d0
 	lea	CutsceneInitTbl,a0
-;	add.w	d0,a0
+	add.w	d0,a0
 	move.b	(a0),stringtime
 	move.l	(a0)+,stringaddr
 
+	moveq	#0,d0
 	move.b	(a0),d0
 	jsr	QueueSound2
 
