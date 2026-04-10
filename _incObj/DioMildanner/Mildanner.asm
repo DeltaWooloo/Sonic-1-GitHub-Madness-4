@@ -129,6 +129,7 @@ BossDioMildanner_IntroMain:
 	.ok2:
 		lea (DioDannerAni_Intro).l,a1
 		jsr	(AnimateSprite).l
+		;bsr.w	DioDanner_LoadGfx1
 		jmp	(DisplaySprite).l
 	.loadboss:
 		move.l	#Map_DioDanner_Boss,obMap(a0)
@@ -163,6 +164,7 @@ BossDioMildanner_AwaitPLCBoss:
 BossDioMildanner_Display_0:
 		lea (DioDannerAni_Boss).l,a1
 		jsr	(AnimateSprite).l
+		;bsr.w	DioDanner_LoadGfx2
 		jmp	(DisplaySprite).l
 
 ; ---------------------------------------------------------------------------
@@ -178,6 +180,7 @@ BossDioMildanner_BossMain:
 		bmi.s	.next_attack
 		lea (DioDannerAni_Boss).l,a1
 		jsr	(AnimateSprite).l
+		;bsr.w	DioDanner_LoadGfx2
 		jmp	(DisplaySprite).l
 
 	.next_attack:
@@ -199,6 +202,7 @@ BossDioMildanner_BossMain:
 BossDioMildanner_Display:
 		lea (DioDannerAni_Boss).l,a1
 		jsr	(AnimateSprite).l
+		;bsr.w	DioDanner_LoadGfx2
 		jmp	(DisplaySprite).l
 
 ; ---------------------------------------------------------------------------
@@ -450,6 +454,7 @@ DeadDioMildanner_AwaitPLCDead:
 DeadDioMildanner_Display:
 		lea (DioDannerAni_Dead).l,a1
 		jsr	(AnimateSprite).l
+		;bsr.w	DioDanner_LoadGfx3
 		jmp	(DisplaySprite).l
 
 ; ---------------------------------------------------------------------------
@@ -500,4 +505,46 @@ DioDannerAni_Boss: dc.w .idle-DioDannerAni_Boss
 DioDannerAni_Dead: dc.w .dead-DioDannerAni_Dead
 
 .dead:	dc.b 5,0,0,1,2,2,3,4,4,5,6,7,afBack,1
+
+		; Nano: Uncomment this after someone added a DPLC mapping for DioDanner.
+
+;DioDanner_LoadGfx1:
+;		move.b	obFrame(a0),d0			; get object's current frame
+;		cmp.b	objoff_38(a0),d0		; has the frame changed?
+;		beq.s	.end					; if not, nothing to do
+;		move.b	d0,objoff_38(a0)		; update cached frame number
+;		move.l	#DioDynPLC_Intro,a2		; load DPLC table
+;		move.w	#SudoAptInstall*tile_size,d4	; starting VRAM tile
+;		move.l	#Art_DioDanner_Intro,d6	; art pointer
+;		jmp	(LoadDynPLC).l				; load DPLC
+
+;.end:
+;		rts								; return
+	
+;DioDanner_LoadGfx2:
+;		move.b	obFrame(a0),d0			; get object's current frame
+;		cmp.b	objoff_38(a0),d0		; has the frame changed?
+;		beq.s	.end					; if not, nothing to do
+;		move.b	d0,objoff_38(a0)		; update cached frame number
+;		move.l	#DioDynPLC_Boss,a2		; load DPLC table
+;		move.w	#SudoAptInstall*tile_size,d4	; starting VRAM tile
+;		move.l	#Art_DioDanner_Boss,d6	; art pointer
+;		jmp	(LoadDynPLC).l				; load DPLC
+
+;.end:
+;		rts								; return
+	
+;DioDanner_LoadGfx3:
+;		move.b	obFrame(a0),d0			; get object's current frame
+;		cmp.b	objoff_38(a0),d0		; has the frame changed?
+;		beq.s	.end					; if not, nothing to do
+;		move.b	d0,objoff_38(a0)		; update cached frame number
+;		move.l	#DioDynPLC_Dead,a2		; load DPLC table
+;		move.w	#SudoAptInstall*tile_size,d4	; starting VRAM tile
+;		move.l	#Art_DioDanner_Dead,d6			; art pointer
+;		jmp	(LoadDynPLC).l				; load DPLC
+	
+;.end:
+;		rts								; return
+
 ;HOY FUCKING SHIT THAT TOOK SO LONG TO DO FUCKING AS UNO CONVERTO! - Dawid
