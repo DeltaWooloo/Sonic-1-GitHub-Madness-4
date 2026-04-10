@@ -98,6 +98,7 @@ Clinton_WinInit:
 	move.l	(a1)+,(a0)+
 
 Clinton_ShowScr:
+	moveq	#$1A,d7
 	jsr	PauseGame
 	move.b	#$1A,(v_vbla_routine).w
 	jsr	WaitForVBla

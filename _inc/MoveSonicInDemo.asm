@@ -35,6 +35,14 @@ DemoRecorder:
 ; ===========================================================================
 
 MDemo_On:
+		tst.w	(v_generictimer).w
+		bne.s	.timerend
+		move.w	#3,(f_restart).w			; trigger a fadeout to black
+		move.b	#id_Sega,(v_gamemode).w			; go to Sega screen
+		tst.w	(f_demo).w				; check if this demo is for the credits
+		bpl.s	.timerend
+		move.b	#id_Credits,(v_gamemode).w		; go to credits again during a credits demo
+.timerend:
 		tst.b	(v_jpadhold1).w	; is start button pressed?
 		bpl.s	.dontquit	; if not, branch
 		tst.w	(f_demo).w	; is this an ending sequence demo?

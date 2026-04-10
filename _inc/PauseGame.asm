@@ -1,12 +1,13 @@
 ; ---------------------------------------------------------------------------
 ; Subroutine to pause the game
+; INPUT
+; d7.b = vblank routine id
 ; ---------------------------------------------------------------------------
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 
 PauseGame:
-		nop	
 		tst.b	(v_lives).w	; do you have any lives left?
 		beq.s	Unpause		; if not, branch
 		tst.w	(f_pause).w	; is game already paused?
@@ -19,8 +20,10 @@ Pause_StopGame:
 		move.b	#1,(v_snddriver_ram.f_pausemusic).w ; pause music
 
 Pause_Loop:
-		move.b	#$10,(v_vbla_routine).w
+		move.b	d7,(v_vbla_routine).w
+		move.w	d7,-(sp)
 		bsr.w	WaitForVBla
+		move.w	(sp)+,d7
 		btst	#bitA,(v_jpadpress1).w ; is button A pressed?
 		beq.s	Pause_ChkBC	; if not, branch
 		if DickingAround=1

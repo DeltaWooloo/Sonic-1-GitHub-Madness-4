@@ -450,6 +450,7 @@ KillSonic:
 		move.w	#-$700,obVelY(a0)
 		move.w	#0,obVelX(a0)
 		move.w	#0,obInertia(a0)
+		move.b	#1,(f_nobgscroll).w
 	if FixBugs=0
 		; Leftover line from the prototype, where objoff_38 was used to respawn Sonic at his last y position.
 		; sticktoconvex gets overwritten with the high byte of Sonic's y position.

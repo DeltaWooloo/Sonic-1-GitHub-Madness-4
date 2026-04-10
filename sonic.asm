@@ -3061,6 +3061,8 @@ Level_StartGame:
 ; ---------------------------------------------------------------------------
 
 Level_MainLoop:
+.loop:
+		moveq	#8,d7			; VBla_08
 		bsr.w	PauseGame
 		move.b	#8,(v_vbla_routine).w
 		bsr.w	WaitForVBla
@@ -3068,17 +3070,24 @@ Level_MainLoop:
 		bsr.w	MoveSonicInDemo
 		bsr.w	LZWaterFeatures
 		jsr	(ExecuteObjects).l
-		tst.w	(f_restart).w
-		bne.w	Level_Restarted
-		tst.w	(v_debuguse).w	; is debug mode being used?
-		bne.s	Level_DoScroll	; if yes, branch
-		cmpi.b	#6,(v_player+obRoutine).w ; has Sonic just died?
-		bhs.s	Level_SkipScroll ; if yes, branch
-
-Level_DoScroll:
+; If you're getting a CHK error, you likely set f_restart without accounting for the -
+; - multiple restart routines below using an id system. That's not your fault, this is new.
+; Sorry for the inconvenience -VM
+		move.w	(f_restart).w,d0
+		chk	#4,d0
+		lsl.w	#2,d0
+		jmp	.reslut(pc,d0.w)
+.reslut:
+		bra.w	.norestart		; 0 ; uhh, dont
+		bra.w	.tradwife		; 1 ; traditional level restart
+		bra.w	.foxy			; 2 ; foxy
+		bra.w	.fadeout		; 3 ; fadeout and load gamemode
+		bra.w	.gamemode		; 4 ; load gamemode
+.foxy:
+		jsr	(GM_FoxyBoo).l
+		bra.w	GM_Level
+.norestart:
 		jsr	(DeformLayers).l
-
-Level_SkipScroll:
 		jsr	(BuildSprites).l
 		jsr	(ObjPosLoad).l
 		bsr.w	PaletteCycle
@@ -3086,47 +3095,22 @@ Level_SkipScroll:
 		bsr.w	OscillateNumDo
 		bsr.w	SynchroAnimate
 		bsr.w	SignpostArtLoad
-
-		cmpi.b	#id_Demo,(v_gamemode).w
-		beq.s	Level_ChkDemo	; if mode is 8 (demo), branch
-		cmpi.b	#id_Level,(v_gamemode).w
-		beq.w	Level_MainLoop	; if mode is $C (level), branch
+		move.b	(v_gamemode).w,d0			; load gamemode if the gamemode isn't a valid level id (compatibility)
+		cmp.b	#id_Level,d0
+		beq.w	.loop
+		cmp.b	#id_Demo,d0
+		beq.w	.loop
+.gamemode:
 		rts
-Level_Restarted:
-		cmpi.b	#id_Demo,(v_gamemode).w
-		beq.s	Level_EndDemo
-		cmpi.w	#2,(f_restart).w
-		bne.s	NotFoxy
-		jsr	(GM_FoxyBoo).l
-NotFoxy:
-		moveq	#0,d0
-		jsr	(Pow_vdp_fixRegs).l	;!@GD: Undo random monitor powerups (VDP register fuckery)
-		bra.w	GM_Level
-; ===========================================================================
-
-Level_ChkDemo:
-		tst.w	(v_generictimer).w ; is there time left on the demo?
-		beq.s	Level_EndDemo	; if not, branch
-		cmpi.b	#id_Demo,(v_gamemode).w
-		beq.w	Level_MainLoop	; if mode is 8 (demo), branch
-		move.b	#id_Sega,(v_gamemode).w ; go to Sega screen
-		rts
-; ===========================================================================
-
-Level_EndDemo:
-		cmpi.b	#id_Demo,(v_gamemode).w
-		bne.s	Level_FadeDemo	; if mode is 8 (demo), branch
-		move.b	#id_Sega,(v_gamemode).w ; go to Sega screen
-		tst.w	(f_demo).w	; is demo mode on & not ending sequence?
-		bpl.s	Level_FadeDemo	; if yes, branch
-		move.b	#id_Credits,(v_gamemode).w ; go to credits
-
-Level_FadeDemo:
+.tradwife:
+		tst.w	(f_demo).w				; do fadeout in demos (compatibility)
+		beq.w	GM_Level
+		move.b	#id_Sega,(v_gamemode).w
+.fadeout:
 		move.w	#60,(v_generictimer).w
 		move.w	#$3F,(v_pfade_start).w
 		clr.w	(v_palchgspeed).w
-
-Level_FDLoop:
+.fadeoutloop:
 		move.b	#8,(v_vbla_routine).w
 		bsr.w	WaitForVBla
 		bsr.w	MoveSonicInDemo
@@ -3134,13 +3118,12 @@ Level_FDLoop:
 		jsr	(BuildSprites).l
 		jsr	(ObjPosLoad).l
 		subq.w	#1,(v_palchgspeed).w
-		bpl.s	loc_3BC8
+		bpl.s	.nofadeupd
 		move.w	#2,(v_palchgspeed).w
 		bsr.w	FadeOut_ToBlack
-
-loc_3BC8:
+.nofadeupd:
 		tst.w	(v_generictimer).w
-		bne.s	Level_FDLoop
+		bne.s	.fadeoutloop
 		rts
 ; ===========================================================================
 
@@ -3228,6 +3211,7 @@ SynchroAnimate:
 		bne.s	.notyet
 		clr.l	(v_adverttimer).w			; play an advertisement
 		move.b	#id_Advert,(v_gamemode).w
+		move.w	#4,(f_restart).w
 	;	moveq	#1,d0					; TODO: need to differenciate the advert from the lamppost
 	;	lea	v_player,a0
 	;	jsr	Advert_StoreInfo
@@ -3385,6 +3369,7 @@ SS_NoDebug:
 ; ---------------------------------------------------------------------------
 
 SS_MainLoop:
+		moveq	#$A,d7			; VBla_0A
 		bsr.w	PauseGame
 		move.b	#$A,(v_vbla_routine).w
 		bsr.w	WaitForVBla
@@ -3462,6 +3447,7 @@ loc_47D4:
 		move.b	#id_SSResult,(v_ssrescard).w ; load results screen object
 
 SS_NormalExit:
+		moveq	#$C,d7			; VBla_0C
 		bsr.w	PauseGame
 		move.b	#$C,(v_vbla_routine).w
 		bsr.w	WaitForVBla
@@ -3933,6 +3919,7 @@ End_LoadSonic:
 ; ---------------------------------------------------------------------------
 
 End_MainLoop:
+		moveq	#$18,d7			; VBla_18
 		bsr.w	PauseGame
 		move.b	#$18,(v_vbla_routine).w
 		bsr.w	WaitForVBla
@@ -3964,6 +3951,7 @@ End_ChkEmerald:
 		clr.w	(v_palchgspeed).w
 
 End_AllEmlds:
+		moveq	#$18,d7			; VBla_18
 		bsr.w	PauseGame
 		move.b	#$18,(v_vbla_routine).w
 		bsr.w	WaitForVBla
@@ -4251,6 +4239,7 @@ TryAgainEnd:
 ; "TRY AGAIN" and "END" screen main loop
 ; ---------------------------------------------------------------------------
 TryAg_MainLoop:
+		moveq	#4,d7			; VBla_04
 		jsr	(PauseGame).w
 		move.b	#4,(v_vbla_routine).w
 		jsr	(WaitForVBla).w
