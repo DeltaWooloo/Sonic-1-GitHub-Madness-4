@@ -108,10 +108,10 @@ BGM_SHC_PSG2:
 
 BGM_SHC_Call03:
 	smpsNoteFill	$03
-	dc.b	nRst, $0C, nB3, $06, $06
-	dc.b	nRst, $0C, nB3, $06, $06
+	dc.b	nRst, $0C, nB3, $06, $12
+	dc.b	nB3, $06, $06
 	dc.b	nRst, nB3, nB3
-	dc.b	nRst, nB3, nB3, nRst, $0C
+	dc.b	nRst, nB3, nB3, $12
 	smpsNoteFill	$00
 	dc.b	nB3, $0C, nRst
 	smpsModSet	$0C, $01, $02, $05
