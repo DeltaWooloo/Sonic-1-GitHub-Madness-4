@@ -27,6 +27,7 @@ Cutscene_ManiacIntro:
 	bra.w	MmIntro_Init
 	bra.w	MmIntro_FadeIn
 	bra.w	MmIntro_Main
+	bra.w	MmIntro_Main.Exit
 	rts
 	nop
 
@@ -53,17 +54,16 @@ MmIntro_Main:
 
 	; draw static tiles from VRAM generated earlier
 
-	move.l	#$62A40003,d3      		; d3 = initial address
-        move.w  #9-1,d4                    ; d4 = width / 2
-        move.w  #7-1,d5                        ; d5 = height
-        bsr.w	_beebushDrawStatic
-
 	sub.l	#$8500,cameraAPosX.w
 	tst.w	cameraAPosX.w
 	bne.s	.Exit
 	addq.b	#1,subscene.w
 
 .Exit:
+	move.l	#$62A40003,d3      		; d3 = initial address
+        move.w  #9-1,d4                    ; d4 = width / 2
+        move.w  #7-1,d5                        ; d5 = height
+        bsr.w	_beebushDrawStatic
 	rts
 
 ScrollManiacIntro:
@@ -99,7 +99,7 @@ _beebushDrawStatic:
 .LoopColumn:            
         jsr     RandomNumber                    ; get rand
         andi.w  #$003F,d0                       ; mask high bits of tile no.
-        ori.w   #$2200,d0                       ; set line 2 and id $1XX
+        ori.w   #$2400,d0                       ; set line 2 and id $1XX
         move.w  d0,(a6)                         ; write 1 tile
 
         dbf     d7,.LoopColumn                  ; loop for width
