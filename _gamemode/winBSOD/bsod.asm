@@ -301,8 +301,14 @@ BSOD_table:	; seconds, seconds to skip, art, map, palette, SMPS sound ID, MPCM s
 		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gen_ntscj.fg,	bsod_gen_ntscj.bg,	bsod_gen_ntscj.pal,	TCLR(1,0),	bgm_gen,		dBSOD
 		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscuj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gen_ntscuj.fg,	bsod_gen_ntscuj.bg,	bsod_gen_ntscuj.pal,TCLR(1,0),	bgm_gen,		dBSOD
 		bsodData		sec_gen,	secSkip_gen,	bsod_gen_pal.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gen_pal.fg,	bsod_gen_pal.bg,	bsod_gen_pal.pal,	TCLR(1,0),	bgm_gen,		dBSOD
-		;Sonic CD/Sega CD-based
+		;Sonic CD-based
 		bsodData		sec_CD,		secSkip_CD,		bsod_scdm.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scdm.fg,		bsod_scdm.bg,		bsod_scdm.pal,		TCLR(0,0),	bgm_VirusAlert,	dVirus
+		bsodData		sec_CD,		secSkip_CD,		bsod_scd1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd1.fg,		bsod_scd1.bg,		bsod_scd1.pal,		TCLR(0,0),	bgm_Hidden,		dLetsGOO	; CYA/Tails
+		bsodData		sec_CD,		secSkip_CD,		bsod_scd2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd2.fg,		bsod_scd2.bg,		bsod_scd2.pal,		TCLR(0,0),	bgm_Title,		dYoFreddy	; DJ
+		bsodData		sec_CD,		secSkip_CD,		bsod_scd3.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd3.fg,		bsod_scd3.bg,		bsod_scd3.pal,		TCLR(0,0),	bgm_BatMan,		dOnTheBall	; Batman; Y So Serious?
+		bsodData		sec_CD,		secSkip_CD,		bsod_scd4.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd4.fg,		bsod_scd4.bg,		bsod_scd4.pal,		TCLR(0,0),	bgm_LG,			dLetsGOO	; Cute Sonic
+		bsodData		sec_CD,		secSkip_CD,		bsod_scd5.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd5.fg,		bsod_scd5.bg,		bsod_scd5.pal,		TCLR(0,0),	bgm_DJKK,		dTwerkOf87	; Fun is Infinite
+		;Sega CD-based
 		bsodData		sec_CD,		secSkip_CD,		bsod_scd_ntscu.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd_ntscu.fg,	bsod_scd_ntscu.bg,	bsod_scd_ntscu.pal,	TCLR(1,0),	bgm_scd,		dBSOD
 		bsodData		sec_CD,		secSkip_CD,		bsod_scd_ntscj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd_ntscj.fg,	bsod_scd_ntscj.bg,	bsod_scd_ntscj.pal,	TCLR(1,0),	bgm_scd,		dBSOD
 		bsodData		sec_CD,		secSkip_CD,		bsod_scd_pale.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd_pale.fg,	bsod_scd_pale.bg,	bsod_scd_pale.pal,	TCLR(1,0),	bgm_scd,		dBSOD
@@ -398,6 +404,47 @@ bsod_scdm:
 			even
 .pal:		binclude "_gamemode/winBSOD/bsod_scdm-pal.bin"
 			even
+			
+bsod_scd1:
+.art1:
+			binclude "_gamemode/winBSOD/bsod_scd1-art.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_scd1-mapFG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_scd1-pal.bin"
+			even
+bsod_scd2:
+.art1:
+			binclude "_gamemode/winBSOD/bsod_scd2-art.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_scd2-mapFG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_scd2-pal.bin"
+			even
+bsod_scd3:
+.art1:
+			binclude "_gamemode/winBSOD/bsod_scd3-art.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_scd3-mapFG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_scd3-pal.bin"
+			even
+bsod_scd4:
+.art1:
+			binclude "_gamemode/winBSOD/bsod_scd4-art.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_scd4-mapFG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_scd4-pal.bin"
+			even
+bsod_scd5:
+.art1:
+			binclude "_gamemode/winBSOD/bsod_scd5-art.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_scd5-mapFG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_scd5-pal.bin"
+			even
 
 bsod_scd_ntscj:
 .fg:		binclude "_gamemode/winBSOD/bsod_scd_ntscj-mapFG.eni"
@@ -452,6 +499,11 @@ bsod_gen_ntscj.bg:
 bsod_gen_ntscuj.bg:	
 bsod_gen_pal.bg:	
 bsod_scdm.bg:
+bsod_scd1.bg:
+bsod_scd2.bg:
+bsod_scd3.bg:
+bsod_scd4.bg:
+bsod_scd5.bg:
 bsod_scd_ntscu.bg:	
 bsod_scd_ntscj.bg:	
 bsod_scd_pale.bg:	
