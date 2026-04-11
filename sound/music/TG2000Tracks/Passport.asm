@@ -17,11 +17,7 @@ Passport_Header:
 	smpsHeaderPSG	Passport_PSG3,	$0C, $00, $00, $00
 
 Passport_Voices:
-;	PSG Voice 00 -> PassTone1
-;	macros:
-;		vol: 15 13 10 8 7 6 4 3 2 1 1 0
-
-;	FM Voice 01 -> 00: 04_funkotronic_beat_8
+;	FM Voice 00 -> 00: 04_funkotronic_beat_8
 	smpsVcAlgorithm		$02
 	smpsVcFeedback		$04
 	smpsVcDetune		$00, $00, $00, $00
@@ -35,7 +31,7 @@ Passport_Voices:
 	smpsVcReleaseRate	$09, $00, $0F, $09
 	smpsVcTotalLevel	$00, $42, $16, $16
 
-;	FM Voice 02 -> 01: Slap Bass #3
+;	FM Voice 01 -> 01: Slap Bass #3
 	smpsVcAlgorithm		$02
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $03, $00, $07
@@ -49,63 +45,7 @@ Passport_Voices:
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$00, $17, $23, $20
 
-;	FM Voice 03 -> 02: 01_toejam_jammin_6
-	smpsVcAlgorithm		$02
-	smpsVcFeedback		$04
-	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$01, $07, $0A, $01
-	smpsVcRateScale		$02, $03, $03, $03
-	smpsVcAttackRate	$1F, $1F, $1F, $18
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$07, $06, $08, $05
-	smpsVcDecayRate2	$06, $00, $00, $00
-	smpsVcDecayLevel	$02, $05, $02, $02
-	smpsVcReleaseRate	$09, $00, $0F, $09
-	smpsVcTotalLevel	$00, $42, $15, $1B
-
-;	FM Voice 04 -> 03: 04_funkotronic_beat_8
-	smpsVcAlgorithm		$02
-	smpsVcFeedback		$04
-	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$01, $06, $0A, $00
-	smpsVcRateScale		$02, $03, $03, $03
-	smpsVcAttackRate	$1F, $1F, $1F, $18
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$07, $06, $08, $05
-	smpsVcDecayRate2	$06, $00, $00, $00
-	smpsVcDecayLevel	$02, $05, $02, $02
-	smpsVcReleaseRate	$09, $00, $0F, $09
-	smpsVcTotalLevel	$00, $42, $16, $23
-
-;	FM Voice 05 -> 04: 05__Chemical_Plant_Zone_60
-	smpsVcAlgorithm		$03
-	smpsVcFeedback		$00
-	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$01, $01, $06, $07
-	smpsVcRateScale		$03, $00, $00, $03
-	smpsVcAttackRate	$1F, $1F, $1F, $1F
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$03, $09, $00, $0C
-	smpsVcDecayRate2	$01, $00, $00, $0F
-	smpsVcDecayLevel	$05, $05, $00, $0F
-	smpsVcReleaseRate	$0C, $05, $03, $03
-	smpsVcTotalLevel	$11, $29, $24, $25
-
-;	FM Voice 06 -> 05: 04_funkotronic_beat_8
-	smpsVcAlgorithm		$02
-	smpsVcFeedback		$04
-	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$01, $06, $0A, $00
-	smpsVcRateScale		$02, $03, $03, $03
-	smpsVcAttackRate	$1F, $1F, $1F, $1F
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$07, $06, $08, $05
-	smpsVcDecayRate2	$06, $00, $00, $00
-	smpsVcDecayLevel	$02, $05, $02, $02
-	smpsVcReleaseRate	$09, $00, $0F, $09
-	smpsVcTotalLevel	$00, $42, $16, $23
-
-;	FM Voice 07 -> 06: Bosco-lead
+;	FM Voice 06 -> 06: Bosco-lead
 	smpsVcAlgorithm		$06
 	smpsVcFeedback		$05
 	smpsVcDetune		$03, $07, $03, $07
@@ -119,7 +59,7 @@ Passport_Voices:
 	smpsVcReleaseRate	$06, $06, $06, $06
 	smpsVcTotalLevel	$0C, $2C, $1C, $14
 
-;	FM Voice 08 -> 07: E.piano #3
+;	FM Voice 07 -> 07: E.piano #3
 	smpsVcAlgorithm		$04
 	smpsVcFeedback		$07
 	smpsVcDetune		$07, $07, $03, $03
@@ -133,15 +73,7 @@ Passport_Voices:
 	smpsVcReleaseRate	$07, $03, $07, $03
 	smpsVcTotalLevel	$03, $2C, $00, $29
 
-;	PSG Voice 09 -> PassTone2
-;	macros:
-;		vol: 15 14 13 13 12 11 11 10 9 8 8 7 7 6 6 5 5 4 3 2 1 0
-
-;	PSG Voice 0A -> PassTone3
-;	macros:
-;		vol: 15 15 15 15 15 15 14 14 14 14 14 14 14 14 14 14 13 13 13 13 13 13 13 13 12 12 12 12 12 12 11 11
-
-;	FM Voice 0B -> 08: Clarinet #1
+;	FM Voice 08 -> 08: Clarinet #1
 	smpsVcAlgorithm		$03
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $00, $00, $00
@@ -155,35 +87,7 @@ Passport_Voices:
 	smpsVcReleaseRate	$08, $08, $04, $07
 	smpsVcTotalLevel	$00, $26, $2A, $23
 
-;	FM Voice 0C -> 09: Digital 4 o4a
-	smpsVcAlgorithm		$04
-	smpsVcFeedback		$00
-	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$06, $09, $03, $09
-	smpsVcRateScale		$00, $00, $00, $00
-	smpsVcAttackRate	$1F, $1F, $1F, $1F
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$1F, $1F, $1F, $1F
-	smpsVcDecayRate2	$00, $00, $00, $00
-	smpsVcDecayLevel	$00, $00, $00, $00
-	smpsVcReleaseRate	$0D, $0D, $0D, $00
-	smpsVcTotalLevel	$06, $0F, $03, $3D
-
-;	FM Voice 0D -> 0A: Digital 4 o4a
-	smpsVcAlgorithm		$05
-	smpsVcFeedback		$00
-	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$06, $09, $03, $09
-	smpsVcRateScale		$00, $00, $00, $00
-	smpsVcAttackRate	$1F, $1F, $1F, $1F
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$1F, $1F, $1F, $1F
-	smpsVcDecayRate2	$00, $00, $00, $00
-	smpsVcDecayLevel	$00, $00, $00, $00
-	smpsVcReleaseRate	$0D, $0D, $0D, $00
-	smpsVcTotalLevel	$06, $0F, $03, $3D
-
-;	FM Voice 0E -> 0B: Slap Bass 1
+;	FM Voice 0B -> 0B: Slap Bass 1
 	smpsVcAlgorithm		$02
 	smpsVcFeedback		$07
 	smpsVcDetune		$03, $03, $07, $07
@@ -197,7 +101,7 @@ Passport_Voices:
 	smpsVcReleaseRate	$07, $07, $07, $08
 	smpsVcTotalLevel	$00, $28, $12, $21
 
-;	FM Voice 0F -> 0C: 14_invincibility_1
+;	FM Voice 0C -> 0C: 14_invincibility_1
 	smpsVcAlgorithm		$02
 	smpsVcFeedback		$07
 	smpsVcDetune		$03, $01, $03, $06
@@ -211,11 +115,7 @@ Passport_Voices:
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$07, $31, $47, $21
 
-;	PSG Voice 10 -> PassTone4
-;	macros:
-;		vol: 15 15 11 11 11 11 11 11 11 11 11 11
-
-;	FM Voice 11 -> 0D: 04_spring_yard_zone_42
+;	FM Voice 0D -> 0D: 04_spring_yard_zone_42
 	smpsVcAlgorithm		$04
 	smpsVcFeedback		$07
 	smpsVcDetune		$03, $05, $05, $03
@@ -229,7 +129,7 @@ Passport_Voices:
 	smpsVcReleaseRate	$07, $00, $07, $00
 	smpsVcTotalLevel	$07, $16, $11, $1A
 
-;	FM Voice 12 -> 0E: Old flute
+;	FM Voice 0E -> 0E: Old flute
 	smpsVcAlgorithm		$02
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $00, $00, $00
@@ -243,21 +143,7 @@ Passport_Voices:
 	smpsVcReleaseRate	$0E, $0E, $0E, $0E
 	smpsVcTotalLevel	$00, $32, $2D, $32
 
-;	FM Voice 13 -> 0F: 01_title_theme_1
-	smpsVcAlgorithm		$02
-	smpsVcFeedback		$07
-	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$01, $01, $07, $01
-	smpsVcRateScale		$01, $02, $02, $02
-	smpsVcAttackRate	$13, $0D, $0E, $0E
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$03, $0E, $0E, $0E
-	smpsVcDecayRate2	$00, $00, $00, $00
-	smpsVcDecayLevel	$00, $01, $0F, $01
-	smpsVcReleaseRate	$0F, $0F, $0F, $0F
-	smpsVcTotalLevel	$06, $27, $28, $18
-
-;	FM Voice 14 -> 10: 01_toejam_jammin_6
+;	FM Voice 10 -> 10: 01_toejam_jammin_6
 	smpsVcAlgorithm		$00
 	smpsVcFeedback		$04
 	smpsVcDetune		$00, $00, $00, $00
@@ -271,21 +157,7 @@ Passport_Voices:
 	smpsVcReleaseRate	$06, $00, $0F, $09
 	smpsVcTotalLevel	$00, $42, $15, $1B
 
-;	FM Voice 15 -> 11: 01_toejam_jammin_6
-	smpsVcAlgorithm		$00
-	smpsVcFeedback		$04
-	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$01, $07, $0A, $01
-	smpsVcRateScale		$02, $03, $03, $03
-	smpsVcAttackRate	$1F, $1F, $1F, $18
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$07, $06, $08, $05
-	smpsVcDecayRate2	$06, $00, $00, $00
-	smpsVcDecayLevel	$02, $05, $02, $02
-	smpsVcReleaseRate	$02, $00, $0F, $09
-	smpsVcTotalLevel	$00, $42, $15, $1B
-
-;	FM Voice 16 -> 12: 01_title_theme_1
+;	FM Voice 12 -> 12: 01_title_theme_1
 	smpsVcAlgorithm		$03
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $00, $00, $00
@@ -298,6 +170,22 @@ Passport_Voices:
 	smpsVcDecayLevel	$00, $01, $0F, $01
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$07, $27, $28, $18
+
+;	PSG Voice 00 -> PassTone1
+;	macros:
+;		vol: 15 13 10 8 7 6 4 3 2 1 1 0
+
+;	PSG Voice 01 -> PassTone2
+;	macros:
+;		vol: 15 14 13 13 12 11 11 10 9 8 8 7 7 6 6 5 5 4 3 2 1 0
+
+;	PSG Voice 02 -> PassTone3
+;	macros:
+;		vol: 15 15 15 15 15 15 14 14 14 14 14 14 14 14 14 14 13 13 13 13 13 13 13 13 12 12 12 12 12 12 11 11
+
+;	PSG Voice 03 -> PassTone4
+;	macros:
+;		vol: 15 15 11 11 11 11 11 11 11 11 11 11
 
 	; Loop Pattern :  00
 	; End Pattern :  2B
@@ -379,48 +267,48 @@ Passport_FM1_03_0_64:
 	smpsReturn
 
 Passport_FM1_04_0_64:
-	smpsSetvoice	$0C
+	smpsSetvoice	$06
 	dc.b nF2, $18, nRst, $04, nAb2, $0C, nRst, $04, nBb2, $0C, nRst, $04, nF2
 	smpsReturn
 
 Passport_FM1_05_0_64:
 	dc.b smpsNoAttack, $24
-	smpsSetvoice	$0C
+	smpsSetvoice	$06
 	dc.b nC3, $02, nRst, nDs3, $04, nRst, nDs3, nF3, nRst, nC3
 	smpsReturn
 
 Passport_FM1_06_0_64:
-	smpsSetvoice	$0C
+	smpsSetvoice	$06
 	dc.b nF2, $18, nRst, $04, nAb2, $0C, nRst, $04, nBb2, $0A, nRst, $02, nC3, nRst, nF2, $04
 	smpsReturn
 
 Passport_FM1_07_0_64:
 	dc.b smpsNoAttack, $20, nRst, $04
-	smpsSetvoice	$0C
+	smpsSetvoice	$06
 	dc.b nG2, $02, nRst, nAb2, $04, nBb2, $02, nRst, nC3, $04, nD3, $02, nRst, nDs3, $04, nF3
 	dc.b $02, nRst
 	smpsReturn
 
 Passport_FM1_08_0_64:
-	smpsSetvoice	$0C
+	smpsSetvoice	$06
 	dc.b nF2, $18, nRst, $04, nAb2, $0C, nRst, $04, nBb2, $0C, nRst, $04, nF2
 	smpsReturn
 
 Passport_FM1_09_0_64:
 	dc.b smpsNoAttack, $24
-	smpsSetvoice	$0C
+	smpsSetvoice	$06
 	dc.b nC3, $02, nRst, nDs3, $04, nG3, $02, nRst, nF3, $04, nDs3, $02, nRst, nC3, $04, nF2
 	smpsReturn
 
 Passport_FM1_0A_0_64:
 	dc.b smpsNoAttack, $18, nRst, $04
-	smpsSetvoice	$0C
+	smpsSetvoice	$06
 	dc.b nAb2, $0C, nRst, $04, nBb2, $0C, nRst, $02, $02, nF2, $04
 	smpsReturn
 
 Passport_FM1_0B_0_64:
 	dc.b smpsNoAttack, $24
-	smpsSetvoice	$0C
+	smpsSetvoice	$06
 	dc.b nF3, $04, nF2, nFs2, $02, nRst, nG2, $04, nG3, $02, nRst, nG2, $08
 	smpsReturn
 
@@ -475,12 +363,12 @@ Passport_FM1_13_0_64:
 Passport_FM1_14_0_64:
 	smpsSetvoice	$01
 	dc.b nC3, $02, nRst, nC3, $04, nRst, nC3, $02, nRst, nG2, $04, nRst, nBb2, nRst, nRst, $08
-	smpsSetvoice	$10
+	smpsSetvoice	$09
 	dc.b nFs5, $01, $01, nRst, $0A, nFs5, $01, $01, nRst, $0A
 	smpsReturn
 
 Passport_FM1_15_0_64:
-	smpsSetvoice	$10
+	smpsSetvoice	$09
 	dc.b nF5, $01, nFs5, $0B, $01, $01, nRst, $0A, nFs5, $01, $01, nRst, $06
 	smpsSetvoice	$01
 	dc.b nG2, $08, nRst, $04, nBb2, $08, nRst, $04, nDs3, $08
@@ -500,13 +388,13 @@ Passport_FM1_17_0_64:
 Passport_FM1_18_0_64:
 	smpsSetvoice	$01
 	dc.b nC3, $02, nRst, nC3, $04, nRst, nC3, $02, nRst, nG2, $04, nRst, nBb2, nRst, nRst, $08
-	smpsSetvoice	$12
+	smpsSetvoice	$0A
 	dc.b nFs5, $01, nG5, $0F, nBb5, $02, nRst, nFs5, $04
 	smpsReturn
 
 Passport_FM1_19_0_64:
 	dc.b smpsNoAttack, $04
-	smpsSetvoice	$12
+	smpsSetvoice	$0A
 	dc.b nDs5, $02, nRst, nC5, $04, nRst, nDs5, $0C, nF5, $04, nRst, $18
 	smpsSetvoice	$01
 	dc.b nG2, $02, nRst, nBb2, $04
@@ -599,48 +487,48 @@ Passport_FM2_03_0_64:
 	smpsReturn
 
 Passport_FM2_04_0_64:
-	smpsSetvoice	$0B
+	smpsSetvoice	$05
 	dc.b nF2, $18, nRst, $04, nAb2, $0C, nRst, $04, nBb2, $0C, nRst, $04, nF2
 	smpsReturn
 
 Passport_FM2_05_0_64:
 	dc.b smpsNoAttack, $24
-	smpsSetvoice	$0B
+	smpsSetvoice	$05
 	dc.b nC3, $02, nRst, nDs3, $04, nRst, nDs3, nF3, nRst, nC3
 	smpsReturn
 
 Passport_FM2_06_0_64:
-	smpsSetvoice	$0B
+	smpsSetvoice	$05
 	dc.b nF2, $18, nRst, $04, nAb2, $0C, nRst, $04, nBb2, $0A, nRst, $02, nC3, nRst, nF2, $04
 	smpsReturn
 
 Passport_FM2_07_0_64:
 	dc.b smpsNoAttack, $20, nRst, $04
-	smpsSetvoice	$0B
+	smpsSetvoice	$05
 	dc.b nG2, $02, nRst, nAb2, $04, nBb2, $02, nRst, nC3, $04, nD3, $02, nRst, nDs3, $04, nF3
 	dc.b $02, nRst
 	smpsReturn
 
 Passport_FM2_08_0_64:
-	smpsSetvoice	$0B
+	smpsSetvoice	$05
 	dc.b nF2, $18, nRst, $04, nAb2, $0C, nRst, $04, nBb2, $0C, nRst, $04, nF2
 	smpsReturn
 
 Passport_FM2_09_0_64:
 	dc.b smpsNoAttack, $24
-	smpsSetvoice	$0B
+	smpsSetvoice	$05
 	dc.b nC3, $02, nRst, nDs3, $04, nG3, $02, nRst, nF3, $04, nDs3, $02, nRst, nC3, $04, nF2
 	smpsReturn
 
 Passport_FM2_0A_0_64:
 	dc.b smpsNoAttack, $18, nRst, $04
-	smpsSetvoice	$0B
+	smpsSetvoice	$05
 	dc.b nAb2, $0C, nRst, $04, nBb2, $0C, nRst, $02, $02, nF2, $04
 	smpsReturn
 
 Passport_FM2_0B_0_64:
 	dc.b smpsNoAttack, $24
-	smpsSetvoice	$0B
+	smpsSetvoice	$05
 	dc.b nF3, $04, nF2, nFs2, $02, nRst, nG2, $04, nG3, $02, nRst, nG2, $08
 	smpsReturn
 
@@ -695,12 +583,12 @@ Passport_FM2_13_0_64:
 Passport_FM2_14_0_64:
 	smpsSetvoice	$00
 	dc.b nC2, $02, nRst, nC2, $04, nRst, nC2, $02, nRst, nG1, $04, nRst, nBb1, nRst, nRst, $08
-	smpsSetvoice	$10
+	smpsSetvoice	$09
 	dc.b nF5, $02, nRst, $0A, nF5, $02, nRst, $0A
 	smpsReturn
 
 Passport_FM2_15_0_64:
-	smpsSetvoice	$10
+	smpsSetvoice	$09
 	dc.b nF5, $0C, $02, nRst, $0A, nF5, $02, nRst, $06
 	smpsSetvoice	$00
 	dc.b nG1, $08, nRst, $04, nBb1, $08, nRst, $04, nDs2, $08
@@ -720,13 +608,13 @@ Passport_FM2_17_0_64:
 Passport_FM2_18_0_64:
 	smpsSetvoice	$00
 	dc.b nC2, $02, nRst, nC2, $04, nRst, nC2, $02, nRst, nG1, $04, nRst, nBb1, nRst, nRst, $08
-	smpsSetvoice	$12
+	smpsSetvoice	$0A
 	dc.b nFs5, $01, nG5, $0F, nBb5, $02, nRst, nFs5, $04
 	smpsReturn
 
 Passport_FM2_19_0_64:
 	dc.b smpsNoAttack, $04
-	smpsSetvoice	$12
+	smpsSetvoice	$0A
 	dc.b nDs5, $02, nRst, nC5, $04, nRst, nDs5, $0C, nF5, $04, nRst, $18
 	smpsSetvoice	$00
 	dc.b nG1, $02, nRst, nBb1, $04
@@ -799,136 +687,136 @@ Passport_FM3_00_0_64:
 	smpsReturn
 
 Passport_FM3_01_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	smpsPan		panRight, $00
 	dc.b nF4, $08, nRst, $04, nD4, $08, nRst, $04, nDs4, $24, nRst, $04
 	smpsReturn
 
 Passport_FM3_02_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nD4, $08, nRst, $04, nBb3, $08, nRst, nG3, $20, nRst, $04
 	smpsReturn
 
 Passport_FM3_03_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nF4, $08, nRst, $04, nD4, $08, nRst, $04, nDs4, $14, nRst, $04, nC4, nRst, nDs4, nRst
 	smpsReturn
 
 Passport_FM3_04_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nD4, $08, nRst, $04, nBb3, $08, nRst, nG3, $20, nRst, $04
 	smpsReturn
 
 Passport_FM3_05_0_64:
-	smpsSetvoice	$0E
+	smpsSetvoice	$08
 	smpsPan		panCenter, $00
 	dc.b nDs4, $01, nF4, $37, nRst, $04, nFs4, $01, nG4, $03
 	smpsReturn
 
 Passport_FM3_06_0_64:
 	dc.b smpsNoAttack, $04
-	smpsSetvoice	$0E
+	smpsSetvoice	$08
 	dc.b nF4, $02, nRst, $06, nDs4, $08, nF4, $02, nRst, $06, nC4, $18, nDs4, $02, nRst, $01
 	dc.b $01, $04, nDs4, $01, nF4, $03
 	smpsReturn
 
 Passport_FM3_07_0_64:
 	dc.b smpsNoAttack, $38, nRst, $04
-	smpsSetvoice	$0E
+	smpsSetvoice	$08
 	dc.b nG4, $01, nBb4, $03
 	smpsReturn
 
 Passport_FM3_08_0_64:
 	dc.b smpsNoAttack, $04
-	smpsSetvoice	$0E
+	smpsSetvoice	$08
 	dc.b nG4, $02, nRst, $06, nF4, $08, nDs4, $02, nRst, $06, nC4, $0C, nRst, $04, nDs4, nRst
 	dc.b nG4, nDs4, $02, nRst, nF4, $04
 	smpsReturn
 
 Passport_FM3_09_0_64:
 	dc.b smpsNoAttack, $38, nRst, $04
-	smpsSetvoice	$0E
+	smpsSetvoice	$08
 	dc.b nDs4, $01, nF4, $03
 	smpsReturn
 
 Passport_FM3_0A_0_64:
 	dc.b smpsNoAttack, $04
-	smpsSetvoice	$0E
+	smpsSetvoice	$08
 	dc.b nG4, $02, nRst, $06, nDs4, $08, nF4, $02, nRst, $06, nC4, $14, nBb3, $02, nRst, nC4
 	dc.b nRst, nDs4, nRst, nF4, $04
 	smpsReturn
 
 Passport_FM3_0B_0_64:
 	dc.b smpsNoAttack, $38, nRst, $04
-	smpsSetvoice	$0E
+	smpsSetvoice	$08
 	dc.b nBb4, $01, nC5, $03
 	smpsReturn
 
 Passport_FM3_0C_0_64:
 	dc.b smpsNoAttack, $04
-	smpsSetvoice	$0E
+	smpsSetvoice	$08
 	dc.b nG4, $02, nRst, $06, nF4, $08, nDs4, $02, nRst, $06, nC4, nRst, $02, nBb3, nRst, nG3
 	dc.b nRst, nFs3, nRst, nF3, nRst, nDs3, nRst, nC3, nRst, nBb2, nRst
 	smpsReturn
 
 Passport_FM3_0D_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	smpsPan		panRight, $00
 	dc.b nF4, $08, nRst, $04, nD4, $08, nRst, $04, nDs4, $24, nRst, $04
 	smpsReturn
 
 Passport_FM3_0E_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nD4, $08, nRst, $04, nBb3, $08, nRst, nG3, $20, nRst, $04
 	smpsReturn
 
 Passport_FM3_0F_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nF4, $08, nRst, $04, nD4, $08, nRst, $04, nDs4, $14, nRst, $04, nC4, nRst, nDs4, nRst
 	smpsReturn
 
 Passport_FM3_10_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nD4, $08, nRst, $04, nBb3, $08, nRst, nG3, $20, nRst, $04
 	smpsReturn
 
 Passport_FM3_11_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nF4, $08, nRst, $04, nD4, $08, nRst, $04, nDs4, $24, nRst, $04
 	smpsReturn
 
 Passport_FM3_12_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nD4, $08, nRst, $04, nBb3, $08, nRst, nG3, $20, nRst, $04
 	smpsReturn
 
 Passport_FM3_13_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nF4, $08, nRst, $04, nD4, $08, nRst, $04, nDs4, $14, nRst, $04, nC4, nRst, nDs4, nRst
 	smpsReturn
 
 Passport_FM3_14_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nD4, $08, nRst, $04, nBb3, $08, nRst, nG3, $20, nRst, $04
 	smpsReturn
 
 Passport_FM3_15_0_64:
-	smpsSetvoice	$0C
+	smpsSetvoice	$06
 	dc.b nC3, $02, nRst, nC3, $04, nRst, nC3, $02, nRst, nG2, $04, nRst, nBb2, $08, nRst, $01
 	dc.b $07
-	smpsSetvoice	$10
+	smpsSetvoice	$09
 	dc.b nC6, $02, nRst, $0A, nC6, $02, nRst, $0A
 	smpsReturn
 
 Passport_FM3_16_0_64:
-	smpsSetvoice	$10
+	smpsSetvoice	$09
 	dc.b nC6, $0C, $02, nRst, $0A, nC6, $02, nRst, $06
-	smpsSetvoice	$0C
+	smpsSetvoice	$06
 	dc.b nG2, $08, nRst, $04, nBb2, $08, nRst, $04, nDs3, $08
 	smpsReturn
 
 Passport_FM3_17_0_64:
-	smpsSetvoice	$0C
+	smpsSetvoice	$06
 	dc.b nC3, $02, nRst, nC3, $04, nRst, nC3, $02, nRst, nG2, $04, nRst, nFs2, $08, nRst, $01
 	dc.b $1F
 	smpsReturn
@@ -938,7 +826,7 @@ Passport_FM3_18_0_64:
 	smpsReturn
 
 Passport_FM3_19_0_64:
-	smpsSetvoice	$0D
+	smpsSetvoice	$07
 	dc.b nC4, $02, nRst, nC4, $04, nRst, nC4, $02, nRst, nG3, $04, nRst, nBb3, $08, nRst, $01
 	dc.b $1F
 	smpsReturn
@@ -950,7 +838,7 @@ Passport_FM3_1A_0_64_78:
 	smpsReturn
 
 Passport_FM3_1B_0_64:
-	smpsSetvoice	$0D
+	smpsSetvoice	$07
 	dc.b nC6, $02, nRst, nC6, $04, nRst, nC6, $02, nRst, nG5, $04, nRst, nBb5, $08, nRst, $04
 	dc.b nBb5, nRst, nBb5, nF5, $06, nRst, $02, nFs5, $08
 	smpsReturn
@@ -1016,7 +904,7 @@ Passport_FM4_00_0_64:
 	smpsReturn
 
 Passport_FM4_01_0_64_7F:
-	smpsSetvoice	$06
+	smpsSetvoice	$02
 	dc.b nBb6, $04
 	smpsAlterVol	$03
 	dc.b nG6
@@ -1049,7 +937,7 @@ Passport_FM4_01_0_64_7F:
 	smpsReturn
 
 Passport_FM4_01_0_64:
-	smpsSetvoice	$06
+	smpsSetvoice	$02
 	smpsAlterVol	$F6
 	dc.b nBb6, $04
 	smpsAlterVol	$03
@@ -1083,22 +971,22 @@ Passport_FM4_01_0_64:
 	smpsReturn
 
 Passport_FM4_02_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nBb3, $08, nRst, $04, nBb3, $08, nRst, $04, nAb3, $24, nRst, $04
 	smpsReturn
 
 Passport_FM4_03_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nG3, $08, nRst, $04, nDs3, $08, nRst, nF3, $20, nRst, $04
 	smpsReturn
 
 Passport_FM4_04_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nBb3, $08, nRst, $04, nBb3, $08, nRst, $04, nAb3, $14, nRst, $04, nF3, nRst, nAb3, nRst
 	smpsReturn
 
 Passport_FM4_05_0_64:
-	smpsSetvoice	$08
+	smpsSetvoice	$04
 	dc.b nFs5, $01, nG5, $0B, nC6, $02, nRst, nRst, $08, nF5
 	smpsModSet	$02, $01, $02, $03
 	dc.b smpsNoAttack, $0E, nRst, $02
@@ -1107,7 +995,7 @@ Passport_FM4_05_0_64:
 	smpsReturn
 
 Passport_FM4_06_0_64:
-	smpsSetvoice	$08
+	smpsSetvoice	$04
 	dc.b nD5, $08
 	smpsModSet	$02, $01, $02, $03
 	dc.b smpsNoAttack, $04
@@ -1118,19 +1006,19 @@ Passport_FM4_06_0_64:
 
 Passport_FM4_07_0_64:
 	dc.b smpsNoAttack, $04, nRst, $08
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nBb3, nRst, $04, nAb3, $14, nRst, $04, nF3, nRst, nAb3, nRst
 	smpsReturn
 
 Passport_FM4_08_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nG3, $08, nRst, $04, nDs3, $08, nRst, nD3, $1C
-	smpsSetvoice	$08
+	smpsSetvoice	$04
 	dc.b nC5, $02, nRst, $01, $01, nC5, $02, nRst, $01, $01
 	smpsReturn
 
 Passport_FM4_09_0_64:
-	smpsSetvoice	$08
+	smpsSetvoice	$04
 	dc.b nFs5, $01, nG5, $0B, nC6, $02, nRst, nRst, $08, nF5
 	smpsModSet	$02, $01, $02, $03
 	dc.b smpsNoAttack, $0E, nRst, $02
@@ -1139,7 +1027,7 @@ Passport_FM4_09_0_64:
 	smpsReturn
 
 Passport_FM4_0A_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nG3, $08, nRst, $04, nDs3, $08, nRst, nD3, $20, nRst, $04
 	smpsReturn
 
@@ -1147,7 +1035,7 @@ Passport_FM4_0B_0_64_75:
 	smpsPan		panCenter, $00
 	smpsAlterVol	$FC
 	dc.b smpsNoAttack, $0C
-	smpsSetvoice	$0D
+	smpsSetvoice	$07
 	dc.b nAb5, $04, nRst, nG5, $02, nRst, nF5, $28
 	smpsReturn
 
@@ -1157,7 +1045,7 @@ Passport_FM4_0C_0_64:
 
 Passport_FM4_0D_0_64:
 	dc.b nRst, $14
-	smpsSetvoice	$0D
+	smpsSetvoice	$07
 	dc.b nC5, $02, nRst, nDs5, $04, nRst, nF5, $08, nRst, $04, nF5, nRst, $10
 	smpsReturn
 
@@ -1167,7 +1055,7 @@ Passport_FM4_0E_0_64:
 
 Passport_FM4_0F_0_64:
 	dc.b smpsNoAttack, $0C
-	smpsSetvoice	$0D
+	smpsSetvoice	$07
 	dc.b nAb5, $04, nRst, nBb5, nRst, nD5, $24
 	smpsReturn
 
@@ -1177,20 +1065,20 @@ Passport_FM4_10_0_64:
 
 Passport_FM4_11_0_64:
 	dc.b nRst, $10
-	smpsSetvoice	$0D
+	smpsSetvoice	$07
 	dc.b nC5, $04, nRst, nDs5, nRst, nF5, $02, nRst, nG5, nRst, nDs5, nRst, $06, nF5, $02, nRst
 	dc.b nG5, nRst, nDs5, nRst, nF5, nRst
 	smpsReturn
 
 Passport_FM4_12_0_64:
 	dc.b nRst, $04
-	smpsSetvoice	$0D
+	smpsSetvoice	$07
 	dc.b nDs5, $02, nRst, nF5, nRst, nG5, nRst, nBb5, nRst, nG5, nRst, nBb5, nRst, nC6, nRst, nBb5
 	dc.b nRst, nG5, nRst, nBb5, nRst, nC6, nRst, nD6, nRst, nC6, nRst, nBb5, nRst, nG5, nRst
 	smpsReturn
 
 Passport_FM4_13_0_64:
-	smpsSetvoice	$08
+	smpsSetvoice	$04
 	dc.b nFs5, $01, nG5, $0B, nC6, $02, nRst, nRst, $08, nF5
 	smpsModSet	$02, $01, $02, $03
 	dc.b smpsNoAttack, $0E, nRst, $02
@@ -1199,7 +1087,7 @@ Passport_FM4_13_0_64:
 	smpsReturn
 
 Passport_FM4_14_0_64:
-	smpsSetvoice	$08
+	smpsSetvoice	$04
 	dc.b nD5, $08
 	smpsModSet	$02, $01, $02, $03
 	dc.b smpsNoAttack, $04
@@ -1209,54 +1097,54 @@ Passport_FM4_14_0_64:
 	smpsReturn
 
 Passport_FM4_16_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nG3, $08, nRst, $04, nDs3, $08, nRst, nD3, $1C
-	smpsSetvoice	$08
+	smpsSetvoice	$04
 	dc.b nC5, $02, nRst, $01, $01, nC5, $02, nRst, $01, $01
 	smpsReturn
 
 Passport_FM4_17_0_64:
-	smpsSetvoice	$08
+	smpsSetvoice	$04
 	dc.b nFs5, $01, nG5, $0B, nC6, $02, nRst, nRst, $08, nF5, $16, nRst, $02, nC5, nRst, nD5
 	dc.b nRst, nDs5, nRst, $01, $01, nC5, $02, nRst
 	smpsReturn
 
 Passport_FM4_18_0_64:
-	smpsSetvoice	$08
+	smpsSetvoice	$04
 	dc.b nD5, $0C, nFs4, $01, nG4, $0B, nRst, $04, nBb4, $0C, nFs4, $03, nRst, $05, nF4, $03
 	dc.b nRst, $01, nDs4, $03, nRst, $01, nC4, $03, nRst, $01, nDs4, $04
 	smpsReturn
 
 Passport_FM4_1A_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nG3, $08, nRst, $04, nDs3, $08, nRst, nD3, $20, nRst, $04
 	smpsReturn
 
 Passport_FM4_1B_0_64:
-	smpsSetvoice	$0B
+	smpsSetvoice	$05
 	dc.b nC3, $02, nRst, nC3, $04, nRst, nC3, $02, nRst, nG2, $04, nRst, nBb2, $08, nRst, $01
 	dc.b $1F
 	smpsReturn
 
 Passport_FM4_1C_0_64:
 	dc.b smpsNoAttack, $20
-	smpsSetvoice	$0B
+	smpsSetvoice	$05
 	dc.b nG2, $08, nRst, $04, nBb2, $08, nRst, $04, nDs3, $08
 	smpsReturn
 
 Passport_FM4_1D_0_64:
-	smpsSetvoice	$0B
+	smpsSetvoice	$05
 	dc.b nC3, $02, nRst, nC3, $04, nRst, nC3, $02, nRst, nG2, $04, nRst, nFs2, $08, nRst, $01
 	dc.b $1F
 	smpsReturn
 
 Passport_FM4_1E_0_64:
-	smpsSetvoice	$0D
+	smpsSetvoice	$07
 	dc.b smpsNoAttack, $28, nG2, $08, nRst, $04, nBb2, $08, nRst, $04
 	smpsReturn
 
 Passport_FM4_1F_0_64:
-	smpsSetvoice	$0D
+	smpsSetvoice	$07
 	dc.b nC3, $02, nRst, nC3, $04, nRst, nC3, $02, nRst, nG2, $04, nRst, nBb2, $08, nRst, $01
 	dc.b $1F
 	smpsReturn
@@ -1268,7 +1156,7 @@ Passport_FM4_20_0_64_79:
 	smpsReturn
 
 Passport_FM4_21_0_64:
-	smpsSetvoice	$0D
+	smpsSetvoice	$07
 	dc.b nC5, $02, nRst, nC5, $04, nRst, nC5, $02, nRst, nG4, $04, nRst, nBb4, $08, nRst, $04
 	dc.b nBb4, nRst, nBb4, nF4, $06, nRst, $02, nFs4, $08
 	smpsReturn
@@ -1335,34 +1223,34 @@ Passport_FM5_00_0_64:
 
 Passport_FM5_01_0_64:
 	dc.b smpsNoAttack, $04
-	smpsSetvoice	$06
+	smpsSetvoice	$02
 	dc.b nBb6, nG6, nC7, nG6, nD7, nG6, nG6, nF6, $08, $04, nBb6, nF6, nC7, nG6, nG6
 	smpsReturn
 
 Passport_FM5_02_0_64_6A:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	smpsPan		panLeft, $00
 	smpsAlterVol	$F2
 	dc.b nA4, $08, nRst, $04, nF4, $08, nRst, $04, nG4, $24, nRst, $04
 	smpsReturn
 
 Passport_FM5_03_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nF4, $08, nRst, $04, nD4, $08, nRst, nC4, $20, nRst, $04
 	smpsReturn
 
 Passport_FM5_04_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nA4, $08, nRst, $04, nF4, $08, nRst, $04, nG4, $14, nRst, $04, nDs4, nRst, nG4, nRst
 	smpsReturn
 
 Passport_FM5_02_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nA4, $08, nRst, $04, nF4, $08, nRst, $04, nG4, $24, nRst, $04
 	smpsReturn
 
 Passport_FM5_05_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nF4, $08, nRst, $04, nD4, $08, nRst, nF4, $20, nRst, $04
 	smpsReturn
 
@@ -1370,7 +1258,7 @@ Passport_FM5_06_0_64_78:
 	smpsPan		panCenter, $00
 	smpsAlterVol	$FF
 	dc.b smpsNoAttack, $0C
-	smpsSetvoice	$0D
+	smpsSetvoice	$07
 	dc.b nC5, $04, nRst, nDs5, $02, nRst, nC5, $28
 	smpsReturn
 
@@ -1380,7 +1268,7 @@ Passport_FM5_07_0_64:
 
 Passport_FM5_08_0_64:
 	dc.b nRst, $14
-	smpsSetvoice	$0D
+	smpsSetvoice	$07
 	dc.b nC6, $02, nRst, nDs6, $04, nRst, nF6, $08, nRst, $04, nF6, nRst, $10
 	smpsReturn
 
@@ -1390,7 +1278,7 @@ Passport_FM5_09_0_64:
 
 Passport_FM5_0A_0_64:
 	dc.b smpsNoAttack, $0C
-	smpsSetvoice	$0D
+	smpsSetvoice	$07
 	dc.b nC5, $04, nRst, nD5, nRst, nG5, $24
 	smpsReturn
 
@@ -1400,74 +1288,74 @@ Passport_FM5_0B_0_64:
 
 Passport_FM5_0C_0_64:
 	dc.b nRst, $10
-	smpsSetvoice	$0D
+	smpsSetvoice	$07
 	dc.b nC6, $04, nRst, nDs6, nRst, nF6, $02, nRst, nG6, nRst, nDs6, nRst, $06, nF6, $02, nRst
 	dc.b nG6, nRst, nDs6, nRst, nF6, nRst
 	smpsReturn
 
 Passport_FM5_0D_0_64:
 	dc.b nRst, $04
-	smpsSetvoice	$0D
+	smpsSetvoice	$07
 	dc.b nDs6, $02, nRst, nF6, nRst, nG6, nRst, nBb6, nRst, nG6, nRst, nBb6, nRst, nC7, nRst, nBb6
 	dc.b nRst, nG6, nRst, nBb6, nRst, nC7, nRst, nD7, nRst, nC7, nRst, nBb6, nRst, nG6, nRst
 	smpsReturn
 
 Passport_FM5_0E_0_64_79:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	smpsPan		panLeft, $00
 	smpsAlterVol	$01
 	dc.b nA4, $08, nRst, $04, nF4, $08, nRst, $04, nG4, $24, nRst, $04
 	smpsReturn
 
 Passport_FM5_0F_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nF4, $08, nRst, $04, nD4, $08, nRst, nC4, $20, nRst, $04
 	smpsReturn
 
 Passport_FM5_10_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nA4, $08, nRst, $04, nF4, $08, nRst, $04, nG4, $14, nRst, $04, nDs4, nRst, nG4, nRst
 	smpsReturn
 
 Passport_FM5_11_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nF4, $08, nRst, $04, nD4, $08, nRst, nF4, $20, nRst, $04
 	smpsReturn
 
 Passport_FM5_12_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nA4, $08, nRst, $04, nF4, $08, nRst, $04, nG4, $24, nRst, $04
 	smpsReturn
 
 Passport_FM5_13_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nF4, $08, nRst, $04, nD4, $08, nRst, nC4, $20, nRst, $04
 	smpsReturn
 
 Passport_FM5_14_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nA4, $08, nRst, $04, nF4, $08, nRst, $04, nG4, $14, nRst, $04, nDs4, nRst, nG4, nRst
 	smpsReturn
 
 Passport_FM5_15_0_64:
-	smpsSetvoice	$07
+	smpsSetvoice	$03
 	dc.b nF4, $08, nRst, $04, nD4, $08, nRst, nF4, $20, nRst, $04
 	smpsReturn
 
 Passport_FM5_16_0_64:
-	smpsSetvoice	$06
+	smpsSetvoice	$02
 	smpsPan		panCenter, $00
 	dc.b nC3, $02, nRst, nC3, $04, nRst, nC3, $02, nRst, nG2, $04, nRst, nBb2, nRst, $24
 	smpsReturn
 
 Passport_FM5_17_0_64:
 	dc.b smpsNoAttack, $20
-	smpsSetvoice	$06
+	smpsSetvoice	$02
 	dc.b nG2, $08, nRst, $04, nBb2, $08, nRst, $04, nDs3, $08
 	smpsReturn
 
 Passport_FM5_18_0_64:
-	smpsSetvoice	$06
+	smpsSetvoice	$02
 	dc.b nC3, $02, nRst, nC3, $04, nRst, nC3, $02, nRst, nG2, $04, nRst, nFs2, nRst, $24
 	smpsReturn
 
@@ -1477,12 +1365,12 @@ Passport_FM5_19_0_64:
 
 Passport_FM5_1A_0_64:
 	dc.b smpsNoAttack, $38
-	smpsSetvoice	$06
+	smpsSetvoice	$02
 	dc.b nG3, $02, nRst, nBb3, $04
 	smpsReturn
 
 Passport_FM5_1B_0_64:
-	smpsSetvoice	$06
+	smpsSetvoice	$02
 	dc.b nC4, $02, nRst, nC4, $04, nRst, nC4, $02, nRst, nG3, $04, nRst, nBb3, nRst, $08, nBb3
 	dc.b $04, nRst, nBb3, nF3, nRst, nFs3, $08
 	smpsReturn

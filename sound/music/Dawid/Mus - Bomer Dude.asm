@@ -1,7 +1,7 @@
 BGM_BomerDude_Header:
 	smpsHeaderStartSong 1, 1
 	smpsHeaderVoice     BGM_BomerDude_Voices
-	smpsHeaderChan      $07, $03
+	smpsHeaderChan      $05, $00
 	smpsHeaderTempo     $01, $00
 
 	smpsHeaderDAC       BGM_BomerDude_DAC,	$00, $F2
@@ -9,21 +9,6 @@ BGM_BomerDude_Header:
 	smpsHeaderFM        BGM_BomerDude_FM2,	$00, $00
 	smpsHeaderFM        BGM_BomerDude_FM3,	$00, $00
 	smpsHeaderFM        BGM_BomerDude_FM4,	$00, $00
-	smpsHeaderFM        BGM_BomerDude_FM5,	$00, $00
-	smpsHeaderFM        BGM_BomerDude_FM6,	$00, $00
-	smpsHeaderPSG       BGM_BomerDude_PSG1,	$00, $00, $00, $00
-	smpsHeaderPSG       BGM_BomerDude_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       BGM_BomerDude_PSG3,	$00, $00, $00, $00
-
-; DAC Data
-BGM_BomerDude_DAC:
-; PSG1 Data
-BGM_BomerDude_PSG1:
-; PSG2 Data
-BGM_BomerDude_PSG2:
-; PSG3 Data
-BGM_BomerDude_PSG3:
-	smpsStop
 
 ; FM1 Data
 BGM_BomerDude_FM1:
@@ -110,6 +95,9 @@ BGM_BomerDude_FM1:
 	dc.b	nRst, $19, nB1, $06, nRst, $05, nB1, $07, nRst, $04, nB1, $07
 	dc.b	nRst, $03, nB1, $07, nRst, $19, nB1, $06, nRst, $05, nB1, $06
 	dc.b	nRst, $05, nB1, $07, nRst, $03, nB1, $06, nRst, $03
+
+; DAC Data
+BGM_BomerDude_DAC:
 	smpsStop
 
 ; FM2 Data
@@ -328,26 +316,6 @@ BGM_BomerDude_FM4:
 	dc.b	$20, nRst, $01, nB3, $04, nRst, $11, nDs4, $0A, nRst, $01, nFs3
 	dc.b	$08, nRst, $17, nFs3, $38, nRst, $08, nE3, $05, nRst, $11, nFs3
 	dc.b	$07, nRst, $03, nDs3, $09
-	smpsStop
-
-; FM5 Data
-BGM_BomerDude_FM5:
-	smpsPan             panCenter, $00
-	dc.b	nRst, $0A
-	smpsSetvoice        $04
-	dc.b	smpsNoAttack, nRst, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
-	dc.b	$7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
-	dc.b	$7F, $7F, $7F, $7F, $7F, $22
-	smpsStop
-
-; FM6 Data
-BGM_BomerDude_FM6:
-	smpsPan             panCenter, $00
-	dc.b	nRst, $0A
-	smpsSetvoice        $05
-	dc.b	smpsNoAttack, nRst, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
-	dc.b	$7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F, $7F
-	dc.b	$7F, $7F, $7F, $7F, $7F, $22
 	smpsStop
 
 BGM_BomerDude_Voices:

@@ -59,35 +59,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$07, $1D, $1B, $23
 
-;	FM Voice 03 -> 03: 29__special_stage_93
-	smpsVcAlgorithm		$02
-	smpsVcFeedback		$07
-	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$01, $01, $07, $01
-	smpsVcRateScale		$01, $02, $02, $02
-	smpsVcAttackRate	$13, $0D, $0E, $0E
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$00, $0E, $0E, $0E
-	smpsVcDecayRate2	$04, $00, $00, $00
-	smpsVcDecayLevel	$00, $01, $0F, $01
-	smpsVcReleaseRate	$0F, $0F, $0F, $0F
-	smpsVcTotalLevel	$07, $27, $28, $18
-
-;	FM Voice 04 -> 04: 29__special_stage_92
-	smpsVcAlgorithm		$02
-	smpsVcFeedback		$07
-	smpsVcDetune		$03, $03, $03, $03
-	smpsVcCoarseFreq	$01, $01, $07, $01
-	smpsVcRateScale		$01, $02, $02, $02
-	smpsVcAttackRate	$13, $0E, $0D, $0D
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$03, $0E, $0E, $0E
-	smpsVcDecayRate2	$00, $00, $00, $00
-	smpsVcDecayLevel	$00, $01, $0F, $01
-	smpsVcReleaseRate	$0A, $03, $0A, $03
-	smpsVcTotalLevel	$0E, $26, $28, $17
-
-;	FM Voice 05 -> 05: 29__special_stage_88
+;	FM Voice 03 -> 03: 29__special_stage_88
 	smpsVcAlgorithm		$02
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $00, $00, $00
@@ -101,7 +73,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$05, $27, $28, $18
 
-;	FM Voice 06 -> 06: 29__Special_Stage_58
+;	FM Voice 04 -> 04: 29__Special_Stage_58
 	smpsVcAlgorithm		$05
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $05, $02, $00
@@ -115,35 +87,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0B, $0B, $0B, $0B
 	smpsVcTotalLevel	$0E, $0E, $0E, $19
 
-;	FM Voice 07 -> 07: 26__emerald_hill_2_player_75
-	smpsVcAlgorithm		$02
-	smpsVcFeedback		$00
-	smpsVcDetune		$03, $07, $07, $07
-	smpsVcCoarseFreq	$01, $03, $01, $05
-	smpsVcRateScale		$02, $02, $01, $00
-	smpsVcAttackRate	$1F, $16, $18, $1F
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$08, $03, $1B, $01
-	smpsVcDecayRate2	$05, $01, $04, $01
-	smpsVcDecayLevel	$02, $03, $02, $0F
-	smpsVcReleaseRate	$0F, $0F, $0F, $0F
-	smpsVcTotalLevel	$09, $30, $29, $24
-
-;	FM Voice 08 -> 08: 26__emerald_hill_2_player_73
-	smpsVcAlgorithm		$00
-	smpsVcFeedback		$04
-	smpsVcDetune		$06, $06, $06, $06
-	smpsVcCoarseFreq	$00, $00, $05, $06
-	smpsVcRateScale		$00, $02, $03, $03
-	smpsVcAttackRate	$1F, $1F, $1F, $1F
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$0C, $09, $06, $00
-	smpsVcDecayRate2	$08, $06, $06, $07
-	smpsVcDecayLevel	$0F, $01, $01, $02
-	smpsVcReleaseRate	$0F, $0F, $0F, $0F
-	smpsVcTotalLevel	$09, $16, $3A, $1C
-
-;	FM Voice 09 -> 09: 26__Emerald_Hill_2_Player_72
+;	FM Voice 05 -> 05: 26__Emerald_Hill_2_Player_72
 	smpsVcAlgorithm		$02
 	smpsVcFeedback		$00
 	smpsVcDetune		$00, $00, $05, $00
@@ -157,7 +101,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$00, $1D, $2A, $16
 
-;	FM Voice 0A -> 0A: 03__emerald_hill_zone_109
+;	FM Voice 06 -> 06: 03__emerald_hill_zone_109
 	smpsVcAlgorithm		$07
 	smpsVcFeedback		$00
 	smpsVcDetune		$00, $00, $00, $00
@@ -171,7 +115,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$04, $05, $05, $05
 	smpsVcTotalLevel	$09, $14, $14, $14
 
-;	FM Voice 0B -> 0B: 03__Emerald_Hill_Zone_108
+;	FM Voice 07 -> 07: 03__Emerald_Hill_Zone_108
 	smpsVcAlgorithm		$03
 	smpsVcFeedback		$07
 	smpsVcDetune		$05, $03, $03, $05
@@ -185,7 +129,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$07, $07, $07, $07
 	smpsVcTotalLevel	$05, $1D, $18, $1C
 
-;	FM Voice 0C -> 0C: 03__emerald_hill_zone_107
+;	FM Voice 08 -> 08: 03__emerald_hill_zone_107
 	smpsVcAlgorithm		$05
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $00, $00, $00
@@ -199,7 +143,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$0B, $1D, $1D, $1A
 
-;	FM Voice 0D -> 0D: 03__emerald_hill_zone_106
+;	FM Voice 09 -> 09: 03__emerald_hill_zone_106
 	smpsVcAlgorithm		$05
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $05, $02, $00
@@ -213,7 +157,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$08, $08, $08, $06
 	smpsVcTotalLevel	$06, $13, $13, $19
 
-;	FM Voice 0E -> 0E: 03__Emerald_Hill_Zone_105
+;	FM Voice 0A -> 0A: 03__Emerald_Hill_Zone_105
 	smpsVcAlgorithm		$03
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $03, $03, $00
@@ -227,43 +171,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$07, $03, $03, $03
 	smpsVcTotalLevel	$0B, $28, $28, $1E
 
-;	FM Voice 0F -> 0F: 03_marble_zone_52
-	smpsVcAlgorithm		$02
-	smpsVcFeedback		$00
-	smpsVcDetune		$05, $05, $03, $03
-	smpsVcCoarseFreq	$01, $05, $02, $0C
-	smpsVcRateScale		$02, $00, $02, $00
-	smpsVcAttackRate	$1F, $1F, $18, $1F
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$11, $0E, $11, $0F
-	smpsVcDecayRate2	$05, $08, $05, $0E
-	smpsVcDecayLevel	$00, $06, $00, $05
-	smpsVcReleaseRate	$0F, $0F, $0F, $0F
-	smpsVcTotalLevel	$13, $2F, $2D, $2D
-
-;	PSG Voice 10 -> TFTone_01
-;	macros:
-;		vol: 15 15 14 13 12 11 10 9 9 8 7 7 6 6 6 5 4 4 4 4 4 3 2 2 2 1 1 1 0 0 0 0
-
-;	PSG Voice 11 -> AppleTone_02
-;	macros:
-;		vol: 15 15 15 15 15 15 14 13 13 12 12 11 11 11 10 9 9 8 7 7 6 5 5 5 4 4 3 3 2 2 2 2
-
-;	FM Voice 12 -> 10: Ins 12
-	smpsVcAlgorithm		$04
-	smpsVcFeedback		$04
-	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$00, $01, $01, $01
-	smpsVcRateScale		$00, $00, $00, $00
-	smpsVcAttackRate	$1F, $1F, $1F, $1F
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$09, $09, $09, $09
-	smpsVcDecayRate2	$00, $00, $00, $00
-	smpsVcDecayLevel	$0F, $0F, $0F, $0F
-	smpsVcReleaseRate	$0F, $0F, $0F, $0F
-	smpsVcTotalLevel	$24, $11, $08, $07
-
-;	FM Voice 13 -> 11: 02_picnic_108
+;	FM Voice 0B -> 0B: 02_picnic_108
 	smpsVcAlgorithm		$04
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $00, $00, $00
@@ -277,21 +185,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$06, $02, $07, $03
 	smpsVcTotalLevel	$05, $1D, $0B, $15
 
-;	FM Voice 14 -> 12: 03_marble_zone_52
-	smpsVcAlgorithm		$02
-	smpsVcFeedback		$00
-	smpsVcDetune		$05, $05, $03, $03
-	smpsVcCoarseFreq	$01, $05, $02, $0C
-	smpsVcRateScale		$02, $00, $02, $00
-	smpsVcAttackRate	$1F, $1F, $18, $1F
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$11, $0E, $11, $0F
-	smpsVcDecayRate2	$05, $08, $05, $0E
-	smpsVcDecayLevel	$00, $06, $00, $05
-	smpsVcReleaseRate	$0F, $0F, $0F, $0F
-	smpsVcTotalLevel	$08, $2F, $2D, $2D
-
-;	FM Voice 15 -> 13: 02_green_hill_zone_23
+;	FM Voice 0C -> 0C: 02_green_hill_zone_23
 	smpsVcAlgorithm		$04
 	smpsVcFeedback		$05
 	smpsVcDetune		$03, $03, $07, $07
@@ -305,7 +199,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$09, $17, $13, $16
 
-;	FM Voice 16 -> 14: 13_staff_roll_37
+;	FM Voice 0D -> 0D: 13_staff_roll_37
 	smpsVcAlgorithm		$04
 	smpsVcFeedback		$00
 	smpsVcDetune		$00, $07, $07, $03
@@ -319,7 +213,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$07, $07, $07, $07
 	smpsVcTotalLevel	$07, $23, $19, $23
 
-;	FM Voice 17 -> 15: 03_mango_118
+;	FM Voice 0E -> 0E: 03_mango_118
 	smpsVcAlgorithm		$04
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $00, $00, $00
@@ -333,7 +227,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$06, $06, $06, $06
 	smpsVcTotalLevel	$0B, $1E, $0B, $1F
 
-;	FM Voice 18 -> 16: 15_extra_life_39
+;	FM Voice 0F -> 0F: 15_extra_life_39
 	smpsVcAlgorithm		$02
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $00, $00, $00
@@ -347,7 +241,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$07, $16, $4E, $18
 
-;	FM Voice 19 -> 17: 13_staff_roll_22
+;	FM Voice 10 -> 10: 13_staff_roll_22
 	smpsVcAlgorithm		$04
 	smpsVcFeedback		$00
 	smpsVcDetune		$03, $03, $00, $07
@@ -361,7 +255,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$07, $23, $0A, $23
 
-;	FM Voice 1A -> 18: 12__Metropolis_Zone_24
+;	FM Voice 11 -> 11: 12__Metropolis_Zone_24
 	smpsVcAlgorithm		$01
 	smpsVcFeedback		$05
 	smpsVcDetune		$05, $05, $01, $01
@@ -375,7 +269,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0A, $06, $06, $06
 	smpsVcTotalLevel	$05, $16, $1C, $1B
 
-;	FM Voice 1B -> 19: 27__casino_night_2_player_71
+;	FM Voice 12 -> 12: 27__casino_night_2_player_71
 	smpsVcAlgorithm		$02
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $00, $00, $00
@@ -389,11 +283,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$12, $20, $28, $17
 
-;	PSG Voice 1C -> DoleTone_03
-;	macros:
-;		vol: 10 11 12 13 14 14 15 15 15 15 15 15 15 15 15 15 15 15 14 14 14 14 12 12 12 12 12 11 10 9 9 8
-
-;	FM Voice 1D -> 1A: 17_drowning_27
+;	FM Voice 13 -> 13: 17_drowning_27
 	smpsVcAlgorithm		$04
 	smpsVcFeedback		$07
 	smpsVcDetune		$03, $05, $05, $03
@@ -407,11 +297,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$08, $16, $02, $1A
 
-;	PSG Voice 1E -> DoleTone_03
-;	macros:
-;		vol: 10 11 12 13 14 14 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 14 14 13 13 13 13 13 13
-
-;	FM Voice 1F -> 1B: 0e_this_horizon_94
+;	FM Voice 14 -> 14: 0e_this_horizon_94
 	smpsVcAlgorithm		$05
 	smpsVcFeedback		$05
 	smpsVcDetune		$01, $00, $06, $07
@@ -425,7 +311,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0C, $0C, $0C, $0F
 	smpsVcTotalLevel	$16, $17, $17, $22
 
-;	FM Voice 20 -> 1C: 17_drowning_43
+;	FM Voice 15 -> 15: 17_drowning_43
 	smpsVcAlgorithm		$04
 	smpsVcFeedback		$05
 	smpsVcDetune		$03, $03, $05, $05
@@ -439,7 +325,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$06, $14, $06, $15
 
-;	FM Voice 21 -> 1D: 17_drowning_44
+;	FM Voice 16 -> 16: 17_drowning_44
 	smpsVcAlgorithm		$07
 	smpsVcFeedback		$00
 	smpsVcDetune		$05, $05, $03, $03
@@ -453,7 +339,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$07, $22, $22, $22
 
-;	FM Voice 22 -> 1E: 25_unused_theme_of_puyo_puyo_3
+;	FM Voice 17 -> 17: 25_unused_theme_of_puyo_puyo_3
 	smpsVcAlgorithm		$05
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $00, $00, $00
@@ -467,7 +353,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0C, $0C, $0C, $08
 	smpsVcTotalLevel	$0D, $15, $0B, $17
 
-;	FM Voice 23 -> 1F: 03_level_11_149
+;	FM Voice 18 -> 18: 03_level_11_149
 	smpsVcAlgorithm		$02
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $00, $00, $00
@@ -481,11 +367,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0F, $0F, $0F, $0F
 	smpsVcTotalLevel	$06, $1E, $2E, $22
 
-;	PSG Voice 24 -> AppleTone_02
-;	macros:
-;		vol: 15 15 14 14 13 13 13 12 12 11 11 11 10 10 9 9 9 8 8 8 8 7 6 6 6 5 5 5 5 5 4 4
-
-;	FM Voice 25 -> 20: 12_Carnival_Night_Zone_2_0
+;	FM Voice 19 -> 19: 12_Carnival_Night_Zone_2_0
 	smpsVcAlgorithm		$03
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $00, $00, $00
@@ -499,7 +381,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0E, $0F, $0F, $0F
 	smpsVcTotalLevel	$00, $1B, $1B, $26
 
-;	FM Voice 26 -> 21: 46a_invincibility_0
+;	FM Voice 1A -> 1A: 46a_invincibility_0
 	smpsVcAlgorithm		$05
 	smpsVcFeedback		$07
 	smpsVcDetune		$00, $00, $00, $00
@@ -513,35 +395,7 @@ CanCan_Voices:
 	smpsVcReleaseRate	$0A, $08, $0A, $05
 	smpsVcTotalLevel	$07, $12, $12, $12
 
-;	FM Voice 27 -> 22: 01_title_screen_181
-	smpsVcAlgorithm		$02
-	smpsVcFeedback		$05
-	smpsVcDetune		$00, $00, $02, $03
-	smpsVcCoarseFreq	$02, $01, $0A, $02
-	smpsVcRateScale		$00, $00, $00, $00
-	smpsVcAttackRate	$16, $11, $12, $12
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$08, $0E, $0E, $0A
-	smpsVcDecayRate2	$00, $00, $00, $00
-	smpsVcDecayLevel	$0C, $01, $0F, $0F
-	smpsVcReleaseRate	$0F, $0F, $0F, $0F
-	smpsVcTotalLevel	$00, $2C, $15, $15
-
-;	FM Voice 28 -> 23: 14_icecap_zone_2_4
-	smpsVcAlgorithm		$05
-	smpsVcFeedback		$05
-	smpsVcDetune		$00, $00, $00, $00
-	smpsVcCoarseFreq	$02, $02, $02, $02
-	smpsVcRateScale		$00, $00, $00, $00
-	smpsVcAttackRate	$10, $10, $10, $10
-	smpsVcAmpMod		$00, $00, $00, $00
-	smpsVcDecayRate1	$08, $08, $08, $07
-	smpsVcDecayRate2	$05, $05, $05, $01
-	smpsVcDecayLevel	$01, $01, $01, $02
-	smpsVcReleaseRate	$0B, $0B, $0B, $08
-	smpsVcTotalLevel	$05, $0E, $0E, $20
-
-;	FM Voice 29 -> 24: 02_picnic_108
+;	FM Voice 1B -> 1B: 02_picnic_108
 	smpsVcAlgorithm		$04
 	smpsVcFeedback		$05
 	smpsVcDetune		$00, $00, $00, $00
@@ -554,6 +408,26 @@ CanCan_Voices:
 	smpsVcDecayLevel	$0F, $00, $00, $02
 	smpsVcReleaseRate	$06, $02, $07, $03
 	smpsVcTotalLevel	$05, $1E, $0B, $16
+
+;	PSG Voice 10 -> TFTone_01
+;	macros:
+;		vol: 15 15 14 13 12 11 10 9 9 8 7 7 6 6 6 5 4 4 4 4 4 3 2 2 2 1 1 1 0 0 0 0
+
+;	PSG Voice 11 -> AppleTone_02
+;	macros:
+;		vol: 15 15 15 15 15 15 14 13 13 12 12 11 11 11 10 9 9 8 7 7 6 5 5 5 4 4 3 3 2 2 2 2
+
+;	PSG Voice 1C -> DoleTone_03
+;	macros:
+;		vol: 10 11 12 13 14 14 15 15 15 15 15 15 15 15 15 15 15 15 14 14 14 14 12 12 12 12 12 11 10 9 9 8
+
+;	PSG Voice 1E -> DoleTone_03
+;	macros:
+;		vol: 10 11 12 13 14 14 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 15 14 14 13 13 13 13 13 13
+
+;	PSG Voice 24 -> AppleTone_02
+;	macros:
+;		vol: 15 15 14 14 13 13 13 12 12 11 11 11 10 10 9 9 9 8 8 8 8 7 6 6 6 5 5 5 5 5 4 4
 
 	; Loop Pattern :  00
 	; End Pattern :  2A
@@ -608,12 +482,12 @@ CanCan_FM1_Jump:
 	smpsStop
 
 CanCan_FM1_00_0_64:
-	smpsSetvoice	$06
+	smpsSetvoice	$04
 	dc.b nA4, $08, nRst, nA5, nRst, nA4, nRst, nA5, nRst
 	smpsReturn
 
 CanCan_FM1_01_0_64_7F:
-	smpsSetvoice	$06
+	smpsSetvoice	$04
 	dc.b nA4, $06, nRst, $02, nA4, $06, nRst, $02, nA4, $06, nRst, $02, nA4, $06, nRst, $02
 	dc.b nA5, $06, nRst, $02, nA5, $06, nRst, $02, nA5, $06
 	smpsAlterVol	$0F
@@ -625,20 +499,20 @@ CanCan_FM1_01_0_64_7F:
 	smpsReturn
 
 CanCan_FM1_02_0_64_70:
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	smpsAlterVol	$F1
 	dc.b nA4, $04, nE5, nE5, nFs5, nE5, nD5, nD5, nFs5, nG5, nB5, nD6, nB5, nB5, nA5, nA5
 	dc.b $08
 	smpsReturn
 
 CanCan_FM1_03_0_64:
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	dc.b nB5, $04, nCs5, nCs5, nB5, nA5, nD5, nD5, nFs5, nFs5, nE5, nFs5, nE5, nFs5, nE5, nFs5
 	dc.b nE5
 	smpsReturn
 
 CanCan_FM1_02_0_64:
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	dc.b nA4, $04, nE5, nE5, nFs5, nE5, nD5, nD5, nFs5, nG5, nB5, nD6, nB5, nB5, nA5, nA5
 	dc.b $08
 	smpsReturn
@@ -649,28 +523,28 @@ CanCan_FM1_05_0_64:
 	smpsReturn
 
 CanCan_FM1_06_0_64:
-	smpsSetvoice	$13
+	smpsSetvoice	$0C
 	dc.b nFs4, $08, nD4, nB3, nA3
-	smpsSetvoice	$0B
+	smpsSetvoice	$07
 	dc.b nA4, $04, nE4, nFs4, nG4, nFs4, nE4, nD4, $08
 	smpsReturn
 
 CanCan_FM1_07_0_64:
-	smpsSetvoice	$13
+	smpsSetvoice	$0C
 	dc.b nFs4, $08, nD4, nB3, nA3
-	smpsSetvoice	$0B
+	smpsSetvoice	$07
 	dc.b nA4, $04, nBb4, nB4, nCs5, nE5, nD5, nD5, $08
 	smpsReturn
 
 CanCan_FM1_04_0_64:
-	smpsSetvoice	$13
+	smpsSetvoice	$0C
 	dc.b nFs4, $08, nD4, nB3, nA3
-	smpsSetvoice	$0B
+	smpsSetvoice	$07
 	dc.b nA4, $04, nBb4, nB4, nCs5, nD5, nA4, nCs5, nA4
 	smpsReturn
 
 CanCan_FM1_08_0_64:
-	smpsSetvoice	$0B
+	smpsSetvoice	$07
 	dc.b nD5, $04, nA4, nCs5, nA4, nD5, nA4, nCs5, nA4, nD5, nA4, nCs5, nA4, nD5, nRst, $02
 	dc.b nD5, nD5, $04, nRst, $02, nD5
 	smpsReturn
@@ -678,14 +552,14 @@ CanCan_FM1_08_0_64:
 CanCan_FM1_09_0_64:
 	dc.b nD5, $04, nRst, $02, nD5, nD5, $04, nRst, $02, nD5, nD5, $04, nRst, $02, nD5, nD5
 	dc.b $04, nRst, $02, nD5, nD5, $04, nRst
-	smpsSetvoice	$17
+	smpsSetvoice	$10
 	dc.b nD4, $08, nG4
 	smpsModSet	$02, $01, $07, $02
 	dc.b smpsNoAttack, $08
 	smpsReturn
 
 CanCan_FM1_0A_0_64:
-	smpsSetvoice	$17
+	smpsSetvoice	$10
 	smpsModOff
 	dc.b nA4, $04, nC5, nB4, nA4, nD5
 	smpsModSet	$02, $01, $05, $02
@@ -705,7 +579,7 @@ CanCan_FM1_0A_0_64:
 	smpsReturn
 
 CanCan_FM1_0B_0_64:
-	smpsSetvoice	$17
+	smpsSetvoice	$10
 	smpsModOff
 	dc.b nA4, $04, nC5, nB4, nA4, nG4, nG5, nFs5, nE5, nD5, nC5, nB4, nA4, nG4, $08
 	smpsModSet	$02, $01, $07, $02
@@ -713,7 +587,7 @@ CanCan_FM1_0B_0_64:
 	smpsReturn
 
 CanCan_FM1_0C_0_64:
-	smpsSetvoice	$17
+	smpsSetvoice	$10
 	smpsModOff
 	dc.b nA4, $04, nC5, nB4, nA4, nG4, nD5, nA4, nB4, nG4, nRst, nD4, $08, nG4
 	smpsModSet	$02, $01, $07, $02
@@ -721,35 +595,35 @@ CanCan_FM1_0C_0_64:
 	smpsReturn
 
 CanCan_FM1_0D_0_48:
-	smpsSetvoice	$17
+	smpsSetvoice	$10
 	smpsModOff
 	dc.b nA4, $04, nC5, nB4, nA4, nG4, nD5, nA4, nB4, nG4, nRst
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	dc.b nB3, $08
 	smpsReturn
 
 CanCan_FM1_0F_0_64:
-	smpsSetvoice	$1A
+	smpsSetvoice	$13
 	dc.b nB5, $02, nRst, nA5, nRst, nA5, nRst, $06
-	smpsSetvoice	$15
+	smpsSetvoice	$0E
 	dc.b nB5, $04, nA5, nA5, $08
-	smpsSetvoice	$1A
+	smpsSetvoice	$13
 	dc.b nB5, $02, nRst, nA5, nRst, nA5, nRst, $06
-	smpsSetvoice	$15
+	smpsSetvoice	$0E
 	dc.b nB5, $04, nA5, nA5, $08
 	smpsReturn
 
 CanCan_FM1_10_0_64:
-	smpsSetvoice	$1A
+	smpsSetvoice	$13
 	dc.b nB5, $02, nRst, nA5, nRst, nA5, nRst, $06, nB5, $02, nRst, nA5, nRst, nA5, nRst, $06
 	dc.b nB5, $02, nRst, nA5, nRst, nA5, nRst, $06, nB5, $02, nRst, nA5, nRst, nA5, nRst, $06
 	smpsReturn
 
 CanCan_FM1_11_0_64:
-	smpsSetvoice	$1A
+	smpsSetvoice	$13
 	dc.b nB5, $02, nRst, nA5, nRst, nB5, nRst, nA5, nRst, nB5, nRst, nA5, nRst, nB5, nRst, nA5
 	dc.b nRst
-	smpsSetvoice	$17
+	smpsSetvoice	$10
 	dc.b nD4, $08
 	smpsModSet	$02, $01, $07, $02
 	dc.b smpsNoAttack, $08
@@ -758,7 +632,7 @@ CanCan_FM1_11_0_64:
 	smpsReturn
 
 CanCan_FM1_12_0_64:
-	smpsSetvoice	$17
+	smpsSetvoice	$10
 	dc.b nA4, $04
 	smpsModSet	$02, $01, $05, $02
 	dc.b smpsNoAttack, $04
@@ -779,7 +653,7 @@ CanCan_FM1_12_0_64:
 	smpsReturn
 
 CanCan_FM1_13_0_64:
-	smpsSetvoice	$17
+	smpsSetvoice	$10
 	dc.b nD4, $04, nD5, nCs5, nB4, nA4, nG4, nFs4, nE4, nD4, $08
 	smpsModSet	$02, $01, $07, $02
 	dc.b smpsNoAttack, $08
@@ -788,7 +662,7 @@ CanCan_FM1_13_0_64:
 	smpsReturn
 
 CanCan_FM1_14_0_64:
-	smpsSetvoice	$17
+	smpsSetvoice	$10
 	dc.b nD4, $04, nA4, nE4, nFs4, nD4, nRst, nA3, $08, nD4
 	smpsModSet	$02, $01, $07, $02
 	dc.b smpsNoAttack, $08
@@ -797,25 +671,25 @@ CanCan_FM1_14_0_64:
 	smpsReturn
 
 CanCan_FM1_0E_0_64_7F:
-	smpsSetvoice	$21
+	smpsSetvoice	$1A
 	smpsAlterVol	$03
 	dc.b nD5, $08, $08, nE5, nFs5, nA5, $04, nG5, nCs5, nB4, nA4, nG5, nFs5, nE5
 	smpsReturn
 
 CanCan_FM1_0E_0_64:
-	smpsSetvoice	$21
+	smpsSetvoice	$1A
 	dc.b nD5, $08, $08, nE5, nFs5, nA5, $04, nG5, nCs5, nB4, nA4, nG5, nFs5, nE5
 	smpsReturn
 
 CanCan_FM1_15_0_64:
-	smpsSetvoice	$20
+	smpsSetvoice	$19
 	dc.b nD5, $04, nA4, $02, nBb4, nB4, nBb4, nA4, nBb4, nB4, nBb4, nA4, nBb4, nB4, nBb4, nA4
 	dc.b nBb4, nB4, nBb4, nA4, nBb4, nB4, nBb4, nA4, nBb4, nB4, nBb4, nA4, nBb4, nB4, nBb4, nA4
 	dc.b nBb4
 	smpsReturn
 
 CanCan_FM1_17_0_64:
-	smpsSetvoice	$18
+	smpsSetvoice	$11
 	smpsModOff
 	dc.b nD3, $04
 	smpsModSet	$02, $01, $05, $02
@@ -851,7 +725,7 @@ CanCan_FM1_17_0_64:
 	smpsReturn
 
 CanCan_FM1_18_0_64:
-	smpsSetvoice	$24
+	smpsSetvoice	$1B
 	smpsModOff
 	dc.b nFs5, $04, nRst, $02, nFs5, nFs5, $04, nRst, $02, nFs5, nFs5, $04, nRst, $02, nFs5, nFs5
 	dc.b $04, nRst, $02, nFs5, nFs5, $04, nRst, $0C, nFs5, $06, nRst, $02, $08
@@ -911,7 +785,7 @@ CanCan_FM2_Jump:
 
 CanCan_FM2_00_0_64:
 	dc.b smpsNoAttack, $08
-	smpsSetvoice	$06
+	smpsSetvoice	$04
 	smpsPan		panRight, $00
 	dc.b nA4, nRst
 	smpsPan		panLeft, $00
@@ -924,7 +798,7 @@ CanCan_FM2_00_0_64:
 
 CanCan_FM2_01_0_64_6A:
 	dc.b smpsNoAttack, $04
-	smpsSetvoice	$06
+	smpsSetvoice	$04
 	smpsPan		panRight, $00
 	dc.b nA4, $08
 	smpsPan		panLeft, $00
@@ -1514,155 +1388,155 @@ CanCan_FM3_01_0_64:
 
 CanCan_FM3_02_0_64:
 	dc.b nRst, $04
-	smpsSetvoice	$05
+	smpsSetvoice	$03
 	dc.b nG3, nRst, nG3, nRst, nA3, nRst, nA3, nRst, nG4, nRst, nG4, nRst, nD4, nRst, nD4
 	smpsReturn
 
 CanCan_FM3_03_0_64:
 	dc.b smpsNoAttack, $04
-	smpsSetvoice	$05
+	smpsSetvoice	$03
 	dc.b nG3, nRst, nG3, nRst, nA3, nRst, nA3
-	smpsSetvoice	$11
+	smpsSetvoice	$0B
 	dc.b nAb4, $08, $08, nA4, nA4
 	smpsReturn
 
 CanCan_FM3_04_0_64:
 	dc.b smpsNoAttack, $04
-	smpsSetvoice	$05
+	smpsSetvoice	$03
 	dc.b nG3, nRst, nG3, nRst, nA3, nRst, nA3
-	smpsSetvoice	$11
+	smpsSetvoice	$0B
 	dc.b nG4, $08, $08, nFs4, nFs4
 	smpsReturn
 
 CanCan_FM3_05_0_64:
-	smpsSetvoice	$16
+	smpsSetvoice	$0F
 	smpsPan		panCenter, $00
 	dc.b nFs5, $08, nD5, nB4, nA4
-	smpsSetvoice	$11
+	smpsSetvoice	$0B
 	smpsPan		panRight, $00
 	dc.b nCs3, nCs3, nD3, $04, $04, $08
 	smpsReturn
 
 CanCan_FM3_06_0_64:
-	smpsSetvoice	$16
+	smpsSetvoice	$0F
 	smpsPan		panCenter, $00
 	dc.b nFs5, $08, nD5, nB4, nA4
-	smpsSetvoice	$11
+	smpsSetvoice	$0B
 	smpsPan		panRight, $00
 	dc.b nCs3, nCs3, nD3, nCs3
 	smpsReturn
 
 CanCan_FM3_07_0_64:
-	smpsSetvoice	$11
+	smpsSetvoice	$0B
 	dc.b nD3, $08, nCs3, nD3, nCs3, nD3, nCs3, nD4, nD4
 	smpsReturn
 
 CanCan_FM3_08_0_64_7A:
-	smpsSetvoice	$11
+	smpsSetvoice	$0B
 	dc.b nD4, $08, $08, $08, $08, $10
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	smpsAlterVol	$05
 	dc.b nG4, $08, nB4
 	smpsReturn
 
 CanCan_FM3_09_0_64:
 	dc.b nD5, $08
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	dc.b nB4, nG4, nB4, nD5, nB4, nFs4, nA4
 	smpsReturn
 
 CanCan_FM3_0A_0_64:
 	dc.b nC5, $08, nA4
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	dc.b nG4, nB4, nD5, nB4, nG4, nB4
 	smpsReturn
 
 CanCan_FM3_0B_0_48:
 	dc.b nC5, $08, nA4
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	dc.b nG4, nB4, nD5, $10
 	smpsReturn
 
 CanCan_FM3_02_0_64_75:
 	dc.b nRst, $04
-	smpsSetvoice	$05
+	smpsSetvoice	$03
 	smpsAlterVol	$FB
 	dc.b nG3, nRst, nG3, nRst, nA3, nRst, nA3, nRst, nG4, nRst, nG4, nRst, nD4, nRst, nD4
 	smpsReturn
 
 CanCan_FM3_0D_0_64:
-	smpsSetvoice	$0C
+	smpsSetvoice	$08
 	dc.b nA3, $08, $08
-	smpsSetvoice	$11
+	smpsSetvoice	$0B
 	dc.b nB4, $04, nA4, nA4, $08
-	smpsSetvoice	$0C
+	smpsSetvoice	$08
 	dc.b nA3, nA3
-	smpsSetvoice	$11
+	smpsSetvoice	$0B
 	dc.b nB4, $04, nA4, nA4, $08
 	smpsReturn
 
 CanCan_FM3_0E_0_64:
-	smpsSetvoice	$1D
+	smpsSetvoice	$16
 	dc.b nA4, $04, nA3, nE5, nE4, nBb4, nBb3, nF5, nF4, nB4, nB3, nFs5, nFs4, nC5, nC4, nG5
 	dc.b nG4
 	smpsReturn
 
 CanCan_FM3_0F_0_64_7A:
-	smpsSetvoice	$1D
+	smpsSetvoice	$16
 	dc.b nE4, $02, nE5, nA4, nA5, nF4, nF5, nBb4, nBb5, nFs4, nFs5, nB4, nB5, nG4, nG5, nCs5
 	dc.b nCs6
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	smpsAlterVol	$05
 	dc.b nD4, $08, nFs4, nA4, nFs4
 	smpsReturn
 
 CanCan_FM3_10_0_64:
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	dc.b nD4, $08, nFs4, nA4, nFs4, nCs4, nE4, nG4, nE4
 	smpsReturn
 
 CanCan_FM3_11_0_64:
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	dc.b nD4, $08, nFs4, nA4, nFs4, nD4, nFs4, nA4, nFs4
 	smpsReturn
 
 CanCan_FM3_12_0_64:
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	dc.b nD4, $08, nFs4, nA4, nFs4, nD4, nFs4, nA4, nFs4
 	smpsReturn
 
 CanCan_FM3_0C_0_64_75:
-	smpsSetvoice	$1E
+	smpsSetvoice	$17
 	smpsAlterVol	$F9
 	dc.b nD4, $10, nE4, $08, nFs4, nG4, $10, nFs4, $08, nE4
 	smpsReturn
 
 CanCan_FM3_0C_0_64:
-	smpsSetvoice	$1E
+	smpsSetvoice	$17
 	dc.b nD4, $10, nE4, $08, nFs4, nG4, $10, nFs4, $08, nE4
 	smpsReturn
 
 CanCan_FM3_13_0_64:
-	smpsSetvoice	$09
+	smpsSetvoice	$05
 	dc.b nFs4, $04, nRst, nE4, nRst, nFs4, nRst, nE4, nRst, nFs4, nRst, nE4, nRst, nFs4, nRst, nE4
 	dc.b nRst
 	smpsReturn
 
 CanCan_FM3_14_0_64:
-	smpsSetvoice	$1A
+	smpsSetvoice	$13
 	dc.b nD2, $02, nD4, nD5, nD6, nD3, nD5, nD6, nD7, nCs3, nCs5, nCs6, nCs7, nB2, nB4, nB5
 	dc.b nB6, nA2, nA4, nA5, nA6, nG2, nG4, nG5, nG6, nFs2, nFs4, nFs5, nFs6, nE2, nE4, nE5
 	dc.b nE6
 	smpsReturn
 
 CanCan_FM3_15_0_64:
-	smpsSetvoice	$0B
+	smpsSetvoice	$07
 	dc.b nA2, $04, nRst, $02, nA2, nA2, $04, nRst, $02, nA2, nA2, $04, nRst, $02, nA2, nA2
 	dc.b $04, nRst, $02, nA2, nA2, $04, nRst, $0C, nA2, $04, nRst, nRst, $08
 	smpsReturn
 
 CanCan_FM3_16_0_64:
-	smpsSetvoice	$0B
+	smpsSetvoice	$07
 	dc.b nFs2, $04, nRst, nRst, $08, nA2, $04, nRst, nRst, $08, nFs2, $20
 	smpsReturn
 
@@ -1726,155 +1600,155 @@ CanCan_FM4_01_0_64:
 
 CanCan_FM4_02_0_64:
 	dc.b nRst, $04
-	smpsSetvoice	$05
+	smpsSetvoice	$03
 	dc.b nCs4, nRst, nCs4, nRst, nD4, nRst, nD4, nRst, nD4, nRst, nD4, nRst, nA3, nRst, nA3
 	smpsReturn
 
 CanCan_FM4_03_0_64:
 	dc.b smpsNoAttack, $04
-	smpsSetvoice	$05
+	smpsSetvoice	$03
 	dc.b nCs4, nRst, nCs4, nRst, nD4, nRst, nD4
-	smpsSetvoice	$11
+	smpsSetvoice	$0B
 	dc.b nE4, $08, $08, $08, $08
 	smpsReturn
 
 CanCan_FM4_04_0_64:
 	dc.b smpsNoAttack, $04
-	smpsSetvoice	$05
+	smpsSetvoice	$03
 	dc.b nCs4, nRst, nCs4, nRst, nD4, nRst, nD4
-	smpsSetvoice	$11
+	smpsSetvoice	$0B
 	dc.b nCs4, $08, $08, nD4, nD4
 	smpsReturn
 
 CanCan_FM4_05_0_64:
-	smpsSetvoice	$16
+	smpsSetvoice	$0F
 	smpsPan		panCenter, $00
 	dc.b nFs4, $08, nD4, nB3, nA3
-	smpsSetvoice	$11
+	smpsSetvoice	$0B
 	smpsPan		panLeft, $00
 	dc.b nA3, nA3, nFs3, $04, $04, $08
 	smpsReturn
 
 CanCan_FM4_06_0_64:
-	smpsSetvoice	$16
+	smpsSetvoice	$0F
 	smpsPan		panCenter, $00
 	dc.b nFs4, $08, nD4, nB3, nA3
-	smpsSetvoice	$11
+	smpsSetvoice	$0B
 	smpsPan		panLeft, $00
 	dc.b nA3, nA3, nFs3, nF3
 	smpsReturn
 
 CanCan_FM4_07_0_64:
-	smpsSetvoice	$11
+	smpsSetvoice	$0B
 	dc.b nFs3, $08, nF3, nFs3, nF3, nFs3, nF3, nFs4, nFs4
 	smpsReturn
 
 CanCan_FM4_08_0_64_7A:
-	smpsSetvoice	$11
+	smpsSetvoice	$0B
 	dc.b nFs4, $08, $08, $08, $08, $10
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	smpsAlterVol	$05
 	dc.b nD4, $08, nG4
 	smpsReturn
 
 CanCan_FM4_09_0_64:
 	dc.b nB4, $08
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	dc.b nG4, nD4, nG4, nB4, nG4, nD4, nFs4
 	smpsReturn
 
 CanCan_FM4_0A_0_64:
 	dc.b nA4, $08, nFs4
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	dc.b nD4, nG4, nB4, nG4, nD4, nG4
 	smpsReturn
 
 CanCan_FM4_0B_0_48:
 	dc.b nA4, $08, nFs4
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	dc.b nD4, nG4, nB4, $10
 	smpsReturn
 
 CanCan_FM4_02_0_64_75:
 	dc.b nRst, $04
-	smpsSetvoice	$05
+	smpsSetvoice	$03
 	smpsAlterVol	$FB
 	dc.b nCs4, nRst, nCs4, nRst, nD4, nRst, nD4, nRst, nD4, nRst, nD4, nRst, nA3, nRst, nA3
 	smpsReturn
 
 CanCan_FM4_0D_0_64:
-	smpsSetvoice	$0C
+	smpsSetvoice	$08
 	dc.b nE3, $08, $08
-	smpsSetvoice	$11
+	smpsSetvoice	$0B
 	dc.b nD4, $04, nE4, nE4, $08
-	smpsSetvoice	$0C
+	smpsSetvoice	$08
 	dc.b nE3, nE3
-	smpsSetvoice	$11
+	smpsSetvoice	$0B
 	dc.b nFs4, $04, nE4, nE4, $08
 	smpsReturn
 
 CanCan_FM4_0E_0_64:
-	smpsSetvoice	$1D
+	smpsSetvoice	$16
 	dc.b nE5, $04, nE4, nA4, nA3, nF5, nF4, nBb4, nBb3, nFs5, nFs4, nB4, nB3, nG5, nG4, nC5
 	dc.b nC4
 	smpsReturn
 
 CanCan_FM4_0F_0_64_7A:
-	smpsSetvoice	$1D
+	smpsSetvoice	$16
 	dc.b nA4, $02, nA5, nE4, nE5, nBb4, nBb5, nF4, nF5, nB4, nB5, nFs4, nFs5, nC5, nC6, nAb4
 	dc.b nAb5
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	smpsAlterVol	$05
 	dc.b nA3, $08, nD4, nFs4, nD4
 	smpsReturn
 
 CanCan_FM4_10_0_64:
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	dc.b nA3, $08, nD4, nFs4, nD4, nA3, nCs4, nE4, nCs4
 	smpsReturn
 
 CanCan_FM4_11_0_64:
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	dc.b nA3, $08, nD4, nFs4, nD4, nA3, nD4, nFs4, nD4
 	smpsReturn
 
 CanCan_FM4_12_0_64:
-	smpsSetvoice	$0D
+	smpsSetvoice	$09
 	dc.b nA3, $08, nD4, nFs4, nD4, nA3, nD4, nFs4, nD4
 	smpsReturn
 
 CanCan_FM4_0C_0_64_75:
-	smpsSetvoice	$1E
+	smpsSetvoice	$17
 	smpsAlterVol	$F9
 	dc.b nFs4, $10, nG4, $08, nA4, nB4, $10, nA4, $08, nG4
 	smpsReturn
 
 CanCan_FM4_0C_0_64:
-	smpsSetvoice	$1E
+	smpsSetvoice	$17
 	dc.b nFs4, $10, nG4, $08, nA4, nB4, $10, nA4, $08, nG4
 	smpsReturn
 
 CanCan_FM4_13_0_64:
-	smpsSetvoice	$09
+	smpsSetvoice	$05
 	dc.b nD4, $04, nRst, nCs4, nRst, nD4, nRst, nCs4, nRst, nD4, nRst, nCs4, nRst, nD4, nRst, nCs4
 	dc.b nRst
 	smpsReturn
 
 CanCan_FM4_14_0_64:
-	smpsSetvoice	$1A
+	smpsSetvoice	$13
 	dc.b nD6, $02, nD5, nD4, nD2, nD7, nD6, nD5, nD3, nCs7, nCs6, nCs5, nCs3, nB6, nB5, nB4
 	dc.b nB2, nA6, nA5, nA4, nA2, nG6, nG5, nG4, nG2, nFs6, nFs5, nFs4, nFs2, nE6, nE5, nE4
 	dc.b nE2
 	smpsReturn
 
 CanCan_FM4_15_0_64:
-	smpsSetvoice	$0B
+	smpsSetvoice	$07
 	dc.b nD3, $04, nRst, $02, nD3, nD3, $04, nRst, $02, nD3, nD3, $04, nRst, $02, nD3, nD3
 	dc.b $04, nRst, $02, nD3, nD3, $04, nRst, $0C, nD3, $04, nRst, nRst, $08
 	smpsReturn
 
 CanCan_FM4_16_0_64:
-	smpsSetvoice	$0B
+	smpsSetvoice	$07
 	dc.b nA2, $04, nRst, nRst, $08, nD3, $04, nRst, nRst, $08, nA2, $20
 	smpsReturn
 
@@ -1926,17 +1800,17 @@ CanCan_FM5_Jump:
 	smpsStop
 
 CanCan_FM5_00_0_64:
-	smpsSetvoice	$0A
+	smpsSetvoice	$06
 	dc.b nA4, $08, nRst, nA5, nRst, nA4, nRst, nA5, nRst
 	smpsReturn
 
 CanCan_FM5_01_0_64:
-	smpsSetvoice	$0A
+	smpsSetvoice	$06
 	dc.b nA4, $08, $08, $08, $08, nA5, nA5, nA5, nA5
 	smpsReturn
 
 CanCan_FM5_04_0_64:
-	smpsSetvoice	$0E
+	smpsSetvoice	$0A
 	dc.b nA2, $04, nE3, nE3, nFs3, nE3, nD3, nD3, nFs3, nG3, nB3, nD4, nB3, nB3, nA3, nA3
 	dc.b $08
 	smpsReturn
@@ -1955,7 +1829,7 @@ CanCan_FM5_06_0_64:
 	smpsSetvoice	$02
 	smpsPan		panCenter, $00
 	dc.b nFs4, $08, nD4, nB3, nA3
-	smpsSetvoice	$14
+	smpsSetvoice	$0D
 	dc.b nA5, $02
 	smpsPan		panRight, $00
 	dc.b $02
@@ -1986,7 +1860,7 @@ CanCan_FM5_06_0_64:
 CanCan_FM5_08_0_64:
 	smpsSetvoice	$02
 	dc.b nFs4, $08, nD4, nB3, nA3
-	smpsSetvoice	$14
+	smpsSetvoice	$0D
 	dc.b nA4, $02
 	smpsPan		panRight, $00
 	dc.b $02
@@ -2017,7 +1891,7 @@ CanCan_FM5_08_0_64:
 CanCan_FM5_02_0_64:
 	smpsSetvoice	$02
 	dc.b nFs4, $08, nD4, nB3, nA3
-	smpsSetvoice	$14
+	smpsSetvoice	$0D
 	dc.b nA4, $02
 	smpsPan		panRight, $00
 	dc.b $02
@@ -2107,7 +1981,7 @@ CanCan_FM5_09_0_64:
 CanCan_FM5_0A_0_64_7F:
 	dc.b nD6, $02, $02, nRst, nD6, nD6, nD6, nRst, nD6, nD6, nD6, nRst, nD6, nD6, nD6, nRst
 	dc.b nD6, nD6, nD6, nRst, $04
-	smpsSetvoice	$19
+	smpsSetvoice	$12
 	smpsAlterVol	$08
 	dc.b nD5, $08, nG5, $10
 	smpsReturn
@@ -2126,13 +2000,13 @@ CanCan_FM5_0D_0_64:
 
 CanCan_FM5_0E_0_48:
 	dc.b nA5, $04, nC6, nB5, nA5, nG5, nD6, nA5, nB5, nG5, $08
-	smpsSetvoice	$05
+	smpsSetvoice	$03
 	dc.b nB4
 	smpsReturn
 
 CanCan_FM5_10_0_64_77:
 	dc.b nRst, $02
-	smpsSetvoice	$1A
+	smpsSetvoice	$13
 	smpsPan		panRight, $00
 	smpsAlterVol	$02
 	dc.b nB5, nRst
@@ -2140,11 +2014,11 @@ CanCan_FM5_10_0_64_77:
 	dc.b nA5, nRst
 	smpsPan		panLeft, $00
 	dc.b nA5, nRst, $04
-	smpsSetvoice	$1B
+	smpsSetvoice	$14
 	smpsPan		panCenter, $00
 	smpsAlterVol	$F6
 	dc.b nB5, nA5, nA5, $0A
-	smpsSetvoice	$1A
+	smpsSetvoice	$13
 	smpsPan		panRight, $00
 	smpsAlterVol	$0A
 	dc.b nB5, $02, nRst
@@ -2152,14 +2026,14 @@ CanCan_FM5_10_0_64_77:
 	dc.b nA5, nRst
 	smpsPan		panLeft, $00
 	dc.b nA5, nRst, $04
-	smpsSetvoice	$1B
+	smpsSetvoice	$14
 	smpsPan		panCenter, $00
 	smpsAlterVol	$F6
 	dc.b nB5, nA5, nA5, $08
 	smpsReturn
 
 CanCan_FM5_11_0_64:
-	smpsSetvoice	$1B
+	smpsSetvoice	$14
 	dc.b nB5, $04, nA5, nA5, nA5
 	smpsPan		panRight, $00
 	dc.b nB4
@@ -2180,7 +2054,7 @@ CanCan_FM5_11_0_64:
 	smpsReturn
 
 CanCan_FM5_12_0_64:
-	smpsSetvoice	$1C
+	smpsSetvoice	$15
 	smpsAlterVol	$1F
 	dc.b nA4, $01
 	smpsAlterVol	$FF
@@ -2245,7 +2119,7 @@ CanCan_FM5_12_0_64:
 	dc.b nA4
 	smpsAlterVol	$FF
 	dc.b nA4
-	smpsSetvoice	$19
+	smpsSetvoice	$12
 	dc.b nD5, $10, nE5, $04, nG5, nFs5, nE5
 	smpsReturn
 
@@ -2255,23 +2129,23 @@ CanCan_FM5_13_0_64:
 
 CanCan_FM5_14_0_64:
 	dc.b nD5, $04, nD6, nCs6, nB5, nA5, nG5, nFs5, nE5
-	smpsSetvoice	$19
+	smpsSetvoice	$12
 	dc.b nD5, $10, nE5, $04, nG5, nFs5, nE5
 	smpsReturn
 
 CanCan_FM5_15_0_64:
 	dc.b nD5, $04, nA5, nE5, nFs5, nD5, $08, nA4
-	smpsSetvoice	$19
+	smpsSetvoice	$12
 	dc.b nD5, $10, nE5, $04, nG5, nFs5, nE5
 	smpsReturn
 
 CanCan_FM5_07_0_64:
-	smpsSetvoice	$1F
+	smpsSetvoice	$18
 	dc.b nD5, $08, $08, nE5, nFs5, nA5, $04, nG5, nCs5, nB4, nA4, nG5, nFs5, nE5
 	smpsReturn
 
 CanCan_FM5_0F_0_64_7F:
-	smpsSetvoice	$1B
+	smpsSetvoice	$14
 	smpsAlterVol	$03
 	dc.b nD5, $04, nA4, $02, nBb4, nB4, nBb4, nA4, nBb4, nB4, nBb4, nA4, nBb4, nB4, nBb4, nA4
 	dc.b nBb4, nB4, nBb4, nA4, nBb4, nB4, nBb4, nA4, nBb4, nB4, nBb4, nA4, nBb4, nB4, nBb4, nA4
@@ -2279,20 +2153,20 @@ CanCan_FM5_0F_0_64_7F:
 	smpsReturn
 
 CanCan_FM5_0F_0_64:
-	smpsSetvoice	$1B
+	smpsSetvoice	$14
 	dc.b nD5, $04, nA4, $02, nBb4, nB4, nBb4, nA4, nBb4, nB4, nBb4, nA4, nBb4, nB4, nBb4, nA4
 	dc.b nBb4, nB4, nBb4, nA4, nBb4, nB4, nBb4, nA4, nBb4, nB4, nBb4, nA4, nBb4, nB4, nBb4, nA4
 	dc.b nBb4
 	smpsReturn
 
 CanCan_FM5_16_0_64_7C:
-	smpsSetvoice	$14
+	smpsSetvoice	$0D
 	smpsAlterVol	$06
 	dc.b nD5, $08, nD6, nCs6, nB5, nA5, nG5, nFs5, nE5
 	smpsReturn
 
 CanCan_FM5_16_0_64:
-	smpsSetvoice	$14
+	smpsSetvoice	$0D
 	dc.b nD5, $08, nD6, nCs6, nB5, nA5, nG5, nFs5, nE5
 	smpsReturn
 
