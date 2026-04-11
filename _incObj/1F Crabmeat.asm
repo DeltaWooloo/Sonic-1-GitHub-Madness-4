@@ -95,7 +95,8 @@ Crab_Action:	; Routine 2
 		subi.w	#$10,obX(a1)
 		move.w	obY(a0),obY(a1)
 		move.w	#-$100,obVelX(a1)
-
+        move.w	#sfx_Fireball,d0
+		jsr	(QueueSound2).l	; play lava ball sound
 .failleft:
 		bsr.w	FindFreeObj
 		bne.s	.failright
