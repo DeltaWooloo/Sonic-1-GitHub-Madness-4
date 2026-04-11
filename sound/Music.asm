@@ -146,6 +146,7 @@ MusicIndex:
 	dc.l	Mus_Win2K		
 	dc.l	Mus_Folgers		
 	dc.l	Mus_MJWin		
+    dc.l	Mus_SanAndreas		
 
 Mus_MWaterS:		include "music/LiquidTracks/Mus - Mega Water S.asm"
 	even
@@ -412,5 +413,7 @@ Mus_Win2K:		include "music/Dawid/WINDOWS2000.asm"
 Mus_Folgers:		include	"music/TG2000Tracks/Folgers.asm"
 	even
 Mus_MJWin:		include	"music/DaxKatter/Mus - Moonwalker Clear.asm"
+	even
+Mus_SanAndreas:		include	"music/Dawid/SANANDREAS.asm"
 	even
 	END
