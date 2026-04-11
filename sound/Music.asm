@@ -32,11 +32,13 @@ MusicIndex:
 	dc.l	Mus_ColdBrew		
 	dc.l	Mus_UNOwenWasHer	
 	dc.l	Mus_Passport		
+	dc.l	Mus_VirusAlert		
 	dc.l	Mus_DoleDetective	
 	dc.l	Mus_HardwareStore	
 	dc.l	Mus_GHZ			
 	dc.l	Mus_TF2			
 	dc.l	Mus_Blue		
+	dc.l	Mus_Hidden		
 	dc.l	Mus_Final		
 	dc.l	Mus_SS			
 
@@ -45,6 +47,7 @@ MusicIndex:
 	dc.l	Mus_Coffinman		
 	dc.l	Mus_Aporia		
 	dc.l	Mus_Megalovania		
+	dc.l	Mus_TwoSteps		
 	dc.l	Mus_DoleBOSS		
 	dc.l	Mus_PizzaPopBoss	
 
@@ -90,7 +93,6 @@ MusicIndex:
 	dc.l	Mus_LimitedClear	
 	dc.l	Mus_Moonwalker		
 	dc.l	Mus_CleanSlate		
-	dc.l	Mus_VirusAlert		
 
 	dc.l	Mus_PuyoReject		
 	dc.l	Mus_LG			
@@ -120,7 +122,6 @@ MusicIndex:
 	dc.l	Mus_VampKiller		
 	dc.l	Mus_Gadget		
 	dc.l	Mus_CanCanInv		
-	dc.l	Mus_TwoSteps		
 	dc.l	Mus_Wormy		
 	dc.l	Mus_Starman		
 	dc.l	Mus_JamesPond		
@@ -135,7 +136,6 @@ MusicIndex:
 	dc.l	Mus_CCLobby		
 	dc.l	Mus_ChairRoom		
 	dc.l	Mus_Skinner		
-	dc.l	Mus_Hidden		
 	dc.l	Mus_BossaNova		
 	dc.l	Mus_dam_dariram		
 	dc.l	Mus_WillTell		
@@ -187,6 +187,8 @@ Mus_UNOwenWasHer:	include	"music/TheWTracks/Mus - UnOwenWasHer.asm"
 	even
 Mus_Passport:		include	"music/TG2000Tracks/Passport.asm"
 	even
+Mus_VirusAlert:		include	"music/TG2000Tracks/VirusAlert.asm"
+	even
 Mus_DoleDetective:	include	"music/Kat/Mus - Dole Detective.asm"
 	even
 Mus_HardwareStore:	include	"music/MattTracks/Mus - Hardware Store.asm"
@@ -196,6 +198,8 @@ Mus_GHZ:		include "music/Kat/Mus - Green Hill Zone.asm"
 Mus_TF2:		include	"music/TG2000Tracks/TF2.asm"
 	even
 Mus_Blue:		include	"music/TG2000Tracks/Blue.asm"
+	even
+Mus_Hidden:		include	"music/Dawid/Hidden.asm" 
 	even
 Mus_Final:		include "music/Dawid/Extremely_intense_boss_song_for_someone.asm" ;very intense not really but eh idgaf
 	even
@@ -302,8 +306,6 @@ Mus_Moonwalker:		include "music/TheWTracks/Mus - Moonwalker Title.asm"
 	even
 Mus_CleanSlate:		include	"music/Robi/ShitSlate.asm"
 	even
-Mus_VirusAlert:		include	"music/TG2000Tracks/VirusAlert.asm"
-	even
 
 ; Used for Commericals
 
@@ -391,8 +393,6 @@ Mus_CCLobby:		include	"music/LiquidTracks/Mus - CCLobby.asm"
 Mus_ChairRoom:		include	"music/CNTracks/TheCheetosChairRoom.asm"
 	even
 Mus_Skinner:		include	"music/TG2000Tracks/Skinner.asm" 
-	even
-Mus_Hidden:		include	"music/Dawid/Hidden.asm" 
 	even
 Mus_BossaNova:		include	"music/TG2000Tracks/BossaNova.asm"
 	even

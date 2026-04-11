@@ -2,7 +2,7 @@ Aporia_Header:
 	smpsHeaderStartSong 3
 	smpsHeaderVoice		Aporia_Voices
 	smpsHeaderChan		$06, $03
-	smpsHeaderTempo		$02, $56
+	smpsHeaderTempo		$02, $44
 ;	Given Tempo = 165.00 BPM
 ;	Approximated Tempo = 165.23 BPM
 

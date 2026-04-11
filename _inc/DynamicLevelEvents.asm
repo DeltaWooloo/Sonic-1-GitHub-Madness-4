@@ -1033,6 +1033,9 @@ DLE_BSZ2:
 		rts
 
 DLE_BSZ3:;Damn fuck
+		move.b	#$D,(v_zone).w ; reset if higher than 6
+		move.b	#$0,(v_act).w ; reset if higher than 6
+
         rts
 DLE_BSZ1:
         moveq	#0,d0
