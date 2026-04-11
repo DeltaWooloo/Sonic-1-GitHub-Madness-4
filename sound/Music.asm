@@ -37,6 +37,7 @@ MusicIndex:
 	dc.l	Mus_GHZ			
 	dc.l	Mus_TF2			
 	dc.l	Mus_Blue		
+	dc.l	Mus_Hidden		
 	dc.l	Mus_Final		
 	dc.l	Mus_SS			
 
@@ -135,7 +136,6 @@ MusicIndex:
 	dc.l	Mus_CCLobby		
 	dc.l	Mus_ChairRoom		
 	dc.l	Mus_Skinner		
-	dc.l	Mus_Hidden		
 	dc.l	Mus_BossaNova		
 	dc.l	Mus_dam_dariram		
 	dc.l	Mus_WillTell		
@@ -196,6 +196,8 @@ Mus_GHZ:		include "music/Kat/Mus - Green Hill Zone.asm"
 Mus_TF2:		include	"music/TG2000Tracks/TF2.asm"
 	even
 Mus_Blue:		include	"music/TG2000Tracks/Blue.asm"
+	even
+Mus_Hidden:		include	"music/Dawid/Hidden.asm" 
 	even
 Mus_Final:		include "music/Dawid/Extremely_intense_boss_song_for_someone.asm" ;very intense not really but eh idgaf
 	even
@@ -391,8 +393,6 @@ Mus_CCLobby:		include	"music/LiquidTracks/Mus - CCLobby.asm"
 Mus_ChairRoom:		include	"music/CNTracks/TheCheetosChairRoom.asm"
 	even
 Mus_Skinner:		include	"music/TG2000Tracks/Skinner.asm" 
-	even
-Mus_Hidden:		include	"music/Dawid/Hidden.asm" 
 	even
 Mus_BossaNova:		include	"music/TG2000Tracks/BossaNova.asm"
 	even

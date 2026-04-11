@@ -259,6 +259,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_GHZ			; Nogales Zone
 	nextenum bgm_TF2			; Bluescapes	(Act 1)		; Dax: Interesting song choice for this :/
 	nextenum bgm_Blue			;		(Act 2)
+	nextenum bgm_Hidden			; BLuestone
 	nextenum bgm_Final			; DUMMY Level BGM
 	nextenum bgm_SS				; Special Stage
 
@@ -366,7 +367,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_CCLobby
 	nextenum bgm_ChairRoom
 	nextenum bgm_Skinner
-	nextenum bgm_Hidden
 	nextenum bgm_BossaNova
 	nextenum bgm_dam_dariram
 	nextenum bgm_WillTell
