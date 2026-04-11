@@ -15,7 +15,6 @@ MayoDed_FM1:
 	smpsSetvoice	$00
 	dc.b	nRst, $05
 	dc.b	nB4, $03, nF5, $06, $03, $03, nE5, $06, nD5, $03, nC5, $12
-	dc.b	nRst
 	smpsStop
 
 ; FM2 Data
@@ -23,7 +22,6 @@ MayoDed_FM2:
 	smpsSetvoice	$01
 	dc.b	nRst, $05
 	dc.b	nB4, $03, $06, $03, $03, $06, $03, nC4, $12
-	dc.b	nRst
 	smpsStop
 
 ; FM3 Data
@@ -31,7 +29,6 @@ MayoDed_FM3:
 	smpsSetvoice	$01
 	dc.b	nRst, $05
 	dc.b	nG4, $03, $06, $03, $03, $06, $03, nRst, $06, nE3
-	dc.b	nRst
 	smpsStop
 
 ; FM4 Data
@@ -40,7 +37,6 @@ MayoDed_FM4:
 	dc.b	nRst, $05
 	dc.b	nG2, $03, $06, $03, $03, nA2, $06, nB2, $03, nC3, nG2
 	dc.b	nE2, nG2, nC2, $06
-	dc.b	nRst
 
 ; DAC Data
 MayoDed_DAC:

@@ -45,6 +45,7 @@ MusicIndex:
 	dc.l	Mus_Coffinman		
 	dc.l	Mus_Aporia		
 	dc.l	Mus_Megalovania		
+	dc.l	Mus_DJKK		
 	dc.l	Mus_DoleBOSS		
 	dc.l	Mus_PizzaPopBoss	
 
@@ -125,7 +126,6 @@ MusicIndex:
 	dc.l	Mus_Starman		
 	dc.l	Mus_JamesPond		
 	dc.l	Mus_AlexKiddEnd		
-	dc.l	Mus_DJKK		
 	dc.l	Mus_Levian		
 	dc.l	Mus_Peppa		
 	dc.l	Mus_SkyBase		
@@ -137,8 +137,8 @@ MusicIndex:
 	dc.l	Mus_Skinner		
 	dc.l	Mus_Hidden		
 	dc.l	Mus_BossaNova		
-	dc.l	Mus_dam_dariram	
-	dc.l	Mus_WillTell	
+	dc.l	Mus_dam_dariram		
+	dc.l	Mus_WillTell		
 
 	dc.l	Mus_CrazyMario		
 	dc.l	Mus_Ding		
@@ -206,13 +206,15 @@ Mus_Boss:		include "music/MattTracks/Mus - Chester Cheetah Boss.asm"
 	even
 Mus_ClintonFuck:	include	"music/Kat/Mus - Clinton Fucker.asm"
 	even
+Mus_Coffinman:		include	"music/TG2000Tracks/Coffinman.asm"	;Boss Track
+	even
 Mus_Aporia:		include	"music/TG2000Tracks/Aporia.asm"
 	even
 Mus_Megalovania:	include	"music/TG2000Tracks/Megalovania.asm"
 	even
-Mus_DoleBOSS:		include	"music/TG2000Tracks/DoleBOSS.asm"	;Boss Track
+Mus_DJKK:		include	"music/TG2000Tracks/DJKK.asm"
 	even
-Mus_Coffinman:		include	"music/TG2000Tracks/Coffinman.asm"	;Boss Track
+Mus_DoleBOSS:		include	"music/TG2000Tracks/DoleBOSS.asm"	;Boss Track
 	even
 Mus_PizzaPopBoss:	include "music/CNTracks/CheetahFakeout.asm"
 	even
@@ -373,8 +375,6 @@ Mus_Starman:		include	"music/TG2000Tracks/Starman.asm"
 Mus_JamesPond:		include	"music/TG2000Tracks/JamesPond.asm"
 	even
 Mus_AlexKiddEnd:	include	"music/TG2000Tracks/AlexKiddEnd.asm"
-	even
-Mus_DJKK:		include	"music/TG2000Tracks/DJKK.asm"
 	even
 Mus_Levian:		include	"music/TG2000Tracks/Levian.asm"
 	even

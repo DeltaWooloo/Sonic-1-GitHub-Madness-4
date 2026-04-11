@@ -778,3 +778,5 @@ WillTell_PSG3_01_0_64:
 	smpsPSGAlterVol	$05
 	dc.b $04
 	smpsReturn
+
+	smpsFooterEndSong	"TG2000Tracks/WillTell.asm"
