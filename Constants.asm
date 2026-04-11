@@ -318,6 +318,8 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_LimitedClear
 	nextenum bgm_Moonwalker
 	nextenum bgm_CleanSlate
+
+	; Windows Error BGM
 	nextenum bgm_VirusAlert
 
 	; Advertisement BGM
