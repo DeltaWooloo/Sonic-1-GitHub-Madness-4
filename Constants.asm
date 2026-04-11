@@ -254,12 +254,13 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_ColdBrew			; Cold Brew	(Act 1+2)
 	nextenum bgm_UNOwenWasHer		; Windows	(Act 1)
 	nextenum bgm_Passport			; 		(Act 2)
+	nextenum bgm_VirusAlert			; 		(Act 3)
 	nextenum bgm_DoleDetective		; Doleville	(Act 1)
 	nextenum bgm_HardwareStore		; 		(Act 2)
 	nextenum bgm_GHZ			; Nogales Zone
 	nextenum bgm_TF2			; Bluescapes	(Act 1)		; Dax: Interesting song choice for this :/
 	nextenum bgm_Blue			;		(Act 2)
-	nextenum bgm_Hidden			; BLuestone
+	nextenum bgm_Hidden			; Bluestone
 	nextenum bgm_Final			; DUMMY Level BGM
 	nextenum bgm_SS				; Special Stage
 
@@ -319,9 +320,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_LimitedClear
 	nextenum bgm_Moonwalker
 	nextenum bgm_CleanSlate
-
-	; Windows Error BGM
-	nextenum bgm_VirusAlert
 
 	; Advertisement BGM
 	nextenum bgm_PuyoReject

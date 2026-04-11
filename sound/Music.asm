@@ -32,6 +32,7 @@ MusicIndex:
 	dc.l	Mus_ColdBrew		
 	dc.l	Mus_UNOwenWasHer	
 	dc.l	Mus_Passport		
+	dc.l	Mus_VirusAlert		
 	dc.l	Mus_DoleDetective	
 	dc.l	Mus_HardwareStore	
 	dc.l	Mus_GHZ			
@@ -92,7 +93,6 @@ MusicIndex:
 	dc.l	Mus_LimitedClear	
 	dc.l	Mus_Moonwalker		
 	dc.l	Mus_CleanSlate		
-	dc.l	Mus_VirusAlert		
 
 	dc.l	Mus_PuyoReject		
 	dc.l	Mus_LG			
@@ -186,6 +186,8 @@ Mus_ColdBrew:		include	"music/CNTracks/CometSTG2.asm"
 Mus_UNOwenWasHer:	include	"music/TheWTracks/Mus - UnOwenWasHer.asm"
 	even
 Mus_Passport:		include	"music/TG2000Tracks/Passport.asm"
+	even
+Mus_VirusAlert:		include	"music/TG2000Tracks/VirusAlert.asm"
 	even
 Mus_DoleDetective:	include	"music/Kat/Mus - Dole Detective.asm"
 	even
@@ -303,8 +305,6 @@ Mus_LimitedClear:	include "music/DaxKatter/Mus - Limited Act Clear.asm"
 Mus_Moonwalker:		include "music/TheWTracks/Mus - Moonwalker Title.asm"
 	even
 Mus_CleanSlate:		include	"music/Robi/ShitSlate.asm"
-	even
-Mus_VirusAlert:		include	"music/TG2000Tracks/VirusAlert.asm"
 	even
 
 ; Used for Commericals
