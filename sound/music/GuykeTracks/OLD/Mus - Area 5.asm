@@ -9097,4 +9097,3 @@ BGM_Area5_Voices:
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $80, $80, $80, $00
 
-	smpsFooterEndSong	"GuykeTracks/Mus - Area 5.asm"

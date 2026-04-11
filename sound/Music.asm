@@ -149,9 +149,9 @@ MusicIndex:
 
 Mus_MWaterS:		include "music/LiquidTracks/Mus - Mega Water S.asm"
 	even
-Mus_OrangeSong:		include	"music/TG2000Tracks/OrangeSong.asm" 
+Mus_OrangeSong:		include	"music/TG2000Tracks/Mus - Orange Song.asm" 
 	even
-Mus_GreenHills:		include	"music/TG2000Tracks/GreenHills.asm"
+Mus_GreenHills:		include	"music/TG2000Tracks/Mus - Green Hills (Flash).asm"
 	even
 Mus_DUNGEON3:		include "music/DaxKatter/Mus - Azure Rainforest.asm"
 	even
@@ -177,7 +177,7 @@ Mus_GCV2005:		include	"music/HS_Tracks/GCV2005.asm"
 	even
 Mus_fightMID:		include "music/CNTracks/Mus - fight.mid.asm"
 	even
-Mus_Cheetah:		include	"music/TG2000Tracks/Cheetah.asm"
+Mus_Cheetah:		include	"music/TG2000Tracks/Mus - CheetahMen.asm"
 	even
 Mus_REMansion:		include "music/CNTracks/RE Mansion.asm"
 	even
@@ -185,9 +185,9 @@ Mus_ColdBrew:		include	"music/CNTracks/CometSTG2.asm"
 	even
 Mus_UNOwenWasHer:	include	"music/TheWTracks/Mus - UnOwenWasHer.asm"
 	even
-Mus_Passport:		include	"music/TG2000Tracks/Passport.asm"
+Mus_Passport:		include	"music/TG2000Tracks/Mus - Passport.asm"
 	even
-Mus_VirusAlert:		include	"music/TG2000Tracks/VirusAlert.asm"
+Mus_VirusAlert:		include	"music/TG2000Tracks/Mus - Virus Alert.asm"
 	even
 Mus_DoleDetective:	include	"music/Kat/Mus - Dole Detective.asm"
 	even
@@ -214,16 +214,16 @@ Mus_Coffinman:		include	"music/TG2000Tracks/Coffinman.asm"	;Boss Track
 	even
 Mus_Aporia:		include	"music/TG2000Tracks/Aporia.asm"
 	even
-Mus_Megalovania:	include	"music/TG2000Tracks/Megalovania.asm"
+Mus_Megalovania:	include	"music/TG2000Tracks/Mus - Megalovania.asm"
 	even
-Mus_TwoSteps:		include	"music/TG2000Tracks/TwoSteps.asm"
+Mus_TwoSteps:		include	"music/TG2000Tracks/Mus - Two Steps.asm"
 	even
 Mus_DoleBOSS:		include	"music/TG2000Tracks/DoleBOSS.asm"	;Boss Track
 	even
 Mus_PizzaPopBoss:	include "music/CNTracks/CheetahFakeout.asm"
 	even
 
-Mus_Invincible:		include "music/TG2000Tracks/SomariInv.asm"
+Mus_Invincible:		include "music/TG2000Tracks/Mus - Somari Invincibility.asm"
 	even
 Mus_AVGNInv:		include	"music/TG2000Tracks/Mus - AVGN Invincibility.asm"
 	even
@@ -236,7 +236,7 @@ Mus_NewBarkTown:	include "music/DaxKatter/Mus - New Bark Town.asm"
 	even
 Mus_Memories:		include	"music/CNTracks/MEMORIES.asm"
 	even
-Mus_Dingaling:		include	"music/TG2000Tracks/Dingaling.asm"
+Mus_Dingaling:		include	"music/TG2000Tracks/Mus - Dingaling.asm"
 	even
 Mus_Continue:		include "music/LiquidTracks/Mus - Uwol Menu.asm"
 	even
@@ -249,7 +249,7 @@ Mus_Jeopardy:		include "music/CNTracks/Jeopardy.asm"
 
 Mus_ActClear:		include	"music/CNTracks/Homero.asm"
 	even
-Mus_Pac2:		include	"music/TG2000Tracks/Pac2.asm"
+Mus_Pac2:		include	"music/TG2000Tracks/Mus - I Won't Be Long.asm"
 	even
 Mus_GameOver:		include "music/DaxKatter/Mus - NBT Game Over.asm"
 	even
@@ -309,9 +309,9 @@ Mus_CleanSlate:		include	"music/Robi/ShitSlate.asm"
 
 ; Used for Commericals
 
-Mus_PuyoReject:		include	"music/TG2000Tracks/PuyoReject.asm"
+Mus_PuyoReject:		include	"music/TG2000Tracks/Mus - Reject of Puyo Puyo.asm"
 	even
-Mus_LG:			include	"music/TG2000Tracks/LG.asm"
+Mus_LG:			include	"music/TG2000Tracks/Mus - LG Washing Machine.asm"
 	even
 Mus_ILBT:		include	"music/TG2000Tracks/ILBT.asm"
 	even
@@ -319,7 +319,7 @@ Mus_Sunset:		include	"music/CNTracks/SUNSET.asm"
 	even
 Mus_Elevator:		include	"music/TG2000Tracks/Elevator.asm" 
 	even
-Mus_SonUnderground:	include	"music/TG2000Tracks/SonUnderground.asm" 
+Mus_SonUnderground:	include	"music/TG2000Tracks/Mus - Sonic Underground.asm" 
 	even
 Mus_Son1UP:		include	"music/TG2000Tracks/Son1UP.asm"
 	even
@@ -334,65 +334,65 @@ Mus_ClintonYears:	include	"music/DaxKatter/Mus - Clinton Years.asm"
 
 ; Unused Tracks (so far)
 
-Mus_CanCan:		include	"music/TG2000Tracks/CanCan.asm" 
+Mus_CanCan:		include	"music/TG2000Tracks/Mus - Can Can.asm" 
 	even
 Mus_ChickenDance:	include	"music/TG2000Tracks/ChickenDance.asm"
 	even
-Mus_DeltaTale:		include	"music/Dawid/DeltaTale fighte.asm"
+Mus_DeltaTale:		include	"music/Dawid/Mus - Deltarune Battle.asm"
 	even
-Mus_Carefree:		include	"music/TG2000Tracks/Carefree.asm"
+Mus_Carefree:		include	"music/TG2000Tracks/Mus - Carefree.asm"
 	even
-Mus_FurElise:		include	"music/TG2000Tracks/FurElise.asm"
+Mus_FurElise:		include	"music/TG2000Tracks/Mus - Fur Elise.asm"
 	even
 Mus_SwingSinners:	include	"music/TG2000Tracks/Mus - Swing Sinners.asm"
 	even
-Mus_Miniscule:		include	"music/TG2000Tracks/Minuscule.asm"
+Mus_Miniscule:		include	"music/TG2000Tracks/Mus - Minuscule.asm"
 	even
-Mus_FuneralMarch:	include	"music/TG2000Tracks/FuneralMarch.asm"
+Mus_FuneralMarch:	include	"music/TG2000Tracks/Mus - Funeral March.asm"
 	even
-Mus_BatMan:		include	"music/TG2000Tracks/BatMan.asm"
+Mus_BatMan:		include	"music/TG2000Tracks/Mus - Batman.asm"
 	even
-Mus_Resetti:		include	"music/TG2000Tracks/Resetti.asm"
+Mus_Resetti:		include	"music/TG2000Tracks/Mus - Mr. Resetti.asm"
 	even
-Mus_Spoopy:		include	"music/TG2000Tracks/Spoopy.asm"
+Mus_Spoopy:		include	"music/TG2000Tracks/Mus - Spoopy.asm"
 	even
-Mus_NewShop:		include	"music/TG2000Tracks/NewShop.asm"
+Mus_NewShop:		include	"music/TG2000Tracks/Mus - SFZ Shop.asm"
 	even
 Mus_NepAnime:		include	"music/GenesisDoes/NepAnime.asm" 
 	even
-Mus_VampKiller:		include	"music/TG2000Tracks/VampireKiller.asm"
+Mus_VampKiller:		include	"music/TG2000Tracks/Mus - Vampire Killer.asm"
 	even
 Mus_Gadget:		include	"music/TG2000Tracks/Gadget.asm"
 	even
 Mus_CanCanInv:		include	"music/TG2000Tracks/CanCanInv.asm"
 	even
-Mus_Wormy:		include	"music/TG2000Tracks/Wormy.asm"
+Mus_Wormy:		include	"music/TG2000Tracks/Mus - Wormy.asm"
 	even
 Mus_Starman:		include	"music/TG2000Tracks/Starman.asm"
 	even
-Mus_JamesPond:		include	"music/TG2000Tracks/JamesPond.asm"
+Mus_JamesPond:		include	"music/TG2000Tracks/Mus - James Pond.asm"
 	even
 Mus_AlexKiddEnd:	include	"music/TG2000Tracks/AlexKiddEnd.asm"
 	even
-Mus_DJKK:		include	"music/TG2000Tracks/DJKK.asm"
+Mus_DJKK:		include	"music/TG2000Tracks/Mus - DJKK.asm"
 	even
-Mus_Levian:		include	"music/TG2000Tracks/Levian.asm"
+Mus_Levian:		include	"music/TG2000Tracks/Mus - Levian.asm"
 	even
-Mus_Peppa:		include	"music/TG2000Tracks/Peppa.asm"
+Mus_Peppa:		include	"music/TG2000Tracks/Mus - Peppa Pig.asm"
 	even
-Mus_SkyBase:		include	"music/TG2000Tracks/SkyBase.asm"
+Mus_SkyBase:		include	"music/TG2000Tracks/Mus - Sky Base.asm"
 	even
 Mus_Scrappy:		include	"music/TG2000Tracks/Scrappy.asm"
 	even
-Mus_WeAreTheSonic:	include	"music/TG2000Tracks/WeAreTheSonic.asm"
+Mus_WeAreTheSonic:	include	"music/TG2000Tracks/Mus - We Are the Sonic.asm"
 	even
-Mus_Thomas:		include	"music/TG2000Tracks/Thomas.asm"
+Mus_Thomas:		include	"music/TG2000Tracks/Mus - Thomas the Tank Engine.asm"
 	even
 Mus_CCLobby:		include	"music/LiquidTracks/Mus - CCLobby.asm"
 	even
 Mus_ChairRoom:		include	"music/CNTracks/TheCheetosChairRoom.asm"
 	even
-Mus_Skinner:		include	"music/TG2000Tracks/Skinner.asm" 
+Mus_Skinner:		include	"music/TG2000Tracks/Mus - Skinner.asm" 
 	even
 Mus_BossaNova:		include	"music/TG2000Tracks/BossaNova.asm"
 	even
