@@ -376,7 +376,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_CrazyMario
 	nextenum bgm_Win2K
 	nextenum bgm_MJWin
-	nextenum bgm_CJ
 
 	; Keep this last
 	nextenum bgm__Last
