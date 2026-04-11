@@ -604,6 +604,7 @@ VBla_Index:	dc.w VBla_00-VBla_Index	; (lag frame)
 		dc.w VBla_18-VBla_Index	; Ending Sequence
 		dc.w VBla_1A-VBla_Index	; kys
 		dc.w VBla_1C-VBla_Index	; gfy
+		dc.w VBla_1E-VBla_Index	; fake credits
 ; ===========================================================================
 
 VBla_1C:
@@ -891,6 +892,17 @@ VBla_1A:
 		subq.w	#1,(v_generictimer).w
 .end:
 		bra.w	ProcessDPLC_9Tiles
+
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; the fake credits it just calls SMPS too much
+; ---------------------------------------------------------------------------
+VBla_1E:
+		bsr.w	VBla_StandardTransfers
+		jsr	(UpdateMusic).l			; this is gonna be fucked
+		jsr	(UpdateMusic).l
+		jsr	(UpdateMusic).l
+		rts
 
 ;!@ GenesisDoes: Dummy int/func for Copera Soundblaster FM
 ; ===========================================================================
