@@ -1,5 +1,5 @@
 BGM_Area5_Header:
-	smpsHeaderStartSong 1, 1
+	smpsHeaderStartSong 3
 	smpsHeaderVoice     BGM_Area5_Voices
 	smpsHeaderChan      $07, $00
 	smpsHeaderTempo     $01, $01
