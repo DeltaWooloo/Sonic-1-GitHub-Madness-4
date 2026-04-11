@@ -400,7 +400,7 @@ SpeedUpIndex:
 		dc.b $40	; Team Fortress 2 - ???
 		dc.b $70	; Sonic 1 - Boss (but slow)
 		dc.b 1		; Tecmo Super Bowl II - Track 3			; VGM2SMPS Slop, don't speed up tempo
-		dc.b 1		; Chester Cheetah: Too Cool For Fool - Boss	; VGM2SMPS Slop, don't speed up tempo
+		dc.b 1		; Chester Cheetah: Wild Wild Quest - Boss	; VGM2SMPS Slop, don't speed up tempo
 		dc.b $20	; Katsushimi - Clinton Fucker			; Uses Drum loop, don't speed up tempo
 		dc.b 1		; Undertale - Megalovania			; VGM2SMPS Slop, don't speed up tempo
 		dc.b $24	; TheGamer2000 - Dole Boss
@@ -409,12 +409,12 @@ SpeedUpIndex:
 		dc.b $50	; Angry Video Game Nerd - Main Theme
 		dc.b $25	; Yuu Yuu Hakusho: Makyo Touitsusen - Smiling Bomb (Instruction Ver.)
 		dc.b $A		; Pokemon Gold/Silver/Crystal - New Bark Town
-		dc.b $33	; Puyo Puyo (PC-88) - Memories of Puyo Puyo
+		dc.b $33	; Puyo Puyo CD - Memories of Puyo Puyo
 		dc.b 1		; ??? - Uwol Menu
 		dc.b $33	; ??? - Ending
 		dc.b 4		; Sonic Superstars - Golden Capital Zone (Act 1)
-		dc.b $70	; Jeopardy - ???
-		dc.b $25	; ??? - Homero
+		dc.b $70	; ConiNight - Jeopardy (S1 MIX)
+		dc.b $25	; ConiNight - Homero (Homero si canta)
 		dc.b 1		; Pacman 2 - I Won't Be Long
 		dc.b $55	; Pokemon Gold/Silver/Crystal - New Bark Town (Game Over)
 		dc.b $24	; Pokemon Gold/Silver/Crystal - New Bark Town (Extra Life)
@@ -444,7 +444,7 @@ SpeedUpIndex:
 		dc.b 1		; Puyo Puyo - Reject of Puyo Puyo
 		dc.b 1		; LG Washing Machine - Jingle
 		dc.b 1		; Hong Kong 97 - I Love Beijing Tianmen
-		dc.b $40	; Puyo Puyo (PC-88) - Sunset of Puyo Puyo
+		dc.b $40	; Puyo Puyo CD - Sunset of Puyo Puyo
 		dc.b 1		; Elevator Music
 		dc.b 1		; Sonic Underground - Main Theme
 		dc.b 1		; Sonic 1 - Extra Life/Chaos Emerald
