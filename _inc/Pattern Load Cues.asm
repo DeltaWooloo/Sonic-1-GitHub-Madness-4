@@ -326,10 +326,8 @@ PLC_NGZ2end:
 ; Pattern load cues - BlueScape
 ; ---------------------------------------------------------------------------
 PLC_BSZ:	dc.w ((PLC_BSZ2-PLC_BSZ-2)/6)-1
-		;plcm	Nem_Stalk, $6B00/32	; flower stalk
-	;	plcm	Nem_Ballhog, $8000/32	; crabmeat enemy
-	;:	plcm	Nem_Splats, $9C80/32	; Splats
-
+		plcm	Nem_Spikes,    ArtTile_Spikes                 ; spikes
+        plcm	Nem_Splats, $9C80/32	; Splats
              ;   plcm    byte_2BBC2, $8300/32
 PLC_BSZ2:	dc.w ((PLC_BSZ2end-PLC_BSZ2-2)/6)-1
 		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal      ; horizontal spring

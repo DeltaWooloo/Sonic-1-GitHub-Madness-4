@@ -7,6 +7,10 @@ InternetExplorer:
                 bne.s	.normal
                 jmp	ObjSplats.l		; OPooougughh it's checking every frame!
 .normal:
+                cmpi.b  #id_BSZ,v_zone.w
+                bne.s	.normal2
+                jmp	ObjSplats.l		; OPooougughh it's checking every frame!
+.normal2:
 		moveq	#0,d0
 		move.b	obRoutine(a0),d0
 		move.w	IE_Index(pc,d0.w),d1
