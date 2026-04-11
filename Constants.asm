@@ -268,7 +268,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Coffinman			; Alberta Canada Boss
 	nextenum bgm_Aporia			; Spring Field Boss
 	nextenum bgm_Megalovania		; MeinKraft Boss
-	nextenum bgm_DJKK			; Mildanner Boss
 	nextenum bgm_DoleBOSS			; Doleville Boss
 	nextenum bgm_PizzaPopBoss		; A Boss of Some kind???
 
@@ -334,28 +333,30 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_ClintonYears
 
 	; Unused Full/Looping BGM
-	nextenum bgm_DeltaTale
-	nextenum bgm_NewShop
+	nextenum bgm_CanCan
 	nextenum bgm_ChickenDance
-	nextenum bgm_NepAnime
-	nextenum bgm_VampKiller
+	nextenum bgm_DeltaTale
 	nextenum bgm_Carefree
-	nextenum bgm_Gadget
-	nextenum bgm_CanCanInv
-	nextenum bgm_TwoSteps
 	nextenum bgm_FurElise
 	nextenum bgm_SwingSinners
 	nextenum bgm_Miniscule
+	nextenum bgm_FuneralMarch
+	nextenum bgm_BatMan
+	nextenum bgm_Resetti
+	nextenum bgm_Spoopy
+	nextenum bgm_NewShop
+	nextenum bgm_NepAnime
+	nextenum bgm_VampKiller
+	nextenum bgm_Gadget
+	nextenum bgm_CanCanInv
+	nextenum bgm_TwoSteps
 	nextenum bgm_Wormy
 	nextenum bgm_Starman
 	nextenum bgm_JamesPond
 	nextenum bgm_AlexKiddEnd
-	nextenum bgm_FuneralMarch
+	nextenum bgm_DJKK
 	nextenum bgm_Levian
-	nextenum bgm_BatMan
 	nextenum bgm_Peppa
-	nextenum bgm_Resetti
-	nextenum bgm_Spoopy
 	nextenum bgm_SkyBase
 	nextenum bgm_Scrappy
 	nextenum bgm_WeAreTheSonic
@@ -363,7 +364,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_CCLobby
 	nextenum bgm_ChairRoom
 	nextenum bgm_Skinner
-	nextenum bgm_CanCan
 	nextenum bgm_Hidden
 	nextenum bgm_BossaNova
 	nextenum bgm_dam_dariram
