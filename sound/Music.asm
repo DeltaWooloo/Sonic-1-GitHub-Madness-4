@@ -212,6 +212,8 @@ Mus_Aporia:		include	"music/TG2000Tracks/Aporia.asm"
 	even
 Mus_Megalovania:	include	"music/TG2000Tracks/Megalovania.asm"
 	even
+Mus_TwoSteps:		include	"music/TG2000Tracks/TwoSteps.asm"
+	even
 Mus_DoleBOSS:		include	"music/TG2000Tracks/DoleBOSS.asm"	;Boss Track
 	even
 Mus_PizzaPopBoss:	include "music/CNTracks/CheetahFakeout.asm"
@@ -352,19 +354,15 @@ Mus_Resetti:		include	"music/TG2000Tracks/Resetti.asm"
 	even
 Mus_Spoopy:		include	"music/TG2000Tracks/Spoopy.asm"
 	even
-
 Mus_NewShop:		include	"music/TG2000Tracks/NewShop.asm"
 	even
 Mus_NepAnime:		include	"music/GenesisDoes/NepAnime.asm" 
 	even
-
 Mus_VampKiller:		include	"music/TG2000Tracks/VampireKiller.asm"
 	even
 Mus_Gadget:		include	"music/TG2000Tracks/Gadget.asm"
 	even
 Mus_CanCanInv:		include	"music/TG2000Tracks/CanCanInv.asm"
-	even
-Mus_TwoSteps:		include	"music/TG2000Tracks/TwoSteps.asm"
 	even
 Mus_Wormy:		include	"music/TG2000Tracks/Wormy.asm"
 	even

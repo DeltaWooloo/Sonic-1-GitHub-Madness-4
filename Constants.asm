@@ -268,6 +268,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Coffinman			; Alberta Canada Boss
 	nextenum bgm_Aporia			; Spring Field Boss
 	nextenum bgm_Megalovania		; MeinKraft Boss
+	nextenum bgm_TwoSteps			; Mildanner Boss
 	nextenum bgm_DoleBOSS			; Doleville Boss
 	nextenum bgm_PizzaPopBoss		; A Boss of Some kind???
 
@@ -349,7 +350,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_VampKiller
 	nextenum bgm_Gadget
 	nextenum bgm_CanCanInv
-	nextenum bgm_TwoSteps
 	nextenum bgm_Wormy
 	nextenum bgm_Starman
 	nextenum bgm_JamesPond
