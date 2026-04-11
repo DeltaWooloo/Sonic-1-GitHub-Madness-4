@@ -2984,10 +2984,10 @@ cfStopTrack:
 		bmi.s	.stoppsg				; Branch if yes
 		tst.b	SMPS_RAM.f_updating_dac(a6)		; Is this the DAC we are updating?
 		bmi.w	.locexit				; Exit if yes
+		pea	.stoppedchannel(pc)			; continue after these fm conditions
 		tst.b	SMPS_RAM.f_voice_selector(a6)		; check if we're stopping a bgm ($00) sfx ($80) or bsfx/ssfx($40)
-		beq.w	FMNoteOff				; if bgm, noteoff and exit (compatibility)
-		bsr.w	FMSilence				; else, silence and continue
-		bra.s	.stoppedchannel
+		beq.w	FMNoteOff				; if bgm, noteoff (compatibility)
+		bra.w	FMSilence				; else, silence
 ; ===========================================================================
 ; loc_72D74:
 .stoppsg:
