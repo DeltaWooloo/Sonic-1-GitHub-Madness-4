@@ -45,6 +45,7 @@ MusicIndex:
 	dc.l	Mus_Coffinman		
 	dc.l	Mus_Aporia		
 	dc.l	Mus_Megalovania		
+	dc.l	Mus_TwoSteps		
 	dc.l	Mus_DoleBOSS		
 	dc.l	Mus_PizzaPopBoss	
 
@@ -120,7 +121,6 @@ MusicIndex:
 	dc.l	Mus_VampKiller		
 	dc.l	Mus_Gadget		
 	dc.l	Mus_CanCanInv		
-	dc.l	Mus_TwoSteps		
 	dc.l	Mus_Wormy		
 	dc.l	Mus_Starman		
 	dc.l	Mus_JamesPond		
