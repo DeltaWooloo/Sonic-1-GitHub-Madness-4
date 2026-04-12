@@ -84,45 +84,45 @@ SampleTable:
 	dcSample	TYPE_DPCM,	Github,		16000,	FLAGS_SFX		; $BE
 	dcSample	TYPE_DPCM,	Madness,	16000,	FLAGS_SFX		; $BF
 	dcSample	TYPE_DPCM,	TheFourth,	16000,	FLAGS_SFX		; $C0
-	dcSample	TYPE_DPCM,	BSOD,		16000,	FLAGS_SFX		; $C1
-	dcSample	TYPE_DPCM,	shutdown,	16000,	FLAGS_SFX		; $C2
-	dcSample	TYPE_DPCM,	chord16,	16000,	FLAGS_SFX		; $C3
-	dcSample	TYPE_DPCM,	w98ipc,		16000,	FLAGS_SFX		; $C4
+	dcSample	TYPE_DPCM,	eggmanLaugh,11025,	FLAGS_SFX		; $C1
+	dcSample	TYPE_DPCM,	BSOD,		16000,	FLAGS_SFX		; $C2
+	dcSample	TYPE_DPCM,	shutdown,	16000,	FLAGS_SFX		; $C3
+	dcSample	TYPE_DPCM,	chord16,	16000,	FLAGS_SFX		; $C4
+	dcSample	TYPE_DPCM,	w98ipc,		16000,	FLAGS_SFX		; $C5
 
 	; Splash Screens
-	dcSample	TYPE_PCM,	EggNo,		11297					; $C5
-	dcSample	TYPE_DPCM,	funnyb_utthole,	8000,	FLAGS_SFX	; $C6
-	dcSample	TYPE_DPCM,	yume2kki,	16000,	FLAGS_SFX		; $C7
-	dcSample	TYPE_DPCM,	EagleSoft_Song,	8000,	FLAGS_SFX	; $C8
-	dcSample	TYPE_DPCM,	GenesisDoes1,	8000				; $C9
-	dcSample	TYPE_DPCM,	Virus,	16000,	FLAGS_SFX			; $CA
-	dcSample	TYPE_DPCM,	supbeaches,	8000					; $CB
+	dcSample	TYPE_PCM,	EggNo,		11297					; $C6
+	dcSample	TYPE_DPCM,	funnyb_utthole,	8000,	FLAGS_SFX	; $C7
+	dcSample	TYPE_DPCM,	yume2kki,	16000,	FLAGS_SFX		; $C8
+	dcSample	TYPE_DPCM,	EagleSoft_Song,	8000,	FLAGS_SFX	; $C9
+	dcSample	TYPE_DPCM,	GenesisDoes1,	8000				; $CA
+	dcSample	TYPE_DPCM,	Virus,	16000,	FLAGS_SFX			; $CB
+	dcSample	TYPE_DPCM,	supbeaches,	8000					; $CC
 
 	; Commercial Samples
-	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $CC
-	dcSample	TYPE_DPCM,	GenesisCan3,	8000,FLAGS_SFX		; $CD
+	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $CD
+	dcSample	TYPE_DPCM,	GenesisCan3,	8000,FLAGS_SFX		; $CE
 
 	; Ollie Samples
-	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $CE
-	dcSample	TYPE_DPCM,	OllieWahoo,	16000					; $CF
+	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $CF
+	dcSample	TYPE_DPCM,	OllieWahoo,	16000					; $D0
 
 	; SEGA Samples
-	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX		; $D0
+	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX		; $D1
 
 	; Unused
-;	dcSample	TYPE_PCM,	Segay,		0,	FLAGS_SFX			; $D1
-;	dcSample	TYPE_PCM,	CL_Penis,	11297					; $D2
-;	dcSample	TYPE_PCM,	Boioing,	5250,	FLAGS_SFX		; $D3
-;	dcSample	TYPE_DPCM,	OrngLaugh,	8000,	FLAGS_SFX		; $D4
-;	dcSample	TYPE_DPCM,	ClintonYeah,	20600,	FLAGS_SFX	; $D5
-;	dcSample	TYPE_DPCM,	GenesisCan1,	16000,FLAGS_SFX		; $D6
-;	dcSample	TYPE_DPCM,	GenesisCan2,	16000,FLAGS_SFX		; $D7
-;	dcSample	TYPE_DPCM,	Intel,		16000, FLAGS_SFX		; $D8
-;	dcSample	TYPE_DPCM,	MadnessR,	16000,	FLAGS_SFX		; $D9
-;	dcSample	TYPE_DPCM,	eggmanLaugh,	16000,	FLAGS_SFX	; $DA
+;	dcSample	TYPE_PCM,	Segay,		0,	FLAGS_SFX			; $D2
+;	dcSample	TYPE_PCM,	CL_Penis,	11297					; $D3
+;	dcSample	TYPE_PCM,	Boioing,	5250,	FLAGS_SFX		; $D4
+;	dcSample	TYPE_DPCM,	OrngLaugh,	8000,	FLAGS_SFX		; $D5
+;	dcSample	TYPE_DPCM,	ClintonYeah,	20600,	FLAGS_SFX	; $D6
+;	dcSample	TYPE_DPCM,	GenesisCan1,	16000,FLAGS_SFX		; $D7
+;	dcSample	TYPE_DPCM,	GenesisCan2,	16000,FLAGS_SFX		; $D8
+;	dcSample	TYPE_DPCM,	Intel,		16000, FLAGS_SFX		; $D9
+;	dcSample	TYPE_DPCM,	MadnessR,	16000,	FLAGS_SFX		; $DA
 	
 	;!@ GD: Last slot always reserved for PCM SFX Silence
-	dcSample	TYPE_DPCM,	dummy,	8000, FLAGS_SFX				; $D1
+	dcSample	TYPE_DPCM,	dummy,	8000, FLAGS_SFX				; $DB
 
 	; ADVISORY: If you're coming to this repo just to add samples,
 	; they are going to get removed. Sorry!
@@ -211,6 +211,7 @@ SampleTable:
 	incdac	Github, "sound/dac/GenesisDoes/git-hub.dpcm"
 	incdac	Madness, "sound/dac/GenesisDoes/Madness.dpcm"
 	incdac	TheFourth, "sound/dac/GenesisDoes/Four.dpcm"
+	incdac	eggmanLaugh, "sound/dac/GenesisDoes/eggmanLaugh.dpcm"
 	incdac	BSOD, "sound/dac/GenesisDoes/windie.dpcm"
 	incdac	shutdown, "sound/dac/GenesisDoes/shutdown.dpcm"
 	incdac	chord16, "sound/dac/GenesisDoes/chord16.dpcm"
@@ -251,7 +252,6 @@ SampleTable:
 ;	incdac	OrngLaugh, "sound/dac/AnOrangesLaugh.dpcm"
 ;	incdac	ClintonYeah, "sound/dac/Clinton Fucker/yeah.dpcm"
 ;	incdac	MadnessR, "sound/dac/GenesisDoes/MadnessR.dpcm"
-;	incdac	eggmanLaugh, "sound/dac/GenesisDoes/eggmanLaugh.dpcm"
 ;	incdac	GenesisCan1,"sound/dac/GenesisDoes/GenesisCan1.dpcm"
 ;	incdac	GenesisCan2,"sound/dac/GenesisDoes/GenesisCan2.dpcm"
 ;	incdac	Intel,"sound/dac/Intel.dpcm"

@@ -3,11 +3,13 @@ bgm_gen:	equ	bgm_hang	;!@ TODO: Port over Genesis song (SLZ from Genesis 1 Mini,
 bgm_scd:	equ	bgm_hang	;!@ TODO: Port over Genesis SMPS remix of US Sega CD BIOS v2 (base it off Sonic 1 Remastered?)
 art_null:	equ	$FFFFFFFF
 
-;ArtTile offsets
-ArtTile_Home0:				equ $000					; Home 		(tile 0)
-ArtTile_Home1:				equ $001					; Home 		(transparency + tile 1)
-ArtTile_bsod_w311_art2:		equ	$061					; W311 		art 2 for 16-bit msgbox
-ArtTile_bsod_w98ipc_art2:	equ	$060					; W98ipc 	art 2 for PC/Microslop gfx 
+; ArtTile offsets
+ArtTile_Home0:				equ $000					; Home 			(tile 0)
+ArtTile_Home1:				equ $001					; Home 			(transparency + tile 1)
+ArtTile_bsod_w311_art2:		equ	$061					; W311 			art 2 for 16-bit msgbox
+ArtTile_bsod_w98ipc_art2:	equ	$060					; W98ipc 		art 2 for PC/Microslop gfx 
+ArtTile_bsod_scdmz_art2:	equ	$061					; Sonic CD MMZ	art 2 for MMZ Virus
+f2s:						equ	$03C
 
 bsodData macro seconds,skipsec,art1,artoff1,art2,artoff2,fg,bg,pal,tclr,bgm,pcm
 	dc.l art1
@@ -296,18 +298,19 @@ BSOD_table:	; seconds, seconds to skip, art, map, palette, SMPS sound ID, MPCM s
 		bsodData		sec_gg,		secSkip_gg,		bsod_gg1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gg1.fg,		bsod_gg1.bg,		bsod_gg1.pal,		TCLR(0,0),	bgm_Retro,		dChord16
 		bsodData		sec_gg,		secSkip_gg,		bsod_gg2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gg2.fg,		bsod_gg2.bg,		bsod_gg2.pal,		TCLR(0,0),	bgm_Retro,		dChord16
 		;Genesis-based
-		bsodData		sec_gen,	secSkip_gen,	art_null,				ArtTile_Home0,	art_null,		ArtTile_Home0,				bsod_tmssrsod.fg,	bsod_tmssrsod.bg,	bsod_tmssrsod.pal,	TCLR(0,0),	bgm_hang,		dVirus
+		bsodData		60*f2s,		secSkip_gen,	art_null,				ArtTile_Home0,	art_null,		ArtTile_Home0,				bsod_tmssrsod.fg,	bsod_tmssrsod.bg,	bsod_tmssrsod.pal,	TCLR(0,0),	bgm_hang,		dVirus
 		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscu.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gen_ntscu.fg,	bsod_gen_ntscu.bg,	bsod_gen_ntscu.pal,	TCLR(1,0),	bgm_gen,		dBSOD
 		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gen_ntscj.fg,	bsod_gen_ntscj.bg,	bsod_gen_ntscj.pal,	TCLR(1,0),	bgm_gen,		dBSOD
 		bsodData		sec_gen,	secSkip_gen,	bsod_gen_ntscuj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gen_ntscuj.fg,	bsod_gen_ntscuj.bg,	bsod_gen_ntscuj.pal,TCLR(1,0),	bgm_gen,		dBSOD
 		bsodData		sec_gen,	secSkip_gen,	bsod_gen_pal.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gen_pal.fg,	bsod_gen_pal.bg,	bsod_gen_pal.pal,	TCLR(1,0),	bgm_gen,		dBSOD
 		;Sonic CD-based
-		bsodData		sec_CD,		secSkip_CD,		bsod_scdm.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scdm.fg,		bsod_scdm.bg,		bsod_scdm.pal,		TCLR(0,0),	bgm_VirusAlert,	dVirus
-		bsodData		sec_CD,		secSkip_CD,		bsod_scd1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd1.fg,		bsod_scd1.bg,		bsod_scd1.pal,		TCLR(0,0),	bgm_Hidden,		dLetsGOO	; CYA/Tails
-		bsodData		sec_CD,		secSkip_CD,		bsod_scd2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd2.fg,		bsod_scd2.bg,		bsod_scd2.pal,		TCLR(0,0),	bgm_Title,		dYoFreddy	; DJ
-		bsodData		sec_CD,		secSkip_CD,		bsod_scd3.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd3.fg,		bsod_scd3.bg,		bsod_scd3.pal,		TCLR(0,0),	bgm_BatMan,		dOnTheBall	; Batman; Y So Serious?
-		bsodData		sec_CD,		secSkip_CD,		bsod_scd4.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd4.fg,		bsod_scd4.bg,		bsod_scd4.pal,		TCLR(0,0),	bgm_LG,			dLetsGOO	; Cute Sonic
-		bsodData		sec_CD,		secSkip_CD,		bsod_scd5.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd5.fg,		bsod_scd5.bg,		bsod_scd5.pal,		TCLR(0,0),	bgm_DJKK,		dTwerkOf87	; Fun is Infinite
+		bsodData		60*f2s,		secSkip_CD,		bsod_scdm.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scdm.fg,		bsod_scdm.bg,		bsod_scdm.pal,		TCLR(0,0),	bgm_VirusAlert,	dVirus		; Sonic CD BRAM corruption (Mildanner parody)
+		bsodData		60*f2s,		secSkip_CD,		bsod_scdmz.art1,		ArtTile_Home1,	bsod_scdmz.art2,ArtTile_bsod_scdmz_art2,	bsod_scdmz.fg,		bsod_scdmz.bg,		bsod_scdmz.pal,		TCLR(0,0),	bgm_MMZPast,	dVirus		; Sonic CD Virus Alert (MMZ BF)
+		bsodData		45*f2s,		secSkip_CD,		bsod_scd1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd1.fg,		bsod_scd1.bg,		bsod_scd1.pal,		TCLR(0,0),	bgm_Hidden,		dLetsGOO	; CYA/Tails
+		bsodData		(60+48)*f2s,secSkip_CD,		bsod_scd2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd2.fg,		bsod_scd2.bg,		bsod_scd2.pal,		TCLR(0,0),	bgm_Title,		dYoFreddy	; DJ
+		bsodData		45*f2s,		secSkip_CD,		bsod_scd3.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd3.fg,		bsod_scd3.bg,		bsod_scd3.pal,		TCLR(0,0),	bgm_BatMan,		dTwerkOf87	; Batman; Y So Serious?
+		bsodData		12*f2s,		secSkip_CD,		bsod_scd4.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd4.fg,		bsod_scd4.bg,		bsod_scd4.pal,		TCLR(0,0),	bgm_LG,			dLetsGOO	; Cute Sonic
+		bsodData		22*f2s,		secSkip_CD,		bsod_scd5.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd5.fg,		bsod_scd5.bg,		bsod_scd5.pal,		TCLR(0,0),	bgm_TwoSteps,	dEggmanLaugh; Fun is Infinite
 		;Sega CD-based
 		bsodData		sec_CD,		secSkip_CD,		bsod_scd_ntscu.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd_ntscu.fg,	bsod_scd_ntscu.bg,	bsod_scd_ntscu.pal,	TCLR(1,0),	bgm_scd,		dBSOD
 		bsodData		sec_CD,		secSkip_CD,		bsod_scd_ntscj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd_ntscj.fg,	bsod_scd_ntscj.bg,	bsod_scd_ntscj.pal,	TCLR(1,0),	bgm_scd,		dBSOD
@@ -403,6 +406,17 @@ bsod_scdm:
 .fg:		binclude "_gamemode/winBSOD/bsod_scdm-mapFG.eni"
 			even
 .pal:		binclude "_gamemode/winBSOD/bsod_scdm-pal.bin"
+			even
+
+bsod_scdmz:
+.art2:
+			binclude "_gamemode/winBSOD/bsod_scdmz-art2.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_scdmz-mapFG.eni"
+			even
+.bg:		binclude "_gamemode/winBSOD/bsod_scdmz-mapBG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_scdmz-pal.bin"
 			even
 			
 bsod_scd1:
@@ -527,6 +541,7 @@ bsod_gen_ntscu.art1:
 bsod_gen_ntscj.art1:
 bsod_gen_ntscuj.art1:
 bsod_gen_pal.art1:
+bsod_scdmz.art1:
 bsod_scd_ntscu.art1:
 bsod_scd_ntscj.art1:
 bsod_scd_pale.art1:

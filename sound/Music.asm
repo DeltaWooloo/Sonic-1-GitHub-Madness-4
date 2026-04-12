@@ -105,6 +105,8 @@ MusicIndex:
 	dc.l	Mus_LimitedEgg		
 	dc.l	Mus_BomerDude		
 	dc.l	Mus_ClintonYears	
+	
+	dc.l	Mus_MMZPast
 
 	dc.l	Mus_CanCan		
 	dc.l	Mus_ChickenDance	
@@ -146,6 +148,7 @@ MusicIndex:
 	dc.l	Mus_Win2K		
 	dc.l	Mus_Folgers		
 	dc.l	Mus_MJWin		
+	;!@ bgmwarning	MusicIndex,4
 
 Mus_MWaterS:		include "music/LiquidTracks/Mus - Mega Water S.asm"
 	even
@@ -330,6 +333,9 @@ Mus_LimitedEgg:		include "music/DaxKatter/Mus - Limited Egg.asm"
 Mus_BomerDude:		include	"music/Dawid/Mus - Bomer Dude.asm"	;i have no idea too
 	even
 Mus_ClintonYears:	include	"music/DaxKatter/Mus - Clinton Years.asm"
+	even
+
+Mus_MMZPast:	include	"music/GenesisDoes/MMZPast_SNN.asm"
 	even
 
 ; Unused Tracks (so far)

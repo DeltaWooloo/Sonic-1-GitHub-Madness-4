@@ -672,6 +672,12 @@ Pow_Randomiser:
 		moveq	#0,d0						; Clear d0
 		jsr	(RandomNumber).l				; get a random number in d0
 		andi.l	#bgm__LastPow2,d0			; !@ Mask to highest bitfield ID
+		
+		;Check if too high
+		cmpi.l	#bgm__Last,d0				;Is it higher than last?
+		bls.s	.skipFix					;if not, branch
+		subi.l	#bgm__Last,d0				;Subtract from max to fix ID
+	.skipFix:
 		jmp	(QueueSound1).l					; play song
 		rts
  
