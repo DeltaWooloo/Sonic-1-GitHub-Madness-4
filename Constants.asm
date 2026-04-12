@@ -742,6 +742,7 @@ ArtTile_CBZChopper:		equ $541
 ArtTile_CBZMoto_Bug:		equ $559
 
 ArtTile_Villager:		equ $4F0
+ArtTile_SCG:		equ $449
 
 ; Eggman
 ArtTile_Eggman:			equ $400

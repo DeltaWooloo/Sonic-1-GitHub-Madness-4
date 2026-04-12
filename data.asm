@@ -336,6 +336,8 @@ Nem_Villager:		binclude	"artnem/Villager.nem"
 		even
 Nem_Mouse:		binclude	"artnem/Mouse.nem"
 		even
+Nem_SCG:		binclude	"artnem/SegaChGuy.nem"
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - character hud
 ; ---------------------------------------------------------------------------

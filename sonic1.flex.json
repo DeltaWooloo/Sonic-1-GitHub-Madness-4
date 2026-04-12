@@ -1,8 +1,33 @@
 {
     "Flex": 2,
     "name": "Sonic 1",
-    "node": "8848ce8b-f5d7-46a6-ac22-eafcbefd5056",
+    "node": "5dfd7215-2a6d-4511-947c-d7cea83cbb73",
     "objects": [
+        {
+            "uuid": "5dfd7215-2a6d-4511-947c-d7cea83cbb73",
+            "format": "Sonic 1.js",
+            "name": "SCG",
+            "palettes": [
+                {
+                    "path": "palette\\Sonic.bin",
+                    "length": 1
+                }
+            ],
+            "art": {
+                "path": "artnem\\SegaChGuy.nem",
+                "compression": "Nemesis",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "_maps\\Sega_Ch_Guy.asm",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            }
+        },
         {
             "uuid": "8848ce8b-f5d7-46a6-ac22-eafcbefd5056",
             "format": "Sonic 1.js",
@@ -20,31 +45,6 @@
             },
             "mappings": {
                 "path": "_maps\\Mouse.asm",
-                "label": ""
-            },
-            "dplcs": {
-                "enabled": false,
-                "path": "",
-                "label": ""
-            }
-        },
-        {
-            "uuid": "f9beba2a-c8e7-449d-9a05-940db22b224f",
-            "format": "Sonic 1.js",
-            "name": "BLUESCAPE pally",
-            "palettes": [
-                {
-                    "path": "palette\\BlueScape.bin",
-                    "length": 3
-                }
-            ],
-            "art": {
-                "path": "",
-                "compression": "Uncompressed",
-                "offset": 0
-            },
-            "mappings": {
-                "path": "",
                 "label": ""
             },
             "dplcs": {

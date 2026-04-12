@@ -37,7 +37,13 @@ Moto_Main:	; Routine 0
 		move.l	#Map_Mouse,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Villager,0,0),obGfx(a0)
 		move.b	#$E,obActWid(a0)
-.NotWIN
+.NotWIN:
+		cmpi.b	#id_BSZ,(v_zone).w		; is zone bsz?
+		bne.s	.NotBSZ	; if not, branch
+		move.l	#Map_SCG,obMap(a0)
+		move.w	#make_art_tile(ArtTile_SCG,0,0),obGfx(a0)
+		move.b	#$E,obActWid(a0)
+.NotBSZ:
 		tst.b	obAnim(a0)	; is object a smoke trail?
 		bne.s	.smoke		; if yes, branch
 		move.b	#$E,obHeight(a0)

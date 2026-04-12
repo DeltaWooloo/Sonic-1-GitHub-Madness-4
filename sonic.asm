@@ -6136,6 +6136,7 @@ Map_LWall:	include	"_maps/Wall of Lava.asm"
 
 		include	"_incObj/40 Moto Bug.asm" ; includes "_incObj/sub RememberState.asm"
 		include	"_anim/Moto Bug.asm"
+		include	"_anim/SegaCH.asm"
 Map_Moto:	include	"_maps/Moto Bug.asm"
 Map_Splats:	 include "_maps/Splats.asm"
 
@@ -6149,6 +6150,7 @@ Map_Yad:	include	"_maps/Yadrin.asm"
 
 		include	"_incObj/sub SolidObject.asm"
 Map_Mouse:	include	"_maps/Mouse.asm"
+Map_SCG:	include	"_maps/Sega_Ch_Guy.asm"
 
 ; CBZ BADNIKS
 Map_IZ:	include	"coniobjs/IZMap.asm"
