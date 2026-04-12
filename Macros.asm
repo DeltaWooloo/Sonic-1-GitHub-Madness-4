@@ -384,6 +384,58 @@ zonewarning:	macro loc,elementsize
 		warning "Size of loc (\{(._end-loc)/elementsize}) does not match ZoneCount (\{ZoneCount})."
 	endif
 		endm
+		
+; ---------------------------------------------------------------------------
+; compare the size of an index with bgm__count constant
+; (should be used immediately after the index)
+; input: index address, element size
+; ---------------------------------------------------------------------------
+
+bgmwarning:	macro loc2,elementsize2
+._end2:
+	if (._end2-loc2)-(bgm__count*elementsize2)<>0
+		warning "Size of loc2 (\{(._end2-loc2)/elementsize2}) does not match bgm__count (\{bgm__count})."
+	endif
+		endm
+		
+; ---------------------------------------------------------------------------
+; compare the size of an index with sfx__count constant
+; (should be used immediately after the index)
+; input: index address, element size
+; ---------------------------------------------------------------------------
+
+sfxwarning:	macro loc3,elementsize3
+._end3:
+	if (._end3-loc3)-(sfx__count*elementsize3)<>0
+		warning "Size of loc3 (\{(._end3-loc3)/elementsize3}) does not match sfx__count (\{sfx__count})."
+	endif
+		endm
+		
+; ---------------------------------------------------------------------------
+; compare the size of an index with spc__count constant
+; (should be used immediately after the index)
+; input: index address, element size
+; ---------------------------------------------------------------------------
+
+spcwarning:	macro loc4,elementsize4
+._end4:
+	if (._end4-loc4)-(spc__count*elementsize4)<>0
+		warning "Size of loc4 (\{(._end4-loc4)/elementsize4}) does not match spc__count (\{spc__count})."
+	endif
+		endm
+		
+; ---------------------------------------------------------------------------
+; compare the size of an index with flg__count constant
+; (should be used immediately after the index)
+; input: index address, element size
+; ---------------------------------------------------------------------------
+
+flgwarning:	macro loc5,elementsize5
+._end5:
+	if (._end5-loc5)-(flg__count*elementsize5)<>0
+		warning "Size of loc5 (\{(._end5-loc5)/elementsize5}) does not match flg__count (\{flg__count})."
+	endif
+		endm
 
 ; ---------------------------------------------------------------------------
 ; produce a packed art-tile

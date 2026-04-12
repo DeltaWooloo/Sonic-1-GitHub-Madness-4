@@ -334,6 +334,9 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_LimitedEgg
 	nextenum bgm_BomerDude
 	nextenum bgm_ClintonYears
+	
+	; BSOD BGM
+	nextenum bgm_MMZPast
 
 	; Unused Full/Looping BGM
 	nextenum bgm_CanCan
@@ -380,7 +383,8 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 
 	; Keep this last
 	nextenum bgm__Last
-	bgm__LastPow2:		equ	$79		;!@ Manually update me	
+	bgm__LastPow2:		equ	$7F						; !@ Manually update me	
+	bgm__count:			equ	(bgm__Last-bgm__First)	; Count of songs
 
 ; Sound effects
 	enum	sfx__First=$A0
@@ -449,11 +453,14 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum sfx_SMPSZ80Snare
 	; Keep this last
 	nextenum	sfx__Last
+	
+	sfx__count:			equ	(sfx__Last-sfx__First)+1	; Count of sfx
 
 ; Special sound effects
 	enum	spec__First=$F0
 	nextenum sfx_Waterfall=spec__First
 spec__Last = sfx_Waterfall
+	spc__count:			equ	(spec__Last-spec__First)+1	; Count of special
 
 flg__First:	equ $FB
 bgm_Fade:	equ ((ptr_flgE0-Sound_ExIndex)/4)+flg__First
@@ -462,6 +469,7 @@ bgm_Speedup:	equ ((ptr_flgE2-Sound_ExIndex)/4)+flg__First
 bgm_Slowdown:	equ ((ptr_flgE3-Sound_ExIndex)/4)+flg__First
 bgm_Stop:	equ ((ptr_flgE4-Sound_ExIndex)/4)+flg__First
 flg__Last:	equ ((ptr_flgend-Sound_ExIndex-4)/4)+flg__First
+flg__count:			equ	(flg__Last-flg__First)+1	; Count of flags
 SNDMAX:		equ	flg__Last	;!@ GD: Maximum sound ID
 
 	include "sound/SampleConstants.asm"

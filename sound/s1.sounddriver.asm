@@ -451,6 +451,8 @@ SpeedUpIndex:
 		dc.b $55	; Sonic 1 - Green Hill Zone (GEMS)
 		dc.b $A0	; Too LimitedSonic - Final Limit
 		dc.b 1		; Whatever the fuck this is
+		bgmwarning	SpeedUpIndex, 1
+		even
 
 ; ---------------------------------------------------------------------------
 ; Priority of sound. New music or SFX must have a priority higher than or equal
@@ -463,6 +465,7 @@ SpeedUpIndex:
 ; SoundTypes:
 SoundPriorities:
 		; BGM
+	.bgm:
 		dc.b     $90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90	; $01
 		dc.b $90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90	; $10
 		dc.b $90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90	; $20
@@ -474,13 +477,15 @@ SoundPriorities:
 		dc.b $90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90	; $80
 		dc.b $90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90	; $90
 
+	.sfx:
 		; SFX
 		dc.b $80,$70,$70,$70,$70,$70,$70,$70,$70,$70,$68,$70,$70,$70,$60,$70	; $A0
 		dc.b $70,$60,$70,$60,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$7F	; $B0
 		dc.b $60,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70	; $C0
 		dc.b $70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$7F,$70,$70	; $D0
 		dc.b $70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70	; $E0
-		
+	
+	.spc:
 		; Special
 		dc.b $80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$90,$90,$90,$90,$90	; $F0
 		even
@@ -1112,7 +1117,6 @@ Sound_PlayCDA:
 ; HORRIBLE Flag index, for tracks
 ; empty index = smps
 PlayCD_Index:
-
 	; flag, loop time
 	dc.L	_MCD_PlayTrack<<24|$00000000	; $01
 	dc.l	$00000000
@@ -1194,7 +1198,7 @@ PlayCD_Index:
 	dc.l	$00000000
 	dc.l	$00000000
 	dc.l	$00000000
-
+	bgmwarning	PlayCD_Index,4
 	even
 	endif
 

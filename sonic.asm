@@ -2417,8 +2417,8 @@ FinalTitle:
 ;		enable_ints
 		
 		;!@ GenesisDoes
-;		move.b	#dEggmanLaugh, d0
-;		jsr		(MegaPCM_PlaySample).l
+		move.b	#dEggmanLaugh, d0
+		jsr		(MegaPCM_PlaySample).l
 
 		moveq	#palid_Title,d0	; load title screen palette
 		bsr.w	PalLoad_Fade
