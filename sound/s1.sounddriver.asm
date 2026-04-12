@@ -2177,12 +2177,6 @@ FMNoteOn:
 		bne.s	.locret					; Return if so
 		btst	#2,SMPS_Track.PlaybackControl(a5)	; Is track being overridden?
 		bne.s	.locret					; Return if so
-                cmpi.b. #6,SMPS_Track.VoiceControl(a5); Is this FM channel 6? ;DSK: first actual commit from me btw
-        bne.s    .notfm6                    ; If not, branch
-        moveq    #$2B,d0                    ; DAC enable/disable register
-        moveq    #0,d1                    ; Disable DAC (letting FM6 run)
-        bsr.w    WriteFMI
-.notfm6:
 		moveq	#$28,d0					; Note on/off register
 		move.b	SMPS_Track.VoiceControl(a5),d1		; Get channel bits
 		ori.b	#$F0,d1					; Note on on all operators
