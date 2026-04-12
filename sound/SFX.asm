@@ -74,6 +74,7 @@ ptr_sndDA:	dc.l SoundDA
 ptr_sndDB:	dc.l SoundDB
 ptr_sndDC:	dc.l SoundDC
 ptr_sndDD:	dc.l SoundDD
+ptr_sndDE:	dc.l SoundDE
 ; ---------------------------------------------------------------------------
 ; Sound effect data
 ; ---------------------------------------------------------------------------
@@ -200,5 +201,7 @@ SoundDB:	include "sfx/SFX - Rift Sky Break.asm"
 SoundDC:	include "sfx/LG Echo.asm"
 		even
 SoundDD:	include "sfx/Snd - Error.asm"
+		even
+SoundDE:	include "sfx/SMPSZ80Snare.asm"
 		even
 	END
