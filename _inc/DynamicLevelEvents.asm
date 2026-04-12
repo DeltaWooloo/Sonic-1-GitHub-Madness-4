@@ -1030,46 +1030,64 @@ DLE_BSZx:	dc.w DLE_BSZ1-DLE_BSZx
 		dc.w DLE_BSZ3-DLE_BSZx
 ; ===========================================================================
 DLE_BSZ2:
-DLE_BSZ3:
 		rts
+
+; ===========================================================================
+
+DLE_BSZ3:
+		move.b	#1,(f_lockctrl).w
+		clr.b	(v_jpadpress1).w
+		move.b	#id_Hurt,(v_player+obAnim).w	; Clear control lock
+		move.w	(v_limitbtm1).w,d0		; Move the bottom of the stage into d0
+		add.w	#$16,d0				; Add 22 to the bottom so that Sonic goes under the screen
+		cmp.w	(v_player+obY).w,d0		; Is Sonic below the bottom of the level?
+		bgt.s	DLE_BSZ3_return			; If not, branch
+		cmpi.b	#6,(v_player+obRoutine).w	; Is Sonic dead?
+		bhs.s	DLE_BSZ3_return			; If yes, then don't go to next level, Sonic must die
+		move.w	#(id_BTZ<<8),(v_zone).w		; Set Zone ID to BlueStone
+		move.w	#1,(f_restart).w		; Restart the level
+
+DLE_BSZ3_return:
+		rts
+; ===========================================================================
 
 DLE_BSZ1:
 		moveq	#0,d0
 		move.b	(v_dle_routine).w,d0
-		move.w	DLE_SBZ1_Boss(pc,d0.w),d0
-		jmp	DLE_SBZ1_Boss(pc,d0.w)
+		move.w	DLE_BSZ1_Boss(pc,d0.w),d0
+		jmp	DLE_BSZ1_Boss(pc,d0.w)
 
-DLE_SBZ1_Boss:
-		dc.w DLE_SBZ1_PreBoss-DLE_SBZ1_Boss
-		dc.w DLE_SBZ1_Boss_Setup-DLE_SBZ1_Boss
-		dc.w DLE_SBZ1_return-DLE_SBZ1_Boss ; wait until palette fades in mildanner object
-		dc.w DLE_SBZ1_return-DLE_SBZ1_Boss
-		dc.w DLE_SBZ1_BossEnd-DLE_SBZ1_Boss
-		dc.w DLE_SBZ1_return-DLE_SBZ1_Boss
-DLE_SBZ1_PreBoss:
+DLE_BSZ1_Boss:
+		dc.w DLE_BSZ1_PreBoss-DLE_BSZ1_Boss
+		dc.w DLE_BSZ1_Boss_Setup-DLE_BSZ1_Boss
+		dc.w DLE_BSZ1_return-DLE_BSZ1_Boss ; wait until palette fades in mildanner object
+		dc.w DLE_BSZ1_return-DLE_BSZ1_Boss
+		dc.w DLE_BSZ1_BossEnd-DLE_BSZ1_Boss
+		dc.w DLE_BSZ1_return-DLE_BSZ1_Boss
+DLE_BSZ1_PreBoss:
 		move.w	#$2700,(v_limitright1).w
 		move.w	#$2700,(v_limitright2).w
 		move.w	#$720,(v_limitbtm1).w
 		cmpi.w	#$1880,(v_screenposx).w
-		bcs.s	DLE_SBZ1_return
+		bcs.s	DLE_BSZ1_return
 		move.w	#$620,(v_limitbtm1).w
 		cmpi.w	#$2000,(v_screenposx).w
-		bcs.s	DLE_SBZ1_return
+		bcs.s	DLE_BSZ1_return
 		move.w	#$2A0,(v_limitbtm1).w
 
 		cmpi.w	#$2200,(v_screenposx).w
-		bcs.s	DLE_SBZ1_return
+		bcs.s	DLE_BSZ1_return
 
 		addq.b	#2,(v_dle_routine).w
 
-
-DLE_SBZ1_return:
+DLE_BSZ1_return:
 		rts
-DLE_SBZ1_BossEnd:
+
+DLE_BSZ1_BossEnd:
 		move.w	#$2700,(v_limitright1).w
 		move.w	#$2700,(v_limitright2).w
 		rts
-DLE_SBZ1_Boss_Setup:
+DLE_BSZ1_Boss_Setup:
 
 
 		move.w	#$2A0,(v_limitbtm1).w
