@@ -146,6 +146,14 @@ loc_EC86:
 		addq.b	#2,obRoutine(a0)
 
 fuckyou76:
+		cmpi.w	#(id_BSZ<<8)+1,(v_zone).w ; is level bsz2?
+		bne.s	wellfuckyounot
+		move.b	#id_Hurt,(v_player+obAnim).w	; change sonics anim to hurt
+		move.w	#(id_BSZ<<8)+2,(v_zone).w		; Set Zone ID to BlueScape 3
+		move.w	#1,(f_restart).w		; Restart the level
+		rts
+
+wellfuckyounot:
 		tst.w	(v_debuguse).w	; is debug mode	on?
 		bne.w	locret_ECEE	; if yes, branch
 		btst	#1,(v_player+obStatus).w
@@ -172,12 +180,6 @@ loc_EC869:
 
 
 GotThroughAct:
-		cmpi.w	#(id_BSZ<<8)+1,(v_zone).w ; is level bsz2?
-		bne.s	wellfuckyounot
-		move.b	#id_Hurt,(v_player+obAnim).w	; change sonics anim to hurt
-		move.w	#(id_BSZ<<8)+2,(v_zone).w		; Set Zone ID to BlueScape 3
-		move.w	#1,(f_restart).w		; Restart the level
-wellfuckyounot:
 		tst.b	(v_endcard).w
 		bne.s	locret_ECEE
 		

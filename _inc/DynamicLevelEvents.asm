@@ -1064,6 +1064,7 @@ DLE_BSZ1_Boss:
 		dc.w DLE_BSZ1_return-DLE_BSZ1_Boss
 		dc.w DLE_BSZ1_BossEnd-DLE_BSZ1_Boss
 		dc.w DLE_BSZ1_return-DLE_BSZ1_Boss
+
 DLE_BSZ1_PreBoss:
 		move.w	#$2700,(v_limitright1).w
 		move.w	#$2700,(v_limitright2).w
@@ -1087,9 +1088,8 @@ DLE_BSZ1_BossEnd:
 		move.w	#$2700,(v_limitright1).w
 		move.w	#$2700,(v_limitright2).w
 		rts
+
 DLE_BSZ1_Boss_Setup:
-
-
 		move.w	#$2A0,(v_limitbtm1).w
 		move.w	#$2A0,(v_limitbtm2).w
 
