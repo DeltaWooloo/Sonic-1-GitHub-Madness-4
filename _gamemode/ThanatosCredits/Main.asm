@@ -375,7 +375,7 @@ thantxt: macro txt
 	thantxt	"GITHUB INC."
 	thantxt	"OCTOCAT"
 	thantxt	"SEGA CHANNEL GUY"
-	thantxt	"WEIRD AL"
+	thantxt	"WEIRD AL YANK."
 	thantxt	"PHIL COLLINS"
 	thantxt	"GENESIS BAND"
 	thantxt	"KRIKZZ FOR EVERDRIVE"
