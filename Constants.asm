@@ -257,6 +257,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_VirusAlert			; 		(Act 3)
 	nextenum bgm_DoleDetective		; Doleville	(Act 1)
 	nextenum bgm_HardwareStore		; 		(Act 2)
+	nextenum bgm_DoleAttack			; 		(Act 3)
 	nextenum bgm_GHZ			; Nogales Zone
 	nextenum bgm_TF2			; Bluescapes	(Act 1)		; Dax: Interesting song choice for this :/
 	nextenum bgm_Blue			;		(Act 2)

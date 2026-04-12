@@ -35,6 +35,7 @@ MusicIndex:
 	dc.l	Mus_VirusAlert		
 	dc.l	Mus_DoleDetective	
 	dc.l	Mus_HardwareStore	
+	dc.l	Mus_DoleAttack		
 	dc.l	Mus_GHZ			
 	dc.l	Mus_TF2			
 	dc.l	Mus_Blue		
@@ -192,6 +193,8 @@ Mus_VirusAlert:		include	"music/TG2000Tracks/Mus - Virus Alert.asm"
 Mus_DoleDetective:	include	"music/Kat/Mus - Dole Detective.asm"
 	even
 Mus_HardwareStore:	include	"music/MattTracks/Mus - Hardware Store.asm"
+	even
+Mus_DoleAttack:		include	"music/MattTracks//Mus - Dole Attack.asm"
 	even
 Mus_GHZ:		include "music/Kat/Mus - Green Hill Zone.asm"
 	even
