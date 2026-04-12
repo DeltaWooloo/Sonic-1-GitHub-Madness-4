@@ -327,6 +327,7 @@ thantxt: macro txt
 	thantxt	"MALACHI"
 	thantxt	"DAWID"
 	thantxt	"SANCHI"
+	thantxt	"DARKSHAMILKHAN"
 	thantxt	"ADD YOUR NAME HERE"
 	dc.b	1,1
 	
