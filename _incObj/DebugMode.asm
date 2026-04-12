@@ -26,6 +26,7 @@ Debug_Main:	; Routine 0
 		; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-10#post-95225
 		bset    #1,obStatus(a0)    ; force airborne state when entering debug mode
         clr.b   (f_nobgscroll).w
+        clr.b   (f_lockscroll).w
         bclr    #6,obStatus(a0)    ; Clear underwater status
         jsr     (ResumeMusic).l
         beq.s   .skipReset

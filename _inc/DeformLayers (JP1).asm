@@ -4,32 +4,33 @@
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
-
+DeformLayers_Exit:
+		rts
 DeformLayers:
 		tst.b	(f_nobgscroll).w
-		beq.s	.bgscroll
-		rts
-; ===========================================================================
-
-	.bgscroll:
-		clr.w	(v_fg_scroll_flags).w
-		clr.w	(v_bg1_scroll_flags).w
-		clr.w	(v_bg2_scroll_flags).w
-		clr.w	(v_bg3_scroll_flags).w
+		bne.s	DeformLayers_Exit
+		moveq	#0,d0
+		move.w	d0,(v_fg_scroll_flags).w
+		move.w	d0,(v_bg1_scroll_flags).w
+		move.w	d0,(v_bg2_scroll_flags).w
+		move.w	d0,(v_bg3_scroll_flags).w
+		move.w	d0,(v_scrshiftx).w
+		move.w	d0,(v_scrshifty).w
+		tst.b	(f_lockscroll).w
+		bne.s	.skipscroll
 		bsr.w	ScrollHoriz
 		bsr.w	ScrollVertical
+	.skipscroll:
 		bsr.w	DynamicLevelEvents
 
-		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
 		add.w	d0,d0
 		move.w	Deform_Index(pc,d0.w),d0
 		jsr	Deform_Index(pc,d0.w)
-		move.w	(v_screenposy).w,(v_scrposy_orig).w
 		bsr.w	ShakeScreen
-		move.w	(v_screenposy).w,(v_scrposy_vdp).w
-		move.w	(v_scrposy_orig).w,v_screenposy
+		move.w	d0,(v_scrposy_vdp).w
+		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
 		rts
 ; End of function DeformLayers
 
@@ -44,7 +45,7 @@ Deform_Index:	dc.w Deform_GHZ-Deform_Index, Deform_LZ-Deform_Index
 		dc.w Deform_GHZ-Deform_Index, Deform_CBZ-Deform_Index
 		dc.w Deform_WZ-Deform_Index, Deform_Joint-Deform_Index
 		dc.w Deform_DVZ-Deform_Index,Deform_NGZ-Deform_Index
-		dc.w Deform_LZ-Deform_Index,Deform_LZ-Deform_Index
+		dc.w Deform_Default-Deform_Index,Deform_Default-Deform_Index
 ; ---------------------------------------------------------------------------
 ; Green Hill Zone background layer deformation code
 ; ---------------------------------------------------------------------------
@@ -160,8 +161,15 @@ Deform_GHZ:
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
-
 Deform_LZ:
+		move.w	(v_scrshiftx).w,d4
+		ext.l	d4
+		asl.l	#3,d4
+		moveq	#2,d6
+		bsr.w	BGScroll_Block1
+		clr.w	(v_bgscreenposy).w
+		bra.s	Deform_Default.lzcont
+Deform_Default:
 	; plain background scroll
 		move.w	(v_scrshiftx).w,d4
 		ext.l	d4
@@ -170,7 +178,7 @@ Deform_LZ:
 		ext.l	d5
 		asl.l	#7,d5
 		bsr.w	BGScroll_XY
-
+.lzcont:
 		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
 		lea	(Lz_Scroll_Data).l,a3
 		lea	(Drown_WobbleData).l,a2
@@ -234,7 +242,7 @@ Lz_Scroll_Data:
 		dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
 		dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
 		dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-; End of function Deform_LZ
+; End of function Deform_Default
 
 ; ---------------------------------------------------------------------------
 ; Marble Zone background layer deformation code
@@ -1040,25 +1048,25 @@ Deform_NGZ:
 
 ; ---------------------------------------------------------------------------
 ; this sucks redo it plz
+; OUTPUT: d0.w = screen fg ypos with a shake
 ; ---------------------------------------------------------------------------
 
 ShakeScreen:
-	move.w  v_scrposy_orig.w,d0
+	move.w  v_screenposy.w,d0
 	move.w  v_screenshaketime.w,d1
-	tst.w   d1
+	move.w	d1,d2
+;	tst.w   d1
 	beq.s   .Done
 	subq.w	#1,v_screenshaketime.w
 	asr.w   #2,d1
 	andi.w	#$2F,d1
 
-	move.w	v_vbla_count+2.w,d2
+;	move.w	v_screenshaketime.w,d2
 	move	d2,ccr			; you can tell i love this
 	bcs.s	.Odd
 	neg.w   d1
 .Odd:
 	add.w   d1,d0
-	move.w  d0,v_screenposy.w
-	rts
 .Done:
 	rts
 ; ---------------------------------------------------------------------------
@@ -1098,24 +1106,17 @@ ScrollHoriz:
 MoveScreenHoriz:
 		move.w	(v_player+obX).w,d0
 		sub.w	(v_screenposx).w,d0 ; Sonic's distance from left edge of screen
+		move.w	#(320/2)-16,d1
 		cmpi.b	#id_ColdBrew,(v_gamemode).w
-		beq.s	.UseColdBrewCam
-		subi.w	#(320/2)-16,d0	; is distance less than 144px?
+		bne.s	.notcoldbrew
+		move.w	#(256/2)-16,d1
+.notcoldbrew
+		sub.w	d1,d0		; is distance within the middle of the screen
 		blt.s	SH_BehindMid	; if yes, branch
 		subi.w	#16,d0		; is distance more than 160px?
 		bge.s	SH_AheadOfMid	; if yes, branch
 		clr.w	(v_scrshiftx).w
 		rts
-
-.UseColdBrewCam:
-		subi.w	#(256/2)-16,d0	; is distance less than 144px?
-		blt.s	SH_BehindMid	; if yes, branch
-		subi.w	#16,d0		; is distance more than 160px?
-		bge.s	SH_AheadOfMid	; if yes, branch
-		clr.w	(v_scrshiftx).w
-		rts
-	
-
 ; ===========================================================================
 
 SH_AheadOfMid:

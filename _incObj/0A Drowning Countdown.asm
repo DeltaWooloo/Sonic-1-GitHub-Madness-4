@@ -234,7 +234,7 @@ Drown_Countdown:; Routine $A
 		move.w	#0,obVelY(a0)
 		move.w	#0,obVelX(a0)
 		move.w	#0,obInertia(a0)
-		move.b	#1,(f_nobgscroll).w
+		move.b	#1,(f_lockscroll).w
 	if FixBugs
 		; Correct Drowning Bugs
 		; https://info.sonicretro.org/SCHG_How-to:Correct_Drowning_Bugs_in_Sonic_1

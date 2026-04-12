@@ -228,8 +228,8 @@ v_unused7:		ds.b	1		; unused
 v_unused8:		ds.b	1		; unused
 v_dle_routine:		ds.b	1		; dynamic level event - routine counter
 			ds.b	1		; unused
-f_nobgscroll:		ds.b	1		; flag set to cancel background scrolling
-			ds.b	1		; unused
+f_nobgscroll:		ds.b	1		; flag set to disable the entirety of the DeformLayers subroutine
+f_lockscroll:		ds.b	1		; flag to lock scrolling (doesn't exist in Sonic 1, this is Sonic 2s Scroll_Lock)
 v_unused9:		ds.b	1		; unused
 			ds.b	1		; unused
 v_unused10:		ds.b	1		; unused

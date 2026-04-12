@@ -170,6 +170,7 @@ BgScrollSpeed:
 		move.w	d1,(v_bgscreenposx).w
 		move.w	d1,(v_bg2screenposx).w
 		move.w	d1,(v_bg3screenposx).w
+		move.b	#0,vscroll_mode
 
 loc_6206:
 		moveq	#0,d2
