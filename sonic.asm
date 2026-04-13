@@ -3320,6 +3320,8 @@ Demo_SS:	binclude	"demodata/Intro - Special Stage.bin"
 ; ---------------------------------------------------------------------------
 
 GM_Special:
+		jmp	GM_Rhythm	; GMZ - goodbye sonic 1 special stages
+
 		move.w	#sfx_EnterSS,d0
 		bsr.w	QueueSound2 ; play special stage entry sound
 		bsr.w	PaletteWhiteOut
@@ -7612,6 +7614,7 @@ Art_LivesNums:	binclude	"artunc/Lives Counter Numbers.bin" ; 8x8 pixel numbers o
 ; ---------------------------------------------------------------------------
 
 		include	"GMZ/DVD Screensaver.asm"	; GMZ - GM_SonicTheScreensaver:
+		include	"GMZ/Rhythm/Main.asm"	; GMZ - GM_Rhythm:
 
 ; !@
 ; ---------------------------------------------------------------------------
