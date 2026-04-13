@@ -488,6 +488,9 @@ UpdateMusic:
 ; loc_71BF8:
 .bgmpsgnext:
 		dbf	d7,.bgmpsgloop
+		; coni - hacky check for special stae
+		cmpi.b #id_Special,(v_gamemode).w ; are we on special stage?
+		beq.s .SMPSPALno ; if yes, don't run
 		btst #6,(v_megadrive).w ; is MD PAL?
 		beq.s .SMPSPALno ; if not, don't run
 		cmpi.b #$5,SMPS_RAM.v_palmuscounter(a6) ; 5th frame?
