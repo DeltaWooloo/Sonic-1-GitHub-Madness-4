@@ -2866,6 +2866,31 @@ Level_WaterPal:
 		move.b	(v_lamp_wtrstat).w,(f_wtr_state).w
 
 Level_GetBgm:
+		cmpi.w	#(id_BSZ<<8)+1,(v_zone).w
+		bne.s	.Okbro
+
+		move.b	#$C,(v_vbla_routine).w
+		bsr.w	WaitForVBla
+		;4000 is address
+		disable_ints
+		lea	(vdp_control_port).l,a6
+		move.w	#$8300+(vram_win>>10),(a6) ; 40x30
+		move.w	#$918C,(a6)
+		move.w	#$929E,(a6)
+
+		fillVRAM	$C1,$FFF,vram_win ; clear background namespace
+
+	.wait1:
+		move.w	(a5),d1
+		btst	#1,d1
+		bne.s	.wait1
+
+		move.w	#$8F02,(a5)
+
+		locVRAM	$3800
+		lea	(Nem_Instagram).l,a0 ;	load alphabet
+		bsr.w	NemDec
+.Okbro:
 		tst.w	(f_demo).w	; Is demo mode on?
 		bcs.s	Level_SkipTtlCard
 		bsr.w  Reproduce_BGM
@@ -4827,7 +4852,32 @@ Obj_Index:
 		include	"_incObj/sub DisplaySprite.asm"
 		include	"_incObj/sub DeleteObject.asm"
 		include	"_inc/ChaseObject.asm"
+		
+Map_Instagram: include "_maps/Instagram.asm"
+	even
 
+DrawInstagramOverlay:
+		move.b	(v_gamemode).w,d0
+		andi.b	#$7F,d0
+		cmpi.b	#id_Demo,d0
+		beq.s	.demo
+		cmpi.b	#id_Level,d0
+		bne.s	.return
+.demo:
+		cmpi.w	#(id_BSZ<<8)+1,(v_zone).w
+		bne.s	.return
+		move.w	#128+92,d3 ; x
+		move.w	#128+92,d2 ; y
+		move.w	#$1C0,a3 ; art tile offset
+		lea	Map_Instagram(pc),a1
+		adda.w	(a1),a1
+		clr.w	d1
+		move.b	(a1)+,d1
+		subq.w	#1,d1
+; 		bmi.s	@return
+		bra.w	BuildSpr_Normal
+.return:
+		rts
 ; ===========================================================================
 BldSpr_ScrPos:	dc.l 0				; blank
 		dc.l v_screenposx&$FFFFFF	; main screen x-position
@@ -4843,6 +4893,7 @@ BldSpr_ScrPos:	dc.l 0				; blank
 BuildSprites:
 		lea	(v_spritetablebuffer).w,a2 ; set address for sprite table
 		moveq	#0,d5
+		bsr.w	DrawInstagramOverlay
 		lea	(v_spritequeue).w,a4
 		moveq	#7,d7
 

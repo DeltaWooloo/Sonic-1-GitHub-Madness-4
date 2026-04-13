@@ -835,6 +835,9 @@ ArtTile_SS_Zone_6:		equ $7A9
 FartDanner:		equ $400
 SudoAptInstall:		equ $5B
 Mildfucker:		equ $700
+;define this bs
+vram_win:   equ $4000
+
 ; Special Stage Results
 ArtTile_SS_Results_Emeralds:	equ $541
 

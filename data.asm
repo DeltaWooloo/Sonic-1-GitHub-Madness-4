@@ -991,7 +991,9 @@ ObjPos_BTZ3:	binclude	"objpos/btz3.bin"
 		even
 
 ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
-
+;INSTAGRAM FOR DEMO ART!
+Nem_Instagram:	incbin	"artnem\Instagram.bin"
+		even
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; ART, MAPS AND PALETTE
