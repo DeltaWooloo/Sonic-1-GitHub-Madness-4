@@ -362,10 +362,10 @@ MMZPast_Sonineko_DAC:
 	dc.b	$01, $01, $02, $02, dKick, dSnare, dSnare, nRst
 
 MMZPast_Sonineko_Loop01:
-	dc.b	$85, $08, dSnare, $06, $02, dKick, $06, $02, dSnare, $08, dKick, dSnare
+	dc.b	dCrashCymbal, $08, dSnare, $06, $02, dKick, $06, $02, dSnare, $08, dKick, dSnare
 	dc.b	$04, dKick, $02, dSnare, $04, $02, dKick, $04, dSnare, dSnare, dKick, $08
 	dc.b	dSnare, $06, $02, dKick, $06, $02, dSnare, $08, dKick, dSnare, $04, dKick
-	dc.b	$02, dSnare, $04, $02, dKick, $04, dSnare, dSnare, $85, $08, dSnare, $06
+	dc.b	$02, dSnare, $04, $02, dKick, $04, dSnare, dSnare, dCrashCymbal, $08, dSnare, $06
 	dc.b	$02, dKick, $06, $02, dSnare, $08, dKick, dSnare, $04, dKick, $02, dSnare
 	dc.b	$04, $02, dKick, $04, dSnare, dSnare, dKick, $08, dSnare, $06, $02, dKick
 	dc.b	$06, $02, dSnare, $08
@@ -376,7 +376,7 @@ MMZPast_Sonineko_Loop00:
 	smpsLoop            $01, $04, MMZPast_Sonineko_Loop01
 
 MMZPast_Sonineko_Loop02:
-	dc.b	$85, $04, dKick, dSnare, dKick, $02, dSnare, nRst, dSnare, dKick, nRst, dSnare
+	dc.b	dCrashCymbal, $04, dKick, dSnare, dKick, $02, dSnare, nRst, dSnare, dKick, nRst, dSnare
 	dc.b	nRst, dKick, nRst, dKick, nRst, dKick, nRst, dSnare, nRst, dKick, dSnare, nRst
 	dc.b	dSnare, dKick, nRst, dSnare, nRst, dSnare, dSnare, dKick, $04, $04, dSnare, dKick
 	dc.b	$02, dSnare, $04, $02, dKick, $04, dSnare, dKick, dKick, dKick, dSnare, dKick
