@@ -146,7 +146,7 @@ InitCutsceneData:
 
 CutsceneInitTbl:
 	dc.l	Str_ManiacIntro1+(4<<24)
-	dc.l	ArtList_ManiacIntro1+(bgm_Aporia<<24)
+	dc.l	ArtList_ManiacIntro1+(bgm_DoleAttack<<24)
 	dc.l	MapScr_ManiacIntro1A
 	dc.l	MapScr_ManiacIntro1B
 
