@@ -44,10 +44,10 @@ ANI.XFLIP = $20
 ANI.YFLIP = $40
 ANI.XYFLIP = $60
 ; ----------------------------------------------------------------------------
-NEEDLB_VRAM	= $5000
+NEEDLB_VRAM	= $4800
 NEEDLB_GFX	= (NEEDLB_VRAM/32)+$2000
 
-NHAMMER_VRAM	= $7000
+NHAMMER_VRAM	= $6800
 NHAMMER_GFX	= (NHAMMER_VRAM/32)+$2000
 ; ----------------------------------------------------------------------------
 
@@ -67,8 +67,8 @@ ExObjNeedle:
 ; ----------------------------------------------------------------------------
 .ExObj:
 	bra.w	ObjNeedleIntro
-	bra.w	ObjNeedleHammer
-	bra.w	ObjNeedleIntro
+	bra.w	ObjNeedle3DTest
+	bra.w	ObjNeedle3DTest
 	rts
 ; ----------------------------------------------------------------------------
 
@@ -264,6 +264,9 @@ Ani_NHammer:
 ; bare 3d test
 ; ----------------------------------------------------------------------------
 
+N3D_CENTERX =	$4A0
+N3D_CENTERY =	$1A0
+
 ObjNeedle3DTest:
 	moveq	#0,d0
 	move.b	obRoutine(a0),d0
@@ -281,8 +284,9 @@ N3DTest_Init:
 	move.l	#Map_NeedleBoss, obMap(a0)
 	move.w	#NEEDLB_GFX,obGfx(a0)
 	move.w	#16,needle.ZPos(a0)
-	move.w	#$480,needle.XOrg(a0)
-	move.w	#$120,needle.YOrg(a0)
+	move.w	#N3D_CENTERX,needle.XOrg(a0)
+	move.w	#N3D_CENTERY,needle.YOrg(a0)
+
 	move.b	#$C,obRender(a0)
 	move.b	#16,obWidth(a0)
 	move.b	#16,obHeight(a0)
@@ -294,6 +298,17 @@ N3DTest_Init:
 	bset	#0,obStatus(a0)
 
 N3DTest_Main:
+	add.w	#2,needle.Timer(a0)
+	move.w	needle.Timer(a0),d0
+	jsr	CalcSine.l
+	move.w	#N3D_CENTERX,d2
+	move.w	#N3D_CENTERY-128,d3
+	asr.w	#2,d0
+	asr.w	#2,d1
+	add.w	d0,d2
+	add.w	d1,d3
+	move.w	d2,needle.XOrg(a0)
+	move.w	d3,needle.YOrg(a0)
 	andi.w	#$FF,needle.ZPos(a0)
 
 	; DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV 
@@ -324,16 +339,12 @@ N3DTest_Main:
 	neg.w	d2
 	add.w	d2,d0
 	move.w	needle.ZPos(a0),d2
-	bne.s	.Ok
-	move.w	#1,d2		; a division by zero is the fastest division :^)
-.Ok
-	divs.w	d2,d0
-	divs.w	d2,d1
-
-	add.w	#256,d0
-	add.w	v_limitleft2.w,d0
-	add.w	v_limittop2.w,d1
-	add.w	#64,d1
+	muls.w	d2,d0
+	muls.w	d2,d1
+	asr.w	#7,d0
+	asr.w	#7,d1	
+	add.w	#N3D_CENTERX,d0
+	add.w	#N3D_CENTERY,d1
 	move.w	d0,obX(a0)
 	move.w	d1,obY(a0)
 	rts
@@ -378,11 +389,17 @@ ArtList_NeedleBoss:
 	dc.w	NEEDLB_VRAM
 	dc.l	Nem_NHammer
 	dc.w	NHAMMER_VRAM
+	dc.l	Nem_NeedleBossBig
+	dc.w	$7000
 	dc.l	-1
 
 
 Map_NeedleBoss:
 	include	"_incObj/NeedleBoss/NeedleBoss Map.asm"
+	even
+
+Map_NeedleBossBig:
+	include	"_incObj/NeedleBoss/NeedleBossBig Map.asm"
 	even
 
 Map_NHammer:
@@ -391,6 +408,10 @@ Map_NHammer:
 
 Nem_NeedleBoss:
 	incbin	"_incObj/NeedleBoss/NeedleBoss.nem"
+	even
+
+Nem_NeedleBossBig:
+	incbin	"_incObj/NeedleBoss/NeedleBossBig.nem"
 	even
 
 Nem_NHammer:

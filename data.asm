@@ -97,56 +97,6 @@ Pal_Maniac:	binclude	"char_assets/Maniac Pal.bin"
 ;		even
 
 ; ---------------------------------------------------------------------------
-; Compressed graphics - special stage
-; ---------------------------------------------------------------------------
-Map_SSWalls:	include	"_maps/SS Walls.asm"
-
-Nem_SSWalls:	binclude	"artnem/Special Walls.nem" ; special stage walls
-		even
-Eni_SSBg1:	binclude	"tilemaps/SS Background 1.eni" ; special stage background (mappings)
-		even
-Nem_SSBgFish:	binclude	"artnem/Special Birds & Fish.nem" ; special stage birds and fish background
-		even
-Eni_SSBg2:	binclude	"tilemaps/SS Background 2.eni" ; special stage background (mappings)
-		even
-Nem_SSBgCloud:	binclude	"artnem/Special Clouds.nem" ; special stage clouds background
-		even
-Nem_SSGOAL:	binclude	"artnem/Special GOAL.nem" ; special stage GOAL block
-		even
-Nem_SSRBlock:	binclude	"artnem/Special R.nem"	; special stage R block
-		even
-Nem_SS1UpBlock:	binclude	"artnem/Special 1UP.nem" ; special stage 1UP block
-		even
-Nem_SSEmStars:	binclude	"artnem/Special Emerald Twinkle.nem" ; special stage stars from a collected emerald
-		even
-Nem_SSRedWhite:	binclude	"artnem/Special Red-White.nem" ; special stage red/white block
-		even
-Nem_SSZone1:	binclude	"artnem/Special ZONE1.nem" ; special stage ZONE1 block
-		even
-Nem_SSZone2:	binclude	"artnem/Special ZONE2.nem" ; ZONE2 block
-		even
-Nem_SSZone3:	binclude	"artnem/Special ZONE3.nem" ; ZONE3 block
-		even
-Nem_SSZone4:	binclude	"artnem/Special ZONE4.nem" ; ZONE4 block
-		even
-Nem_SSZone5:	binclude	"artnem/Special ZONE5.nem" ; ZONE5 block
-		even
-Nem_SSZone6:	binclude	"artnem/Special ZONE6.nem" ; ZONE6 block
-		even
-Nem_SSUpDown:	binclude	"artnem/Special UP-DOWN.nem" ; special stage UP/DOWN block
-		even
-Nem_SSEmerald:	binclude	"artnem/Special Emeralds.nem" ; special stage chaos emeralds
-		even
-Nem_SSGhost:	binclude	"artnem/Special Ghost.nem" ; special stage ghost block
-		even
-Nem_SSWBlock:	binclude	"artnem/Special W.nem"	; special stage W block
-		even
-Nem_SSGlass:	binclude	"artnem/Special Glass.nem" ; special stage destroyable glass block
-		even
-Nem_ResultEm:	binclude	"artnem/Special Result Emeralds.nem" ; chaos emeralds on special stage results screen
-		even
-
-; ---------------------------------------------------------------------------
 ; Compressed graphics - GHZ stuff
 ; ---------------------------------------------------------------------------
 Nem_Stalk:	binclude	"artnem/GHZ Flower Stalk.nem"
@@ -553,7 +503,7 @@ Nem_DioDanner_Dead:	incbin	"_incObj/DioMildanner/Art - Dead.nem"
 ; ---------------------------------------------------------------------------
 Nem_LenBro:	binclude	"coniobjs/LenArt.bin"
 		even
-Nem_IZ:	binclude	"coniobjs/IZArt.bin"
+Nem_IZ:		binclude	"coniobjs/IZArt.bin"
 		even
 Nem_Spongy:	binclude	"coniobjs/SpongyArt.bin"
 		even
@@ -594,9 +544,9 @@ Col_BREW:	binclude	"collide/BREW.bin"	; BREW index
 		even
 Col_WIN:	binclude	"collide/WIN.bin"	; WIN index
 		even
-Col_Joint:	binclude	"collide/Joint.bin"	; Joint index
+Col_Joint:	binclude	"collide/Joint.bin"	; Tonic's Insides index
 		even
-Col_DVZ:	binclude	"collide/DVZ.bin"	; IDONT CARE
+Col_DVZ:	binclude	"collide/DVZ.bin"	; I DONT CARE (Dax: WELL I DO!)
 		even
 Col_NGZ:	binclude	"collide/NGZ.bin"	; O,GOPOG9-I0=IG20=I=0IG4=0I
 		even
@@ -605,21 +555,6 @@ Col_HSZ:	binclude	"collide/HSZ.bin"
 Col_BSZ:	binclude	"collide/BSZ.bin"
 		even
 Col_BTZ:	binclude	"collide/BTZ.bin"
-		even
-; ---------------------------------------------------------------------------
-; Special Stage layouts
-; ---------------------------------------------------------------------------
-SS_1:		binclude	"sslayout/1.eni"
-		even
-SS_2:		binclude	"sslayout/2.eni"
-		even
-SS_3:		binclude	"sslayout/3.eni"
-		even
-SS_4:		binclude	"sslayout/4.eni"
-		even
-SS_5:		binclude	"sslayout/5 (JP1).eni"
-		even
-SS_6:		binclude	"sslayout/6 (JP1).eni"
 		even
 
 ; ---------------------------------------------------------------------------
@@ -1056,7 +991,9 @@ ObjPos_BTZ3:	binclude	"objpos/btz3.bin"
 		even
 
 ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
-
+;INSTAGRAM FOR DEMO ART!
+Nem_Instagram:	incbin	"artnem\Instagram.bin"
+		even
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; ART, MAPS AND PALETTE

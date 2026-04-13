@@ -90,6 +90,7 @@ dYoFreddy			ds.b 1
 dGithub				ds.b 1
 dMadness			ds.b 1
 dTheFourth			ds.b 1
+dEggmanLaugh		ds.b 1
 dBSOD				ds.b 1
 
 ; Splash Screen Samples
@@ -118,7 +119,6 @@ dSega				ds.b 1
 
 ; UNUSED
 ;dMadnessR			ds.b 1
-;dEggmanLaugh		ds.b 1
 ;dPenis				ds.b 1
 ;dBoioing			ds.b 1
 ;dOrangeLaugh		ds.b 1

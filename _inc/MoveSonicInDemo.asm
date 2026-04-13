@@ -53,11 +53,6 @@ MDemo_On:
 		lea	(DemoDataPtr).l,a1
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
-		cmpi.b	#id_Special,(v_gamemode).w ; is this a special stage?
-		bne.s	.notspecial	; if not, branch
-		moveq	#6,d0		; use demo #6
-
-.notspecial:
 		lsl.w	#2,d0
 		movea.l	(a1,d0.w),a1	; fetch address for demo data
 		tst.w	(f_demo).w	; is this an ending sequence demo?
@@ -75,17 +70,7 @@ MDemo_On:
 		lea	(v_jpadhold1).w,a0
 		move.b	d0,d1
 
-	if FixBugs
-		; Fix demo playback
-		; https://info.sonicretro.org/SCHG_How-to:Fix_demo_playback
 		move.b	v_jpadhold2-v_jpadhold1(a0),d2
-	else
-		if Revision=0
-			move.b	(a0),d2
-		else
-			moveq	#0,d2
-		endif
-	endif
 
 		eor.b	d2,d0
 		move.b	d1,(a0)+
@@ -110,8 +95,8 @@ DemoDataPtr:	dc.l Demo_GHZ		; demos run after the title screen
 		dc.l Demo_MZ
 		dc.l Demo_SYZ
 		dc.l Demo_SYZ
-		dc.l Demo_SS
-		dc.l Demo_SS
+		dc.l Demo_BREW
+		dc.l Demo_BREW
 
 DemoEndDataPtr:	dc.l Demo_EndGHZ1	; demos run during the credits
 		dc.l Demo_EndMZ
