@@ -42,7 +42,6 @@ ptr_PLC_WINNERCard:	dc.w PLC_WINNERCard-ArtLoadCues
 ptr_PLC_Boss:		dc.w PLC_Boss-ArtLoadCues
 ptr_PLC_Signpost:	dc.w PLC_Signpost-ArtLoadCues
 ptr_PLC_Warp:		dc.w PLC_Warp-ArtLoadCues
-ptr_PLC_SpecialStage:	dc.w PLC_SpecialStage-ArtLoadCues
 PLC_Animals:
 ptr_PLC_GHZAnimals:	dc.w PLC_GHZAnimals-ArtLoadCues
 ptr_PLC_LZAnimals:	dc.w PLC_LZAnimals-ArtLoadCues
@@ -59,7 +58,6 @@ ptr_PLC_DVZAnimals:	dc.w PLC_DVZAnimals-ArtLoadCues
 ptr_PLC_NGZAnimals:	dc.w PLC_NGZAnimals-ArtLoadCues
 ptr_PLC_BSZAnimals:	dc.w PLC_NGZAnimals-ArtLoadCues
 ptr_PLC_BTZAnimals:	dc.w PLC_NGZAnimals-ArtLoadCues
-ptr_PLC_SSResult:	dc.w PLC_SSResult-ArtLoadCues
 ptr_PLC_Ending:		dc.w PLC_Ending-ArtLoadCues
 ptr_PLC_TryAgain:	dc.w PLC_TryAgain-ArtLoadCues
 ptr_PLC_EggmanSBZ2:	dc.w PLC_EggmanSBZ2-ArtLoadCues
@@ -378,32 +376,6 @@ PLC_Signpostend:
 PLC_Warp:
 PLC_Warpend:
 ; ---------------------------------------------------------------------------
-; Pattern load cues - special stage
-; ---------------------------------------------------------------------------
-PLC_SpecialStage:	dc.w ((PLC_SpeStageend-PLC_SpecialStage-2)/6)-1
-		plcm	Nem_SSBgCloud,  ArtTile_SS_Background_Clouds ; bubble and cloud background
-		plcm	Nem_SSBgFish,   ArtTile_SS_Background_Fish   ; bird and fish background
-		plcm	Nem_SSWalls,    ArtTile_SS_Wall              ; walls
-		plcm	Nem_Bumper,     ArtTile_SS_Bumper            ; bumper
-		plcm	Nem_SSGOAL,     ArtTile_SS_Goal              ; GOAL block
-		plcm	Nem_SSUpDown,   ArtTile_SS_Up_Down           ; UP and DOWN blocks
-		plcm	Nem_SSRBlock,   ArtTile_SS_R_Block           ; R block
-		plcm	Nem_SS1UpBlock, ArtTile_SS_Extra_Life        ; 1UP block
-		plcm	Nem_SSEmStars,  ArtTile_SS_Emerald_Sparkle   ; emerald collection stars
-		plcm	Nem_SSRedWhite, ArtTile_SS_Red_White_Block   ; red and white block
-		plcm	Nem_SSGhost,    ArtTile_SS_Ghost_Block       ; ghost block
-		plcm	Nem_SSWBlock,   ArtTile_SS_W_Block           ; W block
-		plcm	Nem_SSGlass,    ArtTile_SS_Glass             ; glass block
-		plcm	Nem_SSEmerald,  ArtTile_SS_Emerald           ; emeralds
-		plcm	Nem_SSZone1,    ArtTile_SS_Zone_1            ; ZONE 1 block
-		plcm	Nem_SSZone2,    ArtTile_SS_Zone_2            ; ZONE 2 block
-		plcm	Nem_SSZone3,    ArtTile_SS_Zone_3            ; ZONE 3 block
-PLC_SpeStageend:
-		; Unused
-		plcm	Nem_SSZone4,    ArtTile_SS_Zone_4            ; ZONE 4 block
-		plcm	Nem_SSZone5,    ArtTile_SS_Zone_5            ; ZONE 5 block
-		plcm	Nem_SSZone6,    ArtTile_SS_Zone_6            ; ZONE 6 block
-; ---------------------------------------------------------------------------
 ; Pattern load cues - GHZ animals
 ; ---------------------------------------------------------------------------
 PLC_GHZAnimals:	dc.w ((PLC_GHZAnimalsend-PLC_GHZAnimals-2)/6)-1
@@ -487,13 +459,6 @@ PLC_NGZAnimals:	dc.w ((PLC_DVZAnimalsend-PLC_DVZAnimals-2)/6)-1
 		plcm	Nem_Squirrel,    ArtTile_Animal_1 ; ricky
 		plcm	Nem_Chicken, ArtTile_Animal_2 ; cocky
 PLC_NGZAnimalsend:
-; ---------------------------------------------------------------------------
-; Pattern load cues - special stage results screen
-; ---------------------------------------------------------------------------
-PLC_SSResult:dc.w ((PLC_SpeStResultend-PLC_SSResult-2)/6)-1
-		plcm	Nem_ResultEm,  ArtTile_SS_Results_Emeralds ; emeralds
-		plcm	Nem_MiniSonic, ArtTile_Mini_Sonic          ; mini Sonic
-PLC_SpeStResultend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - ending sequence
 ; ---------------------------------------------------------------------------
@@ -593,7 +558,6 @@ plcid_WINNERCard:	equ (ptr_PLC_WINNERCard-ArtLoadCues)/2
 plcid_Boss:		equ (ptr_PLC_Boss-ArtLoadCues)/2	
 plcid_Signpost:		equ (ptr_PLC_Signpost-ArtLoadCues)/2	
 plcid_Warp:		equ (ptr_PLC_Warp-ArtLoadCues)/2	
-plcid_SpecialStage:	equ (ptr_PLC_SpecialStage-ArtLoadCues)/2
 plcid_GHZAnimals:	equ (ptr_PLC_GHZAnimals-ArtLoadCues)/2	
 plcid_LZAnimals:	equ (ptr_PLC_LZAnimals-ArtLoadCues)/2	
 plcid_MZAnimals:	equ (ptr_PLC_MZAnimals-ArtLoadCues)/2	
@@ -607,7 +571,6 @@ plcid_DVZAnimals:	equ (ptr_PLC_DVZAnimals-ArtLoadCues)/2
 plcid_NGZAnimals:	equ (ptr_PLC_NGZAnimals-ArtLoadCues)/2	
 plcid_BSZAnimals:	equ (ptr_PLC_NGZAnimals-ArtLoadCues)/2	
 plcid_BTZAnimals:	equ (ptr_PLC_BTZAnimals-ArtLoadCues)/2	
-plcid_SSResult:		equ (ptr_PLC_SSResult-ArtLoadCues)/2	
 plcid_Ending:		equ (ptr_PLC_Ending-ArtLoadCues)/2	
 plcid_TryAgain:		equ (ptr_PLC_TryAgain-ArtLoadCues)/2	
 plcid_EggmanSBZ2:	equ (ptr_PLC_EggmanSBZ2-ArtLoadCues)/2	

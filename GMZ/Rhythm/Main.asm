@@ -16,6 +16,7 @@ rhyEndState	ds.b	1
 		dephase
 		!org	-	; GMZ - honestly sometimes i hate working in this
 
+GM_Special:
 GM_Rhythm:
 		move.b	#bgm_Stop,d0
 		jsr	QueueSound2 ; stop music

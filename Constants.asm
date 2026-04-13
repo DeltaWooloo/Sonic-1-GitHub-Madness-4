@@ -105,7 +105,6 @@ id_MCZ:		equ $03
 id_SFZ:		equ $04
 id_PPZ:		equ $05
 id_EndZ:	equ $06
-id_SS:		equ $06
 id_CBZ:		equ $07
 id_WIN:		equ $08
 id_Joint:	equ $09

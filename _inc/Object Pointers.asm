@@ -9,7 +9,7 @@ ptr_DaxKatterD:		dc.l Obj_DaxKatterD
 ptr_ClintonFucker:	dc.l ClintonFucker
 ptr_Obj07:		dc.l GM_CNNicoJumpOBJ
 ptr_Splash:		dc.l Splash		; $08
-ptr_SonicSpecial:	dc.l SonicSpecial
+ptr_SonicSpecial:	dc.l NullObject
 ptr_DrownCount:		dc.l DrownCount
 ptr_Pole:		dc.l Pole
 ptr_FlapDoor:		dc.l FlapDoor
@@ -126,8 +126,8 @@ ptr_BossStarLight:	dc.l BossStarLight
 ptr_BossSpikeball:	dc.l BossSpikeball
 ptr_RingFlash:		dc.l RingFlash
 ptr_HiddenBonus:	dc.l HiddenBonus
-ptr_SSResult:		dc.l SSResult
-ptr_SSRChaos:		dc.l SSRChaos
+ptr_SSResult:		dc.l NullObject
+ptr_SSRChaos:		dc.l NullObject
 ptr_ContScrCur:		dc.l ContScrCur		; $80
 ptr_ContSonic:		dc.l NullObject
 ptr_ScrapEggman:	dc.l ScrapEggman
