@@ -41,7 +41,6 @@ MusicIndex:
 	dc.l	Mus_Blue		
 	dc.l	Mus_Hidden		
 	dc.l	Mus_Final		
-	dc.l	Mus_SS			
 
 	dc.l	Mus_Boss		
 	dc.l	Mus_ClintonFuck		
@@ -106,9 +105,10 @@ MusicIndex:
 	dc.l	Mus_LimitedEgg		
 	dc.l	Mus_BomerDude		
 	dc.l	Mus_ClintonYears	
-	
-	dc.l	Mus_MMZPast
 
+	dc.l	Mus_MMZPast		
+
+	dc.l	Mus_SS			
 	dc.l	Mus_CanCan		
 	dc.l	Mus_ChickenDance	
 	dc.l	Mus_DeltaTale		
@@ -208,8 +208,6 @@ Mus_Blue:		include	"music/TG2000Tracks/Blue.asm"
 Mus_Hidden:		include	"music/Dawid/Hidden.asm" 
 	even
 Mus_Final:		include "music/Dawid/Extremely_intense_boss_song_for_someone.asm" ;very intense not really but eh idgaf
-	even
-Mus_SS:			include "music/LiquidTracks/Mus - Special Stage.asm"
 	even
 
 Mus_Boss:		include "music/MattTracks/Mus - Chester Cheetah Boss.asm"
@@ -338,11 +336,15 @@ Mus_BomerDude:		include	"music/Dawid/Mus - Bomer Dude.asm"	;i have no idea too
 Mus_ClintonYears:	include	"music/DaxKatter/Mus - Clinton Years.asm"
 	even
 
+;  Used for Fake Crashes
+
 Mus_MMZPast:	include	"music/GenesisDoes/MMZPast_SNN.asm"
 	even
 
 ; Unused Tracks (so far)
 
+Mus_SS:			include "music/LiquidTracks/Mus - Special Stage.asm"
+	even
 Mus_CanCan:		include	"music/TG2000Tracks/Mus - Can Can.asm" 
 	even
 Mus_ChickenDance:	include	"music/TG2000Tracks/ChickenDance.asm"
