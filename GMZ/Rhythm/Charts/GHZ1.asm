@@ -58,7 +58,7 @@
 		rhyChartWait	64
 		rhyChartNote	btnL, 0, 0, 0
 		rhyChartWait	64
-		rhyChartNote	btnL, 0, 0, btnR
+		rhyChartNote	0, 0, 0, btnR
 
 		; GMZ - Section 3
 		rhyChartWait	32
@@ -292,11 +292,11 @@
 		rhyChartWait	32
 		rhyChartNote	btnL, 0, 0, 0
 		rhyChartWait	32
-		rhyChartNote	btnL, 0, 0, btnR
+		rhyChartNote	0, 0, 0, btnR
 		rhyChartWait	32
 		rhyChartNote	0, btnDn, 0, 0
 		rhyChartWait	32
-		rhyChartNote	0, btnDn, btnUp, 0
+		rhyChartNote	0, 0, btnUp, 0
 		
 		; GMZ - End
 		rhyChartWait	128
