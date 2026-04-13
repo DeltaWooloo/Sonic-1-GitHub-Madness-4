@@ -503,7 +503,7 @@ Nem_DioDanner_Dead:	incbin	"_incObj/DioMildanner/Art - Dead.nem"
 ; ---------------------------------------------------------------------------
 Nem_LenBro:	binclude	"coniobjs/LenArt.bin"
 		even
-Nem_IZ:	binclude	"coniobjs/IZArt.bin"
+Nem_IZ:		binclude	"coniobjs/IZArt.bin"
 		even
 Nem_Spongy:	binclude	"coniobjs/SpongyArt.bin"
 		even
@@ -544,9 +544,9 @@ Col_BREW:	binclude	"collide/BREW.bin"	; BREW index
 		even
 Col_WIN:	binclude	"collide/WIN.bin"	; WIN index
 		even
-Col_Joint:	binclude	"collide/Joint.bin"	; Joint index
+Col_Joint:	binclude	"collide/Joint.bin"	; Tonic's Insides index
 		even
-Col_DVZ:	binclude	"collide/DVZ.bin"	; IDONT CARE
+Col_DVZ:	binclude	"collide/DVZ.bin"	; I DONT CARE (Dax: WELL I DO!)
 		even
 Col_NGZ:	binclude	"collide/NGZ.bin"	; O,GOPOG9-I0=IG20=I=0IG4=0I
 		even
