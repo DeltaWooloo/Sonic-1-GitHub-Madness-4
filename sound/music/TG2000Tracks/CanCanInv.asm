@@ -2,7 +2,7 @@ CanCanInv_Header:
 	smpsHeaderStartSong 3
 	smpsHeaderVoice		CanCanInv_Voices
 	smpsHeaderChan		$06, $03
-	smpsHeaderTempo		$02, $00
+	smpsHeaderTempo		$01, $80
 ;	Given Tempo = 150.00 BPM
 ;	Approximated Tempo = 150.29 BPM
 
