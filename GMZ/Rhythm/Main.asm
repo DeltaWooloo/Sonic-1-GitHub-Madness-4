@@ -191,20 +191,27 @@ Rhythm_End:
 		bsr	ManageRhythmObjects
 		jsr	BuildSprites
 
+		moveq	#0,d1
 		move.b	rhyEndState,d1
-		subq.b	#1,d1
-		bpl	REnd_SpawnMsg
+		move.w	REnd_States(pc,d1.w),d1
+		jmp	REnd_States(pc,d1.w)
 
+REnd_States:
+		dc.w	REnd_FadeBgm-REnd_States
+		dc.w	REnd_SpawnMsg-REnd_States
+		dc.w	REnd_WaitMsg-REnd_States
+		dc.w	REnd_BlackOut-REnd_States
+		dc.w	REnd_Exit-REnd_States
+
+REnd_FadeBgm:
 		move.w	#60*3,v_generictimer
 		move.b	#bgm_Fade,d0
 		jsr	QueueSound2
 
-		addq.b	#1,rhyEndState
+		addq.b	#2,rhyEndState
 		bra	Rhythm_MainLoop
 
 REnd_SpawnMsg:
-		subq.b	#1,d1
-		bpl	REnd_WaitMsg
 		tst.w	v_generictimer
 		bne	Rhythm_MainLoop
 
@@ -229,18 +236,13 @@ REnd_SpawnMsg:
 		move.l	#$024000F0,obX(a1)
 		move.b	#1,msgComingFromRight(a1)	; GMZ - Set the coming from right flag
 
-		addq.b	#1,rhyEndState
+		addq.b	#2,rhyEndState
 		bra	Rhythm_MainLoop
 
 REnd_WaitMsg:
-		subq.b	#1,d1
-		bpl	REnd_BlackOut
 		bra	Rhythm_MainLoop
 
 REnd_BlackOut:
-		subq.b	#1,d1
-		bpl	REnd_Exit
-
 		moveq	#0,d0
 		moveq	#$1F,d2
 		lea	v_palette,a0
@@ -249,7 +251,7 @@ REBout_Loop:
 		move.l	d0,(a0)+
 		dbf	d2,REBout_Loop
 
-		addq.b	#1,rhyEndState
+		addq.b	#2,rhyEndState
 		bra	Rhythm_MainLoop
 
 REnd_Exit:
@@ -431,7 +433,7 @@ RAFall_ChkCollectArea:
 		lea	RAFCCArea_MessageInfo,a2
 		moveq	#0,d0
 		move.w	obScreenY(a0),d0
-		andi.w	#$1C,d0
+		andi.w	#$10,d0
 		lea	(a2,d0.w),a2
 		move.b	(a2)+,obRoutine(a1)
 		moveq	#0,d0
@@ -444,28 +446,15 @@ RAFall_ChkCollectArea:
 		rts
 
 RAFCCArea_MessageInfo:
-		dc.b	5	; GMZ - PROTOTASTIC (Y: 0x160-0x163)
+		dc.b	5	; GMZ - PROTOTASTIC (Y: 0x160-0x16F)
 		dc.b	10
 		dc.w	$0104
-		dc.b	5	; GMZ - PROTOTASTIC (Y: 0x164-0x167)
-		dc.b	10
-		dc.w	$0104
-		dc.b	5	; GMZ - PROTOTASTIC (Y: 0x168-0x16B)
-		dc.b	10
-		dc.w	$0104
-		dc.b	5	; GMZ - PROTOTASTIC (Y: 0x16C-0x16F)
-		dc.b	10
-		dc.w	$0104
-		dc.b	6	; GMZ - SPAZDUNKA (Y: 0x170-0x173)
-		dc.b	5
-		dc.w	$0100
-		dc.b	6	; GMZ - SPAZDUNKA (Y: 0x174-0x177)
-		dc.b	5
-		dc.w	$0100
-		dc.b	6	; GMZ - SPAZDUNKA (Y: 0x178-0x17B)
-		dc.b	5
-		dc.w	$0100
-		dc.b	6	; GMZ - SPAZDUNKA (Y: 0x17C-0x17F)
+
+		dc.l	0	; GMZ - Here for alignment purposes
+		dc.l	0
+		dc.l	0
+
+		dc.b	6	; GMZ - SPAZDUNKA (Y: 0x170-0x17F)
 		dc.b	5
 		dc.w	$0100
 
@@ -607,7 +596,7 @@ RMIDone_DelRight:
 RMIDone_DecTimer:
 		subq.w	#1,msgItDoneTimer(a0)
 		bne.s	RMIDone_Exit
-		addq.b	#1,rhyEndState
+		addq.b	#2,rhyEndState
 
 RMIDone_Exit:
 		jmp	DisplaySprite
