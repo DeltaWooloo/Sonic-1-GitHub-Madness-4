@@ -764,9 +764,7 @@ Pow_vdp_fixRegs:
 		;enableD
 		movem.l	(sp)+,d1		; Pop d1 from stack
 		movem.l	(sp)+,a6		; Pop a6 from stack
-		movem.l	(sp)+,a0		; Pop a0 from stack
-		
-		
+		movem.l	(sp)+,a0		; Pop a0 from stack		
 		rts
 ; ===========================================================================
 

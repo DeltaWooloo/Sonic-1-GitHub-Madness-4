@@ -1,0 +1,19 @@
+Coding:
+- Bugfixes
+	- Address error bug (random monitor, Big Ring)
+	- Apply bchg to VDP registers
+	- Add code to undo funky colors (LoadPalUser/Jump TBL rewrite)
+- Sega Pico build flag/gamepad code
+- Artwork
+	- New Github Madness 4 (GTA4) logos
+	- Windows Zone exclamation point (spikes)
+- Random monitor
+	- Add random monitors to levels
+	- Add slowdown shoes (SpeedUpIndex inverse)
+x Hack Fazbear jumpscare code for Sega Channel Guy jump scare
+- Songs
+	x Metallic Madness Past song
+	- Seal - Crazy
+	- Ricky Martin - Livin' La Vida Loca
+- BSODs
+	- New code for appropriate Genesis/SCD region/tmss crashes
