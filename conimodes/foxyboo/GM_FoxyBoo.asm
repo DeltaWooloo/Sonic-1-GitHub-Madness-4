@@ -43,6 +43,10 @@ GM_FoxyBoo:
 		
 ;!@ GD: Randomize a bit; if 0, then foxy; else Sega Channel Guy
 .randomize:
+		;If BSZ, then always do Sega Channel Guy
+		cmpi.b	#id_BSZ,(v_zone).w		; is zone bsz?
+		beq.w	.ChGuy
+
 		jsr	(RandomNumber).l	;Get rnd number in d0
 		andi.l	#$0F,d0			;Restrict to 4-bit number in d0
 		cmpi.b	#8,d0			;Is d0 8?

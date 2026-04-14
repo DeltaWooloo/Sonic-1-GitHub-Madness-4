@@ -1937,7 +1937,9 @@ Sonic_ResetLevel:; Routine 8
 		beq.s	.restart	;If not, branch
 		
 		cmpi.b	#id_WIN,(v_zone).w	;Is zone Windows zone?
-		beq.s	GotoBSOD		;If not, branch
+		beq.s	GotoBSOD			;If so, branch
+		cmpi.b	#id_BSZ,(v_zone).w	;Is zone Bluescape?
+		beq.s	GotoSChGuy			;If so, branch
 .restart:
 		move.w	#1,(f_restart).w	; restart the level
 .return:
@@ -1947,6 +1949,10 @@ GotoBSOD:
 		;We are in Windows zone and NOT gameover. Do BSOD
 		move.b	#id_BSOD,(v_gamemode).w ; Set BSOD mode
 		move.w	#4,(f_restart).w	; load new gamemode
+		rts
+GotoSChGuy:
+		;We are in Bluescape zone and NOT gameover. Do sega channel guy jump scare
+		jsr		(Pow_Randomiser.getjumpscared).l
 		rts
 ; End of function Sonic_ResetLevel
 
