@@ -41,7 +41,8 @@ MusicIndex:
 	dc.l	Mus_Blue		
 	dc.l	Mus_Hidden		
 	dc.l	Mus_Final		
-
+	dc.l	Mus_BonusEight
+	
 	dc.l	Mus_Boss		
 	dc.l	Mus_ClintonFuck		
 	dc.l	Mus_Coffinman		
@@ -105,7 +106,8 @@ MusicIndex:
 	dc.l	Mus_LimitedEgg		
 	dc.l	Mus_BomerDude		
 	dc.l	Mus_ClintonYears	
-
+	dc.l	Mus_Skinner	
+	
 	dc.l	Mus_MMZPast		
 
 	dc.l	Mus_SS			
@@ -137,12 +139,10 @@ MusicIndex:
 	dc.l	Mus_WeAreTheSonic	
 	dc.l	Mus_Thomas		
 	dc.l	Mus_CCLobby		
-	dc.l	Mus_ChairRoom		
-	dc.l	Mus_Skinner		
+	dc.l	Mus_ChairRoom			
 	dc.l	Mus_BossaNova		
 	dc.l	Mus_dam_dariram		
 	dc.l	Mus_WillTell		
-	dc.l	Mus_BonusEight
 
 	dc.l	Mus_CrazyMario		
 	dc.l	Mus_Ding		
@@ -210,7 +210,9 @@ Mus_Hidden:		include	"music/Dawid/Hidden.asm"
 	even
 Mus_Final:		include "music/Dawid/Extremely_intense_boss_song_for_someone.asm" ;very intense not really but eh idgaf
 	even
-
+Mus_BonusEight:		include	"music/TG2000Tracks/Bonus8.asm"
+	even
+	
 Mus_Boss:		include "music/MattTracks/Mus - Chester Cheetah Boss.asm"
 	even
 Mus_ClintonFuck:	include	"music/Kat/Mus - Clinton Fucker.asm"
@@ -336,7 +338,9 @@ Mus_BomerDude:		include	"music/Dawid/Mus - Bomer Dude.asm"	;i have no idea too
 	even
 Mus_ClintonYears:	include	"music/DaxKatter/Mus - Clinton Years.asm"
 	even
-
+Mus_Skinner:		include	"music/TG2000Tracks/Mus - Skinner.asm" 
+	even
+	
 ;  Used for Fake Crashes
 
 Mus_MMZPast:	include	"music/GenesisDoes/MMZPast_SNN.asm"
@@ -404,15 +408,11 @@ Mus_CCLobby:		include	"music/LiquidTracks/Mus - CCLobby.asm"
 	even
 Mus_ChairRoom:		include	"music/CNTracks/TheCheetosChairRoom.asm"
 	even
-Mus_Skinner:		include	"music/TG2000Tracks/Mus - Skinner.asm" 
-	even
 Mus_BossaNova:		include	"music/TG2000Tracks/BossaNova.asm"
 	even
 Mus_dam_dariram:	include	"music/DSKTracks/dam_dariram_handmade.asm"
 	even
 Mus_WillTell:		include	"music/TG2000Tracks/WillTell.asm"
-	even
-Mus_BonusEight:		include	"music/TG2000Tracks/Bonus8.asm"
 	even
 
 Mus_CrazyMario:		include	"music/Dawid/crazymario.asm"

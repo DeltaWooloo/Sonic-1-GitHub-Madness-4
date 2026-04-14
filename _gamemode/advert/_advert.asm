@@ -210,6 +210,7 @@ GM_Advert:
 		advertdata 30,5,Ad_Atgame.art,Ad_Atgame.fg,Ad_Atgame.pal,bgm_BomerDude,0		;pls dont touch this very beautiful ad
 		advertdata 10,10,Ad_FartBaby.art,Ad_FartBaby.fg,Ad_FartBaby.pal,bgm_LG,0
 		advertdata 12,12,Ad_ClintonYears.art,Ad_ClintonYears.fg,Ad_ClintonYears.pal,bgm_ClintonYears,0
+		advertdata 14,14,Ad_SteamedHams.art,Ad_SteamedHams.fg,Ad_SteamedHams.pal,bgm_Skinner,0		
 .tablee:
 .eyecatch1:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg1,Ad_Eyecatch.pal,0,dRightBack
 .eyecatch2:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg2,Ad_Eyecatch.pal,bgm_EuroSega,0
@@ -395,3 +396,9 @@ Ad_ClintonYears:
 .fg:		binclude "_gamemode/advert/ad-ClintonYears-map.eni"
 .art:		binclude "_gamemode/advert/ad-ClintonYears-art.nem"
 		even
+		
+Ad_SteamedHams:
+.pal:		binclude "_gamemode/advert/ad-SteamedHams-pal.unc"
+.fg:		binclude "_gamemode/advert/ad-SteamedHams-map.eni"
+.art:		binclude "_gamemode/advert/ad-SteamedHams-art.nem"
+		even		

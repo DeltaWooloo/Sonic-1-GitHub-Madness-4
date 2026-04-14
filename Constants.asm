@@ -333,6 +333,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_LimitedEgg
 	nextenum bgm_BomerDude
 	nextenum bgm_ClintonYears
+	nextenum bgm_Skinner
 	
 	; BSOD BGM
 	nextenum bgm_MMZPast
@@ -368,7 +369,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Thomas
 	nextenum bgm_CCLobby
 	nextenum bgm_ChairRoom
-	nextenum bgm_Skinner
 	nextenum bgm_BossaNova
 	nextenum bgm_dam_dariram
 	nextenum bgm_WillTell
