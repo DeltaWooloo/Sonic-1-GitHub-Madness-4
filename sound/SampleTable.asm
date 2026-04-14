@@ -109,6 +109,8 @@ SampleTable:
 
 	; SEGA Samples
 	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX		; $D1
+;fuck you, tonic! -sans voice tts generator
+	dcSample	TYPE_DPCM,	Sands,	8000					; $D2
 
 	; Unused
 ;	dcSample	TYPE_PCM,	Segay,		0,	FLAGS_SFX			; $D2
@@ -236,6 +238,8 @@ SampleTable:
 ; Ollie Samples
 	incdac	OllieGameTap,"sound/dac/ollie/gametap.dpcm"
 	incdac	OllieWahoo,"sound/dac/ollie/wahoo.dpcm"
+;sANDS
+	incdac	Sands, "sound/dac/sansfuckyoutonic.dpcm"
 
 ; ---------------------------------------------------------------
 ; Whatever you want the Sega sound to be

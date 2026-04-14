@@ -1,8 +1,78 @@
 {
     "Flex": 2,
     "name": "Sonic 1",
-    "node": "5dfd7215-2a6d-4511-947c-d7cea83cbb73",
+    "node": "07038098-b10a-4ae9-9ccf-3d69f913dcc2",
     "objects": [
+        {
+            "uuid": "bb28ea94-8ffe-473d-a5e1-344340a02791",
+            "format": "Sonic 1.js",
+            "name": "object",
+            "palettes": [],
+            "art": {
+                "path": "",
+                "compression": "Uncompressed",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            }
+        },
+        {
+            "uuid": "0f2ebb28-ea94-4ffe-873d-e5e1344340a0",
+            "format": "Sonic 1.js",
+            "name": "Sans",
+            "palettes": [
+                {
+                    "path": "palette\\Sonic.bin",
+                    "length": 1
+                }
+            ],
+            "art": {
+                "path": "artnem\\Sans.nem",
+                "compression": "Nemesis",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "_maps\\Sans.asm",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            }
+        },
+        {
+            "uuid": "30f50b4f-e9b9-4fe0-ad1a-31f6af917669",
+            "format": "Sonic 1.js",
+            "name": "Insta Reel",
+            "palettes": [
+                {
+                    "path": "palette\\BlueScape.bin",
+                    "length": 3
+                }
+            ],
+            "art": {
+                "path": "artnem\\Instagram.bin",
+                "compression": "Nemesis",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "_maps\\Instagram.asm",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            }
+        },
         {
             "uuid": "5dfd7215-2a6d-4511-947c-d7cea83cbb73",
             "format": "Sonic 1.js",
@@ -85,20 +155,20 @@
         {
             "uuid": "07038098-b10a-4ae9-9ccf-3d69f913dcc2",
             "format": "Sonic 1.js",
-            "name": "ATGAMEPAL",
+            "name": "Useless",
             "palettes": [
                 {
-                    "path": "_gamemode\\advert\\Atgame.bin",
+                    "path": "",
                     "length": 4
                 }
             ],
             "art": {
-                "path": "",
-                "compression": "Uncompressed",
+                "path": "artnem\\Boss - Exhaust Flame.nem",
+                "compression": "Nemesis",
                 "offset": 0
             },
             "mappings": {
-                "path": "",
+                "path": "_maps\\Boss Items.asm",
                 "label": ""
             },
             "dplcs": {

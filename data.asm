@@ -498,6 +498,8 @@ Nem_DioDanner_Boss:	incbin	"_incObj/DioMildanner/Art - Boss.nem"
 		even
 Nem_DioDanner_Dead:	incbin	"_incObj/DioMildanner/Art - Dead.nem"
 		even
+Nem_Sans:	binclude	"artnem/Sans.nem"
+		even
 ; ---------------------------------------------------------------------------
 ; Cold Brew
 ; ---------------------------------------------------------------------------

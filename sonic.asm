@@ -6346,6 +6346,7 @@ Map_Pri:	include	"_maps/Prison Capsule.asm"
 
 		include	"_incObj/21 HUD.asm"
 Map_HUD:	include	"_maps/HUD.asm"
+Map_Sans:	include	"_maps/Sans.asm"
 
 ; ---------------------------------------------------------------------------
 ; Add points subroutine

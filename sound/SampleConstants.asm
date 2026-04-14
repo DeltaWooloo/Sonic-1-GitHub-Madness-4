@@ -115,6 +115,9 @@ dOllieWahoo			ds.b 1
 
 ; SEGA Samples
 dSega				ds.b 1
+
+dSans				ds.b 1
+
 ;dSega2				ds.b 1
 
 ; UNUSED
