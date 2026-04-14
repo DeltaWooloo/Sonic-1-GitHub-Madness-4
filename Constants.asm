@@ -262,6 +262,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Blue			;		(Act 2)
 	nextenum bgm_Hidden			; Bluestone
 	nextenum bgm_Final			; DUMMY Level BGM
+	nextenum bgm_BonusEight			; Bonus Stage
 
 	; Boss BGM
 	nextenum bgm_Boss			; Regular Boss
@@ -371,14 +372,13 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_BossaNova
 	nextenum bgm_dam_dariram
 	nextenum bgm_WillTell
-	nextenum bgm_BonusEight
 
 	; Unused Jingle BGM
+	nextenum bgm_CrazyMario
 	nextenum bgm_Ding
 	nextenum bgm_SadMac
-	nextenum bgm_Folgers
-	nextenum bgm_CrazyMario
 	nextenum bgm_Win2K
+	nextenum bgm_Folgers
 	nextenum bgm_MJWin
 
 	; Keep this last
