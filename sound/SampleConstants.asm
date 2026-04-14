@@ -75,6 +75,7 @@ dDicks				ds.b 1
 dBabyAlarm			ds.b 1
 dYouCanSuck			ds.b 1
 dBoostPower			ds.b 1
+dBoostRPower		ds.b 1
 dClintonHi			ds.b 1
 dClintonWin			ds.b 1
 dClintonFail		ds.b 1
