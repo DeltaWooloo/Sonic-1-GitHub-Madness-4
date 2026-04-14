@@ -281,11 +281,11 @@ ObjNeedle3DTest:
 ; ----------------------------------------------------------------------------
 N3DTest_Init:
 	add.b	#2, obRoutine(a0)
-	move.l	#Map_NeedleBoss, obMap(a0)
-	move.w	#NEEDLB_GFX,obGfx(a0)
+	move.l	#Map_N3DTest, obMap(a0)
+	move.w	#($8800/32),obGfx(a0)
 	move.w	#16,needle.ZPos(a0)
-	move.w	#N3D_CENTERX,needle.XOrg(a0)
-	move.w	#N3D_CENTERY,needle.YOrg(a0)
+	move.w	obX(a0),needle.XOrg(a0)
+	move.w	obY(a0),needle.YOrg(a0)
 
 	move.b	#$C,obRender(a0)
 	move.b	#16,obWidth(a0)
@@ -301,44 +301,51 @@ N3DTest_Main:
 	add.w	#2,needle.Timer(a0)
 	move.w	needle.Timer(a0),d0
 	jsr	CalcSine.l
-	move.w	#N3D_CENTERX,d2
-	move.w	#N3D_CENTERY-128,d3
-	asr.w	#2,d0
-	asr.w	#2,d1
-	add.w	d0,d2
-	add.w	d1,d3
-	move.w	d2,needle.XOrg(a0)
-	move.w	d3,needle.YOrg(a0)
-	andi.w	#$FF,needle.ZPos(a0)
+	move.w	needle.XOrg(a0),d2
+	move.w	needle.YOrg(a0),d3
+;	asr.w	#6,d0
+;	asr.w	#6,d1
+;	add.w	d0,d2
+;	add.w	d1,d3
+;	move.w	d2,needle.XOrg(a0)
+;	move.w	d3,needle.YOrg(a0)
+	andi.w	#$7F,needle.ZPos(a0)
+	move.w	needle.ZPos(a0),d0
+	andi.w	#$70,d0
+	lsr.w	#4,d0
+	move.b	d0,obFrame(a0)
 
-	; DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV 
-
-		; SACBLRDU
-		btst	#0,(v_jpadhold1).w	; dev
-		beq.w	.NoHeldUp
-		addq.b	#1,v_pcyc_num+1.w
-
-		add.l	#$9800,needle.ZPos(a0)
-
-	.NoHeldUp:
-		btst	#1,(v_jpadhold1).w	; dev
-		beq.w	.NoHeldDown
-		addq.b	#1,v_pcyc_num+1.w
-
-		sub.l	#$9800,needle.ZPos(a0)
-
-	.NoHeldDown:
-
+		; DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV 
+	
+			; SACBLRDU
+			btst	#0,(v_jpadhold1).w	; dev
+			beq.w	.NoHeldUp
+			add.l	#$17000,needle.ZPos(a0)
+	
+		.NoHeldUp:
+			btst	#1,(v_jpadhold1).w	; dev
+			beq.w	.NoHeldDown
+			sub.l	#$17000,needle.ZPos(a0)
+	
+		.NoHeldDown:
+		; DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV 
 
 	moveq	#0,d0
 	moveq	#0,d1
 	moveq	#0,d2
+
 	move.w	needle.XOrg(a0),d0
 	move.w	needle.YOrg(a0),d1
+
 	move.w	v_screenposx.w,d2
 	neg.w	d2
+	sub.w	#N3D_CENTERX/8,d0		; i dont. i dont even
+
 	add.w	d2,d0
+
+	sub.w	#N3D_CENTERY,d1
 	move.w	needle.ZPos(a0),d2
+	add.w	d2,d2
 	muls.w	d2,d0
 	muls.w	d2,d1
 	asr.w	#7,d0
@@ -391,32 +398,34 @@ ArtList_NeedleBoss:
 	dc.w	NHAMMER_VRAM
 	dc.l	Nem_NeedleBossBig
 	dc.w	$7000
+	dc.l	Nem_N3DTest
+	dc.w	$8800
 	dc.l	-1
 
 
 Map_NeedleBoss:
 	include	"_incObj/NeedleBoss/NeedleBoss Map.asm"
 	even
-
 Map_NeedleBossBig:
 	include	"_incObj/NeedleBoss/NeedleBossBig Map.asm"
 	even
-
 Map_NHammer:
 	include	"_incObj/NeedleBoss/Hammer Map.asm"
 	even
-
+Map_N3DTest:
+	include	"_incObj/NeedleBoss/N3DTest Map.asm"
+	even
 Nem_NeedleBoss:
 	incbin	"_incObj/NeedleBoss/NeedleBoss.nem"
 	even
-
 Nem_NeedleBossBig:
 	incbin	"_incObj/NeedleBoss/NeedleBossBig.nem"
 	even
-
 Nem_NHammer:
 	incbin	"_incObj/NeedleBoss/Hammer.nem"
 	even
-
+Nem_N3DTest:
+	incbin	"_incObj/NeedleBoss/N3DTest.nem"
+	even
 Pal_NeedleBoss:
 	incbin	"_incObj/NeedleBoss/NeedleBoss.pal"

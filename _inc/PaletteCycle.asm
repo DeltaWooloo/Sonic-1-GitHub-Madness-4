@@ -203,10 +203,20 @@ PalCycle_DVZ:
 	moveq	#0,d0
 	move.b	v_pcyc_num.w,d0
 
-		btst	#6,(v_jpadhold1).w	; dev
-		beq.w	.NoHeld
-		addq.b	#1,v_pcyc_num+1.w
-.NoHeld
+			; SACBLRDU
+			btst	#0,(v_jpadhold1).w	; dev
+			beq.w	.NoHeldUp
+			addq.b	#1,v_pcyc_num+1.w
+	
+	
+		.NoHeldUp:
+			btst	#1,(v_jpadhold1).w	; dev
+			beq.w	.NoHeldDown
+			addq.b	#1,v_pcyc_num+1.w
+	
+	
+		.NoHeldDown:
+		
 	andi.b	#$FE,d0		; no odd addresses
 	adda.l	d0,a0
 	move.b	v_pcyc_num+1.w,d0
