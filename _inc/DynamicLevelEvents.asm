@@ -1109,8 +1109,10 @@ DLE_BSZ1_Boss_Setup:
 		jsr PlaySound	; play boss music
 		move.w	#palid_DioMildanner,d0
 		jmp (PalLoad2).l
+; ===========================================================================		
 ; ---------------------------------------------------------------------------
-; BlueStone WIP
+; BLUESTONE "THE JOHN SITE"
+; Resize level And Camera 
 ; ---------------------------------------------------------------------------
 
 DLE_BTZ:
@@ -1120,45 +1122,50 @@ DLE_BTZ:
 		move.w	DLE_BTZx(pc,d0.w),d0
 		jmp	DLE_BTZx(pc,d0.w)
 ; ===========================================================================
-DLE_BTZx:	dc.w DLE_BTZ1-DLE_BTZx
-		dc.w DLE_BTZ2-DLE_BTZx
-		dc.w DLE_BTZ3-DLE_BTZx
+DLE_BTZx:	dc.w BlueStone-DLE_BTZx
+		dc.w BlueStone-DLE_BTZx
+		dc.w BlueStone-DLE_BTZx
 ; ===========================================================================
 
-DLE_BTZ1:	; placeholder
-DLE_BTZ2:
-		rts
-
-DLE_BTZ3:
+BlueStone:	; hello world ksajuioooee fohlkasdkja
 		moveq	#0,d0
 		move.b	(v_dle_routine).w,d0
-		move.w	DLE_BTZ3Index(pc,d0.w),d0
-		jmp	DLE_BTZ3Index(pc,d0.w)
+		move.w	BlueStoneIndex(pc,d0.w),d0
+		jmp	BlueStoneIndex(pc,d0.w)
 ; ===========================================================================
-DLE_BTZ3Index:	dc.w DLE_BTZ3main-DLE_BTZ3Index
-		dc.w DLE_BTZ3_Returntofreddy-DLE_BTZ3Index
-		dc.w DLE_BTZ3end-DLE_BTZ3Index
+BlueStoneIndex:	dc.w InitBluSto-BlueStoneIndex
+		dc.w BluSto_Return-BlueStoneIndex
+		dc.w BluSto_end-BlueStoneIndex
 ; ===========================================================================
 
-DLE_BTZ3main:
-		move.w	#$140,(v_limitbtm1).w
+InitBluSto:          
+		move.w	#$40,(v_limitbtm1).w  ; Main Scr View		
+		cmpi.w	#$200,(v_screenposx).w   ; Ajust
+		bcs.s	BluSto_Return
+		move.w	#$30,(v_limitbtm1).w  ; Main Scr View
+		
+HscrBSZ:		
+		move.w  #$300,(v_limitright1).w  ; Right Boundary		
+		move.b	#1,(f_lockscreen).w ; Scr Lock
+
+.LoadJohnBattle:		
 		cmpi.w	#Knight_X_Spawn,(v_screenposx).w  ; WIP 
-		blo.s	DLE_BTZ3_Returntofreddy
+		blo.s	BluSto_Return
 		jsr	(FindFreeObj).l
 		bne.s	.BTZspawnfail
-		_move.b	#id_Roaring_Knight,obID(a1) ; load MZ boss object
-		move.w	#Knight_X_Spawn+$180,obX(a1)
-		move.w	#Knight_Y_Spawn+$24,obY(a1)
+		jmp      BluSto_Return   ; Placeholder
+; ---------------------------------------------------------------------------		
+		; move.b	#id_Roaring_Knight,obID(a1) ; load MZ boss object
+		; move.w	#Knight_X_Spawn+$180,obX(a1)
+		; move.w	#Knight_Y_Spawn+$24,obY(a1)
 
 .BTZspawnfail:
-		move.w	#bgm_Boss,d0
-		jsr	(QueueSound1).l	; play boss music
-		move.b	#1,(f_lockscreen).w ; lock screen
+		move.b	#1,(f_lockscreen).w ; Scr Lock
 		addq.b	#2,(v_dle_routine).w	
 
-DLE_BTZ3end:
+BluSto_end:
 		move.w	(v_screenposx).w,(v_limitleft2).w
 
-DLE_BTZ3_Returntofreddy:
+BluSto_Return:
 		rts
-		
+; ===========================================================================
