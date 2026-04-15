@@ -18,6 +18,7 @@ Knight_Previous_Frame	=	objoff_3B		; Where the Knight's previous frame will be s
 Knight_Timer		=	objoff_38		; Internal timer for the Knight. (2 bytes)
 Knight_X_Target		=	objoff_34		; X coordinate target for the Knight. (2 bytes)
 Knight_Y_Target		=	objoff_36		; Y coordinate target for the Knight. (2 bytes)
+Knight_Hits_Phase1	=	2			; HP for Phase 
 
 ; ===========================================================================
 ; Start of object code
@@ -36,8 +37,8 @@ Obj_Roaring_Knight:
 RKnight_Index:	
 	dc.w RKnight_Init-RKnight_Index		; Initialization routine
 	dc.w RKnight_Phase1-RKnight_Index	; Main logic for phase 1
-	dc.w RKnight_Defeat-RKnight_Index	; Phase 1 to Phase 2 transition
-	dc.w RKnight_Null-RKnight_Index		; Main logic for phase 2
+	dc.w RKnight_P1End-RKnight_Index	; Phase 1 to Phase 2 transition
+	dc.w RKnight_Defeat-RKnight_Index	; Main logic for phase 2
 	dc.w RKnight_Defeat-RKnight_Index	; Defeat and cleanup logic
 	dc.w RKnight_Bullets-RKnight_Index	; Knight bullet objects
 	dc.w RKnight_Null-RKnight_Index		; Knight afterimages
@@ -55,7 +56,7 @@ RKnight_Init:
 	move.b	#$48,obActWid(a0)					; Define render width
 	move.b	#2,obPriority(a0)					; Define sprite render priority
 	move.b	#$F,obColType(a0)
-	move.b	#8,obColProp(a0) ; set number of hits to 8	
+	move.b	#Knight_Hits_Phase1,obColProp(a0) 			; set number of hits for phase 1	
 	clr.b	Knight_Previous_Frame(a0)				; Set previous frame to 0
 	move.b	#2,obFrame(a0)						; Set current frame. This guarantees correct graphics initialization. TODO: Proper animation routine.
 	move.b	#60,objoff_3E(a0)					; Give the Knight invincibility frames.
@@ -79,7 +80,7 @@ RKnight_Phase1:
 	tst.b	obColType(a0)			; Is the Knight invincible?
 	bne.s	.display			; If not, display normally.
 	btst	#3,objoff_3E(a0)		; Otherwise, once every 8 frames...
-	beq.s	.display			; ...choose whether to display the Knight's sprite or not.
+	bne.s	.display			; ...choose whether to display the Knight's sprite or not.
 	rts
 	
 .display:	
@@ -267,6 +268,150 @@ RKPhase1_Idle:
 	rts
 	
 ; End of Phase 1 main behavior
+
+; ===========================================================================
+; Start of Phase 1 end behavior.
+; This phase puts the Knight in a ball and moves it 0x200 pixels away from the center of the current screen.
+; ===========================================================================		
+	
+RKnight_P1End:
+	moveq	#0,d0
+	move.b	ob2ndRout(a0),d0		; Get routine ID
+	move.w	RKP1End_Index(pc,d0.w),d1	; Get indexed routine
+	jsr	RKP1End_Index(pc,d1.w)		; Jump to code
+	; TO-DO: Wave
+	
+	; TO-DO: AnimateSprite
+	lea	(Ani_Roaring_Knight).l,a1	
+	jsr	(AnimateSpriteXL).l
+	bsr.w	RKnight_LoadGfx			; Load graphics from DPLC to VRAM	
+	jmp	(DisplaySprite).l		; Display object
+
+; ===========================================================================
+; Phase 1 end behavior Index
+; ===========================================================================
+
+RKP1End_Index:
+	dc.w	RKPhase1_Wait-RKP1End_Index		; Initialize some of the Knight's properties specific to the Phase 1 to Phase 2 transition.
+	dc.w	RKP1End_LeaveScreenPrep-RKP1End_Index	; Set up the Knight to leave the screen.
+	dc.w	RKPhase1_Wait-RKP1End_Index		; Wait a bit before doing that
+	dc.w	RKP1End_LeaveScreen-RKP1End_Index	; Moves the Knight in ball form to the center of the screen, 0x200px away.
+	dc.w	RKPhase1_Idle-RKP1End_Index		; Wait for the player to reach the Knight.	
+	dc.w	RKPhase1_Idle-RKP1End_Index		; Wait for the Knight's animation to end
+	dc.w	RKPhase1_Idle-RKP1End_Index		; Moves the Knight to the next phase.
+	
+; ===========================================================================
+; Prepares the Knight to leave, setting an animation, and their destination.
+; ===========================================================================
+
+RKP1End_LeaveScreenPrep:
+	move.b	#3,obAnim(a0)					; Set animation to roll
+	bset	#1,obStatus(a0)					; Flip sprites, making the Knight face right
+	move.w	#Knight_X_Spawn+$2A0,Knight_X_Target(a0)	; Set X target
+	move.w	#Knight_Y_Spawn+$70,Knight_Y_Target(a0)		; Set Y target
+	clr.w	obVelX(a0)					; Clear X speed, just in case
+	clr.w	obVelY(a0)					; Clear Y speed, just in case
+	move.w	#60,Knight_Timer(a0)				; Wait 1 second
+	addq.b	#2,ob2ndRout(a0)				; Next routine
+	rts
+
+; ===========================================================================
+; Moves the Knight to their target destination, and changes their speed
+; accordingly
+; ===========================================================================
+
+RKP1End_LeaveScreen:
+	; Move the Knight to the right.
+	move.w	Knight_X_Target(a0),d0		; Get Knight's X target
+	cmp.w	obX(a0),d0			; Check against current X position.
+	ble.s	.moveKVert			; If current X is greater or equal, the Knight has already reached the target.	
+	addi.w	#$40,obVelX(a0)			; Add speed to the Knight
+	cmpi.w	#$800,obVelX(a0)
+	blo.s	.moveKVert
+	move.w	#$800,obVelX(a0)		; ...at least, until a certain speed is met
+	
+	; Move the Knight vertically, relative to their target
+.moveKVert:
+	move.w	Knight_Y_Target(a0),d0		; Get Knight's Y target
+	cmp.w	obY(a0),d0			; Check Y position against Y target
+	blo.s	.isbelow			; If the Knight is below the Y target, do this
+	bhi.s	.isabove			; Otherwise, if the Knight is above the Y target, do that
+	bra.s	.moveKnight			; Else, go straight to movement routines.
+	
+.isbelow:
+	subi.w	#$20,obVelY(a0)
+	cmpi.w	#-$200,obVelY(a0)
+	bge.s	.moveKnight
+	move.w	#-$200,obVelY(a0)
+	bra.s	.moveKnight
+	
+.isabove:
+	addi.w	#$20,obVelY(a0)
+	cmpi.w	#$200,obVelY(a0)
+	ble.s	.moveKnight
+	move.w	#$200,obVelY(a0)
+
+.moveKnight:
+	jsr	(SpeedToPos).l
+	moveq	#2,d6
+	
+	; Check if the Knight has reached their Y target. 
+		
+	tst.w	obVelY(a0)			; Check the Knight's speed.
+	bmi.s	.checkupwards			; The Knight is moving upwards.
+	
+	; The Knight is moving downwards.
+	
+	move.w	Knight_Y_Target(a0),d0		; Get Knight's Y target
+	cmp.w	obY(a0),d0			; Check against current Y position.
+	bgt.s	.checkright			; If current Y is greater, the Knight is above the target.
+	move.w	Knight_Y_Target(a0),obY(a0)	; Align the Knight with their Y target.
+	clr.w	obVelY(a0)
+	subi.b	#1,d6				; Mark one of the conditions as met.
+	bra.s	.checkright
+	
+	; The Knight is moving upwards.
+.checkupwards:
+	move.w	Knight_Y_Target(a0),d0		; Get Knight's Y target
+	cmp.w	obY(a0),d0			; Check against current Y position.
+	blo.s	.checkright			; If current Y is lower, the Knight is below the target.
+	move.w	Knight_Y_Target(a0),obY(a0)	; Align the Knight with their Y target.
+	clr.w	obVelY(a0)
+	subi.b	#1,d6				; Mark one of the conditions as met.
+	
+.checkright:
+	move.w	Knight_X_Target(a0),d0		; Get Knight's X target
+	cmp.w	obX(a0),d0			; Check against current X position.
+	bgt.s	.return				; If current X is lower, the Knight is to the left of the target.
+	move.w	Knight_X_Target(a0),obX(a0)	; Align the Knight with their X target.
+	clr.w	obVelX(a0)	
+	subi.b	#1,d6				; Mark one of the conditions as met.
+	bne.s	.return				; If not both of the conditions were met, return.
+	move.b	#5,obAnim(a0)			; Set the animation to that before the roar.
+	addi.w	#$200,(v_limitright2).w 	; Extend right boundary
+	addq.b	#2,ob2ndRout(a0)
+	
+.return:
+	rts
+	
+; ===========================================================================
+; Moves the Knight, altering their speed until they reach a specific target 
+; location.
+;
+; Sets an animation after the target location is reached on both the X and
+; Y axis.
+; ===========================================================================	
+	
+	
+	
+; ===========================================================================
+; Waits for the player to reach the Knight. This is tested partly via level
+; events.
+; ===========================================================================
+	
+; ===========================================================================
+; Advances the Knight's routine.
+; ===========================================================================
 	
 ; ===========================================================================	
 ; Boss is defeated
@@ -382,6 +527,10 @@ RKnight_HandleHits:
 	btst	#7,obStatus(a0)				; Has the Knight taken all possible damage?
 	beq.s	.normalhit				; If so, branch.
 	addq.b	#2,obRoutine(a0)			; Else, phase is complete. Go to next routine.
+	
+	clr.b	ob2ndRout(a0)				; And clear the secondary routine.
+	move.b	#2,obAnim(a0)				; And make them static
+	move.w	#120,Knight_Timer(a0)			; And wait two seconds idly by
 	rts
 	
 	.normalhit:
@@ -421,6 +570,14 @@ KBullets_LoadProperties:
 	move.b	(a2),obFrame(a0)			; Set static frame
 	
 	rts						; return
+	
+; ===========================================================================
+; Animate Sprite implementation that extends the sprite limit.
+;
+; Used by: Knight
+; ===========================================================================
+
+	include	"dotgen/knight/sub AnimateSprite XL.asm"
 
 ; ===========================================================================
 ; Data
@@ -534,6 +691,45 @@ RKPhase1_BulletChoicesR:
 ; ===========================================================================
 ; Animations
 ; ===========================================================================	
+
+Ani_Roaring_Knight:
+		dc.w	.null-Ani_Roaring_Knight		; 0
+		dc.w	.idle-Ani_Roaring_Knight		; 1
+		dc.w	.static-Ani_Roaring_Knight		; 2
+		dc.w	.turntoball-Ani_Roaring_Knight		; 3
+		dc.w	.ball-Ani_Roaring_Knight		; 4
+		dc.w	.roarprepare-Ani_Roaring_Knight		; 5
+		dc.w	.roar-Ani_Roaring_Knight		; 6
+
+.null:		dc.b	0
+		dc.b	0,$FF
+		even
+
+.idle:		dc.b	1
+		dc.b	1,$FF
+		even
+
+.static:	dc.b	3
+		dc.b	$10,$11,$12,$FF
+		even
+
+.turntoball:	dc.b	3
+		dc.b	$F,$E,$D,$C,$FD,$4
+		even
+
+
+.ball:		dc.b	3
+		dc.b	$B,$7,$8,$9,$A,$FF
+		even
+
+.roarprepare:	dc.b	1
+		dc.b	$13,$FF
+		even
+
+.roar:		dc.b	3
+		dc.b	$14,$15,$FF
+		even
+
 
 Ani_Knight_Bullets:
 	dc.w	.null-Ani_Knight_Bullets
