@@ -596,11 +596,11 @@ ZoneNameTable:
 .End:		dc.b	"ENDING          "
 .MSZ:		dc.b	"COLD BREW       "
 .ABC:		dc.b	"WINDOWS         "
-.Joint:		dc.b	"THE JOINT       "
+.Joint:		dc.b	"REALLY T. INSINE"
 .DVZ:		dc.b	"DOLEVILLE       "
 .Nogales:	dc.b	"NOGALES         "
 .BS:	    dc.b	"BLUESCAPE       "
-.BT:	    dc.b	"BLUESTONE       "
+.BT:	    dc.b	"OLDJOHN         "
 		even
 
 GamemodeNameTable:
