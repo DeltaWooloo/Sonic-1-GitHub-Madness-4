@@ -626,6 +626,7 @@ GamemodeNameTable:
 		dc.w	.Screensaver-.t
 		dc.w	.Clinton-.t	; ClintonScreens
 		dc.w	.BSOD-.t
+	    dc.w	.Sans-.t
 		rept ( (GameModeArray_End-GameModeArray)-(((*)-.t)*2) )/4
 		dc.w	.Placeholder-.t
 		endr
@@ -652,6 +653,7 @@ GamemodeNameTable:
 .Screensaver:	dc.b	"SCREENSAVER     "
 .Clinton:		dc.b	"CLINTON         "
 .BSOD:			dc.b	"WINDOWS BSOD    "
+.Sans:			dc.b	"SANS DEAD       "
 .Placeholder:	dc.b	"PLACEHOLDER NAME"
 		even
 

@@ -425,6 +425,7 @@ GameModeArray:
 	GAMEMODE	GM_SonicTheScreensaver,	id_Screensaver	; GMZ - DVD Screensaver					
 	GAMEMODE	GM_ClintonScreens,	id_ClintonScr	; Clinton fail/win 						
 	GAMEMODE	GM_BSOD,		id_BSOD		; !@ GD: Windows zone BSOD (on death)
+    GAMEMODE	GM_Sans,		id_SansDied		; he died.
 	dephase
 GameModeArray_End:
 
@@ -6427,6 +6428,7 @@ Art_LivesNums:	binclude	"artunc/Lives Counter Numbers.bin" ; 8x8 pixel numbers o
 		include	"_incObj/Arif/Main.asm"
 		
 		include	"_incObj/NeedleBoss/NeedleBoss.asm"
+		
 
 ; ---------------------------------------------------------------------------
 ; GMZ - garblemarden's slop will go here
@@ -6446,6 +6448,9 @@ Art_LivesNums:	binclude	"artunc/Lives Counter Numbers.bin" ; 8x8 pixel numbers o
 		include	"_gamemode/cutscene/cutscene.asm"
 FortnitePortal:
 		include	"_incObj/ObjRiftToGo.asm"
+		
+;sansfucker
+		include "sansfucker.asm" ;le shitty code 2
 
 ; ---------------------------------------------------------------------------
 ; NEEDLEMOUSE SHITTERY  Team Splash Screen files

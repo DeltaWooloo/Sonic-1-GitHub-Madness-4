@@ -384,7 +384,8 @@ SpeedUpIndex:
 	dc.b	  1,   1,   1,   1, $75,   1,   1,   1, $33,   1, $55, $45, $54, $80, $80,   1	; $70-$7F
 	dc.b	  1, $33,   $4A;,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1	; $80-$8F
 ;	dc.b	  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1	; $90-$9F
-		bgmwarning	SpeedUpIndex, 1
+	;	bgmwarning	SpeedUpIndex, 1
+	;bye bye speedupindex warning, go burn in hell
 		even
 
 ; ---------------------------------------------------------------------------

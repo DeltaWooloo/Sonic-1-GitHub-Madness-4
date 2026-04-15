@@ -1,5 +1,5 @@
 ; ---------------------------------------------------------------------------
-; Object 7A - Eggman (SLZ)
+; Object 7A - Sans, he flies now apparently
 ; ---------------------------------------------------------------------------
 
 BossStarLight:
@@ -25,7 +25,7 @@ Obj7A_Main:
 		move.w	#$218,obY(a0)
 		move.w	obX(a0),$30(a0);30og
 		move.w	obY(a0),$38(a0);38 og
-		move.b	#$F,obColType(a0)
+		move.b	#$C,obColType(a0)
 		move.b	#$F,obColProp(a0) ; set number of hits to ALOT cause you technically miss... ALOT
 		lea	Obj7A_ObjData(pc),a2
 		movea.l	a0,a1
@@ -127,11 +127,7 @@ loc_189FE:
 		move.w	#sfx_HitBoss,d0
 		jsr	(PlaySound_Special).l	; play boss damage sound
 	    pcm	dSans,1		; Sans
-		jsr	FindFreeObj
-		bne.s FuckeryNoObjecto
-		move.b	#id_RoadRoller,(a1) ; load object
-FuckeryNoObjecto:
-                rts
+		
 loc_18A28:
 		lea	(v_pal_dry+$22).w,a1
 		moveq	#0,d0
@@ -306,8 +302,8 @@ loc_18BAE:
 
 loc_18BB4:
 		clr.w	obVelY(a0)
-	;	move.w	#bgm_SLZ,d0
-	;	jsr	(PlaySound).l		; play SLZ music
+		move.b  #id_SansDied,(v_gamemode).w ; go to death
+
 
 loc_18BC2:
 		bra.w	loc_189EE
