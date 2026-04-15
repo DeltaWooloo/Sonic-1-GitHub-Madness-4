@@ -43,7 +43,7 @@ Bump_Hit:	; Routine 2
 		bclr	#5,obStatus(a1)
 		clr.b	jumping(a1)
 		move.b	#1,obAnim(a0)	; use "hit" animation
-		move.b	#dBoik,d0	; Boik
+		move.b	#dFuck,d0	; Fuck
 		jsr	(MegaPCM_PlaySample).l
 		lea	(v_objstate).w,a2
 		moveq	#0,d0
