@@ -23,20 +23,11 @@ AnimateLevelGfx:
 AniArt_Index:	dc.w AniArt_GHZ-AniArt_Index, AniArt_none-AniArt_Index		; GHZ, LZ
 		dc.w AniArt_MZ-AniArt_Index, AniArt_none-AniArt_Index		; MZ SLZ
 		dc.w AniArt_none-AniArt_Index, AniArt_SBZ-AniArt_Index		; SYZ, SBZ
-		zonewarning AniArt_Index,2
 		dc.w AniArt_Ending-AniArt_Index, AniArt_CBZ-AniArt_Index	; ENDZ, CBZ
 		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index		; WINZ, JOINTZ
 		dc.w AniArt_none-AniArt_Index, AniArt_GHZ-AniArt_Index		; DOLEZ, NOGALEZ
 		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
-		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
-		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
-		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
-		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
-		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
-		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
-		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
-		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
-		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
+		zonewarning AniArt_Index,2
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Animated pattern routine - Green Hill

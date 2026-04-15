@@ -20,7 +20,6 @@ ptr_PLC_SYZ:		dc.w PLC_SYZ-ArtLoadCues
 ptr_PLC_SYZ2:		dc.w PLC_SYZ2-ArtLoadCues
 ptr_PLC_SBZ:		dc.w PLC_SBZ-ArtLoadCues
 ptr_PLC_SBZ2:		dc.w PLC_SBZ2-ArtLoadCues
-			zonewarning PLC_Levels,4
 ptr_PLC_ENDZ:		dc.w PLC_GHZ-ArtLoadCues
 ptr_PLC_ENDZ2:		dc.w PLC_Ending-ArtLoadCues
 ptr_PLC_BREW:		dc.w PLC_BREW-ArtLoadCues
@@ -49,7 +48,6 @@ ptr_PLC_MZAnimals:	dc.w PLC_MZAnimals-ArtLoadCues
 ptr_PLC_SLZAnimals:	dc.w PLC_SLZAnimals-ArtLoadCues
 ptr_PLC_SYZAnimals:	dc.w PLC_SYZAnimals-ArtLoadCues
 ptr_PLC_SBZAnimals:	dc.w PLC_SBZAnimals-ArtLoadCues
-			zonewarning PLC_Animals,2
 ptr_PLC_ENDZAnimals:	dc.w PLC_ENDZAnimals-ArtLoadCues
 ptr_PLC_BREWAnimals:	dc.w PLC_BREWAnimals-ArtLoadCues
 ptr_PLC_WINAnimals:	dc.w PLC_WINAnimals-ArtLoadCues
@@ -58,6 +56,7 @@ ptr_PLC_DVZAnimals:	dc.w PLC_DVZAnimals-ArtLoadCues
 ptr_PLC_NGZAnimals:	dc.w PLC_NGZAnimals-ArtLoadCues
 ptr_PLC_BSZAnimals:	dc.w PLC_NGZAnimals-ArtLoadCues
 ptr_PLC_BTZAnimals:	dc.w PLC_NGZAnimals-ArtLoadCues
+			zonewarning PLC_Animals,2
 ptr_PLC_Ending:		dc.w PLC_Ending-ArtLoadCues
 ptr_PLC_TryAgain:	dc.w PLC_TryAgain-ArtLoadCues
 ptr_PLC_EggmanSBZ2:	dc.w PLC_EggmanSBZ2-ArtLoadCues

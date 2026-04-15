@@ -26,7 +26,6 @@ palid_MZ:				makePalEntry	Pal_MZ, 			v_palette_line_2
 palid_SLZ:				makePalEntry	Pal_SLZ,			v_palette_line_2
 palid_SYZ:				makePalEntry	Pal_SYZ,			v_palette_line_2
 palid_SBZ1:				makePalEntry	Pal_SBZ1, 			v_palette_line_2
-	zonewarning Pal_Levels,8
 
 palid_Special:			makePalEntry	Pal_Special, 		v_palette_line_1
 palid_LZWater:			makePalEntry	Pal_LZWater, 		v_palette_line_1

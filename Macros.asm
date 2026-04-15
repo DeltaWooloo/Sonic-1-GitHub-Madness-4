@@ -379,9 +379,8 @@ gotoROM:	macro
 ; ---------------------------------------------------------------------------
 
 zonewarning:	macro loc,elementsize
-._end:
-	if (._end-loc)-(ZoneCount*elementsize)<>0
-		warning "Size of loc (\{(._end-loc)/elementsize}) does not match ZoneCount (\{ZoneCount})."
+	if (MOMPASS==2)&&((*-loc)<>(ZoneCount*elementsize))
+		warning "Size of loc ($\{(*-loc)/elementsize}) does not match ZoneCount ($\{ZoneCount})."
 	endif
 		endm
 		

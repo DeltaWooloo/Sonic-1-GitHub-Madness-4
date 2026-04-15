@@ -43,10 +43,7 @@ AddressSRAM = 3
 ;	| 0 = odd+even; 2 = even only; 3 = odd only
 ;	| (odd only is the most common)
 
-ZoneCount = 6
-;	| Used for the zonewarning macro. Do not change, unless more zones get added. aka never change it just add zone fles after it duh
-;	| Discrete zones are: GHZ, LZ, MZ, SLZ, SYZ, and SBZ
-
+ZoneCount:	equ $0E	; Used for the zonewarning macro
 ; ===========================================================================
 	cpu 68000
 	message "Pass \{MOMPASS}"
@@ -3114,21 +3111,6 @@ Level_MainLoop:
 		include	"_inc/LZWaterFeatures.asm"
 		include	"_inc/MoveSonicInDemo.asm"
 
-; ---------------------------------------------------------------------------
-; Collision index pointer loading subroutine
-; ---------------------------------------------------------------------------
-
-; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
-
-
-ColIndexLoad:
-		moveq	#0,d0
-		move.b	(v_zone).w,d0
-		lsl.w	#2,d0
-		move.l	ColPointers(pc,d0.w),(v_collindex).w
-		rts
-; End of function ColIndexLoad
-
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; STAGE MUSIC
@@ -3159,6 +3141,20 @@ BGMDemo:
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
+; Collision index pointer loading subroutine
+; ---------------------------------------------------------------------------
+
+; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
+
+
+ColIndexLoad:
+		moveq	#0,d0
+		move.b	(v_zone).w,d0
+		lsl.w	#2,d0
+		move.l	ColPointers(pc,d0.w),(v_collindex).w
+		rts
+; End of function ColIndexLoad
+; ---------------------------------------------------------------------------
 ; Collision index pointers
 ; ---------------------------------------------------------------------------
 ColPointers:	dc.l Col_GHZ
@@ -3167,11 +3163,16 @@ ColPointers:	dc.l Col_GHZ
 		dc.l Col_SLZ
 		dc.l Col_SYZ
 		dc.l Col_SBZ
-		zonewarning ColPointers,4
 		dc.l Col_GHZ ; Pointer for Ending is missing by default.
 		dc.l Col_BREW
 		dc.l Col_WIN
 		dc.l Col_Joint
+		dc.l Col_DVZ
+		dc.l Col_NGZ
+		dc.l Col_BSZ
+		dc.l Col_BTZ
+		zonewarning ColPointers,4
+
 		include	"_inc/Oscillatory Routines.asm"
 
 ; ---------------------------------------------------------------------------

@@ -40,7 +40,6 @@
 		dc.b 0, 0
 		even
 
-		zonewarning LevelOrder,8
 
 		dc.l 0,0 ; ending
 
@@ -88,3 +87,5 @@
 		dc.b id_BTZ, 0	; Act 3
 		dc.b 0, 0
 		even
+
+		zonewarning LevelOrder,8
