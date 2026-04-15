@@ -283,7 +283,7 @@ N3DTest_Init:
 	add.b	#2, obRoutine(a0)
 	move.l	#Map_N3DTest, obMap(a0)
 	move.w	#($8800/32),obGfx(a0)
-	move.w	#16,needle.ZPos(a0)
+;	move.w	#16,needle.ZPos(a0)
 	move.w	obX(a0),needle.XOrg(a0)
 	move.w	obY(a0),needle.YOrg(a0)
 
@@ -345,7 +345,11 @@ N3DTest_Main:
 
 	sub.w	#N3D_CENTERY,d1
 	move.w	needle.ZPos(a0),d2
-	add.w	d2,d2
+	move.w	d2,d3
+	asr.w	#1,d3
+	add.w	d3,d2
+	asr.w	#1,d3
+	add.w	d3,d2
 	muls.w	d2,d0
 	muls.w	d2,d1
 	asr.w	#7,d0

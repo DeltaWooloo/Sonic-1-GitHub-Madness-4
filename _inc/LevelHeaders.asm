@@ -61,10 +61,10 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 	lhead	plcid_WIN,Kos_WIN,plcid_WIN2,Blk16_WIN,Blk256_WIN,bgm_VirusAlert,palid_WIN,Col_WIN,ObjPos_WIN3,Level_WIN3,Level_WINbg
 	lhead	plcid_WIN,Kos_WIN,plcid_WIN2,Blk16_WIN,Blk256_WIN,bgm_Final,palid_WIN,Col_WIN,ObjPos_WIN1,Level_WIN1,Level_WINbg
 
-	lhead	plcid_Joint,Kos_Joint,plcid_Joint2,Blk16_Joint,Blk256_Joint,bgm_Final,palid_Joint,Col_Joint,ObjPos_Joint1,Level_Joint1,Level_Jointbg
-	lhead	plcid_Joint,Kos_Joint,plcid_Joint2,Blk16_Joint,Blk256_Joint,bgm_Final,palid_Joint,Col_Joint,ObjPos_Joint2,Level_Joint2,Level_Jointbg
-	lhead	plcid_Joint,Kos_Joint,plcid_Joint2,Blk16_Joint,Blk256_Joint,bgm_Final,palid_Joint,Col_Joint,ObjPos_Joint3,Level_Joint3,Level_Jointbg
-	lhead	plcid_Joint,Kos_Joint,plcid_Joint2,Blk16_Joint,Blk256_Joint,bgm_Final,palid_Joint,Col_Joint,ObjPos_Joint1,Level_Joint1,Level_Jointbg
+	lhead	plcid_Joint,Kos_Joint,plcid_Joint2,Blk16_Joint,Blk256_Joint,bgm_Title,palid_Joint,Col_Joint,ObjPos_Joint1,Level_Joint1,Level_Jointbg
+	lhead	plcid_Joint,Kos_Joint,plcid_Joint2,Blk16_Joint,Blk256_Joint,bgm_Title,palid_Joint,Col_Joint,ObjPos_Joint2,Level_Joint2,Level_Jointbg
+	lhead	plcid_Joint,Kos_Joint,plcid_Joint2,Blk16_Joint,Blk256_Joint,bgm_Title,palid_Joint,Col_Joint,ObjPos_Joint3,Level_Joint3,Level_Jointbg
+	lhead	plcid_Joint,Kos_Joint,plcid_Joint2,Blk16_Joint,Blk256_Joint,bgm_Title,palid_Joint,Col_Joint,ObjPos_Joint1,Level_Joint1,Level_Jointbg
 
 	lhead	plcid_Joint,Kos_DVZ,plcid_Joint2,Blk16_DVZ,Blk256_DVZ,bgm_DoleDetective,palid_DVZ,Col_DVZ,ObjPos_DVZ1,Level_DVZ1,Level_DVZbg
 	lhead	plcid_Joint,Kos_HSZ,plcid_Joint2,Blk16_HSZ,Blk256_HSZ,bgm_HardwareStore,palid_HARDWARE,Col_HSZ,ObjPos_HSZ,Level_HSZ,Level_HSZbg

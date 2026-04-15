@@ -80,7 +80,7 @@ Deform_GHZ:
 		moveq	#0,d0
 	.limitY:
 		move.w	d0,d4
-		move.w	d0,(v_bgscrposy_vdp).w
+		move.w	d0,(v_bgscreenposy).w
 		move.w	(v_screenposx).w,d0
 		cmpi.b	#id_Title,(v_gamemode).w
 		bne.s	.notTitle
