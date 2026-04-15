@@ -6476,8 +6476,7 @@ Nem_Rift:	binclude	"artnem/RiftToGo.nem"
 Nem_NogalesBall:	binclude	"artnem/NogalesBall.nem"
 		even
 
-Map_NogalesBall:	binclude	"_maps/ROLLBALL_PAT.asm"
-		even
+Map_NogalesBall:	include	"_maps/ROLLBALL_PAT.asm"
 
 ; ---------------------------------------------------------------------------
 ; WARIO - that shit  2
