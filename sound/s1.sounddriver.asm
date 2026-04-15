@@ -371,7 +371,7 @@ PSG_Will2:
 ; ---------------------------------------------------------------------------
 ; DANGER! several songs will use the first few bytes of MusicIndex as their main
 ; tempos while speed shoes are active. If you don't want that, you should add
-; their "correct" sped-up main tempos to the list.
+; their "correct" sped-up main tempos to the list. - this is irrelevant now sdfnsods-coni
 ; byte_71A94:
 SpeedUpIndex:
 	dc.b	     $55,   1,   1, $44,   1,   1, $76,   1,   1, $80, $55,  $B, $80, $80, $20	; $00-$0F
@@ -382,7 +382,7 @@ SpeedUpIndex:
 	dc.b	  1, $40,   1,   1,   1, $55, $A0,   1,   1, $94, $55,   1, $27, $80, $11,   1	; $50-$5F
 	dc.b	  1,   1,   1,   1,   1,   1,   1,   1, $2B,   1,   1, $80,   1,   1,   1,   1	; $60-$6F
 	dc.b	  1,   1,   1,   1, $75,   1,   1,   1, $33,   1, $55, $45, $54, $80, $80,   1	; $70-$7F
-	dc.b	  1, $33;,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1	; $80-$8F
+	dc.b	  1, $33,   $5A;,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1	; $80-$8F
 ;	dc.b	  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1	; $90-$9F
 		bgmwarning	SpeedUpIndex, 1
 		even
