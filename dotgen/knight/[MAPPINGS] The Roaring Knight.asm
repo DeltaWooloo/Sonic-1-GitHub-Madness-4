@@ -231,19 +231,19 @@ Maps_Knight_20:	spriteHeader
 Maps_Knight_20_End
 
 Maps_Knight_21:	spriteHeader
- spritePiece $C, -$24, 3, 2, 0, 0, 0, 0, 0
- spritePiece 4, -$1C, 1, 4, 6, 0, 0, 0, 0
- spritePiece $24, -$1C, 1, 1, $A, 0, 0, 0, 0
- spritePiece -$1C, -$14, 4, 4, $B, 0, 0, 0, 0
- spritePiece $C, -$14, 1, 4, $1B, 0, 0, 0, 0
- spritePiece $1C, -$14, 1, 1, $1F, 0, 0, 0, 0
- spritePiece -$24, -$C, 1, 4, $20, 0, 0, 0, 0
- spritePiece $14, -$C, 1, 1, $24, 0, 0, 0, 0
- spritePiece -$2C, 4, 1, 1, $25, 0, 0, 0, 0
- spritePiece 4, 4, 1, 1, $26, 0, 0, 0, 0
- spritePiece -$1C, $C, 3, 2, $27, 0, 0, 0, 0
- spritePiece -4, $C, 1, 1, $2D, 0, 0, 0, 0
- spritePiece -$C, $1C, 1, 1, $2E, 0, 0, 0, 0
+ spritePiece $D, -$21, 3, 2, 0, 0, 0, 0, 0
+ spritePiece 5, -$19, 1, 4, 6, 0, 0, 0, 0
+ spritePiece $25, -$19, 1, 1, $A, 0, 0, 0, 0
+ spritePiece -$1B, -$11, 4, 4, $B, 0, 0, 0, 0
+ spritePiece $D, -$11, 1, 4, $1B, 0, 0, 0, 0
+ spritePiece $1D, -$11, 1, 1, $1F, 0, 0, 0, 0
+ spritePiece -$23, -9, 1, 4, $20, 0, 0, 0, 0
+ spritePiece $15, -9, 1, 1, $24, 0, 0, 0, 0
+ spritePiece -$2B, 7, 1, 1, $25, 0, 0, 0, 0
+ spritePiece 5, 7, 1, 1, $26, 0, 0, 0, 0
+ spritePiece -$1B, $F, 3, 2, $27, 0, 0, 0, 0
+ spritePiece -3, $F, 1, 1, $2D, 0, 0, 0, 0
+ spritePiece -$B, $1F, 1, 1, $2E, 0, 0, 0, 0
 Maps_Knight_21_End
 
 	even

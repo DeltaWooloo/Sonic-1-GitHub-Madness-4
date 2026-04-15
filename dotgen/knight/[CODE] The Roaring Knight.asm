@@ -306,7 +306,7 @@ RKP1End_Index:
 
 RKP1End_LeaveScreenPrep:
 	move.b	#3,obAnim(a0)					; Set animation to roll
-	bset	#1,obStatus(a0)					; Flip sprites, making the Knight face right
+	bset	#0,obStatus(a0)					; Flip sprites, making the Knight face right
 	move.w	#Knight_X_Spawn+$2A0,Knight_X_Target(a0)	; Set X target
 	move.w	#Knight_Y_Spawn+$70,Knight_Y_Target(a0)		; Set Y target
 	clr.w	obVelX(a0)					; Clear X speed, just in case
@@ -388,6 +388,7 @@ RKP1End_LeaveScreen:
 	subi.b	#1,d6				; Mark one of the conditions as met.
 	bne.s	.return				; If not both of the conditions were met, return.
 	move.b	#5,obAnim(a0)			; Set the animation to that before the roar.
+	bclr	#0,obStatus(a0)			; Unflip sprites
 	addi.w	#$200,(v_limitright2).w 	; Extend right boundary
 	addq.b	#2,ob2ndRout(a0)
 	
