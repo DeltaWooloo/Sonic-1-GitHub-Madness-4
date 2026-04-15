@@ -27,11 +27,11 @@ Obj1E_Index:	dc.w Obj1E_Main-Obj1E_Index	; 0
 
 Obj1E_Main:
 		move.l	#Map_BallHogH,obMap(a0)
-		move.w	#make_art_tile(ArtTile_Ball_HogH,1,0),obGfx(a0)
+		move.w	#make_art_tile(ArtTile_Ball_HogH,0,0),obGfx(a0)
 		cmpi.b	#id_CBZ,(v_zone).w		; is zone CBZ?
 		bne.s	.NotCBZ	; if not, branch
 		move.l	#Map_Spongy,obMap(a0)
-		move.w	#make_art_tile(ArtTile_CBZSpongy,0,0),obGfx(a0)
+		move.w	#make_art_tile(ArtTile_CBZSpongy,1,0),obGfx(a0)
 .NotCBZ:
 		move.b	#4,obRender(a0)
 		move.w	#$200,obPriority(a0)
