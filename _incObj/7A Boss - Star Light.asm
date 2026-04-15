@@ -126,8 +126,12 @@ loc_189FE:
 		move.b	#$20,$3E(a0)
 		move.w	#sfx_HitBoss,d0
 		jsr	(PlaySound_Special).l	; play boss damage sound
-	    pcm	dSans,1		; skip splash screens with heavy (the 1 turns the jsr in playsample into a jmp)
-
+	    pcm	dSans,1		; Sans
+		jsr	FindFreeObj
+		bne.s FuckeryNoObjecto
+		move.b	#id_RoadRoller,(a1) ; load object
+FuckeryNoObjecto:
+                rts
 loc_18A28:
 		lea	(v_pal_dry+$22).w,a1
 		moveq	#0,d0
