@@ -6469,6 +6469,14 @@ Eni_Atolly:   binclude	"LiquidSplashes/ATOownscreen/Eni/Atolly.eni"
 
 Nem_Rift:	binclude	"artnem/RiftToGo.nem"
 		even
+; ---------------------------------------------------------------------------
+; NOGALES ART
+; ---------------------------------------------------------------------------
+
+Nem_NogalesBall:	binclude	"artnem/NogalesBall.nem"
+		even
+
+Map_NogalesBall:	include	"_maps/ROLLBALL_PAT.asm"
 
 ; ---------------------------------------------------------------------------
 ; WARIO - that shit  2

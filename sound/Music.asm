@@ -142,7 +142,8 @@ MusicIndex:
 	dc.l	Mus_ChairRoom			
 	dc.l	Mus_BossaNova		
 	dc.l	Mus_dam_dariram		
-	dc.l	Mus_WillTell		
+	dc.l	Mus_WillTell
+	dc.l	Mus_Outfarted		
 
 	dc.l	Mus_CrazyMario		
 	dc.l	Mus_Ding		
@@ -414,6 +415,8 @@ Mus_BossaNova:		include	"music/TG2000Tracks/BossaNova.asm"
 Mus_dam_dariram:	include	"music/DSKTracks/dam_dariram_handmade.asm"
 	even
 Mus_WillTell:		include	"music/TG2000Tracks/WillTell.asm"
+	even
+Mus_Outfarted:		include	"music/TG2000Tracks/Outfarted.asm"
 	even
 
 Mus_CrazyMario:		include	"music/Dawid/crazymario.asm"
