@@ -79,10 +79,10 @@ TitleCard_BSZ2:	equ  "BLUESCAPE"
 TitleCard_BSZ3:	equ  "BLUESCAPE"
 TitleCard_BSZ4:	equ  "BLUESCAPE"
 
-TitleCard_BTZ1:	equ  "BLUESTONE"
-TitleCard_BTZ2:	equ  "BLUESTONE"
-TitleCard_BTZ3:	equ  "BLUESTONE"
-TitleCard_BTZ4:	equ  "BLUESTONE"
+TitleCard_BTZ1:	equ  "OLDJOHN"
+TitleCard_BTZ2:	equ  "OLDJOHN"
+TitleCard_BTZ3:	equ  "NOBODY READ THIS"
+TitleCard_BTZ4:	equ  "OYE NO NADA     "
 
 TitleCard_Zone:	equ  "ZONE"
 TitleCard_UseLowerAct: equ 1	; 0 = ACT -- 1 = Act
@@ -510,7 +510,7 @@ TTLCard_BSZ1:	titlecard TitleCard_BSZ1,0,0
 TTLCard_BSZ2:	titlecard TitleCard_BSZ2,0,0
 TTLCard_BSZ3:	titlecard TitleCard_BSZ3,0,0
 TTLCard_BSZ4:	titlecard TitleCard_BSZ4,0,0
-TTLCard_BTZ1:	titlecard TitleCard_BTZ1,0,0
+TTLCard_BTZ1:	titlecard TitleCard_BTZ1,1,0
 TTLCard_BTZ2:	titlecard TitleCard_BTZ2,0,0
 TTLCard_BTZ3:	titlecard TitleCard_BTZ3,0,0
 TTLCard_BTZ4:	titlecard TitleCard_BTZ4,0,0
