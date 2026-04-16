@@ -2803,6 +2803,8 @@ Level_NoMusicFade:
 		move.w	#$8500+(vram_sprites>>9),(a6) ; set sprite table address
 		move.w	#$9001,(a6)		; 64-cell hscroll size
 		move.w	#$8004,(a6)		; 8-colour mode
+		move.w	#$9100,(a6);mr cracky
+		move.w	#$9200,(a6)
 		move.w	#$8720,(a6)		; set background colour (line 3; colour 0)
 		move.w	#$8AFF,(v_hbla_hreg).w ; set palette change position (for water)
 		move.w	(v_hbla_hreg).w,(a6)
