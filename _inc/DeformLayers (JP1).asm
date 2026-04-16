@@ -660,20 +660,29 @@ Deform_SBZ2:;loc_68A2:
 ; End of function Deform_SBZ
 
 ; ---------------------------------------------------------------------------
-; The Joint Zone background layer deformation code
+; Inside Tonic's Body Zone background layer deformation code
 ; ---------------------------------------------------------------------------
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 
 Deform_ITBZ:
+
+.ScrSpeeds	= 	v_bgscroll_buffer
+.spd1		= 	v_bgscroll_buffer+0
+.spd2		=	v_bgscroll_buffer+2
+.spd3		=	v_bgscroll_buffer+4
+.spd4		=	v_bgscroll_buffer+6
+.spd5		=	v_bgscroll_buffer+8
+.spd6		=	v_bgscroll_buffer+10
+.spd7		=	v_bgscroll_buffer+12
+.sincntr	=	v_bgscroll_buffer+14
+
 		move.b	#1,vscroll_mode
-;		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
 		lea	(v_hscrolltablebuffer).w,a1
 		move.w	(v_screenposx).w,d0
 		neg	d0
 		swap 	d0
-		;move.w	d2,d0
 		move.w	#256-1,d1
 .LoopX:		
 		move.l	d0,(a1)+
@@ -682,55 +691,112 @@ Deform_ITBZ:
 		lea	vscroll_buffer,a1
 		move.w	v_screenposy,d0
 		move.w	d0,d3
-		neg	d3
+;		neg	d3
 		swap	d0
 		move.w	d3,d0
-
+		bsr.s	.GetScrSpeeds
 		lea	.SpeedTbl,a2
+		lea	.ScrSpeeds,a3
+		moveq	#0,d1
 		move.w	#24-1,d2
 .LoopY:
-		move.w	d3,d0
-		neg	d0
 		move.b	(a2)+,d1
-		asr.w	d1,d0
+		move.w	(a3,d1.w),d0
 		move.l	d0,(a1)+
 		dbf	d2,.LoopY
 		rts
 
+.GetScrSpeeds:
+		lea	.ScrSpeeds,a3
+		move.w	d3,d4
+		move.w	d4,d5
+		asr.w	d5
+		move.w	d5,(a3)+	;	.spd1
+		asr.w	d5
+		asr.w	#3,d4
+		add.w	d5,d4
+		move.w	d4,(a3)+	;	.spd2
+		move.w	d5,(a3)+	;	.spd3
+		asr.w	d4
+		move.w	d4,(a3)+	;	.spd4
+		; temp
+		asr.w	d5
+		move.w	d5,(a3)+	;	.spd5
+		asr.w	d5
+		asr.w	#3,d4
+		add.w	d5,d4
+		move.w	d4,(a3)+	;	.spd6
+		move.w	d5,(a3)+	;	.spd7
+
+		move.l	d0,d7
+		lea	.ScrSpeeds,a3
+		move.b	14(a3),d0
+
+		jsr	CalcSine
+		asr.w	#2,d0
+
+		rept	7
+		add.w	d0,(a3)+
+		asr.w	d0
+		endr
+
+		jsr	RandomNumber
+		andi.w	#$7F,d0
+		add.w	d0,(a3)
+		move.l	d7,d0
+		rts
+
+	; feel free to clean this up, i'm lazy
+
 .SpeedTbl:
-		dc.b	1
-		dc.b	1
-		dc.b	2
-		dc.b	2
-		dc.b	3
-		dc.b	3
-		dc.b	4
-		dc.b	5
-		dc.b	6
-		dc.b	5
-		dc.b	4
-		dc.b	3
-		dc.b	2
-		dc.b	2
-		dc.b	1
-		dc.b	1
-		dc.b	1
-		dc.b	1
-		dc.b	2
-		dc.b	2
-		dc.b	3
-		dc.b	3
-		dc.b	4
-		dc.b	5
-		dc.b	6
-		dc.b	5
-		dc.b	4
-		dc.b	3
-		dc.b	2
-		dc.b	2
-		dc.b	1
-		dc.b	1
+		dc.b	1*2
+		dc.b	1*2
+		dc.b	2*2
+		dc.b	2*2
+		dc.b	3*2
+		dc.b	3*2
+		dc.b	4*2
+		dc.b	5*2
+		dc.b	6*2
+		dc.b	5*2
+		dc.b	4*2
+		dc.b	3*2
+		dc.b	2*2
+		dc.b	2*2
+		dc.b	1*2
+		dc.b	1*2
+		dc.b	1*2
+		dc.b	1*2
+		dc.b	2*2
+		dc.b	2*2
+		dc.b	3*2
+		dc.b	3*2
+		dc.b	4*2
+		dc.b	5*2
+		dc.b	6*2
+		dc.b	5*2
+		dc.b	4*2
+		dc.b	3*2
+		dc.b	2*2
+		dc.b	2*2
+		dc.b	1*2
+		dc.b	1*2
+		dc.b	1*2
+		dc.b	1*2
+		dc.b	2*2
+		dc.b	2*2
+		dc.b	3*2
+		dc.b	3*2
+		dc.b	4*2
+		dc.b	5*2
+		dc.b	6*2
 		even
+
+
+; remnant from The Joint zone
+; was never developed and eventually replaced by Inside Tonic's Body
+
+
 ;		moveq	#0,d4
 ;		move.w	(v_scrshifty).w,d5
 ;		ext.l	d5
