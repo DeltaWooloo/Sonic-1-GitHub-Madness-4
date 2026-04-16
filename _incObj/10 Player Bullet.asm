@@ -97,8 +97,8 @@ PBullet_Callback:
 PTonicAtt_Init:
 		move.b	#4, obRender(a0)
 		move.b	#5, obPriority(a0)
-		move.b	#24, obHeight(a0)
-		move.b	#48, obWidth(a0)
+		move.b	#16, obHeight(a0)
+		move.b	#16, obWidth(a0)
 		andi.b	#3, obStatus(a0)
 		move.b	#2,obFrame(a0)
 		move.b	#-1,shlastframe(a0)

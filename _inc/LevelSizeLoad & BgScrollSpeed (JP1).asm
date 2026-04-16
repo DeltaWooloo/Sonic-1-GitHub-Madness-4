@@ -241,6 +241,12 @@ BgScroll_SYZ:
 ; ===========================================================================
 
 BgScroll_SBZ:
+		tst.b	v_act.w
+		beq.s	.act1
+		move.b	#0,vscroll_mode
+		move.w	#0,(v_bgscreenposy).w
+		rts
+.act1:
 		move.b	#1,vscroll_mode
 		move.w	#0,(v_bgscreenposy).w
 		rts
