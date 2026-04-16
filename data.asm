@@ -517,9 +517,7 @@ Nem_ChopperCBZ:	binclude	"artnem/Enemy ChopperCBZ.nem"
 		even
 Nem_MotobugCBZ:	binclude	"artnem/Enemy MotobugCBZ.nem"
 		even
-Nem_EizaNorm:	binclude	"coniobjs/eiza/artnorm.bin"
-		even
-Nem_EizaAtt:	binclude	"coniobjs/eiza/artATT.bin"
+Art_Eiza:	binclude	"coniobjs/eiza/art.bin"
 		even
 ; ---------------------------------------------------------------------------
 ; Collision data

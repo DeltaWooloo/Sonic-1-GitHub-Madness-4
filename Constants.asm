@@ -598,6 +598,10 @@ boss_fz_x:	equ $2450		; Final Zone
 boss_fz_y:	equ $510
 boss_fz_end:	equ boss_fz_x+$2B0
 
+boss_cbz_x:	equ $2800		; Cold Brew Zone
+boss_cbz_y:	equ $300
+boss_cbz_end:	equ boss_cbz_x+$160
+
 boss_ngz_x:	equ $2500		; Nogales Zone
 boss_ngz_y:	equ $200
 boss_ngz_end:	equ boss_ghz_x+$160
