@@ -215,7 +215,7 @@ Pri_EndAct:	; Routine $E
 		clr.w	(v_timebonus).w	; GIO: clear the time bonus
 		add.w	(v_ringbonus),d0; GIO: add the entire bonus to d0
 		clr.w	(v_ringbonus).w	; GIO: clear the ring bonus
-		jsr	AddPoints	; GIO: add up the points stored in d0
+		jsr     (AddPoints).l	; GIO: add up the points stored in d0
 		move.b	#id_Damn,(v_gamemode).w
 ;		jsr	(GotThroughAct).l
 		jmp	(DeleteObject).l
