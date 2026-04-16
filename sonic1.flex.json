@@ -1,7 +1,7 @@
 {
     "Flex": 2,
     "name": "Sonic 1",
-    "node": "07038098-b10a-4ae9-9ccf-3d69f913dcc2",
+    "node": "da472ab9-f363-45e6-8ee3-a83fd70d6d9c",
     "objects": [
         {
             "uuid": "bb28ea94-8ffe-473d-a5e1-344340a02791",
@@ -304,26 +304,26 @@
                     "uuid": "dd2839bc-94ec-493e-bf08-a51f4897ec2c"
                 },
                 {
-                    "name": "Sonic",
+                    "name": "Tonic",
                     "palettes": [
                         {
-                            "path": "palette/Sonic.bin",
+                            "path": "char_assets\\Tonic Pal.bin",
                             "length": 1
                         }
                     ],
                     "format": "Sonic 2.js",
                     "art": {
-                        "path": "artunc/Sonic.bin",
+                        "path": "char_assets\\Tonic Art.bin",
                         "compression": "Uncompressed",
                         "offset": 0
                     },
                     "mappings": {
-                        "path": "_maps/Sonic.asm",
+                        "path": "char_assets\\Tonic Map.asm",
                         "label": ""
                     },
                     "dplcs": {
                         "enabled": true,
-                        "path": "_maps/Sonic - Dynamic Gfx Script.asm",
+                        "path": "char_assets\\Tonic DGFX.asm",
                         "label": ""
                     },
                     "uuid": "da472ab9-f363-45e6-8ee3-a83fd70d6d9c"

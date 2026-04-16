@@ -2296,7 +2296,7 @@ Tonic_Animate:
 		moveq	#0,d2
 
 .belowmax3:
-		lsr.w	#6,d2
+		lsr.w	#3,d2
 		move.b	d2,obTimeFrame(a0) ; modify frame duration
 		lea	(SonAni_Push).l,a1
 		move.b	obStatus(a0),d1
