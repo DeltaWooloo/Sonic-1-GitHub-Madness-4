@@ -838,7 +838,7 @@ FartDanner:		equ $400
 SudoAptInstall:		equ $5B
 Mildfucker:		equ $700
 ;define this bs
-vram_win:   equ $4000
+vram_win:   equ $3800
 
 ; Special Stage Results
 ArtTile_SS_Results_Emeralds:	equ $541
