@@ -10,9 +10,9 @@ RamRanch_Header:
 	smpsHeaderFM        RamRanch_FM3,	$F4, $0C
 	smpsHeaderFM        RamRanch_FM4,	$F4, $0C
 	smpsHeaderFM        RamRanch_FM5,	$E8, $0C
-	smpsHeaderPSG       RamRanch_PSG1,	$0C, $03, $00, $08
-	smpsHeaderPSG       RamRanch_PSG2,	$00, $03, $00, $08
-	smpsHeaderPSG       RamRanch_PSG3,	$00, $03, $00, fTone_01
+	smpsHeaderPSG       RamRanch_PSG1,	$18, $03, $00, $08
+	smpsHeaderPSG       RamRanch_PSG2,	$0C, $03, $00, $08
+	smpsHeaderPSG       RamRanch_PSG3,	$0C, $03, $00, fTone_01
 
 ; FM1 Data
 RamRanch_FM1:
@@ -102,17 +102,8 @@ RamRanch_FM2:
 	smpsCall			RamRanch_BassLoop1
 	smpsChangeTransposition $F4
 	smpsCall			RamRanch_FM1PAT1
-	smpsChangeTransposition $0C
-	dc.b	nD3, $0C, $0C, $06, $06, $06, nG2
-	dc.b	nRst, nG2, nG2, $0C, $06, $06, $06, $06, nBb2, $0C, $0C, $06
-	dc.b	$06, $06, nD2, nD2, nD2, nD2, $0C, $06, $06, $06, $06, nRst
-	dc.b	$60, nA2
-
-RamRanch_Loop31:
-	dc.b	$06
-	smpsLoop            $00, $08, RamRanch_Loop31
-	dc.b	nC3, nC3, nC3, nC3, nC3, nC3, nD2, nD2
-	smpsChangeTransposition $F4
+	smpsCall			RamRanch_OhFuckThatsAlsoInFM32
+	dc.b	nD2, nD2
 RamRanch_LeadLoop2L2:
 	smpsCall			RamRanch_LeadLoop2
 	smpsCall			RamRanch_LeadLoop21
@@ -172,20 +163,13 @@ RamRanch_FM3NoPan:
 	smpsCall			RamRanch_SubLead1Loop1
 	smpsCall			RamRanch_OhFuckThatsAlsoInFM31
 
-
 	smpsCall			RamRanch_FM3PAT1
 	smpsAlterNote       $03
 	smpsCall			RamRanch_FM1PAT1
 	smpsAlterNote       $00
-	smpsCall			RamRanch_FM3C1
-	dc.b	nBb3, $0C, $0C, $06, $06, $06, nD4, $0C, $06, nD4, $0C, $06, $06, $06, $06
-	smpsCall			RamRanch_FM3C1
-
-RamRanch_Loop25:
-	dc.b	nA3, $06
-	smpsLoop            $00, $08, RamRanch_Loop25
-	dc.b	nC4, nC4, nC4, nC4, nC4, nC4, nD2, $03, $03, $03, $03
-		smpsAlterNote       $03
+	smpsCall			RamRanch_OhFuckThatsAlsoInFM32
+	dc.b	nD2, $03, $03, $03, $03
+	smpsAlterNote       $03
 RamRanch_LeadLoop2L3:
 	smpsCall			RamRanch_LeadLoop2
 	smpsCall			RamRanch_LeadLoop21
@@ -224,6 +208,16 @@ RamRanch_FM3PAT1:
 	dc.b	nD2, $03, $03, $03, $03, $06, nRst, $24, nF3, $06, nE3, nF3, nRst, nG3, nF3, nG3
 	dc.b	nBb2, $03, $03, $03, $03, $06, nRst, $24, nG3, $06, nF3, nG3, nRst, nF3, nE3, nF3
 	smpsLoop            $00, $04, RamRanch_FM3PAT1
+	smpsReturn
+
+RamRanch_OhFuckThatsAlsoInFM32:
+	smpsCall			RamRanch_FM3C1
+	dc.b	nBb3, $0C, $0C, $06, $06, $06, nD4, $0C, $06, nD4, $0C, $06, $06, $06, $06
+	smpsCall			RamRanch_FM3C1
+RamRanch_Loop25:
+	dc.b	nA3, $06
+	smpsLoop            $00, $08, RamRanch_Loop25
+	dc.b	nC4, nC4, nC4, nC4, nC4, nC4
 	smpsReturn
 
 RamRanch_FM3C1:
