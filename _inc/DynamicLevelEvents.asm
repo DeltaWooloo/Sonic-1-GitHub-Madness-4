@@ -148,28 +148,20 @@ DLE_GHZ3boss:
 
 loc_6EB0:
 		cmpi.w	#boss_ghz_x,(v_screenposx).w
-		blo.s	locret_6EE8
-
-		; load boss
+		bcs.s	locret_6EE8
 		jsr	(FindFreeObj).l
 		bne.s	.noobj
-
-		move.b	#id_Arif,obID(a1) ; load GHZ boss object
-		move.w	#$292F,obX(a1)
-		move.w	#$400,obY(a1)
-
+		_move.b	#id_BossGreenHill,0(a1) ; load GHZ boss	object
+		move.w	#boss_ghz_x+$100,obX(a1)
+		move.w	#boss_ghz_y-$80,obY(a1)
+		move.w	#boss_ghz_x,(v_limitright2).w	; hacky fix
 .noobj:
 		move.w	#bgm_Boss,d0
 		jsr	(QueueSound1).l		; play boss music
-
-		move.w	#$280B, (v_limitleft2).w	; limit left bound
-		move.w	#$2900, (v_limitright2).w ; limit right bound
 		move.b	#1, (f_lockscreen).w 	; lock screen
-
 		addq.b	#2,(v_dle_routine).w
-
-		lea	(PLC_Arif).l,a1
-		jmp	(UserPLC).l
+		moveq	#plcid_Boss,d0
+		jmp		(AddPLC).l		; load boss patterns - oh yeah i forgot we added too many shit for that to pass as a bra
 
 ; ===========================================================================
 
@@ -178,6 +170,7 @@ locret_6EE8:
 ; ===========================================================================
 
 DLE_GHZ3end:
+		move.w	(v_screenposx).w,(v_limitleft2).w
 		rts
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -1004,7 +997,38 @@ DLE_NGZ2:
 locret_POOPFART:
 		rts
 DLE_NGZ3:
+		moveq	#0,d0
+		move.b	(v_dle_routine).w,d0
+		move.w	DLE_NGZ_HUMPY(pc,d0.w),d0
+		jmp	DLE_NGZ_HUMPY(pc,d0.w)
+; ===========================================================================
+DLE_NGZ_HUMPY:	dc.w DLE_NGZ3main-DLE_NGZ_HUMPY
+				dc.w locret_VOMITCOOKIE-DLE_NGZ_HUMPY
+DLE_NGZ3main:
 		move.w	#$200,(v_limitbtm1).w ; set lower y-boundary
+		cmpi.w	#boss_ngz_x,(v_screenposx).w
+		blo.s	locret_VOMITCOOKIE
+
+		; load boss
+		jsr	(FindFreeObj).l
+		bne.s	locret_VOMITCOOKIE
+
+		move.b	#id_Arif,obID(a1) ; load GHZ boss object
+		move.w	#boss_ngz_x+$12F,obX(a1)
+		move.w	#boss_ngz_y,obY(a1)
+
+.noobj:
+		move.w	#bgm_Boss,d0
+		jsr	(QueueSound1).l		; play boss music
+
+		move.w	#boss_ngz_x, (v_limitleft2).w	; limit left bound
+		move.w	#boss_ngz_x+$100, (v_limitright2).w ; limit right bound
+		move.b	#1, (f_lockscreen).w 	; lock screen
+
+		addq.b	#2,(v_dle_routine).w
+
+		lea	(PLC_Arif).l,a1
+		jmp	(UserPLC).l
 		;cmpi.w	#$E50,(v_screenposx).w
 		;bcs.s	locret_VOMITCOOKIE
 		;move.w	#$210,(v_limitbtm1).w

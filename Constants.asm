@@ -598,6 +598,10 @@ boss_fz_x:	equ $2450		; Final Zone
 boss_fz_y:	equ $510
 boss_fz_end:	equ boss_fz_x+$2B0
 
+boss_ngz_x:	equ $2500		; Nogales Zone
+boss_ngz_y:	equ $200
+boss_ngz_end:	equ boss_ghz_x+$160
+
 ; Tile flags (ASM68K-specific, replaces "make_art_tile" function from AS, added here for cross-compatibility)
 Tile_Prio:	equ	1<<15
 Tile_Pal1:	equ	0<<13
