@@ -56,7 +56,7 @@ PSG_Index:
 		dc.l PSG_Virus01, PSG_Virus02, PSG_Virus03, PSG_Virus04 
 		dc.l PSG_ClintonYr, PSG_Pass1, PSG_Pass2, PSG_Pass3, PSG_Pass4
 		dc.l PSG_Mega1, PSG_Mega2, PSG_Mega3, PSG_Mega4
-		dc.l PSG_Will1, PSG_Will2
+		dc.l PSG_Will1, PSG_Will2, PSG_Before
 
 PSG1:		dc.b 0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,$80
 	even
@@ -364,6 +364,10 @@ PSG_Will1:
 
 PSG_Will2:
 	dc.b	0,6,$80
+	even
+
+PSG_Before:
+	dc.b	1,6,9,$B,$D,$80
 	even
 
 ; ---------------------------------------------------------------------------
