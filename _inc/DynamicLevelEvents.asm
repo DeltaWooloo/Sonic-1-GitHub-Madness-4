@@ -801,10 +801,10 @@ off_6E4ABR:	dc.w DLE_BREW3main-off_6E4ABR
 
 DLE_BREW3main:
 		add.w	#1,(v_limitleft2).w
-		cmpi.w	#boss_ghz_x-$220,(v_screenposx).w
+		cmpi.w	#boss_ghz_x-$200,(v_screenposx).w
 		bcs.s	BrewAutoScroll
 		clr.w	(v_limitleft2).w
-		move.w	#boss_ghz_x,(v_limitright2).w
+		move.w	#boss_ghz_x+$160,(v_limitright2).w
 		move.w	#boss_ghz_y,(v_limitbtm1).w
 		addq.b	#2,(v_dle_routine).w
 BrewAutoScroll:
@@ -829,22 +829,22 @@ DLE_BREW3ScrollEnd:
 ; ===========================================================================
 
 DLE_BREW3boss:
-		cmpi.w	#$960,(v_screenposx).w
-		bhs.s	loc_6EB0BR
-		subq.b	#2,(v_dle_routine).w
+;		cmpi.w	#boss_ghz_x,(v_screenposx).w  	; what was this for again?
+;		bhs.s	loc_6EB0BR
+;		subq.b	#2,(v_dle_routine).w
 
-loc_6EB0BR:
+;loc_6EB0BR:
 		cmpi.w	#boss_cbz_x,(v_screenposx).w
 		blo.s	locret_6EE8BR
 		jsr	(FindFreeObj).l
 		bne.s	loc_6ED0BR
-		_move.b	#id_BossGreenHill,obID(a1) ; load BREW boss object
+		_move.b	#id_EizaBoss,obID(a1) ; load BREW boss object
 		move.w	#boss_cbz_x+$100,obX(a1)
 		move.w	#boss_cbz_y-$80,obY(a1)
 
 loc_6ED0BR:
-		move.w	#bgm_Boss,d0
-		jsr	(QueueSound1).l		; play boss music
+;		move.w	#bgm_Boss,d0
+;		jsr	(QueueSound1).l		; play boss music - nah we already got bad emerald to go with it
 		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w
 ; ===========================================================================

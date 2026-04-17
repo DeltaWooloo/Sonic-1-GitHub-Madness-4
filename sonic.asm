@@ -6432,7 +6432,7 @@ Art_LivesNums:	binclude	"artunc/Lives Counter Numbers.bin" ; 8x8 pixel numbers o
 		include	"_incObj/NeedleBoss/NeedleBoss.asm"
 		
 
-;		include	"coniobjs/eiza/Obj.asm"
+		include	"coniobjs/eiza/Obj.asm"
 
 Map_Eiza:	include	"coniobjs/eiza/map.asm"
 		even

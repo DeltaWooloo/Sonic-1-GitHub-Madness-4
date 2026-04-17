@@ -600,7 +600,7 @@ boss_fz_x:	equ $2450		; Final Zone
 boss_fz_y:	equ $510
 boss_fz_end:	equ boss_fz_x+$2B0
 
-boss_cbz_x:	equ $2800		; Cold Brew Zone
+boss_cbz_x:	equ $295F		; Cold Brew Zone
 boss_cbz_y:	equ $300
 boss_cbz_end:	equ boss_cbz_x+$160
 
@@ -753,7 +753,7 @@ ArtTile_Lives_Counter:		equ $7D4
 
 ArtTile_CBZ_Waterfall:		equ ArtTile_Level+$37C
 ArtTile_CBZ_IZ:			equ ArtTile_Level+$3AA
-ArtTile_CBZ_Eiza:		equ ArtTile_Level+$380
+ArtTile_CBZ_Eiza:		equ ArtTile_Level+$400
 ArtTile_CBZSpongy:		equ $40B
 ArtTile_CBZNewtron:		equ $456
 ArtTile_CBZBuzz_Bomber:		equ $476
