@@ -803,9 +803,6 @@ DLE_BREW3main:
 		add.w	#1,(v_limitleft2).w
 		cmpi.w	#boss_ghz_x-$200,(v_screenposx).w
 		bcs.s	BrewAutoScroll
-		clr.w	(v_limitleft2).w
-		move.w	#boss_ghz_x+$160,(v_limitright2).w
-		move.w	#boss_ghz_y,(v_limitbtm1).w
 		addq.b	#2,(v_dle_routine).w
 BrewAutoScroll:
 		move.b	#1,(f_lockscreen).w ; lock screen
@@ -821,6 +818,8 @@ BrewAutoScroll:
 ; ===========================================================================
 DLE_BREW3ScrollEnd:
 		clr.w	(v_limitleft2).w
+		move.w	#boss_ghz_x+$160,(v_limitright2).w
+		move.w	#boss_ghz_y,(v_limitbtm1).w
 		cmpi.w	#boss_ghz_x,(v_screenposx).w
 		bcs.s	.NoEizaYet
 		addq.b	#2,(v_dle_routine).w
@@ -829,11 +828,11 @@ DLE_BREW3ScrollEnd:
 ; ===========================================================================
 
 DLE_BREW3boss:
-;		cmpi.w	#boss_ghz_x,(v_screenposx).w  	; what was this for again?
-;		bhs.s	loc_6EB0BR
-;		subq.b	#2,(v_dle_routine).w
+		cmpi.w	#boss_ghz_x,(v_screenposx).w
+		bhs.s	loc_6EB0BR
+		subq.b	#2,(v_dle_routine).w
 
-;loc_6EB0BR:
+loc_6EB0BR:
 		cmpi.w	#boss_cbz_x,(v_screenposx).w
 		blo.s	locret_6EE8BR
 		jsr	(FindFreeObj).l
