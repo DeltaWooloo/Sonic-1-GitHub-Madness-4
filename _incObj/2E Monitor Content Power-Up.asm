@@ -49,6 +49,13 @@ writeVDP_reg	macro
 	bra.w	.zapSetFX_Timer			;Do zap
 	endm
 	
+writeDBG_reg	macro
+	;KDebug.WriteLine "writeDBG_reg: %<.w d2>"
+	lea		(debug_reg).l,a6	;Load VDP Debug reg into a6
+	move.w	d2,(a6)				;Write register
+	bra.w	.zapSetFX_Timer			;Do zap
+	endm
+	
 ;Macro to spawn an object in Random monitor code
 ;Inputs: object Type ID, subType, PCM to play (if any), variable addr to pop new obj address (if any)
 spawnObj	macro	objID,subType,dac,newObjPop
@@ -332,19 +339,22 @@ Pow_Randomiser:
 		;dc.l	.vdp0B_m3_reg		;										$0B (Mode Register 3)
 		dc.l	.vdp0C_m4_reg		;x $1B / $6C - 	~						$0C (Mode Register 4)
 		dc.l	.vdp10_planSz_reg	;x $1C / $70 - 	~						$10 (VDP Plane Size)
-		dc.l	.funkyColors		;x $1D / $74 - 	Randomize CRAM colors (dry/water palletes)
+		dc.l	.vdp_dbg_gfx		;x $1D / $74 -  ~ VDP Dbg Reg			$00 (GFX)
+		dc.l	.vdp_dbg_z80oc		;x $1E / $78 -  ~ VDP Dbg Reg			$01 (Z80)
+		dc.l	.funkyColors		;x $1F / $7C - 	Randomize CRAM colors (dry/water palletes)		
+		dc.l	.ultrashit			;x $20 / $80 -	All VDP corruption!
 		;!@ GenesisDoes: Spawn stuff
-		dc.l	.spawnPlayer		;x $1E / $78 - 	Spawn a	clone player
-		dc.l	.instaWin			;x $1F / $7C - 	~			Signpost
-		dc.l	.springTime			;x $20 / $80 - 	~			Red vert spring
-		dc.l	.BigRing			;x $21 / $84 - 	~			Giant Ring + give 50 rings
-		dc.l	.monitorInception	;x $22 / $88 - 	~			Another random monitor
-		dc.l	.lampoil			;x $23 / $8C - 	~			New lamppost
-		dc.l	.rAndCRiftApart		;x $24 / $90 -	~			RiftToGo
+		dc.l	.spawnPlayer		;x $21 / $84 - 	Spawn a	clone player
+		dc.l	.instaWin			;x $22 / $88 - 	~			Signpost
+		dc.l	.springTime			;x $23 / $8C - 	~			Red vert spring
+		dc.l	.BigRing			;x $24 / $90 - 	~			Giant Ring + give 50 rings
+		dc.l	.monitorInception	;x $25 / $94 - 	~			Another random monitor
+		dc.l	.lampoil			;x $26 / $98 - 	~			New lamppost
+		dc.l	.rAndCRiftApart		;x $27 / $9C -	~			RiftToGo
 		;!@ GenesisDoes: Other
-		dc.l	.crash				;x $25 / $94 - 	Crash the game (illegal); Task fails successfully!
-		dc.l	.jukebox			;x $26 / $98 - 	Play random song
-		dc.l	Pow_SlowShoes		;x $27 / $9C -  Slow down shoes
+		dc.l	.crash				;x $28 / $A0 - 	Crash the game (illegal); Task fails successfully!
+		dc.l	.jukebox			;x $29 / $A4 - 	Play random song
+		dc.l	Pow_SlowShoes		;x $2A / $A8 -  Slow down shoes
 .powtableend:
 
 ; ===========================================================================
@@ -497,6 +507,17 @@ Pow_Randomiser:
 
 ; ===========================================================================		
 
+.ultrashit:
+		bsr.w	.vdp00_m1_reg
+		bsr.w	.vdp0C_m4_reg
+		bsr.w	.vdp10_planSz_reg
+		bsr.w	.vdp_dbg_gfx
+		bsr.w	.vdp_dbg_z80oc
+		bsr.w	.funkyColors
+		rts
+; ===========================================================================		
+
+
 ;!@ GD: Sets VDP Register (Mode Register 1) left blank and low-color mode
 ; https://segaretro.org/Sega_Mega_Drive/VDP_registers#00
 .vdp00_m1_reg:
@@ -608,6 +629,42 @@ Pow_Randomiser:
 		move.w	d0,d2				; Move d0 into d2
 		writeVDP_reg
 		rts
+; ===========================================================================
+; https://plutiedev.com/vdp-debug
+; https://plutiedev.com/mirror/kabuto-hardware-notes#debug-reg
+; https://segaretro.org/Sega_Mega_Drive/VDP_general_usage#Debug_register
+.vdp_dbg_gfx:		
+		;Sel Debug Register $00 (GFX)
+		KDebug.WriteLine "Pow_Randomizer.vdp_dbg_gfx"
+		writeDBG_sel	$00
+		
+		moveq	#0,d0				; Clear d0
+		jsr		(RandomNumber).l	; get a random number
+		and.l	#$7F80,d0			; only keep proper bitfield in d0
+		
+		move.w	d0,d2				; Move d0 into d2 param
+		andi.w	#$180,d0			; d0 = d0 ANDI $180 (forced planes bits)
+		beq.s	.vdp_dbg_gfx		; If d0 = 0 (normal rendering), randomize again						
+		
+		writeDBG_reg
+		rts
+
+; ===========================================================================
+
+; https://plutiedev.com/vdp-debug
+; https://plutiedev.com/mirror/kabuto-hardware-notes#debug-reg
+; https://segaretro.org/Sega_Mega_Drive/VDP_general_usage#Debug_register
+.vdp_dbg_z80oc:
+		;Sel Debug Register $01 (Z80/PSG)
+		KDebug.WriteLine "Pow_Randomizer.vdp_dbg_z80oc"
+		writeDBG_sel	$01
+		
+		;Overclock the z80
+		moveq	#0,d2
+		move.w	#1,d2
+		writeDBG_reg
+		rts
+
 ; ===========================================================================
 
 ; Corrupt all dry/water palette colors
@@ -825,6 +882,17 @@ Pow_vdp_fixRegs:
 		;move.w	#$8B03,(a6)		; line scroll mode
 		move.w	#$8C81,(a6)		; 40-cell display mode
 		move.w	#$9001,(a6)		; 64-cell hscroll size
+		
+		;Fix debug registers
+		;Register $00 (GFX)
+		writeDBG_sel	$00
+		moveq	#0,d2
+		writeDBG_reg2
+		
+		;Register $01 (Z80)
+		writeDBG_sel	$01
+		moveq	#0,d2
+		writeDBG_reg2
 		
 		;!@ CHeck if clone alive; if so deleteObject
 		tst.b	(v_playerClone).w

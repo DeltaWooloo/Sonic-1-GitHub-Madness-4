@@ -33,6 +33,10 @@ VDP_data_port:		equ vdp_data_port
 VDP_control_port: 	equ vdp_control_port
 vdp_counter:		equ $C00008
 psg_input:		equ $C00011
+; !@ GD:
+; https://plutiedev.com/vdp-debug
+; https://segaretro.org/Sega_Mega_Drive/VDP_general_usage#Debug_register
+debug_sel:		equ	$C00018
 debug_reg:		equ $C0001C
 
 ; Z80 addresses

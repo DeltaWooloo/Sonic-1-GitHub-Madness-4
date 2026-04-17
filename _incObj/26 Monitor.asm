@@ -35,7 +35,7 @@ Mon_Main:	; Routine 0
 		btst	#0,2(a2,d0.w)	; has monitor been broken?
 		beq.s	.notbroken	; if not, branch
 		move.b	#8,obRoutine(a0) ; run "Mon_Display" routine
-		move.b	#$B,obFrame(a0)	; use broken monitor frame
+		move.b	#$C,obFrame(a0)	; use broken monitor frame
 		rts
 ; ===========================================================================
 
