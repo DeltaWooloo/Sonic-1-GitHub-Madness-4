@@ -957,7 +957,7 @@ Deform_CBZ:
 		moveq	#$20,d0
 	.limitY:
 		move.w	d0,d4
-		move.w	d0,(v_bgscrposy_vdp).w
+		move.w	d0,(v_bgscreenposy).w
 		move.w	(v_screenposx).w,d0
 		neg.w	d0
 		swap	d0
@@ -968,14 +968,14 @@ Deform_CBZ:
 		asr.w	#6,d2
 		add.w	d2,d0
 		neg.w	d0
-		move.w	#$54,d1
+		move.w	#80-1,d1
 		sub.w	d4,d1
 		bcs.s	.gotoCloud2
 	.cloudLoop1:
 		move.l	d0,(a1)+
 		dbf	d1,.cloudLoop1
 	.gotoCloud2:
-		move.w	#$1E,d1
+		move.w	#32-1,d1
 		move.w	(v_screenposx).w,d0
 		neg.w	d0
 		asr.w	#4,d0
@@ -983,7 +983,7 @@ Deform_CBZ:
 		move.l	d0,(a1)+
 		dbf	d1,.mountainLoop
 
-		move.w	#$4F,d1
+		move.w	#72-1,d1
 		move.w	(v_screenposx).w,d0
 		neg.w	d0
 		asr.w	#3,d0
@@ -991,7 +991,7 @@ Deform_CBZ:
 		move.l	d0,(a1)+
 		dbf	d1,.hillLoop
 
-		move.w	#$3F,d1
+		move.w	#48+16-1,d1
 		move.w	(v_screenposx).w,d0
 		neg.w	d0
 		asr.w	#2,d0

@@ -56,8 +56,42 @@ BossEiza_FallDownInit:		; this will probably need to be changed to a check floor
 		addq.b	#2,ob2ndRout(a0) ; goto next routine
 
 BossEiza_Nothing:
+;		cmp.b	#1,obAnim(a0)
+;		beq.s	.donotmakeherhittable
+		tst.b	obStatus(a0)
+		bmi.s	loc_1784CEIZA
+		tst.b	obColType(a0)
+		bne.s	locret_1784AEIZA
+		tst.b	objoff_3E(a0)
+		bne.s	BGHZ_ShipFlashEIZA
+		move.b	#$20,objoff_3E(a0)	; set number of times for ship to flash
+		move.w	#sfx_HitBoss,d0
+		jsr	(QueueSound2).l	; play boss damage sound
 
+BGHZ_ShipFlashEIZA:
+;		lea	(v_palette+$22).w,a1 ; load 2nd palette, 2nd entry
+;		moveq	#0,d0		; move 0 (black) to d0
+;		tst.w	(a1)
+;		bne.s	loc_1783CEIZA
+;		move.w	#cWhite,d0	; move 0EEE (white) to d0
+;
+;loc_1783CEIZA:
+;		move.w	d0,(a1)		; load colour stored in d0
+		subq.b	#1,objoff_3E(a0)
+		bne.s	locret_1784AEIZA
+		move.b	#$F,obColType(a0)
+
+locret_1784AEIZA:
+;.donotmakeherhittable:
 		rts
+
+loc_1784CEIZA:
+		moveq	#100,d0
+		jsr		(AddPoints).l
+		move.b	#8,ob2ndRout(a0)
+		move.w	#$B3,objoff_3C(a0)
+		rts
+
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------

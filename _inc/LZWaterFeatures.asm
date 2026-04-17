@@ -41,7 +41,7 @@ WaterHeight:
 		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_SFZ
 		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_PPZ
 		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_End
-		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_Brew
+		dc.w $3FFF,$0200,$3FFF,$3FFF	; id_Brew
 		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_Windows
 		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_Joint
 		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_DVZ

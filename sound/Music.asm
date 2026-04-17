@@ -47,6 +47,7 @@ MusicIndex:
 	bgmdef $00, Mus_Cheetah
 	bgmdef $00, Mus_REMansion
 	bgmdef $00, Mus_ColdBrew
+	bgmdef $00, Mus_ValSDST1
 	bgmdef $00, Mus_UNOwenWasHer
 	bgmdef $00, Mus_Passport
 	bgmdef $00, Mus_VirusAlert
@@ -208,6 +209,8 @@ Mus_Cheetah:		include	"music/TG2000Tracks/Mus - CheetahMen.asm"
 Mus_REMansion:		include "music/CNTracks/RE Mansion.asm"
 	even
 Mus_ColdBrew:		include	"music/CNTracks/CometSTG2.asm"
+	even
+Mus_ValSDST1:		include	"music/CNTracks/ValisSDST1.asm"
 	even
 Mus_UNOwenWasHer:	include	"music/TheWTracks/Mus - UnOwenWasHer.asm"
 	even

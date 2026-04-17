@@ -1530,6 +1530,8 @@ Pal_SBZCyc7:	binclude	"palette/Cycle - SBZ 7.bin"
 Pal_SBZCyc8:	binclude	"palette/Cycle - SBZ 8.bin"
 Pal_SBZCyc9:	binclude	"palette/Cycle - SBZ 9.bin"
 Pal_SBZCyc10:	binclude	"palette/Cycle - SBZ 10.bin"
+Pal_CBZCyc:	binclude		"palette/Cycle - CBZ.bin"
+Pal_CBZCycUD:	binclude	"palette/Cycle - CBZ Underwater.bin"
 ; ---------------------------------------------------------------------------
 ; Subroutine to fade in from black
 ; ---------------------------------------------------------------------------
@@ -2151,6 +2153,8 @@ Pal_SBZ3Water:		bincludeEndMarker	"palette/SBZ Act 3 Underwater.bin"
 Pal_LZSonWater:		bincludeEndMarker	"palette/Sonic - LZ Underwater.bin"
 Pal_SBZ3SonWat:		bincludeEndMarker	"palette/Sonic - SBZ3 Underwater.bin"
 Pal_BREW:		bincludeEndMarker	"palette/BREW Zone.bin"
+Pal_BREWWat:		bincludeEndMarker	"palette/BREW Zone Underwater.bin"
+Pal_CBZ2SonWat:		bincludeEndMarker	"palette/Sonic - CBZ2 Underwater.bin"
 Pal_WIN:		bincludeEndMarker	"palette/WINDOWS Zone.bin"
 Pal_SSResult:		bincludeEndMarker	"palette/Special Stage Results.bin"
 Pal_Continue:		bincludeEndMarker	"palette/Special Stage Continue Bonus.bin"
@@ -2856,10 +2860,12 @@ Level_LoadPal:
 		bpl.s	Level_GetBgm	; if not, branch
 
 		moveq	#palid_LZSonWater,d0 ; palette number $F (LZ)
+		cmpi.b	#id_CBZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
+		bne.s	Level_WaterPal	; it makes me have a boaner
+		moveq	#palid_CBZ2SonWat,d0
 		cmpi.b	#3,(v_act).w	; is act number 3?
 		bne.s	Level_WaterPal	; if not, branch
 		moveq	#palid_SBZ3SonWat,d0 ; palette number $10 (SBZ3)
-
 Level_WaterPal:
 		bsr.w	PalLoad_Fade_Water	; load underwater palette
 		tst.b	(v_lastlamp).w
@@ -3004,10 +3010,12 @@ Level_ChkWaterPal:
 		tst.b	(v_waterflag).w ; is level LZ/SBZ3?
 		bpl.s	Level_Delay	; if not, branch
 		moveq	#palid_LZWater,d0 ; palette $B (LZ underwater)
+		cmpi.b	#id_CBZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
+		bne.s	Level_WtrNotSbz	; it makes me have a boaner
+		moveq	#palid_BREWWat,d0
 		cmpi.b	#3,(v_act).w	; is level SBZ3?
 		bne.s	Level_WtrNotSbz	; if not, branch
 		moveq	#palid_SBZ3Water,d0 ; palette $D (SBZ3 underwater)
-
 Level_WtrNotSbz:
 		bsr.w	PalLoad_Water
 

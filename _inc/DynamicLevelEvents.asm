@@ -793,7 +793,7 @@ DLE_BREW3:
 		move.w	off_6E4ABR(pc,d0.w),d0
 		jmp	off_6E4ABR(pc,d0.w)
 ; ===========================================================================
-off_6E4ABR:	dc.w DLE_BREW3main-off_6E4ABR
+off_6E4ABR:;	dc.w DLE_BREW3main-off_6E4ABR
 		dc.w DLE_BREW3ScrollEnd-off_6E4ABR
 		dc.w DLE_BREW3boss-off_6E4ABR
 		dc.w DLE_BREW3end-off_6E4ABR
