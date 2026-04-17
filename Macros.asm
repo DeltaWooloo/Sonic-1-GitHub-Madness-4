@@ -103,6 +103,21 @@ scrollVDPPlanes_set:	macro	vBLA,bgxpos,bgypos,fgxpos,fgypos
 		move.b	#vBLA,(v_vbla_routine).w
 		jsr	(WaitForVBla).l
 		endm
+		
+;!@ GD: Macro to write VDP Debug selector
+writeDBG_sel	macro	rid
+	;Write VDP Debug selector
+	;KDebug.WriteLine "writeDBG_sel: %<.w rid>"
+	lea		(debug_sel).l,a6	; Load VDP Debug sel into a6
+	move.w	#(rid<<8),(a6)		; Write Reg rid
+	endm
+	
+;!@ GD: Macro to write VDP Debug value d2 to register
+writeDBG_reg2	macro
+	;KDebug.WriteLine "writeDBG_reg: %<.w d2>"
+	lea		(debug_reg).l,a6	;Load VDP Debug reg into a6
+	move.w	d2,(a6)				;Write register
+	endm
 
 ; ---------------------------------------------------------------------------
 ; DMA fill VRAM with a value

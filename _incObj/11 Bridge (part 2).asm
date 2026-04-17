@@ -1,7 +1,8 @@
 
 Bri_Platform:	; Routine 4
 		bsr.s	Bri_WalkOff
-		bsr.w	DisplaySprite
+		;bsr.w	DisplaySprite
+		jsr		(DisplaySprite).l
 		bra.w	Bri_ChkDel
 
 ; ---------------------------------------------------------------------------
