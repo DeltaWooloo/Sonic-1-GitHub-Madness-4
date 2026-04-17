@@ -11,148 +11,164 @@ SonicDriverVer = 1 ; Tell SMPS2ASM that we're using Sonic 1's driver.
 ; ---------------------------------------------------------------------------
 ; Music Pointers
 ; ---------------------------------------------------------------------------
+; TODO: define every tempo to their respective song
+;SpeedUpIndex:
+;	dc.b	     $55,   1,   1, $44,   1,   1, $76,   1,   1, $80, $55,  $B, $80, $80, $20	; $00-$0F
+;	dc.b	$54, $33, $14,   1, $30, $45, $55, $6E,   1, $55, $50, $60, $20, $80, $65,   1	; $10-$1F
+;	dc.b	$21, $65, $44,   1,   1, $34,   1,   1, $60, $70,   7,  $A, $33,   1,   1, $33	; $20-$2F
+;	dc.b	  4, $80, $25,   1, $55, $24,   1, $45, $55,   1, $4F, $55,   8, $90,   1, $55	; $30-$3F
+;	dc.b	$55,   1, $25, $1C, $25,   1,   1, $68, $58, $25, $35, $55,   1, $33,   1,   1	; $40-$4F
+;	dc.b	  1, $40,   1,   1,   1, $55, $A0,   1,   1, $94, $55,   1, $27, $80, $11,   1	; $50-$5F
+;	dc.b	  1,   1,   1,   1,   1,   1,   1,   1, $2B,   1,   1, $80,   1,   1,   1,   1	; $60-$6F
+;	dc.b	  1,   1,   1,   1, $75,   1,   1,   1, $33,   1, $55, $45, $54, $80, $80,   1	; $70-$7F
+;	dc.b	  1, $33, $4A,   1;,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1	; $80-$8F
+;	dc.b	  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1	; $90-$9F
+bgmdef macro tempo,addr
+	dc.l (tempo&$FF)<<24|(addr&$3FFFFF)
+	endm
 MusicIndex:
-	dc.l	Mus_MWaterS		
-	dc.l	Mus_OrangeSong		
-	dc.l	Mus_GreenHills		
-	dc.l	Mus_DUNGEON3		
-	dc.l	Mus_LosTontos		
-	dc.l	Mus_Area5		
-	dc.l	Mus_Easton		
-	dc.l	Mus_Sweden		
-	dc.l	Mus_SMWCave		
-	dc.l	Mus_Doom		
-	dc.l	Mus_BadEmerald		
-	dc.l	Mus_TreasureCaves	
-	dc.l	Mus_Danstar		
-	dc.l	Mus_GCV2005		
-	dc.l	Mus_fightMID		
-	dc.l	Mus_Cheetah		
-	dc.l	Mus_REMansion		
-	dc.l	Mus_ColdBrew		
-	dc.l	Mus_UNOwenWasHer	
-	dc.l	Mus_Passport		
-	dc.l	Mus_VirusAlert		
-	dc.l	Mus_DoleDetective	
-	dc.l	Mus_HardwareStore	
-	dc.l	Mus_DoleAttack		
-	dc.l	Mus_GHZ			
-	dc.l	Mus_TF2			
-	dc.l	Mus_Blue		
-	dc.l	Mus_Hidden		
-	dc.l	Mus_Final		
-	dc.l	Mus_BonusEight
+	bgmdef $00, Mus_MWaterS
+	bgmdef $00, Mus_OrangeSong
+	bgmdef $00, Mus_GreenHills
+	bgmdef $00, Mus_DUNGEON3
+	bgmdef $00, Mus_LosTontos
+	bgmdef $00, Mus_Area5
+	bgmdef $00, Mus_Easton
+	bgmdef $00, Mus_Sweden
+	bgmdef $00, Mus_SMWCave
+	bgmdef $00, Mus_Doom
+	bgmdef $00, Mus_BadEmerald
+	bgmdef $00, Mus_TreasureCaves
+	bgmdef $00, Mus_Danstar
+	bgmdef $00, Mus_GCV2005
+	bgmdef $00, Mus_fightMID
+	bgmdef $00, Mus_Cheetah
+	bgmdef $00, Mus_REMansion
+	bgmdef $00, Mus_ColdBrew
+	bgmdef $00, Mus_UNOwenWasHer
+	bgmdef $00, Mus_Passport
+	bgmdef $00, Mus_VirusAlert
+	bgmdef $00, Mus_DoleDetective
+	bgmdef $00, Mus_HardwareStore
+	bgmdef $00, Mus_DoleAttack
+	bgmdef $00, Mus_GHZ
+	bgmdef $00, Mus_TF2
+	bgmdef $00, Mus_Blue
+	bgmdef $00, Mus_Hidden
+	bgmdef $00, Mus_Final
+	bgmdef $00, Mus_BonusEight
 	
-	dc.l	Mus_Boss		
-	dc.l	Mus_ClintonFuck		
-	dc.l	Mus_Coffinman		
-	dc.l	Mus_Aporia		
-	dc.l	Mus_Megalovania		
-	dc.l	Mus_TwoSteps		
-	dc.l	Mus_DoleBOSS		
-	dc.l	Mus_PizzaPopBoss	
+	bgmdef $00, Mus_Boss
+	bgmdef $00, Mus_ClintonFuck
+	bgmdef $00, Mus_Coffinman
+	bgmdef $00, Mus_Aporia
+	bgmdef $00, Mus_Megalovania
+	bgmdef $00, Mus_TwoSteps
+	bgmdef $00, Mus_DoleBOSS
+	bgmdef $00, Mus_PizzaPopBoss
 
-	dc.l	Mus_Invincible		
-	dc.l	Mus_AVGNInv		
+	bgmdef $00, Mus_Invincible
+	bgmdef $00, Mus_AVGNInv
 
-	dc.l	Mus_Title		
-	dc.l	Mus_SmilingBomb		
-	dc.l	Mus_NewBarkTown		
-	dc.l	Mus_Memories		
-	dc.l	Mus_Dingaling		
-	dc.l	Mus_Continue		
-	dc.l	Mus_Ending		
-	dc.l	Mus_SkySanctuary	
-	dc.l	Mus_Jeopardy		
+	bgmdef $00, Mus_Title
+	bgmdef $00, Mus_SmilingBomb
+	bgmdef $00, Mus_NewBarkTown
+	bgmdef $00, Mus_Memories
+	bgmdef $00, Mus_Dingaling
+	bgmdef $00, Mus_Continue
+	bgmdef $00, Mus_Ending
+	bgmdef $00, Mus_SkySanctuary
+	bgmdef $00, Mus_Jeopardy
 
-	dc.l	Mus_ActClear		
-	dc.l	Mus_Pac2		
-	dc.l	Mus_GameOver		
-	dc.l	Mus_ExtraLife		
-	dc.l	Mus_Drowning		
-	dc.l	Mus_Emerald		
+	bgmdef $00, Mus_ActClear
+	bgmdef $00, Mus_Pac2
+	bgmdef $00, Mus_GameOver
+	bgmdef $00, Mus_ExtraLife
+	bgmdef $00, Mus_Drowning
+	bgmdef $00, Mus_Emerald
 
-	dc.l	Mus_Retro		
-	dc.l	Mus_Setro		
-	dc.l	Mus_MayoDed		
-	dc.l	Mus_S1ActClear		
-	dc.l	Mus_SHCSplash		
-	dc.l	Mus_RetroBlast		
-	dc.l	Mus_ConiJingle		
-	dc.l	Mus_GooglePlayStock	
-	dc.l	Mus_SneakySnitch	
-	dc.l	Mus_TG2000Jingle	
-	dc.l	Mus_Donnie		
-	dc.l	Mus_TSHLogo		
-	dc.l	Mus_S1Continue		
-	dc.l	Mus_PuyoDrown		
-	dc.l	Mus_EuroSega		
-	dc.l	Mus_DeltaWSplash	
-	dc.l	Mus_S3Continue		
-	dc.l	Mus_BlueBalls		
-	dc.l	Mus_ChaosEmerald	
-	dc.l	Mus_LimitedClear	
-	dc.l	Mus_Moonwalker		
-	dc.l	Mus_CleanSlate		
+	bgmdef $00, Mus_Retro
+	bgmdef $00, Mus_Setro
+	bgmdef $00, Mus_MayoDed
+	bgmdef $00, Mus_S1ActClear
+	bgmdef $00, Mus_SHCSplash
+	bgmdef $00, Mus_RetroBlast
+	bgmdef $00, Mus_ConiJingle
+	bgmdef $00, Mus_GooglePlayStock
+	bgmdef $00, Mus_SneakySnitch
+	bgmdef $00, Mus_TG2000Jingle
+	bgmdef $00, Mus_Donnie
+	bgmdef $00, Mus_TSHLogo
+	bgmdef $00, Mus_S1Continue
+	bgmdef $00, Mus_PuyoDrown
+	bgmdef $00, Mus_EuroSega
+	bgmdef $00, Mus_DeltaWSplash
+	bgmdef $00, Mus_S3Continue
+	bgmdef $00, Mus_BlueBalls
+	bgmdef $00, Mus_ChaosEmerald
+	bgmdef $00, Mus_LimitedClear
+	bgmdef $00, Mus_Moonwalker
+	bgmdef $00, Mus_CleanSlate
 
-	dc.l	Mus_PuyoReject		
-	dc.l	Mus_LG			
-	dc.l	Mus_ILBT		
-	dc.l	Mus_Sunset		
-	dc.l	Mus_Elevator		
-	dc.l	Mus_SonUnderground	
-	dc.l	Mus_Son1UP		
-	dc.l	Mus_GEMSHill		
-	dc.l	Mus_LimitedEgg		
-	dc.l	Mus_BomerDude		
-	dc.l	Mus_ClintonYears	
-	dc.l	Mus_Skinner	
+	bgmdef $00, Mus_PuyoReject
+	bgmdef $00, Mus_LG
+	bgmdef $00, Mus_ILBT
+	bgmdef $00, Mus_Sunset
+	bgmdef $00, Mus_Elevator
+	bgmdef $00, Mus_SonUnderground
+	bgmdef $00, Mus_Son1UP
+	bgmdef $00, Mus_GEMSHill
+	bgmdef $00, Mus_LimitedEgg
+	bgmdef $00, Mus_BomerDude
+	bgmdef $00, Mus_ClintonYears
+	bgmdef $00, Mus_Skinner	
 	
-	dc.l	Mus_MMZPast		
+	bgmdef $00, Mus_MMZPast
 
-	dc.l	Mus_SS			
-	dc.l	Mus_CanCan		
-	dc.l	Mus_ChickenDance	
-	dc.l	Mus_DeltaTale		
-	dc.l	Mus_Carefree		
-	dc.l	Mus_FurElise		
-	dc.l	Mus_SwingSinners	
-	dc.l	Mus_Miniscule		
-	dc.l	Mus_FuneralMarch	
-	dc.l	Mus_BatMan		
-	dc.l	Mus_Resetti		
-	dc.l	Mus_Spoopy		
-	dc.l	Mus_NewShop		
-	dc.l	Mus_NepAnime		
-	dc.l	Mus_VampKiller		
-	dc.l	Mus_Gadget		
-	dc.l	Mus_CanCanInv		
-	dc.l	Mus_Wormy		
-	dc.l	Mus_Starman		
-	dc.l	Mus_JamesPond		
-	dc.l	Mus_AlexKiddEnd		
-	dc.l	Mus_DJKK		
-	dc.l	Mus_Levian		
-	dc.l	Mus_Peppa		
-	dc.l	Mus_SkyBase		
-	dc.l	Mus_Scrappy		
-	dc.l	Mus_WeAreTheSonic	
-	dc.l	Mus_Thomas		
-	dc.l	Mus_CCLobby		
-	dc.l	Mus_ChairRoom			
-	dc.l	Mus_BossaNova		
-	dc.l	Mus_dam_dariram		
-	dc.l	Mus_WillTell
-	dc.l	Mus_Outfarted
-	dc.l	Mus_BeforeBoss		
+	bgmdef $00, Mus_SS
+	bgmdef $00, Mus_CanCan
+	bgmdef $00, Mus_ChickenDance
+	bgmdef $00, Mus_DeltaTale
+	bgmdef $00, Mus_Carefree
+	bgmdef $00, Mus_FurElise
+	bgmdef $00, Mus_SwingSinners
+	bgmdef $00, Mus_Miniscule
+	bgmdef $00, Mus_FuneralMarch
+	bgmdef $00, Mus_BatMan
+	bgmdef $00, Mus_Resetti
+	bgmdef $00, Mus_Spoopy
+	bgmdef $00, Mus_NewShop
+	bgmdef $00, Mus_NepAnime
+	bgmdef $00, Mus_VampKiller
+	bgmdef $00, Mus_Gadget
+	bgmdef $00, Mus_CanCanInv
+	bgmdef $00, Mus_Wormy
+	bgmdef $00, Mus_Starman
+	bgmdef $00, Mus_JamesPond
+	bgmdef $00, Mus_AlexKiddEnd
+	bgmdef $00, Mus_DJKK
+	bgmdef $00, Mus_Levian
+	bgmdef $00, Mus_Peppa
+	bgmdef $00, Mus_SkyBase
+	bgmdef $00, Mus_Scrappy
+	bgmdef $00, Mus_WeAreTheSonic
+	bgmdef $00, Mus_Thomas
+	bgmdef $00, Mus_CCLobby
+	bgmdef $00, Mus_ChairRoom
+	bgmdef $00, Mus_BossaNova
+	bgmdef $00, Mus_dam_dariram
+	bgmdef $00, Mus_WillTell
+	bgmdef $00, Mus_Outfarted
+	bgmdef $00, Mus_BeforeBoss
 
-	dc.l	Mus_CrazyMario		
-	dc.l	Mus_Ding		
-	dc.l	Mus_SadMac		
-	dc.l	Mus_Win2K		
-	dc.l	Mus_Folgers		
-	dc.l	Mus_MJWin		
-	dc.l	Mus_RamRanch	
+	bgmdef $00, Mus_CrazyMario
+	bgmdef $00, Mus_Ding
+	bgmdef $00, Mus_SadMac
+	bgmdef $00, Mus_Win2K
+	bgmdef $00, Mus_Folgers
+	bgmdef $00, Mus_MJWin
+	bgmdef $00, Mus_RamRanch
+	bgmdef $20, Mus_S28bitUnused
 	;!@ bgmwarning	MusicIndex,4
 
 Mus_MWaterS:		include "music/LiquidTracks/Mus - Mega Water S.asm"
@@ -435,5 +451,8 @@ Mus_Folgers:		include	"music/TG2000Tracks/Folgers.asm"
 Mus_MJWin:		include	"music/DaxKatter/Mus - Moonwalker Clear.asm"
 	even
 Mus_RamRanch:		include	"music/CNTracks/RamRanch.asm"
+	even
+
+Mus_S28bitUnused:	include	"music/Malachi/Sonic 2 8bit Unused Theme.asm"
 	even
 	END

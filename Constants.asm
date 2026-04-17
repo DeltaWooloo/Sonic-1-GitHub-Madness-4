@@ -383,7 +383,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Folgers
 	nextenum bgm_MJWin
 	nextenum bgm_RamRanch
-
+	nextenum bgm_S28BitUnused
 	; Keep this last
 	nextenum bgm__Last
 	bgm__LastPow2:		equ	$7F						; !@ Manually update me	

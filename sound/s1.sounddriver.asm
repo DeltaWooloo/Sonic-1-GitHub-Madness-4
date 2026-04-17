@@ -27,11 +27,7 @@ dpcmLoopCounter function sampleRate, pcmLoopCounterBase(sampleRate,301/2) ; 301 
 Go_SoundPriorities:	dc.l SoundPriorities
 ; Go_SoundD0:
 Go_SpecSoundIndex:	dc.l SpecSoundIndex
-Go_MusicIndex:		dc.l MusicIndex
 Go_SoundIndex:		dc.l SoundIndex
-; off_719A0:
-Go_SpeedUpIndex:	dc.l SpeedUpIndex
-Go_PSGIndex:		dc.l PSG_Index
 ; ---------------------------------------------------------------------------
 ; PSG instruments used in music
 ; ---------------------------------------------------------------------------
@@ -56,113 +52,85 @@ PSG_Index:
 		dc.l PSG_Virus01, PSG_Virus02, PSG_Virus03, PSG_Virus04 
 		dc.l PSG_ClintonYr, PSG_Pass1, PSG_Pass2, PSG_Pass3, PSG_Pass4
 		dc.l PSG_Mega1, PSG_Mega2, PSG_Mega3, PSG_Mega4
-		dc.l PSG_Will1, PSG_Will2, PSG_Before
+		dc.l AporiaTone_01, PSG_Will1, PSG_Will2, PSG_Before
+		dc.l PSG_S28Bit02,PSG_S28Bit03,PSG_S28Bit04
 
 PSG1:		dc.b 0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,$80
-	even
 
 PSG2:		dc.b 0,2,4,6,8,$10,$80
-	even
 
 PSG3:		dc.b 0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,$80
-	even
 
 PSG4:		dc.b 0,0,2,3,4,4,5,5,5,6,$80
-	even
 
 PSG6:		dc.b 3,3,3,2,2,2,2,1,1,1,0,0,0,0,$80
-	even
 
 PSG5:		dc.b 0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2
 		dc.b 2,2,2,3,3,3,3,3,3,3,3,4,$80
-	even
 
 PSG7:		dc.b 0,0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,3,3,3,4,4,4,5,5,5,6,7,$80
-	even
 
 PSG8:		dc.b 0,0,0,0,0,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,4,4,4,4,4,5,5,5
 		dc.b 5,5,6,6,6,6,6,7,7,7,$80
-	even
 
 PSG9:		dc.b 0,1,2,3,4,5,6,7,8,9,$A,$B,$C,$D,$E,$F,$80
-	even
 
 PSG_1UP01:
 		dc.b 0,0,2,3,4,4,5,5,5,6,6,$80
-	even
 
 PSG_1UP02:
 		dc.b 0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3
 		dc.b 4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7
 		dc.b 8,8,8,8,9,9,9,9,$A,$A,$A,$A,$80
-	even
 
 PSG_1UP03:
 		dc.b 0,1,2,4,6,8,$A,$C,$E,$80
-	even
 
 PSG_DUN3_01:	dc.b 7,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1
 		dc.b 2,2,2,2,2,2,2,3,3,3,3,3,3,3,4,4
 		dc.b 4,4,4,4,4,5,5,5,5,5,5,5,6,$80
-	even
 
 PSG_DUN3_02:	dc.b 7,0,0,0,0,0,0,0,0,0,0,1,3,4,6,7
 		dc.b 9,$A,$C,$D,$F,$80
-	even
 
 PSG_DUN3_03:	dc.b 7,0,0,0,0,0,0,0,1,3,4,6,7,9,$A,$C
 		dc.b $D,$F,$80
-	even
 
 PSG_CF_01:	dc.b 0,0,1,4,$D,$F,$80
-	even
 
 PSG_CF_02:	dc.b 3,3,3,4,4,4,4,6,6,6,9,9,9,9,9,9,$F,$80
-	even
 
 PSG_GO_01:	dc.b 0,2,2,2,2,2,3,3,3,3,4,4,5,5,6,6,7
 		dc.b 7,8,8,9,9,$A,$A,$B,$B,$C,$C,$D,$D
 		dc.b $E,$E,$F,$80
-	even
 
 PSG_GCV1:
 		dc.b 0,0,4,4,5,5,6,6,7,7,8,8,$80
-	even
 
 PSG_GCV2:
 		dc.b 0,0,7,$F,$80
-	even
 
 PSG_DD_01:	dc.b 0,2,7,$D,$F,$80
-	even
 
 PSG_DD_02:	dc.b 1,0,0,0,0,1,2,$80
-	even
 
 PSG_SHC_01:	dc.b	0,1,3,7,$10,$80
-	even
 
 PSG_SHC_02:	dc.b	0,0,0,0,1,1,1,1,2,2,3,3,4,5,5,6
 		dc.b	7,8,8,9,$A,$A,$B,$C,$D,$E,$F,$80
-	even
 
 PSG_SHC_03:	dc.b	0,0,0,0,1,2,2,2,2,3,3,3,4,4,5,5
 		dc.b	5,6,6,7,7,7,8,8,8,8,9,9,$A,$A,$A,$B
 		dc.b	$B,$C,$C,$D,$D,$E,$E,$F,$80
-	even
 
 PSG_SHC_04:	dc.b	0,1,1,2,3,4,5,6,7,8,$80
-	even
 
 PSG_S3_01:	dc.b	2,$F,$80
-	even
 
 PSG_S3_03:	dc.b	2,1,0,0,1,2,2,2,2,2,2,2,2,2,2,2
 		dc.b	2,3,3,3,4,4,4,5,$80
-	even
 
 PSG_S3_0C:	dc.b	0,0,1,1,3,3,4,5,$F,$80
-	even
 
 PSG_SA_0F:	dc.b	$A,9,9,9,9,9,9,9,8,8,8,8,8,8,8,7
 		dc.b	7,7,7,7,7,7,7,6,6,6,6,6,6,6,5,5
@@ -178,220 +146,162 @@ PSG_SA_0F:	dc.b	$A,9,9,9,9,9,9,9,8,8,8,8,8,8,8,7
 		dc.b	8,9,9,9,9,9,9,9,$A,$A,$A,$A,$A,$A,$B,$B
 		dc.b	$B,$B,$B,$B,$B,$C,$C,$C,$C,$C,$C,$C,$D,$D,$D,$D
 		dc.b	$D,$D,$D,$E,$E,$E,$E,$E,$E,$E,$F,$80
-	even
 
 PSG_SMB1:
 	dc.b	$C,6,1,1,1,1,1,1,1,2,2,2,2,2,2,2
 	dc.b	2,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4
 	dc.b	4,5,5,5,5,5,5,5,7,9,$B,$D,$F,$80
-	even
 
 PSG_Dole01:	
 	dc.b	1,2,4,6,7,8,9,$B,$C,$D,$F,$80
-	even
 
 PSG_Dole02:
 	dc.b	0,1,2,3,$80
-	even
 
 
 PSG_Dole03:
 	dc.b	5,4,3,3,2,2,2,1,1,1,1,1,1,2,2,3,3,4,4
 	dc.b	5,5,6,6,6,6,7,$80
-	even
 
 PSG_Dole04:
 	dc.b	0,1,6,$80
-	even
 
 PSG_DSK01:
 	dc.b	1,2,5,7,9,$F,$80
-	even
 
 PSG_DSK02:
 	dc.b	0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5
 	dc.b	5,6,6,6,7,7,8,9,$A,$B,$C,$C,$C,$D,$D,$D
 	dc.b	$D,$D,$E,$E,$E,$E,$E,$E,$E,$F,$80
-	even
 	
 PSG_Chicken_01:
 	dc.b	0,1,2,3,4,5,6,6,7,7,8,8,9,9,$A,$A,$B,$B
 	dc.b	$C,$C,$D,$D,$D,$E,$E,$E,$F,$80
-	even
 	
 PSG_Chicken_02:
 	dc.b	5,4,4,3,2,2,1,1,0,0,0,0,0,0,1,1,2,2,2,3
 	dc.b	3,3,4,4,5,5,5,5,6,6,7,$80
-	even
 	
 PSG_Chicken_03:
 	dc.b	0,1,2,3,3,4,5,5,6,7,8,8,9,9,$A,$A,$A,$B
 	dc.b	$B,$C,$C,$C,$C,$D,$D,$D,$E,$E,$E,$F,$80
-	even
 
 PSG_Danstar_01:
 	dc.b	0,0,1,2,3,3,4,5,5,6,7,7,8,8,9,$A,$B,$C,$D
 	dc.b	$E,$E,$F,$80
-	even
 
 PSG_Danstar_02:
 	dc.b	0,0,1,2,2,2,3,3,4,4,5,5,5,5,6,6,7,7,8,8,9,9
 	dc.b	$A,$A,$B,$B,$B,$C,$C,$D,$E,$80
-	even
 
 PSG_Danstar_03:
 	dc.b	1,1,1,1,1,1,3,3,3,4,4,5,$80
-	even
 
 PSG_Danstar_04:
 	dc.b	2,2,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 	dc.b	1,1,1,1,1,1,1,1,1,2,$80
-	even
 	
 PSG_TF1:
 	dc.b	0,1,2,3,4,5,6,6,7,7,8,8,9,9,$A,$A,$B,$B,$C
 	dc.b	$C,$D,$D,$D,$E,$E,$E,$F,$80
-	even
 
 PSG_TF2:
 	dc.b	0,1,2,3,3,4,5,5,6,7,8,8,9,9,$A,$A,$A,$B,$B
 	dc.b	$C,$C,$C,$C,$D,$D,$D,$E,$E,$E,$F,$80
-	even
 	
 PSG_Apple1:
 	dc.b	0,1,2,3,5,5,6,6,7,8,8,9,9,$A,$A,$B,$B,$C,$C
 	dc.b	$D,$D,$E,$F,$80
-	even
 
 PSG_Apple2:
 	dc.b	0,1,1,2,3,3,3,4,4,5,5,5,6,7,7,7,8,8,8,9,9,9
 	dc.b	$A,$A,$A,$A,$B,$B,$B,$B,$B,$C,$80
-	even
 
 PSG_Apple3:
 	dc.b	5,3,2,2,2,2,1,1,1,1,1,1,1,2,2,2,3,3,3,3,3,3
 	dc.b	3,3,3,3,3,4,$80
-	even
 
 PSG_Scrap1:
 	dc.b	0,1,1,2,2,2,2,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4
 	dc.b	4,5,$80
-	even
 
 PSG_Scrap2:
 	dc.b	4,3,2,2,2,2,1,1,1,1,1,0,$80
-	even
 
 PSG_Coffin:
 	dc.b	7,6,5,4,4,3,3,2,2,1,0,0,0,0,0,0,0,1,1,2,2,2
 	dc.b	2,3,3,4,4,5,5,6,6,7,$80
-	even
 
 PSG_Doom:
 	dc.b	0,0,0,0,0,0,0,0,1,2,2,3,3,3,4,5,5,6,6,7,7,7
 	dc.b	8,8,8,9,9,9,9,$A,$80
-	even
 
 PSG_GHM4_01:
 	dc.b	0,0,0,1,2,3,3,4,4,4,5,$80
-	even
 	
 PSG_Virus01
 	dc.b	0,1,1,2,4,5,7,8,9,$B,$D,$F,$80
-	even
 	
 PSG_Virus02
 	dc.b	0,1,1,2,2,3,3,4,5,5,6,6,6,7,8,8,9,9,$A,$A,$B
 	dc.b	$B,$C,$C,$C,$C,$D,$80
-	even
 	
 PSG_Virus03
 	dc.b	6,5,5,4,3,3,3,2,1,1,1,1,1,2,2,2,3,3,4,5,$80
-	even
 	
 PSG_Virus04
 	dc.b	0,0,0,0,0,3,$80
-	even
 PSG_ClintonYr:
 	dc.b	1,1,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1
 	dc.b	2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3
 	dc.b	4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5
 	dc.b	6,6,6,6,6,6,6,6,6,6,7,$80
-	even
 
 PSG_Pass1:
 	dc.b	0,2,5,7,8,9,$B,$C,$D,$E,$E,$F,$80
-	even
 
 PSG_Pass2:
 	dc.b	0,1,2,2,3,4,4,5,6,7,7,8,8,9,9,$A,$A,$B,$C,$D
 	dc.b	$E,$F,$80
-	even
 
 PSG_Pass3:
 	dc.b	0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2
 	dc.b	2,3,3,3,3,3,3,4,$80
-	even
 
 PSG_Pass4:
 	dc.b	0,0,4,$80
-	even
 
 PSG_Mega1:
 	dc.b	0,1,2,4,4,4,4,5,$80
-	even
 
 PSG_Mega2:
 	dc.b	1,2,3,3,4,5,6,6,7,7,7,8,$80
-	even
 
 PSG_Mega3:
 	dc.b	4,3,3,2,2,3,4,5,5,6,6,7,$80
-	even
 
 PSG_Mega4:
 	dc.b	0,0,0,0,1,2,$80
-	even
 
 AporiaTone_01:
 	dc.b	0,0,0,1,2,2,3,3,4,4,5,5,5,6,6,6,7,7,7,8,8,8
 	dc.b 	9,9,9,9,9,$A,$A,$A,$A,$B,$80
-	even
 
 PSG_Will1:
 	dc.b	0,3,$80
-	even
 
 PSG_Will2:
 	dc.b	0,6,$80
-	even
+
 
 PSG_Before:
 	dc.b	1,6,9,$B,$D,$80
+
+; these are all supposed to use rests but the driver doesn't support it
+PSG_S28Bit02:	dc.b $00,$01,$04,$08,$0B,$0E,$0F,$80
+PSG_S28Bit03:	dc.b $00,$00,$02,$04,$06,$07,$0A,$0C,$0F,$80
+PSG_S28Bit04:	dc.b $01,$02,$02,$02,$02,$02,$02,$02,$03,$03,$04,$04,$0F,$80
 	even
-
-; ---------------------------------------------------------------------------
-; New tempos for songs during speed shoes
-; ---------------------------------------------------------------------------
-; DANGER! several songs will use the first few bytes of MusicIndex as their main
-; tempos while speed shoes are active. If you don't want that, you should add
-; their "correct" sped-up main tempos to the list. - this is irrelevant now sdfnsods-coni
-; byte_71A94:
-SpeedUpIndex:
-	dc.b	     $55,   1,   1, $44,   1,   1, $76,   1,   1, $80, $55,  $B, $80, $80, $20	; $00-$0F
-	dc.b	$54, $33, $14,   1, $30, $45, $55, $6E,   1, $55, $50, $60, $20, $80, $65,   1	; $10-$1F
-	dc.b	$21, $65, $44,   1,   1, $34,   1,   1, $60, $70,   7,  $A, $33,   1,   1, $33	; $20-$2F
-	dc.b	  4, $80, $25,   1, $55, $24,   1, $45, $55,   1, $4F, $55,   8, $90,   1, $55	; $30-$3F
-	dc.b	$55,   1, $25, $1C, $25,   1,   1, $68, $58, $25, $35, $55,   1, $33,   1,   1	; $40-$4F
-	dc.b	  1, $40,   1,   1,   1, $55, $A0,   1,   1, $94, $55,   1, $27, $80, $11,   1	; $50-$5F
-	dc.b	  1,   1,   1,   1,   1,   1,   1,   1, $2B,   1,   1, $80,   1,   1,   1,   1	; $60-$6F
-	dc.b	  1,   1,   1,   1, $75,   1,   1,   1, $33,   1, $55, $45, $54, $80, $80,   1	; $70-$7F
-	dc.b	  1, $33,   $4A;,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1	; $80-$8F
-;	dc.b	  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1	; $90-$9F
-	;	bgmwarning	SpeedUpIndex, 1
-	;bye bye speedupindex warning, go burn in hell
-		even
-
 ; ---------------------------------------------------------------------------
 ; Priority of sound. New music or SFX must have a priority higher than or equal
 ; to what is stored in v_sndprio or it won't play. If bit 7 of new priority is
@@ -1198,11 +1108,10 @@ Sound_PlayBGM:
 .NoCD:
 	endif
 		jsr	InitMusicPlayback(pc)
-		movea.l	(Go_SpeedUpIndex).l,a4
+		lea	MusicIndex(pc),a4
 		subi.b	#bgm__First,d7
-		move.b	(a4,d7.w),SMPS_RAM.v_speeduptempo(a6)
-		movea.l	(Go_MusicIndex).l,a4
 		lsl.w	#2,d7
+		move.b	(a4,d7.w),SMPS_RAM.v_speeduptempo(a6)
 		movea.l	(a4,d7.w),a4		; a4 now points to (uncompressed) song data
 		adda.l	#MusicIndex,a4
 		moveq	#0,d1
@@ -2379,6 +2288,7 @@ PSGUpdateFreq:
 ; loc_72920:
 PSGSetRest:
 		bset	#1,SMPS_Track.PlaybackControl(a5)	; Set 'track at rest' bit
+PSGUpdateVolFX_exit:
 		rts
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
@@ -2386,27 +2296,27 @@ PSGSetRest:
 ; sub_72926:
 PSGUpdateVolFX:
 		tst.b	SMPS_Track.VoiceIndex(a5)	; Test PSG tone
-		beq.w	locret_7298A			; Return if it is zero
+		beq.s	PSGUpdateVolFX_exit		; Return if it is zero
 ; loc_7292E:
-PSGDoVolFX:	; This can actually be made a bit more efficient, see the comments for more
+PSGDoVolFX:
 		move.b	SMPS_Track.Volume(a5),d6	; Get volume
 		moveq	#0,d0
 		move.b	SMPS_Track.VoiceIndex(a5),d0	; Get PSG tone
 		beq.s	SetPSGVolume
-		movea.l	(Go_PSGIndex).l,a0
+		lea	PSG_Index(pc),a0
 		subq.w	#1,d0
 		lsl.w	#2,d0
 		movea.l	(a0,d0.w),a0
-		move.b	SMPS_Track.VolEnvIndex(a5),d0	; Get volume envelope index		; move.b	SMPS_Track.VolEnvIndex(a5),d0
-		move.b	(a0,d0.w),d0			; Volume envelope value			; addq.b	#1,SMPS_Track.VolEnvIndex(a5)
-		addq.b	#1,SMPS_Track.VolEnvIndex(a5)	; Increment volume envelope index	; move.b	(a0,d0.w),d0
-		btst	#7,d0				; Is volume envelope value negative?	; <-- makes this line redundant
-		beq.s	.gotflutter			; Branch if not				; but you gotta make this one a bpl
-		cmpi.b	#$80,d0				; Is it the terminator?			; Since this is the only check, you can take the optimisation a step further:
-		beq.s	VolEnvHold			; If so, branch				; Change the previous beq (bpl) to a bmi and make it branch to VolEnvHold to make these last two lines redundant
+		moveq	#0,d0
+		move.b	SMPS_Track.VolEnvIndex(a5),d0	; Get volume envelope index
+		move.b	(a0,d0.w),d0			; Volume envelope value
+;		bpl.s	.gotflutter			; If volume envelope is positive, branch
+		cmpi.b	#$80,d0				; Is it the terminator?
+		beq.s	VolEnvHold			; If so, branch
 ; loc_72960:
 .gotflutter:
-		add.w	d0,d6		; Add volume envelope value to volume
+		addq.b	#1,SMPS_Track.VolEnvIndex(a5)	; Increment volume envelope index
+		add.b	d0,d6		; Add volume envelope value to volume
 		cmpi.b	#$10,d6		; Is volume $10 or higher?
 		blo.s	SetPSGVolume	; Branch if not
 		moveq	#$F,d6		; Limit to silence and fall through
@@ -2444,7 +2354,7 @@ PSGCheckNoteTimeout:
 ; ===========================================================================
 ; loc_7299A: FlutterDone:
 VolEnvHold:
-		subq.b	#1,SMPS_Track.VolEnvIndex(a5)	; Decrement volume envelope index
+		subq.b	#1,SMPS_Track.VolEnvIndex(a5)	; Decrement volume envelope index back to last volume
 		rts
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
