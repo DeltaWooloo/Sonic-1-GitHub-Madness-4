@@ -26,6 +26,8 @@ SonicDriverVer = 1 ; Tell SMPS2ASM that we're using Sonic 1's driver.
 bgmdef macro tempo,addr
 	dc.l (tempo&$FF)<<24|(addr&$3FFFFF)
 	endm
+; NOTE: a tempo of $FF forces the driver to use the normal tempo
+;       it's otherwise the same as S3Ks tempo algo
 MusicIndex:
 	bgmdef $00, Mus_MWaterS
 	bgmdef $00, Mus_OrangeSong
@@ -59,7 +61,7 @@ MusicIndex:
 	bgmdef $00, Mus_BonusEight
 	
 	bgmdef $00, Mus_Boss
-	bgmdef $00, Mus_ClintonFuck
+	bgmdef $FF, Mus_ClintonFuck
 	bgmdef $00, Mus_Coffinman
 	bgmdef $00, Mus_Aporia
 	bgmdef $00, Mus_Megalovania
@@ -80,11 +82,11 @@ MusicIndex:
 	bgmdef $00, Mus_SkySanctuary
 	bgmdef $00, Mus_Jeopardy
 
-	bgmdef $00, Mus_ActClear
+	bgmdef $FF, Mus_ActClear
 	bgmdef $00, Mus_Pac2
-	bgmdef $00, Mus_GameOver
+	bgmdef $FF, Mus_GameOver
 	bgmdef $00, Mus_ExtraLife
-	bgmdef $00, Mus_Drowning
+	bgmdef $FF, Mus_Drowning
 	bgmdef $00, Mus_Emerald
 
 	bgmdef $00, Mus_Retro
@@ -167,8 +169,8 @@ MusicIndex:
 	bgmdef $00, Mus_Win2K
 	bgmdef $00, Mus_Folgers
 	bgmdef $00, Mus_MJWin
-	bgmdef $00, Mus_RamRanch
-	bgmdef $20, Mus_S28bitUnused
+	bgmdef $18, Mus_RamRanch
+	bgmdef $18, Mus_S28bitUnused
 	;!@ bgmwarning	MusicIndex,4
 
 Mus_MWaterS:		include "music/LiquidTracks/Mus - Mega Water S.asm"

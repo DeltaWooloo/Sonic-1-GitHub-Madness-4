@@ -1111,19 +1111,24 @@ Sound_PlayBGM:
 		lea	MusicIndex(pc),a4
 		subi.b	#bgm__First,d7
 		lsl.w	#2,d7
-		move.b	(a4,d7.w),SMPS_RAM.v_speeduptempo(a6)
+		move.b	(a4,d7.w),d4		; d4 now holds the tempo for speed shoes
 		movea.l	(a4,d7.w),a4		; a4 now points to (uncompressed) song data
 		adda.l	#MusicIndex,a4
 		moveq	#0,d1
 		move.w	(a4),d1			; load voice pointer
 		add.l	a4,d1			; It is a relative pointer
 		move.b	5(a4),d0		; load tempo
-		move.b	d0,SMPS_RAM.v_tempo_mod(a6)
-		tst.b	SMPS_RAM.f_speedup(a6)
+		move.b	d0,SMPS_RAM.v_tempo_mod(a6)	; save non-speed tempo
+		cmp.b	#$FF,d4			; if speed shoes tempo is $FF, use main tempo
+		bne.s	.validspeedtempo
+		move.b	d0,d4
+.validspeedtempo:
+		tst.b	SMPS_RAM.f_speedup(a6)	; if speed shoes are enabled, use speed shoes tempo
 		beq.s	.nospeedshoes
-		move.b	SMPS_RAM.v_speeduptempo(a6),d0
+		move.b	d4,d0
 ; loc_72068:
 .nospeedshoes:
+		move.b	d4,SMPS_RAM.v_speeduptempo(a6)	; save speed tempo
 		move.b	d0,SMPS_RAM.v_main_tempo(a6)
 		move.b	d0,SMPS_RAM.v_main_tempo_timeout(a6)
 		movea.l	a4,a3
