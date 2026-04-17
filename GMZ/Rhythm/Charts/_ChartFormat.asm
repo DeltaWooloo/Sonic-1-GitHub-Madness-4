@@ -32,6 +32,9 @@ rhyChartNote:	macro	left,down,up,right
 ; ---------------------------------------------------------------------------
 
 rhyChartWait:	macro	waitTime
+	if waitTime>=$FF
+	fatal "rhyChartWait: wait time ($\{waitTime}) is too big"
+	endif
 		dc.b	waitTime
 		endm
 
