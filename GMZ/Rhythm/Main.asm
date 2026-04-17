@@ -95,7 +95,7 @@ Rhythm_ClrObjMem:
 		moveq	#0,d1
 		move.b	v_zone,d0
 		move.b	v_act,d1
-		lsl.b	#4,d0
+		lsl.w	#4,d0
 		add.b	d1,d1
 		add.b	d1,d1
 		add.b	d1,d0
@@ -137,6 +137,47 @@ Rhythm_ChartPtr:
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+
+		dc.l	RhythmChart_RamRanch
+		dc.l	RhythmChart_RamRanch
+		dc.l	RhythmChart_RamRanch
+		dc.l	RhythmChart_RamRanch
+
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		zonewarning Rhythm_ChartPtr,16
+
 		; GMZ - Load the HUD and countdown objects
 Rhythm_LoadHUD:
 		jsr	FindFreeObj
@@ -170,6 +211,7 @@ Rhythm_LoadCountdown:
 
 		; GMZ - Main loop
 Rhythm_MainLoop:
+		moveq	#2,d7
 		jsr	PauseGame
 		move.b	#2,v_vbla_routine
 		jsr	WaitForVBla
@@ -418,6 +460,7 @@ RAFall_ChkCollectArea:
 		moveq	#1,d6
 		move.b	obFrame(a0),d4
 		move.b	v_jpadpress1,d5
+;		move.b	v_jpadhold1,d5
 		lsl.b	d4,d6
 		and.b	d6,d5
 		beq	RAFall_Exit	; GMZ - Set to BNE for automatic mode (for testing purposes, if in case you're making a chart and wanna make sure it syncs)
@@ -637,4 +680,7 @@ Map_RhyExplode:
 		include	"Charts/_ChartFormat.asm"
 RhythmChart_GHZ1:
 		include	"Charts/GHZ1.asm"
+		even
+RhythmChart_RamRanch:
+		include	"Charts/Ram Ranch.asm"
 		even
