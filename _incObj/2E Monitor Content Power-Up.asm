@@ -273,10 +273,7 @@ Pow_ChkS:
 Pow_ChkGoggles:
 ; Uncomment these lines to set up the goggles monitor to work with it
 		cmpi.b	#8,d0		; does monitor contain goggles?
-		bne.s	Pow_ChkEnd
-		nop	
-
-Pow_ChkEnd:
+		bne.w	Pow_SlowShoes
 		rts		; 'S' and goggles monitors do nothing
 ; ===========================================================================
 

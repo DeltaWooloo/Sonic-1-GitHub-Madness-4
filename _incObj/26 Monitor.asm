@@ -159,5 +159,5 @@ Mon_Explode:
 		moveq	#0,d0
 		move.b	obRespawnNo(a0),d0
 		bset	#0,2(a2,d0.w)
-		move.b	#9,obAnim(a0)	; set monitor type to broken
+		move.b	#$0A,obAnim(a0)	; set monitor type to broken
 		bra.w	DisplaySprite

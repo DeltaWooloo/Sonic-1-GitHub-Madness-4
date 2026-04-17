@@ -11,6 +11,7 @@ Map_a652: mappingsTable
 	mappingsTableEntry.w	Map_a652_9
 	mappingsTableEntry.w	Map_a652_10
 	mappingsTableEntry.w	Map_a652_11
+	mappingsTableEntry.w	Map_a652_12
 
 Map_a652_0:	spriteHeader
  spritePiece -$10, -$11, 4, 4, 0, 0, 0, 0, 0
@@ -67,7 +68,12 @@ Map_a652_10:	spriteHeader
 Map_a652_10_End
 
 Map_a652_11:	spriteHeader
- spritePiece -$10, -1, 4, 2, $38, 0, 0, 0, 0
+ spritePiece -8, -$B, 2, 2, $24, 0, 0, 1, 0
+ spritePiece -$10, -$11, 4, 4, 0, 0, 0, 0, 0
 Map_a652_11_End
+
+Map_a652_12:	spriteHeader
+ spritePiece -$10, -1, 4, 2, $38, 0, 0, 0, 0
+Map_a652_12_End
 
 	even
