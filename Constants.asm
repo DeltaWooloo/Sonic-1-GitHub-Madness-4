@@ -99,7 +99,7 @@ plane_size_64x32: equ 64*32*2	; size of plane in 512x256 mode
 
 ; Levels
 id_OWZ:		equ $00
-id_ARZ:		equ $01
+id_ARZ:		equ $01												; Formerly LZ (water)
 id_ACZ:		equ $02
 id_MCZ:		equ $03
 id_SFZ:		equ $04
@@ -386,7 +386,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_S28BitUnused
 	; Keep this last
 	nextenum bgm__Last
-	bgm__LastPow2:		equ	$7F						; !@ Manually update me	
+	bgm__LastPow2:		equ	$FF						; !@ Manually update me	
 	bgm__count:			equ	(bgm__Last-bgm__First)	; Count of songs
 
 ; Sound effects

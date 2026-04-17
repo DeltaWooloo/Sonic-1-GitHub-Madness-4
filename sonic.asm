@@ -2780,6 +2780,7 @@ Level_NoMusicFade:
 		move.l	#-1,6(a1)
 		bsr.w	UserPLC
 
+.loadLevelPal
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
 		lsl.w	#7,d0
