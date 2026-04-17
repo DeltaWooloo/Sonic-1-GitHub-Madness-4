@@ -44,13 +44,22 @@ randBit	macro bit,var
 writeVDP_reg	macro 
 	;Write VDP Register
 	lea		(vdp_control_port).l,a6	;Load VDP ctrl port into a6
+	KDebug.WriteLine "writeVDP_reg: %<.w d2>"
 	move.w	d2,(a6)					;Write d2 register
 	bra.w	.zapSetFX_Timer			;Do zap
 	endm
 	
 ;Macro to spawn an object in Random monitor code
-;Inputs: object Type ID, subType, PCM to play (if any)
+;Inputs: object Type ID, subType, PCM to play (if any), variable addr to pop new obj address (if any)
 spawnObj	macro	objID,subType,dac,newObjPop
+	KDebug.WriteLine "spawnObj: ID=%<.b objID>,Type=%<.b subType>"
+	if ("dac"<>"")
+	KDebug.WriteLine "         PCM=%<.b dac>"
+	endif
+	if ("newObjPop"<>"")
+	KDebug.WriteLine "         POP=%<.l newObjPop sym>"
+	endif
+	
 	movem.l	d0,-(sp)				; Push d0 onto stack
 	movem.l	a1,-(sp)				; Push a1 onto stack
 	if ("newObjPop"<>"")
@@ -150,7 +159,8 @@ Pow_GetLife3:
 
 Pow_ChkShoes:
 		cmpi.b	#3,d0		; does monitor contain speed shoes?
-		bne.s	Pow_ChkShield
+		;bne.s	Pow_ChkShield
+		bne.w	Pow_ChkShield
 
 Pow_SpeedShoes:
 		move.b	#1,(v_shoes).w	; speed up the BG music
@@ -164,6 +174,35 @@ Pow_SpeedShoes:
 		pcm	dBoostPower
 		move.b	#bgm_AVGNInv,d0
 		jmp	(QueueSound1).l		; Speed up the music
+; ===========================================================================
+
+Pow_SlowShoes:
+		KDebug.WriteLine "Pow_SlowShoes"
+		move.b	#1,(v_shoes).w	; speed up the BG music
+		move.w	#$4B0,(v_player+shoetime).w	; time limit for the power-up
+		
+		;Sonic Defaults:
+		;move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
+		;move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
+		;move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
+		
+		;Speed Shoes:		
+		;move.w	#$C00,(v_sonspeedmax).w ; change Sonic's top speed
+		;move.w	#$16,(v_sonspeedacc).w	; change Sonic's acceleration
+		;move.w	#$80,(v_sonspeeddec).w	; change Sonic's deceleration		
+		
+		;Slow Shoes:
+		move.w	#$600,(v_sonspeedmax).w ; Sonic's top speed
+		move.w	#$8,(v_sonspeedacc).w ; Sonic's acceleration
+		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
+		tst.b	(v_clintonfucker).w ; is boss mode on?
+		bne.w	.end	; if yes, branch
+		;!@ GenesisDoes: Play wrong way PCM
+		pcm	dBoostRPower
+		move.b	#bgm_LimitedEgg,d0
+		jsr		(QueueSound1).l		; Speed up the music
+	.end:
+		rts
 ; ===========================================================================
 
 Pow_ChkShield:
@@ -289,25 +328,26 @@ Pow_Randomiser:
 		dc.l	.getjumpscared		;$17 / $5C
 		dc.l	.toolimited			;$18 / $60
 		
-		;!@ GenesisDoes: VDP register fuckery
-		dc.l	.vdp00_m1_reg		;x $19 / $64 - 	Mess wtih VDP register 	$00 (Mode Register 1)). Doesn't do much
-		dc.l	.vdp01_m2_reg		;x $1A / $68 - 	~						$01 (Mode Register 2)). Doesn't do much
-		dc.l	.vdp07_bg0_reg		;x $1B / $6C - 	~						$07 (Background color)
-		dc.l	.vdp0B_m3_reg		;x $1C / $70 - 	~						$0B (Mode Register 3). Doesn't do much
-		dc.l	.vdp0C_m4_reg		;x $1D / $74 - 	~						$0C (Mode Register 4)
-		dc.l	.vdp10_planSz_reg	;x $1E / $78 - 	~						$10 (VDP Plane Size)
-		dc.l	.funkyColors		;x $1F / $7C - 	Randomize CRAM colors (dry/water palletes)
+		;!@ GenesisDoes: VDP register fuckery		
+		dc.l	.vdp00_m1_reg		;x $19 / $64 - 	Mess wtih VDP register 	$00 (Mode Register 1)
+		;dc.l	.vdp01_m2_reg		;										$01 (Mode Register 2)
+		dc.l	.vdp07_bg0_reg		;x $1A / $68 - 	~						$07 (Background color)
+		;dc.l	.vdp0B_m3_reg		;										$0B (Mode Register 3)
+		dc.l	.vdp0C_m4_reg		;x $1B / $6C - 	~						$0C (Mode Register 4)
+		dc.l	.vdp10_planSz_reg	;x $1C / $70 - 	~						$10 (VDP Plane Size)
+		dc.l	.funkyColors		;x $1D / $74 - 	Randomize CRAM colors (dry/water palletes)
 		;!@ GenesisDoes: Spawn stuff
-		dc.l	.spawnPlayer		;x $20 / $80 - 	Spawn a	clone player
-		dc.l	.instaWin			;x $21 / $84 - 	~			Signpost
-		dc.l	.springTime			;x $22 / $88 - 	~			Red vert spring
-		dc.l	.BigRing			;x $23 / $8C - 	~			Giant Ring + give 50 rings
-		dc.l	.monitorInception	;x $24 / $90 - 	~			Another random monitor
-		dc.l	.lampoil			;x $25 / $94 - 	~			New lamppost
-		dc.l	.rAndCRiftApart		;x $26 / $98 -	~			RiftToGo
+		dc.l	.spawnPlayer		;x $1E / $78 - 	Spawn a	clone player
+		dc.l	.instaWin			;x $1F / $7C - 	~			Signpost
+		dc.l	.springTime			;x $20 / $80 - 	~			Red vert spring
+		dc.l	.BigRing			;x $21 / $84 - 	~			Giant Ring + give 50 rings
+		dc.l	.monitorInception	;x $22 / $88 - 	~			Another random monitor
+		dc.l	.lampoil			;x $23 / $8C - 	~			New lamppost
+		dc.l	.rAndCRiftApart		;x $24 / $90 -	~			RiftToGo
 		;!@ GenesisDoes: Other
-		dc.l	.crash				;x $27 / $9C - 	Crash the game (illegal); Task fails successfully!
-		dc.l	.jukebox			;x $28 / $A0 - 	Play random song
+		dc.l	.crash				;x $25 / $94 - 	Crash the game (illegal); Task fails successfully!
+		dc.l	.jukebox			;x $26 / $98 - 	Play random song
+		dc.l	Pow_SlowShoes		;x $27 / $9C -  Slow down shoes
 .powtableend:
 
 ; ===========================================================================
@@ -460,19 +500,21 @@ Pow_Randomiser:
 
 ; ===========================================================================		
 
-;!@ GD: Sets VDP Register (Mode Register 1) left blank and/or low-color mode
+;!@ GD: Sets VDP Register (Mode Register 1) left blank and low-color mode
 ; https://segaretro.org/Sega_Mega_Drive/VDP_registers#00
 .vdp00_m1_reg:
-		;disableD
+		;disableD	
+		KDebug.WriteLine "Pow_Randomizer.vdp00_m1_reg"
 		moveq	#0,d2				;Clear d2
 		move.w	$8000,d2			;VDP Register $00 base in d2
-		randBit	5,d2				;Randomize bit 5 (left blank)
-		randBit	2,d2				;Randomize bit 2 (low/high color mode)
+		bset	#5,d2				;Set bit 5 (left blank)
+		bclr	#2,d2				;Clr bit 2 (low color mode)
 		
 		tst.b	(v_waterflag).w 	; is level LZ?
 		bpl.s	.skip				; if not, branch
 		bset	#4,d2				; Set bit 4 (h-int) if water levels		
 	.skip:
+		KDebug.WriteLine "Pow_Randomizer.vdp00_m1_reg: %<.b d2>"
 		writeVDP_reg
 		rts
 ; ===========================================================================
@@ -480,23 +522,25 @@ Pow_Randomiser:
 ;!@ GD: Sets VDP Register (Mode Register 2) H30/H28 and Mode 5 Gen/Mode 4 SMS
 ; https://segaretro.org/Sega_Mega_Drive/VDP_registers#01
 ;Left blank
-.vdp01_m2_reg:
+;.vdp01_m2_reg:
 		;disableD
-		moveq	#0,d2
-		move.w	$8170,d2			;VDP Register $01 base
-		randBit	3,d2				;Randomize bit 3 (H30/H28 mode)
-		randBit	2,d2				;Randomize bit 2 (Mode 5 Gen / Mode 4 SMS modes)
-		writeVDP_reg
-		rts
+		;moveq	#0,d2
+		;move.w	$8170,d2			;VDP Register $01 base
+		;randBit	3,d2				;Randomize bit 3 (H30/H28 mode)
+		;randBit	2,d2			;Randomize bit 2 (Mode 5 Gen / Mode 4 SMS modes)
+		;writeVDP_reg
+		;rts
 ; ===========================================================================
 		
 ;!@ GD: Randomize the background color (VDP Reg $07)
 ;https://segaretro.org/Sega_Mega_Drive/VDP_registers#07
 .vdp07_bg0_reg:		
 		;disableD
+		KDebug.WriteLine "Pow_Randomizer.vdp07_bg0_reg"
 		moveq	#0,d0				; Clear d0
 		jsr		(RandomNumber).l	; get a random number
 		andi.l	#$3F,d0				; only keep lowest 6-bits
+		KDebug.WriteLine "Pow_Randomizer.vdp07_bg0_reg random color: %<.b d0>"
 		ori.w	#$8700,d0			; OR it with VDP $07 base ($8700)
 		move.w	d0,d2				; Move d0 into d2
 		writeVDP_reg
@@ -505,25 +549,48 @@ Pow_Randomiser:
 		
 ;!@ GD: Randomize the Mode register 3 (V/HScrolling modes)
 ;https://segaretro.org/Sega_Mega_Drive/VDP_registers#0B
-.vdp0B_m3_reg:
+;.vdp0B_m3_reg:
 		;disableD
-		moveq	#0,d0				; Clear d0
-		jsr		(RandomNumber).l	; get a random number
-		and.l	#$07,d0				; only keep lowest 3-bit
-		ori.w	#$8B00,d0			; OR it with VDP $0B base ($8B00)
-		move.w	d0,d2				; Move d0 into d2
-		writeVDP_reg
-		rts
+		;moveq	#0,d0				; Clear d0
+		;jsr		(RandomNumber).l	; get a random number
+		;and.l	#$07,d0				; only keep lowest 3-bit
+		;ori.w	#$8B00,d0			; OR it with VDP $0B base ($8B00)
+		;move.w	d0,d2				; Move d0 into d2
+		;writeVDP_reg
+		;rts
 ; ===========================================================================
 
 ;!@ GD: Randomize the Mode register 4 (Interlace, cell-mode, S/H modes)
 ;https://segaretro.org/Sega_Mega_Drive/VDP_registers#0C
 .vdp0C_m4_reg:
 		;disableD
+		KDebug.WriteLine "Pow_Randomizer.vdp0C_m4_reg"
 		moveq	#0,d0				; Clear d0
+		moveq	#0,d1				; Clear d1
 		jsr		(RandomNumber).l	; get a random number
-		and.l	#$8F,d0				; only keep lowest 4-bit and MSB
+		andi.l	#$0E,d0				; only keep bits 1-3
+		jsr		(GetRndBit).l
+		tst.b	d1
+		bne.s	.m4c_set
+	.m4c_clr:
+		KDebug.WriteLine "Pow_Randomizer.vdp0C_m4_reg clear RS0-RS1 (H32)"
+		moveq	#0,d1
+		jsr		(ClrBit).l
+		moveq	#7,d1
+		jsr		(ClrBit).l
+		bra.s	.m4c_cont
+		
+	.m4c_set:
+		KDebug.WriteLine "Pow_Randomizer.vdp0C_m4_reg set RS0-RS1 (H40)"
+		moveq	#0,d1
+		jsr		(SetBit).l
+		moveq	#7,d1
+		jsr		(SetBit).l
+		
+	.m4c_cont:
 		ori.w	#$8C00,d0			; OR it with VDP $0C base ($8C00)
+		cmpi.w	#$8C81,d0
+		beq.w	.vdp0C_m4_reg		; If no random FX, try again
 		move.w	d0,d2				; Move d0 into d2
 		writeVDP_reg
 		rts
@@ -534,10 +601,13 @@ Pow_Randomiser:
 ;https://segaretro.org/Sega_Mega_Drive/VDP_registers#10
 .vdp10_planSz_reg:
 		;disableD
+		KDebug.WriteLine "Pow_Randomizer.vdp10_planSz_reg"
 		moveq	#0,d0				; Clear d0
 		jsr		(RandomNumber).l	; get a random number
 		and.l	#$33,d0				; only keep proper bitfield
 		ori.w	#$9000,d0			; OR it with VDP $10 base ($9000)
+		cmpi.w	#$9001,d0			; Is d0 $9001 (default plane size)
+		beq.s	.vdp10_planSz_reg	; If so, randomize again
 		move.w	d0,d2				; Move d0 into d2
 		writeVDP_reg
 		rts
@@ -548,6 +618,7 @@ Pow_Randomiser:
 ;		nop
 ;		bra.w	.nothing		; since this crashes the game, dummy it out for now
 		;disableD
+		KDebug.WriteLine "Pow_Randomizer.funkyColors"
 		
 		;Push d0-d2, d7, and a0-a1 onto stack
 		movem.l	d0-d3,-(sp)
@@ -556,6 +627,7 @@ Pow_Randomiser:
 		
 		;Directly load garbage palette from random ROM address into dry v_palette 
 		;Clear d0-d1,d7, and a0-a1 registers
+		KDebug.WriteLine "Randomize dry palette"
 		moveq	#0,d0
 		moveq	#0,d1
 		moveq	#0,d2
@@ -571,6 +643,11 @@ Pow_Randomiser:
 		jsr		(PalLoadUser).l				; Dew the load. Dew it, Palpatine said
 		
 		;Again for wet v_palette_water
+		;tst.b	(v_waterflag).w 			; is level LZ?
+		;bpl.s	.skipFunkyWater				; if not, branch
+		bsr.w	isWaterLevel				; Does level have water?
+		beq.s	.skipFunkyWater				; If not, branch
+		KDebug.WriteLine "Randomize wet palette"
 		moveq	#0,d0
 		moveq	#0,d1
 		moveq	#0,d2
@@ -585,6 +662,7 @@ Pow_Randomiser:
 		move.b	#$40-1,d7
 		jsr		(PalLoadUser).l
 		
+	.skipFunkyWater:
 		;Pop d0-d2, d7, and a0-a1 from stack		
 		movem.l	(sp)+,a0-a1
 		movem.l	(sp)+,d7
@@ -597,6 +675,7 @@ Pow_Randomiser:
 ;Subroutine to enable_itns/display, play zap SFX, and setup timer for VDP FX
 .zapSetFX_Timer:
 		;enableD		
+		KDebug.WriteLine "Enable VDP FX powerup!"
 		move.b	#1,(v_vdp_fx).w					; set VDP FX powerdown flag
 		move.w	#$4B0,(v_player+vdpFXTime).w	; time limit for the FX
 		
@@ -668,7 +747,7 @@ Pow_Randomiser:
 ;===========================================================================
  
  ; Play random song
-.jukebox:
+.jukebox:		
 		moveq	#0,d0						; Clear d0
 		jsr	(RandomNumber).l				; get a random number in d0
 		andi.l	#bgm__LastPow2,d0			; !@ Mask to highest bitfield ID
@@ -678,11 +757,13 @@ Pow_Randomiser:
 		bls.s	.skipFix					;if not, branch
 		subi.l	#bgm__Last,d0				;Subtract from max to fix ID
 	.skipFix:
+		KDebug.WriteLine "Pow_Randomizer.jukebox ID: %<.b d0>"
 		jmp	(QueueSound1).l					; play song
 		rts
  
  ;Your under arrest. ILLEGAL
 .crash:		;Bandicoot, duh
+		KDebug.WriteLine "Pow_Randomizer.crash"
 		move.b	#bgm_Stop,d0			; stop the music
 		jsr	(QueueSound2).l
 		move.b	#2,(v_vbla_routine).w	; set routine 2 in V-Int
@@ -735,16 +816,16 @@ Pow_vdp_fixRegs:
 	.skipWtr:		
 		move.w	d1,(a6)			; Write register
 		
-		moveq	#0,d1			; Clear d1
-		move.w	$8170,d1		;VDP Register $01 base
-		btst	#6,(v_megadrive).w
-		beq.s	.skipPal
-		bset	#3,d1			;Set PAL flag		
+		;moveq	#0,d1			; Clear d1
+		;move.w	$8170,d1		;VDP Register $01 base
+		;btst	#6,(v_megadrive).w
+		;beq.s	.skipPal
+		;bset	#3,d1			;Set PAL flag		
 	
-	.skipPal:
-		move.w	d1,(a6)			; Write register
+	;.skipPal:
+		;move.w	d1,(a6)			; Write register
 		move.w	#$8720,(a6)		; set background colour (line 3; colour 0)
-		move.w	#$8B03,(a6)		; line scroll mode
+		;move.w	#$8B03,(a6)		; line scroll mode
 		move.w	#$8C81,(a6)		; 40-cell display mode
 		move.w	#$9001,(a6)		; 64-cell hscroll size
 		
@@ -769,7 +850,155 @@ Pow_vdp_fixRegs:
 ; ===========================================================================
 
 Level_LoadPal2:
-		;!@ GD TODO: Reload Sonic/level dry+wet palettes
+		movem.l	d0-d3/a0-a2,-(sp)		; Store regs
+		; load player dry palette
+		moveq	#0,d0
+		moveq	#0,d1
+		moveq	#0,d2
+		moveq	#0,d3
+		jsr		(GetPlayerData).l
+		move.l	d3,a0
+		lea		(v_palette).w,a1
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		
+		; Load player wet palette (if applicable)
+		moveq	#0,d1					; Clear d1
+		;tst.b	(v_waterflag).w 		; is level LZ?
+		;bpl.s	.skipwtr2				; if not, branch
+		bsr.w	isWaterLevel			; Does level have water?
+		beq.s	.skipwtr2				; If not, branch
+		
+		;!@ GD: Rewrite me after char underwater palette code is fixed up
+		moveq	#palid_LZSonWater,d1 	; palette number $F (LZ)
+		cmpi.b	#3,(v_act).w			; is act number 3?
+		bne.s	.wtr					; if not, branch
+		moveq	#palid_SBZ3SonWat,d1 	; palette number $10 (SBZ3)		
+	.wtr:
+		moveq	#1,d2					; Set water flag
+		bsr.w	.loadpal				; Load d1 character water palette
+			
+	.skipwtr2:
+		; Load this zone/act lhead from LevelHeaders
+		; !@ GD TODO bugfix: This .loadpal call is bugged if in a water level!
+		; Code adapted from GM_Level/Level_NoMusicFade.nowata (.loadLevelPal)
+		moveq	#0,d0
+		move.b	(v_zone).w,d0
+		lsl.w	#7,d0
+		lea	(LevelHeaders).l,a2
+		lea	(a2,d0.w),a2
+		moveq	#0,d0
+		move.b	v_act.w,d0
+		lsl.w	#5,d0
+		lea	(a2,d0.w),a2 				;This lhead loaded into a2
+		
+		;Parse the lhead data
+		;lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bglay
+		;dc.l (plc1<<24)+lvlgfx
+		;dc.l (plc2<<24)+sixteen
+		;dc.l twofivesix
+		;dc.b 0, music, pal, pal
+		;dc.l col1
+		;dc.l objlay
+		;dc.l lvllay
+		;dc.l bglay
+		moveq	#0,d0					; Clear d0
+		moveq	#0,d1					; Clear d1
+		move.l	(a2)+,d0				; Skip lvlgfx
+		move.l	(a2)+,d0				; Skip sixteen
+		move.l	(a2)+,d0				; Skip twofivesix
+		move.b	(a2)+,d0				; Skip 0
+		move.b	(a2)+,d0				; Skip music
+		move.b	(a2),d1					; Move pal ID into d1
+		moveq	#0,d2					; Clear water flag
+		bsr.w	.loadpal				; Load d1 level palette
+		
+		;Load level water pals (if applicable)
+		;tst.b	(v_waterflag).w 		; is level LZ/SBZ3?
+		;bpl.s	.end					; if not, branch
+		bsr.w	isWaterLevel			; Does level have water?
+		beq.s	.end					; If not, branch
+		
+		moveq	#palid_LZWater,d1 		; palette $B (LZ underwater)
+		cmpi.b	#3,(v_act).w			; is level SBZ3?
+		bne.s	.WtrNotSbz				; if not, branch
+		moveq	#palid_SBZ3Water,d1 	; palette $D (SBZ3 underwater)
+.WtrNotSbz:
+		moveq	#1,d2					; Set water flag
+		bsr.w	.loadpal				; Load d1 level water palette 
+.end:
+		movem.l	(sp)+,d0-d3/a0-a2		; Restore regs
+		rts
+		
+; Subroutine:
+		;d1=palID				
+		;d2= (!=0) means treat as water palette
+		;Process this makePalEntry from Pal_Index table		
+		
+		;makePalEntry
+		;dc.l paletteLabel				;$00010203
+		;dc.w paletteRAMaddress,length	;$0405,$0607
+.loadpal:
+		KDebug.WriteLine "Level_LoadPal2.loadpal params: palid d1=%<.b d1>,wtr_flag d2=%<.b d2>"
+		movem.l	d0-d2/d7/a0-a2,-(sp)	; Store regs
+		mulu.w	#$08,d1					; Mult d1 palID by 8 (offset within Pal_Index to get this level's makePalEntry entry)
+		lea		(Pal_Index).l,a2		; Load Pal_Index table into a2
+		adda.w	d1,a2					; Offset a2 by d1 (get this makePalEntry)
+		
+		;Process this makePalEntry; get params for PalLoadUser
+		moveq	#0,d0					; Clear d0
+		moveq	#0,d7					; Clear d7
+		move.l	(a2)+,a0				; Load paletteLabel file into a0 (source param)
+		move.w	(a2)+,d0				; Move palRAM addr into d0
+		ori.l	#$FFFF0000,d0			; Make it 32-bit RAM addr		
+		move.l	d0,a1					; Move RAM addr into a1 (dest param)
+		;If water flag set (d2!=0), then change a1 to water palette dest
+		tst.b	d2						; Is d2 flag set?
+		beq.s	.skipWtr3				; If not, branch
+		;Water flag is set
+		suba.w	#(v_palette-v_palette_water),a1		;Subtract from a1 to get water pal dest
+	
+	.skipWtr3:
+		moveq	#0,d0					; Clear d0
+		move.w	(a2),d0					; Move pal length into d0
+		mulu.w	#4,d0					; Mult by 4
+		move.b	d0,d7					; Move d0 into d7 (word length param)
+		
+		;Do the palette load!
+		KDebug.WriteLine "Level_LoadPal2.loadpal: Src=%<.l a0 sym>,Dest=%<.l a1 sym>,Length=%<.b d7>"
+		jsr		(PalLoadUser).l			; Dew the load. Dew it, Palpatine said
+
+		;movea.l	#0,a0
+		;movea.l	#0,a1				
+		;movea.l	d0,a0				; Move addr in d0 into a0 (source param)
+		;lea		(v_palette).l,a1	; Load dry v_palette addr into a1 (dest param)
+		;move.b	#$40-1,d7				; Load $40 palette words from source into dest
+		;jsr		(PalLoadUser).l		; Dew the load. Dew it, Palpatine said
+		movem.l	(sp)+,d0-d2/d7/a0-a2	; Restore resg
+		rts
+		
+;!@ GD: Change this as new zones get water
+; Function determines if level has water, and sets ccr by tst.b(d2)
+; Output: d2; 1=has water, 0=doesn't
+isWaterLevel:		
+		cmpi.b	#id_ARZ,(v_zone).w		; Is this zone ARZ?
+		bne.s	.notWtr					; If not, branch
+		
+	;Level has water!
+	.hasWtr:
+		moveq	#1,d2					; Set d2 flag
+		bra.s	.end					; Branch
+	;Level doesn't water	
+	.notWtr:
+		moveq	#0,d2					; Clr d2 flag
+	.end:
+		tst.b	d2						; Is d2 0?
 		rts
 
 ; ===========================================================================
@@ -786,6 +1015,7 @@ Pow_GetErrorMsg:
 	if msgDebug>=0
 		move.w	#msgDebug,d0
 	endif
+		KDebug.WriteLine "Message ID: %<.b d0>"
 		move.l	.msgtable(pc,d0.w),a2
 		jmp	(a2)
 

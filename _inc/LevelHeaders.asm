@@ -85,4 +85,4 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 	lhead	plcid_BTZ,Kos_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_Hidden,palid_BTZ,Col_BTZ,ObjPos_BTZ2,Level_BTZ2,Level_BTZbg
 	lhead	plcid_BTZ,Kos_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_Hidden,palid_BTZ,Col_BTZ,ObjPos_BTZ3,Level_BTZ3,Level_BTZbg
 	lhead	plcid_BTZ,Kos_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_Hidden,palid_BTZ,Col_BTZ,ObjPos_BTZ1,Level_BTZ1,Level_BTZbg
-
+	;zonewarning	LevelHeaders,32*4

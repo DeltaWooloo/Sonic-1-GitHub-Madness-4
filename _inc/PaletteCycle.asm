@@ -6,12 +6,18 @@
 
 
 PaletteCycle:
+		;!@ If VDP FX powerdown flag is set, then stop palette cycling
+		tst.b	(v_vdp_fx).w
+		bne.s	.end
+		
 		moveq	#0,d2
 		moveq	#0,d0
 		move.b	(v_zone).w,d0	; get level number
 		add.w	d0,d0
 		move.w	PalCycle_Index(pc,d0.w),d0
-		jmp	PalCycle_Index(pc,d0.w) ; jump to relevant palette routine
+		jmp	PalCycle_Index(pc,d0.w) ; jump to relevant palette routine		
+	.end:
+		rts
 ; End of function PaletteCycle
 
 ; ===========================================================================
