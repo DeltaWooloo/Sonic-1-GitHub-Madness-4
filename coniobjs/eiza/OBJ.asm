@@ -21,9 +21,9 @@ BossEiza_Init:
 		move.l	#Map_Eiza,obMap(a0)
 		move.w	#make_art_tile(ArtTile_CBZ_Eiza,1,0),obGfx(a0)
 		move.b	#4,obRender(a0)
-		move.b	#$10,obActWid(a0)
-		move.b	#32,obWidth(a0)
-		move.b	#32,obHeight(a0)
+		move.b	#8,obActWid(a0)
+		move.b	#18,obWidth(a0)
+		move.b	#18,obHeight(a0)
 		move.b	#4,obPriority(a0)
 		move.b	#$F,obColType(a0)
 		move.b	#8,obColProp(a0) ; set number of hits to 8
