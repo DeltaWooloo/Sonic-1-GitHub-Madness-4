@@ -45,6 +45,10 @@ Rhythm_ClrObjMem:
 		lea	ArtNem_ChartTable,a0
 		jsr	NemDec
 
+		locVRAM	$2C60
+		lea	ArtNem_RhyBackground,a0
+		jsr	NemDec
+
 		locVRAM	$FA0
 		lea	ArtNem_ChartArrows,a0
 		jsr	NemDec
@@ -61,6 +65,23 @@ Rhythm_ClrObjMem:
 		lea	Tilemap_ChartTable,a0
 		move.w	#0,d0
 		jsr	EniDec
+		
+		lea	$FF0000,a1
+		move.l	#$40180003,d0
+		moveq	#15,d1
+		moveq	#27,d2
+		jsr	TilemapToVRAM
+
+		lea	$FF0000,a1
+		lea	Tilemap_RhyBackground,a0
+		move.w	#$163,d0
+		jsr	EniDec
+		
+		lea	$FF0000,a1
+		move.l	#$60000003,d0
+		moveq	#39,d1
+		moveq	#27,d2
+		jsr	TilemapToVRAM
 
 		lea	v_palette,a1
 		lea	Pal_RhythmMain,a0
@@ -80,12 +101,6 @@ Rhythm_ClrObjMem:
 		move.l	(a0)+,(a1)+
 		move.l	(a0)+,(a1)+
 		move.l	(a0)+,(a1)+
-
-		lea	$FF0000,a1
-		move.l	#$40180003,d0
-		moveq	#15,d1
-		moveq	#27,d2
-		jsr	TilemapToVRAM
 
 		; GMZ - Load chart
 		moveq	#0,d0
@@ -651,6 +666,14 @@ ArtNem_ChartTable:
 
 Tilemap_ChartTable:
 		binclude	"Chart Table (Tilemap).bin"
+		even
+
+ArtNem_RhyBackground:
+		binclude	"Background (Art, Nemesis).bin"
+		even
+
+Tilemap_RhyBackground:
+		binclude	"Background (Tilemap).bin"
 		even
 
 ArtNem_ChartArrows:
