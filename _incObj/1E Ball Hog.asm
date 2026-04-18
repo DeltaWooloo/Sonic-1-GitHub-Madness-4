@@ -110,7 +110,7 @@ Obj1E_Action:
 		tst.b	hog_wait(a0)		; is it	set to launch cannonball?
 		beq.s	Obj1E_MakeBall	; if yes, branch
 		;bra.w	MarkObjGone
-		jsr		(MarkObjGone).l
+		jmp		(MarkObjGone).l
 Obj1E_ActionCBZ:
 		lea	Ani_Spongy(pc),a1
 		bsr.w	AnimateSprite
@@ -119,13 +119,13 @@ Obj1E_ActionCBZ:
 		tst.b	hog_wait(a0)		; is it	set to launch cannonball?
 		beq.s	Obj1E_MakeBall	; if yes, branch
 		;bra.w	MarkObjGone
-		jsr		(MarkObjGone).l
+		jmp		(MarkObjGone).l
 ; ===========================================================================
 
 Obj1E_SetBall:
 		sf	hog_wait(a0)		; set to launch	cannonball
 		;bra.w	MarkObjGone
-		jsr		(MarkObjGone).l
+		jmp		(MarkObjGone).l
 ; ===========================================================================
 
 Obj1E_MakeBall:
@@ -180,7 +180,7 @@ Obj1E_MakeBall:
 
 .no_free_ram:
 		;bra.w	MarkObjGone
-		jsr		(MarkObjGone).l
+		jmp		(MarkObjGone).l
 ; ===========================================================================
 
 Obj1E_Action2:
@@ -191,7 +191,7 @@ Obj1E_Action2:
 		lea	Ani_HogVert(pc),a1
 		bsr.w	AnimateSprite
 		;bra.w	MarkObjGone
-		jsr		(MarkObjGone).l
+		jmp	(MarkObjGone).l
 ; ===========================================================================
 .action_index:
 		dc.w Hog_Idle-.action_index

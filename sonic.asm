@@ -168,6 +168,7 @@ ErrorTrap:
 
 EntryPoint:
 		disable_ints
+	;	add.l	crack.w, predominantly_projectfm_neighborhoods.w		; r/HemorrhoidHumpingHumor
 		tst.l	(port_1_control_hi).l	; test port A & B control registers
 		bne.s	PortA_Ok
 		tst.w	(expansion_control_hi).l ; test port C control register
