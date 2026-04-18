@@ -978,26 +978,41 @@ Deform_CBZ:
 		move.w	#32-1,d1
 		move.w	(v_screenposx).w,d0
 		neg.w	d0
+		asr.w	#5,d0
+	.distmountainLoop:		; distant mountains
+		move.l	d0,(a1)+
+		dbf	d1,.distmountainLoop
+
+		move.w	#64-1,d1
+		move.w	(v_screenposx).w,d0
+		neg.w	d0
 		asr.w	#4,d0
-	.mountainLoop:		; distant mountains
+	.mountainLoop:			; closer mountains
 		move.l	d0,(a1)+
 		dbf	d1,.mountainLoop
 
-		move.w	#72-1,d1
+		move.w	#16-1,d1
 		move.w	(v_screenposx).w,d0
 		neg.w	d0
 		asr.w	#3,d0
-	.hillLoop:			; closer mountains
+	.tree1Loop:			; far distant trees
 		move.l	d0,(a1)+
-		dbf	d1,.hillLoop
+		dbf	d1,.tree1Loop
 
-		move.w	#48+16-1,d1
+		move.w	#32-1,d1
 		move.w	(v_screenposx).w,d0
 		neg.w	d0
 		asr.w	#2,d0
-	.waterLoop:			; trees
+	.tree2Loop:			; distant trees
 		move.l	d0,(a1)+
-		dbf	d1,.waterLoop
+		dbf	d1,.tree2Loop
+		move.w	#32-1,d1
+		move.w	(v_screenposx).w,d0
+		neg.w	d0
+		asr.w	#1,d0
+	.tree3Loop:			; closer trees
+		move.l	d0,(a1)+
+		dbf	d1,.tree3Loop
 		rts
 
 ; ---------------------------------------------------------------------------
