@@ -3288,8 +3288,15 @@ SignpostArtLoad:
 		;!@ GD: Variant that will forcibly load the artwork (RandomMonitor spawn)
 SignpostArtLoad2:
 		moveq	#plcid_Signpost,d0
-		bra.w	NewPLC		; load signpost patterns
-
+		bsr.w	NewPLC		; load signpost patterns - i did not notice the bra at first
+		jsr	(GetOtherPlayerData).l
+		move.w	pdat.signart(a5),d0
+		add.l	#Nem_CharSign,d0 ; use RAM for PLC
+		lea	(v_256x256).l,a1
+		move.l	d0,(a1)
+		move.w	#ArtTile_CharSign*$20,4(a1)
+		move.l	#-1,6(a1)
+		bra.w	UserPLC
 .exit:
 		rts
 ; End of function SignpostArtLoad

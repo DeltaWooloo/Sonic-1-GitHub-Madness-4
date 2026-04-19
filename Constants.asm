@@ -786,6 +786,8 @@ ArtTile_Warp:			equ $541
 ArtTile_Mini_Sonic:		equ $551
 ArtTile_Bonuses:		equ $6E2
 ArtTile_Signpost:		equ $680
+ArtTile_CharSign:		equ	$6A2
+
 
 ; Sega Screen
 ArtTile_Sega_Tiles:		equ $000

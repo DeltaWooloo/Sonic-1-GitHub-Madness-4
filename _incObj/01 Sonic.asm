@@ -135,31 +135,36 @@ ch_hurtpcm	equ 2
 ; lazy struct
 
 pdat.livesart	= 0
-pdat.hurtsnd	= 2
-pdat.height	= 4
-pdat.height2	= 5
-pdat.width	= 6
-pdat.width2	= 7
+pdat.signart	= 2
+pdat.hurtsnd	= 4
+pdat.height	= 6
+pdat.height2	= 7
+pdat.width	= 8
+pdat.width2	= 9
 
 GetOtherPlayerData:
 	moveq	#0,d0
 	move.b	(v_characterid).w,d0
 	chk	#chrid_last,d0
-	lsl.w	#3,d0
+	mulu.w	#$A,d0
 	lea	OtherPlayerData(pc,d0.w),a5
 	rts
 
-	; HUD Life Icon Art, Damage SFX
+	; HUD Life Icon Art, Signpost Art, Damage SFX
 
 OtherPlayerData:
 	dc.w	Nem_TonicLives-Nem_Lives
+	dc.w	Nem_CharSignTonic-Nem_CharSign
 	dc.w	dFuck
 	dc.b	19,14				; stand, roll height
 	dc.b	 9, 7				; stand, roll width
+;	dc.b	"Jiggly"			; padder
 	dc.w	Nem_ManiacLives-Nem_Lives
+	dc.w	Nem_CharSignManiac-Nem_CharSign
 	dc.w	dGayNeil
 	dc.b	15, 9
 	dc.b	 7, 6
+;	dc.b	"Joshyy"			; padder
 ; ----------------------------------------------------------------------------
 ; TeethTonic character init routine
 ; ----------------------------------------------------------------------------

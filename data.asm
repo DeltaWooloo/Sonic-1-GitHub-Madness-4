@@ -322,6 +322,13 @@ Nem_VSpring:	binclude	"artnem/Spring Vertical.nem"
 		even
 Nem_SignPost:	binclude	"artnem/Signpost.nem"	; end of level signpost
 		even
+Nem_CharSign:
+Nem_CharSignTonic:	binclude	"artnem/CharSign Tonic.nem"
+		even
+Nem_CharSignManiac:	binclude	"artnem/CharSign Maniac.nem"
+		even
+
+
 Nem_Lamp:	binclude	"artnem/Lamppost.nem"
 		even
 Nem_BigFlash:	binclude	"artnem/Giant Ring Flash.nem"
