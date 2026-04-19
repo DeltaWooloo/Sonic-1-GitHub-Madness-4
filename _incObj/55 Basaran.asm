@@ -17,7 +17,7 @@ Bas_Main:	; Routine 0
 		move.l	#Map_Bas,obMap(a0)
 		move.w	#($68A0/$20),obGfx(a0)
 		move.b	#4,obRender(a0)
-		move.b	#$C,obHeight(a0)
+		move.b	#$18,obHeight(a0)
 		move.b	#2,obPriority(a0)
 		move.b	#$B,obColType(a0)
 		move.b	#$10,obActWid(a0)
