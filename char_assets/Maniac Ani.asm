@@ -61,10 +61,10 @@ ManiacAni_Wait:
 		even
 ManiacAni_Balance:
 
-ManiacAni_LookUp:
-		dc.b 5,2,3,4,3,afBack,4
-ManiacAni_Duck:	
-
+ManiacAni_LookUp:	dc.b 5,2,3,4,3,afBack,4
+		even
+ManiacAni_Duck:	dc.b $3F, $21, afEnd
+		even
 ManiacAni_Warp1:
 
 ManiacAni_Warp2:
