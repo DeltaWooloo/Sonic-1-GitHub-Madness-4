@@ -5,12 +5,12 @@ Coding:
 	x Add code to undo funky colors (LoadPalUser/Jump TBL rewrite)
 - Sega Pico build flag/gamepad code
 - Artwork
-	- New Github Madness 4 (GTA4) logos
+	x New Github Madness 4 (GTA4) logos
 	- Windows Zone exclamation point (spikes)
 	- New Github advertisement (https://www.linkedin.com/posts/shubhankitsirvaiya_australia-ban-github-activity-7378296218990407680-Q4XM)
 - Random monitor
-	- Add random monitors to levels
 	x Add slowdown shoes (SpeedUpIndex inverse)
+	- Add random monitor/slow down shoes to levels	
 x Hack Fazbear jumpscare code for Sega Channel Guy jump scare
 - Songs
 	x Metallic Madness Past song
