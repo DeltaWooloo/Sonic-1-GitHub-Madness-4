@@ -13,6 +13,14 @@ FadeOut:         equ   $FE
 vblank:          equ   v_vbla_routine
 VDP_buff:	     equ   v_vdp_buffer1
 
+ArtTile_Github1: 	equ $000
+ArtTile_Github2: 	equ ArtTile_Github1+$00D
+ArtTile_Github3: 	equ ArtTile_Github2+$00C
+ArtTile_Madness1: 	equ ArtTile_Github3+$013
+ArtTile_Madness2: 	equ ArtTile_Madness1+$019
+ArtTile_Madness3: 	equ ArtTile_Madness2+$015
+ArtTile_IV: 		equ ArtTile_Madness3+$016
+
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; GITHUB MADNESS 4 TITLE  
@@ -40,9 +48,10 @@ GitHubScreen:
 		
 GitHubScr_Frame1:
  		bsr.w	ClearScreen			; Screen Reset
-		move.l	#$40000000,($C00004).l
-		lea	(Nem_GitMadScr).l,a0		; 
-		bsr.w	NemDec
+		;move.l	#$40000000,(VDPCtrl).l
+		;lea	(Nem_GitMadScr).l,a0		; 
+		;bsr.w	NemDec
+		bsr.w	VDP_LoadArt
 		
 		;!@ GenesisDoes
 		move.w	#60*3,(Timer).w
@@ -60,12 +69,15 @@ YoFreddy_Loop:
 		bsr.w	LoopDelay
 		bne.s	YoFreddy_Loop
 		
+		lea		(Pal_GitMad_Text).l,a0
+		bsr.w	VDP_LoadPal
 		lea	(Chunk).l,a1
-		lea	(Eni_GitHub).l,a0  	
+		lea	(Eni_GitHub1).l,a0  	
+		move.w	#ArtTile_Github1,d0
 		bsr.w	VDP_Location
 		bsr.w	TilemapToVRAM
-		moveq	#palid_Sonic,d0	; load Sonic's palette
-		bsr.w	PalLoad2	; Load Sonic Color
+		;moveq	#palid_Sonic,d0	; load Sonic's palette
+		;bsr.w	PalLoad2	; Load Sonic Color
 		move.w	#$16,(Timer).w     ; Blank Time
 		btst	#6,(v_megadrive).w ; is MD PAL?
 		beq.s	.notpal ; if not, don't run
@@ -96,8 +108,11 @@ BlankScr_Loop1:
 		bne.s   BlankScr_Loop1
 		
 GitHubScr_Frame2:				
+		lea		(Pal_GitMad_g2).l,a0
+		bsr.w	VDP_LoadPal
 		lea     (Chunk).l,a1              
-		lea     (Eni_GitHub).l,a0
+		lea     (Eni_GitHub2).l,a0
+		move.w	#ArtTile_Github2,d0
 		bsr.w   VDP_Location
 		bsr.w   TilemapToVRAM
 		move.w  #$10,(Timer).w     ; Text Time
@@ -123,9 +138,12 @@ BlankScr_Loop2:
 		bsr.w   LoopDelay
 		bne.s   BlankScr_Loop2
 
-GitHubScr_Frame3:				
+GitHubScr_Frame3:			
+		lea		(Pal_GitMad_Text).l,a0
+		bsr.w	VDP_LoadPal
 		lea     (Chunk).l,a1		
-		lea     (Eni_GitHub).l,a0
+		lea     (Eni_GitHub3).l,a0
+		move.w	#ArtTile_Github3,d0
 		bsr.w   VDP_Location
 		bsr.w   TilemapToVRAM
 		move.w  #$45,(Timer).w
@@ -155,9 +173,12 @@ BlankScr_Loop3:
 		bsr.w   LoopDelay
 		bne.s   BlankScr_Loop3
 			
-MadnessScr_Frame1: 		 		
+MadnessScr_Frame1: 		 	
+		lea		(Pal_GitMad_Text).l,a0
+		bsr.w	VDP_LoadPal
 		lea     (Chunk).l,a1
-		lea     (Eni_Madness).l,a0
+		lea     (Eni_Madness1).l,a0
+		move.w	#ArtTile_Madness1,d0
 		bsr.w   VDP_Location
 		bsr.w   TilemapToVRAM
 		move.w  #$13,(Timer).w     ; Text Time
@@ -180,9 +201,12 @@ BlankScr_Loop4:
 		bsr.w   LoopDelay
 		bne.s   BlankScr_Loop4
 						
-MadnessScr_Frame2:				
+MadnessScr_Frame2:
+		lea		(Pal_GitMad_m2).l,a0
+		bsr.w	VDP_LoadPal
 		lea     (Chunk).l,a1              
-		lea     (Eni_Madness).l,a0
+		lea     (Eni_Madness2).l,a0
+		move.w	#ArtTile_Madness2,d0
 		bsr.w   VDP_Location
 		bsr.w   TilemapToVRAM
 		move.w  #$13,(Timer).w     ; Text Time
@@ -208,9 +232,12 @@ BlankScr_Loop5:
 		bsr.w   LoopDelay
 		bne.s   BlankScr_Loop5
 			
-MadnessScr_Frame3: 		              
+MadnessScr_Frame3:
+		lea		(Pal_GitMad_Text).l,a0
+		bsr.w	VDP_LoadPal
 		lea     (Chunk).l,a1		
-		lea     (Eni_Madness).l,a0
+		lea     (Eni_Madness3).l,a0
+		move.w	#ArtTile_Madness3,d0
 		bsr.w   VDP_Location
 		bsr.w   TilemapToVRAM
 		move.w  #(60*2)+15,(Timer).w     ; Text Time
@@ -231,18 +258,24 @@ MadnessScr_Loop3:
 		
 ;!@ GenesisDoes: Show IV
 GithubMadness4_Frame:
+		lea		(Pal_GitMad_Text).l,a0
+		bsr.w	VDP_LoadPal
+
 		lea     (Chunk).l,a1		
-		lea     (Eni_GitHub).l,a0
+		lea     (Eni_GitHub3).l,a0
+		move.w	#ArtTile_Github3,d0
 		bsr.w   VDP_Location2
 		bsr.w   TilemapToVRAM
 		
 		lea     (Chunk).l,a1              
-		lea     (Eni_Madness).l,a0
+		lea     (Eni_Madness3).l,a0
+		move.w	#ArtTile_Madness3,d0
 		bsr.w   VDP_Location
 		bsr.w   TilemapToVRAM
 
 		lea     (Chunk).l,a1		
 		lea     (Eni_GHIV).l,a0
+		move.w	#ArtTile_IV,d0
 		bsr.w   VDP_Location3
 		bsr.w   TilemapToVRAM
 		move.w  #$28,(Timer).w     ; Text Time
@@ -275,27 +308,66 @@ MadnessScr_Frame4:
 ; Minor routines
 ; ---------------------------------------------------------------------------
 ; ===========================================================================
+;!@ GD: Loads all tile art into VRAM
+VDP_LoadArt:
+		locVRAM	ArtTile_Github1*tile_size
+		lea		(Nem_Github1).l,a0
+		bsr.w	NemDec
+		locVRAM	ArtTile_Github2*tile_size
+		lea		(Nem_Github2).l,a0
+		bsr.w	NemDec
+		locVRAM	ArtTile_Github3*tile_size
+		lea		(Nem_Github3).l,a0
+		bsr.w	NemDec
+		
+		locVRAM	ArtTile_Madness1*tile_size
+		lea		(Nem_Madness1).l,a0
+		bsr.w	NemDec
+		locVRAM	ArtTile_Madness2*tile_size
+		lea		(Nem_Madness2).l,a0
+		bsr.w	NemDec
+		locVRAM	ArtTile_Madness3*tile_size
+		lea		(Nem_Madness3).l,a0
+		bsr.w	NemDec
+		
+		locVRAM	ArtTile_IV*tile_size
+		lea		(Nem_GHIV).l,a0
+		bsr.w	NemDec
+		rts
+
+;!@ GD: Loads palette a0 into CRAM
+VDP_LoadPal:
+		; INPUT: a0   = palette pointer
+		; a1   = destination (often palette, fadingPalette, or VDPDATA)
+		; d7.b = size $XX-1 (amount of colors minus 1)
+		disable_ints
+		moveq	#0,d7
+		lea		(v_palette).l,a1			; Load dry v_palette addr into a1 (dest param)
+		move.b	#$10-1,d7					; Load $20 palette words from source into dest
+		jsr		(PalLoadUser).l				; Dew the load. Dew it, Palpatine said		
+		enable_ints
+		rts
 		
 VDP_Location:
-        move.w	#0,d0    ; Send d0 to 0
+        ;move.w	#0,d0    ; Send d0 to 0
 		bsr.w   EniDec
 		lea  	(Chunk).l,a1		; Load destination, where to decompress mapping
 		move.l  #$461A0003,d0
-        moveq	#$27,d1			; Set X loop
-		moveq	#$1B,d2			; Set Y loop
+        moveq	#$27,d1				; Set X loop
+		moveq	#$1B,d2				; Set Y loop
 		rts
 		
 VDP_Location2:
-        move.w	#0,d0    ; Send d0 to 0
+        ;move.w	#0,d0    			; Send d0 to 0
 		bsr.w   EniDec
 		lea  	(Chunk).l,a1		; Load destination, where to decompress mapping
 		move.l  #$451A0003,d0
-        moveq	#$27,d1			; Set X loop
-		moveq	#$1B,d2			; Set Y loop
+        moveq	#$27,d1				; Set X loop
+		moveq	#$1B,d2				; Set Y loop
 		rts
 		
 VDP_Location3:
-        move.w	#0,d0    ; Send d0 to 0
+        ;move.w	#0,d0    			; Send d0 to 0
 		bsr.w   EniDec
 		lea  	(Chunk).l,a1		; Load destination, where to decompress mapping
 		move.l  #$47220003,d0

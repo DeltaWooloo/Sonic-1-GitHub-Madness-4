@@ -335,26 +335,26 @@ Pow_Randomiser:
 		;!@ GenesisDoes: VDP register fuckery		
 		dc.l	.vdp00_m1_reg		;x $19 / $64 - 	Mess wtih VDP register 	$00 (Mode Register 1)
 		;dc.l	.vdp01_m2_reg		;										$01 (Mode Register 2)
-		dc.l	.vdp07_bg0_reg		;x $1A / $68 - 	~						$07 (Background color)
+		;dc.l	.vdp07_bg0_reg		;            - 	~						$07 (Background color)
 		;dc.l	.vdp0B_m3_reg		;										$0B (Mode Register 3)
-		dc.l	.vdp0C_m4_reg		;x $1B / $6C - 	~						$0C (Mode Register 4)
-		dc.l	.vdp10_planSz_reg	;x $1C / $70 - 	~						$10 (VDP Plane Size)
-		dc.l	.vdp_dbg_gfx		;x $1D / $74 -  ~ VDP Dbg Reg			$00 (GFX)
-		dc.l	.vdp_dbg_z80oc		;x $1E / $78 -  ~ VDP Dbg Reg			$01 (Z80)
-		dc.l	.funkyColors		;x $1F / $7C - 	Randomize CRAM colors (dry/water palletes)		
-		dc.l	.ultrashit			;x $20 / $80 -	All VDP corruption!
+		dc.l	.vdp0C_m4_reg		;x $1A / $68 - 	~						$0C (Mode Register 4)
+		dc.l	.vdp10_planSz_reg	;x $1B / $6C - 	~						$10 (VDP Plane Size)
+		dc.l	.vdp_dbg_gfx		;x $1C / $70 -  ~ VDP Dbg Reg			$00 (GFX)
+		dc.l	.vdp_dbg_z80oc		;x $1D / $74 -  ~ VDP Dbg Reg			$01 (Z80)
+		dc.l	.funkyColors		;x $1E / $78 - 	Randomize CRAM colors (dry/water palletes)		
+		dc.l	.ultrashit			;x $1F / $7C -	All VDP corruption!
 		;!@ GenesisDoes: Spawn stuff
-		dc.l	.spawnPlayer		;x $21 / $84 - 	Spawn a	clone player
-		dc.l	.instaWin			;x $22 / $88 - 	~			Signpost
-		dc.l	.springTime			;x $23 / $8C - 	~			Red vert spring
-		dc.l	.BigRing			;x $24 / $90 - 	~			Giant Ring + give 50 rings
-		dc.l	.monitorInception	;x $25 / $94 - 	~			Another random monitor
-		dc.l	.lampoil			;x $26 / $98 - 	~			New lamppost
-		dc.l	.rAndCRiftApart		;x $27 / $9C -	~			RiftToGo
+		dc.l	.spawnPlayer		;x $20 / $80 - 	Spawn a	clone player
+		dc.l	.instaWin			;x $21 / $84 - 	~			Signpost
+		dc.l	.springTime			;x $22 / $88 - 	~			Red vert spring
+		dc.l	.BigRing			;x $23 / $8C - 	~			Giant Ring + give 50 rings
+		dc.l	.monitorInception	;x $24 / $90 - 	~			Another random monitor
+		dc.l	.lampoil			;x $25 / $94 - 	~			New lamppost
+		dc.l	.rAndCRiftApart		;x $26 / $98 -	~			RiftToGo
 		;!@ GenesisDoes: Other
-		dc.l	.crash				;x $28 / $A0 - 	Crash the game (illegal); Task fails successfully!
-		dc.l	.jukebox			;x $29 / $A4 - 	Play random song
-		dc.l	Pow_SlowShoes		;x $2A / $A8 -  Slow down shoes
+		dc.l	.crash				;x $27 / $9C - 	Crash the game (illegal); Task fails successfully!
+		dc.l	.jukebox			;x $28 / $A0 - 	Play random song
+		dc.l	Pow_SlowShoes		;x $29 / $A4 -  Slow down shoes
 .powtableend:
 
 ; ===========================================================================
