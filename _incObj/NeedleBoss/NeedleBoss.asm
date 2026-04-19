@@ -67,8 +67,8 @@ ExObjNeedle:
 ; ----------------------------------------------------------------------------
 .ExObj:
 	bra.w	ObjNeedleIntro
-	bra.w	ObjNeedle3DTest
-	bra.w	ObjNeedle3DTest
+	bra.w	ObjNeedleBoss
+	bra.w	ObjNeedleHammer
 	rts
 ; ----------------------------------------------------------------------------
 
@@ -197,8 +197,109 @@ NeedleIntro_FlyOut:
 	bmi.s	.Del
 	rts
 .Del:
-	jmp	DeleteObject.l
+	jsr	DeleteObject.l
+	move.b	#id_NeedleBoss,(a0)
+	move.b	#4,obSubtype(a0)
+	rts
 
+; ----------------------------------------------------------------------------
+; Actual boss related code
+; ----------------------------------------------------------------------------
+
+NBOSS_HOVER_Y1 = $165
+
+NBOSS_START_X1 = $360
+NBOSS_START_X2 = $600
+
+NBOSS_START_Y1 = $100
+
+ObjNeedleBoss:
+	moveq	#0,d0
+	move.b	obRoutine(a0),d0
+	move.w	.Index(pc,d0.w),d1
+	jsr	.Index(pc,d1.w)
+	lea	Ani_NeedleBoss(pc),a1
+	jsr	AnimateSprite.l
+	jmp	DisplaySprite.l
+
+; ----------------------------------------------------------------------------
+.Index:
+	dc.w	NeedleBoss_Init-.Index
+	dc.w	NeedleBoss_Fall1-.Index
+	dc.w	NeedleBoss_Main-.Index
+; ----------------------------------------------------------------------------
+
+NeedleBoss_Init:
+	add.b	#2, obRoutine(a0)
+	move.l	#Map_NeedleBoss, obMap(a0)
+	move.w	#NEEDLB_GFX,obGfx(a0)
+	lea	v_player.w, a1	
+
+	move.w	obX(a1),obX(a0)
+	move.w	obY(a1),d0
+	sub.w	#$100,d0
+	move.w	d0,obY(a0)
+
+	move.w	obX(a0),needle.XOrg(a0)
+	move.w	obY(a0),needle.YOrg(a0)
+
+	move.b	#$4,obRender(a0)
+	move.b	#16,obWidth(a0)
+	move.b	#16,obHeight(a0)
+	move.b	#16,obActWid(a0)
+	move.b	#2,obPriority(a0)
+	move.b	#8,obFrame(a0)
+	move.b	#0,obAnim(a0)
+	move.w	#0,obAngle(a0)
+	bset	#0,obStatus(a0)
+	move.w	#NBOSS_HOVER_Y1,needle.YTarg(a0)
+	move.b	#3,obAnim(a0)
+	move.b	#60*3,needle.Timer(a0)
+
+NeedleBoss_Fall1:
+	subq.b	#1,needle.Timer(a0)
+	beq.s	.Go
+	move.l	obY(a0),d0
+	move.l	needle.YTarg(a0),d1
+	sub.l	d0,d1
+	asr.l	#4,d1
+	add.l	d1,obY(a0)
+	bra.w	_needleChase
+.Go:
+	addq.b	#2,obRoutine(a0)
+	move.b	#60*3,needle.Timer(a0)	
+
+NeedleBoss_Main:
+	subq.b	#1,needle.Timer(a0)
+	bne.s	.Go
+	addq.b	#1,needle.Timer+1(a0)
+	; put timeout chk here
+	move.b	#60,needle.Timer(a0)
+	bsr.w	_needleSpawnAttack
+
+.Go:	
+	bra.w	_needleChase
+
+; ----------------------------------------------------------------------------
+
+_needleSpawnAttack:
+	jsr	(FindFreeObj).l
+	bne.s	.exit
+	move.w	obX(a0),obX(a1)
+	move.w	obY(a0),obY(a1)
+	move.b	#id_NeedleBoss,(a1)
+	move.b	#8,obSubtype(a1)
+.exit
+	rts
+
+
+_needleChase:
+	lea	v_player.w, a1
+	move.w	#$250, d0
+	move.w	#$10, d1
+	jsr	ChaseObject.l
+	move.w	#0, obVelY(a0)
+	jmp	SpeedToPos
 
 ; ----------------------------------------------------------------------------
 ; Bouncing Hammer

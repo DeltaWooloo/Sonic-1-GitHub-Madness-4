@@ -13,7 +13,8 @@ Spik_Index:	dc.w Spik_Main-Spik_Index
 
 spik_origX = objoff_30		; start X position
 spik_origY = objoff_32		; start Y position
-spik_shooting = objoff_33	; iwbtg spike being shot flag
+spik_shooting = objoff_34	; iwbtg spike being shot flag
+spik_notfirst = objoff_35
 
 Spik_Var:	dc.b 0,	$14		; frame number, object width
 		dc.b 1,	$10
@@ -39,6 +40,8 @@ Spik_Main:	; Routine 0
 		move.b	(a1)+,obActWid(a0)
 		move.w	obX(a0),spik_origX(a0)
 		move.w	obY(a0),spik_origY(a0)
+		clr.b	spik_shooting(a0)
+		clr.b	spik_notfirst(a0)
 		
 Spik_Solid:	; Routine 2
 		bsr.w	Spik_Type0x	; make the object move
@@ -82,10 +85,8 @@ Spik_Upright:
 Spik_Hurt:
 		tst.b	(v_invinc).w	; is Sonic invincible?
 		bne.s	Spik_Display	; if yes, branch
-		; (Proper) Spike Bug Fix
-		; https://info.sonicretro.org/SCHG_How-to:Change_Spike_behavior_in_Sonic_1
 		tst.w	(v_player+flashtime).w	; is Sonic invulnerable?
-		bne.s	Spik_Display		; if yes, branch
+		bne.s	Spik_Feature		; if yes, branch
 		move.l	a0,-(sp)
 		movea.l	a0,a2
 		lea	(v_player).w,a0
@@ -103,9 +104,34 @@ loc_CF20:
 		movea.l	(sp)+,a0
 
 Spik_Display:
-		bsr.w	DisplaySprite
-		out_of_range.w	DeleteObject,spik_origX(a0)
-		rts
+		out_of_range.s	.del,spik_origX(a0)
+		tst.b	spik_notfirst(a0)
+		beq.s	.ren
+		tst.b	obRender(a0)
+		bpl.s	.del
+.ren:		bra.w	DisplaySprite
+.del:		bra.w	DeleteObject
+Spik_Feature:
+		moveq	#7,d0
+		and.w	(v_framecount).w,d0
+		bne.s	.nobugs
+		jsr	(FindFreeObj).l
+		bne.s	.nobugs
+		tst.b	spik_notfirst(a0)
+		bne.s	.notfirstone
+		move.w	#sfx_LGEcho,d0
+		jsr	(QueueSound2).l
+.notfirstone:
+		moveq	#object_size-1,d0
+.australia:	move.b	(a0,d0.w),(a1,d0.w)	; This is a valid Motorola 68000 opcode.
+		dbf	d0,.australia
+		clr.b	obStatus(a1)
+		st.b	spik_notfirst(a0)
+		sub.w	#32,obY(a0)
+		sub.w	#32,spik_origY(a0)
+		sub.w	#32,(v_player+obY).w
+.nobugs:
+		bra.w	Spik_Display
 ; ===========================================================================
 
 Spik_Type0x:
@@ -159,14 +185,13 @@ Spik_Type03:
 		bpl.s	locret_CFE6
 
 		tst.b	spik_shooting(a0)
-		beq.s 	.shoot
+		bne.s 	.shoot
 
 		lea	v_player, a1
-		move.w	(v_player+obX).w,d0
+		move.w	obX(a1),d0
 		sub.w	obX(a0),d0
 		bpl.s	.isleft
 		neg.w	d0
-
 .isleft:
 		cmp.b	obActWid(a0), d0	; are we in range?
 		bgt.s	.exit			; if not, branch

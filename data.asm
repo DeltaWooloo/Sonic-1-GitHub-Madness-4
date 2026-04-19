@@ -3,15 +3,54 @@ Nem_SegaLogo:	binclude	"artnem/Sega Logo (JP1).nem" ; large Sega logo
 Eni_SegaLogo:	binclude	"tilemaps/Sega Logo (JP1).eni" ; large Sega logo (mappings)
 		even
 
-Eni_GitHub:	binclude	"ATOGKTitle/Enigma/Github.bin"
-		even
-Eni_Madness:	binclude	"ATOGKTitle/Enigma/Madness.bin"
-		even
+
+;!@ GD: Github Madness IV title card data
+;OLD versions
+;Eni_GitHub:	binclude	"ATOGKTitle/Enigma/Github.bin"
+		;even
+;Eni_Madness:	binclude	"ATOGKTitle/Enigma/Madness.bin"
+		;even
 ;!@ GenesisDoes
-Eni_GHIV:	binclude	"ATOGKTitle/Enigma/IV.bin"
+;Eni_GHIV:	binclude	"ATOGKTitle/Enigma/IV.bin"
+		;even
+;Nem_GitMadScr:	binclude	"ATOGKTitle/Nemesis/GitMad.bin"
+		;even
+
+
+Eni_GitHub1:	binclude	"ATOGKTitle/Enigma/g1-map.eni"
 		even
-Nem_GitMadScr:	binclude	"ATOGKTitle/Nemesis/GitMad.bin"
+Eni_GitHub2:	binclude	"ATOGKTitle/Enigma/g2-map.eni"
 		even
+Eni_GitHub3:	binclude	"ATOGKTitle/Enigma/g3-map.eni"
+		even		
+Eni_Madness1:	binclude	"ATOGKTitle/Enigma/m1-map.eni"
+		even
+Eni_Madness2:	binclude	"ATOGKTitle/Enigma/m2-map.eni"
+		even
+Eni_Madness3:	binclude	"ATOGKTitle/Enigma/m3-map.eni"
+		even
+Eni_GHIV:		binclude	"ATOGKTitle/Enigma/IV-map.eni"
+		even
+Nem_Github1:	binclude	"ATOGKTitle/Nemesis/g1-art.nem"
+		even
+Nem_Github2:	binclude	"ATOGKTitle/Nemesis/g2-art.nem"
+		even
+Nem_Github3:	binclude	"ATOGKTitle/Nemesis/g3-art.nem"
+		even
+Nem_Madness1:	binclude	"ATOGKTitle/Nemesis/m1-art.nem"
+		even
+Nem_Madness2:	binclude	"ATOGKTitle/Nemesis/m2-art.nem"
+		even
+Nem_Madness3:	binclude	"ATOGKTitle/Nemesis/m3-art.nem"
+		even
+Nem_GHIV:		binclude	"ATOGKTitle/Nemesis/IV-art.nem"
+		even
+Pal_GitMad_Text:binclude	"ATOGKTitle/Palette/text.bin"
+		even
+Pal_GitMad_g2:	binclude	"ATOGKTitle/Palette/g2-pal.bin"
+		even
+Pal_GitMad_m2:	binclude	"ATOGKTitle/Palette/m2-pal.bin"
+		even		
 
 Eni_Title:	binclude	"tilemaps/Title Screen.eni" ; title screen foreground (mappings)
 		even
