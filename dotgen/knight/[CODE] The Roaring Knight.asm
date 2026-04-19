@@ -19,6 +19,9 @@ Knight_Timer		=	objoff_38		; Internal timer for the Knight. (2 bytes)
 Knight_X_Target		=	objoff_34		; X coordinate target for the Knight. (2 bytes)
 Knight_Y_Target		=	objoff_36		; Y coordinate target for the Knight. (2 bytes)
 Knight_Hits_Phase1	=	2			; HP for Phase 
+Knight_Sound1_Duration	=	60			; How long the first Knight PCM sound lasts in frames (60Hz)
+Knight_Sound2_Duration	=	180			; How long the second Knight PCM sound lasts in frames (60Hz)
+
 
 ; ===========================================================================
 ; Start of object code
@@ -296,9 +299,11 @@ RKP1End_Index:
 	dc.w	RKP1End_LeaveScreenPrep-RKP1End_Index	; Set up the Knight to leave the screen.
 	dc.w	RKPhase1_Wait-RKP1End_Index		; Wait a bit before doing that
 	dc.w	RKP1End_LeaveScreen-RKP1End_Index	; Moves the Knight in ball form to the center of the screen, 0x200px away.
-	dc.w	RKPhase1_Idle-RKP1End_Index		; Wait for the player to reach the Knight.	
-	dc.w	RKPhase1_Idle-RKP1End_Index		; Wait for the Knight's animation to end
-	dc.w	RKPhase1_Idle-RKP1End_Index		; Moves the Knight to the next phase.
+	dc.w	RKP1End_WaitForPlayer-RKP1End_Index	; Wait for the player to reach the Knight.	
+	dc.w	RKPhase1_Wait-RKP1End_Index		; Prepares the Knight for Roaring
+	dc.w	RKP1End_MakeRoar-RKP1End_Index		; Make the Knight Roar
+	dc.w	RKPhase1_Wait-RKP1End_Index		; Let the animation play
+	dc.w	RKPhase1_Idle-RKP1End_Index		; Switch to next phase.
 	
 ; ===========================================================================
 ; Prepares the Knight to leave, setting an animation, and their destination.
@@ -387,7 +392,7 @@ RKP1End_LeaveScreen:
 	clr.w	obVelX(a0)	
 	subi.b	#1,d6				; Mark one of the conditions as met.
 	bne.s	.return				; If not both of the conditions were met, return.
-	move.b	#5,obAnim(a0)			; Set the animation to that before the roar.
+	move.b	#7,obAnim(a0)			; Set the animation to the one that makes them droop.
 	bclr	#0,obStatus(a0)			; Unflip sprites
 	addi.w	#$200,(v_limitright2).w 	; Extend right boundary
 	addq.b	#2,ob2ndRout(a0)
@@ -395,36 +400,45 @@ RKP1End_LeaveScreen:
 .return:
 	rts
 	
-; ===========================================================================
-; Moves the Knight, altering their speed until they reach a specific target 
-; location.
-;
-; Sets an animation after the target location is reached on both the X and
-; Y axis.
-; ===========================================================================	
-	
-	
 	
 ; ===========================================================================
-; Waits for the player to reach the Knight. This is tested partly via level
-; events.
+; Waits for the player to reach the Knight. 
 ; ===========================================================================
+
+RKP1End_WaitForPlayer:
+	move.w	(v_screenposx).w,d0
+	cmp.w	(v_limitright2).w,d0				; Check if the player has reached the rightmost point in the level.
+	bne.s	.return						; Return if not.
+	addq.b	#2,ob2ndRout(a0)				; Advance routine counter if so.
+	move.w	#Knight_Sound1_Duration,Knight_Timer(a0)	; Set timer for next routine.
+	move.b	#5,obAnim(a0)					; Set animation
+	; TO-DO: Play PCM sound.
+	
+.return:
+	rts
 	
 ; ===========================================================================
-; Advances the Knight's routine.
+; Switches the Knight's animation to roar.
 ; ===========================================================================
+	
+RKP1End_MakeRoar:
+	addq.b	#2,ob2ndRout(a0)				; Advance routine counter if so.
+	move.w	#Knight_Sound2_Duration,Knight_Timer(a0)	; Set timer for next routine.
+	move.b	#6,obAnim(a0)					; Set animation	
+	; TO-DO: Play PCM sound.
+	rts
 	
 ; ===========================================================================	
 ; Boss is defeated
 ; ===========================================================================	
 
 RKnight_Defeat:
-	addi.b	#2,(v_dle_routine).w		; The level's DLE code will handle what to do next!
-	move.w	#100,d0				; set bonus to 1000	
+	addi.b	#2,(v_dle_routine).w			; The level's DLE routine will handle what to do next!
+	move.w	#100,d0					; set bonus to 1000	
 	bsr.w	AddPoints	
 	move.b	#$8, d1
 	jsr	(GHM3Explode_Custom).l
-	lea	(Capsule_ArtList).l,a1				; Get instructions for UserPLC
+	lea	(Capsule_ArtList).l,a1			; Get instructions for UserPLC
 	jsr	(UserPLC).l	
 	jmp	(DeleteObject).l	
 
@@ -701,6 +715,7 @@ Ani_Roaring_Knight:
 		dc.w	.ball-Ani_Roaring_Knight		; 4
 		dc.w	.roarprepare-Ani_Roaring_Knight		; 5
 		dc.w	.roar-Ani_Roaring_Knight		; 6
+		dc.w	.droop-Ani_Roaring_Knight		; 7		
 
 .null:		dc.b	0
 		dc.b	0,$FF
@@ -711,7 +726,7 @@ Ani_Roaring_Knight:
 		even
 
 .static:	dc.b	3
-		dc.b	$10,$11,$12,$FF
+		dc.b	$F,$11,$12,$10,$FE,$3
 		even
 
 .turntoball:	dc.b	3
@@ -730,6 +745,11 @@ Ani_Roaring_Knight:
 .roar:		dc.b	3
 		dc.b	$14,$15,$FF
 		even
+		
+.droop:		dc.b	30
+		dc.b	4,5,4,6,$FF
+	
+even
 
 
 Ani_Knight_Bullets:

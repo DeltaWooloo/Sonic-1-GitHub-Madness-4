@@ -76,27 +76,27 @@ Maps_Knight_4:	spriteHeader
 Maps_Knight_4_End
 
 Maps_Knight_5:	spriteHeader
- spritePiece -$14, -$20, 3, 4, 0, 0, 0, 0, 0
- spritePiece $C, -$20, 1, 2, $C, 0, 0, 0, 0
- spritePiece -$24, -$18, 2, 1, $E, 0, 0, 0, 0
- spritePiece 4, -$18, 1, 4, $10, 0, 0, 0, 0
- spritePiece -$1C, -$10, 1, 1, $14, 0, 0, 0, 0
- spritePiece $C, -8, 1, 2, $15, 0, 0, 0, 0
- spritePiece -$14, 0, 3, 4, $17, 0, 0, 0, 0
- spritePiece 4, 8, 1, 3, $23, 0, 0, 0, 0
- spritePiece $C, $10, 1, 2, $26, 0, 0, 0, 0
- spritePiece -$C, $20, 1, 1, $28, 0, 0, 0, 0
+ spritePiece -$14, -$21, 3, 4, 0, 0, 0, 0, 0
+ spritePiece $C, -$21, 1, 2, $C, 0, 0, 0, 0
+ spritePiece -$24, -$19, 2, 1, $E, 0, 0, 0, 0
+ spritePiece 4, -$19, 1, 4, $10, 0, 0, 0, 0
+ spritePiece -$1C, -$11, 1, 1, $14, 0, 0, 0, 0
+ spritePiece $C, -9, 1, 2, $15, 0, 0, 0, 0
+ spritePiece -$14, -1, 3, 4, $17, 0, 0, 0, 0
+ spritePiece 4, 7, 1, 3, $23, 0, 0, 0, 0
+ spritePiece $C, $F, 1, 2, $26, 0, 0, 0, 0
+ spritePiece -$C, $1F, 1, 1, $28, 0, 0, 0, 0
 Maps_Knight_5_End
 
 Maps_Knight_6:	spriteHeader
- spritePiece -$20, -$20, 4, 3, 0, 0, 0, 0, 0
- spritePiece -$18, -8, 4, 4, $C, 0, 0, 0, 0
- spritePiece -$18, $18, 4, 1, $1C, 0, 0, 0, 0
- spritePiece -$10, -$28, 2, 1, $20, 0, 0, 0, 0
- spritePiece 0, -$20, 2, 3, $22, 0, 0, 0, 0
- spritePiece 8, -8, 1, 4, $28, 0, 0, 0, 0
- spritePiece 8, $18, 2, 1, $2C, 0, 0, 0, 0
- spritePiece $10, -8, 1, 1, $2E, 0, 0, 0, 0
+ spritePiece -$1F, -$1F, 4, 3, 0, 0, 0, 0, 0
+ spritePiece -$17, -7, 4, 4, $C, 0, 0, 0, 0
+ spritePiece -$17, $19, 4, 1, $1C, 0, 0, 0, 0
+ spritePiece -$F, -$27, 2, 1, $20, 0, 0, 0, 0
+ spritePiece 1, -$1F, 2, 3, $22, 0, 0, 0, 0
+ spritePiece 9, -7, 1, 4, $28, 0, 0, 0, 0
+ spritePiece 9, $19, 2, 1, $2C, 0, 0, 0, 0
+ spritePiece $11, -7, 1, 1, $2E, 0, 0, 0, 0
 Maps_Knight_6_End
 
 Maps_Knight_7:	spriteHeader
