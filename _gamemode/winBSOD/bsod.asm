@@ -290,6 +290,7 @@ BSOD_table:	; seconds, seconds to skip, art, map, palette, SMPS sound ID, MPCM s
 		;Windows-based
 		bsodData		sec_std,	secSkip_std,	bsod_w311.art1,			ArtTile_Home1,	bsod_w311.art2,	ArtTile_bsod_w311_art2,		bsod_w311.fg,		bsod_w311.bg,		bsod_w311.pal,		TCLR(0,0),	bgm_Passport,	dChord16
 		bsodData		sec_std,	secSkip_std,	bsod_95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_95.fg,			bsod_95.bg,			bsod_95.pal,		TCLR(1,0),	bgm_hang,		dBSOD		
+		bsodData		sec_std,	secSkip_std,	bsod_MSB.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_MSB.fg,		bsod_MSB.bg,		bsod_MSB.pal,		TCLR(0,0),	bgm_Passport,	dChord16		
 		bsodData		sec_std,	secSkip_std,	bsod_98ipc.art1,		ArtTile_Home1,	bsod_98ipc.art2,ArtTile_bsod_w98ipc_art2,	bsod_98ipc.fg,		bsod_98ipc.bg,		bsod_98ipc.pal,		TCLR(0,7),	bgm_Passport,	dW98IPC
 		bsodData		60*f2s,		secSkip_std,	bsod_sonihack.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sonihack.fg,	bsod_sonihack.bg,	bsod_sonihack.pal,	TCLR(0,0),	bgm_VirusAlert,	dVirus
 		;SMS-based
@@ -335,6 +336,15 @@ bsod_95:
 			even
 .bg:		binclude "_gamemode/winBSOD/bsod_95-mapBG.eni"
 			even
+
+bsod_MSB:
+.art1:		binclude "_gamemode/winBSOD/bsod_MSB-art1.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_MSB-mapFG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_MSB-pal.bin"
+			even
+			
 bsod_98ipc:
 .art2:
 			binclude "_gamemode/winBSOD/bsod_w98ipc-art2.nem"
@@ -513,6 +523,7 @@ bsod_std.bg:
 			binclude "_gamemode/winBSOD/bsod_std-mapBG.eni"
 			even
 
+bsod_MSB.bg:
 bsod_sonihack.bg:
 bsod_sms1.bg:
 bsod_sms2.bg:
