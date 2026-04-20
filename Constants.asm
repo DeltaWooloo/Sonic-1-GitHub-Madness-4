@@ -67,6 +67,7 @@ sram_port:		equ $A130F1
 security_addr:		equ $A14000
 
 ; VRAM data
+vram_window:	equ $A000
 vram_fg:	equ $C000	; foreground namespace
 vram_bg:	equ $E000	; background namespace
 vram_sprites:	equ $F800	; sprite table

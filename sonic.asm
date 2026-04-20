@@ -882,9 +882,13 @@ VBla_StandardTransfers:
 ; ---------------------------------------------------------------------------
 VBla_1A:
 		stopZ80
+		waitZ80
+
 		jsr	ProcessDMAQueue(pc)
 		bsr.w	VBla_StandardTransfers
+
 		startZ80
+		
 		tst.w	(v_generictimer).w
 		beq.w	.end
 		subq.w	#1,(v_generictimer).w
@@ -1162,14 +1166,22 @@ LoadDynPLC:
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 ClearScreen:
+		stopZ80
+		waitZ80
 		fillVRAM	0, 0, $40 ; clear first two tiles
-		fillVRAM	0, vram_fg, vram_fg+plane_size_64x32 ; clear foreground namespace
-		fillVRAM	0, vram_bg, vram_bg+plane_size_64x32 ; clear background namespace
+		fillVRAM	0, vram_fg, vram_fg+plane_size_64x32 	; clear foreground namespace
+		fillVRAM	0, vram_bg, vram_bg+plane_size_64x32 	; clear background namespace
+		fillVRAM	0, vram_window, vram_window+plane_size_64x32 	; clear window namespace
+		startZ80
 .merge
 		clr.l	(v_scrposy_vdp).w
 		clr.l	(v_scrposx_vdp).w
 		clr.l	(v_screenposy).w
 		clr.l	(v_screenposx).w
+		clr.l	(v_bgscrposy_vdp).w
+		clr.l	(v_bgscrposx_vdp).w
+		clr.l	(v_bgscreenposy).w
+		clr.l	(v_bgscreenposx).w
 		clearRAM vscroll_buffer,vscroll_buffer_end
 		clearRAM v_spritetablebuffer,v_spritetablebuffer_end
 		clearRAM v_hscrolltablebuffer,v_hscrolltablebuffer_end_padded

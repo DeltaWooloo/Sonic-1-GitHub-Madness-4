@@ -18,7 +18,7 @@ TSon_Index:	dc.w TSon_Main-TSon_Index
 TSon_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.w	#$A0,obX(a0)
-		move.w	#$8E,obY(a0) ; position is fixed to screen
+		move.w	#$AE,obY(a0) ; position is fixed to screen
 		move.l	#Map_TSon,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Title_Sonic,0,0),obGfx(a0)
 		move.b	#8,obRender(a0)		; penis - coni

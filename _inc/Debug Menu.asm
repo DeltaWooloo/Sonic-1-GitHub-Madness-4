@@ -433,19 +433,8 @@ DebuggerMenu_PlaySound:
 		rts
 
 DebuggerMenu_PlayPCM:	
-		stopPCM				
-		;!@ GD: Check if ID selected is last (dSFXSilence)
+		stopPCM
 		move.b	(v_dbgmenu_pcmid).w,d0
-		cmpi.b	#dsfxSilence,d0				;Is ID silence?
-		bne.s	.skipZ80OC					;if not, branch
-		;We have selected silence.
-		;Unleash the Z80 Overclock mode test!
-		writeDBG_sel	$01					; Select VDP Debug Register $01
-		moveq	#1,d2						; Enable overclock bit
-		writeDBG_reg2						; Write bit
-		rts
-
-	.skipZ80OC:
 		jmp	MegaPCM_PlaySample				; Just play sample
 
 ; ---------------------------------------------------------------------------
