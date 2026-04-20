@@ -377,7 +377,7 @@ HurtSonic:
 .hasshield:
 		move.b	#0,(v_shield).w	; remove shield
 		move.b	#4,obRoutine(a0)
-		bsr.w	Sonic_ResetOnFloor
+		jsr	(Sonic_ResetOnFloor).l
 		bset	#1,obStatus(a0)
 		move.w	#-$400,obVelY(a0) ; make Sonic bounce away from the object
 		move.w	#-$200,obVelX(a0)
@@ -445,7 +445,7 @@ KillSonic:
 		rts
 .NotFoxy:
 		move.b	#6,obRoutine(a0)
-		bsr.w	Sonic_ResetOnFloor
+		jsr	(Sonic_ResetOnFloor).l
 		bset	#1,obStatus(a0)
 		move.w	#-$700,obVelY(a0)
 		move.w	#0,obVelX(a0)

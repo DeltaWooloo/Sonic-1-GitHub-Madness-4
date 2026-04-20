@@ -126,7 +126,15 @@ Art_Maniac:	binclude	"char_assets/Maniac Art.bin"	; Sonic
 		even
 Pal_Maniac:	binclude	"char_assets/Maniac Pal.bin"
 		even
-
+; ---------------------------------------------------------------------------
+; Uncompressed graphics - Mr Bean
+; ---------------------------------------------------------------------------
+Map_MrBean:	include		"char_assets/Bean.asm"
+		even
+Dgfx_MrBean:	include		"char_assets/Bean - Dynamic Sex Script.asm"
+		even
+Art_MrBean:	binclude	"char_assets/Bean.bin"	; Sonic
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - various
 ; ---------------------------------------------------------------------------
