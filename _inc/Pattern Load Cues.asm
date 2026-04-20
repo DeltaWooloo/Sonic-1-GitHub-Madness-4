@@ -62,7 +62,7 @@ ptr_PLC_TryAgain:	dc.w PLC_TryAgain-ArtLoadCues
 ptr_PLC_EggmanSBZ2:	dc.w PLC_EggmanSBZ2-ArtLoadCues
 ptr_PLC_FZBoss:		dc.w PLC_FZBoss-ArtLoadCues
 ptr_PLC_DioDanner:	dc.w PLC_DioDanner-ArtLoadCues
-ptr_PLC_DioDannerBOSS:	dc.w PLC_DioDannerBOSS-ArtLoadCues
+;ptr_PLC_DioDannerBOSS:	dc.w PLC_DioDannerBOSS-ArtLoadCues
 ptr_PLC_DioDannerDEAD:	dc.w PLC_DioDannerDEAD-ArtLoadCues
 ptr_PLC_Sans:		dc.w PLC_Sans-ArtLoadCues
 plcm:	macro gfx,vram
@@ -507,15 +507,15 @@ PLC_FZBossend:
 ; Pattern load cues - boss BLUESCAPO (mildanner)
 ; ---------------------------------------------------------------------------
 PLC_DioDanner:	dc.w ((PLC_DioDannerend-PLC_DioDanner-2)/6)-1
-		plcm	Nem_DioDanner_Intro, FartDanner	; intro
+		plcm	Nem_DioDanner_Intro, ArtTile_FartDanner	; intro
 	PLC_DioDannerend:
 		even
-PLC_DioDannerBOSS:	dc.w ((PLC_DioDannerBOSSend-PLC_DioDannerBOSS-2)/6)-1
-		plcm	Nem_DioDanner_Boss, SudoAptInstall	; boss
-	PLC_DioDannerBOSSend:
-		even
+;PLC_DioDannerBOSS:	dc.w ((PLC_DioDannerBOSSend-PLC_DioDannerBOSS-2)/6)-1
+;		plcm	Nem_DioDanner_Boss, ArtTile_SudoAptInstall	; boss
+;	PLC_DioDannerBOSSend:
+;		even
 PLC_DioDannerDEAD:	dc.w ((PLC_DioDannerDEADend-PLC_DioDannerDEAD-2)/6)-1
-		plcm	Nem_DioDanner_Dead, Mildfucker	; dead
+		plcm	Nem_DioDanner_Dead, ArtTile_FartDanner	; dead
 	PLC_DioDannerDEADend:
 		even;physicfor
 ; ---------------------------------------------------------------------------
@@ -587,6 +587,6 @@ plcid_TryAgain:		equ (ptr_PLC_TryAgain-ArtLoadCues)/2
 plcid_EggmanSBZ2:	equ (ptr_PLC_EggmanSBZ2-ArtLoadCues)/2	
 plcid_FZBoss:		equ (ptr_PLC_FZBoss-ArtLoadCues)/2	
 plcid_DioDanner:	equ (ptr_PLC_DioDanner-ArtLoadCues)/2	; $20
-plcid_DioDannerBOSS:equ (ptr_PLC_DioDannerBOSS-ArtLoadCues)/2	; $21
+;plcid_DioDannerBOSS:equ (ptr_PLC_DioDannerBOSS-ArtLoadCues)/2	; $21
 plcid_DioDannerDEAD:equ (ptr_PLC_DioDannerDEAD-ArtLoadCues)/2	; $22
 plcid_Sans:		equ (ptr_PLC_Sans-ArtLoadCues)/2	
