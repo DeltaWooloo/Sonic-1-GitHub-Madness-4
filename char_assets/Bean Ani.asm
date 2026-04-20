@@ -34,9 +34,9 @@ beanptr_Null:	dc.w BeanAni_Null-Ani_Bean
 beanptr_Float3:	dc.w BeanAni_Float3-Ani_Bean
 beanptr_Float4:	dc.w BeanAni_Float4-Ani_Bean
 
-BeanAni_Walk:	dc.b $FF, 8, afEnd
+BeanAni_Walk:	dc.b $FF, 6, afEnd
 		even
-BeanAni_Run:	dc.b $FF, $8, afEnd, afEnd, afEnd
+BeanAni_Run:	dc.b $FF, 6, afEnd
 		even
 BeanAni_Roll:	dc.b $FE, $2E, $2F, $30, $31, $32, afEnd, afEnd
 		even
