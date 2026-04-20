@@ -403,9 +403,10 @@ Ad_SteamedHams:
 .fg:		binclude "_gamemode/advert/ad-SteamedHams-map.eni"
 .art:		binclude "_gamemode/advert/ad-SteamedHams-art.nem"
 		even
-		
-Ad_MSB:
-.pal:		binclude "_gamemode/advert/ad-MSB-pal.unc"
-.fg:		binclude "_gamemode/advert/ad-MSB-map.eni"
-.art:		binclude "_gamemode/advert/ad-MSB-art.nem"
-		even
+
+; GD: Data crosslinked into BSODs. Saves 4KB		
+;Ad_MSB:
+;.pal:		binclude "_gamemode/advert/ad-MSB-pal.unc"
+;.fg:		binclude "_gamemode/advert/ad-MSB-map.eni"
+;.art:		binclude "_gamemode/advert/ad-MSB-art.nem"
+;		even

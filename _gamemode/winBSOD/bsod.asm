@@ -349,12 +349,14 @@ bsod_95:
 .bg:		binclude "_gamemode/winBSOD/bsod_95-mapBG.eni"
 			even
 
-bsod_MSB:
-.art1:		binclude "_gamemode/winBSOD/bsod_MSB-art1.nem"
+Ad_MSB.art:
+bsod_MSB.art1:		binclude "_gamemode/winBSOD/bsod_MSB-art1.nem"
 			even
-.fg:		binclude "_gamemode/winBSOD/bsod_MSB-mapFG.eni"
+Ad_MSB.fg:
+bsod_MSB.fg:		binclude "_gamemode/winBSOD/bsod_MSB-mapFG.eni"
 			even
-.pal:		binclude "_gamemode/winBSOD/bsod_MSB-pal.bin"
+Ad_MSB.pal:
+bsod_MSB.pal:		binclude "_gamemode/winBSOD/bsod_MSB-pal.bin"
 			even
 			
 bsod_98ipc:
