@@ -67,7 +67,7 @@ BossDioMildanner_SetupBoss:
 		move.b	#1,obStatus(a0)
 
 		move.l	#Map_DioDanner_Intro,obMap(a0)
-		move.w	#make_art_tile(ArtTile_FartDanner,0,1),obGfx(a0)
+		move.w	#make_art_tile(ArtTile_FartDanner,1,0),obGfx(a0)
 		move.b	#0,obFrame(a0)
 
 		; size initially is 20x40
@@ -133,7 +133,7 @@ BossDioMildanner_IntroMain:
 		jmp	(DisplaySprite).l
 	.loadboss:
 		move.l	#Map_DioDanner_Boss,obMap(a0)
-		move.w	#make_art_tile(ArtTile_Mildfucker,0,1),obGfx(a0)
+		move.w	#make_art_tile(ArtTile_Mildfucker,1,0),obGfx(a0)
 		move.b	#0,obFrame(a0)
 		move.b	#0,obAnim(a0) ; @idle
 		subi.w	#34,obY(a0) ; go up due to size
@@ -435,7 +435,7 @@ DeadDioMildanner_AwaitPLCDead:
 
 		move.l	#Map_DioDanner_Dead,obMap(a0)
 		addq.b	#2,(v_dle_routine).w ; go to next screen routine
-		move.w	#make_art_tile(ArtTile_FartDanner,0,1),obGfx(a0)
+		move.w	#make_art_tile(ArtTile_FartDanner,1,0),obGfx(a0)
 		move.b	#0,obFrame(a0)
 		move.b	#0,obAnim(a0) ; @idle
 		addq.b	#2,obRoutine(a0)
