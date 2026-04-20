@@ -6462,6 +6462,7 @@ DPLC_Eiza:	include	"coniobjs/eiza/mapDPLC.asm"
 
 		include	"GMZ/DVD Screensaver.asm"	; GMZ - GM_SonicTheScreensaver:
 		include	"GMZ/Rhythm/Main.asm"	; GMZ - GM_Rhythm:
+		include	"_incObj/Shooter Enemy.asm"	; GMZ - Obj_ShooterEnemy:
 
 ; !@
 ; ---------------------------------------------------------------------------
