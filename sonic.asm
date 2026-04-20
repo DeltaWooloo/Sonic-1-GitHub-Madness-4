@@ -367,7 +367,7 @@ Init_GHM4:
 		bsr.w	InitDMAQueue
 		bsr.w	VDPSetupGame
 		bsr.w	JoypadInit
-		bsr.w	Init_MegaPCM
+		jsr	(Init_SoundDriver).l
 		if CheatsOn=1
 		move.w	#$101,(f_levselcheat).w
 		move.w	#$101,(f_debugcheat).w
@@ -426,7 +426,7 @@ GameModeArray:
 	GAMEMODE	GM_SonicTheScreensaver,	id_Screensaver	; GMZ - DVD Screensaver					
 	GAMEMODE	GM_ClintonScreens,	id_ClintonScr	; Clinton fail/win 						
 	GAMEMODE	GM_BSOD,		id_BSOD		; !@ GD: Windows zone BSOD (on death)
-    GAMEMODE	GM_Sans,		id_SansDied		; he died.
+	GAMEMODE	GM_Sans,		id_SansDied	; he died.
 	dephase
 GameModeArray_End:
 
@@ -966,44 +966,6 @@ HBlank:
 		movem.l	(sp)+,d0-a6
 		rte	
 ; End of function HBlank
-
-; ===========================================================================
-; ---------------------------------------------------------------------------
-; Subroutine to initialise MegaPCM
-; ---------------------------------------------------------------------------
-
-; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
-
-Init_MegaPCM:
-		jsr	(MegaPCM_LoadDriver).l
-		lea	(SampleTable).l,a0
-		jsr	(MegaPCM_LoadSampleTable).l
-		tst.w	d0
-		beq.s	.SampleTableOk
-		nop		; hack to prevent isssue - coni
-	ifdef __DEBUG__
-		; for MD Debugger v.2.5 or above
-		RaiseError "MegaPCM_LoadSampleTable returned %<.b d0>", MPCM_Debugger_LoadSampleTableException
-	else
-		illegal				; I don't know why AS is breaking this
-	endif
-.SampleTableOk:
-
-	if MSUEnabled
-		; check CD mode
-		tst.b	(MegaCDMode).w
-		beq.s	.skip
-	
-		move.w	sr,-(sp)		; save current interrupt mask
-		disable_ints			; mask off interrupts
-	
-		MCDSend	#_MCD_SetVolume, #255
-		MCDSend	#_MCD_NoSeek, #1
-		move.w	(sp)+,sr		; restore ints
-
-.skip:
-	endif
-		rts
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------

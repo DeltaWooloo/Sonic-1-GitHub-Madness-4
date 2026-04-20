@@ -38,10 +38,12 @@
 		dc.b id_ARZ, 3	; Act 2
 		dc.b 0, 0	; Final Zone
 		dc.b 0, 0
-		even
 
-
-		dc.l 0,0 ; ending
+		; Ending
+		dc.b 0,0
+		dc.b 0,0
+		dc.b 0,0
+		dc.b 0,0
 
 		; COLD BREW Zone
 		dc.b id_CBZ, 1	; Act 1

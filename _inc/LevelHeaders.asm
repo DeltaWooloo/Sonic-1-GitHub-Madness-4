@@ -29,7 +29,7 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 	lhead	plcid_MZ,Kos_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_LosTontos,palid_MZ,Col_MZ,ObjPos_MZ1, Level_MZ1,Level_MZ1bg
 	lhead	plcid_MZ,Kos_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_Area5,palid_MZ,Col_MZ,ObjPos_MZ2, Level_MZ2,Level_MZ2bg
 	lhead	plcid_MZ,Kos_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_Easton,palid_MZ,Col_MZ,ObjPos_MZ3, Level_MZ3,Level_MZ3bg
-	lhead	plcid_MZ,Kos_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_LosTontos,palid_MZ,Col_MZ,ObjPos_MZ4,Level_MZ4,Level_MZ4bg
+	lhead	plcid_MZ,Kos_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_BeforeBoss,palid_MZ,Col_MZ,ObjPos_MZ4,Level_MZ4,Level_MZ4bg
 
 	lhead	plcid_SLZ,Kos_SLZ,plcid_SLZ2,Blk16_SLZ,Blk256_SLZ,bgm_Minecraft,palid_SLZ,Col_SLZ,ObjPos_SLZ1,Level_SLZ1,Level_SLZbg
 	lhead	plcid_SLZ,Kos_SLZ,plcid_SLZ2,Blk16_SLZ,Blk256_SLZ,bgm_Doom,palid_SLZ,Col_SLZ,ObjPos_SLZ2,Level_SLZ2,Level_SLZbg
@@ -68,8 +68,8 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 
 	lhead	plcid_Joint,Kos_DVZ,plcid_Joint2,Blk16_DVZ,Blk256_DVZ,bgm_DoleDetective,palid_DVZ,Col_DVZ,ObjPos_DVZ1,Level_DVZ1,Level_DVZbg
 	lhead	plcid_Joint,Kos_HSZ,plcid_Joint2,Blk16_HSZ,Blk256_HSZ,bgm_HardwareStore,palid_HARDWARE,Col_HSZ,ObjPos_HSZ,Level_HSZ,Level_HSZbg
-	lhead	plcid_Joint,Kos_DVZ,plcid_Joint2,Blk16_DVZ,Blk256_DVZ3,0,palid_DVZ,Col_DVZ,ObjPos_DVZ3,Level_DVZ3,Level_DVZbg
-	lhead	plcid_Joint,Kos_DVZ,plcid_Joint2,Blk16_DVZ,Blk256_DVZ3,$FF,palid_Black,Col_DVZ,ObjPos_DVZ4,Level_DVZ4,Level_DVZbg4
+	lhead	plcid_Joint,Kos_DVZ,plcid_Joint2,Blk16_DVZ,Blk256_DVZ3,bgm_BeforeBoss,palid_DVZ,Col_DVZ,ObjPos_DVZ3,Level_DVZ3,Level_DVZbg
+	lhead	plcid_Joint,Kos_DVZ,plcid_Joint2,Blk16_DVZ,Blk256_DVZ3,bgm_BeforeBoss,palid_Black,Col_DVZ,ObjPos_DVZ4,Level_DVZ4,Level_DVZbg4
 
 	lhead	plcid_NGZ,Kos_NGZ,plcid_NGZ2,Blk16_NGZ,Blk256_NGZ,bgm_GHZ,palid_NGZ,Col_NGZ,ObjPos_NGZ1,Level_NGZ1,Level_NGZbg
 	lhead	plcid_NGZ,Kos_NGZ,plcid_NGZ2,Blk16_NGZ,Blk256_NGZ,bgm_GHZ,palid_NGZ,Col_NGZ,ObjPos_NGZ2,Level_NGZ2,Level_NGZbg
@@ -81,8 +81,8 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 	lhead	plcid_BSZ,Kos_BSZ,plcid_BSZ2,Blk16_BSZ,Blk256_BSZ,0,palid_BSZ,Col_BSZ,ObjPos_BSZ3,Level_BSZ3,Level_BSZbg
 	lhead	plcid_BSZ,Kos_BSZ,plcid_BSZ2,Blk16_BSZ,Blk256_BSZ,bgm_TF2,palid_BSZ,Col_BSZ,ObjPos_BSZ1,Level_BSZ1,Level_BSZbg
 
-	lhead	plcid_BTZ,Kos_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_Hidden,palid_BTZ,Col_BTZ,ObjPos_BTZ1,Level_BTZ1,Level_BTZbg
-	lhead	plcid_BTZ,Kos_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_Hidden,palid_BTZ,Col_BTZ,ObjPos_BTZ2,Level_BTZ2,Level_BTZbg
-	lhead	plcid_BTZ,Kos_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_Hidden,palid_BTZ,Col_BTZ,ObjPos_BTZ3,Level_BTZ3,Level_BTZbg
-	lhead	plcid_BTZ,Kos_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_Hidden,palid_BTZ,Col_BTZ,ObjPos_BTZ1,Level_BTZ1,Level_BTZbg
+	lhead	plcid_BTZ,Kos_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_BeforeBoss,palid_BTZ,Col_BTZ,ObjPos_BTZ1,Level_BTZ1,Level_BTZbg
+	lhead	plcid_BTZ,Kos_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_BeforeBoss,palid_BTZ,Col_BTZ,ObjPos_BTZ2,Level_BTZ2,Level_BTZbg
+	lhead	plcid_BTZ,Kos_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_BeforeBoss,palid_BTZ,Col_BTZ,ObjPos_BTZ3,Level_BTZ3,Level_BTZbg
+	lhead	plcid_BTZ,Kos_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_BeforeBoss,palid_BTZ,Col_BTZ,ObjPos_BTZ1,Level_BTZ1,Level_BTZbg
 	;zonewarning	LevelHeaders,32*4
