@@ -163,6 +163,8 @@ MusicIndex:
 	bgmdef $00, Mus_WillTell
 	bgmdef $00, Mus_Outfarted
 	bgmdef $00, Mus_BeforeBoss
+	bgmdef $00, Mus_SonicToole
+	bgmdef $00, Mus_SkyGift
 
 	bgmdef $00, Mus_CrazyMario
 	bgmdef $00, Mus_Ding
@@ -441,6 +443,10 @@ Mus_WillTell:		include	"music/TG2000Tracks/WillTell.asm"
 Mus_Outfarted:		include	"music/TG2000Tracks/Outfarted.asm"
 	even
 Mus_BeforeBoss:		include	"music/TG2000Tracks/BeforeBoss.asm"
+	even
+Mus_SonicToole:		include	"music/TG2000Tracks/SonicToole.asm"
+	even
+Mus_SkyGift:		include	"music/TG2000Tracks/SkyGift.asm"
 	even
 
 Mus_CrazyMario:		include	"music/Dawid/crazymario.asm"

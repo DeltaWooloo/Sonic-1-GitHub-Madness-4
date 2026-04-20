@@ -53,7 +53,7 @@ PSG_Index:
 		dc.l PSG_ClintonYr, PSG_Pass1, PSG_Pass2, PSG_Pass3, PSG_Pass4
 		dc.l PSG_Mega1, PSG_Mega2, PSG_Mega3, PSG_Mega4
 		dc.l AporiaTone_01, PSG_Will1, PSG_Will2, PSG_Before
-		dc.l PSG_S28Bit02,PSG_S28Bit03,PSG_S28Bit04
+		dc.l PSG_S28Bit02,PSG_S28Bit03,PSG_S28Bit04,PSG_Toole
 
 PSG1:		dc.b 0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,$80
 
@@ -296,6 +296,10 @@ PSG_Will2:
 
 PSG_Before:
 	dc.b	1,6,9,$B,$D,$80
+
+PSG_Toole:
+	dc.b	2,2,2,2,3,3,3,3,4,5,5,5,6,6,6,5,6,6,7,7,8,8,8
+	dc.b	9,9,9,9,$A,$B,$B,$C,$D,$80
 
 ; these are all supposed to use rests but the driver doesn't support it
 PSG_S28Bit02:	dc.b $00,$01,$04,$08,$0B,$0E,$0F,$80

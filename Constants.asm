@@ -379,6 +379,8 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_WillTell
 	nextenum bgm_Outfarted
 	nextenum bgm_BeforeBoss
+	nextenum bgm_SonicToole
+	nextenum bgm_SkyGift
 
 	; Unused Jingle BGM
 	nextenum bgm_CrazyMario

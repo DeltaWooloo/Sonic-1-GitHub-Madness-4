@@ -76,7 +76,7 @@ nMaxPSG2			EQU nB6
 	nextenum	clintTone_00,PassTone1,PassTone2,PassTone3,PassTone4
 	nextenum	MegaTone1,MegaTone2,MegaTone3,MegaTone4
 	nextenum	AporiaTone_01,WillTone1,WillTone2,BeforeTone
-	nextenum	fS28bit_02,fS28bit_03,fS28bit_04
+	nextenum	fS28bit_02,fS28bit_03,fS28bit_04,TooleTone
 
 	nextenum	fTone__Last
 	if fTone__Last>$100
