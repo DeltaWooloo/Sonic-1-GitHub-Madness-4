@@ -220,7 +220,6 @@ ObjNeedleBoss:
 	move.b	obRoutine(a0),d0
 	move.w	.Index(pc,d0.w),d1
 	jsr	.Index(pc,d1.w)
-	bsr	_needleBossHits
 	lea	Ani_NeedleBoss(pc),a1
 	jsr	AnimateSprite.l
 	jmp	DisplaySprite.l
@@ -248,7 +247,6 @@ NeedleBoss_Init:
 	move.w	obY(a0),needle.YOrg(a0)
 
 	move.b	#0, obColType(a0)
-	move.b	needlehitcnt.w,obColProp(a0)
 
 	move.b	#$4,obRender(a0)
 	move.b	#16,obWidth(a0)
@@ -277,12 +275,27 @@ NeedleBoss_Fall1:
 	move.b	#60*3,needle.Timer(a0)	
 
 NeedleBoss_Main:
+
+	; active orient to player
+
+	lea 	v_player, a1
+	move.w	obX(a1),d0
+	move.w	obX(a0),d1
+	sub.w	d0,d1
+	bpl.s	.ToLeft
+	bclr	#0,obStatus(a0)
+	bra.s	.Skip
+.ToLeft:
+	bset	#0,obStatus(a0)
+.Skip:
+
+	; spawn check
+
 	subq.b	#1,needle.Timer(a0)
 	bne.s	.Go
 	addq.b	#1,needle.Timer+1(a0)
 	cmpi.b	#5,needle.Timer+1(a0)
 	bge.s	.Exit
-	; put timeout chk here
 	move.b	#60*2,needle.Timer(a0)
 	bsr.w	_needleSpawnAttack
 
@@ -294,21 +307,24 @@ NeedleBoss_Main:
 	move.w	#$700,obVelY(a0)
 	move.w	#-$100,obVelX(a0)
 	move.w	obY(a0),needle.YOrg(a0)
+	move.b	needlehitcnt.w,obColProp(a0)
+	move.b	#$F, obColType(a0)
 	move.b	#sfx_GiantRing,d0
 	jmp	QueueSound2.l
 
 NeedleBoss_FlyOut:
-	move.b	#$F, obColType(a0)
-	subi.w	#$50,obVelY(a0)
-	subi.w	#$10,obVelX(a0)
+	bsr.w	_needleBossHits
+	move.w	#$10,d2
+	btst	#0,obStatus(a0)
+	beq.s	.Go
+	neg	d2
+.Go
+	addi.w	d2,obVelX(a0)
 	jsr	SpeedToPos.l
-	cmpi.w	#$90,obX(a0)
-	ble.s	.Del
-	rts
-.Del:
-	jsr	DeleteObject.l
-	move.b	#id_NeedleBoss,(a0)
-	move.b	#4,obSubtype(a0)
+	cmpi.w	#$1EF,obX(a0)
+	ble.s	.Wait
+	nop
+.Wait:
 	rts
 
 ; ----------------------------------------------------------------------------
@@ -341,7 +357,7 @@ _needleBossHits:
 	bne.s	.Exit
 	tst.b	needle.FlashTimer(a0)
 	bne.s	.HitFlash
-
+	move.b	obColProp(a0),needlehitcnt.w
 	move.b	#$18,needle.FlashTimer(a0)			; set number of times to flash 
 	
 	move.w	#sfx_HitBoss, d0

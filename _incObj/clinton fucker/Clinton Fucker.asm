@@ -71,7 +71,9 @@ Clinton_WinInit:
 	move.w  #0,d2
 	move.w  #(CLINTONWINARTSZ/2),d3
 	jsr	QueueDMATransfer.l
+	stopZ80
 	copyTilemap	MapScr_ClintonWin,vram_bg,40,28
+	startZ80
 	bra.s	.Skip
 .Fail:
 	pcm	dClintonFail
@@ -81,7 +83,9 @@ Clinton_WinInit:
 	move.w  #0,d2
 	move.w  #(CLINTONFAILARTSZ/2),d3
 	jsr	QueueDMATransfer.l
+	stopZ80
 	copyTilemap	MapScr_ClintonFail,vram_bg,40,28
+	startZ80
 .Skip:
 	move.b	#$1A,(v_vbla_routine).w		; garbage will show for a frame without this
 	jsr	WaitForVBla

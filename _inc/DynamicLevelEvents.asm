@@ -943,8 +943,9 @@ DLE_DVZ3:
 		move.w	d0,(v_bg2screenposx).w
 		move.w	d0,(v_bg3screenposx).w
 		move.w	d0,v_bgscreenposy.w
-
+		stopZ80
 		fillVRAM	0, vram_fg, vram_fg+plane_size_64x32 ; clear foreground namespace
+		startZ80
 		move.l  #Art_NeedleScr,d1
 		move.w  #$2000,d2
 		move.w  #(NEEDLESCRARTSZ/2),d3
