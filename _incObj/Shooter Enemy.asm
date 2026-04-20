@@ -26,13 +26,13 @@ Shooter_Main:	; Routine 0
 		jsr	ObjectFall
 		jsr	ObjFloorDist
 		tst.w	d1
-		bpl.s	.notonfloor
+		bpl.s	Shooter_NotOnFloor
 		add.w	d1,obY(a0)
 		move.w	#0,obVelY(a0)
 		addq.b	#2,obRoutine(a0)
 		bchg	#0,obStatus(a0)
 
-	.notonfloor:
+Shooter_NotOnFloor:
 		rts	
 ; ===========================================================================
 
