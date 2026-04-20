@@ -277,6 +277,8 @@ GM_BSOD:
 ; ---------------------------------------------------------------------------
 sec_std:		equ	10
 secSkip_std:	equ	3
+sec_sd:			equ	sec_std
+secSkip_sd:		equ	secSkip_std
 sec_sms:		equ	13*60
 secSkip_sms:	equ	secSkip_std
 sec_gg:			equ	sec_sms
@@ -290,8 +292,19 @@ BSOD_table:	; seconds, seconds to skip, art, map, palette, SMPS sound ID, MPCM s
 		;Windows-based
 		bsodData		sec_std,	secSkip_std,	bsod_w311.art1,			ArtTile_Home1,	bsod_w311.art2,	ArtTile_bsod_w311_art2,		bsod_w311.fg,		bsod_w311.bg,		bsod_w311.pal,		TCLR(0,0),	bgm_Passport,	dChord16
 		bsodData		sec_std,	secSkip_std,	bsod_95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_95.fg,			bsod_95.bg,			bsod_95.pal,		TCLR(1,0),	bgm_hang,		dBSOD		
+		bsodData		sec_std,	secSkip_std,	bsod_MSB.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_MSB.fg,		bsod_MSB.bg,		bsod_MSB.pal,		TCLR(0,0),	bgm_Passport,	dChord16		
 		bsodData		sec_std,	secSkip_std,	bsod_98ipc.art1,		ArtTile_Home1,	bsod_98ipc.art2,ArtTile_bsod_w98ipc_art2,	bsod_98ipc.fg,		bsod_98ipc.bg,		bsod_98ipc.pal,		TCLR(0,7),	bgm_Passport,	dW98IPC
 		bsodData		60*f2s,		secSkip_std,	bsod_sonihack.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sonihack.fg,	bsod_sonihack.bg,	bsod_sonihack.pal,	TCLR(0,0),	bgm_VirusAlert,	dVirus
+		;Safe shutdown
+		bsodData		sec_sd,		secSkip_sd,		bsod_sd1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd1.fg,		bsod_sd1.bg,		bsod_sd1.pal,		TCLR(0,0),	bgm_hang,		dShutdown
+		bsodData		sec_sd,		secSkip_sd,		bsod_sd2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd2.fg,		bsod_sd2.bg,		bsod_sd2.pal,		TCLR(0,0),	bgm_Passport,	dShutdown
+		bsodData		sec_sd,		secSkip_sd,		bsod_sd3.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd3.fg,		bsod_sd3.bg,		bsod_sd3.pal,		TCLR(0,0),	bgm_hang,		dShutdown
+		bsodData		sec_sd,		secSkip_sd,		bsod_sd4.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd4.fg,		bsod_sd4.bg,		bsod_sd4.pal,		TCLR(0,0),	bgm_hang,		dShutdown
+		bsodData		sec_sd,		secSkip_sd,		bsod_sd5.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd5.fg,		bsod_sd5.bg,		bsod_sd5.pal,		TCLR(1,1),	bgm_hang,		dShutdown
+		bsodData		sec_sd,		secSkip_sd,		bsod_sd6.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd6.fg,		bsod_sd6.bg,		bsod_sd6.pal,		TCLR(0,0),	bgm_hang,		dShutdown
+		bsodData		sec_sd,		secSkip_sd,		bsod_sd7.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd7.fg,		bsod_sd7.bg,		bsod_sd7.pal,		TCLR(0,0),	bgm_hang,		dShutdown
+		bsodData		sec_sd,		secSkip_sd,		bsod_sd8.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd8.fg,		bsod_sd8.bg,		bsod_sd8.pal,		TCLR(0,0),	bgm_hang,		dShutdown
+		
 		;SMS-based
 		bsodData		sec_sms,	secSkip_sms,	bsod_sms1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sms1.fg,		bsod_sms1.bg,		bsod_sms1.pal,		TCLR(0,0),	bgm_Retro,		dChord16
 		bsodData		sec_sms,	secSkip_sms,	bsod_sms2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sms2.fg,		bsod_sms2.bg,		bsod_sms2.pal,		TCLR(0,0),	bgm_Retro,		dChord16
@@ -335,6 +348,15 @@ bsod_95:
 			even
 .bg:		binclude "_gamemode/winBSOD/bsod_95-mapBG.eni"
 			even
+
+bsod_MSB:
+.art1:		binclude "_gamemode/winBSOD/bsod_MSB-art1.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_MSB-mapFG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_MSB-pal.bin"
+			even
+			
 bsod_98ipc:
 .art2:
 			binclude "_gamemode/winBSOD/bsod_w98ipc-art2.nem"
@@ -353,6 +375,41 @@ bsod_sonihack:
 .fg:		binclude "_gamemode/winBSOD/bsod_sonihack-mapFG.eni"
 			even
 .pal:		binclude "_gamemode/winBSOD/bsod_sonihack-pal.bin"
+			even
+			
+
+;Shutdown screens
+bsod_sd1:
+.fg:		binclude "_gamemode/winBSOD/bsod_turnoff1-mapFG.eni"
+			even
+bsod_sd2:
+.art1:		binclude "_gamemode/winBSOD/bsod_turnoff2-art1.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_turnoff2-mapFG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_turnoff2-pal.bin"
+			even						
+bsod_sd3:
+.fg:		binclude "_gamemode/winBSOD/bsod_turnoff3-mapFG.eni"
+			even
+bsod_sd4:
+.fg:		binclude "_gamemode/winBSOD/bsod_turnoff4-mapFG.eni"
+			even
+;This one is different
+bsod_sd5:
+.bg:		binclude "_gamemode/winBSOD/bsod_turnoff5-mapBG.eni"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_turnoff5-mapFG.eni"
+			even
+
+bsod_sd6:
+.fg:		binclude "_gamemode/winBSOD/bsod_turnoff6-mapFG.eni"
+			even
+bsod_sd7:
+.fg:		binclude "_gamemode/winBSOD/bsod_turnoff7-mapFG.eni"
+			even
+bsod_sd8:
+.fg:		binclude "_gamemode/winBSOD/bsod_turnoff8-mapFG.eni"
 			even
 			
 bsod_sms1:
@@ -513,6 +570,17 @@ bsod_std.bg:
 			binclude "_gamemode/winBSOD/bsod_std-mapBG.eni"
 			even
 
+
+bsod_sd_std.bg2:
+bsod_sd1.bg:
+bsod_sd2.bg:
+bsod_sd3.bg:
+bsod_sd4.bg:
+bsod_sd6.bg:
+bsod_sd7.bg:
+bsod_sd8.bg:
+
+bsod_MSB.bg:
 bsod_sonihack.bg:
 bsod_sms1.bg:
 bsod_sms2.bg:
@@ -545,6 +613,7 @@ bsod_w311.art2:
 			binclude "_gamemode/winBSOD/bsod_w311-art2.nem"
 			even
 
+;Standard Sonic-Crackers text font
 bsod_w311.art1:
 bsod_95.art1:
 bsod_98ipc.art1:
@@ -565,6 +634,35 @@ bsod_std.art1:
 bsod_w311.pal:
 			binclude "_gamemode/winBSOD/bsod_w311-pal.bin"
 			even		
+			
+;Shutdown fonts
+bsod_sd1.art1:
+bsod_sd3.art1:
+bsod_sd4.art1:
+bsod_sd5.art1:
+bsod_sd6.art1:
+bsod_sd7.art1:
+bsod_sd8.art1:
+			binclude "_gamemode/winBSOD/bsod_turnoff_font-art.nem"			
+			even
+
+;Shutdown palettes
+;Standard (white on black)
+bsod_sd4.pal:
+bsod_sd7.pal:
+bsod_sd8.pal:			
+			binclude "_gamemode/winBSOD/bsod_turnoff_font-pal.bin"
+			even
+;BSOD (white on blue/invert highlight)
+bsod_sd5.pal:
+bsod_sd6.pal:			
+			binclude "_gamemode/winBSOD/bsod_turnoff_fontBSOD-pal.bin"
+			even
+;Shutdown (orange on black)
+bsod_sd1.pal:
+bsod_sd3.pal:
+			binclude "_gamemode/winBSOD/bsod_turnoff_fontOR-pal.bin"
+			even
 
 bsod_95.pal:
 bsod_gen_ntscu.pal:
