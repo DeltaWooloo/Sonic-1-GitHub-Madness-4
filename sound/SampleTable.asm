@@ -113,8 +113,6 @@ SampleTable:
 ;fuck you, tonic! -sans voice tts generator
 	dcSample	TYPE_DPCM,	Sands,	8000					; $D2
 
-	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX		; $D2
-
 	; Unused
 ;	dcSample	TYPE_PCM,	Segay,		0,	FLAGS_SFX			; $D3
 ;	dcSample	TYPE_PCM,	CL_Penis,	11297					; $D4

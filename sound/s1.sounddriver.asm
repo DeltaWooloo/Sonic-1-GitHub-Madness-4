@@ -863,7 +863,7 @@ CycleSoundQueue:
 PlaySoundID:
 		moveq	#0,d7
 		move.b	SMPS_RAM.v_sound_id(a6),d7
-		move.b	#$80,SMPS_RAM.v_sound_id(a6)	; reset music flag
+		move.b	#0,SMPS_RAM.v_sound_id(a6)	; reset music flag
 
 		cmpi.b	#bgm__Last,d7		; Is this music ($81-$93)?
 	if MSUEnabled
@@ -1821,7 +1821,7 @@ StopAllSound:
 		MPCM_stopZ80
 		move.b	#Z_MPCM_COMMAND_STOP, MPCM_Z80_RAM+Z_MPCM_CommandInput	; stop DAC playback
 		MPCM_startZ80
-		move.b	#$80,SMPS_RAM.v_sound_id(a6)	; set music to $80 (silence)
+		move.b	#0,SMPS_RAM.v_sound_id(a6)	; set music to $80 (silence)
 		jsr	FMSilenceAll(pc)
 		bra.w	PSGSilenceAll
 
@@ -1858,7 +1858,7 @@ InitMusicPlayback:
 	else
 		; DANGER! Only v_soundqueue0 and v_soundqueue1 are restored, once again breaking v_soundqueue2
 	endif
-		move.b	#$80,SMPS_RAM.v_sound_id(a6)	; set music to $80 (silence)
+		move.b	#0,SMPS_RAM.v_sound_id(a6)	; set music to $80 (silence)
 	if FixBugs
 		lea	SMPS_RAM.v_music_dac_track.VoiceControl(a6),a1
 		lea	FMDACInitBytes(pc),a2
