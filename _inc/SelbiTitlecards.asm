@@ -25,12 +25,12 @@ TitleCard_GHZ3:	equ  "TTS BATTLE"
 TitleCard_GHZ4:	equ  "Robi says hi"
 
 TitleCard_MZ1:	equ  "ALBERTA CANADA"
-TitleCard_MZ2:	equ  "ALBERTA CANADINA"
-TitleCard_MZ3:	equ  "KILOS LAIR"
+TitleCard_MZ2:	equ  "KILOS LAIR"
+TitleCard_MZ3:	equ  "I LOVE YOU"
 TitleCard_MZ4:	equ  "porn"
 
 TitleCard_SYZ1:	equ  "SPRING FIELD"
-TitleCard_SYZ2:	equ  "PRING FIELD"
+TitleCard_SYZ2:	equ  "GASSY FIELD"
 TitleCard_SYZ3:	equ  "HOMERS"
 TitleCard_SYZ4:	equ  "porn"
 
@@ -45,7 +45,7 @@ TitleCard_SLZ3:	equ  "ENDERMAN PORN"
 TitleCard_SLZ4:	equ  "porn"
 
 TitleCard_SBZ1:	equ  "PRONGLE PLANT"
-TitleCard_SBZ2:	equ  "FUCKIN FACTORY"
+TitleCard_SBZ2:	equ  "APPLE MARIOSHIT"
 TitleCard_SBZ3:	equ  "PIGFAT PUSSHOLE"		; SBZ3 is FZ
 TitleCard_SBZ4:	equ  "porn"
 
