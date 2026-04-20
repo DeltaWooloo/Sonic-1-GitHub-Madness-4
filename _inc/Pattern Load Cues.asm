@@ -316,7 +316,7 @@ PLC_NGZ2:	dc.w ((PLC_NGZ2end-PLC_NGZ2-2)/6)-1
 		plcm	Nem_Chopper, $9360/32	; chopper enemy
 		plcm	Nem_Jaws, $8F60/32	; jaws enemy
 		plcm	Nem_SpikePole, $7300/32	; spiked pole
-		plcm	Nem_Ball, $7540/32	; giant	ball
+		plcm	Nem_NogalesBall, $3E0	; giant	ball
 		plcm	Nem_GhzWall1, $A1E0/32	; breakable wall
 		plcm	Nem_GhzWall2, $6980/32	; normal wall
 PLC_NGZ2end:

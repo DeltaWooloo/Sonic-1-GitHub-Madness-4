@@ -58,6 +58,8 @@ needle.YOrg	= $32	;.w
 needle.Timer	= $34	;.w
 needle.XTarg	= $36	;.l	; lerp needs extra precision
 needle.YTarg	= $3A	;.l
+needle.FlashTimer: = $3E ; mmmeroiwkrdspaodkpasodas
+needle.HitCnt: = $3E ; mmmeroiwkrdspaodkpasodas
 
 ExObjNeedle:
 	moveq	#0, d0
@@ -110,7 +112,7 @@ NeedleIntro_Init:
 	move.b	#0,obAnim(a0)
 	move.w	#0,obAngle(a0)
 	bset	#0,obStatus(a0)
-
+	move.b	#9,needlehitcnt.w
 	; load palette
 
 	lea	(v_palette+32).w,a1
@@ -193,8 +195,8 @@ NeedleIntro_FlyOut:
 	subi.w	#$50,obVelY(a0)
 	subi.w	#$10,obVelX(a0)
 	jsr	SpeedToPos.l
-	tst.w	obX(a0)
-	bmi.s	.Del
+	cmpi.w	#$90,obX(a0)
+	ble.s	.Del
 	rts
 .Del:
 	jsr	DeleteObject.l
@@ -218,6 +220,7 @@ ObjNeedleBoss:
 	move.b	obRoutine(a0),d0
 	move.w	.Index(pc,d0.w),d1
 	jsr	.Index(pc,d1.w)
+	bsr	_needleBossHits
 	lea	Ani_NeedleBoss(pc),a1
 	jsr	AnimateSprite.l
 	jmp	DisplaySprite.l
@@ -227,6 +230,7 @@ ObjNeedleBoss:
 	dc.w	NeedleBoss_Init-.Index
 	dc.w	NeedleBoss_Fall1-.Index
 	dc.w	NeedleBoss_Main-.Index
+	dc.w	NeedleBoss_FlyOut-.Index
 ; ----------------------------------------------------------------------------
 
 NeedleBoss_Init:
@@ -242,6 +246,9 @@ NeedleBoss_Init:
 
 	move.w	obX(a0),needle.XOrg(a0)
 	move.w	obY(a0),needle.YOrg(a0)
+
+	move.b	#0, obColType(a0)
+	move.b	needlehitcnt.w,obColProp(a0)
 
 	move.b	#$4,obRender(a0)
 	move.b	#16,obWidth(a0)
@@ -273,12 +280,36 @@ NeedleBoss_Main:
 	subq.b	#1,needle.Timer(a0)
 	bne.s	.Go
 	addq.b	#1,needle.Timer+1(a0)
+	cmpi.b	#5,needle.Timer+1(a0)
+	bge.s	.Exit
 	; put timeout chk here
-	move.b	#60,needle.Timer(a0)
+	move.b	#60*2,needle.Timer(a0)
 	bsr.w	_needleSpawnAttack
 
 .Go:	
 	bra.w	_needleChase
+.Exit:
+	addq.b	#2,obRoutine(a0)
+	move.b	#3,obAnim(a0)
+	move.w	#$700,obVelY(a0)
+	move.w	#-$100,obVelX(a0)
+	move.w	obY(a0),needle.YOrg(a0)
+	move.b	#sfx_GiantRing,d0
+	jmp	QueueSound2.l
+
+NeedleBoss_FlyOut:
+	move.b	#$F, obColType(a0)
+	subi.w	#$50,obVelY(a0)
+	subi.w	#$10,obVelX(a0)
+	jsr	SpeedToPos.l
+	cmpi.w	#$90,obX(a0)
+	ble.s	.Del
+	rts
+.Del:
+	jsr	DeleteObject.l
+	move.b	#id_NeedleBoss,(a0)
+	move.b	#4,obSubtype(a0)
+	rts
 
 ; ----------------------------------------------------------------------------
 
@@ -300,6 +331,41 @@ _needleChase:
 	jsr	ChaseObject.l
 	move.w	#0, obVelY(a0)
 	jmp	SpeedToPos
+
+; ---------------------------------------------------------------------------
+; i stole this from the arif boss lol
+; ---------------------------------------------------------------------------
+
+_needleBossHits:
+	tst.b	obColType(a0)
+	bne.s	.Exit
+	tst.b	needle.FlashTimer(a0)
+	bne.s	.HitFlash
+
+	move.b	#$18,needle.FlashTimer(a0)			; set number of times to flash 
+	
+	move.w	#sfx_HitBoss, d0
+	jsr	(QueueSound2).l
+
+.HitFlash:
+	tst.b	obFrame(a0)
+	bne.s	.Restore
+
+	move.b	#1,obFrame(a0)
+	subq.b	#1,needle.FlashTimer(a0)			; subtract 1 from flashes counter
+	bne.s	.Exit			; if flashes counter is not zero, branch
+
+	move.b	#0,obFrame(a0)				; restore frame
+	move.b	#$F,obColType(a0)			; restore touch responsibility
+
+	rts
+
+.Restore:
+	move.b	#0,obFrame(a0)
+	rts
+
+.Exit:
+	rts
 
 ; ----------------------------------------------------------------------------
 ; Bouncing Hammer
@@ -327,16 +393,19 @@ NHammer_Init:
 	move.b	#16,obWidth(a0)
 	move.b	#16,obHeight(a0)
 	move.b	#16,obActWid(a0)
-;	move.w	#$400,obX(a0)
-;	move.w	#$1C0,obY(a0)
 	move.b	#2,obPriority(a0)
+	move.b	#$80+6, obColType(a0)
+	move.b	#12, obColProp(a0) 		; set number of hits
 	move.b	#8,obFrame(a0)
 	move.b	#0,obAnim(a0)
 	move.w	#0,obAngle(a0)
 	move.w	#0,obVelY(a0)
 	move.w	#0,obVelX(a0)
+	move.w	#60*5,needle.Timer(a0)
 
 NHammer_Main:
+	subq.w	#1,needle.Timer(a0)
+	beq.s	.Explode
 	lea	v_player.w,a1
 	move.w	#$350,d0
 	move.w	#$20,d1
@@ -350,6 +419,10 @@ NHammer_Main:
 	add.w	#70,obVelY(a0)
 	jsr	SpeedToPos.l
 	rts
+
+.Explode:
+	jsr	GHM3Explode
+	jmp	DeleteObject
 
 Ani_NHammer:
 .t
