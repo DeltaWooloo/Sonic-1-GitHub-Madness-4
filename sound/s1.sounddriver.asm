@@ -21,13 +21,6 @@ SMPS_SPECIAL_SFX_PSG_TRACK_COUNT = (SMPS_RAM.v_spcsfx_psg_tracks_end-SMPS_RAM.v_
 pcmLoopCounterBase function sampleRate,baseCycles, 1+(Z80_Clock/(sampleRate)-(baseCycles)+(13/2))/13
 pcmLoopCounter function sampleRate, pcmLoopCounterBase(sampleRate,90) ; 90 is the number of cycles zPlaySEGAPCMLoop takes to deliver one sample.
 dpcmLoopCounter function sampleRate, pcmLoopCounterBase(sampleRate,301/2) ; 301 is the number of cycles zPlayPCMLoop takes to deliver two samples.
-
-; ---------------------------------------------------------------------------
-; Go_SoundTypes:
-Go_SoundPriorities:	dc.l SoundPriorities
-; Go_SoundD0:
-Go_SpecSoundIndex:	dc.l SpecSoundIndex
-Go_SoundIndex:		dc.l SoundIndex
 ; ---------------------------------------------------------------------------
 ; PSG instruments used in music
 ; ---------------------------------------------------------------------------
@@ -302,9 +295,11 @@ PSG_Toole:
 	dc.b	9,9,9,9,$A,$B,$B,$C,$D,$80
 
 ; these are all supposed to use rests but the driver doesn't support it
-PSG_S28Bit02:	dc.b $00,$01,$04,$08,$0B,$0E,$0F,$80
-PSG_S28Bit03:	dc.b $00,$00,$02,$04,$06,$07,$0A,$0C,$0F,$80
-PSG_S28Bit04:	dc.b $01,$02,$02,$02,$02,$02,$02,$02,$03,$03,$04,$04,$0F,$80
+; the driver also didn't update volenv in the start of a note
+; so, $00 at the start and $0F at the end
+PSG_S28Bit02:	dc.b $00,$00,$01,$04,$08,$0B,$0E,$0F,$80
+PSG_S28Bit03:	dc.b $00,$00,$00,$02,$04,$06,$07,$0A,$0C,$0F,$80
+PSG_S28Bit04:	dc.b $00,$01,$02,$02,$02,$02,$02,$02,$02,$03,$03,$04,$04,$0F,$80
 	even
 ; ---------------------------------------------------------------------------
 ; Priority of sound. New music or SFX must have a priority higher than or equal
@@ -318,7 +313,7 @@ PSG_S28Bit04:	dc.b $01,$02,$02,$02,$02,$02,$02,$02,$03,$03,$04,$04,$0F,$80
 SoundPriorities:
 		; BGM
 	.bgm:
-		dc.b     $90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90	; $01
+		dc.b $90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90	; $01
 		dc.b $90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90	; $10
 		dc.b $90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90	; $20
 		dc.b $90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90	; $30
@@ -339,9 +334,48 @@ SoundPriorities:
 	
 	.spc:
 		; Special
-		dc.b $80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$90,$90,$90,$90,$90	; $F0
-		even
+		dc.b $80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80			; $F0
 
+	.cmd:
+		; Commands/Utilities
+		dc.b $90,$90,$90,$90,$90						; $FB
+		even
+; ===========================================================================
+; Subroutine to initialise the sound driver
+; ---------------------------------------------------------------------------
+Init_SoundDriver:
+		jsr	(MegaPCM_LoadDriver).l
+		lea	(v_snddriver_ram).l,a6
+		bsr.w	StopAllSound
+
+		lea	(SampleTable).l,a0
+		jsr	(MegaPCM_LoadSampleTable).l
+		tst.w	d0
+		beq.s	.SampleTableOk
+		nop		; hack to prevent isssue - coni
+	ifdef __DEBUG__
+		; for MD Debugger v.2.5 or above
+		RaiseError "MegaPCM_LoadSampleTable returned %<.b d0>", MPCM_Debugger_LoadSampleTableException
+	else
+		illegal				; I don't know why AS is breaking this
+	endif
+.SampleTableOk:
+
+	if MSUEnabled
+		; check CD mode
+		tst.b	(MegaCDMode).w
+		beq.s	.skip
+	
+		move.w	sr,-(sp)		; save current interrupt mask
+		disable_ints			; mask off interrupts
+	
+		MCDSend	#_MCD_SetVolume, #255
+		MCDSend	#_MCD_NoSeek, #1
+		move.w	(sp)+,sr		; restore ints
+
+.skip:
+	endif
+		rts
 ; ---------------------------------------------------------------------------
 ; Subroutine to update music more than once per frame
 ; (Called by horizontal & vert. interrupts)
@@ -351,7 +385,7 @@ SoundPriorities:
 
 ; sub_71B4C:
 UpdateMusic:
-		lea	(v_snddriver_ram&$FFFFFF).l,a6
+		lea	(v_snddriver_ram).l,a6
 		clr.b	SMPS_RAM.f_voice_selector(a6)
 		tst.b	SMPS_RAM.f_pausemusic(a6)		; is music paused?
 		bne.w	PauseMusic				; if yes, branch
@@ -830,30 +864,28 @@ PauseMusic:
 
 ; Sound_Play:
 CycleSoundQueue:
-		movea.l	(Go_SoundPriorities).l,a0
+		lea	SoundPriorities(pc),a0
 		lea	SMPS_RAM.v_soundqueue0(a6),a1	; load music track number
-		_move.b	SMPS_RAM.v_sndprio(a6),d3	; Get priority of currently playing SFX
+		move.b	SMPS_RAM.v_sndprio(a6),d3	; Get priority of currently playing SFX
 		moveq	#SMPS_RAM.v_soundqueue_end-SMPS_RAM.v_soundqueue_start-1,d4
 ; loc_71F12:
+		moveq	#0,d0
 .inputloop:
-		move.b	(a1),d0				; move track number to d0
-		move.b	d0,d1
-		clr.b	(a1)+				; Clear entry
-		subi.b	#bgm__First,d0			; Make it into 0-based index
-		bcs.s	.nextinput			; If negative (i.e., it was $80 or lower), branch
-		andi.w	#$7F,d0				; Clear high byte and sign bit
-		move.b	(a0,d0.w),d2			; Get sound type
+		move.b	(a1)+,d0			; move track number to d0
+		beq.s	.nextinput			; If ID is zero, branch
+		clr.b	-1(a1)				; Clear entry
+		move.b	(a0,d0.w),d2			; Get sound priority
 		cmp.b	d3,d2				; Is it a lower priority sound?
 		blo.s	.nextinput			; Branch if yes
 		move.b	d2,d3				; Store new priority
-		move.b	d1,SMPS_RAM.v_sound_id(a6)	; Queue sound for playing
+		move.b	d0,SMPS_RAM.v_sound_id(a6)	; Queue sound for playing
 ; loc_71F3E:
 .nextinput:
 		dbf	d4,.inputloop
 
 		tst.b	d3				; We don't want to change sound priority if it is negative
 		bmi.s	PlaySoundID
-		_move.b	d3,SMPS_RAM.v_sndprio(a6)	; Set new sound priority
+		move.b	d3,SMPS_RAM.v_sndprio(a6)	; Set new sound priority
 ; End of function CycleSoundQueue
 
 
@@ -1311,7 +1343,7 @@ Sound_PlaySFX:
 		move.b	#$80,SMPS_RAM.f_push_playing(a6)	; Mark it as playing
 ; Sound_notA7:
 .sfx_notPush:
-		movea.l	(Go_SoundIndex).l,a0
+		lea	SoundIndex(pc),a0
 		subi.b	#sfx__First,d7		; Make it 0-based
 		lsl.w	#2,d7			; Convert sfx ID into index
 		movea.l	(a0,d7.w),a3		; SFX data pointer
@@ -1436,7 +1468,7 @@ Sound_PlaySpecial:
 ;		bne.w	.locret				; Exit if it is
 ;		tst.b	SMPS_RAM.f_fadein_flag(a6)	; Is music being faded in?
 ;		bne.w	.locret				; Exit if it is
-		movea.l	(Go_SpecSoundIndex).l,a0
+		lea	SpecSoundIndex(pc),a0
 		subi.b	#spec__First,d7			; Make it 0-based
 		lsl.w	#2,d7
 		movea.l	(a0,d7.w),a3
@@ -1831,7 +1863,7 @@ StopAllSound:
 InitMusicPlayback:
 		movea.l	a6,a0
 		; Save several values
-		_move.b	SMPS_RAM.v_sndprio(a6),d1
+		move.b	SMPS_RAM.v_sndprio(a6),d1
 		move.b	SMPS_RAM.f_1up_playing(a6),d2
 		move.b	SMPS_RAM.f_speedup(a6),d3
 		move.b	SMPS_RAM.v_fadein_counter(a6),d4
@@ -1848,7 +1880,7 @@ InitMusicPlayback:
 		dbf	d0,.clearramloop
 
 		; Restore the values saved above
-		_move.b	d1,SMPS_RAM.v_sndprio(a6)
+		move.b	d1,SMPS_RAM.v_sndprio(a6)
 		move.b	d2,SMPS_RAM.f_1up_playing(a6)
 		move.b	d3,SMPS_RAM.f_speedup(a6)
 		move.b	d4,SMPS_RAM.v_fadein_counter(a6)
@@ -2978,7 +3010,7 @@ cfOpF9:
 
 SpecSoundIndex: binclude "sound/music_built/SFX_Special.bin"
 	even
-MusicIndex: binclude "sound/music_built/Music.bin"
-	even
 SoundIndex: binclude "sound/music_built/SFX.bin"
+	even
+MusicIndex: binclude "sound/music_built/Music.bin"
 	even
