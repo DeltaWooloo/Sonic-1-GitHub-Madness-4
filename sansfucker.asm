@@ -26,7 +26,7 @@ GM_Sans_PAL_Loop:
 		move.l	(a0)+,(a1)+			; ''
 		dbf	d0,GM_Sans_PAL_Loop		; repeat until done
 		jsr	PaletteFadeIn			; fade palette in
-		move.b	#$66,d0			; that one cash register sound lel
+		move.b	#bgm_Spoopy,d0			; that one cash register sound lel
 		jsr	PlaySound_Special		; play ID
 		move.w	#15*60,(v_generictimer).w	; set delay time (3 seconds on a 60hz system)
 
