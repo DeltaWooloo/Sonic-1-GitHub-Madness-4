@@ -5,14 +5,14 @@ NemThanatosCredits:	binclude "_gamemode/ThanatosCredits/Credits Font.nem"
 EniThanatosCredits:	binclude "_gamemode/ThanatosCredits/Credits Font.eni"
 
 VDP_ThanatosCredits:
-	dc.w $8700
-	dc.w $8C01
-	dc.w $8B03
-	dc.w $9200
-	dc.w $9001
-	dc.w $8400+(vram_bg>>13)
-	dc.w $8200+(vram_fg>>10)
-	dc.w $8004
+	dc.w $8700					; Set background color to TCLR(0,0)
+	dc.w $8C01					; Set H40 mode (320 px)
+	dc.w $8B03					; HScroll Single-pixel mode
+	dc.w $9200					; Set Window Plane location
+	dc.w $9001					; 64x32 cell plane sizes
+	dc.w $8400+(vram_bg>>13)	; Plane B nametable at $400
+	dc.w $8200+(vram_fg>>10)	; Plane A nametable at $200
+	dc.w $8004					; Mode 1 register
 VDP_ThanatosCredits_end:
 
 GM_ThanatosCredits:

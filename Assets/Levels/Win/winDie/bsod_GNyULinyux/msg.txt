@@ -1,0 +1,76 @@
+USE PLANE SIZE VDP REG $10 = $9011
+https://segaretro.org/Sega_Mega_Drive/Planes#Size
+
+512x512 pixels (64x64 cells)
+8192 ($2000) bytes
+move.w #$9011,($c00004).l
+
+
+
+   1234567890123456789012345678901234567890
+01 I'd just like to interject for a moment.
+02 
+03 What you're referring to as Linux, is
+04 in fact, GNyU/Linux, or as I've recentwy
+05 taken to cawwing it, GNyU pwus Linyux.
+06 Linyux is nyot an opewating system unto
+07 itsewf, but wathew anyothew fwee
+08 componyent of a fuwwy functionying GNyU
+09 system made usefuw by the GNyU cowewibs,
+10 sheww utiwities and vitaw system
+11 componyents compwising a fuww OS as
+12 definyed by POSIX. Many computew usews
+13 wun a modified vewsion of the GNyU
+14 system evewy day, without weawizing it.
+15 Thwough a pecuwiaw tuwn of events, the
+16 vewsion of GNyU which is widewy used
+17 today is often cawwed "Linyux", and
+18 many of its usews awe nyot awawe that it
+19 is basicawwy the GNyU system, devewoped
+20 by the GNyU Pwoject. Thewe weawwy is a
+21 Linyux, and these peopwe awe using it,
+22 but it is just a pawt of the system they
+23 use. Linyux is the ewnyew: the pwogwam
+24 in the system that awwocates the
+25 machinye's wesouwces to the othew
+26 pwogwams that you wun. The kewnyew is an
+27 essentiaw pawt of an opewating system,
+28 but usewess by itsewf; it can onwy
+
+29 function in the context of a compwete
+30 opewating system. Linyux is nyowmawwy
+31 used in combinyation with the GNyU
+32 opewating system: the whowe system is
+33 basicawwy GNyU with Linyux added, ow
+34 GNyU/Linyux. Aww the so-cawwed "Linyux"
+35 distwibutions awe weawwy distwibutions
+36 of GNyU/Linyux.
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+
+57
+58
+59
+60
+61
+62
+63
+64

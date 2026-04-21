@@ -6,6 +6,14 @@
 
 
 AnimateLevelGfx:
+		;!@ GD: Don't handle if Gamemode is NOT GM_Level
+		;(BSOD uses VBLa_08 for BG plane scrolling for GNyU linux bsodData)
+		cmpi.b	#id_Level,(v_gamemode).w
+		bne.s	.ispaused
+		
+		tst.w	(f_pause).w	; is the game paused?
+		bne.s	.ispaused	; if yes, branch
+
 		tst.w	(f_pause).w	; is the game paused?
 		bne.s	.ispaused	; if yes, branch
 		lea	(vdp_data_port).l,a6

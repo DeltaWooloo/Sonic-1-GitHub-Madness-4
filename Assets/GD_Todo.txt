@@ -19,5 +19,5 @@ x Hack Fazbear jumpscare code for Sega Channel Guy jump scare
 	- Seal - Crazy
 	- Ricky Martin - Livin' La Vida Loca
 - BSODs
-	- Linux (https://www.youtube.com/watch?v=QXUSvSUsx80, needs code)
+	x Linux (https://www.youtube.com/watch?v=QXUSvSUsx80, needs code)
 	x New code for appropriate Genesis/SCD region/tmss crashes
