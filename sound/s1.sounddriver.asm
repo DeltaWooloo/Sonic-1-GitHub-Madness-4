@@ -895,6 +895,7 @@ CycleSoundQueue:
 PlaySoundID:
 		moveq	#0,d7
 		move.b	SMPS_RAM.v_sound_id(a6),d7
+		beq.s	.exit
 		move.b	#0,SMPS_RAM.v_sound_id(a6)	; reset music flag
 
 		cmpi.b	#bgm__Last,d7		; Is this music ($81-$93)?
@@ -905,19 +906,19 @@ PlaySoundID:
 	endif
 
 		cmpi.b	#sfx__First,d7		; Is this after music but before sfx? (redundant check)
-		blo.w	.locret			; Return if yes
+		blo.w	.exit			; Return if yes
 		cmpi.b	#sfx__Last,d7		; Is this sfx ($A0-$CF)?
 		blo.w	Sound_PlaySFX		; Branch if yes
 		cmpi.b	#spec__First,d7		; Is this after sfx but before special sfx? (redundant check)
-		blo.w	.locret			; Return if yes
+		blo.w	.exit			; Return if yes
 		cmpi.b	#spec__Last,d7		; Is this special sfx ($D0-$D0)?
 		blo.w	Sound_PlaySpecial	; Branch if yes
 		cmpi.b	#flg__First,d7		; Is this after special sfx but before $E0?
-		blo.w	.locret			; Return if yes
+		blo.w	.exit			; Return if yes
 		cmpi.b	#flg__Last,d7		; Is this $E0-$E4?
 		bls.s	Sound_E0toE4		; Branch if yes
 ; locret_71F8C:
-.locret:
+.exit:
 		rts
 ; ===========================================================================
 
