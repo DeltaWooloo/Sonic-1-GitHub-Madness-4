@@ -11,169 +11,162 @@ SonicDriverVer = 1 ; Tell SMPS2ASM that we're using Sonic 1's driver.
 ; ---------------------------------------------------------------------------
 ; Music Pointers
 ; ---------------------------------------------------------------------------
-; TODO: define every tempo to their respective song
-;SpeedUpIndex:
-;	dc.b	     $55,   1,   1, $44,   1,   1, $76,   1,   1, $80, $55,  $B, $80, $80, $20	; $00-$0F
-;	dc.b	$54, $33, $14,   1, $30, $45, $55, $6E,   1, $55, $50, $60, $20, $80, $65,   1	; $10-$1F
-;	dc.b	$21, $65, $44,   1,   1, $34,   1,   1, $60, $70,   7,  $A, $33,   1,   1, $33	; $20-$2F
-;	dc.b	  4, $80, $25,   1, $55, $24,   1, $45, $55,   1, $4F, $55,   8, $90,   1, $55	; $30-$3F
-;	dc.b	$55,   1, $25, $1C, $25,   1,   1, $68, $58, $25, $35, $55,   1, $33,   1,   1	; $40-$4F
-;	dc.b	  1, $40,   1,   1,   1, $55, $A0,   1,   1, $94, $55,   1, $27, $80, $11,   1	; $50-$5F
-;	dc.b	  1,   1,   1,   1,   1,   1,   1,   1, $2B,   1,   1, $80,   1,   1,   1,   1	; $60-$6F
-;	dc.b	  1,   1,   1,   1, $75,   1,   1,   1, $33,   1, $55, $45, $54, $80, $80,   1	; $70-$7F
-;	dc.b	  1, $33, $4A,   1;,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1	; $80-$8F
-;	dc.b	  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1	; $90-$9F
+
 bgmdef macro tempo,addr
 	dc.l (tempo&$FF)<<24|(addr&$3FFFFF)
 	endm
+
+_nomod equ $FF
 ; NOTE: a tempo of $FF forces the driver to use the normal tempo
 ;       it's otherwise the same as S3Ks tempo algo
+
 MusicIndex:
-	bgmdef $00, Mus_MWaterS
-	bgmdef $00, Mus_OrangeSong
-	bgmdef $00, Mus_GreenHills
-	bgmdef $00, Mus_DUNGEON3
-	bgmdef $00, Mus_LosTontos
-	bgmdef $00, Mus_Area5
-	bgmdef $00, Mus_Easton
-	bgmdef $00, Mus_Sweden
-	bgmdef $00, Mus_SMWCave
-	bgmdef $00, Mus_Doom
-	bgmdef $00, Mus_BadEmerald
-	bgmdef $00, Mus_TreasureCaves
-	bgmdef $00, Mus_Danstar
-	bgmdef $00, Mus_GCV2005
-	bgmdef $00, Mus_fightMID
-	bgmdef $00, Mus_Cheetah
-	bgmdef $00, Mus_REMansion
-	bgmdef $00, Mus_ColdBrew
-	bgmdef $00, Mus_ValSDST1
-	bgmdef $00, Mus_UNOwenWasHer
-	bgmdef $00, Mus_Passport
-	bgmdef $00, Mus_VirusAlert
-	bgmdef $00, Mus_DoleDetective
-	bgmdef $00, Mus_HardwareStore
-	bgmdef $00, Mus_DoleAttack
-	bgmdef $00, Mus_GHZ
-	bgmdef $00, Mus_TF2
-	bgmdef $00, Mus_Blue
-	bgmdef $00, Mus_Hidden
-	bgmdef $00, Mus_Final
-	bgmdef $00, Mus_BonusEight
-	
-	bgmdef $00, Mus_Boss
-	bgmdef $FF, Mus_ClintonFuck
-	bgmdef $00, Mus_Coffinman
-	bgmdef $00, Mus_Aporia
-	bgmdef $00, Mus_Megalovania
-	bgmdef $00, Mus_TwoSteps
-	bgmdef $00, Mus_DoleBOSS
-	bgmdef $00, Mus_PizzaPopBoss
+	bgmdef s1TempotoS3($03), Mus_MWaterS
+	bgmdef $01, Mus_OrangeSong
+	bgmdef $01, Mus_GreenHills
+	bgmdef $44, Mus_DUNGEON3
+	bgmdef $01, Mus_LosTontos
+	bgmdef $01, Mus_Area5
+	bgmdef $76, Mus_Easton
+	bgmdef s1TempotoS3($00), Mus_Sweden
+	bgmdef s1TempotoS3($00), Mus_SMWCave
+	bgmdef $80, Mus_Doom
+	bgmdef $55, Mus_BadEmerald
+	bgmdef s1TempotoS3($18), Mus_TreasureCaves
+	bgmdef $80, Mus_Danstar
+	bgmdef s1TempotoS3($00), Mus_GCV2005
+	bgmdef s1TempotoS3($08), Mus_fightMID
+	bgmdef $54, Mus_Cheetah
+	bgmdef s1TempotoS3($05), Mus_REMansion
+	bgmdef s1TempotoS3($0D), Mus_ColdBrew
+	bgmdef s1TempotoS3($FF), Mus_ValSDST1
+	bgmdef s1TempotoS3($00), Mus_UNOwenWasHer
+	bgmdef $30, Mus_Passport
+	bgmdef $45, Mus_VirusAlert
+	bgmdef $80, Mus_Title
+	bgmdef $55, Mus_DoleDetective
+	bgmdef $6E, Mus_HardwareStore
+	bgmdef s1TempotoS3($03), Mus_GHZ
+	bgmdef $50, Mus_TF2
+	bgmdef $60, Mus_Blue
+	bgmdef s1TempotoS3($02), Mus_Final
 
-	bgmdef $00, Mus_Invincible
-	bgmdef $00, Mus_AVGNInv
+	bgmdef $55, Mus_BeforeBoss
+	bgmdef $01, Mus_Boss
+	bgmdef _nomod, Mus_ClintonFuck
+	bgmdef $65, Mus_Coffinman
+	bgmdef $44, Mus_Aporia
+	bgmdef $01, Mus_Megalovania
+	bgmdef $01, Mus_TwoSteps
+	bgmdef $34, Mus_DoleBOSS
+	bgmdef s1TempotoS3($00), Mus_PizzaPopBoss
 
-	bgmdef $00, Mus_Title
-	bgmdef $00, Mus_SmilingBomb
-	bgmdef $00, Mus_NewBarkTown
-	bgmdef $00, Mus_Memories
-	bgmdef $00, Mus_Dingaling
-	bgmdef $00, Mus_Continue
-	bgmdef $00, Mus_Ending
-	bgmdef $00, Mus_SkySanctuary
-	bgmdef $00, Mus_Jeopardy
+	bgmdef $6C, Mus_RamRanch
 
-	bgmdef $FF, Mus_ActClear
-	bgmdef $00, Mus_Pac2
-	bgmdef $FF, Mus_GameOver
-	bgmdef $00, Mus_ExtraLife
-	bgmdef $FF, Mus_Drowning
-	bgmdef $00, Mus_Emerald
+	bgmdef $01, Mus_Invincible
+	bgmdef $45, Mus_WillTell
+	bgmdef $60, Mus_AVGNInv
+	bgmdef s2TempotoS3($60), Mus_LimitedEgg
 
-	bgmdef $00, Mus_Retro
-	bgmdef $00, Mus_Setro
-	bgmdef $00, Mus_MayoDed
-	bgmdef $00, Mus_S1ActClear
-	bgmdef $00, Mus_SHCSplash
-	bgmdef $00, Mus_RetroBlast
-	bgmdef $00, Mus_ConiJingle
-	bgmdef $00, Mus_GooglePlayStock
-	bgmdef $00, Mus_SneakySnitch
-	bgmdef $00, Mus_TG2000Jingle
-	bgmdef $00, Mus_Donnie
-	bgmdef $00, Mus_TSHLogo
-	bgmdef $00, Mus_S1Continue
-	bgmdef $00, Mus_PuyoDrown
-	bgmdef $00, Mus_EuroSega
-	bgmdef $00, Mus_DeltaWSplash
-	bgmdef $00, Mus_S3Continue
-	bgmdef $00, Mus_BlueBalls
-	bgmdef $00, Mus_ChaosEmerald
-	bgmdef $00, Mus_LimitedClear
-	bgmdef $00, Mus_Moonwalker
-	bgmdef $00, Mus_CleanSlate
+	bgmdef s1TempotoS3($07), Mus_SmilingBomb
+	bgmdef $0A, Mus_NewBarkTown
+	bgmdef s1TempotoS3($05), Mus_Memories
+	bgmdef $01, Mus_DoleAttack
+	bgmdef $01, Mus_Dingaling
+	bgmdef $01, Mus_Spoopy
+	bgmdef s1TempotoS3($FF), Mus_Continue
+	bgmdef s1TempotoS3($05), Mus_Ending
+	bgmdef $04, Mus_SkySanctuary
+	bgmdef s1TempotoS3($00), Mus_Jeopardy
 
-	bgmdef $00, Mus_PuyoReject
-	bgmdef $00, Mus_LG
-	bgmdef $00, Mus_ILBT
-	bgmdef $00, Mus_Sunset
-	bgmdef $00, Mus_Elevator
-	bgmdef $00, Mus_SonUnderground
-	bgmdef $00, Mus_Son1UP
-	bgmdef $00, Mus_GEMSHill
-	bgmdef $00, Mus_LimitedEgg
-	bgmdef $00, Mus_BomerDude
-	bgmdef $00, Mus_ClintonYears
-	bgmdef $00, Mus_Skinner	
-	
-	bgmdef $00, Mus_MMZPast
+	bgmdef _nomod, Mus_ActClear
+	bgmdef s1TempotoS3($05), Mus_MJWin
+	bgmdef s1TempotoS3($03), Mus_GameOver
+	bgmdef $24, Mus_ExtraLife
+	bgmdef _nomod, Mus_Drowning
+	bgmdef $45, Mus_Emerald
 
-	bgmdef $00, Mus_SS
-	bgmdef $00, Mus_CanCan
-	bgmdef $00, Mus_ChickenDance
-	bgmdef $00, Mus_DeltaTale
-	bgmdef $00, Mus_Carefree
-	bgmdef $00, Mus_FurElise
-	bgmdef $00, Mus_SwingSinners
-	bgmdef $00, Mus_Miniscule
-	bgmdef $00, Mus_FuneralMarch
-	bgmdef $00, Mus_BatMan
-	bgmdef $00, Mus_Resetti
-	bgmdef $00, Mus_Spoopy
-	bgmdef $00, Mus_NewShop
-	bgmdef $00, Mus_NepAnime
-	bgmdef $00, Mus_VampKiller
-	bgmdef $00, Mus_Gadget
-	bgmdef $00, Mus_CanCanInv
-	bgmdef $00, Mus_Wormy
-	bgmdef $00, Mus_Starman
-	bgmdef $00, Mus_JamesPond
-	bgmdef $00, Mus_AlexKiddEnd
-	bgmdef $00, Mus_DJKK
-	bgmdef $00, Mus_Levian
-	bgmdef $00, Mus_Peppa
-	bgmdef $00, Mus_SkyBase
-	bgmdef $00, Mus_Scrappy
-	bgmdef $00, Mus_WeAreTheSonic
-	bgmdef $00, Mus_Thomas
-	bgmdef $00, Mus_CCLobby
-	bgmdef $00, Mus_ChairRoom
-	bgmdef $00, Mus_BossaNova
-	bgmdef $00, Mus_dam_dariram
-	bgmdef $00, Mus_WillTell
-	bgmdef $00, Mus_Outfarted
-	bgmdef $00, Mus_BeforeBoss
-	bgmdef $00, Mus_SonicToole
-	bgmdef $00, Mus_SkyGift
+	bgmdef s1TempotoS3($03), Mus_Retro
+	bgmdef $01, Mus_Setro
+	bgmdef $4F, Mus_MayoDed
+	bgmdef s1TempotoS3($03), Mus_S1ActClear
+	bgmdef $08, Mus_SHCSplash
+	bgmdef $90, Mus_RetroBlast
+	bgmdef s1TempotoS3($00), Mus_ConiJingle
+	bgmdef s1TempotoS3($03), Mus_GooglePlayStock
+	bgmdef s1TempotoS3($03), Mus_SneakySnitch
+	bgmdef s1TempotoS3($00), Mus_TG2000Jingle
+	bgmdef s1TempotoS3($07), Mus_Donnie
+	bgmdef s1TempotoS3($09), Mus_TSHLogo
+	bgmdef s1TempotoS3($07), Mus_S1Continue
+	bgmdef s1TempotoS3($00), Mus_PuyoDrown
+	bgmdef s1TempotoS3($00), Mus_EuroSega
+	bgmdef $68, Mus_DeltaWSplash
+	bgmdef $58, Mus_S3Continue
+	bgmdef $25, Mus_BlueBalls
+	bgmdef $35, Mus_ChaosEmerald
+	bgmdef s1TempotoS3($03), Mus_LimitedClear
+	bgmdef s1TempotoS3($FF), Mus_Moonwalker
+	bgmdef s1TempotoS3($05), Mus_CleanSlate
 
-	bgmdef $00, Mus_CrazyMario
-	bgmdef $00, Mus_Ding
-	bgmdef $00, Mus_SadMac
-	bgmdef $00, Mus_Win2K
-	bgmdef $00, Mus_Folgers
-	bgmdef $00, Mus_MJWin
-	bgmdef $18, Mus_RamRanch
-	bgmdef $18, Mus_S28bitUnused
+	bgmdef $01, Mus_PuyoReject
+	bgmdef $01, Mus_LG
+	bgmdef s1TempotoS3($00), Mus_ILBT
+	bgmdef s1TempotoS3($04), Mus_Sunset
+	bgmdef s1TempotoS3($00), Mus_Elevator
+	bgmdef $01, Mus_SonUnderground
+	bgmdef s1TempotoS3($01), Mus_Son1UP
+	bgmdef s1TempotoS3($03), Mus_GEMSHill
+	bgmdef $01, Mus_BomerDude
+	bgmdef $94, Mus_ClintonYears
+	bgmdef $01, Mus_Skinner
+
+	bgmdef s1TempotoS3($03), Mus_MMZPast
+	bgmdef $55, Mus_BossaNova
+	bgmdef $01, Mus_BatMan
+	bgmdef s2TempotoS3($E0), Mus_Hidden
+
+	bgmdef $65, Mus_BonusEight
+	bgmdef $01, Mus_Pac2
+	bgmdef $01, Mus_SS
+	bgmdef $27, Mus_CanCan
+	bgmdef $80, Mus_ChickenDance
+	bgmdef $11, Mus_DeltaTale
+	bgmdef $01, Mus_Carefree
+	bgmdef $01, Mus_FurElise
+	bgmdef $01, Mus_SwingSinners
+	bgmdef $01, Mus_Miniscule
+	bgmdef $01, Mus_FuneralMarch
+	bgmdef $01, Mus_Resetti
+	bgmdef $01, Mus_NewShop
+	bgmdef s1TempotoS3($06), Mus_NepAnime
+	bgmdef $01, Mus_VampKiller
+	bgmdef s1TempotoS3($00), Mus_Gadget
+	bgmdef $80, Mus_CanCanInv
+	bgmdef $01, Mus_Wormy
+	bgmdef s1TempotoS3($00), Mus_Starman
+	bgmdef $01, Mus_JamesPond
+	bgmdef s1TempotoS3($00), Mus_AlexKiddEnd
+	bgmdef $01, Mus_DJKK
+	bgmdef $01, Mus_Levian
+	bgmdef $01, Mus_Peppa
+	bgmdef $01, Mus_SkyBase
+	bgmdef $75, Mus_Scrappy
+	bgmdef $01, Mus_WeAreTheSonic
+	bgmdef $01, Mus_Thomas
+	bgmdef $01, Mus_CCLobby
+	bgmdef s1TempotoS3($05), Mus_ChairRoom
+	bgmdef $01, Mus_dam_dariram
+	bgmdef $55, Mus_Outfarted
+	bgmdef $75, Mus_SkyGift
+	bgmdef s1TempotoS3($05), Mus_S28bitUnused
+
+	bgmdef $73, Mus_SonicToole
+	bgmdef s1TempotoS3($00), Mus_Folgers
+	bgmdef $80, Mus_Ding
+	bgmdef $80, Mus_SadMac
+	bgmdef s1TempotoS3($00), Mus_Win2K
+	bgmdef $54, Mus_CrazyMario
 	;!@ bgmwarning	MusicIndex,4
 
 Mus_MWaterS:		include "music/LiquidTracks/Mus - Mega Water S.asm"

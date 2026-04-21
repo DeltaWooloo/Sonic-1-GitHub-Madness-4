@@ -309,3 +309,5 @@ OutFarted_DAC_06_0_32:
 OutFarted_DAC_07_0_32:
 	dc.b smpsNoAttack, $20
 	smpsReturn
+
+	smpsFooterEndSong	"TG2000Tracks/Outfarted.asm"

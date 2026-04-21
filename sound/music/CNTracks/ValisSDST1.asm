@@ -220,3 +220,4 @@ ValisSTG1_Voices:
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $00, $20, $1A, $2A
 
+	smpsFooterEndSong	"CNTracks/ValisSDST1.asm"

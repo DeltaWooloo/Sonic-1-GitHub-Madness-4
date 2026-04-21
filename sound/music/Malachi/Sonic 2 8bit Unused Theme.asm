@@ -171,3 +171,5 @@ Mus_S28BitUnused_Voices:
 ;Mus_S28BitUnused_VolEnv2:	smpsEnvVolPsg $00,$01,$04,$08,$0B,$0E,REST
 ;Mus_S28BitUnused_VolEnv3:	smpsEnvVolPsg $00,$00,$02,$04,$06,$07,$0A,$0C,REST
 ;Mus_S28BitUnused_VolEnv4:	smpsEnvVolPsg $01,$02,$02,$02,$02,$02,$02,$02,$03,$03,$04,$04,REST
+
+	smpsFooterEndSong	"Malachi/Sonic 2 8bit Unused Theme.asm"

@@ -530,3 +530,4 @@ RamRanch_Voices:
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $00, $17, $2B, $14
 
+	smpsFooterEndSong	"CNTracks/RamRanch.asm"

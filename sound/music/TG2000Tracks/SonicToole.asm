@@ -216,3 +216,5 @@ SonicToole_PSG3_00_0_104:
 	dc.b nMaxPSG, $01, nRst, $03, nMaxPSG, $01, nRst, $03, nMaxPSG, $01, nRst, $03, nMaxPSG, $01, nRst, $03
 	dc.b nMaxPSG, $01, nRst, $07, nMaxPSG, $01, nRst, $22, $01
 	smpsStop
+
+	smpsFooterEndSong	"TG2000/SonicToole.asm"

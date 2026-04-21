@@ -872,3 +872,5 @@ BeforeBoss_PSG3_01_0_64:
 	dc.b nMaxPSG, $02, nRst, $06, nMaxPSG, $02, nRst, $06, nMaxPSG, $02, nRst, $06, nMaxPSG, $02, nRst, nMaxPSG
 	dc.b nRst
 	smpsReturn
+
+	smpsFooterEndSong	"TG2000Tracks/BeforeBoss.asm"

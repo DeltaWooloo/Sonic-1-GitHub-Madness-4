@@ -1069,3 +1069,5 @@ BonusEight_PSG3_05_0_64:
 	smpsPSGAlterVol	$03
 	dc.b $02, $02
 	smpsReturn
+
+	smpsFooterEndSong	"TG2000Tracks/Bonus8.asm"

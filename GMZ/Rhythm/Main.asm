@@ -272,8 +272,8 @@ REnd_SpawnMsg:
 		tst.w	v_generictimer
 		bne	Rhythm_MainLoop
 
-		move.b	#dDAMN,d0
-		jsr	MegaPCM_PlaySample	; GMZ - that damn bird
+		move.b	#bgm_MJWin,d0
+		jsr	(QueueSound1).l		; GMZ - that damn bird
 
 		jsr	FindFreeObj
 		bne	Rhythm_MainLoop
@@ -282,7 +282,7 @@ REnd_SpawnMsg:
 		move.l	#Map_RhyMessages,obMap(a1)
 		move.b	#8,obRoutine(a1)
 		move.w	#$00F0,obScreenY(a1)
-		move.w	#60*3,msgItDoneTimer(a1)	; GMZ - Show the "IT DONE" message for 5 seconds
+		move.w	#60*5,msgItDoneTimer(a1)	; GMZ - Show the "IT DONE" message for 5 seconds
 
 		jsr	FindFreeObj
 		bne	Rhythm_MainLoop

@@ -85,6 +85,7 @@ dDAMN				ds.b 1
 dTwerkOf87			ds.b 1
 dScream				ds.b 1
 dRift				ds.b 1
+dSans				ds.b 1
 
 ; Title Screen Samples
 dYoFreddy			ds.b 1
@@ -117,7 +118,6 @@ dOllieWahoo			ds.b 1
 ; SEGA Samples
 dSega				ds.b 1
 
-dSans				ds.b 1
 
 ;dSega2				ds.b 1
 

@@ -260,17 +260,16 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_UNOwenWasHer		; Windows	(Act 1)
 	nextenum bgm_Passport			; 		(Act 2)
 	nextenum bgm_VirusAlert			; 		(Act 3)
+	nextenum bgm_Title			; Inside Tonic's Body
 	nextenum bgm_DoleDetective		; Doleville	(Act 1)
 	nextenum bgm_HardwareStore		; 		(Act 2)
-	nextenum bgm_DoleAttack			; 		(Act 3)
 	nextenum bgm_GHZ			; Nogales Zone
 	nextenum bgm_TF2			; Bluescapes	(Act 1)		; Dax: Interesting song choice for this :/
 	nextenum bgm_Blue			;		(Act 2)
-	nextenum bgm_Hidden			; Bluestone
-	nextenum bgm_Final			; DUMMY Level BGM
-	nextenum bgm_BonusEight			; Bonus Stage?
+	nextenum bgm_Final			; Final Zone
 
 	; Boss BGM
+	nextenum bgm_BeforeBoss			; Pre-Boss Encounter
 	nextenum bgm_Boss			; Regular Boss
 	nextenum bgm_ClintonFuck		; Bill Clinton Boss
 	nextenum bgm_Coffinman			; Alberta Canada Boss
@@ -280,71 +279,81 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_DoleBOSS			; Doleville Boss
 	nextenum bgm_PizzaPopBoss		; A Boss of Some kind???
 
+	; Special Stage BGM
+	nextenum bgm_RamRanch			; Ram Ranch
+
 	; Power Up BGM
-	nextenum bgm_Invincible
-	nextenum bgm_AVGNInv
+	nextenum bgm_Invincible			; Invincibility
+	nextenum bgm_WillTell			; Invincibility (Mr. Bean)
+	nextenum bgm_AVGNInv			; Power Sneakers
+	nextenum bgm_LimitedEgg			; Slow-Down Shoes
 
 	; UI + Scene BGM
-	nextenum bgm_Title
-	nextenum bgm_smilingbomb
-	nextenum bgm_NewBarkTown
-	nextenum bgm_Memories
-	nextenum bgm_Dingaling
-	nextenum bgm_Continue
-	nextenum bgm_Ending
-	nextenum bgm_SkySanctuary
-	nextenum bgm_Jeopardy
+	nextenum bgm_smilingbomb		; Menu
+	nextenum bgm_NewBarkTown		; Debug Menu
+	nextenum bgm_Memories			; Character/Difficulty Select
+	nextenum bgm_DoleAttack			; Intro Cutscene
+	nextenum bgm_Dingaling			; RPG Battle (might change this)
+	nextenum bgm_Spoopy			; Sans Death Screen
+	nextenum bgm_Continue			; Continue Screen
+	nextenum bgm_Ending			; Ending A
+	nextenum bgm_SkySanctuary		; Ending B
+	nextenum bgm_Jeopardy			; The End Screen
 
 	; In-Game Jingles
-	nextenum bgm_ActClear
-	nextenum bgm_Pac2
-	nextenum bgm_GameOver
-	nextenum bgm_ExtraLife
-	nextenum bgm_Drowning
-	nextenum bgm_Emerald
+	nextenum bgm_ActClear			; Act Clear
+	nextenum bgm_MJWin			; Special Stage Win
+	nextenum bgm_GameOver			; Game Over
+	nextenum bgm_ExtraLife			; Extra Life
+	nextenum bgm_Drowning			; Drowning
+	nextenum bgm_Emerald			; Chaos Emerald
 
 	; Splash Screen BGM
-	nextenum bgm_Retro
-	nextenum bgm_RonicSetro
-	nextenum bgm_MayoDed
-	nextenum bgm_S1ActClear
-	nextenum bgm_SHCSplash
-	nextenum bgm_RetroBlast
-	nextenum bgm_ConiJingle
-	nextenum Bgm_GooglePlayStock
-	nextenum bgm_SneakySnitch
-	nextenum bgm_TG2000Jingle
-	nextenum bgm_Donnie
-	nextenum bgm_TSHLogo
-	nextenum bgm_S1Continue
-	nextenum bgm_PuyoDrown
-	nextenum bgm_EuroSega
-	nextenum bgm_DeltaWSplash
-	nextenum bgm_S3Continue
-	nextenum bgm_BlueBalls
-	nextenum bgm_ChaosEmerald
-	nextenum bgm_LimitedClear
-	nextenum bgm_Moonwalker
-	nextenum bgm_CleanSlate
+	nextenum bgm_Retro			; Sonic Retro
+	nextenum bgm_RonicSetro			; Ronic Setro
+	nextenum bgm_MayoDed			; SSRG
+	nextenum bgm_S1ActClear			; SSRG (Ver. 2)
+	nextenum bgm_SHCSplash			; SHC Splash
+	nextenum bgm_RetroBlast			; Retro Blast Screen
+	nextenum bgm_ConiJingle			; ConiNight
+	nextenum Bgm_GooglePlayStock		; RobiWanKenobi
+	nextenum bgm_SneakySnitch		; Malachi
+	nextenum bgm_TG2000Jingle		; TheGamer2000
+	nextenum bgm_Donnie			; Team Overload
+	nextenum bgm_TSHLogo			; TheSunsetHacker
+	nextenum bgm_S1Continue			; Broke Sonic Screen
+	nextenum bgm_PuyoDrown			; Wait, there's another one?
+	nextenum bgm_EuroSega			; Sega, Now You're Playing With Power!
+	nextenum bgm_DeltaWSplash		; The W Splash Screen
+	nextenum bgm_S3Continue			; The W Splash Screen: NO WAY!
+	nextenum bgm_BlueBalls			; The W Splash Screen: Get Blue Balls!
+	nextenum bgm_ChaosEmerald		; The W Splash Screen: Chaos Emerald!
+	nextenum bgm_LimitedClear		; The W Splash Screen: It is Limited!
+	nextenum bgm_Moonwalker			; The W Splash Screen: You've Been Struck By a Smooth Criminal!
+	nextenum bgm_CleanSlate			; The W Splash Screen: God Fucking Dammit Robi
 
 	; Advertisement BGM
-	nextenum bgm_PuyoReject
-	nextenum bgm_LG
-	nextenum bgm_ILBT
-	nextenum bgm_Sunset
-	nextenum bgm_Elevator
-	nextenum bgm_SonUnderground
-	nextenum bgm_Son1UP
-	nextenum bgm_GEMSHill
-	nextenum bgm_LimitedEgg
-	nextenum bgm_BomerDude
-	nextenum bgm_ClintonYears
-	nextenum bgm_Skinner
-	
+	nextenum bgm_PuyoReject			; Ad Jingle A
+	nextenum bgm_LG				; Ad Jingle B
+	nextenum bgm_ILBT			; Hong Kong 97 Ad
+	nextenum bgm_Sunset			; Carbuncle Ad
+	nextenum bgm_Elevator			; Teeth Tonic Ad
+	nextenum bgm_SonUnderground		; Sonic Underground Ad
+	nextenum bgm_Son1UP			; Sonic 1 Super Challenges Ad
+	nextenum bgm_GEMSHill			; IWBTH Ad
+	nextenum bgm_BomerDude			; AtGames Ad
+	nextenum bgm_ClintonYears		; Gaming in the Clinton Years Ad
+	nextenum bgm_Skinner			; Steamed Hams Ad
+
 	; BSOD BGM
-	nextenum bgm_MMZPast
+	nextenum bgm_MMZPast			; Mega CD Crash
+	nextenum bgm_BossaNova
+	nextenum bgm_BatMan
+	nextenum bgm_Hidden
 
 	; Unused Full/Looping BGM
+	nextenum bgm_BonusEight
+	nextenum bgm_Pac2
 	nextenum bgm_SS
 	nextenum bgm_CanCan
 	nextenum bgm_ChickenDance
@@ -354,9 +363,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_SwingSinners
 	nextenum bgm_Miniscule
 	nextenum bgm_FuneralMarch
-	nextenum bgm_BatMan
 	nextenum bgm_Resetti
-	nextenum bgm_Spoopy
 	nextenum bgm_NewShop
 	nextenum bgm_NepAnime
 	nextenum bgm_VampKiller
@@ -375,23 +382,18 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Thomas
 	nextenum bgm_CCLobby
 	nextenum bgm_ChairRoom
-	nextenum bgm_BossaNova
 	nextenum bgm_dam_dariram
-	nextenum bgm_WillTell
 	nextenum bgm_Outfarted
-	nextenum bgm_BeforeBoss
-	nextenum bgm_SonicToole
 	nextenum bgm_SkyGift
+	nextenum bgm_S28BitUnused
 
 	; Unused Jingle BGM
-	nextenum bgm_CrazyMario
+	nextenum bgm_SonicToole
+	nextenum bgm_Folgers
 	nextenum bgm_Ding
 	nextenum bgm_SadMac
 	nextenum bgm_Win2K
-	nextenum bgm_Folgers
-	nextenum bgm_MJWin
-	nextenum bgm_RamRanch
-	nextenum bgm_S28BitUnused
+	nextenum bgm_CrazyMario
 	; Keep this last
 	nextenum bgm__Last	
 	bgm__count:			equ	(bgm__Last-bgm__First)	; Count of songs

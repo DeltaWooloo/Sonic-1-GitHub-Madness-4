@@ -189,3 +189,5 @@ SkyGift_PSG3_00_0_80:
 	smpsPSGvoice	TooleTone
 	dc.b nMaxPSG, $10, $10, $28
 	smpsReturn
+
+	smpsFooterEndSong	"TG2000Tracks/SkyGift.asm"
