@@ -46,6 +46,8 @@ chrid_last	equ 2
 ; ---------------------------------------------------------------------------
 
 SonicPlayer:
+		cmpi.b	#id_ColdBrew,(v_gamemode).w
+		beq.w	TheColdBrewBear
 		tst.w	(v_debuguse).w		; is debug mode being used?
 		beq.s	.nodbug			; if not, branch
 		jmp	(DebugMode).l
@@ -1200,15 +1202,13 @@ Sonic_LevelBound:
 		
 .bottom2:		
 		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w ; is level SBZ2 ?
-		bne.s	.JUMP_KillSonic	; if not, kill Sonic
+		bne.w	KillSonic_Humpy	; if not, kill Sonic
 		cmpi.w	#$2000,(v_player+obX).w
-		blo.s	.JUMP_KillSonic
+		blo.w	KillSonic_Humpy
 		clr.b	(v_lastlamp).w	; clear lamppost counter
 		move.w	#1,(f_restart).w ; restart the level
 		move.w	#(id_ARZ<<8)+3,(v_zone).w ; set level to SBZ3 (LZ4)
 		rts
-.JUMP_KillSonic:	
-		jmp (KillSonic).l
 ; ----------------------------------------------------------------------------
 
 ; Boundary_Sides
@@ -1863,7 +1863,7 @@ Sonic_HurtStop:
 .skip:
 		addi.w	#224,d0
 		cmp.w	obY(a0),d0
-		blo.w	KillSonic
+		blo.s	KillSonic_Humpy
 		bsr.w	Sonic_Floor
 		btst	#1,obStatus(a0)
 		bne.s	locret_13860
@@ -1877,6 +1877,8 @@ Sonic_HurtStop:
 
 locret_13860:
 		rts
+KillSonic_Humpy:
+		jmp		(KillSonic).l
 ; End of function Sonic_HurtStop
 
 ; ---------------------------------------------------------------------------
@@ -2710,3 +2712,56 @@ Player_LoadGfx:
 		include	"char_assets/Maniac Ani.asm"
 		include	"char_assets/Bean Ani.asm"
 
+; ---------------------------------------------------------------------------
+; This is Cold Brew stuff okay
+; please dont fuck it up
+; ---------------------------------------------------------------------------
+
+TheColdBrewBear:
+		moveq	#0,d0
+		move.b	obRoutine(a0),d0
+		move.w	TheColdBrewBear_Index(pc,d0.w),d1
+		jsr		TheColdBrewBear_Index(pc,d1.w)
+		jmp		(DisplaySprite).l
+TheColdBrewBear_Index:dc.w TheColdBrewBear_Init-TheColdBrewBear_Index
+				dc.w TheColdBrewBear_Slide-TheColdBrewBear_Index
+; ===========================================================================
+
+TheColdBrewBear_Init:	; Routine 0
+		addq.b	#2,obRoutine(a0)
+		move.b	#24,obHeight(a0)
+		move.b	#24,obWidth(a0)
+		move.l	#Map_CBGuy,obMap(a0)
+		move.w	#$780,obGfx(a0)	; using raw addresses im sorry
+;		move.b	#1,obFrame(a0)	; forgot to comment this oops
+		move.b	#2,obPriority(a0)
+		move.b	#$18,obActWid(a0)
+		move.b	#4,obRender(a0)
+
+TheColdBrewBear_Slide:	; Routine 2
+		add.w	#$10,obVelX(a0)
+		jsr	(ObjectFall).l
+;		bsr.w	FootCollision
+		bsr.w	ObjFloorDist
+;		cmpi.w	#-8,d1
+;		blt.s	.notonfloor
+;		cmpi.w	#$C,d1
+;		bge.s	.notonfloor
+		add.w	d1,obY(a0)	; match object's position with the floor
+
+		rts	
+.notonfloor:
+;		move.w	#-$10,obVelY(a0)
+		rts	
+
+Map_CBGuy: mappingsTable
+	mappingsTableEntry.w	Map_413d_0
+
+Map_413d_0:	spriteHeader
+ spritePiece -$18, -$18, 4, 4, 0, 0, 0, 0, 0
+ spritePiece 8, -$10, 2, 4, $10, 0, 0, 0, 0
+ spritePiece -$18, 8, 4, 2, $18, 0, 0, 0, 0
+ spritePiece 8, $10, 2, 1, $20, 0, 0, 0, 0
+Map_413d_0_End
+
+	even

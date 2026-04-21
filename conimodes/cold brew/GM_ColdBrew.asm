@@ -43,6 +43,7 @@ GM_CB_ClrObjRam:
 		locVRAM	0
 		lea	(Nem_ColdBrew).l,a0 ;	; load art
 		jsr	(NemDec).l
+
 		lea	(v_ram_start).l,a1
 		lea	(Eni_ColdBrew).l,a0 ; load map
 		move.w	#0,d0
@@ -181,6 +182,9 @@ CBLevel_DelayLoop:
 		move.b	(v_zone).w,d0
 		addi.w	#plcid_GHZAnimals,d0
 		jsr	(AddPLC).l	; load animal gfx (level no. + $15)
+		locVRAM	$780*$20
+		lea	(Nem_CBZGuy).l,a0 ;	; load art
+		jsr	(NemDec).l
 		jsr	(PaletteWhiteIn).l
 ; ---------------------------------------------------------------------------
 ; Main level loop (when all title card and loading sequences are finished)

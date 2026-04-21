@@ -572,6 +572,8 @@ Nem_ChopperCBZ:	binclude	"artnem/Enemy ChopperCBZ.nem"
 		even
 Nem_MotobugCBZ:	binclude	"artnem/Enemy MotobugCBZ.nem"
 		even
+Nem_CBZGuy:	binclude	"artnem/CBGuy.nem"
+		even
 Art_Eiza:	binclude	"coniobjs/eiza/art.bin"
 		even
 ; ---------------------------------------------------------------------------
