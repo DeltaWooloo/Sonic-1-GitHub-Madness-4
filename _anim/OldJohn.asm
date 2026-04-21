@@ -2,7 +2,7 @@
 ; OLDJOHN
 ; --------------------------------------------------------------------------------
 
-        dc.w AnimPSB_1-Ani_Oldjohn
+        dc.w AnimStatus-Ani_Oldjohn
 		dc.w AnimHurt-Ani_Oldjohn
 		dc.w AnimFly-Ani_Oldjohn
 

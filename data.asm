@@ -546,9 +546,9 @@ Nem_EndStH:	binclude	"artnem/Ending - StH Logo.nem"
 		even
 Eni_TheIdiotBros:	binclude	"tilemaps/Idiots.eni"
 		even
-Nem_DioDanner_Intro:	incbin	"_incObj/DioMildanner/Art - Intro.nem"
+Art_DioDanner:	incbin	"_incObj/DioMildanner/Art - Boss.uncle"
 		even
-Nem_DioDanner_Boss:	incbin	"_incObj/DioMildanner/Art - Boss.nem"
+Nem_DioDanner_Intro:	incbin	"_incObj/DioMildanner/Art - Intro.nem"
 		even
 Nem_DioDanner_Dead:	incbin	"_incObj/DioMildanner/Art - Dead.nem"
 		even

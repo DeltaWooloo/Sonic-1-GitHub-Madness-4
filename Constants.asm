@@ -854,9 +854,8 @@ ArtTile_SS_Zone_5:		equ $7A0
 ArtTile_SS_Zone_6:		equ $7A9
 
 ;MILD danner
-FartDanner:		equ $400
-SudoAptInstall:		equ $5B
-Mildfucker:		equ $700
+ArtTile_FartDanner:		equ $100	; compressed stuff goes here
+ArtTile_Mildfucker:		equ $400	; and this is where the true magic happens
 ;define this bs
 vram_win:   equ $3800
 

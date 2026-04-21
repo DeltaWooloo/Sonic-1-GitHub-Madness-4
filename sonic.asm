@@ -6494,6 +6494,22 @@ Nem_Wario:	binclude	"artnem/Wario.nem"
 	include	"_incObj/Katsi.asm"	
 ; end of 'ROM'
 
+; ==============================================================
+; --------------------------------------------------------------
+; OLDJOHN
+; --------------------------------------------------------------
+
+Nem_OldJohn:	binclude	"artnem/OldJohn.nem"
+		even
+Map_OldJohn:		
+	include "_maps/OldJohn.asm"
+		even		
+Ani_Oldjohn:		
+	include "_anim/OldJohn.asm"
+		even			
+		
+ 		include	"_incObj/OldJohn.asm"	; program it 
+
 	
 		include	"data.asm"		; data includes in here
 ; ===========================================================================
