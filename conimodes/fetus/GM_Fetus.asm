@@ -73,14 +73,15 @@ GM_Fet_PalSet:
 		lea     (Pal_Fetus+3*2).l,a0
 		tst.b	(DiffVariable).w ; check difficulty
 		beq.s	.dontset
-		lea     (Pal_Fetus+6*2).l,a0
+		lea     (Pal_Fetus2+6*2).l,a0
 	.dontset:
-		move.w	#$3,d7	; 6 colors
+		moveq   #8-1,d7	; 6 colors
 	.loop:
 		move.l  (a0)+,(a1)+
 		dbf.w	d7,.loop
 		rts
 
 Pal_Fetus:		bincludeEndMarker	"conimodes/fetus/pal.bin"
+Pal_Fetus2:		bincludeEndMarker	"conimodes/fetus/pal2.bin"
 Nem_Fetus:		binclude	"conimodes/fetus/art.bin"
 Eni_Fetus:		binclude	"conimodes/fetus/map.bin"
