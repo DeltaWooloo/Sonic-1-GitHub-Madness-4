@@ -393,9 +393,9 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_RamRanch
 	nextenum bgm_S28BitUnused
 	; Keep this last
-	nextenum bgm__Last
-	bgm__LastPow2:		equ	$FF						; !@ Manually update me	
+	nextenum bgm__Last	
 	bgm__count:			equ	(bgm__Last-bgm__First)	; Count of songs
+	bgm__LastPow2:		equ	andiMaskB(bgm__Last)
 
 ; Sound effects
 	enum	sfx__First=$A0
