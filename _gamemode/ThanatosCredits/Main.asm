@@ -328,6 +328,7 @@ thantxt: macro txt
 	thantxt	"DAWID"
 	thantxt	"SANCHI"
 	thantxt	"DARKSHAMILKHAN"
+	thantxt	"OMICRONANO.BIN"
 	thantxt	"ADD YOUR NAME HERE"
 	dc.b	1,1
 	
@@ -383,6 +384,7 @@ thantxt: macro txt
 	thantxt	"AND HIS STUPID TEAM"
 	thantxt	"STEVE JOBS BECAUSE"
 	thantxt	"VMWARE"
+	thantxt	"MISTER BEAN"
     thantxt	"HOMER";leave this shit last
 	dc.b	1,1,1
 	thantxt	"AND YOUR MOM"
