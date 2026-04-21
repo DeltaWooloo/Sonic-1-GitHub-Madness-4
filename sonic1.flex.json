@@ -1,8 +1,90 @@
 {
     "Flex": 2,
     "name": "Sonic 1",
-    "node": "30f50b4f-e9b9-4fe0-ad1a-31f6af917669",
+    "node": "da472ab9-f363-45e6-8ee3-a83fd70d6d9c",
     "objects": [
+        {
+            "name": "Characters",
+            "children": [
+                {
+                    "name": "Tonic",
+                    "palettes": [
+                        {
+                            "path": "char_assets\\Tonic Pal.bin",
+                            "length": 1
+                        }
+                    ],
+                    "format": "Sonic 2.js",
+                    "art": {
+                        "path": "char_assets\\Tonic Art.bin",
+                        "compression": "Uncompressed",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "char_assets\\Tonic Map.asm",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": true,
+                        "path": "char_assets\\Tonic DGFX.asm",
+                        "label": ""
+                    },
+                    "uuid": "928cfc75-db7d-4932-9c1c-8a8bf295cab4"
+                },
+                {
+                    "name": "Maniac Mouse",
+                    "palettes": [
+                        {
+                            "path": "char_assets\\Maniac Pal.bin",
+                            "length": 1
+                        }
+                    ],
+                    "format": "Sonic 2.js",
+                    "art": {
+                        "path": "char_assets\\Maniac Art.bin",
+                        "compression": "Uncompressed",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "char_assets\\Maniac Map.asm",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": true,
+                        "path": "char_assets\\Maniac DGFX.asm",
+                        "label": ""
+                    },
+                    "uuid": "8cfc75db-7d39-429c-9c8a-8bf295cab46f"
+                },
+                {
+                    "name": "MrBean",
+                    "palettes": [
+                        {
+                            "path": "char_assets\\Tonic Pal.bin",
+                            "length": 1
+                        }
+                    ],
+                    "format": "Sonic 2.js",
+                    "art": {
+                        "path": "char_assets\\Bean.bin",
+                        "compression": "Uncompressed",
+                        "offset": 0
+                    },
+                    "mappings": {
+                        "path": "char_assets\\Bean.asm",
+                        "label": ""
+                    },
+                    "dplcs": {
+                        "enabled": true,
+                        "path": "char_assets\\Bean - Dynamic Sex Script.asm",
+                        "label": ""
+                    },
+                    "uuid": "da472ab9-f363-45e6-8ee3-a83fd70d6d9c"
+                }
+            ],
+            "isDirectory": true,
+            "expanded": true
+        },
         {
             "uuid": "bb28ea94-8ffe-473d-a5e1-344340a02791",
             "format": "Sonic 1.js",
@@ -302,31 +384,6 @@
                         "label": ""
                     },
                     "uuid": "dd2839bc-94ec-493e-bf08-a51f4897ec2c"
-                },
-                {
-                    "name": "Tonic",
-                    "palettes": [
-                        {
-                            "path": "char_assets\\Tonic Pal.bin",
-                            "length": 1
-                        }
-                    ],
-                    "format": "Sonic 2.js",
-                    "art": {
-                        "path": "char_assets\\Tonic Art.bin",
-                        "compression": "Uncompressed",
-                        "offset": 0
-                    },
-                    "mappings": {
-                        "path": "char_assets\\Tonic Map.asm",
-                        "label": ""
-                    },
-                    "dplcs": {
-                        "enabled": true,
-                        "path": "char_assets\\Tonic DGFX.asm",
-                        "label": ""
-                    },
-                    "uuid": "da472ab9-f363-45e6-8ee3-a83fd70d6d9c"
                 },
                 {
                     "name": "Signpost",
