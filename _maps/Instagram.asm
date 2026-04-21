@@ -1,25 +1,28 @@
-.internal:
-.internal_0: 	dc.w .internal_2-.internal
-.internal_2: 	dc.b $15
-	dc.b $A4, $F, $C0, $0, $A4
-	dc.b $C4, $F, $C0, $0, $A4
-	dc.b $E4, $F, $C0, $0, $A4
-	dc.b $4, $F, $C0, $0, $A4
-	dc.b $24, $F, $C0, $0, $A4
-	dc.b $44, $F, $C0, $0, $A4
-	dc.b $A4, $B, $C0, $0, $C4
-	dc.b $C4, $B, $C0, $0, $C4
-	dc.b $E4, $B, $C0, $0, $C4
-	dc.b $4, $B, $C0, $0, $C4
-	dc.b $24, $B, $C0, $0, $C4
-	dc.b $44, $B, $C0, $0, $C4
-	dc.b $5C, $E, $C0, $10, $DC
-	dc.b $5C, $E, $C0, $1C, $FC
-	dc.b $5C, $A, $C0, $28, $1C
-	dc.b $64, $A, $C0, $31, $4C
-	dc.b $5C, $4, $C0, $3A, $54
-	dc.b $84, $F, $C0, $0, $A4
-	dc.b $64, $F, $C0, $0, $A4
-	dc.b $64, $B, $C0, $0, $C4
-	dc.b $84, $B, $C0, $0, $C4
+Map_ab41: mappingsTable
+	mappingsTableEntry.w	Map_ab41_0
+
+Map_ab41_0:	spriteHeader
+ spritePiece -$5C, -$5C, 4, 4, 0, 0, 0, 0, 1
+ spritePiece -$5C, -$3C, 4, 4, 0, 0, 0, 0, 1
+ spritePiece -$5C, -$1C, 4, 4, 0, 0, 0, 0, 1
+ spritePiece -$5C, 4, 4, 4, 0, 0, 0, 0, 1
+ spritePiece -$5C, $24, 4, 4, 0, 0, 0, 0, 1
+ spritePiece -$5C, $44, 4, 4, 0, 0, 0, 0, 1
+ spritePiece -$3C, -$5C, 3, 4, 0, 0, 0, 0, 1
+ spritePiece -$3C, -$3C, 3, 4, 0, 0, 0, 0, 1
+ spritePiece -$3C, -$1C, 3, 4, 0, 0, 0, 0, 1
+ spritePiece -$3C, 4, 3, 4, 0, 0, 0, 0, 1
+ spritePiece -$3C, $24, 3, 4, 0, 0, 0, 0, 1
+ spritePiece -$3C, $44, 3, 4, 0, 0, 0, 0, 1
+ spritePiece -$24, $5C, 4, 3, $10, 0, 0, 0, 1
+ spritePiece -4, $5C, 4, 3, $1C, 0, 0, 0, 1
+ spritePiece $1C, $5C, 3, 3, $28, 0, 0, 0, 1
+ spritePiece $4C, $64, 3, 3, $31, 0, 0, 0, 1
+ spritePiece $54, $5C, 2, 1, $3A, 0, 0, 0, 1
+ spritePiece -$5C, -$7C, 4, 4, 0, 0, 0, 0, 1
+ spritePiece -$5C, $64, 4, 4, 0, 0, 0, 0, 1
+ spritePiece -$3C, $64, 3, 4, 0, 0, 0, 0, 1
+ spritePiece -$3C, -$7C, 3, 4, 0, 0, 0, 0, 1
+Map_ab41_0_End
+
 	even
