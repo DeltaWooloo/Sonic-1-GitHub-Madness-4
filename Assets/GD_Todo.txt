@@ -8,13 +8,16 @@ Coding:
 	x New Github Madness 4 (GTA4) logos
 	- Windows Zone exclamation point (spikes)
 	- New Github advertisement (https://www.linkedin.com/posts/shubhankitsirvaiya_australia-ban-github-activity-7378296218990407680-Q4XM)
+	- Sonic 1: Pico Edition advertisement
 - Random monitor
 	x Add slowdown shoes (SpeedUpIndex inverse)
 	- Add random monitor/slow down shoes to levels	
+	- Character water palettes/Funky Colors undo
 x Hack Fazbear jumpscare code for Sega Channel Guy jump scare
 - Songs
 	x Metallic Madness Past song
 	- Seal - Crazy
 	- Ricky Martin - Livin' La Vida Loca
 - BSODs
-	- New code for appropriate Genesis/SCD region/tmss crashes
+	- Linux (https://www.youtube.com/watch?v=QXUSvSUsx80, needs code)
+	x New code for appropriate Genesis/SCD region/tmss crashes

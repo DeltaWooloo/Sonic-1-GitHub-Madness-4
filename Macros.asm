@@ -511,6 +511,22 @@ stopPCM:	macro
 	endm
 
 ; ---------------------------------------------------------------------------
+; !@ GD: Function to create an ANDI mask (set MSB and all bits lower than MSB of number)
+; For long, word, and byte lengths
+; -------------------------------------------------------------	
+; uint32_t setAllBitsBelowMSB(uint32_t n) {
+    ; n |= n >> 1;   // Set 2 bits (the MSB and one below)
+    ; n |= n >> 2;   // Set 4 bits
+    ; n |= n >> 4;   // Set 8 bits	Byte
+    ; n |= n >> 8;   // Set 16 bits	Word
+    ; n |= n >> 16;  // Set 32 bits	Long
+    ; return n;
+;}
+andiMaskB	function n,(((n|(n>>1))|((n|(n>>1))>>2))|((n|(n>>1))|((n|(n>>1))>>2))>>4)
+andiMaskW	function n,(andiMaskB(n)|(andiMaskB(n)>>8))
+andiMaskL	function n,(andiMaskW(n)|(andiMaskW(n)>>16))
+
+; ---------------------------------------------------------------------------
 ; Macro to communicate with Sega CD
 ; THANK YOU THEBLAD!!!!
 ; Arguments:
