@@ -39,7 +39,7 @@ TSon_Delay:	;Routine 2
 
 TSon_Move:	; Routine 4
 		bsr.w	ObjectFall
-		cmpi.w	#$62,obY(a0) ; has Sonic reached final position?
+		cmpi.w	#$82,obY(a0) ; has Sonic reached final position?
 		bne.s	TSon_Animate	; if not, branch
 		addq.b	#2,obRoutine(a0)
 		move.l	a0,-(sp)
