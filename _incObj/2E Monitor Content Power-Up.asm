@@ -244,12 +244,21 @@ Pow_Invinciblity:
 		bne.s	Pow_NoMusic	; if yes, branch
 		cmpi.w	#$C,(v_air).w
 		bls.s	Pow_NoMusic
+		cmpi.b	#2,(v_characterid).w		; are we playing as MrBean?
+		beq.s	.Bean_invincbgm				; If so, you get your own song beany, not you tonic or maniac
 		move.w	#bgm_Invincible,d0
 		jmp	(QueueSound1).l ; play invincibility music
+		
+.Bean_invincbgm:
+		move.w	#$7C,d0
+		bra.s 	Pow_PlayBGM
 ; ===========================================================================
 
 Pow_NoMusic:
 		rts
+		
+Pow_PlayBGM:
+		jmp	(QueueSound1).l ; play invincibility music
 ; ===========================================================================
 
 Pow_ChkRings:

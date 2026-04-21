@@ -343,7 +343,8 @@ Nem_TonicLives: 	binclude	"char_assets/hud/Tonic Life Counter Icon.nem"
 		even
 Nem_ManiacLives:	binclude	"char_assets/hud/Maniac Life Counter Icon.nem"
 		even
-
+Nem_MrBeanLives: 	binclude	"char_assets/hud/MrBean's Life Counter Icon.nem"
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - various
 ; ---------------------------------------------------------------------------

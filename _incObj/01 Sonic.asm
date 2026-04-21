@@ -166,7 +166,7 @@ OtherPlayerData:
 	dc.b	15, 9
 	dc.b	 7, 6
 ;	dc.b	"Joshyy"			; padder
-	dc.w	Nem_ManiacLives-Nem_Lives			; Nano: Add a custom sprites for bean's life icon next time. 
+	dc.w	Nem_MrBeanLives-Nem_Lives
 	dc.w	Nem_CharSignManiac-Nem_CharSign		; Nano: Add a custom sprites for bean's signpost next time.
 	dc.w	dFuck
 	dc.b	19,14				; stand, roll height
