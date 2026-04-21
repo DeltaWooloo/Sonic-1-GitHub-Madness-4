@@ -149,8 +149,8 @@ LoopTileNums:
 		dc.b	$BA,	$7F,	$26,	$27	; BREW
 		dc.b	$7F,	$7F,	$7F,	$7F	; WIN
 		dc.b	$7F,	$7F,	$7F,	$7F	; Joint
-		dc.b	$7F,	$7F,	$1F,	$20	; DVZ		; Rechanged the loop placement
-		dc.b	$B5,	$7F,	$7F,	$7F	; NGZ		; I AM A FUCKING IDIOT
+		dc.b	$7F,	$7F,	$7F,	$7F	; DVZ		; Rechanged the loop placement
+		dc.b	$B5,	$7F,	$1F,	$20	; NGZ		; I AM A FUCKING IDIOT
 		dc.b	$7F,	$7F,	$7F,	$7F	; BSZ
 		dc.b	$7F,	$7F,	$7F,	$7F	; BTZ
 		even
