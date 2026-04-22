@@ -1199,13 +1199,18 @@ Deform_NGZ:
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 Deform_ARZ:	; No Scrolling cause I don't know how to make it only scroll on the x-axis
+		move.w	(v_scrshiftx).w,d4
+		ext.l	d4
+		asl.l	#3,d4
+		bsr.w	BGScroll_Block1
+
 		lea	(v_hscrolltablebuffer).w,a1
 		move.w	#224-1,d1
 		move.w	(v_screenposx).w,d0
 		neg.w	d0
 		swap	d0
 		move.w	(v_bgscreenposx).w,d0
-		move.w	#0,d0
+;		move.w	#0,d0
 		neg.w	d0
 
 .loop:
