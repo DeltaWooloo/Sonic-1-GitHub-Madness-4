@@ -45,6 +45,7 @@ Deform_Index:	dc.w Deform_GHZ-Deform_Index, Deform_LZ-Deform_Index
 		dc.w Deform_WZ-Deform_Index, Deform_ITBZ-Deform_Index
 		dc.w Deform_DVZ-Deform_Index,Deform_NGZ-Deform_Index
 		dc.w Deform_Default-Deform_Index,Deform_Default-Deform_Index
+		dc.w Deform_ARZ-Deform_Index
 		zonewarning Deform_Index,2
 ; ---------------------------------------------------------------------------
 ; Green Hill Zone background layer deformation code
@@ -1189,6 +1190,27 @@ Deform_NGZ:
 		add.l	d2,d3
 		swap	d3
 		dbf	d1,.ShearLoop
+		rts
+
+; ---------------------------------------------------------------------------
+; Azure Rainforest Zone background layer deformation code
+; ---------------------------------------------------------------------------
+
+; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
+
+Deform_ARZ:	; No Scrolling cause I don't know how to make it only scroll on the x-axis
+		lea	(v_hscrolltablebuffer).w,a1
+		move.w	#224-1,d1
+		move.w	(v_screenposx).w,d0
+		neg.w	d0
+		swap	d0
+		move.w	(v_bgscreenposx).w,d0
+		move.w	#0,d0
+		neg.w	d0
+
+.loop:
+		move.l	d0,(a1)+
+		dbf	d1,.loop
 		rts
 
 ; ---------------------------------------------------------------------------

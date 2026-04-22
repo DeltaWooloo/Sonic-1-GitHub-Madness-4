@@ -37,6 +37,8 @@ ptr_PLC_BSZ:		dc.w PLC_BSZ-ArtLoadCues
 ptr_PLC_BSZ2:		dc.w PLC_BSZ2-ArtLoadCues
 ptr_PLC_BTZ:		dc.w PLC_BTZ-ArtLoadCues
 ptr_PLC_BTZ2:		dc.w PLC_BTZ2-ArtLoadCues
+ptr_PLC_ARZ:		dc.w PLC_ARZ-ArtLoadCues
+ptr_PLC_ARZ2:		dc.w PLC_ARZ2-ArtLoadCues
 ptr_PLC_WINNERCard:	dc.w PLC_WINNERCard-ArtLoadCues
 ptr_PLC_Boss:		dc.w PLC_Boss-ArtLoadCues
 ptr_PLC_Signpost:	dc.w PLC_Signpost-ArtLoadCues
@@ -56,6 +58,7 @@ ptr_PLC_DVZAnimals:	dc.w PLC_DVZAnimals-ArtLoadCues
 ptr_PLC_NGZAnimals:	dc.w PLC_NGZAnimals-ArtLoadCues
 ptr_PLC_BSZAnimals:	dc.w PLC_NGZAnimals-ArtLoadCues
 ptr_PLC_BTZAnimals:	dc.w PLC_NGZAnimals-ArtLoadCues
+ptr_PLC_ARZAnimals:	dc.w PLC_ARZAnimals-ArtLoadCues
 			zonewarning PLC_Animals,2
 ptr_PLC_Ending:		dc.w PLC_Ending-ArtLoadCues
 ptr_PLC_TryAgain:	dc.w PLC_TryAgain-ArtLoadCues
@@ -346,6 +349,17 @@ PLC_BTZ2:	dc.w ((PLC_BTZ2end-PLC_BTZ2-2)/6)-1
 		 
 PLC_BTZ2end:
 ; ---------------------------------------------------------------------------
+; Pattern load cues - Labyrinth
+; ---------------------------------------------------------------------------
+PLC_ARZ:		dc.w ((PLC_ARZ2-PLC_ARZ-2)/6)-1
+		plcm	Nem_Spikes,      ArtTile_Spikes             ; spikes
+;		plcm	Nem_LZ,          ArtTile_Level              ; LZ main patterns
+		plcm	Nem_Wario,       ArtTile_Wario              ; Wario
+
+PLC_ARZ2:	dc.w ((PLC_ARZ2end-PLC_ARZ2-2)/6)-1
+		plcm	Nem_HSpring,     ArtTile_Spring_Horizontal  ; horizontal spring
+PLC_ARZ2end:
+; ---------------------------------------------------------------------------
 ; Pattern load cues - WINNER card
 ; ---------------------------------------------------------------------------
 PLC_WINNERCard:	dc.w ((PLC_WINNERCardend-PLC_WINNERCard-2)/6)-1
@@ -460,6 +474,13 @@ PLC_NGZAnimals:	dc.w ((PLC_DVZAnimalsend-PLC_DVZAnimals-2)/6)-1
 		plcm	Nem_Chicken, ArtTile_Animal_2 ; cocky
 PLC_NGZAnimalsend:
 ; ---------------------------------------------------------------------------
+; Pattern load cues - ARZ animals
+; ---------------------------------------------------------------------------
+PLC_ARZAnimals:	dc.w ((PLC_ARZAnimalsend-PLC_ARZAnimals-2)/6)-1
+		plcm	Nem_Penguin, ArtTile_Animal_1 ; penguin
+		plcm	Nem_Seal,    ArtTile_Animal_2 ; seal
+PLC_ARZAnimalsend:
+; ---------------------------------------------------------------------------
 ; Pattern load cues - ending sequence
 ; ---------------------------------------------------------------------------
 PLC_Ending:	dc.w ((PLC_Endingend-PLC_Ending-2)/6)-1
@@ -565,6 +586,8 @@ plcid_BSZ:		equ (ptr_PLC_BSZ-ArtLoadCues)/2
 plcid_BSZ2:		equ (ptr_PLC_BSZ2-ArtLoadCues)/2
 plcid_BTZ:		equ (ptr_PLC_BTZ-ArtLoadCues)/2	
 plcid_BTZ2:		equ (ptr_PLC_BTZ2-ArtLoadCues)/2
+plcid_ARZ:		equ (ptr_PLC_ARZ-ArtLoadCues)/2	
+plcid_ARZ2:		equ (ptr_PLC_ARZ2-ArtLoadCues)/2
 plcid_WINNERCard:	equ (ptr_PLC_WINNERCard-ArtLoadCues)/2	
 plcid_Boss:		equ (ptr_PLC_Boss-ArtLoadCues)/2	
 plcid_Signpost:		equ (ptr_PLC_Signpost-ArtLoadCues)/2	
@@ -582,6 +605,7 @@ plcid_DVZAnimals:	equ (ptr_PLC_DVZAnimals-ArtLoadCues)/2
 plcid_NGZAnimals:	equ (ptr_PLC_NGZAnimals-ArtLoadCues)/2	
 plcid_BSZAnimals:	equ (ptr_PLC_NGZAnimals-ArtLoadCues)/2	
 plcid_BTZAnimals:	equ (ptr_PLC_BTZAnimals-ArtLoadCues)/2	
+plcid_ARZAnimals:	equ (ptr_PLC_ARZAnimals-ArtLoadCues)/2	
 plcid_Ending:		equ (ptr_PLC_Ending-ArtLoadCues)/2	
 plcid_TryAgain:		equ (ptr_PLC_TryAgain-ArtLoadCues)/2	
 plcid_EggmanSBZ2:	equ (ptr_PLC_EggmanSBZ2-ArtLoadCues)/2	

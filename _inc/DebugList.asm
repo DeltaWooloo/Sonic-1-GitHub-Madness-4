@@ -16,8 +16,9 @@ DebugList:
 		dc.w .Joint-DebugList
 		dc.w .DVZ-DebugList
 		dc.w .GHZ-DebugList
-	    dc.w .BSZ-DebugList
+		dc.w .BSZ-DebugList
 		dc.w .GHZ-DebugList
+		dc.w .LZ-DebugList	; placeholder for ARZ
 
 dbug:	macro map,object,subtype,frame,vram
 		dc.l map+(object<<24)

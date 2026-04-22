@@ -47,7 +47,7 @@ AddressSRAM = 3
 ;	| 0 = odd+even; 2 = even only; 3 = odd only
 ;	| (odd only is the most common)
 
-ZoneCount:	equ $0E	; Used for the zonewarning macro
+ZoneCount:	equ $0F	; Used for the zonewarning macro
 ; ===========================================================================
 	cpu 68000
 	message "Pass \{MOMPASS}"
@@ -2156,6 +2156,10 @@ Pal_SonicRetro: bincludeEndMarker "LiquidSplashes/Rerto/Palette.bin"
 Pal_SonisRetro: bincludeEndMarker "LiquidSplashes/Rerto/PaletteSonis.bin"
 Pal_MenuText:		bincludeEndMarker	"palette/Menu Font.bin"
 Pal_DioMildanner:	bincludeEndMarker	"_incObj/DioMildanner/Palette.bin"
+Pal_ARZ:		bincludeEndMarker	"palette/Azure Rainforest Zone.bin"
+Pal_ARZWater:		bincludeEndMarker	"palette/Azure Rainforest Zone (water).bin"
+Pal_ARZSonWater:	bincludeEndMarker	"palette/Sonic - ARZ Underwater.bin"
+
     even
 Pal_Black:		bincludeEndMarker	"palette/Black.bin"
 
@@ -2840,11 +2844,21 @@ Level_LoadPal:
 
 		moveq	#palid_LZSonWater,d0 ; palette number $F (LZ)
 		cmpi.b	#id_CBZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
-		bne.s	Level_WaterPal	; it makes me have a boaner
-		moveq	#palid_CBZ2SonWat,d0
-		cmpi.b	#3,(v_act).w	; is act number 3?
+		beq.s	Level_CBZWaterPal	; it makes me have a boaner
+		cmpi.b	#id_ARZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
+		beq.s	Level_ARZWaterPal	; it makes me have a boaner
+		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
 		bne.s	Level_WaterPal	; if not, branch
 		moveq	#palid_SBZ3SonWat,d0 ; palette number $10 (SBZ3)
+		bra.s	Level_WaterPal
+
+Level_CBZWaterPal:
+		moveq	#palid_CBZ2SonWat,d0
+		bra.s	Level_WaterPal
+
+Level_ARZWaterPal:
+		moveq	#palid_ARZSonWater,d0
+
 Level_WaterPal:
 		bsr.w	PalLoad_Fade_Water	; load underwater palette
 		tst.b	(v_lastlamp).w
@@ -2990,11 +3004,21 @@ Level_ChkWaterPal:
 		bpl.s	Level_Delay	; if not, branch
 		moveq	#palid_LZWater,d0 ; palette $B (LZ underwater)
 		cmpi.b	#id_CBZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
-		bne.s	Level_WtrNotSbz	; it makes me have a boaner
-		moveq	#palid_BREWWat,d0
-		cmpi.b	#3,(v_act).w	; is level SBZ3?
+		beq.s	Level_CBZWtr	; it makes me have a boaner
+		cmpi.b	#id_ARZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
+		beq.s	Level_ARZWtr	; it makes me have a boaner
+		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is level SBZ3?
 		bne.s	Level_WtrNotSbz	; if not, branch
 		moveq	#palid_SBZ3Water,d0 ; palette $D (SBZ3 underwater)
+		bra.s	Level_WtrNotSbz
+
+Level_CBZWtr:
+		moveq	#palid_BREWWat,d0
+		bra.s	Level_WtrNotSbz
+
+Level_ARZWtr:
+		moveq	#palid_ARZWater,d0
+
 Level_WtrNotSbz:
 		bsr.w	PalLoad_Water
 
@@ -3162,6 +3186,7 @@ ColPointers:	dc.l Col_GHZ
 		dc.l Col_NGZ
 		dc.l Col_BSZ
 		dc.l Col_BTZ
+		dc.l Col_ARZ
 		zonewarning ColPointers,4
 
 		include	"_inc/Oscillatory Routines.asm"

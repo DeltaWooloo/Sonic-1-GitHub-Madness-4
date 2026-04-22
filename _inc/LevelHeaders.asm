@@ -85,4 +85,9 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 	lhead	plcid_BTZ,Kos_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_BeforeBoss,palid_BTZ,Col_BTZ,ObjPos_BTZ2,Level_BTZ2,Level_BTZbg
 	lhead	plcid_BTZ,Kos_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_BeforeBoss,palid_BTZ,Col_BTZ,ObjPos_BTZ3,Level_BTZ3,Level_BTZbg
 	lhead	plcid_BTZ,Kos_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_BeforeBoss,palid_BTZ,Col_BTZ,ObjPos_BTZ1,Level_BTZ1,Level_BTZbg
+
+	lhead	plcid_ARZ,Kos_ARZ,plcid_ARZ2,Blk16_ARZ,Blk256_ARZ,bgm_Dungeon3,palid_ARZ,Col_ARZ,ObjPos_ARZ1,Level_ARZ1,Level_ARZbg
+	lhead	plcid_ARZ,Kos_ARZ,plcid_ARZ2,Blk16_ARZ,Blk256_ARZ,bgm_Dungeon3,palid_ARZ,Col_ARZ,ObjPos_ARZ2,Level_ARZ2,Level_ARZbg
+	lhead	plcid_ARZ,Kos_ARZ,plcid_ARZ2,Blk16_ARZ,Blk256_ARZ,bgm_Dungeon3,palid_ARZ,Col_ARZ,ObjPos_ARZ3,Level_ARZ3,Level_ARZbg
+	lhead	plcid_ARZ,Kos_ARZ,plcid_ARZ2,Blk16_ARZ,Blk256_ARZ,bgm_Dungeon3,palid_ARZ,Col_ARZ,ObjPos_ARZ1,Level_ARZ1,Level_ARZbg
 	;zonewarning	LevelHeaders,32*4

@@ -104,7 +104,7 @@ plane_size_64x32: equ 64*32*2	; size of plane in 512x256 mode
 
 ; Levels
 id_OWZ:		equ $00
-id_ARZ:		equ $01												; Formerly LZ (water)
+id_WHZ:		equ $01		; Formerly LZ (water)
 id_ACZ:		equ $02
 id_MCZ:		equ $03
 id_SFZ:		equ $04
@@ -117,6 +117,7 @@ id_DVZ:		equ $0A
 id_Nogales:	equ $0B
 id_BSZ:		equ $0C
 id_BTZ:		equ $0D
+id_ARZ:		equ $0E		; need to get water implemented
 
 ; Colours
 cBlack:		equ $000		; colour black
@@ -617,6 +618,11 @@ boss_cbz_end:	equ boss_cbz_x+$160
 boss_ngz_x:	equ $2500		; Nogales Zone
 boss_ngz_y:	equ $200
 boss_ngz_end:	equ boss_ghz_x+$160
+
+boss_arz_x:	equ $1DE0		; Azure Rainforest Zone
+boss_arz_y:	equ $C0
+boss_arz_end:	equ boss_lz_x+$250
+
 
 ; Tile flags (ASM68K-specific, replaces "make_art_tile" function from AS, added here for cross-compatibility)
 Tile_Prio:	equ	1<<15

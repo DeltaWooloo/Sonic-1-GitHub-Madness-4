@@ -153,6 +153,7 @@ LoopTileNums:
 		dc.b	$B5,	$7F,	$1F,	$20	; NGZ		; I AM A FUCKING IDIOT
 		dc.b	$7F,	$7F,	$7F,	$7F	; BSZ
 		dc.b	$7F,	$7F,	$7F,	$7F	; BTZ
+		dc.b	$7F,	$7F,	$7F,	$7F	; BTZ
 		even
 
 ; ---------------------------------------------------------------------------
@@ -188,6 +189,7 @@ BgScroll_Index:	dc.w BgScroll_GHZ-BgScroll_Index, BgScroll_LZ-BgScroll_Index
 		dc.w BgScroll_ITBZ-BgScroll_Index, BgScroll_Default-BgScroll_Index
 		dc.w BgScroll_NGZ-BgScroll_Index, BgScroll_NGZ-BgScroll_Index
 		dc.w BgScroll_Default-BgScroll_Index, BgScroll_Default-BgScroll_Index
+		dc.w BgScroll_ARZ-BgScroll_Index
 		zonewarning BgScroll_Index,2
 ; ===========================================================================
 
@@ -283,4 +285,11 @@ BgScroll_ITBZ:
 		clr.l	(v_bg2screenposy).w
 		clr.l	(v_bg3screenposy).w
 		move.b	#1,vscroll_mode
+		rts
+
+; ===========================================================================
+
+BgScroll_ARZ:
+		move.b	#0,vscroll_mode
+		clr.l	(v_bgscreenposy).w
 		rts

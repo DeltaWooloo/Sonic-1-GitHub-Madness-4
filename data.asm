@@ -514,6 +514,14 @@ Kos_BTZ:	binclude	"artkos/8x8 - BTZ.kos"
 		even
 Blk256_BTZ:	binclude	"map256/BTZ.kos"		
 		even
+
+Blk16_ARZ:	binclude	"map16/ARZ.eni"
+		even
+Kos_ARZ:	binclude	"artkos/8x8 - ARZ.kos"	; LZ primary patterns
+		even
+Blk256_ARZ:	binclude	"map256/ARZ.kos"
+		even
+
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - bosses and ending sequence
 ; ---------------------------------------------------------------------------
@@ -613,7 +621,8 @@ Col_BSZ:	binclude	"collide/BSZ.bin"
 		even
 Col_BTZ:	binclude	"collide/BTZ.bin"
 		even
-
+Col_ARZ:		binclude	"collide/ARZ.bin"	; LZ index
+		even
 ; ---------------------------------------------------------------------------
 ; Animated uncompressed graphics
 ; ---------------------------------------------------------------------------
@@ -851,6 +860,16 @@ Level_BTZ3:	binclude	"levels/btz3.bin"
 		even
 Level_BTZbg:	binclude	"levels/btzbg.bin"
 		even
+
+Level_ARZ1:	binclude	"levels/arz1.bin"
+		even
+Level_ARZ2:	binclude	"levels/arz2.bin"
+		even
+Level_ARZ3:	binclude	"levels/arz3.bin"
+		even
+Level_ARZbg:	binclude	"levels/arzbg.bin"
+		even
+
 ; ---------------------------------------------------------------------------
 ; Uncompressed graphics - Giant Rings
 ; ---------------------------------------------------------------------------
@@ -1045,6 +1064,13 @@ ObjPos_BTZ1:	binclude	"objpos/btz1.bin"
 ObjPos_BTZ2:	binclude	"objpos/btz2.bin"
 		even
 ObjPos_BTZ3:	binclude	"objpos/btz3.bin"
+		even
+
+ObjPos_ARZ1:	binclude	"objpos/arz1.bin"
+		even
+ObjPos_ARZ2:	binclude	"objpos/arz2.bin"
+		even
+ObjPos_ARZ3:	binclude	"objpos/arz3.bin"
 		even
 
 ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0

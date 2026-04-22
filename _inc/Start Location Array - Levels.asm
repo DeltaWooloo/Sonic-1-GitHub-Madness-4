@@ -42,7 +42,7 @@
 		binclude	"startpos/BREW2.bin"
 		binclude	"startpos/BREW3.bin"
 		binclude	"startpos/BREW4.bin"
-		
+
 		binclude	"startpos/WIN1.bin"
 		binclude	"startpos/WIN2.bin"
 		binclude	"startpos/WIN3.bin"
@@ -65,10 +65,15 @@
 		binclude	"startpos/bsz2.bin"
 		binclude	"startpos/bsz3.bin"
 		dc.w	$80,$A8
-		even
+
 		binclude	"startpos/btz1.bin"
 		binclude	"startpos/btz2.bin"
 		binclude	"startpos/btz3.bin"
+		dc.w	$80,$A8
+
+		binclude	"startpos/arz1.bin"
+		binclude	"startpos/arz2.bin"
+		binclude	"startpos/arz3.bin"
 		dc.w	$80,$A8
 		even
 

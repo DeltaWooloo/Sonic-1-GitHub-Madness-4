@@ -191,6 +191,11 @@ Rhythm_ChartPtr:
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
+
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_GHZ1
 		zonewarning Rhythm_ChartPtr,16
 
 		; GMZ - Load the HUD and countdown objects

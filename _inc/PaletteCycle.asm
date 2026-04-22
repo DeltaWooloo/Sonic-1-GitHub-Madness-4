@@ -26,18 +26,19 @@ PaletteCycle:
 ; ---------------------------------------------------------------------------
 PalCycle_Index:	dc.w PalCycle_GHZ-PalCycle_Index
 		dc.w PalCycle_LZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
+		dc.w PalCycle_Null-PalCycle_Index
 		dc.w PalCycle_SLZ-PalCycle_Index
 		dc.w PalCycle_SYZ-PalCycle_Index
 		dc.w PalCycle_SBZ-PalCycle_Index
 		dc.w PalCycle_GHZ-PalCycle_Index	; Ending
 		dc.w PalCycle_CBZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
+		dc.w PalCycle_Null-PalCycle_Index
+		dc.w PalCycle_Null-PalCycle_Index
 		dc.w PalCycle_DVZ-PalCycle_Index
 		dc.w PalCyc_Nogales-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
+		dc.w PalCycle_Null-PalCycle_Index
+		dc.w PalCycle_Null-PalCycle_Index
+		dc.w PalCycle_Null-PalCycle_Index
 		zonewarning PalCycle_Index,2
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
@@ -55,7 +56,7 @@ PCycLZ_Seq:	dc.b 1,	0, 0, 1, 0, 0, 1, 0
 		even
 ; ===========================================================================
 
-PalCycle_MZ:
+PalCycle_Null:
 		rts
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||

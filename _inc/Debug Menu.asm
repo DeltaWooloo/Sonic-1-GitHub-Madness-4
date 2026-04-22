@@ -448,7 +448,7 @@ Debugger_Data:
 		dc.l	GamemodeNameTable
 
 		dc.l	v_zone			; ZONE ID
-		dc.b	$01,$00,13,$00		; step 1, range 0-5
+		dc.b	$01,$00,14,$00		; step 1, range 0-5
 		dc.l	ZoneNameTable
 
 		dc.l	v_act			; ACT ID
@@ -586,9 +586,10 @@ ZoneNameTable:
 		dc.w	.Nogales -.t
 		dc.w	.BS -.t
 		dc.w	.BT -.t
+		dc.w	.ARZ -.t
 
 .GHZ:		dc.b	"ORANGE WORLD    "
-.LZ:		dc.b	"AZURE RAINFOREST"
+.LZ:		dc.b	"WARIO HALLWAY   "
 .MZ:		dc.b	"ALBERTA CANADA  "
 .SLZ:		dc.b	"MEIN KRAFT      "
 .SYZ:		dc.b	"SPRING FIELD    "
@@ -601,6 +602,7 @@ ZoneNameTable:
 .Nogales:	dc.b	"NOGALES         "
 .BS:	    dc.b	"BLUESCAPE       "
 .BT:	    dc.b	"OLDJOHN         "
+.ARZ:		dc.b	"AZURE RAINFOREST"
 		even
 
 GamemodeNameTable:

@@ -83,3 +83,9 @@
 		dc.w CAMDR_ABC, $0000, $300, $0000, $0040, $0040
 		dc.w CAMDR_ABC, $0000, $300, $0000, $0040, $0040
 		even
+		; Azure Rainforest
+		dc.w CAMDR_ABC, $0000, $19A9, $0050, $0050, $0060
+		dc.w CAMDR_ABC, $0000, $10AF, $0050, $0050, $0060
+		dc.w CAMDR_ABC, $0000, $202F, $0050, $0050, $0060
+		dc.w CAMDR_ABC, $0000, $20BF, $0000, $0720, $0060
+		even

@@ -48,6 +48,7 @@ WaterHeight:
 		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_NGZ
 		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_BSZ
 		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_BTZ
+		dc.w $0110,$0110,$0110,$0228	; id_ARZ
 		even
 ; ===========================================================================
 

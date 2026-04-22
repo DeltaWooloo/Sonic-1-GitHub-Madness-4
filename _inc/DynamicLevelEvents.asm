@@ -66,6 +66,7 @@ DLE_Index:	dc.w 	DLE_GHZ-DLE_Index
 		dc.w	DLE_NGZ-DLE_Index
 		dc.w	DLE_BSZ-DLE_Index
 		dc.w	DLE_BTZ-DLE_Index
+		dc.w	DLE_ARZ-DLE_Index
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Green Hill Zone dynamic level events
@@ -1191,3 +1192,36 @@ BluSto_end:
 BluSto_Return:
 		rts
 ; ===========================================================================
+; ---------------------------------------------------------------------------
+; Azure Rainforest Zone dynamic level events
+; ---------------------------------------------------------------------------
+
+DLE_ARZ:
+		moveq	#0,d0
+		move.b	(v_act).w,d0
+		add.w	d0,d0
+		move.w	DLE_ARZx(pc,d0.w),d0
+		jmp	DLE_ARZx(pc,d0.w)
+; ===========================================================================
+DLE_ARZx:	dc.w DLE_ARZ12-DLE_ARZx
+		dc.w DLE_ARZ12-DLE_ARZx
+		dc.w DLE_ARZ3-DLE_ARZx
+; ===========================================================================
+
+DLE_ARZ12:
+		rts
+; ===========================================================================
+
+DLE_ARZ3:
+		tst.b	(v_dle_routine).w
+		bne.s	.return
+		cmpi.w	#boss_lz_x-$140,(v_screenposx).w
+		blo.s	.return
+		jsr	(FindFreeObj).l
+		addq.b	#2,(v_dle_routine).w
+		moveq	#plcid_Boss,d0
+		jmp	(AddPLC).l	; load boss patterns
+; ===========================================================================
+
+.return:
+		rts

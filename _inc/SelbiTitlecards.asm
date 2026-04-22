@@ -84,6 +84,11 @@ TitleCard_BTZ2:	equ  "OLDJOHN"
 TitleCard_BTZ3:	equ  "NOBODY READ THIS"
 TitleCard_BTZ4:	equ  "OYE NO NADA     "
 
+TitleCard_ARZ1:	equ  "AZURE RAINFOREST"
+TitleCard_ARZ2:	equ  "AZURE PAINFOREST"
+TitleCard_ARZ3:	equ  "AZURE LAMEFOREST"
+TitleCard_ARZ4:	equ  "FOE FOE FOE FOE"
+
 TitleCard_Zone:	equ  "ZONE"
 TitleCard_UseLowerAct: equ 1	; 0 = ACT -- 1 = Act
 
@@ -251,7 +256,12 @@ TTL_ConData:
 		dc.l TTLCard_BTZ1_ConData, TTLCard_BTZ1_Array	; BTZ1
 		dc.l TTLCard_BTZ2_ConData, TTLCard_BTZ2_Array	; BTZ2
 		dc.l TTLCard_BTZ3_ConData, TTLCard_BTZ3_Array	; BTZ3
-		dc.l 0, 0	; BTZ4		
+		dc.l 0, 0	; BTZ4
+
+		dc.l TTLCard_ARZ1_ConData, TTLCard_ARZ1_Array	; BTZ1
+		dc.l TTLCard_ARZ2_ConData, TTLCard_ARZ2_Array	; BTZ2
+		dc.l TTLCard_ARZ3_ConData, TTLCard_ARZ3_Array	; BTZ3
+		dc.l 0, 0	; BTZ4
 		even
 
 ; ---------------------------------------------------------------------------
@@ -457,6 +467,11 @@ Map_Card_Extended:	mappingsTable
 	mappingsTableEntry.w	TTLCard_BTZ3	; DVZ 3
 	mappingsTableEntry.w	TTLCard_BTZ4	; DVZ 4
 
+	mappingsTableEntry.w	TTLCard_ARZ1	; ARZ 1
+	mappingsTableEntry.w	TTLCard_ARZ2	; ARZ 2
+	mappingsTableEntry.w	TTLCard_ARZ3	; ARZ 3
+	mappingsTableEntry.w	TTLCard_ARZ4	; ARZ 4
+
 	mappingsTableEntry.w	TTLCard_Zone	; "ZONE" text
 	mappingsTableEntry.w	TTLCard_Act	; Act number
 	mappingsTableEntry.w	TTLCard_Oval	; Blue oval
@@ -514,6 +529,10 @@ TTLCard_BTZ1:	titlecard TitleCard_BTZ1,1,0
 TTLCard_BTZ2:	titlecard TitleCard_BTZ2,0,0
 TTLCard_BTZ3:	titlecard TitleCard_BTZ3,0,0
 TTLCard_BTZ4:	titlecard TitleCard_BTZ4,0,0
+TTLCard_ARZ1:	titlecard TitleCard_ARZ1,0,0
+TTLCard_ARZ2:	titlecard TitleCard_ARZ2,0,0
+TTLCard_ARZ3:	titlecard TitleCard_ARZ3,0,0
+TTLCard_ARZ4:	titlecard TitleCard_ARZ4,0,0
 
 TTLCard_Zone:	titlecard TitleCard_Zone,1,1 ; ZONE label (alternate tile offset)
 
