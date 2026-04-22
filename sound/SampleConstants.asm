@@ -110,7 +110,6 @@ dVirus				ds.b 1
 dsupbeaches			ds.b 1
 
 ; Commercial Samples
-dRightBack			ds.b 1
 dGenesisCan3		ds.b 1
 
 ; Ollie Samples

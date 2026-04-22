@@ -104,7 +104,6 @@ SampleTable:
 	dcSample	TYPE_DPCM,	supbeaches,	8000					; $D0
 
 	; Commercial Samples
-	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $D1
 	dcSample	TYPE_DPCM,	GenesisCan3,	8000,FLAGS_SFX		; $D2
 
 	; Ollie Samples
@@ -118,6 +117,7 @@ SampleTable:
 	dcSample	TYPE_DPCM,	dummy,	8000, FLAGS_SFX				; $D6
 
 	; Unused
+;	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $D1
 ;	dcSample	TYPE_PCM,	Segay,		0,	FLAGS_SFX
 ;	dcSample	TYPE_PCM,	CL_Penis,	11297
 ;	dcSample	TYPE_PCM,	Boioing,	5250,	FLAGS_SFX
@@ -235,7 +235,7 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Advertisement Samples
-	incdac	BeRightBack,"sound/dac/well-be-right-back.dpcm"
+;	incdac	BeRightBack,"sound/dac/well-be-right-back.dpcm"
 	incdac	GenesisCan3,"sound/dac/GenesisDoes/GenesisCan3.dpcm"
 
 ; ---------------------------------------------------------------

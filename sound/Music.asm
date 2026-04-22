@@ -109,6 +109,7 @@ MusicIndex:
 	bgmdef s1TempotoS3($FF), Mus_Moonwalker
 	bgmdef s1TempotoS3($05), Mus_CleanSlate
 
+	bgmdef s1TempotoS3($00), Mus_WBRBack	; GMZ
 	bgmdef $01, Mus_PuyoReject
 	bgmdef $01, Mus_LG
 	bgmdef s1TempotoS3($00), Mus_ILBT
@@ -160,7 +161,6 @@ MusicIndex:
 	bgmdef $55, Mus_Outfarted
 	bgmdef $75, Mus_SkyGift
 	bgmdef s1TempotoS3($05), Mus_S28bitUnused
-	bgmdef $01, Mus_WBRBack	; GMZ
 
 	bgmdef $73, Mus_SonicToole
 	bgmdef s1TempotoS3($00), Mus_Folgers

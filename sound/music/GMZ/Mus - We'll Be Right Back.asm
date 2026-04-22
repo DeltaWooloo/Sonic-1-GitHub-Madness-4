@@ -9,12 +9,12 @@ BGM_WBRBack_Header:
 	smpsHeaderTempo     $01, $00
 
 	smpsHeaderDAC       BGM_WBRBack_DAC,	$00, $F2
-	smpsHeaderFM        BGM_WBRBack_FM1,	$00, $12
-	smpsHeaderFM        BGM_WBRBack_FM2,	$00, $16
-	smpsHeaderFM        BGM_WBRBack_FM3,	$00, $2B
-	smpsHeaderFM        BGM_WBRBack_FM4,	$00, $27
-	smpsHeaderFM        BGM_WBRBack_FM5,	$00, $13
-	smpsHeaderFM        BGM_WBRBack_FM6,	$00, $0F
+	smpsHeaderFM        BGM_WBRBack_FM1,	$00, $0E
+	smpsHeaderFM        BGM_WBRBack_FM2,	$00, $12
+	smpsHeaderFM        BGM_WBRBack_FM3,	$00, $27
+	smpsHeaderFM        BGM_WBRBack_FM4,	$00, $23
+	smpsHeaderFM        BGM_WBRBack_FM5,	$00, $0F
+	smpsHeaderFM        BGM_WBRBack_FM6,	$00, $0B
 	smpsHeaderPSG       BGM_WBRBack_PSG1,	$00, $00, $00, $00
 	smpsHeaderPSG       BGM_WBRBack_PSG2,	$00, $00, $00, $00
 	smpsHeaderPSG       BGM_WBRBack_PSG3,	$00, $00, $00, $00

@@ -334,6 +334,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_CleanSlate			; The W Splash Screen: God Fucking Dammit Robi
 
 	; Advertisement BGM
+	nextenum bgm_WBRBack			; GMZ - this one will be used, actually
 	nextenum bgm_PuyoReject			; Ad Jingle A
 	nextenum bgm_LG				; Ad Jingle B
 	nextenum bgm_ILBT			; Hong Kong 97 Ad
@@ -387,7 +388,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Outfarted
 	nextenum bgm_SkyGift
 	nextenum bgm_S28BitUnused
-	nextenum bgm_WBRBack	; GMZ - this one will be used, actually
 
 	; Unused Jingle BGM
 	nextenum bgm_SonicToole
