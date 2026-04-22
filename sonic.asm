@@ -2150,8 +2150,8 @@ Pal_BTZ:		bincludeEndMarker	"palette/BlueStone.bin"
 Pal_SplashPal:	bincludeEndMarker	"eurosega/pal.bin"
 Pal_ColdBrew:	bincludeEndMarker	"conimodes/cold brew/palette.bin"
 Pal_ColdBrewG:	bincludeEndMarker	"conimodes/cold brew/palette grayscale.bin"
-Pal_TGPal:	bincludeEndMarker	"TGSplash/pal.bin"
-PAL_NT:   bincludeEndMarker	"NMRTT/NM_PAL.bin"
+Pal_TGPal:	bincludeEndMarker	"_gamemode/TGSplash/pal.bin"
+PAL_NT:   bincludeEndMarker	"_gamemode/NeedleTeam/NMRTT/NM_PAL.bin"
 Pal_SonicRetro: bincludeEndMarker "LiquidSplashes/Rerto/Palette.bin"
 Pal_SonisRetro: bincludeEndMarker "LiquidSplashes/Rerto/PaletteSonis.bin"
 Pal_MenuText:		bincludeEndMarker	"palette/Menu Font.bin"
@@ -3560,7 +3560,7 @@ V_Int_2LS:		= $819E
 
 ; ---------------------------------------------------------------------------
 
-	binclude	"rom manual.txt"
+	binclude	"misc/rom manual.txt"
 	even
 
 ; ===========================================================================
@@ -6488,11 +6488,11 @@ FortnitePortal:
 ; NEEDLEMOUSE SHITTERY  Team Splash Screen files
 ; ---------------------------------------------------------------------------
 
-ART_NT:   incbin	"NMRTT/NM_ART.bin"
-        even
+ART_NT:		incbin	"_gamemode/NeedleTeam/NMRTT/NM_ART.bin"
+	even
 
-MAP_NT:   incbin	"NMRTT/NM_MAP.bin"
-        even
+MAP_NT:		incbin	"_gamemode/NeedleTeam/NMRTT/NM_MAP.bin"
+	even
 ; Atolly splash
 
 

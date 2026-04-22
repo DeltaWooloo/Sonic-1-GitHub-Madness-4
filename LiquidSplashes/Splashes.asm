@@ -154,11 +154,11 @@ Splash_Screen_Entries:
 
 ; include dedicated files for a solid spĺash screen
 inc_solid_splash macro name,{GLOBALSYMBOLS}
-Art_\name\: binclude "SolidSplashes/Art - \name\.nem"
+Art_\name\: binclude "LiquidSplashes/SolidSplashes/Art - \name\.nem"
 	even
-Map_\name\: binclude "SolidSplashes/Map - \name\.eni"
+Map_\name\: binclude "LiquidSplashes/SolidSplashes/Map - \name\.eni"
 	even
-Pal_\name\: binclude "SolidSplashes/Pal - \name\.bin"
+Pal_\name\: binclude "LiquidSplashes/SolidSplashes/Pal - \name\.bin"
 	even
 	endm
 
@@ -254,13 +254,13 @@ splash_turd macro routine
 	include "_gamemode/SHC + DeltaW/SHC Splash Screen.asm"
 	include "_gamemode/RetroBlast/RetroBlast.asm"
 	include "LiquidSplashes/EagleSoft/EagleSoft.asm"
-	include "DAX/Splash/DaxKatter Splash.asm"
+	include "_gamemode/DaxKatter Splash/DaxKatter Splash.asm"
 	include "_gamemode/vmss/_runcode.asm"
 	include "_gamemode/Team Overload/main.asm"
 	include "Nano's SHIT/splash/GM_SplashScreenSkipper.asm"
 	include "LiquidSplashes/2kki/2kki.asm"
 	include "eurosega/eurosega.asm"
-	include "TGSplash/TGSplash.asm"
+	include "_gamemode/TGSplash/TGSplash.asm"
 	include "LiquidSplashes/funny butthole/poop.asm"
 	include "_gamemode/SHC + DeltaW/DeltaW Splash Screen.asm"
 	include "dotgen/Giovanni Splash Screen.asm"

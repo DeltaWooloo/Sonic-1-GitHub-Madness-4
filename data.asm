@@ -68,9 +68,9 @@ Eni_SplashMap:	binclude	"eurosega/map.bin"
 		even
 Nem_SplashTiles:	binclude	"eurosega/tiles.bin"
 		even
-Eni_TGMap:	binclude	"TGSplash/map.bin"
+Eni_TGMap:	binclude	"_gamemode/TGSplash/map.bin"
 		even
-Nem_TGTiles:	binclude	"TGSplash/tiles.bin"
+Nem_TGTiles:	binclude	"_gamemode/TGSplash/tiles.bin"
 		even
 
 ; ---------------------------------------------------------------------------
