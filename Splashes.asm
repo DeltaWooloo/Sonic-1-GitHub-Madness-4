@@ -193,8 +193,9 @@ splash_turd macro routine
 	dc.l	routine
 	endm
 
-; Entries
+; Entries	
 	splash_liquid	funnybutthole
+	splash_solid	Gens,$40, 1, _bgm, bgm_SS,60*5
 	splash_liquid	MultiSplash_Init
 	splash_liquid	SonicRetro
 	splash_liquid	NewSSRG_Screen
@@ -216,6 +217,7 @@ splash_turd macro routine
 	splash_solid	ChadWarden,	$20, 0, _pcm, dsupbeaches,		60*7
 	splash_solid	Compile,	$40, 1, _bgm, $00,			60*3
 	splash_solid	GenesisDoes1,	$40, 1, _pcm, dGenesisDoes1,		60*10
+	
 	splash_solid	Blessed,	$40, 1, _bgm, sfx_SSGoal,		200
 	splash_solid	SonicBroke,	$20, 1, _bgm, bgm_S1Continue,		480
 	splash_solid	Wait,		$60, 1, _bgm, bgm_PuyoDrown,		145
@@ -237,6 +239,7 @@ splash_turd macro routine
 	inc_solid_splash ChadWarden
 	inc_solid_splash Compile
 	inc_solid_splash GenesisDoes1
+	inc_solid_splash Gens
 	inc_solid_splash Blessed
 	inc_solid_splash SonicBroke
 	inc_solid_splash Wait
