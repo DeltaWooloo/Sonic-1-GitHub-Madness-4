@@ -16,6 +16,10 @@ DickingAround = 1
 ; 	| If 0, loads SEGA screen first (for public release)
 ; 	| If 1, load Debug Menu first
 
+EggblockOrigin = 1
+; 	| If 0, play ads at 5 minute intervals or when grabbing the ad random monitor powerup
+; 	| If 1, no ads play at all
+
 CheatsOn = 1
 ; 	| If 0, build it with no cheats active
 ; 	| If 1, build it with all cheats active
@@ -3171,6 +3175,7 @@ ColPointers:	dc.l Col_GHZ
 
 SynchroAnimate:
 ; Used for giving advertisements
+	if EggblockOrigin=0
 		addq.l	#1,(v_adverttimer).w
 		cmp.l	#((5*60)*60),(v_adverttimer).w
 		blo.s	.notyet
@@ -3188,6 +3193,7 @@ SynchroAnimate:
 	;	lea	v_player,a0
 	;	jsr	Advert_StoreInfo
 .notyet:
+	endif
 
 ; Used for GHZ spiked log
 Sync1:
