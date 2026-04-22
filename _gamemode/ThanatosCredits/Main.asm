@@ -368,7 +368,7 @@ thantxt: macro txt
 	thantxt	"NINEKO SONINEKO"
 	thantxt	"DEVON"
 	thantxt	"OLLIE TECHDECK"
-	thantxt	"CLOWNANCY"
+	thantxt	"CLOWNACY"
 	thantxt	"VLADIKOMPER"
 	thantxt	"ARCADETV"	
 	thantxt	"NOID MY GOAT"
