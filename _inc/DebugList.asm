@@ -275,13 +275,17 @@ dbug:	macro map,object,subtype,frame,vram
 
 .DVZ:
 		dc.w (.DVZend-.DVZ-2)/8
-;			mappings	object		subtype	frame	VRAM setting
-		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
-		dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
-		dbug	Map_NeedleBoss, id_NeedleBoss,	4,	1,	NEEDLB_GFX
-		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
-		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
-		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
+;			mappings		object			subtype	frame	VRAM setting
+		dbug 	Map_Ring,		id_Rings,		0,	0,	make_art_tile(ArtTile_Ring,1,0)
+		dbug	Map_Monitor,		id_Monitor,		0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		dbug	Map_NeedleBoss, 	id_NeedleBoss,		4,	1,	NEEDLB_GFX
+		dbug	Map_NeedleBoss, 	id_NeedleBoss,		8,	2,	NEEDLB_GFX
+		dbug	Map_NeedleBoss, 	id_NeedleBoss,		12,	3,	NEEDLB_GFX
+		dbug	Map_NeedleBoss, 	id_NeedleBoss,		16,	4,	NEEDLB_GFX
+		dbug	Map_NeedleBoss, 	id_NeedleBoss,		20,	5,	NEEDLB_GFX
+		dbug	Map_Spike,		id_Spikes,		0,	0,	make_art_tile(ArtTile_Spikes,0,0)
+		dbug	Map_Spring,		id_Springs,		0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
+		dbug	Map_Lamp,		id_Lamppost,		1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
 .DVZend:
 		even
 
@@ -290,7 +294,7 @@ dbug:	macro map,object,subtype,frame,vram
 ;			mappings	object		subtype	frame	VRAM setting
 		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
 		dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
-		dbug	Map_Ring, id_WaterSound,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		dbug	Map_Ring, 	id_WaterSound,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
 		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)

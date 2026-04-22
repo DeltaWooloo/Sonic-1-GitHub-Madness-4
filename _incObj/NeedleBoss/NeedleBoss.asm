@@ -49,6 +49,9 @@ NEEDLB_GFX	= (NEEDLB_VRAM/32)+$2000
 
 NHAMMER_VRAM	= $6800
 NHAMMER_GFX	= (NHAMMER_VRAM/32)+$2000
+
+NEEDLBBIG_VRAM	= $7000
+NEEDLBBIG_GFX	= (NEEDLBBIG_VRAM/32)+$2000
 ; ----------------------------------------------------------------------------
 
 needle.ZPos	= needle.XTarg  ; ok yeah we need precision
@@ -71,6 +74,8 @@ ExObjNeedle:
 	bra.w	ObjNeedleIntro
 	bra.w	ObjNeedleBoss
 	bra.w	ObjNeedleHammer
+	bra.w	ObjNeedleBossBig
+	bra.w	ObjNeedle3DTest
 	rts
 ; ----------------------------------------------------------------------------
 
@@ -115,12 +120,7 @@ NeedleIntro_Init:
 	move.b	#9,needlehitcnt.w
 	; load palette
 
-	lea	(v_palette+32).w,a1
-	lea	Pal_NeedleBoss,a2
-
-	rept	8
-	move.l	(a2)+,(a1)+
-	endr
+	bsr.w	_needleLoadPalette
 
 NeedleIntro_WalkIn:
 	sub.w	#2,obX(a0)
@@ -229,6 +229,7 @@ ObjNeedleBoss:
 	dc.w	NeedleBoss_Init-.Index
 	dc.w	NeedleBoss_Fall1-.Index
 	dc.w	NeedleBoss_Main-.Index
+	dc.w	NeedleBoss_Wait-.Index
 	dc.w	NeedleBoss_FlyOut-.Index
 ; ----------------------------------------------------------------------------
 
@@ -272,7 +273,7 @@ NeedleBoss_Fall1:
 	bra.w	_needleChase
 .Go:
 	addq.b	#2,obRoutine(a0)
-	move.b	#60*3,needle.Timer(a0)	
+	move.b	#60*1,needle.Timer(a0)	
 
 NeedleBoss_Main:
 
@@ -303,6 +304,15 @@ NeedleBoss_Main:
 	bra.w	_needleChase
 .Exit:
 	addq.b	#2,obRoutine(a0)
+	move.b	#60*3,needle.Timer(a0)
+	rts
+
+NeedleBoss_Wait:
+	subq.b	#1,needle.Timer(a0)
+	beq.s	.Exit
+	bra.w	_needleChase
+.Exit
+	addq.b	#2,obRoutine(a0)
 	move.b	#3,obAnim(a0)
 	move.w	#$700,obVelY(a0)
 	move.w	#-$100,obVelX(a0)
@@ -311,6 +321,8 @@ NeedleBoss_Main:
 	move.b	#$F, obColType(a0)
 	move.b	#sfx_GiantRing,d0
 	jmp	QueueSound2.l
+
+	rts
 
 NeedleBoss_FlyOut:
 	bsr.w	_needleBossHits
@@ -451,6 +463,48 @@ Ani_NHammer:
 	even
 
 ; ----------------------------------------------------------------------------
+; large bg needle boss body and hands
+; ----------------------------------------------------------------------------
+ObjNeedleBossBig:
+	moveq	#0,d0
+	move.b	obRoutine(a0),d0
+	move.w	.Index(pc,d0.w),d1
+	jsr	.Index(pc,d1.w)
+	jmp	DisplaySprite.l
+
+; ----------------------------------------------------------------------------
+.Index:
+	dc.w	NeedleBossBig_Init-.Index
+	dc.w	NeedleBossBig_Main-.Index
+; ----------------------------------------------------------------------------
+
+NeedleBossBig_Init:
+	add.b	#2, obRoutine(a0)
+	move.l	#Map_NeedleBossBig, obMap(a0)
+	move.w	#NEEDLBBIG_GFX,obGfx(a0)
+
+	move.w	#N3D_CENTERX,needle.XOrg(a0)
+	move.w	#$A0,needle.YOrg(a0)
+	move.w	#$10,needle.ZPos(a0)
+	move.b	#$C,obRender(a0)
+	move.b	#16,obWidth(a0)
+	move.b	#16,obHeight(a0)
+	move.b	#16,obActWid(a0)
+	move.b	#2,obPriority(a0)
+	move.b	#0,obFrame(a0)
+	move.b	#0,obAnim(a0)
+	move.w	#0,obAngle(a0)
+	bset	#0,obStatus(a0)
+	bsr.w	_needleLoadPaletteBig
+
+NeedleBossBig_Main:
+	move.w	needle.XOrg(a0),obX(a0)
+	bsr.w	_needleChase
+	move.w	#$A0,needle.YOrg(a0)
+	move.w	obX(a0),needle.XOrg(a0)
+	bra.w	_needleRender3D
+
+; ----------------------------------------------------------------------------
 ; bare 3d test
 ; ----------------------------------------------------------------------------
 
@@ -520,6 +574,7 @@ N3DTest_Main:
 		.NoHeldDown:
 		; DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV 
 
+_needleRender3D:
 	moveq	#0,d0
 	moveq	#0,d1
 	moveq	#0,d2
@@ -535,6 +590,7 @@ N3DTest_Main:
 
 	sub.w	#N3D_CENTERY,d1
 	move.w	needle.ZPos(a0),d2
+	andi.w	#$7F,d2
 	move.w	d2,d3
 	asr.w	#1,d3
 	add.w	d3,d2
@@ -548,6 +604,24 @@ N3DTest_Main:
 	add.w	#N3D_CENTERY,d1
 	move.w	d0,obX(a0)
 	move.w	d1,obY(a0)
+	rts
+
+_needleLoadPalette:
+	lea	(v_palette+32).w,a1
+	lea	Pal_NeedleBoss,a2
+
+	rept	8
+	move.l	(a2)+,(a1)+
+	endr
+	rts
+
+_needleLoadPaletteBig:
+	lea	(v_palette+32).w,a1
+	lea	Pal_NeedleBossBig,a2
+
+	rept	8
+	move.l	(a2)+,(a1)+
+	endr
 	rts
 ; ----------------------------------------------------------------------------
 ; Needle Boss Anim scripts
@@ -591,7 +665,7 @@ ArtList_NeedleBoss:
 	dc.l	Nem_NHammer
 	dc.w	NHAMMER_VRAM
 	dc.l	Nem_NeedleBossBig
-	dc.w	$7000
+	dc.w	NEEDLBBIG_VRAM
 	dc.l	Nem_N3DTest
 	dc.w	$8800
 	dc.l	-1
@@ -623,3 +697,5 @@ Nem_N3DTest:
 	even
 Pal_NeedleBoss:
 	incbin	"_incObj/NeedleBoss/NeedleBoss.pal"
+Pal_NeedleBossBig:
+	incbin	"_incObj/NeedleBoss/NeedleBossBig.pal"
