@@ -465,6 +465,7 @@ Ani_NHammer:
 ; ----------------------------------------------------------------------------
 ; large bg needle boss body and hands
 ; ----------------------------------------------------------------------------
+
 ObjNeedleBossBig:
 	moveq	#0,d0
 	move.b	obRoutine(a0),d0
@@ -475,6 +476,8 @@ ObjNeedleBossBig:
 ; ----------------------------------------------------------------------------
 .Index:
 	dc.w	NeedleBossBig_Init-.Index
+	dc.w	NeedleBossBig_Fall-.Index
+	dc.w	NeedleBossBig_Charge-.Index
 	dc.w	NeedleBossBig_Main-.Index
 ; ----------------------------------------------------------------------------
 
@@ -484,18 +487,52 @@ NeedleBossBig_Init:
 	move.w	#NEEDLBBIG_GFX,obGfx(a0)
 
 	move.w	#N3D_CENTERX,needle.XOrg(a0)
-	move.w	#$A0,needle.YOrg(a0)
+	move.w	#N3D_CENTERX,obX(a0)
+
+	move.w	#-$70,needle.YOrg(a0)
+
 	move.w	#$10,needle.ZPos(a0)
 	move.b	#$C,obRender(a0)
 	move.b	#16,obWidth(a0)
 	move.b	#16,obHeight(a0)
 	move.b	#16,obActWid(a0)
 	move.b	#2,obPriority(a0)
-	move.b	#0,obFrame(a0)
+	move.b	#6,obFrame(a0)
 	move.b	#0,obAnim(a0)
 	move.w	#0,obAngle(a0)
 	bset	#0,obStatus(a0)
 	bsr.w	_needleLoadPaletteBig
+
+
+NeedleBossBig_Fall:
+	addi.w	#4,needle.YOrg(a0)
+	cmpi.w	#$A0,needle.YOrg(a0)
+	blt.s	.Skip
+	add.b	#2,obRoutine(a0)
+	move.b	#5,obFrame(a0)
+	move.b	#60*2,needle.Timer(a0)
+.Skip
+	bra.w	_needleRender3D
+
+NeedleBossBig_Charge:
+	subq.b	#1,needle.Timer(a0)
+	bne.s	.Go
+	addq.b	#2,obRoutine(a0)
+	move.b	#0,obFrame(a0)
+	move.b	#sfx_GiantRing,d0
+	jmp	QueueSound2.l
+.Go
+	bsr.w	_needleRender3D
+	addi.w	#6,obAngle(a0)
+	jsr	RandomNumber.l
+	andi.l	#$001F001F,d0
+	move.b	obAngle(a0),d1
+	and.b	d1,d0
+	add.w	d0,obX(a0)
+	swap	d0
+	and.b	d1,d0
+	add.w	d0,obY(a0)
+	rts
 
 NeedleBossBig_Main:
 	move.w	needle.XOrg(a0),obX(a0)

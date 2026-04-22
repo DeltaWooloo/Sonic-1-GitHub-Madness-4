@@ -3182,7 +3182,7 @@ SynchroAnimate:
 		cmp.b	#id_Level,(v_gamemode).w		; 3. It's not a level (demo, ending, etc)
 		bne.s	.notyet
 		clr.l	(v_adverttimer).w			; play an advertisement
-		move.b	#id_Advert,(v_gamemode).w
+		;move.b	#id_Advert,(v_gamemode).w
 		move.w	#4,(f_restart).w
 	;	moveq	#1,d0					; TODO: need to differenciate the advert from the lamppost
 	;	lea	v_player,a0
