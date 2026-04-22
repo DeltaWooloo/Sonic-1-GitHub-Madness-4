@@ -56,8 +56,8 @@ ptr_PLC_WINAnimals:	dc.w PLC_WINAnimals-ArtLoadCues
 ptr_PLC_JointAnimals:	dc.w PLC_JointAnimals-ArtLoadCues
 ptr_PLC_DVZAnimals:	dc.w PLC_DVZAnimals-ArtLoadCues
 ptr_PLC_NGZAnimals:	dc.w PLC_NGZAnimals-ArtLoadCues
-ptr_PLC_BSZAnimals:	dc.w PLC_NGZAnimals-ArtLoadCues
-ptr_PLC_BTZAnimals:	dc.w PLC_NGZAnimals-ArtLoadCues
+ptr_PLC_BSZAnimals:	dc.w PLC_BSZAnimals-ArtLoadCues
+ptr_PLC_BTZAnimals:	dc.w PLC_BTZAnimals-ArtLoadCues
 ptr_PLC_ARZAnimals:	dc.w PLC_ARZAnimals-ArtLoadCues
 			zonewarning PLC_Animals,2
 ptr_PLC_Ending:		dc.w PLC_Ending-ArtLoadCues
@@ -467,12 +467,26 @@ PLC_DVZAnimals:	dc.w ((PLC_DVZAnimalsend-PLC_DVZAnimals-2)/6)-1
 		plcm	Nem_Chicken, ArtTile_Animal_2 ; cocky
 PLC_DVZAnimalsend:
 ; ---------------------------------------------------------------------------
-; Pattern load cues - DVZ animals
+; Pattern load cues - Nogales animals
 ; ---------------------------------------------------------------------------
-PLC_NGZAnimals:	dc.w ((PLC_DVZAnimalsend-PLC_DVZAnimals-2)/6)-1
-		plcm	Nem_Squirrel,    ArtTile_Animal_1 ; ricky
-		plcm	Nem_Chicken, ArtTile_Animal_2 ; cocky
+PLC_NGZAnimals:	dc.w ((PLC_NGZAnimalsend-PLC_NGZAnimals-2)/6)-1
+		plcm	Nem_Rin, ArtTile_Animal_1 ; rabbit
+		plcm	Nem_AOrange, ArtTile_Animal_2 ; flicky
 PLC_NGZAnimalsend:
+; ---------------------------------------------------------------------------
+; Pattern load cues - BSZ animals
+; ---------------------------------------------------------------------------
+PLC_BSZAnimals:	dc.w ((PLC_BSZAnimalsend-PLC_BSZAnimals-2)/6)-1
+		plcm	Nem_Squirrel, ArtTile_Animal_1 ; rabbit
+		plcm	Nem_Chicken, ArtTile_Animal_2 ; flicky
+PLC_BSZAnimalsend:
+; ---------------------------------------------------------------------------
+; Pattern load cues - BTZ animals
+; ---------------------------------------------------------------------------
+PLC_BTZAnimals:	dc.w ((PLC_BTZAnimalsend-PLC_BTZAnimals-2)/6)-1
+		plcm	Nem_Squirrel, ArtTile_Animal_1 ; rabbit
+		plcm	Nem_Chicken, ArtTile_Animal_2 ; flicky
+PLC_BTZAnimalsend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - ARZ animals
 ; ---------------------------------------------------------------------------
@@ -603,7 +617,7 @@ plcid_BREWAnimals:	equ (ptr_PLC_BREWAnimals-ArtLoadCues)/2
 plcid_WINAnimals:	equ (ptr_PLC_WINAnimals-ArtLoadCues)/2	
 plcid_DVZAnimals:	equ (ptr_PLC_DVZAnimals-ArtLoadCues)/2	
 plcid_NGZAnimals:	equ (ptr_PLC_NGZAnimals-ArtLoadCues)/2	
-plcid_BSZAnimals:	equ (ptr_PLC_NGZAnimals-ArtLoadCues)/2	
+plcid_BSZAnimals:	equ (ptr_PLC_BSZAnimals-ArtLoadCues)/2	
 plcid_BTZAnimals:	equ (ptr_PLC_BTZAnimals-ArtLoadCues)/2	
 plcid_ARZAnimals:	equ (ptr_PLC_ARZAnimals-ArtLoadCues)/2	
 plcid_Ending:		equ (ptr_PLC_Ending-ArtLoadCues)/2	
