@@ -766,6 +766,8 @@ bsod_22:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_32x.art1,			ArtTile_
 bsod_23:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_32x_nbajte.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x_nbajte.fg,	bsod_32x_nbajte.bg,	bsod_32x_nbajte.pal,TCLR(0,0),	bgm_hang,		dShutdown
 bsod_24:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_32x_xmen.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x_xmen.fg,	bsod_32x_xmen.bg,	bsod_32x_xmen.pal,	TCLR(0,0),	bgm_hang,		dShutdown
 bsod_25:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_32x_zx2k.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x_zx2k.fg,	bsod_32x_zx2k.bg,	bsod_32x_zx2k.pal,	TCLR(0,0),	bgm_hang,		dShutdown
+			;Mac-based
+bsod_26:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_sadMac.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sadMac.fg,		bsod_sadMac.bg,		bsod_sadMac.pal,	TCLR(0,0),	bgm_SadMac,		$00
 BSOD_table_end:
 
 bsod_w311:
@@ -1008,6 +1010,16 @@ bsod_32x_zx2k:
 			even
 .pal:		binclude "_gamemode/winBSOD/bsod_32x_zx2k-pal.bin"
 			even
+			
+;!@ Mac stuff			
+bsod_sadMac:
+.art1:
+			binclude "_gamemode/winBSOD/bsod_sadMac-art1.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_sadMac-mapFG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_sadMac-pal.bin"
+			even
 
 
 bsod_std.bg:
@@ -1049,6 +1061,7 @@ bsod_32x.bg:
 bsod_32x_nbajte.bg:
 bsod_32x_xmen.bg:
 bsod_32x_zx2k.bg:
+bsod_sadMac.bg:
 bsod_std.bg2:
 			binclude "_gamemode/winBSOD/bsod_std-mapBG2.eni"
 			even
