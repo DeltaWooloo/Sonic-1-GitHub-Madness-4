@@ -160,6 +160,7 @@ MusicIndex:
 	bgmdef $55, Mus_Outfarted
 	bgmdef $75, Mus_SkyGift
 	bgmdef s1TempotoS3($05), Mus_S28bitUnused
+	bgmdef $01, Mus_WBRBack	; GMZ
 
 	bgmdef $73, Mus_SonicToole
 	bgmdef s1TempotoS3($00), Mus_Folgers
@@ -459,4 +460,7 @@ Mus_RamRanch:		include	"music/CNTracks/RamRanch.asm"
 
 Mus_S28bitUnused:	include	"music/Malachi/Sonic 2 8bit Unused Theme.asm"
 	even
+
+Mus_WBRBack:		include	"music/GMZ/Mus - We'll Be Right Back.asm"	; GMZ
+	even	; GMZ
 	END
