@@ -2279,7 +2279,7 @@ Sega_GotoTitle:
 
 		include	"LiquidSplashes/ATOownscreen/MAIN.asm"	; Code 
 
-		include "NEEDLE.asm" ;le shitty code
+		include "_gamemode/NeedleTeam/NEEDLE.asm" ;le shitty code
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -6439,7 +6439,7 @@ Art_LivesNums:	binclude	"artunc/Lives Counter Numbers.bin" ; 8x8 pixel numbers o
 		include "Buttcrack/Game.asm"
 		include	"ContinueScreen/Continue.asm"
 
-		include "Splashes.asm"
+		include "LiquidSplashes/Splashes.asm"
 		include "_gamemode/advert/_advert.asm"
 		include	"_inc/GHM3Explode.asm"
 
@@ -6482,7 +6482,7 @@ FortnitePortal:
 		include	"_incObj/ObjRiftToGo.asm"
 		
 ;sansfucker
-		include "sansfucker.asm" ;le shitty code 2
+		include "_gamemode/Sans Defeat/sansfucker.asm" ;le shitty code 2
 
 ; ---------------------------------------------------------------------------
 ; NEEDLEMOUSE SHITTERY  Team Splash Screen files
