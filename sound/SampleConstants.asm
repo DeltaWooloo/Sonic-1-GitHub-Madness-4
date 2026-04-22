@@ -99,6 +99,8 @@ dBSOD				ds.b 1
 dShutdown			ds.b 1
 dChord16			ds.b 1
 dW98IPC				ds.b 1
+dMeow1				ds.b 1
+dMeow2				ds.b 1
 dEggNo				ds.b 1
 dfunnyb_utthole		ds.b 1
 d2kki				ds.b 1

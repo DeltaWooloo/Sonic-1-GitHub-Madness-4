@@ -86,34 +86,36 @@ SampleTable:
 	dcSample	TYPE_DPCM,	Github,		16000,	FLAGS_SFX		; $C0
 	dcSample	TYPE_DPCM,	Madness,	16000,	FLAGS_SFX		; $C1
 	dcSample	TYPE_DPCM,	TheFourth,	16000,	FLAGS_SFX		; $C2
-	dcSample	TYPE_DPCM,	eggmanLaugh,	11025,	FLAGS_SFX		; $C3
+	dcSample	TYPE_DPCM,	eggmanLaugh,11025,	FLAGS_SFX		; $C3
 	dcSample	TYPE_DPCM,	BSOD,		16000,	FLAGS_SFX		; $C4
 	dcSample	TYPE_DPCM,	shutdown,	16000,	FLAGS_SFX		; $C5
 	dcSample	TYPE_DPCM,	chord16,	16000,	FLAGS_SFX		; $C6
 	dcSample	TYPE_DPCM,	w98ipc,		16000,	FLAGS_SFX		; $C7
+	dcSample	TYPE_DPCM,	meow,		16000,	FLAGS_SFX		; $C8
+	dcSample	TYPE_DPCM,	meow,		8000,	FLAGS_SFX		; $C9
 
 	; Splash Screens
-	dcSample	TYPE_PCM,	EggNo,		11297				; $C8
-	dcSample	TYPE_DPCM,	funnyb_utthole,	8000,	FLAGS_SFX		; $C9
-	dcSample	TYPE_DPCM,	yume2kki,	16000,	FLAGS_SFX		; $CA
-	dcSample	TYPE_DPCM,	EagleSoft_Song,	8000,	FLAGS_SFX		; $CB
-	dcSample	TYPE_DPCM,	GenesisDoes1,	8000				; $CC
-	dcSample	TYPE_DPCM,	Virus,		16000,	FLAGS_SFX		; $CD
-	dcSample	TYPE_DPCM,	supbeaches,	8000				; $CE
+	dcSample	TYPE_PCM,	EggNo,		11297					; $CA
+	dcSample	TYPE_DPCM,	funnyb_utthole,	8000,	FLAGS_SFX	; $CB
+	dcSample	TYPE_DPCM,	yume2kki,	16000,	FLAGS_SFX		; $CC
+	dcSample	TYPE_DPCM,	EagleSoft_Song,	8000,	FLAGS_SFX	; $CD
+	dcSample	TYPE_DPCM,	GenesisDoes1,	8000				; $CE
+	dcSample	TYPE_DPCM,	Virus,		16000,	FLAGS_SFX		; $CF
+	dcSample	TYPE_DPCM,	supbeaches,	8000					; $D0
 
 	; Commercial Samples
-	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $CF
-	dcSample	TYPE_DPCM,	GenesisCan3,	8000,FLAGS_SFX			; $D0
+	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $D1
+	dcSample	TYPE_DPCM,	GenesisCan3,	8000,FLAGS_SFX		; $D2
 
 	; Ollie Samples
-	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $D1
-	dcSample	TYPE_DPCM,	OllieWahoo,	16000				; $D2
+	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $D3
+	dcSample	TYPE_DPCM,	OllieWahoo,	16000					; $D4
 
 	; SEGA Samples
-	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX		; $D3
+	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX		; $D5
 
 	;!@ GD: Last slot always reserved for PCM SFX Silence
-	dcSample	TYPE_DPCM,	dummy,	8000, FLAGS_SFX				; $D4
+	dcSample	TYPE_DPCM,	dummy,	8000, FLAGS_SFX				; $D6
 
 	; Unused
 ;	dcSample	TYPE_PCM,	Segay,		0,	FLAGS_SFX
@@ -219,6 +221,7 @@ SampleTable:
 	incdac	shutdown, "sound/dac/GenesisDoes/shutdown.dpcm"
 	incdac	chord16, "sound/dac/GenesisDoes/chord16.dpcm"
 	incdac	w98ipc, "sound/dac/GenesisDoes/w98ipc.dpcm"
+	incdac	meow, "sound/dac/GenesisDoes/meow.dpcm"
 
 ; ---------------------------------------------------------------
 ; Splash Screen Samples
