@@ -51,6 +51,30 @@ DPLCs_Knight: mappingsTable
 	mappingsTableEntry.w	DPLCs_Knight_49
 	mappingsTableEntry.w	DPLCs_Knight_50
 	mappingsTableEntry.w	DPLCs_Knight_51
+	mappingsTableEntry.w	DPLCs_Knight_52
+	mappingsTableEntry.w	DPLCs_Knight_53
+	mappingsTableEntry.w	DPLCs_Knight_54
+	mappingsTableEntry.w	DPLCs_Knight_55
+	mappingsTableEntry.w	DPLCs_Knight_56
+	mappingsTableEntry.w	DPLCs_Knight_57
+	mappingsTableEntry.w	DPLCs_Knight_58
+	mappingsTableEntry.w	DPLCs_Knight_59
+	mappingsTableEntry.w	DPLCs_Knight_60
+	mappingsTableEntry.w	DPLCs_Knight_61
+	mappingsTableEntry.w	DPLCs_Knight_62
+	mappingsTableEntry.w	DPLCs_Knight_63
+	mappingsTableEntry.w	DPLCs_Knight_64
+	mappingsTableEntry.w	DPLCs_Knight_65
+	mappingsTableEntry.w	DPLCs_Knight_66
+	mappingsTableEntry.w	DPLCs_Knight_67
+	mappingsTableEntry.w	DPLCs_Knight_68
+	mappingsTableEntry.w	DPLCs_Knight_69
+	mappingsTableEntry.w	DPLCs_Knight_70
+	mappingsTableEntry.w	DPLCs_Knight_71
+	mappingsTableEntry.w	DPLCs_Knight_72
+	mappingsTableEntry.w	DPLCs_Knight_73
+	mappingsTableEntry.w	DPLCs_Knight_74
+	mappingsTableEntry.w	DPLCs_Knight_75
 
 DPLCs_Knight_0:	dplcHeader
 DPLCs_Knight_0_End
@@ -69,9 +93,8 @@ DPLCs_Knight_2_End
 
 DPLCs_Knight_3:	dplcHeader
  dplcEntry $10, $4F
- dplcEntry 1, $5F
- dplcEntry 1, $60
- dplcEntry $F, $61
+ dplcEntry $10, $5F
+ dplcEntry 1, $6F
  dplcEntry 2, $73
  dplcEntry 3, $70
  dplcEntry 2, $75
@@ -354,5 +377,174 @@ DPLCs_Knight_51:	dplcHeader
  dplcEntry $10, $762
  dplcEntry $D, $772
 DPLCs_Knight_51_End
+
+DPLCs_Knight_52:	dplcHeader
+ dplcEntry $10, $77F
+ dplcEntry $10, $78F
+ dplcEntry 5, $79F
+ dplcEntry 8, $ADC
+DPLCs_Knight_52_End
+
+DPLCs_Knight_53:	dplcHeader
+ dplcEntry $10, $7A4
+ dplcEntry $10, $7B4
+ dplcEntry 5, $7C4
+ dplcEntry 8, $ADC
+DPLCs_Knight_53_End
+
+DPLCs_Knight_54:	dplcHeader
+ dplcEntry $10, $7C9
+ dplcEntry $10, $7D9
+ dplcEntry 2, $7E9
+ dplcEntry 8, $ADC
+DPLCs_Knight_54_End
+
+DPLCs_Knight_55:	dplcHeader
+ dplcEntry $10, $7EB
+ dplcEntry $10, $7FB
+ dplcEntry 7, $80B
+ dplcEntry 4, $AE0
+ dplcEntry 4, $ADC
+DPLCs_Knight_55_End
+
+DPLCs_Knight_56:	dplcHeader
+ dplcEntry $10, $812
+ dplcEntry $10, $822
+ dplcEntry 2, $832
+ dplcEntry 8, $ADC
+DPLCs_Knight_56_End
+
+DPLCs_Knight_57:	dplcHeader
+ dplcEntry $10, $834
+ dplcEntry $10, $844
+ dplcEntry 3, $854
+ dplcEntry 8, $ADC
+DPLCs_Knight_57_End
+
+DPLCs_Knight_58:	dplcHeader
+ dplcEntry $10, $857
+ dplcEntry $10, $867
+ dplcEntry 4, $877
+ dplcEntry 8, $ADC
+DPLCs_Knight_58_End
+
+DPLCs_Knight_59:	dplcHeader
+ dplcEntry $10, $87B
+ dplcEntry $10, $88B
+ dplcEntry 5, $89B
+ dplcEntry 8, $ADC
+DPLCs_Knight_59_End
+
+DPLCs_Knight_60:	dplcHeader
+ dplcEntry $10, $8A0
+ dplcEntry $10, $8B0
+ dplcEntry $10, $8C0
+ dplcEntry $10, $8D0
+ dplcEntry $10, $8E0
+ dplcEntry $B, $8F0
+DPLCs_Knight_60_End
+
+DPLCs_Knight_61:	dplcHeader
+ dplcEntry $10, $8FB
+ dplcEntry $10, $90B
+ dplcEntry $10, $91B
+ dplcEntry 7, $92B
+DPLCs_Knight_61_End
+
+DPLCs_Knight_62:	dplcHeader
+ dplcEntry $10, $932
+ dplcEntry $10, $942
+ dplcEntry $10, $952
+ dplcEntry 7, $962
+DPLCs_Knight_62_End
+
+DPLCs_Knight_63:	dplcHeader
+ dplcEntry $10, $969
+ dplcEntry $10, $979
+ dplcEntry $10, $989
+ dplcEntry 7, $999
+DPLCs_Knight_63_End
+
+DPLCs_Knight_64:	dplcHeader
+ dplcEntry $10, $9A0
+ dplcEntry $10, $9B0
+ dplcEntry $10, $9C0
+ dplcEntry 3, $9D0
+DPLCs_Knight_64_End
+
+DPLCs_Knight_65:	dplcHeader
+ dplcEntry $10, $9D3
+ dplcEntry $10, $9E3
+ dplcEntry $10, $9F3
+ dplcEntry $10, $A03
+ dplcEntry $10, $A13
+ dplcEntry $F, $A23
+DPLCs_Knight_65_End
+
+DPLCs_Knight_66:	dplcHeader
+ dplcEntry $10, $A32
+ dplcEntry $10, $A42
+ dplcEntry $E, $A52
+DPLCs_Knight_66_End
+
+DPLCs_Knight_67:	dplcHeader
+ dplcEntry $10, $A60
+ dplcEntry $10, $A70
+ dplcEntry 9, $A80
+DPLCs_Knight_67_End
+
+DPLCs_Knight_68:	dplcHeader
+ dplcEntry $10, $A89
+ dplcEntry $10, $A99
+ dplcEntry 8, $AA9
+DPLCs_Knight_68_End
+
+DPLCs_Knight_69:	dplcHeader
+ dplcEntry $10, $AB1
+ dplcEntry $10, $AC1
+ dplcEntry $B, $AD1
+DPLCs_Knight_69_End
+
+DPLCs_Knight_70:	dplcHeader
+ dplcEntry $10, $AE4
+ dplcEntry $10, $AF4
+ dplcEntry 7, $B04
+DPLCs_Knight_70_End
+
+DPLCs_Knight_71:	dplcHeader
+ dplcEntry $10, $B0B
+ dplcEntry $10, $B1B
+ dplcEntry 6, $B2B
+DPLCs_Knight_71_End
+
+DPLCs_Knight_72:	dplcHeader
+ dplcEntry $10, $B0B
+ dplcEntry $10, $B1B
+ dplcEntry 6, $B2B
+ dplcEntry 2, $AE2
+DPLCs_Knight_72_End
+
+DPLCs_Knight_73:	dplcHeader
+ dplcEntry $10, $B0B
+ dplcEntry $10, $B1B
+ dplcEntry 6, $B2B
+ dplcEntry 4, $AE0
+DPLCs_Knight_73_End
+
+DPLCs_Knight_74:	dplcHeader
+ dplcEntry 4, $AE0
+ dplcEntry $10, $B0B
+ dplcEntry $10, $B1B
+ dplcEntry 6, $B2B
+ dplcEntry 2, $ADE
+DPLCs_Knight_74_End
+
+DPLCs_Knight_75:	dplcHeader
+ dplcEntry 4, $AE0
+ dplcEntry $10, $B0B
+ dplcEntry $10, $B1B
+ dplcEntry 6, $B2B
+ dplcEntry 4, $ADC
+DPLCs_Knight_75_End
 
 	even

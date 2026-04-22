@@ -18,10 +18,12 @@ Knight_Previous_Frame	=	objoff_3B		; Where the Knight's previous frame will be s
 Knight_Timer		=	objoff_38		; Internal timer for the Knight. (2 bytes)
 Knight_X_Target		=	objoff_34		; X coordinate target for the Knight. (2 bytes)
 Knight_Y_Target		=	objoff_36		; Y coordinate target for the Knight. (2 bytes)
-Knight_Hits_Phase1	=	2			; HP for Phase 
+Knight_Hits_Phase1	=	2			; HP for Phase 1
 Knight_Sound1_Duration	=	60			; How long the first Knight PCM sound lasts in frames (60Hz)
 Knight_Sound2_Duration	=	180			; How long the second Knight PCM sound lasts in frames (60Hz)
-
+Knight_X_Position	=	objoff_30		; The Knight's X position, which is copied over to the Knight's current X position after being processed by waving routines. (2 bytes)
+Knight_Y_Position	=	objoff_32		; Same as above, but for the Y position. (2 bytes)
+Knight_Wave_Increment	=	objoff_3A		; Value that increments once every frame. It makes the Knight wave. (1 byte)
 
 ; ===========================================================================
 ; Start of object code
@@ -41,7 +43,7 @@ RKnight_Index:
 	dc.w RKnight_Init-RKnight_Index		; Initialization routine
 	dc.w RKnight_Phase1-RKnight_Index	; Main logic for phase 1
 	dc.w RKnight_P1End-RKnight_Index	; Phase 1 to Phase 2 transition
-	dc.w RKnight_Defeat-RKnight_Index	; Main logic for phase 2
+	dc.w RKnight_Phase2-RKnight_Index	; Main logic for phase 2
 	dc.w RKnight_Defeat-RKnight_Index	; Defeat and cleanup logic
 	dc.w RKnight_Bullets-RKnight_Index	; Knight bullet objects
 	dc.w RKnight_Null-RKnight_Index		; Knight afterimages
@@ -303,7 +305,9 @@ RKP1End_Index:
 	dc.w	RKPhase1_Wait-RKP1End_Index		; Prepares the Knight for Roaring
 	dc.w	RKP1End_MakeRoar-RKP1End_Index		; Make the Knight Roar
 	dc.w	RKPhase1_Wait-RKP1End_Index		; Let the animation play
-	dc.w	RKPhase1_Idle-RKP1End_Index		; Switch to next phase.
+	dc.w	RKP1End_Swing-RKP1End_Index		; Make the Knight swing their sword
+	dc.w	RKPhase1_Wait-RKP1End_Index		; Let the animation play	
+	dc.w	RKP1End_Phase2-RKP1End_Index		; Switch to next phase.
 	
 ; ===========================================================================
 ; Prepares the Knight to leave, setting an animation, and their destination.
@@ -426,6 +430,66 @@ RKP1End_MakeRoar:
 	move.w	#Knight_Sound2_Duration,Knight_Timer(a0)	; Set timer for next routine.
 	move.b	#6,obAnim(a0)					; Set animation	
 	; TO-DO: Play PCM sound.
+	rts
+	
+; ===========================================================================
+; Switches the Knight's animation to swing.
+; ===========================================================================	
+	
+RKP1End_Swing:	
+	addq.b	#2,ob2ndRout(a0)
+	move.b	#8,obAnim(a0)
+	move.w	#180,Knight_Timer(a0)
+	rts	
+
+; ===========================================================================
+; Moves the Knight onto Phase 2
+; ===========================================================================	
+
+RKP1End_Phase2:
+	addq.b	#2,obRoutine(a0)
+	clr.b	ob2ndRout(a0)
+	move.w	obX(a0),Knight_X_Position(a0)
+	move.w	obY(a0),Knight_Y_Position(a0)
+	move.b	#$80,Knight_Wave_Increment(a0)
+	rts
+	
+; End of Phase 1 end behavior	
+	
+; ===========================================================================
+; Moves the Knight onto Phase 2
+; ===========================================================================		
+	
+RKnight_Phase2:
+	moveq	#0,d0
+	move.b	ob2ndRout(a0),d0		; Get routine ID
+	move.w	RKPhase2_Index(pc,d0.w),d1	; Get indexed routine
+	jsr	RKPhase2_Index(pc,d1.w)		; Jump to code
+	clr.l	obX(a0)
+	clr.l	obY(a0)
+	move.w	Knight_X_Position(a0),obX(a0)
+	move.w	Knight_Y_Position(a0),obY(a0)
+	bsr.w	RKnight_Wave
+	; TO-DO: Wave
+	
+	; TO-DO: AnimateSprite
+	lea	(Ani_Roaring_Knight).l,a1	
+	jsr	(AnimateSpriteXL).l
+	bsr.w	RKnight_LoadGfx			; Load graphics from DPLC to VRAM	
+	jmp	(DisplaySprite).l		; Display object
+	
+; ===========================================================================
+; Phase 2 main behavior Index
+; ===========================================================================	
+	
+RKPhase2_Index:	
+	dc.w	RKPhase2_Idle-RKPhase2_Index	; Idle
+
+; ===========================================================================
+; Knight's Phase 2 idling routine
+; ===========================================================================	
+
+RKPhase2_Idle:
 	rts
 	
 ; ===========================================================================	
@@ -556,6 +620,22 @@ RKnight_HandleHits:
 
 .return:
 	rts
+	
+; ===========================================================================
+; Subroutine to make the Knight wave vertically
+;
+; Used by: Roaring Knight (Phase 2)
+; ===========================================================================	
+
+RKnight_Wave:
+	add.b	#2,Knight_Wave_Increment(a0)	; Add 2 to the wave increment
+	move.b	Knight_Wave_Increment(a0),d0	; Move the increment to a data register
+	jsr	(CalcSine).l			; Extract the sine from a look-up table
+	ext.l	d0				; Extend to longword
+	asl.l	#8,d0				; Multiply sine by 256
+	asl.l	#3,d0				; Multiply sine by 8
+	add.l	d0,obY(a0)			; Adjust Y position
+	rts	
 
 ; ===========================================================================
 ; Load the Knight bullet properties.
@@ -715,7 +795,9 @@ Ani_Roaring_Knight:
 		dc.w	.ball-Ani_Roaring_Knight		; 4
 		dc.w	.roarprepare-Ani_Roaring_Knight		; 5
 		dc.w	.roar-Ani_Roaring_Knight		; 6
-		dc.w	.droop-Ani_Roaring_Knight		; 7		
+		dc.w	.droop-Ani_Roaring_Knight		; 7	
+		dc.w	.swingprepare-Ani_Roaring_Knight	; 8
+		dc.w	.swingdo-Ani_Roaring_Knight		; 9
 
 .null:		dc.b	0
 		dc.b	0,$FF
@@ -748,8 +830,20 @@ Ani_Roaring_Knight:
 		
 .droop:		dc.b	30
 		dc.b	4,5,4,6,$FF
+		even
+		
+.swingprepare:	dc.b	1
+		dc.b	$2,$2,$46,$46,$46,$46,$47,$47,$47,$47,$47,$47,$47,$47	; knight picking themselves up from roar
+		dc.b	$48,$47,$49,$47,$4A,$47,$4B,$47,$4B,$47,$4B,$4B	; knight spawning sword
+		dc.b	$4B,$4B,$4B,$4B,$4B,$4B,$4B,$4B,$4B,$4B,$4B,$4B	; sword sitting there for a bit
+		dc.b	$34,$34,$35,$35,$36,$36,$37,$37,$38,$38,$39,$39,$3A,$3A,$3A,$3A,$3B,$FD,$9		; knight charging up for swing
+		even
 	
-even
+.swingdo:	dc.b	1
+		dc.b	$3C,$3D,$3E,$3E,$3F,$3F,$3F,$3F,$3F,$3F,$3F,$3F
+		dc.b	$3F,$3F,$3F,$3F,$40,$40,$41,$41,$42,$42,$43,$43,$44,$44,$44,$44,$45,$45,$45,$45,$FD,$1
+	
+		even
 
 
 Ani_Knight_Bullets:
