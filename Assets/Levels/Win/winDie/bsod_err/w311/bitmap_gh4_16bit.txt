@@ -1,13 +1,13 @@
    1234567890123456789012345678901234567890
-               GITHUB MADNESS IV           
-   
-             AN ERROR HAS OCCURRED         
-              IN YOUR APPLICATION          
-             IF YOU CHOOSE IGNORE,         
-   YOU SHOULD SAVE YOUR WORK IN A NEW FILE.
-             IF YOU CHOOSE CLOSE,          
-        YOUR APPLICATION WILL TERMINATE    
+01             GITHUB MADNESS IV           
+02 
+03           AN ERROR HAS OCCURRED         
+04            IN YOUR APPLICATION          
+05           IF YOU CHOOSE IGNORE,         
+06 YOU SHOULD SAVE YOUR WORK IN A NEW FILE.
+07           IF YOU CHOOSE CLOSE,          
+08      YOUR APPLICATION WILL TERMINATE    
 
 
 1234567890123456789012345678
-             123            
+          12345678          
