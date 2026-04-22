@@ -34,8 +34,8 @@ TitleCard_SYZ2:	equ  "GASSY FIELD"
 TitleCard_SYZ3:	equ  "HOMERS"
 TitleCard_SYZ4:	equ  "porn"
 
-TitleCard_LZ1:	equ  "AZURE RAINFOREST"
-TitleCard_LZ2:	equ  "AZURE PAINFOREST"
+TitleCard_LZ1:	equ  "Looks Guys Look"
+TitleCard_LZ2:	equ  "Looks Guys Look"
 TitleCard_LZ3:	equ  "FOE FOE FOE FOE"
 TitleCard_LZ4:	equ  "PRONGLE PIT"	; LZ4 is SBZ3
 
