@@ -6,4 +6,4 @@ copy /y "bsod_scdmz-art2.nem" "..\..\..\..\..\..\_gamemode\winBSOD\bsod_scdmz-ar
 copy /y "bsod_scdmz-mapBG.eni" "..\..\..\..\..\..\_gamemode\winBSOD\bsod_scdmz-mapBG.eni"
 copy /y "bsod_scdmz-mapFG.eni" "..\..\..\..\..\..\_gamemode\winBSOD\bsod_scdmz-mapFG.eni"
 copy /y "bsod_scdmz-pal.bin" "..\..\..\..\..\..\_gamemode\winBSOD\bsod_scdmz-pal.bin"
-pause
+REM pause

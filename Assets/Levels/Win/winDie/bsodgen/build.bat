@@ -7,4 +7,4 @@ copy /y "ntscu_only_md_mapFG.eni" "..\..\..\..\..\_gamemode\winBSOD\bsod_gen_nts
 copy /y "ntscj_only_md_mapFG.eni" "..\..\..\..\..\_gamemode\winBSOD\bsod_gen_ntscj-mapFG.eni"
 copy /y "ntscuj_only_md_mapFG.eni" "..\..\..\..\..\_gamemode\winBSOD\bsod_gen_ntscuj-mapFG.eni"
 copy /y "pal_only_md_mapFG.eni" "..\..\..\..\..\_gamemode\winBSOD\bsod_gen_pal-mapFG.eni"
-pause
+REM pause

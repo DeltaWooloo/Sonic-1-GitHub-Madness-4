@@ -20,12 +20,13 @@ bsodType_gnu:		equ	$03					;GNU/Linux troll type
 bsodType_MAX:		equ	bsodType_gnu+1		;MAX type for bsodType enum
 
 ; ArtTile offsets
+ArtTile_fontAfter:			equ	$102					; After standard BSOD font
 ArtTile_Home0:				equ $000					; Home 			(tile 0)
 ArtTile_Home1:				equ $001					; Home 			(transparency + tile 1)
-ArtTile_bsod_w311_art2:		equ	$061					; W311 			art 2 for 16-bit msgbox
-ArtTile_bsod_w98ipc_art2:	equ	$060					; W98ipc 		art 2 for PC/Microslop gfx 
-ArtTile_bsod_scdmz_art2:	equ	$061					; Sonic CD MMZ	art 2 for MMZ Virus
-ArtTile_bsod_gnu_art2:		equ	$101					; GNyu/Linux UwU
+ArtTile_bsod_w311_art2:		equ	ArtTile_fontAfter		; W311 			art 2 for 16-bit msgbox
+ArtTile_bsod_w98ipc_art2:	equ	ArtTile_fontAfter		; W98ipc 		art 2 for PC/Microslop gfx 
+ArtTile_bsod_scdmz_art2:	equ	ArtTile_fontAfter		; Sonic CD MMZ	art 2 for MMZ Virus
+ArtTile_bsod_gnu_art2:		equ	ArtTile_fontAfter-1		; GNyu/Linux UwU
 
 ; ---------------------------------------------------------------------------
 ; compare the size of an index with bsodType_MAX constant
@@ -718,7 +719,7 @@ BSOD_table:	; seconds, seconds to skip, art, map, palette, SMPS sound ID, MPCM s
 bsod_00:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_w311.art1,			ArtTile_Home1,	bsod_w311.art2,	ArtTile_bsod_w311_art2,		bsod_w311.fg,		bsod_w311.bg,		bsod_w311.pal,		TCLR(0,0),	bgm_Passport,	dChord16
 bsod_01:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_95.fg,			bsod_95.bg,			bsod_95.pal,		TCLR(1,0),	bgm_hang,		dBSOD		
 bsod_02:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_MSB.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_MSB.fg,		bsod_MSB.bg,		bsod_MSB.pal,		TCLR(0,0),	bgm_Passport,	dChord16		
-bsod_03:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_98ipc.art1,		ArtTile_Home1,	bsod_98ipc.art2,ArtTile_bsod_w98ipc_art2,	bsod_98ipc.fg,		bsod_98ipc.bg,		bsod_98ipc.pal,		TCLR(0,7),	bgm_Passport,	dW98IPC
+bsod_03:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_98ipc.art1,		ArtTile_Home1,	bsod_98ipc.art2,ArtTile_bsod_w98ipc_art2,	bsod_98ipc.fg,		bsod_98ipc.bg,		bsod_98ipc.pal,		TCLR(2,7),	bgm_Passport,	dW98IPC
 bsod_04:	bsodData		bsodType_reg,	60*f2s,		secSkip_std,	bsod_sonihack.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sonihack.fg,	bsod_sonihack.bg,	bsod_sonihack.pal,	TCLR(0,0),	bgm_VirusAlert,	dVirus
 bsod_05:	bsodData		bsodType_gnu,	60*f2s,		sec_std,		bsod_gnu.art1,			ArtTile_Home1,	bsod_gnu.art2,	ArtTile_bsod_gnu_art2,		bsod_gnu.fg,		bsod_gnu.bg,		bsod_gnu.pal,		TCLR(1,0),	bgm_BossaNova,	dW98IPC
 			;Safe shutdown
@@ -747,7 +748,7 @@ bsod_16:	bsodData		bsodType_gen,	sec_gen,	secSkip_gen,	bsod_gen_pal.art1,		ArtTi
 bsod_genEnd:
 			;Sonic CD-based
 bsod_17:	bsodData		bsodType_reg,	60*f2s,		secSkip_CD,		bsod_scdm.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scdm.fg,		bsod_scdm.bg,		bsod_scdm.pal,		TCLR(0,0),	bgm_VirusAlert,	dVirus		; Sonic CD BRAM corruption (Mildanner parody)
-bsod_18:	bsodData		bsodType_reg,	60*f2s,		secSkip_CD,		bsod_scdmz.art1,		ArtTile_Home1,	bsod_scdmz.art2,ArtTile_bsod_scdmz_art2,	bsod_scdmz.fg,		bsod_scdmz.bg,		bsod_scdmz.pal,		TCLR(0,0),	bgm_MMZPast,	dVirus		; Sonic CD Virus Alert (MMZ BF)
+bsod_18:	bsodData		bsodType_reg,	60*f2s,		secSkip_CD,		bsod_scdmz.art1,		ArtTile_Home1,	bsod_scdmz.art2,ArtTile_bsod_scdmz_art2,	bsod_scdmz.fg,		bsod_scdmz.bg,		bsod_scdmz.pal,		TCLR(2,0),	bgm_MMZPast,	dVirus		; Sonic CD Virus Alert (MMZ BF)
 bsod_19:	bsodData		bsodType_reg,	45*f2s,		secSkip_CD,		bsod_scd1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd1.fg,		bsod_scd1.bg,		bsod_scd1.pal,		TCLR(0,0),	bgm_Hidden,		dLetsGOO	; CYA/Tails
 bsod_1A:	bsodData		bsodType_reg,	(60+48)*f2s,secSkip_CD,		bsod_scd2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd2.fg,		bsod_scd2.bg,		bsod_scd2.pal,		TCLR(0,0),	bgm_Title,		dYoFreddy	; DJ
 bsod_1B:	bsodData		bsodType_reg,	45*f2s,		secSkip_CD,		bsod_scd3.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd3.fg,		bsod_scd3.bg,		bsod_scd3.pal,		TCLR(0,0),	bgm_BatMan,		dTwerkOf87	; Batman; Y So Serious?
@@ -1070,14 +1071,7 @@ bsod_scd_ntscj.art1:
 bsod_scd_pale.art1:
 bsod_scd_pala.art1:
 bsod_32x.art1:
-bsod_std.art1:
-			binclude "_gamemode/winBSOD/bsod_std-art.nem"
-			even
-			
-bsod_w311.pal:
-			binclude "_gamemode/winBSOD/bsod_w311-pal.bin"
-			even		
-			
+
 ;Shutdown fonts
 bsod_sd1.art1:
 bsod_sd3.art1:
@@ -1087,7 +1081,13 @@ bsod_sd6.art1:
 bsod_sd7.art1:
 bsod_sd8.art1:
 bsod_gnu.art1:
-			binclude "_gamemode/winBSOD/bsod_turnoff_font-art.nem"			
+
+bsod_std.art1:
+			binclude "_gamemode/winBSOD/bsod_turnoff_font-art.nem"
+			even
+			
+bsod_w311.pal:
+			binclude "_gamemode/winBSOD/bsod_w311-pal.bin"
 			even
 
 ;Shutdown palettes
