@@ -213,7 +213,7 @@ GM_Advert:
 		advertdata 14,14,Ad_SteamedHams.art,Ad_SteamedHams.fg,Ad_SteamedHams.pal,bgm_Skinner,0		
 		advertdata 10,3,Ad_MSB.art,Ad_MSB.fg,Ad_MSB.pal,bgm_Passport,dChord16
 .tablee:
-.eyecatch1:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg1,Ad_Eyecatch.pal,0,dRightBack
+.eyecatch1:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg1,Ad_Eyecatch.pal,bgm_WBRBack,0
 .eyecatch2:	advertdata 5,10,Ad_Eyecatch.art,Ad_Eyecatch.fg2,Ad_Eyecatch.pal,bgm_EuroSega,0
 
 Ad_Eyecatch:
