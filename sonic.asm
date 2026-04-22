@@ -3294,16 +3294,24 @@ SignpostArtLoad:
 SignpostArtLoad2:
 		moveq	#plcid_Signpost,d0
 		bsr.w	NewPLC		; load signpost patterns - i did not notice the bra at first
-		jsr	(GetOtherPlayerData).l
+; inlined UserPLC
+		jsr	(GetOtherPlayerData).l	; player data in a5
+		lea	(v_plc_buffer-6).w,a2
+		moveq	#(v_plc_buffer_end-v_plc_buffer)/6-1,d0
+.findspace:
+		addq.w	#6,a2		; if not, try next space
+		tst.l	(a2)		; is space available in RAM?
+		dbeq	d0,.findspace	; if yes, exit loop and branch
+		bne.s	.noslots
+		moveq	#0,d0
 		move.w	pdat.signart(a5),d0
-		add.l	#Nem_CharSign,d0 ; use RAM for PLC
-		lea	(v_256x256).l,a1
-		move.l	d0,(a1)
-		move.w	#ArtTile_CharSign*$20,4(a1)
-		move.l	#-1,6(a1)
-		bra.w	UserPLC
+		add.l	#Nem_CharSign,d0
+		move.l	d0,(a2)+
+		move.w	#ArtTile_CharSign*$20,(a2)+
 .exit:
 		rts
+.noslots:
+		illegal
 ; End of function SignpostArtLoad
 
 ; ===========================================================================

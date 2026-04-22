@@ -52,6 +52,7 @@ Anml_VarIndex:	dc.b 8,	7 ; Orange World Zone
 		dc.b 7, 1 ; Bluescape Zone
 		dc.b 7, 1 ; Bluestone Zone
 		dc.b 2, 3 ; Azure Rainforest Zone
+		zonewarning Anml_VarIndex,2
 ; Even are first, odd are second
 ; Map_Animal1 is a TALL FOREVER animal
 ; Map_Animal2 is a BLOCK animal
