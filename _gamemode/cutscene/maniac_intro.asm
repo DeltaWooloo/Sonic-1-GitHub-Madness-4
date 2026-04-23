@@ -257,6 +257,7 @@ MmIntro_WaitClr4:
 	move.w	#0,cameraAPosX.w
 	move.w	#sfx_Bomb,d0
 	jsr	QueueSound2
+	pcm	dDude
 .Wait:
 	rts
 ; ---------------------------------------------------------------------------

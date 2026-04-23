@@ -80,6 +80,7 @@ SampleTable:
 	dcSample	TYPE_PCM,	Scream,		8000,	FLAGS_SFX		; $BC
 	dcSample	TYPE_DPCM,	Rift,		11025,	FLAGS_SFX		; $BD
 	dcSample	TYPE_DPCM,	Sands,		8000,	FLAGS_SFX		; $BE
+	dcSample	TYPE_PCM,	Dude,		16000,	FLAGS_SFX		; i am not rearranging these they literally don't matter fuck off
 
 	; Title Screen Samples
 	dcSample	TYPE_DPCM,	YoFreddy,	16000,	FLAGS_SFX		; $BF
@@ -244,7 +245,7 @@ SampleTable:
 	incdac	OllieWahoo,"sound/dac/ollie/wahoo.dpcm"
 ;sANDS
 	incdac	Sands, "sound/dac/sansfuckyoutonic.dpcm"
-
+	incdac	Dude, "sound/dac/Dude.wav"
 ; ---------------------------------------------------------------
 ; Whatever you want the Sega sound to be
 	incdac	SegaPCM, "sound/dac/sega.wav"
