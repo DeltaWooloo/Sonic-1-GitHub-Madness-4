@@ -86,6 +86,10 @@ ObjIZ_ActIndex:
 		add.w	d1,obY(a0)	; match	object's position with the floor
 		bchg	#0,obStatus(a0)
 		addq.b	#2,ob2ndRout(a0)
+		btst	#1,obSubtype(a0)
+		beq.s	.notonfloor
+		bchg	#0,obStatus(a0)
+		move.b	#8,ob2ndRout(a0)
 .notonfloor:
 		rts
 
