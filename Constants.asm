@@ -104,7 +104,7 @@ plane_size_64x32: equ 64*32*2	; size of plane in 512x256 mode
 
 ; Levels
 id_OWZ:		equ $00
-id_WHZ:		equ $01		; Formerly LZ (water)
+id_WHZ:		equ $01
 id_ACZ:		equ $02
 id_MCZ:		equ $03
 id_SFZ:		equ $04
@@ -117,7 +117,7 @@ id_DVZ:		equ $0A
 id_Nogales:	equ $0B
 id_BSZ:		equ $0C
 id_BTZ:		equ $0D
-id_ARZ:		equ $0E		; need to get water implemented
+id_ARZ:		equ $0E	
 
 ; Colours
 cBlack:		equ $000		; colour black
