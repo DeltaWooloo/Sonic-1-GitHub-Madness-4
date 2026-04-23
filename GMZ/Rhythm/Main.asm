@@ -475,7 +475,7 @@ RAFall_Exit:
 		rts
 
 RAFall_ChkCollectArea:
-		cmpi.w	#$160,obScreenY(a0)
+		cmpi.w	#$160-6,obScreenY(a0)
 		blo	RAFall_Exit
 		moveq	#1,d6
 		move.b	obFrame(a0),d4
