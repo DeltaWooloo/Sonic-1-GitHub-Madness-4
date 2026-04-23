@@ -24,6 +24,7 @@ MusicIndex:
 	bgmdef s1TempotoS3($03), Mus_MWaterS
 	bgmdef $01, Mus_OrangeSong
 	bgmdef $01, Mus_GreenHills
+	bgmdef $FF, Mus_WariosCastle	
 	bgmdef $01, Mus_LosTontos
 	bgmdef $01, Mus_Area5
 	bgmdef $76, Mus_Easton
@@ -176,6 +177,8 @@ Mus_OrangeSong:		include	"music/TG2000Tracks/Mus - Orange Song.asm"
 	even
 Mus_GreenHills:		include	"music/TG2000Tracks/Mus - Green Hills (Flash).asm"
 	even
+Mus_WariosCastle:		include	"music/TheWTracks/Mus - WariosCastle.asm"
+	even	
 Mus_DUNGEON3:		include "music/DaxKatter/Mus - Azure Rainforest.asm"
 	even
 Mus_LosTontos:		include "music/Vertz1515/Mus - La Suerte De Los Tontos.asm"

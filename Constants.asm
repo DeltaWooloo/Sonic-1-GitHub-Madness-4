@@ -242,7 +242,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_MWaterS=bgm__First		; Orange World	(Act 1)
 	nextenum bgm_OrangeSong			; 		(Act 2)
 	nextenum bgm_GreenHills			; 		(Act 3)
-						; Wario Hallway
+	nextenum bgm_WariosCastle			; Wario's hallway
 	nextenum bgm_LosTontos			; Alberta Canada	(Act 1)
 	nextenum bgm_Area5			; 			(Act 2)
 	nextenum bgm_Easton			; 			(Act 3)
