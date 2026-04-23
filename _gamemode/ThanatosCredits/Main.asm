@@ -307,11 +307,19 @@ thantxt: macro txt
 	thantxt	"DELTAW"
 	dc.b	1,1
 
+	thantxt	"PROJECT HOSTS"
+	dc.b	1
+	thantxt	"KATSUSHIMI"		
+	thantxt	"DELTAW"
+	thantxt	"PIKANOOB"		
+	dc.b	1,1
 
 	thantxt	"GHM IV DEV TEAM" ;Originally "Members," but I thought this would be more formal. ~TG2000
 	dc.b	1
 	thantxt	"KATSUSHIMI"
 	thantxt	"BLINGUS"		; created maniac intro art
+	thantxt	"PIKANOOB"
+	thantxt	"DELTAW"	
 	thantxt	"ATOLLY GUYKE"
 	thantxt	"KGL"
 	thantxt	"GENESISDOES"
