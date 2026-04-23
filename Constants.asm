@@ -402,7 +402,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	bgm__LastPow2:		equ	andiMaskB(bgm__Last)
 
 ; Sound effects
-	enum	sfx__First=$A0
+	enum	sfx__First=$90
 	nextenum sfx_Jump=sfx__First
 	nextenum sfx_Lamppost
 	nextenum sfx_A2
