@@ -35,8 +35,8 @@ TitleCard_SYZ3:	equ  "HOMERS"
 TitleCard_SYZ4:	equ  "porn"
 
 TitleCard_LZ1:	equ  "Looks Guys Look"
-TitleCard_LZ2:	equ  "Looks Guys Look"
-TitleCard_LZ3:	equ  "FOE FOE FOE FOE"
+TitleCard_LZ2:	equ  "the dingle"
+TitleCard_LZ3:	equ  "SKY GAVE ME GIFT"
 TitleCard_LZ4:	equ  "PRONGLE PIT"	; LZ4 is SBZ3
 
 TitleCard_SLZ1:	equ  "MEIN KRAFT"		;/give Tonic enchanted_golden_apple[enchantments:{sharpness:255},max_stack_size:99] 99

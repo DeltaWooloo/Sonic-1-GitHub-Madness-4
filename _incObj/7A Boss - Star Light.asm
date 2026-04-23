@@ -26,7 +26,7 @@ Obj7A_Main:
 		move.w	obX(a0),$30(a0);30og
 		move.w	obY(a0),$38(a0);38 og
 		move.b	#$C,obColType(a0)
-		move.b	#$F,obColProp(a0) ; set number of hits to ALOT cause you technically miss... ALOT
+		move.b	#$14,obColProp(a0) ; set number of hits to ALOT cause you technically miss... ALOT
 		lea	Obj7A_ObjData(pc),a2
 		movea.l	a0,a1
 		moveq	#3,d1
@@ -124,14 +124,10 @@ loc_189FE:
 		tst.b	$3E(a0)
 		bne.s	loc_18A28
 		move.b	#$20,$3E(a0)
-		jsr    (FindFreeObj).l
-        bne.s    .fail
-        move.b    #$19,obID(a1) ; load your eggs
 		move.w	#sfx_HitBoss,d0
 		jsr	(PlaySound_Special).l	; play boss damage sound
 	    pcm	dSans,1		; Sans
-.fail:
-     rts
+
 loc_18A28:
 		lea	(v_pal_dry+$22).w,a1
 		moveq	#0,d0
