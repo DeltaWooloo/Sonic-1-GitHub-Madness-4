@@ -9,8 +9,8 @@ WariosCastle_Header:
 	smpsHeaderFM        WariosCastle_FM2,	$00, $08
 	smpsHeaderFM        WariosCastle_FM3,	$00, $0A
 	smpsHeaderFM        WariosCastle_FM4,	$00, $14	
-	smpsHeaderPSG       WariosCastle_PSG1,	$0C, $01, $00, $00
-	smpsHeaderPSG       WariosCastle_PSG2,	$0C, $01, $00, $00
+	smpsHeaderPSG       WariosCastle_PSG1,	$0C, $02, $00, $00
+	smpsHeaderPSG       WariosCastle_PSG2,	$0C, $02, $00, $00
 
 ; DAC Data
 WariosCastle_DAC:
@@ -219,7 +219,6 @@ WariosCastle_Jump01:
 
 ; PSG1 Data
 WariosCastle_PSG1:
-	smpsPSGAlterVol     $01
 	dc.b	nD1, $06, nRst, $1E, nCs1, $06, nRst, nD1, nRst, $12, nEb1, $18
 	dc.b	nD1, $06, nRst, $1E, nCs1, $06, nRst, nD1, nRst, nEb1, nRst, nF1
 	dc.b	nRst, nEb1, nRst, nD1, nRst, $1E, nCs1, $06, nRst, nD1, nRst, $12
