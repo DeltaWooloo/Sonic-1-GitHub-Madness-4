@@ -295,6 +295,20 @@ PrintMsg:
 	bra.s	.Loop
 .Done:
 	rts
+	
+; ---------------------------------------------------------------------------  
+; Clear entire window nametable, basically all messages
+; ---------------------------------------------------------------------------   
+
+ClearMsgs:
+	disable_ints
+	stopZ80
+	waitZ80
+	fillVRAM	0, vram_window, vram_window+plane_size_64x32 	; clear window namespace
+	startZ80
+	enable_ints
+	rts
+
 
 	include		"_gamemode/cutscene/maniac_intro.asm"
 Art_ASCII:	binclude	"_gamemode/cutscene/ASCII.BIN"
@@ -326,7 +340,7 @@ MapScr_ManiacIntro1B:
 		even
 
 MapScr_ManiacIntro2A:
-		dc.b	24-1,	20-1	; width, height
+		dc.b	40-1,	20-1	; width, height
 		dc.w	$C000
 		binclude	"_gamemode/cutscene/data/maniaccutscene1_2.map"
 		even
