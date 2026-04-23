@@ -13,6 +13,7 @@ ValisSTG1_Header:
 
 ; FM5 Data
 ValisSTG1_FM5:
+	smpsAlterNote       $03
 	dc.b	nRst, $04
 
 ; FM1 Data
