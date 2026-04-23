@@ -1,8 +1,33 @@
 {
     "Flex": 2,
     "name": "Sonic 1",
-    "node": "da472ab9-f363-45e6-8ee3-a83fd70d6d9c",
+    "node": "a62d6cfb-09f1-4f03-a0af-291c518ca852",
     "objects": [
+        {
+            "uuid": "a62d6cfb-09f1-4f03-a0af-291c518ca852",
+            "format": "Sonic 1.js",
+            "name": "beans sign",
+            "palettes": [
+                {
+                    "path": "..\\palette\\Sonic.bin",
+                    "length": 1
+                }
+            ],
+            "art": {
+                "path": "..\\artnem\\CharSign Bean.nem",
+                "compression": "Nemesis",
+                "offset": 0
+            },
+            "mappings": {
+                "path": "..\\Signpost.asm",
+                "label": ""
+            },
+            "dplcs": {
+                "enabled": false,
+                "path": "",
+                "label": ""
+            }
+        },
         {
             "name": "Characters",
             "children": [

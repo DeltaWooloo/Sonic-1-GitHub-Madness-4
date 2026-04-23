@@ -375,6 +375,8 @@ Nem_CharSignTonic:	binclude	"artnem/CharSign Tonic.nem"
 		even
 Nem_CharSignManiac:	binclude	"artnem/CharSign Maniac.nem"
 		even
+Nem_CharSignBeans:	binclude	"artnem/CharSign Bean.nem"
+		even
 
 
 Nem_Lamp:	binclude	"artnem/Lamppost.nem"
