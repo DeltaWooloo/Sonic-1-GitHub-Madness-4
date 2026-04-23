@@ -32,14 +32,14 @@ BGM_WBRBack_FM1:
 
 BGM_WBRBack_FM4Jump:
 	dc.b	nRst, $05, nD3, $11, nRst, $05, nCs3, $10, nRst, $06
-	dc.b	nC3, $10, nRst, $06, nB2, $10, nRst, $05, nEb3, $11
+	dc.b	nC3, $10, nRst, $06, nBb2, $10, nRst, $06, nEb3, $11
 	smpsStop
 
 ; FM2 Data
 BGM_WBRBack_FM2:
 	smpsSetvoice        $00
 	dc.b	nA5, $02, nBb5, $13, nRst, $0B, nEb6, nRst, nF6, nRst, nFs6, $03
-	dc.b	nG6, $08, nRst, $0B, nBb6, nRst, $0A, nEb6
+	dc.b	nG6, $08, nRst, $0B, nBb6, nRst, $0B, nEb6
 	smpsStop
 
 ; FM3 Data
@@ -58,13 +58,13 @@ BGM_WBRBack_FM4:
 BGM_WBRBack_FM5:
 	dc.b	nRst, $20
 	smpsSetvoice        $02
-	dc.b	nD4, $2C, $16, $15, nD4
+	dc.b	nD4, $2C, $16, $16, nD4
 	smpsStop
 
 ; FM6 Data
 BGM_WBRBack_FM6:
 	smpsSetvoice        $01
-	dc.b	nG0, $20, $16, nG0, nG0, nG0
+	dc.b	nG0, $20, $16, nG0, nG0, nG0, nG0
 	smpsStop
 
 ; GMZ - TODO, optimise PSG
@@ -179,7 +179,7 @@ BGM_WBRBack_PSG3:
 	dc.b	$02
 	smpsPSGAlterVol     $06
 	smpsAlterNote       $01
-	dc.b	$08
+	dc.b	$09
 	smpsPSGAlterVol     $FA
 
 BGM_WBRBack_Loop00:
@@ -194,13 +194,13 @@ BGM_WBRBack_Loop00:
 BGM_WBRBack_Voices:
 ;	Voice $00
 ;	$3B
-;	$10, $10, $20, $60, 	$1F, $1F, $1F, $1E, 	$02, $0C, $13, $07
+;	$11, $10, $20, $60, 	$1F, $1F, $1F, $1E, 	$02, $0C, $13, $07
 ;	$12, $0A, $05, $04, 	$0F, $3F, $5F, $3F, 	$17, $14, $17, $00
 	smpsVcAlgorithm     $03
 	smpsVcFeedback      $07
 	smpsVcUnusedBits    $00
 	smpsVcDetune        $06, $02, $01, $01
-	smpsVcCoarseFreq    $00, $00, $00, $00
+	smpsVcCoarseFreq    $00, $00, $00, $01
 	smpsVcRateScale     $00, $00, $00, $00
 	smpsVcAttackRate    $1E, $1F, $1F, $1F
 	smpsVcAmpMod        $00, $00, $00, $00
