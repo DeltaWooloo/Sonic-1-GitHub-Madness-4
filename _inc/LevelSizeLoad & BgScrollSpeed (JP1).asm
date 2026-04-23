@@ -186,7 +186,7 @@ BgScroll_Index:	dc.w BgScroll_GHZ-BgScroll_Index, BgScroll_LZ-BgScroll_Index
 		dc.w BgScroll_MZ-BgScroll_Index, BgScroll_SLZ-BgScroll_Index
 		dc.w BgScroll_SYZ-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
 		dc.w BgScroll_End-BgScroll_Index, BgScroll_GHZ-BgScroll_Index
-		dc.w BgScroll_ITBZ-BgScroll_Index, BgScroll_Default-BgScroll_Index
+		dc.w BgScroll_Default-BgScroll_Index, BgScroll_ITBZ-BgScroll_Index
 		dc.w BgScroll_NGZ-BgScroll_Index, BgScroll_NGZ-BgScroll_Index
 		dc.w BgScroll_Default-BgScroll_Index, BgScroll_Default-BgScroll_Index
 		dc.w BgScroll_ARZ-BgScroll_Index
