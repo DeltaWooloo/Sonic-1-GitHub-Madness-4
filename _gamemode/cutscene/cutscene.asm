@@ -23,7 +23,8 @@ GM_Cutscene:
 	jmp	.Index(pc,d0.w)
 .Index
 	bra.w	Cutscene_Init
-	bra.w	Cutscene_Main
+	bra.w	Cutscene_Tonic
+	bra.w	Cutscene_Maniac
 
 Cutscene_Init:
 	move.b	#bgm_Stop,d0
@@ -50,6 +51,11 @@ Cutscene_Init:
 	enable_display
 
 	move.b	#0,subscene.w
+	moveq	#0,d0
+	move.b	cutscene,d0
+	add.b	d0,d0
+	add.b	d0,d0
+	add.b	d0,submode.w
 	addq.b	#4,submode.w
 	move.b	#0,scrollrno.w
 ;	move.l	#StringTest,stringaddr.w
@@ -63,13 +69,18 @@ Cutscene_Init:
 	bne.s	.Wait
 
 ;	jsr	PalFadeIn
+	rts
 
-Cutscene_Main:
+Cutscene_Tonic:
 	bsr.w	_cutsceneSub
 	bsr.w	PrintMsgTimed
-	bsr.w	Cutscene_ManiacIntro
-
+	bra.w	Cutscene_TonicIntro
 	rts
+
+Cutscene_Maniac:
+	bsr.w	_cutsceneSub
+	bsr.w	PrintMsgTimed
+	bra.w	Cutscene_ManiacIntro
 
 _cutsceneSub:
 	move.b	#$1C,(v_vbla_routine).w
@@ -151,13 +162,20 @@ InitCutsceneData:
 	rts
 
 CutsceneInitTbl:
+	dc.l	Str_TonicIntro1+(4<<24)
+	dc.l	ArtList_ManiacIntro1+(bgm_Dingaling<<24)
+	dc.l	MapScr_ManiacIntro1A
+	dc.l	MapScr_ManiacIntro1B
+
 	dc.l	Str_ManiacIntro1+(4<<24)
 	dc.l	ArtList_ManiacIntro1+(bgm_DoleAttack<<24)
 	dc.l	MapScr_ManiacIntro1A
 	dc.l	MapScr_ManiacIntro1B
 
 CutscenePalTbl:
-	dc.l	Pal_ManiacIntro1
+	dc.l	Pal_ManiacIntro1	; tonic
+	dc.l	Pal_ManiacIntro1	; maniac
+
 
 ArtList_ManiacIntro1:
 	dc.l	Nem_ManiacIntro1A
@@ -320,7 +338,7 @@ ClearMsgs:
 	enable_ints
 	rts
 
-
+	include		"_gamemode/cutscene/tonic_intro.asm"
 	include		"_gamemode/cutscene/maniac_intro.asm"
 Art_ASCII:	binclude	"_gamemode/cutscene/ASCII.BIN"
 		even
