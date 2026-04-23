@@ -1172,15 +1172,13 @@ HscrBSZ:
 		move.b	#1,(f_lockscreen).w ; Scr Lock
 
 .LoadJohnBattle:		
-		cmpi.w	#Knight_X_Spawn,(v_screenposx).w  ; WIP 
+		cmpi.w	#OldJohn_X_Spawn,(v_screenposx).w  ; WIP 
 		blo.s	BluSto_Return
 		jsr	(FindFreeObj).l
 		bne.s	.BTZspawnfail
-		jmp      BluSto_Return   ; Placeholder
-; ---------------------------------------------------------------------------		
-		; move.b	#id_Roaring_Knight,obID(a1) ; load MZ boss object
-		; move.w	#Knight_X_Spawn+$180,obX(a1)
-		; move.w	#Knight_Y_Spawn+$24,obY(a1)
+		move.b	#id_OldJohnBoss,obID(a1) ; load bluestone boss object
+		move.w	#OldJohn_X_Spawn+$180,obX(a1)
+		move.w	#OldJohn_Y_Spawn+$24,obY(a1)
 
 .BTZspawnfail:
 		move.b	#1,(f_lockscreen).w ; Scr Lock
