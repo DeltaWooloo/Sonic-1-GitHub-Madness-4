@@ -2465,7 +2465,7 @@ MakePSGFrequencies macro
 	endm
 
 ; word_729CE:
-PSGFrequencies:
+PSGFrequencies: ;WHAT THE FUCK IS THIS YOU FUCKING CLOWNANY IDIOT!
 		MakePSGFrequencies  109.34,    109.34,    109.34,    109.34,    109.34,    109.34,    109.34,    109.34,    109.34,    110.20,    116.76,    123.73
 		MakePSGFrequencies  130.98,    138.78,    146.99,    155.79,    165.22,    174.78,    185.19,    196.24,    207.91,    220.63,    233.52,    247.47
 		MakePSGFrequencies  261.96,    277.56,    293.59,    311.58,    329.97,    349.56,    370.39,    392.49,    415.83,    440.39,    468.03,    494.95

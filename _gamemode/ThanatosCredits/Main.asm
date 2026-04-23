@@ -358,6 +358,11 @@ thantxt: macro txt
 	dc.b	1
 	thantxt	"GAMERGIL THE GOAT"
 	dc.b	1,1
+	
+	thantxt	"JOHN PORK"
+	dc.b	1
+    thantxt	"IS CALLING"
+	dc.b	1,1
 
 	thantxt	"SPECIAL THANKS"
 	dc.b	1
@@ -406,6 +411,8 @@ thantxt: macro txt
 	thantxt	"STEVE JOBS BECAUSE"
 	thantxt	"VMWARE"
 	thantxt	"MISTER BEAN"
+	thantxt	"WINDOWS XP USER"
+	thantxt	"I FARTED SO HARD I SHIT MY"
     thantxt	"HOMER";leave this shit last
 	dc.b	1,1,1
 	thantxt	"AND YOUR MOM"

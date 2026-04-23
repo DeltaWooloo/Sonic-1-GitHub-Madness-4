@@ -6,7 +6,7 @@
 ; thanks to Bill Gates(the owner of fucking Microslop hes really bad), Clownancy(the) and Esrael Sonic Edtior Neato!
 ; ---------------------------------------------------------------------------
 ; NOTE:
-; Set your editor's tab width to 8 characters wide for viewing this file.
+; Set your editor's tab width to 8 characters wide for viewing this file or else you will be touched.
 
 ; ===========================================================================
 ; ASSEMBLY OPTIONS:
