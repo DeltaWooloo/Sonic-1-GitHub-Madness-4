@@ -302,7 +302,7 @@ thantxt: macro txt
 	dc.b	1,1
 
 
-	thantxt	"PROJECT LEAD"
+	thantxt	"REPO OWNER"
 	dc.b	1
 	thantxt	"DELTAW"
 	dc.b	1,1
@@ -385,6 +385,7 @@ thantxt: macro txt
 	thantxt	"HACKPGH"
 	thantxt	"EAGLESOFT LTD"
 	thantxt	"FRANCO AMERICAN"
+	thantxt	"ME"
 	thantxt	"CARDS AG HUMANITY"
 	thantxt	"PRONGLES"
 	thantxt	"THAT DAMN BIRD"
