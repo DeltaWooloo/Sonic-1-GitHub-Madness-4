@@ -20,6 +20,7 @@ Cutscene_ManiacIntro:
 	move.w	cameraBPosY.w, v_bgscrposy_vdp.w
 	move.w	cameraZPosX.w, v_bg3scrposx_vdp.w
 	move.w	cameraZPosY.w, v_bg3scrposy_vdp.w
+	add.w	#1,v_framecount.w
 	rts
 
 
@@ -30,6 +31,7 @@ Cutscene_ManiacIntro:
 	bra.w	MmIntro_Wait1
 	bra.w	MmIntro_LoadTV
 	bra.w	MmIntro_TVStatic
+	bra.w	MmIntro_FlashRN
 	rts
 	nop
 
@@ -77,6 +79,7 @@ MmIntro_Wait1:
 	bra.s	MmIntro_Main.Static
 
 MmIntro_LoadTV:
+	move.b	#1,scrollrno.w
 	addq.b	#1,subscene.w
 	move.l	#Str_ManiacIntro2,stringaddr.w
 	move.b	#60,stringtimer.w
@@ -92,14 +95,69 @@ MmIntro_LoadTV:
 	jmp	DrawTileMap_Addr
 
 MmIntro_TVStatic:
+	tst.b	stringflags.w
+	bmi.s	.Next
+.Draw
 	move.l	#$61980003,d3      		; d3 = initial address
         move.w  #18-1,d4                    ; d4 = width / 2
         move.w  #14-1,d5                        ; d5 = height
         bra.w	_beebushDrawStatic
+.Next:
+	addq.b	#1,subscene.w
+	move.l	#Str_ManiacEllip,stringaddr.w
+	move.b	#60,stringtime.w
+	rts
+
+MmIntro_FlashRN:
+	tst.b	stringflags.w
+	bpl.s	.Go
+	addq.b	#1,subscene.w
+.Go
+	move.w	v_framecount.w,d0
+	move	d0,ccr
+	bcs.s	.ShowRN
+	move.w	#0,cameraBPosX.w
+	bra.s	MmIntro_TVStatic.Draw
+.ShowRN
+	move.w	#128,cameraBPosX.w
+	rts
+
+
+
+
+
+
+
+
+; ---------------------------------------------------------------------------
+; Parallax/Camera, very basic
+; ---------------------------------------------------------------------------
 
 ScrollManiacIntro:
 	lea	hscroll.w,a1
-	move.w	#224-1,d1
+	move.w	#224-1,d7
+	moveq   #0,d0
+	move.b	scrollrno.w,d0
+	add.w	d0,d0
+	add.w	d0,d0
+	jmp	.Index(pc,d0.w)
+
+.Index
+	bra.w	.Main
+	bra.w	.RadNex
+	bra.w	.Exit
+	bra.w	.Exit
+	bra.w	.Exit
+	bra.w	.Exit
+	bra.w	.Exit
+
+.RadNex:
+	move.w	cameraAPosX.w,d0
+	swap	d0
+	move.w	cameraBPosX.w,d0
+	bra.s	.WriteHScroll
+
+.Main:
 	move.w	cameraAPosX.w,d0
 	move.w	d0,d2
 	neg.w	d0
@@ -111,7 +169,8 @@ ScrollManiacIntro:
 
 .WriteHScroll:
 	move.l	d0,(a1)+
-	dbf	d1,.WriteHScroll
+	dbf	d7,.WriteHScroll
+.Exit:
 	rts
 
 ; ---------------------------------------------------------------------------
@@ -137,6 +196,10 @@ _beebushDrawStatic:
         add.l   d6,d3                           ; move to next row
         dbf     d5,.LoopRow                     ; loop for height
         rts
+
+Str_ManiacEllip:
+	dc.b	"...",0
+	even
 
 Str_ManiacIntro1:
 	dc.b	"MANIAC SAT WATCHING FUNNY SHORT CLIP",-1

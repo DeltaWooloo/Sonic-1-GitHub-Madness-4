@@ -5,6 +5,7 @@ ASCII_TILEDELTA	= $0660
 cutscene	= v_zone
 
 	phase	v_sonspeedacc
+stringflags	ds.b	0
 stringaddr	ds.l	1
 stringvramline	ds.w	1      
 stringvram	ds.w	1
@@ -12,7 +13,7 @@ stringvram	ds.w	1
 stringtimer	ds.b	1	
 stringtime	ds.b	1
 subscene	ds.b	1
-		ds.b	1
+scrollrno	ds.b	1
 	dephase
 
 
@@ -50,6 +51,7 @@ Cutscene_Init:
 
 	move.b	#0,subscene.w
 	addq.b	#4,submode.w
+	move.b	#0,scrollrno.w
 ;	move.l	#StringTest,stringaddr.w
 ;	move.b	#8,stringtime.w
 
@@ -79,8 +81,8 @@ _cutsceneSub:
 ; ---------------------------------------------------------------------------
 
 VBLANK_CUTSCENE:
-	jsr	ProcessDMAQueue
 	jsr	VBla_StandardTransfers
+	jsr	ProcessDMAQueue
 	jmp	ProcessDPLC_9Tiles
 
 ; ---------------------------------------------------------------------------
@@ -244,6 +246,7 @@ PrintMsgTimed:
 	beq.s	.Break
 	add.w	d4,d3
 	move.w	d3,VDPDATA
+	clr.b	stringflags.w
 	move.w	#sfx_FCBlip,d0
 	jsr	QueueSound2.l
 	move.l	a0,stringaddr.w
@@ -254,7 +257,9 @@ PrintMsgTimed:
 	add.w	#$80,stringvramline.w
 	move.w	stringvramline.w,stringvram.w
 	move.l	a0,stringaddr.w
+	rts
 .Done:
+	bset	#7,stringflags.w	; set string done
 	rts
 
 
@@ -295,7 +300,7 @@ PrintMsg:
 	bra.s	.Loop
 .Done:
 	rts
-	
+
 ; ---------------------------------------------------------------------------  
 ; Clear entire window nametable, basically all messages
 ; ---------------------------------------------------------------------------   
