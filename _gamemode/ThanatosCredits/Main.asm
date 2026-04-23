@@ -392,7 +392,6 @@ thantxt: macro txt
 	thantxt	"APPLE INC"
 	thantxt	"MICROSLOP CORP"	
 	thantxt	"GITHUB INC"
-	thantxt	"OCTOCAT"
 	thantxt	"WEBFREAK"
 	thantxt	"SEGA CHANNEL GUY"
 	thantxt "AVGN JAMES ROLFE"
