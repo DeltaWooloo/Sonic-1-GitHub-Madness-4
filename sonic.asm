@@ -3723,12 +3723,20 @@ TryAgainEnd:
 		move.w	#make_art_tile(ArtTile_Try_Again_Eggman,0,FALSE),d0
 		jsr	(EniDec).w
 
-		copyTilemap	v_ram_start,vram_fg+$310,17,12
+		copyTilemap	v_ram_start,vram_fg+$310,16,12
 		clearRAM v_palette_fading
 
 		moveq	#palid_TryAgain,d0
 		jsr	(PalLoad_Fade).w	; load ending palette
-		clr.w	(v_palette_fading+$40).w
+		cmpi.b	#6,(v_emeralds).w ; do you have all 6 emeralds?
+		beq.s	.donotkillleach	; if yes, branch
+		move.l #cBlack,d0
+		lea	(v_palette_fading_line_4).w,a1
+		move.w	#6,d1
+	.killleach:
+		move.l	d0,(a1)+
+		dbf	d1,.killleach ; fill palette with black
+.donotkillleach:
 		move.b	#id_EndEggman,(v_endeggman).w ; load Eggman object
 		jsr	(ExecuteObjects).l
 		jsr	(BuildSprites).l

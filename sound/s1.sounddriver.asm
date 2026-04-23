@@ -350,16 +350,16 @@ Init_SoundDriver:
 
 		lea	(SampleTable).l,a0
 		jsr	(MegaPCM_LoadSampleTable).l
-		tst.w	d0
-		beq.s	.SampleTableOk
-		nop		; hack to prevent isssue - coni
-	ifdef __DEBUG__
-		; for MD Debugger v.2.5 or above
-		RaiseError "MegaPCM_LoadSampleTable returned %<.b d0>", MPCM_Debugger_LoadSampleTableException
-	else
-		illegal				; I don't know why AS is breaking this
-	endif
-.SampleTableOk:
+;		tst.w	d0
+;		beq.s	.SampleTableOk
+;		nop		; hack to prevent isssue - coni
+;	ifdef __DEBUG__
+;		; for MD Debugger v.2.5 or above
+;		RaiseError "MegaPCM_LoadSampleTable returned %<.b d0>", MPCM_Debugger_LoadSampleTableException
+;	else
+;		illegal				; I don't know why AS is breaking this
+;	endif
+;.SampleTableOk:
 
 	if MSUEnabled
 		; check CD mode

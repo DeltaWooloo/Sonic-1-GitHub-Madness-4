@@ -89,7 +89,7 @@ ObjIZ_ActIndex:
 		btst	#1,obSubtype(a0)
 		beq.s	.notonfloor
 		bchg	#0,obStatus(a0)
-		move.b	#8,ob2ndRout(a0)
+		bra.w	.beginshoot
 .notonfloor:
 		rts
 
@@ -98,7 +98,7 @@ ObjIZ_ActIndex:
 		bpl.s	.wait		; if time remains, branch
 
 		addq.b	#2,ob2ndRout(a0)
-		move.w	#$180,obVelX(a0) ; move object to the left
+		move.w	#$180,obVelX(a0) ; move object to the right
 		move.b	#1,obAnim(a0)
 		bchg	#0,obStatus(a0)
 		bne.s	.wait
@@ -119,8 +119,7 @@ ObjIZ_ActIndex:
 		bhs.s	.donotbatt	; if not, branch
 		tst.b	obRender(a0)
 		bpl.s	.donotbatt
-		move.b	#8,ob2ndRout(a0)
-		rts
+		bra.s	.beginshoot
 .donotbatt:
 		bsr.w	SpeedToPos
 		jsr	(ObjFloorDist).l
@@ -139,7 +138,22 @@ ObjIZ_ActIndex:
 		rts	
 		
 .shoot:
+		subq.w	#1,.time(a0)	; subtract 1 from pause	time
+		bpl.s	.shwait		; if time remains, branch
+		btst	#1,obSubtype(a0)
+		beq.s	.moveable
+		rts
+.moveable:
+		bchg	#0,obStatus(a0)
+		move.b	#4,ob2ndRout(a0)
+.shwait:
 		rts	
+
+.beginshoot:
+		move.b	#2,obAnim(a0)
+		move.w	#170,.time(a0)	; set shoot time to 1 second
+		move.b	#8,ob2ndRout(a0)
+		rts
 ; ===========================================================================
 
 ObjIZ_Animate:	; Routine 4
