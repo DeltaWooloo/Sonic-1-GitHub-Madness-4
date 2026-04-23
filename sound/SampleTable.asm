@@ -18,42 +18,45 @@ SampleTable:
 	dcSample	TYPE_PCM,	Tom,		18262					; $8A S2 Mid-Tom
 	dcSample	TYPE_PCM,	Tom,		15232					; $8B S2 Low-Tom
 	dcSample	TYPE_PCM,	Tom,		13714					; $8C S2 Floor-Tom
+	dcSample	TYPE_DPCM,	Bongo,		15232					; $8D S2 Hi-Bongo
+	dcSample	TYPE_DPCM,	Bongo,		13064					; $8E S2 Mid-Bongo
+	dcSample	TYPE_DPCM,	Bongo,		10390					; $8F S2 Low-Bongo
+	dcSample	TYPE_DPCM,	Bongo,		7426					; $90 S2 Very Low-Bongo
 
 	; SONIC 3 & KNUCKLES (AND 3D BLAST)
-	dcSample	TYPE_DPCM,	KickS3,		19090					; $8D
-	dcSample	TYPE_DPCM,	SnareS3,	19090					; $8E
-	dcSample	TYPE_DPCM,	MuffledSnare,	19090				; $8F	- Muffled Snare
-	dcSample	TYPE_DPCM,	CrashCymbal,	16766				; $90
-	dcSample	TYPE_DPCM,	ElectricTom,	20513				; $91
-	dcSample	TYPE_DPCM,	ElectricTom,	15803				; $92
-	dcSample	TYPE_DPCM,	ElectricTom,	13482				; $93
-	dcSample	TYPE_DPCM,	ElectricTom,	11274				; $94
-	dcSample	TYPE_DPCM,	TimpaniS3,	12852					; $95	- Hi-Timpani (S3)
-	dcSample	TYPE_DPCM,	TimpaniS3,	9358					; $96	- Low-Timpani (S3)
-	dcSample	TYPE_DPCM,	TimpaniS3,	8492					; $97	- Mid-Timpani (S3)
+	dcSample	TYPE_DPCM,	KickS3,		19090					; $90
+	dcSample	TYPE_DPCM,	SnareS3,	19090					; $91
+	dcSample	TYPE_DPCM,	MuffledSnare,	19090				; $92	- Muffled Snare
+	dcSample	TYPE_DPCM,	CrashCymbal,	16766				; $93
+	dcSample	TYPE_DPCM,	ElectricTom,	20513				; $94
+	dcSample	TYPE_DPCM,	ElectricTom,	15803				; $95
+	dcSample	TYPE_DPCM,	ElectricTom,	13482				; $96
+	dcSample	TYPE_DPCM,	ElectricTom,	11274				; $97
+	dcSample	TYPE_DPCM,	TimpaniS3,	12852					; $98	- Hi-Timpani (S3)
+	dcSample	TYPE_DPCM,	TimpaniS3,	9358					; $99	- Low-Timpani (S3)
+	dcSample	TYPE_DPCM,	TimpaniS3,	8492					; $9A	- Mid-Timpani (S3)
 
 	; #SPINBALLSWEEP
-	dcSample	TYPE_DPCM,	SpinKick,	10400					; $98 Kick (Spinball)
-	dcSample	TYPE_DPCM,	SpinSnare,	10400					; $99 Snare (Spinball)
+	dcSample	TYPE_DPCM,	SpinKick,	10400					; $9B Kick (Spinball)
+	dcSample	TYPE_DPCM,	SpinSnare,	10400					; $9C Snare (Spinball)
 
 	; Generic SMPS
-	dcSample	TYPE_DPCM,	SMPSKick,	10400					; $9A Kick (Spinball)
-	dcSample	TYPE_DPCM,	SMPSSnare,	8000					; $9B Snare (Spinball)
+	dcSample	TYPE_DPCM,	SMPSKick,	10400					; $9D Kick (Spinball)
+	dcSample	TYPE_DPCM,	SMPSSnare,	8000					; $9E Snare (Spinball)
 
 	; CUSTOM SAMPLES
-	dcSample	TYPE_PCM,	ChunkyKick,	16000					; $9C
-	dcSample	TYPE_DPCM,	PokeSnare,	16864					; $9D
-	dcSample	TYPE_PCM,	PokeKickCrash,	15300				; $9E
-	dcSample	TYPE_DPCM,	PokeTimpani,	15000				; $9F
-	dcSample	TYPE_DPCM,	PokeTimpani,	11297				; $A0
-	dcSample	TYPE_DPCM,	PokeTimpani,	7500				; $A1
+	dcSample	TYPE_PCM,	ChunkyKick,	16000					; $9F
+	dcSample	TYPE_DPCM,	PokeSnare,	16864					; $A0
+	dcSample	TYPE_PCM,	PokeKickCrash,	15300				; $A1
+	dcSample	TYPE_DPCM,	PokeTimpani,	15000				; $A2
+	dcSample	TYPE_DPCM,	PokeTimpani,	11297				; $A3
+	dcSample	TYPE_DPCM,	PokeTimpani,	7500				; $A4
+	dcSample	TYPE_DPCM,	CTC1_Tick,	16000					; $A5
 
-	dcSample	TYPE_DPCM,	CTC1_Tick,	16000					; $A2
+	dcSample	TYPE_DPCM,	CF_DrumLoopA,	15830				; $A6
+	dcSample	TYPE_DPCM,	CF_DrumLoopB,	15880				; $A7
 
-	dcSample	TYPE_DPCM,	CF_DrumLoopA,	15830				; $A3
-	dcSample	TYPE_DPCM,	CF_DrumLoopB,	15880				; $A4
-
-	dcSample	TYPE_DPCM,	Homero,		16000					; $A6
+	dcSample	TYPE_DPCM,	Homero,		16000					; $A8
 
 	; In-Game SFX SAMPLES
 	dcSample	TYPE_PCM,	letsgoeee,	8000,	FLAGS_SFX		; $A7
@@ -83,39 +86,39 @@ SampleTable:
 	dcSample	TYPE_PCM,	Dude,		16000,	FLAGS_SFX		; i am not rearranging these they literally don't matter fuck off
 
 	; Title Screen Samples
-	dcSample	TYPE_DPCM,	YoFreddy,	16000,	FLAGS_SFX		; $BF
-	dcSample	TYPE_DPCM,	Github,		16000,	FLAGS_SFX		; $C0
-	dcSample	TYPE_DPCM,	Madness,	16000,	FLAGS_SFX		; $C1
-	dcSample	TYPE_DPCM,	TheFourth,	16000,	FLAGS_SFX		; $C2
-	dcSample	TYPE_DPCM,	eggmanLaugh,11025,	FLAGS_SFX		; $C3
-	dcSample	TYPE_DPCM,	BSOD,		16000,	FLAGS_SFX		; $C4
-	dcSample	TYPE_DPCM,	shutdown,	16000,	FLAGS_SFX		; $C5
-	dcSample	TYPE_DPCM,	chord16,	16000,	FLAGS_SFX		; $C6
-	dcSample	TYPE_DPCM,	w98ipc,		16000,	FLAGS_SFX		; $C7
-	dcSample	TYPE_DPCM,	meow,		16000,	FLAGS_SFX		; $C8
-	dcSample	TYPE_DPCM,	meow,		8000,	FLAGS_SFX		; $C9
+	dcSample	TYPE_DPCM,	YoFreddy,	16000,	FLAGS_SFX		; $C1
+	dcSample	TYPE_DPCM,	Github,		16000,	FLAGS_SFX		; $C2
+	dcSample	TYPE_DPCM,	Madness,	16000,	FLAGS_SFX		; $C3
+	dcSample	TYPE_DPCM,	TheFourth,	16000,	FLAGS_SFX		; $C4
+	dcSample	TYPE_DPCM,	eggmanLaugh,11025,	FLAGS_SFX		; $C5
+	dcSample	TYPE_DPCM,	BSOD,		16000,	FLAGS_SFX		; $C6
+	dcSample	TYPE_DPCM,	shutdown,	16000,	FLAGS_SFX		; $C7
+	dcSample	TYPE_DPCM,	chord16,	16000,	FLAGS_SFX		; $C8
+	dcSample	TYPE_DPCM,	w98ipc,		16000,	FLAGS_SFX		; $C9
+	dcSample	TYPE_DPCM,	meow,		16000,	FLAGS_SFX		; $CA
+	dcSample	TYPE_DPCM,	meow,		8000,	FLAGS_SFX		; $CB
 
 	; Splash Screens
-	dcSample	TYPE_PCM,	EggNo,		11297					; $CA
-	dcSample	TYPE_DPCM,	funnyb_utthole,	8000,	FLAGS_SFX	; $CB
-	dcSample	TYPE_DPCM,	yume2kki,	16000,	FLAGS_SFX		; $CC
-	dcSample	TYPE_DPCM,	EagleSoft_Song,	8000,	FLAGS_SFX	; $CD
-	dcSample	TYPE_DPCM,	GenesisDoes1,	8000				; $CE
-	dcSample	TYPE_DPCM,	Virus,		16000,	FLAGS_SFX		; $CF
-	dcSample	TYPE_DPCM,	supbeaches,	8000					; $D0
+	dcSample	TYPE_PCM,	EggNo,		11297					; $CC
+	dcSample	TYPE_DPCM,	funnyb_utthole,	8000,	FLAGS_SFX		; $CD
+	dcSample	TYPE_DPCM,	yume2kki,	16000,	FLAGS_SFX		; $CE
+	dcSample	TYPE_DPCM,	EagleSoft_Song,	8000,	FLAGS_SFX		; $CF
+	dcSample	TYPE_DPCM,	GenesisDoes1,	8000				; $D0
+	dcSample	TYPE_DPCM,	Virus,		16000,	FLAGS_SFX		; $D1
+	dcSample	TYPE_DPCM,	supbeaches,	8000					; $D2
 
 	; Commercial Samples
-	dcSample	TYPE_DPCM,	GenesisCan3,	8000,FLAGS_SFX		; $D2
+	dcSample	TYPE_DPCM,	GenesisCan3,	8000,FLAGS_SFX		; $D3
 
 	; Ollie Samples
-	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $D3
-	dcSample	TYPE_DPCM,	OllieWahoo,	16000					; $D4
+	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $D4
+	dcSample	TYPE_DPCM,	OllieWahoo,	16000					; $D5
 
 	; SEGA Samples
-	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX		; $D5
+	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX		; $D6
 
 	;!@ GD: Last slot always reserved for PCM SFX Silence
-	dcSample	TYPE_DPCM,	dummy,	8000, FLAGS_SFX				; $D6
+	dcSample	TYPE_DPCM,	dummy,	8000, FLAGS_SFX				; $D7
 
 	; Unused
 ;	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $D1
@@ -145,6 +148,7 @@ SampleTable:
 ; ---------------------------------------------------------------
 ; Sonic 2 Samples
 	incdac	Tom, "sound/dac/S2/Tom.pcm"
+	incdac	Bongo, "sound/dac/S2/Bongo.dpcm"
 
 ; ---------------------------------------------------------------
 ; Sonic 3 Samples

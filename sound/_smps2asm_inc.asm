@@ -115,10 +115,7 @@ convertMainTempoMod macro mod
 			fatal "Invalid main tempo of 0 in song from Sonic 2"
 		endif
 		dc.b	s2TempotoS3(mod)
-	else;if SourceDriver>=3
-		if mod==0
-			message "Performing approximate conversion of Sonic 3 main tempo modifier of 0"
-		endif
+	else
 		dc.b	mod
 	endif
 	endm

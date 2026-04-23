@@ -12,11 +12,15 @@ Moto_Index:	dc.w Moto_Main-Moto_Index
 		dc.w Moto_Action-Moto_Index
 		dc.w Moto_Animate-Moto_Index
 		dc.w Moto_Delete-Moto_Index
+		dc.w Moto_Chase-Moto_Index
 ; ===========================================================================
 
 Moto_Main:	; Routine 0
 		move.l	#Map_Moto,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Moto_Bug,0,0),obGfx(a0)
+		move.b	#$E,obHeight(a0)
+		move.b	#8,obWidth(a0)
+		move.b	#$C,obColType(a0)
 		move.b	#4,obRender(a0)
 		move.b	#4,obPriority(a0)
 		move.b	#$14,obActWid(a0)
@@ -37,6 +41,8 @@ Moto_Main:	; Routine 0
 		move.l	#Map_Mouse,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Villager,0,0),obGfx(a0)
 		move.b	#$E,obActWid(a0)
+		move.b	#8,obRoutine(a0)
+		rts
 .NotWIN:
 		cmpi.b	#id_BSZ,(v_zone).w		; is zone bsz?
 		bne.s	.NotBSZ	; if not, branch
@@ -46,9 +52,6 @@ Moto_Main:	; Routine 0
 .NotBSZ:
 		tst.b	obAnim(a0)	; is object a smoke trail?
 		bne.s	.smoke		; if yes, branch
-		move.b	#$E,obHeight(a0)
-		move.b	#8,obWidth(a0)
-		move.b	#$C,obColType(a0)
 		bsr.w	ObjectFall
 		bsr.w	ObjFloorDist
 		tst.w	d1
@@ -164,3 +167,27 @@ Moto_Animate:	; Routine 4
 
 Moto_Delete:	; Routine 6
 		bra.w	DeleteObject
+
+
+
+Moto_Chase:	; Routine 8
+		lea	v_player.w, a1
+		move.w	#$2A0, d0
+		move.w	#$30, d1
+		jsr	ChaseObject.l
+		tst.b	obSubtype(a0)
+		beq.s	.Go
+		bmi.s	.ClrY
+		move.w	#0,obVelX(a0)
+		bra.s	.Go
+.ClrY
+		move.w	#0,obVelY(a0)
+.Go
+		jsr	SpeedToPos
+
+		move.b	#1,obAnim(a0)
+		lea	(Ani_Moto).l,a1
+		bsr.w	AnimateSprite
+		bsr.w	RememberState
+		bra.w	DisplaySprite
+; ===========================================================================

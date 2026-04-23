@@ -5,56 +5,55 @@ WariosCastle_Header:
 	smpsHeaderTempo     $01, $55
 
 	smpsHeaderDAC       WariosCastle_DAC
-	smpsHeaderFM        WariosCastle_FM1,	$00, $08
-	smpsHeaderFM        WariosCastle_FM2,	$00, $08
-	smpsHeaderFM        WariosCastle_FM3,	$00, $0A
-	smpsHeaderFM        WariosCastle_FM4,	$00, $14	
+	smpsHeaderFM        WariosCastle_FM1,	$00, $0A
+	smpsHeaderFM        WariosCastle_FM2,	$00, $0B
+	smpsHeaderFM        WariosCastle_FM3,	$00, $0B
+	smpsHeaderFM        WariosCastle_FM4,	$00, $16
 	smpsHeaderPSG       WariosCastle_PSG1,	$0C, $02, $00, $00
 	smpsHeaderPSG       WariosCastle_PSG2,	$0C, $02, $00, $00
 
 ; DAC Data
 WariosCastle_DAC:
 	smpsPan             panCenter, $00
-	dc.b	dLowTom, $18
+	dc.b	dPokeLowTimpani, $18
 
 WariosCastle_Loop00:
-	dc.b	dHiTom, $0C, dMidTom, dLowTom, $18, dHiTom, dLowTom, dHiTom, $0C, dMidTom, dLowTom, dHiTom
-	dc.b	$18, $0C, dLowTom, $18, dHiTom, $0C, dMidTom, dLowTom, $18, dHiTom, dLowTom, dHiTom
-	dc.b	$0C, dMidTom, dLowTom, dHiTom, dHiTom, dHiTom, $06, $06
+	dc.b	dHiBongo, $0C, dLowBongo, dPokeLowTimpani, $18, dHiBongo, dPokeLowTimpani, dHiBongo, $0C, dLowBongo, dPokeLowTimpani, dHiBongo
+	dc.b	$18, $0C, dPokeLowTimpani, $18, dHiBongo, $0C, dLowBongo, dPokeLowTimpani, $18, dHiBongo, dPokeLowTimpani, dHiBongo
+	dc.b	$0C, dLowBongo, dPokeLowTimpani, dHiBongo, dHiBongo, dHiBongo, $06, $06
 
 WariosCastle_Jump00:
-	dc.b	dLowTom, $18
+	dc.b	dPokeLowTimpani, $18
 	smpsLoop            $00, $02, WariosCastle_Loop00
 
 WariosCastle_Loop01:
-	dc.b	dHiTom, $0C, dMidTom, dLowTom, $18, dHiTom, dLowTom
+	dc.b	dHiBongo, $0C, dLowBongo, dPokeLowTimpani, $18, dHiBongo, dPokeLowTimpani
 	smpsLoop            $00, $03, WariosCastle_Loop01
 
 WariosCastle_Loop02:
-	dc.b	dHiTom, $0C, dMidTom, dLowTom, dHiTom, $18, $0C, dLowTom, dMidTom, dHiTom, dMidTom, dLowTom
-	dc.b	$18, dHiTom, dLowTom, $0C, dMidTom
+	dc.b	dHiBongo, $0C, dLowBongo, dPokeLowTimpani, dHiBongo, $18, $0C, dPokeLowTimpani, dLowBongo, dHiBongo, dLowBongo, dPokeLowTimpani
+	dc.b	$18, dHiBongo, dPokeLowTimpani, $0C, dLowBongo
 	smpsLoop            $00, $04, WariosCastle_Loop02
-	dc.b	dHiTom, dMidTom, dLowTom, dHiTom, dLowTom, dHiTom, $06, $06
+	dc.b	dHiBongo, dLowBongo, dPokeLowTimpani, dHiBongo, dPokeLowTimpani, dHiBongo, $06, $06
 
 WariosCastle_Loop03:
-	dc.b	dLowTom, $18, dHiTom, $0C, dMidTom, dLowTom, $18, dHiTom
+	dc.b	dPokeLowTimpani, $18, dHiBongo, $0C, dLowBongo, dPokeLowTimpani, $18, dHiBongo
 	smpsLoop            $00, $02, WariosCastle_Loop03
-	dc.b	dLowTom, dHiTom, $0C, dMidTom, dLowTom, $18, dHiTom, $0C, dLowTom
+	dc.b	dPokeLowTimpani, dHiBongo, $0C, dLowBongo, dPokeLowTimpani, $18, dHiBongo, $0C, dPokeLowTimpani
 
 WariosCastle_Loop04:
-	dc.b	dHiTom, dHiTom, $18, dLowTom, $0C
+	dc.b	dHiBongo, dHiBongo, $18, dPokeLowTimpani, $0C
 	smpsLoop            $00, $03, WariosCastle_Loop04
-	dc.b	dHiTom, dHiTom, dMidTom, $06, $06, dLowTom, dLowTom, dLowTom, $18, dHiTom, $0C, dMidTom
-	dc.b	dLowTom, $18, dHiTom, dLowTom, dHiTom, $0C, dMidTom, dLowTom, dHiTom, $18, $0C, dLowTom
-	dc.b	$18, dHiTom, $0C, dMidTom, dLowTom, $18, dHiTom, $24, $0C, $0C, $06, $12
+	dc.b	dHiBongo, dHiBongo, dLowBongo, $06, $06, dPokeLowTimpani, dPokeLowTimpani, dPokeLowTimpani, $18, dHiBongo, $0C, dLowBongo
+	dc.b	dPokeLowTimpani, $18, dHiBongo, dPokeLowTimpani, dHiBongo, $0C, dLowBongo, dPokeLowTimpani, dHiBongo, $18, $0C, dPokeLowTimpani
+	dc.b	$18, dHiBongo, $0C, dLowBongo, dPokeLowTimpani, $18, dHiBongo, $24, $0C, $0C, $06, $12
 	dc.b	$0C, $0C, $06, $06
 	smpsJump            WariosCastle_Jump00
 
 ; FM1 Data
-WariosCastle_FM1:
+WariosCastle_FM2:
 	smpsPan             panCenter, $00
 	smpsSetvoice        $00
-	smpsAlterVol        $03
 	dc.b	nD3, $06, nRst, $1E, nCs3, $06, nRst, nD3, nRst, $12, nEb3, $18
 	dc.b	nD3, $06, nRst, $1E, nCs3, $06, nRst, nD3, nRst, nEb3, nRst, nF3
 	dc.b	nRst, nEb3, nRst, nD3, nRst, $1E, nCs3, $06, nRst, nD3, nRst, $12
@@ -112,10 +111,9 @@ WariosCastle_Loop18:
 	smpsJump            WariosCastle_Loop11
 
 ; FM2 Data
-WariosCastle_FM2:
+WariosCastle_FM3:
 	smpsPan             panCenter, $00
 	smpsSetvoice        $00
-	smpsAlterVol        $03
 
 WariosCastle_Loop05:
 	dc.b	nG2, $06, nRst, $1E, nFs2, $06, nRst, nG2, nRst, $12, nAb2, $18
@@ -181,10 +179,10 @@ WariosCastle_Loop10:
 
 WariosCastle_FM4:
 	smpsDetune		$02
-	dc.b	$05
+	dc.b	$06
 
 ; FM3 Data
-WariosCastle_FM3:
+WariosCastle_FM1:
 	smpsPan             panCenter, $00
 	smpsSetvoice        $01
 	dc.b	nRst, $7F, $7F, $7F, $03
@@ -354,7 +352,7 @@ WariosCastle_Voices:
 	smpsVcDecayRate1    $09, $00, $00, $17
 	smpsVcDecayRate2    $00, $00, $00, $08
 	smpsVcDecayLevel    $0F, $0B, $0F, $04
-	smpsVcReleaseRate   $0A, $01, $04, $03
+	smpsVcReleaseRate   $08, $00, $00, $00
 	smpsVcTotalLevel    $00, $13, $16, $20
 
 ;	Voice $01
@@ -372,6 +370,7 @@ WariosCastle_Voices:
 	smpsVcDecayRate1    $09, $05, $1C, $18
 	smpsVcDecayRate2    $00, $00, $06, $00
 	smpsVcDecayLevel    $0F, $01, $01, $06
-	smpsVcReleaseRate   $09, $01, $06, $07
+	smpsVcReleaseRate   $07, $00, $00, $00
 	smpsVcTotalLevel    $00, $1F, $16, $0D
 
+	smpsFooterEndSong	"TheWTracks/Mus - WariosCastle.asm"
