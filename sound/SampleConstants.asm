@@ -20,6 +20,10 @@ dHiTom				ds.b 1
 dMidTom				ds.b 1
 dLowTom				ds.b 1
 dFloorTom			ds.b 1
+dHiBongo			ds.b 1
+dMidBongo			ds.b 1
+dLowBongo			ds.b 1
+dVLowBongo			ds.b 1
 
 ; Sonic 3
 dKickS3				ds.b 1
