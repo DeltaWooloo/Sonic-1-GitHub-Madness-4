@@ -32,6 +32,10 @@ Cutscene_ManiacIntro:
 	bra.w	MmIntro_LoadTV
 	bra.w	MmIntro_TVStatic
 	bra.w	MmIntro_FlashRN
+	bra.w	MmIntro_WaitTxt1
+	bra.w	MmIntro_WaitClr1
+	bra.w	MmIntro_HedgePenis
+	bra.w	MmIntro_WaitClr2
 	rts
 	nop
 
@@ -39,7 +43,7 @@ MmIntro_Init:
 	move.b	#20,stringtimer.w
 	addq.b	#1,subscene.w
 	move.w	#172,cameraAPosX.w
-        move.l #$40000002,VDPCTRL         ; Set VRAM write address
+        move.l # $78000002,VDPCTRL         ; Set VRAM write address
         move.w  #(8*32)-1,d7
 
 .FillStatic:
@@ -71,7 +75,7 @@ MmIntro_Main:
         bra.w	_beebushDrawStatic
 
 MmIntro_Wait1:
-	sub.w	#1,v_generictimer.w
+	tst.w	v_generictimer.w
 	bne.s	.Go
 	addq.b	#1,subscene.w
 	bra.w	ClearMsgs	
@@ -92,6 +96,13 @@ MmIntro_LoadTV:
 	move.b	(a1)+,d1
 	move.b	(a1)+,d2
 	move.w	(a1)+,d0
+	jsr	DrawTileMap_Addr
+	moveq	#0,d1
+	moveq	#0,d2
+	lea	MapScr_ManiacIntro2B,a1
+	move.b	(a1)+,d1
+	move.b	(a1)+,d2
+	move.w	(a1)+,d0
 	jmp	DrawTileMap_Addr
 
 MmIntro_TVStatic:
@@ -99,7 +110,7 @@ MmIntro_TVStatic:
 	bmi.s	.Next
 .Draw
 	move.l	#$61980003,d3      		; d3 = initial address
-        move.w  #18-1,d4                    ; d4 = width / 2
+        move.w  #16-1,d4                    ; d4 = width / 2
         move.w  #14-1,d5                        ; d5 = height
         bra.w	_beebushDrawStatic
 .Next:
@@ -112,6 +123,10 @@ MmIntro_FlashRN:
 	tst.b	stringflags.w
 	bpl.s	.Go
 	addq.b	#1,subscene.w
+	move.w	#-128,cameraBPosX.w
+	move.l	#Str_ManiacIntro3,stringaddr.w
+	move.b	#4,stringtime.w
+	rts
 .Go
 	move.w	v_framecount.w,d0
 	move	d0,ccr
@@ -119,15 +134,55 @@ MmIntro_FlashRN:
 	move.w	#0,cameraBPosX.w
 	bra.s	MmIntro_TVStatic.Draw
 .ShowRN
-	move.w	#128,cameraBPosX.w
+	move.w	#-128,cameraBPosX.w
 	rts
 
+MmIntro_WaitTxt1:
+	tst.b	stringflags.w
+	beq.s	.Wait
+	move.w	#60*2,v_generictimer.w
+	addq.b	#1,subscene.w
+.Wait
+	rts
 
+MmIntro_WaitClr1:
+	tst.w	v_generictimer.w
+	bne.s	.Wait
+	addq.b	#1,subscene.w
+	bsr.w	ClearMsgs
+	move.l	#Str_ManiacIntro4,stringaddr.w
+	move.b	#60,stringtimer.w
+	move.w  #$AA84,stringvram.w
+	move.w	#$AA84,stringvramline.w
+.Wait:
+	rts
 
+MmIntro_HedgePenis:
+	tst.b	stringflags.w
+	beq.s	.Wait
+	move.w	#60*2,v_generictimer.w
+	addq.b	#1,subscene.w
+.Wait
+	rts
 
-
-
-
+MmIntro_WaitClr2:
+	tst.w	v_generictimer.w
+	bne.s	.Wait
+	addq.b	#1,subscene.w
+	bsr.w	ClearMsgs
+	moveq	#0,d1
+	moveq	#0,d2
+	lea	MapScr_ManiacIntro3A,a1
+	move.b	(a1)+,d1
+	move.b	(a1)+,d2
+	move.w	(a1)+,d0
+	jsr	DrawTileMap_Addr
+	move.l	#Str_ManiacIntro5,stringaddr.w
+	move.b	#60,stringtimer.w
+	move.w  #$AA84,stringvram.w
+	move.w	#$AA84,stringvramline.w
+.Wait:
+	rts
 
 ; ---------------------------------------------------------------------------
 ; Parallax/Camera, very basic
@@ -189,7 +244,7 @@ _beebushDrawStatic:
 .LoopColumn:            
         jsr     RandomNumber                    ; get rand
         andi.w  #$003F,d0                       ; mask high bits of tile no.
-        ori.w   #$2400,d0                       ; set line 2 and id $1XX
+        ori.w   #$25C0,d0                       ; set line 2 and id $1XX
         move.w  d0,(a6)                         ; write 1 tile
 
         dbf     d7,.LoopColumn                  ; loop for width
@@ -202,6 +257,8 @@ Str_ManiacEllip:
 	even
 
 Str_ManiacIntro1:
+		;------------------------------------;
+
 	dc.b	"MANIAC SAT WATCHING FUNNY SHORT CLIP",-1
 	dc.b	"AND COLONOSCOPY TUTORIALS ON HIS CRT",-1
 	dc.b	"HOOKED UP TO A FUCKING ROKU BOX",-1
@@ -209,7 +266,32 @@ Str_ManiacIntro1:
 	even
 
 Str_ManiacIntro2:
-	dc.b	"HE SAT AND WATCHED Sonic 1: South ",-1
-	dc.b	"Island Expedition (SHC 2024 Demo)",-1
-	dc.b	" in 1080p at 60FPS",0
+
+		;------------------------------------;
+
+	dc.b	" HE SAT AND WATCHED ",-1
+	dc.b	"  Sonic 1: South Island Expedition  ",-1
+	dc.b	" (SHC 2024 Demo) in 1080p at 60FPS  ",-1
+	dc.b	0
+	even
+
+Str_ManiacIntro3:
+	dc.b	" UNTIL HE SAW",-1
+	dc.b	"THE RADIANT NEXUS SPLASH SCREEN.",0
+	even
+
+Str_ManiacIntro4:
+	dc.b	"AND THEN A BETASLOP APPEARED AND",-1
+	dc.b	"SHOWED HIS CRAZY HEDGEPENIS.",-1
+	dc.b	-1
+	dc.b	"Uhh. Oh Yeah. That was in the sonic",-1
+	dc.b	"beta 1990.",0 
+	even
+
+Str_ManiacIntro5:
+	dc.b	"HE GOT SOOOOOOOOOOOOOOOOOOO MAD LOL",0 
+	even
+
+
+	dc.b	"MILDANNER HAS A POOPY BUTT AND SONIC HACKING IS GAY"
 	even

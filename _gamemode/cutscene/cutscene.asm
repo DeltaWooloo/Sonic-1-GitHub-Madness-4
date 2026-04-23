@@ -83,8 +83,12 @@ _cutsceneSub:
 VBLANK_CUTSCENE:
 	jsr	VBla_StandardTransfers
 	jsr	ProcessDMAQueue
-	jmp	ProcessDPLC_9Tiles
-
+	jsr	ProcessDPLC_9Tiles
+	tst.w	v_generictimer.w
+	beq.s	.skip
+	sub.w	#1,v_generictimer.w
+.skip:
+	rts
 ; ---------------------------------------------------------------------------
 ; Cutscene Init code
 ; ---------------------------------------------------------------------------
@@ -348,4 +352,16 @@ MapScr_ManiacIntro2A:
 		dc.b	40-1,	20-1	; width, height
 		dc.w	$C000
 		binclude	"_gamemode/cutscene/data/maniaccutscene1_2.map"
+		even
+
+MapScr_ManiacIntro2B:
+		dc.b	16-1,	11-1	; width, height
+		dc.w	 $E238
+		binclude	"_gamemode/cutscene/data/maniaccutscene1b_2.map"
+		even
+
+MapScr_ManiacIntro3A:
+		dc.b	40-1,	20-1	; width, height
+		dc.w	$C000
+		binclude	"_gamemode/cutscene/data/maniaccutscene1_3.map"
 		even
