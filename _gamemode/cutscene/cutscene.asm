@@ -162,12 +162,12 @@ InitCutsceneData:
 	rts
 
 CutsceneInitTbl:
-	dc.l	Str_TonicIntro1+(4<<24)
+	dc.l	Str_TonicIntro1+(3<<24)
 	dc.l	ArtList_ManiacIntro1+(bgm_Dingaling<<24)
 	dc.l	MapScr_ManiacIntro1A
 	dc.l	MapScr_ManiacIntro1B
 
-	dc.l	Str_ManiacIntro1+(4<<24)
+	dc.l	Str_ManiacIntro1+(3<<24)
 	dc.l	ArtList_ManiacIntro1+(bgm_DoleAttack<<24)
 	dc.l	MapScr_ManiacIntro1A
 	dc.l	MapScr_ManiacIntro1B
@@ -384,7 +384,7 @@ MapScr_ManiacIntro2B:
 		even
 
 MapScr_ManiacIntro3A:
-		dc.b	40-1,	20-1	; width, height
+		dc.b	44-1,	20-1	; width, height
 		dc.w	$C000
 		binclude	"_gamemode/cutscene/data/maniaccutscene1_3.map"
 		even

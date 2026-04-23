@@ -7,6 +7,9 @@ cameraBPosY	=	v_bgscreenposy
 cameraZPosX	=	v_bg3screenposx
 cameraZPosY	=	v_bg3screenposy
 
+shakescale	= cameraZPosX
+
+
 Cutscene_ManiacIntro:
 	moveq   #0,d0
 	move.b	subscene.w,d0
@@ -36,7 +39,7 @@ Cutscene_ManiacIntro:
 	bra.w	MmIntro_WaitClr1
 	bra.w	MmIntro_WaitTxt1
 	bra.w	MmIntro_WaitClr2
-	bra.w	MmIntro_WaitTxt1
+	bra.w	MmIntro_FaceShake
 	bra.w	MmIntro_WaitClr3
 	bra.w	MmIntro_WaitTxt1
 	bra.w	MmIntro_WaitClr4
@@ -70,7 +73,7 @@ MmIntro_Main:
 	tst.w	cameraAPosX.w
 	bne.s	.Static
 	addq.b	#1,subscene.w
-	move.w	#60*6,v_generictimer.w
+	move.w	#60*4,v_generictimer.w
 
 .Static:
 	move.l	#$62A40003,d3      		; d3 = initial address
@@ -90,7 +93,7 @@ MmIntro_LoadTV:
 	move.b	#1,scrollrno.w
 	addq.b	#1,subscene.w
 	move.l	#Str_ManiacIntro2,stringaddr.w
-	move.b	#60,stringtimer.w
+	move.b	#30,stringtimer.w
 	move.w  #$AA84,stringvram.w
 	move.w	#$AA84,stringvramline.w
 	
@@ -121,6 +124,8 @@ MmIntro_TVStatic:
 	addq.b	#1,subscene.w
 	move.l	#Str_ManiacEllip,stringaddr.w
 	move.b	#60,stringtime.w
+	move.w	#bgm_Fade,d0
+	jsr	QueueSound2
 	rts
 
 MmIntro_FlashRN:
@@ -129,7 +134,9 @@ MmIntro_FlashRN:
 	addq.b	#1,subscene.w
 	move.w	#-128,cameraBPosX.w
 	move.l	#Str_ManiacIntro3,stringaddr.w
-	move.b	#4,stringtime.w
+	move.b	#2,stringtime.w
+	move.w	#bgm_Aporia,d0
+	jsr	QueueSound2
 	rts
 .Go
 	move.w	v_framecount.w,d0
@@ -155,6 +162,7 @@ MmIntro_WaitClr1:
 	addq.b	#1,subscene.w
 	bsr.w	ClearMsgs
 	move.l	#Str_ManiacIntro4,stringaddr.w
+	move.b	#3,stringtime.w
 	move.b	#60,stringtimer.w
 	move.w  #$AA84,stringvram.w
 	move.w	#$AA84,stringvramline.w
@@ -183,23 +191,49 @@ MmIntro_WaitClr2:
 	jsr	DrawTileMap_Addr
 	lea	ArtList_ManiacIntro2,a1
 	jsr	UserPLC
+	pcm	dChicken
 	move.l	#Str_ManiacIntro5,stringaddr.w
 	move.b	#60,stringtimer.w
 	move.w  #$AA84,stringvram.w
 	move.w	#$AA84,stringvramline.w
+	move.w	#-16,cameraAPosX.w
 .Wait:
 	rts
 
 MmIntro_WaitClr3:
 	tst.w	v_generictimer.w
-	bne.s	.Wait
+	bne.s	MmIntro_FaceShake.Wait
 	addq.b	#1,subscene.w
 	bsr.w	ClearMsgs
 	move.l	#Str_ManiacIntro6,stringaddr.w
 	move.b	#60,stringtimer.w
 	move.w  #$AA84,stringvram.w
 	move.w	#$AA84,stringvramline.w
-.Wait:
+	rts
+
+MmIntro_FaceShake
+	tst.b	stringflags.w
+	beq.s	.Wait
+	move.w	#60*2,v_generictimer.w
+	addq.b	#1,subscene.w
+.Wait
+	moveq	#0,d1
+	move.b	shakescale.w,d1
+	cmpi.b	#$1F,d1
+	bge.s	.skip
+	add.w	#$5,shakescale.w
+	bra.s	.ok
+.skip
+	move.w	#$1F,shakescale.w
+.ok
+	andi.b	#$1F,d1
+	move.w	v_framecount.w,d0
+	move	d0,ccr
+	bcs.s	.skip2
+	neg	d1
+.skip2
+	subi.w	#16,d1
+	move.w	d1,cameraAPosX.w
 	rts
 
 MmIntro_WaitClr4:
@@ -220,6 +254,10 @@ MmIntro_WaitClr4:
 	move.b	#60,stringtimer.w
 	move.w  #$AA84,stringvram.w
 	move.w	#$AA84,stringvramline.w
+	move.w	#0,cameraAPosX.w
+	move.w	#sfx_Bomb,d0
+	jsr	QueueSound2
+	pcm	dDude
 .Wait:
 	rts
 ; ---------------------------------------------------------------------------
