@@ -7,8 +7,8 @@ WariosCastle_Header:
 	smpsHeaderDAC       WariosCastle_DAC
 	smpsHeaderFM        WariosCastle_FM1,	$00, $08
 	smpsHeaderFM        WariosCastle_FM2,	$00, $08
-	smpsHeaderFM        WariosCastle_FM3,	$00, $08
-	smpsHeaderFM        WariosCastle_FM4,	$00, $12	
+	smpsHeaderFM        WariosCastle_FM3,	$00, $0A
+	smpsHeaderFM        WariosCastle_FM4,	$00, $14	
 	smpsHeaderPSG       WariosCastle_PSG1,	$0C, $01, $00, $00
 	smpsHeaderPSG       WariosCastle_PSG2,	$0C, $01, $00, $00
 
