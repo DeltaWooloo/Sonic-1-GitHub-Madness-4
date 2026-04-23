@@ -135,7 +135,9 @@ PLC_LZ:		dc.w ((PLC_LZ2-PLC_LZ-2)/6)-1
 		plcm	Nem_Spikes,      ArtTile_Spikes             ; spikes
 ;		plcm	Nem_LZ,          ArtTile_Level              ; LZ main patterns
 		plcm	Nem_Wario,       ArtTile_Wario              ; Wario
-
+        plcm	Nem_SyzSpike1, ArtTile_SYZ_Big_Spikeball   ; large spikeball
+		plcm	Nem_SyzSpike2, ArtTile_SYZ_Spikeball_Chain ; small spikeball
+		
 PLC_LZ2:	dc.w ((PLC_LZ2end-PLC_LZ2-2)/6)-1
 		plcm	Nem_HSpring,     ArtTile_Spring_Horizontal  ; horizontal spring
 PLC_LZ2end:

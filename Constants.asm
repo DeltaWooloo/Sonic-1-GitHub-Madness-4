@@ -104,7 +104,7 @@ plane_size_64x32: equ 64*32*2	; size of plane in 512x256 mode
 
 ; Levels
 id_OWZ:		equ $00
-id_WHZ:		equ $01		; Formerly LZ (water)
+id_WHZ:		equ $01
 id_ACZ:		equ $02
 id_MCZ:		equ $03
 id_SFZ:		equ $04
@@ -117,7 +117,7 @@ id_DVZ:		equ $0A
 id_Nogales:	equ $0B
 id_BSZ:		equ $0C
 id_BTZ:		equ $0D
-id_ARZ:		equ $0E		; need to get water implemented
+id_ARZ:		equ $0E	
 
 ; Colours
 cBlack:		equ $000		; colour black
@@ -242,7 +242,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_MWaterS=bgm__First		; Orange World	(Act 1)
 	nextenum bgm_OrangeSong			; 		(Act 2)
 	nextenum bgm_GreenHills			; 		(Act 3)
-	nextenum bgm_Dungeon3			; Azure Rainforest
+	nextenum bgm_WariosCastle			; Wario's hallway
 	nextenum bgm_LosTontos			; Alberta Canada	(Act 1)
 	nextenum bgm_Area5			; 			(Act 2)
 	nextenum bgm_Easton			; 			(Act 3)
@@ -257,7 +257,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Cheetah			; 		(Act 2)
 	nextenum bgm_REMansion			; 		(Act 3)
 	nextenum bgm_ColdBrew			; Cold Brew	(Act 1)
-	nextenum bgm_ValSDST1			; Cold Brew	(Act 2)
+	nextenum bgm_ValSDST1			; 		(Act 2)
 	nextenum bgm_UNOwenWasHer		; Windows	(Act 1)
 	nextenum bgm_Passport			; 		(Act 2)
 	nextenum bgm_VirusAlert			; 		(Act 3)
@@ -267,6 +267,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_GHZ			; Nogales Zone
 	nextenum bgm_TF2			; Bluescapes	(Act 1)		; Dax: Interesting song choice for this :/
 	nextenum bgm_Blue			;		(Act 2)
+	nextenum bgm_Dungeon3			; Azure Rainforest
 	nextenum bgm_Final			; Final Zone
 
 	; Boss BGM
@@ -294,7 +295,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_NewBarkTown		; Debug Menu
 	nextenum bgm_Memories			; Character/Difficulty Select
 	nextenum bgm_DoleAttack			; Intro Cutscene
-	nextenum bgm_Dingaling			; RPG Battle (might change this)
 	nextenum bgm_Spoopy			; Sans Death Screen
 	nextenum bgm_Continue			; Continue Screen
 	nextenum bgm_Ending			; Ending A
@@ -352,8 +352,10 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_BossaNova
 	nextenum bgm_BatMan
 	nextenum bgm_Hidden
+	nextenum bgm_SadMac
 
 	; Unused Full/Looping BGM
+	nextenum bgm_Dingaling
 	nextenum bgm_BonusEight
 	nextenum bgm_Pac2
 	nextenum bgm_SS
@@ -393,7 +395,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_SonicToole
 	nextenum bgm_Folgers
 	nextenum bgm_Ding
-	nextenum bgm_SadMac
 	nextenum bgm_Win2K
 	nextenum bgm_CrazyMario
 	; Keep this last

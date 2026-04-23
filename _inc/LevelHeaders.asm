@@ -21,9 +21,9 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 	lhead	plcid_GHZ,Kos_GHZ,plcid_GHZ2,Blk16_GHZ,Blk256_GHZ,bgm_GreenHills,palid_GHZ,Col_GHZ,ObjPos_GHZ3,Level_GHZ3,Level_GHZbg
 	lhead	plcid_GHZ,Kos_GHZ,plcid_GHZ2,Blk16_GHZ,Blk256_GHZ,bgm_BeforeBoss,palid_GHZ,Col_GHZ,ObjPos_Null,Level_GHZ1,Level_GHZbg
 
-	lhead	plcid_LZ,Kos_LZ,plcid_LZ2,Blk16_LZ,Blk256_LZ,bgm_Dungeon3,palid_LZ,Col_LZ,ObjPos_LZ1, Level_LZ1,Level_LZbg
-	lhead	plcid_LZ,Kos_LZ,plcid_LZ2,Blk16_LZ,Blk256_LZ,bgm_ChickenDance,palid_LZ,Col_LZ,ObjPos_LZ2, Level_LZ2,Level_LZbg
-	lhead	plcid_LZ,Kos_LZ,plcid_LZ2,Blk16_LZ,Blk256_LZ,bgm_SkyGift,palid_LZ,Col_LZ,ObjPos_LZ3, Level_LZ3,Level_LZbg
+	lhead	plcid_LZ,Kos_LZ,plcid_LZ2,Blk16_LZ,Blk256_LZ,bgm_WariosCastle,palid_LZ,Col_LZ,ObjPos_LZ1, Level_LZ1,Level_LZbg
+	lhead	plcid_LZ,Kos_LZ,plcid_LZ2,Blk16_LZ,Blk256_LZ,bgm_Dungeon3,palid_LZ,Col_LZ,ObjPos_LZ2, Level_LZ2,Level_LZbg
+	lhead	plcid_LZ,Kos_LZ,plcid_LZ2,Blk16_LZ,Blk256_LZ,bgm_Dungeon3,palid_LZ,Col_LZ,ObjPos_LZ3, Level_LZ3,Level_LZbg
 	lhead	plcid_LZ,Kos_LZ,plcid_LZ2,Blk16_LZ,Blk256_LZ,bgm_REMansion,palid_LZ,Col_LZ,ObjPos_Null,Level_LZ1,Level_LZbg
 
 	lhead	plcid_MZ,Kos_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_LosTontos,palid_MZ,Col_MZ,ObjPos_MZ1, Level_MZ1,Level_MZ1bg

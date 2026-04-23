@@ -24,7 +24,7 @@ MusicIndex:
 	bgmdef s1TempotoS3($03), Mus_MWaterS
 	bgmdef $01, Mus_OrangeSong
 	bgmdef $01, Mus_GreenHills
-	bgmdef $44, Mus_DUNGEON3
+	bgmdef $FF, Mus_WariosCastle	
 	bgmdef $01, Mus_LosTontos
 	bgmdef $01, Mus_Area5
 	bgmdef $76, Mus_Easton
@@ -49,6 +49,7 @@ MusicIndex:
 	bgmdef s1TempotoS3($03), Mus_GHZ
 	bgmdef $50, Mus_TF2
 	bgmdef $60, Mus_Blue
+	bgmdef $44, Mus_DUNGEON3
 	bgmdef s1TempotoS3($02), Mus_Final
 
 	bgmdef $55, Mus_BeforeBoss
@@ -72,7 +73,6 @@ MusicIndex:
 	bgmdef $0A, Mus_NewBarkTown
 	bgmdef s1TempotoS3($05), Mus_Memories
 	bgmdef $01, Mus_DoleAttack
-	bgmdef $01, Mus_Dingaling
 	bgmdef $01, Mus_Spoopy
 	bgmdef s1TempotoS3($FF), Mus_Continue
 	bgmdef s1TempotoS3($05), Mus_Ending
@@ -126,7 +126,9 @@ MusicIndex:
 	bgmdef $55, Mus_BossaNova
 	bgmdef $01, Mus_BatMan
 	bgmdef s2TempotoS3($E0), Mus_Hidden
+	bgmdef $80, Mus_SadMac
 
+	bgmdef $01, Mus_Dingaling
 	bgmdef $65, Mus_BonusEight
 	bgmdef $01, Mus_Pac2
 	bgmdef $01, Mus_SS
@@ -165,7 +167,6 @@ MusicIndex:
 	bgmdef $73, Mus_SonicToole
 	bgmdef s1TempotoS3($00), Mus_Folgers
 	bgmdef $80, Mus_Ding
-	bgmdef $80, Mus_SadMac
 	bgmdef s1TempotoS3($00), Mus_Win2K
 	bgmdef $54, Mus_CrazyMario
 	;!@ bgmwarning	MusicIndex,4
@@ -176,6 +177,8 @@ Mus_OrangeSong:		include	"music/TG2000Tracks/Mus - Orange Song.asm"
 	even
 Mus_GreenHills:		include	"music/TG2000Tracks/Mus - Green Hills (Flash).asm"
 	even
+Mus_WariosCastle:		include	"music/TheWTracks/Mus - WariosCastle.asm"
+	even	
 Mus_DUNGEON3:		include "music/DaxKatter/Mus - Azure Rainforest.asm"
 	even
 Mus_LosTontos:		include "music/Vertz1515/Mus - La Suerte De Los Tontos.asm"

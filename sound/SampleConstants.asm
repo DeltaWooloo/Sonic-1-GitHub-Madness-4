@@ -86,6 +86,7 @@ dTwerkOf87			ds.b 1
 dScream				ds.b 1
 dRift				ds.b 1
 dSans				ds.b 1
+dDude				ds.b 1
 
 ; Title Screen Samples
 dYoFreddy			ds.b 1
