@@ -51,11 +51,47 @@ ObjIZ_Action:	; Routine 2
 		bra.w	RememberState
 
 ; ===========================================================================
-ObjIZ_ActIndex:	dc.w .move-ObjIZ_ActIndex
+ObjIZ_ActIndex:
+		dc.w .jumpwait-ObjIZ_ActIndex
+		dc.w .jump-ObjIZ_ActIndex
+		dc.w .move-ObjIZ_ActIndex
 		dc.w .findfloor-ObjIZ_ActIndex
-
+		dc.w .shoot-ObjIZ_ActIndex
 .time = $30
 ; ===========================================================================
+.jumpwait:
+;		bchg	#0,obStatus(a0)
+		move.w	(v_player+obX).w,d0
+		sub.w	obX(a0),d0
+		bpl.s	.isleft
+		neg.w	d0
+
+.isleft:
+		cmpi.w	#$70,d0		; is Buzz Bomber within $60 pixels of Sonic?
+		bhs.s	.nothereyet	; if not, branch
+		tst.b	obRender(a0)
+		bpl.s	.nothereyet
+		addq.b	#2,ob2ndRout(a0)
+		move.w	#-$400,obVelY(a0)
+		subq.w	#5,obY(a0)
+		move.b	#4,obAnim(a0)
+.nothereyet:
+		rts
+
+.jump:
+		bsr.w	ObjectFall
+		jsr	(ObjFloorDist).l
+		tst.w	d1
+		bpl.s	.notonfloor
+		add.w	d1,obY(a0)	; match	object's position with the floor
+		bchg	#0,obStatus(a0)
+		addq.b	#2,ob2ndRout(a0)
+		btst	#1,obSubtype(a0)
+		beq.s	.notonfloor
+		bchg	#0,obStatus(a0)
+		move.b	#8,ob2ndRout(a0)
+.notonfloor:
+		rts
 
 .move:
 		subq.w	#1,.time(a0)	; subtract 1 from pause	time
@@ -73,6 +109,19 @@ ObjIZ_ActIndex:	dc.w .move-ObjIZ_ActIndex
 ; ===========================================================================
 
 .findfloor:
+		move.w	(v_player+obX).w,d0
+		sub.w	obX(a0),d0
+		bpl.s	.isleftA
+		neg.w	d0
+
+.isleftA:
+		cmpi.w	#$20,d0		; is Buzz Bomber within $20 pixels of Sonic?
+		bhs.s	.donotbatt	; if not, branch
+		tst.b	obRender(a0)
+		bpl.s	.donotbatt
+		move.b	#8,ob2ndRout(a0)
+		rts
+.donotbatt:
 		bsr.w	SpeedToPos
 		jsr	(ObjFloorDist).l
 		cmpi.w	#-8,d1
@@ -87,6 +136,9 @@ ObjIZ_ActIndex:	dc.w .move-ObjIZ_ActIndex
 		move.w	#170,.time(a0)	; set pause time to 1 second
 		move.w	#0,obVelX(a0)	; stop the object moving
 		move.b	#0,obAnim(a0)
+		rts	
+		
+.shoot:
 		rts	
 ; ===========================================================================
 

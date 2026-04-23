@@ -59,30 +59,31 @@ SampleTable:
 	dcSample	TYPE_DPCM,	Homero,		16000					; $A8
 
 	; In-Game SFX SAMPLES
-	dcSample	TYPE_PCM,	letsgoeee,	8000,	FLAGS_SFX		; $A9
-	dcSample	TYPE_PCM,	Boik,		5250,	FLAGS_SFX		; $AA 
-	dcSample	TYPE_PCM,	QuakeJump,	0,	FLAGS_SFX			; $AB 
-	dcSample	TYPE_PCM,	Fannys,		0,	FLAGS_SFX			; $AC
-	dcSample	TYPE_PCM,	QuakeRocket,	11297				; $AD
-	dcSample	TYPE_DPCM,	CL_STFU,	8000,	FLAGS_SFX		; $AE
-	dcSample	TYPE_PCM,	CL_Fuck,	11297					; $AF
-	dcSample	TYPE_DPCM,	Chicken,	8000,	FLAGS_SFX		; $B0 if my oc HailToDodongos has been added, use this sound effect as a sfx_death replacement
-	dcSample	TYPE_PCM,	GayNeil,	0,	FLAGS_SFX			; $B1
-	dcSample	TYPE_PCM,	CL_Dicks,	11297					; $B2
-	dcSample	TYPE_PCM,	BabyAlarm,	0,	FLAGS_SFX			; $B3
-	dcSample	TYPE_PCM,	CL_YouCanSuck,	11297,	FLAGS_SFX			; $B4
-	dcSample	TYPE_DPCM,	Boost,		16000,	FLAGS_SFX		; $B5
-	dcSample	TYPE_DPCM,	BoostR,		16000,	FLAGS_SFX		; $B6
-	dcSample	TYPE_DPCM,	ClintonHi,	20600,	FLAGS_SFX		; $B7
-	dcSample	TYPE_DPCM,	ClintonWin,	11025,	FLAGS_SFX		; $B8
-	dcSample	TYPE_DPCM,	ClintonFail,	11025,	FLAGS_SFX	; $B9
-	dcSample	TYPE_PCM,	CL_DoYouSuck,	11297,	FLAGS_SFX	; $BA
-	dcSample	TYPE_PCM,	CL_OnTheBall,	11297				; $BB
-	dcSample	TYPE_DPCM,	DAMN,		16000,	FLAGS_SFX		; $BC
-	dcSample	TYPE_PCM,	Foxy,		0,	FLAGS_SFX			; $BD
-	dcSample	TYPE_PCM,	Scream,		8000,	FLAGS_SFX		; $BE
-	dcSample	TYPE_DPCM,	Rift,		11025,	FLAGS_SFX		; $BF
-	dcSample	TYPE_DPCM,	Sands,		8000,	FLAGS_SFX		; $C0
+	dcSample	TYPE_PCM,	letsgoeee,	8000,	FLAGS_SFX		; $A7
+	dcSample	TYPE_PCM,	Boik,		5250,	FLAGS_SFX		; $A8 
+	dcSample	TYPE_PCM,	QuakeJump,	0,	FLAGS_SFX			; $A9 
+	dcSample	TYPE_PCM,	Fannys,		0,	FLAGS_SFX			; $AA
+	dcSample	TYPE_PCM,	QuakeRocket,	11297				; $AB 
+	dcSample	TYPE_DPCM,	CL_STFU,	8000,	FLAGS_SFX		; $AC 
+	dcSample	TYPE_PCM,	CL_Fuck,	11297					; $AD 
+	dcSample	TYPE_DPCM,	Chicken,	8000,	FLAGS_SFX		; $AE if my oc HailToDodongos has been added, use this sound effect as a sfx_death replacement
+	dcSample	TYPE_PCM,	GayNeil,	0,	FLAGS_SFX			; $AF
+	dcSample	TYPE_PCM,	CL_Dicks,	11297					; $B0
+	dcSample	TYPE_PCM,	BabyAlarm,	0,	FLAGS_SFX			; $B1
+	dcSample	TYPE_PCM,	CL_YouCanSuck,	11297,	FLAGS_SFX	; $B2
+	dcSample	TYPE_DPCM,	Boost,		16000,	FLAGS_SFX		; $B3
+	dcSample	TYPE_DPCM,	BoostR,		16000,	FLAGS_SFX		; $B4
+	dcSample	TYPE_DPCM,	ClintonHi,	20600,	FLAGS_SFX		; $B5
+	dcSample	TYPE_DPCM,	ClintonWin,	11025,	FLAGS_SFX		; $B6
+	dcSample	TYPE_DPCM,	ClintonFail,	11025,	FLAGS_SFX	; $B7
+	dcSample	TYPE_PCM,	CL_DoYouSuck,	11297,	FLAGS_SFX	; $B8
+	dcSample	TYPE_PCM,	CL_OnTheBall,	11297				; $B9
+	dcSample	TYPE_DPCM,	DAMN,		16000,	FLAGS_SFX		; $BA
+	dcSample	TYPE_PCM,	Foxy,		0,	FLAGS_SFX			; $BB
+	dcSample	TYPE_PCM,	Scream,		8000,	FLAGS_SFX		; $BC
+	dcSample	TYPE_DPCM,	Rift,		11025,	FLAGS_SFX		; $BD
+	dcSample	TYPE_DPCM,	Sands,		8000,	FLAGS_SFX		; $BE
+	dcSample	TYPE_PCM,	Dude,		16000,	FLAGS_SFX		; i am not rearranging these they literally don't matter fuck off
 
 	; Title Screen Samples
 	dcSample	TYPE_DPCM,	YoFreddy,	16000,	FLAGS_SFX		; $C1
@@ -248,7 +249,7 @@ SampleTable:
 	incdac	OllieWahoo,"sound/dac/ollie/wahoo.dpcm"
 ;sANDS
 	incdac	Sands, "sound/dac/sansfuckyoutonic.dpcm"
-
+	incdac	Dude, "sound/dac/Dude.wav"
 ; ---------------------------------------------------------------
 ; Whatever you want the Sega sound to be
 	incdac	SegaPCM, "sound/dac/sega.wav"

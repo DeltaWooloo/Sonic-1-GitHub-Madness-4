@@ -104,7 +104,7 @@ plane_size_64x32: equ 64*32*2	; size of plane in 512x256 mode
 
 ; Levels
 id_OWZ:		equ $00
-id_WHZ:		equ $01		; Formerly LZ (water)
+id_WHZ:		equ $01
 id_ACZ:		equ $02
 id_MCZ:		equ $03
 id_SFZ:		equ $04
@@ -117,7 +117,7 @@ id_DVZ:		equ $0A
 id_Nogales:	equ $0B
 id_BSZ:		equ $0C
 id_BTZ:		equ $0D
-id_ARZ:		equ $0E		; need to get water implemented
+id_ARZ:		equ $0E	
 
 ; Colours
 cBlack:		equ $000		; colour black
@@ -403,7 +403,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	bgm__LastPow2:		equ	andiMaskB(bgm__Last)
 
 ; Sound effects
-	enum	sfx__First=$A0
+	enum	sfx__First=$90
 	nextenum sfx_Jump=sfx__First
 	nextenum sfx_Lamppost
 	nextenum sfx_A2
@@ -467,6 +467,8 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum sfx_LGEcho
 	nextenum sfx_Error
 	nextenum sfx_SMPSZ80Snare
+	nextenum sfx_Static
+	nextenum sfx_SirenAlarm
 	; Keep this last
 	nextenum	sfx__Last
 	

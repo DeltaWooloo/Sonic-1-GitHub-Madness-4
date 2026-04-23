@@ -75,6 +75,8 @@ ptr_sndDB:	dc.l SoundDB
 ptr_sndDC:	dc.l SoundDC
 ptr_sndDD:	dc.l SoundDD
 ptr_sndDE:	dc.l SoundDE
+ptr_sndDF:	dc.l SoundDF
+ptr_sndE0:	dc.l SoundE0
 ; ---------------------------------------------------------------------------
 ; Sound effect data
 ; ---------------------------------------------------------------------------
@@ -203,5 +205,9 @@ SoundDC:	include "sfx/LG Echo.asm"
 SoundDD:	include "sfx/Snd - Error.asm"
 		even
 SoundDE:	include "sfx/SMPSZ80Snare.asm"
+		even
+SoundDF:	include "sfx/Static.asm"
+		even
+SoundE0:	include "sfx/SirenAlarm.asm"
 		even
 	END
