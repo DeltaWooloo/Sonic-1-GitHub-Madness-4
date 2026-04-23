@@ -34,8 +34,12 @@ Cutscene_ManiacIntro:
 	bra.w	MmIntro_FlashRN
 	bra.w	MmIntro_WaitTxt1
 	bra.w	MmIntro_WaitClr1
-	bra.w	MmIntro_HedgePenis
+	bra.w	MmIntro_WaitTxt1
 	bra.w	MmIntro_WaitClr2
+	bra.w	MmIntro_WaitTxt1
+	bra.w	MmIntro_WaitClr3
+	bra.w	MmIntro_WaitTxt1
+	bra.w	MmIntro_WaitClr4
 	rts
 	nop
 
@@ -177,6 +181,8 @@ MmIntro_WaitClr2:
 	move.b	(a1)+,d2
 	move.w	(a1)+,d0
 	jsr	DrawTileMap_Addr
+	lea	ArtList_ManiacIntro2,a1
+	jsr	UserPLC
 	move.l	#Str_ManiacIntro5,stringaddr.w
 	move.b	#60,stringtimer.w
 	move.w  #$AA84,stringvram.w
@@ -184,6 +190,38 @@ MmIntro_WaitClr2:
 .Wait:
 	rts
 
+MmIntro_WaitClr3:
+	tst.w	v_generictimer.w
+	bne.s	.Wait
+	addq.b	#1,subscene.w
+	bsr.w	ClearMsgs
+	move.l	#Str_ManiacIntro6,stringaddr.w
+	move.b	#60,stringtimer.w
+	move.w  #$AA84,stringvram.w
+	move.w	#$AA84,stringvramline.w
+.Wait:
+	rts
+
+MmIntro_WaitClr4:
+	tst.w	v_generictimer.w
+	bne.s	.Wait
+	addq.b	#1,subscene.w
+	bsr.w	ClearMsgs
+	moveq	#0,d1
+	moveq	#0,d2
+	lea	MapScr_ManiacIntro5A,a1
+	move.b	(a1)+,d1
+	move.b	(a1)+,d2
+	move.w	(a1)+,d0
+	jsr	DrawTileMap_Addr
+	jsr	RandomNumber
+	andi.l	#$3FFFFF,d0		; uh. yeah i  Dont care. lol
+	move.l	d0,stringaddr.w
+	move.b	#60,stringtimer.w
+	move.w  #$AA84,stringvram.w
+	move.w	#$AA84,stringvramline.w
+.Wait:
+	rts
 ; ---------------------------------------------------------------------------
 ; Parallax/Camera, very basic
 ; ---------------------------------------------------------------------------
@@ -289,7 +327,19 @@ Str_ManiacIntro4:
 	even
 
 Str_ManiacIntro5:
-	dc.b	"HE GOT SOOOOOOOOOOOOOOOOOOO MAD LOL",0 
+			;------------------------------------;
+	dc.b		"OH MY PROBLEMATIC. ERM.",-1
+	dc.b	        "  you are the single most unfunny",-1
+	dc.b		"  person to ever stumble onto my",-1
+	dc.b		"   riggedy cathode tube.",0
+	even
+
+Str_ManiacIntro6:
+			;------------------------------------;
+	dc.b		"HE WENT TO GRAB HIS CHAINSAW, BUT IT",-1
+	dc.b		"WAS ALL FUCKED UP AND GREASY AND SHIT",-1
+	dc.b		"SO HE WOULD HAVE TO GO GET PARTS TO",-1
+	dc.b		"FIX IT.",0
 	even
 
 
