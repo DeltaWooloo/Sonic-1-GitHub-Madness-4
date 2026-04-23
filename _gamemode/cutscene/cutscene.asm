@@ -324,3 +324,9 @@ MapScr_ManiacIntro1B:
 		dc.w	$E000
 		binclude	"_gamemode/cutscene/data/maniaccutscene1b.map"
 		even
+
+MapScr_ManiacIntro2A:
+		dc.b	24-1,	20-1	; width, height
+		dc.w	$C000
+		binclude	"_gamemode/cutscene/data/maniaccutscene1_2.map"
+		even
