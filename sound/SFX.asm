@@ -77,6 +77,7 @@ ptr_sndDD:	dc.l SoundDD
 ptr_sndDE:	dc.l SoundDE
 ptr_sndDF:	dc.l SoundDF
 ptr_sndE0:	dc.l SoundE0
+ptr_sndE1:	dc.l SoundE1
 ; ---------------------------------------------------------------------------
 ; Sound effect data
 ; ---------------------------------------------------------------------------
@@ -209,5 +210,7 @@ SoundDE:	include "sfx/SMPSZ80Snare.asm"
 SoundDF:	include "sfx/Static.asm"
 		even
 SoundE0:	include "sfx/SirenAlarm.asm"
+		even
+SoundE1:	include "sfx/Long Fart.asm"
 		even
 	END
