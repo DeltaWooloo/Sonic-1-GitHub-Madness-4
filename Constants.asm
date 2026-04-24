@@ -347,6 +347,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_BomerDude			; AtGames Ad
 	nextenum bgm_ClintonYears		; Gaming in the Clinton Years Ad
 	nextenum bgm_Skinner			; Steamed Hams Ad
+	nextenum bgm_EagleSoft			; GMZ - EagleSoft song
 
 	; BSOD BGM
 	nextenum bgm_MMZPast			; Sonic CD Metallic Madness Zone Past (Sonic CD Virus BSOD)
