@@ -119,7 +119,7 @@ ObjIZ_ActIndex:
 		bhs.s	.donotbatt	; if not, branch
 		tst.b	obRender(a0)
 		bpl.s	.donotbatt
-		bra.s	.beginshoot
+		bsr.s	.beginshoot
 .donotbatt:
 		bsr.w	SpeedToPos
 		jsr	(ObjFloorDist).l
