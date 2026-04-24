@@ -122,6 +122,7 @@ MusicIndex:
 	bgmdef $01, Mus_BomerDude
 	bgmdef $94, Mus_ClintonYears
 	bgmdef $01, Mus_Skinner
+	bgmdef s1TempotoS3($00), Mus_EagleSoft	; GMZ
 
 	bgmdef s1TempotoS3($03), Mus_MMZPast	;!@ GD
 	bgmdef $55, Mus_BossaNova
@@ -470,6 +471,8 @@ Mus_S28bitUnused:	include	"music/Malachi/Sonic 2 8bit Unused Theme.asm"
 	even
 
 Mus_WBRBack:		include	"music/GMZ/Mus - We'll Be Right Back.asm"	; GMZ
+	even	; GMZ
+Mus_WBRBack:		include	"music/GMZ/Mus - EagleSoft.asm"	; GMZ
 	even	; GMZ
 
 ;!@ Dummy song; meant for placehold slot, silence, whatever
