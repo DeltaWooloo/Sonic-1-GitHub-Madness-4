@@ -226,8 +226,6 @@ Mus_TwoSteps:		include	"music/TG2000Tracks/Mus - Two Steps.asm"
 	even
 Mus_DoleBOSS:		include	"music/TG2000Tracks/DoleBOSS.asm"	;Boss Track
 	even
-Mus_PizzaPopBoss:	include "music/CNTracks/CheetahFakeout.asm"
-	even
 Mus_WarioLand1Boss:	include "music/GenesisDoes/WarioLand1_Boss.asm"
 	even
 
@@ -358,8 +356,6 @@ Mus_Skinner:		include	"music/TG2000Tracks/Mus - Skinner.asm"
 
 ;  Used for Fake Crashes
 
-Mus_BonusEight:		include	"music/TG2000Tracks/Bonus8.asm"
-	even
 Mus_MMZPast:	include	"music/GenesisDoes/MMZPast_SNN.asm"
 	even
 Mus_SadMac:		include	"music/TG2000Tracks/SadMac.asm"

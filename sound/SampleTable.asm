@@ -50,7 +50,7 @@ SampleTable:
 	dcSample	TYPE_PCM,	PokeKickCrash,	15300				; $A1
 	dcSample	TYPE_DPCM,	PokeTimpani,	15000				; $A2
 	dcSample	TYPE_DPCM,	PokeTimpani,	11297				; $A3
-	dcSample	TYPE_DPCM,	PokeTimpani,	7500				; $A4
+	dcSample	TYPE_DPCM,	ShortTimpani,	7500				; $A4
 	dcSample	TYPE_DPCM,	CTC1_Tick,	16000					; $A5
 
 	dcSample	TYPE_DPCM,	CF_DrumLoopA,	15830				; $A6
@@ -185,6 +185,7 @@ SampleTable:
 	incdac	PokeSnare, "sound/dac/DAX/PokeSnare.dpcm"
 	incdac	PokeKickCrash, "sound/dac/DAX/PokeKickCrash.pcm"
 	incdac	PokeTimpani, "sound/dac/DAX/PokeTimpani.dpcm"
+	incdac	ShortTimpani, "sound/dac/DAX/ShortTimpani.dpcm"
 
 ; ---------------------------------------------------------------
 ; the singular sample file from conic 1 (idgaf if it counts as leaking)
@@ -249,7 +250,6 @@ SampleTable:
 	incdac	funnyb_utthole, "sound/dac/funnybutthole.dpcm"
 	incdac	yume2kki, "sound/dac/2kki.dpcm"
 
-	; incdac	EagleSoft_Song,	"sound/dac/GenesisDoes/EagleSoft_Song.dpcm"	; GMZ - Commented
 	incdac	EagleSoft_Chirp1,	"sound/dac/GMZ/eaglesoft_chirp1.dpcm"	; GMZ
 	incdac	EagleSoft_Chirp2,	"sound/dac/GMZ/eaglesoft_chirp2.dpcm"	; GMZ
 	incdac	EagleSoft_Speech,	"sound/dac/GMZ/eaglesoft_speech.dpcm"	; GMZ
