@@ -23,5 +23,5 @@ TonicIntro_FadeIn:
 
 
 Str_TonicIntro1:
-	dc.b	"*tonic intro here*",0
+	dc.b	"Teeth Tonic is a Colorado Cracker",0
 	even

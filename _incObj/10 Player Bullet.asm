@@ -78,7 +78,24 @@ PBullet_Callback:
 		rts
 
 .DestroyTouched:
-		moveq  #10, d0			; add 100 to score
+		btst	#6,obStatus(a1)
+		beq.s	.Brk
+
+		tst.b	obColProp(a1)
+		beq.s	.Brk
+
+		neg.w	obVelX(a0)	; repel Bullet
+		neg.w	obVelY(a0)
+		asr.w	obVelX(a0)
+		asr.w	obVelY(a0)
+		move.b	#0,obColType(a1)
+		subq.b	#1,obColProp(a1)
+		bne.s	.DoNotOpen
+		bset	#7,obStatus(a1)
+		rts
+
+.Brk:
+		moveq	#10, d0			; add 100 to score
 		jsr	AddPoints
     		move.b	#id_ExplosionItem, obID(a1) ; change object to explosion
 		move.b	#0,obRoutine(a1)
