@@ -65,6 +65,7 @@ MusicIndex:
 
 	bgmdef $6C, Mus_RamRanch
 	bgmdef $27, Mus_CanCan
+	bgmdef $44, Mus_WeebTrash
 
 	bgmdef $01, Mus_Invincible
 	bgmdef $45, Mus_WillTell
@@ -241,6 +242,8 @@ Mus_LimitedEgg:		include "music/DaxKatter/Mus - Limited Egg.asm"
 Mus_RamRanch:		include	"music/CNTracks/RamRanch.asm"
 	even
 Mus_CanCan:		include	"music/TG2000Tracks/Mus - Can Can.asm" 
+	even
+Mus_WeebTrash:		include	"music/MattTracks/Mus - Weeb Trash.asm" 
 	even
 
 Mus_Dingaling:		include	"music/TG2000Tracks/Mus - Dingaling.asm"

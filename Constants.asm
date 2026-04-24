@@ -285,6 +285,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	; Special Stage BGM
 	nextenum bgm_RamRanch			; Demo BGM
 	nextenum bgm_CanCan
+	nextenum bgm_WeebTrash
 
 	; Power Up BGM
 	nextenum bgm_Invincible			; Invincibility

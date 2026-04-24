@@ -65,6 +65,15 @@ dClintLoopB:		ds.b 1
 ; HOMERO
 dHomero:			ds.b 1
 
+dEagSoft_Chirp1		ds.b 1	; GMZ
+dEagSoft_Chirp2		ds.b 1	; GMZ
+dEagSoft_Speech		ds.b 1	; GMZ
+dWeebTrash1			ds.b 1
+dWeebTrash2			ds.b 1
+dWeebTrash3			ds.b 1
+
+dNull			ds.b 1
+
 ; In-Game SFX Samples
 dLetsGOO			ds.b 1
 dBoik				ds.b 1
@@ -113,9 +122,6 @@ dMeow2				ds.b 1
 dEggNo				ds.b 1
 dfunnyb_utthole		ds.b 1
 d2kki				ds.b 1
-dEagSoft_Chirp1		ds.b 1	; GMZ
-dEagSoft_Chirp2		ds.b 1	; GMZ
-dEagSoft_Speech		ds.b 1	; GMZ
 dGenesisDoes1		ds.b 1
 dVirus				ds.b 1
 dsupbeaches			ds.b 1
@@ -125,23 +131,12 @@ dGenesisCan3		ds.b 1
 
 ; Ollie Samples
 dOllieGameTap		ds.b 1
-dOllieWahoo			ds.b 1
 
+; SFX IDs beyond this point cannot be used for music
+
+dOllieWahoo			ds.b 1
 ; SEGA Samples
 dSega				ds.b 1
-
-
-;dSega2				ds.b 1
-
-; UNUSED
-;dMadnessR			ds.b 1
-;dPenis				ds.b 1
-;dBoioing			ds.b 1
-;dOrangeLaugh		ds.b 1
-;dClintonYeah		ds.b 1
-;dGenesisCan1		ds.b 1
-;dGenesisCan2		ds.b 1
-;dIntel				ds.b 1
 
 ;!@ GD: Maximum DAC sample (exclusive range). Used for enum/array bounds
 ;Please reserve this as last

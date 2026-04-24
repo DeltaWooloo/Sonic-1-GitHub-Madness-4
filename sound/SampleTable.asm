@@ -58,6 +58,16 @@ SampleTable:
 
 	dcSample	TYPE_DPCM,	Homero,		16000					; $A8
 
+	dcSample	TYPE_DPCM,	EagleSoft_Chirp1,	8000	; GMZ
+	dcSample	TYPE_DPCM,	EagleSoft_Chirp2,	8000	; GMZ
+	dcSample	TYPE_DPCM,	EagleSoft_Speech,	8000	; GMZ
+
+	dcSample	TYPE_DPCM,	WeebTrash1,	14000
+	dcSample	TYPE_DPCM,	WeebTrash2,	14000
+	dcSample	TYPE_DPCM,	WeebTrash3,	14000
+
+	dcSample	TYPE_DPCM,	dummy,	8000,					; Used to cut samples off in songs
+
 	; In-Game SFX SAMPLES
 	dcSample	TYPE_PCM,	letsgoeee,	8000,	FLAGS_SFX		; $A7
 	dcSample	TYPE_PCM,	Boik,		5250,	FLAGS_SFX		; $A8 
@@ -107,11 +117,6 @@ SampleTable:
 	dcSample	TYPE_PCM,	EggNo,		11297					; $D0
 	dcSample	TYPE_DPCM,	funnyb_utthole,	8000,	FLAGS_SFX	; $D1
 	dcSample	TYPE_DPCM,	yume2kki,	16000,	FLAGS_SFX		; $D2
-
-	; dcSample	TYPE_DPCM,	EagleSoft_Song,	8000,	FLAGS_SFX	; $D3	; GMZ - Commented
-	dcSample	TYPE_DPCM,	EagleSoft_Chirp1,	8000	; GMZ
-	dcSample	TYPE_DPCM,	EagleSoft_Chirp2,	8000	; GMZ
-	dcSample	TYPE_DPCM,	EagleSoft_Speech,	8000	; GMZ
 
 	dcSample	TYPE_DPCM,	GenesisDoes1,	8000				; $D4
 	dcSample	TYPE_DPCM,	Virus,		16000,	FLAGS_SFX		; $D5
@@ -201,6 +206,16 @@ SampleTable:
 	incdac	Homero, "sound/dac/homero.dpcm"
 
 ; ---------------------------------------------------------------
+; Special Song Samples
+	incdac	EagleSoft_Chirp1,	"sound/dac/GMZ/eaglesoft_chirp1.dpcm"	; GMZ
+	incdac	EagleSoft_Chirp2,	"sound/dac/GMZ/eaglesoft_chirp2.dpcm"	; GMZ
+	incdac	EagleSoft_Speech,	"sound/dac/GMZ/eaglesoft_speech.dpcm"	; GMZ
+
+	incdac	WeebTrash1,	"sound/dac/Weeb Trash/WeebTrash1.dpcm"
+	incdac	WeebTrash2,	"sound/dac/Weeb Trash/WeebTrash2.dpcm"
+	incdac	WeebTrash3,	"sound/dac/Weeb Trash/WeebTrash3.dpcm"
+
+; ---------------------------------------------------------------
 ; SFX Samples
 	incdac	letsgoeee, "sound/dac/TheSunsetHacker/letsgoeee.pcm"		; :fire: :fire: :fire: :fire: :fire:
 	incdac	Boik, "sound/dac/boik.wav"
@@ -249,10 +264,6 @@ SampleTable:
 	incdac	EggNo, "sound/dac/EggNo.wav"
 	incdac	funnyb_utthole, "sound/dac/funnybutthole.dpcm"
 	incdac	yume2kki, "sound/dac/2kki.dpcm"
-
-	incdac	EagleSoft_Chirp1,	"sound/dac/GMZ/eaglesoft_chirp1.dpcm"	; GMZ
-	incdac	EagleSoft_Chirp2,	"sound/dac/GMZ/eaglesoft_chirp2.dpcm"	; GMZ
-	incdac	EagleSoft_Speech,	"sound/dac/GMZ/eaglesoft_speech.dpcm"	; GMZ
 
 	incdac	GenesisDoes1,"sound/dac/GenesisDoes/GenesisDoes1.dpcm"
 	incdac	Virus,"sound/dac/GenesisDoes/Virus_Alert.dpcm"
