@@ -6548,7 +6548,7 @@ Ani_Oldjohn:
 		even			
 		
  		include	"_incObj/OldJohn.asm"	; program it 
-
+         ; include	"_incObj/BallsGrabber/S3kSeprateRunBigArms.asm" ; enable s3k big arms 
 	
 		include	"data.asm"		; data includes in here
 ; ===========================================================================
