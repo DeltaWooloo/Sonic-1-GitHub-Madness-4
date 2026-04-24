@@ -873,10 +873,10 @@ BGM_WeebTrash_PSG3_02_0_64_0B:
 	smpsPSGAlterVol	$FF
 
 BGM_WeebTrash_PSG3_02_Loop:
-	dc.b	nMaxPSG1-28, $01
+	dc.b	nMaxPSG1-24, $01
 	smpsAlterPitch	$01
-	smpsLoop	0, 28, BGM_WeebTrash_PSG3_02_Loop
-	smpsAlterPitch	-25
+	smpsLoop	0, 24, BGM_WeebTrash_PSG3_02_Loop
+	smpsAlterPitch	-24
 	dc.b	nMaxPSG2, $28
 	smpsReturn
 
