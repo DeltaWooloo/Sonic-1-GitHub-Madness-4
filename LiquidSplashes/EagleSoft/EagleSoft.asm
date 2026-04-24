@@ -123,14 +123,9 @@ EagleSoft_DumpPal:
 		disable_ints
 		jsr		(PaletteFadeIn).l										; Palette fade in
 		enable_ints
-		; play EagleSoft song
-		;move.w	#dEagleSoftSong,d0										
-		;jsr		(PlaySound_Special).l
-		; move.b	#dEagleSoftSong, d0	; GMZ - Commented
-		; jsr		(MegaPCM_PlaySample).l	; GMZ - Commented
-		move.b	#bgm_EagleSoft,d0	; GMZ
-		jsr	MegaPCM_PlaySample	; GMZ
-		
+		move.w	#bgm_EagleSoft,d0										
+		jsr	(PlaySound_Special).l
+
 		;Load Eagle object		
 		lea	(v_eagle).w,a1												; load eagle to a1		
 		move.b	#$0,obSubtype(a1)										; set Eagle subtype

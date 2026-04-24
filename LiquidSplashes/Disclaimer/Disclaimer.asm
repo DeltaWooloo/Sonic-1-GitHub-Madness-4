@@ -11,10 +11,14 @@ ArtTile_Disclaimer_BG:		equ	(ArtTile_Disclaimer_FG+$102)			;Disclaimer tilemap B
 
 GM_Disclaimer:
 		move.w	#bgm_Stop,d0											; Stop music
-		jsr		(PlaySound_Special).l
+		jsr	(PlaySound_Special).l
+
+		jsr	(PaletteFadeOut).l											; fade palettes out
+
+		disable_ints
+		disable_display
 
 		jsr	(ClearPLC).l												; clear pattern load cues list
-		jsr	(PaletteFadeOut).l											; fade palettes out
 		jsr	(VDPSetupGame).l
 		jsr	(ClearScreen).l												; clear the plane mappings
 
@@ -30,13 +34,11 @@ Disclaimer_ClearObjects:
 		move.l	d0,(a1)+
 		dbf	d1,Disclaimer_ClearObjects									; repeat til all object slots are cleared
 
-		disable_ints
-		disable_display
 
-Disclaimer_LoadText:
-		move.w	(a5)+,(a6)
-		dbf	d1,Disclaimer_LoadText
-		
+;Disclaimer_LoadText:
+;		move.w	(a5)+,(a6)
+;		dbf	d1,Disclaimer_LoadText
+
 		lea	(vdp_control_port).l,a6										; load VDP address port address		
 		move.w	#$8700,(a6)												; set backdrop colour to the very first colour
 		move.w	#$8B03,(a6)												; set scroll mode to horizontal sliced (by line)
@@ -78,7 +80,7 @@ Disclaimer_DumpPal:
 		jsr		(PaletteFadeIn).l										; Palette fade in
 		; play Disclaimer PCM
 		move.b	#dDisclaimer, d0
-		jsr		(MegaPCM_PlaySample).l
+		jsr	(MegaPCM_PlaySample).l
 
 ; ---------------------------------------------------------------------------
 ; Disclaimer Splash Screen main loop

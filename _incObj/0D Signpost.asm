@@ -115,7 +115,7 @@ Sign_SonicRun:	; Routine 6
 		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w ; check if level is CLOCK WORK 2
 		beq.s	fuckyou76
 		tst.w	(v_debuguse).w	; is debug mode on?
-		bne.w	locret_ECEE	; if yes, branch
+		bne.w	Sign_Return	; if yes, branch
 	if FixBugs
 		; This function's checks are a mess, creating an edgecase where it's
 		; possible for the player to avoid having their controls locked by
@@ -124,7 +124,7 @@ Sign_SonicRun:	; Routine 6
 		tst.b	(v_player+obID).w	; Check if Sonic's object has been deleted (because he entered the giant ring)
 		beq.s	loc_EC86
 		btst	#1,(v_player+obStatus).w
-		bne.w	locret_ECEE
+		bne.w	Sign_Return
 	else
 		btst	#1,(v_player+obStatus).w
 		bne.s	loc_EC70
@@ -140,7 +140,7 @@ loc_EC70:
 		move.w	(v_limitright2).w,d1
 		addi.w	#$128,d1
 		cmp.w	d1,d0
-		blo.w	locret_ECEE
+		blo.w	Sign_Return
 
 loc_EC86:
 		addq.b	#2,obRoutine(a0)
@@ -155,7 +155,7 @@ fuckyou76:
 
 wellfuckyounot:
 		tst.w	(v_debuguse).w	; is debug mode	on?
-		bne.w	locret_ECEE	; if yes, branch
+		bne.w	Sign_Return	; if yes, branch
 		btst	#1,(v_player+obStatus).w
 		bne.s	loc_EC70fuck
 		move.b	#1,(f_lockctrl).w ; lock controls
@@ -168,7 +168,7 @@ loc_EC70fuck:
 		move.w	(v_limitright2).w,d1
 		addi.w	#$128,d1
 		cmp.w	d1,d0
-		bcs.w	locret_ECEE
+		bcs.w	Sign_Return
 loc_EC869:
 		addq.b #2,obRoutine(a0);absolute fucking cinema
 ;NMRTT SBZ2 shittery fixer
@@ -181,7 +181,7 @@ loc_EC869:
 
 GotThroughAct:
 		tst.b	(v_endcard).w
-		bne.s	locret_ECEE
+		bne.s	Sign_Return
 		
 		;!@ GD:  New code to skip edge lock if subType $1 (spawned from RandomMonitor)
 		cmpi.b	#0,obSubtype(a0)		;Is subType 0?
@@ -197,6 +197,8 @@ GotThroughAct2:
 		move.b	#id_GotThroughCard,(v_endcard).w
 		moveq	#plcid_WINNERCard,d0
 		jsr	(NewPLC).l	; load title card patterns
+
+GetTimeBonus:
 		move.b	#1,(f_endactbonus).w
 		moveq	#0,d0
 		move.b	(v_timemin).w,d0
@@ -216,10 +218,12 @@ GotThroughAct2:
 		move.w	(v_rings).w,d0	; load number of rings
 		mulu.w	#10,d0		; multiply by 10
 		move.w	d0,(v_ringbonus).w ; set ring bonus
+		cmpi.b	#id_GotThroughCard,(v_endcard).w	; is Got Through Card loaded
+		bne.s	Sign_Return			; we're in the Sans Boss Fight, don't play Act Clear BGM
 		move.b	#bgm_ActClear,d0
 		jsr	(QueueSound2).l
 
-locret_ECEE:
+Sign_Return:
 		rts
 ; End of function GotThroughAct
 

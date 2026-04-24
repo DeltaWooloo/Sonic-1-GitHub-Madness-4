@@ -40,9 +40,15 @@ GM_Sans_Main_Loop:
 		bne.s	GM_Sans_Main_Loop		; if not, branch
 
 TransitToColdBrewers:
-		move.w	#(id_CBZ<<8),(v_zone).w	; set level to Cold Brew
-		move.b  #id_Level,(v_gamemode).w ; go to title screen
-		rts
+		moveq	#0,d0
+		add.w	(v_timebonus).w,d0
+		clr.w	(v_timebonus).w
+		add.w	(v_ringbonus).w,d0
+		clr.w	(v_ringbonus).w
+		jsr	(AddPoints).l
+		move.b	#id_Level,(v_gamemode).w
+		jmp	(GotoNextLevel)
+
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Splash Screen files
