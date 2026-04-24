@@ -98,6 +98,7 @@ dGithub				ds.b 1
 dMadness			ds.b 1
 dTheFourth			ds.b 1
 dEggmanLaugh		ds.b 1
+dDisclaimer			ds.b 1
 dBSOD				ds.b 1
 
 ; Splash Screen Samples

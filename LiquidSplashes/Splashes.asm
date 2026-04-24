@@ -194,8 +194,9 @@ splash_turd macro routine
 	endm
 
 ; Entries	
-	splash_liquid	funnybutthole
-	splash_solid	Gens,$40, 1, _bgm, bgm_SS,60*5
+	splash_liquid	funnybutthole					;!@ GD: Reserve this as the 2nd splash screne
+	splash_liquid	GM_Disclaimer
+	splash_solid	Gens,$40, 1, _bgm, bgm_SS,60*5	
 	splash_liquid	MultiSplash_Init
 	splash_liquid	SonicRetro
 	splash_liquid	NewSSRG_Screen

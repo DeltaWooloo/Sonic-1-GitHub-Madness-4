@@ -1070,7 +1070,7 @@ bsod_w311.art2:
 			binclude "_gamemode/winBSOD/bsod_w311-art2.nem"
 			even
 
-;Standard Sonic-Crackers text font
+;Standard IBM PC text font
 bsod_w311.art1:
 bsod_95.art1:
 bsod_98ipc.art1:
@@ -1095,6 +1095,8 @@ bsod_sd7.art1:
 bsod_sd8.art1:
 bsod_gnu.art1:
 
+;!@ GD: Disclaimer LiquidSplash FG artwork
+ArtFG_Disclaimer:
 bsod_std.art1:
 			binclude "_gamemode/winBSOD/bsod_turnoff_font-art.nem"
 			even
