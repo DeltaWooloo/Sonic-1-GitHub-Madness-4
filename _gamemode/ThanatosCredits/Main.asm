@@ -100,7 +100,8 @@ PalThanatosCredits:	bincludeEndMarker "_gamemode/ThanatosCredits/Palette.pal"
 	bsr.w	RenderTextPlane
 	bsr.w	RenderTextLine
 
-	QueueSound_M bgm_Ending,0
+	QueueSound_M bgm_Ending,0	
+	pcm		dsbDevelopers			; Look at all of these developers!
 
 	; Fade In
 	jsr	(PaletteFadeIn).l
@@ -406,7 +407,7 @@ thantxt: macro txt
 	thantxt	"MICROSLOP CORP"	
 	thantxt	"STEVE BALLMER"	
 	thantxt	"GITHUB INC"
-	thantxt	"CS188"
+	thantxt	"CS ONE EIGHT EIGHT"
 	thantxt	"WEBFREAK"
 	thantxt	"SEGA CHANNEL GUY"
 	thantxt "AVGN JAMES ROLFE"
