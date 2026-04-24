@@ -1970,5 +1970,5 @@ Thomas_Voices:
 	dc.b		$03,$06,$32,$04,$02,$18,$13,$15,$11,$00,$10,$12,$0C,$00,$00,$00
 	dc.b		$00,$0A,$5A,$31,$16,$1E,$24,$21,$00;			Voice 05
 	
-	smpsFooterEndSong	"TG2000Tracks/Thomas.asm"
+	smpsFooterEndSong	"TG2000Tracks/OLD/Thomas.asm"
 	even

@@ -4846,4 +4846,4 @@ BGM_SwingSinners_Voices:
 	smpsVcReleaseRate   $0A, $0A, $01, $00
 	smpsVcTotalLevel    $00, $17, $17, $15
 
-	smpsFooterEndSong	"TG2000Tracks/Mus - Swing Sinners.asm"
+	smpsFooterEndSong	"TG2000Tracks/OLD/Mus - Swing Sinners.asm"

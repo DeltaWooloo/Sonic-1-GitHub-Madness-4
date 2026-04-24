@@ -3347,5 +3347,5 @@ LG_Voices:
 	dc.b		$03,$22,$20,$25,$25,$27,$2C,$17,$00;			Voice 01
 	dc.b		$3C,$31,$52,$50,$30,$52,$53,$52,$53,$08,$00,$08,$00,$04,$00,$04
 	dc.b		$00,$13,$05,$17,$09,$1C,$04,$14,$00;			Voice 02
-	smpsFooterEndSong	"TG2000Tracks/LG.asm"	
+	smpsFooterEndSong	"TG2000Tracks/OLD/LG.asm"	
 	even

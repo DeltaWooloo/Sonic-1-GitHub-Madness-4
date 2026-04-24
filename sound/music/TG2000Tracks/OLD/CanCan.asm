@@ -3360,4 +3360,4 @@ CanCan_PSG3_10_0_64:
 	dc.b nMaxPSG, $10, $10, $20
 	smpsReturn
 
-	smpsFooterEndSong	"TG2000Tracks/CanCan.asm"
+	smpsFooterEndSong	"TG2000Tracks/OLD/CanCan.asm"

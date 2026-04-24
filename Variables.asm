@@ -129,8 +129,10 @@ v_snddriver_ram:	SMPS_RAM		; sound driver state
 
 v_gamemode:		ds.b	1		; game mode (00=Sega; 04=Title; 08=Demo; 0C=Level; 10=SS; 14=Cont; 18=End; 1C=Credit; +8C=PreLevel)
 submode:		ds.b	1		; game mode sub mode cntr (for mode within a gamemode)
+
 v_jpadhold2:		ds.b	1		; joypad input - held, duplicate
 v_jpadpress2:		ds.b	1		; joypad input - pressed, duplicate
+Ctrl_1_held_logical:
 v_jpadhold1:		ds.b	1		; joypad input - held (player 1)
 v_jpadpress1:		ds.b	1		; joypad input - pressed (player 1)
 v_jpadholdp2:		ds.b	1		; joypad input - held (player 2)
@@ -200,7 +202,9 @@ v_plc_framepatternsleft:ds.w	1
 v_plc_buffer_end:
 
 v_levelvariables:				; variables that are reset between levels
+Camera_X_pos:
 v_screenposx:		ds.l	1		; screen position x
+Camera_Y_pos:
 v_screenposy:		ds.l	1		; screen position y
 v_bgscreenposx:		ds.l	1		; background screen position x
 v_bgscreenposy:		ds.l	1		; background screen position y
@@ -341,8 +345,11 @@ v_palette_water_end:
 
 v_palette:		; main palette
 v_palette_line_1:	ds.b $20
+Normal_palette_line_2:
 v_palette_line_2:	ds.b $20
+Normal_palette_line_3:
 v_palette_line_3:	ds.b $20
+Normal_palette_line_4:
 v_palette_line_4:	ds.b $20
 v_palette_end:
 
@@ -443,7 +450,10 @@ v_ani2_frame:		ds.b	1		; synchronised sprite animation 2 - current frame
 v_ani3_time:		ds.b	1		; synchronised sprite animation 3 - time until next frame
 v_ani3_frame:		ds.b	1		; synchronised sprite animation 3 - current frame
 v_ani3_buf:		ds.w	1		; synchronised sprite animation 3 - info buffer
-			ds.b	$26		; unused
+Palette_rotation_custom: ds.l 1 
+Palette_rotation_data: 
+            ds.b    $12 
+			ds.b	$10		; unused
 v_limittopdb:		ds.w	1		; level upper boundary, buffered for debug mode
 v_limitbtmdb:		ds.w	1		; level bottom boundary, buffered for debug mode
 			ds.b	$C		; unused

@@ -98,6 +98,10 @@ dGithub				ds.b 1
 dMadness			ds.b 1
 dTheFourth			ds.b 1
 dEggmanLaugh		ds.b 1
+dDisclaimer			ds.b 1
+dsbDevelopers		ds.b 1
+dsbLove				ds.b 1
+dsbPC				ds.b 1
 dBSOD				ds.b 1
 
 ; Splash Screen Samples
@@ -109,7 +113,11 @@ dMeow2				ds.b 1
 dEggNo				ds.b 1
 dfunnyb_utthole		ds.b 1
 d2kki				ds.b 1
-dEagleSoftSong		ds.b 1
+; dEagleSoftSong		ds.b 1	; GMZ - Commented
+dEagleSoftSong		ds.b 0	; GMZ - This is to avoid errors while porting
+dEagSoft_Chirp1		ds.b 1	; GMZ
+dEagSoft_Chirp2		ds.b 1	; GMZ
+dEagSoft_Speech		ds.b 1	; GMZ
 dGenesisDoes1		ds.b 1
 dVirus				ds.b 1
 dsupbeaches			ds.b 1

@@ -2842,18 +2842,12 @@ Level_LoadPal:
 		tst.b	(v_waterflag).w ; is level LZ?
 		bpl.s	Level_GetBgm	; if not, branch
 
-		moveq	#palid_LZSonWater,d0 ; palette number $F (LZ)
-		cmpi.b	#id_CBZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
-		beq.s	Level_CBZWaterPal	; it makes me have a boaner
+		moveq	#palid_CBZ2SonWat,d0
 		cmpi.b	#id_ARZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
 		beq.s	Level_ARZWaterPal	; it makes me have a boaner
 		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
 		bne.s	Level_WaterPal	; if not, branch
 		moveq	#palid_SBZ3SonWat,d0 ; palette number $10 (SBZ3)
-		bra.s	Level_WaterPal
-
-Level_CBZWaterPal:
-		moveq	#palid_CBZ2SonWat,d0
 		bra.s	Level_WaterPal
 
 Level_ARZWaterPal:
@@ -3002,18 +2996,12 @@ Level_Demo:
 Level_ChkWaterPal:
 		tst.b	(v_waterflag).w ; is level LZ/SBZ3?
 		bpl.s	Level_Delay	; if not, branch
-		moveq	#palid_LZWater,d0 ; palette $B (LZ underwater)
-		cmpi.b	#id_CBZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
-		beq.s	Level_CBZWtr	; it makes me have a boaner
+		moveq	#palid_BREWWat,d0
 		cmpi.b	#id_ARZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
 		beq.s	Level_ARZWtr	; it makes me have a boaner
 		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is level SBZ3?
 		bne.s	Level_WtrNotSbz	; if not, branch
 		moveq	#palid_SBZ3Water,d0 ; palette $D (SBZ3 underwater)
-		bra.s	Level_WtrNotSbz
-
-Level_CBZWtr:
-		moveq	#palid_BREWWat,d0
 		bra.s	Level_WtrNotSbz
 
 Level_ARZWtr:
@@ -3572,6 +3560,8 @@ V_Int_2LS:		= $819E
 	even
 
 ; ===========================================================================
+	include		"LiquidSplashes/Disclaimer/Disclaimer.asm"	; Code 
+	even
 ; ---------------------------------------------------------------------------
 ; Credits ending sequence
 ; ---------------------------------------------------------------------------
@@ -3618,8 +3608,9 @@ GM_Credits:
 		jsr	(AddPLC).w		; load object graphics
 
 Cred_SkipObjGfx:
-;		moveq	#plcid_Main2,d0
-;		bsr.w	AddPLC		; load standard level graphics
+		moveq	#plcid_Main2,d0
+		;bsr.w	AddPLC		; load standard level graphics
+		jsr		(AddPLC).l	; load standard level graphics
 		move.w	#120,(v_generictimer).w ; display a credit for 2 seconds
 		jsr	(PaletteFadeIn).w
 
@@ -3904,8 +3895,9 @@ LevelDataLoad:
 		jsr	(AddPLC).w	; load pattern load cues
 
 .skipPLC:
-;		moveq	#plcid_Main2,d0
-;		bra.w	AddPLC
+		moveq	#plcid_Main2,d0
+		;bra.w	AddPLC
+		jmp		(AddPLC).l
 
 ; ---------------------------------------------------------------------------
 ; Level layout loading subroutine
@@ -6559,7 +6551,7 @@ Ani_Oldjohn:
 		even			
 		
  		include	"_incObj/OldJohn.asm"	; program it 
-
+         ; include	"_incObj/BallsGrabber/S3kSeprateRunBigArms.asm" ; enable s3k big arms 
 	
 		include	"data.asm"		; data includes in here
 ; ===========================================================================

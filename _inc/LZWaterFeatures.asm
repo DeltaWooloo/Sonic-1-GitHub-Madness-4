@@ -35,7 +35,7 @@ LZWaterFeatures:
 ; ---------------------------------------------------------------------------
 WaterHeight:
 		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_OWZ
-		dc.w $0110,$0110,$0110,$0228	; id_ARZ
+		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_WHZ
 		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_ACZ
 		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_MCZ
 		dc.w $3FFF,$3FFF,$3FFF,$3FFF	; id_SFZ

@@ -4627,5 +4627,5 @@ DJKK_Voices:
 	dc.b		$06,$16,$06,$06,$28,$14,$28,$14,$00;			Voice 05
 	dc.b		$3A,$01,$73,$02,$01,$10,$11,$11,$18,$09,$0A,$0A,$0D,$00,$00,$00
 	dc.b		$00,$06,$09,$09,$29,$1B,$22,$1D,$00;			Voice 06
-	smpsFooterEndSong	"TG2000Tracks/DJKK.asm"	
+	smpsFooterEndSong	"TG2000Tracks/OLD/DJKK.asm"	
 	even

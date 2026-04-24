@@ -30,6 +30,7 @@ Shi_Main:	; Routine 0
 
 .stars:
 		addq.b	#2,obRoutine(a0) ; goto Shi_Stars next
+		move.l	#Map_Shield2,obMap(a0)							; !@ GD: Setup invin stars mapping
 		move.w	#make_art_tile(ArtTile_Invincibility,0,0),obGfx(a0)
 		rts
 ; ===========================================================================
@@ -96,7 +97,13 @@ Shi_Stars:	; Routine 4
 		lea	(a1,d0.w),a1
 		move.w	(a1)+,obX(a0)
 		move.w	(a1)+,obY(a0)
-		move.b	(v_player+obStatus).w,obStatus(a0)
+		;!@ GD: Stock Sonic 1 Bugfix, don't yflip stars when Sonic is in-air (obStatus bit 1)
+		;Only track xflip; ignore all other bits
+		;move.b	(v_player+obStatus).w,obStatus(a0)
+		move.b	(v_player+obStatus).w,d0
+		andi.b	#1,d0
+		move.b	d0,obStatus(a0)
+		
 		lea	(Ani_Shield).l,a1
 		jsr	(AnimateSprite).l
 		jmp	(DisplaySprite).l

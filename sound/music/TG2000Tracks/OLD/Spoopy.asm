@@ -1777,5 +1777,5 @@ Spoopy_Voices:
 	dc.b		$3E,$31,$74,$04,$08,$1F,$1F,$1F,$1F,$00,$00,$00,$00,$00,$00,$00
 	dc.b		$00,$00,$06,$06,$06,$1B,$00,$00,$00;			Voice 02
 	
-	smpsFooterEndSong	"TG2000Tracks/Spoopy.asm"
+	smpsFooterEndSong	"TG2000Tracks/OLD/Spoopy.asm"
 	even

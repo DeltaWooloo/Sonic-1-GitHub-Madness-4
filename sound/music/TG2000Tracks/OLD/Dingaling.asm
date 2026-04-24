@@ -5480,5 +5480,5 @@ Dingaling_Voices:
 	dc.b		$00,$63,$03,$23,$19,$28,$32,$30,$00;			Voice 02
 	dc.b		$12,$02,$71,$32,$02,$1F,$1F,$1F,$19,$06,$00,$04,$08,$02,$02,$02
 	dc.b		$00,$20,$07,$30,$27,$18,$0B,$37,$00;			Voice 03
-	smpsFooterEndSong	"TG2000Tracks/Dingaling.asm"
+	smpsFooterEndSong	"TG2000Tracks/OLD/Dingaling.asm"
 	even

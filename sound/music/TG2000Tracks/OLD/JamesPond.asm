@@ -6354,5 +6354,5 @@ JamesPond_Voices:
 	dc.b		$04,$1F,$0C,$8F,$0C,$06,$00,$04,$00;			Voice 05
 	dc.b		$3C,$62,$72,$32,$32,$08,$08,$0F,$09,$07,$1F,$07,$1F,$00,$00,$00
 	dc.b		$00,$16,$06,$16,$06,$1F,$00,$16,$07;			Voice 06
-	smpsFooterEndSong	"TG2000Tracks/JamesPond.asm"	
+	smpsFooterEndSong	"TG2000Tracks/OLD/JamesPond.asm"	
 	even

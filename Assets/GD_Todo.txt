@@ -7,5 +7,9 @@ Coding:
 	- Add random monitor/slow down shoes to levels	
 	- Character water palettes/Funky Colors undo
 - Songs
+	- Windows 95 Rock (https://modarchive.org/index.php?request=view_by_moduleid&query=170694)
+	- Windows 95 Rock Remix (https://modarchive.org/index.php?request=view_by_moduleid&query=201495)
+  ???
+	- All about the Pentiums (Weird Al)?
 	- Seal - Crazy
-	- Ricky Martin - Livin' La Vida Loca
+	- Ricky Martin - Livin' La Vida Loca	

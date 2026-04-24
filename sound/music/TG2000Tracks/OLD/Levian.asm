@@ -3188,5 +3188,5 @@ Levian_Voices:
 	dc.b		$0B,$2F,$1F,$1F,$1F,$19,$2F,$13,$00;			Voice 01
 	dc.b		$3A,$01,$03,$01,$01,$5F,$0C,$0B,$4F,$0B,$1F,$1F,$1F,$00,$00,$00
 	dc.b		$00,$17,$07,$07,$07,$1D,$42,$32,$00;			Voice 02
-	smpsFooterEndSong	"TG2000Tracks/Levian.asm"	
+	smpsFooterEndSong	"TG2000Tracks/OLD/Levian.asm"	
 	even

@@ -2020,5 +2020,5 @@ FuneralMarch_Voices:
 	dc.b		$07,$32,$34,$6A,$FA,$1D,$00,$14,$00;			Voice 02
 	dc.b		$38,$73,$04,$71,$01,$DF,$DD,$DF,$DF,$0F,$05,$05,$04,$05,$04,$02
 	dc.b		$03,$2F,$1F,$3F,$FF,$12,$1C,$1A,$00;			Voice 03
-	smpsFooterEndSong	"TG2000Tracks/FuneralMarch.asm"	
+	smpsFooterEndSong	"TG2000Tracks/OLD/FuneralMarch.asm"	
 	even

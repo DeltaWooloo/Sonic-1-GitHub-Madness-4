@@ -581,4 +581,4 @@ SegaSonicINT_Voices:
 	smpsVcReleaseRate   $0A, $05, $05, $05
 	smpsVcTotalLevel    $00, $20, $24, $24
 	
-	smpsFooterEndSong	"CNTracks/FuckedUpBlueSpheres.asm"
+	smpsFooterEndSong	"CNTracks/Unused/FuckedUpBlueSpheres.asm"

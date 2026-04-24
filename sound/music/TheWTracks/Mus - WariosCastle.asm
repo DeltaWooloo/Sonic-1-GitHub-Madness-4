@@ -1,376 +1,975 @@
-WariosCastle_Header:
+BGM_Wario_Header:
 	smpsHeaderStartSong 3
-	smpsHeaderVoice     WariosCastle_Voices
-	smpsHeaderChan      $05, $02
-	smpsHeaderTempo     $01, $55
+	smpsHeaderVoice		BGM_Wario_Voices
+	smpsHeaderChan		$06, $03
+	smpsHeaderTempo		$02, $55
+;	Given Tempo = 200.00 BPM
+;	Approximated Tempo = 200.39 BPM
 
-	smpsHeaderDAC       WariosCastle_DAC
-	smpsHeaderFM        WariosCastle_FM1,	$00, $0A
-	smpsHeaderFM        WariosCastle_FM2,	$00, $0B
-	smpsHeaderFM        WariosCastle_FM3,	$00, $0B
-	smpsHeaderFM        WariosCastle_FM4,	$00, $16
-	smpsHeaderPSG       WariosCastle_PSG1,	$0C, $02, $00, $00
-	smpsHeaderPSG       WariosCastle_PSG2,	$0C, $02, $00, $00
+	smpsHeaderDAC	BGM_Wario_DAC
+	smpsHeaderFM	BGM_Wario_FM1,	$00, $0A
+	smpsHeaderFM	BGM_Wario_FM2,	$00, $0B
+	smpsHeaderFM	BGM_Wario_FM3,	$00, $00
+	smpsHeaderFM	BGM_Wario_FM4,	$00, $0B
+	smpsHeaderFM	BGM_Wario_FM5,	$00, $16
+	smpsHeaderPSG	BGM_Wario_PSG1,	$0C, $03, $00, uptone_03
+	smpsHeaderPSG	BGM_Wario_PSG2,	$0C, $03, $00, uptone_03
+	smpsHeaderPSG	BGM_Wario_PSG3,	$00, $01, $00, uptone_03
 
-; DAC Data
-WariosCastle_DAC:
-	smpsPan             panCenter, $00
-	dc.b	dPokeLowTimpani, $18
+BGM_Wario_FM5:
+	smpsAlterNote		$02
+	smpsPan		panRight, $00
+	dc.b	nRst, $06
 
-WariosCastle_Loop00:
-	dc.b	dHiBongo, $0C, dLowBongo, dPokeLowTimpani, $18, dHiBongo, dPokeLowTimpani, dHiBongo, $0C, dLowBongo, dPokeLowTimpani, dHiBongo
-	dc.b	$18, $0C, dPokeLowTimpani, $18, dHiBongo, $0C, dLowBongo, dPokeLowTimpani, $18, dHiBongo, dPokeLowTimpani, dHiBongo
-	dc.b	$0C, dLowBongo, dPokeLowTimpani, dHiBongo, dHiBongo, dHiBongo, $06, $06
+BGM_Wario_FM1:
+	smpsSetvoice	$01
+	smpsModSet	$05, $01, $05, $05
+	dc.b	nRst, $60, nRst
 
-WariosCastle_Jump00:
-	dc.b	dPokeLowTimpani, $18
-	smpsLoop            $00, $02, WariosCastle_Loop00
-
-WariosCastle_Loop01:
-	dc.b	dHiBongo, $0C, dLowBongo, dPokeLowTimpani, $18, dHiBongo, dPokeLowTimpani
-	smpsLoop            $00, $03, WariosCastle_Loop01
-
-WariosCastle_Loop02:
-	dc.b	dHiBongo, $0C, dLowBongo, dPokeLowTimpani, dHiBongo, $18, $0C, dPokeLowTimpani, dLowBongo, dHiBongo, dLowBongo, dPokeLowTimpani
-	dc.b	$18, dHiBongo, dPokeLowTimpani, $0C, dLowBongo
-	smpsLoop            $00, $04, WariosCastle_Loop02
-	dc.b	dHiBongo, dLowBongo, dPokeLowTimpani, dHiBongo, dPokeLowTimpani, dHiBongo, $06, $06
-
-WariosCastle_Loop03:
-	dc.b	dPokeLowTimpani, $18, dHiBongo, $0C, dLowBongo, dPokeLowTimpani, $18, dHiBongo
-	smpsLoop            $00, $02, WariosCastle_Loop03
-	dc.b	dPokeLowTimpani, dHiBongo, $0C, dLowBongo, dPokeLowTimpani, $18, dHiBongo, $0C, dPokeLowTimpani
-
-WariosCastle_Loop04:
-	dc.b	dHiBongo, dHiBongo, $18, dPokeLowTimpani, $0C
-	smpsLoop            $00, $03, WariosCastle_Loop04
-	dc.b	dHiBongo, dHiBongo, dLowBongo, $06, $06, dPokeLowTimpani, dPokeLowTimpani, dPokeLowTimpani, $18, dHiBongo, $0C, dLowBongo
-	dc.b	dPokeLowTimpani, $18, dHiBongo, dPokeLowTimpani, dHiBongo, $0C, dLowBongo, dPokeLowTimpani, dHiBongo, $18, $0C, dPokeLowTimpani
-	dc.b	$18, dHiBongo, $0C, dLowBongo, dPokeLowTimpani, $18, dHiBongo, $24, $0C, $0C, $06, $12
-	dc.b	$0C, $0C, $06, $06
-	smpsJump            WariosCastle_Jump00
-
-; FM1 Data
-WariosCastle_FM2:
-	smpsPan             panCenter, $00
-	smpsSetvoice        $00
-	dc.b	nD3, $06, nRst, $1E, nCs3, $06, nRst, nD3, nRst, $12, nEb3, $18
-	dc.b	nD3, $06, nRst, $1E, nCs3, $06, nRst, nD3, nRst, nEb3, nRst, nF3
-	dc.b	nRst, nEb3, nRst, nD3, nRst, $1E, nCs3, $06, nRst, nD3, nRst, $12
-	dc.b	nEb3, $18, nD3, $06, nRst, nD3, nRst, $12, nEb3, $06, nF3, nG3
-	dc.b	nRst, nG4, nRst, nG4, nRst, $12
-
-WariosCastle_Loop11:
-	dc.b	nD3, $06, nRst, $1E, nCs3, $06, nRst, nD3, nRst, $12, nEb3, $18
-	smpsLoop            $00, $02, WariosCastle_Loop11
-	dc.b	nD3, $06, nRst, $1E, nCs3, $06, nRst, nD3, nRst, nEb3, nRst, nF3
-	dc.b	nRst, nEb3, nRst, nD3, nRst, $1E, nCs3, $06, nRst, nD3, nRst, nD3
-	dc.b	nRst, $12, nE3, $06, nF3
-
-WariosCastle_Loop12:
-	dc.b	nG3, nRst, $1E, nFs3, $06, nRst, nG3, nRst, $12, nAb3, $06, nRst
-	dc.b	nBb3, nAb3
-	smpsLoop            $00, $03, WariosCastle_Loop12
-	dc.b	nG3, nRst, nG3, nRst, $12, nFs3, $06, nRst, nG3, nRst, $1E, nAb3
-	dc.b	$06, nRst, nA3, nRst, nA3, nRst, $1E, nA3, $06, nRst, nA3
-
-WariosCastle_Loop13:
-	dc.b	nRst, $1E, nBb3, $06, nRst, nBb3
-	smpsLoop            $00, $02, WariosCastle_Loop13
-
-WariosCastle_Loop14:
-	dc.b	nRst, $1E, nC4, $06, nRst, nC4
-	smpsLoop            $00, $02, WariosCastle_Loop14
-
-WariosCastle_Loop15:
-	dc.b	nRst, $1E, nBb3, $06, nRst, nBb3
-	smpsLoop            $00, $02, WariosCastle_Loop15
-
-WariosCastle_Loop16:
-	dc.b	nRst, $1E, nA3, $06, nRst, nA3
-	smpsLoop            $00, $02, WariosCastle_Loop16
-
-WariosCastle_Loop17:
-	dc.b	nRst, $1E, nBb3, $06, nRst, nBb3
-	smpsLoop            $00, $02, WariosCastle_Loop17
-
-WariosCastle_Loop18:
-	dc.b	nRst, $1E, nC4, $06, nRst, nC4
-	smpsLoop            $00, $04, WariosCastle_Loop18
-	dc.b	nRst, $1E, nCs4, $18, nRst, $0C, nC4, $06, nRst, nCs4, nRst, nCs4
-	dc.b	nRst, $12, nCs5, $06, nRst, nC5, $18, nRst, $0C, nB4, $06, nRst
-	dc.b	nC5, nRst, nC5, nRst, $12, nC5, $06, nRst, nCs5, $18, nRst, $0C
-	dc.b	nC5, $06, nRst, nCs5, nRst, nCs5, nRst, $12, nCs6, $0C, nC6, $06
-	dc.b	nRst, nC6, nRst, $12, nCs5, $0C, nC5, $06, nRst, nC5, nRst, $12
-	dc.b	nCs4, $0C, nC4, $06, nRst, nC4, nRst, $12, nAb2, $0C, nG2, $06
-	dc.b	nRst, nG2, nRst, $1E, nD3, $06, nRst, $1E, nCs3, $06, nRst, nD3
-	dc.b	nRst, $12, nEb3, $18, nD3, $06, nRst, $1E, nCs3, $06, nRst, nD3
-	dc.b	nRst, nEb3, nRst, nF3, nRst, nEb3, nRst, nD3, nRst, $1E, nCs3, $06
-	dc.b	nRst, nD3, nRst, $12, nEb3, $18, nD3, $06, nRst, nD4, nRst, nD4
-	dc.b	nRst, $1E, nD5, $06, nRst, nD5, nRst, $12
-	smpsJump            WariosCastle_Loop11
-
-; FM2 Data
-WariosCastle_FM3:
-	smpsPan             panCenter, $00
-	smpsSetvoice        $00
-
-WariosCastle_Loop05:
-	dc.b	nG2, $06, nRst, $1E, nFs2, $06, nRst, nG2, nRst, $12, nAb2, $18
-	smpsLoop            $00, $03, WariosCastle_Loop05
-	dc.b	nG2, $06, nRst, nG2, nRst, $12, nAb2, $06, nBb2, nC3, nRst, nC4
-	dc.b	nRst, nC4, nRst, $12
-
-WariosCastle_Loop06:
-	dc.b	nG2, $06, nRst, $1E, nFs2, $06, nRst, nG2, nRst, $12, nAb2, $18
-	smpsLoop            $00, $03, WariosCastle_Loop06
-	dc.b	nG2, $06, nRst, $1E, nFs2, $06, nRst, nG2, nRst, nG2, nRst, $12
-	dc.b	nA2, $06, nBb2, nC3
-
-WariosCastle_Loop07:
-	dc.b	nRst, $1E, nB2, $06, nRst, nC3, nRst, $12, nCs3, $18, nC3, $06
-	smpsLoop            $00, $03, WariosCastle_Loop07
-	dc.b	nRst, nC3, nRst, $12, nB2, $06, nRst, nC3, nRst, $1E, nCs3, $06
-
-WariosCastle_Loop08:
-	dc.b	nRst, nD3
-	smpsLoop            $00, $08, WariosCastle_Loop08
-
-WariosCastle_Loop09:
-	dc.b	nRst, nEb3, nRst, nEb3, nRst, nD3, nRst, nD3
-	smpsLoop            $00, $02, WariosCastle_Loop09
-
-WariosCastle_Loop0A:
-	dc.b	nRst, nF3, nRst, nF3, nRst, nD3, nRst, nD3
-	smpsLoop            $00, $02, WariosCastle_Loop0A
-
-WariosCastle_Loop0B:
-	dc.b	nRst, nEb3, nRst, nEb3, nRst, nD3, nRst, nD3
-	smpsLoop            $00, $02, WariosCastle_Loop0B
-
-WariosCastle_Loop0C:
-	dc.b	nRst, nD3
-	smpsLoop            $00, $08, WariosCastle_Loop0C
-
-WariosCastle_Loop0D:
-	dc.b	nRst, nEb3, nRst, nEb3, nRst, nD3, nRst, nD3
-	smpsLoop            $00, $02, WariosCastle_Loop0D
-
-WariosCastle_Loop0E:
-	dc.b	nRst, nF3, nRst, nF3, nRst, nD3, nRst, nD3
-	smpsLoop            $00, $02, WariosCastle_Loop0E
-
-WariosCastle_Loop0F:
-	dc.b	nRst, nFs3, nRst, nFs3, nRst, nD3, nRst, nD3
-	smpsLoop            $00, $02, WariosCastle_Loop0F
-	dc.b	nRst, nEb3, $18, nRst, $0C, nD3, $06, nRst, nEb3, nRst, nEb3, nRst
-	dc.b	$12, nAb4, $06, nRst, nD3, $18, nRst, $0C, nCs3, $06, nRst, nD3
-	dc.b	nRst, nD3, nRst, $12, nG4, $06, nRst, nEb3, $18, nRst, $0C, nD3
-	dc.b	$06, nRst, nEb3, nRst, nEb3, nRst, $12, nAb5, $0C, nG5, $06, nRst
-	dc.b	nG5, nRst, $12, nAb4, $0C, nG4, $06, nRst, nG4, nRst, $12, nAb3
-	dc.b	$0C, nG3, $06, nRst, nG3, nRst, $12, nAb2, $0C, nG2, $06, nRst
-	dc.b	nG2, nRst, $12, nD2, $06, nRst, nG2
-
-WariosCastle_Loop10:
-	dc.b	nRst, $1E, nFs2, $06, nRst, nG2, nRst, $12, nAb2, $18, nG2, $06
-	smpsLoop            $00, $03, WariosCastle_Loop10
-	dc.b	nRst, nCs4, nRst, nCs4, nRst, $1E, nCs5, $06, nRst, nCs5, nRst, $12
-	smpsJump            WariosCastle_Loop06
-
-WariosCastle_FM4:
-	smpsDetune		$02
+BGM_Wario_FM1_Jump:
+	smpsNoteFill	$08
+	dc.b	nD3, $0C, nG3
+	smpsNoteFill	$00
+	dc.b	nBb3, $12
+	smpsNoteFill	$08
+	dc.b	nC4, $06, nCs4, nD4, nBb3, nG3
+	smpsNoteFill	$00
+	dc.b	nD3, $0C, nF3, $06
+	smpsNoteFill	$08
+	dc.b	nE3, $03, nDs3, nD3, $06, nG3, $0C
+	smpsAlterVol	$18
 	dc.b	$06
+	smpsAlterVol	$E8
+	dc.b	nD4, nG4, $0C
+	smpsAlterVol	$18
+	dc.b	$06
+	smpsAlterVol	$E8
+	dc.b	nD5, $06, nG5, $0C
+	smpsAlterVol	$18
+	dc.b	$18
+	smpsAlterVol	$E8
+	dc.b	nF5, $03, nFs5, nG5, $0C
+	smpsAlterVol	$18
+	dc.b	$12
+	smpsAlterVol	$E8
+	dc.b	nE5, $06
+	smpsNoteFill	$00
+	dc.b	nF5
+	smpsNoteFill	$08
+	dc.b	nCs5, $06, nC5, nG4, $0C
+	smpsAlterVol	$18
+	dc.b	$0C
+	smpsAlterVol	$E8
+	dc.b	nE4, $06
+	smpsNoteFill	$00
+	dc.b	nF4
+	smpsNoteFill	$08
+	dc.b	nCs4, nC4, nG3, $0C
+	smpsAlterVol	$18
+	dc.b	$0C
+	smpsAlterVol	$E8
+	dc.b	$06
+	smpsNoteFill	$00
+	dc.b	nAb3, $06
+	smpsNoteFill	$08
+	dc.b	nBb3, $03, nAb3, nG3, $06, nC4, nG4, $0C, $06, nC5, nG5
+	smpsNoteFill	$00
+	dc.b	nAb5
+	smpsNoteFill	$08
+	dc.b	nA5, nFs5, nD5, $0C
+	smpsAlterVol	$18
+	dc.b	$06
+	smpsAlterVol	$E8
+	dc.b	nA4, nFs4, nD4
+	smpsNoteFill	$00
+	dc.b	nDs4, $18, nRst, $06, nBb3, $02, nC4, nBb3, nA3, $03, nRst
+	dc.b	nG3, nRst, nA3, $06, nD4, $03, nRst, $09
+	smpsAlterVol	$18
+	dc.b	nD3, $03, nRst
+	smpsAlterVol	$E8
+	dc.b	nA4, $06, nD5, $03, nRst, $09, nA4, $06, nC5, $18
+	dc.b	nRst, $06, nBb4, $02, nC5, nBb4, nA4, $03, nRst, nG4, nRst, nA4, $06
+	smpsNoteFill	$08
+	dc.b	nD5, $0C
+	smpsAlterVol	$18
+	dc.b	$15
+	smpsAlterVol	$E8
+	smpsNoteFill	$00
+	dc.b	nA4, $03, nD5, nFs5
+	dc.b	nG5, $18
+	smpsNoteFill	$08
+	dc.b	nRst, $06, nG5, nA5, nBb5
+	smpsNoteFill	$00
+	dc.b	nC6, $18
+	smpsNoteFill	$08
+	dc.b	nRst, $06, nBb5, nA5, nG5
+	smpsNoteFill	$00
+	dc.b	nA5
+	smpsNoteFill	$08
+	dc.b	nFs5, nDs5, nD5
+	smpsNoteFill	$00
+	dc.b	nC5
+	smpsNoteFill	$08
+	dc.b	nBb4, nA4, nC5, nBb4, $0C
+	smpsAlterVol	$18
+	dc.b	$06
+	smpsAlterVol	$EA
+	dc.b	nFs3, nG3, $06, $0C
+	smpsAlterVol	$18
+	dc.b	$06
+	smpsNoteFill	$00
+	smpsAlterVol	$E8
+	dc.b	nFs4, $0C, nRst, $06
+	smpsNoteFill		$04
+	dc.b	nF4, nFs4, $06, $0C
+	smpsAlterVol	$18
+	dc.b	$06
+	smpsNoteFill	$00
+	smpsAlterVol	$E8
+	dc.b	nG4, $0C, nRst, $06
+	smpsNoteFill	$04
+	dc.b	nFs4, nG4, $06, $0C
+	smpsAlterVol	$18
+	dc.b	$18
+	smpsNoteFill	$00
+	smpsAlterVol	$E8
+	dc.b	nG4, $06
+	smpsNoteFill	$08
+	dc.b	nFs4, $06, $0C
+	smpsNoteFill	$00
+	dc.b	nG3, $06
+	smpsNoteFill	$08
+	dc.b	nFs3, $06, $0C
+	smpsNoteFill	$00
+	dc.b	nG2, $06
+	smpsNoteFill	$08
+	dc.b	nFs2, nFs2, $0C
+	smpsAlterVol	$18
+	dc.b	$06, nRst, $36
+	smpsAlterVol	$E6
+	dc.b	nD4, $06, nG4, nD5, nC5, nBb4, nA4, nBb4, nG4, $0C
+	smpsAlterVol	$18
+	dc.b	$2A
+	smpsAlterVol	$EA
+	dc.b	nD4, $06, $0C
+	smpsAlterVol	$18
+	dc.b	$06
+	smpsAlterVol	$E8
+	dc.b	nD5, nD5, $0C
+	smpsAlterVol	$FE
+	smpsJump	BGM_Wario_FM1_Jump
 
-; FM3 Data
-WariosCastle_FM1:
-	smpsPan             panCenter, $00
-	smpsSetvoice        $01
-	dc.b	nRst, $7F, $7F, $7F, $03
+BGM_Wario_FM2:
+	smpsCall BGM_Wario_FM2_00_0_48
+	smpsCall BGM_Wario_FM2_00_0_48
+	smpsCall BGM_Wario_FM2_00_0_48
+	smpsCall BGM_Wario_FM2_01_0_48
 
-WariosCastle_Jump01:
-	dc.b	nD3, $06, nRst, $12, nG3, $06, nRst, $12, nBb3, $24, nC4, $06
-	dc.b	nRst, nCs4, nRst, nD4, nRst, nBb3, nRst, nG3, nRst, nD3, $18, nF3
-	dc.b	$0C, nE3, $06, nEb3, nD3, nRst, nG3, nRst, $1E, nD4, $06, nRst
-	dc.b	nG4, nRst, $1E, nD5, $06, nRst, nG5, nRst, $42, nF5, $06, nFs5
-	dc.b	nG5, nRst, $36, nE5, $06, nRst, nF5, $0C, nCs5, $06, nRst, nC5
-	dc.b	nRst, nG4, nRst, $2A, nE4, $06, nRst, nF4, $0C, nCs4, $06, nRst
-	dc.b	nC4, nRst, nG3, nRst, $2A, nG3, $06, nRst, nAb3, $0C, nBb3, $06
-	dc.b	nAb3, nG3, nRst, nC4, nRst, nG4, nRst, $12, nG4, $06, nRst, nC5
-	dc.b	nRst, nG5, nRst, nAb5, $0C, nA5, $06, nRst, nFs5, nRst, nD5, nRst
-	dc.b	$1E, nA4, $06, nRst, nFs4, nRst, nD4, nRst, nEb4, $30, nRst, $0C
-	dc.b	nBb3, $04, nC4, nBb3, nA3, $06, nRst, nG3, nRst, nA3, $0C, nD4
-	dc.b	$06, nRst, $1E, nA4, $0C, nD5, $06, nRst, $12, nA4, $0C, nC5
-	dc.b	$30, nRst, $0C, nBb4, $04, nC5, nBb4, nA4, $06, nRst, nG4, nRst
-	dc.b	nA4, $0C, nD5, $06, nRst, $3C, nA4, $06, nD5, nFs5, nG5, $30
-	dc.b	nRst, $0C, nG5, $06, nRst, nA5, nRst, nBb5, nRst, nC6, $30, nRst
-	dc.b	$0C, nBb5, $06, nRst, nA5, nRst, nG5, nRst, nA5, $0C, nFs5, $06
-	dc.b	nRst, nEb5, nRst, nD5, nRst, nC5, $0C, nBb4, $06, nRst, nA4, nRst
-	dc.b	nC5, nRst, nBb4, nRst, $1E, nFs2, $06, nRst, nG2, nRst, nG2, nRst
-	dc.b	$1E, nFs3, $18, nRst, $0C, nF3, $06, nRst, nFs3, nRst, nFs3, nRst
-	dc.b	$1E, nG3, $18, nRst, $0C, nFs3, $06, nRst, nG3, nRst, nG3, nRst
-	dc.b	$42, nG3, $0C, nFs3, $06, nRst, nFs3, nRst, $12, nG2, $0C, nFs2
-	dc.b	$06, nRst, nFs2, nRst, $12, nG1, $0C, nFs1, $06, nRst, nFs1, nRst
-	dc.b	$7F, $0B, nD3, $06, nRst, nG3, nRst, nD4, nRst, nC4, nRst, nBb3
-	dc.b	nRst, nA3, nRst, nBb3, nRst, nG3, nRst, $66, nD4, $06, nRst, nD4
-	dc.b	nRst, $1E, nD5, $06, nRst, nD5, nRst, $12
-	smpsJump            WariosCastle_Jump01
+BGM_Wario_FM2_Jump:
+	smpsCall BGM_Wario_FM2_00_0_48
+	smpsCall BGM_Wario_FM2_00_0_48
+	smpsCall BGM_Wario_FM2_00_0_48
+	smpsCall BGM_Wario_FM2_02_0_48
+	smpsCall BGM_Wario_FM2_03_0_48
+	smpsCall BGM_Wario_FM2_03_0_48
+	smpsCall BGM_Wario_FM2_03_0_48
+	smpsCall BGM_Wario_FM2_04_0_48
+	smpsCall BGM_Wario_FM2_05_0_48
+	smpsCall BGM_Wario_FM2_06_0_48
+	smpsCall BGM_Wario_FM2_07_0_48
+	smpsCall BGM_Wario_FM2_06_0_48
+	smpsCall BGM_Wario_FM2_05_0_48
+	smpsCall BGM_Wario_FM2_06_0_48
+	smpsCall BGM_Wario_FM2_07_0_48
+	smpsCall BGM_Wario_FM2_08_0_48
+	smpsCall BGM_Wario_FM2_09_0_48
+	smpsCall BGM_Wario_FM2_0A_0_48
+	smpsCall BGM_Wario_FM2_0B_0_48
+	smpsCall BGM_Wario_FM2_0C_0_48
+	smpsCall BGM_Wario_FM2_0D_0_48
+	smpsCall BGM_Wario_FM2_00_0_48
+	smpsCall BGM_Wario_FM2_00_0_48
+	smpsCall BGM_Wario_FM2_00_0_48
+	smpsCall BGM_Wario_FM2_0E_0_48
+	smpsJump BGM_Wario_FM2_Jump
 
-; PSG1 Data
-WariosCastle_PSG1:
-	dc.b	nD1, $06, nRst, $1E, nCs1, $06, nRst, nD1, nRst, $12, nEb1, $18
-	dc.b	nD1, $06, nRst, $1E, nCs1, $06, nRst, nD1, nRst, nEb1, nRst, nF1
-	dc.b	nRst, nEb1, nRst, nD1, nRst, $1E, nCs1, $06, nRst, nD1, nRst, $12
-	dc.b	nEb1, $18, nD1, $06, nRst, nD1, nRst, $12, nEb1, $06, nF1, nG1
-	dc.b	nRst, nG2, nRst, nG2, nRst, $12
+BGM_Wario_FM2_00_0_48:
+	smpsSetvoice	$00
+	smpsNoteFill		$08
+	dc.b	nG2, $12, nFs2, $06, nG2, $0C
+	smpsNoteFill		$00
+	dc.b	nAb2, $0C
+	smpsReturn
 
-WariosCastle_Loop24:
-	dc.b	nD1, $06, nRst, $1E, nCs1, $06, nRst, nD1, nRst, $12, nEb1, $18
-	smpsLoop            $00, $02, WariosCastle_Loop24
-	dc.b	nD1, $06, nRst, $1E, nCs1, $06, nRst, nD1, nRst, nEb1, nRst, nF1
-	dc.b	nRst, nEb1, nRst, nD1, nRst, $1E, nCs1, $06, nRst, nD1, nRst, nD1
-	dc.b	nRst, $12, nE1, $06, nF1
+BGM_Wario_FM2_01_0_48:
+	smpsNoteFill		$08
+	dc.b	nG2, $06, $0C, nAb2, $03, nBb2
+	dc.b	nC3, $06, nC4, nC4, $0C
+	smpsReturn
 
-WariosCastle_Loop25:
-	dc.b	nG1, nRst, $1E, nFs1, $06, nRst, nG1, nRst, $12, nAb1, $06, nRst
-	dc.b	nBb1, nAb1
-	smpsLoop            $00, $03, WariosCastle_Loop25
-	dc.b	nG1, nRst, nG1, nRst, $12, nFs1, $06, nRst, nG1, nRst, $1E, nAb1
-	dc.b	$06, nRst, nA1, nRst, nA1, nRst, $1E, nA1, $06, nRst, nA1
+BGM_Wario_FM2_02_0_48:
+	smpsNoteFill		$08
+	dc.b	nG2, $12, nFs2, $06, nG2
+	dc.b	nG2, $0C, nA2, $03, nBb2
+	smpsReturn
 
-WariosCastle_Loop26:
-	dc.b	nRst, $1E, nBb1, $06, nRst, nBb1
-	smpsLoop            $00, $02, WariosCastle_Loop26
+BGM_Wario_FM2_03_0_48:
+	smpsNoteFill	$08
+	dc.b	nC3, $12, nB2, $06, nC3, $0C
+	smpsNoteFill	$00
+	dc.b	nCs3, $0C
+	smpsReturn
 
-WariosCastle_Loop27:
-	dc.b	nRst, $1E, nC2, $06, nRst, nC2
-	smpsLoop            $00, $02, WariosCastle_Loop27
+BGM_Wario_FM2_04_0_48:
+	smpsNoteFill	$08
+	dc.b	nC3, $06, $0C, nB2, $06, nC3, $12, nCs3, $06
+	smpsReturn
 
-WariosCastle_Loop28:
-	dc.b	nRst, $1E, nBb1, $06, nRst, nBb1
-	smpsLoop            $00, $02, WariosCastle_Loop28
+BGM_Wario_FM2_05_0_48:
+	dc.b	nD3, $06, $06, $06, $06, $06, $06, $06, $06
+	smpsReturn
 
-WariosCastle_Loop29:
-	dc.b	nRst, $1E, nA1, $06, nRst, nA1
-	smpsLoop            $00, $02, WariosCastle_Loop29
+BGM_Wario_FM2_06_0_48:
+	dc.b	nDs3, nDs3, nD3, nD3, nDs3, nDs3, nD3, nD3
+	smpsReturn
 
-WariosCastle_Loop2A:
-	dc.b	nRst, $1E, nBb1, $06, nRst, nBb1
-	smpsLoop            $00, $02, WariosCastle_Loop2A
+BGM_Wario_FM2_07_0_48:
+	dc.b	nF3, nF3, nD3, nD3, nF3, nF3, nD3, nD3
+	smpsReturn
 
-WariosCastle_Loop2B:
-	dc.b	nRst, $1E, nC2, $06, nRst, nC2
-	smpsLoop            $00, $04, WariosCastle_Loop2B
-	dc.b	nRst, $1E, nCs2, $18, nRst, $0C, nC2, $06, nRst, nCs2, nRst, nCs2
-	dc.b	nRst, $12, nCs3, $06, nRst, nC3, $18, nRst, $0C, nB2, $06, nRst
-	dc.b	nC3, nRst, nC3, nRst, $12, nC3, $06, nRst, nCs3, $18, nRst, $0C
-	dc.b	nC3, $06, nRst, nCs3, nRst, nCs3, nRst, $12, nCs4, $0C, nC4, $06
-	dc.b	nRst, nC4, nRst, $12, nCs3, $0C, nC3, $06, nRst, nC3, nRst, $12
-	dc.b	nCs2, $0C, nC2, $06, nRst, nC2, nRst, $12, nAb0, $0C, nG0, $06
-	dc.b	nRst, nG0, nRst, $1E, nD1, $06, nRst, $1E, nCs1, $06, nRst, nD1
-	dc.b	nRst, $12, nEb1, $18, nD1, $06, nRst, $1E, nCs1, $06, nRst, nD1
-	dc.b	nRst, nEb1, nRst, nF1, nRst, nEb1, nRst, nD1, nRst, $1E, nCs1, $06
-	dc.b	nRst, nD1, nRst, $12, nEb1, $18, nD1, $06, nRst, nD2, nRst, nD2
-	dc.b	nRst, $1E, nD3, $06, nRst, nD3, nRst, $12
-	smpsJump            WariosCastle_Loop24
+BGM_Wario_FM2_08_0_48:
+	dc.b	nFs3, nFs3, nD3, nD3, nFs3, nFs3, nD3, nD3
+	smpsReturn
 
-; PSG2 Data
-WariosCastle_PSG2:
-	dc.b	nG0, $06, nRst, $1E, nFs0, $06, nRst, nG0, nRst, $12, nAb0, $18
-	smpsLoop            $00, $03, WariosCastle_PSG2
-	dc.b	nG0, $06, nRst, nG0, nRst, $12, nAb0, $06, nBb0, nC1, nRst, nC2
-	dc.b	nRst, nC2, nRst, $12
+BGM_Wario_FM2_09_0_48:
+	smpsNoteFill	$00
+	dc.b	nDs3, $0C, nRst, $06
+	smpsNoteFill	$08
+	dc.b	nD3, nDs3, nDs3, $0C, nAb4, $06
+	smpsReturn
 
-WariosCastle_Loop19:
-	dc.b	nG0, $06, nRst, $1E, nFs0, $06, nRst, nG0, nRst, $12, nAb0, $18
-	smpsLoop            $00, $03, WariosCastle_Loop19
-	dc.b	nG0, $06, nRst, $1E, nFs0, $06, nRst, nG0, nRst, nG0, nRst, $12
-	dc.b	nA0, $06, nBb0, nC1
+BGM_Wario_FM2_0A_0_48:
+	smpsNoteFill	$00
+	dc.b	nD3, $0C, nRst, $06
+	smpsNoteFill	$08
+	dc.b	nCs3, nD3, nD3, $0C, nG4, $06
+	smpsReturn
 
-WariosCastle_Loop1A:
-	dc.b	nRst, $1E, nB0, $06, nRst, nC1, nRst, $12, nCs1, $18, nC1, $06
-	smpsLoop            $00, $03, WariosCastle_Loop1A
-	dc.b	nRst, nC1, nRst, $12, nB0, $06, nRst, nC1, nRst, $1E, nCs1, $06
+BGM_Wario_FM2_0B_0_48:
+	smpsNoteFill	$00
+	dc.b	nDs3, $0C, nRst, $06
+	smpsNoteFill	$08
+	dc.b	nD3, nDs3, nDs3, $0C
+	smpsNoteFill	$00
+	dc.b	nAb5, $06
+	smpsReturn
 
-WariosCastle_Loop1B:
-	dc.b	nRst, nD1
-	smpsLoop            $00, $08, WariosCastle_Loop1B
+BGM_Wario_FM2_0C_0_48:
+	smpsNoteFill	$08
+	dc.b	nG5, $06, $0C
+	smpsNoteFill	$00
+	dc.b	nAb4, $06
+	smpsNoteFill	$08
+	dc.b	nG4, nG4, $0C
+	smpsNoteFill	$00
+	dc.b	nAb3, $06
+	smpsReturn
 
-WariosCastle_Loop1C:
-	dc.b	nRst, nEb1, nRst, nEb1, nRst, nD1, nRst, nD1
-	smpsLoop            $00, $02, WariosCastle_Loop1C
+BGM_Wario_FM2_0D_0_48:
+	smpsNoteFill	$08
+	dc.b	nG3, $06, $0C
+	smpsNoteFill	$00
+	dc.b	nAb2, $06
+	smpsNoteFill	$08
+	dc.b	nG2, nG2, $0C, nD2, $06
+	smpsReturn
 
-WariosCastle_Loop1D:
-	dc.b	nRst, nF1, nRst, nF1, nRst, nD1, nRst, nD1
-	smpsLoop            $00, $02, WariosCastle_Loop1D
+BGM_Wario_FM2_0E_0_48:
+	smpsNoteFill	$08
+	dc.b	nG2, $06, nCs4, nCs4, $12, nCs5, $06, $0C
+	smpsReturn
 
-WariosCastle_Loop1E:
-	dc.b	nRst, nEb1, nRst, nEb1, nRst, nD1, nRst, nD1
-	smpsLoop            $00, $02, WariosCastle_Loop1E
+BGM_Wario_FM3:
+	smpsCall BGM_Wario_FM3_00_0_48_7F
+	smpsCall BGM_Wario_FM3_01_0_48_7B
+	smpsCall BGM_Wario_FM3_00_0_48_7F
+	smpsCall BGM_Wario_FM3_02_0_48
 
-WariosCastle_Loop1F:
-	dc.b	nRst, nD1
-	smpsLoop            $00, $08, WariosCastle_Loop1F
+BGM_Wario_FM3_Jump:
+	smpsCall BGM_Wario_FM3_00_0_48
+	smpsCall BGM_Wario_FM3_01_0_48_7B
+	smpsCall BGM_Wario_FM3_00_0_48_7F
+	smpsCall BGM_Wario_FM3_01_0_48_7B
+	smpsCall BGM_Wario_FM3_00_0_48_7F
+	smpsCall BGM_Wario_FM3_01_0_48_7B
+	smpsCall BGM_Wario_FM3_00_0_48_7F
+	smpsCall BGM_Wario_FM3_01_0_48_7B
+	smpsCall BGM_Wario_FM3_03_0_48_7F
+	smpsCall BGM_Wario_FM3_04_0_48_77
+	smpsCall BGM_Wario_FM3_03_0_48_7B
+	smpsCall BGM_Wario_FM3_04_0_48_77
+	smpsCall BGM_Wario_FM3_03_0_48_7B
+	smpsCall BGM_Wario_FM3_04_0_48_77
+	smpsCall BGM_Wario_FM3_03_0_48_7B
+	smpsCall BGM_Wario_FM3_04_0_48_77
+	smpsCall BGM_Wario_FM3_05_0_48
+	smpsCall BGM_Wario_FM3_05_0_48
+	smpsCall BGM_Wario_FM3_05_0_48
+	smpsCall BGM_Wario_FM3_06_0_48_7B
+	smpsCall BGM_Wario_FM3_07_0_48_7F
+	smpsCall BGM_Wario_FM3_00_0_48
+	smpsCall BGM_Wario_FM3_01_0_48_7B
+	smpsCall BGM_Wario_FM3_00_0_48_7F
+	smpsCall BGM_Wario_FM3_06_0_48_7B
+	smpsAlterVol	$04
+	smpsJump BGM_Wario_FM3_Jump
 
-WariosCastle_Loop20:
-	dc.b	nRst, nEb1, nRst, nEb1, nRst, nD1, nRst, nD1
-	smpsLoop            $00, $02, WariosCastle_Loop20
+BGM_Wario_FM3_00_0_48_7F:
+	smpsSetvoice	$02
+	dc.b nB1, $12
+	smpsAlterVol	$08
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $06, $06, $01
+	smpsAlterVol	$04
+	dc.b $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01
+	smpsReturn
 
-WariosCastle_Loop21:
-	dc.b	nRst, nF1, nRst, nF1, nRst, nD1, nRst, nD1
-	smpsLoop            $00, $02, WariosCastle_Loop21
+BGM_Wario_FM3_01_0_48_7B:
+	smpsSetvoice	$02
+	smpsAlterVol	$FC
+	dc.b nB1, $12
+	smpsAlterVol	$08
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $06, $06, $06, $02, $02, $02
+	smpsReturn
 
-WariosCastle_Loop22:
-	dc.b	nRst, nFs1, nRst, nFs1, nRst, nD1, nRst, nD1
-	smpsLoop            $00, $02, WariosCastle_Loop22
-	dc.b	nRst, nEb1, $18, nRst, $0C, nD1, $06, nRst, nEb1, nRst, nEb1, nRst
-	dc.b	$12, nAb2, $06, nRst, nD1, $18, nRst, $0C, nCs1, $06, nRst, nD1
-	dc.b	nRst, nD1, nRst, $12, nG2, $06, nRst, nEb1, $18, nRst, $0C, nD1
-	dc.b	$06, nRst, nEb1, nRst, nEb1, nRst, $12, nAb3, $0C, nG3, $06, nRst
-	dc.b	nG3, nRst, $12, nAb2, $0C, nG2, $06, nRst, nG2, nRst, $12, nAb1
-	dc.b	$0C, nG1, $06, nRst, nG1, nRst, $12, nAb0, $0C, nG0, $06, nRst
-	dc.b	nG0, nRst, $12, nD0, $06, nRst, nG0
+BGM_Wario_FM3_02_0_48:
+	smpsSetvoice	$02
+	smpsAlterVol	$FC
+	dc.b nB1, $0C, $06, $01
+	smpsAlterVol	$04
+	dc.b $01, $01, $01, $01, $01
+	smpsAlterVol	$FC
+	dc.b $0C, $06, $01
+	smpsAlterVol	$04
+	dc.b $01, $01, $01, $01, $01
+	smpsReturn
 
-WariosCastle_Loop23:
-	dc.b	nRst, $1E, nFs0, $06, nRst, nG0, nRst, $12, nAb0, $18, nG0, $06
-	smpsLoop            $00, $03, WariosCastle_Loop23
-	dc.b	nRst, nCs2, nRst, nCs2, nRst, $1E, nCs3, $06, nRst, nCs3, nRst, $12
-	smpsJump            WariosCastle_Loop19
+BGM_Wario_FM3_00_0_48:
+	smpsSetvoice	$02
+	smpsAlterVol	$FC
+	dc.b nB1, $12
+	smpsAlterVol	$08
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $06, $06, $01
+	smpsAlterVol	$04
+	dc.b $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01
+	smpsReturn
 
-WariosCastle_Voices:
-;	Voice $00
-;	$38
-;	$31, $31, $32, $31, 	$1F, $1F, $1F, $1F, 	$17, $00, $00, $09
-;	$08, $00, $00, $00, 	$43, $F4, $B1, $FA, 	$20, $16, $13, $00
-	smpsVcAlgorithm     $00
-	smpsVcFeedback      $07
-	smpsVcUnusedBits    $00
-	smpsVcDetune        $03, $03, $03, $03
-	smpsVcCoarseFreq    $01, $02, $01, $01
-	smpsVcRateScale     $00, $00, $00, $00
-	smpsVcAttackRate    $1F, $1F, $1F, $1F
-	smpsVcAmpMod        $00, $00, $00, $00
-	smpsVcDecayRate1    $09, $00, $00, $17
-	smpsVcDecayRate2    $00, $00, $00, $08
-	smpsVcDecayLevel    $0F, $0B, $0F, $04
-	smpsVcReleaseRate   $08, $00, $00, $00
-	smpsVcTotalLevel    $00, $13, $16, $20
+BGM_Wario_FM3_03_0_48_7F:
+	smpsSetvoice	$02
+	dc.b nB1, $06
+	smpsAlterVol	$08
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $06
+	smpsAlterVol	$08
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $06, $06, $02
+	smpsAlterVol	$04
+	dc.b $02, $02
+	smpsAlterVol	$04
+	dc.b $03, $03
+	smpsReturn
 
-;	Voice $01
-;	$00
-;	$3B, $35, $36, $31, 	$1F, $1F, $1F, $1F, 	$18, $1C, $05, $09
-;	$00, $06, $00, $00, 	$67, $16, $11, $F9, 	$0D, $16, $1F, $00
-	smpsVcAlgorithm     $00
-	smpsVcFeedback      $00
-	smpsVcUnusedBits    $00
-	smpsVcDetune        $03, $03, $03, $03
-	smpsVcCoarseFreq    $01, $06, $05, $0B
-	smpsVcRateScale     $00, $00, $00, $00
-	smpsVcAttackRate    $1F, $1F, $1F, $1F
-	smpsVcAmpMod        $00, $00, $00, $00
-	smpsVcDecayRate1    $09, $05, $1C, $18
-	smpsVcDecayRate2    $00, $00, $06, $00
-	smpsVcDecayLevel    $0F, $01, $01, $06
-	smpsVcReleaseRate   $07, $00, $00, $00
-	smpsVcTotalLevel    $00, $1F, $16, $0D
+BGM_Wario_FM3_04_0_48_77:
+	smpsSetvoice	$02
+	smpsAlterVol	$F8
+	dc.b nB1, $06
+	smpsAlterVol	$08
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $06
+	smpsAlterVol	$08
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $06, $06, $01
+	smpsAlterVol	$04
+	dc.b $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01
+	smpsReturn
 
-	smpsFooterEndSong	"TheWTracks/Mus - WariosCastle.asm"
+BGM_Wario_FM3_03_0_48_7B:
+	smpsSetvoice	$02
+	smpsAlterVol	$FC
+	dc.b nB1, $06
+	smpsAlterVol	$08
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $06
+	smpsAlterVol	$08
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $03
+	smpsAlterVol	$FC
+	dc.b $06, $06, $02
+	smpsAlterVol	$04
+	dc.b $02, $02
+	smpsAlterVol	$04
+	dc.b $03, $03
+	smpsReturn
+
+BGM_Wario_FM3_05_0_48:
+	smpsSetvoice	$02
+	smpsAlterVol	$FC
+	dc.b nB1, $06
+	smpsAlterVol	$04
+	dc.b $03
+	smpsAlterVol	$04
+	dc.b $03
+	smpsAlterVol	$04
+	dc.b $06
+	smpsAlterVol	$F4
+	dc.b $06, $06, $0C
+	smpsAlterVol	$0C
+	dc.b $01, $01
+	smpsAlterVol	$FC
+	dc.b $01, $01
+	smpsAlterVol	$FC
+	dc.b $01, $01
+	smpsReturn
+
+BGM_Wario_FM3_06_0_48_7B:
+	smpsSetvoice	$02
+	smpsAlterVol	$FC
+	dc.b nB1, $06, nRst, $2A
+	smpsReturn
+
+BGM_Wario_FM3_07_0_48_7F:
+	dc.b smpsNoAttack, $18
+	smpsSetvoice	$02
+	smpsAlterVol	$30
+	dc.b nB1, $01, $01
+	smpsAlterVol	$FC
+	dc.b $01, $01
+	smpsAlterVol	$FC
+	dc.b $01, $01
+	smpsAlterVol	$FC
+	dc.b $01, $01
+	smpsAlterVol	$FC
+	dc.b $01, $01
+	smpsAlterVol	$FC
+	dc.b $01, $01
+	smpsAlterVol	$FC
+	dc.b $01, $01
+	smpsAlterVol	$FC
+	dc.b $01, $01
+	smpsAlterVol	$FC
+	dc.b $01, $01
+	smpsAlterVol	$FC
+	dc.b $01, $01
+	smpsAlterVol	$FC
+	dc.b $01, $01
+	smpsAlterVol	$FC
+	dc.b $01, $01
+	smpsReturn
+
+BGM_Wario_FM4:
+	smpsCall BGM_Wario_FM4_00_0_48
+	smpsCall BGM_Wario_FM4_01_0_48
+	smpsCall BGM_Wario_FM4_00_0_48
+	smpsCall BGM_Wario_FM4_02_0_48
+
+BGM_Wario_FM4_Jump:
+	smpsCall BGM_Wario_FM4_00_0_48
+	smpsCall BGM_Wario_FM4_00_0_48
+	smpsCall BGM_Wario_FM4_01_0_48
+	smpsCall BGM_Wario_FM4_03_0_48
+	smpsCall BGM_Wario_FM4_04_0_48
+	smpsCall BGM_Wario_FM4_04_0_48
+	smpsCall BGM_Wario_FM4_04_0_48
+	smpsCall BGM_Wario_FM4_05_0_48
+	smpsCall BGM_Wario_FM4_06_0_48
+	smpsCall BGM_Wario_FM4_07_0_48
+	smpsCall BGM_Wario_FM4_08_0_48
+	smpsCall BGM_Wario_FM4_07_0_48
+	smpsCall BGM_Wario_FM4_06_0_48
+	smpsCall BGM_Wario_FM4_07_0_48
+	smpsCall BGM_Wario_FM4_08_0_48
+	smpsCall BGM_Wario_FM4_08_0_48
+	smpsCall BGM_Wario_FM4_09_0_48
+	smpsCall BGM_Wario_FM4_0A_0_48
+	smpsCall BGM_Wario_FM4_0B_0_48
+	smpsCall BGM_Wario_FM4_0C_0_48
+	smpsCall BGM_Wario_FM4_0D_0_48
+	smpsCall BGM_Wario_FM4_00_0_48
+	smpsCall BGM_Wario_FM4_01_0_48
+	smpsCall BGM_Wario_FM4_00_0_48
+	smpsCall BGM_Wario_FM4_0E_0_48
+	smpsJump BGM_Wario_FM4_Jump
+
+BGM_Wario_FM4_00_0_48:
+	smpsSetvoice	$00
+	smpsNoteFill	$08
+	dc.b	nD3, $12, nCs3, $06, nD3, $0C
+	smpsNoteFill	$00
+	dc.b	nDs3, $0C
+	smpsReturn
+
+BGM_Wario_FM4_01_0_48:
+	smpsNoteFill	$08
+	dc.b	nD3, $12, nCs3, $06, nD3, nDs3, nF3, nDs3
+	smpsReturn
+
+BGM_Wario_FM4_02_0_48:
+	smpsNoteFill	$08
+	dc.b	nD3, $06, $0C, nDs3, $03, nF3, nG3, $06, nG4, nG4, $0C
+	smpsReturn
+
+BGM_Wario_FM4_03_0_48:
+	smpsNoteFill		$08
+	dc.b	nD3, $12, nCs3, $06, nD3, nD3, $0C, nE3, $03, nF3
+	smpsReturn
+
+BGM_Wario_FM4_04_0_48:
+	dc.b	nG3, $12, nFs3, $06, nG3, $0C, nAb3, $06, nBb3, $03, nAb3
+	smpsReturn
+
+BGM_Wario_FM4_05_0_48:
+	dc.b	nG3, $06, $0C, nFs3, $06, nG3, $12, nAb3, $06
+	smpsReturn
+
+BGM_Wario_FM4_06_0_48:
+	dc.b	nA3, $06, $12, $06, $12
+	smpsReturn
+
+BGM_Wario_FM4_07_0_48:
+	dc.b	nBb3, $06, $12, $06, $12
+	smpsReturn
+
+BGM_Wario_FM4_08_0_48:
+	dc.b	nC4, $06, $12, $06, $12
+	smpsReturn
+
+BGM_Wario_FM4_09_0_48:
+	smpsNoteFill	$00
+	dc.b	nCs4, $0C, nRst, $06
+	smpsNoteFill	$08
+	dc.b	nC4, nCs4, nCs4, $0C, nCs5, $06
+	smpsReturn
+
+BGM_Wario_FM4_0A_0_48:
+	smpsNoteFill	$00
+	dc.b	nC5, $0C, nRst, $06
+	smpsNoteFill	$08
+	dc.b	nB4, nC5, nC5, $0C, $06
+	smpsReturn
+
+BGM_Wario_FM4_0B_0_48:
+	smpsNoteFill	$00
+	dc.b	nCs5, $0C, nRst, $06
+	smpsNoteFill	$08
+	dc.b	nC5, nCs5, nCs5, $0C
+	smpsNoteFill	$00
+	dc.b	nCs6, $06
+	smpsReturn
+
+BGM_Wario_FM4_0C_0_48:
+	smpsNoteFill	$08
+	dc.b	nC6, $06, $0C
+	smpsNoteFill	$00
+	dc.b	nCs5, $06
+	smpsNoteFill	$08
+	dc.b	nC5, nC5, $0C
+	smpsNoteFill	$00
+	dc.b	nCs4, $06
+	smpsReturn
+
+BGM_Wario_FM4_0D_0_48:
+	smpsNoteFill	$08
+	dc.b	nC4, $06, $0C
+	smpsNoteFill	$00
+	dc.b	nCs3, $06
+	smpsNoteFill	$08
+	dc.b	nC3, nC3, $12
+	smpsReturn
+
+BGM_Wario_FM4_0E_0_48:
+	smpsNoteFill	$08
+	dc.b	nD3, $06, nD4, nD4, $12, nD5, $06, $0C
+	smpsReturn
+
+BGM_Wario_DAC:
+	smpsCall BGM_Wario_DAC_00_0_48
+	smpsCall BGM_Wario_DAC_01_0_48
+	smpsCall BGM_Wario_DAC_00_0_48
+	smpsCall BGM_Wario_DAC_02_0_48
+
+BGM_Wario_DAC_Jump:
+	smpsCall BGM_Wario_DAC_00_0_48
+	smpsCall BGM_Wario_DAC_01_0_48
+	smpsCall BGM_Wario_DAC_00_0_48
+	smpsCall BGM_Wario_DAC_02_0_48
+	smpsCall BGM_Wario_DAC_00_0_48
+	smpsCall BGM_Wario_DAC_00_0_48
+	smpsCall BGM_Wario_DAC_00_0_48
+	smpsCall BGM_Wario_DAC_01_0_48
+	smpsCall BGM_Wario_DAC_03_0_48
+	smpsCall BGM_Wario_DAC_04_0_48
+	smpsCall BGM_Wario_DAC_03_0_48
+	smpsCall BGM_Wario_DAC_04_0_48
+	smpsCall BGM_Wario_DAC_03_0_48
+	smpsCall BGM_Wario_DAC_04_0_48
+	smpsCall BGM_Wario_DAC_03_0_48
+	smpsCall BGM_Wario_DAC_05_0_48
+	smpsCall BGM_Wario_DAC_00_0_48
+	smpsCall BGM_Wario_DAC_00_0_48
+	smpsCall BGM_Wario_DAC_00_0_48
+	smpsCall BGM_Wario_DAC_06_0_48
+	smpsCall BGM_Wario_DAC_06_0_48
+	smpsCall BGM_Wario_DAC_00_0_48
+	smpsCall BGM_Wario_DAC_01_0_48
+	smpsCall BGM_Wario_DAC_00_0_48
+	smpsCall BGM_Wario_DAC_07_0_48
+	smpsJump BGM_Wario_DAC_Jump
+
+BGM_Wario_DAC_00_0_48:	; Effect not supported:
+	dc.b dPokeLowTimpani, $0C, dHiBongo, $06, dLowBongo, dPokeLowTimpani, $0C, dHiBongo
+	smpsReturn
+
+BGM_Wario_DAC_01_0_48:
+	dc.b dPokeLowTimpani, $0C, dHiBongo, $06, dLowBongo, dPokeLowTimpani, dHiBongo, $0C, $06
+	smpsReturn
+
+BGM_Wario_DAC_02_0_48:
+	dc.b dPokeLowTimpani, $0C, dHiBongo, $06, dLowBongo, dPokeLowTimpani, dHiBongo, dHiBongo, dHiBongo, $03, $03
+	smpsReturn
+
+BGM_Wario_DAC_03_0_48:
+	dc.b dPokeLowTimpani, $06, dLowBongo, dHiBongo, dLowBongo, dPokeLowTimpani, $0C, dHiBongo
+	smpsReturn
+
+BGM_Wario_DAC_04_0_48:
+	dc.b dPokeLowTimpani, $06, dLowBongo, dHiBongo, dLowBongo, dPokeLowTimpani, dHiBongo, $0C, $06
+	smpsReturn
+
+BGM_Wario_DAC_05_0_48:
+	dc.b dPokeLowTimpani, $06, dLowBongo, dHiBongo, dLowBongo, dPokeLowTimpani, dHiBongo, dPokeLowTimpani, dHiBongo, $03, $03
+	smpsReturn
+
+BGM_Wario_DAC_06_0_48:
+	dc.b nRst, $30
+	smpsReturn
+
+BGM_Wario_DAC_07_0_48:
+	dc.b dPokeLowTimpani, $30
+	smpsReturn
+
+BGM_Wario_PSG1:
+	smpsCall BGM_Wario_PSG1_00_0_48
+	smpsCall BGM_Wario_PSG1_00_0_48
+	smpsCall BGM_Wario_PSG1_00_0_48
+	smpsCall BGM_Wario_PSG1_01_0_48
+
+BGM_Wario_PSG1_Jump:
+	smpsCall BGM_Wario_PSG1_00_0_48
+	smpsCall BGM_Wario_PSG1_00_0_48
+	smpsCall BGM_Wario_PSG1_00_0_48
+	smpsCall BGM_Wario_PSG1_00_0_48
+	smpsCall BGM_Wario_PSG1_02_0_48
+	smpsCall BGM_Wario_PSG1_03_0_48
+	smpsCall BGM_Wario_PSG1_04_0_48
+	smpsCall BGM_Wario_PSG1_05_0_48
+	smpsPSGvoice	ChickenTone_03
+	smpsCall BGM_Wario_PSG1_06_0_48
+	smpsCall BGM_Wario_PSG1_07_0_48
+	smpsCall BGM_Wario_PSG1_08_0_48
+	smpsCall BGM_Wario_PSG1_07_0_48
+	smpsCall BGM_Wario_PSG1_06_0_48
+	smpsCall BGM_Wario_PSG1_07_0_48
+	smpsCall BGM_Wario_PSG1_08_0_48
+	smpsCall BGM_Wario_PSG1_09_0_48
+	smpsPSGvoice	fTone_04
+	smpsPSGAlterVol	$FD
+	smpsModSet	$05, $01, $01, $05
+	smpsCall BGM_Wario_PSG1_0A_0_48
+	smpsCall BGM_Wario_PSG1_0B_0_48
+	smpsCall BGM_Wario_PSG1_0A_0_48
+	dc.b	nRst, $60
+	smpsPSGvoice	uptone_03
+	smpsPSGAlterVol	$03
+	smpsModOff
+	smpsCall BGM_Wario_PSG1_00_0_48
+	smpsCall BGM_Wario_PSG1_00_0_48
+	smpsCall BGM_Wario_PSG1_00_0_48
+	dc.b	nRst, $30
+	smpsJump BGM_Wario_PSG1_Jump
+
+BGM_Wario_PSG1_00_0_48:
+	dc.b	nRst, $06, nD2, nG2, $12, nD2, $06, nG2, nD2
+	smpsReturn
+
+BGM_Wario_PSG1_01_0_48:
+	dc.b	nRst, $06, nD2, nG2, $12, nC2, $06, nC3, $0C
+	smpsReturn
+
+BGM_Wario_PSG1_02_0_48:
+	dc.b	nRst, $06, nC2, nC3, $12, nC2, $06, nBb2, nG2, $03, nF2
+	smpsReturn
+
+BGM_Wario_PSG1_03_0_48:
+	dc.b	nRst, $06, nC2, nG2, $12, nG1, $06, nC2, nCs2, $03, nE2
+	smpsReturn
+
+BGM_Wario_PSG1_04_0_48:
+	dc.b	nRst, $06, nC1, nC2, $12, nC1, $06, nBb1, nG1, $03, nF1
+	smpsReturn
+
+BGM_Wario_PSG1_05_0_48:
+	dc.b	nRst, $06, nC1, nG1, $12, nC1, $06, nG1, nAb1
+	smpsReturn
+
+BGM_Wario_PSG1_07_0_48:
+	dc.b	nDs0, $06, $06, nDs1, nDs1, nDs0, nDs0, nDs1, nDs1
+	smpsReturn
+
+BGM_Wario_PSG1_08_0_48:
+	dc.b	nF0, $06, $06, nF1, nF1, nF0, nF0, nF1, nF1
+	smpsReturn
+
+BGM_Wario_PSG1_06_0_48:
+	dc.b	nD0, $06, $06, nD1, nD1, nD0, nD0, nD1, nD1
+	smpsReturn
+
+BGM_Wario_PSG1_09_0_48:
+	dc.b	nFs0, $06, $06, nFs1, nFs1, nFs0, nFs0, nFs1, nFs1
+	smpsReturn
+
+BGM_Wario_PSG1_0A_0_48:
+	dc.b nDs1, $0C, nRst, $06
+	smpsNoteFill	$08
+	dc.b nD1, nDs1, nDs1, $0C, nAb1, $06
+	smpsNoteFill	$00
+	smpsReturn
+
+BGM_Wario_PSG1_0B_0_48:
+	dc.b nD1, $0C, nRst, $06
+	smpsNoteFill	$08
+	dc.b nCs1, nD1, nD1, $0C, nG1, $06
+	smpsNoteFill	$00
+	smpsReturn
+
+BGM_Wario_PSG2:
+	smpsCall BGM_Wario_PSG2_00_0_48
+	smpsCall BGM_Wario_PSG2_00_0_48
+	smpsCall BGM_Wario_PSG2_00_0_48
+	smpsCall BGM_Wario_PSG2_01_0_48
+
+BGM_Wario_PSG2_Jump:
+	smpsCall BGM_Wario_PSG2_00_0_48
+	smpsCall BGM_Wario_PSG2_00_0_48
+	smpsCall BGM_Wario_PSG2_00_0_48
+	smpsCall BGM_Wario_PSG2_00_0_48
+	smpsCall BGM_Wario_PSG2_02_0_48
+	smpsCall BGM_Wario_PSG2_03_0_48
+	smpsCall BGM_Wario_PSG2_04_0_48
+	smpsCall BGM_Wario_PSG2_05_0_48
+	smpsPSGvoice	ChickenTone_03
+	smpsCall BGM_Wario_PSG2_06_0_48
+	smpsCall BGM_Wario_PSG2_07_0_48
+	smpsCall BGM_Wario_PSG2_08_0_48
+	smpsCall BGM_Wario_PSG2_07_0_48
+	smpsCall BGM_Wario_PSG2_06_0_48
+	smpsCall BGM_Wario_PSG2_07_0_48
+	smpsCall BGM_Wario_PSG2_08_0_48
+	smpsCall BGM_Wario_PSG2_08_0_48
+	smpsPSGvoice	fTone_04
+	smpsPSGAlterVol	$FD
+	smpsModSet	$05, $01, $01, $05
+	smpsCall BGM_Wario_PSG2_09_0_48
+	smpsCall BGM_Wario_PSG2_0A_0_48
+	smpsCall BGM_Wario_PSG2_09_0_48
+	dc.b	nRst, $60
+	smpsPSGvoice	uptone_03
+	smpsPSGAlterVol	$03
+	smpsModOff
+	smpsCall BGM_Wario_PSG2_00_0_48
+	smpsCall BGM_Wario_PSG2_00_0_48
+	smpsCall BGM_Wario_PSG2_00_0_48
+	dc.b	nRst, $30
+	smpsJump BGM_Wario_PSG2_Jump
+
+BGM_Wario_PSG2_00_0_48:
+	dc.b	nRst, $06, nD1, nG1, $12, nD1, $06, nG1, nD1
+	smpsReturn
+
+BGM_Wario_PSG2_01_0_48:
+	dc.b nRst, $06, nD1, nG1, $12, nC1, $06, nC2, $0C
+	smpsReturn
+
+BGM_Wario_PSG2_02_0_48:
+	dc.b nRst, $06, nC1, nC2, $12, nC1, $06, nBb1, nG1, $03, nF1
+	smpsReturn
+
+BGM_Wario_PSG2_03_0_48:
+	dc.b nRst, $06, nC1, nG1, $12, nG0, $06, nC1, nCs1, $03, nE1
+	smpsReturn
+
+BGM_Wario_PSG2_04_0_48:
+	dc.b nRst, $06, nC0, nC1, $12, nC0, $06, nBb0, nG0, $03, nF0
+	smpsReturn
+
+BGM_Wario_PSG2_05_0_48:
+	dc.b nRst, $06, nC0, nG0, $12, nC0, $06, nG0, nAb0
+	smpsReturn
+
+BGM_Wario_PSG2_07_0_48:
+	dc.b nBb0, $06, $06, nBb1, nBb1, nBb0, nBb0, nBb1, nBb1
+	smpsReturn
+
+BGM_Wario_PSG2_08_0_48:
+	dc.b nC1, $06, $06, nC2, nC2, nC1, nC1, nC2, nC2
+	smpsReturn
+
+BGM_Wario_PSG2_06_0_48:
+	dc.b nA0, $06, $06, nA1, nA1, nA0, nA0, nA1, nA1
+	smpsReturn
+
+BGM_Wario_PSG2_0A_0_48:
+	dc.b nC2, $0C, nRst, $06
+	smpsNoteFill		$08
+	dc.b nB1, nC2, nC2, $0C, $06
+	smpsNoteFill		$00
+	smpsReturn
+
+BGM_Wario_PSG2_09_0_48:
+	dc.b nCs2, $0C, nRst, $06
+	smpsNoteFill		$08
+	dc.b nC2, nCs2, nCs2, $0C, $06
+	smpsNoteFill		$00
+	smpsReturn
+
+BGM_Wario_PSG3:
+	dc.b	nRst, $60, nRst
+
+BGM_Wario_PSG3_Jump:
+	dc.b	nRst, $60
+	smpsLoop	0, 4, BGM_Wario_PSG3_Jump
+	smpsCall BGM_Wario_PSG3_01_0_48
+	smpsCall BGM_Wario_PSG3_02_0_48
+	smpsCall BGM_Wario_PSG3_03_0_48
+	smpsCall BGM_Wario_PSG3_02_0_48
+	smpsCall BGM_Wario_PSG3_01_0_48
+	smpsCall BGM_Wario_PSG3_02_0_48
+	smpsCall BGM_Wario_PSG3_03_0_48
+	smpsCall BGM_Wario_PSG3_04_0_48
+	smpsPSGvoice	fTone_04
+	smpsModSet	$05, $01, $01, $05
+	smpsPSGAlterVol	$FF
+	smpsCall BGM_Wario_PSG3_05_0_48
+	smpsCall BGM_Wario_PSG3_06_0_48
+	smpsCall BGM_Wario_PSG3_05_0_48
+	smpsPSGvoice	uptone_03
+	smpsPSGAlterVol	$01
+	smpsModOff
+
+BGM_Wario_PSG3_Loop:
+	dc.b	nRst, $60
+	smpsLoop	0, 3, BGM_Wario_PSG3_Loop
+	smpsJump	BGM_Wario_PSG3_Jump
+
+BGM_Wario_PSG3_02_0_48:
+	dc.b nDs1, $03, nG1, nBb1, nDs2, nBb1, nDs2, nG2, nBb2, nDs3, nBb2, nG2, nDs2, nBb1, nG1, nDs1
+	dc.b nBb0
+	smpsReturn
+
+BGM_Wario_PSG3_03_0_48:
+	dc.b nF1, $03, nA1, nC2, nF2, nC2, nF2, nA2, nC3, nF3, nC3, nA2, nF2, nC2, nA1, nF1
+	dc.b nC1
+	smpsReturn
+
+BGM_Wario_PSG3_01_0_48:
+	dc.b nD1, $03, nF1, nA1, nD2, nA1, nD2, nF2, nA2, nD3, nA2, nF2, nD2, nA1, nF1, nD1
+	dc.b nA0
+	smpsReturn
+
+BGM_Wario_PSG3_04_0_48:
+	dc.b nFs1, $03, nA1, nC2, nFs2, nC2, nFs2, nA2, nC3, nFs3, nC3, nA2, nFs2, nC2, nA1, nFs1
+	dc.b nC1
+	smpsReturn
+
+BGM_Wario_PSG3_05_0_48:
+	dc.b nG2, $0C, nRst, $06
+	smpsNoteFill		$08
+	dc.b nFs2, nG2, nG2, $12
+	smpsNoteFill		$00
+	smpsReturn
+
+BGM_Wario_PSG3_06_0_48:
+	dc.b nFs2, $0C, nRst, $06
+	smpsNoteFill		$08
+	dc.b nF2, nFs2, nFs2, $12
+	smpsNoteFill		$00
+	smpsReturn
+
+BGM_Wario_Voices:
+;	FM Voice 00 -> 00: Clavinet
+	smpsVcAlgorithm		$00
+	smpsVcFeedback		$07
+	smpsVcDetune		$03, $03, $03, $03
+	smpsVcCoarseFreq	$01, $02, $01, $01
+	smpsVcRateScale		$00, $00, $00, $00
+	smpsVcAttackRate	$1F, $1F, $1F, $1F
+	smpsVcAmpMod		$00, $00, $00, $00
+	smpsVcDecayRate1	$09, $00, $00, $17
+	smpsVcDecayRate2	$00, $00, $00, $08
+	smpsVcDecayLevel	$0F, $0B, $0F, $04
+	smpsVcReleaseRate	$08, $00, $00, $00
+	smpsVcTotalLevel	$00, $13, $16, $20
+
+;	FM Voice 01 -> 01: Lead
+	smpsVcAlgorithm		$00
+	smpsVcFeedback		$00
+	smpsVcDetune		$03, $03, $03, $03
+	smpsVcCoarseFreq	$01, $06, $05, $0B
+	smpsVcRateScale		$00, $00, $00, $00
+	smpsVcAttackRate	$1F, $1F, $1F, $1F
+	smpsVcAmpMod		$00, $00, $00, $00
+	smpsVcDecayRate1	$09, $05, $1C, $18
+	smpsVcDecayRate2	$00, $00, $06, $00
+	smpsVcDecayLevel	$0F, $01, $01, $06
+	smpsVcReleaseRate	$07, $00, $00, $00
+	smpsVcTotalLevel	$00, $1F, $16, $0D
+
+;	FM Voice 02 -> 02: Snare
+	smpsVcAlgorithm		$04
+	smpsVcFeedback		$07
+	smpsVcDetune		$00, $00, $00, $00
+	smpsVcCoarseFreq	$02, $04, $0F, $0F
+	smpsVcRateScale		$00, $00, $00, $00
+	smpsVcAttackRate	$1C, $1F, $1F, $1F
+	smpsVcAmpMod		$00, $00, $00, $00
+	smpsVcDecayRate1	$0D, $18, $11, $00
+	smpsVcDecayRate2	$00, $00, $00, $00
+	smpsVcDecayLevel	$0F, $0F, $0F, $00
+	smpsVcReleaseRate	$0F, $00, $0F, $00
+	smpsVcTotalLevel	$0C, $00, $0C, $00

@@ -25884,4 +25884,4 @@ BGM_LosTontos_Voices:
 	smpsVcReleaseRate   $0F, $0F, $07, $04
 	smpsVcTotalLevel    $00, $28, $0C, $11
 
-	smpsFooterEndSong	"TG2000Tracks/Mus - La Suerte De Los Tontos.asm"
+	smpsFooterEndSong	"Vertz1515/Mus - La Suerte De Los Tontos.asm"

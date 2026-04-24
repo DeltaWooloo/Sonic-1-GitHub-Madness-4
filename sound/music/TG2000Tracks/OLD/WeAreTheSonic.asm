@@ -2079,5 +2079,5 @@ WeAreTheSonic_Voices:
 	dc.b		$08,$0A,$70,$30,$00,$1F,$1F,$5F,$5F,$12,$0E,$0A,$0A,$00,$04,$04
 	dc.b		$03,$2F,$2F,$2F,$2F,$24,$2D,$13,$00;			Voice 04
 	
-	smpsFooterEndSong	"TG2000Tracks/WeAreTheSonic.asm"
+	smpsFooterEndSong	"TG2000Tracks/OLD/WeAreTheSonic.asm"
 	even

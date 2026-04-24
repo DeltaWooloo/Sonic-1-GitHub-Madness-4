@@ -91,37 +91,47 @@ SampleTable:
 	dcSample	TYPE_DPCM,	Madness,	16000,	FLAGS_SFX		; $C3
 	dcSample	TYPE_DPCM,	TheFourth,	16000,	FLAGS_SFX		; $C4
 	dcSample	TYPE_DPCM,	eggmanLaugh,11025,	FLAGS_SFX		; $C5
-	dcSample	TYPE_DPCM,	BSOD,		16000,	FLAGS_SFX		; $C6
-	dcSample	TYPE_DPCM,	shutdown,	16000,	FLAGS_SFX		; $C7
-	dcSample	TYPE_DPCM,	chord16,	16000,	FLAGS_SFX		; $C8
-	dcSample	TYPE_DPCM,	w98ipc,		16000,	FLAGS_SFX		; $C9
-	dcSample	TYPE_DPCM,	meow,		16000,	FLAGS_SFX		; $CA
-	dcSample	TYPE_DPCM,	meow,		8000,	FLAGS_SFX		; $CB
+	dcSample	TYPE_DPCM,	disclaimer,	16000,	FLAGS_SFX		; $C6
+	dcSample	TYPE_DPCM,	sbDevelopers,16000,	FLAGS_SFX		; $C7
+	dcSample	TYPE_DPCM,	sbLove,		16000,	FLAGS_SFX		; $C8
+	dcSample	TYPE_DPCM,	sbPC,		16000,	FLAGS_SFX		; $C9
+	;BSOD stuff
+	dcSample	TYPE_DPCM,	BSOD,		16000,	FLAGS_SFX		; $CA
+	dcSample	TYPE_DPCM,	shutdown,	16000,	FLAGS_SFX		; $CB
+	dcSample	TYPE_DPCM,	chord16,	16000,	FLAGS_SFX		; $CC
+	dcSample	TYPE_DPCM,	w98ipc,		16000,	FLAGS_SFX		; $CD
+	dcSample	TYPE_DPCM,	meow,		16000,	FLAGS_SFX		; $CE
+	dcSample	TYPE_DPCM,	meow,		8000,	FLAGS_SFX		; $CF
 
 	; Splash Screens
-	dcSample	TYPE_PCM,	EggNo,		11297					; $CC
-	dcSample	TYPE_DPCM,	funnyb_utthole,	8000,	FLAGS_SFX		; $CD
-	dcSample	TYPE_DPCM,	yume2kki,	16000,	FLAGS_SFX		; $CE
-	dcSample	TYPE_DPCM,	EagleSoft_Song,	8000,	FLAGS_SFX		; $CF
-	dcSample	TYPE_DPCM,	GenesisDoes1,	8000				; $D0
-	dcSample	TYPE_DPCM,	Virus,		16000,	FLAGS_SFX		; $D1
-	dcSample	TYPE_DPCM,	supbeaches,	8000					; $D2
+	dcSample	TYPE_PCM,	EggNo,		11297					; $D0
+	dcSample	TYPE_DPCM,	funnyb_utthole,	8000,	FLAGS_SFX	; $D1
+	dcSample	TYPE_DPCM,	yume2kki,	16000,	FLAGS_SFX		; $D2
+
+	; dcSample	TYPE_DPCM,	EagleSoft_Song,	8000,	FLAGS_SFX	; $D3	; GMZ - Commented
+	dcSample	TYPE_DPCM,	EagleSoft_Chirp1,	8000	; GMZ
+	dcSample	TYPE_DPCM,	EagleSoft_Chirp2,	8000	; GMZ
+	dcSample	TYPE_DPCM,	EagleSoft_Speech,	8000	; GMZ
+
+	dcSample	TYPE_DPCM,	GenesisDoes1,	8000				; $D4
+	dcSample	TYPE_DPCM,	Virus,		16000,	FLAGS_SFX		; $D5
+	dcSample	TYPE_DPCM,	supbeaches,	8000					; $D6
 
 	; Commercial Samples
-	dcSample	TYPE_DPCM,	GenesisCan3,	8000,FLAGS_SFX		; $D3
+	dcSample	TYPE_DPCM,	GenesisCan3,	8000,FLAGS_SFX		; $D7
 
 	; Ollie Samples
-	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $D4
-	dcSample	TYPE_DPCM,	OllieWahoo,	16000					; $D5
+	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $D8
+	dcSample	TYPE_DPCM,	OllieWahoo,	16000					; $D9
 
 	; SEGA Samples
-	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX		; $D6
+	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX		; $DA
 
 	;!@ GD: Last slot always reserved for PCM SFX Silence
-	dcSample	TYPE_DPCM,	dummy,	8000, FLAGS_SFX				; $D7
+	dcSample	TYPE_DPCM,	dummy,	8000, FLAGS_SFX				; $DB
 
 	; Unused
-;	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $D1
+;	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $DC
 ;	dcSample	TYPE_PCM,	Segay,		0,	FLAGS_SFX
 ;	dcSample	TYPE_PCM,	CL_Penis,	11297
 ;	dcSample	TYPE_PCM,	Boioing,	5250,	FLAGS_SFX
@@ -222,6 +232,11 @@ SampleTable:
 	incdac	Madness, "sound/dac/GenesisDoes/Madness.dpcm"
 	incdac	TheFourth, "sound/dac/GenesisDoes/Four.dpcm"
 	incdac	eggmanLaugh, "sound/dac/GenesisDoes/eggmanLaugh.dpcm"
+	incdac	disclaimer, "sound/dac/GenesisDoes/disclaimer.dpcm"
+	incdac	sbDevelopers, "sound/dac/GenesisDoes/sb_developers.dpcm"
+	incdac	sbLove, "sound/dac/GenesisDoes/sb_love.dpcm"
+	incdac	sbPC, "sound/dac/GenesisDoes/sb_pc.dpcm"
+	
 	incdac	BSOD, "sound/dac/GenesisDoes/windie.dpcm"
 	incdac	shutdown, "sound/dac/GenesisDoes/shutdown.dpcm"
 	incdac	chord16, "sound/dac/GenesisDoes/chord16.dpcm"
@@ -233,7 +248,12 @@ SampleTable:
 	incdac	EggNo, "sound/dac/EggNo.wav"
 	incdac	funnyb_utthole, "sound/dac/funnybutthole.dpcm"
 	incdac	yume2kki, "sound/dac/2kki.dpcm"
-	incdac	EagleSoft_Song,	"sound/dac/GenesisDoes/EagleSoft_Song.dpcm"
+
+	; incdac	EagleSoft_Song,	"sound/dac/GenesisDoes/EagleSoft_Song.dpcm"	; GMZ - Commented
+	incdac	EagleSoft_Chirp1,	"sound/dac/GMZ/eaglesoft_chirp1.dpcm"	; GMZ
+	incdac	EagleSoft_Chirp2,	"sound/dac/GMZ/eaglesoft_chirp2.dpcm"	; GMZ
+	incdac	EagleSoft_Speech,	"sound/dac/GMZ/eaglesoft_speech.dpcm"	; GMZ
+
 	incdac	GenesisDoes1,"sound/dac/GenesisDoes/GenesisDoes1.dpcm"
 	incdac	Virus,"sound/dac/GenesisDoes/Virus_Alert.dpcm"
 	incdac	supbeaches, "sound/dac/supbeaches.dpcm"

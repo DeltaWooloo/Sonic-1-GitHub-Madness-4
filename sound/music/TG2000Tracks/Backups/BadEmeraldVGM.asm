@@ -12776,5 +12776,5 @@ BadEmerald_Voices:
 	dc.b		$01,$47,$07,$57,$37,$1C,$18,$1D,$00;			Voice 06
 	dc.b		$07,$05,$00,$01,$02,$1F,$1F,$1F,$1F,$0E,$0E,$0E,$0E,$02,$02,$02
 	dc.b		$02,$55,$55,$55,$54,$0A,$0A,$0A,$00;			Voice 07
-	smpsFooterEndSong	"TG2000Tracks/BadEmerald.asm"
+	smpsFooterEndSong	"TG2000Tracks/Backups/BadEmeraldVGM.asm"
 	even

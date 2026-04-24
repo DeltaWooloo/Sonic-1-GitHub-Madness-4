@@ -2672,5 +2672,5 @@ SwingSinners_Voices:
 	dc.b		$09,$0A,$6B,$38,$1C,$1B,$30,$15,$00;			Voice 01
 	dc.b		$3D,$01,$01,$01,$01,$94,$19,$19,$19,$0F,$0D,$0D,$0D,$07,$04,$04
 	dc.b		$04,$20,$11,$1A,$1A,$15,$17,$17,$00;			Voice 02
-	smpsFooterEndSong	"TG2000Tracks/#SwingSinners.asm"
+	smpsFooterEndSong	"TG2000Tracks/Backups/#SwingSinners.asm"
 	even
