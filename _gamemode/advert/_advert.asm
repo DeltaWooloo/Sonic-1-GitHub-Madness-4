@@ -209,191 +209,103 @@ Ad_Eyecatch:
 .fg2:		binclude "_gamemode/advert/eyecatch-map2.eni"
 .art:		binclude "_gamemode/advert/eyecatch-art.nem"
 		even
-;Ad_Lactose:
-;.pal:		binclude "_gamemode/advert/ad-lactose-pal.unc"
-;.fg:		binclude "_gamemode/advert/ad-lactose-map.eni"
-;.art:		binclude "_gamemode/advert/ad-lactose-art.nem"
-;		even
-
 Ad_CRT:
 .pal:		binclude "_gamemode/advert/ad-CRT-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-CRT-map.eni"
 .art:		binclude "_gamemode/advert/ad-CRT-art.nem"
 		even
-
-;Ad_Deltarune:
-;.pal:		binclude "_gamemode/advert/ad-deltarune-pal.unc"
-;.fg:		binclude "_gamemode/advert/ad-deltarune-map.eni"
-;.art:		binclude "_gamemode/advert/ad-deltarune-art.nem"
-;		even
-
 Ad_3SonicSonic:
 .pal:		binclude "_gamemode/advert/ad-3ss-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-3ss-map.eni"
 .art:		binclude "_gamemode/advert/ad-3ss-art.nem"
 		even
-
 ;Ad_YuriPropaganda:
 ;.pal:		binclude "_gamemode/advert/ad-yuri-pal.unc"
 ;.fg:		binclude "_gamemode/advert/ad-yuri-map.eni"
 ;.art:		binclude "_gamemode/advert/ad-yuri-art.nem"
 ;		even
-
 Ad_Eggblock:
 .pal:		binclude "_gamemode/advert/ad-eggblock-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-eggblock-map.eni"
 .art:		binclude "_gamemode/advert/ad-eggblock-art.nem"
 		even
-
-;Ad_Willys:
-;.pal:		binclude "_gamemode/advert/ad-willys-pal.unc"
-;.fg:		binclude "_gamemode/advert/ad-willys-map.eni"
-;.art:		binclude "_gamemode/advert/ad-willys-art.nem"
-;		even
-
-;Ad_GameStar:
-;.pal:		binclude "_gamemode/advert/ad-gamestar-pal.unc"
-;.fg:		binclude "_gamemode/advert/ad-gamestar-map.eni"
-;.art:		binclude "_gamemode/advert/ad-gamestar-art.nem"
-;		even
-
 Ad_Craig:
 .pal:		binclude "_gamemode/advert/ad-craig-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-craig-map.eni"
 .art:		binclude "_gamemode/advert/ad-craig-art.nem"
 		even
-
 Ad_Carbuncle:
 .pal:		binclude "_gamemode/advert/ad-carbuncle-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-carbuncle-map.eni"
 .art:		binclude "_gamemode/advert/ad-carbuncle-art.nem"
 		even
-
-;Ad_Support:
-;.pal:		binclude "_gamemode/advert/Pal - Support.bin"
-;.fg:		binclude "_gamemode/advert/Map - Support.eni"
-;.art:		binclude "_gamemode/advert/Art - Support.nem"
-;		even
-
-;Ad_RaidShadowLegends:
-;.pal:		binclude "_gamemode/advert/ad-raidshadowlegends-pal.unc"
-;.fg:		binclude "_gamemode/advert/ad-raidshadowlegends-map.eni"
-;.art:		binclude "_gamemode/advert/ad-raidshadowlegends-art.nem"
-;		even
-
 Ad_TamperThingy:
 .pal:		binclude "_gamemode/advert/ad-TamperThingy-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-TamperThingy-map.eni"
 .art:		binclude "_gamemode/advert/ad-TamperThingy-art.nem"
 		even
-
 Ad_Tonic:
 .pal:		binclude "_gamemode/advert/Tonic Pal.bin"
 .fg:		binclude "_gamemode/advert/Tonic Map.eni"
 .art:		binclude "_gamemode/advert/Tonic Art.nem"
 		even
-
 Ad_SonicUnderground:
 .pal:		binclude "_gamemode/advert/ad-sonic-underground-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-sonic-underground-map.eni"
 .art:		binclude "_gamemode/advert/ad-sonic-underground-art.nem"
 		even
-
 Ad_HK97:
 .pal:		binclude "_gamemode/advert/ad-hong-kong-97-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-hong-kong-97-map.eni"
 .art:		binclude "_gamemode/advert/ad-hong-kong-97-art.nem"
 		even
-
-;!@ GD: Sonic Soup advert
-;Ad_GenesisCan1:
-;.pal:		binclude "_gamemode/advert/ad-GenesisCan1-pal.unc"
-;.fg:		binclude "_gamemode/advert/ad-GenesisCan1-map.eni"
-;.art:		binclude "_gamemode/advert/ad-GenesisCan1-art.nem"
-;		even
-
-;Ad_GenesisCan2:
-;.pal:		binclude "_gamemode/advert/ad-GenesisCan2-pal.unc"
-;.fg:		binclude "_gamemode/advert/ad-GenesisCan2-map.eni"
-;.art:		binclude "_gamemode/advert/ad-GenesisCan2-art.nem"
-;		even
-
-;Ad_Intel:
-;.pal:		binclude "_gamemode/advert/ad-Intel-pal.unc"
-;.fg:		binclude "_gamemode/advert/ad-Intel-map.eni"
-;.art:		binclude "_gamemode/advert/ad-Intel-art.nem"
-;		even
-
 Ad_ElmLab:
 .pal:		binclude "_gamemode/advert/ad-ElmLab-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-ElmLab-map.eni"
 .art:		binclude "_gamemode/advert/ad-ElmLab-art.nem"
 		even
-
 Ad_VH:
 .pal:		binclude "_gamemode/advert/ad-VH-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-VH-map.eni"
 .art:		binclude "_gamemode/advert/ad-VH-art.nem"
 		even
-
 Ad_SuperChallenges:
 .pal:		binclude "_gamemode/advert/ad-super-challenges-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-super-challenges-map.eni"
 .art:		binclude "_gamemode/advert/ad-super-challenges-art.nem"
 		even
-
 Ad_GenesisCan3:
 .pal:		binclude "_gamemode/advert/ad-GenesisCan3-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-GenesisCan3-map.eni"
 .art:		binclude "_gamemode/advert/ad-GenesisCan3-art.nem"
 		even
-
-;!@ Neptunia 5: The Next Dimension video game ad
-;Ad_Nep5:
-;.pal:		binclude "_gamemode/advert/ad-nep5-pal.unc"
-;.fg:		binclude "_gamemode/advert/ad-nep5-map.eni"
-;.art:		binclude "_gamemode/advert/ad-nep5-art.nem"
-;		even
-
 Ad_IWBTH:
 .pal:		binclude "_gamemode/advert/ad-IWBTH-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-IWBTH-map.eni"
 .art:		binclude "_gamemode/advert/ad-IWBTH-art.nem"
 		even
-
 Ad_Limited:
 .pal:		binclude "_gamemode/advert/ad-Limited-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-Limited-map.eni"
 .art:		binclude "_gamemode/advert/ad-Limited-art.nem"
 		even
-
 Ad_Atgame:
 .pal:		binclude "_gamemode/advert/Atgame.bin"
 .fg:		binclude "_gamemode/advert/Atgame.eni"
 .art:		binclude "_gamemode/advert/Atgame.nem"
 		even
-
 Ad_FartBaby:
 .pal:		binclude "_gamemode/advert/ad-FartBaby-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-FartBaby-map.eni"
 .art:		binclude "_gamemode/advert/ad-FartBaby-art.nem"
 		even
-
 Ad_ClintonYears:
 .pal:		binclude "_gamemode/advert/ad-ClintonYears-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-ClintonYears-map.eni"
 .art:		binclude "_gamemode/advert/ad-ClintonYears-art.nem"
 		even
-		
 Ad_SteamedHams:
 .pal:		binclude "_gamemode/advert/ad-SteamedHams-pal.unc"
 .fg:		binclude "_gamemode/advert/ad-SteamedHams-map.eni"
 .art:		binclude "_gamemode/advert/ad-SteamedHams-art.nem"
 		even
-
-; GD: Data crosslinked into BSODs. Saves 4KB		
-;Ad_MSB:
-;.pal:		binclude "_gamemode/advert/ad-MSB-pal.unc"
-;.fg:		binclude "_gamemode/advert/ad-MSB-map.eni"
-;.art:		binclude "_gamemode/advert/ad-MSB-art.nem"
-;		even
