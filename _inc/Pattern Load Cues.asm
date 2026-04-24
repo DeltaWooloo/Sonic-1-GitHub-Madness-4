@@ -4,7 +4,7 @@
 ArtLoadCues:
 
 ptr_PLC_Main:		dc.w PLC_Main-ArtLoadCues
-;ptr_PLC_Main2:		dc.w PLC_Main2-ArtLoadCues
+ptr_PLC_Main2:		dc.w PLC_Main2-ArtLoadCues
 ptr_PLC_Explode:	dc.w PLC_Explode-ArtLoadCues
 ptr_PLC_GameOver:	dc.w PLC_GameOver-ArtLoadCues
 PLC_Levels:
@@ -83,13 +83,12 @@ PLC_Main:	dc.w ((PLC_Mainend-PLC_Main-2)/6)-1
 		plcm	Nem_Monitors, ArtTile_Monitor       ; monitors
 PLC_Mainend:
 ; ---------------------------------------------------------------------------
-; Pattern load cues - standard block 2 which isnt used anymore because one dplc art two need more yummy enemy art funny butthole productions - coni
-; I wet myself.
+; Pattern load cues - standard block 2
 ; ---------------------------------------------------------------------------
-;PLC_Main2:	dc.w ((PLC_Main2end-PLC_Main2-2)/6)-1
+PLC_Main2:	dc.w ((PLC_Main2end-PLC_Main2-2)/6)-1
 		;plcm	Nem_Shield,   ArtTile_Shield        ; shield
-;		plcm	Nem_Stars,    ArtTile_Invincibility ; invincibility stars
-;PLC_Main2end:
+		plcm	Nem_Stars,    ArtTile_Invincibility ; invincibility stars
+PLC_Main2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - explosion
 ; ---------------------------------------------------------------------------
@@ -570,7 +569,7 @@ PLC_Sansendy:
 ; Pattern load cue IDs
 ; ---------------------------------------------------------------------------
 plcid_Main:		equ (ptr_PLC_Main-ArtLoadCues)/2	
-;plcid_Main2:		equ (ptr_PLC_Main2-ArtLoadCues)/2	
+plcid_Main2:		equ (ptr_PLC_Main2-ArtLoadCues)/2	
 plcid_Explode:		equ (ptr_PLC_Explode-ArtLoadCues)/2	
 plcid_GameOver:		equ (ptr_PLC_GameOver-ArtLoadCues)/2	
 plcid_GHZ:		equ (ptr_PLC_GHZ-ArtLoadCues)/2		

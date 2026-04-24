@@ -3618,8 +3618,9 @@ GM_Credits:
 		jsr	(AddPLC).w		; load object graphics
 
 Cred_SkipObjGfx:
-;		moveq	#plcid_Main2,d0
-;		bsr.w	AddPLC		; load standard level graphics
+		moveq	#plcid_Main2,d0
+		;bsr.w	AddPLC		; load standard level graphics
+		jsr		(AddPLC).l	; load standard level graphics
 		move.w	#120,(v_generictimer).w ; display a credit for 2 seconds
 		jsr	(PaletteFadeIn).w
 
@@ -3896,8 +3897,9 @@ LevelDataLoad:
 		jsr	(AddPLC).w	; load pattern load cues
 
 .skipPLC:
-;		moveq	#plcid_Main2,d0
-;		bra.w	AddPLC
+		moveq	#plcid_Main2,d0
+		;bra.w	AddPLC
+		jmp		(AddPLC).l
 
 ; ---------------------------------------------------------------------------
 ; Level layout loading subroutine

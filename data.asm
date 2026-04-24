@@ -140,8 +140,8 @@ Art_MrBean:	binclude	"char_assets/Bean.bin"	; Sonic
 ; ---------------------------------------------------------------------------
 ;Nem_Shield:	binclude	"artnem/Shield.nem"
 ;		even
-;Nem_Stars:	binclude	"artnem/Invincibility Stars.nem"
-;		even
+Nem_Stars:	binclude	"artnem/Invincibility Stars.nem"
+		even
 
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - GHZ stuff
