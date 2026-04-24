@@ -239,16 +239,16 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	enum	SNDMIN=$0				;!@ GD: Minimum sound ID (silence)
 	nextenum bgm__First
 	; Stage BGM
-	nextenum bgm_MWaterS=bgm__First		; Orange World	(Act 1)
+	nextenum bgm_MWaterS=bgm__First	; Orange World	(Act 1)
 	nextenum bgm_OrangeSong			; 		(Act 2)
 	nextenum bgm_GreenHills			; 		(Act 3)
-	nextenum bgm_WariosCastle			; Wario's hallway
+	nextenum bgm_WariosCastle		; Wario's hallway
 	nextenum bgm_LosTontos			; Alberta Canada	(Act 1)
-	nextenum bgm_Area5			; 			(Act 2)
-	nextenum bgm_Easton			; 			(Act 3)
+	nextenum bgm_Area5				; 			(Act 2)
+	nextenum bgm_Easton				; 			(Act 3)
 	nextenum bgm_Minecraft			; Minecraft	(Act 1 - Part 1)
 	nextenum bgm_SMWCave			; Minecraft	(Act 1 - Part 2)
-	nextenum bgm_Doom			; 		(Act 2)
+	nextenum bgm_Doom				; 		(Act 2)
 	nextenum bgm_BadEmerald			; 		(Act 3) + Cold Brew (Act 3)
 	nextenum bgm_TreasureCaves		; Spring Field	(Act 1)
 	nextenum bgm_Danstar			; 		(Act 2)
@@ -261,25 +261,26 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_UNOwenWasHer		; Windows	(Act 1)
 	nextenum bgm_Passport			; 		(Act 2)
 	nextenum bgm_VirusAlert			; 		(Act 3)
-	nextenum bgm_Title			; Inside Tonic's Body
+	nextenum bgm_Title				; Inside Tonic's Body
 	nextenum bgm_DoleDetective		; Doleville	(Act 1)
 	nextenum bgm_HardwareStore		; 		(Act 2)
-	nextenum bgm_GHZ			; Nogales Zone
-	nextenum bgm_TF2			; Bluescapes	(Act 1)		; Dax: Interesting song choice for this :/
-	nextenum bgm_Blue			;		(Act 2)
+	nextenum bgm_GHZ				; Nogales Zone
+	nextenum bgm_TF2				; Bluescapes	(Act 1)		; Dax: Interesting song choice for this :/
+	nextenum bgm_Blue				;		(Act 2)
 	nextenum bgm_Dungeon3			; Azure Rainforest
-	nextenum bgm_Final			; Final Zone
+	nextenum bgm_Final				; Final Zone
 
 	; Boss BGM
 	nextenum bgm_BeforeBoss			; Pre-Boss Encounter
-	nextenum bgm_Boss			; Regular Boss
+	nextenum bgm_Boss				; Regular Boss
 	nextenum bgm_ClintonFuck		; Bill Clinton Boss
 	nextenum bgm_Coffinman			; Alberta Canada Boss
-	nextenum bgm_Aporia			; Spring Field Boss
+	nextenum bgm_Aporia				; Spring Field Boss
 	nextenum bgm_Megalovania		; MeinKraft Boss
 	nextenum bgm_TwoSteps			; Mildanner Boss
 	nextenum bgm_DoleBOSS			; Doleville Boss
 	nextenum bgm_PizzaPopBoss		; A Boss of Some kind???
+	nextenum bgm_WarioLand1Boss		; !@ GD: Wario Land 1 boss
 
 	; Special Stage BGM
 	nextenum bgm_RamRanch			; Ram Ranch
@@ -295,32 +296,32 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_NewBarkTown		; Debug Menu
 	nextenum bgm_Memories			; Character/Difficulty Select
 	nextenum bgm_DoleAttack			; Intro Cutscene
-	nextenum bgm_Spoopy			; Sans Death Screen
+	nextenum bgm_Spoopy				; Sans Death Screen
 	nextenum bgm_Continue			; Continue Screen
-	nextenum bgm_Ending			; Ending A
+	nextenum bgm_Ending				; Ending A
 	nextenum bgm_SkySanctuary		; Ending B
 	nextenum bgm_Jeopardy			; The End Screen
 
 	; In-Game Jingles
 	nextenum bgm_ActClear			; Act Clear
-	nextenum bgm_MJWin			; Special Stage Win
+	nextenum bgm_MJWin				; Special Stage Win
 	nextenum bgm_GameOver			; Game Over
 	nextenum bgm_ExtraLife			; Extra Life
 	nextenum bgm_Drowning			; Drowning
 	nextenum bgm_Emerald			; Chaos Emerald
 
 	; Splash Screen BGM
-	nextenum bgm_Retro			; Sonic Retro
+	nextenum bgm_Retro				; Sonic Retro
 	nextenum bgm_RonicSetro			; Ronic Setro
 	nextenum bgm_MayoDed			; SSRG
 	nextenum bgm_S1ActClear			; SSRG (Ver. 2)
 	nextenum bgm_SHCSplash			; SHC Splash
 	nextenum bgm_RetroBlast			; Retro Blast Screen
 	nextenum bgm_ConiJingle			; ConiNight
-	nextenum Bgm_GooglePlayStock		; RobiWanKenobi
+	nextenum Bgm_GooglePlayStock	; RobiWanKenobi
 	nextenum bgm_SneakySnitch		; Malachi
 	nextenum bgm_TG2000Jingle		; TheGamer2000
-	nextenum bgm_Donnie			; Team Overload
+	nextenum bgm_Donnie				; Team Overload
 	nextenum bgm_TSHLogo			; TheSunsetHacker
 	nextenum bgm_S1Continue			; Broke Sonic Screen
 	nextenum bgm_PuyoDrown			; Wait, there's another one?
@@ -336,23 +337,23 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	; Advertisement BGM
 	nextenum bgm_WBRBack			; GMZ - this one will be used, actually
 	nextenum bgm_PuyoReject			; Ad Jingle A
-	nextenum bgm_LG				; Ad Jingle B
-	nextenum bgm_ILBT			; Hong Kong 97 Ad
-	nextenum bgm_Sunset			; Carbuncle Ad
+	nextenum bgm_LG					; Ad Jingle B
+	nextenum bgm_ILBT				; Hong Kong 97 Ad
+	nextenum bgm_Sunset				; Carbuncle Ad
 	nextenum bgm_Elevator			; Teeth Tonic Ad
 	nextenum bgm_SonUnderground		; Sonic Underground Ad
-	nextenum bgm_Son1UP			; Sonic 1 Super Challenges Ad
+	nextenum bgm_Son1UP				; Sonic 1 Super Challenges Ad
 	nextenum bgm_GEMSHill			; IWBTH Ad
 	nextenum bgm_BomerDude			; AtGames Ad
 	nextenum bgm_ClintonYears		; Gaming in the Clinton Years Ad
 	nextenum bgm_Skinner			; Steamed Hams Ad
 
 	; BSOD BGM
-	nextenum bgm_MMZPast			; Mega CD Crash
-	nextenum bgm_BossaNova
-	nextenum bgm_BatMan
-	nextenum bgm_Hidden
-	nextenum bgm_SadMac
+	nextenum bgm_MMZPast			; Sonic CD Metallic Madness Zone Past (Sonic CD Virus BSOD)
+	nextenum bgm_BossaNova			; GNyU/Linyux shitpost BSOD
+	nextenum bgm_BatMan				; Sonic CD Batman
+	nextenum bgm_Hidden				; Sonic CD CYA Next Game
+	nextenum bgm_SadMac				; Mac crash
 
 	; Unused Full/Looping BGM
 	nextenum bgm_Dingaling

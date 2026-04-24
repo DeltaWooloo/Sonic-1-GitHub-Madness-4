@@ -61,6 +61,7 @@ MusicIndex:
 	bgmdef $01, Mus_TwoSteps
 	bgmdef $34, Mus_DoleBOSS
 	bgmdef s1TempotoS3($00), Mus_PizzaPopBoss
+	bgmdef $34, Mus_WarioLand1Boss	;!@ GD
 
 	bgmdef $6C, Mus_RamRanch
 
@@ -122,7 +123,7 @@ MusicIndex:
 	bgmdef $94, Mus_ClintonYears
 	bgmdef $01, Mus_Skinner
 
-	bgmdef s1TempotoS3($03), Mus_MMZPast
+	bgmdef s1TempotoS3($03), Mus_MMZPast	;!@ GD
 	bgmdef $55, Mus_BossaNova
 	bgmdef $01, Mus_BatMan
 	bgmdef s2TempotoS3($E0), Mus_Hidden
@@ -142,7 +143,7 @@ MusicIndex:
 	bgmdef $01, Mus_FuneralMarch
 	bgmdef $01, Mus_Resetti
 	bgmdef $01, Mus_NewShop
-	bgmdef s1TempotoS3($06), Mus_NepAnime
+	bgmdef s1TempotoS3($06), Mus_NepAnime		;!@ GD
 	bgmdef $01, Mus_VampKiller
 	bgmdef s1TempotoS3($00), Mus_Gadget
 	bgmdef $80, Mus_CanCanInv
@@ -251,6 +252,8 @@ Mus_TwoSteps:		include	"music/TG2000Tracks/Mus - Two Steps.asm"
 Mus_DoleBOSS:		include	"music/TG2000Tracks/DoleBOSS.asm"	;Boss Track
 	even
 Mus_PizzaPopBoss:	include "music/CNTracks/CheetahFakeout.asm"
+	even
+Mus_WarioLand1Boss:	include "music/GenesisDoes/WarioLand1_Boss.asm"
 	even
 
 Mus_Invincible:		include "music/TG2000Tracks/Mus - Somari Invincibility.asm"
