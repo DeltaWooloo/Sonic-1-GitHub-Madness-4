@@ -3928,5 +3928,5 @@ GreenHills_Voices:
 	dc.b		$00,$0F,$1F,$0F,$1F,$16,$00,$17,$00;			Voice 05
 	dc.b		$3D,$01,$02,$02,$02,$10,$50,$50,$50,$07,$08,$08,$08,$01,$00,$00
 	dc.b		$00,$20,$17,$17,$17,$1C,$00,$00,$00;			Voice 06
-	smpsFooterEndSong	"TG2000Tracks/GreenHills.asm"	
+	smpsFooterEndSong	"TG2000Tracks/OLD/GreenHills.asm"	
 	even

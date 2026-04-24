@@ -2237,4 +2237,4 @@ Passport_PSG3_0F_0_64:
 	dc.b $02
 	smpsReturn
 
-	smpsFooterEndSong	"TG2000Tracks/Passport.asm"
+	smpsFooterEndSong	"TG2000Tracks/OLD/Passport.asm"

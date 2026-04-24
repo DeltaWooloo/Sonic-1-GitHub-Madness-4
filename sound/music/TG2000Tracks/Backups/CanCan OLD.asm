@@ -24405,5 +24405,5 @@ CanCan_Voices:
 	dc.b		$00,$06,$06,$06,$0A,$1B,$1C,$16,$00;			Voice 1A
 	dc.b		$2C,$03,$02,$0F,$04,$8E,$53,$9F,$1F,$0B,$00,$00,$0D,$01,$00,$00
 	dc.b		$00,$23,$07,$02,$F6,$16,$06,$1E,$00;			Voice 1B
-	smpsFooterEndSong	"TG2000Tracks/CanCan.asm"
+	smpsFooterEndSong	"TG2000Tracks/Backups/CanCan OLD.asm"
 	even

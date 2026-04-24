@@ -14001,5 +14001,5 @@ CheetahMen_Voices:
 	dc.b		$00,$FF,$FE,$FE,$FE,$14,$23,$1E,$00;			Voice 05
 	dc.b		$35,$20,$10,$10,$00,$51,$16,$1F,$16,$08,$06,$06,$01,$07,$06,$06
 	dc.b		$0D,$44,$14,$44,$6A,$14,$77,$79,$00;			Voice 06
-	smpsFooterEndSong	"TG2000Tracks/Cheetah.asm"	
+	smpsFooterEndSong	"TG2000Tracks/Backups/Cheetah.asm"	
 	even

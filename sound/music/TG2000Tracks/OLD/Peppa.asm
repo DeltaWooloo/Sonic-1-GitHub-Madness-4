@@ -3022,5 +3022,5 @@ Peppa_Voices:
 	dc.b		$3D,$02,$02,$01,$02,$90,$10,$12,$17,$0F,$0D,$0D,$0D,$07,$04,$04
 	dc.b		$04,$25,$1A,$1A,$1A,$14,$00,$00,$00;			Voice 06
 	
-	smpsFooterEndSong	"TG2000Tracks/Peppa.asm"
+	smpsFooterEndSong	"TG2000Tracks/OLD/Peppa.asm"
 	even

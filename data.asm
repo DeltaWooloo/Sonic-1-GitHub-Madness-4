@@ -79,6 +79,9 @@ Nem_TGTiles:	binclude	"_gamemode/TGSplash/tiles.bin"
 
 Map_Shield:	include		"_maps/Shield Map.asm"	
 		even
+;!@ GD: Invin fire
+Map_Shield2:	include	"_maps/Shield and Invincibility.asm"
+		even
 Dgfx_Shield:	include		"_maps/Shield DGFX.asm"	
 		even
 Art_Shield:	binclude	"artunc/Shield.bin"	
@@ -140,8 +143,8 @@ Art_MrBean:	binclude	"char_assets/Bean.bin"	; Sonic
 ; ---------------------------------------------------------------------------
 ;Nem_Shield:	binclude	"artnem/Shield.nem"
 ;		even
-;Nem_Stars:	binclude	"artnem/Invincibility Stars.nem"
-;		even
+Nem_Stars:	binclude	"artnem/Invincibility Stars.nem"
+		even
 
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - GHZ stuff

@@ -2543,4 +2543,4 @@ VirusAlert_PSG3_0A_0_64_0F:
 	dc.b $04
 	smpsReturn
 
-	smpsFooterEndSong	"TG2000Tracks/VirusAlert.asm"
+	smpsFooterEndSong	"TG2000Tracks/OLD/VirusAlert.asm"

@@ -232,12 +232,12 @@ Pow_Invinciblity:
 		move.w	#$4B0,(v_player+invtime).w ; time limit for the power-up
 		move.b	#id_ShieldItem,(v_starsobj1).w ; load stars object ($3801)
 		move.b	#1,(v_starsobj1+obAnim).w
-		;move.b	#id_ShieldItem,(v_starsobj2).w ; load stars object ($3802)
-		;move.b	#2,(v_starsobj2+obAnim).w
-		;move.b	#id_ShieldItem,(v_starsobj3).w ; load stars object ($3803)
-		;move.b	#3,(v_starsobj3+obAnim).w
-		;move.b	#id_ShieldItem,(v_starsobj4).w ; load stars object ($3804)
-		;move.b	#4,(v_starsobj4+obAnim).w
+		move.b	#id_ShieldItem,(v_starsobj2).w ; load stars object ($3802)
+		move.b	#2,(v_starsobj2+obAnim).w
+		move.b	#id_ShieldItem,(v_starsobj3).w ; load stars object ($3803)
+		move.b	#3,(v_starsobj3+obAnim).w
+		move.b	#id_ShieldItem,(v_starsobj4).w ; load stars object ($3804)
+		move.b	#4,(v_starsobj4+obAnim).w
 		tst.b	(f_lockscreen).w ; is boss mode on?
 		bne.s	Pow_NoMusic	; if yes, branch
 		tst.b	(v_clintonfucker).w ; is boss mode on?
@@ -348,21 +348,21 @@ Pow_Randomiser:
 		dc.l	.vdp0C_m4_reg		;x $1A / $68 - 	~						$0C (Mode Register 4)
 		dc.l	.vdp10_planSz_reg	;x $1B / $6C - 	~						$10 (VDP Plane Size)
 		dc.l	.vdp_dbg_gfx		;x $1C / $70 -  ~ VDP Dbg Reg			$00 (GFX)
-		dc.l	.vdp_dbg_z80oc		;x $1D / $74 -  ~ VDP Dbg Reg			$01 (Z80)
-		dc.l	.funkyColors		;x $1E / $78 - 	Randomize CRAM colors (dry/water palletes)		
-		dc.l	.ultrashit			;x $1F / $7C -	All VDP corruption!
+		;dc.l	.vdp_dbg_z80oc		;x $1D / $74 -  ~ VDP Dbg Reg			$01 (Z80) - Too unstable for some emulators
+		dc.l	.funkyColors		;x $1D / $74 - 	Randomize CRAM colors (dry/water palletes)		
+		dc.l	.ultrashit			;x $1E / $78 -	All VDP corruption!
 		;!@ GenesisDoes: Spawn stuff
-		dc.l	.spawnPlayer		;x $20 / $80 - 	Spawn a	clone player
-		dc.l	.instaWin			;x $21 / $84 - 	~			Signpost
-		dc.l	.springTime			;x $22 / $88 - 	~			Red vert spring
-		dc.l	.BigRing			;x $23 / $8C - 	~			Giant Ring + give 50 rings
-		dc.l	.monitorInception	;x $24 / $90 - 	~			Another random monitor
-		dc.l	.lampoil			;x $25 / $94 - 	~			New lamppost
-		dc.l	.rAndCRiftApart		;x $26 / $98 -	~			RiftToGo
+		;dc.l	.spawnPlayer		;x $1F / $7C - 	Spawn a	clone player - Has issues
+		dc.l	.instaWin			;x $1F / $7C - 	~			Signpost
+		dc.l	.springTime			;x $20 / $80 - 	~			Red vert spring
+		dc.l	.BigRing			;x $21 / $84 - 	~			Giant Ring + give 50 rings
+		dc.l	.monitorInception	;x $22 / $98 - 	~			Another random monitor
+		dc.l	.lampoil			;x $23 / $9C - 	~			New lamppost
+		dc.l	.rAndCRiftApart		;x $24 / $A0 -	~			RiftToGo
 		;!@ GenesisDoes: Other
-		dc.l	.crash				;x $27 / $9C - 	Crash the game (illegal); Task fails successfully!
-		dc.l	.jukebox			;x $28 / $A0 - 	Play random song
-		dc.l	Pow_SlowShoes		;x $29 / $A4 -  Slow down shoes
+		dc.l	.crash				;x $25 / $94 - 	Crash the game (illegal); Task fails successfully!
+		dc.l	.jukebox			;x $26 / $A8 - 	Play random song
+		dc.l	Pow_SlowShoes		;x $27 / $AC -  Slow down shoes
 .powtableend:
 
 ; ===========================================================================
@@ -520,7 +520,7 @@ Pow_Randomiser:
 		bsr.w	.vdp0C_m4_reg
 		bsr.w	.vdp10_planSz_reg
 		bsr.w	.vdp_dbg_gfx
-		bsr.w	.vdp_dbg_z80oc
+		;bsr.w	.vdp_dbg_z80oc		;!@ GD: Disabled due to too unstable
 		bsr.w	.funkyColors
 		rts
 ; ===========================================================================		
@@ -903,11 +903,12 @@ Pow_vdp_fixRegs:
 		writeDBG_reg2
 		
 		;!@ CHeck if clone alive; if so deleteObject
-		tst.b	(v_playerClone).w
-		beq.s	.skip
-		lea		(v_playerClone),a0
-		movea.l	(a0),a0
-		jsr		(DeleteObject).l		
+		; Disabled, due to clone player disabled
+		;tst.b	(v_playerClone).w
+		;beq.s	.skip
+		;lea		(v_playerClone),a0
+		;movea.l	(a0),a0
+		;jsr		(DeleteObject).l		
 		
 	.skip:		
 		cmpi.b	#0,d0			; CHeck d0 input param. Is it 0?

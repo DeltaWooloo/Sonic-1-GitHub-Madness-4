@@ -226,3 +226,4 @@ NCISLAND_Voices:
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $00, $97, $2C, $27
 
+	smpsFooterEndSong	"CNTracks/Unused/NCIsland.asm"

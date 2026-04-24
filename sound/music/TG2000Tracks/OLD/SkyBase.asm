@@ -5565,5 +5565,5 @@ SkyBase_Voices:
 	dc.b		$10,$02,$51,$66,$01,$1F,$1F,$5F,$1F,$04,$08,$08,$04,$00,$0F,$00
 	dc.b		$00,$18,$38,$58,$18,$2D,$1E,$19,$00;			Voice 03
 	
-	smpsFooterEndSong	"TG2000Tracks/SkyBase.asm"
+	smpsFooterEndSong	"TG2000Tracks/OLD/SkyBase.asm"
 	even

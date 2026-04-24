@@ -5074,4 +5074,4 @@ CCLobby_Voices:
 	smpsVcReleaseRate   $0F, $0A, $0A, $0A
 	smpsVcTotalLevel    $00, $0F, $2D, $1E
 
-	smpsFooterEndSong	"LiquidTracks/Mus - CCLobby.asm"
+	smpsFooterEndSong	"LiquidTracks/OLD/Mus - CCLobby.asm"

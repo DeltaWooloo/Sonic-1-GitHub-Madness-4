@@ -755,3 +755,6 @@ Thundersink_DAC_05_0_64:	; Effect not supported:
 Thundersink_DAC_03_0_64:
 	dc.b nCs0, $40
 	smpsReturn
+
+	smpsFooterEndSong	"TG2000Tracks/Backups/Thundersink (Needs work).asm"
+	even

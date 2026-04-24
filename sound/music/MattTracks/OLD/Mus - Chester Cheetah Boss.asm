@@ -2983,4 +2983,4 @@ BGM_ChesterBoss_Voices:
 	smpsVcReleaseRate   $0F, $08, $0C, $08
 	smpsVcTotalLevel    $00, $09, $1B, $0F
 
-	smpsFooterEndSong	"MattTracks/Mus - Chester Cheetah Boss.asm"
+	smpsFooterEndSong	"MattTracks/OLD/Mus - Chester Cheetah Boss.asm"

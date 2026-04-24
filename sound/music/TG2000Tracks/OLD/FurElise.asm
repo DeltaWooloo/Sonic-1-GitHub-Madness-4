@@ -629,5 +629,5 @@ FurElise_DAC:
 FurElise_Voices:
 	dc.b		$2C,$31,$31,$71,$71,$5F,$54,$5F,$5F,$05,$0A,$03,$0C,$00,$03,$03
 	dc.b		$03,$00,$87,$00,$A7,$17,$00,$19,$02;			Voice 00
-	smpsFooterEndSong	"TG2000Tracks/FurElise.asm"	
+	smpsFooterEndSong	"TG2000Tracks/OLD/FurElise.asm"	
 	even
