@@ -126,8 +126,10 @@ EagleSoft_DumpPal:
 		; play EagleSoft song
 		;move.w	#dEagleSoftSong,d0										
 		;jsr		(PlaySound_Special).l
-		move.b	#dEagleSoftSong, d0
-		jsr		(MegaPCM_PlaySample).l
+		; move.b	#dEagleSoftSong, d0	; GMZ - Commented
+		; jsr		(MegaPCM_PlaySample).l	; GMZ - Commented
+		move.b	#bgm_EagleSoft,d0	; GMZ
+		jsr	MegaPCM_PlaySample	; GMZ
 		
 		;Load Eagle object		
 		lea	(v_eagle).w,a1												; load eagle to a1		
