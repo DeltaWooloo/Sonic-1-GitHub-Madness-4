@@ -276,6 +276,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_ClintonFuck		; Bill Clinton Boss
 	nextenum bgm_WarioLand1Boss		; Wario Hallway Boss
 	nextenum bgm_Coffinman			; Alberta Canada (Act 3) Boss
+	nextenum bgm_DeltaTale			; Alberta Canada (Act 4) Boss
 	nextenum bgm_Aporia			; Spring Field Boss
 	nextenum bgm_Megalovania		; MeinKraft Boss
 	nextenum bgm_DoleBOSS			; Doleville Boss
@@ -283,6 +284,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 
 	; Special Stage BGM
 	nextenum bgm_RamRanch			; Demo BGM
+	nextenum bgm_CanCan
 
 	; Power Up BGM
 	nextenum bgm_Invincible			; Invincibility
@@ -362,47 +364,14 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_W95RockR			; !@ GD: Windows 95 Rock Remix (https://modarchive.org/index.php?request=view_by_moduleid&query=201495)
 
 	; Unused Full/Looping BGM
-	nextenum bgm_PizzaPopBoss
-	nextenum bgm_BonusEight
-	nextenum bgm_Pac2
-	nextenum bgm_CanCan
-	nextenum bgm_ChickenDance
-	nextenum bgm_DeltaTale
-	nextenum bgm_Carefree
-	nextenum bgm_FurElise
 	nextenum bgm_SwingSinners
-	nextenum bgm_Miniscule
-	nextenum bgm_FuneralMarch
-	nextenum bgm_Resetti
-	nextenum bgm_NewShop
-	nextenum bgm_NepAnime
-	nextenum bgm_VampKiller
-	nextenum bgm_Gadget
-	nextenum bgm_CanCanInv
-	nextenum bgm_Wormy
-	nextenum bgm_Starman
-	nextenum bgm_JamesPond
-	nextenum bgm_AlexKiddEnd
-	nextenum bgm_DJKK
-	nextenum bgm_Levian
-	nextenum bgm_Peppa
+	nextenum bgm_WeAreTheSonic
+	nextenum bgm_ChairRoom
 	nextenum bgm_SkyBase
 	nextenum bgm_Scrappy
-	nextenum bgm_WeAreTheSonic
-	nextenum bgm_Thomas
-	nextenum bgm_CCLobby
-	nextenum bgm_ChairRoom
-	nextenum bgm_dam_dariram
-	nextenum bgm_Outfarted
 	nextenum bgm_SkyGift
-	nextenum bgm_S28BitUnused
+	nextenum bgm_Outfarted
 
-	; Unused Jingle BGM
-	nextenum bgm_SonicToole
-	nextenum bgm_Folgers
-	nextenum bgm_Ding
-	nextenum bgm_Win2K
-	nextenum bgm_CrazyMario
 	; Keep this last
 	nextenum bgm__Last	
 	bgm__count:			equ	(bgm__Last-bgm__First)	; Count of songs
