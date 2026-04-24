@@ -3120,8 +3120,8 @@ Level_MainLoop:
 ; ---------------------------------------------------------------------------
 
 Reproduce_BGM:
-        tst.w	(f_demo).w	; Is demo mode on?
-		bne.s	BGMDemo
+		tst.w	(f_demo).w	; Is demo mode on?
+		bne.s	.DemoBGM
 		moveq	#0,d0
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
@@ -3134,13 +3134,11 @@ Reproduce_BGM:
 		lea	(a2,d0.w),a2 
 		move.b	13(a2),d0
 		move.b	d0,(v_zonemusic).w
-		bsr.w	QueueSound1	; play music		
-        rts
-		
-BGMDemo:
-        move.b	#bgm_ActClear,d0
-		jsr	(QueueSound2).l
-		rts
+		bra.w	QueueSound1	; play music
+
+.DemoBGM:
+		move.b	#bgm_RamRanch,d0
+		jmp	(QueueSound2).l
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------

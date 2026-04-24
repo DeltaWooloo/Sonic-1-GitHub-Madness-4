@@ -196,7 +196,7 @@ splash_turd macro routine
 ; Entries	
 	splash_liquid	funnybutthole					;!@ GD: Reserve this as the 2nd splash screne
 	splash_liquid	GM_Disclaimer
-	splash_solid	Gens,$40, 1, _bgm, bgm_SS,60*5	
+	splash_solid	Gens,		$40, 1, _bgm, bgm_SS,			60*5
 	splash_liquid	MultiSplash_Init
 	splash_liquid	SonicRetro
 	splash_liquid	NewSSRG_Screen
@@ -225,7 +225,6 @@ splash_turd macro routine
 	splash_solid	GameTap,	$20, 1, _pcm, dOllieGameTap,		60*3
 	splash_solid	Clownancy,	$20, 1, _bgm, $00,			60*3
 	splash_solid	Ollie,		$20, 1, _pcm, dOllieWahoo,		60*3
-;	splash_solid	W,		$40, 1, _bgm, bgm_Win2K,		380
 
 	splash_liquid	GM_NTOSKRNL
 	splash_liquid	GM_SegaEU
@@ -247,7 +246,6 @@ splash_turd macro routine
 	inc_solid_splash GameTap
 	inc_solid_splash Clownancy
 	inc_solid_splash Ollie
-	;inc_solid_splash W
 
 ; Files for liquid
 	include "LiquidSplashes/Rerto/Rerto.asm"

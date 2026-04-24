@@ -302,8 +302,8 @@ loc_18BAE:
 
 loc_18BB4:
 		clr.w	obVelY(a0)
+		jsr	(GetTimeBonus).l
 		move.b  #id_SansDied,(v_gamemode).w ; go to death
-
 
 loc_18BC2:
 		bra.w	loc_189EE

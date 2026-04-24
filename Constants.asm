@@ -272,18 +272,17 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 
 	; Boss BGM
 	nextenum bgm_BeforeBoss			; Pre-Boss Encounter
-	nextenum bgm_Boss				; Regular Boss
+	nextenum bgm_Boss			; Regular Boss
 	nextenum bgm_ClintonFuck		; Bill Clinton Boss
-	nextenum bgm_Coffinman			; Alberta Canada Boss
-	nextenum bgm_Aporia				; Spring Field Boss
+	nextenum bgm_WarioLand1Boss		; Wario Hallway Boss
+	nextenum bgm_Coffinman			; Alberta Canada (Act 3) Boss
+	nextenum bgm_Aporia			; Spring Field Boss
 	nextenum bgm_Megalovania		; MeinKraft Boss
-	nextenum bgm_TwoSteps			; Mildanner Boss
 	nextenum bgm_DoleBOSS			; Doleville Boss
-	nextenum bgm_PizzaPopBoss		; A Boss of Some kind???
-	nextenum bgm_WarioLand1Boss		; !@ GD: Wario Land 1 boss
+	nextenum bgm_TwoSteps			; Bluescapes Boss
 
 	; Special Stage BGM
-	nextenum bgm_RamRanch			; Ram Ranch
+	nextenum bgm_RamRanch			; Demo BGM
 
 	; Power Up BGM
 	nextenum bgm_Invincible			; Invincibility
@@ -291,11 +290,15 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_AVGNInv			; Power Sneakers
 	nextenum bgm_LimitedEgg			; Slow-Down Shoes
 
-	; UI + Scene BGM
+	; Scene BGM
+	nextenum bgm_Dingaling
+	nextenum bgm_DoleAttack			; Intro Cutscene
+
+	; UI BGM
 	nextenum bgm_smilingbomb		; Menu
 	nextenum bgm_NewBarkTown		; Debug Menu
 	nextenum bgm_Memories			; Character/Difficulty Select
-	nextenum bgm_DoleAttack			; Intro Cutscene
+	nextenum bgm_ActClear			; Act Clear
 	nextenum bgm_Spoopy				; Sans Death Screen
 	nextenum bgm_Continue			; Continue Screen
 	nextenum bgm_Ending				; Ending A
@@ -303,7 +306,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Jeopardy			; The End Screen
 
 	; In-Game Jingles
-	nextenum bgm_ActClear			; Act Clear
 	nextenum bgm_MJWin				; Special Stage Win
 	nextenum bgm_GameOver			; Game Over
 	nextenum bgm_ExtraLife			; Extra Life
@@ -311,12 +313,14 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Emerald			; Chaos Emerald
 
 	; Splash Screen BGM
+	nextenum bgm_SS				; Winners Don't Use Gens
 	nextenum bgm_Retro				; Sonic Retro
 	nextenum bgm_RonicSetro			; Ronic Setro
 	nextenum bgm_MayoDed			; SSRG
 	nextenum bgm_S1ActClear			; SSRG (Ver. 2)
 	nextenum bgm_SHCSplash			; SHC Splash
 	nextenum bgm_RetroBlast			; Retro Blast Screen
+	nextenum bgm_EagleSoft			; GMZ - EagleSoft song
 	nextenum bgm_ConiJingle			; ConiNight
 	nextenum Bgm_GooglePlayStock	; RobiWanKenobi
 	nextenum bgm_SneakySnitch		; Malachi
@@ -358,10 +362,9 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_W95RockR			; !@ GD: Windows 95 Rock Remix (https://modarchive.org/index.php?request=view_by_moduleid&query=201495)
 
 	; Unused Full/Looping BGM
-	nextenum bgm_Dingaling
+	nextenum bgm_PizzaPopBoss
 	nextenum bgm_BonusEight
 	nextenum bgm_Pac2
-	nextenum bgm_SS
 	nextenum bgm_CanCan
 	nextenum bgm_ChickenDance
 	nextenum bgm_DeltaTale

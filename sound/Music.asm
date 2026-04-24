@@ -24,7 +24,7 @@ MusicIndex:
 	bgmdef s1TempotoS3($03), Mus_MWaterS
 	bgmdef $01, Mus_OrangeSong
 	bgmdef $01, Mus_GreenHills
-	bgmdef $FF, Mus_WariosCastle	
+	bgmdef $FF, Mus_WariosCastle
 	bgmdef $01, Mus_LosTontos
 	bgmdef $01, Mus_Area5
 	bgmdef $76, Mus_Easton
@@ -55,13 +55,12 @@ MusicIndex:
 	bgmdef $55, Mus_BeforeBoss
 	bgmdef $01, Mus_Boss
 	bgmdef _nomod, Mus_ClintonFuck
+	bgmdef s1TempotoS3($00), Mus_WarioLand1Boss	;!@ GD
 	bgmdef $65, Mus_Coffinman
 	bgmdef $44, Mus_Aporia
 	bgmdef $01, Mus_Megalovania
-	bgmdef $01, Mus_TwoSteps
 	bgmdef $34, Mus_DoleBOSS
-	bgmdef s1TempotoS3($00), Mus_PizzaPopBoss
-	bgmdef $34, Mus_WarioLand1Boss	;!@ GD
+	bgmdef $01, Mus_TwoSteps
 
 	bgmdef $6C, Mus_RamRanch
 
@@ -70,29 +69,33 @@ MusicIndex:
 	bgmdef $60, Mus_AVGNInv
 	bgmdef s2TempotoS3($60), Mus_LimitedEgg
 
+	bgmdef $01, Mus_Dingaling
+	bgmdef $01, Mus_DoleAttack
+
 	bgmdef s1TempotoS3($07), Mus_SmilingBomb
 	bgmdef $0A, Mus_NewBarkTown
 	bgmdef s1TempotoS3($05), Mus_Memories
-	bgmdef $01, Mus_DoleAttack
+	bgmdef _nomod, Mus_ActClear
 	bgmdef $01, Mus_Spoopy
 	bgmdef s1TempotoS3($FF), Mus_Continue
 	bgmdef s1TempotoS3($05), Mus_Ending
 	bgmdef $04, Mus_SkySanctuary
 	bgmdef s1TempotoS3($00), Mus_Jeopardy
 
-	bgmdef _nomod, Mus_ActClear
 	bgmdef s1TempotoS3($05), Mus_MJWin
 	bgmdef s1TempotoS3($03), Mus_GameOver
 	bgmdef $24, Mus_ExtraLife
 	bgmdef _nomod, Mus_Drowning
 	bgmdef $45, Mus_Emerald
 
+	bgmdef $01, Mus_SS
 	bgmdef s1TempotoS3($03), Mus_Retro
 	bgmdef $01, Mus_Setro
 	bgmdef $4F, Mus_MayoDed
 	bgmdef s1TempotoS3($03), Mus_S1ActClear
 	bgmdef $08, Mus_SHCSplash
 	bgmdef $90, Mus_RetroBlast
+	bgmdef s1TempotoS3($00), Mus_EagleSoft	; GMZ
 	bgmdef s1TempotoS3($00), Mus_ConiJingle
 	bgmdef s1TempotoS3($03), Mus_GooglePlayStock
 	bgmdef s1TempotoS3($03), Mus_SneakySnitch
@@ -122,7 +125,6 @@ MusicIndex:
 	bgmdef $01, Mus_BomerDude
 	bgmdef $94, Mus_ClintonYears
 	bgmdef $01, Mus_Skinner
-	bgmdef s1TempotoS3($00), Mus_EagleSoft	; GMZ
 
 	bgmdef s1TempotoS3($03), Mus_MMZPast	;!@ GD
 	bgmdef $55, Mus_BossaNova
@@ -132,10 +134,9 @@ MusicIndex:
 	bgmdef $80, Mus_dummy					;!@ GD: slot reserved for Windows 95 Rock
 	bgmdef $80, Mus_dummy					;!@ GD: slot reserved for Windows 95 Rock (Remix)
 
-	bgmdef $01, Mus_Dingaling
+	bgmdef s1TempotoS3($00), Mus_PizzaPopBoss
 	bgmdef $65, Mus_BonusEight
 	bgmdef $01, Mus_Pac2
-	bgmdef $01, Mus_SS
 	bgmdef $27, Mus_CanCan
 	bgmdef $80, Mus_ChickenDance
 	bgmdef $11, Mus_DeltaTale
@@ -237,9 +238,9 @@ Mus_Hidden:		include	"music/Dawid/Hidden.asm"
 	even
 Mus_Final:		include "music/Dawid/Extremely_intense_boss_song_for_someone.asm" ;very intense not really but eh idgaf
 	even
-Mus_BonusEight:		include	"music/TG2000Tracks/Bonus8.asm"
+
+Mus_BeforeBoss:		include	"music/TG2000Tracks/BeforeBoss.asm"
 	even
-	
 Mus_Boss:		include "music/MattTracks/Mus - Chester Cheetah Boss.asm"
 	even
 Mus_ClintonFuck:	include	"music/Kat/Mus - Clinton Fucker.asm"
@@ -261,7 +262,17 @@ Mus_WarioLand1Boss:	include "music/GenesisDoes/WarioLand1_Boss.asm"
 
 Mus_Invincible:		include "music/TG2000Tracks/Mus - Somari Invincibility.asm"
 	even
+Mus_WillTell:		include	"music/TG2000Tracks/WillTell.asm"
+	even
 Mus_AVGNInv:		include	"music/TG2000Tracks/Mus - AVGN Invincibility.asm"
+	even
+Mus_LimitedEgg:		include "music/DaxKatter/Mus - Limited Egg.asm"
+	even
+
+Mus_RamRanch:		include	"music/CNTracks/RamRanch.asm"
+	even
+
+Mus_Dingaling:		include	"music/TG2000Tracks/Mus - Dingaling.asm"
 	even
 
 Mus_Title:		include "music/TG2000Tracks/Mus - The GHM4 Song.asm"
@@ -272,8 +283,6 @@ Mus_NewBarkTown:	include "music/DaxKatter/Mus - New Bark Town.asm"
 	even
 Mus_Memories:		include	"music/CNTracks/MEMORIES.asm"
 	even
-Mus_Dingaling:		include	"music/TG2000Tracks/Mus - Dingaling.asm"
-	even
 Mus_Continue:		include "music/LiquidTracks/Mus - Uwol Menu.asm"
 	even
 Mus_Ending:		include "music/MattTracks/Mus - Ending.asm"
@@ -282,10 +291,10 @@ Mus_SkySanctuary:	include	"music/DaxKatter/Mus - Golden Sanctuary.asm"
 	even
 Mus_Jeopardy:		include "music/CNTracks/Jeopardy.asm"
 	even
-
 Mus_ActClear:		include	"music/CNTracks/Homero.asm"
 	even
-Mus_Pac2:		include	"music/TG2000Tracks/Mus - I Won't Be Long.asm"
+
+Mus_MJWin:		include	"music/DaxKatter/Mus - Moonwalker Clear.asm"
 	even
 Mus_GameOver:		include "music/DaxKatter/Mus - NBT Game Over.asm"
 	even
@@ -298,6 +307,8 @@ Mus_Emerald:		include	"music/TG2000Tracks/ChaosFarm.asm"
 
 ; Used for Splash Screens
 
+Mus_SS:			include "music/LiquidTracks/Mus - Special Stage.asm"
+	even
 Mus_Retro:		include "music/LiquidTracks/Mus - Sonic Retro.asm"
 	even
 Mus_Setro:		include	"music/PikaNoob/Mus - Ronic Setro.asm"
@@ -310,6 +321,8 @@ Mus_SHCSplash:		include	"music/BigNate/Mus - SHC Splash Screen.asm"
 	even
 Mus_RetroBlast:		include	"music/DaxKatter/Mus - SMB1 Game Over.asm" 
 	even
+Mus_EagleSoft:		include	"music/GMZ/Mus - EagleSoft.asm"	; GMZ
+	even	; GMZ
 Mus_ConiJingle:		include "music/CNTracks/Mus - Coni Jingle.asm"
 	even
 Mus_GooglePlayStock:	include	"music/Robi/FunkyMusic.asm"
@@ -345,6 +358,8 @@ Mus_CleanSlate:		include	"music/Robi/ShitSlate.asm"
 
 ; Used for Commericals
 
+Mus_WBRBack:		include	"music/GMZ/Mus - We'll Be Right Back.asm"	; GMZ
+	even	; GMZ
 Mus_PuyoReject:		include	"music/TG2000Tracks/Mus - Reject of Puyo Puyo.asm"
 	even
 Mus_LG:			include	"music/TG2000Tracks/Mus - LG Washing Machine.asm"
@@ -361,23 +376,29 @@ Mus_Son1UP:		include	"music/TG2000Tracks/Son1UP.asm"
 	even
 Mus_GEMSHill:		include	"music/AburtosTracks/Mus - GEMS Hill.asm"
 	even
-Mus_LimitedEgg:		include "music/DaxKatter/Mus - Limited Egg.asm"
-	even
 Mus_BomerDude:		include	"music/Dawid/Mus - Bomer Dude.asm"	;i have no idea too
 	even
 Mus_ClintonYears:	include	"music/DaxKatter/Mus - Clinton Years.asm"
 	even
 Mus_Skinner:		include	"music/TG2000Tracks/Mus - Skinner.asm" 
 	even
-	
+
 ;  Used for Fake Crashes
 
+Mus_BonusEight:		include	"music/TG2000Tracks/Bonus8.asm"
+	even
 Mus_MMZPast:	include	"music/GenesisDoes/MMZPast_SNN.asm"
+	even
+Mus_SadMac:		include	"music/TG2000Tracks/SadMac.asm"
+	even
+Mus_BatMan:		include	"music/TG2000Tracks/Mus - Batman.asm"
+	even
+Mus_Spoopy:		include	"music/TG2000Tracks/Mus - Spoopy.asm"
 	even
 
 ; Unused Tracks (so far)
 
-Mus_SS:			include "music/LiquidTracks/Mus - Special Stage.asm"
+Mus_Pac2:		include	"music/TG2000Tracks/Mus - I Won't Be Long.asm"
 	even
 Mus_CanCan:		include	"music/TG2000Tracks/Mus - Can Can.asm" 
 	even
@@ -395,11 +416,7 @@ Mus_Miniscule:		include	"music/TG2000Tracks/Mus - Minuscule.asm"
 	even
 Mus_FuneralMarch:	include	"music/TG2000Tracks/Mus - Funeral March.asm"
 	even
-Mus_BatMan:		include	"music/TG2000Tracks/Mus - Batman.asm"
-	even
 Mus_Resetti:		include	"music/TG2000Tracks/Mus - Mr. Resetti.asm"
-	even
-Mus_Spoopy:		include	"music/TG2000Tracks/Mus - Spoopy.asm"
 	even
 Mus_NewShop:		include	"music/TG2000Tracks/Mus - SFZ Shop.asm"
 	even
@@ -441,39 +458,23 @@ Mus_BossaNova:		include	"music/TG2000Tracks/BossaNova.asm"
 	even
 Mus_dam_dariram:	include	"music/DSKTracks/dam_dariram_handmade.asm"
 	even
-Mus_WillTell:		include	"music/TG2000Tracks/WillTell.asm"
-	even
 Mus_Outfarted:		include	"music/TG2000Tracks/Outfarted.asm"
-	even
-Mus_BeforeBoss:		include	"music/TG2000Tracks/BeforeBoss.asm"
-	even
-Mus_SonicToole:		include	"music/TG2000Tracks/SonicToole.asm"
 	even
 Mus_SkyGift:		include	"music/TG2000Tracks/SkyGift.asm"
 	even
 
+Mus_SonicToole:		include	"music/TG2000Tracks/SonicToole.asm"
+	even
 Mus_CrazyMario:		include	"music/Dawid/crazymario.asm"
 	even
 Mus_Ding:		include	"music/TG2000Tracks/Ding.asm"
-	even
-Mus_SadMac:		include	"music/TG2000Tracks/SadMac.asm"
 	even
 Mus_Win2K:		include "music/Dawid/WINDOWS2000.asm"
 	even
 Mus_Folgers:		include	"music/TG2000Tracks/Folgers.asm"
 	even
-Mus_MJWin:		include	"music/DaxKatter/Mus - Moonwalker Clear.asm"
-	even
-Mus_RamRanch:		include	"music/CNTracks/RamRanch.asm"
-	even
-
 Mus_S28bitUnused:	include	"music/Malachi/Sonic 2 8bit Unused Theme.asm"
 	even
-
-Mus_WBRBack:		include	"music/GMZ/Mus - We'll Be Right Back.asm"	; GMZ
-	even	; GMZ
-Mus_WBRBack:		include	"music/GMZ/Mus - EagleSoft.asm"	; GMZ
-	even	; GMZ
 
 ;!@ Dummy song; meant for placehold slot, silence, whatever
 Mus_dummy:		include	"music/dummy.asm"	; !@ GD

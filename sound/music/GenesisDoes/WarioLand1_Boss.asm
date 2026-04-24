@@ -1,9 +1,7 @@
-dClap = dProtoSnare
-
 WL1_Boss_Header:
-	smpsHeaderStartSong 1
+	smpsHeaderStartSong 3
 	smpsHeaderVoice     WL1_Boss_Voices
-	smpsHeaderChan      $06, $01
+	smpsHeaderChan      $06, $03
 	smpsHeaderTempo     $02, $00
 
 	smpsHeaderDAC       WL1_Boss_DAC
@@ -12,25 +10,27 @@ WL1_Boss_Header:
 	smpsHeaderFM        WL1_Boss_FM3,	$00, $08
 	smpsHeaderFM        WL1_Boss_FM4,	$00, $08
 	smpsHeaderFM        WL1_Boss_FM5,	$00, $08
-	smpsHeaderPSG       WL1_Boss_PSG1,	$00, $00, $00, $00
+	smpsHeaderPSG       WL1_Boss_PSG1,	$0C, $00, $00, $00
+	smpsHeaderPSG       WL1_Boss_Null,	$00, $00, $00, $00
+	smpsHeaderPSG       WL1_Boss_PSG3,	$00, $02, $00, fTone_04
 
 ; DAC Data
 WL1_Boss_DAC:
 	smpsPan             panCenter, $00
-	dc.b	nRst, $3F, dKick
+	dc.b	nRst, $3F, dKickS3
 
 WL1_Boss_Loop00:
-	dc.b	$09, $03, dSnare, $06
+	dc.b	$09, $03, dSnareS3, $06
 
 WL1_Boss_Loop01:
-	dc.b	dKick, dSnare, $03, dClap, $84, dClap, $09, dKick, $06
+	dc.b	dKickS3, dSnareS3, $12, dKickS3, $06
 	smpsLoop            $00, $07, WL1_Boss_Loop00
 	dc.b	$09, $03
 
 WL1_Boss_Jump00:
-	dc.b	dSnare, $06
+	dc.b	dSnareS3, $06
 	smpsLoop            $01, $02, WL1_Boss_Loop01
-	dc.b	dKick, dSnare, $03, dClap, $84, dClap, $09, dKick, $06, $0C
+	dc.b	dKickS3, dSnareS3, $12, dKickS3, $06, $0C
 	smpsJump            WL1_Boss_Jump00
 
 ; FM1 Data
@@ -193,6 +193,22 @@ WL1_Boss_Jump06:
 	dc.b	nC3, nRst, nG2, nRst, nE2, nRst, nC2, nRst, nCs2, nC2, nCs2, nAb2
 	dc.b	nRst, nAb2, nBb2, nAb2, nG2, nC3, nRst, nG3
 	smpsJump            WL1_Boss_Jump06
+
+WL1_Boss_Null:
+	smpsStop
+
+; DAC Data
+WL1_Boss_PSG3:
+	smpsPSGform	$E7
+	dc.b	nRst, $3F
+
+WL1_Boss_PSG3_Jump:
+	dc.b	nRst, $1B, nMaxPSG1-1, $03
+	smpsNoteFill	$02
+	dc.b	$03
+	smpsNoteFill	$00
+	dc.b	nMaxPSG1-1, $0F
+	smpsJump	WL1_Boss_PSG3_Jump
 
 WL1_Boss_Voices:
 ;	Voice $00
