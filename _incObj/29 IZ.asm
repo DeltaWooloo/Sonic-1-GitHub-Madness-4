@@ -67,7 +67,7 @@ ObjIZ_ActIndex:
 		neg.w	d0
 
 .isleft:
-		cmpi.w	#$70,d0		; is Buzz Bomber within $60 pixels of Sonic?
+		cmpi.w	#$60,d0		; is Buzz Bomber within $60 pixels of Sonic?
 		bhs.s	.nothereyet	; if not, branch
 		tst.b	obRender(a0)
 		bpl.s	.nothereyet
@@ -115,7 +115,7 @@ ObjIZ_ActIndex:
 		neg.w	d0
 
 .isleftA:
-		cmpi.w	#$20,d0		; is Buzz Bomber within $20 pixels of Sonic?
+		cmpi.w	#$30,d0		; is Buzz Bomber within $30 pixels of Sonic?
 		bhs.s	.donotbatt	; if not, branch
 		tst.b	obRender(a0)
 		bpl.s	.donotbatt
@@ -138,10 +138,15 @@ ObjIZ_ActIndex:
 		rts	
 		
 .shoot:
+;		cmpi.w	#60,.time(a0)
+;		bne.s	.spawnbullet
+
+;.spawnbullet:
 		subq.w	#1,.time(a0)	; subtract 1 from pause	time
 		bpl.s	.shwait		; if time remains, branch
 		btst	#1,obSubtype(a0)
 		beq.s	.moveable
+		move.b	#0,ob2ndRout(a0)
 		rts
 .moveable:
 		bchg	#0,obStatus(a0)
@@ -151,8 +156,14 @@ ObjIZ_ActIndex:
 
 .beginshoot:
 		move.b	#2,obAnim(a0)
-		move.w	#170,.time(a0)	; set shoot time to 1 second
+		move.w	#60,.time(a0)	; set shoot time to 1 second
 		move.b	#8,ob2ndRout(a0)
+		bsr.w	FindFreeObj
+		bne.s	.fail
+		_move.b	#id_Missile,obID(a1) ; load missile object
+		move.w	obX(a0),obX(a1)
+		move.w	obY(a0),obY(a1)
+.fail:
 		rts
 ; ===========================================================================
 
