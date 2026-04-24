@@ -129,7 +129,7 @@ EagleSoft_DumpPal:
 		; move.b	#dEagleSoftSong, d0	; GMZ - Commented
 		; jsr		(MegaPCM_PlaySample).l	; GMZ - Commented
 		move.b	#bgm_EagleSoft,d0	; GMZ
-		jsr	MegaPCM_PlaySample	; GMZ
+		jsr	QueueSound1	; GMZ
 		
 		;Load Eagle object		
 		lea	(v_eagle).w,a1												; load eagle to a1		
