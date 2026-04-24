@@ -79,6 +79,9 @@ Nem_TGTiles:	binclude	"_gamemode/TGSplash/tiles.bin"
 
 Map_Shield:	include		"_maps/Shield Map.asm"	
 		even
+;!@ GD: Invin fire
+Map_Shield2:	include	"_maps/Shield and Invincibility.asm"
+		even
 Dgfx_Shield:	include		"_maps/Shield DGFX.asm"	
 		even
 Art_Shield:	binclude	"artunc/Shield.bin"	
