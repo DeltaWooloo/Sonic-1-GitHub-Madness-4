@@ -361,7 +361,12 @@ thantxt: macro txt
 	thantxt	"DAXKATTER"
 	thantxt	"KATSUSHIMI"
 	dc.b	1,1
-	
+
+	thantxt	"DEMO RECORDING"
+	dc.b	1
+	thantxt	"CONINIGHT"
+	dc.b	1,1
+
 	thantxt	"PROTOTASTIC"
 	dc.b	1
 	thantxt	"GAMERGIL THE GOAT"
