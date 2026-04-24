@@ -423,6 +423,7 @@ thantxt: macro txt
 	thantxt "GENESISFAN SIXTYFOUR"
 	thantxt	"SII ARCHIVES"
 	thantxt	"AND HIS STUPID TEAM"
+	thantxt	"KAGAYMINE LEN"
 	thantxt	"STEVE JOBS BECAUSE"
 	thantxt	"VMWARE"
 	thantxt	"MISTER BEAN"
