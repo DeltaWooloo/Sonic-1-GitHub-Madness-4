@@ -776,7 +776,6 @@ DLE_BREW1:
 		cmpi.w	#$1780,(v_screenposx).w ; has the camera reached $1780 on x-axis?
 		blo.s	locret_6E08BR	; if not, branch
 		move.w	#$400,(v_limitbtm1).w ; set lower y-boundary
-DLE_BREW4:
 locret_6E08BR:
 		rts
 ; ===========================================================================
@@ -855,6 +854,22 @@ locret_6EE8BR:
 
 DLE_BREW3end:
 		move.w	(v_screenposx).w,(v_limitleft2).w
+		rts
+
+DLE_BREW4:
+		moveq	#0,d0
+		move.b	(v_dle_routine).w,d0
+		move.w	CBZ4Events(pc,d0.w),d0
+		jmp	CBZ4Events(pc,d0.w)
+CBZ4Events:
+		dc.w CBZ4PalLoad-CBZ4Events	;	janky
+		dc.w CBZ4PalLoad-CBZ4Events
+		dc.w CBZ4Nothing-CBZ4Events
+CBZ4PalLoad:
+		moveq	#palid_PWisp,d0
+		jsr		(PalLoad).l
+		addq.b	#2,(v_dle_routine).w
+CBZ4Nothing:
 		rts
 
 ; ===========================================================================

@@ -149,7 +149,7 @@ ptr_RobiWK:		dc.l OBJ_RobiWK_Logo
 prt_NeedleBoss		dc.l ExObjNeedle
 peter_CBZBoss1		dc.l BossEiza
 ptr_OldJohn:		dc.l ObjOldJohn
-
+peter_CBZBoss2		dc.l BossProngleWisp
 NullObject:
 		jmp	(DeleteObject).l	; It would be safer to have this instruction here, but instead it just falls through to ObjectFall
 
@@ -300,3 +300,4 @@ id_RobiWK_Logo:		equ ((ptr_RobiWK-Obj_Index)/4)+1
 id_NeedleBoss:		equ ((prt_NeedleBoss-Obj_Index)/4)+1
 id_EizaBoss:		equ ((peter_CBZBoss1-Obj_Index)/4)+1
 id_OldJohnBoss:		equ ((ptr_OldJohn-Obj_Index)/4)+1
+id_PWispBoss:		equ ((peter_CBZBoss2-Obj_Index)/4)+1

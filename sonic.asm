@@ -2159,7 +2159,7 @@ Pal_DioMildanner:	bincludeEndMarker	"_incObj/DioMildanner/Palette.bin"
 Pal_ARZ:		bincludeEndMarker	"palette/Azure Rainforest Zone.bin"
 Pal_ARZWater:		bincludeEndMarker	"palette/Azure Rainforest Zone (water).bin"
 Pal_ARZSonWater:	bincludeEndMarker	"palette/Sonic - ARZ Underwater.bin"
-
+Pal_PWisp:	bincludeEndMarker	"palette/ProngleWisp.bin"
     even
 Pal_Black:		bincludeEndMarker	"palette/Black.bin"
 
@@ -6476,6 +6476,9 @@ Map_Eiza:	include	"coniobjs/eiza/map.asm"
 		even
 DPLC_Eiza:	include	"coniobjs/eiza/mapDPLC.asm"
 		even
+
+			include	"coniobjs/ProngWispOBJ.asm"
+Map_Pwisp:	include	"coniobjs/ProngleWisp.asm"
 
 ; ---------------------------------------------------------------------------
 ; GMZ - garblemarden's slop will go here

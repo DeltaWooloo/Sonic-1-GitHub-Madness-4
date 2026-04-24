@@ -265,6 +265,7 @@ PLC_BREW2:	dc.w ((PLC_BREW2end-PLC_BREW2-2)/6)-1
 PLC_BREW2end:
 
 PLC_BREW3:	dc.w ((PLC_BREW3end-PLC_BREW3-2)/6)-1
+		plcm	Nem_ProngleWisp,   ArtTile_Eggman
 PLC_BREW3end:
 
 ; ---------------------------------------------------------------------------

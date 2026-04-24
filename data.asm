@@ -584,6 +584,8 @@ Nem_MotobugCBZ:	binclude	"artnem/Enemy MotobugCBZ.nem"
 		even
 Nem_CBZGuy:	binclude	"artnem/CBGuy.nem"
 		even
+Nem_ProngleWisp:	binclude	"coniobjs/ProngleWisp.bin"
+		even
 Art_Eiza:	binclude	"coniobjs/eiza/art.bin"
 		even
 ; ---------------------------------------------------------------------------
