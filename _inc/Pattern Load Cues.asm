@@ -310,7 +310,6 @@ PLC_DVZ2end:
 ; ---------------------------------------------------------------------------
 PLC_NGZ:	dc.w ((PLC_NGZ2-PLC_NGZ-2)/6)-1
 		plcm	Nem_Stalk, $6B00/32	; flower stalk
-	;	plcm	Nem_Ballhog, $8000/32	; crabmeat enemy
 		plcm	Nem_Splats, $9C80/32	; Splats
 
              ;   plcm    byte_2BBC2, $8300/32

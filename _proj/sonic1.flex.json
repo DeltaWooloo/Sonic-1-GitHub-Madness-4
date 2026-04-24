@@ -1,7 +1,7 @@
 {
     "Flex": 2,
     "name": "Sonic 1",
-    "node": "a62d6cfb-09f1-4f03-a0af-291c518ca852",
+    "node": "6355e6ce-e3a8-4fd7-8d6d-9cd8865fb147",
     "objects": [
         {
             "uuid": "a62d6cfb-09f1-4f03-a0af-291c518ca852",
@@ -3207,7 +3207,7 @@
                 }
             ],
             "isDirectory": true,
-            "expanded": false,
+            "expanded": true,
             "uuid": "6c6337c4-6aa9-448b-b085-fe2f6400cd25"
         },
         {
