@@ -14,7 +14,7 @@ BGM_Wario_Header:
 	smpsHeaderFM	BGM_Wario_FM5,	$00, $16
 	smpsHeaderPSG	BGM_Wario_PSG1,	$0C, $03, $00, uptone_03
 	smpsHeaderPSG	BGM_Wario_PSG2,	$0C, $03, $00, uptone_03
-	smpsHeaderPSG	BGM_Wario_PSG3,	$00, $01, $00, uptone_03
+	smpsHeaderPSG	BGM_Wario_PSG3,	$00, $00, $00, uptone_03
 
 BGM_Wario_FM5:
 	smpsAlterNote		$02
@@ -699,7 +699,8 @@ BGM_Wario_PSG1_Jump:
 	smpsCall BGM_Wario_PSG1_03_0_48
 	smpsCall BGM_Wario_PSG1_04_0_48
 	smpsCall BGM_Wario_PSG1_05_0_48
-	smpsPSGvoice	ChickenTone_03
+	smpsPSGvoice	ChickenTone_02
+	smpsPSGAlterVol	$01
 	smpsCall BGM_Wario_PSG1_06_0_48
 	smpsCall BGM_Wario_PSG1_07_0_48
 	smpsCall BGM_Wario_PSG1_08_0_48
@@ -709,7 +710,7 @@ BGM_Wario_PSG1_Jump:
 	smpsCall BGM_Wario_PSG1_08_0_48
 	smpsCall BGM_Wario_PSG1_09_0_48
 	smpsPSGvoice	fTone_04
-	smpsPSGAlterVol	$FD
+	smpsPSGAlterVol	$FC
 	smpsModSet	$05, $01, $01, $05
 	smpsCall BGM_Wario_PSG1_0A_0_48
 	smpsCall BGM_Wario_PSG1_0B_0_48
@@ -793,7 +794,8 @@ BGM_Wario_PSG2_Jump:
 	smpsCall BGM_Wario_PSG2_03_0_48
 	smpsCall BGM_Wario_PSG2_04_0_48
 	smpsCall BGM_Wario_PSG2_05_0_48
-	smpsPSGvoice	ChickenTone_03
+	smpsPSGvoice	ChickenTone_02
+	smpsPSGAlterVol	$01
 	smpsCall BGM_Wario_PSG2_06_0_48
 	smpsCall BGM_Wario_PSG2_07_0_48
 	smpsCall BGM_Wario_PSG2_08_0_48
@@ -803,7 +805,7 @@ BGM_Wario_PSG2_Jump:
 	smpsCall BGM_Wario_PSG2_08_0_48
 	smpsCall BGM_Wario_PSG2_08_0_48
 	smpsPSGvoice	fTone_04
-	smpsPSGAlterVol	$FD
+	smpsPSGAlterVol	$FC
 	smpsModSet	$05, $01, $01, $05
 	smpsCall BGM_Wario_PSG2_09_0_48
 	smpsCall BGM_Wario_PSG2_0A_0_48
@@ -884,12 +886,10 @@ BGM_Wario_PSG3_Jump:
 	smpsCall BGM_Wario_PSG3_04_0_48
 	smpsPSGvoice	fTone_04
 	smpsModSet	$05, $01, $01, $05
-	smpsPSGAlterVol	$FF
 	smpsCall BGM_Wario_PSG3_05_0_48
 	smpsCall BGM_Wario_PSG3_06_0_48
 	smpsCall BGM_Wario_PSG3_05_0_48
 	smpsPSGvoice	uptone_03
-	smpsPSGAlterVol	$01
 	smpsModOff
 
 BGM_Wario_PSG3_Loop:
