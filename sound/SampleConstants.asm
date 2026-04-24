@@ -113,7 +113,11 @@ dMeow2				ds.b 1
 dEggNo				ds.b 1
 dfunnyb_utthole		ds.b 1
 d2kki				ds.b 1
-dEagleSoftSong		ds.b 1
+; dEagleSoftSong		ds.b 1	; GMZ - Commented
+dEagleSoftSong		ds.b 0	; GMZ - This is to avoid errors while porting
+dEagSoft_Chirp1		ds.b 1	; GMZ
+dEagSoft_Chirp2		ds.b 1	; GMZ
+dEagSoft_Speech		ds.b 1	; GMZ
 dGenesisDoes1		ds.b 1
 dVirus				ds.b 1
 dsupbeaches			ds.b 1
