@@ -2842,18 +2842,12 @@ Level_LoadPal:
 		tst.b	(v_waterflag).w ; is level LZ?
 		bpl.s	Level_GetBgm	; if not, branch
 
-		moveq	#palid_LZSonWater,d0 ; palette number $F (LZ)
-		cmpi.b	#id_CBZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
-		beq.s	Level_CBZWaterPal	; it makes me have a boaner
+		moveq	#palid_CBZ2SonWat,d0
 		cmpi.b	#id_ARZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
 		beq.s	Level_ARZWaterPal	; it makes me have a boaner
 		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
 		bne.s	Level_WaterPal	; if not, branch
 		moveq	#palid_SBZ3SonWat,d0 ; palette number $10 (SBZ3)
-		bra.s	Level_WaterPal
-
-Level_CBZWaterPal:
-		moveq	#palid_CBZ2SonWat,d0
 		bra.s	Level_WaterPal
 
 Level_ARZWaterPal:
@@ -3002,18 +2996,12 @@ Level_Demo:
 Level_ChkWaterPal:
 		tst.b	(v_waterflag).w ; is level LZ/SBZ3?
 		bpl.s	Level_Delay	; if not, branch
-		moveq	#palid_LZWater,d0 ; palette $B (LZ underwater)
-		cmpi.b	#id_CBZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
-		beq.s	Level_CBZWtr	; it makes me have a boaner
+		moveq	#palid_BREWWat,d0
 		cmpi.b	#id_ARZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
 		beq.s	Level_ARZWtr	; it makes me have a boaner
 		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is level SBZ3?
 		bne.s	Level_WtrNotSbz	; if not, branch
 		moveq	#palid_SBZ3Water,d0 ; palette $D (SBZ3 underwater)
-		bra.s	Level_WtrNotSbz
-
-Level_CBZWtr:
-		moveq	#palid_BREWWat,d0
 		bra.s	Level_WtrNotSbz
 
 Level_ARZWtr:
