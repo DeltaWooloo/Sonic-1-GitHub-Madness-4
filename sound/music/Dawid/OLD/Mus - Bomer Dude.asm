@@ -427,4 +427,4 @@ BGM_BomerDude_Voices:
 	smpsVcReleaseRate   $07, $06, $06, $06
 	smpsVcTotalLevel    $00, $1F, $1C, $04
 
-	smpsFooterEndSong	"Dawid/Mus - Bomer Dude.asm"
+	smpsFooterEndSong	"Dawid/OLD/Mus - Bomer Dude.asm"

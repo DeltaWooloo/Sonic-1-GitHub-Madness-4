@@ -7506,5 +7506,5 @@ SFZShop_Voices:
 	dc.b		$3C,$46,$00,$01,$00,$DF,$5F,$DF,$1D,$1D,$13,$1E,$10,$09,$0F,$12
 	dc.b		$1C,$10,$57,$96,$27,$7F,$00,$7F,$00;			Voice 1A
 	
-	smpsFooterEndSong	"TG2000Tracks/NewShop.asm"
+	smpsFooterEndSong	"TG2000Tracks/OLD/NewShop.asm"
 	even

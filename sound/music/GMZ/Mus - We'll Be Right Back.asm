@@ -246,4 +246,4 @@ BGM_WBRBack_Voices:
 	smpsVcReleaseRate   $07, $06, $07, $00
 	smpsVcTotalLevel    $0C, $10, $00, $03
 
-	smpsFooterEndSong	"Mus - We'll Be Right Back.asm"	; GMZ - i don't think you'd have to do this in any other assembler
+	smpsFooterEndSong	"Mus - We'll Be Right Back.asm"

@@ -3539,3 +3539,5 @@ CanCan_PSG3_10_0_64:
 CanCan_PSG3_11_0_64:
 	dc.b nMaxPSG, $40
 	smpsStop
+	
+	smpsFooterEndSong	"TG2000Tracks/Backups/CanCan_DRAFT.asm"

@@ -2377,5 +2377,5 @@ TwoSteps_Voices:
 	dc.b		$3A,$01,$07,$01,$01,$8E,$8E,$8D,$53,$0E,$0E,$0E,$03,$00,$00,$00
 	dc.b		$00,$1F,$FF,$1F,$0F,$18,$28,$27,$00;			Voice 03
 	
-	smpsFooterEndSong	"TG2000Tracks/TwoSteps.asm"
+	smpsFooterEndSong	"TG2000Tracks/OLD/TwoSteps.asm"
 	even

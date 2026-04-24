@@ -4394,5 +4394,5 @@ PuyoReject_Voices:
 	dc.b		$14,$A6,$F8,$56,$95,$02,$00,$0F,$00;			Voice 07
 	dc.b		$30,$71,$00,$31,$32,$58,$5F,$5F,$1F,$00,$00,$00,$00,$00,$00,$00
 	dc.b		$00,$03,$03,$02,$06,$0D,$1B,$14,$00;			Voice 08
-	smpsFooterEndSong	"TG2000Tracks/PuyoReject.asm"	
+	smpsFooterEndSong	"TG2000Tracks/OLD/PuyoReject.asm"	
 	even

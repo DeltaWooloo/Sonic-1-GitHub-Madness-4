@@ -4594,5 +4594,5 @@ Minuscule_Voices:
 	dc.b		$09,$0A,$8B,$38,$1C,$22,$38,$13,$00;			Voice 01
 	dc.b		$3C,$02,$02,$74,$02,$14,$18,$14,$11,$0A,$0A,$03,$05,$01,$02,$02
 	dc.b		$00,$63,$03,$23,$19,$28,$29,$30,$00;			Voice 02
-	smpsFooterEndSong	"TG2000Tracks/Minuscule.asm"	
+	smpsFooterEndSong	"TG2000Tracks/OLD/Minuscule.asm"	
 	even

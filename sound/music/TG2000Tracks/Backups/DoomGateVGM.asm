@@ -4609,5 +4609,5 @@ DoomGate_Voices:
 	dc.b		$09,$26,$16,$16,$F6,$17,$32,$14,$00;			Voice 01
 	dc.b		$3B,$03,$72,$01,$01,$1E,$1F,$1F,$1F,$00,$00,$00,$00,$00,$00,$00
 	dc.b		$00,$26,$09,$09,$49,$1F,$0E,$04,$00;			Voice 02
-	smpsFooterEndSong	"TG2000Tracks/DoomGate.asm"	
+	smpsFooterEndSong	"TG2000Tracks/Backups/DoomGateVGM.asm"	
 	even

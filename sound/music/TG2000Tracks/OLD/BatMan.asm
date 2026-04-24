@@ -3885,5 +3885,5 @@ BatMan_Voices:
 	dc.b		$0B,$2F,$1F,$1F,$1F,$19,$2F,$13,$00;			Voice 00
 	dc.b		$00,$37,$62,$30,$31,$DF,$DF,$9F,$9F,$07,$06,$09,$10,$07,$06,$06
 	dc.b		$0B,$2F,$1F,$1F,$1F,$15,$2F,$13,$00;			Voice 01
-	smpsFooterEndSong	"TG2000Tracks/BatMan.asm"
+	smpsFooterEndSong	"TG2000Tracks/OLD/BatMan.asm"
 	even

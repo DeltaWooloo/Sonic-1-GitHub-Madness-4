@@ -7723,5 +7723,5 @@ CanCanInv_Voices:
 	dc.b		$03,$2F,$2F,$2F,$2F,$24,$2C,$11,$00;			Voice 01
 	dc.b		$22,$01,$72,$02,$01,$10,$11,$11,$18,$09,$0A,$0A,$0D,$00,$00,$00
 	dc.b		$00,$06,$09,$09,$29,$1B,$23,$1C,$00;			Voice 02
-	smpsFooterEndSong	"TG2000Tracks/CanCanInvBACKUP.asm"	
+	smpsFooterEndSong	"TG2000Tracks/Backups/CanCanInvBACKUP.asm"	
 	even

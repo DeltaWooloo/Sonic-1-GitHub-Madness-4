@@ -879,4 +879,4 @@ DJKK_PSG3_01_0_32:
 	dc.b smpsNoAttack, $03, nMaxPSG, $05, $05, $06, $02
 	smpsReturn
 	
-	smpsFooterEndSong	"TG2000Tracks/DJKK BAD.asm"
+	smpsFooterEndSong	"TG2000Tracks/Backups/DJKK (Needs Reimporting).asm"

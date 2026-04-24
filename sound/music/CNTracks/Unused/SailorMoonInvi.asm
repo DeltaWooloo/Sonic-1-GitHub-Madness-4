@@ -188,4 +188,4 @@ SailorInvi_Voices:
 	smpsVcReleaseRate   $04, $06, $03, $05
 	smpsVcTotalLevel    $00, $2D, $00, $2D
 
-	smpsFooterEndSong	"CNTracks/SailorMoonInvi.asm"
+	smpsFooterEndSong	"CNTracks/Unused/SailorMoonInvi.asm"
