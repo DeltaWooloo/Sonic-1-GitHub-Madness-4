@@ -370,7 +370,6 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_SkyBase
 	nextenum bgm_Scrappy
 	nextenum bgm_SkyGift
-	nextenum bgm_Outfarted
 
 	; Keep this last
 	nextenum bgm__Last	
