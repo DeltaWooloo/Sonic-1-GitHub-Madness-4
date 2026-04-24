@@ -354,6 +354,8 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_BatMan				; Sonic CD Batman
 	nextenum bgm_Hidden				; Sonic CD CYA Next Game
 	nextenum bgm_SadMac				; Mac crash
+	nextenum bgm_W95Rock			; !@ GD: Windows 95 Rock (https://modarchive.org/index.php?request=view_by_moduleid&query=170694)
+	nextenum bgm_W95RockR			; !@ GD: Windows 95 Rock Remix (https://modarchive.org/index.php?request=view_by_moduleid&query=201495)
 
 	; Unused Full/Looping BGM
 	nextenum bgm_Dingaling

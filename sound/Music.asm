@@ -128,6 +128,8 @@ MusicIndex:
 	bgmdef $01, Mus_BatMan
 	bgmdef s2TempotoS3($E0), Mus_Hidden
 	bgmdef $80, Mus_SadMac
+	bgmdef $80, Mus_dummy					;!@ GD: slot reserved for Windows 95 Rock
+	bgmdef $80, Mus_dummy					;!@ GD: slot reserved for Windows 95 Rock (Remix)
 
 	bgmdef $01, Mus_Dingaling
 	bgmdef $65, Mus_BonusEight
@@ -469,4 +471,8 @@ Mus_S28bitUnused:	include	"music/Malachi/Sonic 2 8bit Unused Theme.asm"
 
 Mus_WBRBack:		include	"music/GMZ/Mus - We'll Be Right Back.asm"	; GMZ
 	even	; GMZ
+
+;!@ Dummy song; meant for placehold slot, silence, whatever
+Mus_dummy:		include	"music/dummy.asm"	; !@ GD
+	even
 	END
