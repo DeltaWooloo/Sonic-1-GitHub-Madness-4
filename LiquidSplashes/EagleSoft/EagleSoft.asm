@@ -124,7 +124,7 @@ EagleSoft_DumpPal:
 		jsr		(PaletteFadeIn).l										; Palette fade in
 		enable_ints
 		move.w	#bgm_EagleSoft,d0										
-		jsr	(PlaySound_Special).l
+		jsr	(QueueSound1).l
 
 		;Load Eagle object		
 		lea	(v_eagle).w,a1												; load eagle to a1		
