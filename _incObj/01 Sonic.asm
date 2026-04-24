@@ -483,6 +483,7 @@ Sonic_MdJump:
 		btst	#6,obStatus(a0)
 		beq.s	.notunderwater
 		subi.w	#$28,obVelY(a0)
+		addq.w  #1,obY(a0) 
 
 .notunderwater:
         bsr.w	Sonic_ExtraJump
