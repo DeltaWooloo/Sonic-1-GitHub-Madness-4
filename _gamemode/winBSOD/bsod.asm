@@ -24,6 +24,11 @@ bsodType_MAX:		equ	bsodType_gnu+1		;MAX type for bsodType enum
 ArtTile_fontAfter:			equ	$102					; After standard BSOD font
 ArtTile_Home0:				equ $000					; Home 			(tile 0)
 ArtTile_Home1:				equ $001					; Home 			(transparency + tile 1)
+;Steve ballmer arttile offsets
+ArtTile_bsod_sbPC:			equ	ArtTile_fontAfter+1		; Steve Ballmer Imma PC	~	art 2 for screaming BG gfx
+ArtTile_bsod_sbDev:			equ	ArtTile_fontAfter+1		; Steve Ballmer Devs	~	art 2 for .NET conf gfx
+ArtTile_bsod_sbLove:		equ	ArtTile_fontAfter+1		; Steve Ballmer Devs	~	art 2 for .NET conf gfx
+;Other
 ArtTile_bsod_w311_art2:		equ	ArtTile_fontAfter		; W311 			art 2 for 16-bit msgbox
 ArtTile_bsod_w98ipc_art2:	equ	ArtTile_fontAfter		; W98ipc 		art 2 for PC/Microslop gfx 
 ArtTile_bsod_scdmz_art2:	equ	ArtTile_fontAfter		; Sonic CD MMZ	art 2 for MMZ Virus
@@ -705,7 +710,9 @@ bsodGNU:
 sec_std:		equ	10
 secSkip_std:	equ	3
 sec_boot:		equ	(4*60)*f2s
-secSkip_boot:	equ	15
+secSkip_boot:	equ	10
+sec_SB:			equ	sec_boot
+secSkip_SB:		equ	secSkip_boot
 sec_sd:			equ	sec_std
 secSkip_sd:		equ	secSkip_std
 sec_sms:		equ	13*60
@@ -730,55 +737,62 @@ bsod_06:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_bw95.art1,			ArtTi
 bsod_07:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_bw95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_bw95.fg,		bsod_bw95.bg,		bsod_bw95.pal,		TCLR(0,0),	bgm_W95RockR,	pcm_none
 bsod_08:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_bw98.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_bw98.fg,		bsod_bw98.bg,		bsod_bw98.pal,		TCLR(0,0),	bgm_hang,		dW98IPC
 bsod_09:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_bwme.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_bwme.fg,		bsod_bwme.bg,		bsod_bwme.pal,		TCLR(0,0),	bgm_hang,		dW98IPC
+			;Fucking Steve Ballmer, a living meme
+bsod_0A:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbPC.art1,			ArtTile_Home1,	bsod_sbPC.art2,	ArtTile_bsod_sbPC,			bsod_sbPC.fg,		bsod_sbPC.bg,		bsod_sbPC.pal,		TCLR(2,0),	bgm_W95Rock,	dsbPC
+bsod_0B:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbPC.art1,			ArtTile_Home1,	bsod_sbPC.art2,	ArtTile_bsod_sbPC,			bsod_sbPC.fg,		bsod_sbPC.bg,		bsod_sbPC.pal,		TCLR(2,0),	bgm_W95RockR,	dsbPC
+bsod_0C:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbDev.art1,		ArtTile_Home1,	bsod_sbDev.art2,ArtTile_bsod_sbDev,			bsod_sbDev.fg,		bsod_sbDev.bg,		bsod_sbDev.pal,		TCLR(2,0),	bgm_W95Rock,	dsbDevelopers
+bsod_0D:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbDev.art1,		ArtTile_Home1,	bsod_sbDev.art2,ArtTile_bsod_sbDev,			bsod_sbDev.fg,		bsod_sbDev.bg,		bsod_sbDev.pal,		TCLR(2,0),	bgm_W95RockR,	dsbDevelopers
+bsod_0E:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbLove.art1,		ArtTile_Home1,	bsod_sbLove.art2,ArtTile_bsod_sbLove,		bsod_sbLove.fg,		bsod_sbLove.bg,		bsod_sbLove.pal,	TCLR(2,0),	bgm_W95Rock,	dsbLove
+bsod_0F:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbLove.art1,		ArtTile_Home1,	bsod_sbLove.art2,ArtTile_bsod_sbLove,		bsod_sbLove.fg,		bsod_sbLove.bg,		bsod_sbLove.pal,	TCLR(2,0),	bgm_W95RockR,	dsbLove
 			;Safe shutdown
-bsod_0A:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd1.fg,		bsod_sd1.bg,		bsod_sd1.pal,		TCLR(0,0),	bgm_hang,		dShutdown
-bsod_0B:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd2.fg,		bsod_sd2.bg,		bsod_sd2.pal,		TCLR(0,0),	bgm_Passport,	dShutdown
-bsod_0C:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd3.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd3.fg,		bsod_sd3.bg,		bsod_sd3.pal,		TCLR(0,0),	bgm_hang,		dShutdown
-bsod_0D:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd4.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd4.fg,		bsod_sd4.bg,		bsod_sd4.pal,		TCLR(0,0),	bgm_hang,		dShutdown
-bsod_0E:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd5.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd5.fg,		bsod_sd5.bg,		bsod_sd5.pal,		TCLR(1,1),	bgm_hang,		dShutdown
-bsod_0F:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd6.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd6.fg,		bsod_sd6.bg,		bsod_sd6.pal,		TCLR(0,0),	bgm_hang,		dShutdown
-bsod_10:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd7.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd7.fg,		bsod_sd7.bg,		bsod_sd7.pal,		TCLR(0,0),	bgm_hang,		dShutdown
-bsod_11:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd8.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd8.fg,		bsod_sd8.bg,		bsod_sd8.pal,		TCLR(0,0),	bgm_hang,		dShutdown
-bsod_12:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd9.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd9.fg,		bsod_sd9.bg,		bsod_sd9.pal,		TCLR(0,0),	bgm_hang,		dShutdown
-bsod_13:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd10.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd10.fg,		bsod_sd10.bg,		bsod_sd10.pal,		TCLR(0,0),	bgm_hang,		dShutdown
+bsod_10:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd1.fg,		bsod_sd1.bg,		bsod_sd1.pal,		TCLR(0,0),	bgm_hang,		dShutdown
+bsod_11:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd2.fg,		bsod_sd2.bg,		bsod_sd2.pal,		TCLR(0,0),	bgm_Passport,	dShutdown
+bsod_12:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd3.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd3.fg,		bsod_sd3.bg,		bsod_sd3.pal,		TCLR(0,0),	bgm_hang,		dShutdown
+bsod_13:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd4.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd4.fg,		bsod_sd4.bg,		bsod_sd4.pal,		TCLR(0,0),	bgm_hang,		dShutdown
+bsod_14:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd5.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd5.fg,		bsod_sd5.bg,		bsod_sd5.pal,		TCLR(1,1),	bgm_hang,		dShutdown
+bsod_15:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd6.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd6.fg,		bsod_sd6.bg,		bsod_sd6.pal,		TCLR(0,0),	bgm_hang,		dShutdown
+bsod_16:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd7.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd7.fg,		bsod_sd7.bg,		bsod_sd7.pal,		TCLR(0,0),	bgm_hang,		dShutdown
+bsod_17:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd8.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd8.fg,		bsod_sd8.bg,		bsod_sd8.pal,		TCLR(0,0),	bgm_hang,		dShutdown
+bsod_18:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd9.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd9.fg,		bsod_sd9.bg,		bsod_sd9.pal,		TCLR(0,0),	bgm_hang,		dShutdown
+bsod_19:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd10.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd10.fg,		bsod_sd10.bg,		bsod_sd10.pal,		TCLR(0,0),	bgm_hang,		dShutdown
 			
 			;SMS-based
-bsod_14:	bsodData		bsodType_reg,	sec_sms,	secSkip_sms,	bsod_sms1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sms1.fg,		bsod_sms1.bg,		bsod_sms1.pal,		TCLR(0,0),	bgm_Retro,		dChord16
-bsod_15:	bsodData		bsodType_reg,	sec_sms,	secSkip_sms,	bsod_sms2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sms2.fg,		bsod_sms2.bg,		bsod_sms2.pal,		TCLR(0,0),	bgm_Retro,		dChord16
+bsod_1A:	bsodData		bsodType_reg,	sec_sms,	secSkip_sms,	bsod_sms1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sms1.fg,		bsod_sms1.bg,		bsod_sms1.pal,		TCLR(0,0),	bgm_Retro,		dChord16
+bsod_1B:	bsodData		bsodType_reg,	sec_sms,	secSkip_sms,	bsod_sms2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sms2.fg,		bsod_sms2.bg,		bsod_sms2.pal,		TCLR(0,0),	bgm_Retro,		dChord16
 			;GG-based
-bsod_16:	bsodData		bsodType_reg,	sec_gg,		secSkip_gg,		bsod_gg1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gg1.fg,		bsod_gg1.bg,		bsod_gg1.pal,		TCLR(0,0),	bgm_Retro,		dChord16
-bsod_17:	bsodData		bsodType_reg,	sec_gg,		secSkip_gg,		bsod_gg2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gg2.fg,		bsod_gg2.bg,		bsod_gg2.pal,		TCLR(0,0),	bgm_Retro,		dChord16
+bsod_1C:	bsodData		bsodType_reg,	sec_gg,		secSkip_gg,		bsod_gg1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gg1.fg,		bsod_gg1.bg,		bsod_gg1.pal,		TCLR(0,0),	bgm_Retro,		dChord16
+bsod_1D:	bsodData		bsodType_reg,	sec_gg,		secSkip_gg,		bsod_gg2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gg2.fg,		bsod_gg2.bg,		bsod_gg2.pal,		TCLR(0,0),	bgm_Retro,		dChord16
 			;Genesis-based
-bsod_18:	bsodData		bsodType_reg,	sec_gen,	secSkip_gen,	art_null,				ArtTile_Home0,	art_null,		ArtTile_Home0,				bsod_tmssrsod.fg,	bsod_tmssrsod.bg,	bsod_tmssrsod.pal,	TCLR(0,0),	bgm_hang,		dVirus
+bsod_1E:	bsodData		bsodType_reg,	sec_gen,	secSkip_gen,	art_null,				ArtTile_Home0,	art_null,		ArtTile_Home0,				bsod_tmssrsod.fg,	bsod_tmssrsod.bg,	bsod_tmssrsod.pal,	TCLR(0,0),	bgm_hang,		dVirus
 bsod_gen:
-bsod_19:	bsodData		bsodType_gen,	sec_gen,	secSkip_gen,	bsod_gen_ntscu.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gen_ntscu.fg,	bsod_gen_ntscu.bg,	bsod_gen_ntscu.pal,	TCLR(1,0),	bgm_gen,		dBSOD
-bsod_1A:	bsodData		bsodType_gen,	sec_gen,	secSkip_gen,	bsod_gen_ntscj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gen_ntscj.fg,	bsod_gen_ntscj.bg,	bsod_gen_ntscj.pal,	TCLR(1,0),	bgm_gen,		dBSOD
-bsod_1B:	bsodData		bsodType_gen,	sec_gen,	secSkip_gen,	bsod_gen_ntscuj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gen_ntscuj.fg,	bsod_gen_ntscuj.bg,	bsod_gen_ntscuj.pal,TCLR(1,0),	bgm_gen,		dBSOD
-bsod_1C:	bsodData		bsodType_gen,	sec_gen,	secSkip_gen,	bsod_gen_pal.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gen_pal.fg,	bsod_gen_pal.bg,	bsod_gen_pal.pal,	TCLR(1,0),	bgm_gen,		dBSOD
+bsod_1F:	bsodData		bsodType_gen,	sec_gen,	secSkip_gen,	bsod_gen_ntscu.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gen_ntscu.fg,	bsod_gen_ntscu.bg,	bsod_gen_ntscu.pal,	TCLR(1,0),	bgm_gen,		dBSOD
+bsod_20:	bsodData		bsodType_gen,	sec_gen,	secSkip_gen,	bsod_gen_ntscj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gen_ntscj.fg,	bsod_gen_ntscj.bg,	bsod_gen_ntscj.pal,	TCLR(1,0),	bgm_gen,		dBSOD
+bsod_21:	bsodData		bsodType_gen,	sec_gen,	secSkip_gen,	bsod_gen_ntscuj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gen_ntscuj.fg,	bsod_gen_ntscuj.bg,	bsod_gen_ntscuj.pal,TCLR(1,0),	bgm_gen,		dBSOD
+bsod_22:	bsodData		bsodType_gen,	sec_gen,	secSkip_gen,	bsod_gen_pal.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gen_pal.fg,	bsod_gen_pal.bg,	bsod_gen_pal.pal,	TCLR(1,0),	bgm_gen,		dBSOD
 bsod_genEnd:
 			;Sonic CD-based
-bsod_1D:	bsodData		bsodType_reg,	60*f2s,		secSkip_CD,		bsod_scdm.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scdm.fg,		bsod_scdm.bg,		bsod_scdm.pal,		TCLR(0,0),	bgm_VirusAlert,	dVirus		; Sonic CD BRAM corruption (Mildanner parody)
-bsod_1E:	bsodData		bsodType_reg,	60*f2s,		secSkip_CD,		bsod_scdmz.art1,		ArtTile_Home1,	bsod_scdmz.art2,ArtTile_bsod_scdmz_art2,	bsod_scdmz.fg,		bsod_scdmz.bg,		bsod_scdmz.pal,		TCLR(2,0),	bgm_MMZPast,	dVirus		; Sonic CD Virus Alert (MMZ BF)
-bsod_1F:	bsodData		bsodType_reg,	45*f2s,		secSkip_CD,		bsod_scd1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd1.fg,		bsod_scd1.bg,		bsod_scd1.pal,		TCLR(0,0),	bgm_Hidden,		dLetsGOO	; CYA/Tails
-bsod_20:	bsodData		bsodType_reg,	(60+48)*f2s,secSkip_CD,		bsod_scd2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd2.fg,		bsod_scd2.bg,		bsod_scd2.pal,		TCLR(0,0),	bgm_Title,		dYoFreddy	; DJ
-bsod_21:	bsodData		bsodType_reg,	45*f2s,		secSkip_CD,		bsod_scd3.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd3.fg,		bsod_scd3.bg,		bsod_scd3.pal,		TCLR(0,0),	bgm_BatMan,		dTwerkOf87	; Batman; Y So Serious?
-bsod_22:	bsodData		bsodType_reg,	12*f2s,		secSkip_CD,		bsod_scd4.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd4.fg,		bsod_scd4.bg,		bsod_scd4.pal,		TCLR(0,0),	bgm_LG,			dLetsGOO	; Cute Sonic
-bsod_23:	bsodData		bsodType_reg,	22*f2s,		secSkip_CD,		bsod_scd5.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd5.fg,		bsod_scd5.bg,		bsod_scd5.pal,		TCLR(0,0),	bgm_TwoSteps,	dEggmanLaugh; Fun is Infinite
+bsod_23:	bsodData		bsodType_reg,	60*f2s,		secSkip_CD,		bsod_scdm.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scdm.fg,		bsod_scdm.bg,		bsod_scdm.pal,		TCLR(0,0),	bgm_VirusAlert,	dVirus		; Sonic CD BRAM corruption (Mildanner parody)
+bsod_24:	bsodData		bsodType_reg,	60*f2s,		secSkip_CD,		bsod_scdmz.art1,		ArtTile_Home1,	bsod_scdmz.art2,ArtTile_bsod_scdmz_art2,	bsod_scdmz.fg,		bsod_scdmz.bg,		bsod_scdmz.pal,		TCLR(2,0),	bgm_MMZPast,	dVirus		; Sonic CD Virus Alert (MMZ BF)
+bsod_25:	bsodData		bsodType_reg,	45*f2s,		secSkip_CD,		bsod_scd1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd1.fg,		bsod_scd1.bg,		bsod_scd1.pal,		TCLR(0,0),	bgm_Hidden,		dLetsGOO	; CYA/Tails
+bsod_26:	bsodData		bsodType_reg,	(60+48)*f2s,secSkip_CD,		bsod_scd2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd2.fg,		bsod_scd2.bg,		bsod_scd2.pal,		TCLR(0,0),	bgm_Title,		dYoFreddy	; DJ
+bsod_27:	bsodData		bsodType_reg,	45*f2s,		secSkip_CD,		bsod_scd3.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd3.fg,		bsod_scd3.bg,		bsod_scd3.pal,		TCLR(0,0),	bgm_BatMan,		dTwerkOf87	; Batman; Y So Serious?
+bsod_28:	bsodData		bsodType_reg,	12*f2s,		secSkip_CD,		bsod_scd4.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd4.fg,		bsod_scd4.bg,		bsod_scd4.pal,		TCLR(0,0),	bgm_LG,			dLetsGOO	; Cute Sonic
+bsod_29:	bsodData		bsodType_reg,	22*f2s,		secSkip_CD,		bsod_scd5.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd5.fg,		bsod_scd5.bg,		bsod_scd5.pal,		TCLR(0,0),	bgm_TwoSteps,	dEggmanLaugh; Fun is Infinite
 			;Sega CD-based
 bsod_scd:
-bsod_24:	bsodData		bsodType_scd,	sec_CD,		secSkip_CD,		bsod_scd_ntscu.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd_ntscu.fg,	bsod_scd_ntscu.bg,	bsod_scd_ntscu.pal,	TCLR(1,0),	bgm_scd,		dBSOD
-bsod_25:	bsodData		bsodType_scd,	sec_CD,		secSkip_CD,		bsod_scd_ntscj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd_ntscj.fg,	bsod_scd_ntscj.bg,	bsod_scd_ntscj.pal,	TCLR(1,0),	bgm_scd,		dBSOD
-bsod_26:	bsodData		bsodType_scd,	sec_CD,		secSkip_CD,		bsod_scd_pale.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd_pale.fg,	bsod_scd_pale.bg,	bsod_scd_pale.pal,	TCLR(1,0),	bgm_scd,		dBSOD
-bsod_27:	bsodData		bsodType_scd,	sec_CD,		secSkip_CD,		bsod_scd_pala.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd_pala.fg,	bsod_scd_pala.bg,	bsod_scd_pala.pal,	TCLR(1,0),	bgm_scd,		dBSOD
+bsod_2A:	bsodData		bsodType_scd,	sec_CD,		secSkip_CD,		bsod_scd_ntscu.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd_ntscu.fg,	bsod_scd_ntscu.bg,	bsod_scd_ntscu.pal,	TCLR(1,0),	bgm_scd,		dBSOD
+bsod_2B:	bsodData		bsodType_scd,	sec_CD,		secSkip_CD,		bsod_scd_ntscj.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd_ntscj.fg,	bsod_scd_ntscj.bg,	bsod_scd_ntscj.pal,	TCLR(1,0),	bgm_scd,		dBSOD
+bsod_2C:	bsodData		bsodType_scd,	sec_CD,		secSkip_CD,		bsod_scd_pale.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd_pale.fg,	bsod_scd_pale.bg,	bsod_scd_pale.pal,	TCLR(1,0),	bgm_scd,		dBSOD
+bsod_2D:	bsodData		bsodType_scd,	sec_CD,		secSkip_CD,		bsod_scd_pala.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd_pala.fg,	bsod_scd_pala.bg,	bsod_scd_pala.pal,	TCLR(1,0),	bgm_scd,		dBSOD
 bsod_scdEnd:
 			;Sega 32x-based
-bsod_28:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_32x.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x.fg,		bsod_32x.bg,		bsod_32x.pal,		TCLR(1,0),	bgm_W95Rock,	dShutdown
-bsod_29:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_32x.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x.fg,		bsod_32x.bg,		bsod_32x.pal,		TCLR(1,0),	bgm_W95RockR,	dShutdown
-bsod_2A:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_32x_nbajte.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x_nbajte.fg,	bsod_32x_nbajte.bg,	bsod_32x_nbajte.pal,TCLR(0,0),	bgm_hang,		dShutdown
-bsod_2B:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_32x_xmen.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x_xmen.fg,	bsod_32x_xmen.bg,	bsod_32x_xmen.pal,	TCLR(0,0),	bgm_hang,		dShutdown
-bsod_2C:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_32x_zx2k.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x_zx2k.fg,	bsod_32x_zx2k.bg,	bsod_32x_zx2k.pal,	TCLR(0,0),	bgm_hang,		dShutdown
+bsod_2E:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_32x.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x.fg,		bsod_32x.bg,		bsod_32x.pal,		TCLR(1,0),	bgm_W95Rock,	dShutdown
+bsod_2F:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_32x.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x.fg,		bsod_32x.bg,		bsod_32x.pal,		TCLR(1,0),	bgm_W95RockR,	dShutdown
+bsod_30:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_32x_nbajte.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x_nbajte.fg,	bsod_32x_nbajte.bg,	bsod_32x_nbajte.pal,TCLR(0,0),	bgm_hang,		dShutdown
+bsod_31:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_32x_xmen.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x_xmen.fg,	bsod_32x_xmen.bg,	bsod_32x_xmen.pal,	TCLR(0,0),	bgm_hang,		dShutdown
+bsod_32:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_32x_zx2k.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x_zx2k.fg,	bsod_32x_zx2k.bg,	bsod_32x_zx2k.pal,	TCLR(0,0),	bgm_hang,		dShutdown
 			;Mac-based
-bsod_2D:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_sadMac.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sadMac.fg,		bsod_sadMac.bg,		bsod_sadMac.pal,	TCLR(0,0),	bgm_SadMac,		$00
+bsod_33:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_sadMac.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sadMac.fg,		bsod_sadMac.bg,		bsod_sadMac.pal,	TCLR(0,0),	bgm_SadMac,		$00
 BSOD_table_end:
 
 bsod_w311:
@@ -858,6 +872,39 @@ bsod_bwme:
 .fg:		binclude "_gamemode/winBSOD/bsod_bwme-mapFG.eni"
 			even
 .pal:		binclude "_gamemode/winBSOD/bsod_bwme-pal.bin"
+			even
+			
+			
+;Steve ballmer screens
+bsod_sbPC:
+.art2:
+			binclude "_gamemode/winBSOD/bsod_sbPC-art2.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_sbPC-mapFG.eni"
+			even
+.bg:		binclude "_gamemode/winBSOD/bsod_sbPC-mapBG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_sbPC-pal.bin"
+			even
+bsod_sbDev:
+.art2:
+			binclude "_gamemode/winBSOD/bsod_sbDev-art2.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_sbDev-mapFG.eni"
+			even
+.bg:		binclude "_gamemode/winBSOD/bsod_sbDev-mapBG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_sbDev-pal.bin"
+			even
+bsod_sbLove:
+.art2:
+			binclude "_gamemode/winBSOD/bsod_sbLove-art2.nem"
+			even
+.fg:		binclude "_gamemode/winBSOD/bsod_sbLove-mapFG.eni"
+			even
+.bg:		binclude "_gamemode/winBSOD/bsod_sbLove-mapBG.eni"
+			even
+.pal:		binclude "_gamemode/winBSOD/bsod_sbLove-pal.bin"
 			even
 			
 
@@ -1133,6 +1180,9 @@ bsod_w311.art2:
 bsod_w311.art1:
 bsod_95.art1:
 bsod_98ipc.art1:
+bsod_sbPC.art1:
+bsod_sbDev.art1:
+bsod_sbLove.art1:
 bsod_gen_ntscu.art1:
 bsod_gen_ntscj.art1:
 bsod_gen_ntscuj.art1:

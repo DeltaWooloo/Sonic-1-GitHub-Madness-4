@@ -37,6 +37,7 @@ Assets/Audio/DAC/GenesisDoes1/GenesisDoes1_data
 Assets/Audio/DAC/GenesisDoes1/GenesisDoes1_LD_data
 Assets/Audio/DAC/GenesisDoes1/GenesisDoes1.aup
 Assets/Audio/DAC/GenesisDoes1/GenesisDoes1_LD.aup
+Assets/_gamemode/winBSOD/bsod_SteveBallmer/*.mp4
 Assets/SolidSplashes/GenesisCan/SonicPasta.mp4
 Assets/Audio/DAC/MMZ_BF_Jap/credits.txt
 Assets/Audio/DAC/MMZ_BF_Jap/Metallic Madness Bad Future JP V1.5.vgm
@@ -56,3 +57,8 @@ Assets/Audio/DAC/GNyU/I'd just like to interject for a moment uwu - WebFreak (12
 Assets/Audio/DAC/GNyU/I'd just like to interject for a moment uwu.mp3
 Assets/Audio/DAC/SteveBallmer/cs188_SteveBallmer_YTP.mp4
 Assets/Audio/DAC/SteveBallmer/cs188.wav
+Assets/Audio/DAC/winBSOD/SteveBallmer/cs188.wav
+Assets/Audio/DAC/winBSOD/SteveBallmer/cs188_SteveBallmer_YTP.mp4
+Assets/Audio/DAC/SteveBallmer/cs188_SteveBallmer_YTP.wav
+Assets/Audio/DAC/winBSOD/SteveBallmer/dotNet_Conf.wav
+Assets/Audio/DAC/winBSOD/SteveBallmer/sb_loveMS.wav
