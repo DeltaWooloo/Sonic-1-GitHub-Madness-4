@@ -117,7 +117,7 @@ NeedleIntro_Init:
 	move.b	#0,obAnim(a0)
 	move.w	#0,obAngle(a0)
 	bset	#0,obStatus(a0)
-	move.b	#9,needlehitcnt.w
+	move.b	#16,needlehitcnt.w
 	; load palette
 
 	bsr.w	_needleLoadPalette
@@ -351,7 +351,7 @@ NeedleBoss_HitFloor:
 .Exit:
 	addq.b	#2,obRoutine(a0)
 	move.b	#0,obAnim(a0)	
-	move.b	#$F,obColType(a0)
+	move.b	#$B,obColType(a0)
 	clr.b	needle.Flag+1(a0)
 	rts
 
@@ -360,7 +360,6 @@ NeedleBoss_HitFloor:
 NeedleBoss_Chase:
 	move.b	ob2ndRout(a0),d0
 	jsr	.Index(pc,d0.w)
-	bsr.w	_needleChase
 	bsr.w	_needleFacePlayer
 	rts
 
@@ -368,8 +367,9 @@ NeedleBoss_Chase:
 .Index:
 	bra.w	.ChkRangeWait
 	bra.w	.Spin
-	bra.w	.ChkRangeWait
-
+	bra.w	.Jump
+	move.w	#0,ob2ndRout(a0)	; in case anything happens
+	rts
 ; --------------------------------------
 
 .ChkRangeWait:
@@ -379,7 +379,7 @@ NeedleBoss_Chase:
 	neg.w	d0
 .abs:
 	cmpi.w	#$50,d0
-	bhs.s	.Exit
+	bhs.s	.ChkJmp
 	tst.w	obVelX(a0)
 	bpl.s	.NotNeg1
 	move.b	#0,needle.Flag(a0)
@@ -389,17 +389,44 @@ NeedleBoss_Chase:
 .skip1:
 	addq.b	#4,ob2ndRout(a0)
 	move.b	#8,obAnim(a0)
+
 	move.b	#sfx_Roll,d0
-	jsr	QueueSound1.l
-	add.b	#1,needle.Flag+1(a0)
-	cmpi.b	#6,needle.Flag+1(a0)
-	bne.s	.Exit
+	jsr	QueueSound2.l
+
+	move.b	#$80+$B,obColType(a0)	; set dmg collision
+
+	add.b	#1,needle.Flag+1(a0)	
+	cmpi.b	#6,needle.Flag+1(a0)	; chk if leave to next phase
+	bne.s	.Exit			; if not, exit
+
+	move.b	#sfx_Bonus,d0
+	jsr	QueueSound2.l
+
+	move.b	#$B,obColType(a0)	
 	addq.b	#2,obRoutine(a0)
 	move.b	#6,obAnim(a0)
 	move.w	#$3C00,needle.Timer(a0)
 	move.w	#0,obVelX(a0)
 	move.w	#0,obVelY(a0)
-.Exit
+	rts
+.ChkJmp	
+	move.w	(v_player+obY).w,d0
+	move.w	obY(a0),d1
+	sub.w	d0,d1
+	cmpi.w	#$30,d1
+	bge.s	.Set
+
+	bsr.w	_needleBossHits
+.Exit:
+	bra.w	_needleChase
+
+.Set
+	move.b	#$80+$B,obColType(a0)	; set dmg collision
+	move.w	#-$700,obVelY(a0)
+	move.b	#sfx_Jump,d0
+	jsr	QueueSound1.l
+	addq.b	#8,ob2ndRout(a0)
+	move.b	#8,obAnim(a0)
 	rts
 
 ; --------------------------------------
@@ -418,7 +445,22 @@ NeedleBoss_Chase:
 	move.b	#0,obAnim(a0)	
 .Unspin:
 	subq.b	#4,ob2ndRout(a0)
+	move.b	#$B,obColType(a0)
+.Exit2:
 	rts
+
+; --------------------------------------
+
+.Jump:
+	jsr	ObjectFall.l
+	cmpi.w	#NBOSS_FLOOR_Y,obY(a0)
+	ble.s	.Exit2
+	move.w	#NBOSS_FLOOR_Y,obY(a0)
+	subq.b	#8,ob2ndRout(a0)
+	move.b	#$B,obColType(a0)
+	move.b	#0,obAnim(a0)	
+	rts
+
 ; --------------------------------------
 
 NeedleBoss_SpinTurn:
@@ -435,9 +477,14 @@ NeedleBoss_SpinTurn:
 	move.b	#1,needle.Timer+1(a0)
 .Skip
 	sub.w	#56,obVelY(a0)
+	cmpi.w	#NBOSS_START_Y1-$A0,obY(a0)
+	ble.s	.StartBigPhase
 	jmp	SpeedToPos.l
-
-
+.StartBigPhase:
+	jsr	DeleteObject.l
+	move.b	#id_NeedleBoss,(a0)
+	move.b	#12,obSubtype(a0)
+	rts
 ; ----------------------------------------------------------------------------
 
 _needleSpawnAttack:
@@ -455,7 +502,7 @@ _needleSpawnAttack:
 _needleChase:
 	lea	v_player.w, a1
 	move.w	#$450, d0
-	move.w	#$10, d1
+	move.w	#$20, d1
 	jsr	ChaseObject.l
 	move.w	#0, obVelY(a0)
 	jmp	SpeedToPos
@@ -486,7 +533,7 @@ _needleBossHits:
 	bne.s	.HitFlash
 	; initial hit
 	move.b	obColProp(a0),needlehitcnt.w
-	move.b	#50,needle.FlashTimer(a0)			; set number of times to flash 
+	move.b	#80,needle.FlashTimer(a0)			; set number of times to flash 
 	move.b	obAnim(a0),needle.LastAnim(a0)
 	move.b	#7,obAnim(a0)
 	move.w	#sfx_HitBoss, d0
@@ -533,7 +580,6 @@ NHammer_Init:
 	move.b	#16,obActWid(a0)
 	move.b	#2,obPriority(a0)
 	move.b	#$80+6, obColType(a0)
-	move.b	#12, obColProp(a0) 		; set number of hits
 	move.b	#8,obFrame(a0)
 	move.b	#0,obAnim(a0)
 	move.w	#0,obAngle(a0)
