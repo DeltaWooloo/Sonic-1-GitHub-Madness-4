@@ -275,6 +275,7 @@ PLC_WIN:	dc.w ((PLC_WIN2-PLC_WIN-2)/6)-1
 		plcm	Nem_HSpring,   ArtTile_Spring_Horizontal        ; horizontal spring
 		plcm	Nem_Mouse,   ArtTile_Villager                   ; Mouse the computer mouse controller		         
 		plcm	Nem_IE,        ArtTile_IE                       ; Internet Explorer enemy
+		plcm	Nem_RecycleBin,        ArtTile_RecyleBin                       ; Recycle Bin enemy
 		plcm	Nem_Spikes,    ArtTile_Spikes                 ; spikes
 
 PLC_WIN2:	dc.w ((PLC_WIN2end-PLC_WIN2-2)/6)-1
