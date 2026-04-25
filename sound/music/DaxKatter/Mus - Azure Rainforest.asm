@@ -9,7 +9,7 @@ BGM_DUNGEON3_Header:		; To clean up
 
 	smpsHeaderDAC	BGM_DUNGEON3_DAC
 	smpsHeaderFM	BGM_DUNGEON3_FM1,	$00, $0E
-	smpsHeaderFM	BGM_DUNGEON3_FM2,	$00, $0B
+	smpsHeaderFM	BGM_DUNGEON3_FM2,	$00, $0C
 	smpsHeaderFM	BGM_DUNGEON3_FM3,	$00, $0E
 	smpsHeaderFM	BGM_DUNGEON3_FM4,	$00, $13
 	smpsHeaderFM	BGM_DUNGEON3_FM5,	$00, $15
