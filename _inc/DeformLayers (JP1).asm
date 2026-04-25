@@ -1042,7 +1042,7 @@ Deform_DVZ:
 .CheckerFloor:
 		move.w	v_screenposx.w,d0
 		move.w	d0,d3
-		asr.w	#1,d0
+		asr.w	#2,d0
 		add.w	d3,d0
 
 		move.w	d0,d5

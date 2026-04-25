@@ -5818,7 +5818,7 @@ Map_Splash:	include	"_maps/Water Splash.asm"
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
-
+; this label is completely wrong btw
 Sonic_WalkSpeed:
 		move.l	obX(a0),d3
 		move.l	obY(a0),d2
@@ -5861,7 +5861,11 @@ loc_14D24:
 		beq.w	loc_14F7C
 		andi.b	#$38,d1
 		bne.s	loc_14D3C
+		jsr	GetOtherPlayerData
+		move.b	pdat.height2(a5),d4
+		sub.b	obHeight(a0),d4
 		addq.w	#8,d2
+		sub.w	d4,d2
 
 loc_14D3C:
 		cmpi.b	#$40,d0

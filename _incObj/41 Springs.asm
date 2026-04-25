@@ -24,8 +24,8 @@ Spring_Index:	dc.w Spring_Main-Spring_Index
 
 spring_pow = objoff_30			; power of current spring
 
-Spring_Powers:	; dc.w -$1000		; power	of red spring (GMZ - Commented)
-		; dc.w -$A00		; power	of yellow spring (GMZ - Commented)
+Spring_Powers:	 dc.w -$600		; power	of red spring (GMZ - Commented)
+		 dc.w -$400		; power	of yellow spring (GMZ - Commented)
 ; ===========================================================================
 
 Spring_Main:	; Routine 0
@@ -58,8 +58,8 @@ Spring_NotDwn:
 		; bset	#5,obGfx(a0)
 
 loc_DB72:
-		; andi.w	#$F,d0	; GMZ - Commented
-		; move.w	Spring_Powers(pc,d0.w),spring_pow(a0)	; GMZ - Commented
+		andi.w	#$F,d0	; GMZ - Commented
+		move.w	Spring_Powers(pc,d0.w),spring_pow(a0)	; GMZ - Commented
 		rts
 ; ===========================================================================
 
@@ -77,16 +77,16 @@ Spring_Up:	; Routine 2
 Spring_BounceUp:
 		addq.b	#2,obRoutine(a0)
 		addq.w	#8,obY(a1)
-		; move.w	spring_pow(a0),obVelY(a1) ; move Sonic upwards (GMZ - Commented)
+		move.w	spring_pow(a0),obVelY(a1) ; move Sonic upwards (GMZ - Commented)
 
 		; GMZ - Our code starts here
 		moveq	#0,d0
 		move.b	v_framebyte,d0
 		andi.b	#$F,d0
 		addq.b	#1,d0
-		lsl.w	#8,d0
+		asl.w	#8,d0
 		neg.w	d0
-		move.w	d0,obVelY(a1)
+		add.w	d0,obVelY(a1)
 		; GMZ - Our code ends here
 
 		bset	#1,obStatus(a1)
@@ -193,7 +193,7 @@ locret_DCAE:
 Spring_BounceDwn:
 		addq.b	#2,obRoutine(a0)
 		subq.w	#8,obY(a1)
-		; move.w	spring_pow(a0),obVelY(a1)	; GMZ - Commented
+		move.w	spring_pow(a0),obVelY(a1)	; GMZ - Commented
 
 		; GMZ - Our code starts here
 		moveq	#0,d0
