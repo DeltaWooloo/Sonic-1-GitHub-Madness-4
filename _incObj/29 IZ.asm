@@ -10,8 +10,10 @@ ObjIZ:
 ; ===========================================================================
 ObjIZ_Index:	dc.w ObjIZ_Main-ObjIZ_Index
 		dc.w ObjIZ_Action-ObjIZ_Index
-		dc.w ObjIZ_Animate-ObjIZ_Index
-		dc.w ObjIZ_Delete-ObjIZ_Index
+		dc.w ObjIZ_BattInit-ObjIZ_Index
+		dc.w ObjIZ_Batt-ObjIZ_Index
+;		dc.w ObjIZ_Animate-ObjIZ_Index
+;		dc.w ObjIZ_Delete-ObjIZ_Index
 ; ===========================================================================
 
 ObjIZ_Main:	; Routine 0
@@ -47,7 +49,10 @@ ObjIZ_Action:	; Routine 2
 		move.b	ob2ndRout(a0),d0
 		move.w	ObjIZ_ActIndex(pc,d0.w),d1
 		jsr	ObjIZ_ActIndex(pc,d1.w)
-		bsr.w	ObjIZ_Animate
+;		bsr.w	ObjIZ_Animate
+		lea	(Ani_IZ).l,a1
+		bsr.w	AnimateSprite
+		bsr.w	DisplaySprite
 		bra.w	RememberState
 
 ; ===========================================================================
@@ -160,21 +165,48 @@ ObjIZ_ActIndex:
 		move.b	#8,ob2ndRout(a0)
 		bsr.w	FindFreeObj
 		bne.s	.fail
-		_move.b	#id_Missile,obID(a1) ; load missile object
+		_move.b	#id_IZ,obID(a1) ; load batt object
+		move.b	#6,obRoutine(a1)	; set bomb
 		move.w	obX(a0),obX(a1)
 		move.w	obY(a0),obY(a1)
+		add.w	#$10,obX(a1)
+		sub.w	#$10,obY(a1)
 .fail:
 		rts
-; ===========================================================================
 
-ObjIZ_Animate:	; Routine 4
+ObjIZ_BattInit:
+		move.l	#Map_IZ,obMap(a0)
+		move.w	#make_art_tile(ArtTile_CBZ_IZ,0,0),obGfx(a0)
+		move.b	#4,obRender(a0)
+		move.b	#4,obPriority(a0)
+		move.b	#$87,obColType(a0)
+		move.b	#8,obActWid(a0)
+		move.b	#5,obAnim(a0)
+		addq.b	#2,obRoutine(a0) ; goto ObjIZ_Action next
+		bra.w	DisplaySprite
+
+ObjIZ_Batt:
 		lea	(Ani_IZ).l,a1
 		bsr.w	AnimateSprite
+		move.w	#$180,obVelX(a0)
+		bsr.w	ObjectFall
+		jsr	(ObjFloorDist).l
+		tst.w	d1
+		bpl.s	.notonfloor
+		move.w	#-$180,obVelY(a0)
+.notonfloor:
 		bra.w	DisplaySprite
+
 ; ===========================================================================
 
-ObjIZ_Delete:	; Routine 6
-		bra.w	DeleteObject
+;ObjIZ_Animate:	; Routine 4
+;		lea	(Ani_IZ).l,a1
+;		bsr.w	AnimateSprite
+;		bra.w	DisplaySprite
+; ===========================================================================
+
+;ObjIZ_Delete:	; Routine 6
+;		bra.w	DeleteObject
 
 Ani_IZ:
 		dc.w Ani_IZ.stand-Ani_IZ
