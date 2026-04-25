@@ -1981,9 +1981,9 @@ Sonic_ResetLevel:; Routine 8
 		beq.s	GotoSChGuy			;If so, branch
 .restart:
 		move.w	#1,(f_restart).w	; restart the level
+.return:
 		moveq	#1,d0				; Reload palette param (level restart will do so)
 		jsr		(Pow_vdp_fixRegs).l	; !@ GD: Bugfix to reset Random monitor FX if restarting back into GM_Level mode
-.return:		
 		rts
 
 GotoBSOD:
