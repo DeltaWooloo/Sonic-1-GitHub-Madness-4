@@ -143,6 +143,8 @@ MusicIndex:
 	bgmdef $01, Mus_SkyBase
 	bgmdef $75, Mus_Scrappy
 	bgmdef $75, Mus_SkyGift
+	bgmdef s1TempotoS3($03), Mus_BLIND_MODE
+	bgmdef s1TempotoS3($03), Mus_FrontHook
 
 	;!@ bgmwarning	MusicIndex,4
 
@@ -383,6 +385,10 @@ Mus_SkyBase:		include	"music/TG2000Tracks/Mus - Sky Base.asm"
 Mus_Scrappy:		include	"music/TG2000Tracks/Scrappy.asm"
 	even
 Mus_SkyGift:		include	"music/TG2000Tracks/SkyGift.asm"
+	even
+Mus_BLIND_MODE:		include	"music/TIS_Tracks/BLIND_MODE.asm"
+	even
+Mus_FrontHook:		include	"music/TIS_Tracks/FrontinHook.asm"
 	even
 
 ;!@ Dummy song; meant for placehold slot, silence, whatever
