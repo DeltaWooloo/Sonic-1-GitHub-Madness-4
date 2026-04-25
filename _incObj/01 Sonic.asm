@@ -237,7 +237,7 @@ MrBean_Init:
 		move.b	#2,obPriority(a0)
 		move.b	#$18,obActWid(a0)
 		move.b	#4,obRender(a0)
-		or.b	#1,f_ammocount.w
+;		or.b	#1,f_ammocount.w
 		move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
 		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
 		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
