@@ -2751,6 +2751,12 @@ Level_NoMusicFade:
 		disable_ints
 		fillVRAM $2F,0,$10000		; fill vram with dummy tiles
 		bsr.w	ClearScreen
+		
+		moveq	#0,d0
+		jsr	(Pow_vdp_fixRegs).l
+		move.b	#0,(v_vdp_fx).w	; cancel VDP FX
+
+
 		tst.w	(f_demo).w		; is an ending sequence demo running?
 		bmi.s	.notitlecard		; if yes, branch
 		jsr	(TitleCards_LoadArt).l
