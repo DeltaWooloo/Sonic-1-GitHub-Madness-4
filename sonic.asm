@@ -415,10 +415,10 @@ GameModeArray:
 	GAMEMODE	GM_Special,		id_Special	; Special Stage							
 	GAMEMODE	GM_Continue,		id_Continue	; Continue Screen						
 	GAMEMODE	GM_Ending,		id_Ending	; End of game sequence					
+	GAMEMODE	GM_ThanatosCredits,	id_Thanatos	; Credits - Thanatos ver. 				
 	GAMEMODE	TryAgainEnd,		id_TryAgainEnd	; Testable TRY AGAIN/END screen 		
 	GAMEMODE	GM_ColdBrew,		id_ColdBrew	; Cold Brew 							
 	GAMEMODE	GM_FoxyBoo,		id_FoxyBoo	; Foxy Scare 							
-	GAMEMODE	GM_ThanatosCredits,	id_Thanatos	; Credits - Thanatos ver. 				
 	GAMEMODE	GM_Fetus,		id_Fetus	; Difficulty Select screen out of spite 
 	GAMEMODE	GM_Damn,		id_Damn		; DAMN!!!!!!!!!!!!!!!!!!!!!!!			
 	GAMEMODE	GM_SplashScreenSkipper,	id_SplashSkip	; My Stupid Splash is here 				
