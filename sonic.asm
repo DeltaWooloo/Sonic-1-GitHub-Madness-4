@@ -2670,12 +2670,13 @@ Demo_Brew:
 
 DemoSetup:
 		move.w	(v_demonum).w,d0 ; load demo number
-		andi.w	#7,d0
+;		andi.w	#7,d0
+		moveq	#0,d0
 		add.w	d0,d0
 		move.w	Demo_Levels(pc,d0.w),d0	; load level number for demo
 		move.w	d0,(v_zone).w
 		addq.w	#1,(v_demonum).w ; add 1 to demo number
-		cmpi.w	#4,(v_demonum).w ; is demo number less than 5?
+		cmpi.w	#5,(v_demonum).w ; is demo number less than 6?
 		blo.s	loc_3422	; if yes, branch
 		move.w	#0,(v_demonum).w ; reset demo number to 0
 loc_3422:
@@ -2719,6 +2720,7 @@ Demo_Levels:
 		dc.b	id_ACZ, 0
 		dc.b	id_SFZ, 0
 		dc.b	id_CBZ, 0
+		dc.b	id_DVZ, 0
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -2728,8 +2730,8 @@ Demo_Levels:
 GM_Level:
 		move.b	#0,vscroll_mode
 		bset	#7,(v_gamemode).w ; add $80 to screen mode (for pre level sequence)
-		tst.w	(f_demo).w
-		bmi.s	Level_NoMusicFade
+;		tst.w	(f_demo).w
+;		bmi.s	Level_NoMusicFade
 		move.b	#bgm_Fade,d0
 		bsr.w	QueueSound2 ; fade out music
 		jsr	(MegaPCM_StopPlayback).l
@@ -2758,8 +2760,8 @@ Level_NoMusicFade:
 		move.b	#0,(v_vdp_fx).w	; cancel VDP FX
 
 
-		tst.w	(f_demo).w		; is an ending sequence demo running?
-		bmi.s	.notitlecard		; if yes, branch
+;		tst.w	(f_demo).w		; is an ending sequence demo running?
+;		bmi.s	.notitlecard		; if yes, branch
 		jsr	(TitleCards_LoadArt).l
 		moveq	#plcid_Main,d0
 		bsr.w	AddPLC			; load standard patterns
@@ -2892,8 +2894,8 @@ Level_GetBgm:
 		lea	(Nem_Instagram).l,a0 ;	load alphabet
 		bsr.w	NemDec
 .Okbro:
-		tst.w	(f_demo).w	; Is demo mode on?
-		bcs.s	Level_SkipTtlCard
+;		tst.w	(f_demo).w	; Is demo mode on?
+;		bcs.s	Level_SkipTtlCard
 		bsr.w  Reproduce_BGM
 		move.b	#id_TitleCard,(v_titlecard).w ; load title card object
 
@@ -2929,7 +2931,12 @@ Level_SkipTtlCard:
 .cont:
 		move.b	#id_SonicPlayer,(v_player).w ; load Sonic object
 		tst.w	(f_demo).w
-		bmi.s	Level_ChkDebug
+		beq.s	.dontsetchar
+		moveq	#0,d0
+		lea	(DemoChars).l,a1
+		move.b	(v_zone).w,d0
+		move.b	(a1,d0.w),(v_characterid).w
+.dontsetchar:
 		move.b	#id_HUD,(v_hud).w ; load HUD object
 ;		cmpi.w	#(id_Joint<<8)+0,(v_zone).w	; comment this stuff out its a test burp
 ;		bne.s	Level_ChkDebug	; comment this stuff out its a test burp
@@ -3314,7 +3321,7 @@ SignpostArtLoad2:
 Demo_GHZ:	binclude	"demodata/Intro - GHZ.bin"
 Demo_MZ:	binclude	"demodata/Intro - MZ.bin"
 Demo_SYZ:	binclude	"demodata/Intro - SYZ.bin"
-Demo_BREW:	binclude	"demodata/Intro - BREW.bin"
+;Demo_BREW:	binclude	"demodata/Intro - BREW.bin"
 ; ===========================================================================
 
 		include	"_incObj/80 Continue Screen Elements.asm"		; KEEP!!!!!!
