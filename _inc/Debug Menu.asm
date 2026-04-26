@@ -620,7 +620,6 @@ GamemodeNameTable:
 		dc.w	.Jumpscare-.t
 		dc.w	.Difficulty-.t
 		dc.w	.DamnScreen-.t
-		dc.w	.Skipper-.t
 		dc.w	.Advert-.t
 		dc.w	.Earthbou-.t
 		dc.w	.Screensaver-.t
@@ -645,7 +644,6 @@ GamemodeNameTable:
 .Jumpscare:		dc.b	"JUMPSCARE       "
 .Difficulty:		dc.b	"DIFFICULTY      "
 .DamnScreen:		dc.b	"DAMN!!!!!!!!!!!!"
-.Skipper:		dc.b	"SPLASH SKIPPER  "
 .Advert:		dc.b	"ADVERTISEMENTS  "
 .Earthbou:		dc.b	"CUTSCENES       "
 .Screensaver:		dc.b	"SCREENSAVER     "

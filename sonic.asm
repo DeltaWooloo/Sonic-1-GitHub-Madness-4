@@ -408,24 +408,23 @@ id	= *
 
 GameModeArray:
 	phase	0
-	GAMEMODE	GM_Sega,		id_Sega		; Sega Screen 							
-	GAMEMODE	GM_Title,		id_Title	; Title Screen							
-	GAMEMODE	GM_Level,		id_Demo		; Demo Mode								
-	GAMEMODE	GM_Level,		id_Level	; Normal Level							
-	GAMEMODE	GM_Special,		id_Special	; Special Stage							
-	GAMEMODE	GM_Continue,		id_Continue	; Continue Screen						
-	GAMEMODE	GM_Ending,		id_Ending	; End of game sequence					
-	GAMEMODE	GM_ThanatosCredits,	id_Thanatos	; Credits - Thanatos ver. 				
-	GAMEMODE	TryAgainEnd,		id_TryAgainEnd	; Testable TRY AGAIN/END screen 		
-	GAMEMODE	GM_ColdBrew,		id_ColdBrew	; Cold Brew 							
-	GAMEMODE	GM_FoxyBoo,		id_FoxyBoo	; Foxy Scare 							
-	GAMEMODE	GM_Fetus,		id_Fetus	; Difficulty Select screen out of spite 
-	GAMEMODE	GM_Damn,		id_Damn		; DAMN!!!!!!!!!!!!!!!!!!!!!!!			
-	GAMEMODE	GM_SplashScreenSkipper,	id_SplashSkip	; My Stupid Splash is here 				
-	GAMEMODE	GM_Advert,		id_Advert	; For all the reject splash screens I guess
-	GAMEMODE	GM_Cutscene,		id_Cutscene	; 		
-	GAMEMODE	GM_SonicTheScreensaver,	id_Screensaver	; GMZ - DVD Screensaver					
-	GAMEMODE	GM_ClintonScreens,	id_ClintonScr	; Clinton fail/win 						
+	GAMEMODE	GM_Sega,		id_Sega		; Sega Screen
+	GAMEMODE	GM_Title,		id_Title	; Title Screen
+	GAMEMODE	GM_Level,		id_Demo		; Demo Mode
+	GAMEMODE	GM_Level,		id_Level	; Normal Level
+	GAMEMODE	GM_Special,		id_Special	; Special Stage
+	GAMEMODE	GM_Continue,		id_Continue	; Continue Screen
+	GAMEMODE	GM_Ending,		id_Ending	; End of game sequence
+	GAMEMODE	GM_ThanatosCredits,	id_Thanatos	; Credits - Thanatos ver.
+	GAMEMODE	TryAgainEnd,		id_TryAgainEnd	; TRY AGAIN/END screen
+	GAMEMODE	GM_ColdBrew,		id_ColdBrew	; Cold Brew
+	GAMEMODE	GM_FoxyBoo,		id_FoxyBoo	; Jumpscare Test Mode
+	GAMEMODE	GM_Fetus,		id_Fetus	; Difficulty Select
+	GAMEMODE	GM_Damn,		id_Damn		; DAMN!!!!!!!!!!!!!!!!!!!!!!!
+	GAMEMODE	GM_Advert,		id_Advert	; In-Game Advertisements
+	GAMEMODE	GM_Cutscene,		id_Cutscene	; Intro/Outro Cutscenes
+	GAMEMODE	GM_SonicTheScreensaver,	id_Screensaver	; GMZ - DVD Screensaver
+	GAMEMODE	GM_ClintonScreens,	id_ClintonScr	; Clinton fail/win
 	GAMEMODE	GM_BSOD,		id_BSOD		; !@ GD: Windows zone BSOD (on death)
 	GAMEMODE	GM_Sans,		id_SansDied	; he died.
 	GAMEMODE	GM_DebugMenu,		id_DebugMenu	; Debug Menu
@@ -2115,10 +2114,8 @@ Pal_SegaBG:		bincludeEndMarker	"palette/Sega Background.bin"
 Pal_Title:		bincludeEndMarker	"palette/Title Screen.bin"
 Pal_LevelSel:		bincludeEndMarker	"palette/Level Select.bin"
 Pal_Sonic:		bincludeEndMarker	"palette/Sonic.bin"			; generic sonic palette
-Pal_SplScrSki:		bincludeEndMarker	"Nano's SHIT/splash/data/pal.pal"
 Pal_GHZ:		bincludeEndMarker	"palette/Green Hill Zone.bin"
 Pal_LZ:			bincludeEndMarker	"palette/Labyrinth Zone.bin"
-Pal_LZWater:		bincludeEndMarker	"palette/Labyrinth Zone Underwater.bin"
 Pal_MZ:			bincludeEndMarker	"palette/Marble Zone.bin"
 Pal_SLZ:		bincludeEndMarker	"palette/Star Light Zone.bin"
 Pal_SYZ:		bincludeEndMarker	"palette/Spring Yard Zone.bin"

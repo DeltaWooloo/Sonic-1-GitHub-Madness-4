@@ -981,10 +981,15 @@ Level_LoadPal2:
 		beq.s	.skipwtr2				; If not, branch
 		
 		;!@ GD: Rewrite me after char underwater palette code is fixed up
-		moveq	#palid_LZSonWater,d1 	; palette number $F (LZ)
-		cmpi.b	#3,(v_act).w			; is act number 3?
-		bne.s	.wtr					; if not, branch
-		moveq	#palid_SBZ3SonWat,d1 	; palette number $10 (SBZ3)		
+		moveq	#palid_CBZ2SonWat,d0
+		cmpi.b	#id_ARZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
+		beq.s	.ARZWtr			; it makes me have a boaner
+		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
+		bne.s	.wtr			; if not, branch
+		moveq	#palid_SBZ3SonWat,d0 ; palette number $10 (SBZ3)
+		bra.s	.WtrNotSbz
+	.ARZWtr:
+		moveq	#palid_ARZSonWater,d0
 	.wtr:
 		moveq	#1,d2					; Set water flag
 		bsr.w	.loadpal				; Load d1 character water palette
@@ -1029,11 +1034,18 @@ Level_LoadPal2:
 		;bpl.s	.end					; if not, branch
 		bsr.w	isWaterLevel			; Does level have water?
 		beq.s	.end					; If not, branch
-		
-		moveq	#palid_LZWater,d1 		; palette $B (LZ underwater)
-		cmpi.b	#3,(v_act).w			; is level SBZ3?
-		bne.s	.WtrNotSbz				; if not, branch
-		moveq	#palid_SBZ3Water,d1 	; palette $D (SBZ3 underwater)
+
+		moveq	#palid_CBZ2SonWat,d0
+		cmpi.b	#id_ARZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
+		beq.s	.ARZWaterPal	; it makes me have a boaner
+		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
+		bne.s	.WtrNotSbz	; if not, branch
+		moveq	#palid_SBZ3SonWat,d0 ; palette number $10 (SBZ3)
+		bra.s	.WtrNotSbz
+
+.ARZWaterPal:
+		moveq	#palid_ARZSonWater,d0
+
 .WtrNotSbz:
 		moveq	#1,d2					; Set water flag
 		bsr.w	.loadpal				; Load d1 level water palette 
@@ -1092,9 +1104,13 @@ Level_LoadPal2:
 ; Function determines if level has water, and sets ccr by tst.b(d2)
 ; Output: d2; 1=has water, 0=doesn't
 isWaterLevel:		
+		cmpi.w	#(id_CBZ<<8)+1,(v_zone).w		; Is this zone ARZ?
+		beq.s	.hasWtr					; If not, branch
 		cmpi.b	#id_ARZ,(v_zone).w		; Is this zone ARZ?
-		bne.s	.notWtr					; If not, branch
-		
+		beq.s	.hasWtr					; If not, branch
+		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
+		bne.s	.notWtr	; if not, branch
+
 	;Level has water!
 	.hasWtr:
 		moveq	#1,d2					; Set d2 flag

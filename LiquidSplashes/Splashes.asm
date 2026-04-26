@@ -254,7 +254,6 @@ splash_turd macro routine
 	include "_gamemode/DaxKatter Splash/DaxKatter Splash.asm"
 	include "_gamemode/vmss/_runcode.asm"
 ;	include "_gamemode/Team Overload/main.asm"
-	include "Nano's SHIT/splash/GM_SplashScreenSkipper.asm"
 	include "LiquidSplashes/2kki/2kki.asm"
 	include "eurosega/eurosega.asm"
 	include "_gamemode/TGSplash/TGSplash.asm"
