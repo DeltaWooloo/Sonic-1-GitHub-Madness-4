@@ -2654,7 +2654,12 @@ loc_33B6:
 		move.b	#id_Demo,(v_gamemode).w ; set screen mode to 08 (demo)
 		cmpi.w	#(id_CBZ<<8),d0	; is level number 0700 (the cold brew zone)?
 		beq.s	Demo_Brew	; if yes, branch
-		move.b	#3,(v_lives).w	; set lives to 3
+		move.b	#A,(v_lives).w	; set lives to 10
+		tst.b	(DiffVariable).w ; check difficulty
+		beq.s	dontHardAnuidkiforgotthename
+		move.b	#1,(v_lives).w	; set lives to 1
+		
+dontHardAnuidkiforgotthename:		
 		moveq	#0,d0
 		move.w	d0,(v_rings).w	; clear rings
 		move.l	d0,(v_time).w	; clear time
