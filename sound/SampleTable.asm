@@ -69,10 +69,12 @@ SampleTable:
 	dcSample	TYPE_DPCM,	dummy,	8000,					; Used to cut samples off in songs
 
 	; In-Game SFX SAMPLES
+	dcSample	TYPE_DPCM,	DAMN,		16000,	FLAGS_SFX		; $BA
 	dcSample	TYPE_PCM,	letsgoeee,	8000,	FLAGS_SFX		; $A7
 	dcSample	TYPE_PCM,	Boik,		5250,	FLAGS_SFX		; $A8 
 	dcSample	TYPE_PCM,	QuakeJump,	0,	FLAGS_SFX			; $A9 
 	dcSample	TYPE_PCM,	Fannys,		0,	FLAGS_SFX			; $AA
+	dcSample	TYPE_PCM,	Trevor,		0,	FLAGS_SFX			; $AA
 	dcSample	TYPE_PCM,	QuakeRocket,	11297				; $AB 
 	dcSample	TYPE_DPCM,	CL_STFU,	8000,	FLAGS_SFX		; $AC 
 	dcSample	TYPE_PCM,	CL_Fuck,	11297					; $AD 
@@ -88,7 +90,6 @@ SampleTable:
 	dcSample	TYPE_DPCM,	ClintonFail,	11025,	FLAGS_SFX	; $B7
 	dcSample	TYPE_PCM,	CL_DoYouSuck,	11297,	FLAGS_SFX	; $B8
 	dcSample	TYPE_PCM,	CL_OnTheBall,	11297				; $B9
-	dcSample	TYPE_DPCM,	DAMN,		16000,	FLAGS_SFX		; $BA
 	dcSample	TYPE_PCM,	Foxy,		0,	FLAGS_SFX			; $BB
 	dcSample	TYPE_PCM,	Scream,		8000,	FLAGS_SFX		; $BC
 	dcSample	TYPE_DPCM,	Rift,		11025,	FLAGS_SFX		; $BD
@@ -220,7 +221,8 @@ SampleTable:
 	incdac	letsgoeee, "sound/dac/TheSunsetHacker/letsgoeee.pcm"		; :fire: :fire: :fire: :fire: :fire:
 	incdac	Boik, "sound/dac/boik.wav"
 	incdac	QuakeJump, "sound/dac/quakejump.wav"
-	incdac	Fannys, "sound/dac/Trevor.wav"
+	incdac	Fannys, "sound/dac/PicturesOf.wav"
+	incdac	Trevor, "sound/dac/Trevor.wav"
 	incdac	QuakeRocket, "sound/dac/tankfire1.wav"
 	incdac	CL_STFU, "sound/dac/CL_STFU.dpcm"
 	incdac	CL_Fuck, "sound/dac/CL_Fuck.wav"
@@ -240,7 +242,9 @@ SampleTable:
 	incdac	Foxy, "sound/dac/Foxy.wav"
  	incdac	Scream, "sound/dac/Scream.wav"
 	incdac	Rift, "sound/dac/Rift.dpcm"
-	
+	incdac	Sands, "sound/dac/sansfuckyoutonic.dpcm"
+	incdac	Dude, "sound/dac/Dude.wav"
+
 ; ---------------------------------------------------------------
 ; Title Screen Samples
 	incdac	YoFreddy, "sound/dac/GenesisDoes/YoFreddy.dpcm"
@@ -271,16 +275,13 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Advertisement Samples
-;	incdac	BeRightBack,"sound/dac/well-be-right-back.dpcm"
 	incdac	GenesisCan3,"sound/dac/GenesisDoes/GenesisCan3.dpcm"
 
 ; ---------------------------------------------------------------
 ; Ollie Samples
 	incdac	OllieGameTap,"sound/dac/ollie/gametap.dpcm"
 	incdac	OllieWahoo,"sound/dac/ollie/wahoo.dpcm"
-;sANDS
-	incdac	Sands, "sound/dac/sansfuckyoutonic.dpcm"
-	incdac	Dude, "sound/dac/Dude.wav"
+
 ; ---------------------------------------------------------------
 ; Whatever you want the Sega sound to be
 	incdac	SegaPCM, "sound/dac/sega.wav"

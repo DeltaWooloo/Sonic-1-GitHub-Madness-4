@@ -205,9 +205,9 @@ splash_turd macro routine
 	splash_liquid	GM_EagleSoft
 	splash_liquid	GM_CNNicoJump
 	splash_liquid	GM_DaxKatter
-	splash_liquid	RobiWanKenobi_Splash
+;	splash_liquid	RobiWanKenobi_Splash
 	splash_liquid	Malachi_Splash
-	splash_liquid	TeamOverload_Splash
+;	splash_liquid	TeamOverload_Splash
 	splash_liquid	GM_TheSunsetJester
 	splash_liquid	GM_TGSplash
 	splash_liquid	AtollySplash
@@ -222,9 +222,8 @@ splash_turd macro routine
 	splash_solid	Blessed,	$40, 1, _bgm, sfx_SSGoal,		200
 	splash_solid	SonicBroke,	$20, 1, _bgm, bgm_S1Continue,		480
 	splash_solid	Wait,		$60, 1, _bgm, bgm_PuyoDrown,		145
-	splash_solid	GameTap,	$20, 1, _pcm, dOllieGameTap,		60*3
+;	splash_solid	GameTap,	$20, 1, _pcm, dOllieGameTap,		60*3
 	splash_solid	Clownancy,	$20, 1, _bgm, $00,			60*3
-	splash_solid	Ollie,		$20, 1, _pcm, dOllieWahoo,		60*3
 
 	splash_liquid	GM_NTOSKRNL
 	splash_liquid	GM_SegaEU
@@ -243,9 +242,8 @@ splash_turd macro routine
 	inc_solid_splash Blessed
 	inc_solid_splash SonicBroke
 	inc_solid_splash Wait
-	inc_solid_splash GameTap
+;	inc_solid_splash GameTap
 	inc_solid_splash Clownancy
-	inc_solid_splash Ollie
 
 ; Files for liquid
 	include "LiquidSplashes/Rerto/Rerto.asm"
@@ -255,7 +253,7 @@ splash_turd macro routine
 	include "LiquidSplashes/EagleSoft/EagleSoft.asm"
 	include "_gamemode/DaxKatter Splash/DaxKatter Splash.asm"
 	include "_gamemode/vmss/_runcode.asm"
-	include "_gamemode/Team Overload/main.asm"
+;	include "_gamemode/Team Overload/main.asm"
 	include "Nano's SHIT/splash/GM_SplashScreenSkipper.asm"
 	include "LiquidSplashes/2kki/2kki.asm"
 	include "eurosega/eurosega.asm"
@@ -265,15 +263,15 @@ splash_turd macro routine
 	include "dotgen/Giovanni Splash Screen.asm"
 	include "dotgen/DynPaletteTransition.asm"
 	include "_gamemode/TSH Splash/TSHSplash.asm"
+;	include "LiquidSplashes/RobiWK/Splash.asm"
 ; Files for turd
 	include "CrazyRemilia/Remi/Remi.asm"
-	include "LiquidSplashes/RobiWK/Splash.asm"
 
 
-MapEni_BG:	binclude "LiquidSplashes/RobiWK/BG_Map.bin"
-	even
-ArtNem_BG:	binclude "LiquidSplashes/RobiWK/BG_Art.bin"
-	even
+;MapEni_BG:	binclude "LiquidSplashes/RobiWK/BG_Map.bin"
+;	even
+;ArtNem_BG:	binclude "LiquidSplashes/RobiWK/BG_Art.bin"
+;	even
 
-Pal_RobiWK:	binclude "LiquidSplashes/RobiWK/Pal.bin"
-	even
+;Pal_RobiWK:	binclude "LiquidSplashes/RobiWK/Pal.bin"
+;	even
