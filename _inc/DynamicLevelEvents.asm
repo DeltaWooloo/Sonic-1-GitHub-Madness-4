@@ -419,7 +419,7 @@ DLE_MZ4chkboss:
 		move.w	#Knight_Y_Spawn+$24,obY(a1)
 
 .spawnfail:
-		move.w	#bgm_Boss,d0
+		move.w	#bgm_DeltaTale,d0 ;if you dont like this then uhh change it back to bgm_Boss :P -Dawid
 		jsr	(QueueSound1).l	; play boss music
 		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w	
