@@ -2869,19 +2869,20 @@ Level_WaterPal:
 		move.b	(v_lamp_wtrstat).w,(f_wtr_state).w
 
 Level_GetBgm:
-		cmpi.w	#(id_BSZ<<8)+1,(v_zone).w
-		bne.s	.Okbro
+		;Check if BSZ2; if so, enable Instagram window plane
+		cmpi.w	#(id_BSZ<<8)+1,(v_zone).w	; Is zone BSZ2?
+		bne.s	.Okbro						; If not, branch
 
-		move.b	#$C,(v_vbla_routine).w
-		bsr.w	WaitForVBla
+		move.b	#$C,(v_vbla_routine).w		; Load VBla routine $0C
+		bsr.w	WaitForVBla					; Run VBla
 		;4000 is address
 		disable_ints
 		lea	(vdp_control_port).l,a6
-		move.w	#$8300+(vram_win>>10),(a6) ; 40x30
-		move.w	#$918C,(a6)
-		move.w	#$929E,(a6)
+		move.w	#$8300+(vram_win>>10),(a6) 	; 40x30
+		move.w	#$918C,(a6)					; HP to right edge, $0C
+		move.w	#$929E,(a6)					; VP to bottom edge, $12
 
-		fillVRAM	$C1,$FFF,vram_win ; clear background namespace
+		fillVRAM	$C1,$FFF,vram_window ; clear background namespace
 
 	.wait1:
 		move.w	(a5),d1

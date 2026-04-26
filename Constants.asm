@@ -849,7 +849,7 @@ ArtTile_SS_Zone_6:		equ $7A9
 ArtTile_FartDanner:		equ $100	; compressed stuff goes here
 ArtTile_Mildfucker:		equ $400	; and this is where the true magic happens
 ;define this bs
-vram_win:   equ $3800
+vram_win:   equ $4000
 
 ; Special Stage Results
 ArtTile_SS_Results_Emeralds:	equ $541
