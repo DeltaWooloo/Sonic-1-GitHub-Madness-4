@@ -828,6 +828,8 @@ Pow_Randomiser:
 
 ;Spawn a rift
 .rAndCRiftApart:		;Rachet and Clank: Arif-tapart
+		moveq	#plcid_Rift,d0					; Load rift PLC
+		jsr		(NewPLC).l						; load pattern
 		spawnObj	id_Rift,$00,dOllieGameTap
 		rts
 ;===========================================================================
