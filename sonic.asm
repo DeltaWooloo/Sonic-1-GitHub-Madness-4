@@ -415,13 +415,10 @@ GameModeArray:
 	GAMEMODE	GM_Special,		id_Special	; Special Stage							
 	GAMEMODE	GM_Continue,		id_Continue	; Continue Screen						
 	GAMEMODE	GM_Ending,		id_Ending	; End of game sequence					
-	GAMEMODE	GM_Credits,		id_Credits	; Credits 								
+	GAMEMODE	TryAgainEnd,		id_TryAgainEnd	; Testable TRY AGAIN/END screen 		
 	GAMEMODE	GM_ColdBrew,		id_ColdBrew	; Cold Brew 							
 	GAMEMODE	GM_FoxyBoo,		id_FoxyBoo	; Foxy Scare 							
-	GAMEMODE	GM_DebugMenu,		id_DebugMenu	; Debug Menu
 	GAMEMODE	GM_ThanatosCredits,	id_Thanatos	; Credits - Thanatos ver. 				
-	GAMEMODE	GM_ButtcrackMan,	id_ButtcrackMa	; BUTTCRACK MAN 						
-	GAMEMODE	TryAgainEnd,		id_TryAgainEnd	; Testable TRY AGAIN/END screen 		
 	GAMEMODE	GM_Fetus,		id_Fetus	; Difficulty Select screen out of spite 
 	GAMEMODE	GM_Damn,		id_Damn		; DAMN!!!!!!!!!!!!!!!!!!!!!!!			
 	GAMEMODE	GM_SplashScreenSkipper,	id_SplashSkip	; My Stupid Splash is here 				
@@ -431,6 +428,7 @@ GameModeArray:
 	GAMEMODE	GM_ClintonScreens,	id_ClintonScr	; Clinton fail/win 						
 	GAMEMODE	GM_BSOD,		id_BSOD		; !@ GD: Windows zone BSOD (on death)
 	GAMEMODE	GM_Sans,		id_SansDied	; he died.
+	GAMEMODE	GM_DebugMenu,		id_DebugMenu	; Debug Menu
 	dephase
 GameModeArray_End:
 
@@ -3429,9 +3427,7 @@ End_MainLoop:
 		cmpi.b	#id_Ending,(v_gamemode).w ; is game mode $18 (ending)?
 		beq.s	End_ChkEmerald	; if yes, branch
 
-		move.b	#id_Credits,(v_gamemode).w ; goto credits
-		move.b	#bgm_NewBarkTown,d0
-		bsr.w	QueueSound2		; play placeholder music
+		move.b	#id_TryAgainEnd,(v_gamemode).w ; goto credits
 		move.w	#0,(v_creditsnum).w ; set credits index number to 0
 		rts
 ; ===========================================================================
@@ -6456,7 +6452,6 @@ Art_LivesNums:	binclude	"artunc/Lives Counter Numbers.bin" ; 8x8 pixel numbers o
 		include "conimodes/foxyboo/GM_FoxyBoo.asm"
 		include "_gamemode/ThanatosCredits/Main.asm"
 
-		include "Buttcrack/Game.asm"
 		include	"ContinueScreen/Continue.asm"
 
 		include "LiquidSplashes/Splashes.asm"

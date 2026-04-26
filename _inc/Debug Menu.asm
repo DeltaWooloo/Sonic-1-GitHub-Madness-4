@@ -601,8 +601,8 @@ ZoneNameTable:
 .Joint:		dc.b	"REALLY T. INSINE"
 .DVZ:		dc.b	"DOLEVILLE       "
 .Nogales:	dc.b	"NOGALES         "
-.BS:	    dc.b	"BLUESCAPE       "
-.BT:	    dc.b	"OLDJOHN         "
+.BS:		dc.b	"BLUESCAPE       "
+.BT:		dc.b	"OLD JOHN        "
 .ARZ:		dc.b	"AZURE RAINFOREST"
 		even
 
@@ -614,13 +614,10 @@ GamemodeNameTable:
 		dc.w	.Special-.t
 		dc.w	.Continue-.t
 		dc.w	.Ending-.t
-		dc.w	.CreditsS1-.t
-		dc.w	.ColdBrew-.t
-		dc.w	.FoxyScare-.t
-		dc.w	.DebugMenu-.t
 		dc.w	.Thanatos-.t
-		dc.w	.ButtcrackMan-.t
-		dc.w	.TryAgainTest-.t
+		dc.w	.TryAgain-.t
+		dc.w	.ColdBrew-.t
+		dc.w	.Jumpscare-.t
 		dc.w	.Difficulty-.t
 		dc.w	.DamnScreen-.t
 		dc.w	.Skipper-.t
@@ -629,7 +626,8 @@ GamemodeNameTable:
 		dc.w	.Screensaver-.t
 		dc.w	.Clinton-.t	; ClintonScreens
 		dc.w	.BSOD-.t
-	    dc.w	.Sans-.t
+		dc.w	.Sans-.t
+		dc.w	.DebugMenu-.t
 		rept ( (GameModeArray_End-GameModeArray)-(((*)-.t)*2) )/4
 		dc.w	.Placeholder-.t
 		endr
@@ -641,23 +639,21 @@ GamemodeNameTable:
 .Special:		dc.b	"SPECIAL STAGE   "
 .Continue:		dc.b	"CONTINUE        "
 .Ending:		dc.b	"ENDING          "
-.CreditsS1:		dc.b	"CREDITS SONIC 1 "
+.Thanatos:		dc.b	"CREDITS         "
+.TryAgain:		dc.b	"TRY AGAIN/END   "
 .ColdBrew:		dc.b	"COLD BREW       "
-.FoxyScare:		dc.b	"FOXY JUMPSCARE  "
-.DebugMenu:		dc.b	"DEBUG MENU      "
-.Thanatos:		dc.b	"THANATOS CREDITS"
-.ButtcrackMan:	dc.b	"BUTTCRACK MAN   "
-.TryAgainTest:	dc.b	"TRY AGAIN/END   "
-.Difficulty:	dc.b	"DIFFICULTY      "
-.DamnScreen:	dc.b	"DAMN!!!!!!!!!!!!"
+.Jumpscare:		dc.b	"JUMPSCARE       "
+.Difficulty:		dc.b	"DIFFICULTY      "
+.DamnScreen:		dc.b	"DAMN!!!!!!!!!!!!"
 .Skipper:		dc.b	"SPLASH SKIPPER  "
 .Advert:		dc.b	"ADVERTISEMENTS  "
 .Earthbou:		dc.b	"CUTSCENES       "
-.Screensaver:	dc.b	"SCREENSAVER     "
+.Screensaver:		dc.b	"SCREENSAVER     "
 .Clinton:		dc.b	"CLINTON         "
 .BSOD:			dc.b	"WINDOWS BSOD    "
 .Sans:			dc.b	"SANS DEAD       "
-.Placeholder:	dc.b	"PLACEHOLDER NAME"
+.DebugMenu:		dc.b	"DEBUG MENU      "
+.Placeholder:		dc.b	"PLACEHOLDER NAME"
 		even
 
 CharacterNameTable:
