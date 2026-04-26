@@ -66,7 +66,7 @@ GM_Fet_ControlExit:
 		jsr		(PaletteFadeOut).l	; INCASE
 		lea	(vdp_control_port).l,a6
 		move.w	#$8C81,(a6)	; set to next screen mode
-		move.b	#id_Title,(v_gamemode).w ; go to title screen
+		move.b	#id_Level,(v_gamemode).w ; go to level
 		rts
 
 GM_Fet_PalSet:
