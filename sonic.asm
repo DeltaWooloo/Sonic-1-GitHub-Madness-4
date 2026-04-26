@@ -2340,6 +2340,7 @@ GM_Title:
 		bsr.w	WaitForVBla		; wait for V-Blank to finish
 
 		move.b	#0,(v_lastlamp).w ; clear lamppost counter
+		jsr	(Pow_fix_RandMon_Runonce_flags).l	;!@ GD: Clear f_randMonPow runonce flags
 		move.w	#0,(v_debuguse).w ; disable debug item placement mode
 		move.w	#0,(f_demo).w	; disable debug mode
 		move.w	#(id_OWZ<<8),(v_zone).w	; set level to GHZ (00)

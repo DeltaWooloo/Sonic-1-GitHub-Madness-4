@@ -38,6 +38,7 @@ GM_DebugMenu:
 		disable_display
 		clr.b	(f_wtr_state).w
 		clr.b	(v_lastlamp).w
+		jsr	(Pow_fix_RandMon_Runonce_flags).l	;!@ GD: Clear f_randMonPow runonce flags
 		clr.w	(v_debuguse).w
 		clr.w	(f_demo).w
 		clr.b	(f_nobgscroll).w

@@ -1207,6 +1207,7 @@ Sonic_LevelBound:
 		cmpi.w	#$2000,(v_player+obX).w
 		blo.w	KillSonic_Humpy
 		clr.b	(v_lastlamp).w	; clear lamppost counter
+		jsr	(Pow_fix_RandMon_Runonce_flags).l	;!@ GD: Clear f_randMonPow runonce flags
 		move.w	#1,(f_restart).w ; restart the level
 		move.w	#(id_ARZ<<8)+3,(v_zone).w ; set level to SBZ3 (LZ4)
 		rts

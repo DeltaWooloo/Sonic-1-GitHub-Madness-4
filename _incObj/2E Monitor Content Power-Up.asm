@@ -1,6 +1,12 @@
 ; ---------------------------------------------------------------------------
 ; Object 2E - contents of monitors
 ; ---------------------------------------------------------------------------
+;!@ GD: offsets
+;f_RandMonPow:	Bitfield: 0000 0lsb
+pow_Lampost:	equ	$02	; Bit #2 = l = lampost
+pow_Signpost:	equ	$01	; Bit #1 = s = signpost
+pow_Bigring:	equ	$00	; Bit #0 = b = BigRing
+
 ;Random monitor debug data/consts
 monLong	equ	4		;Length of each random monitor entry in table (long = 4 bytes)
 
@@ -762,9 +768,15 @@ Pow_Randomiser:
 ; ===========================================================================
 		
 ; Your winner! Spawn a signpost
-.instaWin:
-		jsr		(SignpostArtLoad2).l	;Load in signpost/ring flash artwork
-		spawnObj	id_Signpost,$01		;Special subtype $1 for proper usage
+.instaWin:		
+		;if monDebug<0
+		btst	#pow_Signpost,(f_RandMonPow).w	;If signpost runonce flag set?
+		bne.w	Pow_Randomiser					;If so, skip and re-randomize		
+		bset	#pow_Signpost,(f_RandMonPow).w	;Set signpost flag
+		;endif
+		
+		jsr		(SignpostArtLoad2).l	;Load in signpost/ring flash artwork		
+		spawnObj	id_Signpost,$01		;Special subtype $1 for proper usage		
 		rts
 ; ===========================================================================
 
@@ -783,6 +795,12 @@ Pow_Randomiser:
 		
 ;Spawn a Giant Ring, and award 50 rings to ride
 .BigRing:
+		;if monDebug<0
+		btst	#pow_Bigring,(f_RandMonPow).w	;If big ring runonce flag set?
+		bne.w	Pow_Randomiser					;If so, skip and re-randomize		
+		bset	#pow_Bigring,(f_RandMonPow).w	;Set big ring flag
+		;endif
+
 		jsr		(SignpostArtLoad2).l				;Load in signpost/ring flash artwork
 		addi.w	#50,(v_rings).w	; add 50 rings to enable
 		spawnObj	id_GiantRing,$01,dOllieWahoo	;Special subtype $1 for proper usage
@@ -797,6 +815,12 @@ Pow_Randomiser:
 		
 ;Spawn a lamppost
 .lampoil:		;Rope, bombs, you want it? It's yours my friend; as long as you have enough rings
+		;if monDebug<0
+		btst	#pow_Lampost,(f_RandMonPow).w	;If lamppost runonce flag set?
+		bne.w	Pow_Randomiser					;If so, skip and re-randomize		
+		bset	#pow_Lampost,(f_RandMonPow).w	;Set lamppost flag
+		;endif
+		
 		clr.b	(v_lastlamp).w					;Reset lamppost, for new one
 		spawnObj	id_Lamppost,$7F,dOllieWahoo	;Subtype $7F to chump all other IDs
 		rts
@@ -920,6 +944,11 @@ Pow_vdp_fixRegs:
 		movem.l	(sp)+,d1		; Pop d1 from stack
 		movem.l	(sp)+,a6		; Pop a6 from stack
 		movem.l	(sp)+,a0		; Pop a0 from stack		
+		rts
+; ===========================================================================
+; Reset runonce flags
+Pow_fix_RandMon_Runonce_flags:
+		move.b	#0,(f_RandMonPow).w
 		rts
 ; ===========================================================================
 
