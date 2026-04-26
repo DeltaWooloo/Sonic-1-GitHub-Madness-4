@@ -87,16 +87,37 @@ MDemo_On:
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
-; Demo sequence pointers
+; Demo sequence pointers, depends on level ID
 ; ---------------------------------------------------------------------------
-DemoDataPtr:	dc.l Demo_GHZ		; demos run after the title screen
-		dc.l Demo_GHZ
-		dc.l Demo_MZ
-		dc.l Demo_MZ
-		dc.l Demo_SYZ
-		dc.l Demo_SYZ
-		dc.l Demo_BREW
-		dc.l Demo_BREW
+DemoDataPtr:	dc.l Demo_GHZ		; orange world
+				dc.l Demo_GHZ		; wario hallway (UNUSED)
+				dc.l Demo_MZ		; alberta canada
+				dc.l Demo_MZ		;endermanporn (UNUSED) (ASANE TED MOTORBOATING)
+				dc.l Demo_SYZ		; springfield
+				dc.l Demo_SYZ		; prongle plant (UNUSEDANNER)
+				dc.l Demo_SYZ		; ending this is used somewhere else if you make this exact one a demo despite it having a gamemode im dipping you in tar
+				dc.l Demo_SYZ		; technically unused cuz uhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh gamemode
+				dc.l Demo_SYZ		; bill gates scratching hi s ball gates )enesud(
+				dc.l Demo_SYZ		; rivet (unused i gave up labelling)
+				dc.l Demo_SYZ		; AH THERE YOU ARE DOLEVILLE
+
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; Demo character identifier, also depends on level ID which in that case refer to above
+; ---------------------------------------------------------------------------
+
+DemoChars:	dc.b chrid_tonic
+			dc.b chrid_tonic
+			dc.b chrid_tonic
+			dc.b chrid_tonic
+			dc.b chrid_tonic
+			dc.b chrid_tonic
+			dc.b chrid_tonic
+			dc.b chrid_tonic
+			dc.b chrid_tonic
+			dc.b chrid_tonic
+			dc.b chrid_maniac
+			even
 
 ;DemoEndDataPtr:	dc.l Demo_EndGHZ1	; demos run during the credits
 ;		dc.l Demo_EndMZ

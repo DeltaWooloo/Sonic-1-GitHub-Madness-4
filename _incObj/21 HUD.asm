@@ -10,6 +10,8 @@ HUD:
 ; ===========================================================================
 HUD_Index:	dc.w HUD_Main-HUD_Index
 		dc.w HUD_Flash-HUD_Index
+		dc.w HUD_AlertInit-HUD_Index
+		dc.w HUD_Alert-HUD_Index
 ; ===========================================================================
 
 HUD_Main:	; Routine 0
@@ -43,4 +45,29 @@ HUD_Flash:	; Routine 2
 .display:
 		move.b	d0,obFrame(a0)
 .lol
+		jmp	(DisplaySprite).l
+
+HUD_AlertInit:
+		addq.b	#2,obRoutine(a0)
+		move.w	#$120,obX(a0)
+		move.w	#$C0,obScreenY(a0)
+		move.l	#Map_burpHUD,obMap(a0)
+		move.w	#make_art_tile(ArtTile_BurpHUD,0,0),obGfx(a0)
+		move.b	#0,obRender(a0)
+		move.b	#0,obPriority(a0)
+		move.b	#6,obFrame(a0)
+HUD_Alert:
+		move.b	(v_vbla_byte).w,d0 ; get low byte of VBlank counter
+		andi.b	#$3F,d0
+		bne.s	.nopcm
+		pcm 	dBabyAlarm
+.nopcm:
+		move.b	(v_vbla_byte).w,d0 ; get low byte of VBlank counter
+		andi.b	#$1F,d0
+		bne.s	.dontdrop
+		subq.b	#1,obFrame(a0)
+		bpl.s	.dontdrop
+		clr.b	obRoutine(a0)
+		pcm 	dQuakeRocket
+.dontdrop:
 		jmp	(DisplaySprite).l

@@ -292,6 +292,7 @@ PLC_Joint:	dc.w ((PLC_Joint2-PLC_Joint-2)/6)-1
 ;		plcm	Nem_Joint,       ArtTile_Level                   ; Joint main patterns
 
 PLC_Joint2:	dc.w ((PLC_Joint2end-PLC_Joint2-2)/6)-1
+		plcm	Nem_burpHud,    ArtTile_BurpHUD	; PLACEHOLDER IM PLACEHOLDERING IT - CONI
 		plcm	Nem_Spikes,     ArtTile_Spikes                 ; spikes
 		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal      ; horizontal spring
 		     
