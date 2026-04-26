@@ -1,5 +1,5 @@
 0
-9
+10
 00000	00FFD03A	w	h	0	vdpFXTime
 00001	00FFF63C	d	h	0	v_playerClone
 00002	00FFFE2D	b	h	0	v_vdp_fx
@@ -9,3 +9,4 @@
 00006	00FFF64E	b	h	0	f_water
 00007	00FFF73E	b	h	0	f_gnu
 00008	00FFFE02	w	h	0	v_framecount
+00009	00FFF73F	b	h	0	f_RandMonPow
