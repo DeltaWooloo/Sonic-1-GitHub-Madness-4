@@ -355,6 +355,8 @@ Nem_TitleCard:	binclude	"artnem/Title Cards.nem"
 		even
 Nem_Hud:	binclude	"artnem/HUD.nem"	; HUD (rings, time, score)
 		even
+Nem_burpHud:	binclude	"artnem/burpHUD.nem"	; THE BURP IS COMING. - coni
+		even
 Nem_Ring:	binclude	"artnem/Rings.nem"
 		even
 Nem_Monitors:	binclude	"artnem/Monitors.nem"

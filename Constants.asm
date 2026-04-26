@@ -739,6 +739,7 @@ ArtTile_Animal_1:		equ $580
 ArtTile_Animal_2:		equ $592
 ArtTile_Explosion:		equ $5A0
 ArtTile_Monitor:		equ $680
+ArtTile_BurpHUD:			equ $4C0
 ArtTile_HUD:			equ $6C0
 ArtTile_SpecialAttack:	equ $6EA
 ArtTile_Sonic:			equ $780

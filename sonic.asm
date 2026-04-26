@@ -2924,6 +2924,9 @@ Level_SkipTtlCard:
 		tst.w	(f_demo).w
 		bmi.s	Level_ChkDebug
 		move.b	#id_HUD,(v_hud).w ; load HUD object
+;		cmpi.w	#(id_Joint<<8)+0,(v_zone).w	; comment this stuff out its a test burp
+;		bne.s	Level_ChkDebug	; comment this stuff out its a test burp
+;		move.b	#4,(v_hud+obRoutine).w ; comment this stuff out its a test burp
 
 Level_ChkDebug:
 		tst.b	(f_debugcheat).w ; has debug cheat been entered?
@@ -6381,6 +6384,7 @@ Map_Pri:	include	"_maps/Prison Capsule.asm"
 
 		include	"_incObj/21 HUD.asm"
 Map_HUD:	include	"_maps/HUD.asm"
+Map_burpHUD:	include	"_maps/burpHUD.asm"
 Map_Sans:	include	"_maps/Sans.asm"
 
 ; ---------------------------------------------------------------------------
