@@ -467,6 +467,12 @@ KillSonic:
 		move.b	#dShutdown, d0
 		bra.s	.sound
 .notWindows:
+		cmpi.b	#id_Ending,(v_gamemode).w
+		bne.s	.NotEnding
+		move.b	#dTrevor,d0
+		bra.s	.sound
+
+.NotEnding:
 		move.b	#dChicken,d0		; play spikes death sound
 		cmpi.b	#id_Spikes,obID(a2)	; check if you were killed by spikes
 		beq.s	.sound

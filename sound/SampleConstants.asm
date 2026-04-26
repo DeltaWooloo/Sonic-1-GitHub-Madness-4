@@ -75,10 +75,12 @@ dWeebTrash3			ds.b 1
 dNull			ds.b 1
 
 ; In-Game SFX Samples
+dDAMN				ds.b 1
 dLetsGOO			ds.b 1
 dBoik				ds.b 1
 dQuakeJump			ds.b 1
 dFannys				ds.b 1
+dTrevor				ds.b 1
 dQuakeRocket		ds.b 1
 dSTFU				ds.b 1
 dFuck				ds.b 1
@@ -94,7 +96,6 @@ dClintonWin			ds.b 1
 dClintonFail		ds.b 1
 dDoYouSuck			ds.b 1
 dOnTheBall			ds.b 1
-dDAMN				ds.b 1
 dTwerkOf87			ds.b 1
 dScream				ds.b 1
 dRift				ds.b 1
@@ -131,10 +132,8 @@ dGenesisCan3		ds.b 1
 
 ; Ollie Samples
 dOllieGameTap		ds.b 1
-
-; SFX IDs beyond this point cannot be used for music
-
 dOllieWahoo			ds.b 1
+
 ; SEGA Samples
 dSega				ds.b 1
 

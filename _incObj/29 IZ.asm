@@ -53,7 +53,7 @@ ObjIZ_Action:	; Routine 2
 		lea	(Ani_IZ).l,a1
 		bsr.w	AnimateSprite
 		bsr.w	DisplaySprite
-		bra.w	RememberState
+		jmp		(RememberState).l
 
 ; ===========================================================================
 ObjIZ_ActIndex:
