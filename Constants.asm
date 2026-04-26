@@ -371,6 +371,8 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_SkyBase
 	nextenum bgm_Scrappy
 	nextenum bgm_SkyGift
+	nextenum bgm_BLIND_MODE
+	nextenum bgm_FrontHook
 
 	; Keep this last
 	nextenum bgm__Last	
@@ -726,6 +728,7 @@ ArtTile_Burrobot:		equ $4A6
 ArtTile_Basaran:		equ $4B8
 ArtTile_Roller:			equ $4B8
 ArtTile_IE:			equ $4E0
+ArtTile_RecyleBin:			equ $500
 ArtTile_Moto_Bug:		equ $4F0
 ArtTile_Button:			equ $50F
 ArtTile_Spikes:			equ $51B

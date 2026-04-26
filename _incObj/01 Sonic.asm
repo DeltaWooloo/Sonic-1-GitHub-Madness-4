@@ -782,7 +782,7 @@ loc_13024:
 		move.b	obAngle(a0),d0
 		add.b	d1,d0
 		move.w	d0,-(sp)
-		bsr.w	Sonic_WalkSpeed
+		bsr.w	Sonic_ChkWallAhead
 		move.w	(sp)+,d0
 		tst.w	d1
 		bpl.s	locret_1307C
@@ -1207,6 +1207,7 @@ Sonic_LevelBound:
 		cmpi.w	#$2000,(v_player+obX).w
 		blo.w	KillSonic_Humpy
 		clr.b	(v_lastlamp).w	; clear lamppost counter
+		jsr	(Pow_fix_RandMon_Runonce_flags).l	;!@ GD: Clear f_randMonPow runonce flags
 		move.w	#1,(f_restart).w ; restart the level
 		move.w	#(id_ARZ<<8)+3,(v_zone).w ; set level to SBZ3 (LZ4)
 		rts
@@ -1981,9 +1982,9 @@ Sonic_ResetLevel:; Routine 8
 		beq.s	GotoSChGuy			;If so, branch
 .restart:
 		move.w	#1,(f_restart).w	; restart the level
+.return:
 		moveq	#1,d0				; Reload palette param (level restart will do so)
 		jsr		(Pow_vdp_fixRegs).l	; !@ GD: Bugfix to reset Random monitor FX if restarting back into GM_Level mode
-.return:		
 		rts
 
 GotoBSOD:

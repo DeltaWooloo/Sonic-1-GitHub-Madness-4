@@ -408,29 +408,26 @@ id	= *
 
 GameModeArray:
 	phase	0
-	GAMEMODE	GM_Sega,		id_Sega		; Sega Screen 							
-	GAMEMODE	GM_Title,		id_Title	; Title Screen							
-	GAMEMODE	GM_Level,		id_Demo		; Demo Mode								
-	GAMEMODE	GM_Level,		id_Level	; Normal Level							
-	GAMEMODE	GM_Special,		id_Special	; Special Stage							
-	GAMEMODE	GM_Continue,		id_Continue	; Continue Screen						
-	GAMEMODE	GM_Ending,		id_Ending	; End of game sequence					
-	GAMEMODE	GM_Credits,		id_Credits	; Credits 								
-	GAMEMODE	GM_ColdBrew,		id_ColdBrew	; Cold Brew 							
-	GAMEMODE	GM_FoxyBoo,		id_FoxyBoo	; Foxy Scare 							
-	GAMEMODE	GM_DebugMenu,		id_DebugMenu	; Debug Menu
-	GAMEMODE	GM_ThanatosCredits,	id_Thanatos	; Credits - Thanatos ver. 				
-	GAMEMODE	GM_ButtcrackMan,	id_ButtcrackMa	; BUTTCRACK MAN 						
-	GAMEMODE	TryAgainEnd,		id_TryAgainEnd	; Testable TRY AGAIN/END screen 		
-	GAMEMODE	GM_Fetus,		id_Fetus	; Difficulty Select screen out of spite 
-	GAMEMODE	GM_Damn,		id_Damn		; DAMN!!!!!!!!!!!!!!!!!!!!!!!			
-	GAMEMODE	GM_SplashScreenSkipper,	id_SplashSkip	; My Stupid Splash is here 				
-	GAMEMODE	GM_Advert,		id_Advert	; For all the reject splash screens I guess
-	GAMEMODE	GM_Cutscene,		id_Cutscene	; 		
-	GAMEMODE	GM_SonicTheScreensaver,	id_Screensaver	; GMZ - DVD Screensaver					
-	GAMEMODE	GM_ClintonScreens,	id_ClintonScr	; Clinton fail/win 						
+	GAMEMODE	GM_Sega,		id_Sega		; Sega Screen
+	GAMEMODE	GM_Title,		id_Title	; Title Screen
+	GAMEMODE	GM_Level,		id_Demo		; Demo Mode
+	GAMEMODE	GM_Level,		id_Level	; Normal Level
+	GAMEMODE	GM_Special,		id_Special	; Special Stage
+	GAMEMODE	GM_Continue,		id_Continue	; Continue Screen
+	GAMEMODE	GM_Ending,		id_Ending	; End of game sequence
+	GAMEMODE	GM_ThanatosCredits,	id_Thanatos	; Credits - Thanatos ver.
+	GAMEMODE	TryAgainEnd,		id_TryAgainEnd	; TRY AGAIN/END screen
+	GAMEMODE	GM_ColdBrew,		id_ColdBrew	; Cold Brew
+	GAMEMODE	GM_FoxyBoo,		id_FoxyBoo	; Jumpscare Test Mode
+	GAMEMODE	GM_Fetus,		id_Fetus	; Difficulty Select
+	GAMEMODE	GM_Damn,		id_Damn		; DAMN!!!!!!!!!!!!!!!!!!!!!!!
+	GAMEMODE	GM_Advert,		id_Advert	; In-Game Advertisements
+	GAMEMODE	GM_Cutscene,		id_Cutscene	; Intro/Outro Cutscenes
+	GAMEMODE	GM_SonicTheScreensaver,	id_Screensaver	; GMZ - DVD Screensaver
+	GAMEMODE	GM_ClintonScreens,	id_ClintonScr	; Clinton fail/win
 	GAMEMODE	GM_BSOD,		id_BSOD		; !@ GD: Windows zone BSOD (on death)
 	GAMEMODE	GM_Sans,		id_SansDied	; he died.
+	GAMEMODE	GM_DebugMenu,		id_DebugMenu	; Debug Menu
 	dephase
 GameModeArray_End:
 
@@ -2117,10 +2114,8 @@ Pal_SegaBG:		bincludeEndMarker	"palette/Sega Background.bin"
 Pal_Title:		bincludeEndMarker	"palette/Title Screen.bin"
 Pal_LevelSel:		bincludeEndMarker	"palette/Level Select.bin"
 Pal_Sonic:		bincludeEndMarker	"palette/Sonic.bin"			; generic sonic palette
-Pal_SplScrSki:		bincludeEndMarker	"Nano's SHIT/splash/data/pal.pal"
 Pal_GHZ:		bincludeEndMarker	"palette/Green Hill Zone.bin"
 Pal_LZ:			bincludeEndMarker	"palette/Labyrinth Zone.bin"
-Pal_LZWater:		bincludeEndMarker	"palette/Labyrinth Zone Underwater.bin"
 Pal_MZ:			bincludeEndMarker	"palette/Marble Zone.bin"
 Pal_SLZ:		bincludeEndMarker	"palette/Star Light Zone.bin"
 Pal_SYZ:		bincludeEndMarker	"palette/Spring Yard Zone.bin"
@@ -2340,6 +2335,7 @@ GM_Title:
 		bsr.w	WaitForVBla		; wait for V-Blank to finish
 
 		move.b	#0,(v_lastlamp).w ; clear lamppost counter
+		jsr	(Pow_fix_RandMon_Runonce_flags).l	;!@ GD: Clear f_randMonPow runonce flags
 		move.w	#0,(v_debuguse).w ; disable debug item placement mode
 		move.w	#0,(f_demo).w	; disable debug mode
 		move.w	#(id_OWZ<<8),(v_zone).w	; set level to GHZ (00)
@@ -2655,7 +2651,12 @@ loc_33B6:
 		move.b	#id_Demo,(v_gamemode).w ; set screen mode to 08 (demo)
 		cmpi.w	#(id_CBZ<<8),d0	; is level number 0700 (the cold brew zone)?
 		beq.s	Demo_Brew	; if yes, branch
-		move.b	#3,(v_lives).w	; set lives to 3
+		move.b	#A,(v_lives).w	; set lives to 10
+		tst.b	(DiffVariable).w ; check difficulty
+		beq.s	dontHardAnuidkiforgotthename
+		move.b	#1,(v_lives).w	; set lives to 1
+		
+dontHardAnuidkiforgotthename:		
 		moveq	#0,d0
 		move.w	d0,(v_rings).w	; clear rings
 		move.l	d0,(v_time).w	; clear time
@@ -2751,6 +2752,12 @@ Level_NoMusicFade:
 		disable_ints
 		fillVRAM $2F,0,$10000		; fill vram with dummy tiles
 		bsr.w	ClearScreen
+		
+		moveq	#0,d0
+		jsr	(Pow_vdp_fixRegs).l
+		move.b	#0,(v_vdp_fx).w	; cancel VDP FX
+
+
 		tst.w	(f_demo).w		; is an ending sequence demo running?
 		bmi.s	.notitlecard		; if yes, branch
 		jsr	(TitleCards_LoadArt).l
@@ -3425,9 +3432,7 @@ End_MainLoop:
 		cmpi.b	#id_Ending,(v_gamemode).w ; is game mode $18 (ending)?
 		beq.s	End_ChkEmerald	; if yes, branch
 
-		move.b	#id_Credits,(v_gamemode).w ; goto credits
-		move.b	#bgm_NewBarkTown,d0
-		bsr.w	QueueSound2		; play placeholder music
+		move.b	#id_TryAgainEnd,(v_gamemode).w ; goto credits
 		move.w	#0,(v_creditsnum).w ; set credits index number to 0
 		rts
 ; ===========================================================================
@@ -4505,6 +4510,11 @@ Map_Jaws:	include	"_maps/Jaws.asm"
 		include	"_anim/Internet Explorer.asm"
 Map_IE:		include	"_maps/Internet Explorer.asm"
 
+
+		include	"_incObj/7E Recycle Bin.asm"
+		include	"_incObj/7F Recycle Bin Trash.asm"
+		include	"_anim/Recycle Bin.asm"
+Map_RecycleBin:		include	"_maps/Recycle Bin.asm"
 		include	"_incObj/2F MZ Large Grassy Platforms.asm"
 		include	"_incObj/35 Burning Grass.asm"
 		include	"_anim/Burning Grass.asm"
@@ -5821,8 +5831,8 @@ Map_Splash:	include	"_maps/Water Splash.asm"
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
-; this label is completely wrong btw
-Sonic_WalkSpeed:
+
+Sonic_ChkWallAhead:
 		move.l	obX(a0),d3
 		move.l	obY(a0),d2
 		move.w	obVelX(a0),d1
@@ -5864,18 +5874,17 @@ loc_14D24:
 		beq.w	loc_14F7C
 		andi.b	#$38,d1
 		bne.s	loc_14D3C
-		jsr	GetOtherPlayerData
-		move.b	pdat.height2(a5),d4
-		sub.b	obHeight(a0),d4
 		addq.w	#8,d2
-		sub.w	d4,d2
+	        btst    #2,obStatus(a0)    ; Is Sonic copy pastingfrom a mini tutorial
+        	beq.s   loc_14D3C          ; If not, NIPPLES
+        	subq.w  #5,d2              ; If so, move push sensor up a bit
 
 loc_14D3C:
 		cmpi.b	#$40,d0
 		beq.w	loc_1504A
 		bra.w	loc_14EBC
 
-; End of function Sonic_WalkSpeed
+; End of function Sonic_ChkWallAhead
 
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
@@ -6449,7 +6458,6 @@ Art_LivesNums:	binclude	"artunc/Lives Counter Numbers.bin" ; 8x8 pixel numbers o
 		include "conimodes/foxyboo/GM_FoxyBoo.asm"
 		include "_gamemode/ThanatosCredits/Main.asm"
 
-		include "Buttcrack/Game.asm"
 		include	"ContinueScreen/Continue.asm"
 
 		include "LiquidSplashes/Splashes.asm"

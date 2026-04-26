@@ -5,7 +5,10 @@
 GM_Sans:
 		jsr	PaletteFadeOut		; fade palettes out
 		jsr	ClearScreen		; clear the plane mappings
+		;!@ GD: Bugfix; init d0 to 0
+		moveq	#0,d0		
 		move.b	d0,(v_lastlamp).w ; clear lamppost counter
+		jsr	(Pow_fix_RandMon_Runonce_flags).l	;!@ GD: Clear f_randMonPow runonce flags
 		lea	(v_ram_start).l,a1	; load dump location
 		lea	(MAP_SansDied).l,a0		; load compressed mappings address
 		move.w	#320,d0			; prepare pattern index value to patch to mappings

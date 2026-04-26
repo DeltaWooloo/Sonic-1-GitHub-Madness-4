@@ -7,12 +7,13 @@ ptr_PLC_Main:		dc.w PLC_Main-ArtLoadCues
 ptr_PLC_Main2:		dc.w PLC_Main2-ArtLoadCues
 ptr_PLC_Explode:	dc.w PLC_Explode-ArtLoadCues
 ptr_PLC_GameOver:	dc.w PLC_GameOver-ArtLoadCues
+
 PLC_Levels:
 ptr_PLC_GHZ:		dc.w PLC_GHZ-ArtLoadCues
 ptr_PLC_GHZ2:		dc.w PLC_GHZ2-ArtLoadCues
-ptr_PLC_LZ:		dc.w PLC_LZ-ArtLoadCues
+ptr_PLC_LZ:			dc.w PLC_LZ-ArtLoadCues
 ptr_PLC_LZ2:		dc.w PLC_LZ2-ArtLoadCues
-ptr_PLC_MZ:		dc.w PLC_MZ-ArtLoadCues
+ptr_PLC_MZ:			dc.w PLC_MZ-ArtLoadCues
 ptr_PLC_MZ2:		dc.w PLC_MZ2-ArtLoadCues
 ptr_PLC_SLZ:		dc.w PLC_SLZ-ArtLoadCues
 ptr_PLC_SLZ2:		dc.w PLC_SLZ2-ArtLoadCues
@@ -39,10 +40,12 @@ ptr_PLC_BTZ:		dc.w PLC_BTZ-ArtLoadCues
 ptr_PLC_BTZ2:		dc.w PLC_BTZ2-ArtLoadCues
 ptr_PLC_ARZ:		dc.w PLC_ARZ-ArtLoadCues
 ptr_PLC_ARZ2:		dc.w PLC_ARZ2-ArtLoadCues
+
 ptr_PLC_WINNERCard:	dc.w PLC_WINNERCard-ArtLoadCues
 ptr_PLC_Boss:		dc.w PLC_Boss-ArtLoadCues
 ptr_PLC_Signpost:	dc.w PLC_Signpost-ArtLoadCues
 ptr_PLC_Warp:		dc.w PLC_Warp-ArtLoadCues
+
 PLC_Animals:
 ptr_PLC_GHZAnimals:	dc.w PLC_GHZAnimals-ArtLoadCues
 ptr_PLC_LZAnimals:	dc.w PLC_LZAnimals-ArtLoadCues
@@ -60,6 +63,7 @@ ptr_PLC_BSZAnimals:	dc.w PLC_BSZAnimals-ArtLoadCues
 ptr_PLC_BTZAnimals:	dc.w PLC_BTZAnimals-ArtLoadCues
 ptr_PLC_ARZAnimals:	dc.w PLC_ARZAnimals-ArtLoadCues
 			zonewarning PLC_Animals,2
+
 ptr_PLC_Ending:		dc.w PLC_Ending-ArtLoadCues
 ptr_PLC_TryAgain:	dc.w PLC_TryAgain-ArtLoadCues
 ptr_PLC_EggmanSBZ2:	dc.w PLC_EggmanSBZ2-ArtLoadCues
@@ -68,6 +72,7 @@ ptr_PLC_DioDanner:	dc.w PLC_DioDanner-ArtLoadCues
 ;ptr_PLC_DioDannerBOSS:	dc.w PLC_DioDannerBOSS-ArtLoadCues
 ptr_PLC_DioDannerDEAD:	dc.w PLC_DioDannerDEAD-ArtLoadCues
 ptr_PLC_Sans:		dc.w PLC_Sans-ArtLoadCues
+ptr_PLC_Rift:		dc.w PLC_Rift-ArtLoadCues
 plcm:	macro gfx,vram
 		dc.w (gfx>>16)&$FF,gfx&$FFFF,vram*32
 		endm
@@ -275,6 +280,7 @@ PLC_WIN:	dc.w ((PLC_WIN2-PLC_WIN-2)/6)-1
 		plcm	Nem_HSpring,   ArtTile_Spring_Horizontal        ; horizontal spring
 		plcm	Nem_Mouse,   ArtTile_Villager                   ; Mouse the computer mouse controller		         
 		plcm	Nem_IE,        ArtTile_IE                       ; Internet Explorer enemy
+		plcm	Nem_RecycleBin,        ArtTile_RecyleBin                       ; Recycle Bin enemy
 		plcm	Nem_Spikes,    ArtTile_Spikes                 ; spikes
 
 PLC_WIN2:	dc.w ((PLC_WIN2end-PLC_WIN2-2)/6)-1
@@ -567,48 +573,53 @@ PLC_Sans:	dc.w ((PLC_Sansendy-PLC_Sans-2)/6)-1
 		plcm	Nem_SlzSpike, ArtTile_Eggman_Spikeball ; spikeball (SLZ boss)
 		plcm	Nem_Exhaust,  ArtTile_Eggman_Exhaust   ; exhaust flame
 PLC_Sansendy:
+
+PLC_Rift:	dc.w ((PLC_Riftend-PLC_Rift-2)/6)-1
+        dc.l    Nem_Rift								;  put this on plcs
+	    dc.w    $9760	
+PLC_Riftend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cue IDs
 ; ---------------------------------------------------------------------------
-plcid_Main:		equ (ptr_PLC_Main-ArtLoadCues)/2	
+plcid_Main:			equ (ptr_PLC_Main-ArtLoadCues)/2	
 plcid_Main2:		equ (ptr_PLC_Main2-ArtLoadCues)/2	
 plcid_Explode:		equ (ptr_PLC_Explode-ArtLoadCues)/2	
 plcid_GameOver:		equ (ptr_PLC_GameOver-ArtLoadCues)/2	
-plcid_GHZ:		equ (ptr_PLC_GHZ-ArtLoadCues)/2		
-plcid_GHZ2:		equ (ptr_PLC_GHZ2-ArtLoadCues)/2	
-plcid_LZ:		equ (ptr_PLC_LZ-ArtLoadCues)/2		
-plcid_LZ2:		equ (ptr_PLC_LZ2-ArtLoadCues)/2		
-plcid_MZ:		equ (ptr_PLC_MZ-ArtLoadCues)/2		
-plcid_MZ2:		equ (ptr_PLC_MZ2-ArtLoadCues)/2		
-plcid_SLZ:		equ (ptr_PLC_SLZ-ArtLoadCues)/2		
-plcid_SLZ2:		equ (ptr_PLC_SLZ2-ArtLoadCues)/2	
-plcid_SYZ:		equ (ptr_PLC_SYZ-ArtLoadCues)/2		
-plcid_SYZ2:		equ (ptr_PLC_SYZ2-ArtLoadCues)/2	
-plcid_SBZ:		equ (ptr_PLC_SBZ-ArtLoadCues)/2		
-plcid_SBZ2:		equ (ptr_PLC_SBZ2-ArtLoadCues)/2	
-plcid_ENDZ:		equ (ptr_PLC_ENDZ-ArtLoadCues)/2	
+plcid_GHZ:			equ (ptr_PLC_GHZ-ArtLoadCues)/2		
+plcid_GHZ2:			equ (ptr_PLC_GHZ2-ArtLoadCues)/2	
+plcid_LZ:			equ (ptr_PLC_LZ-ArtLoadCues)/2		
+plcid_LZ2:			equ (ptr_PLC_LZ2-ArtLoadCues)/2		
+plcid_MZ:			equ (ptr_PLC_MZ-ArtLoadCues)/2		
+plcid_MZ2:			equ (ptr_PLC_MZ2-ArtLoadCues)/2		
+plcid_SLZ:			equ (ptr_PLC_SLZ-ArtLoadCues)/2		
+plcid_SLZ2:			equ (ptr_PLC_SLZ2-ArtLoadCues)/2	
+plcid_SYZ:			equ (ptr_PLC_SYZ-ArtLoadCues)/2		
+plcid_SYZ2:			equ (ptr_PLC_SYZ2-ArtLoadCues)/2	
+plcid_SBZ:			equ (ptr_PLC_SBZ-ArtLoadCues)/2		
+plcid_SBZ2:			equ (ptr_PLC_SBZ2-ArtLoadCues)/2	
+plcid_ENDZ:			equ (ptr_PLC_ENDZ-ArtLoadCues)/2	
 plcid_ENDZ2:		equ (ptr_PLC_ENDZ2-ArtLoadCues)/2	
-plcid_BREW:		equ (ptr_PLC_BREW-ArtLoadCues)/2	
+plcid_BREW:			equ (ptr_PLC_BREW-ArtLoadCues)/2	
 plcid_BREW2:		equ (ptr_PLC_BREW2-ArtLoadCues)/2	
 plcid_BREW3:		equ (ptr_PLC_BREW3-ArtLoadCues)/2	
-plcid_WIN:		equ (ptr_PLC_WIN-ArtLoadCues)/2		
-plcid_WIN2:		equ (ptr_PLC_WIN-ArtLoadCues)/2		
+plcid_WIN:			equ (ptr_PLC_WIN-ArtLoadCues)/2		
+plcid_WIN2:			equ (ptr_PLC_WIN-ArtLoadCues)/2		
 plcid_Joint:		equ (ptr_PLC_Joint-ArtLoadCues)/2	
 plcid_Joint2:		equ (ptr_PLC_Joint2-ArtLoadCues)/2
-plcid_DVZ:		equ (ptr_PLC_DVZ-ArtLoadCues)/2	
-plcid_DVZ2:		equ (ptr_PLC_DVZ2-ArtLoadCues)/2	
-plcid_NGZ:		equ (ptr_PLC_NGZ-ArtLoadCues)/2	
-plcid_NGZ2:		equ (ptr_PLC_NGZ2-ArtLoadCues)/2	
-plcid_BSZ:		equ (ptr_PLC_BSZ-ArtLoadCues)/2	
-plcid_BSZ2:		equ (ptr_PLC_BSZ2-ArtLoadCues)/2
-plcid_BTZ:		equ (ptr_PLC_BTZ-ArtLoadCues)/2	
-plcid_BTZ2:		equ (ptr_PLC_BTZ2-ArtLoadCues)/2
-plcid_ARZ:		equ (ptr_PLC_ARZ-ArtLoadCues)/2	
-plcid_ARZ2:		equ (ptr_PLC_ARZ2-ArtLoadCues)/2
+plcid_DVZ:			equ (ptr_PLC_DVZ-ArtLoadCues)/2	
+plcid_DVZ2:			equ (ptr_PLC_DVZ2-ArtLoadCues)/2	
+plcid_NGZ:			equ (ptr_PLC_NGZ-ArtLoadCues)/2	
+plcid_NGZ2:			equ (ptr_PLC_NGZ2-ArtLoadCues)/2	
+plcid_BSZ:			equ (ptr_PLC_BSZ-ArtLoadCues)/2	
+plcid_BSZ2:			equ (ptr_PLC_BSZ2-ArtLoadCues)/2
+plcid_BTZ:			equ (ptr_PLC_BTZ-ArtLoadCues)/2	
+plcid_BTZ2:			equ (ptr_PLC_BTZ2-ArtLoadCues)/2
+plcid_ARZ:			equ (ptr_PLC_ARZ-ArtLoadCues)/2	
+plcid_ARZ2:			equ (ptr_PLC_ARZ2-ArtLoadCues)/2
 plcid_WINNERCard:	equ (ptr_PLC_WINNERCard-ArtLoadCues)/2	
-plcid_Boss:		equ (ptr_PLC_Boss-ArtLoadCues)/2	
+plcid_Boss:			equ (ptr_PLC_Boss-ArtLoadCues)/2	
 plcid_Signpost:		equ (ptr_PLC_Signpost-ArtLoadCues)/2	
-plcid_Warp:		equ (ptr_PLC_Warp-ArtLoadCues)/2	
+plcid_Warp:			equ (ptr_PLC_Warp-ArtLoadCues)/2	
 plcid_GHZAnimals:	equ (ptr_PLC_GHZAnimals-ArtLoadCues)/2	
 plcid_LZAnimals:	equ (ptr_PLC_LZAnimals-ArtLoadCues)/2	
 plcid_MZAnimals:	equ (ptr_PLC_MZAnimals-ArtLoadCues)/2	
@@ -627,7 +638,8 @@ plcid_Ending:		equ (ptr_PLC_Ending-ArtLoadCues)/2
 plcid_TryAgain:		equ (ptr_PLC_TryAgain-ArtLoadCues)/2	
 plcid_EggmanSBZ2:	equ (ptr_PLC_EggmanSBZ2-ArtLoadCues)/2	
 plcid_FZBoss:		equ (ptr_PLC_FZBoss-ArtLoadCues)/2	
-plcid_DioDanner:	equ (ptr_PLC_DioDanner-ArtLoadCues)/2	; $20
+plcid_DioDanner:	equ (ptr_PLC_DioDanner-ArtLoadCues)/2		; $20
 ;plcid_DioDannerBOSS:equ (ptr_PLC_DioDannerBOSS-ArtLoadCues)/2	; $21
 plcid_DioDannerDEAD:equ (ptr_PLC_DioDannerDEAD-ArtLoadCues)/2	; $22
-plcid_Sans:		equ (ptr_PLC_Sans-ArtLoadCues)/2	
+plcid_Sans:			equ (ptr_PLC_Sans-ArtLoadCues)/2			; $23
+plcid_Rift:			equ (ptr_PLC_Rift-ArtLoadCues)/2			; $24 !@ GD: For rift random monitor

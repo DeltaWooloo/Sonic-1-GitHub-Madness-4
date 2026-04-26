@@ -1,6 +1,12 @@
 ; ---------------------------------------------------------------------------
 ; Object 2E - contents of monitors
 ; ---------------------------------------------------------------------------
+;!@ GD: offsets
+;f_RandMonPow:	Bitfield: 0000 0lsb
+pow_Lampost:	equ	$02	; Bit #2 = l = lampost
+pow_Signpost:	equ	$01	; Bit #1 = s = signpost
+pow_Bigring:	equ	$00	; Bit #0 = b = BigRing
+
 ;Random monitor debug data/consts
 monLong	equ	4		;Length of each random monitor entry in table (long = 4 bytes)
 
@@ -762,9 +768,15 @@ Pow_Randomiser:
 ; ===========================================================================
 		
 ; Your winner! Spawn a signpost
-.instaWin:
-		jsr		(SignpostArtLoad2).l	;Load in signpost/ring flash artwork
-		spawnObj	id_Signpost,$01		;Special subtype $1 for proper usage
+.instaWin:		
+		;if monDebug<0
+		btst	#pow_Signpost,(f_RandMonPow).w	;If signpost runonce flag set?
+		bne.w	Pow_Randomiser					;If so, skip and re-randomize		
+		bset	#pow_Signpost,(f_RandMonPow).w	;Set signpost flag
+		;endif
+		
+		jsr		(SignpostArtLoad2).l	;Load in signpost/ring flash artwork		
+		spawnObj	id_Signpost,$01		;Special subtype $1 for proper usage		
 		rts
 ; ===========================================================================
 
@@ -783,6 +795,12 @@ Pow_Randomiser:
 		
 ;Spawn a Giant Ring, and award 50 rings to ride
 .BigRing:
+		;if monDebug<0
+		btst	#pow_Bigring,(f_RandMonPow).w	;If big ring runonce flag set?
+		bne.w	Pow_Randomiser					;If so, skip and re-randomize		
+		bset	#pow_Bigring,(f_RandMonPow).w	;Set big ring flag
+		;endif
+
 		jsr		(SignpostArtLoad2).l				;Load in signpost/ring flash artwork
 		addi.w	#50,(v_rings).w	; add 50 rings to enable
 		spawnObj	id_GiantRing,$01,dOllieWahoo	;Special subtype $1 for proper usage
@@ -797,6 +815,12 @@ Pow_Randomiser:
 		
 ;Spawn a lamppost
 .lampoil:		;Rope, bombs, you want it? It's yours my friend; as long as you have enough rings
+		;if monDebug<0
+		btst	#pow_Lampost,(f_RandMonPow).w	;If lamppost runonce flag set?
+		bne.w	Pow_Randomiser					;If so, skip and re-randomize		
+		bset	#pow_Lampost,(f_RandMonPow).w	;Set lamppost flag
+		;endif
+		
 		clr.b	(v_lastlamp).w					;Reset lamppost, for new one
 		spawnObj	id_Lamppost,$7F,dOllieWahoo	;Subtype $7F to chump all other IDs
 		rts
@@ -804,6 +828,8 @@ Pow_Randomiser:
 
 ;Spawn a rift
 .rAndCRiftApart:		;Rachet and Clank: Arif-tapart
+		moveq	#plcid_Rift,d0					; Load rift PLC
+		jsr		(NewPLC).l						; load pattern
 		spawnObj	id_Rift,$00,dOllieGameTap
 		rts
 ;===========================================================================
@@ -922,6 +948,11 @@ Pow_vdp_fixRegs:
 		movem.l	(sp)+,a0		; Pop a0 from stack		
 		rts
 ; ===========================================================================
+; Reset runonce flags
+Pow_fix_RandMon_Runonce_flags:
+		move.b	#0,(f_RandMonPow).w
+		rts
+; ===========================================================================
 
 Level_LoadPal2:
 		movem.l	d0-d3/a0-a2,-(sp)		; Store regs
@@ -950,10 +981,15 @@ Level_LoadPal2:
 		beq.s	.skipwtr2				; If not, branch
 		
 		;!@ GD: Rewrite me after char underwater palette code is fixed up
-		moveq	#palid_LZSonWater,d1 	; palette number $F (LZ)
-		cmpi.b	#3,(v_act).w			; is act number 3?
-		bne.s	.wtr					; if not, branch
-		moveq	#palid_SBZ3SonWat,d1 	; palette number $10 (SBZ3)		
+		moveq	#palid_CBZ2SonWat,d0
+		cmpi.b	#id_ARZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
+		beq.s	.ARZWtr			; it makes me have a boaner
+		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
+		bne.s	.wtr			; if not, branch
+		moveq	#palid_SBZ3SonWat,d0 ; palette number $10 (SBZ3)
+		bra.s	.WtrNotSbz
+	.ARZWtr:
+		moveq	#palid_ARZSonWater,d0
 	.wtr:
 		moveq	#1,d2					; Set water flag
 		bsr.w	.loadpal				; Load d1 character water palette
@@ -998,11 +1034,18 @@ Level_LoadPal2:
 		;bpl.s	.end					; if not, branch
 		bsr.w	isWaterLevel			; Does level have water?
 		beq.s	.end					; If not, branch
-		
-		moveq	#palid_LZWater,d1 		; palette $B (LZ underwater)
-		cmpi.b	#3,(v_act).w			; is level SBZ3?
-		bne.s	.WtrNotSbz				; if not, branch
-		moveq	#palid_SBZ3Water,d1 	; palette $D (SBZ3 underwater)
+
+		moveq	#palid_CBZ2SonWat,d0
+		cmpi.b	#id_ARZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
+		beq.s	.ARZWaterPal	; it makes me have a boaner
+		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
+		bne.s	.WtrNotSbz	; if not, branch
+		moveq	#palid_SBZ3SonWat,d0 ; palette number $10 (SBZ3)
+		bra.s	.WtrNotSbz
+
+.ARZWaterPal:
+		moveq	#palid_ARZSonWater,d0
+
 .WtrNotSbz:
 		moveq	#1,d2					; Set water flag
 		bsr.w	.loadpal				; Load d1 level water palette 
@@ -1061,9 +1104,13 @@ Level_LoadPal2:
 ; Function determines if level has water, and sets ccr by tst.b(d2)
 ; Output: d2; 1=has water, 0=doesn't
 isWaterLevel:		
+		cmpi.w	#(id_CBZ<<8)+1,(v_zone).w		; Is this zone ARZ?
+		beq.s	.hasWtr					; If not, branch
 		cmpi.b	#id_ARZ,(v_zone).w		; Is this zone ARZ?
-		bne.s	.notWtr					; If not, branch
-		
+		beq.s	.hasWtr					; If not, branch
+		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
+		bne.s	.notWtr	; if not, branch
+
 	;Level has water!
 	.hasWtr:
 		moveq	#1,d2					; Set d2 flag

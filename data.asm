@@ -332,6 +332,8 @@ Nem_Cater:	binclude	"artnem/Enemy Caterkiller.nem"
 		even
 Nem_IE:		binclude	"artnem/Internet Explorer.nem"
 		even
+Nem_RecycleBin:		binclude	"artnem/Recycle Bin.nem"
+		even		
 Nem_Villager:		binclude	"artnem/Villager.nem"
 		even
 Nem_Mouse:		binclude	"artnem/Mouse.nem"

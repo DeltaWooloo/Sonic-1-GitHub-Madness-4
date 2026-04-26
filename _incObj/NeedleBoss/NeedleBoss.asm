@@ -71,11 +71,12 @@ ExObjNeedle:
 
 ; ----------------------------------------------------------------------------
 .ExObj:
-	bra.w	ObjNeedleIntro
-	bra.w	ObjNeedleBoss
-	bra.w	ObjNeedleHammer
-	bra.w	ObjNeedleBossBig
-	bra.w	ObjNeedle3DTest
+	bra.w	ObjNeedleIntro		; 0
+	bra.w	ObjNeedleBoss		; 4
+	bra.w	ObjNeedleHammer		; 8
+	bra.w	ObjNeedleBossBig	; 12
+	bra.w	ObjNeedleHand		; 16
+	bra.w	ObjNeedle3DTest		; 20
 	rts
 ; ----------------------------------------------------------------------------
 
@@ -117,7 +118,7 @@ NeedleIntro_Init:
 	move.b	#0,obAnim(a0)
 	move.w	#0,obAngle(a0)
 	bset	#0,obStatus(a0)
-	move.b	#9,needlehitcnt.w
+	move.b	#16,needlehitcnt.w
 	; load palette
 
 	bsr.w	_needleLoadPalette
@@ -351,7 +352,7 @@ NeedleBoss_HitFloor:
 .Exit:
 	addq.b	#2,obRoutine(a0)
 	move.b	#0,obAnim(a0)	
-	move.b	#$F,obColType(a0)
+	move.b	#$B,obColType(a0)
 	clr.b	needle.Flag+1(a0)
 	rts
 
@@ -360,7 +361,6 @@ NeedleBoss_HitFloor:
 NeedleBoss_Chase:
 	move.b	ob2ndRout(a0),d0
 	jsr	.Index(pc,d0.w)
-	bsr.w	_needleChase
 	bsr.w	_needleFacePlayer
 	rts
 
@@ -368,8 +368,9 @@ NeedleBoss_Chase:
 .Index:
 	bra.w	.ChkRangeWait
 	bra.w	.Spin
-	bra.w	.ChkRangeWait
-
+	bra.w	.Jump
+	move.w	#0,ob2ndRout(a0)	; in case anything happens
+	rts
 ; --------------------------------------
 
 .ChkRangeWait:
@@ -379,7 +380,7 @@ NeedleBoss_Chase:
 	neg.w	d0
 .abs:
 	cmpi.w	#$50,d0
-	bhs.s	.Exit
+	bhs.s	.ChkJmp
 	tst.w	obVelX(a0)
 	bpl.s	.NotNeg1
 	move.b	#0,needle.Flag(a0)
@@ -389,17 +390,44 @@ NeedleBoss_Chase:
 .skip1:
 	addq.b	#4,ob2ndRout(a0)
 	move.b	#8,obAnim(a0)
+
 	move.b	#sfx_Roll,d0
-	jsr	QueueSound1.l
-	add.b	#1,needle.Flag+1(a0)
-	cmpi.b	#6,needle.Flag+1(a0)
-	bne.s	.Exit
+	jsr	QueueSound2.l
+
+	move.b	#$80+$B,obColType(a0)	; set dmg collision
+
+	add.b	#1,needle.Flag+1(a0)	
+	cmpi.b	#6,needle.Flag+1(a0)	; chk if leave to next phase
+	bne.s	.Exit			; if not, exit
+
+	move.b	#sfx_Bonus,d0
+	jsr	QueueSound2.l
+
+	move.b	#$B,obColType(a0)	
 	addq.b	#2,obRoutine(a0)
 	move.b	#6,obAnim(a0)
 	move.w	#$3C00,needle.Timer(a0)
 	move.w	#0,obVelX(a0)
 	move.w	#0,obVelY(a0)
-.Exit
+	rts
+.ChkJmp	
+	move.w	(v_player+obY).w,d0
+	move.w	obY(a0),d1
+	sub.w	d0,d1
+	cmpi.w	#$30,d1
+	bge.s	.Set
+
+	bsr.w	_needleBossHits
+.Exit:
+	bra.w	_needleChase
+
+.Set
+	move.b	#$80+$B,obColType(a0)	; set dmg collision
+	move.w	#-$700,obVelY(a0)
+	move.b	#sfx_Jump,d0
+	jsr	QueueSound1.l
+	addq.b	#8,ob2ndRout(a0)
+	move.b	#8,obAnim(a0)
 	rts
 
 ; --------------------------------------
@@ -418,7 +446,22 @@ NeedleBoss_Chase:
 	move.b	#0,obAnim(a0)	
 .Unspin:
 	subq.b	#4,ob2ndRout(a0)
+	move.b	#$B,obColType(a0)
+.Exit2:
 	rts
+
+; --------------------------------------
+
+.Jump:
+	jsr	ObjectFall.l
+	cmpi.w	#NBOSS_FLOOR_Y,obY(a0)
+	ble.s	.Exit2
+	move.w	#NBOSS_FLOOR_Y,obY(a0)
+	subq.b	#8,ob2ndRout(a0)
+	move.b	#$B,obColType(a0)
+	move.b	#0,obAnim(a0)	
+	rts
+
 ; --------------------------------------
 
 NeedleBoss_SpinTurn:
@@ -435,9 +478,14 @@ NeedleBoss_SpinTurn:
 	move.b	#1,needle.Timer+1(a0)
 .Skip
 	sub.w	#56,obVelY(a0)
+	cmpi.w	#NBOSS_START_Y1-$A0,obY(a0)
+	ble.s	.StartBigPhase
 	jmp	SpeedToPos.l
-
-
+.StartBigPhase:
+	jsr	DeleteObject.l
+	move.b	#id_NeedleBoss,(a0)
+	move.b	#12,obSubtype(a0)
+	rts
 ; ----------------------------------------------------------------------------
 
 _needleSpawnAttack:
@@ -455,7 +503,7 @@ _needleSpawnAttack:
 _needleChase:
 	lea	v_player.w, a1
 	move.w	#$450, d0
-	move.w	#$10, d1
+	move.w	#$20, d1
 	jsr	ChaseObject.l
 	move.w	#0, obVelY(a0)
 	jmp	SpeedToPos
@@ -486,7 +534,7 @@ _needleBossHits:
 	bne.s	.HitFlash
 	; initial hit
 	move.b	obColProp(a0),needlehitcnt.w
-	move.b	#50,needle.FlashTimer(a0)			; set number of times to flash 
+	move.b	#80,needle.FlashTimer(a0)			; set number of times to flash 
 	move.b	obAnim(a0),needle.LastAnim(a0)
 	move.b	#7,obAnim(a0)
 	move.w	#sfx_HitBoss, d0
@@ -533,7 +581,6 @@ NHammer_Init:
 	move.b	#16,obActWid(a0)
 	move.b	#2,obPriority(a0)
 	move.b	#$80+6, obColType(a0)
-	move.b	#12, obColProp(a0) 		; set number of hits
 	move.b	#8,obFrame(a0)
 	move.b	#0,obAnim(a0)
 	move.w	#0,obAngle(a0)
@@ -573,7 +620,7 @@ Ani_NHammer:
 	even
 
 ; ----------------------------------------------------------------------------
-; large bg needle boss body and hands
+; large bg needle boss body
 ; ----------------------------------------------------------------------------
 
 ObjNeedleBossBig:
@@ -589,6 +636,8 @@ ObjNeedleBossBig:
 	dc.w	NeedleBossBig_Fall-.Index
 	dc.w	NeedleBossBig_Charge-.Index
 	dc.w	NeedleBossBig_Main-.Index
+	dc.w	NeedleBossBig_BodyInit-.Index
+	dc.w	NeedleBossBig_Body-.Index
 ; ----------------------------------------------------------------------------
 
 NeedleBossBig_Init:
@@ -601,25 +650,24 @@ NeedleBossBig_Init:
 
 	move.w	#-$70,needle.YOrg(a0)
 
-	move.w	#$10,needle.ZPos(a0)
+	move.w	#$D,needle.ZPos(a0)
 	move.b	#$C,obRender(a0)
 	move.b	#16,obWidth(a0)
 	move.b	#16,obHeight(a0)
 	move.b	#16,obActWid(a0)
 	move.b	#2,obPriority(a0)
-	move.b	#6,obFrame(a0)
+	move.b	#7,obFrame(a0)
 	move.b	#0,obAnim(a0)
 	move.w	#0,obAngle(a0)
 	bset	#0,obStatus(a0)
 	bsr.w	_needleLoadPaletteBig
-
 
 NeedleBossBig_Fall:
 	addi.w	#4,needle.YOrg(a0)
 	cmpi.w	#$A0,needle.YOrg(a0)
 	blt.s	.Skip
 	add.b	#2,obRoutine(a0)
-	move.b	#5,obFrame(a0)
+	move.b	#6,obFrame(a0)
 	move.b	#60*2,needle.Timer(a0)
 .Skip
 	bra.w	_needleRender3D
@@ -630,7 +678,12 @@ NeedleBossBig_Charge:
 	addq.b	#2,obRoutine(a0)
 	move.b	#0,obFrame(a0)
 	move.b	#sfx_GiantRing,d0
-	jmp	QueueSound2.l
+	jsr	QueueSound2.l
+
+	bra.w	_needleBigSpawnObjs
+
+	move.w	#-$90,needle.YOrg(a0)
+	rts
 .Go
 	bsr.w	_needleRender3D
 	addi.w	#6,obAngle(a0)
@@ -647,10 +700,115 @@ NeedleBossBig_Charge:
 NeedleBossBig_Main:
 	move.w	needle.XOrg(a0),obX(a0)
 	bsr.w	_needleChase
-	move.w	#$A0,needle.YOrg(a0)
+	move.w	#$60,needle.YOrg(a0)
 	move.w	obX(a0),needle.XOrg(a0)
 	bra.w	_needleRender3D
 
+NeedleBossBig_BodyInit:
+	add.b	#2, obRoutine(a0)
+	move.l	#Map_NeedleBossBig, obMap(a0)
+	move.w	#NEEDLBBIG_GFX,obGfx(a0)
+
+	move.w	#N3D_CENTERX,needle.XOrg(a0)
+	move.w	#N3D_CENTERX,obX(a0)
+
+	move.w	#-$70,needle.YOrg(a0)
+
+	move.w	#$B,needle.ZPos(a0)
+	move.b	#$C,obRender(a0)
+	move.b	#16,obWidth(a0)
+	move.b	#16,obHeight(a0)
+	move.b	#16,obActWid(a0)
+	move.b	#2,obPriority(a0)
+	move.b	#1,obFrame(a0)
+	move.b	#0,obAnim(a0)
+	move.w	#0,obAngle(a0)
+
+NeedleBossBig_Body:
+	move.w	needle.XOrg(a0),obX(a0)
+	bsr.w	_needleChase
+	move.w	#$A8,needle.YOrg(a0)
+	move.w	obX(a0),needle.XOrg(a0)
+	bra.w	_needleRender3D
+
+
+_needleBigSpawnObjs:
+	jsr	(FindFreeObj).l		; spawn body
+	bne.s	.ex
+	move.w	obX(a0),obX(a1)
+	move.w	obY(a0),obY(a1)
+	move.b	#id_NeedleBoss,(a1)
+	move.b	#12,obSubtype(a1)
+	move.b	#8,obRoutine(a1)
+
+	jsr	(FindFreeObj).l		; spawn left hand
+	bne.s	.ex
+
+	move.w	obX(a0),obX(a1)
+	move.w	obY(a0),obY(a1)
+	move.b	#id_NeedleBoss,(a1)
+	move.b	#16,obSubtype(a1)
+
+	jsr	(FindFreeObj).l		; spawn right hand
+	bne.s	.ex
+	move.w	obX(a0),obX(a1)
+	move.w	obY(a0),obY(a1)
+	move.b	#id_NeedleBoss,(a1)
+	move.b	#16,obSubtype(a1)
+	move.b	#2,obRoutine(a1)
+.ex
+	rts
+
+; ----------------------------------------------------------------------------
+; large fg needle boss hands
+; ----------------------------------------------------------------------------
+
+NLIMIT_LEFT = $380
+NLIMIT_RIGHT	= $480+320
+HAND_L_STARTX = NLIMIT_LEFT+196
+HAND_R_STARTX = NLIMIT_RIGHT-196
+
+HAND_HIGH_Y	= NBOSS_HOVER_Y1
+HAND_MID_Y	= NBOSS_HOVER_Y1+96
+HAND_LOW_Y	= NBOSS_FLOOR_Y
+ObjNeedleHand:
+	moveq	#0,d0
+	move.b	obRoutine(a0),d0
+	move.w	.Index(pc,d0.w),d1
+	jsr	.Index(pc,d1.w)
+	jmp	DisplaySprite.l
+
+; ----------------------------------------------------------------------------
+.Index:
+	dc.w	NeedleHand_InitLeft-.Index
+	dc.w	NeedleHand_InitRight-.Index
+	dc.w	NeedleHand_Main-.Index
+; ----------------------------------------------------------------------------
+
+NeedleHand_InitLeft:
+	add.b	#4, obRoutine(a0)
+	move.w	#HAND_L_STARTX,obX(a0)
+	move.b	#$4,obRender(a0)
+	bra.s	_needleinit2
+
+NeedleHand_InitRight:
+	add.b	#2, obRoutine(a0)
+	move.w	#HAND_R_STARTX,obX(a0)
+	move.b	#$4,obRender(a0)	
+	bset	#0,obStatus(a0)
+	bset	#0,obRender(a0)
+_needleinit2:
+	move.w	#HAND_MID_Y,obY(a0)
+	move.l	#Map_NeedleBossBig,obMap(a0)
+	move.w	#NEEDLBBIG_GFX,obGfx(a0)
+	move.b	#48,obWidth(a0)
+	move.b	#48,obActWid(a0)
+	move.b	#16,obHeight(a0)
+	bsr.w	_needleLoadPaletteBig
+	move.b	#8,obFrame(a0)
+
+NeedleHand_Main:
+	rts
 ; ----------------------------------------------------------------------------
 ; bare 3d test
 ; ----------------------------------------------------------------------------
@@ -859,8 +1017,8 @@ ArtList_NeedleBoss:
 	dc.w	NHAMMER_VRAM
 	dc.l	Nem_NeedleBossBig
 	dc.w	NEEDLBBIG_VRAM
-	dc.l	Nem_N3DTest
-	dc.w	$8800
+	;dc.l	Nem_N3DTest
+	;dc.w	$8800
 	dc.l	-1
 
 

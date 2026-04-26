@@ -228,8 +228,13 @@ v_scrposy_orig:		ds.b	4		; stored y screen pos
 v_scrshiftx:		ds.w	1		; x-screen shift (new - last) * $100
 v_scrshifty:		ds.w	1		; y-screen shift (new - last) * $100
 v_lookshift:		ds.w	1		; screen shift when Sonic looks up/down
-v_unused7:		ds.b	1		; unused
-v_unused8:		ds.b	1		; unused
+v_unused7:			ds.b	1		; unused
+;v_unused8:			ds.b	1		; unused	
+f_RandMonPow:		ds.b	1		; !@ GD: Now used, for keeping track if Random Monitor 
+									; Bitfield: 0000 0lsb
+									; Bit #2 = l = lampost
+									; Bit #1 = s = signpost
+									; Bit #0 = b = BigRing
 v_dle_routine:		ds.b	1		; dynamic level event - routine counter
 			ds.b	1		; unused
 f_nobgscroll:		ds.b	1		; flag set to disable the entirety of the DeformLayers subroutine
