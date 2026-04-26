@@ -24,6 +24,7 @@ Knight_Sound2_Duration	=	180			; How long the second Knight PCM sound lasts in f
 Knight_X_Position	=	objoff_30		; The Knight's X position, which is copied over to the Knight's current X position after being processed by waving routines. (2 bytes)
 Knight_Y_Position	=	objoff_32		; Same as above, but for the Y position. (2 bytes)
 Knight_Wave_Increment	=	objoff_3A		; Value that increments once every frame. It makes the Knight wave. (1 byte)
+Knight_DoWave		=	objoff_2F		; Flag that determines whether the Knight should wave. (1 byte)
 
 ; ===========================================================================
 ; Start of object code
@@ -187,7 +188,6 @@ RKPhase1_Attack:
 	sub.w	#1,Knight_Timer(a0)			; Reduce Knight timer by 1
 	bne.s	.nobullet				; If not time, don't spawn a bullet.
 
-	jsr	(RandomNumber).l			; gib random number	
 	move.w	#29,Knight_Timer(a0)			; Reset timer
 	lea	(RKPhase1_BulletChoicesL).l,a2		; Get the Knight's possible spawnable bullets
 	move.w	#-$400,d2				; Set speed at which the bullet will go
@@ -201,7 +201,7 @@ RKPhase1_Attack:
 	bne.s	.nobullet				; sorry, the datacenters bought all of it :(
 	
 	; Pick bullet
-	move.l	(v_vbla_count).w,(v_random).w		; Set a seed for the randomizer.
+	move.l	(v_vbla_count).w,(v_random).w		; Set a seed for the randomizer. (Commenting this line makes every sword the same unfortunately, which is really bad)
 	jsr	(RandomNumber).l			; Get a random number
 	andi.l	#7,d1					; Number must be within 0-7.
 	adda.l	d1,a2					; Point to selection.
@@ -452,6 +452,7 @@ RKP1End_Phase2:
 	move.w	obX(a0),Knight_X_Position(a0)
 	move.w	obY(a0),Knight_Y_Position(a0)
 	move.b	#$80,Knight_Wave_Increment(a0)
+	move.w	#120,Knight_Timer(a0)
 	rts
 	
 ; End of Phase 1 end behavior	
@@ -462,17 +463,15 @@ RKP1End_Phase2:
 	
 RKnight_Phase2:
 	moveq	#0,d0
-	move.b	ob2ndRout(a0),d0		; Get routine ID
-	move.w	RKPhase2_Index(pc,d0.w),d1	; Get indexed routine
-	jsr	RKPhase2_Index(pc,d1.w)		; Jump to code
 	clr.l	obX(a0)
 	clr.l	obY(a0)
 	move.w	Knight_X_Position(a0),obX(a0)
-	move.w	Knight_Y_Position(a0),obY(a0)
-	bsr.w	RKnight_Wave
-	; TO-DO: Wave
+	move.w	Knight_Y_Position(a0),obY(a0)	
+	move.b	ob2ndRout(a0),d0		; Get routine ID
+	move.w	RKPhase2_Index(pc,d0.w),d1	; Get indexed routine
+	jsr	RKPhase2_Index(pc,d1.w)		; Jump to code
+
 	
-	; TO-DO: AnimateSprite
 	lea	(Ani_Roaring_Knight).l,a1	
 	jsr	(AnimateSpriteXL).l
 	bsr.w	RKnight_LoadGfx			; Load graphics from DPLC to VRAM	
@@ -483,13 +482,201 @@ RKnight_Phase2:
 ; ===========================================================================	
 	
 RKPhase2_Index:	
-	dc.w	RKPhase2_Idle-RKPhase2_Index	; Idle
+	dc.w	RKPhase2_WaitWave-RKPhase2_Index	; Wait for a couple of seconds
+	dc.w	RKPhase2_ChooseAttack-RKPhase2_Index	; Choose a random attack
+	dc.w	RKP2_SwordDance_Target-RKPhase2_Index	; Sword dance: select the target position
+	dc.w	RKPhase2_MoveXYTarget-RKPhase2_Index	; Sword dance: move to target
+	dc.w	RKPhase2_SummonSwords-RKPhase2_Index	; Sword dance: summon a whole lot of swords
+	dc.w	RKPhase2_Loop-RKPhase2_Index		; Restore idle animation
+;	dc.w	RKPhase1_Idle-RKPhase2_Index		; Return to first routine
 
 ; ===========================================================================
-; Knight's Phase 2 idling routine
+; Makes the Knight wait until a timer has expired *and* they're centered.
 ; ===========================================================================	
 
-RKPhase2_Idle:
+RKPhase2_WaitWave:
+	sub.w	#1,Knight_Timer(a0)
+	bne.s	.not0
+	tst.b	Knight_Wave_Increment(a0)
+	beq.s	.centered
+	cmpi.b	#$80,Knight_Wave_Increment(a0)
+	bne.s	.notx80
+
+.centered:
+	addq.b	#2,ob2ndRout(a0)
+	rts
+
+.notx80:
+	move.w	#1,Knight_Timer(a0)
+	
+.not0:
+	bra.w	RKnight_Wave
+	
+; ===========================================================================	
+; Choose a random attack
+;
+; TO-DO: make the Knight actually choose a random attack.
+; Until then, use for testing attacks.
+; ===========================================================================	
+	
+RKPhase2_ChooseAttack:
+	addq.b	#2,ob2ndRout(a0)
+	rts
+	
+; ===========================================================================	
+; Set the target location for the sword dance.
+; ===========================================================================		
+
+RKP2_SwordDance_Target:
+	jsr	(RandomNumber).l
+	swap	d1	
+	btst	#0,d1
+	bne.s	.left
+	
+	move.w	#Knight_X_Spawn+$320,Knight_X_Target(a0)
+	bclr	#0,obStatus(a0)
+	bra.s	.common
+
+.left:
+	move.w	#Knight_X_Spawn+$220,Knight_X_Target(a0)
+	bset	#0,obStatus(a0)
+
+.common:
+	move.w	#Knight_Y_Spawn+$24,Knight_Y_Target(a0)
+	move.w	#$200,obVelX(a0)
+	move.w	#$200,obVelY(a0)
+	addq.b	#2,ob2ndRout(a0)
+	rts
+	
+; ===========================================================================	
+; Move to X and Y target location
+; ===========================================================================		
+
+RKPhase2_MoveXYTarget:
+	; X target
+	moveq	#2,d6
+	moveq	#0,d4
+	moveq	#0,d5
+	move.w	obVelX(a0),d4
+	asr.w	#8,d4
+	move.w	obVelY(a0),d5
+	asr.w	#8,d5
+	move.w	Knight_X_Position(a0),d0
+	cmp.w	Knight_X_Target(a0),d0		; Where is the target relative to the boss?
+	blt.s	.oppositeX			; If target > ObX, then boss must go to the right.
+	beq.s	.atXtarget
+	sub.w	d4,Knight_X_Position(a0)	; Move boss to the left
+	bra.s	.checkforXtarget
+.oppositeX:
+	add.w	d4,Knight_X_Position(a0)	; Move boss to the right
+	
+.checkforXtarget:
+	move.w	Knight_X_Position(a0),d0	
+	cmp.w	Knight_X_Target(a0),d0		; Has boss reached desired target?
+	bne.s	.Ytarget			; Branch if not.
+
+.atXtarget:
+	subq	#1,d6
+
+.Ytarget:
+	move.w	Knight_Y_Position(a0),d0
+	cmp.w	Knight_Y_Target(a0),d0		; Where is the target relative to the boss?
+	blt.s	.opposite			; If target > ObX, then boss must go up.
+	beq.s	.atYTarget
+	sub.w	d5,Knight_Y_Position(a0)	; Move boss up         
+	bra.s	.checkforYtarget
+.opposite:
+	add.w	d5,Knight_Y_Position(a0)			; Move boss down         
+	
+.checkforYtarget:
+	move.w	obY(a0),d0	
+	cmp.w	Knight_Y_Target(a0),d0		; Has boss reached desired target?
+	bne.s	.notattarget			; Branch if not.
+	
+.atYTarget:	
+	subq	#1,d6
+	bne.s	.notattarget
+	addq.b	#2,ob2ndRout(a0)
+	
+.notattarget:
+	rts	
+	
+; ===========================================================================	
+; Move to X and Y target location
+; ===========================================================================	
+
+RKPhase2_SummonSwords:
+	cmpi.b	#$A,obAnim(a0)				; Check if the Knight's animation is correct
+	beq.s	.skip					; If yes, skip initialization
+	
+	move.b	#$A,obAnim(a0)				; Make the Knight point
+	move.w	#450,Knight_Timer(a0)			; Attack lasts 7 and a half seconds
+	
+.skip:
+	moveq	#0,d0
+	move.w	Knight_Timer(a0),d0
+	divu.w	#29,d0					; I sincerely apologize. I *need* the extra randomness.
+	swap	d0					; Put remainder in lower word
+	tst.w	d0					; Is remainder 0?
+	bne.w	.nosword
+
+	; I LOVE COPY-PASTING CODE!!!!!!!!!!!!!!!!!!!!!!!
+	move.w	#-$600,d2				; Set speed at which the bullet will go
+	btst	#0,obStatus(a0)				; Which direction is the Knight facing?
+	beq.s	.isleft					; If left, keep as-is.
+	neg.w	d2					; Else, change speed at which the bullet will go
+
+.isleft:
+	; Set vertical offset
+;	move.l	(v_vbla_count).w,(v_random).w		; Set a seed for the randomizer.
+	jsr	(RandomNumber).l			; Get a random number
+	swap	d1
+	andi.l	#3,d1					; Number must be within 0-3.
+	lsl.l	#4,d1					; Multiply by 16
+	moveq	#1,d6
+
+.spawnswords:
+	jsr	(FindFreeObj).l				; Find RAM space
+	bne.w	.nosword				; sorry, the datacenters bought all of it :(
+	
+	; Summon bullet
+	move.b	#id_Roaring_Knight,(a1)			; Make new object
+	move.b	#$A,obRoutine(a1)			; Object is a bullet
+	clr.b	ob2ndRout(a1)
+	move.w	d2,obVelX(a1)				; Give the object speed
+	move.w	obX(a0),obX(a1)				; Copy X position
+	move.w	d2,d3
+	asr.w	#3,d3
+	sub.w	d3,obX(a1)				; Make it spawn slightly off screen
+	move.w  a0,Knight_Parent(a1)	
+
+	btst	#0,d6					; Check if d6 is odd
+	bne.s	.ceiling				; If yes, spawn a ceiling sword.
+
+	move.w	#Knight_Y_Spawn+$E0,obY(a1)		; Set Y spawn
+	sub.w	d1,obY(a1)				; Change Y spawn according to random value
+	move.b	#5,obSubtype(a1)			; Set object subtype to upwards facing sword.
+	bra.s	.notceiling
+
+.ceiling:
+	move.w	#Knight_Y_Spawn-$40,obY(a1)		; Set Y spawn
+	add.w	d1,obY(a1)				; Change Y spawn according to random value
+	move.b	#4,obSubtype(a1)			; Set object subtype to upwards facing sword.
+
+.notceiling:
+	dbf	d6,.spawnswords
+
+.nosword:
+	bra.w	RKPhase1_Wait				; Decrement timer
+	
+; ===========================================================================	
+; Makes the Knight loop through their attacks
+; ===========================================================================	
+
+RKPhase2_Loop:
+	move.b	#1,obAnim(a0)
+	move.w	#120,Knight_Timer(a0)
+	clr.b	ob2ndRout(a0)
 	rts
 	
 ; ===========================================================================	
@@ -798,6 +985,7 @@ Ani_Roaring_Knight:
 		dc.w	.droop-Ani_Roaring_Knight		; 7	
 		dc.w	.swingprepare-Ani_Roaring_Knight	; 8
 		dc.w	.swingdo-Ani_Roaring_Knight		; 9
+		dc.w	.point-Ani_Roaring_Knight		; $A
 
 .null:		dc.b	0
 		dc.b	0,$FF
@@ -844,6 +1032,9 @@ Ani_Roaring_Knight:
 		dc.b	$3F,$3F,$3F,$3F,$40,$40,$41,$41,$42,$42,$43,$43,$44,$44,$44,$44,$45,$45,$45,$45,$FD,$1
 	
 		even
+		
+.point:		dc.b	3
+		dc.b	$16,$17,$18,$19,$FE,$1
 
 
 Ani_Knight_Bullets:
