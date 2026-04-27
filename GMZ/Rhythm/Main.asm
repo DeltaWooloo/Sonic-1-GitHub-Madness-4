@@ -195,10 +195,10 @@ Rhythm_ChartPtr:
 		dc.l	RhythmChart_GHZ1
 
 		; Bluescape
-		dc.l	RhythmChart_GHZ1
-		dc.l	RhythmChart_GHZ1
-		dc.l	RhythmChart_GHZ1
-		dc.l	RhythmChart_GHZ1
+		dc.l	RhythmChart_Sky
+		dc.l	RhythmChart_Sky
+		dc.l	RhythmChart_Sky
+		dc.l	RhythmChart_Sky
 
 		; Old John
 		dc.l	RhythmChart_GHZ1
@@ -736,4 +736,7 @@ RhythmChart_CanCan:
 
 RhythmChart_WeebTrash:
 		include	"Charts/Weeb Trash.asm"
+		even
+RhythmChart_Sky:
+		include	"Charts/Sky.asm"
 		even
