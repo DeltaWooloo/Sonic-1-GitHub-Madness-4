@@ -622,9 +622,10 @@ DLE_SBZ1:
 		cmpi.w	#$1880,(v_screenposx).w
 		blo.s	locret_7242
 		move.w	#$620,(v_limitbtm1).w
-		cmpi.w	#$2000,(v_screenposx).w
-		blo.s	locret_7242
-		move.w	#$2A0,(v_limitbtm1).w
+		;!@ GD: Heck no, disable
+		;cmpi.w	#$2000,(v_screenposx).w
+		;blo.s	locret_7242
+		;move.w	#$2A0,(v_limitbtm1).w
 
 locret_7242:
 		rts

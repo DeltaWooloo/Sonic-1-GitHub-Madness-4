@@ -235,7 +235,8 @@ PLC_SBZ2:	dc.w ((PLC_SBZ2end-PLC_SBZ2-2)/6)-1
 		plcm	Nem_SbzDoor2,   ArtTile_SBZ_Horizontal_Door    ; horizontal door
 		plcm	Nem_Electric,   ArtTile_SBZ_Electric_Orb       ; electric orb
 		plcm	Nem_TrapDoor,   ArtTile_SBZ_Trap_Door          ; trapdoor
-		plcm	Nem_SbzFloor,   ArtTile_SBZ_Collapsing_Floor+4 ; collapsing floor
+		;plcm	Nem_SbzFloor,   ArtTile_SBZ_Collapsing_Floor+4 ; collapsing floor
+		plcm	Nem_SbzFloor,   ArtTile_SBZ_Collapsing_Floor ; collapsing floor
 		plcm	Nem_SpinPform,  ArtTile_SBZ_Spinning_Platform  ; small spinning platform
 		plcm	Nem_LzSwitch,   ArtTile_Button                 ; switch
 		plcm	Nem_Spikes,     ArtTile_Spikes                 ; spikes
@@ -243,6 +244,10 @@ PLC_SBZ2:	dc.w ((PLC_SBZ2end-PLC_SBZ2-2)/6)-1
  		plcm	Nem_BallHogH,   ArtTile_Ball_HogH                ; ball hog enemy
 		plcm	Nem_BallHogV,   ArtTile_Ball_HogV                ; ball hog enemy
 		plcm	Nem_ProtoExplosion, ArtTile_Proto_Explosion 	; explosion
+		;!@ GD: Add this to 2; artwork seems to be stomping over itself
+		plcm	Nem_Bomb,       ArtTile_Bomb                   ; bomb enemy
+		plcm	Nem_Cater,      ArtTile_SBZ_Caterkiller        ; caterkiller enemy
+		plcm	Nem_SbzBlock,  ArtTile_SBZ_Vanishing_Block     ; vanishing block
 PLC_SBZ2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - COLD BREW
