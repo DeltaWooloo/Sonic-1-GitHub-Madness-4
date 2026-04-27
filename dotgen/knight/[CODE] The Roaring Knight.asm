@@ -25,6 +25,10 @@ Knight_X_Position	=	objoff_30		; The Knight's X position, which is copied over t
 Knight_Y_Position	=	objoff_32		; Same as above, but for the Y position. (2 bytes)
 Knight_Wave_Increment	=	objoff_3A		; Value that increments once every frame. It makes the Knight wave. (1 byte)
 Knight_DoWave		=	objoff_2F		; Flag that determines whether the Knight should wave. (1 byte)
+Knight_SwordRain_AtkRem =	objoff_2E		; Count how many instances of the sword rain attack are to be executed yet (1 byte)
+Knight_SwordRain_Spawn	=	objoff_2C		; Destination X coordinate for the sword rain (2 bytes)
+Knight_SwordRain_SwdRem	=	objoff_2B		; Bitfield. Bit 7: Gap was skipped already. Bits 0-6: How many swords remain to spawn. (1 byte)
+Knight_SwordRain_SwdGap	=	objoff_2A		; How many swords until a gap is formed. (1 byte)
 
 ; ===========================================================================
 ; Start of object code
@@ -47,7 +51,7 @@ RKnight_Index:
 	dc.w RKnight_Phase2-RKnight_Index	; Main logic for phase 2
 	dc.w RKnight_Defeat-RKnight_Index	; Defeat and cleanup logic
 	dc.w RKnight_Bullets-RKnight_Index	; Knight bullet objects
-	dc.w RKnight_Null-RKnight_Index		; Knight afterimages
+	dc.w RKnight_Bullets-RKnight_Index	; Knight bullet objects (suspended)
 	
 ; ===========================================================================
 ; Object initialization routine
@@ -487,7 +491,15 @@ RKPhase2_Index:
 	dc.w	RKP2_SwordDance_Target-RKPhase2_Index	; Sword dance: select the target position
 	dc.w	RKPhase2_MoveXYTarget-RKPhase2_Index	; Sword dance: move to target
 	dc.w	RKPhase2_SummonSwords-RKPhase2_Index	; Sword dance: summon a whole lot of swords
-	dc.w	RKPhase2_Loop-RKPhase2_Index		; Restore idle animation
+	dc.w	RKPhase2_Loop-RKPhase2_Index		; Restore idle animation and do another attack
+	dc.w	RKP2_SwordRain_Target-RKPhase2_Index	; Sword rain: select the target position
+	dc.w	RKPhase2_MoveXYTarget-RKPhase2_Index	; Sword rain: move to target
+	dc.w	RKPhase2_WaitWave-RKPhase2_Index	; Sword rain: wait before striking
+	dc.w	RKP2_SwordRain_Prepare-RKPhase2_Index	; Sword rain: prepare the Knight to make swords spawn.
+	dc.w	RKP2_SwordRain_Spawn-RKPhase2_Index	; Sword rain: make them spawn
+	dc.w	RKPhase1_Wait-RKPhase2_Index		; Sword rain: Wait before striking
+	dc.w	RKP2_SwordRain_Strike-RKPhase2_Index	; Sword rain: Strike!
+	dc.w	RKPhase2_Loop-RKPhase2_Index		; Restore idle animation and do another attack
 ;	dc.w	RKPhase1_Idle-RKPhase2_Index		; Return to first routine
 
 ; ===========================================================================
@@ -520,7 +532,7 @@ RKPhase2_WaitWave:
 ; ===========================================================================	
 	
 RKPhase2_ChooseAttack:
-	addq.b	#2,ob2ndRout(a0)
+	move.b	#$C,ob2ndRout(a0)
 	rts
 	
 ; ===========================================================================	
@@ -610,18 +622,18 @@ RKPhase2_SummonSwords:
 	beq.s	.skip					; If yes, skip initialization
 	
 	move.b	#$A,obAnim(a0)				; Make the Knight point
-	move.w	#450,Knight_Timer(a0)			; Attack lasts 7 and a half seconds
+	move.w	#449,Knight_Timer(a0)			; Attack lasts 7 and a half seconds
 	
 .skip:
 	moveq	#0,d0
 	move.w	Knight_Timer(a0),d0
-	divu.w	#29,d0					; I sincerely apologize. I *need* the extra randomness.
+	divu.w	#45,d0					; I sincerely apologize. I *need* the extra randomness.
 	swap	d0					; Put remainder in lower word
 	tst.w	d0					; Is remainder 0?
 	bne.w	.nosword
 
 	; I LOVE COPY-PASTING CODE!!!!!!!!!!!!!!!!!!!!!!!
-	move.w	#-$600,d2				; Set speed at which the bullet will go
+	move.w	#-$400,d2				; Set speed at which the bullet will go
 	btst	#0,obStatus(a0)				; Which direction is the Knight facing?
 	beq.s	.isleft					; If left, keep as-is.
 	neg.w	d2					; Else, change speed at which the bullet will go
@@ -668,6 +680,121 @@ RKPhase2_SummonSwords:
 
 .nosword:
 	bra.w	RKPhase1_Wait				; Decrement timer
+	
+; ===========================================================================	
+; Move the Knight to the expected target location for the sword rain attack.
+; ===========================================================================	
+
+RKP2_SwordRain_Target:
+	bclr	#0,obStatus(a0)
+	move.w	#Knight_X_Spawn+$2A0,Knight_X_Target(a0)
+	move.w	#Knight_Y_Spawn+$54,Knight_Y_Target(a0)
+	move.w	#$200,obVelX(a0)
+	move.w	#$200,obVelY(a0)
+	addq.b	#2,ob2ndRout(a0)
+	move.b	#$B,obAnim(a0)
+	move.b	#5,Knight_SwordRain_AtkRem(a0)		; Number of times the attack will be repeated
+	move.w	#60,Knight_Timer(a0)
+	rts
+	
+; ===========================================================================	
+; Prepare the Knight to spawn a bunch of swords
+; ===========================================================================
+
+RKP2_SwordRain_Prepare:
+	move.b	#8,Knight_SwordRain_SwdRem(a0)		; Number of swords that will be spawned
+	move.b	#$C,obAnim(a0)				; Make the Knight raise their sword
+	addq.b	#2,ob2ndRout(a0)
+	move.w	#3,Knight_Timer(a0)
+	move.w	#Knight_X_Spawn+$218,Knight_SwordRain_Spawn(a0)	; Set where the first sword will be spawned
+
+	jsr	(RandomNumber).l			; Get a random number
+	swap	d1
+	andi.l	#7,d1					; Number must be within 0-7.
+	move.b	d1,Knight_SwordRain_SwdGap(a0)		; Set how many swords until a gap is formed.
+	
+	rts
+	
+; ===========================================================================	
+; Make the Knight spawn a bunch of swords
+; ===========================================================================
+
+RKP2_SwordRain_Spawn:
+	sub.w	#1,Knight_Timer(a0)
+	bne.w	.not0
+	
+	jsr	(FindFreeObj).l				; Find RAM space
+	bne.w	.outtaswords				; This should never happen.
+		
+	; Summon bullet
+	move.b	#id_Roaring_Knight,(a1)			; Make new object
+	move.b	#$C,obRoutine(a1)			; Object is a bullet that will stay stationary for a bit
+	clr.b	ob2ndRout(a1)
+	move.w	#$1000,obVelY(a1)			; Give the object speed
+	move.w	Knight_SwordRain_Spawn(a0),obX(a1)	; Make it spawn at a set X position
+	move.w	Knight_Y_Position(a0),obY(a1)		; Copy Y position
+	subi.w	#$30,obY(a1)				; Set base Y position to slightly above the Knight
+
+	moveq	#0,d0
+
+	move.b	#8,obSubtype(a1)			; Set object subtype
+	move.w  a0,Knight_Parent(a1)		
+	
+	subi.b	#1,Knight_SwordRain_SwdRem(a0)		; Remove 1 sword from the remaining sword count
+	move.b	Knight_SwordRain_SwdRem(a0),d0
+	andi.b	#$7F,d0
+	lea	(Knight_SwordRain_YOffsets).l,a2
+	adda.l	d0,a2	
+	moveq	#0,d1
+	move.b	(a2),d1
+	add.w	d1,obY(a1)				; Change the sword's offset sometimes
+	tst.b	d0
+	beq.s	.outtaswords				; If the Knight is out of swords, branch.
+	
+	move.w	#3,Knight_Timer(a0)
+	addi.w	#30,Knight_SwordRain_Spawn(a0)		; The next sword will spawn further to the right
+	btst	#7,Knight_SwordRain_SwdRem(a0)		; Check if the gap was already made.
+	bne.s	.nogap
+	subi.b	#1,Knight_SwordRain_SwdGap(a0)
+	bne.s	.nogap
+	bset	#7,Knight_SwordRain_SwdRem(a0)
+	addi.w	#60,Knight_SwordRain_Spawn(a0)		; Add more of a gap if a cointoss was successful
+	rts
+		
+.outtaswords:
+	move.w	#60,Knight_Timer(a0)
+	addq.b	#2,ob2ndRout(a0)
+	
+.not0:
+.nogap:
+	rts	
+
+; ===========================================================================	
+; Make the swords fall
+; ===========================================================================
+
+RKP2_SwordRain_Strike:
+	cmpi.b	#$D,obAnim(a0)				; Has the Knight already struck?
+	beq.s	.hasstruck				; If yes, branch
+	
+	move.b	#$D,obAnim(a0)				; But if not... strike!
+	move.w	#90,Knight_Timer(a0)
+	
+.hasstruck:
+	sub.w	#1,Knight_Timer(a0)
+	bne.w	.not0
+
+	subi.b	#1,Knight_SwordRain_AtkRem(a0)
+	bne.s	.prepareagain
+	addq.b	#2,ob2ndRout(a0)
+	
+.not0:	
+	rts
+	
+.prepareagain:
+	move.b	#$12,ob2ndRout(a0)			; Return to pre-strike routine
+	rts
+	
 	
 ; ===========================================================================	
 ; Makes the Knight loop through their attacks
@@ -723,8 +850,26 @@ RKnight_Bullets:
 	or.b	d0,obStatus(a0)
 	
 .skipInit:
+	cmpi.b	#$A,obRoutine(a0)
+	beq.s	.movebullets
+	bsr.w	RKBullets_Stationary					; These bullets should wait for an animation from the Knight to play before moving
+	bra.s	.chkdelete
+	
+.movebullets:
 	jsr	(SpeedToPos).l						; Move object according to given speed.
-	out_of_range.s	.jmptodelete					; Standard checks for deleting an object based on distance from screen bounds.
+	
+.chkdelete:	
+	out_of_range.s	.jmptodelete					; Standard checks for deleting an object based on horizontal distance from screen bounds.
+	
+	; Copy-pasted check for Y coordinate despawn
+	move.w	obY(a0),d0	; get object position
+	andi.w	#$FF80,d0	; round down to nearest $80
+	move.w	(v_screenposy).w,d1 ; get screen position
+	subi.w	#128,d1
+	andi.w	#$FF80,d1
+	sub.w	d1,d0		; approx distance between object and screen
+	cmpi.w	#128+224+192,d0
+	bhi.s	.jmptodelete
 	
 	; If the deletion checks fail...
 	
@@ -738,7 +883,7 @@ RKnight_Bullets:
 	
 .jmptodelete:
 	jmp	(DeleteObject).l					; Else, delete the object.
-	
+		
 ; ===========================================================================
 ; Subroutines
 ; ===========================================================================
@@ -854,6 +999,20 @@ KBullets_LoadProperties:
 	rts						; return
 	
 ; ===========================================================================
+; Hold the bullets stationary until they're ready to move.
+;
+; Used by: Bullets
+; ===========================================================================
+
+RKBullets_Stationary:
+	cmpi.b	#$D,obAnim(a1)				; Did the Knight swing?
+	bne.s	.return					; Return if not.
+	subq.b	#2,obRoutine(a0)			; Let the bullets move.
+
+.return:
+	rts
+
+; ===========================================================================
 ; Animate Sprite implementation that extends the sprite limit.
 ;
 ; Used by: Knight
@@ -864,6 +1023,13 @@ KBullets_LoadProperties:
 ; ===========================================================================
 ; Data
 ; ===========================================================================
+
+; ===========================================================================
+; Knight Sword rain Y spawn offsets
+; ===========================================================================
+
+Knight_SwordRain_YOffsets:
+	dc.b	$20,$10,$0,$0,$0,$0,$10,$20
 
 ; ===========================================================================
 ; Knight Bullet Property table
@@ -986,6 +1152,9 @@ Ani_Roaring_Knight:
 		dc.w	.swingprepare-Ani_Roaring_Knight	; 8
 		dc.w	.swingdo-Ani_Roaring_Knight		; 9
 		dc.w	.point-Ani_Roaring_Knight		; $A
+		dc.w	.aurafarm-Ani_Roaring_Knight		; $B
+		dc.w	.swingprefront-Ani_Roaring_Knight	; $C
+		dc.w	.swingdofront-Ani_Roaring_Knight	; $D
 
 .null:		dc.b	0
 		dc.b	0,$FF
@@ -1035,7 +1204,19 @@ Ani_Roaring_Knight:
 		
 .point:		dc.b	3
 		dc.b	$16,$17,$18,$19,$FE,$1
-
+		even
+		
+.aurafarm:	dc.b	1
+		dc.b	$1A,$FF
+		even
+		
+.swingprefront:	dc.b	3
+		dc.b	$1B,$1C,$FE,$1
+		even
+		
+.swingdofront:	dc.b	3
+		dc.b	$1D,$1E,$1F,$FE,$1	
+		even
 
 Ani_Knight_Bullets:
 	dc.w	.null-Ani_Knight_Bullets
