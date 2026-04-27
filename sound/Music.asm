@@ -154,7 +154,7 @@ Mus_OrangeSong:		include	"music/TG2000Tracks/Mus - Orange Song.asm"
 	even
 Mus_GreenHills:		include	"music/TG2000Tracks/Mus - Green Hills (Flash).asm"
 	even
-Mus_WariosCastle:		include	"music/TheWTracks/Mus - WariosCastle.asm"
+Mus_WariosCastle:	include	"music/TheWTracks/Mus - WariosCastle.asm"
 	even	
 Mus_DUNGEON3:		include "music/DaxKatter/Mus - Azure Rainforest.asm"
 	even

@@ -58,9 +58,9 @@ SampleTable:
 
 	dcSample	TYPE_DPCM,	Homero,		16000					; $A8
 
-	dcSample	TYPE_DPCM,	EagleSoft_Chirp1,	8000	; GMZ
-	dcSample	TYPE_DPCM,	EagleSoft_Chirp2,	8000	; GMZ
-	dcSample	TYPE_DPCM,	EagleSoft_Speech,	8000	; GMZ
+	dcSample	TYPE_DPCM,	ES_Chirp1,	8000	; GMZ
+	dcSample	TYPE_DPCM,	ES_Chirp2,	8000	; GMZ
+	dcSample	TYPE_DPCM,	ES_Speech,	8000	; GMZ
 
 	dcSample	TYPE_DPCM,	WeebTrash1,	14000
 	dcSample	TYPE_DPCM,	WeebTrash2,	14000
@@ -101,9 +101,9 @@ SampleTable:
 	dcSample	TYPE_DPCM,	Github,		16000,	FLAGS_SFX		; $C2
 	dcSample	TYPE_DPCM,	Madness,	16000,	FLAGS_SFX		; $C3
 	dcSample	TYPE_DPCM,	TheFourth,	16000,	FLAGS_SFX		; $C4
-	dcSample	TYPE_DPCM,	eggmanLaugh,11025,	FLAGS_SFX		; $C5
+	dcSample	TYPE_DPCM,	eggmanLaugh,	11025,	FLAGS_SFX		; $C5
 	dcSample	TYPE_DPCM,	disclaimer,	16000,	FLAGS_SFX		; $C6
-	dcSample	TYPE_DPCM,	sbDevelopers,16000,	FLAGS_SFX		; $C7
+	dcSample	TYPE_DPCM,	sbDevelopers,	16000,	FLAGS_SFX		; $C7
 	dcSample	TYPE_DPCM,	sbLove,		16000,	FLAGS_SFX		; $C8
 	dcSample	TYPE_DPCM,	sbPC,		16000,	FLAGS_SFX		; $C9
 	;BSOD stuff
@@ -124,7 +124,7 @@ SampleTable:
 	dcSample	TYPE_DPCM,	supbeaches,	8000					; $D6
 
 	; Commercial Samples
-	dcSample	TYPE_DPCM,	GenesisCan3,	8000,FLAGS_SFX		; $D7
+	dcSample	TYPE_DPCM,	GenesisCan3,	8000,	FLAGS_SFX		; $D7
 
 	; Ollie Samples
 	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $D8
@@ -134,7 +134,7 @@ SampleTable:
 	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $DA
 
 	;!@ GD: Last slot always reserved for PCM SFX Silence
-	dcSample	TYPE_DPCM,	dummy,	8000, FLAGS_SFX				; $DB
+	dcSample	TYPE_DPCM,	dummy,		8000,	FLAGS_SFX				; $DB
 
 	; Unused
 ;	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $DC
@@ -204,13 +204,13 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Homero
-	incdac	Homero, "sound/dac/homero.dpcm"
+	incdac	Homero,		"sound/dac/homero.dpcm"
 
 ; ---------------------------------------------------------------
 ; Special Song Samples
-	incdac	EagleSoft_Chirp1,	"sound/dac/GMZ/eaglesoft_chirp1.dpcm"	; GMZ
-	incdac	EagleSoft_Chirp2,	"sound/dac/GMZ/eaglesoft_chirp2.dpcm"	; GMZ
-	incdac	EagleSoft_Speech,	"sound/dac/GMZ/eaglesoft_speech.dpcm"	; GMZ
+	incdac	ES_Chirp1,	"sound/dac/GMZ/eaglesoft_chirp1.dpcm"	; GMZ
+	incdac	ES_Chirp2,	"sound/dac/GMZ/eaglesoft_chirp2.dpcm"	; GMZ
+	incdac	ES_Speech,	"sound/dac/GMZ/eaglesoft_speech.dpcm"	; GMZ
 
 	incdac	WeebTrash1,	"sound/dac/Weeb Trash/WeebTrash1.dpcm"
 	incdac	WeebTrash2,	"sound/dac/Weeb Trash/WeebTrash2.dpcm"

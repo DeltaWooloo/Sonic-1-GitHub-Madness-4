@@ -122,76 +122,91 @@ Rhythm_ClrObjMem:
 
 		; GMZ - Chart pointer table
 Rhythm_ChartPtr:
+		; Orange World
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 
+		; Wario Hallway
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 
+		; Alberta Canada
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 
+		; Mein Kraft
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 
+		; Spring Field
+		dc.l	RhythmChart_CanCan
+		dc.l	RhythmChart_CanCan
+		dc.l	RhythmChart_CanCan
+		dc.l	RhythmChart_CanCan
+
+		; Prongle Plant
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 
+		; ENDING
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 
-		dc.l	RhythmChart_GHZ1
-		dc.l	RhythmChart_GHZ1
-		dc.l	RhythmChart_GHZ1
-		dc.l	RhythmChart_GHZ1
-
+		; Cold Brew
 		dc.l	RhythmChart_RamRanch
 		dc.l	RhythmChart_RamRanch
 		dc.l	RhythmChart_RamRanch
 		dc.l	RhythmChart_RamRanch
 
+		; Windows Zone
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 
+		; Inside Tonic's Body
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 
+		; Doleville
+		dc.l	RhythmChart_WeebTrash
+		dc.l	RhythmChart_WeebTrash
+		dc.l	RhythmChart_WeebTrash
+		dc.l	RhythmChart_WeebTrash
+
+		; Nogales
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 
+		; Bluescape
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 
+		; Old John
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 
-		dc.l	RhythmChart_GHZ1
-		dc.l	RhythmChart_GHZ1
-		dc.l	RhythmChart_GHZ1
-		dc.l	RhythmChart_GHZ1
-
+		; Azure Rainforest
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
 		dc.l	RhythmChart_GHZ1
@@ -706,9 +721,19 @@ Map_RhyExplode:
 		even
 
 		include	"Charts/_ChartFormat.asm"
+
 RhythmChart_GHZ1:
 		include	"Charts/GHZ1.asm"
 		even
+
 RhythmChart_RamRanch:
 		include	"Charts/Ram Ranch.asm"
+		even
+
+RhythmChart_CanCan:
+		include	"Charts/Can Can.asm"
+		even
+
+RhythmChart_WeebTrash:
+		include	"Charts/Weeb Trash.asm"
 		even
