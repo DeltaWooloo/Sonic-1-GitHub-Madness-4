@@ -166,6 +166,7 @@ Pow_Unk:
 Pow_ChkGoggles:
 		rts
 Pow_GetHurt:
+		move.l	a0,a1
 		move.l	a0,-(sp)
 		lea	(v_player).w,a0
 		jsr	(React_ChkHurt).l	; Hurt player as an exchangc
