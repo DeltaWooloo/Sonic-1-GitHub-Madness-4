@@ -782,8 +782,10 @@ ObjNeedleHand:
 .Index:
 	dc.w	NeedleHand_InitLeft-.Index
 	dc.w	NeedleHand_InitRight-.Index
-	dc.w	NeedleHand_Main-.Index
 	dc.w	NeedleHand_Wait-.Index
+	dc.w	NeedleHand_Close-.Index
+	dc.w	NeedleHand_Clap-.Index
+	dc.w	NeedleHand_Wait2-.Index
 ; ----------------------------------------------------------------------------
 
 NeedleHand_InitLeft:
@@ -806,43 +808,101 @@ _needleinit2:
 	move.b	#48,obActWid(a0)
 	move.b	#16,obHeight(a0)
 	bsr.w	_needleLoadPaletteBig
-	move.b	#8,obFrame(a0)
-	move.w	#255,needle.Timer(a0)
+	move.b	#9,obFrame(a0)
+	move.w	#60*3,needle.Timer(a0)
 
-NeedleHand_Main:
+NeedleHand_Wait:
+	sub.w	#1,needle.Timer(a0)
+	bne.s	.Go
+	add.b	#2, obRoutine(a0)
+	move.w	#256,needle.Timer(a0)
+	move.b	#$80+6, obColType(a0)
+	move.b	#$A,obFrame(a0)
+.Go:
+	cmpi.w	#60*2,needle.Timer(a0)
+	bne.s	.Skip
+	move.b	#8,obFrame(a0)
+.Skip
+	lea 	v_player, a1
+	move.w	obX(a1),needle.XTarg(a0)
+	move.w	obY(a1),needle.YTarg(a0)
+	move.w	#96,d0
+	btst	#0,obStatus(a0)
+	bne.s	.Right
+	neg.w	d0
+.Right
+	add.w	d0,needle.XTarg(a0)
+	bra.w	_needleLerpToXY
+
+
+NeedleHand_Close:
 	lea 	v_player, a1
 	move.w	obX(a1),needle.XTarg(a0)
 	move.w	obY(a1),needle.YTarg(a0)
 
 	sub.w	#1,needle.Timer(a0)
-	cmpi.w	#32,needle.Timer(a0)
+	cmpi.w	#128,needle.Timer(a0)
 	bne.s	.Go
 	add.b	#2, obRoutine(a0)
+	move.w	#sfx_Teleport,d0
+	jmp	QueueSound2
 .Go
 	move.w	needle.Timer(a0),d0
 	asr.w	#2,d0
 	addi.w	#32,d0
-	btst	#0,obRender(a0)
+	btst	#0,obStatus(a0)
 	bne.s	.Right
 	neg.w	d0
 .Right
 	add.w	d0,needle.XTarg(a0)
-;	rts
+	bra.w	_needleLerpToXY
+
+NeedleHand_Clap:
+
+;	bgt.s	.Go
+;	move.w	#0,needle.Timer(a0)
+;	add.b	#2, obRoutine(a0)
+;	move.w	#sfx_BreakItem,d0
+;	jmp	QueueSound2
+;.Go
+	move.w	#8,d0
+	move.w	obX(a0),d1
+	move.w	needle.XTarg(a0),d2
+	btst	#0,obStatus(a0)
+	bne.s	.Right
+	add.w	d0,d1
+	cmp.w	d2,d1
+	bge.s	.Next
+	bra.s	.Exit
+.Right
+	sub.w	d0,d1
+	cmp.w	d2,d1
+	ble.s	.Next
+	bra.s	.Exit
+.Exit:
+	move.w	d1,obX(a0)
+	rts
+.Next:
+	add.b	#2, obRoutine(a0)
+	move.w	#sfx_BreakItem,d0
+	jmp	QueueSound2
+	rts
+
+NeedleHand_Wait2:
+	rts
 
 _needleLerpToXY:
 	move.l	obY(a0),d0
 	move.l	needle.YTarg(a0),d1
 	sub.l	d0,d1
-	asr.l	#4,d1
+	asr.l	#3,d1
 	add.l	d1,obY(a0)
 
 	move.l	obX(a0),d0
 	move.l	needle.XTarg(a0),d1
 	sub.l	d0,d1
-	asr.l	#4,d1
+	asr.l	#3,d1
 	add.l	d1,obX(a0)
-.Exit:
-NeedleHand_Wait:
 	rts
 
 ; ----------------------------------------------------------------------------
