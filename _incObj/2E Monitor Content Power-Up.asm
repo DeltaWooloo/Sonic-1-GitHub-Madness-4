@@ -996,7 +996,7 @@ Level_LoadPal2:
 		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
 		bne.s	.wtr			; if not, branch
 		moveq	#palid_SBZ3SonWat,d0 ; palette number $10 (SBZ3)
-		bra.s	.WtrNotSbz
+		bra.s	.wtr
 	.ARZWtr:
 		moveq	#palid_ARZSonWater,d0
 	.wtr:
