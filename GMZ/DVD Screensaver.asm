@@ -63,31 +63,45 @@ Screensa_LoadMDLogoPal:
 		move.b	#1,obID(a1)	; GMZ - Set object as active
 		move.l	#$012000F0,obX(a1)	; GMZ - Set starting position
 
-		; GMZ - Code to check the console's region starts here
-		tst.b	v_megadrive	; GMZ - Is the console Japanese?
-		bpl.s	Screensa_LoadMDLogoObj	; GMZ - If yes, branch
-		move.w	#$2078,obHeight(a1)	; GMZ - Set width and height measurements
-		move.l	#Map_ScreensaGENLogo,obMap(a1)	; GMZ - Set mappings
-		bra.s	Screensa_LdMDLgoVramAddr
-
-Screensa_LoadMDLogoObj:
-		move.w	#$354E,obHeight(a1)	; GMZ - Set width and height measurements
-		move.l	#Map_ScreensaMDLogo,obMap(a1)	; GMZ - Set mappings
+		; GMZ - OLD code to check the console's region starts here
+		;tst.b	v_megadrive	; GMZ - Is the console Japanese?
+		;bpl.s	Screensa_LoadMDLogoObj	; GMZ - If yes, branch
+		;move.w	#$2078,obHeight(a1)	; GMZ - Set width and height measurements
+		;move.l	#Map_ScreensaGENLogo,obMap(a1)	; GMZ - Set mappings
 		;bra.s	Screensa_LdMDLgoVramAddr
 
-;ScreensaMDLogoMap_Tbl:		; coni - these two tables are unused as of now
-;		dc.l	Map_ScreensaMDLogo		; DOM 60Hz
-;		dc.l	Map_ScreensaA50Logo		; DOM 50Hz
-;		dc.l	Map_ScreensaGENLogo		; INT 60Hz
-;		dc.l	Map_ScreensaGENLogo		; INT 50Hz
-;ScreensaMDLogoMeasure_Tbl:
-;		dc.w	$354E		; DOM 60Hz
-;		dc.w	$2078		; DOM 50Hz
-;		dc.w	$2078		; INT 60Hz
-;		dc.w	$2078		; INT 50Hz
+;Screensa_LoadMDLogoObj:
+		;move.w	#$354E,obHeight(a1)	; GMZ - Set width and height measurements
+		;move.l	#Map_ScreensaMDLogo,obMap(a1)	; GMZ - Set mappings
+		;bra.s	Screensa_LdMDLgoVramAddr
+		; GMZ - OLD code to check the console's region ends here
+
+		; GMZ - NEW code to check the console's region starts here
+		moveq	#0,d0
+		move.b	v_megadrive,d0
+		lsr.b	#4,d0
+		lea	ScreensaMDLogoMap_Tbl(pc,d0.w),a0
+		move.l	(a0),obMap(a1)
+		addi.l	#$10,a0
+		move.w	(a0),obHeight(a1)
+		bra.s	Screensa_LdMDLgoVramAddr
+
+ScreensaMDLogoMap_Tbl:		; coni - these two tables are unused as of now (GMZ - not anymore.)
+		dc.l	Map_ScreensaMDLogo		; DOM 60Hz
+		dc.l	Map_ScreensaA50Logo		; DOM 50Hz
+		dc.l	Map_ScreensaGENLogo		; INT 60Hz
+		dc.l	Map_ScreensaGENLogo		; INT 50Hz
+ScreensaMDLogoMeasure_Tbl:
+		dc.w	$354E		; DOM 60Hz
+		dc.w	0
+		dc.w	$2078		; DOM 50Hz
+		dc.w	0
+		dc.w	$2078		; INT 60Hz
+		dc.w	0
+		dc.w	$2078		; INT 50Hz
 	
 Screensa_LdMDLgoVramAddr:
-		; GMZ - Code to check the console's region ends here
+		; GMZ - NEW code to check the console's region ends here
 
 		move.w	#1,obGfx(a1)	; GMZ - Set VRAM address
 		move.l	a1,screensa_sonic	; GMZ - Point to the MD logo's object memory
@@ -242,9 +256,17 @@ ScreensaSonic_HColR:
 		bra.s	ScreensaSonic_HColR_ChgDir
 
 ScreensaSonic_ChkJPBoundR:
+		cmpi.b	#$40,v_megadrive
+		bne.s	ScreensaSonic_HColR_NoA50
+		sub.w	#(320+128)-4,d0
+		bra.s	ScreensaSonic_HColR_A50
+
+ScreensaSonic_HColR_NoA50:
 		; GMZ - Code to check the console's region ends here
 
 		sub.w	#(320+128)+2,d0	; GMZ - Did the sprite hit the screen's right boundary?
+
+ScreensaSonic_HColR_A50:
 		bne.s	ScreensaSonic_Exit	; GMZ - If not, branch
 
 ScreensaSonic_HColR_ChgDir:	; GMZ - Part of code to check console's region
@@ -256,7 +278,15 @@ ScreensaSonic_HColL:
 		move.b	obWidth(a0),d1
 		lsr.b	#1,d1
 		sub.w	d1,d0	; GMZ - Get the boundary of Sonic's sprite
+		cmpi.b	#$40,v_megadrive
+		bne.s	ScreensaSonic_HColL_NoA50
+		sub.w	#128+4,d0
+		bra.s	ScreensaSonic_HColL_A50
+
+ScreensaSonic_HColL_NoA50:
 		sub.w	#128,d0	; GMZ - Did the sprite hit the screen's left boundary?
+
+ScreensaSonic_HColL_A50:
 		bne.s	ScreensaSonic_Exit	; GMZ - If not, branch
 		andi.b	#%0111,obStatus(a0)	; GMZ - If yes, change the direction
 
