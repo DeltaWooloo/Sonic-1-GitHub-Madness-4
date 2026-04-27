@@ -23,8 +23,11 @@ SolidObject:
 		sub.w	obX(a0),d0
 		add.w	d1,d0
 		bmi.s	.leave		; if Sonic moves off the left, branch
+		;!@ GD: Fix backside spikes
+		; https://info.sonicretro.org/SCHG_How-to:Fix_Spikes_Backside_Damage_in_Sonic_1
 		cmp.w	d2,d0		; has Sonic moved off the right?
-		blo.s	.stand		; if not, branch
+		;!@ blo.s	.stand		; if not, branch
+		bls.s	.stand		; if not, branch
 
 .leave:
 		bclr	#3,obStatus(a1)	; clear Sonic's standing flag
