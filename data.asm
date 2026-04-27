@@ -492,7 +492,11 @@ Blk256_Joint:	binclude	"map256/Joint.kos"
 		even
 Blk16_DVZ:	binclude	"map16/DVZ.eni"
 		even
+Blk16_DVZ3:	binclude	"map16/DVZ3.eni"
+		even
 Kos_DVZ:	binclude	"artkos/8x8 - DVZ.kos"	; DVZ	primary padded. pamperspoop
+		even
+Kos_DVZ3:	binclude	"artkos/8x8 - DVZ3.kos"	; DVZ	primary padded. pamperspoop
 		even
 Blk256_DVZ:	binclude	"map256/DVZ.kos"
 		even
@@ -623,6 +627,8 @@ Col_WIN:	binclude	"collide/WIN.bin"	; WIN index
 Col_Joint:	binclude	"collide/Joint.bin"	; Tonic's Insides index
 		even
 Col_DVZ:	binclude	"collide/DVZ.bin"	; I DONT CARE (Dax: WELL I DO!)
+		even
+Col_DVZ3:	binclude	"collide/DVZ3.bin"	; I DONT CARE (Dax: WELL I DO!)
 		even
 Col_NGZ:	binclude	"collide/NGZ.bin"	; O,GOPOG9-I0=IG20=I=0IG4=0I
 		even
@@ -828,7 +834,8 @@ Level_Joint2:	binclude	"levels/Joint2.bin"
 		even
 Level_Joint3:	binclude	"levels/Joint3.bin"
 		even
-Level_Joint1Unk:	
+Level_Joint1Unk:
+Level_stub:
 		dc.l 0
 Level_DVZ1:	binclude	"levels/DVZ1.bin"
 		even
