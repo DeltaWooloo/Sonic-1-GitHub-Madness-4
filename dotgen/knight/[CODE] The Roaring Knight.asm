@@ -734,7 +734,13 @@ RKP2_SwordRain_Spawn:
 	move.w	Knight_SwordRain_Spawn(a0),obX(a1)	; Make it spawn at a set X position
 	move.w	Knight_Y_Position(a0),obY(a1)		; Copy Y position
 	subi.w	#$30,obY(a1)				; Set base Y position to slightly above the Knight
-
+	moveq	#0,d0
+	move.w	obY(a1),d0
+	cmp.w	(v_player+obY).w,d0			; Is the player above the highest sword's expected location?
+	bls.s	.skippunish				; If not, skip the punishment.
+	subi.w	#$E0,obY(a1)				; Try dodging this, moon jumper!
+	
+.skippunish:	
 	moveq	#0,d0
 
 	move.b	#8,obSubtype(a1)			; Set object subtype
