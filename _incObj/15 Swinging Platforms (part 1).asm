@@ -134,7 +134,7 @@ Swing_SetSolid:	; Routine 2
 
 Swing_Action:	; Routine $C
 		bsr.w	Swing_Move
-		bsr.w	DisplaySprite
+		jsr		(DisplaySprite).l
 		bra.w	Swing_ChkDel
 ; ===========================================================================
 
@@ -149,7 +149,7 @@ Swing_Action2:	; Routine 4
 		move.b	obHeight(a0),d3
 		addq.b	#1,d3
 		bsr.w	MvSonicOnPtfm
-		bsr.w	DisplaySprite
+		jsr		(DisplaySprite).l
 		bra.w	Swing_ChkDel
 
 		rts

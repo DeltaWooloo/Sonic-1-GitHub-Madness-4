@@ -152,7 +152,8 @@ GotoNextLevel:
 		add.w	d1,d0
 		tst.b	(f_difficulty).w
 		beq.s	.devilsanus
-		move.w	FetLevelOrder(pc,d0.w),d0 ; load level from level order array
+		lea 	FetLevelOrder(pc),a1 ; load level from level order array
+		move.l	(a1,d0.w),d0
 		bra.s	.afterfetus
 .devilsanus:
 		move.w	LevelOrder(pc,d0.w),d0 ; load level from level order array
