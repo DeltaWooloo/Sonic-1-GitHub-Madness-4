@@ -67,8 +67,13 @@ Drown_ChkWater:	; Routine 4
 		move.b	#id_Drown_Display,obRoutine(a0) ; goto Drown_Display next
 		addq.b	#7,obAnim(a0)
 		cmpi.b	#$D,obAnim(a0)
-		beq.s	Drown_Display
-		bra.s	Drown_Display
+		;!@ Bubble anim ID fix
+		;!@ https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-6#post-91005
+		;beq.s	Drown_Display
+		;bra.s	Drown_Display
+		bls.s   Drown_Display                   ; DEV: Combine the "beq" and "blo" into "bls"
+		move.b  #$D,obAnim(a0)                  ; DEV: Set to "pop animation"
+		bra.s   Drown_Display
 ; ===========================================================================
 
 .wobble:

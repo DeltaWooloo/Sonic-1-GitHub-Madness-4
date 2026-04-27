@@ -6242,9 +6242,12 @@ loc_14D24:
 		andi.b	#$38,d1
 		bne.s	loc_14D3C
 		addq.w	#8,d2
-	        btst    #2,obStatus(a0)    ; Is Sonic copy pastingfrom a mini tutorial
-        	beq.s   loc_14D3C          ; If not, NIPPLES
-        	subq.w  #5,d2              ; If so, move push sensor up a bit
+		
+		;!@ Roll push sensor fix
+		;!@ https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-5#post-90077
+		btst    #2,obStatus(a0)    ; Is Sonic copy pastingfrom a mini tutorial
+		beq.s   loc_14D3C          ; If not, NIPPLES
+		subq.w  #5,d2              ; If so, move push sensor up a bit
 
 loc_14D3C:
 		cmpi.b	#$40,d0

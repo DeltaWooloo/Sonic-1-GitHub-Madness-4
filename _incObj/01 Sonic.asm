@@ -1802,15 +1802,20 @@ Sonic_ResetOnFloor:
 		bclr	#5,obStatus(a0)	; clear push flag.
 		bclr	#1,obStatus(a0)	; clear in-air flag.
 		bclr	#4,obStatus(a0)	; clear roll-jump flag.
+		
+		; Sonic reset floor fix:
+		; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-6#post-90342
+		move.b	#id_Walk,obAnim(a0) ; use running/walking animation
 		btst	#2,obStatus(a0)	; check if Sonic is in a ball state.
 		beq.s	.notball	; if not, skip.
 		bclr	#2,obStatus(a0)	; clear ball flag.
 		bsr.w	GetOtherPlayerData
 		move.b	pdat.height(a5),obHeight(a0)
 		move.b	pdat.width(a5),obWidth(a0)
-		move.b	#id_Walk,obAnim(a0) ; use running/walking animation
+		; Sonic reset floor fix:
+		; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-6#post-90342
+		;move.b	#id_Walk,obAnim(a0) ; use running/walking animation
 		subq.w	#5,obY(a0)	; raise Sonic up 5 pixels so he's not inside the ground.
-
 
 .notball:
 		move.b	#0,jumping(a0)	; clear jump flag.
@@ -1843,6 +1848,9 @@ Sonic_Hurt:	; Routine 4
 
 .notunderwater:
 		bsr.w	Sonic_HurtStop
+		;!@ Collide with Water after hurt:
+		;!@ https://info.sonicretro.org/SCHG_How-to:Collide_with_water_after_being_hurt#Sonic_1
+		bsr.w	Sonic_Water				
 		bsr.w	Sonic_LevelBound
 		bsr.w	Sonic_RecordPosition
 		bsr.w	Player_Animate

@@ -325,7 +325,10 @@ v_ringbonus:		ds.w	1		; ring bonus at the end of an act
 f_endactbonus:		ds.b	1		; time/ring bonus update flag at the end of an act
 v_sonicend:		ds.b	1		; routine counter for Sonic in the ending sequence
 v_lz_deform:		ds.w	1		; LZ deformation offset, in units of $80
-			ds.b	4		; unused
+									; !@ GD: Fix Squash logic / https://info.sonicretro.org/SCHG_How-to:Improve_Squash_Kill_Logic
+v_squashbuffer:		ds.b	1		; buffer Sonic's squash distance for one frame to prevent cheap deaths
+					ds.b	3		; unused
+					;!@ds.b	4		; unused					
 v_d_anim_done:		ds.w	1
 ;			ds.w	1
 f_switch:		ds.b	$10		; flags set when Sonic stands on a switch

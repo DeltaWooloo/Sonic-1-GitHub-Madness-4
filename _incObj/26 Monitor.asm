@@ -126,7 +126,9 @@ loc_A246:
 loc_A25C:
 		btst	#5,obStatus(a0)
 		beq.s	Mon_Animate
-		move.w	#1,obAnim(a1)	; clear obAnim and set obNextAni to 1
+		;!@ GD: Fix walk-jump bug (monitor)
+		;https://info.sonicretro.org/SCHG_How-to:Fix_the_Walk-Jump_Bug_in_Sonic_1
+		;!@ move.w	#1,obAnim(a1)	; clear obAnim and set obNextAni to 1
 
 loc_A26A:
 		bclr	#5,obStatus(a0)
