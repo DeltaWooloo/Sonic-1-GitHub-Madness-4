@@ -211,6 +211,10 @@ MBlock_Type0A:
 		move.b	obActWid(a0),d3
 		add.w	d3,d3
 		moveq	#8,d1
+		tst.b	(f_difficulty).w
+		beq.s	.devilsanus
+		moveq	#1,d1
+.devilsanus:
 		btst	#0,obStatus(a0)
 		beq.s	loc_10004
 		neg.w	d1
