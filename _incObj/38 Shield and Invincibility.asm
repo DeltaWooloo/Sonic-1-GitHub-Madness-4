@@ -29,6 +29,9 @@ Shi_Main:	; Routine 0
 ; ===========================================================================
 
 .stars:
+		;@! Reload stars for bugfix
+		moveq	#plcid_Main2,d0
+		jsr		(AddPLC).l		
 		addq.b	#2,obRoutine(a0) ; goto Shi_Stars next
 		move.l	#Map_Shield2,obMap(a0)							; !@ GD: Setup invin stars mapping
 		move.w	#make_art_tile(ArtTile_Invincibility,0,0),obGfx(a0)
