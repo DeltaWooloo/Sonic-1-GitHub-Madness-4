@@ -769,11 +769,11 @@ Pow_Randomiser:
 		
 ; Your winner! Spawn a signpost
 .instaWin:		
-		;if monDebug<0
+		if monDebug<0
 		btst	#pow_Signpost,(f_RandMonPow).w	;If signpost runonce flag set?
-		bne.w	Pow_Randomiser					;If so, skip and re-randomize		
+		bne.w	.nothing						;If so, skip and re-randomize		
 		bset	#pow_Signpost,(f_RandMonPow).w	;Set signpost flag
-		;endif
+		endif
 		
 		jsr		(SignpostArtLoad2).l	;Load in signpost/ring flash artwork		
 		spawnObj	id_Signpost,$01		;Special subtype $1 for proper usage		
@@ -795,11 +795,11 @@ Pow_Randomiser:
 		
 ;Spawn a Giant Ring, and award 50 rings to ride
 .BigRing:
-		;if monDebug<0
+		if monDebug<0
 		btst	#pow_Bigring,(f_RandMonPow).w	;If big ring runonce flag set?
-		bne.w	Pow_Randomiser					;If so, skip and re-randomize		
+		bne.w	.nothing						;If so, skip
 		bset	#pow_Bigring,(f_RandMonPow).w	;Set big ring flag
-		;endif
+		endif
 
 		jsr		(SignpostArtLoad2).l				;Load in signpost/ring flash artwork
 		addi.w	#50,(v_rings).w	; add 50 rings to enable
@@ -815,11 +815,11 @@ Pow_Randomiser:
 		
 ;Spawn a lamppost
 .lampoil:		;Rope, bombs, you want it? It's yours my friend; as long as you have enough rings
-		;if monDebug<0
-		btst	#pow_Lampost,(f_RandMonPow).w	;If lamppost runonce flag set?
-		bne.w	Pow_Randomiser					;If so, skip and re-randomize		
-		bset	#pow_Lampost,(f_RandMonPow).w	;Set lamppost flag
-		;endif
+		if monDebug<0
+		btst	#pow_Lampost,(f_RandMonPow).w	; If lamppost runonce flag set?
+		bne.w	.nothing					 	; If so, skip
+		bset	#pow_Lampost,(f_RandMonPow).w	; Set lamppost flag
+		endif
 		
 		clr.b	(v_lastlamp).w					;Reset lamppost, for new one
 		spawnObj	id_Lamppost,$7F,dOllieWahoo	;Subtype $7F to chump all other IDs
