@@ -1749,8 +1749,8 @@ FadeIn_FromBlack:
 		bsr.s	FadeIn_AddColour ; increase colour
 		dbf	d0,.addcolour	; repeat for size of palette
 
-		cmpi.b	#id_WHZ,(v_zone).w	; is level Labyrinth?
-		bne.s	.exit		; if not, branch
+		tst.b	(v_waterflag).w	; is level a water level?
+		bpl.s	.exit		; if not, branch
 
 		moveq	#0,d0
 		lea	(v_palette_water).w,a0
@@ -1821,6 +1821,7 @@ PaletteFadeOut:
 		beq.s	.mainloop				; MJ: if null, delay a frame
 		bsr.s	FadeOut_ToBlack
 		dbf	d4,.mainloop
+		clr.b	(v_waterflag).w
 		rts
 ; End of function PaletteFadeOut
 
@@ -2119,8 +2120,8 @@ WhiteIn_FromWhite:
 		bsr.s	WhiteIn_DecColour ; decrease colour
 		dbf	d0,.decolour	; repeat for size of palette
 
-		cmpi.b	#id_WHZ,(v_zone).w	; is level Labyrinth?
-		bne.s	.exit		; if not, branch
+		tst.b	(v_waterflag).w	; is level a water level?
+		bpl.s	.exit		; if not, branch
 		moveq	#0,d0
 		lea	(v_palette_water).w,a0
 		lea	(v_palette_water_fading).w,a1
@@ -2188,6 +2189,7 @@ PaletteWhiteOut:
 		beq.s	.mainloop				; MJ: if null, delay a frame
 		bsr.s	WhiteOut_ToWhite
 		dbf	d4,.mainloop
+		clr.b	(v_waterflag).w
 		rts
 ; End of function PaletteWhiteOut
 
