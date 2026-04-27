@@ -138,21 +138,40 @@ Pow_Move:	; Routine 2
 Pow_Checks:
 		addq.b	#2,obRoutine(a0)
 		move.w	#29,obTimeFrame(a0) ; display icon for half a second
-
-Pow_ChkEggman:
+		moveq	#0,d0
 		move.b	obAnim(a0),d0
-		cmpi.b	#1,d0		; does monitor contain Eggman?
-		bne.s	Pow_ChkSonic
+		chk	#(.le-.l)/2-1,d0
+		add.w	d0,d0
+		move.w	.l(pc,d0.w),d0
+		jmp	.l(pc,d0.w)
+.l:
+		dc.w Pow_Unk-.l			; 0
+		dc.w Pow_GetHurt-.l		; 1
+		dc.w Pow_GetLife-.l		; 2
+		dc.w Pow_ChkShoes-.l		; 3
+		dc.w Pow_ChkShield-.l		; 4
+		dc.w Pow_ChkInvinc-.l		; 5
+		dc.w Pow_ChkRings-.l		; 6
+		dc.w Pow_Randomiser-.l		; 7
+		dc.w Pow_ChkGoggles-.l		; 8
+		dc.w Pow_SlowShoes-.l		; 9
+.le:
 
+Pow_Delete:	; Routine 4
+		subq.w	#1,obTimeFrame(a0)
+		bmi.w	DeleteObject	; delete after half a second
+		rts
+; ===========================================================================
+Pow_Unk:
+Pow_ChkGoggles:
+		rts
 Pow_GetHurt:
+		move.l	a0,-(sp)
 		lea	(v_player).w,a0
 		jsr	(React_ChkHurt).l	; Hurt player as an exchangc
-
+		move.l	(sp)+,a0
+		rts
 ; ===========================================================================
-
-Pow_ChkSonic:
-		cmpi.b	#2,d0		; does monitor contain Sonic?
-		bne.s	Pow_ChkShoes
 
 Pow_GetLife:
 		bsr.s	Pow_GetLife2
@@ -167,14 +186,9 @@ Pow_GetLife2:
 Pow_GetLife3:
 		move.w	#bgm_ExtraLife,d0
 		jmp	(QueueSound1).l	; play extra life music
-
 ; ===========================================================================
 
 Pow_ChkShoes:
-		cmpi.b	#3,d0		; does monitor contain speed shoes?
-		;bne.s	Pow_ChkShield
-		bne.w	Pow_ChkShield
-
 Pow_SpeedShoes:
 		move.b	#1,(v_shoes).w	; speed up the BG music
 		move.w	#$4B0,(v_player+shoetime).w	; time limit for the power-up
@@ -219,9 +233,6 @@ Pow_SlowShoes:
 ; ===========================================================================
 
 Pow_ChkShield:
-		cmpi.b	#4,d0		; does monitor contain a shield?
-		bne.s	Pow_ChkInvinc
-
 Pow_Shield:
 		move.b	#1,(v_shield).w	; give Sonic a shield
 		move.b	#id_ShieldItem,(v_shieldobj).w ; load shield object ($38)
@@ -230,9 +241,6 @@ Pow_Shield:
 ; ===========================================================================
 
 Pow_ChkInvinc:
-		cmpi.b	#5,d0		; does monitor contain invincibility?
-		bne.s	Pow_ChkRings
-
 Pow_Invinciblity:
 		move.b	#1,(v_invinc).w	; make Sonic invincible
 		move.w	#$4B0,(v_player+invtime).w ; time limit for the power-up
@@ -267,10 +275,8 @@ Pow_NoMusic:
 ; ===========================================================================
 
 Pow_ChkRings:
-		cmpi.b	#6,d0		; does monitor contain 10 rings?
-		bne.s	Pow_ChkS
-
 		addi.w	#70,(v_rings).w	; add 70 rings to the number of rings you have because you are smart
+
 Pow_GetRings:
 		ori.b	#1,(f_ringcount).w ; update the ring counter
 		cmpi.w	#420,(v_rings).w ; check if you have 256 rings
@@ -286,23 +292,6 @@ Pow_RingSound:
 		move.w	#sfx_Ring,d0
 		jmp	(QueueSound1).l	; play ring sound
 ; ===========================================================================
-
-Pow_ChkS:
-		cmpi.b	#7,d0		; does monitor contain 'S'?
-		beq.s	Pow_Randomiser
-
-Pow_ChkGoggles:
-; Uncomment these lines to set up the goggles monitor to work with it
-		cmpi.b	#8,d0		; does monitor contain goggles?
-		bne.w	Pow_SlowShoes
-		rts		; 'S' and goggles monitors do nothing
-; ===========================================================================
-
-Pow_Delete:	; Routine 4
-		subq.w	#1,obTimeFrame(a0)
-		bmi.w	DeleteObject	; delete after half a second
-		rts
-
 Pow_Randomiser:
 		moveq	#0,d0
 		jsr	(RandomNumber).l	; get a random number
@@ -369,6 +358,9 @@ Pow_Randomiser:
 		dc.l	.crash				;x $25 / $94 - 	Crash the game (illegal); Task fails successfully!
 		dc.l	.jukebox			;x $26 / $A8 - 	Play random song
 		dc.l	Pow_SlowShoes		;x $27 / $AC -  Slow down shoes
+
+		; ML: the "why did no one do these already"s
+		dc.l	.newchara		;$28 / $A0
 .powtableend:
 
 ; ===========================================================================
@@ -506,6 +498,22 @@ Pow_Randomiser:
 .getjumpscared:	; Swiggity swoogity, Foxy is coming for your booty
 		move.b	#0,(v_invinc).w	; remove invincibility
 		move.w	#2,(f_restart).w ; FOXY SCARE
+		rts
+
+; ===========================================================================
+.newchara:	; randomize and reload character data
+		jsr	(RandomNumber).l
+		and.l	#$FFFF,d0
+		divu.w	#chrid_last+1,d0
+		swap	d0
+		chk	#chrid_last,d0		; should be impossible
+		cmp.b	(v_characterid).w,d0	; is it the same?
+		beq.s	.newchara		; alright we're doing it again!
+		move.b	d0,(v_characterid).w
+		move.l	a0,-(sp)
+		lea	(v_player).w,a0
+		jsr	Player_Reinit
+		move.l	(sp)+,a0
 		rts
 
 ; ===========================================================================

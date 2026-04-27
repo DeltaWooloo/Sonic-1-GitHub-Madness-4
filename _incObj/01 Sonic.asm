@@ -245,6 +245,41 @@ MrBean_Init:
 		nop
 
 ; ----------------------------------------------------------------------------
+; Reload character specific attributes mid-level
+; notably used for Pow_Randomiser.newchara
+; ----------------------------------------------------------------------------
+Player_Reinit:
+		jsr	GetOtherPlayerData
+		move.b	pdat.height(a5),d0
+		move.b	pdat.width(a5),d1
+		btst	#2,obStatus(a0)
+		beq.s	.newchara_notrolling
+		move.b	pdat.height2(a5),d0
+		move.b	pdat.width2(a5),d1
+.newchara_notrolling:
+		move.b	obHeight(a0),d2
+		sub.b	d0,d2
+		ext.w	d2
+		sub.w	d2,obY(a0)
+		move.b	d0,obHeight(a0)
+		move.b	d1,obWidth(a0)
+
+		jsr	GetPlayerData
+		move.l	d0,obMap(a0)
+		move.l	d1,dgfxaddr(a0)
+		move.l	d2,artaddr(a0)
+		move.l	d3,a1
+		lea	(v_palette_line_1).w,a2
+		rept 32/4
+		move.l	(a1)+,(a2)+
+		endr
+
+		st.b	obPrevAni(a0)
+		jsr	Player_Animate
+		jsr	Player_LoadGfx
+		rts
+
+; ----------------------------------------------------------------------------
 ; Main player control routine
 ; ----------------------------------------------------------------------------
 

@@ -3102,6 +3102,7 @@ Level_NoMusicFade:
 		clearRAM v_misc_variables
 		clearRAM v_levelvariables
 		clearRAM v_timingandscreenvariables
+		move.b	(v_savedcharacterid).w,(v_characterid).w
 ;		move.b	#0,(v_waterflag).w
 ;		cmp.b	#id_OWZ,(v_zone).w
 ;		beq.s	.yawata

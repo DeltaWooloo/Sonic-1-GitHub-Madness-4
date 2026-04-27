@@ -496,8 +496,9 @@ v_gambashield:		ds.b	1	; used by the gamba shield
 v_storedshield:		ds.b	1	; used to determine whether to give the player a shield
 v_scorelife:		ds.l	1		; points required for an extra life (JP1 only)
 v_characterid:		ds.b	1
+v_savedcharacterid:	ds.b	1
 v_zonemusic:		ds.b	1
-			ds.b	6
+			ds.b	5
 MegaCDMode:		ds.b 	1
 			ds.b 	1
 v_unlimitedammo:	ds.b 	1
