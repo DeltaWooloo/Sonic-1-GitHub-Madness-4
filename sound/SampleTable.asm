@@ -131,7 +131,7 @@ SampleTable:
 	dcSample	TYPE_DPCM,	OllieWahoo,	16000					; $D9
 
 	; SEGA Samples
-	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX		; $DA
+	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $DA
 
 	;!@ GD: Last slot always reserved for PCM SFX Silence
 	dcSample	TYPE_DPCM,	dummy,	8000, FLAGS_SFX				; $DB
@@ -284,7 +284,7 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Whatever you want the Sega sound to be
-	incdac	SegaPCM, "sound/dac/sega.wav"
+	incdac	SegaPCM, "sound/dac/sega.pcm"
 
 ; ---------------------------------------------------------------
 	;!@ SAVE THIS AS (LAST SLOT-2)

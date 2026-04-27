@@ -160,7 +160,7 @@ v_misc_variables:
 v_vbla_0e_counter:	ds.b	1		; tracks how many times vertical interrupts routine 0E occured (pretty much unused because routine 0E is unused)
 ;!@					;ds.b	1		; unused
 f_hangSMPS:			ds.b	1		; !@ GenesisDoes: If set, hangs the sound driver (stop running UpdateMusic in Vblank)
-					
+v_vblank_routine:
 v_vbla_routine:		ds.b	1		; VBlank - routine counter
 			ds.b	1		; unused
 v_spritecount:		ds.b	1		; number of sprites on-screen
@@ -325,7 +325,10 @@ v_ringbonus:		ds.w	1		; ring bonus at the end of an act
 f_endactbonus:		ds.b	1		; time/ring bonus update flag at the end of an act
 v_sonicend:		ds.b	1		; routine counter for Sonic in the ending sequence
 v_lz_deform:		ds.w	1		; LZ deformation offset, in units of $80
-			ds.b	4		; unused
+									; !@ GD: Fix Squash logic / https://info.sonicretro.org/SCHG_How-to:Improve_Squash_Kill_Logic
+v_squashbuffer:		ds.b	1		; buffer Sonic's squash distance for one frame to prevent cheap deaths
+					ds.b	3		; unused
+					;!@ds.b	4		; unused					
 v_d_anim_done:		ds.w	1
 ;			ds.w	1
 f_switch:		ds.b	$10		; flags set when Sonic stands on a switch

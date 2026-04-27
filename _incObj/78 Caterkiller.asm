@@ -122,6 +122,8 @@ Cat_ChkGone:
 		bclr	#7,2(a2,d0.w)
 
 .delete:
+		;!@ Caterkiller collision bugfix: (https://sonicresearch.org/community/index.php?threads/how-to-fix-the-caterkiller-damage-bug.4178/)
+		clr.b    $20(a1)
 		move.b	#$A,obRoutine(a0)	; goto Cat_Delete next
 		rts
 ; ===========================================================================

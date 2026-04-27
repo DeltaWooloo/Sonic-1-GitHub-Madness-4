@@ -129,6 +129,9 @@ cYellow:	equ cGreen+cRed		; colour yellow
 cAqua:		equ cGreen+cBlue	; colour aqua
 cMagenta:	equ cBlue+cRed		; colour magenta
 
+;!@ GD:
+id_VBlank_PaletteFade:	equ	$12
+
 ; Joypad input
 bitUp:		equ 0
 bitDn:		equ 1

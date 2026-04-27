@@ -9,9 +9,13 @@ SwingingPlatform:
 		move.w	Swing_Index(pc,d0.w),d1
 		jmp	Swing_Index(pc,d1.w)
 ; ===========================================================================
-Swing_Index:	dc.w Swing_Main-Swing_Index, Swing_SetSolid-Swing_Index
-		dc.w Swing_Action2-Swing_Index,	Swing_Delete-Swing_Index
-		dc.w Swing_Delete-Swing_Index, Swing_Display-Swing_Index
+Swing_Index:
+		dc.w Swing_Main-Swing_Index
+		dc.w Swing_SetSolid-Swing_Index
+		dc.w Swing_Action2-Swing_Index
+		dc.w Swing_Delete-Swing_Index
+		dc.w Swing_Delete-Swing_Index
+		dc.w Swing_Display-Swing_Index		;!@ Routine $0C
 		dc.w Swing_Action-Swing_Index
 
 swing_origX = objoff_3A		; original x-axis position
@@ -111,6 +115,11 @@ Swing_Main:	; Routine 0
 		move.b	#1,obFrame(a0)
 		move.b	#2,obPriority(a0)
 		move.b	#$81,obColType(a0) ; make object hurt when touched
+		
+		;!@ GHZ Wrecking ball bugfix
+		;!@ https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-2#post-87830
+		move.b	#$C,obRoutine(a0)	; set routine to Swing_Action
+		bra.s	Swing_Action	; skip solidity routines
 
 .not1X:
 		cmpi.b	#id_PPZ,(v_zone).w ; is zone SBZ?

@@ -1,7 +1,9 @@
 Coding:
 - Bugfixes
-	- Address error bug (random monitor, Big Ring)
+	x Address error bug (random monitor, Big Ring)
+	x Random Monitor crash
 	x Add code to undo funky colors (LoadPalUser/Jump TBL rewrite)
+x Modify wording of Disclaimer
 - Sega Pico build flag/gamepad code
 - Random monitor
 	- Add random monitor/slow down shoes to levels	

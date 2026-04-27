@@ -1,5 +1,5 @@
 0
-10
+13
 00000	00FFD03A	w	h	0	vdpFXTime
 00001	00FFF63C	d	h	0	v_playerClone
 00002	00FFFE2D	b	h	0	v_vdp_fx
@@ -10,3 +10,6 @@
 00007	00FFF73E	b	h	0	f_gnu
 00008	00FFFE02	w	h	0	v_framecount
 00009	00FFF73F	b	h	0	f_RandMonPow
+0000A	00FFF6FE	d	h	0	v_screenposx
+0000B	00FFF702	d	h	0	v_screenposy
+0000C	00FFF7D8	b	h	0	v_squashbuffer

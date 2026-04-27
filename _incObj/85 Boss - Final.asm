@@ -191,6 +191,12 @@ loc_19F6A:
 		move.w	d0,(v_player+obVelX).w
 		tst.b	objoff_35(a0)
 		bne.s	loc_19F88
+		;!@ FZ Boss bugfixes:
+		;!@ https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-9#post-94978
+		; prevents the hit underflow from eggman
+        tst.b   obColProp(a0)
+        beq.w   locret_1A01E
+		
 		subq.b	#1,obColProp(a0)
 		move.b	#$64,objoff_35(a0)
 		move.w	#sfx_HitBoss,d0
@@ -204,6 +210,10 @@ loc_19F88:
 ; ===========================================================================
 
 loc_19F96:
+		; !@ FZ Boss bugfixes:
+        ; If eggman is defeated, don't display the "laughing" animation and branch
+        ; tst.b    obColProp(a0)
+        ; beq.w   locret_1A01E		
 		move.b	#1,obAnim(a0)
 
 loc_19F9C:
@@ -515,8 +525,8 @@ loc_1A2E4:
 ; ===========================================================================
 
 loc_1A312:
-		tst.b	obRender(a0)
-		bpl.w	BossFinal_Delete
+		;tst.b	obRender(a0)
+		;bpl.w	BossFinal_Delete
 		bsr.w	BossDefeated
 		move.b	#2,obPriority(a0)
 		move.b	#0,obAnim(a0)
