@@ -112,6 +112,11 @@ Spik_Display:
 .ren:		bra.w	DisplaySprite
 .del:		bra.w	DeleteObject
 Spik_Feature:
+		; This is a bug, sez GenesisDoes		
+		;!@ GD: Is Zone id_ACZ? If so, skip the "features"
+		cmpi.b	#id_ACZ,(v_zone).w
+		beq.s	.nobugs
+		
 		moveq	#7,d0
 		and.w	(v_framecount).w,d0
 		bne.s	.nobugs
