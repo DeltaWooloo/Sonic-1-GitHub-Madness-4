@@ -70,10 +70,10 @@ GM_Fet_ControlExit:
 		rts
 
 GM_Fet_PalSet:
-		lea     (Pal_Fetus).l,a0
+		lea     (Pal_Fetus2).l,a0
 		tst.b	(DiffVariable).w ; check difficulty
 		beq.s	.dontset
-		lea     (Pal_Fetus2).l,a0
+		lea     (Pal_Fetus).l,a0
 	.dontset:
 		moveq   #16-1,d7	; 6 colors
 	.loop:
