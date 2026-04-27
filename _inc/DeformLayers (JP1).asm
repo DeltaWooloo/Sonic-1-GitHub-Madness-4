@@ -1198,7 +1198,7 @@ Deform_NGZ:
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
-Deform_ARZ:	; No Scrolling cause I don't know how to make it only scroll on the x-axis
+Deform_ARZ:
 		move.w	(v_scrshiftx).w,d4
 		ext.l	d4
 		asl.l	#3,d4

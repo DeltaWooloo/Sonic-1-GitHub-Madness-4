@@ -25,7 +25,6 @@ GM_DebugMenu:
 		move.b	#bgm_Fade,d0
 		bsr.w	QueueSound2		; stop music
 		bsr.w	PaletteFadeOut
-		bsr.w	ClearScreen
 		disable_ints
 		lea	(vdp_control_port).l,a6
 		move.w	#$8004,(a6)	; 8-colour mode
@@ -35,8 +34,9 @@ GM_DebugMenu:
 		move.w	#$9200,(a6)	; window vertical position
 		move.w	#$8B03,(a6)
 		move.w	#$8720,(a6)	; set background colour (palette line 2, entry 0)
-		disable_display
 		clr.b	(f_wtr_state).w
+		disable_display
+		bsr.w	ClearScreen
 		clr.b	(v_lastlamp).w
 		jsr	(Pow_fix_RandMon_Runonce_flags).l	;!@ GD: Clear f_randMonPow runonce flags
 		clr.w	(v_debuguse).w
