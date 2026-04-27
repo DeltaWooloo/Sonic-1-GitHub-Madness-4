@@ -150,7 +150,13 @@ GotoNextLevel:
 		andi.w	#3,d1
 		add.w	d1,d1
 		add.w	d1,d0
+		tst.b	(f_difficulty).w
+		beq.s	.devilsanus
+		move.w	FetLevelOrder(pc,d0.w),d0 ; load level from level order array
+		bra.s	.afterfetus
+.devilsanus:
 		move.w	LevelOrder(pc,d0.w),d0 ; load level from level order array
+.afterfetus:
 		move.w	d0,(v_zone).w	; set level number
 		tst.w	d0
 		bne.s	Got_ChkSS
