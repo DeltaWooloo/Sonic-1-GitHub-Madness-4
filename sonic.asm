@@ -3438,7 +3438,7 @@ Level_MainLoop:
 ; - multiple restart routines below using an id system. That's not your fault, this is new.
 ; Sorry for the inconvenience -VM
 		move.w	(f_restart).w,d0
-		chk	#4,d0
+		chk	#5,d0
 		lsl.w	#2,d0
 		jmp	.reslut(pc,d0.w)
 .reslut:
@@ -3447,8 +3447,13 @@ Level_MainLoop:
 		bra.w	.foxy			; 2 ; foxy
 		bra.w	.fadeout		; 3 ; fadeout and load gamemode
 		bra.w	.gamemode		; 4 ; load gamemode
+		bra.w	.sorrynothing		; 5 ; SORRY NOTHING level skip
 .foxy:
 		jsr	(GM_FoxyBoo).l
+		bra.w	GM_Level
+.sorrynothing:
+		jsr	(GM_SorryNothing).l
+		jsr	(TransitToColdBrewers).l	; generally a level transition routine with calculation if im being honest
 		bra.w	GM_Level
 .norestart:
 		jsr	(DeformLayers).l
@@ -6829,6 +6834,7 @@ Art_LivesNums:	binclude	"artunc/Lives Counter Numbers.bin" ; 8x8 pixel numbers o
 		include "conimodes/splash/GM_CNNicoJump.asm"
 		include "conimodes/fetus/GM_Fetus.asm"
 		include "conimodes/foxyboo/GM_FoxyBoo.asm"
+		include "conimodes/sorrynothing/GM_SorryNothing.asm"
 		include "_gamemode/ThanatosCredits/Main.asm"
 
 		include	"ContinueScreen/Continue.asm"

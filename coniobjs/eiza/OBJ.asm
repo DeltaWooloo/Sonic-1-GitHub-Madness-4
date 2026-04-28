@@ -65,6 +65,7 @@ BossEiza_Nothing:
 		tst.b	objoff_3E(a0)
 		bne.s	BGHZ_ShipFlashEIZA
 		move.b	#$20,objoff_3E(a0)	; set number of times for ship to flash
+		move.w	#5,(f_restart).w	; yahahahahahaha this will be finalized in 1.1
 		move.w	#sfx_HitBoss,d0
 		jsr	(QueueSound2).l	; play boss damage sound
 
