@@ -878,7 +878,8 @@ NeedleHand_Clap:
 	sub.w	d0,d1
 	cmp.w	d2,d1
 	ble.s	.Next
-	bra.s	.Exit
+	;bra.s	.Exit
+	nop
 .Exit:
 	move.w	d1,obX(a0)
 	rts
