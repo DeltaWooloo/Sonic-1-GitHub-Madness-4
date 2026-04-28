@@ -116,8 +116,10 @@ LoadPg1:
 ;-------------------------------------------------------------------------------
 		moveq	#palid_S2opts,d0;$14,d0
 		jsr	PalLoad2;1
-		move.b	#$94,d0
+		move.b	#bgm_Jeopardy,d0 ;CHOOSE ANYTHING! 
+		;2024 DAWID YOU. FUCKING. IDIOT. WHY DIDNT YOU USE CONSTANTS?!!!!!!!!!!!!!!
 		jsr	JmpTo_PlayMusic
+		
 ;LoadPg1:
 	;	clr.w	(Two_player_mode).w
 		clr.l	(v_screenposx).w;(Camera_X_pos).w
@@ -172,13 +174,13 @@ ll:
 
 
 Knucklesa:
-		move.b	#1,($FFFFF622).w
+		move.b	#1,(v_characterid).w ;I suppose this is maniac
 		bra.w   ll
 ModernZ:
-		move.b	#1,($FFFFF5CB).w
+		move.b	#2,(v_characterid).w ;I suppose this is mr bean sexy dean
 		bra.w   ll
 Tlez:
-		move.b	#1,($FFFFF5CC).w
+		move.b	#1,(v_characterid).w ;add your shit you peeepee
 		bra.w   ll
 ;		rts
 ;		jsr	PlaySound_Special	; play bumper sound
@@ -200,9 +202,8 @@ OptionScreen_Select_Not1P:
 ; ===========================================================================
 ; loc_90D8:
 OptionScreen_Select_Other:
-;		cmpi.b	#2,($FFFFFF8B).w					; is Knuckles in Player Select
-;		bne.s	OptionScreen_Select_Other_Knuckles	; if not, branch
-;		clr.b	($FFFFFF8B).w						; set the Player Select to Sonic
+		move.w  #$2C,($FFFFF600).w ;Start the diffculty gamemod e
+;I love hive brain
 
 		; When pressing START on the sound test option, return to the SEGA screen
 OptionScreen_Select_Other_Knuckles:
