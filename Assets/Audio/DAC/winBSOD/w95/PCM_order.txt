@@ -1,0 +1,21 @@
+Instrum ID	PCM			pcmID
+06			Tom low		
+08			Crash cymb	
+09			closeHH		
+13			Tom			
+
+15			w95			dmsr_w95
+16			changeLife	dmsr_Change
+17			neverBeaten	dmsr_neverBeaten
+18			ooh1		dmsr_ooh1
+19			ooh2		dmsr_ooh2
+20			ooh3		dmsr_ooh3
+21			ooh4		dmsr_ooh4
+22			w95_2		dmsr_w95_2
+23			mouse		dmsr_mouse
+24			live		dmsr_live
+25			much		dmsr_much
+26			better		dmsr_better
+27			gates		dmsr_gates
+28			microsoft	dmsr_microsoft
+29			windows		dmsr_windows

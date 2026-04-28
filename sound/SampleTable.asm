@@ -113,31 +113,47 @@ SampleTable:
 	dcSample	TYPE_DPCM,	w98ipc,		16000,	FLAGS_SFX		; $CD
 	dcSample	TYPE_DPCM,	meow,		16000,	FLAGS_SFX		; $CE
 	dcSample	TYPE_DPCM,	meow,		8000,	FLAGS_SFX		; $CF
+	;BSOD/w95 rock
+	dcSample	TYPE_DPCM,	w95r_windows,16000					; $D0
+	dcSample	TYPE_DPCM,	w95r_better,16000					; $D1
+	dcSample	TYPE_DPCM,	w95r_changeLife,16000				; $D2
+	dcSample	TYPE_DPCM,	w95r_gates,	16000					; $D3
+	dcSample	TYPE_DPCM,	w95r_live,	16000					; $D4
+	dcSample	TYPE_DPCM,	w95r_microsoft,16000				; $D5
+	dcSample	TYPE_DPCM,	w95r_mouse,	16000					; $D6
+	dcSample	TYPE_DPCM,	w95r_much,	16000					; $D7
+	dcSample	TYPE_DPCM,	w95r_neverbeaten,	16000			; $D8
+	dcSample	TYPE_DPCM,	w95r_ooh1,	16000					; $D9
+	dcSample	TYPE_DPCM,	w95r_ooh2,	16000					; $DA
+	dcSample	TYPE_DPCM,	w95r_ooh3,	16000					; $DB
+	dcSample	TYPE_DPCM,	w95r_ooh4,	16000					; $DC
+	dcSample	TYPE_DPCM,	w95r_w95,	16000					; $DD
+	dcSample	TYPE_DPCM,	w95r_w95_2,	16000					; $DE
 
 	; Splash Screens
-	dcSample	TYPE_PCM,	EggNo,		11297					; $D0
-	dcSample	TYPE_DPCM,	funnyb_utthole,	8000,	FLAGS_SFX	; $D1
-	dcSample	TYPE_DPCM,	yume2kki,	16000,	FLAGS_SFX		; $D2
+	dcSample	TYPE_PCM,	EggNo,		11297					; $DF
+	dcSample	TYPE_DPCM,	funnyb_utthole,	8000,	FLAGS_SFX	; $E0
+	dcSample	TYPE_DPCM,	yume2kki,	16000,	FLAGS_SFX		; $E1
 
-	dcSample	TYPE_DPCM,	GenesisDoes1,	8000				; $D4
-	dcSample	TYPE_DPCM,	Virus,		16000,	FLAGS_SFX		; $D5
-	dcSample	TYPE_DPCM,	supbeaches,	8000					; $D6
+	dcSample	TYPE_DPCM,	GenesisDoes1,	8000				; $E2
+	dcSample	TYPE_DPCM,	Virus,		16000,	FLAGS_SFX		; $E3
+	dcSample	TYPE_DPCM,	supbeaches,	8000					; $E4
 
 	; Commercial Samples
-	dcSample	TYPE_DPCM,	GenesisCan3,	8000,	FLAGS_SFX		; $D7
+	dcSample	TYPE_DPCM,	GenesisCan3,	8000,	FLAGS_SFX	; $E5
 
 	; Ollie Samples
-	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $D8
-	dcSample	TYPE_DPCM,	OllieWahoo,	16000					; $D9
+	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $E6
+	dcSample	TYPE_DPCM,	OllieWahoo,	16000					; $E7
 
 	; SEGA Samples
-	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $DA
+	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $E8
 
 	;!@ GD: Last slot always reserved for PCM SFX Silence
-	dcSample	TYPE_DPCM,	dummy,		8000,	FLAGS_SFX				; $DB
+	dcSample	TYPE_DPCM,	dummy,		8000,	FLAGS_SFX		; $E9
 
 	; Unused
-;	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $DC
+;	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $EA
 ;	dcSample	TYPE_PCM,	Segay,		0,	FLAGS_SFX
 ;	dcSample	TYPE_PCM,	CL_Penis,	11297
 ;	dcSample	TYPE_PCM,	Boioing,	5250,	FLAGS_SFX
@@ -257,11 +273,32 @@ SampleTable:
 	incdac	sbLove, "sound/dac/GenesisDoes/sb_love.dpcm"
 	incdac	sbPC, "sound/dac/GenesisDoes/sb_pc.dpcm"
 	
+; BSOD samples
 	incdac	BSOD, "sound/dac/GenesisDoes/windie.dpcm"
 	incdac	shutdown, "sound/dac/GenesisDoes/shutdown.dpcm"
 	incdac	chord16, "sound/dac/GenesisDoes/chord16.dpcm"
 	incdac	w98ipc, "sound/dac/GenesisDoes/w98ipc.dpcm"
 	incdac	meow, "sound/dac/GenesisDoes/meow.dpcm"
+
+; BSOD W95 Rock samples
+	incdac	w95r_windows, "sound/dac/GenesisDoes/w95r_windows.dpcm"
+	incdac	w95r_better, "sound/dac/GenesisDoes/w95r_better.dpcm"
+	incdac	w95r_changeLife, "sound/dac/GenesisDoes/w95r_changeLife.dpcm"
+	incdac	w95r_gates, "sound/dac/GenesisDoes/w95r_gates.dpcm"
+	incdac	w95r_live, "sound/dac/GenesisDoes/w95r_live.dpcm"
+	incdac	w95r_microsoft, "sound/dac/GenesisDoes/w95r_microsoft.dpcm"
+	incdac	w95r_mouse, "sound/dac/GenesisDoes/w95r_mouse.dpcm"
+	incdac	w95r_much, "sound/dac/GenesisDoes/w95r_much.dpcm"
+	incdac	w95r_neverbeaten, "sound/dac/GenesisDoes/w95r_neverbeaten.dpcm"
+	incdac	w95r_ooh1, "sound/dac/GenesisDoes/w95r_ooh1.dpcm"
+	incdac	w95r_ooh2, "sound/dac/GenesisDoes/w95r_ooh2.dpcm"
+	incdac	w95r_ooh3, "sound/dac/GenesisDoes/w95r_ooh3.dpcm"
+	incdac	w95r_ooh4, "sound/dac/GenesisDoes/w95r_ooh4.dpcm"
+	incdac	w95r_w95, "sound/dac/GenesisDoes/w95r_w95.dpcm"
+	incdac	w95r_w95_2, "sound/dac/GenesisDoes/w95r_w95_2.dpcm"
+
+
+
 
 ; ---------------------------------------------------------------
 ; Splash Screen Samples
