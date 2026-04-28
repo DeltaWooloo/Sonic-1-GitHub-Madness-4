@@ -3127,6 +3127,13 @@ Level_NoMusicFade:
 		jsr	(TitleCards_LoadArt).l
 		moveq	#plcid_Main,d0
 		bsr.w	AddPLC			; load standard patterns
+		tst.w	(f_demo).w
+		beq.s	.dontsetchar
+		moveq	#0,d0
+		lea	(DemoChars).l,a1
+		move.b	(v_zone).w,d0
+		move.b	(a1,d0.w),(v_characterid).w
+.dontsetchar:
 		; load player hud lives art
 ;		move.w	#ch_hudlives,d0
 		jsr	(GetOtherPlayerData).l
@@ -3293,13 +3300,6 @@ Level_SkipTtlCard:
 		bra.s	Level_ChkWater
 .cont:
 		move.b	#id_SonicPlayer,(v_player).w ; load Sonic object
-		tst.w	(f_demo).w
-		beq.s	.dontsetchar
-		moveq	#0,d0
-		lea	(DemoChars).l,a1
-		move.b	(v_zone).w,d0
-		move.b	(a1,d0.w),(v_characterid).w
-.dontsetchar:
 		move.b	#id_HUD,(v_hud).w ; load HUD object
 ;		cmpi.w	#(id_Joint<<8)+0,(v_zone).w	; comment this stuff out its a test burp
 ;		bne.s	Level_ChkDebug	; comment this stuff out its a test burp
