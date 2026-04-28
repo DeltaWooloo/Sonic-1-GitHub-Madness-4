@@ -1,4 +1,4 @@
-Cutscene_TonicIntro:
+Cutscene_InsideTonicIntro:
 	moveq   #0,d0
 	move.b	subscene.w,d0
 	add.w	d0,d0
@@ -13,15 +13,18 @@ Cutscene_TonicIntro:
 	add.w	#1,v_framecount.w
 	rts
 .Index:
-	bra.w	TonicIntro_FadeIn
+	bra.w	InTonicIntro_FadeIn
 	rts	; put more routines here
 	nop
 
-TonicIntro_FadeIn:
+InTonicIntro_FadeIn:
 	addq.b	#1,subscene.w
 	jmp	PalFadeIn
 
 
-Str_TonicIntro1:
-	dc.b	"Teeth Tonic is a Colorado Cracker",0
+Str_InTonicIntro1:
+	dc.b "  Tonic Gets Back Home To His Stupid ",-1
+	dc.b "  Fucking Friend Rivet After Various ",-1
+	dc.b " Hours of not programming and Beating",-1
+	dc.b " The Final Boss",0
 	even

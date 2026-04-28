@@ -25,6 +25,8 @@ GM_Cutscene:
 	bra.w	Cutscene_Init
 	bra.w	Cutscene_Tonic
 	bra.w	Cutscene_Maniac
+	bra.w	Cutscene_InTonic
+	rts
 
 Cutscene_Init:
 	move.b	#bgm_Stop,d0
@@ -81,6 +83,11 @@ Cutscene_Maniac:
 	bsr.w	_cutsceneSub
 	bsr.w	PrintMsgTimed
 	bra.w	Cutscene_ManiacIntro
+
+Cutscene_InTonic:
+	bsr.w	_cutsceneSub
+	bsr.w	PrintMsgTimed
+	bra.w	Cutscene_InsideTonicIntro
 
 _cutsceneSub:
 	move.b	#$1C,(v_vbla_routine).w
@@ -140,12 +147,12 @@ InitCutsceneData:
 	move.b	(a1)+,d2
 	move.w	(a1)+,d0
 	jsr	DrawTileMap_Addr
-
 	moveq	#0,d0
-	move.b	cutscene,d0
-
 	lea	CutscenePalTbl,a0
-	; put stuyff here idk
+	move.b	cutscene,d0
+	add.w	d0,d0
+	add.w	d0,d0	
+	add.w	d0,a0
 	move.l	(a0),a1
 
 	lea	(v_palette_fading).w,a0
@@ -172,10 +179,15 @@ CutsceneInitTbl:
 	dc.l	MapScr_ManiacIntro1A
 	dc.l	MapScr_ManiacIntro1B
 
+	dc.l	Str_InTonicIntro1+(3<<24)
+	dc.l	ArtList_InTonicIntro1+(bgm_REMansion<<24)
+	dc.l	MapScr_InTonicIntro1A
+	dc.l	MapScr_InTonicIntro1B
+
 CutscenePalTbl:
 	dc.l	Pal_ManiacIntro1	; tonic
 	dc.l	Pal_ManiacIntro1	; maniac
-
+	dc.l	Pal_InTonicIntro1	; maniac
 
 ArtList_ManiacIntro1:
 	dc.l	Nem_ManiacIntro1A
@@ -188,7 +200,10 @@ ArtList_ManiacIntro2:
 	dc.w	$0000
 	dc.l	-1
 
-
+ArtList_InTonicIntro1:
+	dc.l	Nem_InTonicIntro1
+	dc.w	$0000
+	dc.l	-1
 
 
 ; ---------------------------------------------------------------------------
@@ -338,8 +353,30 @@ ClearMsgs:
 	enable_ints
 	rts
 
+
+
+
+
+
+
 	include		"_gamemode/cutscene/tonic_intro.asm"
+
 	include		"_gamemode/cutscene/maniac_intro.asm"
+
+	include		"_gamemode/cutscene/inside_tonic_intro.asm"
+
+
+
+
+
+
+
+
+
+
+
+
+
 Art_ASCII:	binclude	"_gamemode/cutscene/ASCII.BIN"
 		even
 Art_ASCIIE:
@@ -349,6 +386,12 @@ Pal_ManiacIntro1:
 		binclude	"_gamemode/cutscene/data/maniaccutscene1.pal"	; the way i authored these was Very Tired Very Slow head so
 		binclude	"_gamemode/cutscene/data/maniaccutscene1b.pal"	; temp
 		dc.w		0	; bg color temp
+		even
+Pal_InTonicIntro1:
+		binclude	"_gamemode/cutscene/data/intoniccutscene1.pal"
+		dc.w		0
+		even
+
 Nem_ManiacIntro1A:
 		binclude	"_gamemode/cutscene/data/maniaccutscene1.nem"
 		even
@@ -393,4 +436,18 @@ MapScr_ManiacIntro5A:
 		dc.b	40-1,	20-1	; width, height
 		dc.w	$C000
 		binclude	"_gamemode/cutscene/data/maniaccutscene1_5.map"
+		even
+
+Nem_InTonicIntro1:
+		binclude	"_gamemode/cutscene/data/intoniccutscene1.nem"
+		even
+MapScr_InTonicIntro1A:
+		dc.b	40-1,	20-1	; width, height
+		dc.w	$C000
+		binclude	"_gamemode/cutscene/data/intoniccutscene1a.map"
+		even
+MapScr_InTonicIntro1B:
+		dc.b	40-1,	20-1	; width, height
+		dc.w	$E000
+		binclude	"_gamemode/cutscene/data/intoniccutscene1.map"
 		even
