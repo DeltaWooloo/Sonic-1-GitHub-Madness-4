@@ -131,7 +131,7 @@ LoadPg1:
 		move.w	($FFFFF60C).w,d0;(VDP_Reg1_val).w,d0
 		ori.b	#$40,d0
 		move.w	d0,(VDP_control_port).l
-		jsr	PaletteFadeOut
+		jsr	PaletteFadeIn
 ; loc_9060:
 OptionScreen_Main:
 		move.b	#$16,(Vint_routine).w
