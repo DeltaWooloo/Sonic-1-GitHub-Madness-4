@@ -1170,5 +1170,5 @@ MapScr_NeedleScr:
 	incbin	"_incObj/NeedleBoss/scroll.map"
 	even
 ;Option
-Art_Text:	binclude	"s2option/UNCMENUTEXT.bin" ; text used in level select and debug mode
+Art_Texty:	binclude	"s2option/UNCMENUTEXT.bin" ; text used in level select and debug mode
 		even

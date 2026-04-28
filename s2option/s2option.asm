@@ -6,7 +6,7 @@
 ;===============================================================================
 VDP_control_porty		equ	$C00004
 Chunk_Table				equ	$FFFF0000
-VDP_Command_Buffer		equ	$FFFFDC00
+VDP_Command_Buffery		equ	$FFFFDC00
 Game_Mode				equ	$FFFFF600
 Ctrl_1_Press			equ	$FFFFF605
 Vint_routine			equ	$FFFFF62A
@@ -41,8 +41,8 @@ MenuScreen:
 ;		clearRAM Menus_Object_RAM,(Menus_Object_RAM_End-Menus_Object_RAM)
 
 		; load background + graphics of font/LevSelPics
-		clr.w	(VDP_Command_Buffer).w
-		move.l	#VDP_Command_Buffer,($FFFFDCFC).w
+		clr.w	(VDP_Command_Buffery).w
+		move.l	#VDP_Command_Buffery,($FFFFDCFC).w
 		move.l	#$42000000,(VDP_control_port).l
 		lea	(Nem_MenuFont).l,a0
 		jsr	NemDec
@@ -127,7 +127,7 @@ LoadPg1:
 	;	clr.w	(Correct_cheat_entries).w
 	;	clr.w	(Correct_cheat_entries_2).w
 		move.b	#$16,(Vint_routine).w
-		jsr	WaitForVint
+		jsr	WaitForVBla
 		move.w	($FFFFF60C).w,d0;(VDP_Reg1_val).w,d0
 		ori.b	#$40,d0
 		move.w	d0,(VDP_control_port).l
@@ -135,7 +135,7 @@ LoadPg1:
 ; loc_9060:
 OptionScreen_Main:
 		move.b	#$16,(Vint_routine).w
-		jsr	WaitForVint
+		jsr	WaitForVBla
 		move	#$2700,sr
 		bsr.w	loc_91F8
 		bsr.w	OptionScreen_Controls
@@ -147,7 +147,7 @@ OptionScreen_Main:
 	;	or.b	(Ctrl_2_Press).w,d0
 		andi.b	#btnStart,d0	; is Start button pressed?
 		bne.s	OptionScreen_Select		; if yes, branch
-		bra.s	OptionScreen_Main
+		jsr	OptionScreen_Main ;originally bra.s but that wont work??
 ; ===========================================================================
 ; loc_909A:
 OptionScreen_Select:
@@ -169,7 +169,7 @@ ll:
 		move.l	d0,($FFFFFE22).w	; clear time
 		move.l	d0,($FFFFFE26).w	; clear score
 		move.b	#3,($FFFFFE12).w	; set lives to 3
-		move.b	#GameModeID_Level,(Game_Mode).w ; => Level (Zone play mode)
+		move.b	#$0C,(Game_Mode).w ; => Level (Zone play mode) I love my life
 		rts
 
 
@@ -198,7 +198,7 @@ OptionScreen_Select_Not1P:
 	;	move.b	#0,(Current_Zone_2P).w
 	;	move.w	#0,(Player_mode).w
 	;	rts
-		bra.s	OptionScreen_Main
+		jsr	OptionScreen_Main;also bra.s before... hmmmm
 ; ===========================================================================
 ; loc_90D8:
 OptionScreen_Select_Other:
@@ -647,11 +647,11 @@ __Z = $37
 
 
 _st = $1A
-TextOptScr_PlayerSelect:	dc.b	$10,_st,___,__P,__L,__A,__Y,__E,__R,__,__S,__E,__L,__E,__C,__T,___,_st
+TextOptScr_PlayerSelect:	dc.b	$10,_st,___,__P,__L,__A,__Y,__E,__R,___,__S,__E,__L,__E,__C,__T,___,_st
 TextOptScr_Sonic:			dc.b	$E,___,___,___,___,__T,__O,__N,__I,__C,___,___,___,___,___,___
 TextOptScr_Miles:			dc.b	$E,___,___,___,___,__M,__A,__N,__I,__A,__C,___,___,___,___,___
 TextOptScr_Tails:			dc.b	$E,___,___,___,___,__S,__E,__X,__Y,__B,__E,__A,__N,__S,___,___
-TextOptScr_Tails:			dc.b	$E,___,___,___,___,__S,__E,__X,__Y,__B,__E,__A,__N,___,___,___
+TextOptScr_Knuckles:		dc.b	$E,___,___,___,___,__S,__E,__X,__Y,__B,__E,__A,__N,___,___,___
 TextOptScr_MS:		        dc.b	$E,___,___,___,__U,__N,__U,__S,__E,__D,___,__B,___,___,___,___
 
 TextOptScr_VsModeItems:		dc.b	$10,_st,___,__D,__I,__F,__F,__I,__C,__U,__L,__T,__Y,___,___,___,___,_st

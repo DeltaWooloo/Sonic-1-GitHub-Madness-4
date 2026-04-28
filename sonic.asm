@@ -428,6 +428,7 @@ GameModeArray:
 	GAMEMODE	GM_BSOD,		id_BSOD		; !@ GD: Windows zone BSOD (on death)
 	GAMEMODE	GM_Sans,		id_SansDied	; he died.
 	GAMEMODE	GM_DebugMenu,		id_DebugMenu	; Debug Menu
+	GAMEMODE	MenuScreen,		id_Options	; Optio
 	dephase
 GameModeArray_End:
 
@@ -6920,6 +6921,8 @@ Nem_NogalesBall:	binclude	"artnem/NogalesBall.nem"
 Nem_Wario:	binclude	"artnem/Wario.nem"
 		even	
 	include	"_incObj/Katsi.asm"	
+	
+	include "s2option/s2option.asm"
 ; end of 'ROM'
 
 ; ==============================================================
