@@ -4,7 +4,7 @@
 ; [ Fim ]
 ;===============================================================================
 ;===============================================================================
-VDP_control_port		equ	$C00004
+VDP_control_porty		equ	$C00004
 Chunk_Table				equ	$FFFF0000
 VDP_Command_Buffer		equ	$FFFFDC00
 Game_Mode				equ	$FFFFF600
@@ -20,13 +20,13 @@ Graphics_Flags =		ramaddr( $FFFFFFF8 ) ; misc. bitfield
 ; ===========================================================================
 ; loc_8BD4:
 MenuScreen:
-		jsr	Pal_FadeFrom
+		jsr	PaletteFadeIn
 		move	#$2700,sr
 		move.w	($FFFFF60C).w,d0
 		andi.b	#$BF,d0
-		move.w	d0,(VDP_control_port).l
+		move.w	d0,(VDP_control_porty).l
 		jsr	ClearScreen
-		lea	(VDP_control_port).l,a6
+		lea	(VDP_control_porty).l,a6
 		move.w	#$8004,(a6)
 		move.w	#$8230,(a6)
 		move.w	#$8407,(a6)
@@ -114,7 +114,7 @@ LoadPg1:
 		move.b	#$0000,($FFFFF7B9).w	; Inicializa o contador das animações do menu
 ;		bsr.w	Dynamic_Menu
 ;-------------------------------------------------------------------------------
-		moveq	#palid_S2opts,d0;$14,d0
+		moveq	#palid_Sonic,d0;$14,d0
 		jsr	PalLoad2;1
 		move.b	#bgm_Jeopardy,d0 ;CHOOSE ANYTHING! 
 		;2024 DAWID YOU. FUCKING. IDIOT. WHY DIDNT YOU USE CONSTANTS?!!!!!!!!!!!!!!
@@ -131,7 +131,7 @@ LoadPg1:
 		move.w	($FFFFF60C).w,d0;(VDP_Reg1_val).w,d0
 		ori.b	#$40,d0
 		move.w	d0,(VDP_control_port).l
-		jsr	Pal_FadeTo
+		jsr	PaletteFadeOut
 ; loc_9060:
 OptionScreen_Main:
 		move.b	#$16,(Vint_routine).w
@@ -650,9 +650,10 @@ _st = $1A
 TextOptScr_PlayerSelect:	dc.b	$10,_st,___,__P,__L,__A,__Y,__E,__R,__,__S,__E,__L,__E,__C,__T,___,_st
 TextOptScr_Sonic:			dc.b	$E,___,___,___,___,__T,__O,__N,__I,__C,___,___,___,___,___,___
 TextOptScr_Miles:			dc.b	$E,___,___,___,___,__M,__A,__N,__I,__A,__C,___,___,___,___,___
+TextOptScr_Tails:			dc.b	$E,___,___,___,___,__S,__E,__X,__Y,__B,__E,__A,__N,__S,___,___
 TextOptScr_Tails:			dc.b	$E,___,___,___,___,__S,__E,__X,__Y,__B,__E,__A,__N,___,___,___
-TextOptScr_Knuckles:		dc.b	$E,___,___,___,__U,__N,__U,__S,__E,__D,___,__A,___,___,___,___
 TextOptScr_MS:		        dc.b	$E,___,___,___,__U,__N,__U,__S,__E,__D,___,__B,___,___,___,___
+
 TextOptScr_VsModeItems:		dc.b	$10,_st,___,__D,__I,__F,__F,__I,__C,__U,__L,__T,__Y,___,___,___,___,_st
 TextOptScr_AllKindsItems:	dc.b	$E,___,___,___,___,__S,__T,__A,__R,__T,___,___,___,___,___,___;press start you idiot
 TextOptScr_TeleportOnly:	dc.b	$E,___,___,___,___,__S,__T,__A,__R,__T,___,___,___,___,___,___
@@ -685,7 +686,7 @@ TextOptScr_NewOpt:			dc.b	$E,___,___,___,__U,__N,__U,__S,__E,__D,___,__B,___,___
 
 ; options screen mappings (Enigma compressed)
 ; byte_9AB2:
-MapEng_Options:	binclude "tilemaps\Options Screen.bin"
+MapEng_Options:	binclude "s2option\Options Screen ENIMAP.bin"
 		even
 
 ; level select screen mappings (Enigma compressed)
@@ -709,15 +710,15 @@ MapEng_Options:	binclude "tilemaps\Options Screen.bin"
 ;JmpTo_PlaneMapToVRAM
 ;		jmp	(PlaneMapToVRAM).l
 ; End of function sub_9186
-Eni_MenuBox:	binclude	"tilemaps\menubox.bin"	; menu options box (mappings)
+Eni_MenuBox:	binclude	"s2option\menuboxENIMAP.bin"	; menu options box (mappings)
 		even
-Nem_MenuFont:	binclude	"artnem\menufont.bin" ; level select s2 font
+Nem_MenuFont:	binclude	"s2option\menufont.bin" ; level select s2 font
 		even
-Nem_MenuBox:	binclude	"artnem\menuboxnem.bin"  ; menu options box
+Nem_MenuBox:	binclude	"s2option\menuboxNem.bin"  ; menu options box
 		even
 ;Nem_LevelIcons:	binclude	"artnem\levelico.bin"	; level select s2 icons
 ;		even
-Eni_MenuBg:	binclude	"tilemaps\menubg.bin"	; level select s2 background (mappings)
+Eni_MenuBg:	binclude	"s2option\menubgENImap.bin"	; level select s2 background (mappings)
 		even		
 JmpTo_PlayMusic:
 	jmp	PlaySound;Play_Music
