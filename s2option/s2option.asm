@@ -147,7 +147,7 @@ OptionScreen_Main:
 	;	or.b	(Ctrl_2_Press).w,d0
 		andi.b	#btnStart,d0	; is Start button pressed?
 		bne.s	OptionScreen_Select		; if yes, branch
-		jsr	OptionScreen_Main ;originally bra.s but that wont work??
+		bra.l	OptionScreen_Main ;originally bra.s but that wont work??
 ; ===========================================================================
 ; loc_909A:
 OptionScreen_Select:
@@ -198,7 +198,7 @@ OptionScreen_Select_Not1P:
 	;	move.b	#0,(Current_Zone_2P).w
 	;	move.w	#0,(Player_mode).w
 	;	rts
-		jsr	OptionScreen_Main;also bra.s before... hmmmm
+		bra.l	OptionScreen_Main;also bra.s before... hmmmm
 ; ===========================================================================
 ; loc_90D8:
 OptionScreen_Select_Other:
