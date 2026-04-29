@@ -5,17 +5,17 @@
 ; define stuff from older disassemblies because eyes
 ;- CONI
 PlaySound	=		QueueSound1
-PlaySound_Special	=	QueueSound2
-PlaySound_Unused	=	QueueSound3
+PlaySound_Special =	QueueSound2
+PlaySound_Unused =	QueueSound3
 PalLoad1	=		PalLoad_Fade
 PalLoad2	=		PalLoad
 v_pal_dry	=		v_palette
-v_demolength	= v_generictimer
+v_demolength	= 	v_generictimer
 
-Size_of_SegaPCM:		equ $6978
+Size_of_SegaPCM:	equ $6978
 Size_of_DAC_driver_guess:	equ $1760
 
-opcode_rte		equ $4E73
+opcode_rte			equ $4E73
 opcode_jmpabslong	equ $4EF9
 opcode_jmpabsword	equ $4EF8
 
@@ -25,6 +25,130 @@ M68000_Clock:    equ Master_Clock/7
 Z80_Clock:       equ Master_Clock/15
 FM_Sample_Rate:  equ M68000_Clock/(6*6*4)
 PSG_Sample_Rate: equ Z80_Clock/16
+fps_Rate:		 equ $3C						;!@ FPS for timers
+
+;!@ GD: ROM headers
+hdr_Genesis:	 equ	"SEGA MEGA DRIVE "
+hdr_Pico:		 equ	"SEGA PICO       "
+hdr_MegaPico:	 equ	"SEGA MEGA PICO  "
+tmss_init:		 equ	"init"
+tmss_str:		 equ	"SEGA"
+
+; TMSS Stuff
+; !@ GD: PICO addresses (from Sonic 1 Pico)
+pico_START:			equ $800000
+pico_version:		equ	$800001	;1 byte
+pico_btn:			equ	$800003	;1 byte	;!@ Although format is standard Genesis SACBRLDU, AC btns are always HI (11). Pen btn = Start, Red button = B
+pico_penX_hi:		equ	$800005	;1 byte
+pico_penX_lo:		equ	$800007	;1 byte
+pico_penY_hi:		equ	$800009	;1 byte
+pico_penY_lo:		equ	$80000B	;1 byte
+pico_BookPage:		equ	$80000D	;1 byte
+pico_copType:		equ	$80000F	;1 byte
+pico_pcm_data:		equ	$800010	;1 word
+pico_pcm_ctrl:		equ	$800012	;1 word
+
+;https://gendev.spritesmind.net/forum/viewtopic.php?p=38147
+;
+;!@ Bitfield data for pcm_ctrl
+;Pico ADPCM:
+;The Pico's ADPCM chip seems to be based on the uPD7759,
+;but the frontend and pinout are quite different.
+;It also seems to run at twice the clock speed.
+;
+;It adds the following features over the base uPD7759:
+;- 64-byte (or maybe 63?) FIFO
+;- Selectable low-pass filter (6 kHz, 12 kHz or 16 kHz based on comments from Sega's driver)
+;- 3-bit volume
+;
+;The chip sits directly on the 68K's bus,
+;but seems to rely on the IO chip to handle address decoding.
+;
+;The bits of the control port are as follows:
+;
+;biuuruuu ffuuuvvv
+;b=		15: Write 1 to reset, read returns BUSY status (i.e. is the chip currently playing a sample)
+;i=		14: Interrupt enable. Level 3 interrupts will trigger based on FIFO fullness when set, they will not when clear
+;uu=	13-12: ?
+;r=		11: Sega driver always sets this bit outside of reset, but some games expect ADPCM to work with it clear.
+;uuu=	10-8: ?
+;ff=	7-6: Filter selection, 11 = 16 kHz, 10 = 12 kHz, 01 = 6 kHz, 00 = ??
+;uuu=	5-3: ?
+;vvv=	2-0: Volume
+;
+;Some games do write stuff to the unknown bits, but it's unclear what they do.
+;It's possible some of the bits are used to select the FIFO threshold for interrupts,
+;but it's hard to say without hardware testing.
+;
+;Data format is basically the same as uPD7759 in slave mode except without the dummy bytes
+;so the first byte you encounter is a command byte (i.e. either delay or sample command).
+;
+;bitfield indices
+bPctr_vol0:			equ	0		;Volume bits vvv
+bPctr_vol1:			equ	1
+bPctr_vol2:			equ	2
+bPctr_unk3:			equ	3		;Unknown bits uuu 3-5 
+bPctr_unk4:			equ	4
+bPctr_unk5:			equ	5
+bPctr_flt0:			equ	6		;Filter bits ff 6-7
+bPctr_flt1:			equ	7
+
+bPctr_unk8:			equ	8		;Unknown bits uuu 8-10
+bPctr_unk9:			equ	9
+bPctr_unk10:		equ	10
+bPctr_segaRst:		equ	11		;Sega reset bit r 11
+bPctr_unk12:		equ	12		;Unknown bits uu 12-13
+bPctr_unk13:		equ	13
+bPctr_intEn:		equ	14		;Interrupt enable bit i 14
+bPctr_busy:			equ	15		;Busy/status flag b 15
+
+;Masks
+;						%biuuruuuffuuuvvv
+;						         _lower__
+;						 _higher_
+mPctr_vol0:			equ	%0000000000000001		;Volume bits vvv
+mPctr_vol1:			equ	%0000000000000010
+mPctr_vol2:			equ	%0000000000000100
+mPctr_unk3:			equ	%0000000000001000		;Unknown bits uuu 3-5
+mPctr_unk4:			equ	%0000000000010000
+mPctr_unk5:			equ	%0000000000100000
+mPctr_flt0:			equ	%0000000001000000		;Filter bits ff 6-7
+mPctr_flt1:			equ	%0000000010000000
+
+mPctr_unk8:			equ	%0000000100000000		;Unknown bits uuu 8-10
+mPctr_unk9:			equ	%0000001000000000
+mPctr_unk10:		equ	%0000010000000000
+mPctr_segaRst:		equ	%0000100000000000		;Sega reset bit r 11
+mPctr_unk12:		equ	%0001000000000000		;Unknown bits uu 12-13
+mPctr_unk13:		equ	%0010000000000000
+mPctr_intEn:		equ	%0100000000000000		;Interrupt enable bit i 14
+mPctr_busy:			equ	%1000000000000000		;Busy/status flag b 15
+mPctr_volUnk:		equ	%0000000000111111		;Mask for 3-bit volume+3-bit unknown bits
+
+pico_port_1_data:	equ	$800015	;1 word
+pico_port_1_ctrl:	equ	$800017	;1 word
+pico_security_addr:	equ	$800019	;2 words
+
+copr_ymz263b_a0:	equ	$BFF801	;1 word
+copr_ymz263b_d0:	equ	$BFF803	;1 word
+copr_ymz263b_a1:	equ	$BFF805	;1 word
+copr_ymz263b_d1:	equ	$BFF807	;1 word
+
+copr_ymf262_a0:		equ	$BFF824
+copr_ymf262_d0:		equ	$BFF828
+copr_ymf262_a1:		equ	$BFF834
+
+copr_ym712b_a0:		equ	$BFF840
+
+; Pico constants
+penX_min:			equ	$003C
+penX_max:			equ	$017C
+penY_min:			equ	$01FC
+penY_minPad:		equ	$01FC
+penY_maxPad:		equ $02F7
+penY_minBook:		equ	$02F8
+penY_maxBook:		equ	$03F3
+penY_max:			equ	$03F3
 
 ; VDP addressses
 vdp_data_port:		equ $C00000
@@ -32,22 +156,22 @@ vdp_control_port:	equ $C00004
 VDP_data_port:		equ vdp_data_port
 VDP_control_port: 	equ vdp_control_port
 vdp_counter:		equ $C00008
-psg_input:		equ $C00011
+psg_input:			equ $C00011
 ; !@ GD:
 ; https://plutiedev.com/vdp-debug
 ; https://segaretro.org/Sega_Mega_Drive/VDP_general_usage#Debug_register
-debug_sel:		equ	$C00018
-debug_reg:		equ $C0001C
+debug_sel:			equ	$C00018
+debug_reg:			equ $C0001C
 
 ; Z80 addresses
-z80_ram:		equ $A00000	; start of Z80 RAM
+z80_ram:			equ $A00000	; start of Z80 RAM
 z80_ram_end:		equ $A02000	; end of non-reserved Z80 RAM
-ym2612_a0:		equ $A04000
-ym2612_d0:		equ $A04001
-ym2612_a1:		equ $A04002
-ym2612_d1:		equ $A04003
+ym2612_a0:			equ $A04000
+ym2612_d0:			equ $A04001
+ym2612_a1:			equ $A04002
+ym2612_d1:			equ $A04003
 z80_bus_request:	equ $A11100
-z80_reset:		equ $A11200
+z80_reset:			equ $A11200
 
 ; I/O addresses
 console_version:	equ $A10001
@@ -55,15 +179,19 @@ port_1_data_hi:		equ $A10002
 port_1_data:		equ $A10003
 port_2_data_hi:		equ $A10004
 port_2_data:		equ $A10005
+port_exp_data:
+z80_expansion_data:	equ $A10006	;!@
 port_1_control_hi:	equ $A10008
 port_1_control:		equ $A10009
 port_2_control_hi:	equ $A1000A
 port_2_control:		equ $A1000B
-expansion_control_hi:	equ $A1000C
+port_exp_control_hi:
+expansion_control_hi:equ $A1000C
+port_exp_control:
 expansion_control:	equ $A1000D
 
 ; Misc addresses
-sram_port:		equ $A130F1
+sram_port:			equ $A130F1
 security_addr:		equ $A14000
 
 ; VRAM data

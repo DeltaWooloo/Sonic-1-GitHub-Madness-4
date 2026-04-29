@@ -14,7 +14,6 @@ bsodID function bsodLbl,((bsodLbl-BSOD_table)/bsodDatasize)
 
 ;Misc BSOD constants
 art_null:			equ	$FFFFFFFF			;Flag for don't load art
-f2s:				equ	$03C				;Frames to seconds (60) conversion factor
 f_gnu 				= 	v_unused7			; Flag set if GNyU screen/mode active
 ;BSOD type constants
 bsodType_reg:		equ	$00					;Normal type
@@ -712,13 +711,13 @@ bsodGNU:
 ; ---------------------------------------------------------------------------		
 sec_std:		equ	10
 secSkip_std:	equ	3
-sec_boot:		equ	(4*60)*f2s
+sec_boot:		equ	(4*60)*fps_Rate
 secSkip_boot:	equ	10
 sec_SB:			equ	sec_boot
 secSkip_SB:		equ	secSkip_boot
 sec_sd:			equ	sec_std
 secSkip_sd:		equ	secSkip_std
-sec_sms:		equ	13*60
+sec_sms:		equ	13*fps_Rate
 secSkip_sms:	equ	secSkip_std
 sec_gg:			equ	sec_sms
 secSkip_gg:		equ	secSkip_sms
@@ -733,8 +732,8 @@ bsod_00:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_w311.art1,			ArtTile
 bsod_01:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_95.fg,			bsod_95.bg,			bsod_95.pal,		TCLR(1,0),	bgm_hang,		dBSOD
 bsod_02:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_MSB.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_MSB.fg,		bsod_MSB.bg,		bsod_MSB.pal,		TCLR(0,0),	bgm_Passport,	dChord16		
 bsod_03:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_98ipc.art1,		ArtTile_Home1,	bsod_98ipc.art2,ArtTile_bsod_w98ipc_art2,	bsod_98ipc.fg,		bsod_98ipc.bg,		bsod_98ipc.pal,		TCLR(2,7),	bgm_Passport,	dW98IPC
-bsod_04:	bsodData		bsodType_reg,	60*f2s,		secSkip_std,	bsod_sonihack.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sonihack.fg,	bsod_sonihack.bg,	bsod_sonihack.pal,	TCLR(0,0),	bgm_VirusAlert,	dVirus
-bsod_05:	bsodData		bsodType_gnu,	60*f2s,		sec_std,		bsod_gnu.art1,			ArtTile_Home1,	bsod_gnu.art2,	ArtTile_bsod_gnu_art2,		bsod_gnu.fg,		bsod_gnu.bg,		bsod_gnu.pal,		TCLR(1,0),	bgm_BossaNova,	dMeow1
+bsod_04:	bsodData		bsodType_reg,	60*fps_Rate,secSkip_std,	bsod_sonihack.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sonihack.fg,	bsod_sonihack.bg,	bsod_sonihack.pal,	TCLR(0,0),	bgm_VirusAlert,	dVirus
+bsod_05:	bsodData		bsodType_gnu,	60*fps_Rate,sec_std,		bsod_gnu.art1,			ArtTile_Home1,	bsod_gnu.art2,	ArtTile_bsod_gnu_art2,		bsod_gnu.fg,		bsod_gnu.bg,		bsod_gnu.pal,		TCLR(1,0),	bgm_BossaNova,	dMeow1
 			;Windows-based bootup
 bsod_06:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_bw95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_bw95.fg,		bsod_bw95.bg,		bsod_bw95.pal,		TCLR(0,0),	bgm_rock1,		pcm_none
 bsod_07:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_bw95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_bw95.fg,		bsod_bw95.bg,		bsod_bw95.pal,		TCLR(0,0),	bgm_rockR,		pcm_none
@@ -774,13 +773,13 @@ bsod_21:	bsodData		bsodType_gen,	sec_gen,	secSkip_gen,	bsod_gen_ntscuj.art1,	Art
 bsod_22:	bsodData		bsodType_gen,	sec_gen,	secSkip_gen,	bsod_gen_pal.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_gen_pal.fg,	bsod_gen_pal.bg,	bsod_gen_pal.pal,	TCLR(1,0),	bgm_gen,		dBSOD
 bsod_genEnd:
 			;Sonic CD-based
-bsod_23:	bsodData		bsodType_reg,	60*f2s,		secSkip_CD,		bsod_scdm.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scdm.fg,		bsod_scdm.bg,		bsod_scdm.pal,		TCLR(0,0),	bgm_VirusAlert,	dVirus		; Sonic CD BRAM corruption (Mildanner parody)
-bsod_24:	bsodData		bsodType_reg,	60*f2s,		secSkip_CD,		bsod_scdmz.art1,		ArtTile_Home1,	bsod_scdmz.art2,ArtTile_bsod_scdmz_art2,	bsod_scdmz.fg,		bsod_scdmz.bg,		bsod_scdmz.pal,		TCLR(2,0),	bgm_MMZPast,	dVirus		; Sonic CD Virus Alert (MMZ BF)
-bsod_25:	bsodData		bsodType_reg,	45*f2s,		secSkip_CD,		bsod_scd1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd1.fg,		bsod_scd1.bg,		bsod_scd1.pal,		TCLR(0,0),	bgm_Hidden,		dLetsGOO	; CYA/Tails
-bsod_26:	bsodData		bsodType_reg,	(60+48)*f2s,secSkip_CD,		bsod_scd2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd2.fg,		bsod_scd2.bg,		bsod_scd2.pal,		TCLR(0,0),	bgm_Title,		dYoFreddy	; DJ
-bsod_27:	bsodData		bsodType_reg,	45*f2s,		secSkip_CD,		bsod_scd3.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd3.fg,		bsod_scd3.bg,		bsod_scd3.pal,		TCLR(0,0),	bgm_BatMan,		dTwerkOf87	; Batman; Y So Serious?
-bsod_28:	bsodData		bsodType_reg,	12*f2s,		secSkip_CD,		bsod_scd4.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd4.fg,		bsod_scd4.bg,		bsod_scd4.pal,		TCLR(0,0),	bgm_LG,			dLetsGOO	; Cute Sonic
-bsod_29:	bsodData		bsodType_reg,	22*f2s,		secSkip_CD,		bsod_scd5.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd5.fg,		bsod_scd5.bg,		bsod_scd5.pal,		TCLR(0,0),	bgm_TwoSteps,	dEggmanLaugh; Fun is Infinite
+bsod_23:	bsodData		bsodType_reg,	60*fps_Rate,secSkip_CD,		bsod_scdm.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scdm.fg,		bsod_scdm.bg,		bsod_scdm.pal,		TCLR(0,0),	bgm_VirusAlert,	dVirus		; Sonic CD BRAM corruption (Mildanner parody)
+bsod_24:	bsodData		bsodType_reg,	60*fps_Rate,secSkip_CD,		bsod_scdmz.art1,		ArtTile_Home1,	bsod_scdmz.art2,ArtTile_bsod_scdmz_art2,	bsod_scdmz.fg,		bsod_scdmz.bg,		bsod_scdmz.pal,		TCLR(2,0),	bgm_MMZPast,	dVirus		; Sonic CD Virus Alert (MMZ BF)
+bsod_25:	bsodData		bsodType_reg,	45*fps_Rate,secSkip_CD,		bsod_scd1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd1.fg,		bsod_scd1.bg,		bsod_scd1.pal,		TCLR(0,0),	bgm_Hidden,		dLetsGOO	; CYA/Tails
+bsod_26:	bsodData		bsodType_reg,	(60+48)*fps_Rate,secSkip_CD,bsod_scd2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd2.fg,		bsod_scd2.bg,		bsod_scd2.pal,		TCLR(0,0),	bgm_Title,		dYoFreddy	; DJ
+bsod_27:	bsodData		bsodType_reg,	45*fps_Rate,secSkip_CD,		bsod_scd3.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd3.fg,		bsod_scd3.bg,		bsod_scd3.pal,		TCLR(0,0),	bgm_BatMan,		dTwerkOf87	; Batman; Y So Serious?
+bsod_28:	bsodData		bsodType_reg,	12*fps_Rate,secSkip_CD,		bsod_scd4.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd4.fg,		bsod_scd4.bg,		bsod_scd4.pal,		TCLR(0,0),	bgm_LG,			dLetsGOO	; Cute Sonic
+bsod_29:	bsodData		bsodType_reg,	22*fps_Rate,secSkip_CD,		bsod_scd5.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd5.fg,		bsod_scd5.bg,		bsod_scd5.pal,		TCLR(0,0),	bgm_TwoSteps,	dEggmanLaugh; Fun is Infinite
 			;Sega CD-based
 bsod_scd:
 bsod_2A:	bsodData		bsodType_scd,	sec_CD,		secSkip_CD,		bsod_scd_ntscu.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd_ntscu.fg,	bsod_scd_ntscu.bg,	bsod_scd_ntscu.pal,	TCLR(1,0),	bgm_scd,		dBSOD

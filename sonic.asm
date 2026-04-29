@@ -135,7 +135,8 @@ Vectors:
 		dc.l ErrorTrap			; Unused (reserved)
 		dc.l ErrorTrap			; Unused (reserved)
 		dc.l ErrorTrap			; Unused (reserved)
-		dc.b "SEGA MEGA DRIVE " ; Hardware system ID (Console name)
+		;!@ GD: Add S1Pico code to change header depending on platform being run on
+		dc.b hdr_Genesis 		; Hardware system ID (Console name)
 		dc.b "SONICGM4 2026.04" ; Copyright holder and release date (generally year)
 		dc.b "I WILL BANISH YOU TO THAT TOWN IN JOHTO         " ; Domestic name
 		dc.b "GITHUB MADNESS IV: RETURN OF THE FEVERDREAM     " ; International name
@@ -184,7 +185,7 @@ PortA_Ok:	bne.s	SkipSetup		; skip the VDP and Z80 setup code if this is a soft-r
 		move.b	-$10FF(a1),d0	; get hardware version (from $A10001)
 		andi.b	#$F,d0
 		beq.s	SkipSecurity	; If the console has no TMSS, skip the security stuff.
-		move.l	#'SEGA',$2F00(a1) ; move "SEGA" to TMSS register ($A14000)
+		move.l	#tmss_str,$2F00(a1) ; move \ to TMSS register ($A14000)
 
 SkipSecurity:
 		move.w	(a4),d0	; clear write-pending flag in VDP to prevent issues if the 68k has been reset in the middle of writing a command long word to the VDP.
@@ -338,7 +339,7 @@ GameProgram:
 		tst.w	(vdp_control_port).l
 		btst	#6,(expansion_control).l
 		beq.s	CheckSumCheck
-		cmpi.l	#'init',(v_init).w ; ye bruv has the checksum started innit?
+		cmpi.l	#tmss_init,(v_init).w ; ye bruv has the checksum started innit?
 		beq.w	GameInit	; if yes, fucking branch. HARD
 
 CheckSumCheck:
@@ -3238,6 +3239,13 @@ Level_WaterPal:
 		move.b	(v_lamp_wtrstat).w,(f_wtr_state).w
 
 Level_GetBgm:
+		;!@ If debug build, skip BZ2 instagram window mode; else nop placeholder
+		ifdef __DEBUG__
+		bra.s	.Okbro
+		else
+		nop
+		endif
+		
 		;Check if BSZ2; if so, enable Instagram window plane
 		cmpi.w	#(id_BSZ<<8)+1,(v_zone).w	; Is zone BSZ2?
 		bne.s	.Okbro						; If not, branch
@@ -5283,6 +5291,12 @@ DrawInstagramOverlay:
 		cmpi.b	#id_Level,d0
 		bne.s	.return
 .demo:
+		;!@ If debug build, skip BZ2 instagram window mode; else nop placeholder
+		ifdef __DEBUG__
+		bra.s	.return
+		else
+		nop
+		endif
 		cmpi.w	#(id_BSZ<<8)+1,(v_zone).w
 		bne.s	.return
 		move.w	#128+92,d3 ; x
