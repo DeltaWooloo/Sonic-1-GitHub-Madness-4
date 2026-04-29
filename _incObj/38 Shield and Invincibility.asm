@@ -59,7 +59,8 @@ Shi_Shield:	; Routine 2
 
 Shi_Stars:	; Routine 4
 		tst.b	(v_invinc).w	; does Sonic have invincibility?
-		beq.s	Shi_Start_Delete		; if not, branch
+		;beq.s	Shi_Start_Delete		; if not, branch
+		beq.w	Shi_Start_Delete		; if not, branch
 		move.w	(v_trackpos).w,d0 ; get index value for tracking data
 		move.b	obAnim(a0),d1
 		subq.b	#1,d1
@@ -91,18 +92,50 @@ Shi_Stars:	; Routine 4
 		cmpi.b	#$18,d1
 		blo.s	.a
 		moveq	#0,d1
-
 .a:
 		move.b	d1,objoff_30(a0)
-
 .b:
 		lea	(v_tracksonic).w,a1
 		lea	(a1,d0.w),a1
 		move.w	(a1)+,obX(a0)
 		move.w	(a1)+,obY(a0)
+		
+		;!@ GD: Only check water level if has water
+		cmpi.b	#id_ARZ,(v_zone).w			; ARZ zone
+		beq.s	.doWtrChk
+		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; WHZ3?
+		beq.s	.doWtrChk
+		cmpi.w	#(id_CBZ<<8)+1,(v_zone).w	; CBZ2?
+		beq.s	.doWtrChk
+		bra.s	.resume		
+;We have water; check level
+.doWtrChk:		
+		moveq	#0,d0
+		move.w	(v_waterpos1).w,d0			;Move water lvl into d0
+		cmp.w	obY(a0),d0					; is flame underwater?
+		blo.s	.bubbles					; if yes, branch
+;Flame is NOT underwater
+.notbubbles:
+		moveq	#0,d0						; Clear d0
+		move.b	obAnim(a0),d0				; Move anim ID into d0
+		subi.b	#1,d0						; d0--
+		bclr	#2,d0						; Clear bit 2
+		addi.b	#1,d0						; d0++
+		move.b	d0,obAnim(a0)				; Move d0 back into animID
+		bra.s	.resume						; Branch
+;Flame is underwater; change to bubble anims
+.bubbles:
+		moveq	#0,d0						; Clear d0
+		move.b	obAnim(a0),d0				; Move anim ID into d0
+		subi.b	#1,d0						; d0--
+		bset	#2,d0						; Set bit 2
+		addi.b	#1,d0						; d0++
+		move.b	d0,obAnim(a0)				; Move d0 back into animID
+.resume:		
 		;!@ GD: Stock Sonic 1 Bugfix, don't yflip stars when Sonic is in-air (obStatus bit 1)
 		;Only track xflip; ignore all other bits
 		;move.b	(v_player+obStatus).w,obStatus(a0)
+		moveq	#0,d0
 		move.b	(v_player+obStatus).w,d0
 		andi.b	#1,d0
 		move.b	d0,obStatus(a0)
