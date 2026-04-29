@@ -408,8 +408,9 @@ Sonic_Display:
 		subq.w	#1,vdpFXTime(a0)	; subtract 1 from time
 		bne.s	.exit
 		
-		;!@ Undo FX, reload level pal
+		;!@ Undo FX, reload level pal, DON'T reset window plane (BSZ2)
 		moveq	#1,d0
+		moveq	#0,d1
 		jsr		(Pow_vdp_fixRegs).l
 		
 		move.b	#0,(v_vdp_fx).w	; cancel VDP FX
@@ -2031,6 +2032,7 @@ Sonic_ResetLevel:; Routine 8
 		move.w	#1,(f_restart).w	; restart the level
 .return:
 		moveq	#1,d0				; Reload palette param (level restart will do so)
+		moveq	#1,d1				; Reset window plane
 		jsr		(Pow_vdp_fixRegs).l	; !@ GD: Bugfix to reset Random monitor FX if restarting back into GM_Level mode
 		rts
 

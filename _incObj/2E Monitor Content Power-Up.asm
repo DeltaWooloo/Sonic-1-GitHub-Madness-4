@@ -920,13 +920,26 @@ Pow_Randomiser:
 ; ===========================================================================
 ; !@ GD: Subroutine to restore various VDP registers after Random monitor fuckery
 ; Inputs: d0 !=0 to reload level pal
+; 		  d1 !=0 to reset window plane (BSZ2)
 ; ===========================================================================
 Pow_vdp_fixRegs:
 		;disableD
 		movem.l	a0,-(sp)				; Push a0 onto stack
 		movem.l	a6,-(sp)				; Push a6 onto stack
-		movem.l	d1,-(sp)				; Push d1 onto stack
 		lea		(vdp_control_port).l,a6
+		
+		;!@ Remove Window plane (BSZ2 non-debug builds)
+		cmpi.w	#(id_BSZ<<8)+1,(v_zone).w	; Is zone BSZ2?
+		bne.s	.resetWindow				; IF NOT, reset window plane; else do check below
+		; We are in BSZ2 level
+		tst.b	d1							; Check d1 input param. Is it 0?
+		beq.s	.skipWindow					; If so, branch		
+	.resetWindow:
+		move.w	#$8300+($A000>>10),(a6)		; set window nametable address		
+		move.w	#$9100,(a6)					; window horizontal position
+		move.w	#$9200,(a6)					; window vertical position
+	
+	.skipWindow:		
 		moveq	#0,d1			; Clear d1
 		move.w	$8004,d1		; VDP Register $00 base		
 		tst.b	(v_waterflag).w ; is level LZ?
@@ -947,12 +960,7 @@ Pow_vdp_fixRegs:
 		;move.w	#$8B03,(a6)		; line scroll mode
 		move.w	#$8C81,(a6)		; 40-cell display mode
 		move.w	#$9001,(a6)		; 64-cell hscroll size
-		
-		;!@ Remove Window plane (BSZ2 non-debug builds)
-		move.w	#$8300+($A000>>10),(a6)	; set window nametable address		
-		move.w	#$9100,(a6)				; window horizontal position
-		move.w	#$9200,(a6)				; window vertical position
-		
+
 		;Fix debug registers
 		;Register $00 (GFX)
 		writeDBG_sel	$00
@@ -979,7 +987,6 @@ Pow_vdp_fixRegs:
 		bsr.s	Level_LoadPal2
 	.skip2:
 		;enableD
-		movem.l	(sp)+,d1		; Pop d1 from stack
 		movem.l	(sp)+,a6		; Pop a6 from stack
 		movem.l	(sp)+,a0		; Pop a0 from stack		
 		rts

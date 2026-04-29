@@ -386,6 +386,7 @@ Init_GHM4:
 MainGameLoop:
 		;!@GD: Fix VDP registers if mode changed
 		moveq	#0,d0
+		moveq	#1,d1
 		jsr		(Pow_vdp_fixRegs).l
 
 		move.b	(v_gamemode).w,d0			; load Game Mode
@@ -3119,6 +3120,7 @@ Level_NoMusicFade:
 		bsr.w	ClearScreen
 		
 		moveq	#0,d0
+		moveq	#1,d1
 		jsr	(Pow_vdp_fixRegs).l
 		move.b	#0,(v_vdp_fx).w	; cancel VDP FX
 
