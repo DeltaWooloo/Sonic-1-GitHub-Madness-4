@@ -829,6 +829,11 @@ Pow_Randomiser:
 
 		jsr		(SignpostArtLoad2).l				;Load in signpost/ring flash artwork
 		addi.w	#50,(v_rings).w	; add 50 rings to enable
+		;!@ >999 Rings Fix
+        cmpi.w  #999,(v_rings).w    ; does Sonic have 999 or more rings?
+        blo.s   .BigRing_spawnit
+        move.w  #999,(v_rings).w    ; cap your rings to 999
+.BigRing_spawnit:
 		spawnObj	id_GiantRing,$01,dOllieWahoo	;Special subtype $1 for proper usage
 		rts
 ; ===========================================================================
