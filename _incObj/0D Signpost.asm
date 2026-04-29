@@ -194,6 +194,7 @@ GotThroughAct:
 GotThroughAct2:
 		clr.b	(v_invinc).w	; disable invincibility
 		clr.b	(f_timecount).w	; stop time counter
+		move.b	#1,(v_bossstatus).w	;!@ GD bugfix: Set boss flag. This will prevent drowning in CBZ2/water levels if underwater
 		move.b	#id_GotThroughCard,(v_endcard).w
 		moveq	#plcid_WINNERCard,d0
 		jsr	(NewPLC).l	; load title card patterns

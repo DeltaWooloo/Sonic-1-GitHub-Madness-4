@@ -183,7 +183,23 @@ Drown_Countdown:; Routine $A
 		bhs.w	.nocountdown
 		btst	#6,(v_player+obStatus).w ; is Sonic underwater?
 		beq.w	.nocountdown	; if not, branch
+		
+		;!@ GD: Bugfix, if level has water and end-of-level cards loaded, skip drown (esp. CBZ2)
+		cmpi.b	#id_ARZ,(v_zone).w			; golly i LOOOOVE hardcoded checks
+		beq.s	.doBugfix
+		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; WHZ3?
+		beq.s	.doBugfix
+		cmpi.w	#(id_CBZ<<8)+1,(v_zone).w	; is level number CBZ2 (has water)?
+		beq.s	.doBugfix
+		bra.s	.loseAir		
+	.doBugfix:
+		;!@ GD: There will probably be bugs here if
+		;low air and then it stops...
+		;due to this cond being triggered
+		tst.b	(v_bossstatus).w			; If boss status set?
+		bne.w	.nocountdown				; If so, skip drowning
 
+	.loseAir:
 		subq.w	#1,drown_time(a0)	; decrement timer
 		bpl.w	.nochange	; branch if time remains
 		move.w	#59,drown_time(a0)

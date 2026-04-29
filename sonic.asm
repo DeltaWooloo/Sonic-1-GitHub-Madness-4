@@ -5300,7 +5300,9 @@ DrawInstagramOverlay:
 		cmpi.w	#(id_BSZ<<8)+1,(v_zone).w
 		bne.s	.return
 		move.w	#128+92,d3 ; x
-		move.w	#128+92,d2 ; y
+		;!@ GD: Move it upwards 8px tile for room for the life counter
+		;move.w	#128+92,d2 ; y
+		move.w	#(128+84),d2 ; y
 		move.w	#$1C0,a3 ; art tile offset
 		lea	Map_Instagram(pc),a1
 		adda.w	(a1),a1

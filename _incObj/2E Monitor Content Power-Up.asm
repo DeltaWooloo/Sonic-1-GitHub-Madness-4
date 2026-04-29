@@ -180,6 +180,11 @@ Pow_GetLife:
 		rts
 
 Pow_GetLife2:
+		;!@ >99 Lives Fix
+        cmpi.b  #99,(v_lives).w    ; does Sonic have 99 or more lives?
+        ;bhs.s   .playlifesnd    ; if yes, branch
+		bhs.s   Pow_GetLife3
+
 		addq.b	#1,(v_lives).w	; add 1 to the number of lives you have
 		addq.b	#1,(f_lifecount).w ; update the lives counter
 		rts
@@ -279,12 +284,24 @@ Pow_ChkRings:
 		addi.w	#70,(v_rings).w	; add 70 rings to the number of rings you have because you are smart
 
 Pow_GetRings:
+		;!@ GD: Ring/life cap
+		;https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-9#post-94930
+		; >999 Rings Fix
+        cmpi.w  #999,(v_rings).w    ; does Sonic have 999 or more rings?
+        blo.s   .updaterings
+        move.w  #999,(v_rings).w    ; cap your rings to 999
+.updaterings:
 		ori.b	#1,(f_ringcount).w ; update the ring counter
-		cmpi.w	#420,(v_rings).w ; check if you have 256 rings
+		
+       ;!@ >99 Lives Fix
+        cmpi.b  #99,(v_lives).w    ; does Sonic have 99 or more lives?
+        bhs.s   Pow_RingSound    ; if yes, branch
+		
+		cmpi.w	#100,(v_rings).w ; check if you have 100 rings
 		blo.s	Pow_RingSound
 		bset	#1,(v_lifecount).w
 		beq.w	Pow_GetLife
-		cmpi.w	#666,(v_rings).w ; check if you have 666 rings
+		cmpi.w	#200,(v_rings).w ; check if you have 200 rings
 		blo.s	Pow_RingSound
 		bset	#2,(v_lifecount).w
 		beq.w	Pow_GetLife
@@ -812,6 +829,11 @@ Pow_Randomiser:
 
 		jsr		(SignpostArtLoad2).l				;Load in signpost/ring flash artwork
 		addi.w	#50,(v_rings).w	; add 50 rings to enable
+		;!@ >999 Rings Fix
+        cmpi.w  #999,(v_rings).w    ; does Sonic have 999 or more rings?
+        blo.s   .BigRing_spawnit
+        move.w  #999,(v_rings).w    ; cap your rings to 999
+.BigRing_spawnit:
 		spawnObj	id_GiantRing,$01,dOllieWahoo	;Special subtype $1 for proper usage
 		rts
 ; ===========================================================================
@@ -926,7 +948,7 @@ Pow_vdp_fixRegs:
 		move.w	#$8C81,(a6)		; 40-cell display mode
 		move.w	#$9001,(a6)		; 64-cell hscroll size
 		
-		;!@ Remove Window plane
+		;!@ Remove Window plane (BSZ2 non-debug builds)
 		move.w	#$8300+($A000>>10),(a6)	; set window nametable address		
 		move.w	#$9100,(a6)				; window horizontal position
 		move.w	#$9200,(a6)				; window vertical position

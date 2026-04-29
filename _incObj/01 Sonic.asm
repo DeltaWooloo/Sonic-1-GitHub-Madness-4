@@ -1943,6 +1943,10 @@ Sonic_Death:	; Routine 6
         rts
 
 .doDeath:
+		;!@ GD: Bugfix for PPZ1 walk-death
+		;Spam death anim to fix :shruggie:
+		move.b	#id_Death,obAnim(a0)
+
 		bsr.w	GameOver
 		bsr.w	ObjectFall
 		bsr.w	Sonic_RecordPosition

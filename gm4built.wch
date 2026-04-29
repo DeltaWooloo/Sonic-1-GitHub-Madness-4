@@ -1,5 +1,5 @@
 0
-13
+17
 00000	00FFD03A	w	h	0	vdpFXTime
 00001	00FFF63C	d	h	0	v_playerClone
 00002	00FFFE2D	b	h	0	v_vdp_fx
@@ -13,3 +13,7 @@
 0000A	00FFF6FE	d	h	0	v_screenposx
 0000B	00FFF702	d	h	0	v_screenposy
 0000C	00FFF7D8	b	h	0	v_squashbuffer
+0000D	00FFD01C	b	h	0	obAnim(v_player)
+0000E	00FFF000	d	h	0	v_endcard
+0000F	00FFFE12	w	h	0	v_air
+00010	00FFF7A5	b	h	0	v_bossstatus
