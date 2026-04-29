@@ -18,7 +18,7 @@ Knight_Previous_Frame	=	objoff_3B		; Where the Knight's previous frame will be s
 Knight_Timer		=	objoff_38		; Internal timer for the Knight. (2 bytes)
 Knight_X_Target		=	objoff_34		; X coordinate target for the Knight. (2 bytes)
 Knight_Y_Target		=	objoff_36		; Y coordinate target for the Knight. (2 bytes)
-Knight_Hits_Phase1	=	2			; HP for Phase 1
+Knight_Hits_Phase1	=	8			; HP for Phase 1
 Knight_Hits_Phase2	=	16			; HP for Phase 2
 Knight_Sound1_Duration	=	60			; How long the first Knight PCM sound lasts in frames (60Hz)
 Knight_Sound2_Duration	=	180			; How long the second Knight PCM sound lasts in frames (60Hz)
@@ -31,6 +31,7 @@ Knight_SwordRain_Spawn	=	objoff_2C		; Destination X coordinate for the sword rai
 Knight_SwordRain_SwdRem	=	objoff_2B		; Bitfield. Bit 7: Gap was skipped already. Bits 0-6: How many swords remain to spawn. (1 byte)
 Knight_SwordRain_SwdGap	=	objoff_2A		; How many swords until a gap is formed. (1 byte)
 Knight_FlyAttack_AtkRem =	objoff_2E		; Count how many instances of the fly attack are to be executed yet (1 byte)
+Knight_PrevAttack	=	objoff_29		; The Knight's previous attack.
 
 ; ===========================================================================
 ; Start of object code
@@ -462,7 +463,8 @@ RKP1End_Phase2:
 	move.b	#$F,obColType(a0)
 	move.b	#Knight_Hits_Phase2,obColProp(a0)
 	bclr	#7,obStatus(a0)
-	move.b	#60,objoff_3E(a0)					; Give the Knight invincibility frames.	
+	move.b	#60,objoff_3E(a0)					; Give the Knight invincibility frames.
+	clr.b	Knight_PrevAttack(a0)
 	rts
 	
 ; End of Phase 1 end behavior	
@@ -555,7 +557,17 @@ RKPhase2_WaitWave:
 ; ===========================================================================	
 	
 RKPhase2_ChooseAttack:
-	move.b	#$1C,ob2ndRout(a0)
+	lea	(RKPhase2_MoveChoices).l,a2
+	jsr	(RandomNumber).l
+	swap	d1
+	andi.l	#3,d1					; Number must be within 0-3.
+	adda.l	d1,a2					; Point to selection.	
+	move.b	(a2),d2
+	cmp.b	Knight_PrevAttack(a0),d2		; Was this attack chosen already?
+	beq.s	RKPhase2_ChooseAttack			; If yes, choose again.
+	
+	move.b	(a2),ob2ndRout(a0)
+	move.b	(a2),Knight_PrevAttack(a0)
 	rts
 	
 ; ===========================================================================	
@@ -716,7 +728,7 @@ RKP2_SwordRain_Target:
 	move.w	#$200,obVelY(a0)
 	addq.b	#2,ob2ndRout(a0)
 	move.b	#$B,obAnim(a0)
-	move.b	#5,Knight_SwordRain_AtkRem(a0)		; Number of times the attack will be repeated
+	move.b	#3,Knight_SwordRain_AtkRem(a0)		; Number of times the attack will be repeated
 	move.w	#60,Knight_Timer(a0)
 	rts
 	
@@ -791,7 +803,7 @@ RKP2_SwordRain_Spawn:
 	rts
 		
 .outtaswords:
-	move.w	#60,Knight_Timer(a0)
+	move.w	#40,Knight_Timer(a0)
 	addq.b	#2,ob2ndRout(a0)
 	
 .not0:
@@ -803,11 +815,13 @@ RKP2_SwordRain_Spawn:
 ; ===========================================================================
 
 RKP2_SwordRain_Strike:
+	cmpi.b	#$E,obAnim(a0)				; Has the Knight already struck?
+	beq.s	.hasstruck				; If yes, branch
 	cmpi.b	#$D,obAnim(a0)				; Has the Knight already struck?
 	beq.s	.hasstruck				; If yes, branch
 	
 	move.b	#$D,obAnim(a0)				; But if not... strike!
-	move.w	#90,Knight_Timer(a0)
+	move.w	#60,Knight_Timer(a0)
 	
 .hasstruck:
 	sub.w	#1,Knight_Timer(a0)
@@ -1325,6 +1339,14 @@ RKPhase1_BulletChoicesL:
 	
 RKPhase1_BulletChoicesR:
 	dc.b	0, 2, 4, 5, 6, 8, 9, 0
+	even
+	
+; ===========================================================================
+; Possible move choices for Phase 2
+; ===========================================================================	
+	
+RKPhase2_MoveChoices:
+	dc.b	$4,$4,$C,$1C
 	even
 	
 ; ===========================================================================
