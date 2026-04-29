@@ -29,6 +29,7 @@ Knight_SwordRain_AtkRem =	objoff_2E		; Count how many instances of the sword rai
 Knight_SwordRain_Spawn	=	objoff_2C		; Destination X coordinate for the sword rain (2 bytes)
 Knight_SwordRain_SwdRem	=	objoff_2B		; Bitfield. Bit 7: Gap was skipped already. Bits 0-6: How many swords remain to spawn. (1 byte)
 Knight_SwordRain_SwdGap	=	objoff_2A		; How many swords until a gap is formed. (1 byte)
+Knight_FlyAttack_AtkRem =	objoff_2E		; Count how many instances of the fly attack are to be executed yet (1 byte)
 
 ; ===========================================================================
 ; Start of object code
@@ -500,7 +501,15 @@ RKPhase2_Index:
 	dc.w	RKPhase1_Wait-RKPhase2_Index		; Sword rain: Wait before striking
 	dc.w	RKP2_SwordRain_Strike-RKPhase2_Index	; Sword rain: Strike!
 	dc.w	RKPhase2_Loop-RKPhase2_Index		; Restore idle animation and do another attack
-;	dc.w	RKPhase1_Idle-RKPhase2_Index		; Return to first routine
+	dc.w	RKP2_FlyAttack_Start-RKPhase2_Index	; Turn the Knight into a bird
+	dc.w	RKP2_FlyAttack_Strike-RKPhase2_Index	; Fly attack: strike
+	dc.w	RKPhase1_Wait-RKPhase2_Index		; Fly attack: wait after striking
+	dc.w	RKP2_FlyAttack_Repos-RKPhase2_Index	; Fly attack: repositions the Knight after striking
+	dc.w	RKPhase1_Wait-RKPhase2_Index		; Fly attack: wait after striking
+	dc.w	RKPhase2_MoveXYTarget-RKPhase2_Index	; Fly attack: repositions the Knight in ball form
+	dc.w	RKPhase1_Idle-RKPhase2_Index		; Fly attack: switch the Knight back to standard idle
+	dc.w	RKPhase1_Wait-RKPhase2_Index		; Fly attack: wait after striking
+	dc.w	RKPhase2_Loop-RKPhase2_Index		; Restore idle animation and do another attack
 
 ; ===========================================================================
 ; Makes the Knight wait until a timer has expired *and* they're centered.
@@ -532,7 +541,7 @@ RKPhase2_WaitWave:
 ; ===========================================================================	
 	
 RKPhase2_ChooseAttack:
-	move.b	#$C,ob2ndRout(a0)
+	move.b	#$1C,ob2ndRout(a0)
 	rts
 	
 ; ===========================================================================	
@@ -801,6 +810,101 @@ RKP2_SwordRain_Strike:
 	move.b	#$12,ob2ndRout(a0)			; Return to pre-strike routine
 	rts
 	
+; ===========================================================================	
+; BIRD UP!
+; ===========================================================================	
+
+RKP2_FlyAttack_Start:
+	move.b	#$F,obAnim(a0)				; Set this animation
+	
+.skipinit:
+	cmpi.b	#$17,obAniFrame(a0)			; Check if the animation has reached this specific point
+	bne.s	.return					; If not, return
+	addq.b	#2,ob2ndRout(a0)			; Set routine accordingly
+	move.b	#4,Knight_FlyAttack_AtkRem(a0)		; Set number of times attack will be executed
+	move.w	#$C00,obInertia(a0)			; Set inertia
+.return:	
+	rts
+	
+; ===========================================================================
+; Fly towards the edge of the screen
+; ===========================================================================	
+
+RKP2_FlyAttack_Strike:
+	moveq	#0,d0
+	move.w	obInertia(a0),d0
+	btst	#0,obStatus(a0)				; Check orientation
+	bne.s	.testrange
+	
+	neg.w	d0
+	
+.testrange:
+	moveq	#0,d1
+	move.w	(v_screenposx).w,d1
+	sub.w	#$40,d1
+	btst	#0,obStatus(a0)				; Check orientation
+	beq.s	.movingleft
+	
+	move.w	(v_screenposx).w,d1
+	add.w	#320+$40,d1
+	cmp.w	Knight_X_Position(a0),d1		; Has the Knight escaped the set boundary?
+	bhi.s	.onscreen	
+	bra.s	.endattack
+	
+	
+.movingleft:
+	cmp.w	Knight_X_Position(a0),d1		; Has the Knight escaped the set boundary?
+	blo.s	.onscreen
+	
+.endattack:
+	subq.b	#1,Knight_FlyAttack_AtkRem(a0)		; Subtract 1 from the remaining attacks.
+	beq.s	.strikesover
+	addq.b	#2,ob2ndRout(a0)			; Move to next routine
+	move.w	#90,Knight_Timer(a0)			; Set up timer
+	rts
+	
+.onscreen:
+	asr.w	#8,d0
+	add.w	d0,Knight_X_Position(a0)
+	rts
+	
+.strikesover:
+	addq.b	#6,ob2ndRout(a0)				; Knight goes back to target position
+	move.b	#4,obAnim(a0)					; in ball form
+	move.w	#Knight_X_Spawn+$2A0,Knight_X_Target(a0)	; Set X target
+	move.w	#Knight_Y_Spawn+$70,Knight_Y_Target(a0)		; Set Y target
+	move.w	#Knight_X_Spawn-$40,Knight_X_Position(a0)	; Hack that makes the Knight's return never fail without implementing proper boundary crossing checks :P
+	btst	#0,obStatus(a0)
+	bne.s	.fineasis
+	move.w	#Knight_X_Spawn+$180,Knight_X_Position(a0)	; Hack that makes the Knight's return never fail without implementing proper boundary crossing checks :P
+.fineasis:
+	move.w	#30,Knight_Timer(a0)
+	move.w	#$800,obVelX(a0)
+	move.w	#$800,obVelY(a0)	
+	rts
+	
+; ===========================================================================
+; Reposition the Knight for a new strike
+; ===========================================================================		
+	
+RKP2_FlyAttack_Repos:
+	subq.b	#4,ob2ndRout(a0)			; Makes the Knight strike again after this attack
+	bchg	#0,obStatus(a0)				; Flips orientation
+	move.w	#Knight_Y_Spawn,Knight_Y_Position(a0)	; Set base Y position
+	moveq	#0,d0
+	move.b	Knight_FlyAttack_AtkRem(a0),d0
+	andi.b	#$7F,d0
+	lea	(Knight_FlyAttack_YOffsets).l,a2
+	adda.l	d0,a2	
+	moveq	#0,d1
+	move.b	(a2),d1
+	add.w	d1,Knight_Y_Position(a0)		; Set the offset accordingly
+	cmpi.w	#Knight_Y_Spawn,(v_player+obY).w	; Check if player is way above a certain spot
+	bhs.s	.nomjpunish				; If not, branch.
+	move.w	(v_player+obY).w,Knight_Y_Position(a0)	; Make the Knight spawn where the player is instead
+	
+.nomjpunish:
+	rts
 	
 ; ===========================================================================	
 ; Makes the Knight loop through their attacks
@@ -1036,6 +1140,15 @@ RKBullets_Stationary:
 
 Knight_SwordRain_YOffsets:
 	dc.b	$20,$10,$0,$0,$0,$0,$10,$20
+	even
+	
+; ===========================================================================
+; Knight Fly attack Y spawn offsets
+; ===========================================================================
+	
+Knight_FlyAttack_YOffsets:
+	dc.b	$90,$90,$60,$30
+	even
 
 ; ===========================================================================
 ; Knight Bullet Property table
@@ -1161,6 +1274,9 @@ Ani_Roaring_Knight:
 		dc.w	.aurafarm-Ani_Roaring_Knight		; $B
 		dc.w	.swingprefront-Ani_Roaring_Knight	; $C
 		dc.w	.swingdofront-Ani_Roaring_Knight	; $D
+		dc.w	.swingafterfront-Ani_Roaring_Knight	; $E
+		dc.w	.flyattackprep-Ani_Roaring_Knight	; $F
+		dc.w	.flyattackdo-Ani_Roaring_Knight		; $10
 
 .null:		dc.b	0
 		dc.b	0,$FF
@@ -1221,8 +1337,21 @@ Ani_Roaring_Knight:
 		even
 		
 .swingdofront:	dc.b	3
-		dc.b	$1D,$1E,$1F,$FE,$1	
+		dc.b	$1D,$1E,$1F,$FD,$E	
 		even
+		
+.swingafterfront:
+		dc.b	3
+		dc.b	$1F,$FF
+		even
+		
+.flyattackprep:
+		dc.b	3
+		dc.b	$20,$21,$22,$23,$24,$25,$B,$7,$8,$9,$A,$B,$7,$8,$9,$A,$28,$29,$2A,$2B,$2C,$2D,$2E,$2F,$FD,$10
+		
+.flyattackdo:
+		dc.b	1
+		dc.b	$30,$31,$32,$33,$FF
 
 Ani_Knight_Bullets:
 	dc.w	.null-Ani_Knight_Bullets
