@@ -13,6 +13,10 @@ Debug_Index:	dc.w Debug_Main-Debug_Index
 ; ===========================================================================
 
 Debug_Main:	; Routine 0
+		;!@ GD: Improve vert cam movement in Debug
+		;!@ https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-10#post-95226
+		bset	#1,obStatus(a0)	; force airborne state when entering debug mode
+
 		addq.b	#2,(v_debuguse).w
 		move.w	(v_limittop2).w,(v_limittopdb).w ; buffer level x-boundary
 		move.w	(v_limitbtm1).w,(v_limitbtmdb).w ; buffer level y-boundary
