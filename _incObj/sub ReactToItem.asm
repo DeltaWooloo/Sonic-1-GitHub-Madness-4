@@ -113,6 +113,9 @@ ReactToItem:
 		tst.b	obRender(a1)
 		bpl.s	.next
 		move.b	obColType(a1),d0 ; load collision type
+		cmpi.b	#$29,obColType(a1)	; GIO: Check if collision if this specific one
+		beq.s	.next		; GIO: if it is, skip
+		tst.b	d0		; GIO
 		bne.s	.proximity	; if nonzero, branch
 
 .next:

@@ -19,6 +19,7 @@ Knight_Timer		=	objoff_38		; Internal timer for the Knight. (2 bytes)
 Knight_X_Target		=	objoff_34		; X coordinate target for the Knight. (2 bytes)
 Knight_Y_Target		=	objoff_36		; Y coordinate target for the Knight. (2 bytes)
 Knight_Hits_Phase1	=	2			; HP for Phase 1
+Knight_Hits_Phase2	=	16			; HP for Phase 2
 Knight_Sound1_Duration	=	60			; How long the first Knight PCM sound lasts in frames (60Hz)
 Knight_Sound2_Duration	=	180			; How long the second Knight PCM sound lasts in frames (60Hz)
 Knight_X_Position	=	objoff_30		; The Knight's X position, which is copied over to the Knight's current X position after being processed by waving routines. (2 bytes)
@@ -458,6 +459,10 @@ RKP1End_Phase2:
 	move.w	obY(a0),Knight_Y_Position(a0)
 	move.b	#$80,Knight_Wave_Increment(a0)
 	move.w	#120,Knight_Timer(a0)
+	move.b	#$F,obColType(a0)
+	move.b	#Knight_Hits_Phase2,obColProp(a0)
+	bclr	#7,obStatus(a0)
+	move.b	#60,objoff_3E(a0)					; Give the Knight invincibility frames.	
 	rts
 	
 ; End of Phase 1 end behavior	
@@ -479,7 +484,17 @@ RKnight_Phase2:
 	
 	lea	(Ani_Roaring_Knight).l,a1	
 	jsr	(AnimateSpriteXL).l
+	bsr.w	RKnight_HandleHits		; Handle the Knight getting hit	
+	bsr.w	RKPhase2_Collision		; Set collision according to the current animation
 	bsr.w	RKnight_LoadGfx			; Load graphics from DPLC to VRAM	
+	
+	cmpi.b	#60,objoff_3E(a0)		; Is the Knight invincible?
+	beq.s	.display			; If not, display normally.
+	btst	#3,objoff_3E(a0)		; Otherwise, once every 8 frames...
+	bne.s	.display			; ...choose whether to display the Knight's sprite or not.
+	rts
+
+.display	
 	jmp	(DisplaySprite).l		; Display object
 	
 ; ===========================================================================
@@ -507,8 +522,7 @@ RKPhase2_Index:
 	dc.w	RKP2_FlyAttack_Repos-RKPhase2_Index	; Fly attack: repositions the Knight after striking
 	dc.w	RKPhase1_Wait-RKPhase2_Index		; Fly attack: wait after striking
 	dc.w	RKPhase2_MoveXYTarget-RKPhase2_Index	; Fly attack: repositions the Knight in ball form
-	dc.w	RKPhase1_Idle-RKPhase2_Index		; Fly attack: switch the Knight back to standard idle
-	dc.w	RKPhase1_Wait-RKPhase2_Index		; Fly attack: wait after striking
+	dc.w	RKPhase2_Unball-RKPhase2_Index		; Fly attack: switch the Knight back to standard idle
 	dc.w	RKPhase2_Loop-RKPhase2_Index		; Restore idle animation and do another attack
 
 ; ===========================================================================
@@ -873,14 +887,15 @@ RKP2_FlyAttack_Strike:
 	move.b	#4,obAnim(a0)					; in ball form
 	move.w	#Knight_X_Spawn+$2A0,Knight_X_Target(a0)	; Set X target
 	move.w	#Knight_Y_Spawn+$70,Knight_Y_Target(a0)		; Set Y target
-	move.w	#Knight_X_Spawn-$40,Knight_X_Position(a0)	; Hack that makes the Knight's return never fail without implementing proper boundary crossing checks :P
+	move.w	#Knight_X_Spawn+$160,Knight_X_Position(a0)	; Hack that makes the Knight's return never fail without implementing proper boundary crossing checks :P
 	btst	#0,obStatus(a0)
-	bne.s	.fineasis
-	move.w	#Knight_X_Spawn+$180,Knight_X_Position(a0)	; Hack that makes the Knight's return never fail without implementing proper boundary crossing checks :P
+	beq.s	.fineasis
+	move.w	#Knight_X_Spawn+$380,Knight_X_Position(a0)	; Hack that makes the Knight's return never fail without implementing proper boundary crossing checks :P
 .fineasis:
 	move.w	#30,Knight_Timer(a0)
 	move.w	#$800,obVelX(a0)
-	move.w	#$800,obVelY(a0)	
+	move.w	#$800,obVelY(a0)
+	bchg	#0,obStatus(a0)
 	rts
 	
 ; ===========================================================================
@@ -902,8 +917,29 @@ RKP2_FlyAttack_Repos:
 	cmpi.w	#Knight_Y_Spawn,(v_player+obY).w	; Check if player is way above a certain spot
 	bhs.s	.nomjpunish				; If not, branch.
 	move.w	(v_player+obY).w,Knight_Y_Position(a0)	; Make the Knight spawn where the player is instead
+	andi.w	#$FFF8,Knight_Y_Position(a0)		; Round
 	
 .nomjpunish:
+	rts
+	
+; ===========================================================================	
+; Turns the Knight back into their idle form from a ball form
+; ===========================================================================	
+	
+RKPhase2_Unball:
+	cmpi.b	#1,obAnim(a0)
+	beq.s	.isidle
+	cmpi.b	#$11,obAnim(a0)
+	beq.s	.return
+	
+	cmpi.b	#$1,obAniFrame(a0)	; is the Knight on the first frame of the ball animation?
+	bne.s	.return
+	move.b	#$11,obAnim(a0)
+.return:
+	rts
+	
+.isidle:
+	addq.b	#2,ob2ndRout(a0)
 	rts
 	
 ; ===========================================================================	
@@ -997,6 +1033,42 @@ RKnight_Bullets:
 ; ===========================================================================
 ; Subroutines
 ; ===========================================================================
+
+; ===========================================================================
+; Subroutine to change the object's collision based on the currently playing
+; animation.
+;
+; Used by: Roaring Knight (Phase 2)
+; ===========================================================================
+
+RKPhase2_Collision:
+	tst.b	obColType(a0)				; Does the Knight have collision to begin with??
+	beq.s	.return					; If not, return.
+	move.b	#$F,obColType(a0)			; Default collision
+	cmpi.b	#4,obAnim(a0)				; Is animation ball?
+	beq.s	.clrcollision				; If yes, set no collision.
+	cmpi.b	#$F,obAnim(a0)				; Is animation transformation into bird?
+	beq.s	.clrcollision				; If yes, set no collision.
+	cmpi.b	#$11,obAnim(a0)				; Is animation transformation from ball to idle?
+	beq.s	.clrcollision				; If yes, set no collision.
+	cmpi.b	#$D,obAnim(a0)				; Is animation front facing strike?
+	beq.s	.hurtstrike				; If yes, set collision to hurt.
+	cmpi.b	#$10,obAnim(a0)				; Is animation bird flight?	
+	beq.s	.hurtbird				; If yes, set collision to hurt.
+.return:
+	rts
+	
+.clrcollision:
+	move.b	#$29,obColType(a0)
+	rts
+	
+.hurtstrike:
+	move.b	#$8F,obColType(a0)
+	rts
+	
+.hurtbird:
+	move.b	#$A7,obColType(a0)
+	rts
 
 ; ===========================================================================
 ; Subroutine to change the object's orientation based on the X position
@@ -1277,6 +1349,7 @@ Ani_Roaring_Knight:
 		dc.w	.swingafterfront-Ani_Roaring_Knight	; $E
 		dc.w	.flyattackprep-Ani_Roaring_Knight	; $F
 		dc.w	.flyattackdo-Ani_Roaring_Knight		; $10
+		dc.w	.unball-Ani_Roaring_Knight		; $11	
 
 .null:		dc.b	0
 		dc.b	0,$FF
@@ -1348,10 +1421,17 @@ Ani_Roaring_Knight:
 .flyattackprep:
 		dc.b	3
 		dc.b	$20,$21,$22,$23,$24,$25,$B,$7,$8,$9,$A,$B,$7,$8,$9,$A,$28,$29,$2A,$2B,$2C,$2D,$2E,$2F,$FD,$10
+		even
 		
 .flyattackdo:
 		dc.b	1
 		dc.b	$30,$31,$32,$33,$FF
+		even
+		
+.unball:
+		dc.b	3
+		dc.b	$C,$D,$E,$F,$FD,$1
+		even
 
 Ani_Knight_Bullets:
 	dc.w	.null-Ani_Knight_Bullets
