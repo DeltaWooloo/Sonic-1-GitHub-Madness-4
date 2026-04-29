@@ -25,7 +25,7 @@ HUD_Update:
 		tst.b	(f_ringcount).w	; does the ring counter need updating?
 		beq.s	.chkammo	; if not, branch
 		bpl.s	.notzero
-		locVRAM	(ArtTile_HUD+28)*tile_size
+		locVRAM	(ArtTile_HUD+28)*tile_size,d0
 		bsr.w	Hud_LoadZero	; reset rings to 0 if Sonic is hit
 
 .notzero:
@@ -43,7 +43,7 @@ HUD_Update:
 		tst.b	f_ammocount.w
 		beq.s	.chktime	; if not, branch
 		bpl.s	.notzero2
-		locVRAM	(ArtTile_HUD+31)*tile_size
+		locVRAM	(ArtTile_HUD+31)*tile_size,d0
 		bsr.w	Hud_LoadZero	; reset rings to 0 if Sonic is hit
 .notzero2:
 		clr.b	(f_ammocount).w
@@ -128,6 +128,7 @@ HudDebug:
 		tst.b	(f_ringcount).w	; does the ring counter need updating?
 		beq.s	.objcounter	; if not, branch
 		bpl.s	.notzero
+		locVRAM	(ArtTile_HUD+28)*tile_size,d0
 		bsr.w	Hud_LoadZero	; reset rings to 0 if Sonic is hit
 
 .notzero:
@@ -171,8 +172,9 @@ HudDebug:
 
 
 Hud_LoadZero:
+		lea	(vdp_data_port).l,a6
 		lea	Hud_TilesZero(pc),a2
-		move.w	#2,d2
+		moveq	#3-1,d2
 		bra.s	loc_1C83E
 ; End of function Hud_LoadZero
 
@@ -186,40 +188,43 @@ Hud_LoadZero:
 Hud_Base:
 		lea	(vdp_data_port).l,a6
 		bsr.w	Hud_Lives
-		locVRAM	(ArtTile_HUD+17)*tile_size
+		locVRAM	(ArtTile_HUD+17)*tile_size,d0
 		lea	Hud_TilesBase(pc),a2
-		move.w	#17-1,d2
-
+		moveq	#17-1,d2
+; a6 = vdp_data_port
+; d0 = vdp vram write address
+; d2 = loop
+; a2 = data
 loc_1C83E:
 		lea	Art_Text,a1
-
-loc_1C842:
-		move.w	#8-1,d1
+		move.w	sr,-(sp)
+		disable_ints
+		move.l	d0,vdp_control_port-vdp_data_port(a6)
+.loop:
+		moveq	#8-1,d1
 		move.b	(a2)+,d0
-		bmi.s	loc_1C85E
+		bmi.s	.blank
 		ext.w	d0
 		lsl.w	#5,d0
 		lea	(a1,d0.w),a3
-
-loc_1C852:
+.writetile:
 		move.l	(a3)+,(a6)
-		dbf	d1,loc_1C852
-
-loc_1C858:
-		dbf	d2,loc_1C842
-
+		dbf	d1,.writetile
+.cont:
+		dbf	d2,.loop
+		move.w	(sp)+,sr
 		rts
-; ===========================================================================
-
-loc_1C85E:
-		move.l	#0,(a6)
-		dbf	d1,loc_1C85E
-
-		bra.s	loc_1C858
+.blank:
+		moveq	#0,d0
+.writeblank:
+		move.l	d0,(a6)
+		dbf	d1,.writeblank
+		bra.s	.cont
 ; End of function Hud_Base
 
 ; ===========================================================================
-Hud_TilesBase:	dc.b $FF, $FF, $FF, $FF, $FF, $FF, 0 
+Hud_TilesBase:	; dc.b $FF, $FF, $FF, $FF, $FF, $FF, 0	; GMZ - Commented
+		dc.b $FF, 0, 0, 0, 0, 0, 0	; GMZ - Start the score HUD with 6 zeroes
 Hud_TilesTIME:	dc.b 0, $C, 0, 0
 Hud_TilesZero:	dc.b $FF, $FF, 0
 Hud_TilesAMMO:	dc.b $1B, $2F, $E

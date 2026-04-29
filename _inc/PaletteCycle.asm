@@ -6,12 +6,18 @@
 
 
 PaletteCycle:
+		;!@ If VDP FX powerdown flag is set, then stop palette cycling
+		tst.b	(v_vdp_fx).w
+		bne.s	.end
+		
 		moveq	#0,d2
 		moveq	#0,d0
 		move.b	(v_zone).w,d0	; get level number
 		add.w	d0,d0
 		move.w	PalCycle_Index(pc,d0.w),d0
-		jmp	PalCycle_Index(pc,d0.w) ; jump to relevant palette routine
+		jmp	PalCycle_Index(pc,d0.w) ; jump to relevant palette routine		
+	.end:
+		rts
 ; End of function PaletteCycle
 
 ; ===========================================================================
@@ -20,27 +26,20 @@ PaletteCycle:
 ; ---------------------------------------------------------------------------
 PalCycle_Index:	dc.w PalCycle_GHZ-PalCycle_Index
 		dc.w PalCycle_LZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
+		dc.w PalCycle_Null-PalCycle_Index
 		dc.w PalCycle_SLZ-PalCycle_Index
 		dc.w PalCycle_SYZ-PalCycle_Index
 		dc.w PalCycle_SBZ-PalCycle_Index
-		zonewarning PalCycle_Index,2
 		dc.w PalCycle_GHZ-PalCycle_Index	; Ending
-		dc.w PalCycle_MZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
+		dc.w PalCycle_CBZ-PalCycle_Index
+		dc.w PalCycle_Null-PalCycle_Index
+		dc.w PalCycle_Null-PalCycle_Index
 		dc.w PalCycle_DVZ-PalCycle_Index
 		dc.w PalCyc_Nogales-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
-		dc.w PalCycle_MZ-PalCycle_Index
+		dc.w PalCycle_Null-PalCycle_Index
+		dc.w PalCycle_Null-PalCycle_Index
+		dc.w PalCycle_Null-PalCycle_Index
+		zonewarning PalCycle_Index,2
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
@@ -57,7 +56,7 @@ PCycLZ_Seq:	dc.b 1,	0, 0, 1, 0, 0, 1, 0
 		even
 ; ===========================================================================
 
-PalCycle_MZ:
+PalCycle_Null:
 		rts
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
@@ -195,6 +194,27 @@ locret_1B64:
 
 ; ---------------------------------------------------------------------------
 
+PalCycle_CBZ:
+		subq.w	#1,(v_pcyc_time).w ; decrement timer
+		bpl.s	PCycCBZ_Skip	; if time remains, branch
+
+		move.w	#5,(v_pcyc_time).w ; reset timer to 5 frames
+		move.w	(v_pcyc_num).w,d0 ; get cycle number
+		addq.w	#1,(v_pcyc_num).w ; increment cycle number
+		andi.w	#3,d0		; if cycle > 3, reset to 0
+		lsl.w	#3,d0
+		lea	(Pal_CBZCyc).l,a0
+		lea	(v_pal_dry+$50).w,a1
+		move.l	(a0,d0.w),(a1)+
+		move.l	4(a0,d0.w),(a1)	; copy palette data to RAM
+		lea	(Pal_CBZCycUD).l,a0
+		lea	(v_palette_water+$50).w,a1
+		move.l	(a0,d0.w),(a1)+
+		move.l	4(a0,d0.w),(a1)	; copy palette data to RAM
+PCycCBZ_Skip:
+		rts	
+; End of function PCycle_CBZ
+
 PalCycle_DVZ:
 	move.b	v_clintonfucker,d0
 	bpl.s	.Exit
@@ -203,10 +223,20 @@ PalCycle_DVZ:
 	moveq	#0,d0
 	move.b	v_pcyc_num.w,d0
 
-		btst	#6,(v_jpadhold1).w	; dev
-		beq.w	.NoHeld
-		addq.b	#1,v_pcyc_num+1.w
-.NoHeld
+			; SACBLRDU
+			btst	#0,(v_jpadhold1).w	; dev
+			beq.w	.NoHeldUp
+			addq.b	#1,v_pcyc_num+1.w
+	
+	
+		.NoHeldUp:
+			btst	#1,(v_jpadhold1).w	; dev
+			beq.w	.NoHeldDown
+			addq.b	#1,v_pcyc_num+1.w
+	
+	
+		.NoHeldDown:
+		
 	andi.b	#$FE,d0		; no odd addresses
 	adda.l	d0,a0
 	move.b	v_pcyc_num+1.w,d0
@@ -229,8 +259,8 @@ PalCycle_DVZ:
 
 .Cycle:
 	rept 3
-	dc.w $222,$222,$222,$222,$222,$222,$222
-	dc.w $EEE,$EEE,$EEE,$EEE,$EEE,$EEE,$EEE
+	dc.w $060,$060,$060,$060,$060,$060,$060
+	dc.w $2E4,$2E4,$2E4,$2E4,$2E4,$2E4,$2E4
 	endr
 ; ---------------------------------------------------------------------------
 

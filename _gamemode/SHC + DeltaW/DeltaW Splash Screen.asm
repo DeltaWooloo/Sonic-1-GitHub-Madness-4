@@ -119,7 +119,7 @@ QuoteSoundTable:
 		dc.b	bgm_DeltaWSplash	; 35
 		dc.b	bgm_DeltaWSplash	; 36
 		dc.b	bgm_DeltaWSplash	; 37
-		dc.b	0			; 38
+		dc.b	0					; 38
 		dc.b	bgm_DeltaWSplash	; 39
 		dc.b	bgm_DeltaWSplash	; 40
 		dc.b	bgm_DeltaWSplash	; 41
@@ -147,7 +147,7 @@ QuoteSoundTable:
 		dc.b	bgm_BlueBalls		; 63
 		dc.b	bgm_DeltaWSplash	; 64
 		dc.b	bgm_DeltaWSplash	; 65
-		dc.b	sfx_Spring		; 66
+		dc.b	sfx_Spring			; 66
 		dc.b	bgm_DeltaWSplash	; 67
 		dc.b	bgm_DeltaWSplash	; 68
 		dc.b	bgm_DeltaWSplash	; 69
@@ -208,6 +208,9 @@ QuoteSoundTable:
 		dc.b	bgm_RonicSetro		; 124
 		dc.b	bgm_Moonwalker		; 125
 		dc.b	bgm_DeltaWSplash	; 126
+		dc.b	bgm_DeltaWSplash	; 127
+		dc.b	bgm_DeltaWSplash	; 128
+		dc.b	sfx_Lamppost		; 129
 		even
 
 ; ===========================================================================
@@ -367,6 +370,9 @@ TextData_QuotePointers:
 		dc.w	TextData_Quote124-TextData_QuotePointers
 		dc.w	TextData_Quote125-TextData_QuotePointers
 		dc.w	TextData_Quote126-TextData_QuotePointers
+		dc.w	TextData_Quote127-TextData_QuotePointers
+		dc.w	TextData_Quote128-TextData_QuotePointers
+		dc.w	TextData_Quote129-TextData_QuotePointers
 TextData_QuotePointers_End:
 		
 TextData_Quote0:	dc.b	"        A CERTIFIED W MOMENT        "
@@ -496,6 +502,9 @@ TextData_Quote123:	dc.b	"             THE J!!!!!             "
 TextData_Quote124:	dc.b	"    BROUGHT TO YOU BY RONIC SETRO   "
 TextData_Quote125:	dc.b	"     STRUCK BY A SMOOTH CRIMINAL    "
 TextData_Quote126:	dc.b	"         THAT'S ALL, FOLKS!         "
+TextData_Quote127:	dc.b	"       LEMON MIXED WITH MILK        "
+TextData_Quote128:	dc.b	"    GO BLEACH YOUR ROOTS, CREEP!    "
+TextData_Quote129:	dc.b	"   BIG HOLE! BIG ALRIGHT! BIIIG!!!  "
 ;TextData_Quote:	dc.b	"                                    "
 TextData_Quotes_End:	even
 

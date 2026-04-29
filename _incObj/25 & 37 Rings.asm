@@ -141,16 +141,28 @@ Ring_Delete:	; Routine 8
 
 
 CollectRing:
-		addq.w	#1,(v_rings).w	; add 1 to rings
-		ori.b	#1,(f_ringcount).w ; update the rings counter
-		move.w	#sfx_Ring,d0	; play ring sound
-		cmpi.w	#420,(v_rings).w ; do you have < 420 rings?
-		blo.s	.playsnd	; if yes, branch
-		bset	#1,(v_lifecount).w ; update lives counter
+		;!@ GD: Ring/life cap
+		;https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-9#post-94930
+		; >999 Rings Fix
+        cmpi.w  #999,(v_rings).w    ; does Sonic have 999 or more rings?
+        bhs.s   .updaterings    	; if so, skip the increment
+		
+		addq.w	#1,(v_rings).w		; add 1 to rings
+		ori.b	#1,(f_ringcount).w 	; update the rings counter
+.updaterings:						;!@
+		move.w	#sfx_Ring,d0		; play ring sound
+		
+		;!@ >99 Lives Fix
+        cmpi.b  #99,(v_lives).w    	; does Sonic have 99 or more lives?
+        bhs.s   .playsnd    		; if yes, branch
+		
+		cmpi.w	#100,(v_rings).w 	; do you have < 100 rings?
+		blo.s	.playsnd			; if yes, branch
+		bset	#1,(v_lifecount).w 	; update lives counter
 		beq.s	.got100
-		cmpi.w	#666,(v_rings).w ; do you have < 666 rings?
-		blo.s	.playsnd	; if yes, branch
-		bset	#2,(v_lifecount).w ; update lives counter
+		cmpi.w	#200,(v_rings).w 	; do you have < 200 rings?
+		blo.s	.playsnd			; if yes, branch
+		bset	#2,(v_lifecount).w 	; update lives counter
 		bne.s	.playsnd
 
 .got100:
@@ -257,8 +269,8 @@ RLoss_Count:	; Routine 0
 		move.b	d0,obDelayAni(a0)	; Move d0 to new timer
 		move.b	d0,(v_ani3_time).w	; Move d0 to old timer (for animated purposes)
 	endif
-		move.w	#sfx_RingLoss,d0
-		jsr	(QueueSound2).l		; play ring loss sound
+		move.w	#sfx_Fireball,d0
+		jsr	(QueueSound2).l	; play lava ball sound
 
 RLoss_Bounce:	; Routine 2
 		move.b	(v_ani3_frame).w,obFrame(a0)

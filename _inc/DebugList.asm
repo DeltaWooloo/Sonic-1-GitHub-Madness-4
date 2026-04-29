@@ -16,19 +16,36 @@ DebugList:
 		dc.w .Joint-DebugList
 		dc.w .DVZ-DebugList
 		dc.w .GHZ-DebugList
+		dc.w .BSZ-DebugList
+		dc.w .GHZ-DebugList
+		dc.w .LZ-DebugList	; placeholder for ARZ
 
 dbug:	macro map,object,subtype,frame,vram
 		dc.l map+(object<<24)
 		dc.b subtype,frame
 		dc.w vram
 		endm
+		
+;!@ Debug all monitors: (https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-10#post-95045)	
+allMonitors:	macro
+	dbug    Map_Monitor,    id_Monitor,    1,    3,    make_art_tile(ArtTile_Monitor,0,0) ; Eggman Monitor
+	dbug    Map_Monitor,    id_Monitor,    2,    4,    make_art_tile(ArtTile_Monitor,0,0) ; 1-Up Monitor
+	dbug    Map_Monitor,    id_Monitor,    3,    5,    make_art_tile(ArtTile_Monitor,0,0) ; Speed Shoes Monitor
+	dbug    Map_Monitor,    id_Monitor,    4,    6,    make_art_tile(ArtTile_Monitor,0,0) ; Shield Monitor
+	dbug    Map_Monitor,    id_Monitor,    5,    7,    make_art_tile(ArtTile_Monitor,0,0) ; Invincibility Monitor
+	dbug    Map_Monitor,    id_Monitor,    6,    8,    make_art_tile(ArtTile_Monitor,0,0) ; Ring Monitor
+	dbug    Map_Monitor,    id_Monitor,    7,    9,    make_art_tile(ArtTile_Monitor,0,0) ; Randomizer
+	dbug    Map_Monitor,    id_Monitor,    8,    10,   make_art_tile(ArtTile_Monitor,0,0) ; Slow Shoes
+	endm
 
 .GHZ:
 		dc.w (.GHZend-.GHZ-2)/8
 
 ;			mappings	object		subtype	frame	VRAM setting
 		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
-		dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		;!@
+		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		allMonitors
 		dbug	Map_Crab,	id_Crabmeat,	0,	0,	make_art_tile(ArtTile_Crabmeat,0,0)
 		dbug	Map_Buzz,	id_BuzzBomber,	0,	0,	make_art_tile(ArtTile_Buzz_Bomber,0,0)
 		dbug	Map_Chop,	id_Chopper,	0,	0,	make_art_tile(ArtTile_Chopper,0,0)
@@ -51,7 +68,9 @@ dbug:	macro map,object,subtype,frame,vram
 
 ;			mappings	object		subtype	frame	VRAM setting
 		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
-		dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		;!@
+		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		allMonitors
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
 		dbug	Map_Jaws,	id_Jaws,	8,	0,	make_art_tile(ArtTile_Jaws,1,0)
 ;		dbug	Map_Burro,	id_Burrobot,	0,	2,	make_art_tile(ArtTile_Burrobot,0,1)	; i want meiko to gently pet me
@@ -86,7 +105,9 @@ dbug:	macro map,object,subtype,frame,vram
 
 ;			mappings	object		subtype	frame	VRAM setting
 		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
-		dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		;!@
+		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		allMonitors
 		dbug	Map_Buzz,	id_BuzzBomber,	0,	0,	make_art_tile(ArtTile_Buzz_Bomber,0,0)
 		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
@@ -115,7 +136,9 @@ dbug:	macro map,object,subtype,frame,vram
 
 ;			mappings	object		subtype	frame	VRAM setting
 		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
-		dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		;!@
+		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		allMonitors
 		dbug	Map_Elev,	id_Elevator,	0,	0,	make_art_tile(ArtTile_Level,2,0)
 		dbug	Map_CFlo,	id_CollapseFloor, 0,	2,	make_art_tile(ArtTile_SLZ_Collapsing_Floor,2,0)
 		dbug	Map_Plat_SLZ,	id_BasicPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
@@ -138,7 +161,9 @@ dbug:	macro map,object,subtype,frame,vram
 
 ;			mappings	object		subtype	frame	VRAM setting
 		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
-		dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		;!@
+		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		allMonitors
 		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
 		dbug	Map_Roll,	id_Roller,	0,	0,	make_art_tile(ArtTile_Roller,0,0)
@@ -158,7 +183,9 @@ dbug:	macro map,object,subtype,frame,vram
 
 ;			mappings	object		subtype	frame	VRAM setting
 		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
-		dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		;!@
+		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		allMonitors
 		dbug	Map_Bomb,	id_Bomb,	0,	0,	make_art_tile(ArtTile_Bomb,0,0)
 		dbug	Map_Orb,	id_Orbinaut,	0,	0,	make_art_tile(ArtTile_SBZ_Orbinaut,0,0)
 		dbug	Map_Cat,	id_Caterkiller,	0,	0,	make_art_tile(ArtTile_SBZ_Caterkiller,1,0)
@@ -212,7 +239,9 @@ dbug:	macro map,object,subtype,frame,vram
 
 ;			mappings	object		subtype	frame	VRAM setting
 		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
-		dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		;!@
+		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		allMonitors
 		dbug	Map_IZ,	id_IZ,	0,	0,	make_art_tile(ArtTile_CBZ_IZ,0,0)
 		dbug	Map_IZ,	id_IZ,	2,	0,	make_art_tile(ArtTile_CBZ_IZ,0,0)
 		dbug	Map_IZ,	id_IZ,	1,	0,	make_art_tile(ArtTile_CBZ_IZ,1,0)
@@ -232,6 +261,7 @@ dbug:	macro map,object,subtype,frame,vram
 ;		dbug	Map_Edge,	id_EdgeWalls,	0,	0,	make_art_tile(ArtTile_GHZ_Edge_Wall,2,0)
 ;		dbug	Map_GBall,	id_Obj19,	0,	0,	make_art_tile(ArtTile_GHZ_Giant_Ball,2,0)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
+		dbug	Map_Pwisp,	id_PWispBoss,	0,	0,	make_art_tile(ArtTile_Eggman,1,0)
 ;		dbug	Map_GRing,	id_GiantRing,	0,	0,	make_art_tile(ArtTile_Giant_Ring,1,0)
 ;		dbug	Map_Bonus,	id_HiddenBonus,	1,	1,	make_art_tile(ArtTile_Hidden_Points,0,1)
 ;		dbug	Map_Animal5,id_Animals,	0,	2,	make_art_tile(ArtTile_Animal_1,0,0)
@@ -242,7 +272,9 @@ dbug:	macro map,object,subtype,frame,vram
 
 ;			mappings	object		subtype	frame	VRAM setting
 		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
-		dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		;!@
+		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		allMonitors
 		dbug	Map_Elev,	id_Elevator,	0,	0,	make_art_tile(ArtTile_Level,2,0)
 		dbug	Map_CFlo,	id_CollapseFloor, 0,	2,	make_art_tile(ArtTile_SLZ_Collapsing_Floor,2,0)
 		dbug	Map_Plat_SLZ,	id_BasicPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
@@ -263,7 +295,9 @@ dbug:	macro map,object,subtype,frame,vram
 
 ;			mappings	object		subtype	frame	VRAM setting
 		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
-		dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		;!@
+		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		allMonitors
 		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
@@ -273,12 +307,32 @@ dbug:	macro map,object,subtype,frame,vram
 
 .DVZ:
 		dc.w (.DVZend-.DVZ-2)/8
+;			mappings		object			subtype	frame	VRAM setting
+		dbug 	Map_Ring,		id_Rings,		0,	0,	make_art_tile(ArtTile_Ring,1,0)
+		;!@
+		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		allMonitors
+		dbug	Map_NeedleBoss, 	id_NeedleBoss,		4,	1,	NEEDLB_GFX
+		dbug	Map_NeedleBoss, 	id_NeedleBoss,		8,	2,	NEEDLB_GFX
+		dbug	Map_NeedleBoss, 	id_NeedleBoss,		12,	3,	NEEDLB_GFX
+		dbug	Map_NeedleBoss, 	id_NeedleBoss,		16,	4,	NEEDLB_GFX
+		dbug	Map_NeedleBoss, 	id_NeedleBoss,		20,	5,	NEEDLB_GFX
+		dbug	Map_Spike,		id_Spikes,		0,	0,	make_art_tile(ArtTile_Spikes,0,0)
+		dbug	Map_Spring,		id_Springs,		0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
+		dbug	Map_Lamp,		id_Lamppost,		1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
+.DVZend:
+		even
+
+.BSZ:
+		dc.w (.BSZend-.BSZ-2)/8
 ;			mappings	object		subtype	frame	VRAM setting
 		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
-		dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
-		dbug	Map_NeedleBoss, id_NeedleBoss,	4,	1,	NEEDLB_GFX
+		;!@
+		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		allMonitors
+		dbug	Map_Ring, 	id_WaterSound,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
 		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
-.DVZend:
+.BSZend:
 		even

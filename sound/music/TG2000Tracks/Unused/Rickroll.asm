@@ -24719,5 +24719,5 @@ Rickroll_Voices:
 	dc.b		$1C,$3F,$03,$31,$31,$1F,$1B,$1E,$1E,$0F,$07,$06,$07,$00,$0A,$00
 	dc.b		$00,$8A,$86,$F6,$F7,$26,$02,$17,$00;			Voice 04
 	
-	smpsFooterEndSong	"TG2000Tracks/Rickroll.asm"
+	smpsFooterEndSong	"TG2000Tracks/Unused/Rickroll.asm"
 	even

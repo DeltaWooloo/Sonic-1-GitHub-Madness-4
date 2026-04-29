@@ -5,131 +5,164 @@
 -
 	phase $80
 ; Sonic 1
-DACMIN				ds.b 1	;!@ GD: Minimumum DAC sample - 1 (silence). Used for enum/array bounds
-dKick				ds.b 1
-dSnare				ds.b 1
-dProtoSnare			ds.b 1
-dTimpani			ds.b 1
-dHiTimpani			ds.b 1
-dMidTimpani			ds.b 1
-dLowTimpani			ds.b 1
-dVLowTimpani		ds.b 1
+DACMIN						ds.b 1	;!@ GD: Minimumum DAC sample - 1 (silence). Used for enum/array bounds
+dKick						ds.b 1
+dSnare						ds.b 1
+dProtoSnare					ds.b 1
+dTimpani					ds.b 1
+dHiTimpani					ds.b 1
+dMidTimpani					ds.b 1
+dLowTimpani					ds.b 1
+dVLowTimpani				ds.b 1
 
 ; Sonic 2
-dHiTom				ds.b 1
-dMidTom				ds.b 1
-dLowTom				ds.b 1
-dFloorTom			ds.b 1
+dHiTom						ds.b 1
+dMidTom						ds.b 1
+dLowTom						ds.b 1
+dFloorTom					ds.b 1
+dHiBongo					ds.b 1
+dMidBongo					ds.b 1
+dLowBongo					ds.b 1
+dVLowBongo					ds.b 1
 
 ; Sonic 3
-dKickS3				ds.b 1
-dSnareS3			ds.b 1
-dMuffledSnare		ds.b 1
-dCrashCymbal		ds.b 1
-dElectricHighTom	ds.b 1
-dElectricHiTom = dElectricHighTom
-dElectricMidTom		ds.b 1
-dElectricLowTom		ds.b 1
-dElectricFloorTom	ds.b 1
-dHiTimpaniS3		ds.b 1
-dMidTimpaniS3		ds.b 1
-dLowTimpaniS3		ds.b 1
+dKickS3						ds.b 1
+dSnareS3					ds.b 1
+dMuffledSnare				ds.b 1
+dCrashCymbal				ds.b 1
+dElectricHighTom			ds.b 1
+dElectricHiTom = 			dElectricHighTom
+dElectricMidTom				ds.b 1
+dElectricLowTom				ds.b 1
+dElectricFloorTom			ds.b 1
+dHiTimpaniS3				ds.b 1
+dMidTimpaniS3				ds.b 1
+dLowTimpaniS3				ds.b 1
 
 ; Sonic Spinball
-dSpinKick			ds.b 1
-dSpinSnare			ds.b 1
+dSpinKick					ds.b 1
+dSpinSnare					ds.b 1
 
 ; Generic SMPS
-dSMPSKick			ds.b 1
-dSMPSSnare			ds.b 1
+dSMPSKick					ds.b 1
+dSMPSSnare					ds.b 1
 
 ; Dax Sample Set
-dChunkyKick			ds.b 1
-dPokeSnare			ds.b 1
-dPokeKickCrashHi	ds.b 1
-dPokeHiTimpani		ds.b 1
-dPokeMidTimpani		ds.b 1
-dPokeLowTimpani		ds.b 1
+dChunkyKick					ds.b 1
+dPokeSnare					ds.b 1
+dPokeKickCrashHi			ds.b 1
+dPokeHiTimpani				ds.b 1
+dPokeMidTimpani				ds.b 1
+dPokeLowTimpani				ds.b 1
 
 ; Conic 1 DAC
-dTick:				ds.b 1
+dTick:						ds.b 1
 
 ; Clinton Fucker
-dClintLoopA:		ds.b 1
-dClintLoopB:		ds.b 1
+dClintLoopA:				ds.b 1
+dClintLoopB:				ds.b 1
 
 ; HOMERO
-dHomero:			ds.b 1
+dHomero:					ds.b 1
+
+dEagSoft_Chirp1				ds.b 1	; GMZ
+dEagSoft_Chirp2				ds.b 1	; GMZ
+dEagSoft_Speech				ds.b 1	; GMZ
+dWeebTrash1					ds.b 1
+dWeebTrash2					ds.b 1
+dWeebTrash3					ds.b 1
+
+dNull						ds.b 1
 
 ; In-Game SFX Samples
-dLetsGOO			ds.b 1
-dBoik				ds.b 1
-dQuakeJump			ds.b 1
-dFannys				ds.b 1
-dQuakeRocket		ds.b 1
-dSTFU				ds.b 1
-dFuck				ds.b 1
-dChicken			ds.b 1
-dGayNeil			ds.b 1
-dDicks				ds.b 1
-dBabyAlarm			ds.b 1
-dYouCanSuck			ds.b 1
-dBoostPower			ds.b 1
-dClintonHi			ds.b 1
-dClintonWin			ds.b 1
-dClintonFail		ds.b 1
-dDoYouSuck			ds.b 1
-dOnTheBall			ds.b 1
-dDAMN				ds.b 1
-dTwerkOf87			ds.b 1
-dScream				ds.b 1
-dRift				ds.b 1
+dDAMN						ds.b 1
+dLetsGOO					ds.b 1
+dBoik						ds.b 1
+dQuakeJump					ds.b 1
+dFannys						ds.b 1
+dTrevor						ds.b 1
+dQuakeRocket				ds.b 1
+dSTFU						ds.b 1
+dFuck						ds.b 1
+dChicken					ds.b 1
+dGayNeil					ds.b 1
+dDicks						ds.b 1
+dBabyAlarm					ds.b 1
+dYouCanSuck					ds.b 1
+dBoostPower					ds.b 1
+dBoostRPower				ds.b 1
+dClintonHi					ds.b 1
+dClintonWin					ds.b 1
+dClintonFail				ds.b 1
+dDoYouSuck					ds.b 1
+dOnTheBall					ds.b 1
+dTwerkOf87					ds.b 1
+dScream						ds.b 1
+dRift						ds.b 1
+dSans						ds.b 1
+dDude						ds.b 1
 
 ; Title Screen Samples
-dYoFreddy			ds.b 1
-dGithub				ds.b 1
-dMadness			ds.b 1
-dTheFourth			ds.b 1
-dBSOD				ds.b 1
+dYoFreddy					ds.b 1
+dGithub						ds.b 1
+dMadness					ds.b 1
+dTheFourth					ds.b 1
+dEggmanLaugh				ds.b 1
+dDisclaimer					ds.b 1
+;BSOD samples
+dsbDevelopers				ds.b 1
+dsbLove						ds.b 1
+dsbPC						ds.b 1
+dBSOD						ds.b 1
 
-; Splash Screen Samples
-dShutdown			ds.b 1
-dChord16			ds.b 1
-dW98IPC				ds.b 1
-dEggNo				ds.b 1
-dfunnyb_utthole		ds.b 1
-d2kki				ds.b 1
-dEagleSoftSong		ds.b 1
-dGenesisDoes1		ds.b 1
-dVirus				ds.b 1
-dsupbeaches			ds.b 1
+; more BSOD	Splash Screen Samples
+dShutdown					ds.b 1
+dChord16					ds.b 1
+dW98IPC						ds.b 1
+dMeow1						ds.b 1
+dMeow2						ds.b 1
 
+; Windows 95 Rock lyrics samples
+;dmsr_windows				ds.b 1
+;dmsr_better					ds.b 1
+;dmsr_Change					ds.b 1
+;dmsr_gates					ds.b 1
+;dmsr_live					ds.b 1
+;dmsr_microsoft				ds.b 1
+;dmsr_mouse					ds.b 1
+;dmsr_much					ds.b 1
+;dmsr_never					ds.b 1
+;dmsr_ooh1					ds.b 1
+;dmsr_ooh2					ds.b 1
+;dmsr_ooh3					ds.b 1
+;dmsr_ooh4					ds.b 1
+;dmsr_w95					ds.b 1
+;dmsr_w95_2					ds.b 1
+
+dEggNo						ds.b 1
+dfunnyb_utthole				ds.b 1
+d2kki						ds.b 1
+dGenesisDoes1				ds.b 1
+dVirus						ds.b 1
+dsupbeaches					ds.b 1
 ; Commercial Samples
-dRightBack			ds.b 1
-dGenesisCan3		ds.b 1
+dGenesisCan3				ds.b 1
 
 ; Ollie Samples
-dOllieGameTap		ds.b 1
-dOllieWahoo			ds.b 1
+dOllieGameTap				ds.b 1
+dOllieWahoo					ds.b 1
+
+
+; Mega Man 8 Samples
+dKickMM8					ds.b 1
+dSnareMM8					ds.b 1
 
 ; SEGA Samples
-dSega				ds.b 1
-;dSega2				ds.b 1
-
-; UNUSED
-;dMadnessR			ds.b 1
-;dEggmanLaugh		ds.b 1
-;dPenis				ds.b 1
-;dBoioing			ds.b 1
-;dOrangeLaugh		ds.b 1
-;dClintonYeah		ds.b 1
-;dGenesisCan1		ds.b 1
-;dGenesisCan2		ds.b 1
-;dIntel				ds.b 1
+dSega						ds.b 1
 
 ;!@ GD: Maximum DAC sample (exclusive range). Used for enum/array bounds
 ;Please reserve this as last
-dsfxSilence			ds.b 1
+dsfxSilence					ds.b 1
 DACMAX = dsfxSilence
 	dephase
 	!org -

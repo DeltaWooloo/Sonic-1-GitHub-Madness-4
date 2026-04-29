@@ -40,11 +40,14 @@ locktime:	equ $3E	; temporary D-Pad control lock timer (2 bytes)
 
 chrid_tonic	equ 0
 chrid_maniac	equ 1
-chrid_last	equ 1
+chrid_mrbean	equ 2
+chrid_last	equ 2
 
 ; ---------------------------------------------------------------------------
 
 SonicPlayer:
+		cmpi.b	#id_ColdBrew,(v_gamemode).w
+		beq.w	TheColdBrewBear
 		tst.w	(v_debuguse).w		; is debug mode being used?
 		beq.s	.nodbug			; if not, branch
 		jmp	(DebugMode).l
@@ -97,7 +100,7 @@ Player_Init:	; Routine 0
 .lut:
 		dc.l	Tonic_Init
 		dc.l	Maniac_Init
-
+		dc.l	MrBean_Init
 ; ----------------------------------------------------------------------------
 ; Get player's current character data.
 ; d0 = map
@@ -121,7 +124,7 @@ GetPlayerData:
 PlayerMapList:
 	dc.l	Map_Tonic,Dgfx_Tonic,Art_Tonic,Pal_Tonic
 	dc.l	Map_Maniac,Dgfx_Maniac,Art_Maniac,Pal_Maniac
-
+	dc.l	Map_MrBean,Dgfx_MrBean,Art_MrBean,Pal_Tonic
 ; ----------------------------------------------------------------------------
 ; Get... other player data!
 ; OUTPUTS:
@@ -135,31 +138,42 @@ ch_hurtpcm	equ 2
 ; lazy struct
 
 pdat.livesart	= 0
-pdat.hurtsnd	= 2
-pdat.height	= 4
-pdat.height2	= 5
-pdat.width	= 6
-pdat.width2	= 7
+pdat.signart	= 2
+pdat.hurtsnd	= 4
+pdat.height	= 6
+pdat.height2	= 7
+pdat.width	= 8
+pdat.width2	= 9
 
 GetOtherPlayerData:
 	moveq	#0,d0
 	move.b	(v_characterid).w,d0
 	chk	#chrid_last,d0
-	lsl.w	#3,d0
+	mulu.w	#$A,d0
 	lea	OtherPlayerData(pc,d0.w),a5
 	rts
 
-	; HUD Life Icon Art, Damage SFX
+	; HUD Life Icon Art, Signpost Art, Damage SFX
 
 OtherPlayerData:
 	dc.w	Nem_TonicLives-Nem_Lives
+	dc.w	Nem_CharSignTonic-Nem_CharSign
 	dc.w	dFuck
 	dc.b	19,14				; stand, roll height
 	dc.b	 9, 7				; stand, roll width
+;	dc.b	"Jiggly"			; padder
 	dc.w	Nem_ManiacLives-Nem_Lives
+	dc.w	Nem_CharSignManiac-Nem_CharSign
 	dc.w	dGayNeil
 	dc.b	15, 9
 	dc.b	 7, 6
+;	dc.b	"Joshyy"			; padder
+	dc.w	Nem_MrBeanLives-Nem_Lives
+	dc.w	Nem_CharSignBeans-Nem_CharSign		; Nano: Add a custom sprites for bean's signpost next time. ;Dawid: did it for ya!
+	dc.w	dFuck
+	dc.b	19,14				; stand, roll height
+	dc.b	 9, 7				; stand, roll width
+;	dc.b	"Sexyy"			; padder
 ; ----------------------------------------------------------------------------
 ; TeethTonic character init routine
 ; ----------------------------------------------------------------------------
@@ -205,7 +219,65 @@ Maniac_Init:
 		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
 		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
 		bra.w	Sonic_Control
+		
+; ----------------------------------------------------------------------------
+; MrBean character init routine
+; ----------------------------------------------------------------------------
+
+MrBean_Init:
+		addq.b	#2,obRoutine(a0)
+		bsr.w	GetOtherPlayerData
+		move.b	pdat.height(a5),obHeight(a0)
+		move.b	pdat.width(a5),obWidth(a0)
+		bsr.w	GetPlayerData
+		move.l	d0,obMap(a0)
+		move.l	d1,dgfxaddr(a0)
+		move.l	d2,artaddr(a0)
+		move.w	#make_art_tile(ArtTile_Sonic,0,0),obGfx(a0)
+		move.b	#2,obPriority(a0)
+		move.b	#$18,obActWid(a0)
+		move.b	#4,obRender(a0)
+;		or.b	#1,f_ammocount.w
+		move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
+		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
+		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
+		bra.w	Sonic_Control
 		nop
+
+; ----------------------------------------------------------------------------
+; Reload character specific attributes mid-level
+; notably used for Pow_Randomiser.newchara
+; ----------------------------------------------------------------------------
+Player_Reinit:
+		jsr	GetOtherPlayerData
+		move.b	pdat.height(a5),d0
+		move.b	pdat.width(a5),d1
+		btst	#2,obStatus(a0)
+		beq.s	.newchara_notrolling
+		move.b	pdat.height2(a5),d0
+		move.b	pdat.width2(a5),d1
+.newchara_notrolling:
+		move.b	obHeight(a0),d2
+		sub.b	d0,d2
+		ext.w	d2
+		sub.w	d2,obY(a0)
+		move.b	d0,obHeight(a0)
+		move.b	d1,obWidth(a0)
+
+		jsr	GetPlayerData
+		move.l	d0,obMap(a0)
+		move.l	d1,dgfxaddr(a0)
+		move.l	d2,artaddr(a0)
+		move.l	d3,a1
+		lea	(v_palette_line_1).w,a2
+		rept 32/4
+		move.l	(a1)+,(a2)+
+		endr
+
+		st.b	obPrevAni(a0)
+		jsr	Player_Animate
+		jsr	Player_LoadGfx
+		rts
 
 ; ----------------------------------------------------------------------------
 ; Main player control routine
@@ -259,7 +331,7 @@ Sonic_Control:	; Routine 2
 
 .ignoreobjcoll:
 		bsr.w	Sonic_Loops
-		bsr.w	Sonic_LoadGfx
+		bsr.w	Player_LoadGfx
 		rts
 ; ----------------------------------------------------------------------------
 ; Obj01_Modes:
@@ -336,8 +408,9 @@ Sonic_Display:
 		subq.w	#1,vdpFXTime(a0)	; subtract 1 from time
 		bne.s	.exit
 		
-		;!@ Undo FX, reload level pal
+		;!@ Undo FX, reload level pal, DON'T reset window plane (BSZ2)
 		moveq	#1,d0
+		moveq	#0,d1
 		jsr		(Pow_vdp_fixRegs).l
 		
 		move.b	#0,(v_vdp_fx).w	; cancel VDP FX
@@ -446,6 +519,7 @@ Sonic_MdJump:
 		btst	#6,obStatus(a0)
 		beq.s	.notunderwater
 		subi.w	#$28,obVelY(a0)
+		addq.w  #1,obY(a0) 
 
 .notunderwater:
         bsr.w	Sonic_ExtraJump
@@ -506,7 +580,7 @@ PlayerAttackHandle:
 .lut:
 		dc.l	TonicAttack
 		dc.l	ManiacAttack
-
+		dc.l	MrBeanAttack
 ; ----------------------------------------------------------------------------
 ; Tonic bullet spawn
 ; ----------------------------------------------------------------------------
@@ -582,7 +656,8 @@ ManiacAttack:
 .nobullets:
 		rts
 
-		
+MrBeanAttack:
+		rts			; make a code about throwing teddy
 ; ---------------------------------------------------------------------------
 ; Subroutine to make Sonic walk/run
 ; ---------------------------------------------------------------------------
@@ -743,7 +818,7 @@ loc_13024:
 		move.b	obAngle(a0),d0
 		add.b	d1,d0
 		move.w	d0,-(sp)
-		bsr.w	Sonic_WalkSpeed
+		bsr.w	Sonic_ChkWallAhead
 		move.w	(sp)+,d0
 		tst.w	d1
 		bpl.s	locret_1307C
@@ -1164,15 +1239,14 @@ Sonic_LevelBound:
 		
 .bottom2:		
 		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w ; is level SBZ2 ?
-		bne.s	.JUMP_KillSonic	; if not, kill Sonic
+		bne.w	KillSonic_Humpy	; if not, kill Sonic
 		cmpi.w	#$2000,(v_player+obX).w
-		blo.s	.JUMP_KillSonic
+		blo.w	KillSonic_Humpy
 		clr.b	(v_lastlamp).w	; clear lamppost counter
+		jsr	(Pow_fix_RandMon_Runonce_flags).l	;!@ GD: Clear f_randMonPow runonce flags
 		move.w	#1,(f_restart).w ; restart the level
 		move.w	#(id_ARZ<<8)+3,(v_zone).w ; set level to SBZ3 (LZ4)
 		rts
-.JUMP_KillSonic:	
-		jmp (KillSonic).l
 ; ----------------------------------------------------------------------------
 
 ; Boundary_Sides
@@ -1764,15 +1838,20 @@ Sonic_ResetOnFloor:
 		bclr	#5,obStatus(a0)	; clear push flag.
 		bclr	#1,obStatus(a0)	; clear in-air flag.
 		bclr	#4,obStatus(a0)	; clear roll-jump flag.
+		
+		; Sonic reset floor fix:
+		; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-6#post-90342
+		move.b	#id_Walk,obAnim(a0) ; use running/walking animation
 		btst	#2,obStatus(a0)	; check if Sonic is in a ball state.
 		beq.s	.notball	; if not, skip.
 		bclr	#2,obStatus(a0)	; clear ball flag.
 		bsr.w	GetOtherPlayerData
 		move.b	pdat.height(a5),obHeight(a0)
 		move.b	pdat.width(a5),obWidth(a0)
-		move.b	#id_Walk,obAnim(a0) ; use running/walking animation
+		; Sonic reset floor fix:
+		; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-6#post-90342
+		;move.b	#id_Walk,obAnim(a0) ; use running/walking animation
 		subq.w	#5,obY(a0)	; raise Sonic up 5 pixels so he's not inside the ground.
-
 
 .notball:
 		move.b	#0,jumping(a0)	; clear jump flag.
@@ -1805,10 +1884,13 @@ Sonic_Hurt:	; Routine 4
 
 .notunderwater:
 		bsr.w	Sonic_HurtStop
+		;!@ Collide with Water after hurt:
+		;!@ https://info.sonicretro.org/SCHG_How-to:Collide_with_water_after_being_hurt#Sonic_1
+		bsr.w	Sonic_Water				
 		bsr.w	Sonic_LevelBound
 		bsr.w	Sonic_RecordPosition
 		bsr.w	Player_Animate
-		bsr.w	Sonic_LoadGfx
+		bsr.w	Player_LoadGfx
 		bra.w	DisplaySprite
 
 ; ---------------------------------------------------------------------------
@@ -1827,7 +1909,7 @@ Sonic_HurtStop:
 .skip:
 		addi.w	#224,d0
 		cmp.w	obY(a0),d0
-		blo.w	KillSonic
+		blo.s	KillSonic_Humpy
 		bsr.w	Sonic_Floor
 		btst	#1,obStatus(a0)
 		bne.s	locret_13860
@@ -1841,6 +1923,8 @@ Sonic_HurtStop:
 
 locret_13860:
 		rts
+KillSonic_Humpy:
+		jmp		(KillSonic).l
 ; End of function Sonic_HurtStop
 
 ; ---------------------------------------------------------------------------
@@ -1860,11 +1944,15 @@ Sonic_Death:	; Routine 6
         rts
 
 .doDeath:
+		;!@ GD: Bugfix for PPZ1 walk-death
+		;Spam death anim to fix :shruggie:
+		move.b	#id_Death,obAnim(a0)
+
 		bsr.w	GameOver
 		bsr.w	ObjectFall
 		bsr.w	Sonic_RecordPosition
 		bsr.w	Player_Animate
-		bsr.w	Sonic_LoadGfx
+		bsr.w	Player_LoadGfx
 		bra.w	DisplaySprite
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
@@ -1927,28 +2015,35 @@ locret_13900:
 ; Obj01_ResetLevel:
 Sonic_ResetLevel:; Routine 8
 		tst.w	restartime(a0)
-		beq.s	GotoBSOD.return
+		beq.s	.return
 		subq.w	#1,restartime(a0)	; subtract 1 from time delay
-		bne.s	GotoBSOD.return
+		bne.s	.return
 ;!@ GD: New function to display BSOD if death (not gameover in Windows zone)
 .check_WinBSOD:
 		;Check if positive lives (NOT gameover)
-		tst.b	(v_lives).w			;Have lives?
-		beq.s	GotoBSOD.restart	;If not, branch
+		tst.b	(v_lives).w		;Have lives?
+		beq.s	.restart	;If not, branch
 		
 		cmpi.b	#id_WIN,(v_zone).w	;Is zone Windows zone?
-		bne.s	GotoBSOD.restart	;If not, branch
-GotoBSOD:		
+		beq.s	GotoBSOD			;If so, branch
+		cmpi.b	#id_BSZ,(v_zone).w	;Is zone Bluescape?
+		beq.s	GotoSChGuy			;If so, branch
+.restart:
+		move.w	#1,(f_restart).w	; restart the level
+.return:
+		moveq	#1,d0				; Reload palette param (level restart will do so)
+		moveq	#1,d1				; Reset window plane
+		jsr		(Pow_vdp_fixRegs).l	; !@ GD: Bugfix to reset Random monitor FX if restarting back into GM_Level mode
+		rts
+
+GotoBSOD:
 		;We are in Windows zone and NOT gameover. Do BSOD
 		move.b	#id_BSOD,(v_gamemode).w ; Set BSOD mode
-		jsr		(GM_BSOD).l				;Goto BSOD
-		move.b	#id_Level,(v_gamemode).w ;goto Level on restart
-		
-.restart:
-		move.w	#1,(f_restart).w ; restart the level
-		;jmp		(Level_MainLoop).l
-		jmp		(MainGameLoop).l
-.return:
+		move.w	#4,(f_restart).w	; load new gamemode
+		rts
+GotoSChGuy:
+		;We are in Bluescape zone and NOT gameover. Do sega channel guy jump scare
+		jsr		(Pow_Randomiser.getjumpscared).l
 		rts
 ; End of function Sonic_ResetLevel
 
@@ -1963,7 +2058,7 @@ Sonic_Drowned:
 		addi.w	#$10,obVelY(a0)		; Apply gravity
 		bsr.w	Sonic_RecordPosition	; Record position
 		bsr.w	Player_Animate		; Animate Sonic
-		bsr.w	Sonic_LoadGfx		; Load Sonic's DPLCs
+		bsr.w	Player_LoadGfx		; Load Sonic's DPLCs
 		bra.w	DisplaySprite		; And finally, display Sonic
 ; End of function Sonic_Drowned
 	endif
@@ -2073,12 +2168,10 @@ Player_Animate:
 .AniRoutTbl	
 		bra.w	Tonic_Animate
 		bra.w	Maniac_Animate	
-		bra.w	Tonic_Animate
-		bra.w	Tonic_Animate
-		bra.w	Tonic_Animate
+		bra.w	Bean_Animate
 
 ; ---------------------------------------------------------------------------
-; Sonic animation routine
+; Tonic animation routine
 ; ---------------------------------------------------------------------------
 Sonic_Animate: 	;kys
 Tonic_Animate:
@@ -2292,7 +2385,7 @@ Tonic_Animate:
 		moveq	#0,d2
 
 .belowmax3:
-		lsr.w	#6,d2
+		lsr.w	#3,d2
 		move.b	d2,obTimeFrame(a0) ; modify frame duration
 		lea	(SonAni_Push).l,a1
 		move.b	obStatus(a0),d1
@@ -2459,7 +2552,7 @@ Maniac_Animate:
 
 ; SAnim_Push:
 .push:
-		move.w	obInertia(a0),d2 ; get Sonic's speed
+		move.w	obInertia(a0),d2 ; get Bean's speed
 		bmi.s	.negspeed
 		neg.w	d2
 
@@ -2477,13 +2570,183 @@ Maniac_Animate:
 		andi.b	#$FC,obRender(a0)
 		or.b	d1,obRender(a0)
 		bra.w	.loadframe
+; ---------------------------------------------------------------------------
+; MrBean animation routine
+; ---------------------------------------------------------------------------		
+
+Bean_Animate:
+		lea	(Ani_Bean).l,a1
+		moveq	#0,d0
+		move.b	obAnim(a0),d0
+		cmp.b	obPrevAni(a0),d0 ; has animation changed?
+		beq.s	.do		; if not, branch
+		move.b	d0,obPrevAni(a0)
+		move.b	#0,obAniFrame(a0) ; reset animation
+		move.b	#0,obTimeFrame(a0) ; reset frame duration
+
+.do:
+		add.w	d0,d0
+		adda.w	(a1,d0.w),a1	; jump to appropriate animation	script
+		move.b	(a1),d0
+		bmi.s	.walkrunroll	; if animation is walk/run/roll/jump, branch
+		move.b	obStatus(a0),d1
+		andi.b	#1,d1
+		andi.b	#$FC,obRender(a0)
+		or.b	d1,obRender(a0)
+		subq.b	#1,obTimeFrame(a0) ; subtract 1 from frame duration
+		bpl.s	.delay		; if time remains, branch
+		move.b	d0,obTimeFrame(a0) ; load frame duration
+
+.loadframe:
+		moveq	#0,d1
+		move.b	obAniFrame(a0),d1 ; load current frame number
+		move.b	1(a1,d1.w),d0	; read sprite number from script
+		bmi.s	.end_FF		; if animation is complete, branch
+
+.next:
+		move.b	d0,obFrame(a0)	; load sprite number
+		addq.b	#1,obAniFrame(a0) ; next frame number
+
+.delay:
+		rts	
+; ===========================================================================
+
+.end_FF:
+		addq.b	#1,d0		; is the end flag = $FF	?
+		bne.s	.end_FE		; if not, branch
+		move.b	#0,obAniFrame(a0) ; restart the animation
+		move.b	1(a1),d0	; read sprite number
+		bra.s	.next
+; ===========================================================================
+
+.end_FE:
+		addq.b	#1,d0		; is the end flag = $FE	?
+		bne.s	.end_FD		; if not, branch
+		move.b	2(a1,d1.w),d0	; read the next	byte in	the script
+		sub.b	d0,obAniFrame(a0) ; jump back d0 bytes in the script
+		sub.b	d0,d1
+		move.b	1(a1,d1.w),d0	; read sprite number
+		bra.s	.next
+; ===========================================================================
+
+.end_FD:
+		addq.b	#1,d0		; is the end flag = $FD	?
+		bne.s	.end		; if not, branch
+		move.b	2(a1,d1.w),obAnim(a0) ; read next byte, run that animation
+
+.end:
+		rts	
+; ===========================================================================
+
+.walkrunroll:
+		subq.b	#1,obTimeFrame(a0) ; subtract 1 from frame duration
+		bpl.s	.delay		; if time remains, branch
+		addq.b	#1,d0		; is animation walking/running?
+		bne.w	.rolljump	; if not, branch
+		moveq	#0,d1
+		move.b	obAngle(a0),d0	; get Bean's angle
+		move.b	obStatus(a0),d2
+		andi.b	#1,d2		; is Bean mirrored horizontally?
+		bne.s	.flip		; if yes, branch
+		not.b	d0		; reverse angle
+
+.flip:
+		addi.b	#$10,d0		; add $10 to angle
+		bpl.s	.noinvert	; if angle is $0-$7F, branch
+		moveq	#3,d1
+
+.noinvert:
+		andi.b	#$FC,obRender(a0)
+		eor.b	d1,d2
+		or.b	d2,obRender(a0)
+		btst	#5,obStatus(a0)	; is Bean pushing something?
+		bne.w	.push		; if yes, branch
+
+		lsr.b	#4,d0		; divide angle by $10
+		andi.b	#6,d0		; angle	must be	0, 2, 4	or 6
+		move.w	obInertia(a0),d2 ; get Bean's speed
+		bpl.s	.nomodspeed
+		neg.w	d2		; modulus speed
+
+.nomodspeed:
+		lea	(BeanAni_Walk).l,a1 ; use walking animation
+		move.b	d0,d1
+		lsr.b	#1,d1
+		add.b	d1,d0
+
+.running:
+		add.b	d0,d0
+		move.b	d0,d3
+		neg.w	d2
+		addi.w	#$800,d2
+		bpl.s	.belowmax
+		moveq	#0,d2		; max animation speed
+
+.belowmax:
+		lsr.w	#8,d2
+		move.b	d2,obTimeFrame(a0) ; modify frame duration
+		bsr.w	.loadframe
+		add.b	d3,obFrame(a0)	; modify frame number
+		rts	
+; ===========================================================================
+
+.rolljump:
+		addq.b	#1,d0		; is animation rolling/jumping?
+		bne.s	.push		; if not, branch
+		move.w	obInertia(a0),d2 ; get Bean's speed
+		bpl.s	.nomodspeed2
+		neg.w	d2
+
+.nomodspeed2:
+		lea	(BeanAni_Roll2).l,a1 ; use fast animation
+		cmpi.w	#$600,d2	; is Bean moving fast?
+		bhs.s	.rollfast	; if yes, branch
+		lea	(BeanAni_Roll).l,a1 ; use slower	animation
+
+.rollfast:
+		neg.w	d2
+		addi.w	#$400,d2
+		bpl.s	.belowmax2
+		moveq	#0,d2
+
+.belowmax2:
+		lsr.w	#8,d2
+		move.b	d2,obTimeFrame(a0) ; modify frame duration
+		move.b	obStatus(a0),d1
+		andi.b	#1,d1
+		andi.b	#$FC,obRender(a0)
+		or.b	d1,obRender(a0)
+		bra.w	.loadframe
+; ===========================================================================
+
+.push:
+		move.w	obInertia(a0),d2 ; get Bean's speed
+		bmi.s	.negspeed
+		neg.w	d2
+
+.negspeed:
+		addi.w	#$800,d2
+		bpl.s	.belowmax3	
+		moveq	#0,d2
+
+.belowmax3:
+		lsr.w	#6,d2
+		move.b	d2,obTimeFrame(a0) ; modify frame duration
+		lea	(BeanAni_Push).l,a1
+		move.b	obStatus(a0),d1
+		andi.b	#1,d1
+		andi.b	#$FC,obRender(a0)
+		or.b	d1,obRender(a0)
+		bra.w	.loadframe
+
+; End of function Bean_Animate
 
 ; ---------------------------------------------------------------------------
-; Sonic DPLC loading subroutine
+; Player DPLC loading subroutine
 ; ---------------------------------------------------------------------------
 
 ; LoadDgfx_Tonic:
-Sonic_LoadGfx:
+Player_LoadGfx:
 		move.b	obFrame(a0),d0			; get Sonic's current frame
 		cmp.b	(v_sonframenum).w,d0		; has the frame changed?
 		beq.s	.end				; if not, nothing to do
@@ -2494,9 +2757,62 @@ Sonic_LoadGfx:
 		jmp	(LoadDynPLC).l			; load DPLC
 .end:
 		rts					; return
-; End of function Sonic_LoadGfx
-
+; End of function Player_LoadGfx
 
 		include	"char_assets/Sonic Ani.asm"
 		include	"char_assets/Maniac Ani.asm"
+		include	"char_assets/Bean Ani.asm"
 
+; ---------------------------------------------------------------------------
+; This is Cold Brew stuff okay
+; please dont fuck it up
+; ---------------------------------------------------------------------------
+
+TheColdBrewBear:
+		moveq	#0,d0
+		move.b	obRoutine(a0),d0
+		move.w	TheColdBrewBear_Index(pc,d0.w),d1
+		jsr		TheColdBrewBear_Index(pc,d1.w)
+		jmp		(DisplaySprite).l
+TheColdBrewBear_Index:dc.w TheColdBrewBear_Init-TheColdBrewBear_Index
+				dc.w TheColdBrewBear_Slide-TheColdBrewBear_Index
+; ===========================================================================
+
+TheColdBrewBear_Init:	; Routine 0
+		addq.b	#2,obRoutine(a0)
+		move.b	#24,obHeight(a0)
+		move.b	#24,obWidth(a0)
+		move.l	#Map_CBGuy,obMap(a0)
+		move.w	#$780,obGfx(a0)	; using raw addresses im sorry
+;		move.b	#1,obFrame(a0)	; forgot to comment this oops
+		move.b	#2,obPriority(a0)
+		move.b	#$18,obActWid(a0)
+		move.b	#4,obRender(a0)
+
+TheColdBrewBear_Slide:	; Routine 2
+		add.w	#$10,obVelX(a0)
+		jsr	(ObjectFall).l
+;		bsr.w	FootCollision
+		bsr.w	ObjFloorDist
+;		cmpi.w	#-8,d1
+;		blt.s	.notonfloor
+;		cmpi.w	#$C,d1
+;		bge.s	.notonfloor
+		add.w	d1,obY(a0)	; match object's position with the floor
+
+		rts	
+.notonfloor:
+;		move.w	#-$10,obVelY(a0)
+		rts	
+
+Map_CBGuy: mappingsTable
+	mappingsTableEntry.w	Map_413d_0
+
+Map_413d_0:	spriteHeader
+ spritePiece -$18, -$18, 4, 4, 0, 0, 0, 0, 0
+ spritePiece 8, -$10, 2, 4, $10, 0, 0, 0, 0
+ spritePiece -$18, 8, 4, 2, $18, 0, 0, 0, 0
+ spritePiece 8, $10, 2, 1, $20, 0, 0, 0, 0
+Map_413d_0_End
+
+	even

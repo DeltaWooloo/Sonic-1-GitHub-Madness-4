@@ -10096,5 +10096,5 @@ Coffinman2.0_Voices:
 	dc.b		$08,$20,$10,$10,$F8,$19,$37,$13,$00;			Voice 00
 	dc.b		$3A,$01,$01,$01,$02,$8D,$07,$07,$52,$09,$00,$00,$03,$01,$02,$02
 	dc.b		$00,$52,$02,$02,$28,$18,$22,$18,$00;			Voice 01
-	smpsFooterEndSong	"TG2000Tracks/Coffinman.asm"	
+	smpsFooterEndSong	"TG2000Tracks/Backups/Coffinman.asm"	
 	even

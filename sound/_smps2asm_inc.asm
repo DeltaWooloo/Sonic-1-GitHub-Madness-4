@@ -56,19 +56,32 @@ nMaxPSG2			EQU nB6
 
 ; ---------------------------------------------------------------------------
 ; PSG volume envelope equates
-	enum		fTone_01=$01,fTone_02,fTone_03,fTone_04,fTone_05,fTone_06
-	nextenum	fTone_07,fTone_08,fTone_09,uptone_01,uptone_02,uptone_03,duntone_01
-	nextenum	duntone_02,duntone_03,cfTone_01,cfTone_02,goTone_01
-	nextenum	fTone_GCV1,fTone_GCV2,ddTone_01,ddTone_02,SHCTone_01
-	nextenum	SHCTone_02,SHCTone_03,SHCTone_04,sTone_01,sTone_03,sTone_0C
-	nextenum	staTone_0F,smb1Tone,DoleTone_01,DoleTone_02,DoleTone_03,DoleTone_04
-	nextenum	dskTone_01,dskTone_02,ChickenTone_01,ChickenTone_02,ChickenTone_03
-	nextenum	DanTone_01,DanTone_02,DanTone_03,DanTone_04,TFTone_01,TFTone_02
-	nextenum	AppleTone_01,AppleTone_02,AppleTone_03,ScrapTone_01,ScrapTone_02
-	nextenum	CoffinTone,DoomTone,ghm4Tone_01,VirusTone01,VirusTone02,VirusTone03
-	nextenum	VirusTone04,clintTone_00,PassTone1,PassTone2,PassTone3,PassTone4
-	nextenum	MegaTone1,MegaTone2,MegaTone3,MegaTone4,AporiaTone_01
+	enum		fTone_01=$01,fTone_02,fTone_03
+	nextenum	fTone_04,fTone_05,fTone_06
+	nextenum	fTone_07,fTone_08,fTone_09
+	nextenum	uptone_01,uptone_02,uptone_03
+	nextenum	duntone_01,duntone_02,duntone_03
+	nextenum	cfTone_01,cfTone_02,goTone_01
+	nextenum	fTone_GCV1,fTone_GCV2
+	nextenum	ddTone_01,ddTone_02
+	nextenum	SHCTone_01,SHCTone_02,SHCTone_03,SHCTone_04
+	nextenum	sTone_01,sTone_03,sTone_0C,staTone_0F
+	nextenum	smb1Tone,DoleTone_01,DoleTone_02,DoleTone_03
+	nextenum	DoleTone_04,dskTone_01,dskTone_02
+	nextenum	ChickenTone_01,ChickenTone_02,ChickenTone_03
+	nextenum	DanTone_01,DanTone_02,DanTone_03,DanTone_04
+	nextenum	TFTone_01,TFTone_02,AppleTone_01,AppleTone_02,AppleTone_03
+	nextenum	ScrapTone_01,ScrapTone_02,CoffinTone,DoomTone,ghm4Tone_01
+	nextenum	VirusTone01,VirusTone02,VirusTone03,VirusTone04
+	nextenum	clintTone_00,PassTone1,PassTone2,PassTone3,PassTone4
+	nextenum	MegaTone1,MegaTone2,MegaTone3,MegaTone4
+	nextenum	AporiaTone_01,WillTone1,WillTone2,BeforeTone
+	nextenum	fS28bit_02,fS28bit_03,fS28bit_04,TooleTone
 
+	nextenum	fTone__Last
+	if fTone__Last>$100
+	fatal "Too many volume envelopes! Please cut back on them!"
+	endif
 ; ---------------------------------------------------------------------------
 
 ; Channel IDs for SFX
@@ -102,10 +115,7 @@ convertMainTempoMod macro mod
 			fatal "Invalid main tempo of 0 in song from Sonic 2"
 		endif
 		dc.b	s2TempotoS3(mod)
-	else;if SourceDriver>=3
-		if mod==0
-			message "Performing approximate conversion of Sonic 3 main tempo modifier of 0"
-		endif
+	else
 		dc.b	mod
 	endif
 	endm

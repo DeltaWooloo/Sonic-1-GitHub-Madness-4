@@ -1,6 +1,10 @@
 ; ---------------------------------------------------------------------------
 ; Animation script - Motobug enemy
 ; ---------------------------------------------------------------------------
+                cmpi.b  #id_BSZ,v_zone.w
+                bne.s	Ani_Moto
+                jmp	Ani_SCG.l		; OPooougughh it's checking every frame!
+				
 Ani_Moto:	dc.w .stand-Ani_Moto
 		dc.w .walk-Ani_Moto
 		dc.w .smoke-Ani_Moto

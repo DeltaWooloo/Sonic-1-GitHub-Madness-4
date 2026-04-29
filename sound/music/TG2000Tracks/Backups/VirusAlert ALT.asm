@@ -2755,3 +2755,6 @@ VirusAlert_PSG3_0A_0_64_0F:
 	smpsPSGAlterVol	$05
 	dc.b $04
 	smpsReturn
+
+	smpsFooterEndSong	"TG2000Tracks/Backups/VirusAlert ALT.asm"
+	even

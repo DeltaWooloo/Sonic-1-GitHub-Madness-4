@@ -35,7 +35,7 @@ Mon_Main:	; Routine 0
 		btst	#0,2(a2,d0.w)	; has monitor been broken?
 		beq.s	.notbroken	; if not, branch
 		move.b	#8,obRoutine(a0) ; run "Mon_Display" routine
-		move.b	#$B,obFrame(a0)	; use broken monitor frame
+		move.b	#$C,obFrame(a0)	; use broken monitor frame
 		rts
 ; ===========================================================================
 
@@ -126,7 +126,9 @@ loc_A246:
 loc_A25C:
 		btst	#5,obStatus(a0)
 		beq.s	Mon_Animate
-		move.w	#1,obAnim(a1)	; clear obAnim and set obNextAni to 1
+		;!@ GD: Fix walk-jump bug (monitor)
+		;https://info.sonicretro.org/SCHG_How-to:Fix_the_Walk-Jump_Bug_in_Sonic_1
+		;!@ move.w	#1,obAnim(a1)	; clear obAnim and set obNextAni to 1
 
 loc_A26A:
 		bclr	#5,obStatus(a0)
@@ -159,5 +161,5 @@ Mon_Explode:
 		moveq	#0,d0
 		move.b	obRespawnNo(a0),d0
 		bset	#0,2(a2,d0.w)
-		move.b	#9,obAnim(a0)	; set monitor type to broken
+		move.b	#$0A,obAnim(a0)	; set monitor type to broken
 		bra.w	DisplaySprite

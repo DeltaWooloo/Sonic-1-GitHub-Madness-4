@@ -8,7 +8,7 @@
 LevelSizeLoad:
 		moveq	#0,d0
 		move.b	d0,(v_unused7).w
-		move.b	d0,(v_unused8).w
+		;move.b	d0,(v_unused8).w		;!@ Now used
 		move.b	d0,(v_unused9).w
 		move.b	d0,(v_unused10).w
 		move.b	d0,(v_dle_routine).w

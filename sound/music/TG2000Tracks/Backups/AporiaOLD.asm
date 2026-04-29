@@ -10100,5 +10100,5 @@ Aporia_Voices:
 	dc.b		$00,$55,$8C,$15,$07,$1A,$32,$1E,$00;			Voice 07
 	dc.b		$3C,$05,$01,$0A,$01,$56,$59,$5C,$58,$0E,$0F,$14,$0F,$09,$09,$06
 	dc.b		$09,$46,$35,$36,$35,$1F,$02,$1E,$00;			Voice 08
-	smpsFooterEndSong	"TG2000Tracks/AporiaOLD.asm"
+	smpsFooterEndSong	"TG2000Tracks/Backups/AporiaOLD.asm"
 	even

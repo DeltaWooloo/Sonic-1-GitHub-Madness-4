@@ -1,0 +1,10 @@
+; provided by Selbi, to be placed in some subfolder
+Palette File: bsod_turnoff_font-pal.bin
+Mapping File: bsod_gnul-mapFG.unc
+Art File: bsod_turnoff_font-art.nem
+Mapping Compression: None
+Art Compression: Nemesis
+Palette Length: 0x80
+Palette Offset: 0x00
+x-Size: 64
+y-Size: 64

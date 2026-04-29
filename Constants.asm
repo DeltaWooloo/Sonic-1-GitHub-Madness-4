@@ -5,17 +5,17 @@
 ; define stuff from older disassemblies because eyes
 ;- CONI
 PlaySound	=		QueueSound1
-PlaySound_Special	=	QueueSound2
-PlaySound_Unused	=	QueueSound3
+PlaySound_Special =	QueueSound2
+PlaySound_Unused =	QueueSound3
 PalLoad1	=		PalLoad_Fade
 PalLoad2	=		PalLoad
 v_pal_dry	=		v_palette
-v_demolength	= v_generictimer
+v_demolength	= 	v_generictimer
 
-Size_of_SegaPCM:		equ $6978
+Size_of_SegaPCM:	equ $6978
 Size_of_DAC_driver_guess:	equ $1760
 
-opcode_rte		equ $4E73
+opcode_rte			equ $4E73
 opcode_jmpabslong	equ $4EF9
 opcode_jmpabsword	equ $4EF8
 
@@ -25,6 +25,130 @@ M68000_Clock:    equ Master_Clock/7
 Z80_Clock:       equ Master_Clock/15
 FM_Sample_Rate:  equ M68000_Clock/(6*6*4)
 PSG_Sample_Rate: equ Z80_Clock/16
+fps_Rate:		 equ $3C						;!@ FPS for timers
+
+;!@ GD: ROM headers
+hdr_Genesis:	 equ	"SEGA MEGA DRIVE "
+hdr_Pico:		 equ	"SEGA PICO       "
+hdr_MegaPico:	 equ	"SEGA MEGA PICO  "
+tmss_init:		 equ	"init"
+tmss_str:		 equ	"SEGA"
+
+; TMSS Stuff
+; !@ GD: PICO addresses (from Sonic 1 Pico)
+pico_START:			equ $800000
+pico_version:		equ	$800001	;1 byte
+pico_btn:			equ	$800003	;1 byte	;!@ Although format is standard Genesis SACBRLDU, AC btns are always HI (11). Pen btn = Start, Red button = B
+pico_penX_hi:		equ	$800005	;1 byte
+pico_penX_lo:		equ	$800007	;1 byte
+pico_penY_hi:		equ	$800009	;1 byte
+pico_penY_lo:		equ	$80000B	;1 byte
+pico_BookPage:		equ	$80000D	;1 byte
+pico_copType:		equ	$80000F	;1 byte
+pico_pcm_data:		equ	$800010	;1 word
+pico_pcm_ctrl:		equ	$800012	;1 word
+
+;https://gendev.spritesmind.net/forum/viewtopic.php?p=38147
+;
+;!@ Bitfield data for pcm_ctrl
+;Pico ADPCM:
+;The Pico's ADPCM chip seems to be based on the uPD7759,
+;but the frontend and pinout are quite different.
+;It also seems to run at twice the clock speed.
+;
+;It adds the following features over the base uPD7759:
+;- 64-byte (or maybe 63?) FIFO
+;- Selectable low-pass filter (6 kHz, 12 kHz or 16 kHz based on comments from Sega's driver)
+;- 3-bit volume
+;
+;The chip sits directly on the 68K's bus,
+;but seems to rely on the IO chip to handle address decoding.
+;
+;The bits of the control port are as follows:
+;
+;biuuruuu ffuuuvvv
+;b=		15: Write 1 to reset, read returns BUSY status (i.e. is the chip currently playing a sample)
+;i=		14: Interrupt enable. Level 3 interrupts will trigger based on FIFO fullness when set, they will not when clear
+;uu=	13-12: ?
+;r=		11: Sega driver always sets this bit outside of reset, but some games expect ADPCM to work with it clear.
+;uuu=	10-8: ?
+;ff=	7-6: Filter selection, 11 = 16 kHz, 10 = 12 kHz, 01 = 6 kHz, 00 = ??
+;uuu=	5-3: ?
+;vvv=	2-0: Volume
+;
+;Some games do write stuff to the unknown bits, but it's unclear what they do.
+;It's possible some of the bits are used to select the FIFO threshold for interrupts,
+;but it's hard to say without hardware testing.
+;
+;Data format is basically the same as uPD7759 in slave mode except without the dummy bytes
+;so the first byte you encounter is a command byte (i.e. either delay or sample command).
+;
+;bitfield indices
+bPctr_vol0:			equ	0		;Volume bits vvv
+bPctr_vol1:			equ	1
+bPctr_vol2:			equ	2
+bPctr_unk3:			equ	3		;Unknown bits uuu 3-5 
+bPctr_unk4:			equ	4
+bPctr_unk5:			equ	5
+bPctr_flt0:			equ	6		;Filter bits ff 6-7
+bPctr_flt1:			equ	7
+
+bPctr_unk8:			equ	8		;Unknown bits uuu 8-10
+bPctr_unk9:			equ	9
+bPctr_unk10:		equ	10
+bPctr_segaRst:		equ	11		;Sega reset bit r 11
+bPctr_unk12:		equ	12		;Unknown bits uu 12-13
+bPctr_unk13:		equ	13
+bPctr_intEn:		equ	14		;Interrupt enable bit i 14
+bPctr_busy:			equ	15		;Busy/status flag b 15
+
+;Masks
+;						%biuuruuuffuuuvvv
+;						         _lower__
+;						 _higher_
+mPctr_vol0:			equ	%0000000000000001		;Volume bits vvv
+mPctr_vol1:			equ	%0000000000000010
+mPctr_vol2:			equ	%0000000000000100
+mPctr_unk3:			equ	%0000000000001000		;Unknown bits uuu 3-5
+mPctr_unk4:			equ	%0000000000010000
+mPctr_unk5:			equ	%0000000000100000
+mPctr_flt0:			equ	%0000000001000000		;Filter bits ff 6-7
+mPctr_flt1:			equ	%0000000010000000
+
+mPctr_unk8:			equ	%0000000100000000		;Unknown bits uuu 8-10
+mPctr_unk9:			equ	%0000001000000000
+mPctr_unk10:		equ	%0000010000000000
+mPctr_segaRst:		equ	%0000100000000000		;Sega reset bit r 11
+mPctr_unk12:		equ	%0001000000000000		;Unknown bits uu 12-13
+mPctr_unk13:		equ	%0010000000000000
+mPctr_intEn:		equ	%0100000000000000		;Interrupt enable bit i 14
+mPctr_busy:			equ	%1000000000000000		;Busy/status flag b 15
+mPctr_volUnk:		equ	%0000000000111111		;Mask for 3-bit volume+3-bit unknown bits
+
+pico_port_1_data:	equ	$800015	;1 word
+pico_port_1_ctrl:	equ	$800017	;1 word
+pico_security_addr:	equ	$800019	;2 words
+
+copr_ymz263b_a0:	equ	$BFF801	;1 word
+copr_ymz263b_d0:	equ	$BFF803	;1 word
+copr_ymz263b_a1:	equ	$BFF805	;1 word
+copr_ymz263b_d1:	equ	$BFF807	;1 word
+
+copr_ymf262_a0:		equ	$BFF824
+copr_ymf262_d0:		equ	$BFF828
+copr_ymf262_a1:		equ	$BFF834
+
+copr_ym712b_a0:		equ	$BFF840
+
+; Pico constants
+penX_min:			equ	$003C
+penX_max:			equ	$017C
+penY_min:			equ	$01FC
+penY_minPad:		equ	$01FC
+penY_maxPad:		equ $02F7
+penY_minBook:		equ	$02F8
+penY_maxBook:		equ	$03F3
+penY_max:			equ	$03F3
 
 ; VDP addressses
 vdp_data_port:		equ $C00000
@@ -32,18 +156,22 @@ vdp_control_port:	equ $C00004
 VDP_data_port:		equ vdp_data_port
 VDP_control_port: 	equ vdp_control_port
 vdp_counter:		equ $C00008
-psg_input:		equ $C00011
-debug_reg:		equ $C0001C
+psg_input:			equ $C00011
+; !@ GD:
+; https://plutiedev.com/vdp-debug
+; https://segaretro.org/Sega_Mega_Drive/VDP_general_usage#Debug_register
+debug_sel:			equ	$C00018
+debug_reg:			equ $C0001C
 
 ; Z80 addresses
-z80_ram:		equ $A00000	; start of Z80 RAM
+z80_ram:			equ $A00000	; start of Z80 RAM
 z80_ram_end:		equ $A02000	; end of non-reserved Z80 RAM
-ym2612_a0:		equ $A04000
-ym2612_d0:		equ $A04001
-ym2612_a1:		equ $A04002
-ym2612_d1:		equ $A04003
+ym2612_a0:			equ $A04000
+ym2612_d0:			equ $A04001
+ym2612_a1:			equ $A04002
+ym2612_d1:			equ $A04003
 z80_bus_request:	equ $A11100
-z80_reset:		equ $A11200
+z80_reset:			equ $A11200
 
 ; I/O addresses
 console_version:	equ $A10001
@@ -51,18 +179,23 @@ port_1_data_hi:		equ $A10002
 port_1_data:		equ $A10003
 port_2_data_hi:		equ $A10004
 port_2_data:		equ $A10005
+port_exp_data:
+z80_expansion_data:	equ $A10006	;!@
 port_1_control_hi:	equ $A10008
 port_1_control:		equ $A10009
 port_2_control_hi:	equ $A1000A
 port_2_control:		equ $A1000B
-expansion_control_hi:	equ $A1000C
+port_exp_control_hi:
+expansion_control_hi:equ $A1000C
+port_exp_control:
 expansion_control:	equ $A1000D
 
 ; Misc addresses
-sram_port:		equ $A130F1
+sram_port:			equ $A130F1
 security_addr:		equ $A14000
 
 ; VRAM data
+vram_window:	equ $A000
 vram_fg:	equ $C000	; foreground namespace
 vram_bg:	equ $E000	; background namespace
 vram_sprites:	equ $F800	; sprite table
@@ -99,13 +232,12 @@ plane_size_64x32: equ 64*32*2	; size of plane in 512x256 mode
 
 ; Levels
 id_OWZ:		equ $00
-id_ARZ:		equ $01
+id_WHZ:		equ $01
 id_ACZ:		equ $02
 id_MCZ:		equ $03
 id_SFZ:		equ $04
 id_PPZ:		equ $05
 id_EndZ:	equ $06
-id_SS:		equ $06
 id_CBZ:		equ $07
 id_WIN:		equ $08
 id_Joint:	equ $09
@@ -113,6 +245,7 @@ id_DVZ:		equ $0A
 id_Nogales:	equ $0B
 id_BSZ:		equ $0C
 id_BTZ:		equ $0D
+id_ARZ:		equ $0E	
 
 ; Colours
 cBlack:		equ $000		; colour black
@@ -123,6 +256,9 @@ cRed:		equ $00E		; colour red
 cYellow:	equ cGreen+cRed		; colour yellow
 cAqua:		equ cGreen+cBlue	; colour aqua
 cMagenta:	equ cBlue+cRed		; colour magenta
+
+;!@ GD:
+id_VBlank_PaletteFade:	equ	$12
 
 ; Joypad input
 bitUp:		equ 0
@@ -234,16 +370,16 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	enum	SNDMIN=$0				;!@ GD: Minimum sound ID (silence)
 	nextenum bgm__First
 	; Stage BGM
-	nextenum bgm_MWaterS=bgm__First		; Orange World	(Act 1)
+	nextenum bgm_MWaterS=bgm__First	; Orange World	(Act 1)
 	nextenum bgm_OrangeSong			; 		(Act 2)
 	nextenum bgm_GreenHills			; 		(Act 3)
-	nextenum bgm_Dungeon3			; Azure Rainforest
+	nextenum bgm_WariosCastle		; Wario's hallway
 	nextenum bgm_LosTontos			; Alberta Canada	(Act 1)
-	nextenum bgm_Area5			; 			(Act 2)
-	nextenum bgm_Easton			; 			(Act 3)
+	nextenum bgm_Area5				; 			(Act 2)
+	nextenum bgm_Easton				; 			(Act 3)
 	nextenum bgm_Minecraft			; Minecraft	(Act 1 - Part 1)
 	nextenum bgm_SMWCave			; Minecraft	(Act 1 - Part 2)
-	nextenum bgm_Doom			; 		(Act 2)
+	nextenum bgm_Doom				; 		(Act 2)
 	nextenum bgm_BadEmerald			; 		(Act 3) + Cold Brew (Act 3)
 	nextenum bgm_TreasureCaves		; Spring Field	(Act 1)
 	nextenum bgm_Danstar			; 		(Act 2)
@@ -251,137 +387,132 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_fightMID			; Prongle Plant	(Act 1)
 	nextenum bgm_Cheetah			; 		(Act 2)
 	nextenum bgm_REMansion			; 		(Act 3)
-	nextenum bgm_ColdBrew			; Cold Brew	(Act 1+2)
+	nextenum bgm_ColdBrew			; Cold Brew	(Act 1)
+	nextenum bgm_ValSDST1			; 		(Act 2)
 	nextenum bgm_UNOwenWasHer		; Windows	(Act 1)
 	nextenum bgm_Passport			; 		(Act 2)
+	nextenum bgm_VirusAlert			; 		(Act 3)
+	nextenum bgm_Title				; Inside Tonic's Body
 	nextenum bgm_DoleDetective		; Doleville	(Act 1)
 	nextenum bgm_HardwareStore		; 		(Act 2)
-	nextenum bgm_GHZ			; Nogales Zone
-	nextenum bgm_TF2			; Bluescapes	(Act 1)		; Dax: Interesting song choice for this :/
-	nextenum bgm_Blue			;		(Act 2)
-	nextenum bgm_Final			; DUMMY Level BGM
-	nextenum bgm_SS				; Special Stage
+	nextenum bgm_GHZ				; Nogales Zone
+	nextenum bgm_TF2				; Bluescapes	(Act 1)		; Dax: Interesting song choice for this :/
+	nextenum bgm_Blue				;		(Act 2)
+	nextenum bgm_Dungeon3			; Azure Rainforest
+	nextenum bgm_Final				; Final Zone
 
 	; Boss BGM
+	nextenum bgm_BeforeBoss			; Pre-Boss Encounter
 	nextenum bgm_Boss			; Regular Boss
 	nextenum bgm_ClintonFuck		; Bill Clinton Boss
-	nextenum bgm_Coffinman			; Alberta Canada Boss
+	nextenum bgm_WarioLand1Boss		; Wario Hallway Boss
+	nextenum bgm_Coffinman			; Alberta Canada (Act 3) Boss
+	nextenum bgm_DeltaTale			; Alberta Canada (Act 4) Boss
 	nextenum bgm_Aporia			; Spring Field Boss
 	nextenum bgm_Megalovania		; MeinKraft Boss
 	nextenum bgm_DoleBOSS			; Doleville Boss
-	nextenum bgm_PizzaPopBoss		; A Boss of Some kind???
+	nextenum bgm_TwoSteps			; Bluescapes Boss
+
+	; Special Stage BGM
+	nextenum bgm_RamRanch			; Demo BGM
+	nextenum bgm_CanCan
+	nextenum bgm_WeebTrash
 
 	; Power Up BGM
-	nextenum bgm_Invincible
-	nextenum bgm_AVGNInv
+	nextenum bgm_Invincible			; Invincibility
+	nextenum bgm_WillTell			; Invincibility (Mr. Bean)
+	nextenum bgm_AVGNInv			; Power Sneakers
+	nextenum bgm_LimitedEgg			; Slow-Down Shoes
 
-	; UI + Scene BGM
-	nextenum bgm_Title
-	nextenum bgm_smilingbomb
-	nextenum bgm_NewBarkTown
-	nextenum bgm_Memories
+	; Scene BGM
 	nextenum bgm_Dingaling
-	nextenum bgm_Continue
-	nextenum bgm_Ending
-	nextenum bgm_SkySanctuary
-	nextenum bgm_Jeopardy
+	nextenum bgm_DoleAttack			; Intro Cutscene
+
+	; UI BGM
+	nextenum bgm_smilingbomb		; Menu
+	nextenum bgm_NewBarkTown		; Debug Menu
+	nextenum bgm_Memories			; Character/Difficulty Select
+	nextenum bgm_ActClear			; Act Clear
+	nextenum bgm_Spoopy				; Sans Death Screen
+	nextenum bgm_Continue			; Continue Screen
+	nextenum bgm_Ending				; Ending A
+	nextenum bgm_SkySanctuary		; Ending B
+	nextenum bgm_Jeopardy			; The End Screen
 
 	; In-Game Jingles
-	nextenum bgm_ActClear
-	nextenum bgm_Pac2
-	nextenum bgm_GameOver
-	nextenum bgm_ExtraLife
-	nextenum bgm_Drowning
-	nextenum bgm_Emerald
+	nextenum bgm_MJWin				; Special Stage Win
+	nextenum bgm_GameOver			; Game Over
+	nextenum bgm_ExtraLife			; Extra Life
+	nextenum bgm_Drowning			; Drowning
+	nextenum bgm_Emerald			; Chaos Emerald
 
 	; Splash Screen BGM
-	nextenum bgm_Retro
-	nextenum bgm_RonicSetro
-	nextenum bgm_MayoDed
-	nextenum bgm_S1ActClear
-	nextenum bgm_SHCSplash
-	nextenum bgm_RetroBlast
-	nextenum bgm_ConiJingle
-	nextenum Bgm_GooglePlayStock
-	nextenum bgm_SneakySnitch
-	nextenum bgm_TG2000Jingle
-	nextenum bgm_Donnie
-	nextenum bgm_TSHLogo
-	nextenum bgm_S1Continue
-	nextenum bgm_PuyoDrown
-	nextenum bgm_EuroSega
-	nextenum bgm_DeltaWSplash
-	nextenum bgm_S3Continue
-	nextenum bgm_BlueBalls
-	nextenum bgm_ChaosEmerald
-	nextenum bgm_LimitedClear
-	nextenum bgm_Moonwalker
-	nextenum bgm_CleanSlate
-	nextenum bgm_VirusAlert
+	nextenum bgm_SS				; Winners Don't Use Gens
+	nextenum bgm_Retro				; Sonic Retro
+	nextenum bgm_RonicSetro			; Ronic Setro
+	nextenum bgm_MayoDed			; SSRG
+	nextenum bgm_S1ActClear			; SSRG (Ver. 2)
+	nextenum bgm_SHCSplash			; SHC Splash
+	nextenum bgm_RetroBlast			; Retro Blast Screen
+	nextenum bgm_EagleSoft			; GMZ - EagleSoft song
+	nextenum bgm_ConiJingle			; ConiNight
+	nextenum Bgm_GooglePlayStock	; RobiWanKenobi
+	nextenum bgm_SneakySnitch		; Malachi
+	nextenum bgm_TG2000Jingle		; TheGamer2000
+	nextenum bgm_Donnie				; Team Overload
+	nextenum bgm_TSHLogo			; TheSunsetHacker
+	nextenum bgm_S1Continue			; Broke Sonic Screen
+	nextenum bgm_PuyoDrown			; Wait, there's another one?
+	nextenum bgm_EuroSega			; Sega, Now You're Playing With Power!
+	nextenum bgm_DeltaWSplash		; The W Splash Screen
+	nextenum bgm_S3Continue			; The W Splash Screen: NO WAY!
+	nextenum bgm_BlueBalls			; The W Splash Screen: Get Blue Balls!
+	nextenum bgm_ChaosEmerald		; The W Splash Screen: Chaos Emerald!
+	nextenum bgm_LimitedClear		; The W Splash Screen: It is Limited!
+	nextenum bgm_Moonwalker			; The W Splash Screen: You've Been Struck By a Smooth Criminal!
+	nextenum bgm_CleanSlate			; The W Splash Screen: God Fucking Dammit Robi
 
 	; Advertisement BGM
-	nextenum bgm_PuyoReject
-	nextenum bgm_LG
-	nextenum bgm_ILBT
-	nextenum bgm_Sunset
-	nextenum bgm_Elevator
-	nextenum bgm_SonUnderground
-	nextenum bgm_Son1UP
-	nextenum bgm_GEMSHill
-	nextenum bgm_LimitedEgg
-	nextenum bgm_BomerDude
-	nextenum bgm_ClintonYears
+	nextenum bgm_WBRBack			; GMZ - this one will be used, actually
+	nextenum bgm_PuyoReject			; Ad Jingle A
+	nextenum bgm_LG					; Ad Jingle B
+	nextenum bgm_ILBT				; Hong Kong 97 Ad
+	nextenum bgm_Sunset				; Carbuncle Ad
+	nextenum bgm_Elevator			; Teeth Tonic Ad
+	nextenum bgm_SonUnderground		; Sonic Underground Ad
+	nextenum bgm_Son1UP				; Sonic 1 Super Challenges Ad
+	nextenum bgm_GEMSHill			; IWBTH Ad
+	nextenum bgm_BomerDude			; AtGames Ad
+	nextenum bgm_ClintonYears		; Gaming in the Clinton Years Ad
+	nextenum bgm_Skinner			; Steamed Hams Ad
+
+	; BSOD BGM
+	nextenum bgm_MMZPast			; Sonic CD Metallic Madness Zone Past (Sonic CD Virus BSOD)
+	nextenum bgm_BossaNova			; GNyU/Linyux shitpost BSOD
+	nextenum bgm_BatMan				; Sonic CD Batman
+	nextenum bgm_Hidden				; Sonic CD CYA Next Game
+	nextenum bgm_SadMac				; Mac crash
+	nextenum bgm_W95Rock			; !@ GD: Windows 95 Rock (https://modarchive.org/index.php?request=view_by_moduleid&query=170694)
+	nextenum bgm_W95RockR			; !@ GD: Windows 95 Rock Remix (https://modarchive.org/index.php?request=view_by_moduleid&query=201495)
 
 	; Unused Full/Looping BGM
-	nextenum bgm_DeltaTale
-	nextenum bgm_NewShop
-	nextenum bgm_ChickenDance
-	nextenum bgm_NepAnime
-	nextenum bgm_VampKiller
-	nextenum bgm_Carefree
-	nextenum bgm_Gadget
-	nextenum bgm_CanCanInv
-	nextenum bgm_TwoSteps
-	nextenum bgm_FurElise
 	nextenum bgm_SwingSinners
-	nextenum bgm_Miniscule
-	nextenum bgm_Wormy
-	nextenum bgm_Starman
-	nextenum bgm_JamesPond
-	nextenum bgm_AlexKiddEnd
-	nextenum bgm_DJKK
-	nextenum bgm_FuneralMarch
-	nextenum bgm_Levian
-	nextenum bgm_BatMan
-	nextenum bgm_Peppa
-	nextenum bgm_Resetti
-	nextenum bgm_Spoopy
+	nextenum bgm_WeAreTheSonic
+	nextenum bgm_ChairRoom
 	nextenum bgm_SkyBase
 	nextenum bgm_Scrappy
-	nextenum bgm_WeAreTheSonic
-	nextenum bgm_Thomas
-	nextenum bgm_CCLobby
-	nextenum bgm_ChairRoom
-	nextenum bgm_Skinner
-	nextenum bgm_CanCan
-	nextenum bgm_Hidden
-	nextenum bgm_BossaNova
-	nextenum bgm_dam_dariram
-
-	; Unused Jingle BGM
-	nextenum bgm_Ding
-	nextenum bgm_SadMac
-	nextenum bgm_Folgers
-	nextenum bgm_CrazyMario
-	nextenum bgm_Win2K
-	nextenum bgm_MJWin
-
+	nextenum bgm_SkyGift
+	nextenum bgm_BLIND_MODE
+	nextenum bgm_FrontHook
+	;nextenum bgm_MM8StageSelect
+	
 	; Keep this last
-	nextenum bgm__Last
-	bgm__LastPow2:		equ	$7F		;!@ Manually update me	
+	nextenum bgm__Last	
+	bgm__count:			equ	(bgm__Last-bgm__First)	; Count of songs
+	bgm__LastPow2:		equ	andiMaskB(bgm__Last)
 
 ; Sound effects
-	enum	sfx__First=$A0
+	enum	sfx__First=$90
 	nextenum sfx_Jump=sfx__First
 	nextenum sfx_Lamppost
 	nextenum sfx_A2
@@ -444,13 +575,20 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum sfx_RiftSky
 	nextenum sfx_LGEcho
 	nextenum sfx_Error
+	nextenum sfx_SMPSZ80Snare
+	nextenum sfx_Static
+	nextenum sfx_SirenAlarm
+	nextenum sfx_LongFart
 	; Keep this last
 	nextenum	sfx__Last
+	
+	sfx__count:			equ	(sfx__Last-sfx__First)+1	; Count of sfx
 
 ; Special sound effects
 	enum	spec__First=$F0
 	nextenum sfx_Waterfall=spec__First
 spec__Last = sfx_Waterfall
+	spc__count:			equ	(spec__Last-spec__First)+1	; Count of special
 
 flg__First:	equ $FB
 bgm_Fade:	equ ((ptr_flgE0-Sound_ExIndex)/4)+flg__First
@@ -459,6 +597,7 @@ bgm_Speedup:	equ ((ptr_flgE2-Sound_ExIndex)/4)+flg__First
 bgm_Slowdown:	equ ((ptr_flgE3-Sound_ExIndex)/4)+flg__First
 bgm_Stop:	equ ((ptr_flgE4-Sound_ExIndex)/4)+flg__First
 flg__Last:	equ ((ptr_flgend-Sound_ExIndex-4)/4)+flg__First
+flg__count:			equ	(flg__Last-flg__First)+1	; Count of flags
 SNDMAX:		equ	flg__Last	;!@ GD: Maximum sound ID
 
 	include "sound/SampleConstants.asm"
@@ -586,6 +725,19 @@ boss_fz_x:	equ $2450		; Final Zone
 boss_fz_y:	equ $510
 boss_fz_end:	equ boss_fz_x+$2B0
 
+boss_cbz_x:	equ $295F		; Cold Brew Zone
+boss_cbz_y:	equ $300
+boss_cbz_end:	equ boss_cbz_x+$160
+
+boss_ngz_x:	equ $2500		; Nogales Zone
+boss_ngz_y:	equ $200
+boss_ngz_end:	equ boss_ghz_x+$160
+
+boss_arz_x:	equ $1DE0		; Azure Rainforest Zone
+boss_arz_y:	equ $C0
+boss_arz_end:	equ boss_lz_x+$250
+
+
 ; Tile flags (ASM68K-specific, replaces "make_art_tile" function from AS, added here for cross-compatibility)
 Tile_Prio:	equ	1<<15
 Tile_Pal1:	equ	0<<13
@@ -708,6 +860,7 @@ ArtTile_Burrobot:		equ $4A6
 ArtTile_Basaran:		equ $4B8
 ArtTile_Roller:			equ $4B8
 ArtTile_IE:			equ $4E0
+ArtTile_RecyleBin:			equ $500
 ArtTile_Moto_Bug:		equ $4F0
 ArtTile_Button:			equ $50F
 ArtTile_Spikes:			equ $51B
@@ -721,6 +874,7 @@ ArtTile_Animal_1:		equ $580
 ArtTile_Animal_2:		equ $592
 ArtTile_Explosion:		equ $5A0
 ArtTile_Monitor:		equ $680
+ArtTile_BurpHUD:			equ $4C0
 ArtTile_HUD:			equ $6C0
 ArtTile_SpecialAttack:	equ $6EA
 ArtTile_Sonic:			equ $780
@@ -731,7 +885,7 @@ ArtTile_Lives_Counter:		equ $7D4
 
 ArtTile_CBZ_Waterfall:		equ ArtTile_Level+$37C
 ArtTile_CBZ_IZ:			equ ArtTile_Level+$3AA
-ArtTile_CBZ_Eiza:		equ ArtTile_Level+$380
+ArtTile_CBZ_Eiza:		equ ArtTile_Level+$400
 ArtTile_CBZSpongy:		equ $40B
 ArtTile_CBZNewtron:		equ $456
 ArtTile_CBZBuzz_Bomber:		equ $476
@@ -740,6 +894,7 @@ ArtTile_CBZChopper:		equ $541
 ArtTile_CBZMoto_Bug:		equ $559
 
 ArtTile_Villager:		equ $4F0
+ArtTile_SCG:		equ $449
 
 ; Eggman
 ArtTile_Eggman:			equ $400
@@ -758,6 +913,8 @@ ArtTile_Warp:			equ $541
 ArtTile_Mini_Sonic:		equ $551
 ArtTile_Bonuses:		equ $6E2
 ArtTile_Signpost:		equ $680
+ArtTile_CharSign:		equ	$6A2
+
 
 ; Sega Screen
 ArtTile_Sega_Tiles:		equ $000
@@ -819,6 +976,12 @@ ArtTile_SS_Zone_3:		equ $7A9
 ArtTile_SS_Zone_4:		equ $797
 ArtTile_SS_Zone_5:		equ $7A0
 ArtTile_SS_Zone_6:		equ $7A9
+
+;MILD danner
+ArtTile_FartDanner:		equ $100	; compressed stuff goes here
+ArtTile_Mildfucker:		equ $400	; and this is where the true magic happens
+;define this bs
+vram_win:   equ $4000
 
 ; Special Stage Results
 ArtTile_SS_Results_Emeralds:	equ $541

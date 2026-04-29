@@ -9,6 +9,6 @@ Ani_Burro:	dc.w .walk1-Ani_Burro
 .walk1:		dc.b $C,	0, 1, afEnd
 .walk2:		dc.b 6,	2, 3, afEnd
 .digging:	dc.b 3,	2, 3, afEnd
-.fall:		dc.b $C, 4, 5, afBack, 1
+.fall:		dc.b 3,	0, 1, 4, 5, 5, afChange, 1
 .banan:		dc.b 4,	6, 7, 8, 9, afEnd
 		even

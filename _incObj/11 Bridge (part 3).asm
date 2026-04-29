@@ -124,21 +124,18 @@ Bri_ChkDel:
 		movea.l	d0,a1
 		cmp.w	a0,d0
 		beq.s	.skipdel
-		bsr.w	DeleteChild
+		jsr		(DeleteChild).l
 
 .skipdel:
 		dbf	d2,.loop ; repeat d2 times (bridge length)
 
 .delparent:
-		bsr.w	DeleteObject
-		rts
+		jmp	(DeleteObject).l
 ; ===========================================================================
 
 Bri_Delete:	; Routine 6, 8
-		bsr.w	DeleteObject
-		rts
+		jmp	(DeleteObject).l
 ; ===========================================================================
 
 Bri_Display:	; Routine $A
-		bsr.w	DisplaySprite
-		rts
+		jmp	(DisplaySprite).l

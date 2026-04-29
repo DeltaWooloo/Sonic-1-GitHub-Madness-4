@@ -110,7 +110,7 @@ UseRAMSourceSafeDMA = 1&(AssumeSourceAddressIsRAMSafe==0)
 ; disabled by default because you can simply align the art in ROM and avoid the
 ; issue altogether. It is here so that you have a high-performance routine to do
 ; the job in situations where you can't align it in ROM.
-Use128kbSafeDMA = 0
+Use128kbSafeDMA = 1
 ; ===========================================================================
 ; option UseVIntSafeDMA
 ;
@@ -119,7 +119,7 @@ Use128kbSafeDMA = 0
 ; handle these race conditions would be to make unsafe callers (such as S3&K's
 ; KosM decoder) prevent these by masking off interrupts before calling and then
 ; restore interrupts after.
-UseVIntSafeDMA = 0
+UseVIntSafeDMA = 1
 ; ===========================================================================
 ; Convenience macros, for increased maintainability of the code.
 	ifndef DMA
@@ -201,7 +201,7 @@ QueueStaticDMA macro src,length,dest
 	endif
 	if UseVIntSafeDMA==1
 		move.w	sr,-(sp)										; Save current interrupt mask
-		disableInts												; Mask off interrupts
+		disable_ints												; Mask off interrupts
 	endif ; UseVIntSafeDMA==1
 	movea.w	(VDP_Command_Buffer_Slot).w,a1
 	cmpa.w	#VDP_Command_Buffer_Slot,a1
@@ -235,7 +235,7 @@ Add_To_DMA_Queue:
 QueueDMATransfer:
 	if UseVIntSafeDMA==1
 		move.w	sr,-(sp)									; Save current interrupt mask
-		disableInts											; Mask off interrupts
+		disable_ints											; Mask off interrupts
 	endif ; UseVIntSafeDMA==1
 	movea.w	(VDP_Command_Buffer_Slot).w,a1
 	cmpa.w	#VDP_Command_Buffer_Slot,a1

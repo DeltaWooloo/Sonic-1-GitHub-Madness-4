@@ -1,3 +1,7 @@
 cls
+copy /y "dummy\dummy.asm" "..\..\..\sound\music\dummy.asm"
 copy /y "NepAnime\Out\S1_Opt.asm" "..\..\..\sound\music\GenesisDoes\NepAnime.asm"
+copy /y "W95\cry-w95.asm" "..\..\..\sound\music\GenesisDoes\cry-w95.asm"
+copy /y "MMZ_Past\musicFE_Opt.asm" "..\..\..\sound\music\GenesisDoes\MMZPast_SNN.asm"
+copy /y "WarioLand1_Boss\Out\S1_Opt.asm" "..\..\..\sound\music\GenesisDoes\WarioLand1_Boss.asm"
 pause

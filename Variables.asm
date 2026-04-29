@@ -129,8 +129,10 @@ v_snddriver_ram:	SMPS_RAM		; sound driver state
 
 v_gamemode:		ds.b	1		; game mode (00=Sega; 04=Title; 08=Demo; 0C=Level; 10=SS; 14=Cont; 18=End; 1C=Credit; +8C=PreLevel)
 submode:		ds.b	1		; game mode sub mode cntr (for mode within a gamemode)
+
 v_jpadhold2:		ds.b	1		; joypad input - held, duplicate
 v_jpadpress2:		ds.b	1		; joypad input - pressed, duplicate
+Ctrl_1_held_logical:
 v_jpadhold1:		ds.b	1		; joypad input - held (player 1)
 v_jpadpress1:		ds.b	1		; joypad input - pressed (player 1)
 v_jpadholdp2:		ds.b	1		; joypad input - held (player 2)
@@ -158,7 +160,7 @@ v_misc_variables:
 v_vbla_0e_counter:	ds.b	1		; tracks how many times vertical interrupts routine 0E occured (pretty much unused because routine 0E is unused)
 ;!@					;ds.b	1		; unused
 f_hangSMPS:			ds.b	1		; !@ GenesisDoes: If set, hangs the sound driver (stop running UpdateMusic in Vblank)
-					
+v_vblank_routine:
 v_vbla_routine:		ds.b	1		; VBlank - routine counter
 			ds.b	1		; unused
 v_spritecount:		ds.b	1		; number of sprites on-screen
@@ -200,7 +202,9 @@ v_plc_framepatternsleft:ds.w	1
 v_plc_buffer_end:
 
 v_levelvariables:				; variables that are reset between levels
+Camera_X_pos:
 v_screenposx:		ds.l	1		; screen position x
+Camera_Y_pos:
 v_screenposy:		ds.l	1		; screen position y
 v_bgscreenposx:		ds.l	1		; background screen position x
 v_bgscreenposy:		ds.l	1		; background screen position y
@@ -224,12 +228,17 @@ v_scrposy_orig:		ds.b	4		; stored y screen pos
 v_scrshiftx:		ds.w	1		; x-screen shift (new - last) * $100
 v_scrshifty:		ds.w	1		; y-screen shift (new - last) * $100
 v_lookshift:		ds.w	1		; screen shift when Sonic looks up/down
-v_unused7:		ds.b	1		; unused
-v_unused8:		ds.b	1		; unused
+v_unused7:			ds.b	1		; unused
+;v_unused8:			ds.b	1		; unused	
+f_RandMonPow:		ds.b	1		; !@ GD: Now used, for keeping track if Random Monitor 
+									; Bitfield: 0000 0lsb
+									; Bit #2 = l = lampost
+									; Bit #1 = s = signpost
+									; Bit #0 = b = BigRing
 v_dle_routine:		ds.b	1		; dynamic level event - routine counter
 			ds.b	1		; unused
-f_nobgscroll:		ds.b	1		; flag set to cancel background scrolling
-			ds.b	1		; unused
+f_nobgscroll:		ds.b	1		; flag set to disable the entirety of the DeformLayers subroutine
+f_lockscroll:		ds.b	1		; flag to lock scrolling (doesn't exist in Sonic 1, this is Sonic 2s Scroll_Lock)
 v_unused9:		ds.b	1		; unused
 			ds.b	1		; unused
 v_unused10:		ds.b	1		; unused
@@ -309,14 +318,17 @@ v_obj6B:		ds.b	1		; object 6B (SBZ stomper) variable
 f_lockctrl:		ds.b	1		; flag set to lock controls during ending sequence
 f_bigring:		ds.b	1		; flag set when Sonic collects the giant ring
 f_obj56:		ds.b	1		; object 56 flag
-			ds.b	1		; unused
+needlehitcnt:		ds.b	1		; im Working on it.
 v_itembonus:		ds.w	1		; item bonus from broken enemies, blocks etc.
 v_timebonus:		ds.w	1		; time bonus at the end of an act
 v_ringbonus:		ds.w	1		; ring bonus at the end of an act
 f_endactbonus:		ds.b	1		; time/ring bonus update flag at the end of an act
 v_sonicend:		ds.b	1		; routine counter for Sonic in the ending sequence
 v_lz_deform:		ds.w	1		; LZ deformation offset, in units of $80
-			ds.b	4		; unused
+									; !@ GD: Fix Squash logic / https://info.sonicretro.org/SCHG_How-to:Improve_Squash_Kill_Logic
+v_squashbuffer:		ds.b	1		; buffer Sonic's squash distance for one frame to prevent cheap deaths
+					ds.b	3		; unused
+					;!@ds.b	4		; unused					
 v_d_anim_done:		ds.w	1
 ;			ds.w	1
 f_switch:		ds.b	$10		; flags set when Sonic stands on a switch
@@ -341,8 +353,11 @@ v_palette_water_end:
 
 v_palette:		; main palette
 v_palette_line_1:	ds.b $20
+Normal_palette_line_2:
 v_palette_line_2:	ds.b $20
+Normal_palette_line_3:
 v_palette_line_3:	ds.b $20
+Normal_palette_line_4:
 v_palette_line_4:	ds.b $20
 v_palette_end:
 
@@ -443,7 +458,10 @@ v_ani2_frame:		ds.b	1		; synchronised sprite animation 2 - current frame
 v_ani3_time:		ds.b	1		; synchronised sprite animation 3 - time until next frame
 v_ani3_frame:		ds.b	1		; synchronised sprite animation 3 - current frame
 v_ani3_buf:		ds.w	1		; synchronised sprite animation 3 - info buffer
-			ds.b	$26		; unused
+Palette_rotation_custom: ds.l 1 
+Palette_rotation_data: 
+            ds.b    $12 
+			ds.b	$10		; unused
 v_limittopdb:		ds.w	1		; level upper boundary, buffered for debug mode
 v_limitbtmdb:		ds.w	1		; level bottom boundary, buffered for debug mode
 			ds.b	$C		; unused
@@ -461,6 +479,8 @@ v_fg_scroll_flags_dup:	ds.w	1
 v_bg1_scroll_flags_dup:	ds.w	1
 v_bg2_scroll_flags_dup:	ds.w	1
 v_bg3_scroll_flags_dup:	ds.w	1
+Saved_music: equ $FFFFFFCB ; byte
+
 			ds.b 	1
 			ds.b	$43		; unused
 v_timingandscreenvariables_end:
@@ -476,8 +496,9 @@ v_gambashield:		ds.b	1	; used by the gamba shield
 v_storedshield:		ds.b	1	; used to determine whether to give the player a shield
 v_scorelife:		ds.l	1		; points required for an extra life (JP1 only)
 v_characterid:		ds.b	1
+v_savedcharacterid:	ds.b	1
 v_zonemusic:		ds.b	1
-			ds.b	6
+			ds.b	5
 MegaCDMode:		ds.b 	1
 			ds.b 	1
 v_unlimitedammo:	ds.b 	1

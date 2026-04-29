@@ -25,7 +25,7 @@ Map_BossItems_internal:	mappingsTable
 .cross_End
 
 .widepipe:	spriteHeader
-	spritePiece	-$C, $14, 3, 2, 7, 0, 0, 0, 0	; SLZ boss
+;	spritePiece	-$C, $14, 3, 2, 7, 0, 0, 0, 0	; SLZ boss
 .widepipe_End
 
 .pipe:	spriteHeader

@@ -377,7 +377,7 @@ HurtSonic:
 .hasshield:
 		move.b	#0,(v_shield).w	; remove shield
 		move.b	#4,obRoutine(a0)
-		bsr.w	Sonic_ResetOnFloor
+		jsr	(Sonic_ResetOnFloor).l
 		bset	#1,obStatus(a0)
 		move.w	#-$400,obVelY(a0) ; make Sonic bounce away from the object
 		move.w	#-$200,obVelX(a0)
@@ -445,11 +445,12 @@ KillSonic:
 		rts
 .NotFoxy:
 		move.b	#6,obRoutine(a0)
-		bsr.w	Sonic_ResetOnFloor
+		jsr	(Sonic_ResetOnFloor).l
 		bset	#1,obStatus(a0)
 		move.w	#-$700,obVelY(a0)
 		move.w	#0,obVelX(a0)
 		move.w	#0,obInertia(a0)
+		move.b	#1,(f_lockscroll).w
 	if FixBugs=0
 		; Leftover line from the prototype, where objoff_38 was used to respawn Sonic at his last y position.
 		; sticktoconvex gets overwritten with the high byte of Sonic's y position.
@@ -466,6 +467,12 @@ KillSonic:
 		move.b	#dShutdown, d0
 		bra.s	.sound
 .notWindows:
+		cmpi.b	#id_Ending,(v_gamemode).w
+		bne.s	.NotEnding
+		move.b	#dTrevor,d0
+		bra.s	.sound
+
+.NotEnding:
 		move.b	#dChicken,d0		; play spikes death sound
 		cmpi.b	#id_Spikes,obID(a2)	; check if you were killed by spikes
 		beq.s	.sound

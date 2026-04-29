@@ -3,15 +3,54 @@ Nem_SegaLogo:	binclude	"artnem/Sega Logo (JP1).nem" ; large Sega logo
 Eni_SegaLogo:	binclude	"tilemaps/Sega Logo (JP1).eni" ; large Sega logo (mappings)
 		even
 
-Eni_GitHub:	binclude	"ATOGKTitle/Enigma/Github.bin"
-		even
-Eni_Madness:	binclude	"ATOGKTitle/Enigma/Madness.bin"
-		even
+
+;!@ GD: Github Madness IV title card data
+;OLD versions
+;Eni_GitHub:	binclude	"ATOGKTitle/Enigma/Github.bin"
+		;even
+;Eni_Madness:	binclude	"ATOGKTitle/Enigma/Madness.bin"
+		;even
 ;!@ GenesisDoes
-Eni_GHIV:	binclude	"ATOGKTitle/Enigma/IV.bin"
+;Eni_GHIV:	binclude	"ATOGKTitle/Enigma/IV.bin"
+		;even
+;Nem_GitMadScr:	binclude	"ATOGKTitle/Nemesis/GitMad.bin"
+		;even
+
+
+Eni_GitHub1:	binclude	"ATOGKTitle/Enigma/g1-map.eni"
 		even
-Nem_GitMadScr:	binclude	"ATOGKTitle/Nemesis/GitMad.bin"
+Eni_GitHub2:	binclude	"ATOGKTitle/Enigma/g2-map.eni"
 		even
+Eni_GitHub3:	binclude	"ATOGKTitle/Enigma/g3-map.eni"
+		even		
+Eni_Madness1:	binclude	"ATOGKTitle/Enigma/m1-map.eni"
+		even
+Eni_Madness2:	binclude	"ATOGKTitle/Enigma/m2-map.eni"
+		even
+Eni_Madness3:	binclude	"ATOGKTitle/Enigma/m3-map.eni"
+		even
+Eni_GHIV:		binclude	"ATOGKTitle/Enigma/IV-map.eni"
+		even
+Nem_Github1:	binclude	"ATOGKTitle/Nemesis/g1-art.nem"
+		even
+Nem_Github2:	binclude	"ATOGKTitle/Nemesis/g2-art.nem"
+		even
+Nem_Github3:	binclude	"ATOGKTitle/Nemesis/g3-art.nem"
+		even
+Nem_Madness1:	binclude	"ATOGKTitle/Nemesis/m1-art.nem"
+		even
+Nem_Madness2:	binclude	"ATOGKTitle/Nemesis/m2-art.nem"
+		even
+Nem_Madness3:	binclude	"ATOGKTitle/Nemesis/m3-art.nem"
+		even
+Nem_GHIV:		binclude	"ATOGKTitle/Nemesis/IV-art.nem"
+		even
+Pal_GitMad_Text:binclude	"ATOGKTitle/Palette/text.bin"
+		even
+Pal_GitMad_g2:	binclude	"ATOGKTitle/Palette/g2-pal.bin"
+		even
+Pal_GitMad_m2:	binclude	"ATOGKTitle/Palette/m2-pal.bin"
+		even		
 
 Eni_Title:	binclude	"tilemaps/Title Screen.eni" ; title screen foreground (mappings)
 		even
@@ -29,9 +68,9 @@ Eni_SplashMap:	binclude	"eurosega/map.bin"
 		even
 Nem_SplashTiles:	binclude	"eurosega/tiles.bin"
 		even
-Eni_TGMap:	binclude	"TGSplash/map.bin"
+Eni_TGMap:	binclude	"_gamemode/TGSplash/map.bin"
 		even
-Nem_TGTiles:	binclude	"TGSplash/tiles.bin"
+Nem_TGTiles:	binclude	"_gamemode/TGSplash/tiles.bin"
 		even
 
 ; ---------------------------------------------------------------------------
@@ -39,6 +78,9 @@ Nem_TGTiles:	binclude	"TGSplash/tiles.bin"
 ; ---------------------------------------------------------------------------	
 
 Map_Shield:	include		"_maps/Shield Map.asm"	
+		even
+;!@ GD: Invin fire
+Map_Shield2:	include	"_maps/Shield and Invincibility.asm"
 		even
 Dgfx_Shield:	include		"_maps/Shield DGFX.asm"	
 		even
@@ -87,63 +129,21 @@ Art_Maniac:	binclude	"char_assets/Maniac Art.bin"	; Sonic
 		even
 Pal_Maniac:	binclude	"char_assets/Maniac Pal.bin"
 		even
-
+; ---------------------------------------------------------------------------
+; Uncompressed graphics - Mr Bean
+; ---------------------------------------------------------------------------
+Map_MrBean:	include		"char_assets/Bean.asm"
+		even
+Dgfx_MrBean:	include		"char_assets/Bean - Dynamic Sex Script.asm"
+		even
+Art_MrBean:	binclude	"char_assets/Bean.bin"	; Sonic
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - various
 ; ---------------------------------------------------------------------------
 ;Nem_Shield:	binclude	"artnem/Shield.nem"
 ;		even
-;Nem_Stars:	binclude	"artnem/Invincibility Stars.nem"
-;		even
-
-; ---------------------------------------------------------------------------
-; Compressed graphics - special stage
-; ---------------------------------------------------------------------------
-Map_SSWalls:	include	"_maps/SS Walls.asm"
-
-Nem_SSWalls:	binclude	"artnem/Special Walls.nem" ; special stage walls
-		even
-Eni_SSBg1:	binclude	"tilemaps/SS Background 1.eni" ; special stage background (mappings)
-		even
-Nem_SSBgFish:	binclude	"artnem/Special Birds & Fish.nem" ; special stage birds and fish background
-		even
-Eni_SSBg2:	binclude	"tilemaps/SS Background 2.eni" ; special stage background (mappings)
-		even
-Nem_SSBgCloud:	binclude	"artnem/Special Clouds.nem" ; special stage clouds background
-		even
-Nem_SSGOAL:	binclude	"artnem/Special GOAL.nem" ; special stage GOAL block
-		even
-Nem_SSRBlock:	binclude	"artnem/Special R.nem"	; special stage R block
-		even
-Nem_SS1UpBlock:	binclude	"artnem/Special 1UP.nem" ; special stage 1UP block
-		even
-Nem_SSEmStars:	binclude	"artnem/Special Emerald Twinkle.nem" ; special stage stars from a collected emerald
-		even
-Nem_SSRedWhite:	binclude	"artnem/Special Red-White.nem" ; special stage red/white block
-		even
-Nem_SSZone1:	binclude	"artnem/Special ZONE1.nem" ; special stage ZONE1 block
-		even
-Nem_SSZone2:	binclude	"artnem/Special ZONE2.nem" ; ZONE2 block
-		even
-Nem_SSZone3:	binclude	"artnem/Special ZONE3.nem" ; ZONE3 block
-		even
-Nem_SSZone4:	binclude	"artnem/Special ZONE4.nem" ; ZONE4 block
-		even
-Nem_SSZone5:	binclude	"artnem/Special ZONE5.nem" ; ZONE5 block
-		even
-Nem_SSZone6:	binclude	"artnem/Special ZONE6.nem" ; ZONE6 block
-		even
-Nem_SSUpDown:	binclude	"artnem/Special UP-DOWN.nem" ; special stage UP/DOWN block
-		even
-Nem_SSEmerald:	binclude	"artnem/Special Emeralds.nem" ; special stage chaos emeralds
-		even
-Nem_SSGhost:	binclude	"artnem/Special Ghost.nem" ; special stage ghost block
-		even
-Nem_SSWBlock:	binclude	"artnem/Special W.nem"	; special stage W block
-		even
-Nem_SSGlass:	binclude	"artnem/Special Glass.nem" ; special stage destroyable glass block
-		even
-Nem_ResultEm:	binclude	"artnem/Special Result Emeralds.nem" ; chaos emeralds on special stage results screen
+Nem_Stars:	binclude	"artnem/Invincibility Stars.nem"
 		even
 
 ; ---------------------------------------------------------------------------
@@ -332,9 +332,13 @@ Nem_Cater:	binclude	"artnem/Enemy Caterkiller.nem"
 		even
 Nem_IE:		binclude	"artnem/Internet Explorer.nem"
 		even
+Nem_RecycleBin:		binclude	"artnem/Recycle Bin.nem"
+		even		
 Nem_Villager:		binclude	"artnem/Villager.nem"
 		even
 Nem_Mouse:		binclude	"artnem/Mouse.nem"
+		even
+Nem_SCG:		binclude	"artnem/SegaChGuy.nem"
 		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - character hud
@@ -344,13 +348,16 @@ Nem_TonicLives: 	binclude	"char_assets/hud/Tonic Life Counter Icon.nem"
 		even
 Nem_ManiacLives:	binclude	"char_assets/hud/Maniac Life Counter Icon.nem"
 		even
-
+Nem_MrBeanLives: 	binclude	"char_assets/hud/MrBean's Life Counter Icon.nem"
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - various
 ; ---------------------------------------------------------------------------
 Nem_TitleCard:	binclude	"artnem/Title Cards.nem"
 		even
 Nem_Hud:	binclude	"artnem/HUD.nem"	; HUD (rings, time, score)
+		even
+Nem_burpHud:	binclude	"artnem/burpHUD.nem"	; THE BURP IS COMING. - coni
 		even
 Nem_Ring:	binclude	"artnem/Rings.nem"
 		even
@@ -370,6 +377,15 @@ Nem_VSpring:	binclude	"artnem/Spring Vertical.nem"
 		even
 Nem_SignPost:	binclude	"artnem/Signpost.nem"	; end of level signpost
 		even
+Nem_CharSign:
+Nem_CharSignTonic:	binclude	"artnem/CharSign Tonic.nem"
+		even
+Nem_CharSignManiac:	binclude	"artnem/CharSign Maniac.nem"
+		even
+Nem_CharSignBeans:	binclude	"artnem/CharSign Bean.nem"
+		even
+
+
 Nem_Lamp:	binclude	"artnem/Lamppost.nem"
 		even
 Nem_BigFlash:	binclude	"artnem/Giant Ring Flash.nem"
@@ -476,7 +492,11 @@ Blk256_Joint:	binclude	"map256/Joint.kos"
 		even
 Blk16_DVZ:	binclude	"map16/DVZ.eni"
 		even
+Blk16_DVZ3:	binclude	"map16/DVZ3.eni"
+		even
 Kos_DVZ:	binclude	"artkos/8x8 - DVZ.kos"	; DVZ	primary padded. pamperspoop
+		even
+Kos_DVZ3:	binclude	"artkos/8x8 - DVZ3.kos"	; DVZ	primary padded. pamperspoop
 		even
 Blk256_DVZ:	binclude	"map256/DVZ.kos"
 		even
@@ -507,6 +527,14 @@ Kos_BTZ:	binclude	"artkos/8x8 - BTZ.kos"
 		even
 Blk256_BTZ:	binclude	"map256/BTZ.kos"		
 		even
+
+Blk16_ARZ:	binclude	"map16/ARZ.eni"
+		even
+Kos_ARZ:	binclude	"artkos/8x8 - ARZ.kos"	; LZ primary patterns
+		even
+Blk256_ARZ:	binclude	"map256/ARZ.kos"
+		even
+
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - bosses and ending sequence
 ; ---------------------------------------------------------------------------
@@ -540,12 +568,20 @@ Nem_EndStH:	binclude	"artnem/Ending - StH Logo.nem"
 		even
 Eni_TheIdiotBros:	binclude	"tilemaps/Idiots.eni"
 		even
+Art_DioDanner:	incbin	"_incObj/DioMildanner/Art - Boss.uncle"
+		even
+Nem_DioDanner_Intro:	incbin	"_incObj/DioMildanner/Art - Intro.nem"
+		even
+Nem_DioDanner_Dead:	incbin	"_incObj/DioMildanner/Art - Dead.nem"
+		even
+Nem_Sans:	binclude	"artnem/Sans.nem"
+		even
 ; ---------------------------------------------------------------------------
 ; Cold Brew
 ; ---------------------------------------------------------------------------
 Nem_LenBro:	binclude	"coniobjs/LenArt.bin"
 		even
-Nem_IZ:	binclude	"coniobjs/IZArt.bin"
+Nem_IZ:		binclude	"coniobjs/IZArt.bin"
 		even
 Nem_Spongy:	binclude	"coniobjs/SpongyArt.bin"
 		even
@@ -557,9 +593,11 @@ Nem_ChopperCBZ:	binclude	"artnem/Enemy ChopperCBZ.nem"
 		even
 Nem_MotobugCBZ:	binclude	"artnem/Enemy MotobugCBZ.nem"
 		even
-Nem_EizaNorm:	binclude	"coniobjs/eiza/artnorm.bin"
+Nem_CBZGuy:	binclude	"artnem/CBGuy.nem"
 		even
-Nem_EizaAtt:	binclude	"coniobjs/eiza/artATT.bin"
+Nem_ProngleWisp:	binclude	"coniobjs/ProngleWisp.bin"
+		even
+Art_Eiza:	binclude	"coniobjs/eiza/art.bin"
 		even
 ; ---------------------------------------------------------------------------
 ; Collision data
@@ -586,9 +624,11 @@ Col_BREW:	binclude	"collide/BREW.bin"	; BREW index
 		even
 Col_WIN:	binclude	"collide/WIN.bin"	; WIN index
 		even
-Col_Joint:	binclude	"collide/Joint.bin"	; Joint index
+Col_Joint:	binclude	"collide/Joint.bin"	; Tonic's Insides index
 		even
-Col_DVZ:	binclude	"collide/DVZ.bin"	; IDONT CARE
+Col_DVZ:	binclude	"collide/DVZ.bin"	; I DONT CARE (Dax: WELL I DO!)
+		even
+Col_DVZ3:	binclude	"collide/DVZ3.bin"	; I DONT CARE (Dax: WELL I DO!)
 		even
 Col_NGZ:	binclude	"collide/NGZ.bin"	; O,GOPOG9-I0=IG20=I=0IG4=0I
 		even
@@ -598,22 +638,8 @@ Col_BSZ:	binclude	"collide/BSZ.bin"
 		even
 Col_BTZ:	binclude	"collide/BTZ.bin"
 		even
-; ---------------------------------------------------------------------------
-; Special Stage layouts
-; ---------------------------------------------------------------------------
-SS_1:		binclude	"sslayout/1.eni"
+Col_ARZ:		binclude	"collide/ARZ.bin"	; LZ index
 		even
-SS_2:		binclude	"sslayout/2.eni"
-		even
-SS_3:		binclude	"sslayout/3.eni"
-		even
-SS_4:		binclude	"sslayout/4.eni"
-		even
-SS_5:		binclude	"sslayout/5 (JP1).eni"
-		even
-SS_6:		binclude	"sslayout/6 (JP1).eni"
-		even
-
 ; ---------------------------------------------------------------------------
 ; Animated uncompressed graphics
 ; ---------------------------------------------------------------------------
@@ -808,7 +834,8 @@ Level_Joint2:	binclude	"levels/Joint2.bin"
 		even
 Level_Joint3:	binclude	"levels/Joint3.bin"
 		even
-Level_Joint1Unk:	
+Level_Joint1Unk:
+Level_stub:
 		dc.l 0
 Level_DVZ1:	binclude	"levels/DVZ1.bin"
 		even
@@ -851,6 +878,16 @@ Level_BTZ3:	binclude	"levels/btz3.bin"
 		even
 Level_BTZbg:	binclude	"levels/btzbg.bin"
 		even
+
+Level_ARZ1:	binclude	"levels/arz1.bin"
+		even
+Level_ARZ2:	binclude	"levels/arz2.bin"
+		even
+Level_ARZ3:	binclude	"levels/arz3.bin"
+		even
+Level_ARZbg:	binclude	"levels/arzbg.bin"
+		even
+
 ; ---------------------------------------------------------------------------
 ; Uncompressed graphics - Giant Rings
 ; ---------------------------------------------------------------------------
@@ -1047,8 +1084,17 @@ ObjPos_BTZ2:	binclude	"objpos/btz2.bin"
 ObjPos_BTZ3:	binclude	"objpos/btz3.bin"
 		even
 
-ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
+ObjPos_ARZ1:	binclude	"objpos/arz1.bin"
+		even
+ObjPos_ARZ2:	binclude	"objpos/arz2.bin"
+		even
+ObjPos_ARZ3:	binclude	"objpos/arz3.bin"
+		even
 
+ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
+;INSTAGRAM FOR DEMO ART!
+Nem_Instagram:	incbin	"artnem\Instagram.bin"
+		even
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; ART, MAPS AND PALETTE

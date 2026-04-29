@@ -5441,4 +5441,4 @@ Danstar_Voices:
 	dc.b		$06,$35,$1A,$15,$1A,$10,$00,$18,$10;			Voice 04
 	even
 
-	smpsFooterEndSong	"TG2000Tracks/Danstar BACKUP 2.asm"
+	smpsFooterEndSong	"TG2000Tracks/Backups/Danstar BACKUP 2.asm"

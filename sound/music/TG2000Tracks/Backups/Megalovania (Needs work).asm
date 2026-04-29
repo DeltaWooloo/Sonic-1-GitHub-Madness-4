@@ -2447,3 +2447,5 @@ Megalovania_PSG3_08_0_64:
 Megalovania_PSG3_0A_0_64:
 	dc.b nRst, $40
 	smpsReturn
+
+	smpsFooterEndSong	"TG2000Tracks/Backups/Megalovania (Needs works).asm"

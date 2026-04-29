@@ -8,7 +8,7 @@
 LevelSizeLoad:
 		moveq	#0,d0
 		move.b	d0,(v_unused7).w
-		move.b	d0,(v_unused8).w
+		;!@ move.b	d0,(v_unused8).w
 		move.b	d0,(v_unused9).w
 		move.b	d0,(v_unused10).w
 		move.b	d0,(v_dle_routine).w
@@ -146,12 +146,13 @@ LoopTileNums:
 		dc.b	$7F,	$7F,	$7F,	$7F	; Spring Yard
 		dc.b	$7F,	$7F,	$7F,	$7F	; Scrap Brain
 		dc.b	$B5,	$7F,	$1F,	$20	; Ending (Green Hill)
-		dc.b	$B5,	$7F,	$1F,	$20	; BREW
-		dc.b	$AA,	$B4,	$7F,	$7F	; WIN
+		dc.b	$BA,	$7F,	$26,	$27	; BREW
+		dc.b	$7F,	$7F,	$7F,	$7F	; WIN
 		dc.b	$7F,	$7F,	$7F,	$7F	; Joint
-		dc.b	$7F,	$7F,	$7F,	$7F	; DVZ
-		dc.b	$7F,	$7F,	$7F,	$7F	; NGZ
+		dc.b	$7F,	$7F,	$7F,	$7F	; DVZ		; Rechanged the loop placement
+		dc.b	$B5,	$7F,	$1F,	$20	; NGZ		; I AM A FUCKING IDIOT
 		dc.b	$7F,	$7F,	$7F,	$7F	; BSZ
+		dc.b	$7F,	$7F,	$7F,	$7F	; BTZ
 		dc.b	$7F,	$7F,	$7F,	$7F	; BTZ
 		even
 
@@ -170,6 +171,7 @@ BgScrollSpeed:
 		move.w	d1,(v_bgscreenposx).w
 		move.w	d1,(v_bg2screenposx).w
 		move.w	d1,(v_bg3screenposx).w
+		move.b	#0,vscroll_mode
 
 loc_6206:
 		moveq	#0,d2
@@ -183,12 +185,12 @@ loc_6206:
 BgScroll_Index:	dc.w BgScroll_GHZ-BgScroll_Index, BgScroll_LZ-BgScroll_Index
 		dc.w BgScroll_MZ-BgScroll_Index, BgScroll_SLZ-BgScroll_Index
 		dc.w BgScroll_SYZ-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
-		zonewarning BgScroll_Index,2
 		dc.w BgScroll_End-BgScroll_Index, BgScroll_GHZ-BgScroll_Index
-		dc.w BgScroll_Default-BgScroll_Index, BgScroll_Default-BgScroll_Index
+		dc.w BgScroll_Default-BgScroll_Index, BgScroll_ITBZ-BgScroll_Index
 		dc.w BgScroll_NGZ-BgScroll_Index, BgScroll_NGZ-BgScroll_Index
 		dc.w BgScroll_Default-BgScroll_Index, BgScroll_Default-BgScroll_Index
-		dc.w BgScroll_Default-BgScroll_Index, BgScroll_Default-BgScroll_Index
+		dc.w BgScroll_ARZ-BgScroll_Index
+		zonewarning BgScroll_Index,2
 ; ===========================================================================
 
 BgScroll_Default:
@@ -241,6 +243,12 @@ BgScroll_SYZ:
 ; ===========================================================================
 
 BgScroll_SBZ:
+		tst.b	v_act.w
+		beq.s	.act1
+		move.b	#0,vscroll_mode
+		move.w	#0,(v_bgscreenposy).w
+		rts
+.act1:
 		move.b	#1,vscroll_mode
 		move.w	#0,(v_bgscreenposy).w
 		rts
@@ -270,3 +278,18 @@ BgScroll_End:
 
 BgScroll_NGZ:
 		bra.w	Deform_NGZ
+
+BgScroll_ITBZ:
+		clr.l	(v_bgscreenposx).w
+		clr.l	(v_bgscreenposy).w
+		clr.l	(v_bg2screenposy).w
+		clr.l	(v_bg3screenposy).w
+		move.b	#1,vscroll_mode
+		rts
+
+; ===========================================================================
+
+BgScroll_ARZ:
+		move.b	#0,vscroll_mode
+		clr.l	(v_bgscreenposy).w
+		rts

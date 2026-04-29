@@ -73,7 +73,7 @@ ArifBoss_Arif:
 		tst.w	obVelY(a0)
 		bmi.s	.Intro1_Return
 
-		cmpi.w	#$3C0, obY(a0)				; fart ypos check
+		cmpi.w	#boss_ngz_y+$C0, obY(a0)	; fart ypos check (- fuzzy why would you do thissdf - coni)
 		blt.s	.Intro1_Return
 
 		jsr	ObjFloorDist
@@ -182,7 +182,7 @@ ArifBoss_Arif:
 		tst.w	obVelY(a0)
 		bmi.s	.Fall_Exit
 
-		cmpi.w	#$3C0, obY(a0)				; fart ypos check
+		cmpi.w	#boss_ngz_y+$C0, obY(a0)				; fart ypos check
 		blt.s	.Fall_Exit
 
 		jsr	ObjFloorDist

@@ -1,37 +1,25 @@
-DPLC_ed17: mappingsTable
-	mappingsTableEntry.w	DPLC_ed17_0
-	mappingsTableEntry.w	DPLC_ed17_1
-	mappingsTableEntry.w	DPLC_ed17_2
-	mappingsTableEntry.w	DPLC_ed17_3
-	mappingsTableEntry.w	DPLC_ed17_4
-	mappingsTableEntry.w	DPLC_ed17_5
-	mappingsTableEntry.w	DPLC_ed17_6
-
-DPLC_ed17_0:	dplcHeader
-DPLC_ed17_0_End
-
-DPLC_ed17_1:	dplcHeader
- dplcEntry 8, 0
-DPLC_ed17_1_End
-
-DPLC_ed17_2:	dplcHeader
- dplcEntry 8, 0
-DPLC_ed17_2_End
-
-DPLC_ed17_3:	dplcHeader
- dplcEntry 8, 0
-DPLC_ed17_3_End
-
-DPLC_ed17_4:	dplcHeader
- dplcEntry 8, 0
-DPLC_ed17_4_End
-
-DPLC_ed17_5:	dplcHeader
- dplcEntry 8, 0
-DPLC_ed17_5_End
-
-DPLC_ed17_6:	dplcHeader
- dplcEntry 8, 0
-DPLC_ed17_6_End
-
+DPLC_3883:
+DPLC_3883_0: 	dc.w DPLC_3883_10-DPLC_3883
+DPLC_3883_2: 	dc.w DPLC_3883_11-DPLC_3883
+DPLC_3883_4: 	dc.w DPLC_3883_14-DPLC_3883
+DPLC_3883_6: 	dc.w DPLC_3883_17-DPLC_3883
+DPLC_3883_8: 	dc.w DPLC_3883_1A-DPLC_3883
+DPLC_3883_A: 	dc.w DPLC_3883_1D-DPLC_3883
+DPLC_3883_C: 	dc.w DPLC_3883_20-DPLC_3883
+DPLC_3883_E: 	dc.w DPLC_3883_23-DPLC_3883
+DPLC_3883_10: 	dc.b $0
+DPLC_3883_11: 	dc.b $1
+	dc.b $30, $4
+DPLC_3883_14: 	dc.b $1
+	dc.b $70, $0
+DPLC_3883_17: 	dc.b $1
+	dc.b $70, $0
+DPLC_3883_1A: 	dc.b $1
+	dc.b $70, $0
+DPLC_3883_1D: 	dc.b $1
+	dc.b $70, $0
+DPLC_3883_20: 	dc.b $1
+	dc.b $70, $0
+DPLC_3883_23: 	dc.b $1
+	dc.b $30, $8
 	even

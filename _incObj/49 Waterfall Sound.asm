@@ -3,6 +3,10 @@
 ; ---------------------------------------------------------------------------
 
 WaterSound:
+                cmpi.b  #id_BSZ,v_zone.w
+                bne.s	.continueyoustupid
+                jmp	BossDioMildanner.l		; fart
+.continueyoustupid
 		moveq	#0,d0
 		move.b	obRoutine(a0),d0
 		move.w	WSnd_Index(pc,d0.w),d1

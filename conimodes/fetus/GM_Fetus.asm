@@ -48,7 +48,7 @@ GM_Fet_ClrObjRam:
 
 		moveq	#palid_Fetus,d0
 		jsr		(PalLoad1).l		; load palette
-		lea     (v_palette_fading+$12).w,a1
+		lea     (v_palette_fading).w,a1
 		bsr.s	GM_Fet_PalSet
 		jsr		(PaletteFadeIn).l
 
@@ -58,7 +58,7 @@ GM_Fet_Loop:
 		cmpi.b	#btnA,(v_jpadpress1).w ; check if action button is pressed
 		bne.s	GM_Fet_ControlExit	; if not, branch
 		bchg	#0,(DiffVariable).w
-		lea     (v_palette+$12).w,a1
+		lea     (v_palette).w,a1
 		bsr.s	GM_Fet_PalSet
 GM_Fet_ControlExit:
 		andi.b	#btnStart,(v_jpadpress1).w ; check if Start is held - i can't check the same variable again apparently idk why - coni
@@ -66,21 +66,23 @@ GM_Fet_ControlExit:
 		jsr		(PaletteFadeOut).l	; INCASE
 		lea	(vdp_control_port).l,a6
 		move.w	#$8C81,(a6)	; set to next screen mode
-		move.b	#id_Title,(v_gamemode).w ; go to title screen
+		move.b	#id_Level,(v_gamemode).w ; go to level
 		rts
 
 GM_Fet_PalSet:
-		lea     (Pal_Fetus+3*2).l,a0
+		lea     (Pal_Fetus2).l,a0
 		tst.b	(DiffVariable).w ; check difficulty
 		beq.s	.dontset
-		lea     (Pal_Fetus+6*2).l,a0
+		lea     (Pal_Fetus).l,a0
 	.dontset:
-		move.w	#$3,d7	; 6 colors
+		moveq   #16-1,d7	; 6 colors
 	.loop:
 		move.l  (a0)+,(a1)+
 		dbf.w	d7,.loop
 		rts
 
 Pal_Fetus:		bincludeEndMarker	"conimodes/fetus/pal.bin"
+Pal_Fetus2:		bincludeEndMarker	"conimodes/fetus/pal2.bin"
+Pal_FetusRepeatAAAA:		bincludeEndMarker	"conimodes/fetus/pal.bin"
 Nem_Fetus:		binclude	"conimodes/fetus/art.bin"
 Eni_Fetus:		binclude	"conimodes/fetus/map.bin"

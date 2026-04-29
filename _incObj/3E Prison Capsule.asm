@@ -206,6 +206,16 @@ Pri_EndAct:	; Routine $E
 		beq.s	.found		; if yes, branch
 		adda.w	d2,a1		; next object RAM
 		dbf	d0,.findanimal	; repeat $3E times
+		; CONI - actually calculate the level results it doing none of that bothered me
+		; hello someone whos reading this
+		; its 5:23 pm
+		; i'm close to screaming at someone
+		; anyways hi joevanni i hope you don't mind me putting your code here
+		add.w	(v_timebonus),d0; GIO: add the entire bonus to data register 0
+		clr.w	(v_timebonus).w	; GIO: clear the time bonus
+		add.w	(v_ringbonus),d0; GIO: add the entire bonus to d0
+		clr.w	(v_ringbonus).w	; GIO: clear the ring bonus
+		jsr     (AddPoints).l	; GIO: add up the points stored in d0
 		move.b	#id_Damn,(v_gamemode).w
 ;		jsr	(GotThroughAct).l
 		jmp	(DeleteObject).l

@@ -32,6 +32,8 @@ Buzz_Main:	; Routine 0
 		move.b	#3,obPriority(a0)
 		move.b	#8,obColType(a0)
 		move.b	#$18,obActWid(a0)
+		move.b	#32,obWidth(a0)
+		move.b	#32,obHeight(a0)
 		cmpi.b	#id_CBZ,(v_zone).w		; is zone CBZ?
 		bne.s	.NotCBZ	; if not, branch
 		move.l	#Map_BuzzCBZ,obMap(a0)

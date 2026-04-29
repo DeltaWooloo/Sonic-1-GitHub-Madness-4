@@ -25,7 +25,6 @@ GM_DebugMenu:
 		move.b	#bgm_Fade,d0
 		bsr.w	QueueSound2		; stop music
 		bsr.w	PaletteFadeOut
-		bsr.w	ClearScreen
 		disable_ints
 		lea	(vdp_control_port).l,a6
 		move.w	#$8004,(a6)	; 8-colour mode
@@ -35,9 +34,11 @@ GM_DebugMenu:
 		move.w	#$9200,(a6)	; window vertical position
 		move.w	#$8B03,(a6)
 		move.w	#$8720,(a6)	; set background colour (palette line 2, entry 0)
-		disable_display
 		clr.b	(f_wtr_state).w
+		disable_display
+		bsr.w	ClearScreen
 		clr.b	(v_lastlamp).w
+		jsr	(Pow_fix_RandMon_Runonce_flags).l	;!@ GD: Clear f_randMonPow runonce flags
 		clr.w	(v_debuguse).w
 		clr.w	(f_demo).w
 		clr.b	(f_nobgscroll).w
@@ -435,7 +436,7 @@ DebuggerMenu_PlaySound:
 DebuggerMenu_PlayPCM:	
 		stopPCM
 		move.b	(v_dbgmenu_pcmid).w,d0
-		jmp	MegaPCM_PlaySample
+		jmp	MegaPCM_PlaySample				; Just play sample
 
 ; ---------------------------------------------------------------------------
 ; Data table for menu entries (8 bytes each):
@@ -448,7 +449,7 @@ Debugger_Data:
 		dc.l	GamemodeNameTable
 
 		dc.l	v_zone			; ZONE ID
-		dc.b	$01,$00,13,$00		; step 1, range 0-5
+		dc.b	$01,$00,14,$00		; step 1, range 0-5
 		dc.l	ZoneNameTable
 
 		dc.l	v_act			; ACT ID
@@ -463,7 +464,7 @@ Debugger_Data:
 		dc.b	$01,$01,$63,$00		; step 1, range 1-99
 		dc.l	0
 
-		dc.l	v_characterid		; CHARACTER
+		dc.l	v_savedcharacterid	; CHARACTER
 		dc.b	$01,$00,chrid_last,$00	; step 1, range 1-99
 		dc.l	CharacterNameTable
 
@@ -586,9 +587,10 @@ ZoneNameTable:
 		dc.w	.Nogales -.t
 		dc.w	.BS -.t
 		dc.w	.BT -.t
+		dc.w	.ARZ -.t
 
 .GHZ:		dc.b	"ORANGE WORLD    "
-.LZ:		dc.b	"AZURE RAINFOREST"
+.LZ:		dc.b	"WARIO HALLWAY   "
 .MZ:		dc.b	"ALBERTA CANADA  "
 .SLZ:		dc.b	"MEIN KRAFT      "
 .SYZ:		dc.b	"SPRING FIELD    "
@@ -596,11 +598,12 @@ ZoneNameTable:
 .End:		dc.b	"ENDING          "
 .MSZ:		dc.b	"COLD BREW       "
 .ABC:		dc.b	"WINDOWS         "
-.Joint:		dc.b	"THE JOINT       "
+.Joint:		dc.b	"REALLY T. INSINE"
 .DVZ:		dc.b	"DOLEVILLE       "
 .Nogales:	dc.b	"NOGALES         "
-.BS:	    dc.b	"BLUESCAPE       "
-.BT:	    dc.b	"BLUESTONE       "
+.BS:		dc.b	"BLUESCAPE       "
+.BT:		dc.b	"OLD JOHN        "
+.ARZ:		dc.b	"AZURE RAINFOREST"
 		even
 
 GamemodeNameTable:
@@ -611,21 +614,19 @@ GamemodeNameTable:
 		dc.w	.Special-.t
 		dc.w	.Continue-.t
 		dc.w	.Ending-.t
-		dc.w	.CreditsS1-.t
-		dc.w	.ColdBrew-.t
-		dc.w	.FoxyScare-.t
-		dc.w	.DebugMenu-.t
 		dc.w	.Thanatos-.t
-		dc.w	.ButtcrackMan-.t
-		dc.w	.TryAgainTest-.t
+		dc.w	.TryAgain-.t
+		dc.w	.ColdBrew-.t
+		dc.w	.Jumpscare-.t
 		dc.w	.Difficulty-.t
 		dc.w	.DamnScreen-.t
-		dc.w	.Skipper-.t
 		dc.w	.Advert-.t
 		dc.w	.Earthbou-.t
 		dc.w	.Screensaver-.t
 		dc.w	.Clinton-.t	; ClintonScreens
 		dc.w	.BSOD-.t
+		dc.w	.Sans-.t
+		dc.w	.DebugMenu-.t
 		rept ( (GameModeArray_End-GameModeArray)-(((*)-.t)*2) )/4
 		dc.w	.Placeholder-.t
 		endr
@@ -637,29 +638,29 @@ GamemodeNameTable:
 .Special:		dc.b	"SPECIAL STAGE   "
 .Continue:		dc.b	"CONTINUE        "
 .Ending:		dc.b	"ENDING          "
-.CreditsS1:		dc.b	"CREDITS SONIC 1 "
+.Thanatos:		dc.b	"CREDITS         "
+.TryAgain:		dc.b	"TRY AGAIN/END   "
 .ColdBrew:		dc.b	"COLD BREW       "
-.FoxyScare:		dc.b	"FOXY JUMPSCARE  "
-.DebugMenu:		dc.b	"DEBUG MENU      "
-.Thanatos:		dc.b	"THANATOS CREDITS"
-.ButtcrackMan:		dc.b	"BUTTCRACK MAN   "
-.TryAgainTest:		dc.b	"TRY AGAIN/END   "
+.Jumpscare:		dc.b	"JUMPSCARE       "
 .Difficulty:		dc.b	"DIFFICULTY      "
 .DamnScreen:		dc.b	"DAMN!!!!!!!!!!!!"
-.Skipper:		dc.b	"SPLASH SKIPPER  "
 .Advert:		dc.b	"ADVERTISEMENTS  "
-.Earthbou:		dc.b	"CUTSCENES	 "
+.Earthbou:		dc.b	"CUTSCENES       "
 .Screensaver:		dc.b	"SCREENSAVER     "
 .Clinton:		dc.b	"CLINTON         "
 .BSOD:			dc.b	"WINDOWS BSOD    "
+.Sans:			dc.b	"SANS DEAD       "
+.DebugMenu:		dc.b	"DEBUG MENU      "
 .Placeholder:		dc.b	"PLACEHOLDER NAME"
 		even
 
 CharacterNameTable:
 .t:		dc.w	.Tonic-.t
 		dc.w	.Maniac-.t
+		dc.w	.Bean-.t
 .Tonic:		dc.b	"TEETH TONIC     "
 .Maniac:	dc.b	"MANIAC MOUSE    "
+.Bean:	dc.b	"MR BEAN SEXYBEAN"
 		even
 
 ; ---------------------------------------------------------------------------

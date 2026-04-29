@@ -103,6 +103,21 @@ scrollVDPPlanes_set:	macro	vBLA,bgxpos,bgypos,fgxpos,fgypos
 		move.b	#vBLA,(v_vbla_routine).w
 		jsr	(WaitForVBla).l
 		endm
+		
+;!@ GD: Macro to write VDP Debug selector
+writeDBG_sel	macro	rid
+	;Write VDP Debug selector
+	;KDebug.WriteLine "writeDBG_sel: %<.w rid>"
+	lea		(debug_sel).l,a6	; Load VDP Debug sel into a6
+	move.w	#(rid<<8),(a6)		; Write Reg rid
+	endm
+	
+;!@ GD: Macro to write VDP Debug value d2 to register
+writeDBG_reg2	macro
+	;KDebug.WriteLine "writeDBG_reg: %<.w d2>"
+	lea		(debug_reg).l,a6	;Load VDP Debug reg into a6
+	move.w	d2,(a6)				;Write register
+	endm
 
 ; ---------------------------------------------------------------------------
 ; DMA fill VRAM with a value
@@ -379,9 +394,60 @@ gotoROM:	macro
 ; ---------------------------------------------------------------------------
 
 zonewarning:	macro loc,elementsize
-._end:
-	if (._end-loc)-(ZoneCount*elementsize)<>0
-		warning "Size of loc (\{(._end-loc)/elementsize}) does not match ZoneCount (\{ZoneCount})."
+	if (MOMPASS==2)&&((*-loc)<>(ZoneCount*elementsize))
+		warning "Size of loc ($\{(*-loc)/elementsize}) does not match ZoneCount ($\{ZoneCount})."
+	endif
+		endm
+		
+; ---------------------------------------------------------------------------
+; compare the size of an index with bgm__count constant
+; (should be used immediately after the index)
+; input: index address, element size
+; ---------------------------------------------------------------------------
+
+bgmwarning:	macro loc2,elementsize2
+._end2:
+	if (._end2-loc2)-(bgm__count*elementsize2)<>0
+		warning "Size of loc2 (\{(._end2-loc2)/elementsize2}) does not match bgm__count (\{bgm__count})."
+	endif
+		endm
+		
+; ---------------------------------------------------------------------------
+; compare the size of an index with sfx__count constant
+; (should be used immediately after the index)
+; input: index address, element size
+; ---------------------------------------------------------------------------
+
+sfxwarning:	macro loc3,elementsize3
+._end3:
+	if (._end3-loc3)-(sfx__count*elementsize3)<>0
+		warning "Size of loc3 (\{(._end3-loc3)/elementsize3}) does not match sfx__count (\{sfx__count})."
+	endif
+		endm
+		
+; ---------------------------------------------------------------------------
+; compare the size of an index with spc__count constant
+; (should be used immediately after the index)
+; input: index address, element size
+; ---------------------------------------------------------------------------
+
+spcwarning:	macro loc4,elementsize4
+._end4:
+	if (._end4-loc4)-(spc__count*elementsize4)<>0
+		warning "Size of loc4 (\{(._end4-loc4)/elementsize4}) does not match spc__count (\{spc__count})."
+	endif
+		endm
+		
+; ---------------------------------------------------------------------------
+; compare the size of an index with flg__count constant
+; (should be used immediately after the index)
+; input: index address, element size
+; ---------------------------------------------------------------------------
+
+flgwarning:	macro loc5,elementsize5
+._end5:
+	if (._end5-loc5)-(flg__count*elementsize5)<>0
+		warning "Size of loc5 (\{(._end5-loc5)/elementsize5}) does not match flg__count (\{flg__count})."
 	endif
 		endm
 
@@ -443,6 +509,22 @@ stopPCM:	macro
 	move.b	#dsfxSilence,d0
 	jsr	(MegaPCM_PlaySample).l
 	endm
+
+; ---------------------------------------------------------------------------
+; !@ GD: Function to create an ANDI mask (set MSB and all bits lower than MSB of number)
+; For long, word, and byte lengths
+; -------------------------------------------------------------	
+; uint32_t setAllBitsBelowMSB(uint32_t n) {
+    ; n |= n >> 1;   // Set 2 bits (the MSB and one below)
+    ; n |= n >> 2;   // Set 4 bits
+    ; n |= n >> 4;   // Set 8 bits	Byte
+    ; n |= n >> 8;   // Set 16 bits	Word
+    ; n |= n >> 16;  // Set 32 bits	Long
+    ; return n;
+;}
+andiMaskB	function n,(((n|(n>>1))|((n|(n>>1))>>2))|((n|(n>>1))|((n|(n>>1))>>2))>>4)
+andiMaskW	function n,(andiMaskB(n)|(andiMaskB(n)>>8))
+andiMaskL	function n,(andiMaskW(n)|(andiMaskW(n)>>16))
 
 ; ---------------------------------------------------------------------------
 ; Macro to communicate with Sega CD

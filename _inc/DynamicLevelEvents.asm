@@ -66,6 +66,7 @@ DLE_Index:	dc.w 	DLE_GHZ-DLE_Index
 		dc.w	DLE_NGZ-DLE_Index
 		dc.w	DLE_BSZ-DLE_Index
 		dc.w	DLE_BTZ-DLE_Index
+		dc.w	DLE_ARZ-DLE_Index
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Green Hill Zone dynamic level events
@@ -148,28 +149,20 @@ DLE_GHZ3boss:
 
 loc_6EB0:
 		cmpi.w	#boss_ghz_x,(v_screenposx).w
-		blo.s	locret_6EE8
-
-		; load boss
+		bcs.s	locret_6EE8
 		jsr	(FindFreeObj).l
 		bne.s	.noobj
-
-		move.b	#id_Arif,obID(a1) ; load GHZ boss object
-		move.w	#$292F,obX(a1)
-		move.w	#$400,obY(a1)
-
+		_move.b	#id_BossGreenHill,0(a1) ; load GHZ boss	object
+		move.w	#boss_ghz_x+$100,obX(a1)
+		move.w	#boss_ghz_y-$80,obY(a1)
+		move.w	#boss_ghz_x,(v_limitright2).w	; hacky fix
 .noobj:
 		move.w	#bgm_Boss,d0
 		jsr	(QueueSound1).l		; play boss music
-
-		move.w	#$280B, (v_limitleft2).w	; limit left bound
-		move.w	#$2900, (v_limitright2).w ; limit right bound
 		move.b	#1, (f_lockscreen).w 	; lock screen
-
 		addq.b	#2,(v_dle_routine).w
-
-		lea	(PLC_Arif).l,a1
-		jmp	(UserPLC).l
+		moveq	#plcid_Boss,d0
+		jmp		(AddPLC).l		; load boss patterns - oh yeah i forgot we added too many shit for that to pass as a bra
 
 ; ===========================================================================
 
@@ -178,6 +171,7 @@ locret_6EE8:
 ; ===========================================================================
 
 DLE_GHZ3end:
+		move.w	(v_screenposx).w,(v_limitleft2).w
 		rts
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -226,6 +220,7 @@ DLE_SBZ3:
 		cmpi.w	#$18,(v_player+obY).w ; has Sonic reached the top of the level?
 		bhs.s	locret_6F8C	; if not, branch
 		clr.b	(v_lastlamp).w
+		jsr	(Pow_fix_RandMon_Runonce_flags).l	;!@ GD: Clear f_randMonPow runonce flags
 		move.w	#1,(f_restart).w ; restart level
 		move.w	#(id_PPZ<<8)+2,(v_zone).w ; set level number to 0502 (FZ)
 		move.b	#1,(f_playerctrl).w ; lock controls
@@ -424,7 +419,7 @@ DLE_MZ4chkboss:
 		move.w	#Knight_Y_Spawn+$24,obY(a1)
 
 .spawnfail:
-		move.w	#bgm_Boss,d0
+		move.w	#bgm_DeltaTale,d0 ;if you dont like this then uhh change it back to bgm_Boss :P -Dawid
 		jsr	(QueueSound1).l	; play boss music
 		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w	
@@ -512,7 +507,7 @@ loc_7144:
 		jsr	(QueueSound1).l	; play boss music
 		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w
-		moveq	#plcid_Boss,d0
+		moveq	#plcid_Sans,d0
 		jmp	(AddPLC).l	; load boss patterns
 ; ===========================================================================
 
@@ -627,9 +622,10 @@ DLE_SBZ1:
 		cmpi.w	#$1880,(v_screenposx).w
 		blo.s	locret_7242
 		move.w	#$620,(v_limitbtm1).w
-		cmpi.w	#$2000,(v_screenposx).w
-		blo.s	locret_7242
-		move.w	#$2A0,(v_limitbtm1).w
+		;!@ GD: Heck no, disable
+		;cmpi.w	#$2000,(v_screenposx).w
+		;blo.s	locret_7242
+		;move.w	#$2A0,(v_limitbtm1).w
 
 locret_7242:
 		rts
@@ -782,7 +778,6 @@ DLE_BREW1:
 		cmpi.w	#$1780,(v_screenposx).w ; has the camera reached $1780 on x-axis?
 		blo.s	locret_6E08BR	; if not, branch
 		move.w	#$400,(v_limitbtm1).w ; set lower y-boundary
-DLE_BREW4:
 locret_6E08BR:
 		rts
 ; ===========================================================================
@@ -800,26 +795,16 @@ DLE_BREW3:
 		move.w	off_6E4ABR(pc,d0.w),d0
 		jmp	off_6E4ABR(pc,d0.w)
 ; ===========================================================================
-off_6E4ABR:	dc.w DLE_BREW3main-off_6E4ABR
+off_6E4ABR:;	dc.w DLE_BREW3main-off_6E4ABR
 		dc.w DLE_BREW3ScrollEnd-off_6E4ABR
 		dc.w DLE_BREW3boss-off_6E4ABR
 		dc.w DLE_BREW3end-off_6E4ABR
 ; ===========================================================================
 
-EizaArtList:
-	dc.l	Nem_EizaNorm
-	dc.w	$7080
-	dc.l	-1		; Load in her GFX, likely gobbling up all of obj vram
-
 DLE_BREW3main:
 		add.w	#1,(v_limitleft2).w
-		cmpi.w	#boss_ghz_x-$220,(v_screenposx).w
+		cmpi.w	#boss_ghz_x-$200,(v_screenposx).w
 		bcs.s	BrewAutoScroll
-		lea	(EizaArtList).l,a1
-		jsr	(UserPLC).l
-		clr.w	(v_limitleft2).w
-		move.w	#boss_ghz_x,(v_limitright2).w
-		move.w	#boss_ghz_y,(v_limitbtm1).w
 		addq.b	#2,(v_dle_routine).w
 BrewAutoScroll:
 		move.b	#1,(f_lockscreen).w ; lock screen
@@ -835,6 +820,8 @@ BrewAutoScroll:
 ; ===========================================================================
 DLE_BREW3ScrollEnd:
 		clr.w	(v_limitleft2).w
+		move.w	#boss_ghz_x+$160,(v_limitright2).w
+		move.w	#boss_ghz_y,(v_limitbtm1).w
 		cmpi.w	#boss_ghz_x,(v_screenposx).w
 		bcs.s	.NoEizaYet
 		addq.b	#2,(v_dle_routine).w
@@ -843,26 +830,24 @@ DLE_BREW3ScrollEnd:
 ; ===========================================================================
 
 DLE_BREW3boss:
-		cmpi.w	#$960,(v_screenposx).w
+		cmpi.w	#boss_ghz_x,(v_screenposx).w
 		bhs.s	loc_6EB0BR
 		subq.b	#2,(v_dle_routine).w
 
 loc_6EB0BR:
-		cmpi.w	#boss_ghz_x,(v_screenposx).w
+		cmpi.w	#boss_cbz_x,(v_screenposx).w
 		blo.s	locret_6EE8BR
 		jsr	(FindFreeObj).l
 		bne.s	loc_6ED0BR
-		_move.b	#id_BossGreenHill,obID(a1) ; load BREW boss object
-		move.w	#boss_ghz_x+$100,obX(a1)
-		move.w	#boss_ghz_y-$80,obY(a1)
+		_move.b	#id_EizaBoss,obID(a1) ; load BREW boss object
+		move.w	#boss_cbz_x+$100,obX(a1)
+		move.w	#boss_cbz_y-$80,obY(a1)
 
 loc_6ED0BR:
-		move.w	#bgm_Boss,d0
-		jsr	(QueueSound1).l		; play boss music
+;		move.w	#bgm_Boss,d0
+;		jsr	(QueueSound1).l		; play boss music - nah we already got bad emerald to go with it
 		move.b	#1,(f_lockscreen).w ; lock screen
 		addq.b	#2,(v_dle_routine).w
-		moveq	#plcid_Boss,d0
-		jmp	(AddPLC).l	; load boss patterns
 ; ===========================================================================
 
 locret_6EE8BR:
@@ -871,6 +856,22 @@ locret_6EE8BR:
 
 DLE_BREW3end:
 		move.w	(v_screenposx).w,(v_limitleft2).w
+		rts
+
+DLE_BREW4:
+		moveq	#0,d0
+		move.b	(v_dle_routine).w,d0
+		move.w	CBZ4Events(pc,d0.w),d0
+		jmp	CBZ4Events(pc,d0.w)
+CBZ4Events:
+		dc.w CBZ4PalLoad-CBZ4Events	;	janky
+		dc.w CBZ4PalLoad-CBZ4Events
+		dc.w CBZ4Nothing-CBZ4Events
+CBZ4PalLoad:
+		moveq	#palid_PWisp,d0
+		jsr		(PalLoad).l
+		addq.b	#2,(v_dle_routine).w
+CBZ4Nothing:
 		rts
 
 ; ===========================================================================
@@ -961,12 +962,20 @@ DLE_DVZ3:
 		move.w	d0,(v_bg3screenposx).w
 		move.w	d0,v_bgscreenposy.w
 
+		disable_ints
+		stopZ80
+		waitZ80
+
 		fillVRAM	0, vram_fg, vram_fg+plane_size_64x32 ; clear foreground namespace
 		move.l  #Art_NeedleScr,d1
 		move.w  #$2000,d2
 		move.w  #(NEEDLESCRARTSZ/2),d3
 		jsr	QueueDMATransfer.l
 		copyTilemap	MapScr_NeedleScr,vram_bg+$700,58,14
+
+		startZ80
+		enable_ints
+		
 		addq.b	#4,v_dle_routine.w
 		add.w	#256,v_limitright2.w		
 		rts
@@ -1004,7 +1013,38 @@ DLE_NGZ2:
 locret_POOPFART:
 		rts
 DLE_NGZ3:
+		moveq	#0,d0
+		move.b	(v_dle_routine).w,d0
+		move.w	DLE_NGZ_HUMPY(pc,d0.w),d0
+		jmp	DLE_NGZ_HUMPY(pc,d0.w)
+; ===========================================================================
+DLE_NGZ_HUMPY:	dc.w DLE_NGZ3main-DLE_NGZ_HUMPY
+				dc.w locret_VOMITCOOKIE-DLE_NGZ_HUMPY
+DLE_NGZ3main:
 		move.w	#$200,(v_limitbtm1).w ; set lower y-boundary
+		cmpi.w	#boss_ngz_x,(v_screenposx).w
+		blo.s	locret_VOMITCOOKIE
+
+		; load boss
+		jsr	(FindFreeObj).l
+		bne.s	locret_VOMITCOOKIE
+
+		move.b	#id_Arif,obID(a1) ; load GHZ boss object
+		move.w	#boss_ngz_x+$12F,obX(a1)
+		move.w	#boss_ngz_y,obY(a1)
+
+.noobj:
+		move.w	#bgm_Boss,d0
+		jsr	(QueueSound1).l		; play boss music
+
+		move.w	#boss_ngz_x, (v_limitleft2).w	; limit left bound
+		move.w	#boss_ngz_x+$100, (v_limitright2).w ; limit right bound
+		move.b	#1, (f_lockscreen).w 	; lock screen
+
+		addq.b	#2,(v_dle_routine).w
+
+		lea	(PLC_Arif).l,a1
+		jmp	(UserPLC).l
 		;cmpi.w	#$E50,(v_screenposx).w
 		;bcs.s	locret_VOMITCOOKIE
 		;move.w	#$210,(v_limitbtm1).w
@@ -1015,13 +1055,104 @@ DLE_NGZ3:
 locret_VOMITCOOKIE:
 		rts
 ; ---------------------------------------------------------------------------
-;bluescape
+;                 *******Aw yeah Bluescape zone!*******
 ; ---------------------------------------------------------------------------
 
 DLE_BSZ:
+		moveq	#0,d0
+		move.b	(v_act).w,d0
+		add.w	d0,d0
+		move.w	DLE_BSZx(pc,d0.w),d0
+		jmp	DLE_BSZx(pc,d0.w)
+; ===========================================================================
+DLE_BSZx:	dc.w DLE_BSZ1-DLE_BSZx
+		dc.w DLE_BSZ2-DLE_BSZx
+		dc.w DLE_BSZ3-DLE_BSZx
+; ===========================================================================
+DLE_BSZ2:
 		rts
+
+; ===========================================================================
+
+DLE_BSZ3:
+		move.b	#1,(f_lockctrl).w
+		clr.b	(v_jpadpress1).w
+		move.b	#id_Hurt,(v_player+obAnim).w	; Clear control lock
+		move.w	(v_limitbtm1).w,d0		; Move the bottom of the stage into d0
+		add.w	#$16,d0				; Add 22 to the bottom so that Sonic goes under the screen
+		cmp.w	(v_player+obY).w,d0		; Is Sonic below the bottom of the level?
+		bgt.s	DLE_BSZ3_return			; If not, branch
+		cmpi.b	#6,(v_player+obRoutine).w	; Is Sonic dead?
+		bhs.s	DLE_BSZ3_return			; If yes, then don't go to next level, Sonic must die
+		move.w	#(id_BTZ<<8),(v_zone).w		; Set Zone ID to BlueStone
+		move.w	#1,(f_restart).w		; Restart the level
+
+DLE_BSZ3_return:
+		rts
+; ===========================================================================
+
+DLE_BSZ1:
+		moveq	#0,d0
+		move.b	(v_dle_routine).w,d0
+		move.w	DLE_BSZ1_Boss(pc,d0.w),d0
+		jmp	DLE_BSZ1_Boss(pc,d0.w)
+
+DLE_BSZ1_Boss:
+		dc.w DLE_BSZ1_PreBoss-DLE_BSZ1_Boss
+		dc.w DLE_BSZ1_Boss_Setup-DLE_BSZ1_Boss
+		dc.w DLE_BSZ1_return-DLE_BSZ1_Boss ; wait until palette fades in mildanner object
+		dc.w DLE_BSZ1_return-DLE_BSZ1_Boss
+		dc.w DLE_BSZ1_BossEnd-DLE_BSZ1_Boss
+		dc.w DLE_BSZ1_return-DLE_BSZ1_Boss
+
+DLE_BSZ1_PreBoss:
+		move.w	#$2700,(v_limitright1).w
+		move.w	#$2700,(v_limitright2).w
+		move.w	#$720,(v_limitbtm1).w
+		cmpi.w	#$1880,(v_screenposx).w
+		bcs.s	DLE_BSZ1_return
+		move.w	#$620,(v_limitbtm1).w
+		cmpi.w	#$2000,(v_screenposx).w
+		bcs.s	DLE_BSZ1_return
+		move.w	#$2A0,(v_limitbtm1).w
+
+		cmpi.w	#$2200,(v_screenposx).w
+		bcs.s	DLE_BSZ1_return
+
+		addq.b	#2,(v_dle_routine).w
+
+DLE_BSZ1_return:
+		rts
+
+DLE_BSZ1_BossEnd:
+		move.w	#$2700,(v_limitright1).w
+		move.w	#$2700,(v_limitright2).w
+		rts
+
+DLE_BSZ1_Boss_Setup:
+		move.w	#$2A0,(v_limitbtm1).w
+		move.w	#$2A0,(v_limitbtm2).w
+
+		move.w	#$2300-64,(v_limitright1).w
+		move.w	#$2300-64,(v_limitright2).w ; limit screen
+
+		move.w	#$2200,(v_limitleft1).w
+		move.w	#$2200,(v_limitleft2).w ; can't go back
+		addq.b	#2,(v_dle_routine).w
+
+		jsr	FindFreeObj
+		bne.s	.noobj
+		move.b	#$49,(a1) ; load boss
+		;turning the most useless ass object into the most useful
+	.noobj:
+		move.w	#bgm_Fade,d0
+		jsr PlaySound	; play boss music
+		move.w	#palid_DioMildanner,d0
+		jmp (PalLoad2).l
+; ===========================================================================		
 ; ---------------------------------------------------------------------------
-; BlueStone WIP
+; BLUESTONE "THE JOHN SITE"
+; Resize level And Camera 
 ; ---------------------------------------------------------------------------
 
 DLE_BTZ:
@@ -1031,45 +1162,81 @@ DLE_BTZ:
 		move.w	DLE_BTZx(pc,d0.w),d0
 		jmp	DLE_BTZx(pc,d0.w)
 ; ===========================================================================
-DLE_BTZx:	dc.w DLE_BTZ1-DLE_BTZx
-		dc.w DLE_BTZ2-DLE_BTZx
-		dc.w DLE_BTZ3-DLE_BTZx
+DLE_BTZx:	dc.w BlueStone-DLE_BTZx
+		dc.w BlueStone-DLE_BTZx
+		dc.w BlueStone-DLE_BTZx
 ; ===========================================================================
 
-DLE_BTZ1:	; placeholder
-DLE_BTZ2:
-		rts
-
-DLE_BTZ3:
+BlueStone:	; hello world ksajuioooee fohlkasdkja
 		moveq	#0,d0
 		move.b	(v_dle_routine).w,d0
-		move.w	DLE_BTZ3Index(pc,d0.w),d0
-		jmp	DLE_BTZ3Index(pc,d0.w)
+		move.w	BlueStoneIndex(pc,d0.w),d0
+		jmp	BlueStoneIndex(pc,d0.w)
 ; ===========================================================================
-DLE_BTZ3Index:	dc.w DLE_BTZ3main-DLE_BTZ3Index
-		dc.w DLE_BTZ3_Returntofreddy-DLE_BTZ3Index
-		dc.w DLE_BTZ3end-DLE_BTZ3Index
+BlueStoneIndex:	dc.w InitBluSto-BlueStoneIndex
+		dc.w BluSto_Return-BlueStoneIndex
+		dc.w BluSto_end-BlueStoneIndex
 ; ===========================================================================
 
-DLE_BTZ3main:
-		move.w	#$140,(v_limitbtm1).w
-		cmpi.w	#Knight_X_Spawn,(v_screenposx).w  ; WIP 
-		blo.s	DLE_BTZ3_Returntofreddy
+InitBluSto:          
+		move.w	#$40,(v_limitbtm1).w  ; Main Scr View		
+		cmpi.w	#$200,(v_screenposx).w   ; Ajust
+		bcs.s	BluSto_Return
+		move.w	#$30,(v_limitbtm1).w  ; Main Scr View
+		
+HscrBSZ:		
+		move.w  #$300,(v_limitright1).w  ; Right Boundary		
+		move.b	#1,(f_lockscreen).w ; Scr Lock
+
+.LoadJohnBattle:		
+		cmpi.w	#OldJohn_X_Spawn,(v_screenposx).w  ; WIP 
+		blo.s	BluSto_Return
 		jsr	(FindFreeObj).l
 		bne.s	.BTZspawnfail
-		_move.b	#id_Roaring_Knight,obID(a1) ; load MZ boss object
-		move.w	#Knight_X_Spawn+$180,obX(a1)
-		move.w	#Knight_Y_Spawn+$24,obY(a1)
+		move.b	#id_OldJohnBoss,obID(a1) ; load bluestone boss object
+		move.w	#OldJohn_X_Spawn+$180,obX(a1)
+		move.w	#OldJohn_Y_Spawn+$24,obY(a1)
 
 .BTZspawnfail:
-		move.w	#bgm_Boss,d0
-		jsr	(QueueSound1).l	; play boss music
-		move.b	#1,(f_lockscreen).w ; lock screen
+		move.b	#1,(f_lockscreen).w ; Scr Lock
 		addq.b	#2,(v_dle_routine).w	
 
-DLE_BTZ3end:
+BluSto_end:
 		move.w	(v_screenposx).w,(v_limitleft2).w
 
-DLE_BTZ3_Returntofreddy:
+BluSto_Return:
 		rts
-		
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; Azure Rainforest Zone dynamic level events
+; ---------------------------------------------------------------------------
+
+DLE_ARZ:
+		moveq	#0,d0
+		move.b	(v_act).w,d0
+		add.w	d0,d0
+		move.w	DLE_ARZx(pc,d0.w),d0
+		jmp	DLE_ARZx(pc,d0.w)
+; ===========================================================================
+DLE_ARZx:	dc.w DLE_ARZ12-DLE_ARZx
+		dc.w DLE_ARZ12-DLE_ARZx
+		dc.w DLE_ARZ3-DLE_ARZx
+; ===========================================================================
+
+DLE_ARZ12:
+		rts
+; ===========================================================================
+
+DLE_ARZ3:
+		tst.b	(v_dle_routine).w
+		bne.s	.return
+		cmpi.w	#boss_lz_x-$140,(v_screenposx).w
+		blo.s	.return
+		jsr	(FindFreeObj).l
+		addq.b	#2,(v_dle_routine).w
+		moveq	#plcid_Boss,d0
+		jmp	(AddPLC).l	; load boss patterns
+; ===========================================================================
+
+.return:
+		rts

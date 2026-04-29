@@ -25,18 +25,18 @@ TitleCard_GHZ3:	equ  "TTS BATTLE"
 TitleCard_GHZ4:	equ  "Robi says hi"
 
 TitleCard_MZ1:	equ  "ALBERTA CANADA"
-TitleCard_MZ2:	equ  "ALBERTA CANADINA"
-TitleCard_MZ3:	equ  "KILOS LAIR"
+TitleCard_MZ2:	equ  "KILOS LAIR"
+TitleCard_MZ3:	equ  "I LOVE YOU"
 TitleCard_MZ4:	equ  "porn"
 
 TitleCard_SYZ1:	equ  "SPRING FIELD"
-TitleCard_SYZ2:	equ  "PRING FIELD"
+TitleCard_SYZ2:	equ  "GASSY FIELD"
 TitleCard_SYZ3:	equ  "HOMERS"
 TitleCard_SYZ4:	equ  "porn"
 
-TitleCard_LZ1:	equ  "AZURE RAINFOREST"
-TitleCard_LZ2:	equ  "AZURE PAINFOREST"
-TitleCard_LZ3:	equ  "FOE FOE FOE FOE"
+TitleCard_LZ1:	equ  "Looks Guys Look"
+TitleCard_LZ2:	equ  "the dingle"
+TitleCard_LZ3:	equ  "SKY GAVE ME GIFT"
 TitleCard_LZ4:	equ  "PRONGLE PIT"	; LZ4 is SBZ3
 
 TitleCard_SLZ1:	equ  "MEIN KRAFT"		;/give Tonic enchanted_golden_apple[enchantments:{sharpness:255},max_stack_size:99] 99
@@ -45,7 +45,7 @@ TitleCard_SLZ3:	equ  "ENDERMAN PORN"
 TitleCard_SLZ4:	equ  "porn"
 
 TitleCard_SBZ1:	equ  "PRONGLE PLANT"
-TitleCard_SBZ2:	equ  "FUCKIN FACTORY"
+TitleCard_SBZ2:	equ  "APPLE MARIOSHIT"
 TitleCard_SBZ3:	equ  "PIGFAT PUSSHOLE"		; SBZ3 is FZ
 TitleCard_SBZ4:	equ  "porn"
 
@@ -54,12 +54,12 @@ TitleCard_Brew2:	equ  "HOT BREW"
 TitleCard_Brew3:	equ  "Roast Brew"
 TitleCard_Brew4:	equ  "Hostile Soul"
 
-TitleCard_WIN1:	equ  "Insert Title"
-TitleCard_WIN2:	equ  "Insert Tit"
-TitleCard_WIN3:	equ  "AGGA"
+TitleCard_WIN1:	equ  "MICROSLOP HQ"
+TitleCard_WIN2:	equ  "WINDOWS XP"
+TitleCard_WIN3:	equ  "CLIPPY CLITORIS"
 TitleCard_WIN4:	equ  "AGGA"
 
-TitleCard_Joint1:	equ  "The Joint"
+TitleCard_Joint1:	equ  "Inside Tonics Body"
 TitleCard_Joint2:	equ  "Ten years in the"
 TitleCard_Joint3:	equ  "Made you a fuckin"
 TitleCard_Joint4:	equ  "porn"
@@ -79,10 +79,15 @@ TitleCard_BSZ2:	equ  "BLUESCAPE"
 TitleCard_BSZ3:	equ  "BLUESCAPE"
 TitleCard_BSZ4:	equ  "BLUESCAPE"
 
-TitleCard_BTZ1:	equ  "BLUESTONE"
-TitleCard_BTZ2:	equ  "BLUESTONE"
-TitleCard_BTZ3:	equ  "BLUESTONE"
-TitleCard_BTZ4:	equ  "BLUESTONE"
+TitleCard_BTZ1:	equ  "OLDJOHN"
+TitleCard_BTZ2:	equ  "OLDJOHN"
+TitleCard_BTZ3:	equ  "NOBODY READ THIS"
+TitleCard_BTZ4:	equ  "OYE NO NADA     "
+
+TitleCard_ARZ1:	equ  "AZURE RAINFOREST"
+TitleCard_ARZ2:	equ  "AZURE PAINFOREST"
+TitleCard_ARZ3:	equ  "AZURE LAMEFOREST"
+TitleCard_ARZ4:	equ  "FOE FOE FOE FOE"
 
 TitleCard_Zone:	equ  "ZONE"
 TitleCard_UseLowerAct: equ 1	; 0 = ACT -- 1 = Act
@@ -251,7 +256,12 @@ TTL_ConData:
 		dc.l TTLCard_BTZ1_ConData, TTLCard_BTZ1_Array	; BTZ1
 		dc.l TTLCard_BTZ2_ConData, TTLCard_BTZ2_Array	; BTZ2
 		dc.l TTLCard_BTZ3_ConData, TTLCard_BTZ3_Array	; BTZ3
-		dc.l 0, 0	; BTZ4		
+		dc.l 0, 0	; BTZ4
+
+		dc.l TTLCard_ARZ1_ConData, TTLCard_ARZ1_Array	; BTZ1
+		dc.l TTLCard_ARZ2_ConData, TTLCard_ARZ2_Array	; BTZ2
+		dc.l TTLCard_ARZ3_ConData, TTLCard_ARZ3_Array	; BTZ3
+		dc.l 0, 0	; BTZ4
 		even
 
 ; ---------------------------------------------------------------------------
@@ -457,6 +467,11 @@ Map_Card_Extended:	mappingsTable
 	mappingsTableEntry.w	TTLCard_BTZ3	; DVZ 3
 	mappingsTableEntry.w	TTLCard_BTZ4	; DVZ 4
 
+	mappingsTableEntry.w	TTLCard_ARZ1	; ARZ 1
+	mappingsTableEntry.w	TTLCard_ARZ2	; ARZ 2
+	mappingsTableEntry.w	TTLCard_ARZ3	; ARZ 3
+	mappingsTableEntry.w	TTLCard_ARZ4	; ARZ 4
+
 	mappingsTableEntry.w	TTLCard_Zone	; "ZONE" text
 	mappingsTableEntry.w	TTLCard_Act	; Act number
 	mappingsTableEntry.w	TTLCard_Oval	; Blue oval
@@ -510,10 +525,14 @@ TTLCard_BSZ1:	titlecard TitleCard_BSZ1,0,0
 TTLCard_BSZ2:	titlecard TitleCard_BSZ2,0,0
 TTLCard_BSZ3:	titlecard TitleCard_BSZ3,0,0
 TTLCard_BSZ4:	titlecard TitleCard_BSZ4,0,0
-TTLCard_BTZ1:	titlecard TitleCard_BTZ1,0,0
+TTLCard_BTZ1:	titlecard TitleCard_BTZ1,1,0
 TTLCard_BTZ2:	titlecard TitleCard_BTZ2,0,0
 TTLCard_BTZ3:	titlecard TitleCard_BTZ3,0,0
 TTLCard_BTZ4:	titlecard TitleCard_BTZ4,0,0
+TTLCard_ARZ1:	titlecard TitleCard_ARZ1,0,0
+TTLCard_ARZ2:	titlecard TitleCard_ARZ2,0,0
+TTLCard_ARZ3:	titlecard TitleCard_ARZ3,0,0
+TTLCard_ARZ4:	titlecard TitleCard_ARZ4,0,0
 
 TTLCard_Zone:	titlecard TitleCard_Zone,1,1 ; ZONE label (alternate tile offset)
 

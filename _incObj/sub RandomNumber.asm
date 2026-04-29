@@ -56,3 +56,40 @@ RandomAddress:
 		movem.l	(sp)+,d1			; Pop d1 from stack
 		rts
 		
+; ---------------------------------------------------------------------------
+; !@ GenesisDoes
+; Subroutine to generate a random bit, in d0
+; Uses: 	d0, d1
+; Outputs: 	d1
+; ---------------------------------------------------------------------------
+
+; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
+GetRndBit:
+		movem.l	d0,-(sp)			; Push d0 onto stack
+		bsr.w	RandomNumber
+		andi.l	#1,d0
+		move.l	d0,d1
+		movem.l	(sp)+,d0			; Pop d0 from stack
+		rts
+		
+; ---------------------------------------------------------------------------
+; !@ GenesisDoes
+; Subroutine to set a bit (d1) of value (d0)
+; Inputs:	d1 (bit ID)
+;			d0 (value)
+; ---------------------------------------------------------------------------
+; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
+SetBit:
+		bset	d1,d0
+		rts
+		
+; ---------------------------------------------------------------------------
+; !@ GenesisDoes
+; Subroutine to clr a bit (d1) of value (d0)
+; Inputs:	d1 (bit ID)
+;			d0 (value)
+; ---------------------------------------------------------------------------
+; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
+ClrBit:
+		bclr	d1,d0
+		rts

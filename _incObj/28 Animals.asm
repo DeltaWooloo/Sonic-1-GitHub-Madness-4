@@ -37,16 +37,22 @@ Anml_BadnikIndexEnd:dc.w loc_9240-Anml_Index ; Anml_FromPrison (from hivebrain's
 		dc.w loc_92D6-Anml_Index ; ENDING 11
 Anml_CapsuleRoutID:		equ Anml_BadnikIndexEnd-Anml_Index
 
-Anml_VarIndex:	dc.b 8,	7 ; Green Hill Zone
-		dc.b 2, 3 ; Labyrinth Zone
-		dc.b 6, 3 ; Marble Zone
-		dc.b 4, 5 ; Star Light Zone
-		dc.b 4, 1 ; Spring Yard Zone
-		dc.b 0, 1 ; Scrap Brain Zone
+Anml_VarIndex:	dc.b 8,	7 ; Orange World Zone
+		dc.b 2, 3 ; Wario Hallway Zone
+		dc.b 6, 3 ; Alberta Canada Zone
+		dc.b 4, 5 ; Mien Kraft Zone
+		dc.b 4, 1 ; Spring Field Zone
+		dc.b 0, 1 ; Prongle Plant Zone
 		dc.b 0,	5 ; Green Hill Zone
 		dc.b 0,	5 ; COLD BREW Zone
 		dc.b $A, 9 ; WINDOWS Zone
 		dc.b 7, 1 ; JOINT Zone
+		dc.b 7, 1 ; Doleville Zone
+		dc.b 8, 7 ; Nogales Zone
+		dc.b 7, 1 ; Bluescape Zone
+		dc.b 7, 1 ; Bluestone Zone
+		dc.b 2, 3 ; Azure Rainforest Zone
+		zonewarning Anml_VarIndex,2
 ; Even are first, odd are second
 ; Map_Animal1 is a TALL FOREVER animal
 ; Map_Animal2 is a BLOCK animal

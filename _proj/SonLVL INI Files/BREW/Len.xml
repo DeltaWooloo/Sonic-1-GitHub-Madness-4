@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ObjDef xmlns="http://www.sonicretro.org" Name="Len" Image="Len1" RememberState="true">
+  <Images>
+    <ImageFromMappings id="Len1">
+      <ArtFile filename="../../coniobjs/LenArt.bin"/>
+      <MapFile type="ASM" filename="../../coniobjs/LenMap.asm" frame="0" startpal="0" />
+    </ImageFromMappings>
+
+    <ImageFromMappings id="Len2">
+      <ArtFile filename="../../coniobjs/LenArt.bin"/>
+      <MapFile type="ASM" filename="../../coniobjs/LenMap.asm" frame="0" startpal="1" />
+    </ImageFromMappings>
+	
+    <ImageFromMappings id="Len3">
+      <ArtFile filename="../../coniobjs/LenArt.bin"/>
+      <MapFile type="ASM" filename="../../coniobjs/LenMap.asm" frame="0" startpal="3" />
+    </ImageFromMappings>
+
+  </Images>
+  <Subtypes>
+    <Subtype id="00" name="Normal" image="Len1"/>
+    <Subtype id="01" name="Neutral" image="Len2"/>
+    <Subtype id="03" name="Evil" image="Len3"/>
+  </Subtypes>
+</ObjDef>

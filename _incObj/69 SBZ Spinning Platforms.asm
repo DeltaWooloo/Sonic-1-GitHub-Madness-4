@@ -21,7 +21,10 @@ Spin_Main:	; Routine 0
 		move.l	#Map_Trap,obMap(a0)
 		move.w	#make_art_tile(ArtTile_SBZ_Trap_Door,2,0),obGfx(a0)
 		ori.b	#4,obRender(a0)
-		move.b	#$80,obActWid(a0)
+		;!@ SBZ Trapdoor vizpos bugfix
+		;!@ https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-5#post-90205
+		;move.b	#$80,obActWid(a0)
+		move.b	#$40,obActWid(a0)
 		moveq	#0,d0
 		move.b	obSubtype(a0),d0
 		andi.w	#$F,d0

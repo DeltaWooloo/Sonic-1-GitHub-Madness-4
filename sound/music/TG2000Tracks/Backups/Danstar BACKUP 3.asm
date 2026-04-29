@@ -952,4 +952,4 @@ DanStar_PSG3_01_0_64:
 	dc.b $02, nMaxPSG, $01, nRst, $04, nMaxPSG, $01, nRst, $02, nMaxPSG, $01, nRst, $07
 	smpsReturn
 
-	smpsFooterEndSong	"TG2000Tracks/Danstar BACKUP 3.asm"
+	smpsFooterEndSong	"TG2000Tracks/Backups/Danstar BACKUP 3.asm"

@@ -3,13 +3,13 @@
 ; ---------------------------------------------------------------------------
 ptr_SonicPlayer:	dc.l SonicPlayer	; $01
 ptr_Katsi:		dc.l Katsi
-ptr_Obj03:		dc.l NullObject
+ptr_Obj03:		dc.l Obj_ShooterEnemy	; GMZ
 ptr_Arif:		dc.l ArifBoss
 ptr_DaxKatterD:		dc.l Obj_DaxKatterD
 ptr_ClintonFucker:	dc.l ClintonFucker
 ptr_Obj07:		dc.l GM_CNNicoJumpOBJ
 ptr_Splash:		dc.l Splash		; $08
-ptr_SonicSpecial:	dc.l SonicSpecial
+ptr_SonicSpecial:	dc.l NullObject
 ptr_DrownCount:		dc.l DrownCount
 ptr_Pole:		dc.l Pole
 ptr_FlapDoor:		dc.l FlapDoor
@@ -18,7 +18,7 @@ ptr_TitleSonic:		dc.l TitleSonic
 ptr_PSBTM:		dc.l PSBTM
 ptr_PlayerBullet:	dc.l PlayerBullet	; $10
 ptr_Bridge:		dc.l Bridge
-ptr_Rift:		dc.l FortnitePortal   ; no light  
+ptr_Rift:		dc.l FortnitePortal	; no light
 ptr_LavaMaker:		dc.l LavaMaker
 ptr_LavaBall:		dc.l LavaBall
 ptr_SwingingPlatform:	dc.l SwingingPlatform
@@ -126,8 +126,8 @@ ptr_BossStarLight:	dc.l BossStarLight
 ptr_BossSpikeball:	dc.l BossSpikeball
 ptr_RingFlash:		dc.l RingFlash
 ptr_HiddenBonus:	dc.l HiddenBonus
-ptr_SSResult:		dc.l SSResult
-ptr_SSRChaos:		dc.l SSRChaos
+ptr_RecyleBin:		dc.l RecyleBin
+ptr_RecyleBinTrash:		dc.l RecyleBinTrash
 ptr_ContScrCur:		dc.l ContScrCur		; $80
 ptr_ContSonic:		dc.l NullObject
 ptr_ScrapEggman:	dc.l ScrapEggman
@@ -144,10 +144,12 @@ ptr_TryChaos:		dc.l TryChaos
 ptr_ExplosionSHC:	dc.l ExplosionSHC
 ptr_Roaring_Knight:	dc.l Obj_Roaring_Knight
 ptr_Sunset:		dc.l ObjSunset
-ptr_RobiWK:		dc.l OBJ_RobiWK_Logo
-;ptr_Sunset:		dc.l NullObject
+;ptr_RobiWK:		dc.l OBJ_RobiWK_Logo
+ptr_Obj90:		dc.l NullObject
 prt_NeedleBoss		dc.l ExObjNeedle
-
+peter_CBZBoss1		dc.l BossEiza
+ptr_OldJohn:		dc.l ObjOldJohn
+peter_CBZBoss2		dc.l BossProngleWisp
 NullObject:
 		jmp	(DeleteObject).l	; It would be safer to have this instruction here, but instead it just falls through to ObjectFall
 
@@ -276,8 +278,8 @@ id_BossStarLight:	equ ((ptr_BossStarLight-Obj_Index)/4)+1
 id_BossSpikeball:	equ ((ptr_BossSpikeball-Obj_Index)/4)+1
 id_RingFlash:		equ ((ptr_RingFlash-Obj_Index)/4)+1
 id_HiddenBonus:		equ ((ptr_HiddenBonus-Obj_Index)/4)+1
-id_SSResult:		equ ((ptr_SSResult-Obj_Index)/4)+1
-id_SSRChaos:		equ ((ptr_SSRChaos-Obj_Index)/4)+1
+id_RecyleBin:		equ ((ptr_RecyleBin-Obj_Index)/4)+1
+id_RecyleBinTrash:		equ ((ptr_RecyleBinTrash-Obj_Index)/4)+1
 id_ContScrCur:		equ ((ptr_ContScrCur-Obj_Index)/4)+1		; $80
 id_ContSonic:		equ ((ptr_ContSonic-Obj_Index)/4)+1
 id_ScrapEggman:		equ ((ptr_ScrapEggman-Obj_Index)/4)+1
@@ -294,5 +296,8 @@ id_TryChaos:		equ ((ptr_TryChaos-Obj_Index)/4)+1
 id_ExplosionSHC:	equ ((ptr_ExplosionSHC-Obj_Index)/4)+1
 id_Roaring_Knight:	equ ((ptr_Roaring_Knight-Obj_Index)/4)+1
 id_Sunset:		equ ((ptr_Sunset-Obj_Index)/4)+1
-id_RobiWK_Logo:		equ ((ptr_RobiWK-Obj_Index)/4)+1
+;id_RobiWK_Logo:		equ ((ptr_RobiWK-Obj_Index)/4)+1
 id_NeedleBoss:		equ ((prt_NeedleBoss-Obj_Index)/4)+1
+id_EizaBoss:		equ ((peter_CBZBoss1-Obj_Index)/4)+1
+id_OldJohnBoss:		equ ((ptr_OldJohn-Obj_Index)/4)+1
+id_PWispBoss:		equ ((peter_CBZBoss2-Obj_Index)/4)+1

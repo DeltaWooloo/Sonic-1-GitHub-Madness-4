@@ -2,7 +2,7 @@ BGM_RonicSetro_Header:
 	smpsHeaderStartSong 3
 	smpsHeaderVoice     BGM_RonicSetro_Voices
 	smpsHeaderChan      $03, $03
-	smpsHeaderTempo     $01, $00
+	smpsHeaderTempo     $01, $01
 
 	smpsHeaderDAC       BGM_RonicSetro_DAC
 	smpsHeaderFM        BGM_RonicSetro_FM1,	$00, $03

@@ -67,8 +67,13 @@ Drown_ChkWater:	; Routine 4
 		move.b	#id_Drown_Display,obRoutine(a0) ; goto Drown_Display next
 		addq.b	#7,obAnim(a0)
 		cmpi.b	#$D,obAnim(a0)
-		beq.s	Drown_Display
-		bra.s	Drown_Display
+		;!@ Bubble anim ID fix
+		;!@ https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-6#post-91005
+		;beq.s	Drown_Display
+		;bra.s	Drown_Display
+		bls.s   Drown_Display                   ; DEV: Combine the "beq" and "blo" into "bls"
+		move.b  #$D,obAnim(a0)                  ; DEV: Set to "pop animation"
+		bra.s   Drown_Display
 ; ===========================================================================
 
 .wobble:
@@ -178,7 +183,23 @@ Drown_Countdown:; Routine $A
 		bhs.w	.nocountdown
 		btst	#6,(v_player+obStatus).w ; is Sonic underwater?
 		beq.w	.nocountdown	; if not, branch
+		
+		;!@ GD: Bugfix, if level has water and end-of-level cards loaded, skip drown (esp. CBZ2)
+		cmpi.b	#id_ARZ,(v_zone).w			; golly i LOOOOVE hardcoded checks
+		beq.s	.doBugfix
+		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; WHZ3?
+		beq.s	.doBugfix
+		cmpi.w	#(id_CBZ<<8)+1,(v_zone).w	; is level number CBZ2 (has water)?
+		beq.s	.doBugfix
+		bra.s	.loseAir		
+	.doBugfix:
+		;!@ GD: There will probably be bugs here if
+		;low air and then it stops...
+		;due to this cond being triggered
+		tst.b	(v_bossstatus).w			; If boss status set?
+		bne.w	.nocountdown				; If so, skip drowning
 
+	.loseAir:
 		subq.w	#1,drown_time(a0)	; decrement timer
 		bpl.w	.nochange	; branch if time remains
 		move.w	#59,drown_time(a0)
@@ -234,7 +255,7 @@ Drown_Countdown:; Routine $A
 		move.w	#0,obVelY(a0)
 		move.w	#0,obVelX(a0)
 		move.w	#0,obInertia(a0)
-		move.b	#1,(f_nobgscroll).w
+		move.b	#1,(f_lockscroll).w
 	if FixBugs
 		; Correct Drowning Bugs
 		; https://info.sonicretro.org/SCHG_How-to:Correct_Drowning_Bugs_in_Sonic_1

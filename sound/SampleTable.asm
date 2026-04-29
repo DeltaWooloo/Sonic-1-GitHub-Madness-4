@@ -18,48 +18,63 @@ SampleTable:
 	dcSample	TYPE_PCM,	Tom,		18262					; $8A S2 Mid-Tom
 	dcSample	TYPE_PCM,	Tom,		15232					; $8B S2 Low-Tom
 	dcSample	TYPE_PCM,	Tom,		13714					; $8C S2 Floor-Tom
+	dcSample	TYPE_DPCM,	Bongo,		15232					; $8D S2 Hi-Bongo
+	dcSample	TYPE_DPCM,	Bongo,		13064					; $8E S2 Mid-Bongo
+	dcSample	TYPE_DPCM,	Bongo,		10390					; $8F S2 Low-Bongo
+	dcSample	TYPE_DPCM,	Bongo,		7426					; $90 S2 Very Low-Bongo
 
 	; SONIC 3 & KNUCKLES (AND 3D BLAST)
-	dcSample	TYPE_DPCM,	KickS3,		19090					; $8D
-	dcSample	TYPE_DPCM,	SnareS3,	19090					; $8E
-	dcSample	TYPE_DPCM,	MuffledSnare,	19090				; $8F	- Muffled Snare
-	dcSample	TYPE_DPCM,	CrashCymbal,	16766				; $90
-	dcSample	TYPE_DPCM,	ElectricTom,	20513				; $91
-	dcSample	TYPE_DPCM,	ElectricTom,	15803				; $92
-	dcSample	TYPE_DPCM,	ElectricTom,	13482				; $93
-	dcSample	TYPE_DPCM,	ElectricTom,	11274				; $94
-	dcSample	TYPE_DPCM,	TimpaniS3,	12852					; $95	- Hi-Timpani (S3)
-	dcSample	TYPE_DPCM,	TimpaniS3,	9358					; $96	- Low-Timpani (S3)
-	dcSample	TYPE_DPCM,	TimpaniS3,	8492					; $97	- Mid-Timpani (S3)
+	dcSample	TYPE_DPCM,	KickS3,		19090					; $90
+	dcSample	TYPE_DPCM,	SnareS3,	19090					; $91
+	dcSample	TYPE_DPCM,	MuffledSnare,	19090				; $92	- Muffled Snare
+	dcSample	TYPE_DPCM,	CrashCymbal,	16766				; $93
+	dcSample	TYPE_DPCM,	ElectricTom,	20513				; $94
+	dcSample	TYPE_DPCM,	ElectricTom,	15803				; $95
+	dcSample	TYPE_DPCM,	ElectricTom,	13482				; $96
+	dcSample	TYPE_DPCM,	ElectricTom,	11274				; $97
+	dcSample	TYPE_DPCM,	TimpaniS3,	12852					; $98	- Hi-Timpani (S3)
+	dcSample	TYPE_DPCM,	TimpaniS3,	9358					; $99	- Low-Timpani (S3)
+	dcSample	TYPE_DPCM,	TimpaniS3,	8492					; $9A	- Mid-Timpani (S3)
 
 	; #SPINBALLSWEEP
-	dcSample	TYPE_DPCM,	SpinKick,	10400					; $98 Kick (Spinball)
-	dcSample	TYPE_DPCM,	SpinSnare,	10400					; $99 Snare (Spinball)
+	dcSample	TYPE_DPCM,	SpinKick,	10400					; $9B Kick (Spinball)
+	dcSample	TYPE_DPCM,	SpinSnare,	10400					; $9C Snare (Spinball)
 
 	; Generic SMPS
-	dcSample	TYPE_DPCM,	SMPSKick,	10400					; $9A Kick (Spinball)
-	dcSample	TYPE_DPCM,	SMPSSnare,	8000					; $9B Snare (Spinball)
+	dcSample	TYPE_DPCM,	SMPSKick,	10400					; $9D Kick (Spinball)
+	dcSample	TYPE_DPCM,	SMPSSnare,	8000					; $9E Snare (Spinball)
 
 	; CUSTOM SAMPLES
-	dcSample	TYPE_PCM,	ChunkyKick,	16000					; $9C
-	dcSample	TYPE_DPCM,	PokeSnare,	16864					; $9D
-	dcSample	TYPE_PCM,	PokeKickCrash,	15300				; $9E
-	dcSample	TYPE_DPCM,	PokeTimpani,	15000				; $9F
-	dcSample	TYPE_DPCM,	PokeTimpani,	11297				; $A0
-	dcSample	TYPE_DPCM,	PokeTimpani,	7500				; $A1
+	dcSample	TYPE_PCM,	ChunkyKick,	16000					; $9F
+	dcSample	TYPE_DPCM,	PokeSnare,	16864					; $A0
+	dcSample	TYPE_PCM,	PokeKickCrash,	15300				; $A1
+	dcSample	TYPE_DPCM,	PokeTimpani,	15000				; $A2
+	dcSample	TYPE_DPCM,	PokeTimpani,	11297				; $A3
+	dcSample	TYPE_DPCM,	ShortTimpani,	7500				; $A4
+	dcSample	TYPE_DPCM,	CTC1_Tick,	16000					; $A5
 
-	dcSample	TYPE_DPCM,	CTC1_Tick,	16000					; $A2
+	dcSample	TYPE_DPCM,	CF_DrumLoopA,	15830				; $A6
+	dcSample	TYPE_DPCM,	CF_DrumLoopB,	15880				; $A7
 
-	dcSample	TYPE_DPCM,	CF_DrumLoopA,	15830				; $A3
-	dcSample	TYPE_DPCM,	CF_DrumLoopB,	15880				; $A4
+	dcSample	TYPE_DPCM,	Homero,		16000					; $A8
 
-	dcSample	TYPE_DPCM,	Homero,		16000					; $A6
+	dcSample	TYPE_DPCM,	ES_Chirp1,	8000	; GMZ
+	dcSample	TYPE_DPCM,	ES_Chirp2,	8000	; GMZ
+	dcSample	TYPE_DPCM,	ES_Speech,	8000	; GMZ
+
+	dcSample	TYPE_DPCM,	WeebTrash1,	14000
+	dcSample	TYPE_DPCM,	WeebTrash2,	14000
+	dcSample	TYPE_DPCM,	WeebTrash3,	14000
+
+	dcSample	TYPE_DPCM,	dummy,	8000,					; Used to cut samples off in songs
 
 	; In-Game SFX SAMPLES
+	dcSample	TYPE_DPCM,	DAMN,		16000,	FLAGS_SFX		; $BA
 	dcSample	TYPE_PCM,	letsgoeee,	8000,	FLAGS_SFX		; $A7
 	dcSample	TYPE_PCM,	Boik,		5250,	FLAGS_SFX		; $A8 
 	dcSample	TYPE_PCM,	QuakeJump,	0,	FLAGS_SFX			; $A9 
 	dcSample	TYPE_PCM,	Fannys,		0,	FLAGS_SFX			; $AA
+	dcSample	TYPE_PCM,	Trevor,		0,	FLAGS_SFX			; $AA
 	dcSample	TYPE_PCM,	QuakeRocket,	11297				; $AB 
 	dcSample	TYPE_DPCM,	CL_STFU,	8000,	FLAGS_SFX		; $AC 
 	dcSample	TYPE_PCM,	CL_Fuck,	11297					; $AD 
@@ -69,60 +84,89 @@ SampleTable:
 	dcSample	TYPE_PCM,	BabyAlarm,	0,	FLAGS_SFX			; $B1
 	dcSample	TYPE_PCM,	CL_YouCanSuck,	11297,	FLAGS_SFX	; $B2
 	dcSample	TYPE_DPCM,	Boost,		16000,	FLAGS_SFX		; $B3
-	dcSample	TYPE_DPCM,	ClintonHi,	20600,	FLAGS_SFX		; $B4
-	dcSample	TYPE_DPCM,	ClintonWin,	11025,	FLAGS_SFX		; $B5
-	dcSample	TYPE_DPCM,	ClintonFail,	11025,	FLAGS_SFX	; $B6
-	dcSample	TYPE_PCM,	CL_DoYouSuck,	11297,	FLAGS_SFX	; $B7
-	dcSample	TYPE_PCM,	CL_OnTheBall,	11297				; $B8
-	dcSample	TYPE_DPCM,	DAMN,		16000,	FLAGS_SFX		; $B9
-	dcSample	TYPE_PCM,	Foxy,		0,	FLAGS_SFX			; $BA
-	dcSample	TYPE_PCM,	Scream,		8000,	FLAGS_SFX		; $BB
-	dcSample	TYPE_DPCM,	Rift,		11025,	FLAGS_SFX		; $BC
+	dcSample	TYPE_DPCM,	BoostR,		16000,	FLAGS_SFX		; $B4
+	dcSample	TYPE_DPCM,	ClintonHi,	20600,	FLAGS_SFX		; $B5
+	dcSample	TYPE_DPCM,	ClintonWin,	11025,	FLAGS_SFX		; $B6
+	dcSample	TYPE_DPCM,	ClintonFail,	11025,	FLAGS_SFX	; $B7
+	dcSample	TYPE_PCM,	CL_DoYouSuck,	11297,	FLAGS_SFX	; $B8
+	dcSample	TYPE_PCM,	CL_OnTheBall,	11297				; $B9
+	dcSample	TYPE_PCM,	Foxy,		0,	FLAGS_SFX			; $BB
+	dcSample	TYPE_PCM,	Scream,		8000,	FLAGS_SFX		; $BC
+	dcSample	TYPE_DPCM,	Rift,		11025,	FLAGS_SFX		; $BD
+	dcSample	TYPE_DPCM,	Sands,		8000,	FLAGS_SFX		; $BE
+	dcSample	TYPE_PCM,	Dude,		16000,	FLAGS_SFX		; i am not rearranging these they literally don't matter fuck off
 
 	; Title Screen Samples
-	dcSample	TYPE_DPCM,	YoFreddy,	16000,	FLAGS_SFX		; $BD
-	dcSample	TYPE_DPCM,	Github,		16000,	FLAGS_SFX		; $BE
-	dcSample	TYPE_DPCM,	Madness,	16000,	FLAGS_SFX		; $BF
-	dcSample	TYPE_DPCM,	TheFourth,	16000,	FLAGS_SFX		; $C0
-	dcSample	TYPE_DPCM,	BSOD,		16000,	FLAGS_SFX		; $C1
-	dcSample	TYPE_DPCM,	shutdown,	16000,	FLAGS_SFX		; $C2
-	dcSample	TYPE_DPCM,	chord16,	16000,	FLAGS_SFX		; $C3
-	dcSample	TYPE_DPCM,	w98ipc,		16000,	FLAGS_SFX		; $C4
+	dcSample	TYPE_DPCM,	YoFreddy,	16000,	FLAGS_SFX		; $C1
+	dcSample	TYPE_DPCM,	Github,		16000,	FLAGS_SFX		; $C2
+	dcSample	TYPE_DPCM,	Madness,	16000,	FLAGS_SFX		; $C3
+	dcSample	TYPE_DPCM,	TheFourth,	16000,	FLAGS_SFX		; $C4
+	dcSample	TYPE_DPCM,	eggmanLaugh,	11025,	FLAGS_SFX		; $C5
+	dcSample	TYPE_DPCM,	disclaimer,	16000,	FLAGS_SFX		; $C6
+	dcSample	TYPE_DPCM,	sbDevelopers,	16000,	FLAGS_SFX		; $C7
+	dcSample	TYPE_DPCM,	sbLove,		16000,	FLAGS_SFX		; $C8
+	dcSample	TYPE_DPCM,	sbPC,		16000,	FLAGS_SFX		; $C9
+	;BSOD stuff
+	dcSample	TYPE_DPCM,	BSOD,		16000,	FLAGS_SFX		; $CA
+	dcSample	TYPE_DPCM,	shutdown,	16000,	FLAGS_SFX		; $CB
+	dcSample	TYPE_DPCM,	chord16,	16000,	FLAGS_SFX		; $CC
+	dcSample	TYPE_DPCM,	w98ipc,		16000,	FLAGS_SFX		; $CD
+	dcSample	TYPE_DPCM,	meow,		16000,	FLAGS_SFX		; $CE
+	dcSample	TYPE_DPCM,	meow,		8000,	FLAGS_SFX		; $CF
+	;BSOD/w95 rock
+	;dcSample	TYPE_DPCM,	w95r_windows,16000					; $D0
+	;dcSample	TYPE_DPCM,	w95r_better,16000					; $D1
+	;dcSample	TYPE_DPCM,	w95r_changeLife,16000				; $D2
+	;dcSample	TYPE_DPCM,	w95r_gates,	16000					; $D3
+	;dcSample	TYPE_DPCM,	w95r_live,	16000					; $D4
+	;dcSample	TYPE_DPCM,	w95r_microsoft,16000				; $D5
+	;dcSample	TYPE_DPCM,	w95r_mouse,	16000					; $D6
+	;dcSample	TYPE_DPCM,	w95r_much,	16000					; $D7
+	;dcSample	TYPE_DPCM,	w95r_neverbeaten,	16000			; $D8
+	;dcSample	TYPE_DPCM,	w95r_ooh1,	16000					; $D9
+	;dcSample	TYPE_DPCM,	w95r_ooh2,	16000					; $DA
+	;dcSample	TYPE_DPCM,	w95r_ooh3,	16000					; $DB
+	;dcSample	TYPE_DPCM,	w95r_ooh4,	16000					; $DC
+	;dcSample	TYPE_DPCM,	w95r_w95,	16000					; $DD
+	;dcSample	TYPE_DPCM,	w95r_w95_2,	16000					; $DE
 
 	; Splash Screens
-	dcSample	TYPE_PCM,	EggNo,		11297					; $C5
-	dcSample	TYPE_DPCM,	funnyb_utthole,	8000,	FLAGS_SFX	; $C6
-	dcSample	TYPE_DPCM,	yume2kki,	16000,	FLAGS_SFX		; $C7
-	dcSample	TYPE_DPCM,	EagleSoft_Song,	8000,	FLAGS_SFX	; $C8
-	dcSample	TYPE_DPCM,	GenesisDoes1,	8000				; $C9
-	dcSample	TYPE_DPCM,	Virus,	16000,	FLAGS_SFX			; $CA
-	dcSample	TYPE_DPCM,	supbeaches,	8000					; $CB
+	dcSample	TYPE_PCM,	EggNo,		11297					; $DF
+	dcSample	TYPE_DPCM,	funnyb_utthole,	8000,	FLAGS_SFX	; $E0
+	dcSample	TYPE_DPCM,	yume2kki,	16000,	FLAGS_SFX		; $E1
+
+	dcSample	TYPE_DPCM,	GenesisDoes1,	8000				; $E2
+	dcSample	TYPE_DPCM,	Virus,		16000,	FLAGS_SFX		; $E3
+	dcSample	TYPE_DPCM,	supbeaches,	8000					; $E4
 
 	; Commercial Samples
-	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $CC
-	dcSample	TYPE_DPCM,	GenesisCan3,	8000,FLAGS_SFX		; $CD
+	dcSample	TYPE_DPCM,	GenesisCan3,	8000,	FLAGS_SFX	; $E5
 
 	; Ollie Samples
-	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $CE
-	dcSample	TYPE_DPCM,	OllieWahoo,	16000					; $CF
+	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $E6
+	dcSample	TYPE_DPCM,	OllieWahoo,	16000					; $E7
+	
+	; Mega Man 8 Samples
+	dcSample	TYPE_PCM,	MM8Kick,		16000					; $E8
+	dcSample	TYPE_PCM,	MM8Snare,	16000						; $E9
 
 	; SEGA Samples
-	dcSample	TYPE_PCM_TURBO,	SegaPCM,	0,	FLAGS_SFX		; $D0
+	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $EA
+
+	;!@ GD: Last slot always reserved for PCM SFX Silence
+	dcSample	TYPE_DPCM,	dummy,		8000,	FLAGS_SFX		; $EB
 
 	; Unused
-;	dcSample	TYPE_PCM,	Segay,		0,	FLAGS_SFX			; $D1
-;	dcSample	TYPE_PCM,	CL_Penis,	11297					; $D2
-;	dcSample	TYPE_PCM,	Boioing,	5250,	FLAGS_SFX		; $D3
-;	dcSample	TYPE_DPCM,	OrngLaugh,	8000,	FLAGS_SFX		; $D4
-;	dcSample	TYPE_DPCM,	ClintonYeah,	20600,	FLAGS_SFX	; $D5
-;	dcSample	TYPE_DPCM,	GenesisCan1,	16000,FLAGS_SFX		; $D6
-;	dcSample	TYPE_DPCM,	GenesisCan2,	16000,FLAGS_SFX		; $D7
-;	dcSample	TYPE_DPCM,	Intel,		16000, FLAGS_SFX		; $D8
-;	dcSample	TYPE_DPCM,	MadnessR,	16000,	FLAGS_SFX		; $D9
-;	dcSample	TYPE_DPCM,	eggmanLaugh,	16000,	FLAGS_SFX	; $DA
-	
-	;!@ GD: Last slot always reserved for PCM SFX Silence
-	dcSample	TYPE_DPCM,	dummy,	8000, FLAGS_SFX				; $D1
+;	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $EC
+;	dcSample	TYPE_PCM,	Segay,		0,	FLAGS_SFX
+;	dcSample	TYPE_PCM,	CL_Penis,	11297
+;	dcSample	TYPE_PCM,	Boioing,	5250,	FLAGS_SFX
+;	dcSample	TYPE_DPCM,	OrngLaugh,	8000,	FLAGS_SFX
+;	dcSample	TYPE_DPCM,	ClintonYeah,	20600,	FLAGS_SFX
+;	dcSample	TYPE_DPCM,	GenesisCan1,	16000,FLAGS_SFX
+;	dcSample	TYPE_DPCM,	GenesisCan2,	16000,FLAGS_SFX
+;	dcSample	TYPE_DPCM,	Intel,		16000, FLAGS_SFX
+;	dcSample	TYPE_DPCM,	MadnessR,	16000,	FLAGS_SFX
 
 	; ADVISORY: If you're coming to this repo just to add samples,
 	; they are going to get removed. Sorry!
@@ -140,6 +184,7 @@ SampleTable:
 ; ---------------------------------------------------------------
 ; Sonic 2 Samples
 	incdac	Tom, "sound/dac/S2/Tom.pcm"
+	incdac	Bongo, "sound/dac/S2/Bongo.dpcm"
 
 ; ---------------------------------------------------------------
 ; Sonic 3 Samples
@@ -166,6 +211,7 @@ SampleTable:
 	incdac	PokeSnare, "sound/dac/DAX/PokeSnare.dpcm"
 	incdac	PokeKickCrash, "sound/dac/DAX/PokeKickCrash.pcm"
 	incdac	PokeTimpani, "sound/dac/DAX/PokeTimpani.dpcm"
+	incdac	ShortTimpani, "sound/dac/DAX/ShortTimpani.dpcm"
 
 ; ---------------------------------------------------------------
 ; the singular sample file from conic 1 (idgaf if it counts as leaking)
@@ -178,14 +224,25 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Homero
-	incdac	Homero, "sound/dac/homero.dpcm"
+	incdac	Homero,		"sound/dac/homero.dpcm"
+
+; ---------------------------------------------------------------
+; Special Song Samples
+	incdac	ES_Chirp1,	"sound/dac/GMZ/eaglesoft_chirp1.dpcm"	; GMZ
+	incdac	ES_Chirp2,	"sound/dac/GMZ/eaglesoft_chirp2.dpcm"	; GMZ
+	incdac	ES_Speech,	"sound/dac/GMZ/eaglesoft_speech.dpcm"	; GMZ
+
+	incdac	WeebTrash1,	"sound/dac/Weeb Trash/WeebTrash1.dpcm"
+	incdac	WeebTrash2,	"sound/dac/Weeb Trash/WeebTrash2.dpcm"
+	incdac	WeebTrash3,	"sound/dac/Weeb Trash/WeebTrash3.dpcm"
 
 ; ---------------------------------------------------------------
 ; SFX Samples
 	incdac	letsgoeee, "sound/dac/TheSunsetHacker/letsgoeee.pcm"		; :fire: :fire: :fire: :fire: :fire:
 	incdac	Boik, "sound/dac/boik.wav"
 	incdac	QuakeJump, "sound/dac/quakejump.wav"
-	incdac	Fannys, "sound/dac/Trevor.wav"
+	incdac	Fannys, "sound/dac/PicturesOf.wav"
+	incdac	Trevor, "sound/dac/Trevor.wav"
 	incdac	QuakeRocket, "sound/dac/tankfire1.wav"
 	incdac	CL_STFU, "sound/dac/CL_STFU.dpcm"
 	incdac	CL_Fuck, "sound/dac/CL_Fuck.wav"
@@ -196,6 +253,7 @@ SampleTable:
 	incdac	BabyAlarm, "sound/dac/BabyAlarm.wav"
 	incdac	CL_YouCanSuck, "sound/dac/CL_YouCanSuck.wav"
 	incdac	Boost,"sound/dac/GenesisDoes/Boost.dpcm"
+	incdac	BoostR,"sound/dac/GenesisDoes/BoostR.dpcm"
 	incdac	ClintonHi, "sound/dac/Clinton Fucker/hi.dpcm"
 	incdac	ClintonWin, "sound/dac/Clinton Fucker/win.dpcm"
 	incdac	ClintonFail, "sound/dac/Clinton Fucker/fail.dpcm"
@@ -204,31 +262,60 @@ SampleTable:
 	incdac	Foxy, "sound/dac/Foxy.wav"
  	incdac	Scream, "sound/dac/Scream.wav"
 	incdac	Rift, "sound/dac/Rift.dpcm"
-	
+	incdac	Sands, "sound/dac/sansfuckyoutonic.dpcm"
+	incdac	Dude, "sound/dac/Dude.wav"
+
 ; ---------------------------------------------------------------
 ; Title Screen Samples
 	incdac	YoFreddy, "sound/dac/GenesisDoes/YoFreddy.dpcm"
 	incdac	Github, "sound/dac/GenesisDoes/git-hub.dpcm"
 	incdac	Madness, "sound/dac/GenesisDoes/Madness.dpcm"
 	incdac	TheFourth, "sound/dac/GenesisDoes/Four.dpcm"
+	incdac	eggmanLaugh, "sound/dac/GenesisDoes/eggmanLaugh.dpcm"
+	incdac	disclaimer, "sound/dac/GenesisDoes/disclaimer.dpcm"
+	incdac	sbDevelopers, "sound/dac/GenesisDoes/sb_developers.dpcm"
+	incdac	sbLove, "sound/dac/GenesisDoes/sb_love.dpcm"
+	incdac	sbPC, "sound/dac/GenesisDoes/sb_pc.dpcm"
+	
+; BSOD samples
 	incdac	BSOD, "sound/dac/GenesisDoes/windie.dpcm"
 	incdac	shutdown, "sound/dac/GenesisDoes/shutdown.dpcm"
 	incdac	chord16, "sound/dac/GenesisDoes/chord16.dpcm"
 	incdac	w98ipc, "sound/dac/GenesisDoes/w98ipc.dpcm"
+	incdac	meow, "sound/dac/GenesisDoes/meow.dpcm"
+
+; BSOD W95 Rock samples
+	;incdac	w95r_windows, "sound/dac/GenesisDoes/w95r_windows.dpcm"
+	;incdac	w95r_better, "sound/dac/GenesisDoes/w95r_better.dpcm"
+	;incdac	w95r_changeLife, "sound/dac/GenesisDoes/w95r_changeLife.dpcm"
+	;incdac	w95r_gates, "sound/dac/GenesisDoes/w95r_gates.dpcm"
+	;incdac	w95r_live, "sound/dac/GenesisDoes/w95r_live.dpcm"
+	;incdac	w95r_microsoft, "sound/dac/GenesisDoes/w95r_microsoft.dpcm"
+	;incdac	w95r_mouse, "sound/dac/GenesisDoes/w95r_mouse.dpcm"
+	;incdac	w95r_much, "sound/dac/GenesisDoes/w95r_much.dpcm"
+	;incdac	w95r_neverbeaten, "sound/dac/GenesisDoes/w95r_neverbeaten.dpcm"
+	;incdac	w95r_ooh1, "sound/dac/GenesisDoes/w95r_ooh1.dpcm"
+	;incdac	w95r_ooh2, "sound/dac/GenesisDoes/w95r_ooh2.dpcm"
+	;incdac	w95r_ooh3, "sound/dac/GenesisDoes/w95r_ooh3.dpcm"
+	;incdac	w95r_ooh4, "sound/dac/GenesisDoes/w95r_ooh4.dpcm"
+	;incdac	w95r_w95, "sound/dac/GenesisDoes/w95r_w95.dpcm"
+	;incdac	w95r_w95_2, "sound/dac/GenesisDoes/w95r_w95_2.dpcm"
+
+
+
 
 ; ---------------------------------------------------------------
 ; Splash Screen Samples
 	incdac	EggNo, "sound/dac/EggNo.wav"
 	incdac	funnyb_utthole, "sound/dac/funnybutthole.dpcm"
 	incdac	yume2kki, "sound/dac/2kki.dpcm"
-	incdac	EagleSoft_Song,	"sound/dac/GenesisDoes/EagleSoft_Song.dpcm"
+
 	incdac	GenesisDoes1,"sound/dac/GenesisDoes/GenesisDoes1.dpcm"
 	incdac	Virus,"sound/dac/GenesisDoes/Virus_Alert.dpcm"
 	incdac	supbeaches, "sound/dac/supbeaches.dpcm"
 
 ; ---------------------------------------------------------------
 ; Advertisement Samples
-	incdac	BeRightBack,"sound/dac/well-be-right-back.dpcm"
 	incdac	GenesisCan3,"sound/dac/GenesisDoes/GenesisCan3.dpcm"
 
 ; ---------------------------------------------------------------
@@ -237,8 +324,13 @@ SampleTable:
 	incdac	OllieWahoo,"sound/dac/ollie/wahoo.dpcm"
 
 ; ---------------------------------------------------------------
+; Mega Man 8 Samples
+	incdac	MM8Kick,"sound/dac/MM8 Kick.wav"
+	incdac	MM8Snare,"sound/dac/MM8 Snare.wav"
+
+; ---------------------------------------------------------------
 ; Whatever you want the Sega sound to be
-	incdac	SegaPCM, "sound/dac/sega.wav"
+	incdac	SegaPCM, "sound/dac/sega.pcm"
 
 ; ---------------------------------------------------------------
 	;!@ SAVE THIS AS (LAST SLOT-2)
@@ -251,7 +343,6 @@ SampleTable:
 ;	incdac	OrngLaugh, "sound/dac/AnOrangesLaugh.dpcm"
 ;	incdac	ClintonYeah, "sound/dac/Clinton Fucker/yeah.dpcm"
 ;	incdac	MadnessR, "sound/dac/GenesisDoes/MadnessR.dpcm"
-;	incdac	eggmanLaugh, "sound/dac/GenesisDoes/eggmanLaugh.dpcm"
 ;	incdac	GenesisCan1,"sound/dac/GenesisDoes/GenesisCan1.dpcm"
 ;	incdac	GenesisCan2,"sound/dac/GenesisDoes/GenesisCan2.dpcm"
 ;	incdac	Intel,"sound/dac/Intel.dpcm"

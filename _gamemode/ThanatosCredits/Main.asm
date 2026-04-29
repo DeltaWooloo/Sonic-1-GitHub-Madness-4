@@ -5,14 +5,14 @@ NemThanatosCredits:	binclude "_gamemode/ThanatosCredits/Credits Font.nem"
 EniThanatosCredits:	binclude "_gamemode/ThanatosCredits/Credits Font.eni"
 
 VDP_ThanatosCredits:
-	dc.w $8700
-	dc.w $8C01
-	dc.w $8B03
-	dc.w $9200
-	dc.w $9001
-	dc.w $8400+(vram_bg>>13)
-	dc.w $8200+(vram_fg>>10)
-	dc.w $8004
+	dc.w $8700					; Set background color to TCLR(0,0)
+	dc.w $8C01					; Set H40 mode (320 px)
+	dc.w $8B03					; HScroll Single-pixel mode
+	dc.w $9200					; Set Window Plane location
+	dc.w $9001					; 64x32 cell plane sizes
+	dc.w $8400+(vram_bg>>13)	; Plane B nametable at $400
+	dc.w $8200+(vram_fg>>10)	; Plane A nametable at $200
+	dc.w $8004					; Mode 1 register
 VDP_ThanatosCredits_end:
 
 GM_ThanatosCredits:
@@ -100,7 +100,8 @@ PalThanatosCredits:	bincludeEndMarker "_gamemode/ThanatosCredits/Palette.pal"
 	bsr.w	RenderTextPlane
 	bsr.w	RenderTextLine
 
-	QueueSound_M bgm_Ending,0
+	QueueSound_M bgm_Ending,0	
+	pcm		dsbDevelopers			; Look at all of these developers!
 
 	; Fade In
 	jsr	(PaletteFadeIn).l
@@ -302,15 +303,24 @@ thantxt: macro txt
 	dc.b	1,1
 
 
-	thantxt	"PROJECT LEAD"
+	thantxt	"REPO OWNER"
 	dc.b	1
 	thantxt	"DELTAW"
 	dc.b	1,1
 
+	thantxt	"PROJECT HOSTS"
+	dc.b	1
+	thantxt	"KATSUSHIMI"		
+	thantxt	"DELTAW"
+	thantxt	"PIKANOOB"		
+	dc.b	1,1
 
 	thantxt	"GHM IV DEV TEAM" ;Originally "Members," but I thought this would be more formal. ~TG2000
 	dc.b	1
 	thantxt	"KATSUSHIMI"
+	thantxt	"BLINGUS"		; created maniac intro art
+	thantxt	"PIKANOOB"
+	thantxt	"DELTAW"	
 	thantxt	"ATOLLY GUYKE"
 	thantxt	"KGL"
 	thantxt	"GENESISDOES"
@@ -326,6 +336,8 @@ thantxt: macro txt
 	thantxt	"MALACHI"
 	thantxt	"DAWID"
 	thantxt	"SANCHI"
+	thantxt	"DARKSHAMILKHAN"
+	thantxt	"OMICRONANO.BIN"
 	thantxt	"ADD YOUR NAME HERE"
 	dc.b	1,1
 	
@@ -339,6 +351,7 @@ thantxt: macro txt
 	thantxt	"GENESISDOES"
 	thantxt	"DAXKATTER"
 	thantxt	"CONINIGHT"
+	thantxt	"DAWID"
 	dc.b	1,1
 	
 	thantxt	"BUILD PROCESS"
@@ -349,27 +362,74 @@ thantxt: macro txt
 	thantxt	"DAXKATTER"
 	thantxt	"KATSUSHIMI"
 	dc.b	1,1
-	
+
+	thantxt	"DEMO RECORDING"
+	dc.b	1
+	thantxt	"CONINIGHT"
+	dc.b	1,1
+
 	thantxt	"PROTOTASTIC"
 	dc.b	1
 	thantxt	"GAMERGIL THE GOAT"
+	dc.b	1,1
+	
+	thantxt	"JOHN PORK"
+	dc.b	1
+    thantxt	"IS CALLING"
 	dc.b	1,1
 
 	thantxt	"SPECIAL THANKS"
 	dc.b	1
 	thantxt	"TEETH TONIC"
+	thantxt	"DELTAW"
+	thantxt	"PIKANOOB"	
+	thantxt	"TALKWALKER"
+	thantxt	"NINEKO SONINEKO"
+	thantxt	"DEVON"
+	thantxt	"OLLIE TECHDECK"
+	thantxt	"CLOWNANCY"				;Intentional typo for Ollie; lol
+	thantxt	"VLADIKOMPER"
+	thantxt	"ARCADETV"	
 	thantxt	"NOID MY GOAT"
 	thantxt	"SEGA"
+	thantxt	"SONIC UNDERGROUND"
+	thantxt	"NTENDO"	
 	thantxt	"SSRG"
+	thantxt	"SONIC RETRO"
+	thantxt	"HACKPGH"
+	thantxt	"EAGLESOFT LTD"
 	thantxt	"FRANCO AMERICAN"
+	thantxt	"ME"
 	thantxt	"CARDS AG HUMANITY"
 	thantxt	"PRONGLES"
-	thantxt	"MICROSLOP CORP"
+	thantxt	"THAT DAMN BIRD"
+	thantxt	"APPLE INC"
+	thantxt	"MICROSLOP CORP"	
+	thantxt	"STEVE BALLMER"	
+	thantxt	"GITHUB INC"
+	thantxt	"CS ONE EIGHT EIGHT"
+	thantxt	"WEBFREAK"
+	thantxt	"SEGA CHANNEL GUY"
+	thantxt "AVGN JAMES ROLFE"
+	thantxt "PRES BILL CLINTON"
+	thantxt	"WEIRD AL YANK."
+	thantxt	"PHIL COLLINS"
+	thantxt	"GENESIS BAND"
 	thantxt	"KRIKZZ FOR EVERDRIVE"
-	thantxt	"S2 ARCHIVES"
+	thantxt "STONE AGE GAMER"
+	thantxt "RETRO BIT"
+	thantxt "TEAM EUROPE"	
+	thantxt "GOODTOFUFRIDAY"
+	thantxt "GQ ELECTRONICS LLC"
+	thantxt "GENESISFAN SIXTYFOUR"
+	thantxt	"SII ARCHIVES"
 	thantxt	"AND HIS STUPID TEAM"
+	thantxt	"KAGAYMINE LEN"
 	thantxt	"STEVE JOBS BECAUSE"
 	thantxt	"VMWARE"
+	thantxt	"MISTER BEAN"
+	thantxt	"WINDOWS XP USER"
+	thantxt	"I FARTED SO HARD I SHIT MY"
     thantxt	"HOMER";leave this shit last
 	dc.b	1,1,1
 	thantxt	"AND YOUR MOM"

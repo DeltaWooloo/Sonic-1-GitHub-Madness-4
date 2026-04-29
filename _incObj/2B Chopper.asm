@@ -31,6 +31,8 @@ coderest:
 		move.b	#4,obPriority(a0)
 		move.b	#9,obColType(a0)
 		move.b	#$10,obActWid(a0)
+		move.b	#32,obWidth(a0)
+		move.b	#32,obHeight(a0)
 		move.w	#-$700,obVelY(a0) ; set vertical speed
 		move.w	obY(a0),chop_origY(a0) ; save original position
 		

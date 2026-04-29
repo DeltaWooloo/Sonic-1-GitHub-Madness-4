@@ -13,53 +13,59 @@ Pal_Index:
 
 ; Id			Palette label,		RAM location
 ; NOTE: Palette size is calculated dynamically using an end marker made by bincludeEndMarker
-palid_SegaBG:		makePalEntry	Pal_SegaBG, 		v_palette_line_1
-palid_Title:		makePalEntry	Pal_Title,		v_palette_line_1
-palid_LevelSel:		makePalEntry	Pal_LevelSel,		v_palette_line_1
-palid_Sonic:		makePalEntry	Pal_Sonic,		v_palette_line_1
-palid_SplScrSki:	makePalEntry	Pal_SplScrSki,		v_palette_line_1
+palid_SegaBG:			makePalEntry	Pal_SegaBG, 		v_palette_line_1
+palid_Title:			makePalEntry	Pal_Title,			v_palette_line_1
+palid_LevelSel:			makePalEntry	Pal_LevelSel,		v_palette_line_1
+palid_Sonic:			makePalEntry	Pal_Sonic,			v_palette_line_1
+
 Pal_Levels:
+palid_GHZ:				makePalEntry	Pal_GHZ, 			v_palette_line_2
+palid_LZ:				makePalEntry	Pal_LZ, 			v_palette_line_2
+palid_MZ:				makePalEntry	Pal_MZ, 			v_palette_line_2
+palid_SLZ:				makePalEntry	Pal_SLZ,			v_palette_line_2
+palid_SYZ:				makePalEntry	Pal_SYZ,			v_palette_line_2
+palid_SBZ1:				makePalEntry	Pal_SBZ1, 			v_palette_line_2
 
-palid_GHZ:		makePalEntry	Pal_GHZ, 		v_palette_line_2
-palid_LZ:		makePalEntry	Pal_LZ, 		v_palette_line_2
-palid_MZ:		makePalEntry	Pal_MZ, 		v_palette_line_2
-palid_SLZ:		makePalEntry	Pal_SLZ,		v_palette_line_2
-palid_SYZ:		makePalEntry	Pal_SYZ,		v_palette_line_2
-palid_SBZ1:		makePalEntry	Pal_SBZ1, 		v_palette_line_2
-	zonewarning Pal_Levels,8
-
-palid_Special:		makePalEntry	Pal_Special, 		v_palette_line_1
-palid_LZWater:		makePalEntry	Pal_LZWater, 		v_palette_line_1
-palid_SBZ3:		makePalEntry	Pal_SBZ3, 		v_palette_line_2
-palid_SBZ3Water:	makePalEntry	Pal_SBZ3Water, 		v_palette_line_1
-palid_SBZ2:		makePalEntry	Pal_SBZ2, 		v_palette_line_2
-palid_LZSonWater:	makePalEntry	Pal_LZSonWater,		v_palette_line_1
-palid_SBZ3SonWat:	makePalEntry	Pal_SBZ3SonWat,		v_palette_line_1
-palid_BREW:		makePalEntry	Pal_BREW,		v_palette_line_2
-palid_WIN:		makePalEntry	Pal_WIN, 		v_palette_line_2
-palid_SSResult:		makePalEntry	Pal_SSResult, 		v_palette_line_1
-palid_Continue:		makePalEntry	Pal_Continue, 		v_palette_line_1
-palid_Ending:		makePalEntry	Pal_Ending, 		v_palette_line_1
-palid_ColdBrew:		makePalEntry	Pal_ColdBrew, 		v_palette_line_1
-palid_ColdBrewG:	makePalEntry	Pal_ColdBrewG, 		v_palette_line_1
-palid_SonicRetro:	makePalEntry 	Pal_SonicRetro, 	v_palette_line_1
-palid_SonisRetro:	makePalEntry 	Pal_SonisRetro, 	v_palette_line_1
-palid_SplashPal:	makePalEntry	Pal_SplashPal, 		v_palette_line_1
-palid_TryAgain:		makePalEntry	Pal_TryAgain, 		v_palette_line_1
-palid_CN:		makePalEntry	Pal_CN, 		v_palette_line_1
+palid_Special:			makePalEntry	Pal_Special, 		v_palette_line_1
+palid_SBZ3:				makePalEntry	Pal_SBZ3, 			v_palette_line_2
+palid_SBZ3Water:		makePalEntry	Pal_SBZ3Water, 		v_palette_line_1
+palid_SBZ2:				makePalEntry	Pal_SBZ2, 			v_palette_line_2
+palid_LZSonWater:		makePalEntry	Pal_LZSonWater,		v_palette_line_1
+palid_SBZ3SonWat:		makePalEntry	Pal_SBZ3SonWat,		v_palette_line_1
+palid_BREW:				makePalEntry	Pal_BREW,			v_palette_line_2
+palid_BREWWat:			makePalEntry	Pal_BREWWat, 		v_palette_line_1
+palid_CBZ2SonWat:		makePalEntry	Pal_CBZ2SonWat, 	v_palette_line_1
+palid_WIN:				makePalEntry	Pal_WIN, 			v_palette_line_2
+palid_SSResult:			makePalEntry	Pal_SSResult, 		v_palette_line_1
+palid_Continue:			makePalEntry	Pal_Continue, 		v_palette_line_1
+palid_Ending:			makePalEntry	Pal_Ending, 		v_palette_line_1
+palid_ColdBrew:			makePalEntry	Pal_ColdBrew, 		v_palette_line_1
+palid_ColdBrewG:		makePalEntry	Pal_ColdBrewG, 		v_palette_line_1
+palid_SonicRetro:		makePalEntry 	Pal_SonicRetro, 	v_palette_line_1
+palid_SonisRetro:		makePalEntry 	Pal_SonisRetro, 	v_palette_line_1
+palid_SplashPal:		makePalEntry	Pal_SplashPal, 		v_palette_line_1
+palid_TryAgain:			makePalEntry	Pal_TryAgain, 		v_palette_line_1
+palid_CN:				makePalEntry	Pal_CN, 			v_palette_line_1
 palid_FelixDecision:	makePalEntry 	Pal_FelixDecision, 	v_palette_line_1
 palid_FelixGameOver:	makePalEntry 	Pal_FelixGameOver, 	v_palette_line_1
-palid_Joint:		makePalEntry	Pal_Joint, 		v_palette_line_2
-palid_Fetus:		makePalEntry	Pal_Fetus, 		v_palette_line_1
-palid_Black:		makePalEntry	Pal_Black, 		v_palette_line_1
-palid_TGPal:		makePalEntry	Pal_TGPal, 		v_palette_line_1
-palid_S2:		makePalEntry	Pal_S2,			v_palette_line_1
-palid_Savethemoonsonic:	makePalEntry	Pal_STMsonic,		v_palette_line_1
-palid_DVZ:		makePalEntry	Pal_DVZ,		v_palette_line_2
-palid_Foxy:		makePalEntry	Pal_Foxy,		v_palette_line_1
-palid_NGZ:		makePalEntry	Pal_NGZ,		v_palette_line_2
-palid_HARDWARE:		makePalEntry	Pal_HARDWARE,		v_palette_line_2
-palid_BSZ:		makePalEntry	Pal_BSZ,		v_palette_line_2
-palid_BTZ:		makePalEntry	Pal_BTZ,		v_palette_line_2
+palid_Joint:			makePalEntry	Pal_Joint, 			v_palette_line_2
+palid_Fetus:			makePalEntry	Pal_Fetus, 			v_palette_line_1
+palid_Fetus2:			makePalEntry	Pal_Fetus2, 		v_palette_line_1
 
+palid_Black:			makePalEntry	Pal_Black, 			v_palette_line_1
+palid_TGPal:			makePalEntry	Pal_TGPal, 			v_palette_line_1
+palid_S2:				makePalEntry	Pal_S2,				v_palette_line_1
+palid_Savethemoonsonic:	makePalEntry	Pal_STMsonic,		v_palette_line_1
+palid_DVZ:				makePalEntry	Pal_DVZ,			v_palette_line_2
+palid_Foxy:				makePalEntry	Pal_Foxy,			v_palette_line_1
+palid_SegaChGuy:		makePalEntry	Pal_SegaChGuy,		v_palette_line_1
+palid_NGZ:				makePalEntry	Pal_NGZ,			v_palette_line_2
+palid_HARDWARE:			makePalEntry	Pal_HARDWARE,		v_palette_line_2
+palid_BSZ:				makePalEntry	Pal_BSZ,			v_palette_line_2
+palid_BTZ:				makePalEntry	Pal_BTZ,			v_palette_line_2
+palid_DioMildanner:		makePalEntry	Pal_DioMildanner,	v_pal_dry+$20, $10	; KONO PALETTE SWAP DA!
+palid_ARZ:				makePalEntry	Pal_ARZ, 			v_palette_line_2
+palid_ARZWater:			makePalEntry	Pal_ARZWater, 		v_palette_line_1
+palid_ARZSonWater:		makePalEntry	Pal_ARZSonWater,		v_palette_line_1
+palid_PWisp:			makePalEntry	Pal_PWisp, 			v_palette_line_2
 	even

@@ -1,83 +1,195 @@
-Map_060c: mappingsTable
-	mappingsTableEntry.w	Map_060c_0
-	mappingsTableEntry.w	Map_060c_1
-	mappingsTableEntry.w	Map_060c_2
-	mappingsTableEntry.w	Map_060c_3
-	mappingsTableEntry.w	Map_060c_4
-	mappingsTableEntry.w	Map_060c_5
-	mappingsTableEntry.w	Map_060c_6
-	mappingsTableEntry.w	Map_060c_7
-	mappingsTableEntry.w	Map_060c_8
-	mappingsTableEntry.w	Map_060c_9
+Map_ShieldInvin2: mappingsTable
+	mappingsTableEntry.w	Map_ShieldInvin2_0
+	mappingsTableEntry.w	Map_ShieldInvin2_1
+	mappingsTableEntry.w	Map_ShieldInvin2_2
+	mappingsTableEntry.w	Map_ShieldInvin2_3
+	mappingsTableEntry.w	Map_ShieldInvin2_4
+	mappingsTableEntry.w	Map_ShieldInvin2_5
+	mappingsTableEntry.w	Map_ShieldInvin2_6
+	mappingsTableEntry.w	Map_ShieldInvin2_7
+	mappingsTableEntry.w	Map_ShieldInvin2_8
+	mappingsTableEntry.w	Map_ShieldInvin2_9
+	mappingsTableEntry.w	Map_ShieldInvin2_10
+	mappingsTableEntry.w	Map_ShieldInvin2_11
+	mappingsTableEntry.w	Map_ShieldInvin2_12
+	mappingsTableEntry.w	Map_ShieldInvin2_13
+	mappingsTableEntry.w	Map_ShieldInvin2_14
+	mappingsTableEntry.w	Map_ShieldInvin2_15
+	mappingsTableEntry.w	Map_ShieldInvin2_16
+	mappingsTableEntry.w	Map_ShieldInvin2_17
+	mappingsTableEntry.w	Map_ShieldInvin2_18
+	mappingsTableEntry.w	Map_ShieldInvin2_19
 
-Map_060c_0:	spriteHeader
- spritePiece -$18, -$18, 3, 3, 0, 0, 0, 0, 0
- spritePiece 0, -$18, 3, 3, 0, 1, 0, 0, 0
- spritePiece -$18, 0, 3, 3, 0, 0, 1, 0, 0
- spritePiece 0, 0, 3, 3, 0, 1, 1, 0, 0
-Map_060c_0_End
+Map_ShieldInvin2_0:	spriteHeader
+ spritePiece -$10, 4, 1, 2, 0, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 2, 0, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 2, 0, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 2, 0, 0, 0, 0, 0
+Map_ShieldInvin2_0_End
 
-Map_060c_1:	spriteHeader
- spritePiece -$18, -$18, 3, 3, 9, 0, 0, 0, 0
- spritePiece 0, -$18, 3, 3, $12, 0, 0, 0, 0
- spritePiece -$18, 0, 3, 3, 9, 0, 1, 0, 0
- spritePiece 0, 0, 3, 3, $12, 0, 1, 0, 0
-Map_060c_1_End
+Map_ShieldInvin2_1:	spriteHeader
+ spritePiece -$10, 4, 1, 2, 2, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 2, 2, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 2, 2, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 2, 2, 0, 0, 0, 0
+Map_ShieldInvin2_1_End
 
-Map_060c_2:	spriteHeader
- spritePiece -$18, -$18, 3, 3, $1B, 0, 0, 0, 0
- spritePiece 0, -$18, 3, 3, $24, 0, 0, 0, 0
- spritePiece -$18, 0, 3, 3, $1B, 0, 1, 0, 0
- spritePiece 0, 0, 3, 3, $24, 0, 1, 0, 0
-Map_060c_2_End
+Map_ShieldInvin2_2:	spriteHeader
+ spritePiece -$10, 4, 1, 2, 4, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 2, 4, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 2, 4, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 2, 4, 0, 0, 0, 0
+Map_ShieldInvin2_2_End
 
-Map_060c_3:	spriteHeader
- spritePiece -$18, -$18, 3, 3, $2D, 0, 0, 0, 0
- spritePiece 0, -$18, 3, 3, $2D, 1, 0, 0, 0
- spritePiece -$18, 0, 3, 3, $2D, 0, 1, 0, 0
- spritePiece 0, 0, 3, 3, $2D, 1, 1, 0, 0
-Map_060c_3_End
+Map_ShieldInvin2_3:	spriteHeader
+ spritePiece -$10, 4, 1, 2, 6, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 2, 6, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 2, 6, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 2, 6, 0, 0, 0, 0
+Map_ShieldInvin2_3_End
 
-Map_060c_4:	spriteHeader
- spritePiece -$18, -$18, 3, 3, $36, 0, 0, 0, 0
- spritePiece 0, -$18, 3, 3, $3F, 0, 0, 0, 0
- spritePiece -$18, 0, 3, 3, $36, 0, 1, 0, 0
- spritePiece 0, 0, 3, 3, $3F, 0, 1, 0, 0
-Map_060c_4_End
+Map_ShieldInvin2_4:	spriteHeader
+ spritePiece -$10, 4, 1, 2, 6, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 2, 6, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 2, 6, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 2, 6, 0, 0, 0, 0
+Map_ShieldInvin2_4_End
 
-Map_060c_5:	spriteHeader
- spritePiece -$18, -$18, 3, 3, $48, 0, 0, 0, 0
- spritePiece 0, -$18, 3, 3, $51, 0, 0, 0, 0
- spritePiece -$18, 0, 3, 3, $48, 0, 1, 0, 0
- spritePiece 0, 0, 3, 3, $51, 0, 1, 0, 0
-Map_060c_5_End
+Map_ShieldInvin2_5:	spriteHeader
+ spritePiece -$10, 4, 1, 2, 4, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 2, 4, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 2, 4, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 2, 4, 0, 0, 0, 0
+Map_ShieldInvin2_5_End
 
-Map_060c_6:	spriteHeader
- spritePiece -$18, -$18, 3, 3, 0, 0, 0, 0, 0
- spritePiece 0, -$18, 3, 3, 9, 0, 0, 0, 0
- spritePiece -$18, 0, 3, 3, 9, 1, 1, 0, 0
- spritePiece 0, 0, 3, 3, 0, 1, 1, 0, 0
-Map_060c_6_End
+Map_ShieldInvin2_6:	spriteHeader
+ spritePiece -$10, 4, 1, 2, 2, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 2, 2, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 2, 2, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 2, 2, 0, 0, 0, 0
+Map_ShieldInvin2_6_End
 
-Map_060c_7:	spriteHeader
- spritePiece -$18, -$18, 3, 3, 9, 1, 0, 0, 0
- spritePiece 0, -$18, 3, 3, 0, 1, 0, 0, 0
- spritePiece -$18, 0, 3, 3, 0, 0, 1, 0, 0
- spritePiece 0, 0, 3, 3, 9, 0, 1, 0, 0
-Map_060c_7_End
+Map_ShieldInvin2_7:	spriteHeader
+ spritePiece -$10, 4, 1, 2, 0, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 2, 0, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 2, 0, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 2, 0, 0, 0, 0, 0
+Map_ShieldInvin2_7_End
 
-Map_060c_8:	spriteHeader
- spritePiece -$18, -$18, 3, 3, $12, 0, 0, 0, 0
- spritePiece 0, -$18, 3, 3, $1B, 0, 0, 0, 0
- spritePiece -$18, 0, 3, 3, $1B, 1, 1, 0, 0
- spritePiece 0, 0, 3, 3, $12, 1, 1, 0, 0
-Map_060c_8_End
+Map_ShieldInvin2_8:	spriteHeader
+ spritePiece -$10, 4, 1, 2, 0, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 2, 0, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 2, 0, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 2, 0, 0, 0, 0, 0
+Map_ShieldInvin2_8_End
 
-Map_060c_9:	spriteHeader
- spritePiece -$18, -$18, 3, 3, $1B, 1, 0, 0, 0
- spritePiece 0, -$18, 3, 3, $12, 1, 0, 0, 0
- spritePiece -$18, 0, 3, 3, $12, 0, 1, 0, 0
- spritePiece 0, 0, 3, 3, $1B, 0, 1, 0, 0
-Map_060c_9_End
+Map_ShieldInvin2_9:	spriteHeader
+ spritePiece -$10, 4, 1, 2, 0, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 2, 0, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 2, 0, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 2, 0, 0, 0, 0, 0
+Map_ShieldInvin2_9_End
+
+Map_ShieldInvin2_10:	spriteHeader
+ spritePiece -$10, $C, 1, 1, 8, 0, 0, 0, 0
+ spritePiece -8, $C, 1, 1, 8, 0, 0, 0, 0
+ spritePiece 0, $C, 1, 1, 8, 0, 0, 0, 0
+ spritePiece 8, $C, 1, 1, 8, 0, 0, 0, 0
+ spritePiece -$10, 4, 1, 1, $B, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 1, $B, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 1, $B, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 1, $B, 0, 0, 0, 0
+Map_ShieldInvin2_10_End
+
+Map_ShieldInvin2_11:	spriteHeader
+ spritePiece -$10, 4, 1, 1, 8, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 1, 8, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 1, 8, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 1, 8, 0, 0, 0, 0
+ spritePiece -$10, $C, 1, 1, 9, 0, 0, 0, 0
+ spritePiece -8, $C, 1, 1, 9, 0, 0, 0, 0
+ spritePiece 0, $C, 1, 1, 9, 0, 0, 0, 0
+ spritePiece 8, $C, 1, 1, 9, 0, 0, 0, 0
+Map_ShieldInvin2_11_End
+
+Map_ShieldInvin2_12:	spriteHeader
+ spritePiece -$10, 4, 1, 2, 9, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 2, 9, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 2, 9, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 2, 9, 0, 0, 0, 0
+Map_ShieldInvin2_12_End
+
+Map_ShieldInvin2_13:	spriteHeader
+ spritePiece -$10, $C, 1, 1, $A, 0, 0, 0, 0
+ spritePiece -$10, 4, 1, 1, $A, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 1, $A, 0, 0, 0, 0
+ spritePiece -8, $C, 1, 1, $A, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 1, $A, 0, 0, 0, 0
+ spritePiece 0, $C, 1, 1, $A, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 1, $A, 0, 0, 0, 0
+ spritePiece 8, $C, 1, 1, $A, 0, 0, 0, 0
+Map_ShieldInvin2_13_End
+
+Map_ShieldInvin2_14:	spriteHeader
+ spritePiece -$10, $C, 1, 1, $A, 0, 0, 0, 0
+ spritePiece -$10, 4, 1, 1, $A, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 1, $A, 0, 0, 0, 0
+ spritePiece -8, $C, 1, 1, $A, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 1, $A, 0, 0, 0, 0
+ spritePiece 0, $C, 1, 1, $A, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 1, $A, 0, 0, 0, 0
+ spritePiece 8, $C, 1, 1, $A, 0, 0, 0, 0
+Map_ShieldInvin2_14_End
+
+Map_ShieldInvin2_15:	spriteHeader
+ spritePiece -$10, 4, 1, 1, 8, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 1, 8, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 1, 8, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 1, 8, 0, 0, 0, 0
+ spritePiece -$10, $C, 1, 1, 9, 0, 0, 0, 0
+ spritePiece -8, $C, 1, 1, 9, 0, 0, 0, 0
+ spritePiece 0, $C, 1, 1, 9, 0, 0, 0, 0
+ spritePiece 8, $C, 1, 1, 9, 0, 0, 0, 0
+Map_ShieldInvin2_15_End
+
+Map_ShieldInvin2_16:	spriteHeader
+ spritePiece -$10, 4, 1, 2, 9, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 2, 9, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 2, 9, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 2, 9, 0, 0, 0, 0
+Map_ShieldInvin2_16_End
+
+Map_ShieldInvin2_17:	spriteHeader
+ spritePiece -$10, $C, 1, 1, 8, 0, 0, 0, 0
+ spritePiece -8, $C, 1, 1, 8, 0, 0, 0, 0
+ spritePiece 0, $C, 1, 1, 8, 0, 0, 0, 0
+ spritePiece 8, $C, 1, 1, 8, 0, 0, 0, 0
+ spritePiece -$10, 4, 1, 1, $B, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 1, $B, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 1, $B, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 1, $B, 0, 0, 0, 0
+Map_ShieldInvin2_17_End
+
+Map_ShieldInvin2_18:	spriteHeader
+ spritePiece -$10, $C, 1, 1, 8, 0, 0, 0, 0
+ spritePiece -8, $C, 1, 1, 8, 0, 0, 0, 0
+ spritePiece 0, $C, 1, 1, 8, 0, 0, 0, 0
+ spritePiece 8, $C, 1, 1, 8, 0, 0, 0, 0
+ spritePiece -$10, 4, 1, 1, $B, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 1, $B, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 1, $B, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 1, $B, 0, 0, 0, 0
+Map_ShieldInvin2_18_End
+
+Map_ShieldInvin2_19:	spriteHeader
+ spritePiece -$10, $C, 1, 1, 8, 0, 0, 0, 0
+ spritePiece -8, $C, 1, 1, 8, 0, 0, 0, 0
+ spritePiece 0, $C, 1, 1, 8, 0, 0, 0, 0
+ spritePiece 8, $C, 1, 1, 8, 0, 0, 0, 0
+ spritePiece -$10, 4, 1, 1, $B, 0, 0, 0, 0
+ spritePiece -8, 4, 1, 1, $B, 0, 0, 0, 0
+ spritePiece 0, 4, 1, 1, $B, 0, 0, 0, 0
+ spritePiece 8, 4, 1, 1, $B, 0, 0, 0, 0
+Map_ShieldInvin2_19_End
 
 	even

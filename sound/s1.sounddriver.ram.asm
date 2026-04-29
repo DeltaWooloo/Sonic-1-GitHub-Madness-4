@@ -52,9 +52,9 @@ v_soundqueue_end:
 			ds.b	1	; unused
 f_voice_selector:	ds.b	1	; $00 = use music voice pointer; $40 = use special voice pointer; $80 = use track voice pointer
 			ds.b	9
-v_voice_ptr:		ds.l	1	; voice data pointer (4 bytes)
+			ds.l	1	; voice data pointer (4 bytes)
 			ds.b	4	; unused
-v_special_voice_ptr:	ds.l	1	; voice data pointer for special SFX ($D0-$DF) (4 bytes)
+			ds.l	1	; voice data pointer for special SFX ($D0-$DF) (4 bytes)
 f_fadein_flag:		ds.b	1	; Flag for fade in
 v_fadein_delay:		ds.b	1
 v_fadein_counter:	ds.b	1	; Timer for fade in/out

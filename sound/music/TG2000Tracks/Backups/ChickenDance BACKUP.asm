@@ -11150,5 +11150,5 @@ ChickenDance_Voices:
 	dc.b		$01,$27,$2A,$27,$2B,$1B,$00,$27,$01;			Voice 02
 	dc.b		$3A,$31,$38,$33,$34,$59,$5C,$19,$11,$0B,$0C,$10,$0A,$00,$02,$00
 	dc.b		$00,$05,$1D,$0D,$0D,$25,$25,$2F,$00;			Voice 03
-	smpsFooterEndSong	"TG2000Tracks/ChickenDance BACKUP.asm"
+	smpsFooterEndSong	"TG2000Tracks/Backups/ChickenDance BACKUP.asm"
 	even

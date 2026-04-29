@@ -136,7 +136,7 @@ RollingBall_Init:
 	move.b  #2,obj.Action(a0)
 .NotFreed:
 	move.l  #SprPat_RollingBall,obj.Pat(a0)
-	move.w  #$43AA,obj.Tile(a0)
+	move.w  #$43E0,obj.Tile(a0)
 	move.b  #4,obj.Render(a0)
 	move.b  #3,obj.Priority(a0)
 	move.b  #$18,obj.XRender(a0)

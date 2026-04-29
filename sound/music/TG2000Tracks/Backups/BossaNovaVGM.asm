@@ -15338,5 +15338,5 @@ BossaNova_Voices:
 	dc.b		$00,$72,$70,$35,$71,$53,$5B,$1D,$1F,$01,$03,$0F,$00,$1B,$1D,$1F
 	dc.b		$0B,$40,$03,$F3,$09,$08,$11,$1D,$00;			Voice 05
 	
-	smpsFooterEndSong	"TG2000Tracks/BossaNova.asm"
+	smpsFooterEndSong	"TG2000Tracks/Backups/BossaNova.asm"
 	even

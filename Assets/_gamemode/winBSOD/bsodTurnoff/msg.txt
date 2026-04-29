@@ -1,0 +1,218 @@
+"It's now safe to turn off your computer."
+   1234567890123456789012345678901234567890
+01
+02
+03
+04
+05
+06
+07
+08
+09
+10
+11
+12
+13
+14         It's now safe to turn off       
+15              your computer.             
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+
+1234567890123456789012345678
+             12             
+			 
+			 
+"You can now safely turn off your computer"
+   1234567890123456789012345678901234567890
+01
+02
+03
+04
+05
+06
+07
+08
+09
+10
+11
+12
+13
+14            You can now safely           
+15          turn off your computer.        
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+
+1234567890123456789012345678
+             12             
+
+NOT h-centered, due to TV safe area. Message top-left aligned
+"You can now safely turn off your computer."
+"If you want to restart your computer, press CTRL+ALT+DEL."
+   1234567890123456789012345678901234567890
+01
+02
+03   You can now safely turn off your
+04   computer.
+05 
+06   If you want to restart your computer,
+07   press CTRL+ALT+DEL.
+08
+09
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+
+NOT-vert centered, offset from top/sides due to CRT TV Safe area
+1234567890123456789012345678
+  12345                     
+			 
+			 
+https://youtu.be/LCfTgZYSs-k?si=FzRNdfwr0YHMhs-a&t=51
+  It is safe to turn off your machine now  
+You reached the point where the machine tried to turn off.  Either
+the ACPI S5  method or the APM BIOS did not  work or has not yet been
+implemented.  Current implementation of this rev requires that you
+now press the power button to continue.
+
+System halted."
+   12345678901234567890123456789012345678
+01
+02
+03
+04
+05
+06
+07
+08
+09  It is safe to turn off your
+10  machine now
+11
+12  You reached the point where the 
+13  machine tried to turn off.  Either
+14  the ACPI S5 method or the APM BIOS
+15  did not work or has not yet been
+16  implemented. Current implementation
+17  of this rev requires that you now
+18  press the power button to continue.
+19
+20  System halted.
+21
+22
+23
+24
+25
+26
+27
+28
+
+1234567890123456789012345678
+        123456789012        
+		
+		
+"The system may be powered off now."
+   12345678901234567890123456789012345678
+01
+02
+03
+04
+05
+06
+07
+08
+09
+10
+11
+12
+13
+14   The system may be powered off now.  
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+
+1234567890123456789012345678
+              1             
+			  
+			  
+"It is now safe to power off the system."
+   12345678901234567890123456789012345678
+01
+02
+03   It is now safe to power off
+04   the system.
+04
+05
+06
+07
+08
+09
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+
+1234567890123456789012345678
+  12

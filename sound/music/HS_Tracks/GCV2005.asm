@@ -15,7 +15,7 @@ GCV_2005_Header:
 	smpsHeaderStartSong 1
 	smpsHeaderVoice		GCV_2005_Voices
 	smpsHeaderChan		$04, $03
-	smpsHeaderTempo		$03, $02
+	smpsHeaderTempo		$06, $00
 	smpsHeaderDAC	GCV_2005_DAC
 	smpsHeaderFM	GCV_2005_FM1,	$00, $04
 	smpsHeaderFM	GCV_2005_FM2,	$00, $04

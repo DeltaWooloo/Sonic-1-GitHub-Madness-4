@@ -363,3 +363,5 @@ MJWin_Voices:
 	dc.b		$02,$00,$00,$00,$00,$5C,$54,$1C,$D0,$0C,$08,$0A,$05,$00,$00,$00
 	dc.b		$00,$FF,$FF,$FF,$FF,$24,$1B,$22,$00;			Voice 01
 	even
+
+	smpsFooterEndSong	"TG2000Tracks/Unused/MJ.asm"

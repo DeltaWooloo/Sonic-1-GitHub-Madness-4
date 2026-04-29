@@ -30,8 +30,11 @@ CNSCROBJ_LogoInit:	; Routine 0 - Logo Init
 		move.l	#Map_CNSCROBJ,obMap(a0)
 		move.w	#$1,obGfx(a0)
 		move.b	#1,obPriority(a0)
+		move.b	#1,$30(a0)	; shhh
 CNSCROBJ_LogoAnimate:	; Routine 2 - Logo Animate
-		move.b	#$A,obFrame(a0)
+		tst.b	$30(a0)		; ensure its told by nico to animate now
+		beq.w	CNSCROBJ_Animate
+;		move.b	#$A,obFrame(a0)
 		; Crescent position is $40
 		; O position is $50
 		; N1 position is $60
@@ -67,13 +70,19 @@ CNSCROBJ_JumpRight:	; Routine 6 - Nico jumping right
 		move.w	#$200,obVelX(a0); set X velocity for bouncing right
 		move.w	$34(a0),d0
 		cmp.w	obX(a0),d0		; was he about to reach right next to the logo?
-		bge.s	.MoveRight		; if not, branch and continue bouncing - had to use a BNE
+		bge.s	.MoveRight		; if not, branch and continue bouncing
 		clr.w	obVelX(a0)		; clear X velocity so Nico lands correctly
 		move.w	#30,$30(a0)		; Wait Time
 		move.b	#3,obAnim(a0)	; Set Animation to be Nico's Third animation (stop and briefly look at the opposite direction)
 		addq.b	#2,obRoutine(a0); Next...
 		bra.w	CNSCROBJ_Wait
 .MoveRight:
+		move.w	$32(a0),d0
+		add.w	#$20,d0
+		cmp.w	obX(a0),d0		; was he about to reach the first letter of logo?
+		bne.s	.DontTellLogo		; if not, branch and continue bouncing
+		clr.b	(v_logoobj+$30).w
+.DontTellLogo:
 		jsr	(ObjectFall).l
 		move.w	#$78,d0
 		cmp.w	obY(a0),d0		; was he about to fall under the ground?
@@ -147,8 +156,9 @@ Ani_CNSCROBJ:	dc.w .Logo-Ani_CNSCROBJ
 				dc.w .Bounce-Ani_CNSCROBJ
 				dc.w .Land-Ani_CNSCROBJ
 				dc.w .End-Ani_CNSCROBJ
-.Logo:		dc.b $A,	0, 0, 1, 2, 3, 4, 5, 6,	7, 8
-			dc.b 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, $A, afBack, 1
+.Logo:		dc.b 6,	1, 2, 3, 4, 5, 6,	7, 8
+			dc.b 8, 8, 8, 8, 8, 8, 8, 8, 8	; hooray an entire repeat of 8s
+			dc.b 8, 8, 8, 8, 8, 9, $A, afBack, 1
 .Stand:		dc.b 6,	$B, $B, $B, $C, afChange, 2
 .Bounce:	dc.b 6,	$D, $E, $E, $E, afEnd
 .Land:		dc.b 6, $E, $E, $D,	$F, afBack, 1

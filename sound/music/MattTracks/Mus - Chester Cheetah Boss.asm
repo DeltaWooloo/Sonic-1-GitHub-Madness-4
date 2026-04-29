@@ -1,8 +1,8 @@
 BGM_ChesterBoss_Header:
-	smpsHeaderStartSong 1, 1
+	smpsHeaderStartSong 3
 	smpsHeaderVoice     BGM_ChesterBoss_Voices
-	smpsHeaderChan      $07, $03
-	smpsHeaderTempo     $01, $00
+	smpsHeaderChan      $06, $00
+	smpsHeaderTempo     $01, $01
 
 	smpsHeaderDAC       BGM_ChesterBoss_DAC,	$00, $F2
 	smpsHeaderFM        BGM_ChesterBoss_FM1,	$00, $00
@@ -10,21 +10,9 @@ BGM_ChesterBoss_Header:
 	smpsHeaderFM        BGM_ChesterBoss_FM3,	$00, $00
 	smpsHeaderFM        BGM_ChesterBoss_FM4,	$00, $00
 	smpsHeaderFM        BGM_ChesterBoss_FM5,	$00, $00
-	smpsHeaderFM        BGM_ChesterBoss_FM6,	$00, $00
-	smpsHeaderPSG       BGM_ChesterBoss_PSG1,	$00, $00, $00, $00
-	smpsHeaderPSG       BGM_ChesterBoss_PSG2,	$00, $00, $00, $00
-	smpsHeaderPSG       BGM_ChesterBoss_PSG3,	$00, $00, $00, $00
 
 ; DAC Data
 BGM_ChesterBoss_DAC:
-; FM1 Data
-BGM_ChesterBoss_FM1:
-; PSG1 Data
-BGM_ChesterBoss_PSG1:
-; PSG2 Data
-BGM_ChesterBoss_PSG2:
-; PSG3 Data
-BGM_ChesterBoss_PSG3:
 	smpsStop
 
 ; FM2 Data
@@ -35,16 +23,30 @@ BGM_ChesterBoss_FM2:
 	dc.b	nRst, $7F, $10, nB3, $06, nRst, $0C, nB3, $06, nRst, $0C, nB3
 	dc.b	nB3, $18, nB3, nB3, nB3, nB3, nB3, nB3, $30
 
-BGM_ChesterBoss_Jump04:
-	dc.b	nB3, $0C, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3
-	dc.b	nB3, nB3, $06, nRst, $0C, nB3, $06, nRst, $0C, nB3, nB3, nB3
-	dc.b	nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, $06
-	dc.b	nRst, $2A, nB3, $0C, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3
-	dc.b	nB3, nB3, nB3, nB3, $06, nRst, $0C, nB3, $06, nRst, $0C, nB3
-	dc.b	nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3, nB3
+BGM_ChesterBoss_Jump02:
+	dc.b	nB3
+
+BGM_ChesterBoss_Loop73:
+	dc.b	$0C
+	smpsLoop            $00, $0C, BGM_ChesterBoss_Loop73
+	dc.b	nB3, $06, nRst, $0C, nB3, $06, nRst, $0C
+
+BGM_ChesterBoss_Loop74:
+	dc.b	nB3
+	smpsLoop            $00, $0D, BGM_ChesterBoss_Loop74
+	dc.b	nB3, $06, nRst, $2A, nB3
+
+BGM_ChesterBoss_Loop75:
+	dc.b	$0C
+	smpsLoop            $00, $0C, BGM_ChesterBoss_Loop75
+	dc.b	nB3, $06, nRst, $0C, nB3, $06, nRst, $0C
+
+BGM_ChesterBoss_Loop76:
+	dc.b	nB3
+	smpsLoop            $00, $0D, BGM_ChesterBoss_Loop76
 	dc.b	nB3, $30
 	smpsPan             panCenter, $00
-	smpsJump            BGM_ChesterBoss_Jump04
+	smpsJump            BGM_ChesterBoss_Jump02
 
 ; FM3 Data
 BGM_ChesterBoss_FM3:
@@ -52,443 +54,353 @@ BGM_ChesterBoss_FM3:
 	smpsAlterVol        $0A
 	smpsPan             panCenter, $00
 	smpsAlterNote       $0D
-	dc.b	nFs3, $08, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $09, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $09, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01, nE4, $05
-	dc.b	nRst, $01
-	smpsAlterNote       $0B
-	dc.b	nDs4, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nCs4, $05, nRst, $01
-	smpsAlterNote       $0B
-	dc.b	nDs4, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nCs4, $05, nRst, $01, nB3, $05, nRst, $01, nCs4, $05, nRst, $01
-	dc.b	nB3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $09, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $09, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $09, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
-	smpsAlterNote       $0B
-	dc.b	nDs4, $05, nRst, $01, nDs4, $05, nRst, $0D, nDs4, $05, nRst, $01
-	dc.b	nDs4, $05, nRst, $0D
+	dc.b	nFs3, $08
 
-BGM_ChesterBoss_Jump03:
-	smpsAlterNote       $0D
-	dc.b	nFs3, $09, smpsNoAttack
+BGM_ChesterBoss_Loop61:
+	dc.b	smpsNoAttack
 	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
+	dc.b	$01, smpsNoAttack
 	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
+	dc.b	nG3, nRst
+
+BGM_ChesterBoss_Loop60:
+	dc.b	nGs3, $05, nRst, $01
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop60
+	dc.b	nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
 	smpsAlterNote       $0D
-	dc.b	nFs3, $09, smpsNoAttack
+	dc.b	nFs3, $09
+	smpsLoop            $01, $02, BGM_ChesterBoss_Loop61
+	dc.b	smpsNoAttack
 	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
+	dc.b	$01, smpsNoAttack
 	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $09, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01, nE4, $05
+	dc.b	nG3, nRst
+
+BGM_ChesterBoss_Loop62:
+	dc.b	nGs3, $05, nRst, $01
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop62
+	dc.b	nCs4, $0B, nRst, $01, nB3, $05, nRst, $01, nE4, $05
+
+BGM_ChesterBoss_Loop63:
 	dc.b	nRst, $01
 	smpsAlterNote       $0B
 	dc.b	nDs4, $05, nRst, $01
 	smpsAlterNote       $00
-	dc.b	nCs4, $05, nRst, $01
+	dc.b	nCs4, $05
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop63
+	dc.b	nRst, $01, nB3, $05, nRst, $01, nCs4, $05
+
+BGM_ChesterBoss_Loop65:
+	dc.b	nRst, $01, nB3, $05, nRst, $01
+	smpsAlterNote       $0D
+	dc.b	nFs3, $09, smpsNoAttack
+	smpsAlterNote       $1B
+	dc.b	$01, smpsNoAttack
+	smpsAlterNote       $00
+	dc.b	nG3, nRst
+
+BGM_ChesterBoss_Loop64:
+	dc.b	nGs3, $05, nRst, $01
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop64
+	dc.b	nCs4, $0B
+	smpsLoop            $01, $03, BGM_ChesterBoss_Loop65
+	dc.b	nRst, $01, nB3, $05, nRst, $01
+	smpsAlterNote       $0B
+
+BGM_ChesterBoss_Loop66:
+	dc.b	nDs4, $05, nRst, $01, nDs4, $05, nRst, $0D
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop66
+
+BGM_ChesterBoss_Loop68:
+	smpsAlterNote       $0D
+	dc.b	nFs3, $09, smpsNoAttack
+	smpsAlterNote       $1B
+	dc.b	$01, smpsNoAttack
+	smpsAlterNote       $00
+	dc.b	nG3, nRst
+
+BGM_ChesterBoss_Loop67:
+	dc.b	nGs3, $05, nRst, $01
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop67
+	dc.b	nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
+	smpsLoop            $01, $03, BGM_ChesterBoss_Loop68
+	dc.b	nE4, $05
+
+BGM_ChesterBoss_Loop69:
+	dc.b	nRst, $01
 	smpsAlterNote       $0B
 	dc.b	nDs4, $05, nRst, $01
 	smpsAlterNote       $00
-	dc.b	nCs4, $05, nRst, $01, nB3, $05, nRst, $01, nCs4, $05, nRst, $01
-	dc.b	nB3, $05, nRst, $01
+	dc.b	nCs4, $05
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop69
+	dc.b	nRst, $01, nB3, $05, nRst, $01, nCs4, $05
+
+BGM_ChesterBoss_Loop6B:
+	dc.b	nRst, $01, nB3, $05, nRst, $01
 	smpsAlterNote       $0D
 	dc.b	nFs3, $09, smpsNoAttack
 	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
+	dc.b	$01, smpsNoAttack
 	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $09, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $09, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
+	dc.b	nG3, nRst
+
+BGM_ChesterBoss_Loop6A:
+	dc.b	nGs3, $05, nRst, $01
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop6A
+	dc.b	nCs4, $0B
+	smpsLoop            $01, $03, BGM_ChesterBoss_Loop6B
+	dc.b	nRst, $01, nB3, $05, nRst, $01
 	smpsSetvoice        $0B
 	smpsAlterVol        $FF
+
+BGM_ChesterBoss_Loop6C:
 	dc.b	nE4, $03, nRst, $01, nAs3, $03, nRst, $01, nB3, $03, nRst, $01
-	dc.b	nE4, $03, nRst, $01, nAs3, $03, nRst, $01, nB3, $03, nRst, $01
-	dc.b	nE4, $03, nRst, $01, nAs3, $03, nRst, $01, nB3, $03, nRst, $01
-	dc.b	nE4, $03, nRst, $01, nAs3, $03, nRst, $01, nB3, $03, nRst, $01
+	smpsLoop            $00, $04, BGM_ChesterBoss_Loop6C
 	smpsSetvoice        $02
 	smpsAlterVol        $01
+
+BGM_ChesterBoss_Loop6E:
 	smpsAlterNote       $0D
 	dc.b	nFs3, $09, smpsNoAttack
 	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
+	dc.b	$01, smpsNoAttack
 	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $09, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $09, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01, nE4, $05
+	dc.b	nG3, nRst
+
+BGM_ChesterBoss_Loop6D:
+	dc.b	nGs3, $05, nRst, $01
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop6D
+	dc.b	nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
+	smpsLoop            $01, $03, BGM_ChesterBoss_Loop6E
+	dc.b	nE4, $05
+
+BGM_ChesterBoss_Loop6F:
 	dc.b	nRst, $01
 	smpsAlterNote       $0B
 	dc.b	nDs4, $05, nRst, $01
 	smpsAlterNote       $00
-	dc.b	nCs4, $05, nRst, $01
+	dc.b	nCs4, $05
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop6F
+	dc.b	nRst, $01, nB3, $05, nRst, $01, nCs4, $05
+
+BGM_ChesterBoss_Loop71:
+	dc.b	nRst, $01, nB3, $05, nRst, $01
+	smpsAlterNote       $0D
+	dc.b	nFs3, $09, smpsNoAttack
+	smpsAlterNote       $1B
+	dc.b	$01, smpsNoAttack
+	smpsAlterNote       $00
+	dc.b	nG3, nRst
+
+BGM_ChesterBoss_Loop70:
+	dc.b	nGs3, $05, nRst, $01
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop70
+	dc.b	nCs4, $0B
+	smpsLoop            $01, $03, BGM_ChesterBoss_Loop71
+	dc.b	nRst, $01, nB3, $05, nRst, $01
 	smpsAlterNote       $0B
-	dc.b	nDs4, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nCs4, $05, nRst, $01, nB3, $05, nRst, $01, nCs4, $05, nRst, $01
-	dc.b	nB3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $09, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $09, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $09, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG3, nRst, nGs3, $05, nRst, $01, nGs3, $05, nRst, $01, nGs3, $05
-	dc.b	nRst, $01, nCs4, $0B, nRst, $01, nB3, $05, nRst, $01
-	smpsAlterNote       $0B
-	dc.b	nDs4, $05, nRst, $01, nDs4, $05, nRst, $0D, nDs4, $05, nRst, $01
-	dc.b	nDs4, $05, nRst, $0D
+
+BGM_ChesterBoss_Loop72:
+	dc.b	nDs4, $05, nRst, $01, nDs4, $05, nRst, $0D
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop72
 	smpsPan             panCenter, $00
-	smpsJump            BGM_ChesterBoss_Jump03
+	smpsJump            BGM_ChesterBoss_Loop68
 
 ; FM4 Data
 BGM_ChesterBoss_FM4:
 	smpsSetvoice        $02
 	smpsAlterVol        $0E
 	smpsPan             panCenter, $00
-	dc.b	nCs3, $08, smpsNoAttack
-	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nD3, nRst
-	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nGs3, $0B, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nCs3, $09, smpsNoAttack
-	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nD3, nRst
-	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nGs3, $0B, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nCs3, $09, smpsNoAttack
-	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nD3, nRst
-	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nGs3, $0B, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nB3, $05, nRst, $01, nAs3, $05, nRst, $01, nGs3, $05, nRst, $01
-	dc.b	nAs3, $05, nRst, $01, nGs3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nGs3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nCs3, $09, smpsNoAttack
-	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nD3, nRst
-	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nGs3, $0B, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nCs3, $09, smpsNoAttack
-	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nD3, nRst
-	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nGs3, $0B, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nCs3, $09, smpsNoAttack
-	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nD3, nRst
-	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nGs3, $0B, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nAs3, $05, nRst, $01, nAs3, $05, nRst, $0D, nAs3, $05, nRst, $01
-	dc.b	nAs3, $05, nRst, $0D
+	dc.b	nCs3, $08
 
-BGM_ChesterBoss_Jump02:
-	dc.b	nCs3, $09, smpsNoAttack
+BGM_ChesterBoss_Loop4E:
+	dc.b	smpsNoAttack
 	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
+	dc.b	$01, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nD3, nRst
 	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
+
+BGM_ChesterBoss_Loop4D:
+	dc.b	nDs3, $05, nRst, $01
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop4D
 	smpsAlterNote       $00
 	dc.b	nGs3, $0B, nRst, $01
 	smpsAlterNote       $0D
 	dc.b	nFs3, $05, nRst, $01
 	smpsAlterNote       $00
-	dc.b	nCs3, $09, smpsNoAttack
+	dc.b	nCs3, $09
+	smpsLoop            $01, $02, BGM_ChesterBoss_Loop4E
+	dc.b	smpsNoAttack
 	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
+	dc.b	$01, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nD3, nRst
 	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
+
+BGM_ChesterBoss_Loop4F:
+	dc.b	nDs3, $05, nRst, $01
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop4F
 	smpsAlterNote       $00
 	dc.b	nGs3, $0B, nRst, $01
 	smpsAlterNote       $0D
 	dc.b	nFs3, $05, nRst, $01
 	smpsAlterNote       $00
-	dc.b	nCs3, $09, smpsNoAttack
-	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nD3, nRst
-	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nGs3, $0B, nRst, $01
+	dc.b	nB3, $05
+
+BGM_ChesterBoss_Loop50:
+	dc.b	nRst, $01, nAs3, $05, nRst, $01, nGs3, $05
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop50
+	dc.b	nRst, $01
 	smpsAlterNote       $0D
 	dc.b	nFs3, $05, nRst, $01
 	smpsAlterNote       $00
-	dc.b	nB3, $05, nRst, $01, nAs3, $05, nRst, $01, nGs3, $05, nRst, $01
-	dc.b	nAs3, $05, nRst, $01, nGs3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nGs3, $05, nRst, $01
+	dc.b	nGs3, $05
+
+BGM_ChesterBoss_Loop52:
+	dc.b	nRst, $01
 	smpsAlterNote       $0D
 	dc.b	nFs3, $05, nRst, $01
 	smpsAlterNote       $00
 	dc.b	nCs3, $09, smpsNoAttack
 	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
+	dc.b	$01, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nD3, nRst
 	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
+
+BGM_ChesterBoss_Loop51:
+	dc.b	nDs3, $05, nRst, $01
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop51
+	smpsAlterNote       $00
+	dc.b	nGs3, $0B
+	smpsLoop            $01, $03, BGM_ChesterBoss_Loop52
+	dc.b	nRst, $01
+	smpsAlterNote       $0D
+	dc.b	nFs3, $05, nRst, $01
+	smpsAlterNote       $00
+
+BGM_ChesterBoss_Loop53:
+	dc.b	nAs3, $05, nRst, $01, nAs3, $05, nRst, $0D
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop53
+
+BGM_ChesterBoss_Loop55:
+	dc.b	nCs3, $09, smpsNoAttack
+	smpsAlterNote       $0A
+	dc.b	$01, smpsNoAttack
+	smpsAlterNote       $00
+	dc.b	nD3, nRst
+	smpsAlterNote       $0B
+
+BGM_ChesterBoss_Loop54:
+	dc.b	nDs3, $05, nRst, $01
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop54
 	smpsAlterNote       $00
 	dc.b	nGs3, $0B, nRst, $01
 	smpsAlterNote       $0D
 	dc.b	nFs3, $05, nRst, $01
 	smpsAlterNote       $00
-	dc.b	nCs3, $09, smpsNoAttack
-	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
+	smpsLoop            $01, $03, BGM_ChesterBoss_Loop55
+	dc.b	nB3, $05
+
+BGM_ChesterBoss_Loop56:
+	dc.b	nRst, $01, nAs3, $05, nRst, $01, nGs3, $05
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop56
+	dc.b	nRst, $01
+	smpsAlterNote       $0D
+	dc.b	nFs3, $05, nRst, $01
 	smpsAlterNote       $00
-	dc.b	nD3, nRst
-	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nGs3, $0B, nRst, $01
+	dc.b	nGs3, $05
+
+BGM_ChesterBoss_Loop58:
+	dc.b	nRst, $01
 	smpsAlterNote       $0D
 	dc.b	nFs3, $05, nRst, $01
 	smpsAlterNote       $00
 	dc.b	nCs3, $09, smpsNoAttack
 	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
+	dc.b	$01, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nD3, nRst
 	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
+
+BGM_ChesterBoss_Loop57:
+	dc.b	nDs3, $05, nRst, $01
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop57
 	smpsAlterNote       $00
-	dc.b	nGs3, $0B, nRst, $01
+	dc.b	nGs3, $0B
+	smpsLoop            $01, $03, BGM_ChesterBoss_Loop58
+	dc.b	nRst, $01
 	smpsAlterNote       $0D
 	dc.b	nFs3, $05, nRst, $01
 	smpsSetvoice        $0B
 	smpsAlterVol        $FF
-	dc.b	smpsNoAttack, nRst, $03
+	dc.b	smpsNoAttack, $03
 	smpsAlterNote       $00
-	dc.b	nE4, $04, nAs3, nB3, nE4, nAs3, nB3, nE4, nAs3, nB3, nE4, nAs3
-	dc.b	nB3, $01
+
+BGM_ChesterBoss_Loop59:
+	dc.b	nE4, $04, nAs3, nB3
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop59
+	dc.b	nE4, nAs3, nB3, $01
 	smpsSetvoice        $02
 	smpsAlterVol        $01
+
+BGM_ChesterBoss_Loop5B:
 	dc.b	nCs3, $09, smpsNoAttack
 	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
+	dc.b	$01, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nD3, nRst
 	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
+
+BGM_ChesterBoss_Loop5A:
+	dc.b	nDs3, $05, nRst, $01
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop5A
 	smpsAlterNote       $00
 	dc.b	nGs3, $0B, nRst, $01
 	smpsAlterNote       $0D
 	dc.b	nFs3, $05, nRst, $01
 	smpsAlterNote       $00
-	dc.b	nCs3, $09, smpsNoAttack
-	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
+	smpsLoop            $01, $03, BGM_ChesterBoss_Loop5B
+	dc.b	nB3, $05
+
+BGM_ChesterBoss_Loop5C:
+	dc.b	nRst, $01, nAs3, $05, nRst, $01, nGs3, $05
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop5C
+	dc.b	nRst, $01
+	smpsAlterNote       $0D
+	dc.b	nFs3, $05, nRst, $01
 	smpsAlterNote       $00
-	dc.b	nD3, nRst
-	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nGs3, $0B, nRst, $01
+	dc.b	nGs3, $05
+
+BGM_ChesterBoss_Loop5E:
+	dc.b	nRst, $01
 	smpsAlterNote       $0D
 	dc.b	nFs3, $05, nRst, $01
 	smpsAlterNote       $00
 	dc.b	nCs3, $09, smpsNoAttack
 	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
+	dc.b	$01, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nD3, nRst
 	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
+
+BGM_ChesterBoss_Loop5D:
+	dc.b	nDs3, $05, nRst, $01
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop5D
 	smpsAlterNote       $00
-	dc.b	nGs3, $0B, nRst, $01
+	dc.b	nGs3, $0B
+	smpsLoop            $01, $03, BGM_ChesterBoss_Loop5E
+	dc.b	nRst, $01
 	smpsAlterNote       $0D
 	dc.b	nFs3, $05, nRst, $01
 	smpsAlterNote       $00
-	dc.b	nB3, $05, nRst, $01, nAs3, $05, nRst, $01, nGs3, $05, nRst, $01
-	dc.b	nAs3, $05, nRst, $01, nGs3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nGs3, $05, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nCs3, $09, smpsNoAttack
-	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nD3, nRst
-	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nGs3, $0B, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nCs3, $09, smpsNoAttack
-	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nD3, nRst
-	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nGs3, $0B, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nCs3, $09, smpsNoAttack
-	smpsAlterNote       $0A
-	dc.b	nCs3, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nD3, nRst
-	smpsAlterNote       $0B
-	dc.b	nDs3, $05, nRst, $01, nDs3, $05, nRst, $01, nDs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nGs3, $0B, nRst, $01
-	smpsAlterNote       $0D
-	dc.b	nFs3, $05, nRst, $01
-	smpsAlterNote       $00
-	dc.b	nAs3, $05, nRst, $01, nAs3, $05, nRst, $0D, nAs3, $05, nRst, $01
-	dc.b	nAs3, $05, nRst, $0D
+
+BGM_ChesterBoss_Loop5F:
+	dc.b	nAs3, $05, nRst, $01, nAs3, $05, nRst, $0D
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop5F
 	smpsPan             panCenter, $00
-	smpsJump            BGM_ChesterBoss_Jump02
+	smpsJump            BGM_ChesterBoss_Loop55
 
 ; FM5 Data
 BGM_ChesterBoss_FM5:
@@ -498,6 +410,8 @@ BGM_ChesterBoss_FM5:
 	dc.b	nRst, $7F, $10
 	smpsSetvoice        $05
 	smpsAlterVol        $FB
+
+BGM_ChesterBoss_Loop06:
 	smpsAlterNote       $05
 	dc.b	nDs2, $01, smpsNoAttack
 	smpsAlterNote       $00
@@ -523,7 +437,7 @@ BGM_ChesterBoss_FM5:
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack, nFs1, $01, smpsNoAttack
+	dc.b	nFs1, smpsNoAttack, $01, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -536,6 +450,9 @@ BGM_ChesterBoss_FM5:
 	dc.b	nFs1
 	smpsSetvoice        $05
 	smpsAlterVol        $FC
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop06
+
+BGM_ChesterBoss_Loop07:
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -546,54 +463,7 @@ BGM_ChesterBoss_FM5:
 	dc.b	nB3, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2
-	smpsSetvoice        $06
-	smpsAlterVol        $04
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack, nFs1, $01, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1
-	smpsSetvoice        $05
-	smpsAlterVol        $FC
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop07
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -602,6 +472,8 @@ BGM_ChesterBoss_FM5:
 	smpsAlterVol        $04
 	dc.b	nRst
 	smpsSetvoice        $06
+
+BGM_ChesterBoss_Loop08:
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -612,14 +484,15 @@ BGM_ChesterBoss_FM5:
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
+	smpsLoop            $00, $04, BGM_ChesterBoss_Loop08
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
 	dc.b	nDs1, smpsNoAttack
 	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
+	dc.b	nB0
+
+BGM_ChesterBoss_Loop09:
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
@@ -630,6 +503,9 @@ BGM_ChesterBoss_FM5:
 	dc.b	nB0, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
+	smpsLoop            $00, $04, BGM_ChesterBoss_Loop09
+
+BGM_ChesterBoss_Loop0A:
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
@@ -637,7 +513,11 @@ BGM_ChesterBoss_FM5:
 	smpsAlterNote       $F5
 	dc.b	nDs1, smpsNoAttack
 	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
+	dc.b	nB0
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop0A
+
+BGM_ChesterBoss_Loop0B:
+	dc.b	smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
@@ -648,6 +528,9 @@ BGM_ChesterBoss_FM5:
 	dc.b	nDs1, smpsNoAttack
 	smpsAlterNote       $F7
 	dc.b	nB0
+	smpsLoop            $00, $04, BGM_ChesterBoss_Loop0B
+
+BGM_ChesterBoss_Loop0C:
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
@@ -658,6 +541,9 @@ BGM_ChesterBoss_FM5:
 	dc.b	nB0, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
+	smpsLoop            $00, $04, BGM_ChesterBoss_Loop0C
+
+BGM_ChesterBoss_Loop0D:
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
@@ -665,27 +551,11 @@ BGM_ChesterBoss_FM5:
 	smpsAlterNote       $F5
 	dc.b	nDs1, smpsNoAttack
 	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
+	dc.b	nB0
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop0D
+
+BGM_ChesterBoss_Loop0E:
+	dc.b	smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
@@ -696,6 +566,9 @@ BGM_ChesterBoss_FM5:
 	dc.b	nDs1, smpsNoAttack
 	smpsAlterNote       $F7
 	dc.b	nB0
+	smpsLoop            $00, $04, BGM_ChesterBoss_Loop0E
+
+BGM_ChesterBoss_Loop0F:
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
@@ -706,36 +579,9 @@ BGM_ChesterBoss_FM5:
 	dc.b	nB0, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
+	smpsLoop            $00, $04, BGM_ChesterBoss_Loop0F
+
+BGM_ChesterBoss_Loop10:
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
@@ -744,158 +590,8 @@ BGM_ChesterBoss_FM5:
 	dc.b	nDs1, smpsNoAttack
 	smpsAlterNote       $F7
 	dc.b	nB0
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop10
+	dc.b	smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
@@ -913,7 +609,7 @@ BGM_ChesterBoss_FM5:
 	smpsAlterNote       $0F
 	dc.b	nCs3, smpsNoAttack
 	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack, nDs2, $01, smpsNoAttack
+	dc.b	nDs2, smpsNoAttack, $01, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nF2, smpsNoAttack
 	smpsAlterNote       $05
@@ -941,26 +637,8 @@ BGM_ChesterBoss_FM5:
 	smpsSetvoice        $05
 	smpsAlterVol        $FC
 	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack, nDs2, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
+
+BGM_ChesterBoss_Loop11:
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nF2, smpsNoAttack
@@ -972,6 +650,9 @@ BGM_ChesterBoss_FM5:
 	dc.b	nCs3, smpsNoAttack
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop11
+
+BGM_ChesterBoss_Loop12:
 	smpsAlterNote       $00
 	dc.b	nF2, smpsNoAttack
 	smpsAlterNote       $05
@@ -982,6 +663,7 @@ BGM_ChesterBoss_FM5:
 	dc.b	nCs3, smpsNoAttack
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop12
 	smpsAlterNote       $00
 	dc.b	nF2, smpsNoAttack
 	smpsAlterNote       $05
@@ -992,6 +674,8 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterVol        $04
 	dc.b	nRst
 	smpsSetvoice        $06
+
+BGM_ChesterBoss_Loop13:
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -1002,22 +686,15 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop13
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $09
 	smpsAlterVol        $FC
 	dc.b	nRst
 	smpsSetvoice        $05
+
+BGM_ChesterBoss_Loop14:
 	smpsAlterNote       $00
 	dc.b	nF2, smpsNoAttack
 	smpsAlterNote       $05
@@ -1028,20 +705,13 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs3, smpsNoAttack
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop14
 	smpsAlterNote       $00
 	dc.b	nF2
 	smpsSetvoice        $06
 	smpsAlterVol        $04
+
+BGM_ChesterBoss_Loop15:
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
@@ -1052,21 +722,14 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop15
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $05
 	smpsAlterVol        $FC
+
+BGM_ChesterBoss_Loop16:
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -1077,16 +740,7 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nB3, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop16
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -1095,6 +749,8 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterVol        $04
 	dc.b	nRst
 	smpsSetvoice        $06
+
+BGM_ChesterBoss_Loop17:
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -1105,16 +761,7 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop17
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $0A
@@ -1133,6 +780,8 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nDs2
 	smpsSetvoice        $06
 	smpsAlterVol        $04
+
+BGM_ChesterBoss_Loop18:
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
@@ -1143,24 +792,15 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nB0, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop18
+
+BGM_ChesterBoss_Loop19:
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop19
+	dc.b	smpsNoAttack
 	smpsAlterNote       $F5
 	dc.b	nDs1, smpsNoAttack
 	smpsAlterNote       $F7
@@ -1171,6 +811,8 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nFs1
 	smpsSetvoice        $05
 	smpsAlterVol        $FC
+
+BGM_ChesterBoss_Loop1A:
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -1181,16 +823,7 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nB3, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop1A
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -1199,6 +832,8 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterVol        $04
 	dc.b	nRst
 	smpsSetvoice        $06
+
+BGM_ChesterBoss_Loop1B:
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -1209,22 +844,15 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop1B
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $09
 	smpsAlterVol        $FC
 	dc.b	nRst
 	smpsSetvoice        $05
+
+BGM_ChesterBoss_Loop1C:
 	smpsAlterNote       $00
 	dc.b	nF2, smpsNoAttack
 	smpsAlterNote       $05
@@ -1235,20 +863,13 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs3, smpsNoAttack
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop1C
 	smpsAlterNote       $00
 	dc.b	nF2
 	smpsSetvoice        $06
 	smpsAlterVol        $04
+
+BGM_ChesterBoss_Loop1D:
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
@@ -1259,21 +880,14 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop1D
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $05
 	smpsAlterVol        $FC
+
+BGM_ChesterBoss_Loop1E:
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -1284,24 +898,17 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nB3, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop1E
+
+BGM_ChesterBoss_Loop1F:
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nF2
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop1F
+
+BGM_ChesterBoss_Loop20:
+	dc.b	smpsNoAttack
 	smpsAlterNote       $05
 	dc.b	nD3, smpsNoAttack
 	smpsAlterNote       $00
@@ -1323,7 +930,7 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack, nFs1, $01, smpsNoAttack
+	dc.b	nFs1, smpsNoAttack, $01, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -1339,55 +946,11 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2
-	smpsSetvoice        $06
-	smpsAlterVol        $04
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack, nFs1, $01, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1
-	smpsSetvoice        $05
-	smpsAlterVol        $FC
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
+	dc.b	nF2
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop20
+
+BGM_ChesterBoss_Loop21:
+	dc.b	smpsNoAttack
 	smpsAlterNote       $05
 	dc.b	nD3, smpsNoAttack
 	smpsAlterNote       $00
@@ -1398,10 +961,13 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nF2
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop21
 	smpsSetvoice        $07
 	smpsAlterVol        $04
 	dc.b	nRst
 	smpsSetvoice        $06
+
+BGM_ChesterBoss_Loop22:
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -1412,22 +978,15 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop22
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $09
 	smpsAlterVol        $FC
 	dc.b	nRst
 	smpsSetvoice        $05
+
+BGM_ChesterBoss_Loop23:
 	smpsAlterNote       $00
 	dc.b	nF2, smpsNoAttack
 	smpsAlterNote       $05
@@ -1438,20 +997,13 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs3, smpsNoAttack
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop23
 	smpsAlterNote       $00
 	dc.b	nF2
 	smpsSetvoice        $06
 	smpsAlterVol        $04
+
+BGM_ChesterBoss_Loop24:
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
@@ -1462,21 +1014,14 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop24
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $05
 	smpsAlterVol        $FC
+
+BGM_ChesterBoss_Loop25:
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -1487,16 +1032,7 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nB3, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop25
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -1505,6 +1041,8 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterVol        $04
 	dc.b	nRst
 	smpsSetvoice        $06
+
+BGM_ChesterBoss_Loop26:
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -1515,16 +1053,7 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop26
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $09
@@ -1543,6 +1072,8 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nDs2
 	smpsSetvoice        $06
 	smpsAlterVol        $04
+
+BGM_ChesterBoss_Loop27:
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
@@ -1553,24 +1084,15 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nB0, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop27
+
+BGM_ChesterBoss_Loop28:
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop28
+	dc.b	smpsNoAttack
 	smpsAlterNote       $F5
 	dc.b	nDs1, smpsNoAttack
 	smpsAlterNote       $F7
@@ -1581,6 +1103,8 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nFs1
 	smpsSetvoice        $05
 	smpsAlterVol        $FC
+
+BGM_ChesterBoss_Loop29:
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -1591,16 +1115,7 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nB3, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop29
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -1609,6 +1124,8 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterVol        $04
 	dc.b	nRst
 	smpsSetvoice        $06
+
+BGM_ChesterBoss_Loop2A:
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -1619,22 +1136,15 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop2A
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $09
 	smpsAlterVol        $FC
 	dc.b	nRst
 	smpsSetvoice        $05
+
+BGM_ChesterBoss_Loop2B:
 	smpsAlterNote       $00
 	dc.b	nF2, smpsNoAttack
 	smpsAlterNote       $05
@@ -1645,20 +1155,13 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs3, smpsNoAttack
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop2B
 	smpsAlterNote       $00
 	dc.b	nF2
 	smpsSetvoice        $06
 	smpsAlterVol        $04
+
+BGM_ChesterBoss_Loop2C:
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
@@ -1669,21 +1172,14 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop2C
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $05
 	smpsAlterVol        $FC
+
+BGM_ChesterBoss_Loop2D:
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -1694,16 +1190,7 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nB3, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop2D
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -1712,6 +1199,8 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterVol        $04
 	dc.b	nRst
 	smpsSetvoice        $06
+
+BGM_ChesterBoss_Loop2E:
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -1722,36 +1211,7 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
+	smpsLoop            $00, $04, BGM_ChesterBoss_Loop2E
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -1772,6 +1232,8 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nFs1
 	smpsSetvoice        $05
 	smpsAlterVol        $FC
+
+BGM_ChesterBoss_Loop2F:
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -1782,16 +1244,7 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nB3, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop2F
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -1800,6 +1253,8 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nRst
 	smpsSetvoice        $06
 	smpsAlterVol        $04
+
+BGM_ChesterBoss_Loop30:
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -1810,22 +1265,15 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop30
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $09
 	smpsAlterVol        $FC
 	dc.b	nRst
 	smpsSetvoice        $05
+
+BGM_ChesterBoss_Loop31:
 	smpsAlterNote       $00
 	dc.b	nF2, smpsNoAttack
 	smpsAlterNote       $05
@@ -1836,20 +1284,13 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs3, smpsNoAttack
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop31
 	smpsAlterNote       $00
 	dc.b	nF2
 	smpsSetvoice        $06
 	smpsAlterVol        $04
+
+BGM_ChesterBoss_Loop32:
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
@@ -1860,21 +1301,14 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop32
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $05
 	smpsAlterVol        $FC
+
+BGM_ChesterBoss_Loop33:
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -1885,16 +1319,7 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nB3, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop33
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -1903,6 +1328,8 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterVol        $04
 	dc.b	nRst
 	smpsSetvoice        $06
+
+BGM_ChesterBoss_Loop34:
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -1913,16 +1340,7 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop34
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $09
@@ -1931,6 +1349,145 @@ BGM_ChesterBoss_Jump01:
 	smpsSetvoice        $05
 	smpsAlterNote       $00
 	dc.b	nF2, smpsNoAttack
+	smpsAlterNote       $05
+	dc.b	nD3, smpsNoAttack
+	smpsAlterNote       $00
+	dc.b	nB3, smpsNoAttack
+	smpsAlterNote       $0F
+	dc.b	nCs3, smpsNoAttack
+	smpsAlterNote       $05
+	dc.b	nDs2
+	smpsSetvoice        $06
+	smpsAlterVol        $04
+
+BGM_ChesterBoss_Loop35:
+	smpsAlterNote       $00
+	dc.b	nFs1, smpsNoAttack
+	smpsAlterNote       $EC
+	dc.b	nG1, smpsNoAttack
+	smpsAlterNote       $F5
+	dc.b	nDs1, smpsNoAttack
+	smpsAlterNote       $F7
+	dc.b	nB0, smpsNoAttack
+	smpsAlterNote       $0F
+	dc.b	nCs1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop35
+
+BGM_ChesterBoss_Loop36:
+	smpsAlterNote       $00
+	dc.b	nFs1, smpsNoAttack
+	smpsAlterNote       $EC
+	dc.b	nG1
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop36
+	dc.b	smpsNoAttack
+	smpsAlterNote       $F5
+	dc.b	nDs1, smpsNoAttack
+	smpsAlterNote       $F7
+	dc.b	nB0, smpsNoAttack
+	smpsAlterNote       $0F
+	dc.b	nCs1, smpsNoAttack
+	smpsAlterNote       $00
+	dc.b	nFs1
+	smpsSetvoice        $05
+	smpsAlterVol        $FC
+
+BGM_ChesterBoss_Loop37:
+	smpsAlterNote       $05
+	dc.b	nDs2, smpsNoAttack
+	smpsAlterNote       $00
+	dc.b	nF2, smpsNoAttack
+	smpsAlterNote       $05
+	dc.b	nD3, smpsNoAttack
+	smpsAlterNote       $00
+	dc.b	nB3, smpsNoAttack
+	smpsAlterNote       $0F
+	dc.b	nCs3, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop37
+	smpsAlterNote       $05
+	dc.b	nDs2, smpsNoAttack
+	smpsAlterNote       $00
+	dc.b	nF2
+	smpsSetvoice        $07
+	smpsAlterVol        $04
+	dc.b	nRst
+	smpsSetvoice        $06
+
+BGM_ChesterBoss_Loop38:
+	smpsAlterNote       $EC
+	dc.b	nG1, smpsNoAttack
+	smpsAlterNote       $F5
+	dc.b	nDs1, smpsNoAttack
+	smpsAlterNote       $F7
+	dc.b	nB0, smpsNoAttack
+	smpsAlterNote       $0F
+	dc.b	nCs1, smpsNoAttack
+	smpsAlterNote       $00
+	dc.b	nFs1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop38
+	smpsAlterNote       $EC
+	dc.b	nG1
+	smpsSetvoice        $09
+	smpsAlterVol        $FC
+	dc.b	nRst
+	smpsSetvoice        $05
+
+BGM_ChesterBoss_Loop39:
+	smpsAlterNote       $00
+	dc.b	nF2, smpsNoAttack
+	smpsAlterNote       $05
+	dc.b	nD3, smpsNoAttack
+	smpsAlterNote       $00
+	dc.b	nB3, smpsNoAttack
+	smpsAlterNote       $0F
+	dc.b	nCs3, smpsNoAttack
+	smpsAlterNote       $05
+	dc.b	nDs2, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop39
+	smpsAlterNote       $00
+	dc.b	nF2
+	smpsSetvoice        $06
+	smpsAlterVol        $04
+
+BGM_ChesterBoss_Loop3A:
+	dc.b	nFs1, smpsNoAttack
+	smpsAlterNote       $EC
+	dc.b	nG1, smpsNoAttack
+	smpsAlterNote       $F5
+	dc.b	nDs1, smpsNoAttack
+	smpsAlterNote       $F7
+	dc.b	nB0, smpsNoAttack
+	smpsAlterNote       $0F
+	dc.b	nCs1, smpsNoAttack
+	smpsAlterNote       $00
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop3A
+	dc.b	nFs1, smpsNoAttack
+	smpsAlterNote       $EC
+	dc.b	nG1
+	smpsSetvoice        $05
+	smpsAlterVol        $FC
+
+BGM_ChesterBoss_Loop3B:
+	smpsAlterNote       $05
+	dc.b	nDs2, smpsNoAttack
+	smpsAlterNote       $00
+	dc.b	nF2, smpsNoAttack
+	smpsAlterNote       $05
+	dc.b	nD3, smpsNoAttack
+	smpsAlterNote       $00
+	dc.b	nB3, smpsNoAttack
+	smpsAlterNote       $0F
+	dc.b	nCs3, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop3B
+
+BGM_ChesterBoss_Loop3C:
+	smpsAlterNote       $05
+	dc.b	nDs2, smpsNoAttack
+	smpsAlterNote       $00
+	dc.b	nF2
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop3C
+
+BGM_ChesterBoss_Loop3D:
+	dc.b	smpsNoAttack
 	smpsAlterNote       $05
 	dc.b	nD3, smpsNoAttack
 	smpsAlterNote       $00
@@ -1952,21 +1509,7 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
+	dc.b	nFs1, smpsNoAttack, $01, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -1982,17 +1525,11 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
+	dc.b	nF2
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop3D
+
+BGM_ChesterBoss_Loop3E:
+	dc.b	smpsNoAttack
 	smpsAlterNote       $05
 	dc.b	nD3, smpsNoAttack
 	smpsAlterNote       $00
@@ -2003,10 +1540,13 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nF2
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop3E
 	smpsSetvoice        $07
 	smpsAlterVol        $04
 	dc.b	nRst
 	smpsSetvoice        $06
+
+BGM_ChesterBoss_Loop3F:
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -2017,22 +1557,15 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop3F
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $09
 	smpsAlterVol        $FC
 	dc.b	nRst
 	smpsSetvoice        $05
+
+BGM_ChesterBoss_Loop40:
 	smpsAlterNote       $00
 	dc.b	nF2, smpsNoAttack
 	smpsAlterNote       $05
@@ -2043,20 +1576,13 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs3, smpsNoAttack
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop40
 	smpsAlterNote       $00
 	dc.b	nF2
 	smpsSetvoice        $06
 	smpsAlterVol        $04
+
+BGM_ChesterBoss_Loop41:
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
@@ -2067,21 +1593,14 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop41
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $05
 	smpsAlterVol        $FC
+
+BGM_ChesterBoss_Loop42:
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -2092,116 +1611,7 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nB3, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2
-	smpsSetvoice        $06
-	smpsAlterVol        $04
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack, nFs1, $01, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1
-	smpsSetvoice        $05
-	smpsAlterVol        $FC
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2
-	smpsSetvoice        $06
-	smpsAlterVol        $04
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack, nFs1, $01, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1
-	smpsSetvoice        $05
-	smpsAlterVol        $FC
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop42
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -2210,6 +1620,8 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterVol        $04
 	dc.b	nRst
 	smpsSetvoice        $06
+
+BGM_ChesterBoss_Loop43:
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -2220,119 +1632,7 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1
-	smpsSetvoice        $09
-	smpsAlterVol        $FC
-	dc.b	nRst
-	smpsSetvoice        $05
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2
-	smpsSetvoice        $06
-	smpsAlterVol        $04
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1
-	smpsSetvoice        $05
-	smpsAlterVol        $FC
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2
-	smpsSetvoice        $07
-	smpsAlterVol        $04
-	dc.b	nRst
-	smpsSetvoice        $06
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop43
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $09
@@ -2351,6 +1651,8 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nDs2
 	smpsSetvoice        $06
 	smpsAlterVol        $04
+
+BGM_ChesterBoss_Loop44:
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
@@ -2361,24 +1663,15 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nB0, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop44
+
+BGM_ChesterBoss_Loop45:
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop45
+	dc.b	smpsNoAttack
 	smpsAlterNote       $F5
 	dc.b	nDs1, smpsNoAttack
 	smpsAlterNote       $F7
@@ -2389,6 +1682,8 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nFs1
 	smpsSetvoice        $05
 	smpsAlterVol        $FC
+
+BGM_ChesterBoss_Loop46:
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -2399,16 +1694,7 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nB3, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop46
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -2417,6 +1703,8 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterVol        $04
 	dc.b	nRst
 	smpsSetvoice        $06
+
+BGM_ChesterBoss_Loop47:
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
 	smpsAlterNote       $F5
@@ -2427,22 +1715,15 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop47
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $09
 	smpsAlterVol        $FC
 	dc.b	nRst
 	smpsSetvoice        $05
+
+BGM_ChesterBoss_Loop48:
 	smpsAlterNote       $00
 	dc.b	nF2, smpsNoAttack
 	smpsAlterNote       $05
@@ -2453,20 +1734,13 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs3, smpsNoAttack
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop48
 	smpsAlterNote       $00
 	dc.b	nF2
 	smpsSetvoice        $06
 	smpsAlterVol        $04
+
+BGM_ChesterBoss_Loop49:
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1, smpsNoAttack
@@ -2477,21 +1751,14 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterNote       $0F
 	dc.b	nCs1, smpsNoAttack
 	smpsAlterNote       $00
-	dc.b	nFs1, smpsNoAttack
-	smpsAlterNote       $EC
-	dc.b	nG1, smpsNoAttack
-	smpsAlterNote       $F5
-	dc.b	nDs1, smpsNoAttack
-	smpsAlterNote       $F7
-	dc.b	nB0, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs1, smpsNoAttack
-	smpsAlterNote       $00
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop49
 	dc.b	nFs1, smpsNoAttack
 	smpsAlterNote       $EC
 	dc.b	nG1
 	smpsSetvoice        $05
 	smpsAlterVol        $FC
+
+BGM_ChesterBoss_Loop4A:
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -2502,16 +1769,7 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nB3, smpsNoAttack
 	smpsAlterNote       $0F
 	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop4A
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
@@ -2539,7 +1797,7 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterNote       $0F
 	dc.b	nCs3, smpsNoAttack
 	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack, nDs2, $01, smpsNoAttack
+	dc.b	nDs2, smpsNoAttack, $01, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nF2, smpsNoAttack
 	smpsAlterNote       $05
@@ -2567,26 +1825,8 @@ BGM_ChesterBoss_Jump01:
 	smpsSetvoice        $05
 	smpsAlterVol        $FC
 	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nDs2, smpsNoAttack, nDs2, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nF2, smpsNoAttack
-	smpsAlterNote       $05
-	dc.b	nD3, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nB3, smpsNoAttack
-	smpsAlterNote       $0F
-	dc.b	nCs3, smpsNoAttack
-	smpsAlterNote       $05
+
+BGM_ChesterBoss_Loop4B:
 	dc.b	nDs2, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nF2, smpsNoAttack
@@ -2598,6 +1838,9 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs3, smpsNoAttack
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop4B
+
+BGM_ChesterBoss_Loop4C:
 	smpsAlterNote       $00
 	dc.b	nF2, smpsNoAttack
 	smpsAlterNote       $05
@@ -2608,6 +1851,7 @@ BGM_ChesterBoss_Jump01:
 	dc.b	nCs3, smpsNoAttack
 	smpsAlterNote       $05
 	dc.b	nDs2, smpsNoAttack
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop4C
 	smpsAlterNote       $00
 	dc.b	nF2, smpsNoAttack
 	smpsAlterNote       $05
@@ -2616,36 +1860,34 @@ BGM_ChesterBoss_Jump01:
 	smpsAlterNote       $05
 	smpsJump            BGM_ChesterBoss_Jump01
 
-; FM6 Data
-BGM_ChesterBoss_FM6:
+; FM1 Data
+BGM_ChesterBoss_FM1:
 	smpsSetvoice        $04
 	smpsAlterVol        $0E
 	smpsPan             panCenter, $00
 	dc.b	nRst, $7F, $7F, $51
 	smpsAlterNote       $0B
-	dc.b	nDs1, $05, nRst, $01, nDs1, $05, nRst, $0D, nDs1, $05, nRst, $01
-	dc.b	nDs1, $05, nRst, $0D
+
+BGM_ChesterBoss_Loop00:
+	dc.b	nDs1, $05, nRst, $01, nDs1, $05, nRst, $0D
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop00
 
 BGM_ChesterBoss_Jump00:
 	dc.b	nRst, $01
+
+BGM_ChesterBoss_Loop01:
 	smpsAlterNote       $0D
 	dc.b	nFs0, $08, smpsNoAttack
 	smpsAlterNote       $1B
-	dc.b	nFs0, $01, smpsNoAttack
+	dc.b	$01, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nG0, nRst, $02, nGs0, $04, nRst, $01, nGs0, $05, nRst, $01, nGs0
 	dc.b	$05, nRst, $01, nCs1, $0B, nRst, $01, nB0, $05, nRst, $02
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop01
 	smpsAlterNote       $0D
 	dc.b	nFs0, $08, smpsNoAttack
 	smpsAlterNote       $1B
-	dc.b	nFs0, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG0, nRst, $02, nGs0, $04, nRst, $01, nGs0, $05, nRst, $01, nGs0
-	dc.b	$05, nRst, $01, nCs1, $0B, nRst, $01, nB0, $05, nRst, $02
-	smpsAlterNote       $0D
-	dc.b	nFs0, $08, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs0, $01, smpsNoAttack
+	dc.b	$01, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nG0, nRst, $02, nGs0, $04, nRst, $01, nGs0, $05, nRst, $01, nGs0
 	dc.b	$05, nRst, $01, nCs1, $0B, nRst, $01, nB0, $05, nRst, $01
@@ -2654,46 +1896,33 @@ BGM_ChesterBoss_Jump00:
 	smpsAlterNote       $0E
 	dc.b	nG0, $05, nRst, $0D
 	smpsAlterNote       $00
-	dc.b	nAs0, $0B, nRst, $02
+	dc.b	nAs0, $0B
+
+BGM_ChesterBoss_Loop02:
+	dc.b	nRst, $02
 	smpsAlterNote       $0D
 	dc.b	nFs0, $08, smpsNoAttack
 	smpsAlterNote       $1B
-	dc.b	nFs0, $01, smpsNoAttack
+	dc.b	$01, smpsNoAttack
+	smpsAlterNote       $00
+	dc.b	nG0, nRst, $02, nGs0, $04, nRst, $01, nGs0, $05, nRst, $01, nGs0
+	dc.b	$05, nRst, $01, nCs1, $0B, nRst, $01, nB0, $05
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop02
+	dc.b	nRst, $32
+
+BGM_ChesterBoss_Loop03:
+	smpsAlterNote       $0D
+	dc.b	nFs0, $08, smpsNoAttack
+	smpsAlterNote       $1B
+	dc.b	$01, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nG0, nRst, $02, nGs0, $04, nRst, $01, nGs0, $05, nRst, $01, nGs0
 	dc.b	$05, nRst, $01, nCs1, $0B, nRst, $01, nB0, $05, nRst, $02
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop03
 	smpsAlterNote       $0D
 	dc.b	nFs0, $08, smpsNoAttack
 	smpsAlterNote       $1B
-	dc.b	nFs0, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG0, nRst, $02, nGs0, $04, nRst, $01, nGs0, $05, nRst, $01, nGs0
-	dc.b	$05, nRst, $01, nCs1, $0B, nRst, $01, nB0, $05, nRst, $02
-	smpsAlterNote       $0D
-	dc.b	nFs0, $08, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs0, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG0, nRst, $02, nGs0, $04, nRst, $01, nGs0, $05, nRst, $01, nGs0
-	dc.b	$05, nRst, $01, nCs1, $0B, nRst, $01, nB0, $05, nRst, $32
-	smpsAlterNote       $0D
-	dc.b	nFs0, $08, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs0, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG0, nRst, $02, nGs0, $04, nRst, $01, nGs0, $05, nRst, $01, nGs0
-	dc.b	$05, nRst, $01, nCs1, $0B, nRst, $01, nB0, $05, nRst, $02
-	smpsAlterNote       $0D
-	dc.b	nFs0, $08, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs0, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG0, nRst, $02, nGs0, $04, nRst, $01, nGs0, $05, nRst, $01, nGs0
-	dc.b	$05, nRst, $01, nCs1, $0B, nRst, $01, nB0, $05, nRst, $02
-	smpsAlterNote       $0D
-	dc.b	nFs0, $08, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs0, $01, smpsNoAttack
+	dc.b	$01, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nG0, nRst, $02, nGs0, $04, nRst, $01, nGs0, $05, nRst, $01, nGs0
 	dc.b	$05, nRst, $01, nCs1, $0B, nRst, $01, nB0, $05, nRst, $01
@@ -2702,31 +1931,24 @@ BGM_ChesterBoss_Jump00:
 	smpsAlterNote       $0E
 	dc.b	nG0, $05, nRst, $0D
 	smpsAlterNote       $00
-	dc.b	nAs0, $0B, nRst, $02
+	dc.b	nAs0, $0B
+
+BGM_ChesterBoss_Loop04:
+	dc.b	nRst, $02
 	smpsAlterNote       $0D
 	dc.b	nFs0, $08, smpsNoAttack
 	smpsAlterNote       $1B
-	dc.b	nFs0, $01, smpsNoAttack
+	dc.b	$01, smpsNoAttack
 	smpsAlterNote       $00
 	dc.b	nG0, nRst, $02, nGs0, $04, nRst, $01, nGs0, $05, nRst, $01, nGs0
-	dc.b	$05, nRst, $01, nCs1, $0B, nRst, $01, nB0, $05, nRst, $02
-	smpsAlterNote       $0D
-	dc.b	nFs0, $08, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs0, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG0, nRst, $02, nGs0, $04, nRst, $01, nGs0, $05, nRst, $01, nGs0
-	dc.b	$05, nRst, $01, nCs1, $0B, nRst, $01, nB0, $05, nRst, $02
-	smpsAlterNote       $0D
-	dc.b	nFs0, $08, smpsNoAttack
-	smpsAlterNote       $1B
-	dc.b	nFs0, $01, smpsNoAttack
-	smpsAlterNote       $00
-	dc.b	nG0, nRst, $02, nGs0, $04, nRst, $01, nGs0, $05, nRst, $01, nGs0
-	dc.b	$05, nRst, $01, nCs1, $0B, nRst, $01, nB0, $05, nRst, $01
+	dc.b	$05, nRst, $01, nCs1, $0B, nRst, $01, nB0, $05
+	smpsLoop            $00, $03, BGM_ChesterBoss_Loop04
+	dc.b	nRst, $01
 	smpsAlterNote       $0B
-	dc.b	nDs1, $05, nRst, $01, nDs1, $05, nRst, $0D, nDs1, $05, nRst, $01
-	dc.b	nDs1, $05, nRst, $0D
+
+BGM_ChesterBoss_Loop05:
+	dc.b	nDs1, $05, nRst, $01, nDs1, $05, nRst, $0D
+	smpsLoop            $00, $02, BGM_ChesterBoss_Loop05
 	smpsPan             panCenter, $00
 	smpsJump            BGM_ChesterBoss_Jump00
 

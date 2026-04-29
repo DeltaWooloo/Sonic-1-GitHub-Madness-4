@@ -4,32 +4,33 @@
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
-
+DeformLayers_Exit:
+		rts
 DeformLayers:
 		tst.b	(f_nobgscroll).w
-		beq.s	.bgscroll
-		rts
-; ===========================================================================
-
-	.bgscroll:
-		clr.w	(v_fg_scroll_flags).w
-		clr.w	(v_bg1_scroll_flags).w
-		clr.w	(v_bg2_scroll_flags).w
-		clr.w	(v_bg3_scroll_flags).w
+		bne.s	DeformLayers_Exit
+		moveq	#0,d0
+		move.w	d0,(v_fg_scroll_flags).w
+		move.w	d0,(v_bg1_scroll_flags).w
+		move.w	d0,(v_bg2_scroll_flags).w
+		move.w	d0,(v_bg3_scroll_flags).w
+		move.w	d0,(v_scrshiftx).w
+		move.w	d0,(v_scrshifty).w
+		tst.b	(f_lockscroll).w
+		bne.s	.skipscroll
 		bsr.w	ScrollHoriz
 		bsr.w	ScrollVertical
+	.skipscroll:
 		bsr.w	DynamicLevelEvents
 
-		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
 		add.w	d0,d0
 		move.w	Deform_Index(pc,d0.w),d0
 		jsr	Deform_Index(pc,d0.w)
-		move.w	(v_screenposy).w,(v_scrposy_orig).w
 		bsr.w	ShakeScreen
-		move.w	(v_screenposy).w,(v_scrposy_vdp).w
-		move.w	(v_scrposy_orig).w,v_screenposy
+		move.w	d0,(v_scrposy_vdp).w
+		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
 		rts
 ; End of function DeformLayers
 
@@ -40,11 +41,12 @@ DeformLayers:
 Deform_Index:	dc.w Deform_GHZ-Deform_Index, Deform_LZ-Deform_Index
 		dc.w Deform_MZ-Deform_Index, Deform_SLZ-Deform_Index
 		dc.w Deform_SYZ-Deform_Index, Deform_SBZ-Deform_Index
-		zonewarning Deform_Index,2
 		dc.w Deform_GHZ-Deform_Index, Deform_CBZ-Deform_Index
-		dc.w Deform_WZ-Deform_Index, Deform_Joint-Deform_Index
+		dc.w Deform_WZ-Deform_Index, Deform_ITBZ-Deform_Index
 		dc.w Deform_DVZ-Deform_Index,Deform_NGZ-Deform_Index
-		dc.w Deform_LZ-Deform_Index,Deform_LZ-Deform_Index
+		dc.w Deform_Default-Deform_Index,Deform_Default-Deform_Index
+		dc.w Deform_ARZ-Deform_Index
+		zonewarning Deform_Index,2
 ; ---------------------------------------------------------------------------
 ; Green Hill Zone background layer deformation code
 ; ---------------------------------------------------------------------------
@@ -79,7 +81,7 @@ Deform_GHZ:
 		moveq	#0,d0
 	.limitY:
 		move.w	d0,d4
-		move.w	d0,(v_bgscrposy_vdp).w
+		move.w	d0,(v_bgscreenposy).w
 		move.w	(v_screenposx).w,d0
 		cmpi.b	#id_Title,(v_gamemode).w
 		bne.s	.notTitle
@@ -160,8 +162,15 @@ Deform_GHZ:
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
-
 Deform_LZ:
+		move.w	(v_scrshiftx).w,d4
+		ext.l	d4
+		asl.l	#3,d4
+		moveq	#2,d6
+		bsr.w	BGScroll_Block1
+		clr.w	(v_bgscreenposy).w
+		bra.s	Deform_Default.lzcont
+Deform_Default:
 	; plain background scroll
 		move.w	(v_scrshiftx).w,d4
 		ext.l	d4
@@ -170,7 +179,7 @@ Deform_LZ:
 		ext.l	d5
 		asl.l	#7,d5
 		bsr.w	BGScroll_XY
-
+.lzcont:
 		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
 		lea	(Lz_Scroll_Data).l,a3
 		lea	(Drown_WobbleData).l,a2
@@ -234,7 +243,7 @@ Lz_Scroll_Data:
 		dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
 		dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
 		dc.b   0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
-; End of function Deform_LZ
+; End of function Deform_Default
 
 ; ---------------------------------------------------------------------------
 ; Marble Zone background layer deformation code
@@ -652,131 +661,261 @@ Deform_SBZ2:;loc_68A2:
 ; End of function Deform_SBZ
 
 ; ---------------------------------------------------------------------------
-; The Joint Zone background layer deformation code
+; Inside Tonic's Body Zone background layer deformation code
 ; ---------------------------------------------------------------------------
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 
-Deform_Joint:
-		moveq	#0,d4
-		move.w	(v_scrshifty).w,d5
-		ext.l	d5
-		asl.l	#6,d5
-		bsr.w	BGScroll_XY	; ScrollBlock1 in older disassemblies
-		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
+Deform_ITBZ:
+
+.ScrSpeeds	= 	v_bgscroll_buffer
+.spd1		= 	v_bgscroll_buffer+0
+.spd2		=	v_bgscroll_buffer+2
+.spd3		=	v_bgscroll_buffer+4
+.spd4		=	v_bgscroll_buffer+6
+.spd5		=	v_bgscroll_buffer+8
+.spd6		=	v_bgscroll_buffer+10
+.spd7		=	v_bgscroll_buffer+12
+.sincntr	=	v_bgscroll_buffer+14
+
+		move.b	#1,vscroll_mode
 		lea	(v_hscrolltablebuffer).w,a1
 		move.w	(v_screenposx).w,d0
-		neg.w	d0
-		swap	d0
-		move.w	(v_screenposx).w,d0
-		neg.w	d0
-
-		move.w	d0,d3
-
-; First Block
- 		move.w	(v_screenposy).w,d1
- 		lsr.w	#2,d1
-		neg.w	d1
-		addi.w	#32-1,d1
-		bmi.s	+
-
-		lsr.w	#1,d0
-
--		move.l	d0,(a1)+
-		dbf.w	d1,-
-
-; Second Block
-+
-		add.w	#32-1,d1
-		bmi.s	+
-
-		move.w	d3,d0
-		lsr.w	#1,d0
-		add.w	d3,d0
-		lsr.w	#1,d0
-
--		move.l	d0,(a1)+
-		dbf.w	d1,-
-; Middle
-+
-		add.w	#72,d1
-		bmi.s	+
-		move.w	d3,d0
-		lsr.w	#2,d0
-
--		move.l	d0,(a1)+
-		dbf.w	d1,-
-; Light seams
-+
-		add.w	#40,d1
-		bmi.s	+
-		move.w	d3,d0
-		lsr.w	#2,d0
-
-		clr.w	d4
-		move.w	(v_screenposx).w,d4 ; dx
-		lsr.w	#2,d4
-		divu.w	#224>>1,d4
-		swap	d4
-.dy = -40
-		; sy = sx = -1
-		move.w	d4,(v_bg_calc_var).w
-		addi.w	#.dy,(v_bg_calc_var).w ; error
--
-		move.w	(v_bg_calc_var).w,d2
-		add.w	d2,d2
-		cmpi.w	#.dy,d2
-		blt.s	.no_y_add
-		add.w	#.dy,(v_bg_calc_var).w
-		subq.w	#1,d0
-.no_y_add
-		cmp.w	d4,d2
-		bgt.s	-
-		add.w	d4,(v_bg_calc_var).w
+		neg	d0
+		swap 	d0
+		move.w	#256-1,d1
+.LoopX:		
 		move.l	d0,(a1)+
-		dbf.w	d1,-
-; Second Block
-+
-		add.w	#32-1,d1
-		bmi.s	+
+		dbf	d1,.LoopX
 
+		lea	vscroll_buffer,a1
+		move.w	v_screenposy,d0
+		move.w	d0,d3
+;		neg	d3
+		swap	d0
 		move.w	d3,d0
-		lsr.w	#1,d0
-		add.w	d3,d0
-		lsr.w	#1,d0
-
--		move.l	d0,(a1)+
-		dbf.w	d1,-
-+
-; First Block
-		addi.w	#40-1,d1
-		bmi.s	+
-
-		move.l	#v_hscrolltablebuffer_end,d2
-		sub.l	a1,d2
-
-		move.w	d3,d0
-		lsr.w	#1,d0
-
--		move.l	d0,(a1)+
-		subq.w	#4,d2
-		ble.s	.end
-		dbf.w	d1,-
-; Remaining
-+
-		move.l	#v_hscrolltablebuffer_end,d1
-		sub.l	a1,d1
-		blo.s	.end
-; 		KDebug.WriteLine "%<.w d1>"
-;
--		move.l	d0,(a1)+
-		subq.w	#4,d1
-		bgt.s	-
-
-.end
+		bsr.s	.GetScrSpeeds
+		lea	.SpeedTbl,a2
+		lea	.ScrSpeeds,a3
+		moveq	#0,d1
+		move.w	#24-1,d2
+.LoopY:
+		move.b	(a2)+,d1
+		move.w	(a3,d1.w),d0
+		move.l	d0,(a1)+
+		dbf	d2,.LoopY
 		rts
-; End of function Deform_Joint
+
+.GetScrSpeeds:
+		lea	.ScrSpeeds,a3
+		move.w	d3,d4
+		move.w	d4,d5
+		asr.w	d5
+		move.w	d5,(a3)+	;	.spd1
+		asr.w	d5
+		asr.w	#3,d4
+		add.w	d5,d4
+		move.w	d4,(a3)+	;	.spd2
+		move.w	d5,(a3)+	;	.spd3
+		asr.w	d4
+		move.w	d4,(a3)+	;	.spd4
+		; temp
+		asr.w	d5
+		move.w	d5,(a3)+	;	.spd5
+		asr.w	d5
+		asr.w	#3,d4
+		add.w	d5,d4
+		move.w	d4,(a3)+	;	.spd6
+		move.w	d5,(a3)+	;	.spd7
+
+		move.l	d0,d7
+		lea	.ScrSpeeds,a3
+		move.b	14(a3),d0
+
+		jsr	CalcSine
+		asr.w	#2,d0
+
+		rept	7
+		add.w	d0,(a3)+
+		asr.w	d0
+		endr
+
+		jsr	RandomNumber
+		andi.w	#$7F,d0
+		add.w	d0,(a3)
+		move.l	d7,d0
+		rts
+
+	; feel free to clean this up, i'm lazy
+
+.SpeedTbl:
+		dc.b	1*2
+		dc.b	1*2
+		dc.b	2*2
+		dc.b	2*2
+		dc.b	3*2
+		dc.b	3*2
+		dc.b	4*2
+		dc.b	5*2
+		dc.b	6*2
+		dc.b	5*2
+		dc.b	4*2
+		dc.b	3*2
+		dc.b	2*2
+		dc.b	2*2
+		dc.b	1*2
+		dc.b	1*2
+		dc.b	1*2
+		dc.b	1*2
+		dc.b	2*2
+		dc.b	2*2
+		dc.b	3*2
+		dc.b	3*2
+		dc.b	4*2
+		dc.b	5*2
+		dc.b	6*2
+		dc.b	5*2
+		dc.b	4*2
+		dc.b	3*2
+		dc.b	2*2
+		dc.b	2*2
+		dc.b	1*2
+		dc.b	1*2
+		dc.b	1*2
+		dc.b	1*2
+		dc.b	2*2
+		dc.b	2*2
+		dc.b	3*2
+		dc.b	3*2
+		dc.b	4*2
+		dc.b	5*2
+		dc.b	6*2
+		even
+
+
+; remnant from The Joint zone
+; was never developed and eventually replaced by Inside Tonic's Body
+
+
+;		moveq	#0,d4
+;		move.w	(v_scrshifty).w,d5
+;		ext.l	d5
+;		asl.l	#6,d5
+;		bsr.w	BGScroll_XY	; ScrollBlock1 in older disassemblies
+;		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
+;		lea	(v_hscrolltablebuffer).w,a1
+;		move.w	(v_screenposx).w,d0
+;		neg.w	d0
+;		swap	d0
+;		move.w	(v_screenposx).w,d0
+;		neg.w	d0
+;
+;		move.w	d0,d3
+;
+;; First Block
+; 		move.w	(v_screenposy).w,d1
+; 		lsr.w	#2,d1
+;		neg.w	d1
+;		addi.w	#32-1,d1
+;		bmi.s	+
+;
+;		lsr.w	#1,d0
+;
+;-		move.l	d0,(a1)+
+;		dbf.w	d1,-
+;
+;; Second Block
+;+
+;		add.w	#32-1,d1
+;		bmi.s	+
+;
+;		move.w	d3,d0
+;		lsr.w	#1,d0
+;		add.w	d3,d0
+;		lsr.w	#1,d0
+;
+;-		move.l	d0,(a1)+
+;		dbf.w	d1,-
+;; Middle
+;+
+;		add.w	#72,d1
+;		bmi.s	+
+;		move.w	d3,d0
+;		lsr.w	#2,d0
+;
+;-		move.l	d0,(a1)+
+;		dbf.w	d1,-
+;; Light seams
+;+
+;		add.w	#40,d1
+;		bmi.s	+
+;		move.w	d3,d0
+;		lsr.w	#2,d0
+;
+;		clr.w	d4
+;		move.w	(v_screenposx).w,d4 ; dx
+;		lsr.w	#2,d4
+;		divu.w	#224>>1,d4
+;		swap	d4
+;.dy = -40
+;		; sy = sx = -1
+;		move.w	d4,(v_bg_calc_var).w
+;		addi.w	#.dy,(v_bg_calc_var).w ; error
+;-
+;		move.w	(v_bg_calc_var).w,d2
+;		add.w	d2,d2
+;		cmpi.w	#.dy,d2
+;		blt.s	.no_y_add
+;		add.w	#.dy,(v_bg_calc_var).w
+;		subq.w	#1,d0
+;.no_y_add
+;		cmp.w	d4,d2
+;		bgt.s	-
+;		add.w	d4,(v_bg_calc_var).w
+;		move.l	d0,(a1)+
+;		dbf.w	d1,-
+;; Second Block
+;+
+;		add.w	#32-1,d1
+;		bmi.s	+
+;
+;		move.w	d3,d0
+;		lsr.w	#1,d0
+;		add.w	d3,d0
+;		lsr.w	#1,d0
+;
+;-		move.l	d0,(a1)+
+;		dbf.w	d1,-
+;+
+;; First Block
+;		addi.w	#40-1,d1
+;		bmi.s	+
+;
+;		move.l	#v_hscrolltablebuffer_end,d2
+;		sub.l	a1,d2
+;
+;		move.w	d3,d0
+;		lsr.w	#1,d0
+;
+;-		move.l	d0,(a1)+
+;		subq.w	#4,d2
+;		ble.s	.end
+;		dbf.w	d1,-
+;; Remaining
+;+
+;		move.l	#v_hscrolltablebuffer_end,d1
+;		sub.l	a1,d1
+;		blo.s	.end
+;; 		KDebug.WriteLine "%<.w d1>"
+;;
+;-		move.l	d0,(a1)+
+;		subq.w	#4,d1
+;		bgt.s	-
+;
+;.end
+;		rts
+; End of function Deform_ITBZ
 
 
 ; ---------------------------------------------------------------------------
@@ -819,7 +958,7 @@ Deform_CBZ:
 		moveq	#$20,d0
 	.limitY:
 		move.w	d0,d4
-		move.w	d0,(v_bgscrposy_vdp).w
+		move.w	d0,(v_bgscreenposy).w
 		move.w	(v_screenposx).w,d0
 		neg.w	d0
 		swap	d0
@@ -830,36 +969,51 @@ Deform_CBZ:
 		asr.w	#6,d2
 		add.w	d2,d0
 		neg.w	d0
-		move.w	#$54,d1
+		move.w	#80-1,d1
 		sub.w	d4,d1
 		bcs.s	.gotoCloud2
 	.cloudLoop1:
 		move.l	d0,(a1)+
 		dbf	d1,.cloudLoop1
 	.gotoCloud2:
-		move.w	#$1E,d1
+		move.w	#32-1,d1
+		move.w	(v_screenposx).w,d0
+		neg.w	d0
+		asr.w	#5,d0
+	.distmountainLoop:		; distant mountains
+		move.l	d0,(a1)+
+		dbf	d1,.distmountainLoop
+
+		move.w	#64-1,d1
 		move.w	(v_screenposx).w,d0
 		neg.w	d0
 		asr.w	#4,d0
-	.mountainLoop:		; distant mountains
+	.mountainLoop:			; closer mountains
 		move.l	d0,(a1)+
 		dbf	d1,.mountainLoop
 
-		move.w	#$4F,d1
+		move.w	#16-1,d1
 		move.w	(v_screenposx).w,d0
 		neg.w	d0
 		asr.w	#3,d0
-	.hillLoop:			; closer mountains
+	.tree1Loop:			; far distant trees
 		move.l	d0,(a1)+
-		dbf	d1,.hillLoop
+		dbf	d1,.tree1Loop
 
-		move.w	#$3F,d1
+		move.w	#32-1,d1
 		move.w	(v_screenposx).w,d0
 		neg.w	d0
 		asr.w	#2,d0
-	.waterLoop:			; trees
+	.tree2Loop:			; distant trees
 		move.l	d0,(a1)+
-		dbf	d1,.waterLoop
+		dbf	d1,.tree2Loop
+		move.w	#32-1,d1
+		move.w	(v_screenposx).w,d0
+		neg.w	d0
+		asr.w	#1,d0
+	.tree3Loop:			; closer trees
+		move.l	d0,(a1)+
+		dbf	d1,.tree3Loop
 		rts
 
 ; ---------------------------------------------------------------------------
@@ -888,7 +1042,7 @@ Deform_DVZ:
 .CheckerFloor:
 		move.w	v_screenposx.w,d0
 		move.w	d0,d3
-		asr.w	#1,d0
+		asr.w	#2,d0
 		add.w	d3,d0
 
 		move.w	d0,d5
@@ -1039,26 +1193,52 @@ Deform_NGZ:
 		rts
 
 ; ---------------------------------------------------------------------------
+; Azure Rainforest Zone background layer deformation code
+; ---------------------------------------------------------------------------
+
+; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
+
+Deform_ARZ:
+		move.w	(v_scrshiftx).w,d4
+		ext.l	d4
+		asl.l	#3,d4
+		bsr.w	BGScroll_Block1
+
+		lea	(v_hscrolltablebuffer).w,a1
+		move.w	#224-1,d1
+		move.w	(v_screenposx).w,d0
+		neg.w	d0
+		swap	d0
+		move.w	(v_bgscreenposx).w,d0
+;		move.w	#0,d0
+		neg.w	d0
+
+.loop:
+		move.l	d0,(a1)+
+		dbf	d1,.loop
+		rts
+
+; ---------------------------------------------------------------------------
 ; this sucks redo it plz
+; OUTPUT: d0.w = screen fg ypos with a shake
 ; ---------------------------------------------------------------------------
 
 ShakeScreen:
-	move.w  v_scrposy_orig.w,d0
+	move.w  v_screenposy.w,d0
 	move.w  v_screenshaketime.w,d1
-	tst.w   d1
+	move.w	d1,d2
+;	tst.w   d1
 	beq.s   .Done
 	subq.w	#1,v_screenshaketime.w
 	asr.w   #2,d1
 	andi.w	#$2F,d1
 
-	move.w	v_vbla_count+2.w,d2
+;	move.w	v_screenshaketime.w,d2
 	move	d2,ccr			; you can tell i love this
 	bcs.s	.Odd
 	neg.w   d1
 .Odd:
 	add.w   d1,d0
-	move.w  d0,v_screenposy.w
-	rts
 .Done:
 	rts
 ; ---------------------------------------------------------------------------
@@ -1098,24 +1278,17 @@ ScrollHoriz:
 MoveScreenHoriz:
 		move.w	(v_player+obX).w,d0
 		sub.w	(v_screenposx).w,d0 ; Sonic's distance from left edge of screen
+		move.w	#(320/2)-16,d1
 		cmpi.b	#id_ColdBrew,(v_gamemode).w
-		beq.s	.UseColdBrewCam
-		subi.w	#(320/2)-16,d0	; is distance less than 144px?
+		bne.s	.notcoldbrew
+		move.w	#(256/2)-16,d1
+.notcoldbrew
+		sub.w	d1,d0		; is distance within the middle of the screen
 		blt.s	SH_BehindMid	; if yes, branch
 		subi.w	#16,d0		; is distance more than 160px?
 		bge.s	SH_AheadOfMid	; if yes, branch
 		clr.w	(v_scrshiftx).w
 		rts
-
-.UseColdBrewCam:
-		subi.w	#(256/2)-16,d0	; is distance less than 144px?
-		blt.s	SH_BehindMid	; if yes, branch
-		subi.w	#16,d0		; is distance more than 160px?
-		bge.s	SH_AheadOfMid	; if yes, branch
-		clr.w	(v_scrshiftx).w
-		rts
-	
-
 ; ===========================================================================
 
 SH_AheadOfMid:

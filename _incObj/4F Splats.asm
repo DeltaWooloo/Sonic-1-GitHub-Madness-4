@@ -19,6 +19,7 @@ loc_D20A:
                 move.b  #4,obRender(a0)
                 move.b  #4,obPriority(a0)
                 move.b  #$C,obActWid(a0)
+                move.b  #32,obWidth(a0)
                 move.b  #$14,obHeight(a0)
                 move.b  #2,obColType(a0)
                 tst.b   obSubtype(a0)

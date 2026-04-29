@@ -23,8 +23,11 @@ SolidObject:
 		sub.w	obX(a0),d0
 		add.w	d1,d0
 		bmi.s	.leave		; if Sonic moves off the left, branch
+		;!@ GD: Fix backside spikes
+		; https://info.sonicretro.org/SCHG_How-to:Fix_Spikes_Backside_Damage_in_Sonic_1
 		cmp.w	d2,d0		; has Sonic moved off the right?
-		blo.s	.stand		; if not, branch
+		;!@ blo.s	.stand		; if not, branch
+		bls.s	.stand		; if not, branch
 
 .leave:
 		bclr	#3,obStatus(a1)	; clear Sonic's standing flag
@@ -247,6 +250,9 @@ Solid_Below:
 		move.w	#0,obVelY(a1)	; stop Sonic moving
 
 Solid_TopBtmAir:
+		;!@ Fix squash code:
+		clr.b	(v_squashbuffer).w ; no squash check was needed this frame, reset squash distance buffer
+Solid_TopBtmAir_2:
 		moveq	#-1,d4
 		rts
 ; ===========================================================================
@@ -254,6 +260,23 @@ Solid_TopBtmAir:
 Solid_Squash:
 		btst	#1,obStatus(a1)	; is Sonic in the air?
 		bne.s	Solid_TopBtmAir	; if yes, branch
+		
+		;!@ Fix squash code:
+		; https://info.sonicretro.org/SCHG_How-to:Improve_Squash_Kill_Logic
+		; Sonic is supposed to get squashed now, here is where we will add the leeway check
+		cmpi.b	#-8,d3			; is squash distance greater than a tile (8px)?
+		blt.s	.kill			; if yes, kill Sonic anyway
+		tst.b	(v_squashbuffer).w	; is this the first frame Sonic would have been squashed?
+		beq.s	.buffer			; if yes, survive this frame and remember squash distance
+		cmp.b	(v_squashbuffer).w,d3	; is new squash distance bigger than the stored one?
+		blt.s	.kill			; if yes, do squash kill (object moved closer)
+.buffer:	move.b	d3,(v_squashbuffer).w	; remember squash distance for next frame
+		bra.s	Solid_TopBtmAir_2	; survive squash this frame
+; ===========================================================================
+
+.kill:
+		clr.b	(v_squashbuffer).w	; reset squash distance buffer
+		
 		move.l	a0,-(sp)
 		movea.l	a1,a0
 		jsr	(KillSonic).l	; kill Sonic

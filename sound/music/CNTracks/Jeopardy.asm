@@ -3,7 +3,7 @@ Jeopardy_Header:
 	smpsHeaderStartSong 1
 	smpsHeaderVoice     Jeopardy_Voices
 	smpsHeaderChan      $06, $03
-	smpsHeaderTempo     $01, $02
+	smpsHeaderTempo     $02, $00
 
 	smpsHeaderDAC       Jeopardy_DAC
 	smpsHeaderFM        Jeopardy_FM1,	$00, $08

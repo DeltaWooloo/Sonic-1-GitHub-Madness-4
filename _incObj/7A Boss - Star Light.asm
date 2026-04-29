@@ -1,5 +1,5 @@
 ; ---------------------------------------------------------------------------
-; Object 7A - Eggman (SLZ)
+; Object 7A - Sans, he flies now apparently
 ; ---------------------------------------------------------------------------
 
 BossStarLight:
@@ -22,11 +22,11 @@ Obj7A_ObjData:	dc.b 2,	0, 4		; routine number, animation, priority
 
 Obj7A_Main:
 		move.w	#$2188,obX(a0)
-		move.w	#$228,obY(a0)
-		move.w	obX(a0),$30(a0)
-		move.w	obY(a0),$38(a0)
-		move.b	#$F,obColType(a0)
-		move.b	#8,obColProp(a0) ; set number of hits to 8
+		move.w	#$218,obY(a0)
+		move.w	obX(a0),$30(a0);30og
+		move.w	obY(a0),$38(a0);38 og
+		move.b	#$C,obColType(a0)
+		move.b	#$14,obColProp(a0) ; set number of hits to ALOT cause you technically miss... ALOT
 		lea	Obj7A_ObjData(pc),a2
 		movea.l	a0,a1
 		moveq	#3,d1
@@ -46,7 +46,7 @@ Obj7A_LoadBoss:
 		move.b	(a2)+,obRoutine(a1)
 		move.b	(a2)+,obAnim(a1)
 		move.b	(a2)+,obPriority(a1)
-		move.l	#Map_Eggman,obMap(a1)
+		move.l	#Map_Sans,obMap(a1)
 		move.w	#$400,obGfx(a1)
 		move.b	#4,obRender(a1)
 		move.b	#$20,obActWid(a1)
@@ -126,6 +126,7 @@ loc_189FE:
 		move.b	#$20,$3E(a0)
 		move.w	#sfx_HitBoss,d0
 		jsr	(PlaySound_Special).l	; play boss damage sound
+	    pcm	dSans,1		; Sans
 
 loc_18A28:
 		lea	(v_pal_dry+$22).w,a1
@@ -295,14 +296,14 @@ loc_18B96:
 ; ===========================================================================
 
 loc_18BAE:
-		subq.w	#8,obVelY(a0)
+		subq.w	#1,obVelY(a0)
 		bra.s	loc_18BC2
 ; ===========================================================================
 
 loc_18BB4:
 		clr.w	obVelY(a0)
-	;	move.w	#bgm_SLZ,d0
-	;	jsr	(PlaySound).l		; play SLZ music
+		jsr	(GetTimeBonus).l
+		move.b  #id_SansDied,(v_gamemode).w ; go to death
 
 loc_18BC2:
 		bra.w	loc_189EE
