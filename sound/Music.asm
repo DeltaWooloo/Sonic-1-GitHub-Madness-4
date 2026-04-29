@@ -365,6 +365,8 @@ Mus_MMZPast:	include	"music/GenesisDoes/MMZPast_SNN.asm"
 	even
 Mus_SadMac:		include	"music/TG2000Tracks/SadMac.asm"
 	even
+;Mus_cry_w95:	include	"music/GenesisDoes/cry-w95.asm"
+	;even
 Mus_BatMan:		include	"music/TG2000Tracks/Mus - Batman.asm"
 	even
 Mus_Spoopy:		include	"music/TG2000Tracks/Mus - Spoopy.asm"

@@ -114,21 +114,21 @@ SampleTable:
 	dcSample	TYPE_DPCM,	meow,		16000,	FLAGS_SFX		; $CE
 	dcSample	TYPE_DPCM,	meow,		8000,	FLAGS_SFX		; $CF
 	;BSOD/w95 rock
-	dcSample	TYPE_DPCM,	w95r_windows,16000					; $D0
-	dcSample	TYPE_DPCM,	w95r_better,16000					; $D1
-	dcSample	TYPE_DPCM,	w95r_changeLife,16000				; $D2
-	dcSample	TYPE_DPCM,	w95r_gates,	16000					; $D3
-	dcSample	TYPE_DPCM,	w95r_live,	16000					; $D4
-	dcSample	TYPE_DPCM,	w95r_microsoft,16000				; $D5
-	dcSample	TYPE_DPCM,	w95r_mouse,	16000					; $D6
-	dcSample	TYPE_DPCM,	w95r_much,	16000					; $D7
-	dcSample	TYPE_DPCM,	w95r_neverbeaten,	16000			; $D8
-	dcSample	TYPE_DPCM,	w95r_ooh1,	16000					; $D9
-	dcSample	TYPE_DPCM,	w95r_ooh2,	16000					; $DA
-	dcSample	TYPE_DPCM,	w95r_ooh3,	16000					; $DB
-	dcSample	TYPE_DPCM,	w95r_ooh4,	16000					; $DC
-	dcSample	TYPE_DPCM,	w95r_w95,	16000					; $DD
-	dcSample	TYPE_DPCM,	w95r_w95_2,	16000					; $DE
+	;dcSample	TYPE_DPCM,	w95r_windows,16000					; $D0
+	;dcSample	TYPE_DPCM,	w95r_better,16000					; $D1
+	;dcSample	TYPE_DPCM,	w95r_changeLife,16000				; $D2
+	;dcSample	TYPE_DPCM,	w95r_gates,	16000					; $D3
+	;dcSample	TYPE_DPCM,	w95r_live,	16000					; $D4
+	;dcSample	TYPE_DPCM,	w95r_microsoft,16000				; $D5
+	;dcSample	TYPE_DPCM,	w95r_mouse,	16000					; $D6
+	;dcSample	TYPE_DPCM,	w95r_much,	16000					; $D7
+	;dcSample	TYPE_DPCM,	w95r_neverbeaten,	16000			; $D8
+	;dcSample	TYPE_DPCM,	w95r_ooh1,	16000					; $D9
+	;dcSample	TYPE_DPCM,	w95r_ooh2,	16000					; $DA
+	;dcSample	TYPE_DPCM,	w95r_ooh3,	16000					; $DB
+	;dcSample	TYPE_DPCM,	w95r_ooh4,	16000					; $DC
+	;dcSample	TYPE_DPCM,	w95r_w95,	16000					; $DD
+	;dcSample	TYPE_DPCM,	w95r_w95_2,	16000					; $DE
 
 	; Splash Screens
 	dcSample	TYPE_PCM,	EggNo,		11297					; $DF
@@ -281,21 +281,21 @@ SampleTable:
 	incdac	meow, "sound/dac/GenesisDoes/meow.dpcm"
 
 ; BSOD W95 Rock samples
-	incdac	w95r_windows, "sound/dac/GenesisDoes/w95r_windows.dpcm"
-	incdac	w95r_better, "sound/dac/GenesisDoes/w95r_better.dpcm"
-	incdac	w95r_changeLife, "sound/dac/GenesisDoes/w95r_changeLife.dpcm"
-	incdac	w95r_gates, "sound/dac/GenesisDoes/w95r_gates.dpcm"
-	incdac	w95r_live, "sound/dac/GenesisDoes/w95r_live.dpcm"
-	incdac	w95r_microsoft, "sound/dac/GenesisDoes/w95r_microsoft.dpcm"
-	incdac	w95r_mouse, "sound/dac/GenesisDoes/w95r_mouse.dpcm"
-	incdac	w95r_much, "sound/dac/GenesisDoes/w95r_much.dpcm"
-	incdac	w95r_neverbeaten, "sound/dac/GenesisDoes/w95r_neverbeaten.dpcm"
-	incdac	w95r_ooh1, "sound/dac/GenesisDoes/w95r_ooh1.dpcm"
-	incdac	w95r_ooh2, "sound/dac/GenesisDoes/w95r_ooh2.dpcm"
-	incdac	w95r_ooh3, "sound/dac/GenesisDoes/w95r_ooh3.dpcm"
-	incdac	w95r_ooh4, "sound/dac/GenesisDoes/w95r_ooh4.dpcm"
-	incdac	w95r_w95, "sound/dac/GenesisDoes/w95r_w95.dpcm"
-	incdac	w95r_w95_2, "sound/dac/GenesisDoes/w95r_w95_2.dpcm"
+	;incdac	w95r_windows, "sound/dac/GenesisDoes/w95r_windows.dpcm"
+	;incdac	w95r_better, "sound/dac/GenesisDoes/w95r_better.dpcm"
+	;incdac	w95r_changeLife, "sound/dac/GenesisDoes/w95r_changeLife.dpcm"
+	;incdac	w95r_gates, "sound/dac/GenesisDoes/w95r_gates.dpcm"
+	;incdac	w95r_live, "sound/dac/GenesisDoes/w95r_live.dpcm"
+	;incdac	w95r_microsoft, "sound/dac/GenesisDoes/w95r_microsoft.dpcm"
+	;incdac	w95r_mouse, "sound/dac/GenesisDoes/w95r_mouse.dpcm"
+	;incdac	w95r_much, "sound/dac/GenesisDoes/w95r_much.dpcm"
+	;incdac	w95r_neverbeaten, "sound/dac/GenesisDoes/w95r_neverbeaten.dpcm"
+	;incdac	w95r_ooh1, "sound/dac/GenesisDoes/w95r_ooh1.dpcm"
+	;incdac	w95r_ooh2, "sound/dac/GenesisDoes/w95r_ooh2.dpcm"
+	;incdac	w95r_ooh3, "sound/dac/GenesisDoes/w95r_ooh3.dpcm"
+	;incdac	w95r_ooh4, "sound/dac/GenesisDoes/w95r_ooh4.dpcm"
+	;incdac	w95r_w95, "sound/dac/GenesisDoes/w95r_w95.dpcm"
+	;incdac	w95r_w95_2, "sound/dac/GenesisDoes/w95r_w95_2.dpcm"
 
 
 

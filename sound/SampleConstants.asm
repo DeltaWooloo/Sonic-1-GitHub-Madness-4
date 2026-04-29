@@ -123,21 +123,21 @@ dMeow1						ds.b 1
 dMeow2						ds.b 1
 
 ; Windows 95 Rock lyrics samples
-dmsr_windows				ds.b 1
-dmsr_better					ds.b 1
-dmsr_Change					ds.b 1
-dmsr_gates					ds.b 1
-dmsr_live					ds.b 1
-dmsr_microsoft				ds.b 1
-dmsr_mouse					ds.b 1
-dmsr_much					ds.b 1
-dmsr_never					ds.b 1
-dmsr_ooh1					ds.b 1
-dmsr_ooh2					ds.b 1
-dmsr_ooh3					ds.b 1
-dmsr_ooh4					ds.b 1
-dmsr_w95					ds.b 1
-dmsr_w95_2					ds.b 1
+;dmsr_windows				ds.b 1
+;dmsr_better					ds.b 1
+;dmsr_Change					ds.b 1
+;dmsr_gates					ds.b 1
+;dmsr_live					ds.b 1
+;dmsr_microsoft				ds.b 1
+;dmsr_mouse					ds.b 1
+;dmsr_much					ds.b 1
+;dmsr_never					ds.b 1
+;dmsr_ooh1					ds.b 1
+;dmsr_ooh2					ds.b 1
+;dmsr_ooh3					ds.b 1
+;dmsr_ooh4					ds.b 1
+;dmsr_w95					ds.b 1
+;dmsr_w95_2					ds.b 1
 
 dEggNo						ds.b 1
 dfunnyb_utthole				ds.b 1

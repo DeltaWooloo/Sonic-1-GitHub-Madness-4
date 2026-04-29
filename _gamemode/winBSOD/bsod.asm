@@ -4,6 +4,9 @@ bgm_gen:			equ	bgm_hang			;!@ TODO: Port over Genesis song (SLZ from Genesis 1 M
 bgm_scd:			equ	bgm_hang			;!@ TODO: Port over Genesis SMPS remix of US Sega CD BIOS v2 (base it off Sonic 1 Remastered?)
 pcm_none:			equ	$00
 
+bgm_rock1:			equ	bgm_Passport		;bgm_W95Rock
+bgm_rockR:			equ	bgm_UNOwenWasHer	;bgm_W95RockR
+
 ; ---------------------------------------------------------------------------
 ;!@ GenesisDoes: function gets the ID of a bsodData entry
 ; ---------------------------------------------------------------------------
@@ -733,17 +736,17 @@ bsod_03:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_98ipc.art1,		ArtTile
 bsod_04:	bsodData		bsodType_reg,	60*f2s,		secSkip_std,	bsod_sonihack.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sonihack.fg,	bsod_sonihack.bg,	bsod_sonihack.pal,	TCLR(0,0),	bgm_VirusAlert,	dVirus
 bsod_05:	bsodData		bsodType_gnu,	60*f2s,		sec_std,		bsod_gnu.art1,			ArtTile_Home1,	bsod_gnu.art2,	ArtTile_bsod_gnu_art2,		bsod_gnu.fg,		bsod_gnu.bg,		bsod_gnu.pal,		TCLR(1,0),	bgm_BossaNova,	dMeow1
 			;Windows-based bootup
-bsod_06:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_bw95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_bw95.fg,		bsod_bw95.bg,		bsod_bw95.pal,		TCLR(0,0),	bgm_W95Rock,	pcm_none
-bsod_07:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_bw95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_bw95.fg,		bsod_bw95.bg,		bsod_bw95.pal,		TCLR(0,0),	bgm_W95RockR,	pcm_none
+bsod_06:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_bw95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_bw95.fg,		bsod_bw95.bg,		bsod_bw95.pal,		TCLR(0,0),	bgm_rock1,		pcm_none
+bsod_07:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_bw95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_bw95.fg,		bsod_bw95.bg,		bsod_bw95.pal,		TCLR(0,0),	bgm_rockR,		pcm_none
 bsod_08:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_bw98.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_bw98.fg,		bsod_bw98.bg,		bsod_bw98.pal,		TCLR(0,0),	bgm_hang,		dW98IPC
 bsod_09:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_bwme.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_bwme.fg,		bsod_bwme.bg,		bsod_bwme.pal,		TCLR(0,0),	bgm_hang,		dW98IPC
 			;Fucking Steve Ballmer, a living meme
-bsod_0A:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbPC.art1,			ArtTile_Home1,	bsod_sbPC.art2,	ArtTile_bsod_sbPC,			bsod_sbPC.fg,		bsod_sbPC.bg,		bsod_sbPC.pal,		TCLR(2,0),	bgm_W95Rock,	dsbPC
-bsod_0B:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbPC.art1,			ArtTile_Home1,	bsod_sbPC.art2,	ArtTile_bsod_sbPC,			bsod_sbPC.fg,		bsod_sbPC.bg,		bsod_sbPC.pal,		TCLR(2,0),	bgm_W95RockR,	dsbPC
-bsod_0C:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbDev.art1,		ArtTile_Home1,	bsod_sbDev.art2,ArtTile_bsod_sbDev,			bsod_sbDev.fg,		bsod_sbDev.bg,		bsod_sbDev.pal,		TCLR(2,0),	bgm_W95Rock,	dsbDevelopers
-bsod_0D:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbDev.art1,		ArtTile_Home1,	bsod_sbDev.art2,ArtTile_bsod_sbDev,			bsod_sbDev.fg,		bsod_sbDev.bg,		bsod_sbDev.pal,		TCLR(2,0),	bgm_W95RockR,	dsbDevelopers
-bsod_0E:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbLove.art1,		ArtTile_Home1,	bsod_sbLove.art2,ArtTile_bsod_sbLove,		bsod_sbLove.fg,		bsod_sbLove.bg,		bsod_sbLove.pal,	TCLR(2,0),	bgm_W95Rock,	dsbLove
-bsod_0F:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbLove.art1,		ArtTile_Home1,	bsod_sbLove.art2,ArtTile_bsod_sbLove,		bsod_sbLove.fg,		bsod_sbLove.bg,		bsod_sbLove.pal,	TCLR(2,0),	bgm_W95RockR,	dsbLove
+bsod_0A:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbPC.art1,			ArtTile_Home1,	bsod_sbPC.art2,	ArtTile_bsod_sbPC,			bsod_sbPC.fg,		bsod_sbPC.bg,		bsod_sbPC.pal,		TCLR(2,0),	bgm_rock1,		dsbPC
+bsod_0B:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbPC.art1,			ArtTile_Home1,	bsod_sbPC.art2,	ArtTile_bsod_sbPC,			bsod_sbPC.fg,		bsod_sbPC.bg,		bsod_sbPC.pal,		TCLR(2,0),	bgm_rockR,		dsbPC
+bsod_0C:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbDev.art1,		ArtTile_Home1,	bsod_sbDev.art2,ArtTile_bsod_sbDev,			bsod_sbDev.fg,		bsod_sbDev.bg,		bsod_sbDev.pal,		TCLR(2,0),	bgm_rock1,		dsbDevelopers
+bsod_0D:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbDev.art1,		ArtTile_Home1,	bsod_sbDev.art2,ArtTile_bsod_sbDev,			bsod_sbDev.fg,		bsod_sbDev.bg,		bsod_sbDev.pal,		TCLR(2,0),	bgm_rockR,		dsbDevelopers
+bsod_0E:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbLove.art1,		ArtTile_Home1,	bsod_sbLove.art2,ArtTile_bsod_sbLove,		bsod_sbLove.fg,		bsod_sbLove.bg,		bsod_sbLove.pal,	TCLR(2,0),	bgm_rock1,		dsbLove
+bsod_0F:	bsodData		bsodType_reg,	sec_SB,		secSkip_SB,		bsod_sbLove.art1,		ArtTile_Home1,	bsod_sbLove.art2,ArtTile_bsod_sbLove,		bsod_sbLove.fg,		bsod_sbLove.bg,		bsod_sbLove.pal,	TCLR(2,0),	bgm_rockR,		dsbLove
 			;Safe shutdown
 bsod_10:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd1.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd1.fg,		bsod_sd1.bg,		bsod_sd1.pal,		TCLR(0,0),	bgm_hang,		dShutdown
 bsod_11:	bsodData		bsodType_reg,	sec_sd,		secSkip_sd,		bsod_sd2.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sd2.fg,		bsod_sd2.bg,		bsod_sd2.pal,		TCLR(0,0),	bgm_Passport,	dShutdown
@@ -786,8 +789,8 @@ bsod_2C:	bsodData		bsodType_scd,	sec_CD,		secSkip_CD,		bsod_scd_pale.art1,		ArtT
 bsod_2D:	bsodData		bsodType_scd,	sec_CD,		secSkip_CD,		bsod_scd_pala.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_scd_pala.fg,	bsod_scd_pala.bg,	bsod_scd_pala.pal,	TCLR(1,0),	bgm_scd,		dBSOD
 bsod_scdEnd:
 			;Sega 32x-based
-bsod_2E:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_32x.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x.fg,		bsod_32x.bg,		bsod_32x.pal,		TCLR(1,0),	bgm_W95Rock,	dShutdown
-bsod_2F:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_32x.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x.fg,		bsod_32x.bg,		bsod_32x.pal,		TCLR(1,0),	bgm_W95RockR,	dShutdown
+bsod_2E:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_32x.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x.fg,		bsod_32x.bg,		bsod_32x.pal,		TCLR(1,0),	bgm_rock1,		dShutdown
+bsod_2F:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_32x.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x.fg,		bsod_32x.bg,		bsod_32x.pal,		TCLR(1,0),	bgm_rockR,		dShutdown
 bsod_30:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_32x_nbajte.art1,	ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x_nbajte.fg,	bsod_32x_nbajte.bg,	bsod_32x_nbajte.pal,TCLR(0,0),	bgm_hang,		dShutdown
 bsod_31:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_32x_xmen.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x_xmen.fg,	bsod_32x_xmen.bg,	bsod_32x_xmen.pal,	TCLR(0,0),	bgm_hang,		dShutdown
 bsod_32:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_32x_zx2k.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_32x_zx2k.fg,	bsod_32x_zx2k.bg,	bsod_32x_zx2k.pal,	TCLR(0,0),	bgm_hang,		dShutdown
