@@ -145,15 +145,19 @@ SampleTable:
 	; Ollie Samples
 	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $E6
 	dcSample	TYPE_DPCM,	OllieWahoo,	16000					; $E7
+	
+	; Mega Man 8 Samples
+	dcSample	TYPE_PCM,	MM8Kick,		16000					; $E8
+	dcSample	TYPE_PCM,	MM8Snare,	16000						; $E9
 
 	; SEGA Samples
-	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $E8
+	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $EA
 
 	;!@ GD: Last slot always reserved for PCM SFX Silence
-	dcSample	TYPE_DPCM,	dummy,		8000,	FLAGS_SFX		; $E9
+	dcSample	TYPE_DPCM,	dummy,		8000,	FLAGS_SFX		; $EB
 
 	; Unused
-;	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $EA
+;	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $EC
 ;	dcSample	TYPE_PCM,	Segay,		0,	FLAGS_SFX
 ;	dcSample	TYPE_PCM,	CL_Penis,	11297
 ;	dcSample	TYPE_PCM,	Boioing,	5250,	FLAGS_SFX
@@ -318,6 +322,11 @@ SampleTable:
 ; Ollie Samples
 	incdac	OllieGameTap,"sound/dac/ollie/gametap.dpcm"
 	incdac	OllieWahoo,"sound/dac/ollie/wahoo.dpcm"
+
+; ---------------------------------------------------------------
+; Mega Man 8 Samples
+	incdac	MM8Kick,"sound/dac/MM8 Kick.wav"
+	incdac	MM8Snare,"sound/dac/MM8 Snare.wav"
 
 ; ---------------------------------------------------------------
 ; Whatever you want the Sega sound to be

@@ -504,7 +504,8 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_SkyGift
 	nextenum bgm_BLIND_MODE
 	nextenum bgm_FrontHook
-
+	;nextenum bgm_MM8StageSelect
+	
 	; Keep this last
 	nextenum bgm__Last	
 	bgm__count:			equ	(bgm__Last-bgm__First)	; Count of songs

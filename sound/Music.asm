@@ -145,6 +145,7 @@ MusicIndex:
 	bgmdef $75, Mus_SkyGift
 	bgmdef s1TempotoS3($03), Mus_BLIND_MODE
 	bgmdef s1TempotoS3($03), Mus_FrontHook
+	;bgmdef $00, Mus_MM8StageSelect		;Dax, it that the correct tempo or no?
 
 	;!@ bgmwarning	MusicIndex,4
 
@@ -392,7 +393,8 @@ Mus_BLIND_MODE:		include	"music/TIS_Tracks/BLIND_MODE.asm"
 	even
 Mus_FrontHook:		include	"music/TIS_Tracks/FrontinHook.asm"
 	even
-
+;Mus_MM8StageSelect:		include	"music/SaneWay/MM8 - Stage Select.asm"
+;	even
 ;!@ Dummy song; meant for placehold slot, silence, whatever
 Mus_dummy:		include	"music/dummy.asm"	; !@ GD
 	even

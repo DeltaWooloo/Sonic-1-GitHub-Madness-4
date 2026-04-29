@@ -152,6 +152,11 @@ dGenesisCan3				ds.b 1
 dOllieGameTap				ds.b 1
 dOllieWahoo					ds.b 1
 
+
+; Mega Man 8 Samples
+dKickMM8					ds.b 1
+dSnareMM8					ds.b 1
+
 ; SEGA Samples
 dSega						ds.b 1
 
