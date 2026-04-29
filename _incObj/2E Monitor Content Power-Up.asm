@@ -926,6 +926,11 @@ Pow_vdp_fixRegs:
 		move.w	#$8C81,(a6)		; 40-cell display mode
 		move.w	#$9001,(a6)		; 64-cell hscroll size
 		
+		;!@ Remove Window plane
+		move.w	#$8300+($A000>>10),(a6)	; set window nametable address		
+		move.w	#$9100,(a6)				; window horizontal position
+		move.w	#$9200,(a6)				; window vertical position
+		
 		;Fix debug registers
 		;Register $00 (GFX)
 		writeDBG_sel	$00
