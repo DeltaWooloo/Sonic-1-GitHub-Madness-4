@@ -145,6 +145,42 @@ loc_1D05E:
 		add.l	d1,d3
 
 loc_1D066:
+;!@ GD: Debug boundaries
+;!@ https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-10
+		cmpi.b	#id_Special,(v_gamemode).w ; is game mode $10 (special stage)?
+		beq.s	.right_ok		; if yes, don't cap position (there are no dynamic boundaries)
+
+		moveq	#0,d5			; clear d5
+		move.w	(v_limittop2).w,d5	; get top level boundary
+		swap	d5			; swap to high word
+		cmp.l	d5,d2			; is new debug position above top boundary?
+		bge.s	.top_ok			; if not, branch
+		move.l	d5,d2			; cap debug position to top boundary
+.top_ok:
+		moveq	#0,d5			; clear d5
+		move.w	(v_limitbtm2).w,d5	; get bottom level boundary
+		addi.w	#224,d5			; add screen height (224px)
+		swap	d5			; swap to high word
+		cmp.l	d5,d2			; is new debug position below bottom boundary?
+		ble.s	.bottom_ok		; if not, branch
+		move.l	d5,d2			; cap debug position to bottom boundary
+.bottom_ok:
+		moveq	#0,d5			; clear d5
+		move.w	(v_limitleft2).w,d5	; get left level boundary
+		swap	d5			; swap to high word
+		cmp.l	d5,d3			; is new debug position past left boundary?
+		bge.s	.left_ok		; if not, branch
+		move.l	d5,d3			; cap debug position to left boundary
+.left_ok:
+		moveq	#0,d5			; clear d5
+		move.w	(v_limitright2).w,d5	; get right level boundary
+		addi.w	#320,d5			; add screen width (320px)
+		swap	d5			; swap to high word
+		cmp.l	d5,d3			; is new debug position past right boundary?
+		ble.s	.right_ok		; is not, branch
+		move.l	d5,d3			; cap debug position to right boundary
+.right_ok:
+
 		move.l	d2,obY(a0)
 		move.l	d3,obX(a0)
 
