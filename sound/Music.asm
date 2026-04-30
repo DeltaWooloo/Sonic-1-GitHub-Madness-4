@@ -136,6 +136,8 @@ MusicIndex:
 	bgmdef $80, Mus_SadMac
 	bgmdef $80, Mus_dummy			;!@ GD: slot reserved for Windows 95 Rock
 	bgmdef $80, Mus_dummy					;!@ GD: slot reserved for Windows 95 Rock (Remix)
+	
+	bgmdef $80, Mus_dummy					; GIO: Intended. used by the Roaring Knight.
 
 	bgmdef $01, Mus_SwingSinners
 	bgmdef $01, Mus_WeAreTheSonic

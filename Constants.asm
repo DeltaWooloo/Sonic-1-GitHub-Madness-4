@@ -495,6 +495,9 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_W95Rock			; !@ GD: Windows 95 Rock (https://modarchive.org/index.php?request=view_by_moduleid&query=170694)
 	nextenum bgm_W95RockR			; !@ GD: Windows 95 Rock Remix (https://modarchive.org/index.php?request=view_by_moduleid&query=201495)
 
+	; silence
+	nextenum bgm_Silence			; GIO: used as-is by Roaring Knight
+
 	; Unused Full/Looping BGM
 	nextenum bgm_SwingSinners
 	nextenum bgm_WeAreTheSonic
@@ -579,6 +582,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum sfx_Static
 	nextenum sfx_SirenAlarm
 	nextenum sfx_LongFart
+	nextenum sfx_Thump
 	; Keep this last
 	nextenum	sfx__Last
 	

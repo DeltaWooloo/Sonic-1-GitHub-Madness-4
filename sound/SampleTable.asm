@@ -151,12 +151,19 @@ SampleTable:
 	; Ollie Samples
 	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $E6
 	dcSample	TYPE_DPCM,	OllieWahoo,	16000					; $E7
+	
+	
+	; Deltarune Samples
+	dcSample	TYPE_PCM,	Knight_Hurt,	22050			; $EA
+	dcSample	TYPE_PCM,	Knight_Stretch,	22050				; $EB
+	dcSample	TYPE_PCM,	Knight_Roar,	22050,	FLAGS_SFX		; $EC
+	dcSample	TYPE_PCM,	DR_Battle_Start, 22050,	FLAGS_SFX		; $ED
 
 	; SEGA Samples
-	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $EA
+	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $EE
 
 	;!@ GD: Last slot always reserved for PCM SFX Silence
-	dcSample	TYPE_DPCM,	dummy,		8000,	FLAGS_SFX		; $EB
+	dcSample	TYPE_DPCM,	dummy,		8000,	FLAGS_SFX		; $EF
 
 	; Unused
 ;	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $EC
@@ -326,6 +333,13 @@ SampleTable:
 ; Mega Man 8 Samples
 	incdac	MM8Kick,"sound/dac/MM8 Kick.wav"
 	incdac	MM8Snare,"sound/dac/MM8 Snare.wav"
+	
+; ---------------------------------------------------------------
+; Deltarune Samples
+	incdac	Knight_Hurt,"sound/dac/snd_knight_hurt.wav"
+	incdac	Knight_Stretch,"sound/dac/snd_knight_stretch.wav"
+	incdac	Knight_Roar,"sound/dac/snd_knightroar.wav"
+	incdac	DR_Battle_Start,"sound/dac/snd_weaponpull.wav"		; for whatever reason, snd_weaponpull_fast.wav breaks things
 
 ; ---------------------------------------------------------------
 ; Whatever you want the Sega sound to be

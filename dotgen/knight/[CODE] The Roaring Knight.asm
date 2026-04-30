@@ -20,8 +20,8 @@ Knight_X_Target		=	objoff_34		; X coordinate target for the Knight. (2 bytes)
 Knight_Y_Target		=	objoff_36		; Y coordinate target for the Knight. (2 bytes)
 Knight_Hits_Phase1	=	8			; HP for Phase 1
 Knight_Hits_Phase2	=	16			; HP for Phase 2
-Knight_Sound1_Duration	=	60			; How long the first Knight PCM sound lasts in frames (60Hz)
-Knight_Sound2_Duration	=	180			; How long the second Knight PCM sound lasts in frames (60Hz)
+Knight_Sound1_Duration	=	152			; How long the first Knight PCM sound lasts in frames (60Hz)
+Knight_Sound2_Duration	=	296			; How long the second Knight PCM sound lasts in frames (60Hz)
 Knight_X_Position	=	objoff_30		; The Knight's X position, which is copied over to the Knight's current X position after being processed by waving routines. (2 bytes)
 Knight_Y_Position	=	objoff_32		; Same as above, but for the Y position. (2 bytes)
 Knight_Wave_Increment	=	objoff_3A		; Value that increments once every frame. It makes the Knight wave. (1 byte)
@@ -295,6 +295,8 @@ RKnight_P1End:
 	
 	; TO-DO: AnimateSprite
 	lea	(Ani_Roaring_Knight).l,a1	
+	bsr.w	HackForPCMOnSwing
+	bsr.w	HackForNoYScroll
 	jsr	(AnimateSpriteXL).l
 	bsr.w	RKnight_LoadGfx			; Load graphics from DPLC to VRAM	
 	jmp	(DisplaySprite).l		; Display object
@@ -304,7 +306,6 @@ RKnight_P1End:
 ; ===========================================================================
 
 RKP1End_Index:
-	dc.w	RKPhase1_Wait-RKP1End_Index		; Initialize some of the Knight's properties specific to the Phase 1 to Phase 2 transition.
 	dc.w	RKP1End_LeaveScreenPrep-RKP1End_Index	; Set up the Knight to leave the screen.
 	dc.w	RKPhase1_Wait-RKP1End_Index		; Wait a bit before doing that
 	dc.w	RKP1End_LeaveScreen-RKP1End_Index	; Moves the Knight in ball form to the center of the screen, 0x200px away.
@@ -328,8 +329,11 @@ RKP1End_LeaveScreenPrep:
 	clr.w	obVelX(a0)					; Clear X speed, just in case
 	clr.w	obVelY(a0)					; Clear Y speed, just in case
 	move.w	#60,Knight_Timer(a0)				; Wait 1 second
-	addq.b	#2,ob2ndRout(a0)				; Next routine
-	rts
+	addq.b	#2,ob2ndRout(a0)				; Next routine	
+	move.b	#bgm_Silence,d0
+	jsr	(PlaySound_Special).l 	
+	move.b	#dKnight_Hurt,d0	
+	jmp	(MegaPCM_PlaySample).l		
 
 ; ===========================================================================
 ; Moves the Knight to their target destination, and changes their speed
@@ -423,7 +427,14 @@ RKP1End_WaitForPlayer:
 	addq.b	#2,ob2ndRout(a0)				; Advance routine counter if so.
 	move.w	#Knight_Sound1_Duration,Knight_Timer(a0)	; Set timer for next routine.
 	move.b	#5,obAnim(a0)					; Set animation
-	; TO-DO: Play PCM sound.
+	move.b	#1,(f_lockctrl).w 				; lock controls
+	clr.w	(v_player+obInertia).w				; clear player speed
+	clr.w	(v_player+obVelX).w				; clear player speed	
+	bclr	#0,(v_player+obStatus).w			; force orientation to the right
+	move.w	#(btnUp<<8),(v_jpadhold2).w 			; make player look up
+	
+	move.b	#dKnight_Stretch,d0	
+	jmp	(MegaPCM_PlaySample).l	
 	
 .return:
 	rts
@@ -436,7 +447,9 @@ RKP1End_MakeRoar:
 	addq.b	#2,ob2ndRout(a0)				; Advance routine counter if so.
 	move.w	#Knight_Sound2_Duration,Knight_Timer(a0)	; Set timer for next routine.
 	move.b	#6,obAnim(a0)					; Set animation	
-	; TO-DO: Play PCM sound.
+	move.b	#dKnight_Roar,d0	
+	jmp	(MegaPCM_PlaySample).l		
+	
 	rts
 	
 ; ===========================================================================
@@ -455,6 +468,7 @@ RKP1End_Swing:
 
 RKP1End_Phase2:
 	addq.b	#2,obRoutine(a0)
+	clr.b	(f_lockctrl).w 						; Unlock player controls	
 	clr.b	ob2ndRout(a0)
 	move.w	obX(a0),Knight_X_Position(a0)
 	move.w	obY(a0),Knight_Y_Position(a0)
@@ -465,7 +479,8 @@ RKP1End_Phase2:
 	bclr	#7,obStatus(a0)
 	move.b	#60,objoff_3E(a0)					; Give the Knight invincibility frames.
 	clr.b	Knight_PrevAttack(a0)
-	rts
+	move.b	#bgm_Boss,d0
+	jmp	(PlaySound).l 	
 	
 ; End of Phase 1 end behavior	
 	
@@ -1049,6 +1064,40 @@ RKnight_Bullets:
 ; ===========================================================================
 
 ; ===========================================================================
+; Dirty hack that plays a sound effect when the Knight switches to a specific 
+; animation
+;
+; Used by: Roaring Knight (Phase 1 End)
+; ===========================================================================
+
+HackForPCMOnSwing:
+	cmpi.b	#$10,ob2ndRout(a0)					; Check for specific routine
+	bne.s	.return							; Return if not equal
+	cmpi.b	#9,obAnim(a0)						; Check for specific animation
+	bne.s	.return							; Return if not equal
+	cmpi.b	#9,obPrevAni(a0)					; Check for specific previous animation
+	beq.s	.return							; Return if equal
+	move.b	#dDR_Battle_Start,d0	
+	jmp	(MegaPCM_PlaySample).l
+	
+.return:
+	rts
+
+; ===========================================================================
+; Dirty hack that turns off vertical scroll when pressing up or down
+;
+; Used by: Roaring Knight (Phase 1 End)
+; ===========================================================================
+
+HackForNoYScroll:
+	cmpi.b	#$8,ob2ndRout(a0)					; Check for specific routine
+	blt.s	.return							; Return if before that
+	move.w	#$60,(v_lookshift).w 					; Force screen to its default position	
+	
+.return:	
+	rts
+
+; ===========================================================================
 ; Subroutine to change the object's collision based on the currently playing
 ; animation.
 ;
@@ -1142,10 +1191,16 @@ RKnight_HandleHits:
 	
 	.normalhit:
 	sub.b	#1,objoff_3E(a0)			; Decrement the Knight's invincibility frames.
-	bne.s	.return					; If not 0, return.
+	bne.s	.noreset				; If not 0, branch.
 	move.b	#$F,obColType(a0)			; Restore the Knight's hitbox.
 	move.b	#60,objoff_3E(a0)			; Restore the Knight's invincibility frames for later.
+	rts
 
+.noreset:
+	cmpi.b	#59,objoff_3E(a0)			; Was the boss *just* hit?
+	bne.s	.return					; If not, return.
+	move.b	#sfx_Thump,d0
+	jsr	(PlaySound_Special).l 		
 .return:
 	rts
 	
