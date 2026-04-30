@@ -215,7 +215,7 @@ splash_turd macro routine
 	splash_liquid	Yume2kki
 
 	;!@ GenesisDoes
-	splash_solid	ChadWarden,	$20, 0, _pcm, dsupbeaches,		60*7
+;	splash_solid	ChadWarden,	$20, 0, _pcm, dsupbeaches,		60*7
 	splash_solid	Compile,	$40, 1, _bgm, $00,			60*3
 	splash_solid	GenesisDoes1,	$40, 1, _pcm, dGenesisDoes1,		60*10
 	
@@ -227,7 +227,7 @@ splash_turd macro routine
 
 	splash_liquid	GM_NTOSKRNL
 	splash_liquid	GM_SegaEU
-	splash_turd	Remilia
+;	splash_turd	Remilia
 	splash_liquid	GM_DWSplash		; the later you have this, the funnier it is
 	splash_liquid	GiovanniSplash		; the later you have this, the funnier it is
 	dc.w	-1 ; end marker
@@ -264,7 +264,7 @@ splash_turd macro routine
 	include "_gamemode/TSH Splash/TSHSplash.asm"
 ;	include "LiquidSplashes/RobiWK/Splash.asm"
 ; Files for turd
-	include "CrazyRemilia/Remi/Remi.asm"
+;	include "CrazyRemilia/Remi/Remi.asm"
 
 
 ;MapEni_BG:	binclude "LiquidSplashes/RobiWK/BG_Map.bin"

@@ -2576,10 +2576,10 @@ GM_Sega:
 		copyTilemap	v_ram_start,vram_bg+$510,24,8
 		copyTilemap	v_ram_start+24*8*2,vram_fg,40,28
 
-		tst.b	(v_megadrive).w	; is console Japanese?
-		bmi.s	.loadpal
-		copyTilemap	v_ram_start+$A40,vram_fg+$53A,3,2 ; hide "TM" with a white rectangle
-.loadpal:
+;		tst.b	(v_megadrive).w	; is console Japanese?
+;		bmi.s	.loadpal
+;		copyTilemap	v_ram_start+$A40,vram_fg+$53A,3,2 ; hide "TM" with a white rectangle
+;.loadpal:
 		moveq	#palid_SegaBG,d0
 		bsr.w	PalLoad	; load Sega logo palette
 		move.w	#-$A,(v_pcyc_num).w
