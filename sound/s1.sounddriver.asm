@@ -607,6 +607,13 @@ FMSetFreq:
 		add.b	SMPS_Track.Transpose(a5),d5	; Add track transposition
 		andi.w	#$7F,d5				; Clear high byte and sign bit
 		lsl.w	#1,d5
+		cmpi.b	#2,(v_characterid).w		; are we playing as MrBean? TEMPORARY!
+		bne.s	OriginalFrequenciesFM				; If not use original frequencies.
+		lea	FMFrequenciesFC(pc),a0
+		move.w	(a0,d5.w),d6
+		move.w	d6,SMPS_Track.Freq(a5)		; Store new frequency
+		rts
+OriginalFrequenciesFM:
 		lea	FMFrequencies(pc),a0
 		move.w	(a0,d5.w),d6
 		move.w	d6,SMPS_Track.Freq(a5)		; Store new frequency
@@ -2211,7 +2218,15 @@ FMFrequencies:
 		MakeFMFrequenciesOctave 5
 		MakeFMFrequenciesOctave 6
 		MakeFMFrequenciesOctave 7
-
+FMFrequenciesFC:
+		dc.w $01C5,$01FF,$013C,$017C,$025E,$0284,$02AB,$02D3,$02FE,$032D,$035C,$038F,$03C5,$03FF,$043C,$047C
+		dc.w $0A5E,$0A84,$0AAB,$0AD3,$0AFE,$0B2D,$0B5C,$0B8F,$0BC5,$0BFF,$0C3C,$0C7C
+		dc.w $125E,$1284,$12AB,$12D3,$12FE,$132D,$135C,$138F,$13C5,$13FF,$143C,$147C
+		dc.w $1A5E,$1A84,$1AAB,$1AD3,$1AFE,$1B2D,$1B5C,$1B8F,$1BC5,$1BFF,$1C3C,$1C7C
+		dc.w $225E,$2284,$22AB,$22D3,$22FE,$232D,$235C,$238F,$23C5,$23FF,$243C,$247C
+		dc.w $2A5E,$2A84,$2AAB,$2AD3,$2AFE,$2B2D,$2B5C,$2B8F,$2BC5,$2BFF,$2C3C,$2C7C
+		dc.w $325E,$3284,$32AB,$32D3,$32FE,$332D,$335C,$338F,$33C5,$33FF,$343C,$347C
+		dc.w $3A5E,$3A84,$3AAB,$3AD3,$3AFE,$3B2D,$3B5C,$3B8F,$3BC5,$3BFF,$3C3C,$3C7C
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 ; sub_72850:
@@ -2271,16 +2286,22 @@ PSGDoNext:
 ; sub_728AC:
 PSGSetFreq:
 		subi.b	#$81,d5				; Convert to 0-based index
-		bcs.s	.restpsg			; If $80, put track at rest
+		bcs.s	restpsg			; If $80, put track at rest
 		add.b	SMPS_Track.Transpose(a5),d5	; Add in channel transposition
 		andi.w	#$7F,d5				; Clear high byte and sign bit
 		lsl.w	#1,d5
+		cmpi.b	#2,(v_characterid).w		; are we playing as MrBean? TEMPORARY!
+		bne.s	OriginalFrequencies				; If not use original frequencies.
+		lea	PSGFrequenciesFC(pc),a0
+		move.w	(a0,d5.w),SMPS_Track.Freq(a5)	; Set new frequency
+		bra.w	FinishTrackUpdate
+OriginalFrequencies:
 		lea	PSGFrequencies(pc),a0
 		move.w	(a0,d5.w),SMPS_Track.Freq(a5)	; Set new frequency
 		bra.w	FinishTrackUpdate
 ; ===========================================================================
 ; loc_728CA:
-.restpsg:
+restpsg:
 		bset	#1,SMPS_Track.PlaybackControl(a5)	; Set 'track at rest' bit
 		move.w	#-1,SMPS_Track.Freq(a5)			; Invalidate note frequency
 		jsr	FinishTrackUpdate(pc)
@@ -2474,6 +2495,13 @@ PSGFrequencies: ;WHAT THE FUCK IS THIS YOU FUCKING CLOWNANY IDIOT!
 		MakePSGFrequencies 2071.49,   2193.34,   2330.42,   2485.78,   2601.40,   2796.51,   2943.69,   3107.23,   3290.01,   3495.64,   3608.40,   3857.25
 		MakePSGFrequencies 4142.98,   4302.32,   4660.85,   4863.50,   5084.56,   5326.69,   5887.39,   6214.47,   6580.02,   6991.28, 223721.56, 223721.56
 
+PSGFrequenciesFC:
+		dc.w $3FF, $3FF, $3FF, $3FF, $3F7, $3BE, $388
+		dc.w $356, $326, $2F9, $2CE, $2A5, $280, $25C, $23A, $21A, $1FB, $1DF, $1C4
+		dc.w $1AB, $193, $17D, $167, $153, $140, $12E, $11D, $10D,  $FE,  $EF,  $E2
+		dc.w  $D6,  $C9,  $BE,  $B4,  $A9,  $A0,  $97,  $8F,  $87,  $7F,  $78,  $71
+		dc.w  $6B,  $65,  $5F,  $5A,  $55,  $50,  $4B,  $47,  $43,  $40,  $3C,  $39
+		dc.w  $36,  $33,  $30,  $2D,  $2B,  $28,  $26,  $24,  $22,  $20,  $1F,  $1D,  $1B,  $1A,    0
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 ; sub_72A5A:
