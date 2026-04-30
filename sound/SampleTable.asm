@@ -54,8 +54,8 @@ SampleTable:
 	dcSample	TYPE_DPCM,	CTC1_Tick,	16000					; $A5
 
 	; Mega Man 8 Samples
-	dcSample	TYPE_PCM,	MM8Kick,		16000					; $E8
-	dcSample	TYPE_PCM,	MM8Snare,	16000						; $E9
+	dcSample	TYPE_PCM,	MM8Kick,		22050					; $E8
+	dcSample	TYPE_PCM,	MM8Snare,		22050						; $E9
 
 	dcSample	TYPE_DPCM,	CF_DrumLoopA,	15830				; $A6
 	dcSample	TYPE_DPCM,	CF_DrumLoopB,	15880				; $A7
