@@ -58,6 +58,10 @@ dPokeLowTimpani				ds.b 1
 ; Conic 1 DAC
 dTick:						ds.b 1
 
+; Mega Man 8 Samples
+dKickMM8					ds.b 1
+dSnareMM8					ds.b 1
+
 ; Clinton Fucker
 dClintLoopA:				ds.b 1
 dClintLoopB:				ds.b 1
@@ -71,11 +75,28 @@ dEagSoft_Speech				ds.b 1	; GMZ
 dWeebTrash1					ds.b 1
 dWeebTrash2					ds.b 1
 dWeebTrash3					ds.b 1
+dDAMN						ds.b 1
+
+; Windows 95 Rock lyrics samples
+;dmsr_windows				ds.b 1
+;dmsr_better					ds.b 1
+;dmsr_Change					ds.b 1
+;dmsr_gates					ds.b 1
+;dmsr_live					ds.b 1
+;dmsr_microsoft				ds.b 1
+;dmsr_mouse					ds.b 1
+;dmsr_much					ds.b 1
+;dmsr_never					ds.b 1
+;dmsr_ooh1					ds.b 1
+;dmsr_ooh2					ds.b 1
+;dmsr_ooh3					ds.b 1
+;dmsr_ooh4					ds.b 1
+;dmsr_w95					ds.b 1
+;dmsr_w95_2					ds.b 1
 
 dNull						ds.b 1
 
 ; In-Game SFX Samples
-dDAMN						ds.b 1
 dLetsGOO					ds.b 1
 dBoik						ds.b 1
 dQuakeJump					ds.b 1
@@ -122,23 +143,6 @@ dW98IPC						ds.b 1
 dMeow1						ds.b 1
 dMeow2						ds.b 1
 
-; Windows 95 Rock lyrics samples
-;dmsr_windows				ds.b 1
-;dmsr_better					ds.b 1
-;dmsr_Change					ds.b 1
-;dmsr_gates					ds.b 1
-;dmsr_live					ds.b 1
-;dmsr_microsoft				ds.b 1
-;dmsr_mouse					ds.b 1
-;dmsr_much					ds.b 1
-;dmsr_never					ds.b 1
-;dmsr_ooh1					ds.b 1
-;dmsr_ooh2					ds.b 1
-;dmsr_ooh3					ds.b 1
-;dmsr_ooh4					ds.b 1
-;dmsr_w95					ds.b 1
-;dmsr_w95_2					ds.b 1
-
 dEggNo						ds.b 1
 dfunnyb_utthole				ds.b 1
 d2kki						ds.b 1
@@ -151,11 +155,6 @@ dGenesisCan3				ds.b 1
 ; Ollie Samples
 dOllieGameTap				ds.b 1
 dOllieWahoo					ds.b 1
-
-
-; Mega Man 8 Samples
-dKickMM8					ds.b 1
-dSnareMM8					ds.b 1
 
 ; SEGA Samples
 dSega						ds.b 1

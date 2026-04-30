@@ -53,6 +53,10 @@ SampleTable:
 	dcSample	TYPE_DPCM,	ShortTimpani,	7500				; $A4
 	dcSample	TYPE_DPCM,	CTC1_Tick,	16000					; $A5
 
+	; Mega Man 8 Samples
+	dcSample	TYPE_PCM,	MM8Kick,		16000					; $E8
+	dcSample	TYPE_PCM,	MM8Snare,	16000						; $E9
+
 	dcSample	TYPE_DPCM,	CF_DrumLoopA,	15830				; $A6
 	dcSample	TYPE_DPCM,	CF_DrumLoopB,	15880				; $A7
 
@@ -66,10 +70,28 @@ SampleTable:
 	dcSample	TYPE_DPCM,	WeebTrash2,	14000
 	dcSample	TYPE_DPCM,	WeebTrash3,	14000
 
+	dcSample	TYPE_DPCM,	DAMN,		16000,	FLAGS_SFX		; $BA
+
+	;BSOD/w95 rock
+	;dcSample	TYPE_DPCM,	w95r_windows,16000					; $D0
+	;dcSample	TYPE_DPCM,	w95r_better,16000					; $D1
+	;dcSample	TYPE_DPCM,	w95r_changeLife,16000				; $D2
+	;dcSample	TYPE_DPCM,	w95r_gates,	16000					; $D3
+	;dcSample	TYPE_DPCM,	w95r_live,	16000					; $D4
+	;dcSample	TYPE_DPCM,	w95r_microsoft,16000				; $D5
+	;dcSample	TYPE_DPCM,	w95r_mouse,	16000					; $D6
+	;dcSample	TYPE_DPCM,	w95r_much,	16000					; $D7
+	;dcSample	TYPE_DPCM,	w95r_neverbeaten,	16000			; $D8
+	;dcSample	TYPE_DPCM,	w95r_ooh1,	16000					; $D9
+	;dcSample	TYPE_DPCM,	w95r_ooh2,	16000					; $DA
+	;dcSample	TYPE_DPCM,	w95r_ooh3,	16000					; $DB
+	;dcSample	TYPE_DPCM,	w95r_ooh4,	16000					; $DC
+	;dcSample	TYPE_DPCM,	w95r_w95,	16000					; $DD
+	;dcSample	TYPE_DPCM,	w95r_w95_2,	16000					; $DE
+
 	dcSample	TYPE_DPCM,	dummy,	8000,					; Used to cut samples off in songs
 
 	; In-Game SFX SAMPLES
-	dcSample	TYPE_DPCM,	DAMN,		16000,	FLAGS_SFX		; $BA
 	dcSample	TYPE_PCM,	letsgoeee,	8000,	FLAGS_SFX		; $A7
 	dcSample	TYPE_PCM,	Boik,		5250,	FLAGS_SFX		; $A8 
 	dcSample	TYPE_PCM,	QuakeJump,	0,	FLAGS_SFX			; $A9 
@@ -113,22 +135,6 @@ SampleTable:
 	dcSample	TYPE_DPCM,	w98ipc,		16000,	FLAGS_SFX		; $CD
 	dcSample	TYPE_DPCM,	meow,		16000,	FLAGS_SFX		; $CE
 	dcSample	TYPE_DPCM,	meow,		8000,	FLAGS_SFX		; $CF
-	;BSOD/w95 rock
-	;dcSample	TYPE_DPCM,	w95r_windows,16000					; $D0
-	;dcSample	TYPE_DPCM,	w95r_better,16000					; $D1
-	;dcSample	TYPE_DPCM,	w95r_changeLife,16000				; $D2
-	;dcSample	TYPE_DPCM,	w95r_gates,	16000					; $D3
-	;dcSample	TYPE_DPCM,	w95r_live,	16000					; $D4
-	;dcSample	TYPE_DPCM,	w95r_microsoft,16000				; $D5
-	;dcSample	TYPE_DPCM,	w95r_mouse,	16000					; $D6
-	;dcSample	TYPE_DPCM,	w95r_much,	16000					; $D7
-	;dcSample	TYPE_DPCM,	w95r_neverbeaten,	16000			; $D8
-	;dcSample	TYPE_DPCM,	w95r_ooh1,	16000					; $D9
-	;dcSample	TYPE_DPCM,	w95r_ooh2,	16000					; $DA
-	;dcSample	TYPE_DPCM,	w95r_ooh3,	16000					; $DB
-	;dcSample	TYPE_DPCM,	w95r_ooh4,	16000					; $DC
-	;dcSample	TYPE_DPCM,	w95r_w95,	16000					; $DD
-	;dcSample	TYPE_DPCM,	w95r_w95_2,	16000					; $DE
 
 	; Splash Screens
 	dcSample	TYPE_PCM,	EggNo,		11297					; $DF
@@ -145,10 +151,6 @@ SampleTable:
 	; Ollie Samples
 	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $E6
 	dcSample	TYPE_DPCM,	OllieWahoo,	16000					; $E7
-	
-	; Mega Man 8 Samples
-	dcSample	TYPE_PCM,	MM8Kick,		16000					; $E8
-	dcSample	TYPE_PCM,	MM8Snare,	16000						; $E9
 
 	; SEGA Samples
 	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $EA
@@ -300,9 +302,6 @@ SampleTable:
 	;incdac	w95r_ooh4, "sound/dac/GenesisDoes/w95r_ooh4.dpcm"
 	;incdac	w95r_w95, "sound/dac/GenesisDoes/w95r_w95.dpcm"
 	;incdac	w95r_w95_2, "sound/dac/GenesisDoes/w95r_w95_2.dpcm"
-
-
-
 
 ; ---------------------------------------------------------------
 ; Splash Screen Samples

@@ -2,17 +2,17 @@ MM8_StageSelect_Header:
 	smpsHeaderStartSong 3
 	smpsHeaderVoice		MM8_StageSelect_Voices
 	smpsHeaderChan		$06,	$03
-	smpsHeaderTempo		$01,	$00
+	smpsHeaderTempo		$01,	$01
 
 	smpsHeaderDAC		MM8_StageSelect_DAC
 	smpsHeaderFM		MM8_StageSelect_FM1,	smpsPitch00,	$00
+	smpsHeaderFM		MM8_StageSelect_FM5,	smpsPitch00,	$00
 	smpsHeaderFM		MM8_StageSelect_FM2,	smpsPitch00,	$00
 	smpsHeaderFM		MM8_StageSelect_FM3,	smpsPitch00,	$00
 	smpsHeaderFM		MM8_StageSelect_FM4,	smpsPitch00,	$00
-	smpsHeaderFM		MM8_StageSelect_FM5,	smpsPitch00,	$00
-	smpsHeaderPSG		MM8_StageSelect_PSG1,	smpsPitch00,	$00,	$00,	$00
-	smpsHeaderPSG		MM8_StageSelect_PSG2,	smpsPitch00,	$00,	$00,	$00
-	smpsHeaderPSG		MM8_StageSelect_PSG3,	smpsPitch00,	$00,	$00,	$00
+	smpsHeaderPSG		MM8_StageSelect_PSG1,	$0C,	$01,	$00,	$00
+	smpsHeaderPSG		MM8_StageSelect_PSG2,	$0C,	$01,	$00,	$00
+	smpsHeaderPSG		MM8_StageSelect_PSG3,	$00,	$02,	$00,	$00
 
 ; FM1 Data
 MM8_StageSelect_FM1:
@@ -521,23 +521,23 @@ MM8_StageSelect_PSG3:
 	smpsPSGform	$E7
 MM8_StageSelect_Loop08:
 	smpsAlterNote	$01
-	dc.b		nA5,	$01
+	dc.b		nMaxPSG2,	$01
 	smpsPSGAlterVol	$04
 	smpsAlterNote	$01
-	dc.b		nA5
+	dc.b		nMaxPSG2
 	smpsPSGAlterVol	$05
 	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$15
+	dc.b		nMaxPSG2,	nRst,	$15
 	smpsPSGAlterVol	$F7
 	smpsLoop	$00,	$1F,	MM8_StageSelect_Loop08
 	smpsAlterNote	$01
-	dc.b		nA5,	$01
+	dc.b		nMaxPSG2,	$01
 	smpsPSGAlterVol	$04
 	smpsAlterNote	$01
-	dc.b		nA5
+	dc.b		nMaxPSG2
 	smpsPSGAlterVol	$05
 	smpsAlterNote	$01
-	dc.b		nA5,	nRst,	$09
+	dc.b		nMaxPSG2,	nRst,	$09
 	smpsPSGAlterVol	$F7
 	smpsJump	MM8_StageSelect_PSG3
 
