@@ -215,7 +215,7 @@ splash_turd macro routine
 	splash_liquid	Yume2kki
 
 	;!@ GenesisDoes
-;	splash_solid	ChadWarden,	$20, 0, _pcm, dsupbeaches,		60*7
+	splash_solid	ChadWarden,	$20, 0, _pcm, dsupbeaches,		60*7
 	splash_solid	Compile,	$40, 1, _bgm, $00,			60*3
 	splash_solid	GenesisDoes1,	$40, 1, _pcm, dGenesisDoes1,		60*10
 	
