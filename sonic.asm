@@ -3099,6 +3099,15 @@ GM_Level:
 		bsr.w	QueueSound2 ; fade out music
 		jsr	(MegaPCM_StopPlayback).l
 
+		cmpi.b	#id_WIN,(v_zone).w	; is level Windows?
+		bne.s	Level_ClearWinBoot			; if not, don't do the juicy part
+		tst.b	(Win98LogoSYSSeen).w	; have we seen that already?
+		bne.s	Level_NoMusicFade		; if yes, skip
+		move.b	#'W',(Win98LogoSYSSeen).w	; now set the already seen variable
+		jsr		(GM_LogoSYS).l	; hehehe
+		bra.s	Level_NoMusicFade
+Level_ClearWinBoot:
+		clr.b	(Win98LogoSYSSeen).w
 Level_NoMusicFade:
 		bsr.w	ClearPLC
 		bsr.w	PaletteFadeOut
@@ -6853,6 +6862,7 @@ Art_LivesNums:	binclude	"artunc/Lives Counter Numbers.bin" ; 8x8 pixel numbers o
 		include "conimodes/fetus/GM_Fetus.asm"
 		include "conimodes/foxyboo/GM_FoxyBoo.asm"
 		include "conimodes/sorrynothing/GM_SorryNothing.asm"
+		include "conimodes/win98/GM_Win98.asm"
 		include "_gamemode/ThanatosCredits/Main.asm"
 
 		include	"ContinueScreen/Continue.asm"

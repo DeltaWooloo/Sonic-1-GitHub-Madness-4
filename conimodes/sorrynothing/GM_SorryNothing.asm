@@ -61,6 +61,7 @@ SorryNothing_loop:
 		jsr		(WaitForVBla).l
 		tst.w	(v_demolength).w
 		bne.s	SorryNothing_loop
+		lea	(vdp_control_port).l,a6
 		move.w	#$8C81,(a6)	; set to H40 mode
 		jmp	(WinXP_CLearPal).l
 ;		rts

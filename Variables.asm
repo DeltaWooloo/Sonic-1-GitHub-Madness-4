@@ -481,10 +481,11 @@ v_bg2_scroll_flags_dup:	ds.w	1
 v_bg3_scroll_flags_dup:	ds.w	1
 Saved_music: equ $FFFFFFCB ; byte
 
-			ds.b	$40		; unused
+			ds.b	$3E		; unused
 v_timingandscreenvariables_end:
-Win98LogoSYSSeen:			ds.b	$1
-							ds.b	$1		; unused
+Win98LogoSYSSeen:			ds.b	1
+					ds.b	1
+					ds.w	1
 FM_PitchUp:			ds.b	1
 PSG_PitchUp:		ds.b	1
 
