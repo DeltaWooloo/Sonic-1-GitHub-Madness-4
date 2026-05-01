@@ -143,6 +143,8 @@ Got_NextLevel:	; Routine $A
 		bsr.w	DisplaySprite
 
 GotoNextLevel:
+		clr.b	(FM_PitchUp).w	; clear Firecore
+		clr.b	(PSG_PitchUp).w	; clear Firecore
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
 		lsl.w	#3,d0

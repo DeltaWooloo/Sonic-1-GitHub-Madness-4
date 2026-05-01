@@ -331,7 +331,7 @@ Pow_Randomiser:
 		dc.l	.nothing			;$01 / $04
 		dc.l	.nothing			;$02 / $08
 		dc.l	.nothing			;$03 / $0C
-		dc.l	.superlucky			;$04 / $10
+		dc.l	superlucky			;$04 / $10
 		dc.l	Pow_GetLife			;$05 / $14
 		dc.l	.getrings			;$06 / $18
 		dc.l	Pow_Invinciblity	;$07 / $1C
@@ -351,7 +351,8 @@ Pow_Randomiser:
 		dc.l	.timeforads			;$15 / $54
 		dc.l	.die				;$16 / $58
 		dc.l	.getjumpscared		;$17 / $5C
-		dc.l	.toolimited			;$18 / $60
+		dc.l    Firecore
+		dc.l	.toolimited			;$19 / $64
 		
 		;!@ GenesisDoes: VDP register fuckery		
 		dc.l	.vdp00_m1_reg		;x $19 / $64 - 	Mess wtih VDP register 	$00 (Mode Register 1)
@@ -373,10 +374,9 @@ Pow_Randomiser:
 		dc.l	.lampoil			;x $23 / $9C - 	~			New lamppost
 		dc.l	.rAndCRiftApart		;x $24 / $A0 -	~			RiftToGo
 		;!@ GenesisDoes: Other
-		dc.l	.crash				;x $25 / $94 - 	Crash the game (illegal); Task fails successfully!
+		dc.l	crash				;x $25 / $94 - 	Crash the game (illegal); Task fails successfully!
 		dc.l	.jukebox			;x $26 / $A8 - 	Play random song
 		dc.l	Pow_SlowShoes		;x $27 / $AC -  Slow down shoes
-
 		; ML: the "why did no one do these already"s
 		dc.l	.newchara		;$28 / $A0
 .powtableend:
@@ -879,9 +879,13 @@ Pow_Randomiser:
 		KDebug.WriteLine "Pow_Randomizer.jukebox ID: %<.b d0>"
 		jmp	(QueueSound1).l					; play song
 		rts
- 
+ Firecore:
+ 		move.b	#$FC,(FM_PitchUp).w	; ok
+		move.b	#$F9,(PSG_PitchUp).w	; ok
+		rts
+
  ;Your under arrest. ILLEGAL
-.crash:		;Bandicoot, duh
+crash:		;Bandicoot, duh
 		KDebug.WriteLine "Pow_Randomizer.crash"
 		move.b	#bgm_Stop,d0			; stop the music
 		jsr	(QueueSound2).l
@@ -891,7 +895,7 @@ Pow_Randomiser:
 		bra.w	Pow_GetErrorMsg
 
 ; ===========================================================================
-.superlucky:	; Congrats, you get all power-ups
+superlucky:	; Congrats, you get all power-ups
 		move.w	#77,(v_rings).w		; make your ring count 77 because you are super lucky
 		ori.b	#1,(f_ringcount).w	; update the ring counter
 		move.b	#1,(v_shoes).w		; speed up the BG music
