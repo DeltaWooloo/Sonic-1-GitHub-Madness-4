@@ -481,9 +481,10 @@ v_bg2_scroll_flags_dup:	ds.w	1
 v_bg3_scroll_flags_dup:	ds.w	1
 Saved_music: equ $FFFFFFCB ; byte
 
-			ds.b 	1
-			ds.b	$43		; unused
+			ds.b	$42		; unused
 v_timingandscreenvariables_end:
+FM_PitchUp:			ds.b	1
+PSG_PitchUp:		ds.b	1
 
 v_adverttimer:		ds.l	1
 v_levseldelay:		ds.w	1		; level select - time until change when up/down is held
