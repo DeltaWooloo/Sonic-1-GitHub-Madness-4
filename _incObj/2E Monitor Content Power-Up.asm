@@ -378,7 +378,8 @@ Pow_Randomiser:
 		dc.l	.jukebox			;x $26 / $A8 - 	Play random song
 		dc.l	Pow_SlowShoes		;x $27 / $AC -  Slow down shoes
 		dc.l	FirecorePSGOnly		;x $27 / $AC -  Slow down shoes
-		dc.l	FirecoreFIXER		;x $27 / $AC -  Firecore fixer pitcher, does the opposite of "Firecore" Code 
+		dc.l	FirecoreFIXER		;x $27 / $AC -  Firecore fixer pitcher, does the opposite of "Firecore" Code
+        dc.l    FirecoreFMOnly      ; self explanitory....		
 		;Aka it pitches it up so it sounds right on firecores?? on emulators it sounds pitched up... yeah idk how to explain
 		; ML: the "why did no one do these already"s
 		dc.l	.newchara		;$28 / $A0
@@ -882,12 +883,20 @@ Pow_Randomiser:
 		KDebug.WriteLine "Pow_Randomizer.jukebox ID: %<.b d0>"
 		jmp	(QueueSound1).l					; play song
 		rts
+;------------------------------------------------------------------
+;No Pitches????
+;------------------------------------------------------------------
 Firecore:
  		move.b	#$FC,(FM_PitchUp).w	; ok
 		move.b	#$F9,(PSG_PitchUp).w	; ok
 		rts
 FirecorePSGOnly:
+ 		move.b	#$00,(FM_PitchUp).w	; ok
 		move.b	#$F9,(PSG_PitchUp).w	; ok
+		rts
+FirecoreFMOnly:
+ 		move.b	#$FC,(FM_PitchUp).w	; ok
+		move.b	#$00,(PSG_PitchUp).w	; ok
 		rts
 FirecoreFIXER:
  		move.b	#$04,(FM_PitchUp).w	; ok

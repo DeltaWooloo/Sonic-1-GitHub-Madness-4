@@ -94,7 +94,7 @@ Swing_DelLoop:
 		lsl.w	#object_size_bits,d0
 		addi.l	#v_objspace&$FFFFFF,d0
 		movea.l	d0,a1
-		bsr.w	DeleteChild
+		jsr	DeleteChild
 		dbf	d2,Swing_DelLoop ; repeat for length of chain
 		rts
 ; ===========================================================================
