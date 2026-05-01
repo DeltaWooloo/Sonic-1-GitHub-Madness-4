@@ -68,4 +68,5 @@ palid_ARZ:				makePalEntry	Pal_ARZ, 			v_palette_line_2
 palid_ARZWater:			makePalEntry	Pal_ARZWater, 		v_palette_line_1
 palid_ARZSonWater:		makePalEntry	Pal_ARZSonWater,		v_palette_line_1
 palid_PWisp:			makePalEntry	Pal_PWisp, 			v_palette_line_2
+palid_MSX:		makePalEntry	Pal_MSX,		v_palette_line_1
 	even
