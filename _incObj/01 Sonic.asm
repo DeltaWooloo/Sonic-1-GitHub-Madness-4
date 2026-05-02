@@ -530,11 +530,7 @@ Sonic_MdJump:
 
 ; Obj01_MdRoll:
 Sonic_MdRoll:
-		tst.b	obPinball(a0)
-		bne.s	.nojump
 		bsr.w	Sonic_Jump
-	
-.nojump:
 		bsr.w	Sonic_RollRepel
 		bsr.w	Sonic_RollSpeed
 		bsr.w	Sonic_LevelBound
@@ -1011,31 +1007,12 @@ loc_131A6:
 loc_131AA:
 		tst.w	obInertia(a0)	; is Sonic moving?
 		bne.s	loc_131CC	; if yes, branch
-		tst.b	obPinball(a0) ; is the pinball mode flag set?
-		bne.s	.KeepRolling
 		bclr	#2,obStatus(a0)
 		bsr.w	GetOtherPlayerData
 		move.b	pdat.height(a5),obHeight(a0)
 		move.b	pdat.width(a5),obWidth(a0)
 		move.b	#id_Wait,obAnim(a0) ; use "standing" animation
 		subq.w	#5,obY(a0)
-		
-		
-.KeepRolling:
-		move.w	#$400,obInertia(a0)
-		btst	#0,obStatus(a0)
-		beq.s	.resetscreen
-		neg.w	obInertia(a0)
-
-; resets the screen to normal while rolling, like Obj01_ResetScr
-; loc_1A85A:
-.resetscreen:
-;		cmpi.w	#(screen_height/2)-16,(Camera_Y_pos_bias).w	; is screen in its default position?
-;		beq.s	Sonic_SetRollSpeeds		; if yes, branch
-;		bhs.s	+				; depending on the sign of the difference,
-;		addq.w	#4,(Camera_Y_pos_bias).w	; either add 2
-;+		subq.w	#2,(Camera_Y_pos_bias).w	; or subtract 2
-		rts			; if you figure how to deal with it, remove the rts
 
 loc_131CC:
 		move.b	obAngle(a0),d0
@@ -1471,8 +1448,6 @@ Sonic_JumpHeight:
 		rts
 
 .capyvel:
-		tst.b	obPinball(a0)	; is Sonic charging a spindash or in a rolling-only area?
-		bne.s	.return2		; if yes, return
 		cmpi.w	#-$FC0,obVelY(a0)
 		bge.s	.return2
 		move.w	#-$FC0,obVelY(a0)
@@ -1835,9 +1810,6 @@ locret_1379E:
 
 
 Sonic_ResetOnFloor:
-		tst.b	obPinball(a0)
-		bne.w	.noshield
-		move.b	#id_Walk,obAnim(a0)
 		btst	#4,obStatus(a0)	; is Sonic roll-jumping?
 		beq.s	.notrolljump	; if not, skip.
 		nop	; Unknown removed code.
