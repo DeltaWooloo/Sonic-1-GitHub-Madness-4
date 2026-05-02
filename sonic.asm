@@ -4165,6 +4165,7 @@ TryAg_Exit:
 		include	"_incObj/8B Try Again & End Eggman.asm"
 		include "_anim/Try Again & End Eggman.asm"
 		include	"_incObj/8C Try Again Emeralds.asm"
+		include	"_incObj/90 Pinball Mode.asm"
 Map_EEgg:	include	"_maps/Try Again & End Eggman.asm"
 
 ; ---------------------------------------------------------------------------
