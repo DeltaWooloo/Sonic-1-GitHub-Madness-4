@@ -33,8 +33,14 @@ GM_Continue:
 	move.b	#5, (v_objspace+$32)
 
 	; Draw stuff to screen
-	bsr.w 	ContinueText_Init		; initialize text renderer
-	bsr.w 	.DrawContinue			; draw main continue screen
+
+	;cmp.b	#00, v_characterid ;Teeth Tonic
+	;beq	.DrawContinue
+	;cmp.b	#01, v_characterid ;Needlemouse
+	;beq	.DrawContinueNeedlemouse
+
+	bsr.w 	ContinueText_Init		
+	bsr.w 	.DrawContinue			
 	jsr	PaletteFadeIn
 
 ; Continue screen routine
@@ -149,6 +155,31 @@ GM_Continue:
 	
 	rts
 
+;WIP routine for drawing needlemouse's game over
+;.DrawContinueNeedlemouse ;the hypothetical needlemouse continue screen
+	;moveq	#palid_FelixDecision, d0 ;gonna have to use this since idek how palettes load in here
+	;jsr	PalLoad_Fade
+	; Tiles
+	;locVRAM $0
+	;lea	(.decision_needlemouse_fart).l, a0
+	;jsr	NemDec
+
+	; Tilemap
+	;Continue_DrawMap	.decision_needlemouse_mapfuckbitchcuck
+
+	; Text
+	;Continue_DrawText	.Text_DecisionContinues, $1, $8
+	;Continue_DrawText	.Text_DecisionContinue, $3, $8
+	;Continue_DrawText	.Text_YesNo, $1A, $20
+
+	; Continues
+	;move.l	#$409A0003, 4(a6)
+	;move.w	#$6381, d0
+	;add.b	(v_continues), d0
+	;move.w 	d0, (a6)
+
+	;rts
+
 .DrawGameOver:
 	; Palette
 	moveq	#palid_FelixGameOver, d0
@@ -171,10 +202,16 @@ GM_Continue:
 
 ; ---------------------------------------------------------------------------
 ; Graphics Data except for palette because sonic 1 is fucking retarded
+; oh okay lol -ponpon
 ; ---------------------------------------------------------------------------
 .Decision_Map: incbin "ContinueScreen/Graphics/Tile/Decision/Map.bin"
 	even
 .Decision_Art: incbin "ContinueScreen/Graphics/Tile/Decision/Tiles.bin"
+	even
+
+.decision_needlemouse_mapfuckbitchcuck: incbin "ContinueScreen/Graphics/Tile/decide_needlemouse/Map.bin"
+	even
+.decision_needlemouse_fart: incbin "ContinueScreen/Graphics/Tile/decide_needlemouse/Tiles.bin"
 	even
 
 .GameOver_Map: incbin "ContinueScreen/Graphics/Tile/GameOver/Map.bin"
