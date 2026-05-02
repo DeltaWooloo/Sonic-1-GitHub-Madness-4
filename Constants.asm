@@ -508,6 +508,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_BLIND_MODE
 	nextenum bgm_FrontHook
 	nextenum bgm_MM8StageSelect
+	nextenum bgm_Eraser
 	
 	; Keep this last
 	nextenum bgm__Last	

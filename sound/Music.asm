@@ -148,6 +148,7 @@ MusicIndex:
 	bgmdef s1TempotoS3($03), Mus_BLIND_MODE
 	bgmdef s1TempotoS3($03), Mus_FrontHook
 	bgmdef $01, Mus_MM8StageSelect
+	bgmdef s1TempotoS3($A0), Mus_Eraser
 
 	;!@ bgmwarning	MusicIndex,4
 
@@ -395,7 +396,9 @@ Mus_BLIND_MODE:		include	"music/TIS_Tracks/BLIND_MODE.asm"
 	even
 Mus_FrontHook:		include	"music/TIS_Tracks/FrontinHook.asm"
 	even
-Mus_MM8StageSelect:		include	"music/SaneWay/MM8 - Stage Select.asm"
+Mus_MM8StageSelect:	include	"music/SaneWay/MM8 - Stage Select.asm"
+	even
+Mus_Eraser:		include	"music/DaxKatter/Mus - Eraser VS.asm"
 	even
 ;!@ Dummy song; meant for placehold slot, silence, whatever
 Mus_dummy:		include	"music/dummy.asm"	; !@ GD
