@@ -579,6 +579,8 @@ VBlank:
 		andi.w	#$3E,d0
 		move.w	VBla_Index(pc,d0.w),d0
 		jsr	VBla_Index(pc,d0.w)
+		move.w	(v_jpadhold1+2).w,d7
+		add.w	d7,(v_jpadhold1).w
 VBla_Music:
 		enable_ints
 		;!@ GD: f_hangSMPS flag. If set, then stop update music (hang sound driver)
@@ -868,7 +870,6 @@ VBla_16:
 ; sub_106E:
 VBla_StandardTransfers:
 		bsr.w	ReadJoypads
-
 		writeVRAM	v_spritetablebuffer,vram_sprites
 		writeVRAM	v_hscrolltablebuffer,vram_hscroll
 		tst.b	(f_wtr_state).w			; is the screen completely underwater?
