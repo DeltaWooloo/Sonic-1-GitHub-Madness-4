@@ -580,7 +580,7 @@ VBlank:
 		move.w	VBla_Index(pc,d0.w),d0
 		jsr	VBla_Index(pc,d0.w)
 		move.w	(v_jpadhold1+2).w,d7
-		add.w	d7,(v_jpadhold1).w
+		or.w	d7,(v_jpadhold1).w
 VBla_Music:
 		enable_ints
 		;!@ GD: f_hangSMPS flag. If set, then stop update music (hang sound driver)
