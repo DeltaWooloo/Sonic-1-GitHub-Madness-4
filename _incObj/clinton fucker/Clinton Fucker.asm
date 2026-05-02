@@ -57,14 +57,13 @@ Clinton_WinInit:
 	move.l	d0,(a0)+
 	move.l	d0,(a0)+
 	move.l	d0,(a0)+
-
+	clearRAM v_lvlobjspace
 	clearRAM vscroll_buffer,vscroll_buffer_end
 	clearRAM v_spritetablebuffer,v_spritetablebuffer_end
 	clearRAM v_hscrolltablebuffer,v_hscrolltablebuffer_end_padded
 
 	cmpi.b	#4,submode
 	bne.s	.Fail
-	pcm	dClintonWin
 	move.b	#8,submode.w
 	move.w	#$FFFF,v_generictimer.w
 	move.l  #Art_ClintonWin,d1
@@ -77,9 +76,12 @@ Clinton_WinInit:
 	copyTilemap	MapScr_ClintonWin,vram_bg,40,28
 
 	startZ80
+	enable_ints
+	move.b	#$1A,(v_vbla_routine).w		; wait
+	jsr	WaitForVBla
+	pcm	dClintonWin
 	bra.s	.Skip
 .Fail:
-	pcm	dClintonFail
 	move.b	#8,submode.w
 	move.w	#60*3,v_generictimer.w
 	move.l  #Art_ClintonFail,d1
@@ -93,6 +95,9 @@ Clinton_WinInit:
 	copyTilemap	MapScr_ClintonFail,vram_bg,40,28
 
 	startZ80
+	move.b	#$1A,(v_vbla_routine).w		; wait
+	jsr	WaitForVBla
+	pcm	dClintonFail
 .Skip:	
 	enable_ints
 	move.b	#$1A,(v_vbla_routine).w		; garbage will show for a frame without this
