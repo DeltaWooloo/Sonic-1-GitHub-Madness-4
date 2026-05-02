@@ -62,14 +62,13 @@ Cutscene_Init:
 	move.b	#0,scrollrno.w
 ;	move.l	#StringTest,stringaddr.w
 ;	move.b	#8,stringtime.w
-
+	
 .Wait:
 	move.b	#$1C,(v_vbla_routine).w
 	jsr	WaitForVBla
 	jsr	RunPLC
 	tst.l	v_plc_buffer
 	bne.s	.Wait
-
 ;	jsr	PalFadeIn
 	rts
 
@@ -90,6 +89,7 @@ Cutscene_InTonic:
 	bra.w	Cutscene_InsideTonicIntro
 
 _cutsceneSub:
+	move.w	#$9294,VDPCTRL		; window vertical position
 	move.b	#$1C,(v_vbla_routine).w
 	jsr	WaitForVBla
 	jmp	RunPLC
@@ -102,6 +102,7 @@ VBLANK_CUTSCENE:
 	jsr	VBla_StandardTransfers
 	jsr	ProcessDMAQueue
 	jsr	ProcessDPLC_9Tiles
+	move.w	#$9294,VDPCTRL		; window vertical position
 	tst.w	v_generictimer.w
 	beq.s	.skip
 	sub.w	#1,v_generictimer.w
