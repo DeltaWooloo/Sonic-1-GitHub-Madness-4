@@ -2,7 +2,7 @@
 ; Object pointers
 ; ---------------------------------------------------------------------------
 ptr_SonicPlayer:	dc.l SonicPlayer	; $01
-ptr_Katsi:		dc.l Katsi
+ptr_PinballMode:	dc.l PinballMode
 ptr_Obj03:		dc.l Obj_ShooterEnemy	; GMZ
 ptr_Arif:		dc.l ArifBoss
 ptr_DaxKatterD:		dc.l Obj_DaxKatterD
@@ -145,7 +145,6 @@ ptr_ExplosionSHC:	dc.l ExplosionSHC
 ptr_Roaring_Knight:	dc.l Obj_Roaring_Knight
 ptr_Sunset:		dc.l ObjSunset
 ;ptr_RobiWK:		dc.l OBJ_RobiWK_Logo
-ptr_Obj90:		dc.l NullObject
 prt_NeedleBoss		dc.l ExObjNeedle
 peter_CBZBoss1		dc.l BossEiza
 ptr_OldJohn:		dc.l ObjOldJohn
@@ -154,7 +153,7 @@ NullObject:
 		jmp	(DeleteObject).l	; It would be safer to have this instruction here, but instead it just falls through to ObjectFall
 
 id_SonicPlayer:		equ ((ptr_SonicPlayer-Obj_Index)/4)+1		; $01
-id_Katsi:		equ ((ptr_Katsi-Obj_Index)/4)+1
+id_PinballMode:		equ ((ptr_PinballMode-Obj_Index)/4)+1
 id_Obj03:		equ ((ptr_Obj03-Obj_Index)/4)+1
 id_Arif:		equ ((ptr_Arif-Obj_Index)/4)+1
 id_DaxKatterD:		equ ((ptr_DaxKatterD-Obj_Index)/4)+1
@@ -296,7 +295,6 @@ id_TryChaos:		equ ((ptr_TryChaos-Obj_Index)/4)+1
 id_ExplosionSHC:	equ ((ptr_ExplosionSHC-Obj_Index)/4)+1
 id_Roaring_Knight:	equ ((ptr_Roaring_Knight-Obj_Index)/4)+1
 id_Sunset:		equ ((ptr_Sunset-Obj_Index)/4)+1
-;id_RobiWK_Logo:		equ ((ptr_RobiWK-Obj_Index)/4)+1
 id_NeedleBoss:		equ ((prt_NeedleBoss-Obj_Index)/4)+1
 id_EizaBoss:		equ ((peter_CBZBoss1-Obj_Index)/4)+1
 id_OldJohnBoss:		equ ((ptr_OldJohn-Obj_Index)/4)+1

@@ -3314,10 +3314,10 @@ Level_SkipTtlCard:
 		;jsr	(ConvertCollisionArray).l
 		;bsr.w	ColIndexLoad
 		bsr.w	LZWaterFeatures
-		cmpi.w	#(id_DVZ<<8)+3,(v_zone).w	; skip over dvz act 4
-		bne.s	.cont
-		move.b	#id_Katsi,(v_player).w ; separate object for dvz act 4
-		bra.s	Level_ChkWater
+;		cmpi.w	#(id_DVZ<<8)+3,(v_zone).w	; skip over dvz act 4
+;		bne.s	.cont
+;		move.b	#id_Katsi,(v_player).w ; separate object for dvz act 4
+;		bra.s	Level_ChkWater
 .cont:
 		move.b	#id_SonicPlayer,(v_player).w ; load Sonic object
 		move.b	#id_HUD,(v_hud).w ; load HUD object
@@ -4165,6 +4165,7 @@ TryAg_Exit:
 		include	"_incObj/8B Try Again & End Eggman.asm"
 		include "_anim/Try Again & End Eggman.asm"
 		include	"_incObj/8C Try Again Emeralds.asm"
+		include	"_incObj/90 Pinball Mode.asm"
 Map_EEgg:	include	"_maps/Try Again & End Eggman.asm"
 
 ; ---------------------------------------------------------------------------

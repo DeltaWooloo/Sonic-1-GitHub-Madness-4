@@ -40,6 +40,21 @@
 ;REND.TOGGLE	= 7
 ; ===========================================================================
 
+	; give myself some scratch RAM
+
+	phase ramaddr ( $FFFF0000 )
+
+	ds.b	$A*chunk_size
+body_posx:		ds.w	1
+body_posx_onscr:	ds.w	1
+lhand_posx:		ds.w	1
+lhand_posy:		ds.w	1
+rhand_posx:		ds.w	1
+rhand_posy:		ds.w	1
+ref3d_posx:		ds.w	1
+ref3d_posx2:		ds.w	1
+	dephase
+
 ANI.XFLIP = $20
 ANI.YFLIP = $40
 ANI.XYFLIP = $60
@@ -202,7 +217,7 @@ NeedleIntro_FlyOut:
 .Del:
 	jsr	DeleteObject.l
 	move.b	#id_NeedleBoss,(a0)
-	move.b	#4,obSubtype(a0)
+	move.b	#12,obSubtype(a0)
 	rts
 
 ; ----------------------------------------------------------------------------
@@ -702,6 +717,7 @@ NeedleBossBig_Main:
 	bsr.w	_needleChase
 	move.w	#$60,needle.YOrg(a0)
 	move.w	obX(a0),needle.XOrg(a0)
+	move.w	obX(a0),body_posx
 	bra.w	_needleRender3D
 
 NeedleBossBig_BodyInit:
@@ -725,16 +741,17 @@ NeedleBossBig_BodyInit:
 	move.w	#0,obAngle(a0)
 
 NeedleBossBig_Body:
-	move.w	needle.XOrg(a0),obX(a0)
+	move.w	body_posx,obX(a0)
 	bsr.w	_needleChase
 	move.w	#$A8,needle.YOrg(a0)
 	move.w	obX(a0),needle.XOrg(a0)
-	bra.w	_needleRender3D
-
+	bsr.w	_needleRender3D
+	move.w	d0,body_posx_onscr
+	rts
 
 _needleBigSpawnObjs:
 	jsr	(FindFreeObj).l		; spawn body
-	bne.s	.ex
+	bne.w	.ex
 	move.w	obX(a0),obX(a1)
 	move.w	obY(a0),obY(a1)
 	move.b	#id_NeedleBoss,(a1)
@@ -742,7 +759,7 @@ _needleBigSpawnObjs:
 	move.b	#8,obRoutine(a1)
 
 	jsr	(FindFreeObj).l		; spawn left hand
-	bne.s	.ex
+	bne.w	.ex
 
 	move.w	obX(a0),obX(a1)
 	move.w	obY(a0),obY(a1)
@@ -750,12 +767,39 @@ _needleBigSpawnObjs:
 	move.b	#16,obSubtype(a1)
 
 	jsr	(FindFreeObj).l		; spawn right hand
-	bne.s	.ex
+	bne.w	.ex
 	move.w	obX(a0),obX(a1)
 	move.w	obY(a0),obY(a1)
 	move.b	#id_NeedleBoss,(a1)
 	move.b	#16,obSubtype(a1)
 	move.b	#2,obRoutine(a1)
+
+	moveq	#0,d6
+
+	rept	4
+	jsr	(FindFreeObj).l		; arm segs L
+	bne.w	.ex
+	move.b	#id_NeedleBoss,(a1)
+	move.b	#20,obSubtype(a1)
+	move.b	#0,obRoutine(a1)
+	add.w	#$12,d6
+	move.w	d6,needle.ZPos(a1)
+	move.b	#0,nball.MFlag(a1)
+	endr
+
+	moveq	#0,d6
+
+	rept	4
+	jsr	(FindFreeObj).l		; arm segs R
+	bne.w	.ex
+	move.b	#id_NeedleBoss,(a1)
+	move.b	#20,obSubtype(a1)
+	move.b	#0,obRoutine(a1)
+	add.w	#$12,d6
+	move.w	d6,needle.ZPos(a1)
+	move.b	#1,nball.MFlag(a1)
+	endr
+
 .ex
 	rts
 
@@ -771,12 +815,25 @@ HAND_R_STARTX = NLIMIT_RIGHT-196
 HAND_HIGH_Y	= NBOSS_HOVER_Y1
 HAND_MID_Y	= NBOSS_HOVER_Y1+96
 HAND_LOW_Y	= NBOSS_FLOOR_Y
+
 ObjNeedleHand:
 	moveq	#0,d0
 	move.b	obRoutine(a0),d0
 	move.w	.Index(pc,d0.w),d1
 	jsr	.Index(pc,d1.w)
-	jmp	DisplaySprite.l
+
+	; lol
+
+	pea	DisplaySprite.l
+	btst	#0,obStatus(a0)
+	bne.s	.Right
+	move.w	obX(a0),lhand_posx
+	move.w	obY(a0),lhand_posy
+	rts
+.Right:
+	move.w	obX(a0),rhand_posx
+	move.w	obY(a0),rhand_posy
+	rts
 
 ; ----------------------------------------------------------------------------
 .Index:
@@ -814,10 +871,9 @@ _needleinit2:
 NeedleHand_Wait:
 	sub.w	#1,needle.Timer(a0)
 	bne.s	.Go
-	add.b	#2, obRoutine(a0)
+;	add.b	#2, obRoutine(a0)
 	move.w	#256,needle.Timer(a0)
-	move.b	#$80+6, obColType(a0)
-	move.b	#$A,obFrame(a0)
+;	move.b	#$80+6, obColType(a0)
 .Go:
 	cmpi.w	#60*2,needle.Timer(a0)
 	bne.s	.Skip
@@ -912,7 +968,7 @@ _needleLerpToXY:
 
 N3D_CENTERX =	$4A0
 N3D_CENTERY =	$1A0
-
+nball.MFlag = obAngle
 ObjNeedle3DTest:
 	moveq	#0,d0
 	move.b	obRoutine(a0),d0
@@ -929,9 +985,6 @@ N3DTest_Init:
 	add.b	#2, obRoutine(a0)
 	move.l	#Map_N3DTest, obMap(a0)
 	move.w	#($8800/32),obGfx(a0)
-;	move.w	#16,needle.ZPos(a0)
-	move.w	obX(a0),needle.XOrg(a0)
-	move.w	obY(a0),needle.YOrg(a0)
 
 	move.b	#$C,obRender(a0)
 	move.b	#16,obWidth(a0)
@@ -940,47 +993,50 @@ N3DTest_Init:
 	move.b	#2,obPriority(a0)
 	move.b	#8,obFrame(a0)
 	move.b	#0,obAnim(a0)
-	move.w	#0,obAngle(a0)
-	bset	#0,obStatus(a0)
 
 N3DTest_Main:
-	add.w	#2,needle.Timer(a0)
-	move.w	needle.Timer(a0),d0
-	jsr	CalcSine.l
+	move.w	lhand_posx,needle.XOrg(a0)
+	move.w	lhand_posy,needle.YOrg(a0)
+	tst.b	nball.MFlag
+	beq.s	.Go
+	move.w	rhand_posx,needle.XOrg(a0)
+	move.w	rhand_posy,needle.YOrg(a0)	
+.Go
 	move.w	needle.XOrg(a0),d2
 	move.w	needle.YOrg(a0),d3
-;	asr.w	#6,d0
-;	asr.w	#6,d1
-;	add.w	d0,d2
-;	add.w	d1,d3
-;	move.w	d2,needle.XOrg(a0)
-;	move.w	d3,needle.YOrg(a0)
 	andi.w	#$7F,needle.ZPos(a0)
 	move.w	needle.ZPos(a0),d0
 	andi.w	#$70,d0
 	lsr.w	#4,d0
 	move.b	d0,obFrame(a0)
 
-		; DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV 
-	
-			; SACBLRDU
-			btst	#0,(v_jpadhold1).w	; dev
-			beq.w	.NoHeldUp
-			add.l	#$17000,needle.ZPos(a0)
-	
-		.NoHeldUp:
-			btst	#1,(v_jpadhold1).w	; dev
-			beq.w	.NoHeldDown
-			sub.l	#$17000,needle.ZPos(a0)
-	
-		.NoHeldDown:
-		; DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV 
+		;; DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV 
+		;
+		;	; SACBLRDU
+		;	btst	#0,(v_jpadhold1).w	; dev
+		;	beq.w	.NoHeldUp
+		;	add.l	#$17000,needle.ZPos(a0)
+		;
+		;.NoHeldUp:
+		;	btst	#1,(v_jpadhold1).w	; dev
+		;	beq.w	.NoHeldDown
+		;	sub.l	#$17000,needle.ZPos(a0)
+		;
+		;.NoHeldDown:
+		;; DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV 
+_needleRenderArm3D:
+	move.w	#N3D_CENTERX+32,d4
+	move.w	#N3D_CENTERY-32,d5
+	tst.b	nball.MFlag
+	beq.s	.Go	
+	sub.w	#64,d4  		; if "mirrored"
+.Go
+	bra.s	_needleRender3D.UserCenter
 
 _needleRender3D:
-	moveq	#0,d0
-	moveq	#0,d1
-	moveq	#0,d2
-
+	move.w	#N3D_CENTERX,d4
+	move.w	#N3D_CENTERY,d5
+.UserCenter
 	move.w	needle.XOrg(a0),d0
 	move.w	needle.YOrg(a0),d1
 
@@ -1002,8 +1058,8 @@ _needleRender3D:
 	muls.w	d2,d1
 	asr.w	#7,d0
 	asr.w	#7,d1	
-	add.w	#N3D_CENTERX,d0
-	add.w	#N3D_CENTERY,d1
+	add.w	d4,d0
+	add.w	d5,d1
 	move.w	d0,obX(a0)
 	move.w	d1,obY(a0)
 	rts
@@ -1114,8 +1170,8 @@ ArtList_NeedleBoss:
 	dc.w	NHAMMER_VRAM
 	dc.l	Nem_NeedleBossBig
 	dc.w	NEEDLBBIG_VRAM
-	;dc.l	Nem_N3DTest
-	;dc.w	$8800
+	dc.l	Nem_N3DTest
+	dc.w	$8800
 	dc.l	-1
 
 

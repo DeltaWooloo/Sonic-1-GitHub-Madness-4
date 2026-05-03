@@ -15,3 +15,8 @@ RememberState:
 
 .delete:
 		bra.w	DeleteObject
+.NoDisp:
+MarkObjGone3:	
+		out_of_range.w	.offscreen
+.offscreen:
+		jmp	RememberState.offscreen
