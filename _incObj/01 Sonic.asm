@@ -1033,7 +1033,7 @@ loc_131AA:
 ; resets the screen to normal while rolling, like Obj01_ResetScr
 .resetscreen:
 		cmpi.w	#60,(v_lookshift).w	; is screen in its default position?
-		beq.s	Sonic_SetRollSpeeds		; if yes, branch
+		beq.s	loc_131CC		; if yes, branch
 		bhs.s	+				; depending on the sign of the difference,
 		addq.w	#4,(v_lookshift).w	; either add 2
 +		subq.w	#2,(v_lookshift).w	; or subtract 2
