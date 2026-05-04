@@ -943,7 +943,7 @@ superlucky:	; Congrats, you get all power-ups
 ; ===========================================================================
 ; !@ GD: Subroutine to restore various VDP registers after Random monitor fuckery
 ; Inputs: d0 !=0 to reload level pal
-; 		  d1 !=0 to reset window plane (BSZ2)
+; 		  d1 !=0 to reset window plane (BSZ2, PPZ1, id_joint)
 ; ===========================================================================
 Pow_vdp_fixRegs:
 		;disableD
@@ -951,10 +951,16 @@ Pow_vdp_fixRegs:
 		movem.l	a6,-(sp)				; Push a6 onto stack
 		lea		(vdp_control_port).l,a6
 		
-		;!@ Remove Window plane (BSZ2 non-debug builds)
+		;!@ Remove Window plane (BSZ2, PPZ1, Joint non-debug builds)
+		cmpi.w	#(id_PPZ<<8)+0,(v_zone).w	; Is zone PPZ1?
+		beq.s	.checkWindow				; if so, branch
+		cmpi.b	#id_Joint,(v_zone).w		; is zone Inside Tonic?
+		beq.s	.checkWindow				; if so, branch
+		
 		cmpi.w	#(id_BSZ<<8)+1,(v_zone).w	; Is zone BSZ2?
 		bne.s	.resetWindow				; IF NOT, reset window plane; else do check below
-		; We are in BSZ2 level
+	.checkWindow:
+		; We are in a window level (BSZ2, PPZ1, id_joint zone)
 		tst.b	d1							; Check d1 input param. Is it 0?
 		beq.s	.skipWindow					; If so, branch		
 	.resetWindow:

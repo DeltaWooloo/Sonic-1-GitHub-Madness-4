@@ -100,7 +100,8 @@ Swing_DelLoop:
 ; ===========================================================================
 
 Swing_Delete:	; Routine 6, 8
-		bsr.w	DeleteObject
+		;!@bsr.w	DeleteObject
+		jsr		(DeleteObject).l
 		rts
 ; ===========================================================================
 

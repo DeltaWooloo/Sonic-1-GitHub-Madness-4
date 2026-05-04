@@ -3283,7 +3283,38 @@ Level_GetBgm:
 		locVRAM	$3800
 		lea	(Nem_Instagram).l,a0 ;	load alphabet
 		bsr.w	NemDec
+
 .Okbro:
+		;!@ GD: Check if zones use vert tile-by-offset mode (vscroll column -1 bugfix)
+		cmpi.w	#(id_PPZ<<8)+0,(v_zone).w	; is level PPZ1?
+		beq.s	.vertFix
+		cmpi.b	#id_Joint,(v_zone).w		; is zone Inside Tonic?
+		beq.s	.vertFix
+		bra.s	.Okbro2		
+
+.vertFix:		
+		move.b	#$C,(v_vbla_routine).w		; Load VBla routine $0C
+		bsr.w	WaitForVBla					; Run VBla
+		;4000 is address
+		disable_ints
+		lea	(vdp_control_port).l,a6
+		move.w	#$8300+(vram_win>>10),(a6) 	; 40x30
+		move.w	#$9101,(a6)					; HP to left edge, HP = $02 tiles 
+		move.w	#$9200,(a6)					; VP to bottom edge, VP = $00 tiles
+
+		fillVRAM	$01,$FFF,vram_window 	; clear background namespace with tile $01 (opaque tile)
+	.wait2:
+		move.w	(a5),d1
+		btst	#1,d1
+		bne.s	.wait2
+
+		move.w	#$8F02,(a5)
+
+		;locVRAM	$3800
+		;lea	(Nem_Instagram).l,a0 ;	load alphabet
+		;bsr.w	NemDec
+		
+.Okbro2:
 ;		tst.w	(f_demo).w	; Is demo mode on?
 ;		bcs.s	Level_SkipTtlCard
 		bsr.w  Reproduce_BGM
