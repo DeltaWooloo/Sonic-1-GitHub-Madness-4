@@ -11,8 +11,8 @@
 
 ArtTile_Roaring_Knight	=	ArtTile_Eggman		; VRAM pointer to Knight graphics.
 ArtTile_Knight_Weapons	=	ArtTile_Eggman_Weapons	; VRAM pointer to Knight weapon graphics.
-Knight_X_Spawn		=	$540			; The Knight's horizontal spawn point. Also used in Dynamic level events. It should be the leftmost point of the arena.
-Knight_Y_Spawn		=	$140			; The Knight's vertical spawn point. Also used in Dynamic level events. It should be the uppermost point of the screen at its lowest possible height.
+Knight_X_Spawn		=	$1840			; The Knight's horizontal spawn point. Also used in Dynamic level events. It should be the leftmost point of the arena.
+Knight_Y_Spawn		=	$220			; The Knight's vertical spawn point. Also used in Dynamic level events. It should be the uppermost point of the screen at its lowest possible height.
 Knight_Parent		=	objoff_3E		; Used by subobjects. They store the Knight's RAM location, to ensure that they exist. (2 bytes)
 Knight_Previous_Frame	=	objoff_3B		; Where the Knight's previous frame will be stored. For DLPC purposes. (1 byte)
 Knight_Timer		=	objoff_38		; Internal timer for the Knight. (2 bytes)
