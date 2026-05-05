@@ -394,7 +394,7 @@ DLE_MZ3afterboss:
 		
 		addi.w	#$200,(v_limitright2).w
 		addq.b	#2,(v_dle_routine).w
-		move.w	#bgm_LosTontos,d0
+		move.w	#bgm_Easton,d0
 		jmp	(QueueSound1).w	; play level music
 
 DLE_MZ3_return:
