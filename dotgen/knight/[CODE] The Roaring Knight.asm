@@ -73,6 +73,9 @@ RKnight_Init:
 	clr.b	Knight_Previous_Frame(a0)				; Set previous frame to 0
 	move.b	#2,obFrame(a0)						; Set current frame. This guarantees correct graphics initialization. TODO: Proper animation routine.
 	move.b	#60,objoff_3E(a0)					; Give the Knight invincibility frames.
+	bset	#6,obStatus(a0)						; GHM4: recognize hitboxes from character weapons
+	move.b	#$18,obWidth(a0)					; GHM4: i only need to set this so bullets can recognize the knight
+	move.b	#$18,obHeight(a0)					; GHM4: i only need to set this so bullets can recognize the knight
 	move.w	#Knight_X_Spawn+$120,Knight_X_Target(a0)		; Set Knight's initial destination
 	lea	(KnightBullets_ArtList).l,a1				; Get instructions for UserPLC
 	jsr	(UserPLC).l
@@ -1174,6 +1177,8 @@ RKPhase2_Collision:
 	tst.b	obColType(a0)				; Does the Knight have collision to begin with??
 	beq.s	.return					; If not, return.
 	move.b	#$F,obColType(a0)			; Default collision
+	move.b	#$18,obWidth(a0)			; GHM4: i only need to set this so bullets can recognize the knight
+	move.b	#$18,obHeight(a0)			; GHM4: i only need to set this so bullets can recognize the knight
 	cmpi.b	#4,obAnim(a0)				; Is animation ball?
 	beq.s	.clrcollision				; If yes, set no collision.
 	cmpi.b	#$F,obAnim(a0)				; Is animation transformation into bird?
@@ -1189,6 +1194,8 @@ RKPhase2_Collision:
 	
 .clrcollision:
 	move.b	#$29,obColType(a0)
+	clr.b	obWidth(a0)
+	clr.b	obHeight(a0)
 	rts
 	
 .hurtstrike:
@@ -1197,6 +1204,8 @@ RKPhase2_Collision:
 	
 .hurtbird:
 	move.b	#$A7,obColType(a0)
+	move.b	#$28,obWidth(a0)			; GHM4: i only need to set this so bullets can recognize the knight
+	move.b	#$C,obHeight(a0)			; GHM4: i only need to set this so bullets can recognize the knight	
 	rts
 
 ; ===========================================================================
