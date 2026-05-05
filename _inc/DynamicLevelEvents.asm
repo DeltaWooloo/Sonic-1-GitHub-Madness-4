@@ -1071,7 +1071,7 @@ DLE_NGZ3main:
 		move.w	#boss_ngz_y,obY(a1)
 
 .noobj:
-		move.w	#bgm_Boss,d0
+		move.w	#bgm_Coffinman,d0
 		jsr	(QueueSound1).l		; play boss music
 
 		move.w	#boss_ngz_x, (v_limitleft2).w	; limit left bound
