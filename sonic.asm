@@ -384,10 +384,16 @@ Init_GHM4:
 		endif
 
 MainGameLoop:
-		;!@GD: Fix VDP registers if mode changed
-		moveq	#0,d0
-		moveq	#1,d1
-		jsr		(Pow_vdp_fixRegs).l
+;		;!@GD: Fix VDP registers if mode changed	
+
+; temporarily removed this. it causes extreme visual tearing when in certain gamemodes because 
+; it's resetting registers during active scan
+; add it to ClearScreen maybe, that's called on most gamemode inits
+
+
+;		moveq	#0,d0
+;		moveq	#1,d1
+;		jsr		(Pow_vdp_fixRegs).l
 
 		move.b	(v_gamemode).w,d0			; load Game Mode
 		andi.w	#$7C,d0					; limit Game Mode value to $1C max (change to a maximum of 7C to add more game modes)
