@@ -158,6 +158,7 @@ Advert_StoreInfo:
 		move.b	(v_lifecount).w,(v_lamp_lives).w 	; lives
 		move.l	(v_time).w,(v_lamp_time).w 		; time
 		move.b	(v_dle_routine).w,(v_lamp_dle).w	; routine counter for dynamic level mod
+		move.b	(v_collectibles).w,(v_lamp_collectibles).w	; Scratch my nuts
 		move.w	(v_limitbtm2).w,(v_lamp_limitbtm).w 	; lower y-boundary of level
 		move.w	(v_screenposx).w,(v_lamp_scrx).w 	; screen x-position
 		move.w	(v_screenposy).w,(v_lamp_scry).w 	; screen y-position
@@ -194,6 +195,7 @@ Lamp_LoadInfo:
 		move.b	#59,(v_timecent).w
 		subq.b	#1,(v_timesec).w
 		move.b	(v_lamp_dle).w,(v_dle_routine).w
+		move.b	(v_lamp_collectibles).w,(v_collectibles).w	; Scratch my nuts
 		move.b	(v_lamp_wtrrout).w,(v_wtr_routine).w
 		move.w	(v_lamp_limitbtm).w,(v_limitbtm2).w
 		move.w	(v_lamp_limitbtm).w,(v_limitbtm1).w

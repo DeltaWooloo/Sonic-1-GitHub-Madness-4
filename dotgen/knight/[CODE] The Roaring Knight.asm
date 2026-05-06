@@ -11,8 +11,8 @@
 
 ArtTile_Roaring_Knight	=	ArtTile_Eggman		; VRAM pointer to Knight graphics.
 ArtTile_Knight_Weapons	=	ArtTile_Eggman_Weapons	; VRAM pointer to Knight weapon graphics.
-Knight_X_Spawn		=	$540			; The Knight's horizontal spawn point. Also used in Dynamic level events. It should be the leftmost point of the arena.
-Knight_Y_Spawn		=	$140			; The Knight's vertical spawn point. Also used in Dynamic level events. It should be the uppermost point of the screen at its lowest possible height.
+Knight_X_Spawn		=	$1840			; The Knight's horizontal spawn point. Also used in Dynamic level events. It should be the leftmost point of the arena.
+Knight_Y_Spawn		=	$220			; The Knight's vertical spawn point. Also used in Dynamic level events. It should be the uppermost point of the screen at its lowest possible height.
 Knight_Parent		=	objoff_3E		; Used by subobjects. They store the Knight's RAM location, to ensure that they exist. (2 bytes)
 Knight_Previous_Frame	=	objoff_3B		; Where the Knight's previous frame will be stored. For DLPC purposes. (1 byte)
 Knight_Timer		=	objoff_38		; Internal timer for the Knight. (2 bytes)
@@ -73,6 +73,9 @@ RKnight_Init:
 	clr.b	Knight_Previous_Frame(a0)				; Set previous frame to 0
 	move.b	#2,obFrame(a0)						; Set current frame. This guarantees correct graphics initialization. TODO: Proper animation routine.
 	move.b	#60,objoff_3E(a0)					; Give the Knight invincibility frames.
+	bset	#6,obStatus(a0)						; GHM4: recognize hitboxes from character weapons
+	move.b	#$18,obWidth(a0)					; GHM4: i only need to set this so bullets can recognize the knight
+	move.b	#$18,obHeight(a0)					; GHM4: i only need to set this so bullets can recognize the knight
 	move.w	#Knight_X_Spawn+$120,Knight_X_Target(a0)		; Set Knight's initial destination
 	lea	(KnightBullets_ArtList).l,a1				; Get instructions for UserPLC
 	jsr	(UserPLC).l
@@ -431,6 +434,10 @@ RKP1End_WaitForPlayer:
 	clr.w	(v_player+obInertia).w				; clear player speed
 	clr.w	(v_player+obVelX).w				; clear player speed	
 	bclr	#0,(v_player+obStatus).w			; force orientation to the right
+	bclr	#2,(v_player+obStatus).w			; forcefully stop roll
+	jsr	(GetOtherPlayerData).l				; GHM4
+	move.b	pdat.height(a5),(v_player+obHeight).w		; GHM4 reset height
+	move.b	pdat.width(a5),(v_player+obWidth).w		; GHM4 reset width
 	move.w	#(btnUp<<8),(v_jpadhold2).w 			; make player look up
 	
 	move.b	#dKnight_Stretch,d0	
@@ -474,6 +481,10 @@ RKP1End_Phase2:
 	move.w	obY(a0),Knight_Y_Position(a0)
 	move.b	#$80,Knight_Wave_Increment(a0)
 	move.w	#120,Knight_Timer(a0)
+	tst.b	(DiffVariable).w					; GHM4: Check difficulty
+	bne.s	.skipdiff						; GHM4: If non-zero, player is in Fetus mode.
+	move.w	#60,Knight_Timer(a0)
+.skipdiff:	
 	move.b	#$F,obColType(a0)
 	move.b	#Knight_Hits_Phase2,obColProp(a0)
 	bclr	#7,obStatus(a0)
@@ -673,17 +684,32 @@ RKPhase2_SummonSwords:
 	
 	move.b	#$A,obAnim(a0)				; Make the Knight point
 	move.w	#449,Knight_Timer(a0)			; Attack lasts 7 and a half seconds
+	tst.b	(DiffVariable).w			; GHM4: Check difficulty
+	bne.s	.skip					; GHM4: If non-zero, player is in Fetus mode.
+	move.w	#719,Knight_Timer(a0)			; Attack lasts for 12 seconds
 	
 .skip:
 	moveq	#0,d0
 	move.w	Knight_Timer(a0),d0
-	divu.w	#45,d0					; I sincerely apologize. I *need* the extra randomness.
+	
+	tst.b	(DiffVariable).w			; GHM4: Check difficulty
+	bne.s	.fetusmode				; GHM4: If non-zero, player is in Fetus mode.
+	divu.w	#23,d0
+	bra.s	.common
+.fetusmode:
+	divu.w	#45,d0					; I sincerely apologize.
+.common:		
 	swap	d0					; Put remainder in lower word
 	tst.w	d0					; Is remainder 0?
 	bne.w	.nosword
 
 	; I LOVE COPY-PASTING CODE!!!!!!!!!!!!!!!!!!!!!!!
 	move.w	#-$400,d2				; Set speed at which the bullet will go
+	tst.b	(DiffVariable).w			; GHM4: Check difficulty
+	bne.s	.skipdiff				; GHM4: If non-zero, player is in Fetus mode.
+	move.w	#-$600,d2				; Bullet will go faster
+	
+.skipdiff:	
 	btst	#0,obStatus(a0)				; Which direction is the Knight facing?
 	beq.s	.isleft					; If left, keep as-is.
 	neg.w	d2					; Else, change speed at which the bullet will go
@@ -744,6 +770,10 @@ RKP2_SwordRain_Target:
 	addq.b	#2,ob2ndRout(a0)
 	move.b	#$B,obAnim(a0)
 	move.b	#3,Knight_SwordRain_AtkRem(a0)		; Number of times the attack will be repeated
+	tst.b	(DiffVariable).w			; GHM4: Check difficulty
+	bne.s	.skipdiff				; GHM4: If non-zero, player is in Fetus mode.
+	move.b	#7,Knight_SwordRain_AtkRem(a0)		; Number of times the attack will be repeated
+.skipdiff:	
 	move.w	#60,Knight_Timer(a0)
 	rts
 	
@@ -760,7 +790,15 @@ RKP2_SwordRain_Prepare:
 
 	jsr	(RandomNumber).l			; Get a random number
 	swap	d1
+	tst.b	(DiffVariable).w			; GHM4: Check difficulty
+	bne.s	.fetusmode				; GHM4: If non-zero, player is in Fetus mode.
+
+	andi.l	#3,d1					; Number must be within 0-3.
+	addi.b	#3,d1					; Number must be within 3-6.
+	bra.s	.common
+.fetusmode:
 	andi.l	#7,d1					; Number must be within 0-7.
+.common:	
 	move.b	d1,Knight_SwordRain_SwdGap(a0)		; Set how many swords until a gap is formed.
 	
 	rts
@@ -791,6 +829,9 @@ RKP2_SwordRain_Spawn:
 	subi.w	#$E0,obY(a1)				; Try dodging this, moon jumper!
 	
 .skippunish:	
+	move.b	#sfx_SpikesMove,d0
+	jsr	(PlaySound_Special).l 	
+
 	moveq	#0,d0
 
 	move.b	#8,obSubtype(a1)			; Set object subtype
@@ -819,6 +860,11 @@ RKP2_SwordRain_Spawn:
 		
 .outtaswords:
 	move.w	#40,Knight_Timer(a0)
+	tst.b	(DiffVariable).w			; GHM4: Check difficulty
+	bne.s	.skipdiff				; GHM4: If non-zero, player is in Fetus mode.
+	move.w	#25,Knight_Timer(a0)
+	
+.skipdiff:		
 	addq.b	#2,ob2ndRout(a0)
 	
 .not0:
@@ -835,8 +881,13 @@ RKP2_SwordRain_Strike:
 	cmpi.b	#$D,obAnim(a0)				; Has the Knight already struck?
 	beq.s	.hasstruck				; If yes, branch
 	
+	move.b	#sfx_Teleport,d0
+	jsr	(PlaySound_Special).l 		
 	move.b	#$D,obAnim(a0)				; But if not... strike!
 	move.w	#60,Knight_Timer(a0)
+	tst.b	(DiffVariable).w			; GHM4: Check difficulty
+	bne.s	.hasstruck				; GHM4: If non-zero, player is in Fetus mode.
+	move.w	#40,Knight_Timer(a0)
 	
 .hasstruck:
 	sub.w	#1,Knight_Timer(a0)
@@ -865,6 +916,10 @@ RKP2_FlyAttack_Start:
 	bne.s	.return					; If not, return
 	addq.b	#2,ob2ndRout(a0)			; Set routine accordingly
 	move.b	#4,Knight_FlyAttack_AtkRem(a0)		; Set number of times attack will be executed
+	tst.b	(DiffVariable).w			; GHM4: Check difficulty
+	bne.s	.skipdiff				; GHM4: If non-zero, player is in Fetus mode.
+	move.b	#8,Knight_FlyAttack_AtkRem(a0)		; Set number of times attack will be executed
+.skipdiff:		
 	move.w	#$C00,obInertia(a0)			; Set inertia
 .return:	
 	rts
@@ -904,6 +959,10 @@ RKP2_FlyAttack_Strike:
 	beq.s	.strikesover
 	addq.b	#2,ob2ndRout(a0)			; Move to next routine
 	move.w	#90,Knight_Timer(a0)			; Set up timer
+	tst.b	(DiffVariable).w			; GHM4: Check difficulty
+	bne.s	.skipdiff				; GHM4: If non-zero, player is in Fetus mode.
+	move.w	#15,Knight_Timer(a0)			; Set up timer
+.skipdiff:		
 	rts
 	
 .onscreen:
@@ -949,7 +1008,13 @@ RKP2_FlyAttack_Repos:
 	andi.w	#$FFF8,Knight_Y_Position(a0)		; Round
 	
 .nomjpunish:
-	rts
+	tst.b	(DiffVariable).w			; GHM4: Check difficulty
+	bne.s	.skipdiff				; GHM4: If non-zero, player is in Fetus mode.
+	move.w	(v_player+obY).w,Knight_Y_Position(a0)	; Make the Knight spawn where the player is instead
+	andi.w	#$FFF8,Knight_Y_Position(a0)		; Round
+.skipdiff:
+	move.b	#sfx_Dash,d0
+	jmp	(PlaySound_Special).l 		
 	
 ; ===========================================================================	
 ; Turns the Knight back into their idle form from a ball form
@@ -978,6 +1043,10 @@ RKPhase2_Unball:
 RKPhase2_Loop:
 	move.b	#1,obAnim(a0)
 	move.w	#120,Knight_Timer(a0)
+	tst.b	(DiffVariable).w			; GHM4: Check difficulty
+	bne.s	.skipdiff				; GHM4: If non-zero, player is in Fetus mode.
+	move.w	#60,Knight_Timer(a0)			; Set up timer
+.skipdiff:	
 	clr.b	ob2ndRout(a0)
 	rts
 	
@@ -1108,6 +1177,8 @@ RKPhase2_Collision:
 	tst.b	obColType(a0)				; Does the Knight have collision to begin with??
 	beq.s	.return					; If not, return.
 	move.b	#$F,obColType(a0)			; Default collision
+	move.b	#$18,obWidth(a0)			; GHM4: i only need to set this so bullets can recognize the knight
+	move.b	#$18,obHeight(a0)			; GHM4: i only need to set this so bullets can recognize the knight
 	cmpi.b	#4,obAnim(a0)				; Is animation ball?
 	beq.s	.clrcollision				; If yes, set no collision.
 	cmpi.b	#$F,obAnim(a0)				; Is animation transformation into bird?
@@ -1123,6 +1194,8 @@ RKPhase2_Collision:
 	
 .clrcollision:
 	move.b	#$29,obColType(a0)
+	clr.b	obWidth(a0)
+	clr.b	obHeight(a0)
 	rts
 	
 .hurtstrike:
@@ -1131,6 +1204,8 @@ RKPhase2_Collision:
 	
 .hurtbird:
 	move.b	#$A7,obColType(a0)
+	move.b	#$28,obWidth(a0)			; GHM4: i only need to set this so bullets can recognize the knight
+	move.b	#$C,obHeight(a0)			; GHM4: i only need to set this so bullets can recognize the knight	
 	rts
 
 ; ===========================================================================
@@ -1288,7 +1363,7 @@ Knight_SwordRain_YOffsets:
 ; ===========================================================================
 	
 Knight_FlyAttack_YOffsets:
-	dc.b	$90,$90,$60,$30
+	dc.b	$90,$90,$60,$30,$60,$90,$60,$30
 	even
 
 ; ===========================================================================

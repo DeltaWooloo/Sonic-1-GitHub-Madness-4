@@ -327,7 +327,8 @@ v_sonicend:		ds.b	1		; routine counter for Sonic in the ending sequence
 v_lz_deform:		ds.w	1		; LZ deformation offset, in units of $80
 									; !@ GD: Fix Squash logic / https://info.sonicretro.org/SCHG_How-to:Improve_Squash_Kill_Logic
 v_squashbuffer:		ds.b	1		; buffer Sonic's squash distance for one frame to prevent cheap deaths
-					ds.b	3		; unused
+v_collectibles:		ds.b	1		; collectibles bitfield (Scratch my nuts)
+					ds.b	2		; unused
 					;!@ds.b	4		; unused					
 v_d_anim_done:		ds.w	1
 ;			ds.w	1
@@ -394,7 +395,7 @@ v_airbyte = v_air+1				; low byte for air
 v_lastspecial:		ds.b	1		; last special stage number
 			ds.b	1		; unused
 v_continues:		ds.b	1		; number of continues
-			ds.b	1		; unused
+			ds.b	1
 f_timeover:		ds.b	1		; time over flag
 v_lifecount:		ds.b	1		; lives counter value (for actual number, see "v_lives")
 f_lifecount:		ds.b	1		; lives counter update flag
@@ -423,7 +424,7 @@ v_lamp_ypos:		ds.w	1		; y-axis for Sonic to respawn at lamppost
 v_lamp_rings:		ds.w	1		; rings stored at lamppost
 v_lamp_time:		ds.l	1		; time stored at lamppost
 v_lamp_dle:		ds.b	1		; dynamic level event routine counter at lamppost
-			ds.b	1		; unused
+v_lamp_collectibles	ds.b	1		; collectible bitfield at lamppost (formerly unused; Scratch my nuts)
 v_lamp_limitbtm:	ds.w	1		; level bottom boundary at lamppost
 v_lamp_scrx:		ds.w	1		; x-axis screen at lamppost
 v_lamp_scry:		ds.w	1		; y-axis screen at lamppost

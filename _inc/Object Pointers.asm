@@ -9,7 +9,7 @@ ptr_DaxKatterD:		dc.l Obj_DaxKatterD
 ptr_ClintonFucker:	dc.l ClintonFucker
 ptr_Obj07:		dc.l GM_CNNicoJumpOBJ
 ptr_Splash:		dc.l Splash		; $08
-ptr_SonicSpecial:	dc.l NullObject
+ptr_Collectible:	dc.l Collectible	; Scratch my nuts
 ptr_DrownCount:		dc.l DrownCount
 ptr_Pole:		dc.l Pole
 ptr_FlapDoor:		dc.l FlapDoor
@@ -160,7 +160,7 @@ id_DaxKatterD:		equ ((ptr_DaxKatterD-Obj_Index)/4)+1
 id_ClintonFucker:	equ ((ptr_ClintonFucker-Obj_Index)/4)+1
 id_Obj07:		equ ((ptr_Obj07-Obj_Index)/4)+1
 id_Splash:		equ ((ptr_Splash-Obj_Index)/4)+1		; $08
-id_SonicSpecial:	equ ((ptr_SonicSpecial-Obj_Index)/4)+1
+id_Collectible:		equ ((ptr_Collectible-Obj_Index)/4)+1		; Scratch my nuts
 id_DrownCount:		equ ((ptr_DrownCount-Obj_Index)/4)+1
 id_Pole:		equ ((ptr_Pole-Obj_Index)/4)+1
 id_FlapDoor:		equ ((ptr_FlapDoor-Obj_Index)/4)+1

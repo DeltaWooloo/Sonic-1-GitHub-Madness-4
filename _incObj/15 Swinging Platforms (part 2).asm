@@ -100,10 +100,8 @@ Swing_DelLoop:
 ; ===========================================================================
 
 Swing_Delete:	; Routine 6, 8
-		;!@bsr.w	DeleteObject
-		jsr		(DeleteObject).l
-		rts
+		jmp	DeleteObject
 ; ===========================================================================
 
 Swing_Display:	; Routine $A
-		bra.w	DisplaySprite
+		jmp	DisplaySprite

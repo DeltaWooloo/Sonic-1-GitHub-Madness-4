@@ -4965,6 +4965,7 @@ Map_Push:	include	"_maps/Pushable Blocks.asm"
 		include	"_incObj/3A Got Through Card.asm"
 ;		include	"_incObj/7E Special Stage Results.asm"
 ;		include	"_incObj/7F SS Result Chaos Emeralds.asm"
+		include	"_incObj/09 Collectible Bullshit.asm"		; Scratch my nuts
 
 ; ---------------------------------------------------------------------------
 ; Sprite mappings - zone title cards			- none of this is used so it's all commented, uhm.. pilk. - coni

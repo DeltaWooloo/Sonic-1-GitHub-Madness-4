@@ -357,42 +357,78 @@ locret_7088:
 DLE_MZ3:
 		moveq	#0,d0
 		move.b	(v_dle_routine).w,d0
-		move.w	off_7098(pc,d0.w),d0
-		jmp	off_7098(pc,d0.w)
+		move.w	DLE_MZ3_routines(pc,d0.w),d0
+		jmp	DLE_MZ3_routines(pc,d0.w)
 ; ===========================================================================
-off_7098:	dc.w DLE_MZ3boss-off_7098
-		dc.w DLE_MZ3end-off_7098
+DLE_MZ3_routines:	dc.w DLE_MZ3chkboss-DLE_MZ3_routines
+			dc.w DLE_MZ3end-DLE_MZ3_routines
+			dc.w DLE_MZ3afterboss-DLE_MZ3_routines
+			dc.w DLE_MZ3_return-DLE_MZ3_routines
 ; ===========================================================================
 
-DLE_MZ3boss:
+DLE_MZ3chkboss:
 		move.w	#$720,(v_limitbtm1).w
-		cmpi.w	#boss_mz_x-$2A0,(v_screenposx).w
-		blo.s	locret_70E8
-		move.w	#boss_mz_y,(v_limitbtm1).w
-		cmpi.w	#boss_mz_x-$10,(v_screenposx).w
-		blo.s	locret_70E8
-		jsr	(FindFreeObj).l
-		bne.s	loc_70D0
-		_move.b	#id_BossMarble,obID(a1) ; load MZ boss object
-		move.w	#boss_mz_x+$1F0,obX(a1)
-		move.w	#boss_mz_y+$1C,obY(a1)
+		cmpi.w	#Knight_X_Spawn-$2A0,(v_screenposx).w
+		blo.s	DLE_MZ3_return
+		move.w	#Knight_Y_Spawn,(v_limitbtm1).w
 
-loc_70D0:
-		move.w	#bgm_Coffinman,d0
+		cmpi.w	#Knight_X_Spawn,(v_screenposx).w
+		blo.s	DLE_MZ3_return
+		jsr	(FindFreeObj).l
+		bne.s	.spawnfail
+		_move.b	#id_Roaring_Knight,obID(a1) ; load MZ boss object
+		move.w	#Knight_X_Spawn+$180,obX(a1)
+		move.w	#Knight_Y_Spawn+$24,obY(a1)
+
+.spawnfail:
+		move.w	#bgm_DeltaTale,d0 ;if you dont like this then uhh change it back to bgm_Boss :P -Dawid
 		jsr	(QueueSound1).l	; play boss music
 		move.b	#1,(f_lockscreen).w ; lock screen
-		addq.b	#2,(v_dle_routine).w
-		moveq	#plcid_Boss,d0
-		jmp	(AddPLC).l	; load boss patterns
-; ===========================================================================
-
-locret_70E8:
-		rts
-; ===========================================================================
+		addq.b	#2,(v_dle_routine).w	
 
 DLE_MZ3end:
 		move.w	(v_screenposx).w,(v_limitleft2).w
 		rts
+		
+DLE_MZ3afterboss:
+		
+		addi.w	#$200,(v_limitright2).w
+		addq.b	#2,(v_dle_routine).w
+		move.w	#bgm_Easton,d0
+		jmp	(QueueSound1).w	; play level music
+
+DLE_MZ3_return:
+		rts
+
+; DLE_MZ3boss:
+		; move.w	#$720,(v_limitbtm1).w
+		; cmpi.w	#boss_mz_x-$2A0,(v_screenposx).w
+		; blo.s	locret_70E8
+		; move.w	#boss_mz_y,(v_limitbtm1).w
+		; cmpi.w	#boss_mz_x-$10,(v_screenposx).w
+		; blo.s	locret_70E8
+		; jsr	(FindFreeObj).l
+		; bne.s	loc_70D0
+		; _move.b	#id_BossMarble,obID(a1) ; load MZ boss object
+		; move.w	#boss_mz_x+$1F0,obX(a1)
+		; move.w	#boss_mz_y+$1C,obY(a1)
+
+; loc_70D0:
+		; move.w	#bgm_Coffinman,d0
+		; jsr	(QueueSound1).l	; play boss music
+		; move.b	#1,(f_lockscreen).w ; lock screen
+		; addq.b	#2,(v_dle_routine).w
+		; moveq	#plcid_Boss,d0
+		; jmp	(AddPLC).l	; load boss patterns
+; ; ===========================================================================
+
+; locret_70E8:
+		; rts
+; ; ===========================================================================
+
+; DLE_MZ3end:
+		; move.w	(v_screenposx).w,(v_limitleft2).w
+		; rts
 		
 ; ===========================================================================
 
@@ -437,6 +473,7 @@ DLE_MZ4afterboss:
 
 DLE_MZ4_return:
 		rts
+		
 		
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -1034,7 +1071,7 @@ DLE_NGZ3main:
 		move.w	#boss_ngz_y,obY(a1)
 
 .noobj:
-		move.w	#bgm_Boss,d0
+		move.w	#bgm_Coffinman,d0
 		jsr	(QueueSound1).l		; play boss music
 
 		move.w	#boss_ngz_x, (v_limitleft2).w	; limit left bound
