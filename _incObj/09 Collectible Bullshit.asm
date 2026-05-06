@@ -20,7 +20,7 @@ Collectible:
 
 ; ---------------------------------------------------------------------------
 .init:
-		move.b	(obSubtype).w,d0	; Get the collectible's ID (1-8)
+		move.b	obSubtype(a0),d0	; Get the collectible's ID (1-8)
 		subq.b	#1,d0			; Convert it to a bitfield index (0-7)
 		bmi.w	DeleteObject		; If invalid, delete the object	(accounts for underflow only)
 
@@ -29,7 +29,7 @@ Collectible:
 
 	; Ring graphics are a placeholder
 		move.l	#Map_Ring,obMap(a0)
-		move.w	#make_art_tile(ArtTile_Ring,3,0),obGfx(a0)
+		move.w	#make_art_tile(ArtTile_Ring,1,0),obGfx(a0)
 
 		move.b	#4,obRender(a0)
 		move.b	#2,obPriority(a0)
@@ -78,7 +78,7 @@ Collectible:
 		jsr	(QueueSound2).l		; ^
 		jsr	(Lamp_StoreInfo).l	; Set checkpoint
 
-		move.b	(obSubtype).w,d0	; Get the collectible's ID (1-8)
+		move.b	obSubtype(a0),d0	; Get the collectible's ID (1-8)
 		subq.b	#1,d0			; Convert it to a bitfield index (0-7)
 		bset.b	d0,(v_collectibles).w	; Set the appropriate bit (mark this collectible collected)
 
