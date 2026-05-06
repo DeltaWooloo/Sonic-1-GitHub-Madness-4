@@ -87,8 +87,9 @@ Collectible:
 		cmpi.b	#%111,d0		; (currently harcoded to 3, but can go up to 8)
 		bne.w	.sparkle		; If not, branch
 
-		jsr	(GotThroughAct).l	; Otherwise, initiate the end of level sequence
 		clr.b	(v_player).w		; Erase the player
+		jsr	(GHM3Explode).l		; Explosion
+		jsr	(GotThroughAct).l	; Initiate the end of level sequence
 		bra.w	.sparkle		; If not, branch
 
 ; ---------------------------------------------------------------------------
