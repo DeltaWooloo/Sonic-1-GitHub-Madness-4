@@ -79,7 +79,6 @@ Cutscene_Tonic:
 	rts
 
 Cutscene_Maniac:
-	move.b	#0,vscroll_mode
 	bsr.w	_cutsceneSub
 	bsr.w	PrintMsgTimed
 	bra.w	Cutscene_ManiacIntro
@@ -100,9 +99,7 @@ _cutsceneSub:
 ; ---------------------------------------------------------------------------
 
 VBLANK_CUTSCENE:
-		writeVRAM	v_spritetablebuffer,vram_sprites
-		writeVRAM	v_hscrolltablebuffer,vram_hscroll
-		writeCRAM	v_palette,0
+	jsr	VBla_StandardTransfers
 	jsr	ProcessDMAQueue
 	jsr	ProcessDPLC_9Tiles
 	move.w	#$9294,VDPCTRL		; window vertical position
