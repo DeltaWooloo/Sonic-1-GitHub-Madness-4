@@ -76,17 +76,19 @@ Collectible:
 	; Ring sound is a placeholder
 		move.w	#sfx_Ring,d0		; Play ring sound
 		jsr	(QueueSound2).l		; ^
-		jsr	(Lamp_StoreInfo).l	; Set checkpoint
 
 		move.b	obSubtype(a0),d0	; Get the collectible's ID (1-8)
 		subq.b	#1,d0			; Convert it to a bitfield index (0-7)
 		bset.b	d0,(v_collectibles).w	; Set the appropriate bit (mark this collectible collected)
+
+		jsr	(Lamp_StoreInfo).l	; Set checkpoint
 
 		move.b	(v_collectibles).w,d0	; Check if all the collectibles have been obtained
 		cmpi.b	#%111,d0		; (currently harcoded to 3, but can go up to 8)
 		bne.w	.sparkle		; If not, branch
 
 		jsr	(GotThroughAct).l	; Otherwise, initiate the end of level sequence
+		clr.b	(v_player).w		; Erase the player
 		bra.w	.sparkle		; If not, branch
 
 ; ---------------------------------------------------------------------------
