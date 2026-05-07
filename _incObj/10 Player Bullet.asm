@@ -71,6 +71,16 @@ PBullet_Callback:
 
 		andi.b	#$C0, d1	; is obColType $40 or higher?
 		beq.s	.DestroyTouched	; if not, branch
+		
+		; GIO:	Roaring Knight specific behavior
+		cmpi.b	#4,obRoutine(a0)	; Is attack one of Maniac Mouse's bullets?
+		bhs.s	.rkend			; If not, branch
+		cmpi.b	#id_Roaring_Knight,(a1)	; Is object the Roaring Knight?
+		bne.s	.rkend			; If not, branch
+		cmpi.b	#$A7,obColType(a1)	; Is the Knight currently in bird form?
+		beq.s	.DestroyTouched		; If yes, hit the Knight
+
+.rkend:		
 		andi.b	#$3F,d0
 		cmpi.b	#$6, d0		; is collision type $46 ?
 		beq.s	.OpenMonitor	; if yes, branch
