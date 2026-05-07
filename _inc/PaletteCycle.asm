@@ -27,7 +27,7 @@ PaletteCycle:
 PalCycle_Index:	dc.w PalCycle_GHZ-PalCycle_Index
 		dc.w PalCycle_LZ-PalCycle_Index
 		dc.w PalCycle_Null-PalCycle_Index
-		dc.w PalCycle_SLZ-PalCycle_Index
+		dc.w PalCycle_Null-PalCycle_Index
 		dc.w PalCycle_SYZ-PalCycle_Index
 		dc.w PalCycle_SBZ-PalCycle_Index
 		dc.w PalCycle_GHZ-PalCycle_Index	; Ending
