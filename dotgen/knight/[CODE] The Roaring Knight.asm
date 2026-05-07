@@ -20,6 +20,7 @@ Knight_X_Target		=	objoff_34		; X coordinate target for the Knight. (2 bytes)
 Knight_Y_Target		=	objoff_36		; Y coordinate target for the Knight. (2 bytes)
 Knight_Hits_Phase1	=	8			; HP for Phase 1
 Knight_Hits_Phase2	=	16			; HP for Phase 2
+Knight_Hits_Phase2_Easy =	8			; HP for Phase 2 (Easy mode)
 Knight_Sound1_Duration	=	152			; How long the first Knight PCM sound lasts in frames (60Hz)
 Knight_Sound2_Duration	=	296			; How long the second Knight PCM sound lasts in frames (60Hz)
 Knight_X_Position	=	objoff_30		; The Knight's X position, which is copied over to the Knight's current X position after being processed by waving routines. (2 bytes)
@@ -486,7 +487,11 @@ RKP1End_Phase2:
 	move.w	#60,Knight_Timer(a0)
 .skipdiff:	
 	move.b	#$F,obColType(a0)
-	move.b	#Knight_Hits_Phase2,obColProp(a0)
+	move.b	#Knight_Hits_Phase2_Easy,obColProp(a0)
+	tst.b	(DiffVariable).w			; GHM4: Check difficulty
+	bne.s	.skip					; GHM4: If non-zero, player is in Fetus mode.	
+	move.b	#Knight_Hits_Phase2,obColProp(a0)	
+.skip:	
 	bclr	#7,obStatus(a0)
 	move.b	#60,objoff_3E(a0)					; Give the Knight invincibility frames.
 	clr.b	Knight_PrevAttack(a0)
@@ -772,7 +777,7 @@ RKP2_SwordRain_Target:
 	move.b	#3,Knight_SwordRain_AtkRem(a0)		; Number of times the attack will be repeated
 	tst.b	(DiffVariable).w			; GHM4: Check difficulty
 	bne.s	.skipdiff				; GHM4: If non-zero, player is in Fetus mode.
-	move.b	#7,Knight_SwordRain_AtkRem(a0)		; Number of times the attack will be repeated
+	move.b	#5,Knight_SwordRain_AtkRem(a0)		; Number of times the attack will be repeated
 .skipdiff:	
 	move.w	#60,Knight_Timer(a0)
 	rts
@@ -823,8 +828,8 @@ RKP2_SwordRain_Spawn:
 	move.w	Knight_Y_Position(a0),obY(a1)		; Copy Y position
 	subi.w	#$30,obY(a1)				; Set base Y position to slightly above the Knight
 	moveq	#0,d0
-	move.w	obY(a1),d0
-	cmp.w	(v_player+obY).w,d0			; Is the player above the highest sword's expected location?
+	move.w	#Knight_Y_Spawn,d0
+	cmp.w	(v_player+obY).w,d0			; Is the player above the Knight's highest spawn point?
 	bls.s	.skippunish				; If not, skip the punishment.
 	subi.w	#$E0,obY(a1)				; Try dodging this, moon jumper!
 	
