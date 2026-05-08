@@ -161,6 +161,9 @@ Nem_Ball:	binclude	"artnem/GHZ Giant Ball.nem"
 		even
 Nem_Spikes:	binclude	"artnem/Spikes.nem"
 		even
+;!@ GD: Variant of spikes for Windows Zone
+Nem_SpikesWin:	binclude	"artnem/SpikesWin.nem"
+		even
 ;Nem_GhzLog:	binclude	"artnem/Unused - GHZ Log.nem"
 ;		even
 Nem_SpikePole:	binclude	"artnem/GHZ Spiked Log.nem"

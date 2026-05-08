@@ -27,7 +27,19 @@ Spik_Var:	dc.b 0,	$14		; frame number, object width
 Spik_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_Spike,obMap(a0)
+		
+		;!@ GD: Change palette line for spikes if in Windows Zone (use 2nd line for mini warning icon skin)
+		cmpi.b	#id_WIN,(v_zone).w	; is level Windows?
+		bne.s	.regular			; if not, branch
+		;We're in Windows zone. Change palette line
+	.windows:
+		move.w	#make_art_tile(ArtTile_Spikes,1,0),obGfx(a0)
+		bra.s	.continue		
+		;We're NOT in Windows zone. Use regular palette line
+	.regular:
 		move.w	#make_art_tile(ArtTile_Spikes,0,0),obGfx(a0)
+		
+	.continue:
 		ori.b	#4,obRender(a0)
 		move.b	#4,obPriority(a0)
 		move.b	obSubtype(a0),d0

@@ -1,6 +1,8 @@
 cls
+copy /y "AZD\azd_omg.wav" "..\..\..\sound\DAC\GenesisDoes\azd_omg.wav"
 copy /y "Boost\Boost.wav" "..\..\..\sound\DAC\GenesisDoes\Boost.wav"
 copy /y "BoostR\BoostR.wav" "..\..\..\sound\DAC\GenesisDoes\BoostR.wav"
+copy /y "dsud\udied.wav" "..\..\..\sound\DAC\GenesisDoes\udied.wav"
 copy /y "Four\4.wav" "..\..\..\sound\DAC\GenesisDoes\Four.wav"
 copy /y "GenesisCan\GenesisCan1.wav" "..\..\..\sound\DAC\GenesisDoes\GenesisCan1.wav"
 copy /y "GenesisCan\GenesisCan2.wav" "..\..\..\sound\DAC\GenesisDoes\GenesisCan2.wav"

@@ -1,4 +1,7 @@
 v_foxyframe = v_objspace+obFrame
+scareCount1	equ	$03
+scareCount0	equ	scareCount1-1
+scareMask	equ	andiMaskB(scareCount1)
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -45,12 +48,43 @@ GM_FoxyBoo:
 .randomize:
 		;If BSZ, then always do Sega Channel Guy
 		cmpi.b	#id_BSZ,(v_zone).w		; is zone bsz?
-		beq.w	.ChGuy
+		beq.w	scare_Index.ChGuy		; If so, do Sega channel Guy
+		
+		;If BTZ/DVZ2, then always do You Died
+		cmpi.b	#id_BTZ,(v_zone).w		; is zone btz?
+		beq.w	scare_Index.DS_YouDied	; if so, do YouDied				
+		; Only do Kat's boss jumpscare if NOT debug
+		ifdef __DEBUG__
+		nop
+		nop
+		nop
+		nop
+		nop
+		else
+		cmpi.w	#(id_DVZ<<8)+2,(v_zone).w	;Is zone DVZ3 (boss)?
+		beq.w	scare_Index.DS_YouDied	; if so, do YouDied
+		endif
 
-		jsr	(RandomNumber).l	;Get rnd number in d0
-		andi.l	#$0F,d0			;Restrict to 4-bit number in d0
-		cmpi.b	#8,d0			;Is d0 8?
-		bhi.w	.ChGuy			;If >8, branch (Sega Channel Guy)		
+		jsr	(RandomNumber).l			;Get rnd number in d0
+		andi.l	#scareMask,d0			;Restrict to x-bit number in d0
+		cmpi.b	#scareCount1,d0			;Is do scareCount 1-based?
+		blo.s	.randContinue			;if lower than, branch
+		subi.b	#scareCount1,d0			;We are higher. Subtract to get back into range
+		
+	.randContinue:
+		add.w	d0,d0					;Double d0 (word-based jumps)
+		move.w	scare_Index(pc,d0.w),d0	;Adjust d0
+		jmp		scare_Index(pc,d0.w)	;Run d0 routine
+		rts
+		
+;Table of word-based offsets into jumpscare routines
+; ===========================================================================
+		even
+scare_Index:
+		dc.w scare_Index.foxy-scare_Index		;$00 Foxy
+		dc.w scare_Index.ChGuy-scare_Index		;$02 Sega Channel Guy
+		dc.w scare_Index.DS_YouDied-scare_Index	;$04 You Died (DS)
+		even
 
 ;Foxy jump scare
 .foxy:
@@ -96,7 +130,7 @@ GM_FoxyBoo:
 		bra.w	.foxy_loop
 		
 ;!@ GD: Sega Channel Guy
-;Foxy jump scare
+; Sega Channel Guy jumpscare
 .ChGuy:
 		lea	(vdp_control_port).l,a6
 		move.w	#$8C81,(a6)	; set to H40
@@ -137,6 +171,48 @@ GM_FoxyBoo:
 		jsr		(TilemapToVRAM).l
 		add.b	#1,(v_foxyframe).w
 		bra.w	.schg_loop
+
+;!@ GD: You Died
+; You Died jumpscare (Dark Souls)
+.DS_YouDied:
+		lea	(vdp_control_port).l,a6
+		move.w	#$8C81,(a6)	; set to H40
+		locVRAM	0
+		lea	(Nem_YouDied).l,a0
+		jsr	(NemDec).l
+
+		move.b	#2,(v_vbla_routine).w
+		jsr		(WaitForVBla).l
+
+		moveq	#palid_YouDied,d0
+		jsr		(PalLoad2).l		; load palette
+
+		move.w	#$1A,(v_demolength).w
+		move.b	#dUDied,d0
+		jsr	(MegaPCM_PlaySample).l
+.dsud_loop:
+		move.b	#2,(v_vbla_routine).w
+		jsr		(WaitForVBla).l
+		cmpi.b	#$10,(v_foxyframe).w
+		beq.w	.end
+		tst.w	(v_demolength).w
+		bne.s	.dsud_loop
+		move.w	#$1A,(v_demolength).w
+		lea	(v_ram_start).l,a1
+		moveq	#0,d0
+		move.b	(v_foxyframe).w,d0
+		lsl.w	#2,d0
+		lea 	YouDiedFrames(pc),a0
+		move.l	(a0,d0.w),a0
+		move.w	#0,d0
+		jsr	(EniDec).l
+		lea	(v_ram_start).l,a1
+		locVRAM	$E000,d0
+		moveq	#$27,d1
+		moveq	#$1B,d2
+		jsr		(TilemapToVRAM).l
+		add.b	#1,(v_foxyframe).w
+		bra.w	.dsud_loop
 		
 ;End this game mode
 .end:
@@ -237,4 +313,31 @@ Eni_SegaChGuyF11:	binclude			"conimodes/foxyboo/map11_b.eni"
 Eni_SegaChGuyF12:	binclude			"conimodes/foxyboo/map12_b.eni"
 					even
 Eni_SegaChGuyF13:	binclude			"conimodes/foxyboo/map13_b.eni"
+					even
+					
+;!@ GD: You Died data
+YouDiedFrames:
+	dc.l	Eni_YouDied		;Frame	$00
+	dc.l	Eni_YouDied		;Frame	$01
+	dc.l	Eni_YouDied		;Frame	$02
+	dc.l	Eni_YouDied		;Frame	$03
+	dc.l	Eni_YouDied		;Frame	$04
+	dc.l	Eni_YouDied		;Frame	$05
+	dc.l	Eni_YouDied		;Frame	$06
+	dc.l	Eni_YouDied		;Frame	$07
+	dc.l	Eni_YouDied		;Frame	$08
+	dc.l	Eni_YouDied		;Frame	$09
+	dc.l	Eni_YouDied		;Frame	$0A
+	dc.l	Eni_YouDied		;Frame	$0B
+	dc.l	Eni_YouDied		;Frame	$0C
+	dc.l	Eni_YouDied		;Frame	$0D
+	dc.l	Eni_YouDied		;Frame	$0E
+	dc.l	Eni_YouDied		;Frame	$0F
+	even					;Frame	$10
+
+Pal_YouDied:		bincludeEndMarker	"conimodes/foxyboo/pal_c.bin"
+					even
+Nem_YouDied:		binclude			"conimodes/foxyboo/art_c.nem"
+					even
+Eni_YouDied:		binclude			"conimodes/foxyboo/map0_c.eni"
 					even
