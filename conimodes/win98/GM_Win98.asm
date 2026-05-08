@@ -72,6 +72,9 @@ GM_LogoSYS:
 		moveq	#$0,d2
 		jsr		(TilemapToVRAM).l
 
+		; !@ GD: Play passport song
+		move.b	#bgm_Passport,d0
+		jsr		(PlaySound_Special).l
 
 		moveq	#palid_Win98,d0
 		jsr		(PalLoad2).l		; load palette

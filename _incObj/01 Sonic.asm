@@ -2057,6 +2057,19 @@ Sonic_ResetLevel:; Routine 8
 		beq.s	GotoBSOD			;If so, branch
 		cmpi.b	#id_BSZ,(v_zone).w	;Is zone Bluescape?
 		beq.s	GotoSChGuy			;If so, branch
+		cmpi.b	#id_BTZ,(v_zone).w	;Is zone Bluestone?
+		beq.s	GotoYouDied			;If so, branch		
+		; Only do Kat's boss jumpscare if NOT debug
+		ifdef __DEBUG__
+		nop
+		nop
+		nop
+		nop
+		else
+		cmpi.w	#(id_DVZ<<8)+2,(v_zone).w	;Is zone DVZ3 (boss)?
+		beq.s	GotoYouDied
+		endif
+		
 .restart:
 		move.w	#1,(f_restart).w	; restart the level
 .return:
@@ -2071,7 +2084,8 @@ GotoBSOD:
 		move.w	#4,(f_restart).w	; load new gamemode
 		rts
 GotoSChGuy:
-		;We are in Bluescape zone and NOT gameover. Do sega channel guy jump scare
+GotoYouDied:
+		;We are in BSZ/BTZ zone and NOT gameover. Do forced jump scare
 		jsr		(Pow_Randomiser.getjumpscared).l
 		rts
 ; End of function Sonic_ResetLevel

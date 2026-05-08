@@ -59,6 +59,7 @@ palid_Savethemoonsonic:	makePalEntry	Pal_STMsonic,		v_palette_line_1
 palid_DVZ:				makePalEntry	Pal_DVZ,			v_palette_line_2
 palid_Foxy:				makePalEntry	Pal_Foxy,			v_palette_line_1
 palid_SegaChGuy:		makePalEntry	Pal_SegaChGuy,		v_palette_line_1
+palid_YouDied:			makePalEntry	Pal_YouDied,		v_palette_line_1
 palid_NGZ:				makePalEntry	Pal_NGZ,			v_palette_line_2
 palid_HARDWARE:			makePalEntry	Pal_HARDWARE,		v_palette_line_2
 palid_BSZ:				makePalEntry	Pal_BSZ,			v_palette_line_2
