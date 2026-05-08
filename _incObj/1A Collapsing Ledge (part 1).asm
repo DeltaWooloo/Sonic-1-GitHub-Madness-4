@@ -24,6 +24,10 @@ Ledge_Main:	; Routine 0
 		bne.s	.notNogales
 		move.l	#Map_LedgeNogal,obMap(a0)
 .notNogales:
+		cmpi.b	#id_CBZ,(v_zone).w ; check if level is CBZ
+		bne.s	.notCBZ
+		move.l	#Map_LedgeCBZ,obMap(a0) ; CBZ specific code
+.notCBZ:
 		ori.b	#4,obRender(a0)
 		move.b	#4,obPriority(a0)
 		move.b	#7,ledge_timedelay(a0) ; set time delay for collapse

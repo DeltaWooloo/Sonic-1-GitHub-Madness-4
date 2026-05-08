@@ -17,6 +17,11 @@ Edge_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_Edge,obMap(a0)
 		move.w	#make_art_tile(ArtTile_GHZ_Edge_Wall,2,0),obGfx(a0)
+		cmpi.b	#id_CBZ,(v_zone).w ; check if level is CBZ
+		bne.s	.notCBZ
+		move.l	#Map_CBZEdge,obMap(a0)
+		move.w	#make_art_tile(0,2,0),obGfx(a0) ; 0 cuz its in the level art
+.notCBZ:
 		ori.b	#4,obRender(a0)
 		move.b	#8,obActWid(a0)
 		move.b	#6,obPriority(a0)

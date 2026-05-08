@@ -79,7 +79,7 @@ Hel_NotCentre:
 
 Hel_Action:	; Routine 2, 4
 		bsr.w	Hel_RotateSpikes
-		bsr.w	DisplaySprite
+		jsr		(DisplaySprite).l
 		bra.w	Hel_ChkDel
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
@@ -118,14 +118,14 @@ Hel_DelLoop:
 		lsl.w	#object_size_bits,d0
 		addi.l	#v_objspace&$FFFFFF,d0
 		movea.l	d0,a1		; get child address
-		bsr.w	DeleteChild	; delete object
+		jsr		(DeleteChild).l	; delete object
 		dbf	d2,Hel_DelLoop ; repeat d2 times (helix length)
 
 Hel_Delete:	; Routine 6
-		bsr.w	DeleteObject
+		jsr		(DeleteObject).l
 		rts
 ; ===========================================================================
 
 Hel_Display:	; Routine 8
 		bsr.w	Hel_RotateSpikes
-		bra.w	DisplaySprite
+		jmp		(DisplaySprite).l

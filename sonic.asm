@@ -4589,6 +4589,7 @@ Map_Plat_Unused:include	"_maps/Platforms (unused).asm"		; nogales uses these
 Map_Plat_GHZ:	include	"_maps/Platforms (GHZ).asm"
 Map_Plat_SYZ:	include	"_maps/Platforms (SYZ).asm"
 Map_Plat_SLZ:	include	"_maps/Platforms (SLZ).asm"
+Map_Plat_CBZ:	include	"_maps/Platforms (CBZ).asm"
 		include	"_incObj/19.asm"
 Map_GBall:	include	"_maps/GHZ Ball.asm"
 		include	"_incObj/1A Collapsing Ledge (part 1).asm"
@@ -4700,6 +4701,7 @@ Ledge_SlopeData:
 
 Map_Ledge:	include	"_maps/Collapsing Ledge.asm"
 Map_LedgeNogal:	include	"_maps/Collapsing Ledge (Unused).asm"
+Map_LedgeCBZ:	include	"_maps/Collapsing Ledge CBZ.asm"
 Map_CFlo:	include	"_maps/Collapsing Floors.asm"
 
 		include	"_incObj/1C Scenery.asm"
@@ -5212,6 +5214,7 @@ Map_Spike:	include	"_maps/Spikes.asm"
 		include	"_incObj/3B Purple Rock.asm"
 		include	"_incObj/49 Waterfall Sound.asm"
 Map_PRock:	include	"_maps/Purple Rock.asm"
+Map_CBZRock:	include	"_maps/Purple Rock CBZ.asm"
 		include	"_incObj/3C Smashable Wall.asm"
 
 		include	"_incObj/sub SmashObject.asm"
@@ -5952,6 +5955,7 @@ Map_Roll:	include	"_maps/Roller.asm"
 
 		include	"_incObj/44 GHZ Edge Walls.asm"
 Map_Edge:	include	"_maps/GHZ Edge Walls.asm"
+Map_CBZEdge:	include	"_maps/CBZ Edging Walls.asm"
 
 		include	"_incObj/13 Lava Ball Maker.asm"
 		include	"_incObj/14 Lava Ball.asm"

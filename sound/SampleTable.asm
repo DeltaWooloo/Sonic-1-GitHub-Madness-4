@@ -161,14 +161,16 @@ SampleTable:
 	dcSample	TYPE_PCM,	Knight_Roar,	22050,	FLAGS_SFX	; $E9
 	dcSample	TYPE_PCM,	DR_Battle_Start, 22050,	FLAGS_SFX	; $EA
 
+	dcSample	TYPE_PCM,	SexFland,	8000,	FLAGS_SFX		; $EB
+
 	; SEGA Samples
-	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $EB
+	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $EC
 
 	;!@ GD: Last slot always reserved for PCM SFX Silence
-	dcSample	TYPE_DPCM,	dummy,		8000,	FLAGS_SFX		; $EC
+	dcSample	TYPE_DPCM,	dummy,		8000,	FLAGS_SFX		; $ED
 
 	; Unused
-;	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $ED
+;	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $EE
 ;	dcSample	TYPE_PCM,	Segay,		0,	FLAGS_SFX
 ;	dcSample	TYPE_PCM,	CL_Penis,	11297
 ;	dcSample	TYPE_PCM,	Boioing,	5250,	FLAGS_SFX
@@ -344,6 +346,10 @@ SampleTable:
 	incdac	Knight_Stretch,"sound/dac/snd_knight_stretch.wav"
 	incdac	Knight_Roar,"sound/dac/snd_knightroar.wav"
 	incdac	DR_Battle_Start,"sound/dac/snd_weaponpull.wav"		; for whatever reason, snd_weaponpull_fast.wav breaks things
+
+; ---------------------------------------------------------------
+; stupid sexy flanders
+	incdac	SexFland,"sound/dac/sexyflanders.wav"
 
 ; ---------------------------------------------------------------
 ; Whatever you want the Sega sound to be

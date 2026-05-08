@@ -16,6 +16,11 @@ Rock_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_PRock,obMap(a0)
 		move.w	#make_art_tile(ArtTile_GHZ_Purple_Rock,0,0),obGfx(a0)
+		cmpi.b	#id_CBZ,(v_zone).w ; check if level is CBZ
+		bne.s	.notCBZ
+		move.l	#Map_CBZRock,obMap(a0)
+		clr.w	obGfx(a0)	; its just in the level art on player palette so mhm clear that
+.notCBZ:
 		;!@ GD: Enable h/v flip of object
 		;move.b	#4,obRender(a0)
 		move.b	obStatus(a0),d0

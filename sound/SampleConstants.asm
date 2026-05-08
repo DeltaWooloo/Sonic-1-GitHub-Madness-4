@@ -164,6 +164,7 @@ dKnight_Stretch					ds.b 1
 dKnight_Roar					ds.b 1
 dDR_Battle_Start				ds.b 1
 
+dSexyFlanders				ds.b 1
 ; SEGA Samples
 dSega						ds.b 1
 

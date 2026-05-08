@@ -50,8 +50,8 @@ TitleCard_SBZ3:	equ  "PIGFAT PUSSHOLE"		; SBZ3 is FZ
 TitleCard_SBZ4:	equ  "porn"
 
 TitleCard_Brew1:	equ  "COLD BREW"
-TitleCard_Brew2:	equ  "HOT BREW"
-TitleCard_Brew3:	equ  "Roast Brew"
+TitleCard_Brew2:	equ  "The flood"
+TitleCard_Brew3:	equ  "SUPERSUCKYSCROLL"
 TitleCard_Brew4:	equ  "Hostile Soul"
 
 TitleCard_WIN1:	equ  "MICROSLOP HQ"

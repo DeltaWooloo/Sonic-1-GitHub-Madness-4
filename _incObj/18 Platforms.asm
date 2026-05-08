@@ -34,7 +34,12 @@ Plat_Main:	; Routine 0
 		move.b	#3,obSubtype(a0)
 
 .notSLZ:
+		cmpi.b	#id_CBZ,(v_zone).w ; check if level is CBZ
+		bne.s	.notCBZ
+		move.l	#Map_Plat_CBZ,obMap(a0) ; CBZ specific code
+		move.b	#$20,obActWid(a0)
 
+.notCBZ:
 		cmpi.b	#id_Nogales,(v_zone).w ; check if level is Nogales
 		bne.s	.notNogales
 		move.l	#Map_Plat_Unused,obMap(a0) ; Nogales Mappings
