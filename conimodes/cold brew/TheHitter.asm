@@ -9,13 +9,14 @@ BrewText:
 		jsr	BrewText_Index(pc,d1.w)
 		jmp	(DisplaySprite).l
 ; ===========================================================================
-BrewText_Index:	dc.w BrewText_Main-BrewText_Index
-			dc.w BrewText_Display-BrewText_Index
-			dc.w BrewText_Display-BrewText_Index
-			dc.w BrewText_Display-BrewText_Index
-			dc.w BrewText_Display-BrewText_Index
-			dc.w BrewText_Display-BrewText_Index
-			dc.w BrewText_Die-BrewText_Index
+BrewText_Index:
+		dc.w BrewText_Main-BrewText_Index
+		dc.w BrewText_Display-BrewText_Index
+		dc.w BrewText_Display-BrewText_Index
+		dc.w BrewText_Display-BrewText_Index
+		dc.w BrewText_Display-BrewText_Index
+		dc.w BrewText_Display-BrewText_Index
+		dc.w BrewText_Die-BrewText_Index
 ; ===========================================================================
 
 BrewText_Main:	; Routine 0
@@ -45,6 +46,14 @@ BrewText_Display:
 		move.b	obFrame(a0),d1
 		move.b	BrewText_SFX(pc,d1.w),d0
 		jsr		(PlaySound_Special).l
+		
+		;!@ GD: Play a PCM_SFX sample too (if any)
+		move.w	#0,d0
+		move.w	#0,d1
+		move.b	obFrame(a0),d1
+		move.b	BrewText_PCM(pc,d1.w),d0
+		jsr		(MegaPCM_PlaySample).l
+		
 		addq.b	#2,obRoutine(a0)
 .Wait:
 		rts
@@ -56,13 +65,24 @@ BrewText_Die:
 BrewText_Timer:
 		dc.w $10	; WHEN
 		dc.w $10	; THAT
-		dc.w $20	; GITHUB
-		dc.w $20	; MADNESS
+		dc.w $3C	; GITHUB
+		dc.w $3C	; MADNESS
 		dc.w $100	; HITS
+		even
 
 BrewText_SFX:
-		dc.b $A0	; WHEN
-		dc.b $A9	; THAT
-		dc.b $AC	; GITHUB
-		dc.b $AD	; MADNESS
-		dc.b $C4	; HITS
+		dc.b sfx_Saw		; WHEN
+		dc.b sfx_Collapse	; THAT
+		dc.b sfx_Teleport	; GITHUB
+		dc.b sfx_ChainStomp	; MADNESS
+		dc.b sfx_FCBlip		; HITS
+		even
+
+; !@ GD: PCM samples foreach step		
+BrewText_PCM:
+		dc.b dNull			; WHEN
+		dc.b dNull			; THAT
+		dc.b dGithub		; GITHUB
+		dc.b dMadness		; MADNESS
+		dc.b dEggmanLaugh	; HITS
+		even

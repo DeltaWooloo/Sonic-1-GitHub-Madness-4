@@ -28,13 +28,22 @@ AnimateLevelGfx:
 		rts
 
 ; ===========================================================================
-AniArt_Index:	dc.w AniArt_GHZ-AniArt_Index, AniArt_none-AniArt_Index		; GHZ, LZ
-		dc.w AniArt_MZ-AniArt_Index, AniArt_none-AniArt_Index		; MZ SLZ
-		dc.w AniArt_none-AniArt_Index, AniArt_SBZ-AniArt_Index		; SYZ, SBZ
-		dc.w AniArt_Ending-AniArt_Index, AniArt_CBZ-AniArt_Index	; ENDZ, CBZ
-		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index		; WINZ, JOINTZ
-		dc.w AniArt_none-AniArt_Index, AniArt_GHZ-AniArt_Index		; DOLEZ, NOGALEZ
-		dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
+AniArt_Index:
+		dc.w AniArt_GHZ-AniArt_Index
+		dc.w AniArt_none-AniArt_Index		; GHZ, LZ
+		dc.w AniArt_MZ-AniArt_Index
+		dc.w AniArt_none-AniArt_Index		; MZ SLZ
+		dc.w AniArt_none-AniArt_Index
+		;dc.w AniArt_SBZ-AniArt_Index		; SYZ, SBZ
+		dc.w AniArt_none-AniArt_Index		; SYZ, SBZ (NOP'd out)
+		dc.w AniArt_Ending-AniArt_Index
+		dc.w AniArt_CBZ-AniArt_Index	; ENDZ, CBZ
+		dc.w AniArt_none-AniArt_Index
+		dc.w AniArt_none-AniArt_Index		; WINZ, JOINTZ
+		dc.w AniArt_none-AniArt_Index
+		dc.w AniArt_GHZ-AniArt_Index		; DOLEZ, NOGALEZ
+		dc.w AniArt_none-AniArt_Index
+		dc.w AniArt_none-AniArt_Index
 		dc.w AniArt_none-AniArt_Index
 		zonewarning AniArt_Index,2
 ; ===========================================================================

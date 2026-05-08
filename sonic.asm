@@ -3289,6 +3289,7 @@ Level_GetBgm:
 		locVRAM	$3800
 		lea	(Nem_Instagram).l,a0 ;	load alphabet
 		bsr.w	NemDec
+
 .Okbro:
 ;		tst.w	(f_demo).w	; Is demo mode on?
 ;		bcs.s	Level_SkipTtlCard

@@ -29,7 +29,7 @@ ptr_Obj19:		dc.l Obj19
 ptr_CollapseLedge:	dc.l CollapseLedge
 ptr_WaterSurface:	dc.l WaterSurface
 ptr_Scenery:		dc.l Scenery
-ptr_MagicSwitch:	dc.l MagicSwitch
+ptr_MagicSwitch:	dc.l MagicSwitch	; $1D Coni's Coldbrew
 ptr_BallHog:		dc.l BallHog
 ptr_Crabmeat:		dc.l Crabmeat
 ptr_Cannonball:		dc.l Cannonball		; $20

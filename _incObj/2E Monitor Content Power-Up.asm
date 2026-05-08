@@ -951,10 +951,11 @@ Pow_vdp_fixRegs:
 		movem.l	a6,-(sp)				; Push a6 onto stack
 		lea		(vdp_control_port).l,a6
 		
-		;!@ Remove Window plane (BSZ2 non-debug builds)
+		;!@ Remove Window plane (BSZ2)
 		cmpi.w	#(id_BSZ<<8)+1,(v_zone).w	; Is zone BSZ2?
 		bne.s	.resetWindow				; IF NOT, reset window plane; else do check below
-		; We are in BSZ2 level
+	.checkWindow:
+		; We are in a window level (BSZ2)
 		tst.b	d1							; Check d1 input param. Is it 0?
 		beq.s	.skipWindow					; If so, branch		
 	.resetWindow:

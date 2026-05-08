@@ -142,6 +142,8 @@ dChord16					ds.b 1
 dW98IPC						ds.b 1
 dMeow1						ds.b 1
 dMeow2						ds.b 1
+dazdOMG						ds.b 1
+dUDied						ds.b 1
 
 dEggNo						ds.b 1
 dfunnyb_utthole				ds.b 1
