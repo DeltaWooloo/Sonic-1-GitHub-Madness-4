@@ -3332,6 +3332,11 @@ Level_SkipTtlCard:
 ;		move.b	#4,(v_hud+obRoutine).w ; comment this stuff out its a test burp
 
 Level_ChkDebug:
+		cmpi.b	#id_MCZ,(v_zone).w	; is this return to tokyo zone
+		bne.s	.noporn
+		move.b	#id_HUD,(v_pornvidmark).w ; load HUD object
+		move.b	#$C,(v_pornvidmark+obRoutine).w
+.noporn:
 		tst.b	(f_debugcheat).w ; has debug cheat been entered?
 		beq.s	Level_ChkWater	; if not, branch
 		btst	#bitA,(v_jpadhold1).w ; is A button held?

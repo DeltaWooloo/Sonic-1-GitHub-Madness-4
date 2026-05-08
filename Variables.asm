@@ -83,6 +83,7 @@ v_starsobj4	= v_objspace+object_size*11	; object variable space for the invincib
 
 v_splash	= v_objspace+object_size*12	; object variable space for the water splash ($40 bytes)
 v_sonicbubbles	= v_objspace+object_size*13	; object variable space for the bubbles that come out of Sonic's mouth/drown countdown ($40 bytes)
+v_pornvidmark	= v_objspace+object_size*16
 v_watersurface1	= v_objspace+object_size*30	; object variable space for the water surface #1 ($40 bytes)
 v_watersurface2	= v_objspace+object_size*31	; object variable space for the water surface #1 ($40 bytes)
 

@@ -10,8 +10,12 @@ HUD:
 ; ===========================================================================
 HUD_Index:	dc.w HUD_Main-HUD_Index
 		dc.w HUD_Flash-HUD_Index
-		dc.w HUD_AlertInit-HUD_Index
+		dc.w HUD_AlertInit-HUD_Index	; for inside tonics body
 		dc.w HUD_Alert-HUD_Index
+		dc.w HUD_AlertInit-HUD_Index	; for prongle-o-wisp
+		dc.w HUD_Alert-HUD_Index
+		dc.w HUD_KaitoNippleInit-HUD_Index	; MyDawidVid.Fun
+		dc.w HUD_KaitoNipple-HUD_Index
 ; ===========================================================================
 
 HUD_Main:	; Routine 0
@@ -36,8 +40,8 @@ HUD_Main:	; Routine 0
 	.resume:
 		move.l	#Map_HUD,obMap(a0)
 		move.w	#make_art_tile(ArtTile_HUD,0,0),obGfx(a0)
-		move.b	#0,obRender(a0)
-		move.b	#0,obPriority(a0)
+;		move.b	#0,obRender(a0)
+;		move.b	#0,obPriority(a0)
 
 HUD_Flash:	; Routine 2
 		; Fix the HUD blinking
@@ -69,8 +73,8 @@ HUD_AlertInit:
 		move.w	#$C0,obScreenY(a0)
 		move.l	#Map_burpHUD,obMap(a0)
 		move.w	#make_art_tile(ArtTile_BurpHUD,0,0),obGfx(a0)
-		move.b	#0,obRender(a0)
-		move.b	#0,obPriority(a0)
+;		move.b	#0,obRender(a0)
+;		move.b	#0,obPriority(a0)
 		move.b	#6,obFrame(a0)
 HUD_Alert:
 		move.b	(v_vbla_byte).w,d0 ; get low byte of VBlank counter
@@ -80,10 +84,17 @@ HUD_Alert:
 .nopcm:
 		move.b	(v_vbla_byte).w,d0 ; get low byte of VBlank counter
 		andi.b	#$1F,d0
-		bne.s	.dontdrop
+		bne.s	HUD_KaitoNipple
 		subq.b	#1,obFrame(a0)
-		bpl.s	.dontdrop
+		bpl.s	HUD_KaitoNipple
 		clr.b	obRoutine(a0)
 		pcm 	dQuakeRocket
-.dontdrop:
+		bra.s	HUD_KaitoNipple
+HUD_KaitoNippleInit:
+		addq.b	#2,obRoutine(a0)
+		move.w	#$160,obX(a0)
+		move.w	#$100,obScreenY(a0)
+		move.l	#Map_burpHUD,obMap(a0)
+		move.w	#make_art_tile(ArtTile_BurpHUD,0,0),obGfx(a0)
+HUD_KaitoNipple:
 		jmp	(DisplaySprite).l
