@@ -249,8 +249,8 @@ allMonitors:	macro
 		dbug	Map_BuzzCBZ,	id_BuzzBomber,	0,	0,	make_art_tile(ArtTile_CBZBuzz_Bomber,0,0)
 		dbug	Map_ChopCBZ,	id_Chopper,	0,	0,	make_art_tile(ArtTile_CBZChopper,0,0)
 		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
-		dbug	Map_Plat_GHZ,	id_BasicPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
-;		dbug	Map_PRock,	id_PurpleRock,	0,	0,	make_art_tile(ArtTile_GHZ_Purple_Rock,3,0)
+		dbug	Map_Plat_CBZ,	id_BasicPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
+		dbug	Map_CBZRock,	id_PurpleRock,	0,	0,	make_art_tile(ArtTile_Level,0,0)
 		dbug	Map_MotoCBZ,	id_MotoBug,	0,	0,	make_art_tile(ArtTile_CBZMoto_Bug,0,0)
 		dbug	Map_Len,	id_Burrobot,	0,	0,	make_art_tile(ArtTile_CBZLen,0,0)
 		dbug	Map_Len,	id_Burrobot,	1,	0,	make_art_tile(ArtTile_CBZLen,1,0)
@@ -258,13 +258,9 @@ allMonitors:	macro
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
 		dbug	Map_Newt,	id_Newtron,	0,	0,	make_art_tile(ArtTile_CBZNewtron,1,0)
 		dbug	Map_Spongy,	id_BallHog,	3,	0,	make_art_tile(ArtTile_CBZSpongy,0,0)
-;		dbug	Map_Edge,	id_EdgeWalls,	0,	0,	make_art_tile(ArtTile_GHZ_Edge_Wall,2,0)
-;		dbug	Map_GBall,	id_Obj19,	0,	0,	make_art_tile(ArtTile_GHZ_Giant_Ball,2,0)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
 		dbug	Map_Pwisp,	id_PWispBoss,	0,	0,	make_art_tile(ArtTile_Eggman,1,0)
-;		dbug	Map_GRing,	id_GiantRing,	0,	0,	make_art_tile(ArtTile_Giant_Ring,1,0)
-;		dbug	Map_Bonus,	id_HiddenBonus,	1,	1,	make_art_tile(ArtTile_Hidden_Points,0,1)
-;		dbug	Map_Animal5,id_Animals,	0,	2,	make_art_tile(ArtTile_Animal_1,0,0)
+		dbug	Map_Animal5,id_Animals,	0,	2,	make_art_tile(ArtTile_Animal_1,0,0)
 .BREWend:
 
 .WIN:

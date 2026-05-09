@@ -293,7 +293,7 @@ Plat_Move:
 		move.b	obAngle(a0),d1	; load platform-motion variable
 		subi.b	#$40,d1
 		ext.w	d1
-		asr.w	#1,d1
+		asl.w	#2,d1
 		add.w	d1,d0
 		move.w	d0,objoff_2C(a0)	; change position on y-axis
 

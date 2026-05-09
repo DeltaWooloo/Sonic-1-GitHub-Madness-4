@@ -13,7 +13,7 @@ ObjIZ_Index:	dc.w ObjIZ_Main-ObjIZ_Index
 		dc.w ObjIZ_BattInit-ObjIZ_Index
 		dc.w ObjIZ_Batt-ObjIZ_Index
 ;		dc.w ObjIZ_Animate-ObjIZ_Index
-;		dc.w ObjIZ_Delete-ObjIZ_Index
+		dc.w ObjIZ_Delete-ObjIZ_Index
 ; ===========================================================================
 
 ObjIZ_Main:	; Routine 0
@@ -205,8 +205,8 @@ ObjIZ_Batt:
 ;		bra.w	DisplaySprite
 ; ===========================================================================
 
-;ObjIZ_Delete:	; Routine 6
-;		bra.w	DeleteObject
+ObjIZ_Delete:	; Routine 6
+		bra.w	DeleteObject
 
 Ani_IZ:
 		dc.w Ani_IZ.stand-Ani_IZ
