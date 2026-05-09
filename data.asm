@@ -343,6 +343,8 @@ Nem_Mouse:		binclude	"artnem/Mouse.nem"
 		even
 Nem_SCG:		binclude	"artnem/SegaChGuy.nem"
 		even
+Nem_BTG:	binclude	"artnem/EnemyBTG.bin"
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - character hud
 ; ---------------------------------------------------------------------------

@@ -344,6 +344,7 @@ PLC_BSZ:	dc.w ((PLC_BSZ2-PLC_BSZ-2)/6)-1
 		plcm	Nem_Spikes,    ArtTile_Spikes                 ; spikes
 		plcm	Nem_SCG, ArtTile_SCG	; Splats
         plcm	Nem_Splats, $9C80/32	; Splats
+		plcm	Nem_BTG,  ArtTile_Crabmeat               ; crabmeat enemy
              ;   plcm    byte_2BBC2, $8300/32
 PLC_BSZ2:	dc.w ((PLC_BSZ2end-PLC_BSZ2-2)/6)-1
 		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal      ; horizontal spring

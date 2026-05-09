@@ -6910,7 +6910,8 @@ DPLC_Eiza:	include	"coniobjs/eiza/mapDPLC.asm"
 
 			include	"coniobjs/ProngWispOBJ.asm"
 Map_Pwisp:	include	"coniobjs/ProngleWisp.asm"
-
+Map_BTG:	include	"_maps/BTG.asm"
+		even
 ; ---------------------------------------------------------------------------
 ; GMZ - garblemarden's slop will go here
 ; ---------------------------------------------------------------------------

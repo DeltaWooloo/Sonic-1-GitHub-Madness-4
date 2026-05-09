@@ -34,6 +34,11 @@ Crab_Main:	; Routine 0
 		move.b	#3,obPriority(a0)
 		move.b	#6,obColType(a0)
 		move.b	#$15,obActWid(a0)
+		cmpi.b	#id_BSZ,(v_zone).w		; is zone BSZ?
+		bne.s	.ContinueIfNot	; if not, branch
+		move.l	#Map_BTG,obMap(a0) ;USE BLUE TELEVISION SE- oh I MEAN GAMES!
+		move.w	#make_art_tile(ArtTile_Crabmeat,0,0),obGfx(a0)
+.ContinueIfNot:
 		bsr.w	ObjectFall
 		jsr	(ObjFloorDist).l	; find floor
 		tst.w	d1
@@ -201,6 +206,11 @@ Crab_BallMain:	; Routine 6
 		move.b	#3,obPriority(a0)
 		move.b	#$87,obColType(a0)
 		move.b	#8,obActWid(a0)
+		cmpi.b	#id_BSZ,(v_zone).w		; is zone BSZ?
+		bne.s	.ContinueIfNot2	; if not, branch
+		move.l	#Map_BTG,obMap(a0) ;USE BLUE TELEVISION SE- oh I MEAN GAMES!
+		move.w	#make_art_tile(ArtTile_Crabmeat,0,0),obGfx(a0)
+.ContinueIfNot2:
 		move.w	#-$400,obVelY(a0)
 		move.b	#7,obAnim(a0)
 
@@ -217,10 +227,10 @@ Crab_BallMove:	; Routine 8
 		addi.w	#$E0,d0
 		cmp.w	obY(a0),d0	; has object moved below the level boundary?
 	if FixBugs
-		blo.s	Crab_Delete
+		blo.l	Crab_Delete
 		bra.w	DisplaySprite
 	else
-		blo.s	.delete		; if yes, branch
+		blo.l	.delete		; if yes, branch
 		rts
 
 .delete:
