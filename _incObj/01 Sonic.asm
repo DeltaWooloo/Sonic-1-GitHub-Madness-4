@@ -1909,8 +1909,8 @@ Sonic_Hurt:	; Routine 4
 		addi.w	#$20,obVelY(a0)
 		btst	#6,obStatus(a0)
 		beq.s	.notunderwater
-		subi.w	#$40,obVelY(a0)
-
+		subi.w	#$5,obVelY(a0)	; CONI - THIS WAS CHANGED TO $40 WHY WHY WHYYYYYYYYSJDFNIHBSFIHBI
+; WHOEVER MADE THAT CHANGE give me a nice picture of megurine luka
 .notunderwater:
 		bsr.w	Sonic_HurtStop
 		;!@ Collide with Water after hurt:
