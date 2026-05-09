@@ -149,6 +149,7 @@ MusicIndex:
 	bgmdef s1TempotoS3($03), Mus_FrontHook
 	bgmdef $01, Mus_MM8StageSelect
 	bgmdef s1TempotoS3($A0), Mus_Eraser
+	bgmdef s1TempotoS3($A0), Mus_MVZ
 
 	;!@ bgmwarning	MusicIndex,4
 
@@ -400,6 +401,8 @@ Mus_MM8StageSelect:	include	"music/SaneWay/MM8 - Stage Select.asm"
 	even
 Mus_Eraser:		include	"music/DaxKatter/Mus - Eraser VS.asm"
 	even
+Mus_MVZ:    include "music/Dawid/Mushroom_Valley.asm"
+       even
 ;!@ Dummy song; meant for placehold slot, silence, whatever
 Mus_dummy:		include	"music/dummy.asm"	; !@ GD
 	even
