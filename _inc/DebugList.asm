@@ -178,7 +178,7 @@ allMonitors:	macro
 		dbug	Map_MBlock_SYZ,	id_MovingBlock,	2,	0,	make_art_tile(ArtTile_SYZ_Block,1,0) ; !@ GD: SYZ Moving plat
 		dbug	Map_FBlock,	id_FloatingBlock, 0,	0,	make_art_tile(ArtTile_Level,2,0)
 		
-		dbug	Map_But,	id_Button,	0,	0,	make_art_tile(ArtTile_Button+4,0,0)
+		dbug	Map_But,	id_Button,	0,	0,	make_art_tile(ArtTile_Button_SYZ+4,0,0)
 		dbug	Map_Cat,	id_Caterkiller,	0,	0,	make_art_tile(ArtTile_MZ_SYZ_Caterkiller,1,0)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
 .SYZend:

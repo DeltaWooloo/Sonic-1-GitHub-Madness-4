@@ -874,6 +874,7 @@ ArtTile_IE:			equ $4E0
 ArtTile_RecyleBin:			equ $500
 ArtTile_Moto_Bug:		equ $4F0
 ArtTile_Button:			equ $50F
+ArtTile_Button_SYZ:		equ $538		;!@ GD: Relocate button for SYZ
 ArtTile_Spikes:			equ $51B
 ArtTile_Spring_Horizontal:	equ $523
 ArtTile_Spring_Vertical:	equ $533

@@ -211,6 +211,9 @@ PLC_SYZ2:	dc.w ((PLC_SYZ2end-PLC_SYZ2-2)/6)-1
 		dc.w $A0E0
  		plcm	Nem_Spikes,    ArtTile_Spikes              ; spikes
 		plcm	Nem_HSpring,   ArtTile_Spring_Horizontal   ; horizontal spring
+		
+		;!@ GD: Add switch (relocated arttile)
+		plcm	Nem_LzSwitch,   ArtTile_Button_SYZ                 ; switch
 		    
 PLC_SYZ2end:
 ; ---------------------------------------------------------------------------

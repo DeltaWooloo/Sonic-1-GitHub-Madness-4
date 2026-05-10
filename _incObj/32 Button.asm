@@ -18,11 +18,23 @@ But_Main:	; Routine 0
 		move.l	#Map_But,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Button+4,2,0),obGfx(a0) ; MZ specific code
 		cmpi.b	#id_ACZ,(v_zone).w ; is level Marble Zone?
-		beq.s	But_IsMZ	; if yes, branch
+		;beq.s	But_IsMZ	; if yes, branch
+		beq.s	But_IsReg	; if yes, branch
+		
+		;!@ GD: Relocate artTile for SYZ (caterkiller stomps on the gfx)
+		cmpi.b	#id_SFZ,(v_zone).w ; is level Marble Zone?
+		beq.s	But_IsSYZ	; if yes, branch
 
+		; All other zones use this
 		move.w	#make_art_tile(ArtTile_Button+4,0,0),obGfx(a0)	; SYZ, LZ and SBZ specific code
+		bra.s	But_IsReg		
+		
+;!@ GD: SYZ button reloc
+But_IsSYZ:
+		move.w	#make_art_tile(ArtTile_Button_SYZ+4,0,0),obGfx(a0) ; SYZ specific code
 
-But_IsMZ:
+But_IsReg:
+;But_IsMZ:
 		move.b	#4,obRender(a0)
 		move.b	#$10,obActWid(a0)
 		move.b	#4,obPriority(a0)
