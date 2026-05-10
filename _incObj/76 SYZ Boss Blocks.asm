@@ -29,7 +29,9 @@ BossBlock_Loop:
 BossBlock_MakeBlock:
 		move.b	#id_BossBlock,obID(a1)
 		move.l	#Map_BossBlock,obMap(a1)
-		move.w	#make_art_tile(ArtTile_Level,2,0),obGfx(a1)
+		;!@GD: Just use pal0
+		;move.w	#make_art_tile(ArtTile_Level,2,0),obGfx(a1)
+		move.w	#make_art_tile(ArtTile_Level,0,0),obGfx(a1)
 		move.b	#4,obRender(a1)
 		move.b	#$10,obActWid(a1)
 		move.b	#$10,obHeight(a1)
