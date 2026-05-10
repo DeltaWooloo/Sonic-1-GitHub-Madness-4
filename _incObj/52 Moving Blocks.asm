@@ -8,14 +8,16 @@ MovingBlock:
 		move.w	MBlock_Index(pc,d0.w),d1
 		jmp	MBlock_Index(pc,d1.w)
 ; ===========================================================================
-MBlock_Index:	dc.w MBlock_Main-MBlock_Index
+MBlock_Index:
+		dc.w MBlock_Main-MBlock_Index
 		dc.w MBlock_Platform-MBlock_Index
 		dc.w MBlock_StandOn-MBlock_Index
 
 mblock_origX = objoff_30
 mblock_origY = objoff_32
 
-MBlock_Var:	dc.b $10, 0		; object width, frame number
+MBlock_Var:
+		dc.b $10, 0		; object width, frame number
 		dc.b $20, 1
 		dc.b $20, 2
 		dc.b $40, 3
@@ -26,6 +28,14 @@ MBlock_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_MBlock,obMap(a0)
 		move.w	#make_art_tile(ArtTile_MZ_Block,2,0),obGfx(a0)
+		
+		;!@ GD: Special SYZ (SFZ) check
+		cmpi.b	#id_SFZ,(v_zone).w ; check if level is SFZ (SYZ)
+		bne.s	.notSYZ
+		;This is SYZ; just change mapping file/offset and palette; keep same collision etc				
+		move.l	#Map_MBlock_SYZ,obMap(a0)
+		move.w	#make_art_tile(ArtTile_SYZ_Block,1,0),obGfx(a0)						
+	.notSYZ:						
 		cmpi.b	#id_ARZ,(v_zone).w ; check if level is LZ
 		bne.s	loc_FE44
 		move.l	#Map_MBlockLZ,obMap(a0) ; LZ specific code

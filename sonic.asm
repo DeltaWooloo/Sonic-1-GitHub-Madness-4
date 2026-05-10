@@ -6015,6 +6015,8 @@ Map_Smab:	include	"_maps/Smashable Green Block.asm"
 
 		include	"_incObj/52 Moving Blocks.asm"
 Map_MBlock:	include	"_maps/Moving Blocks (MZ and SBZ).asm"
+;!@ GD: New block mapping for SYZ
+Map_MBlock_SYZ:	include	"_maps/Moving Blocks (SYZ).asm"
 Map_MBlockLZ:	include	"_maps/Moving Blocks (LZ).asm"
 
 		include	"_incObj/55 Basaran.asm"

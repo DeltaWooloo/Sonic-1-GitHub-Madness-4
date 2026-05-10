@@ -194,7 +194,8 @@ Bom_End:	; Routine 6
 		bsr.w	SpeedToPos
 		addi.w	#$18,obVelY(a0)
 		lea	(Ani_Bomb).l,a1
-		bsr.w	AnimateSprite
+		;!@ bsr.w	AnimateSprite
+		jsr		(AnimateSprite).l
 		tst.b	obRender(a0)
 		bpl.w	DeleteObject
 		bra.w	DisplaySprite

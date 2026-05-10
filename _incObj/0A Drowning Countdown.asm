@@ -282,7 +282,8 @@ Drown_Countdown:; Routine $A
 .loc_13F94:
 		move.l	a0,-(sp)
 		lea	(v_player).w,a0
-		bsr.w	SpeedToPos
+		;!@ bsr.w	SpeedToPos
+		jsr		(SpeedToPos).l
 		addi.w	#$10,obVelY(a0)
 		movea.l	(sp)+,a0
 		bra.s	.nochange

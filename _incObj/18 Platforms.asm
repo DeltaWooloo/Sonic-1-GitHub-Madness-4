@@ -22,6 +22,7 @@ Plat_Main:	; Routine 0
 		move.b	#$20,obActWid(a0)
 		cmpi.b	#id_SFZ,(v_zone).w ; check if level is SYZ
 		bne.s	.notSYZ
+		move.w	#make_art_tile(ArtTile_Level,1,0),obGfx(a0)	;!@ GD: Change to pal line 1
 		move.l	#Map_Plat_SYZ,obMap(a0) ; SYZ specific code
 		move.b	#$20,obActWid(a0)
 

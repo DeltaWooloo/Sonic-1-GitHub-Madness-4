@@ -776,6 +776,10 @@ ArtTile_GHZ_Purple_Rock:	equ $3D0
 
 ; Marble Zone
 ArtTile_MZ_Block:		equ $2B8
+;!@ GD: Variant of MZ block for SYZ (secret moving platform)
+; Just lazily load from level's artnem (moving platform for SYZ)
+ArtTile_SYZ_Block:			equ ArtTile_Level
+
 ArtTile_MZ_Animated_Magma:	equ ArtTile_Level+$2D2
 ArtTile_MZ_Animated_Lava:	equ ArtTile_Level+$2E2
 ArtTile_MZ_Torch:		equ ArtTile_Level+$2F2
