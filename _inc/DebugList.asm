@@ -166,11 +166,11 @@ allMonitors:	macro
 		allMonitors
 		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
-		dbug	Map_Roll,	id_Roller,	0,	0,	make_art_tile(ArtTile_Roller,0,0)
+		;dbug	Map_Roll,	id_Roller,	0,	0,	make_art_tile(ArtTile_Roller,0,0)
 		dbug	Map_Bump,	id_Bumper,	0,	0,	make_art_tile(ArtTile_SYZ_Bumper,0,0)
 		dbug	Map_Crab,	id_Crabmeat,	0,	0,	make_art_tile(ArtTile_Crabmeat,0,0)
 		dbug	Map_Buzz,	id_BuzzBomber,	0,	0,	make_art_tile(ArtTile_Buzz_Bomber,0,0)
-		dbug	Map_Yad,	id_Yadrin,	0,	0,	make_art_tile(ArtTile_Yadrin,1,0)
+		dbug	Map_Wario,	id_Yadrin,	0,	0,	make_art_tile(ArtTile_Wario,0,0)			;Wario
 		dbug	Map_Plat_SYZ,	id_BasicPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
 		dbug	Map_FBlock,	id_FloatingBlock, 0,	0,	make_art_tile(ArtTile_Level,2,0)
 		dbug	Map_But,	id_Button,	0,	0,	make_art_tile(ArtTile_Button+4,0,0)
