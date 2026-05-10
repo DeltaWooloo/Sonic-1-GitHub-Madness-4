@@ -13,7 +13,8 @@ Prison:
 .delete:
 		jmp	(DeleteObject).l
 ; ===========================================================================
-Pri_Index:	dc.w Pri_Main-Pri_Index
+Pri_Index:
+		dc.w Pri_Main-Pri_Index
 		dc.w Pri_BodyMain-Pri_Index
 		dc.w Pri_Switched-Pri_Index
 		dc.w Pri_Explosion-Pri_Index
@@ -31,6 +32,18 @@ Pri_Var:	dc.b 2,	$20, 4,	0	; routine, width, priority, frame
 ; ===========================================================================
 
 Pri_Main:	; Routine 0
+		;!@ GD: Stupid new subType $04 which just forcibly loads
+		;the prison capsule gfx as runonce and then self-destructs
+		moveq	#0,d0				; Clear d0
+		move.b	obSubtype(a0),d0	; Move subTpye into d0
+		cmpi.b	#$04,d0				; Is this subtype $04?
+		bne.s	.skipPLC			; If not, branch
+		;This is special subType $03; load capsule patterns
+		moveq	#plcid_Boss2,d0		; Move PLC into d0
+		jsr		(NewPLC).l			; load capsule patterns
+		bra.s	Prison.delete
+		
+	.skipPLC:
 		move.l	#Map_Pri,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Prison_Capsule,0,0),obGfx(a0)
 		move.b	#4,obRender(a0)

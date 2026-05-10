@@ -124,6 +124,9 @@ loc_19248:
 		subq.b	#1,objoff_3E(a0)
 		bne.s	locret_19256
 		move.b	#$F,obColType(a0)
+		
+		;!@ GD: Bugfix for flash being held after flash sequence
+		bsr.w	BossSpringYard_resetFlash
 
 locret_19256:
 		rts
@@ -619,3 +622,12 @@ loc_19688:
 
 BossSpringYard_SpikeDelete:
 		jmp	(DeleteObject).l
+
+;!@ GD: Bugfix for flash being held after flash sequence
+BossSpringYard_resetFlash:		
+		movem.l	d0/a1,-(sp)		
+		moveq	#0,d0
+		lea	(v_palette+$22).w,a1
+		move.w	d0,(a1)
+		movem.l	(sp)+,d0/a1
+		rts

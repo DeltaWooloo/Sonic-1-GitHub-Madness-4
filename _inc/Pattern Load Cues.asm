@@ -44,7 +44,8 @@ ptr_PLC_ARZ2:		dc.w PLC_ARZ2-ArtLoadCues
 ptr_PLC_WINNERCard:	dc.w PLC_WINNERCard-ArtLoadCues
 ptr_PLC_Boss:		dc.w PLC_Boss-ArtLoadCues
 ptr_PLC_Signpost:	dc.w PLC_Signpost-ArtLoadCues
-ptr_PLC_Warp:		dc.w PLC_Warp-ArtLoadCues
+;!@ ptr_PLC_Warp:		dc.w PLC_Warp-ArtLoadCues
+ptr_PLC_Boss2:		dc.w PLC_Boss2-ArtLoadCues
 
 PLC_Animals:
 ptr_PLC_GHZAnimals:	dc.w PLC_GHZAnimals-ArtLoadCues
@@ -402,8 +403,12 @@ PLC_Signpostend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - beta special stage warp effect
 ; ---------------------------------------------------------------------------
-PLC_Warp:
-PLC_Warpend:
+;!@ GenesisDoes: Now used for Act 3 capsule ONLY (for boss-less act 3, e.g. ITBZ)
+;PLC_Warp:
+PLC_Boss2:	dc.w ((PLC_Boss2end-PLC_Boss2-2)/6)-1	;!@ GD: Added		
+		plcm	Nem_Prison,   ArtTile_Prison_Capsule   ; prison capsule
+;PLC_Warpend:
+PLC_Boss2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - GHZ animals
 ; ---------------------------------------------------------------------------
@@ -625,7 +630,11 @@ plcid_ARZ2:			equ (ptr_PLC_ARZ2-ArtLoadCues)/2
 plcid_WINNERCard:	equ (ptr_PLC_WINNERCard-ArtLoadCues)/2	
 plcid_Boss:			equ (ptr_PLC_Boss-ArtLoadCues)/2	
 plcid_Signpost:		equ (ptr_PLC_Signpost-ArtLoadCues)/2	
-plcid_Warp:			equ (ptr_PLC_Warp-ArtLoadCues)/2	
+
+;!@ GD: Now capsule prison only
+;plcid_Warp:		equ (ptr_PLC_Warp-ArtLoadCues)/2	
+plcid_Boss2:		equ (ptr_PLC_Boss2-ArtLoadCues)/2	
+
 plcid_GHZAnimals:	equ (ptr_PLC_GHZAnimals-ArtLoadCues)/2	
 plcid_LZAnimals:	equ (ptr_PLC_LZAnimals-ArtLoadCues)/2	
 plcid_MZAnimals:	equ (ptr_PLC_MZAnimals-ArtLoadCues)/2	

@@ -226,11 +226,13 @@ Crab_BallMove:	; Routine 8
 		move.w	(v_limitbtm2).w,d0
 		addi.w	#$E0,d0
 		cmp.w	obY(a0),d0	; has object moved below the level boundary?
-	if FixBugs
+	if FixBugs=0
 		blo.l	Crab_Delete
 		bra.w	DisplaySprite
 	else
-		blo.l	.delete		; if yes, branch
+		;!@ blo.l ain't a good valid opcode. Also .s works, blolol - GenesisDoes
+		;blo.l	.delete		; if yes, branch
+		blo.s	.delete		; if yes, branch
 		rts
 
 .delete:
