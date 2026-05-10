@@ -13,6 +13,11 @@
   <Subtypes>
     <Subtype id="00" name="Capsule" image="capsule" />
     <Subtype id="01" name="Button" image="button" />
+	<!-- !@ Stock Sonic 1 (game runtime) -->
+	<Subtype id="02" name="breakdown_1" image="button" />
+	<Subtype id="03" name="breakdown_2" image="button" />
+	<!-- !@ GenesisDoes additions -->
+	<Subtype id="04" name="PLC_loader" image="button" />
   </Subtypes>
   <Properties>
     <BitsProperty name="Type" type="EggPrisonType" startbit="0" length="1" />
@@ -21,6 +26,11 @@
     <Enum name="EggPrisonType">
       <EnumMember name="Capsule" />
       <EnumMember name="Button" />
+	  <!-- !@ Stock Sonic 1 (game runtime) -->
+	  <EnumMember name="breakdown_1" />
+	  <EnumMember name="breakdown_2" />
+	  <!-- !@ GenesisDoes additions -->
+	  <EnumMember name="PLC_loader" />
     </Enum>
   </Enums>
 </ObjDef>
