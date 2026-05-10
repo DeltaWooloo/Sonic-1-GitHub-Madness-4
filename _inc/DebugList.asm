@@ -36,6 +36,8 @@ allMonitors:	macro
 	dbug    Map_Monitor,    id_Monitor,    6,    8,    make_art_tile(ArtTile_Monitor,0,0) ; Ring Monitor
 	dbug    Map_Monitor,    id_Monitor,    7,    9,    make_art_tile(ArtTile_Monitor,0,0) ; Randomizer
 	dbug    Map_Monitor,    id_Monitor,    8,    10,   make_art_tile(ArtTile_Monitor,0,0) ; Slow Shoes
+	;!@ GD: Add Rift
+	dbug	Map_Rift,id_Rift,	0,	1,	$9760
 	endm
 
 .GHZ:
@@ -111,10 +113,10 @@ allMonitors:	macro
 		dbug	Map_Buzz,	id_BuzzBomber,	0,	0,	make_art_tile(ArtTile_Buzz_Bomber,0,0)
 		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
-		dbug	Map_Fire,	id_LavaMaker,	0,	0,	make_art_tile(ArtTile_MZ_Fireball,0,0)
-		dbug	Map_Brick,	id_MarbleBrick,	0,	0,	make_art_tile(ArtTile_Level,2,0)
-		dbug	Map_Geyser,	id_GeyserMaker,	0,	0,	make_art_tile(ArtTile_MZ_Lava,3,0)
-		dbug	Map_LWall,	id_LavaWall,	0,	0,	make_art_tile(ArtTile_MZ_Lava,3,0)
+		;dbug	Map_Fire,	id_LavaMaker,	0,	0,	make_art_tile(ArtTile_MZ_Fireball,0,0)
+		;dbug	Map_Brick,	id_MarbleBrick,	0,	0,	make_art_tile(ArtTile_Level,2,0)
+		;dbug	Map_Geyser,	id_GeyserMaker,	0,	0,	make_art_tile(ArtTile_MZ_Lava,3,0)
+		;dbug	Map_LWall,	id_LavaWall,	0,	0,	make_art_tile(ArtTile_MZ_Lava,3,0)
 		dbug	Map_Push,	id_PushBlock,	0,	0,	make_art_tile(ArtTile_MZ_Block,2,0)
 		dbug	Map_Yad,	id_Yadrin,	0,	0,	make_art_tile(ArtTile_Yadrin,1,0)
 		dbug	Map_Smab,	id_SmashBlock,	0,	0,	make_art_tile(ArtTile_MZ_Block,2,0)
@@ -126,8 +128,8 @@ allMonitors:	macro
 		dbug	Map_CFlo,	id_CollapseFloor, 0,	0,	make_art_tile(ArtTile_MZ_Block,3,0) ; Incorrect palette line.
 	endif
 		dbug	Map_LTag,	id_LavaTag,	0,	0,	make_art_tile(ArtTile_Monitor,0,1)
-		dbug	Map_Bas,	id_Basaran,	0,	0,	make_art_tile(ArtTile_Basaran,0,0)
-		dbug	Map_Cat,	id_Caterkiller,	0,	0,	make_art_tile(ArtTile_MZ_SYZ_Caterkiller,1,0)
+		dbug	Map_Bas,	id_Basaran,	0,	0,	($68A0/$20)
+		dbug	Map_Cat,	id_Caterkiller,	0,	0,	($A0E0/$20)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
 .MZend:
 
@@ -303,7 +305,6 @@ allMonitors:	macro
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
 .Jointend:
-
 		even
 
 .DVZ:
