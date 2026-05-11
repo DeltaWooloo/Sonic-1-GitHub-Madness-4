@@ -31,25 +31,22 @@ ArifBoss_Bullet:
 		move.b	#$4, obActWid(a0)
 		add.b	#6, obPriority(a0)
 		move.b	#.MaxTime, .TimeToLive(a0)
-
-		add.b	#2, obRoutine(a0)
-
+		addi.b	#2, obRoutine(a0)
 		rts
 
 ; ===========================================================================
 
 .Run:
 		; switch vram loc every other frame
+		moveq	#0,d0
 		move.b	(v_framebyte).w, d0
-		and.b	#1, d0
+		andi.b	#1, d0
 		move.b	d0, obFrame(a0)
 
 		; collide shit
 		move.b	#$87, obColType(a0)
-
-		sub.b	#1, .TimeToLive(a0)
+		subi.b	#1, .TimeToLive(a0)
 		beq.s	.Destroy
-
 		rts
 
 ; ===========================================================================

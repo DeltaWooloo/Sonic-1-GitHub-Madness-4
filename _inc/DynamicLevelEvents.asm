@@ -1057,6 +1057,8 @@ DLE_NGZ3:
 ; ===========================================================================
 DLE_NGZ_HUMPY:	dc.w DLE_NGZ3main-DLE_NGZ_HUMPY
 				dc.w locret_VOMITCOOKIE-DLE_NGZ_HUMPY
+				dc.w DLE_NGZ3end-DLE_NGZ_HUMPY			;!@ GD
+				dc.w locret_VOMITCOOKIE-DLE_NGZ_HUMPY	;!@ GD
 DLE_NGZ3main:
 		move.w	#$200,(v_limitbtm1).w ; set lower y-boundary
 		cmpi.w	#boss_ngz_x,(v_screenposx).w
@@ -1090,6 +1092,23 @@ DLE_NGZ3main:
 		NOP
 
 locret_VOMITCOOKIE:
+		rts
+		
+DLE_NGZ3end:
+		;move.w	#bgm_Coffinman,d0
+		;jsr	(QueueSound1).l		; play boss music
+		
+		;Fuck you Tonic
+		pcm		dSans
+		
+		;Load prison capulse gfx
+		moveq	#plcid_Boss2,d0		; Move PLC into d0
+		jsr		(NewPLC).l			; load capsule patterns
+		
+		move.w	#boss_ngz_x, (v_limitleft2).w	; limit left bound
+		move.w	#boss_ngz_x+$200, (v_limitright2).w ; limit right bound
+		move.b	#1, (f_lockscreen).w 	; lock screen
+		addq.b	#2,(v_dle_routine).w
 		rts
 ; ---------------------------------------------------------------------------
 ;                 *******Aw yeah Bluescape zone!*******

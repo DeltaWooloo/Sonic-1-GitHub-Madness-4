@@ -377,12 +377,12 @@ Pow_Randomiser:
 		dc.l	crash				;x $25 / $94 - 	Crash the game (illegal); Task fails successfully!
 		dc.l	.jukebox			;x $26 / $A8 - 	Play random song
 		dc.l	Pow_SlowShoes		;x $27 / $AC -  Slow down shoes
-		dc.l	FirecorePSGOnly		;x $27 / $AC -  Slow down shoes
-		dc.l	FirecoreFIXER		;x $27 / $AC -  Firecore fixer pitcher, does the opposite of "Firecore" Code
-        dc.l    FirecoreFMOnly      ; self explanitory....		
+		dc.l	FirecorePSGOnly		;x $28 / $B0 -  Slow down shoes
+		dc.l	FirecoreFIXER		;x $29 / $B4 -  Firecore fixer pitcher, does the opposite of "Firecore" Code
+        dc.l    FirecoreFMOnly      ;x $2A / $B8 self explanitory....		
 		;Aka it pitches it up so it sounds right on firecores?? on emulators it sounds pitched up... yeah idk how to explain
 		; ML: the "why did no one do these already"s
-		dc.l	.newchara		;$28 / $A0
+		dc.l	.newchara			;x $2B / $BC
 .powtableend:
 
 ; ===========================================================================

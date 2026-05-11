@@ -435,6 +435,9 @@ HurtSonic:
 
 
 KillSonic:
+		;!@ Is debug mode enabled? If so, skip foxy
+		tst.w   (f_debugmode).w
+        bne.s   .NotFoxy
 		tst.w	(v_debuguse).w	; is debug mode active?
 		bne.w	.dontdie	; if yes, branch
 ;		tst.b	(v_enablefox).w

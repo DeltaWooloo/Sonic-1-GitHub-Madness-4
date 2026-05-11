@@ -60,8 +60,7 @@ ArifBoss_Arif:
 		move.b	#$F, obColType(a0)
 		move.b	#12, obColProp(a0) 		; set number of hits
 		
-		add.b	#2, obRoutine(a0)
-
+		addq.b	#2, obRoutine(a0)
 		rts
 
 ; ===========================================================================
@@ -80,6 +79,7 @@ ArifBoss_Arif:
 		add.w	d1, obY(a0)				; ensure object position is grounded by adding floor distance
 		
 		move.w	#$25,(v_screenshaketime).w
+		moveq	#0,d0
 		move.w	#sfx_Thud, d0
 		jsr	(QueueSound2).l
 
@@ -116,6 +116,7 @@ ArifBoss_Arif:
 
 		sub.w	#$1, .RoutineTimer(a0) 
 
+		moveq	#0,d0
 		move.w	#sfx_HitBoss, d0
 		jsr	(QueueSound2).l
 
@@ -189,6 +190,7 @@ ArifBoss_Arif:
 		add.w	d1, obY(a0)				; ensure object position is grounded by adding floor distance
 
 		move.w	#$25,(v_screenshaketime).w
+		moveq	#0,d0
 		move.w	#sfx_Thud, d0
 		jsr	(QueueSound2).l
 
@@ -291,6 +293,7 @@ ArifBoss_Arif:
 
 		move.b	#$18, .FlashTimer(a0)			; set number of times to flash 
 		
+		moveq	#0,d0
 		move.w	#sfx_HitBoss, d0
 		jsr	(QueueSound2).l
 

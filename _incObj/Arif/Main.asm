@@ -31,11 +31,14 @@ ArifBoss:
 .Routines:
 		dc.w	.Setup-.Routines
 		dc.w	.Loop-.Routines
+		dc.w	.Dead-.Routines			;!@ GD
+		dc.w	.Done-.Routines			;!@ GD
 
 ; ===========================================================================
 
 .Setup:
 		jsr 	(FindFreeObj).l
+		move.l	a1,(v_object).w		;!@GD: Store addr of object into v_object
 		move.b	#id_Arif, (a1)
 		move.b	#2, obSubtype(a1)
 		move.w	obX(a0), obX(a1)
@@ -45,7 +48,23 @@ ArifBoss:
 		rts
 
 .Loop:
-		; later check for boss defeat
+		;!@ GD: Check for boss defeat
+		movea.l	(v_object).w,a1			; Move boss addr into a1
+		tst.b	obColProp(a1)			; Has hits left?
+		bne.s	.locret					; If so, branch
+		;He's dead; goto next routine
+		addq.b	#2, obRoutine(a0)
+
+	.locret:
+		rts
+		
+.Dead:
+		addq.b	#2,(v_dle_routine).w	; Goto next level routine
+		addq.b	#2, obRoutine(a0)		; Goto next routine
+		rts
+		
+.Done:
+		jsr		(DeleteObject).l
 		rts
 
 ; ===========================================================================
