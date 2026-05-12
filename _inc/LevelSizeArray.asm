@@ -7,12 +7,12 @@
 		;    |      |      |--------------------------Right boundary
 		;    |      |      |      |-------------------Top boundary
 		;    |      |      |      |      |------------Bottom boundary
-		; GHZ|      |      |      |      |      |-----Vertical screen shift (redundant)
+		; x GHZ|      |      |      |      |      |-----Vertical screen shift (redundant)
 		dc.w CAMDR_ABC, $0000, $24BF, $0000, $0300, $0060
 		dc.w CAMDR_ABC, $0000, $1EBF, $0000, $0300, $0060
 		dc.w CAMDR_ABC, $0000, $2960, $0000, $0300, $0060
 		dc.w CAMDR_ABC, $0000, $2ABF, $0000, $0300, $0060
-		; LZ
+		; x LZ
 		dc.w CAMDR_ABC, $0000, $19A9, $0050, $0050, $0060
 		dc.w CAMDR_ABC, $0000, $10AF, $0050, $0050, $0060
 		dc.w CAMDR_ABC, $0000, $202F, $0050, $0050, $0060
@@ -27,9 +27,9 @@
 		dc.w CAMDR_ABC, $0000, $1FBF, $0000, $0640, $0060
 		dc.w CAMDR_ABC, $0000, $2000, $0000, $06C0, $0060
 		dc.w CAMDR_ABC, $0000, $3EC0, $0000, $0720, $0060
-		; SYZ
+		; x SYZ
 		dc.w CAMDR_ABC, $0000, $22C0, $0000, $0420, $0060
-		dc.w CAMDR_ABC, $0000, $28C0, $0000, $0520, $0060
+		dc.w CAMDR_ABC, $0000, $26C0, $0000, $0520, $0060
 		dc.w CAMDR_ABC, $0000, $2C00, $0000, $0620, $0060
 		dc.w CAMDR_ABC, $0000, $2EC0, $0000, $0620, $0060
 		; SBZ
@@ -37,7 +37,7 @@
 		dc.w CAMDR_ABC, $0000, $1E40, $FF00, $0800, $0060
 		dc.w CAMDR_ABC, $2080, $2460, $0510, $0510, $0060
 		dc.w CAMDR_ABC, $0000, $3EC0, $0000, $0720, $0060
-		; Ending
+		; x Ending
 		dc.w CAMDR_ABC, $0000, $0500, $0110, $0110, $0060
 		dc.w CAMDR_ABC, $0000, $0DC0, $0110, $0110, $0060
 		dc.w CAMDR_ABC, $0000, $2FFF, $0000, $0320, $0060
@@ -47,21 +47,21 @@
 		dc.w CAMDR_ABC, $0000, $1EBF, $0000, $0300, $0060
 		dc.w CAMDR_ABC, $0000, $0000, $0000, $0300, $0060
 		dc.w CAMDR_ABC, $0000, $100, $0000, $0000, $0060
-		; WIN
+		; x WIN
 		dc.w CAMDR_ABC, $0000, $1FBF, $0000, $0420, $0060
 		dc.w CAMDR_ABC, $0000, $1FBF, $0000, $0640, $0060
 		dc.w CAMDR_ABC, $0000, $2000, $0000, $06C0, $0060
 		dc.w CAMDR_ABC, $0000, $3EC0, $0000, $0720, $0060
 		even
-		; Joint
-		dc.w CAMDR_ABC, $0000, $1FBF, $0000, $0640, $0060
+		; x Joint
+		dc.w CAMDR_ABC, $0000, $0D40, $FF00, $0800, $0060
 		dc.w CAMDR_ABC, $0000, $1FBF, $0000, $0640, $0060
 		dc.w CAMDR_ABC, $0000, $2000, $0000, $06C0, $0060
 		dc.w CAMDR_ABC, $0000, $3EC0, $0000, $0720, $0060
 		even
 		; Doleville
-		dc.w CAMDR_ABC, $0000, $1FBF, $0000, $0640, $0060
-		dc.w CAMDR_ABC, $0000, $1FBF, $0000, $0640, $0060
+		dc.w CAMDR_ABC, $0000, $1DC0, $0000, $0640, $0060
+		dc.w CAMDR_ABC, $0000, $0B40, $0000, $0640, $0060
 		dc.w CAMDR_ABC, $0000, $0380, $0140, $0140, $0060
 		dc.w CAMDR_ABC, $0000, $3EC0, $0000, $0720, $0060
 		even

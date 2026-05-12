@@ -1218,7 +1218,8 @@ DLE_BTZ:
 		move.w	DLE_BTZx(pc,d0.w),d0
 		jmp	DLE_BTZx(pc,d0.w)
 ; ===========================================================================
-DLE_BTZx:	dc.w BlueStone-DLE_BTZx
+DLE_BTZx:
+		dc.w BlueStone-DLE_BTZx
 		dc.w BlueStone-DLE_BTZx
 		dc.w BlueStone-DLE_BTZx
 ; ===========================================================================
@@ -1227,9 +1228,10 @@ BlueStone:	; hello world ksajuioooee fohlkasdkja
 		moveq	#0,d0
 		move.b	(v_dle_routine).w,d0
 		move.w	BlueStoneIndex(pc,d0.w),d0
-		jmp	BlueStoneIndex(pc,d0.w)
+		jmp		BlueStoneIndex(pc,d0.w)
 ; ===========================================================================
-BlueStoneIndex:	dc.w InitBluSto-BlueStoneIndex
+BlueStoneIndex:
+		dc.w InitBluSto-BlueStoneIndex
 		dc.w BluSto_Return-BlueStoneIndex
 		dc.w BluSto_end-BlueStoneIndex
 ; ===========================================================================
@@ -1245,10 +1247,20 @@ HscrBSZ:
 		move.b	#1,(f_lockscreen).w ; Scr Lock
 
 .LoadJohnBattle:		
-		cmpi.w	#OldJohn_X_Spawn,(v_screenposx).w  ; WIP 
-		blo.s	BluSto_Return
-		jsr	(FindFreeObj).l
-		bne.s	.BTZspawnfail
+		;!@ GD: Boss is currently crashing game. Skip it for now
+		;cmpi.w	#OldJohn_X_Spawn,(v_screenposx).w  ; WIP 
+		;blo.s	BluSto_Return
+		;jsr	(FindFreeObj).l
+		;bne.s	.BTZspawnfail
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		bra.s	.BTZspawnfail
+		
 		move.b	#id_OldJohnBoss,obID(a1) ; load bluestone boss object
 		move.w	#OldJohn_X_Spawn+$180,obX(a1)
 		move.w	#OldJohn_Y_Spawn+$24,obY(a1)

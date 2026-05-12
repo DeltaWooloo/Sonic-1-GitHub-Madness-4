@@ -1269,7 +1269,9 @@ Sonic_LevelBound:
 		clr.b	(v_lastlamp).w	; clear lamppost counter
 		jsr	(Pow_fix_RandMon_Runonce_flags).l	;!@ GD: Clear f_randMonPow runonce flags
 		move.w	#1,(f_restart).w ; restart the level
-		move.w	#(id_ARZ<<8)+3,(v_zone).w ; set level to SBZ3 (LZ4)
+		;!@ GD: Just goto final zone
+		;move.w	#(id_ARZ<<8)+3,(v_zone).w ; set level to SBZ3 (LZ4)
+		move.w	#(id_PPZ<<8)+2,(v_zone).w ; set level to Final Zone (SBZ3)
 		rts
 ; ----------------------------------------------------------------------------
 

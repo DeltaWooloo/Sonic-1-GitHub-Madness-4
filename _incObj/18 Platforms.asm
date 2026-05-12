@@ -77,7 +77,8 @@ loc_7EE0:
 Plat_Action:	; Routine 8
 		bsr.w	Plat_Move
 		bsr.w	Plat_Nudge
-		bsr.w	DisplaySprite
+		;!@ bsr.w	DisplaySprite
+		jsr		(DisplaySprite).l
 		bra.w	Plat_ChkDel
 ; ===========================================================================
 

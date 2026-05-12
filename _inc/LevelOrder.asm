@@ -10,10 +10,13 @@
 		dc.b 0, 0
 
 		; Wario Hallway Zone
-		dc.b id_WHZ, 1	; Act 1
+		dc.b id_MCZ, 0	; Act 1
 		dc.b id_WHZ, 2	; Act 2
-		dc.b id_MCZ, 0	; Act 3
-		dc.b id_PPZ, 2	; Scrap Brain Zone Act 3
+		dc.b id_WHZ, 2	; Act 3
+		dc.b id_PPZ, 2	; Scrap Brain Zone Act 3		
+		;dc.b id_WHZ, 2	; Act 2
+		;dc.b id_MCZ, 0	; Act 3
+		;dc.b id_PPZ, 2	; Scrap Brain Zone Act 3
 
 		; Alberta Canada Zone
 		dc.b id_ACZ, 1	; Act 1
@@ -58,10 +61,14 @@
 		dc.b 0, 0
 
 		; Joint Zone
-		dc.b id_Joint, 1	; Act 1
-		dc.b id_Joint, 2	; Act 2
+		dc.b id_DVZ, 0	; Act 3
+		dc.b id_Joint,2	; Act 2
 		dc.b id_DVZ, 0	; Act 3
 		dc.b 0, 0
+		;dc.b id_Joint, 1	; Act 1
+		;dc.b id_Joint, 2	; Act 2
+		;dc.b id_DVZ, 0	; Act 3
+		;dc.b 0, 0
 
 		; Doleville Zone
 		dc.b id_DVZ, 1	; Act 1
@@ -84,10 +91,14 @@
 		even
 
 		; BlueStone Zone
-		dc.b id_BTZ, 1	; Act 1
+		dc.b id_PPZ, 0	; Act 1
 		dc.b id_BTZ, 2	; Act 2
 		dc.b id_BTZ, 0	; Act 3
 		dc.b 0, 0
+		;dc.b id_BTZ, 1	; Act 1
+		;dc.b id_BTZ, 2	; Act 2
+		;dc.b id_BTZ, 0	; Act 3
+		;dc.b 0, 0
 		even
 
 		; Azure Rainforest Zone
@@ -111,10 +122,13 @@ FetLevelOrder:
 		dc.b 0, 0
 
 		; Wario Hallway Zone
-		dc.b id_WHZ, 1	; Act 1
+		dc.b id_MCZ, 0	; Act 1
 		dc.b id_WHZ, 2	; Act 2
-		dc.b id_MCZ, 0	; Act 3
+		dc.b id_WHZ, 2	; Act 3
 		dc.b id_PPZ, 2	; Scrap Brain Zone Act 3
+		;dc.b id_WHZ, 2	; Act 2
+		;dc.b id_MCZ, 0	; Act 3
+		;dc.b id_PPZ, 2	; Scrap Brain Zone Act 3
 
 		; Alberta Canada Zone
 		dc.b id_ACZ, 1	; Act 1
@@ -159,10 +173,14 @@ FetLevelOrder:
 		dc.b 0, 0
 
 		; Joint Zone
-		dc.b id_Joint, 1	; Act 1
-		dc.b id_Joint, 2	; Act 2
+		dc.b id_DVZ, 0	; Act 3
+		dc.b id_Joint,2	; Act 2
 		dc.b id_DVZ, 0	; Act 3
 		dc.b 0, 0
+		;dc.b id_Joint, 1	; Act 1
+		;dc.b id_Joint, 2	; Act 2
+		;dc.b id_DVZ, 0	; Act 3
+		;dc.b 0, 0
 
 		; Doleville Zone
 		dc.b id_DVZ, 1	; Act 1
