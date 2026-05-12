@@ -734,7 +734,7 @@ bsod_02:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_MSB.art1,			ArtTile_
 bsod_03:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_MSBtan.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_MSBtan.fg,		bsod_MSBtan.bg,		bsod_MSBtan.pal,	TCLR(0,0),	bgm_Passport,	dChord16
 bsod_04:	bsodData		bsodType_reg,	sec_std,	secSkip_std,	bsod_98ipc.art1,		ArtTile_Home1,	bsod_98ipc.art2,ArtTile_bsod_w98ipc_art2,	bsod_98ipc.fg,		bsod_98ipc.bg,		bsod_98ipc.pal,		TCLR(2,7),	bgm_Passport,	dW98IPC
 bsod_05:	bsodData		bsodType_reg,	60*fps_Rate,secSkip_std,	bsod_sonihack.art1,		ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_sonihack.fg,	bsod_sonihack.bg,	bsod_sonihack.pal,	TCLR(0,0),	bgm_VirusAlert,	dVirus
-bsod_06:	bsodData		bsodType_gnu,	60*fps_Rate,sec_std,		bsod_gnu.art1,			ArtTile_Home1,	bsod_gnu.art2,	ArtTile_bsod_gnu_art2,		bsod_gnu.fg,		bsod_gnu.bg,		bsod_gnu.pal,		TCLR(1,0),	bgm_BossaNova,	dMeow1
+bsod_06:	bsodData		bsodType_gnu,	60*fps_Rate,sec_std,		bsod_gnu.art1,			ArtTile_Home1,	bsod_gnu.art2,	ArtTile_bsod_gnu_art2,		bsod_gnu.fg,		bsod_gnu.bg,		bsod_gnu.pal,		TCLR(1,0),	bgm_BossaNova,	pcm_none
 			;Windows-based bootup
 bsod_07:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_bw95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_bw95.fg,		bsod_bw95.bg,		bsod_bw95.pal,		TCLR(0,0),	bgm_rock1,		pcm_none
 bsod_08:	bsodData		bsodType_reg,	sec_boot,	secSkip_boot,	bsod_bw95.art1,			ArtTile_Home1,	art_null,		ArtTile_Home0,				bsod_bw95.fg,		bsod_bw95.bg,		bsod_bw95.pal,		TCLR(0,0),	bgm_rockR,		pcm_none

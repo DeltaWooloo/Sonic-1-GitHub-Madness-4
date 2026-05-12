@@ -106,7 +106,6 @@ HUD_KaitoNippleInit:
 		move.w	#$100,obScreenY(a0)
 		move.l	#Map_mdfunHUD,obMap(a0)
 		move.w	#make_art_tile(ArtTile_mdfunHUD,0,1),obGfx(a0)
-HUD_omgB:
 HUD_KaitoNipple:
 		jmp	(DisplaySprite).l
 		
@@ -139,9 +138,23 @@ HUD_omg_getArt:
 	.cont:
 		rts		
 		
+; Subroutine to flash the omg gfx
+HUD_omg_flash:
+		moveq	#0,d0				; Clear d0
+		move.b	(v_framebyte).w,d0	; Move framebyte into d0
+		andi.b	#andiMaskB(8),d0	; d0=ANDI(F,d0)
+		cmpi.b	#8,d0				; Is d0 8?
+		bne.s	.skip				; If not, branch
+		;Limit hit
+		move.b	#13,d0				; Bit 13 (obGFX pal0 bit)
+		bchg	d0,obGfx(a0)		; Alternate the palette bit
+	.skip:
+		rts
+		
 ;Display sprite and runonce play pcm
 HUD_omgA:
-		jsr	(DisplaySprite).l
+		bsr.s	HUD_omg_flash
+		jsr		(DisplaySprite).l
 
 		;If runonce flag not set, then skip
 		tst.b	objoff_30(a0)
@@ -153,6 +166,10 @@ HUD_omgA:
 		jsr	(MegaPCM_PlaySample).l
 .locret:
 		rts
+		
+HUD_omgB:
+		bsr.s	HUD_omg_flash
+		jmp	(DisplaySprite).l
 
 ;Deletes the omgA/B objects (arrow/text)
 HUD_omgA_delete:
