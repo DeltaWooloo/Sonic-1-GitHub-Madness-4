@@ -2,6 +2,9 @@
 ; Object 21 - SCORE, TIME, RINGS
 ; ---------------------------------------------------------------------------
 
+;SST $30 = pcm runonce for vscroll bug watermark
+pcm_runonce = objoff_30
+
 HUD:
 		moveq	#0,d0
 		move.b	obRoutine(a0),d0
@@ -17,6 +20,12 @@ HUD_Index:
 		dc.w HUD_Alert-HUD_Index			; $0A Alert ~
 		dc.w HUD_KaitoNippleInit-HUD_Index	; $0C Init for MCZ (MyDawidVid.Fun)
 		dc.w HUD_KaitoNipple-HUD_Index		; $0E Run ~
+		dc.w HUD_omgA_Init-HUD_Index		; $10 Init for omg arrow(PPZ1/Joint zone)
+		dc.w HUD_omgA-HUD_Index				; $12 Run ~
+		dc.w HUD_omgA_delete-HUD_Index		; $14 Delete ~
+		dc.w HUD_omgB_Init-HUD_Index		; $16 Init for omg text (PPZ1/Joint zone)
+		dc.w HUD_omgB-HUD_Index				; $18 Run ~
+		dc.w HUD_omgB_delete-HUD_Index		; $1A Run ~
 ; ===========================================================================
 
 HUD_Main:	; Routine 0
@@ -96,6 +105,57 @@ HUD_KaitoNippleInit:
 		move.w	#$180,obX(a0)
 		move.w	#$100,obScreenY(a0)
 		move.l	#Map_mdfunHUD,obMap(a0)
-		move.w	#make_art_tile(ArtTile_mdfunHUD,0,0),obGfx(a0)
+		move.w	#make_art_tile(ArtTile_mdfunHUD,0,1),obGfx(a0)
+HUD_omgB:
 HUD_KaitoNipple:
 		jmp	(DisplaySprite).l
+		
+;!@ Arrow for OMG
+HUD_omgA_Init:
+		addq.b	#2,obRoutine(a0)
+		move.w	#$A0,obX(a0)
+		move.w	#$100,obScreenY(a0)
+		move.l	#Map_bugHUD,obMap(a0)		
+		bsr.s	HUD_omg_getArt
+		move.b	#0,obFrame(a0)			; Use frame 0 (arrow)
+		bra.s	HUD_omgA
+		
+;!@ text for OMG
+HUD_omgB_Init:
+		addq.b	#2,obRoutine(a0)
+		move.w	#$A0+$28,obX(a0)
+		move.w	#$100,obScreenY(a0)
+		move.l	#Map_bugHUD,obMap(a0)
+		bsr.s	HUD_omg_getArt
+		move.b	#1,obFrame(a0)			; Use frame 1 (text)
+		bra.s	HUD_omgB
+		
+;Subroutine to load gfx from appropriate VRAM offset, based on zone loaded
+HUD_omg_getArt:
+		move.w	#make_art_tile(ArtTile_bugHUD1,0,1),obGfx(a0)	;PPZ1
+		cmpi.b	#id_Joint,(v_zone).w	; is this joint zone?
+		bne.s	.cont					; if not, branch
+		move.w	#make_art_tile(ArtTile_bugHUD2,0,1),obGfx(a0)	;Joint zone
+	.cont:
+		rts		
+		
+;Display sprite and runonce play pcm
+HUD_omgA:
+		jsr	(DisplaySprite).l
+
+		;If runonce flag not set, then skip
+		tst.b	objoff_30(a0)
+		bne.s	.locret
+		
+		move.b	#1,objoff_30(a0)			;Set runonce flag
+		;Play OMG pcm
+		move.b	#dazdOMG, d0
+		jsr	(MegaPCM_PlaySample).l
+.locret:
+		rts
+
+;Deletes the omgA/B objects (arrow/text)
+HUD_omgA_delete:
+HUD_omgB_delete:
+		jsr		(DeleteObject).l
+		rts

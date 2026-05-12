@@ -3214,7 +3214,14 @@ Level_NoMusicFade:
 Level_LoadPal:
 		cmpi.w	#(id_DVZ<<8)+3,(v_zone).w	; skip over dvz act 4
 		beq.s	.cont
-		move.b	#dLetsGOO, d0
+		
+		;!@ Skip if in PPZ1 or Joint zone
+		cmpi.b	#id_Joint,(v_zone).w		; is this joint zone?
+		beq.s	.cont					; if so, branch
+		cmpi.w	#(id_PPZ<<8)+0,(v_zone).w	; is this PPZ1?
+		beq.s	.cont					; if so, branch
+
+		move.b	#dLetsGOO, d0				; Let's go pcm
 		jsr	(MegaPCM_PlaySample).l
 		; hiii
 .cont:
@@ -3333,11 +3340,27 @@ Level_SkipTtlCard:
 ;		move.b	#4,(v_hud+obRoutine).w ; comment this stuff out its a test burp
 
 Level_ChkDebug:
-		cmpi.b	#id_MCZ,(v_zone).w	; is this return to tokyo zone
+		;!@ GD, Coni, Dawid - Load MyDawid.fun watermark for MCZ
+		cmpi.b	#id_MCZ,(v_zone).w	; is this MCZ?
 		bne.s	.noporn
 		move.b	#id_HUD,(v_pornvidmark).w ; load HUD object
 		move.b	#$C,(v_pornvidmark+obRoutine).w
 .noporn:
+
+		;!@ GD - Load bug watermark for levels with vscroll bug (PPZ1, Joint zone)
+		cmpi.b	#id_Joint,(v_zone).w		; is this joint zone?
+		beq.s	.bug						; if so, branch
+		cmpi.w	#(id_PPZ<<8)+0,(v_zone).w	; is this PPZ1?
+		beq.s	.bug						; if so, branch
+		bra.s	.noBug						; Skip bug watermark if any other zone
+		
+.bug:
+		move.b	#id_HUD,(v_vsbmark_arrow).w ; load HUD arrow object
+		move.b	#$10,(v_vsbmark_arrow+obRoutine).w
+		move.b	#id_HUD,(v_vsbmark_text).w ; load HUD text object
+		move.b	#$10+6,(v_vsbmark_text+obRoutine).w
+
+.noBug:
 		tst.b	(f_debugcheat).w ; has debug cheat been entered?
 		beq.s	Level_ChkWater	; if not, branch
 		btst	#bitA,(v_jpadhold1).w ; is A button held?
@@ -3675,26 +3698,39 @@ SyncEnd:
 
 SignpostArtLoad:
 		tst.b	v_clintonfucker
-		bne.s	SignpostArtLoad2.exit
+		bne.w	SignpostArtLoad2.exit
 		tst.w	(v_debuguse).w	; is debug mode being used?
 		bne.w	SignpostArtLoad2.exit		; if yes, branch
 		cmpi.b	#2,(v_act).w	; is act number 02 (act 3)?
-		beq.s	SignpostArtLoad2.exit		; if yes, branch
+		beq.w	SignpostArtLoad2.exit		; if yes, branch
 		cmpi.w	#(id_ACZ<<8)+3,(v_zone).w	; is this giovanni's test level?
-		beq.s	SignpostArtLoad2.exit		; if yes, branch
+		beq.w	SignpostArtLoad2.exit		; if yes, branch
 
 		move.w	(v_screenposx).w,d0
 		move.w	(v_limitright2).w,d1
 		subi.w	#$100,d1
 		cmp.w	d1,d0		; has Sonic reached the edge of the level?
-		blt.s	SignpostArtLoad2.exit		; if not, branch
+		blt.w	SignpostArtLoad2.exit		; if not, branch
 		tst.b	(f_timecount).w
-		beq.s	SignpostArtLoad2.exit
+		beq.w	SignpostArtLoad2.exit
 		cmp.w	(v_limitleft2).w,d1
-		beq.s	SignpostArtLoad2.exit
+		beq.w	SignpostArtLoad2.exit
 		move.w	d1,(v_limitleft2).w ; move left boundary to current screen position
 		;!@ GD: Variant that will forcibly load the artwork (RandomMonitor spawn)
+
 SignpostArtLoad2:
+		;!@ GD: If levels with VScroll bug watermark,
+		;(PPZ1 or Joint zone), delete the watermarks (bc PLC overwrite)
+		cmpi.b	#id_Joint,(v_zone).w		; is this joint zone?
+		beq.s	.del_vsb					; if so, branch
+		cmpi.w	#(id_PPZ<<8)+0,(v_zone).w	; is this PPZ1?
+		beq.s	.del_vsb					; if so, branch
+		bra.s	.skipDel		
+	.del_vsb:
+		addq.b	#2,(v_vsbmark_arrow+obRoutine).w
+		addq.b	#2,(v_vsbmark_text+obRoutine).w	
+	.skipDel:
+
 		moveq	#plcid_Signpost,d0
 		bsr.w	NewPLC		; load signpost patterns - i did not notice the bra at first
 ; inlined UserPLC
@@ -6821,6 +6857,7 @@ Map_Pri:	include	"_maps/Prison Capsule.asm"
 Map_HUD:	include	"_maps/HUD.asm"
 Map_burpHUD:	include	"_maps/burpHUD.asm"		; Burp HUD - coni
 Map_mdfunHUD:	include	"_maps/mdfunHUD.asm"	; Mydawid.fun - !@ GD
+Map_bugHUD:		include	"_maps/bugHUD.asm"		; OMG Vscroll bug - !@ GD
 Map_Sans:	include	"_maps/Sans.asm"
 
 ; ---------------------------------------------------------------------------

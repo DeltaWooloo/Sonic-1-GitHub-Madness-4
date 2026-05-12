@@ -220,7 +220,7 @@ PLC_SYZ2end:
 ; Pattern load cues - Scrap Brain
 ; ---------------------------------------------------------------------------
 PLC_SBZ:	dc.w ((PLC_SBZ2-PLC_SBZ-2)/6)-1
-;		plcm	Nem_SBZ,       ArtTile_Level                   ; SBZ main patterns
+;		plcm	Nem_SBZ,       ArtTile_Level                   ; SBZ main patterns				
 		plcm	Nem_Stomper,   ArtTile_SBZ_Moving_Block_Short  ; moving platform and stomper
 		plcm	Nem_SbzDoor1,  ArtTile_SBZ_Door                ; door
 		plcm	Nem_Girder,    ArtTile_SBZ_Girder              ; girder
@@ -252,6 +252,7 @@ PLC_SBZ2:	dc.w ((PLC_SBZ2end-PLC_SBZ2-2)/6)-1
 		plcm	Nem_Bomb,       ArtTile_Bomb                   ; bomb enemy
 		plcm	Nem_Cater,      ArtTile_SBZ_Caterkiller        ; caterkiller enemy
 		plcm	Nem_SbzBlock,  ArtTile_SBZ_Vanishing_Block     ; vanishing block
+		plcm	Nem_bugHUD,  	ArtTile_bugHUD1				   ; !@ GD: OMG vscroll bug watermark
 PLC_SBZ2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - COLD BREW
@@ -301,6 +302,7 @@ PLC_Joint:	dc.w ((PLC_Joint2-PLC_Joint-2)/6)-1
 ;		plcm	Nem_Joint,       ArtTile_Level                   ; Joint main patterns
 
 PLC_Joint2:	dc.w ((PLC_Joint2end-PLC_Joint2-2)/6)-1
+		plcm	Nem_bugHUD,  	ArtTile_bugHUD2					; !@ GD: OMG vscroll bug watermark
 		plcm	Nem_burpHud,    ArtTile_BurpHUD	; PLACEHOLDER IM PLACEHOLDERING IT - CONI
 		plcm	Nem_Spikes,     ArtTile_Spikes                 ; spikes
 		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal      ; horizontal spring

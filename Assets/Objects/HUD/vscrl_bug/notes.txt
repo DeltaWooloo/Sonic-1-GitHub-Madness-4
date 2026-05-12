@@ -1,0 +1,3 @@
+palette: 		palette\Sonic.bin
+art (nem): 		artnem\mdfunHUD.nem
+spr mappings:	_maps\mdfunHUD.asm
