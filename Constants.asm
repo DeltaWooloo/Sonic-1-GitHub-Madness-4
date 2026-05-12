@@ -246,6 +246,8 @@ id_Nogales:	equ $0B
 id_BSZ:		equ $0C
 id_BTZ:		equ $0D
 id_ARZ:		equ $0E	
+id_zMAX:	equ (id_ARZ+1)	; Max amount of zones (1-based)
+id_actMAX:	equ	$04			; Max amount of acts per zone (1-based)
 
 ; Colours
 cBlack:		equ $000		; colour black

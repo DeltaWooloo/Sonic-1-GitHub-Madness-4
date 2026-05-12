@@ -13,7 +13,7 @@
 		dc.b id_MCZ, 0	; Act 1
 		dc.b id_WHZ, 2	; Act 2
 		dc.b id_WHZ, 2	; Act 3
-		dc.b id_PPZ, 2	; Scrap Brain Zone Act 3		
+		dc.b id_PPZ, 2	; Scrap Brain Zone Act 3
 		;dc.b id_WHZ, 2	; Act 2
 		;dc.b id_MCZ, 0	; Act 3
 		;dc.b id_PPZ, 2	; Scrap Brain Zone Act 3
@@ -203,10 +203,14 @@ FetLevelOrder:
 		even
 
 		; BlueStone Zone
-		dc.b id_BTZ, 1	; Act 1
+		dc.b id_PPZ, 0	; Act 1
 		dc.b id_BTZ, 2	; Act 2
 		dc.b id_BTZ, 0	; Act 3
 		dc.b 0, 0
+		;dc.b id_BTZ, 1	; Act 1
+		;dc.b id_BTZ, 2	; Act 2
+		;dc.b id_BTZ, 0	; Act 3
+		;dc.b 0, 0
 		even
 
 		; Azure Rainforest Zone

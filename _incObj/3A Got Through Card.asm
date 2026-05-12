@@ -154,9 +154,12 @@ GotoNextLevel:
 		add.w	d1,d0
 		tst.b	(f_difficulty).w
 		beq.s	.devilsanus
-		lea 	FetLevelOrder(pc),a1 ; load level from level order array
-		move.l	(a1,d0.w),d0
-		bra.s	.afterfetus
+		;!@ GenesisDoes; optimize/mirror the code style for Fetus mode
+		;lea 	FetLevelOrder(pc),a1 ; load level from level order array
+		;move.l	(a1,d0.w),d0
+		addi.w	#(id_zMAX*(id_actMAX*2)),d0
+		move.w	LevelOrder(pc,d0.w),d0 ; load level from other level order array
+		bra.s	.afterfetus		
 .devilsanus:
 		move.w	LevelOrder(pc,d0.w),d0 ; load level from level order array
 .afterfetus:
