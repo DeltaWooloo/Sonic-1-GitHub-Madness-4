@@ -1,5 +1,3 @@
-;!@ GD: BossaNova - Cat Edition
-
 BossaNova_Header:
 	smpsHeaderStartSong 3
 	smpsHeaderVoice		BossaNova_Voices
@@ -771,28 +769,28 @@ BossaNova_DAC_Jump:
 	smpsJump BossaNova_DAC_Jump
 
 BossaNova_DAC_08_0_64:	; Effect not supported:
-	dc.b dMeow1, $08, dMeow2, dMeow1, $04, dMeow2, $08, dMeow1, $04, $08, dMeow2, $04, dMeow1, $08, dMeow2, $04
-	dc.b dMeow1, $08
+	dc.b dKick, $08, dSnare, dKick, $04, dSnare, $08, dKick, $04, $08, dSnare, $04, dKick, $08, dSnare, $04
+	dc.b dKick, $08
 	smpsReturn
 
 BossaNova_DAC_0A_0_64:	; Effect not supported:
-	dc.b dMeow1, $08, dMeow2, dMeow1, $04, dMeow2, $08, dMeow1, $04, $08, dMeow2, $04, dMeow1, $08, dMeow2, $04
-	dc.b dMeow1, dMeow2
+	dc.b dKick, $08, dSnare, dKick, $04, dSnare, $08, dKick, $04, $08, dSnare, $04, dKick, $08, dSnare, $04
+	dc.b dKick, dSnare
 	smpsReturn
 
 BossaNova_DAC_09_0_64:	; Effect not supported:
-	dc.b dMeow1, $08, dMeow2, dMeow1, $04, dMeow2, $08, dMeow1, $04, $08, dMeow2, $04, dMeow1, $08, dMeow2, $02
+	dc.b dKick, $08, dSnare, dKick, $04, dSnare, $08, dKick, $04, $08, dSnare, $04, dKick, $08, dSnare, $02
 	dc.b $02, $04, $04
 	smpsReturn
 
 BossaNova_DAC_0B_0_64:	; Effect not supported:
-	dc.b dMeow1, $08, dMeow2, dMeow1, $04, dMeow2, $08, dMeow1, $04, $08, dMeow2, $04, dMeow1, $08, dMeow2, $04
+	dc.b dKick, $08, dSnare, dKick, $04, dSnare, $08, dKick, $04, $08, dSnare, $04, dKick, $08, dSnare, $04
 	dc.b $04, $02, $02
 	smpsReturn
 
 BossaNova_DAC_0C_0_64:
-	dc.b dMeow2, $08, $08, $04, $04, dMeow1, dMeow2, $08, dMeow1, $02, $02, $04, $04, dMeow2, $08, dMeow1
-	dc.b $04, dMeow2
+	dc.b dSnare, $08, $08, $04, $04, dKick, dSnare, $08, dKick, $02, $02, $04, $04, dSnare, $08, dKick
+	dc.b $04, dSnare
 	smpsReturn
 
 BossaNova_PSG1:

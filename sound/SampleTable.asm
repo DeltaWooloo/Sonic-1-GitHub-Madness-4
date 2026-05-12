@@ -133,8 +133,8 @@ SampleTable:
 	dcSample	TYPE_DPCM,	shutdown,	16000,	FLAGS_SFX		; $D7
 	dcSample	TYPE_DPCM,	chord16,	16000,	FLAGS_SFX		; $D8
 	dcSample	TYPE_DPCM,	w98ipc,		16000,	FLAGS_SFX		; $D9
-	dcSample	TYPE_DPCM,	meow,		16000,	FLAGS_SFX		; $DA
-	dcSample	TYPE_DPCM,	meow,		8000,	FLAGS_SFX		; $DB
+	dcSample	TYPE_DPCM,	meow,		16000,					; $DA
+	dcSample	TYPE_DPCM,	meow,		8000,					; $DB
 	dcSample	TYPE_DPCM,	azdOMG,		16000,	FLAGS_SFX		; $DC
 	dcSample	TYPE_DPCM,	uDied,		4000,	FLAGS_SFX		; $DD
 
