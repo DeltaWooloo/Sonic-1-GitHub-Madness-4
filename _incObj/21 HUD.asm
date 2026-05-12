@@ -8,14 +8,15 @@ HUD:
 		move.w	HUD_Index(pc,d0.w),d1
 		jmp	HUD_Index(pc,d1.w)
 ; ===========================================================================
-HUD_Index:	dc.w HUD_Main-HUD_Index
-		dc.w HUD_Flash-HUD_Index
-		dc.w HUD_AlertInit-HUD_Index	; for inside tonics body
-		dc.w HUD_Alert-HUD_Index
-		dc.w HUD_AlertInit-HUD_Index	; for prongle-o-wisp
-		dc.w HUD_Alert-HUD_Index
-		dc.w HUD_KaitoNippleInit-HUD_Index	; MyDawidVid.Fun
-		dc.w HUD_KaitoNipple-HUD_Index
+HUD_Index:
+		dc.w HUD_Main-HUD_Index				; $00 Main hud
+		dc.w HUD_Flash-HUD_Index			; $02 Main hud (flashing)
+		dc.w HUD_AlertInit-HUD_Index		; $04 Init for inside tonics body
+		dc.w HUD_Alert-HUD_Index			; $06 Alert for inside tonics body
+		dc.w HUD_AlertInit-HUD_Index		; $08 Init for prongle-o-wisp
+		dc.w HUD_Alert-HUD_Index			; $0A Alert ~
+		dc.w HUD_KaitoNippleInit-HUD_Index	; $0C Init for MCZ (MyDawidVid.Fun)
+		dc.w HUD_KaitoNipple-HUD_Index		; $0E Run ~
 ; ===========================================================================
 
 HUD_Main:	; Routine 0
@@ -92,9 +93,9 @@ HUD_Alert:
 		bra.s	HUD_KaitoNipple
 HUD_KaitoNippleInit:
 		addq.b	#2,obRoutine(a0)
-		move.w	#$160,obX(a0)
+		move.w	#$180,obX(a0)
 		move.w	#$100,obScreenY(a0)
-		move.l	#Map_burpHUD,obMap(a0)
-		move.w	#make_art_tile(ArtTile_BurpHUD,0,0),obGfx(a0)
+		move.l	#Map_mdfunHUD,obMap(a0)
+		move.w	#make_art_tile(ArtTile_mdfunHUD,0,0),obGfx(a0)
 HUD_KaitoNipple:
 		jmp	(DisplaySprite).l

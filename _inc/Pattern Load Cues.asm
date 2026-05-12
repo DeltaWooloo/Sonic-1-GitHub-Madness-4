@@ -175,16 +175,16 @@ PLC_MZ2end:
 ; ---------------------------------------------------------------------------
 PLC_SLZ:	dc.w ((PLC_SLZ2-PLC_SLZ-2)/6)-1
 ;		plcm	Nem_SLZ,       ArtTile_Level                    ; SLZ main patterns
+		plcm	Nem_mdfunHud,  ArtTile_mdfunHUD					; !@ GD: Mydawid.fun HUD for watermark
 		plcm	Nem_Bomb,      ArtTile_Bomb                     ; bomb enemy
 		plcm	Nem_Orbinaut,  ArtTile_SLZ_Orbinaut             ; orbinaut enemy
-		plcm	Nem_RoadRoller,  ArtTile_SLZ_RoadRoller             ; road roller fuck you
-		plcm	Nem_Villager,   ArtTile_Villager               ; MR FUCKING VILLAGER
+		plcm	Nem_RoadRoller,ArtTile_SLZ_RoadRoller           ; road roller fuck you
+		plcm	Nem_Villager,  ArtTile_Villager               	; MR FUCKING VILLAGER
 		plcm	Nem_MzFire,    ArtTile_SLZ_Fireball             ; fireballs
 		plcm	Nem_SlzBlock,  ArtTile_SLZ_Collapsing_Floor     ; block
 		plcm	Nem_SlzWall,   ArtTile_GHZ_SLZ_Smashable_Wall+4 ; breakable wall
 		plcm	Nem_Spikes,    ArtTile_Spikes                   ; spikes
 		plcm	Nem_HSpring,   ArtTile_Spring_Horizontal        ; horizontal spring
-		         
 
 PLC_SLZ2:	dc.w ((PLC_SLZ2end-PLC_SLZ2-2)/6)-1
 		plcm	Nem_Seesaw,    ArtTile_SLZ_Seesaw                ; seesaw
@@ -192,7 +192,7 @@ PLC_SLZ2:	dc.w ((PLC_SLZ2end-PLC_SLZ2-2)/6)-1
 		plcm	Nem_Pylon,     ArtTile_SLZ_Pylon                 ; foreground pylon
 		plcm	Nem_SlzSwing,  ArtTile_SLZ_Swing                 ; swinging platform
 		plcm	Nem_SlzCannon, ArtTile_SLZ_Fireball_Launcher     ; fireball launcher
-	             ;	plcm	Nem_SlzSpike,  ArtTile_SLZ_Spikeball             ; spikeball
+	    ;plcm	Nem_SlzSpike,  ArtTile_SLZ_Spikeball             ; spikeball
 PLC_SLZ2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - Spring Yard

@@ -6819,7 +6819,8 @@ Map_Pri:	include	"_maps/Prison Capsule.asm"
 
 		include	"_incObj/21 HUD.asm"
 Map_HUD:	include	"_maps/HUD.asm"
-Map_burpHUD:	include	"_maps/burpHUD.asm"
+Map_burpHUD:	include	"_maps/burpHUD.asm"		; Burp HUD - coni
+Map_mdfunHUD:	include	"_maps/mdfunHUD.asm"	; Mydawid.fun - !@ GD
 Map_Sans:	include	"_maps/Sans.asm"
 
 ; ---------------------------------------------------------------------------

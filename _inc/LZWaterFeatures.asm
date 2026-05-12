@@ -5,6 +5,16 @@
 LZWaterFeatures:
 		tst.b	(v_waterflag).w
 		bpl.s	.notlabyrinth
+		
+		;!@ GD: Only load water on CBZ2 and ARZ,
+		;to skip subrout and to save CPU cycles
+		cmpi.b	#id_ARZ,(v_zone).w
+		beq.s	.aqua
+		cmpi.w	#(id_CBZ<<8)+1,(v_zone).w		
+		beq.s	.aqua
+		bra.s	.notlabyrinth
+		
+	.aqua:
 		clr.b	(f_wtr_state).w
 		moveq	#0,d0
 		move.b	(v_oscillate+2).w,d0
