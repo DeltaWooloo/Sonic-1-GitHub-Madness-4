@@ -12,20 +12,21 @@ HUD:
 		jmp	HUD_Index(pc,d1.w)
 ; ===========================================================================
 HUD_Index:
-		dc.w HUD_Main-HUD_Index				; $00 Main hud
-		dc.w HUD_Flash-HUD_Index			; $02 Main hud (flashing)
-		dc.w HUD_AlertInit-HUD_Index		; $04 Init for inside tonics body
-		dc.w HUD_Alert-HUD_Index			; $06 Alert for inside tonics body
-		dc.w HUD_AlertInit-HUD_Index		; $08 Init for prongle-o-wisp
-		dc.w HUD_Alert-HUD_Index			; $0A Alert ~
-		dc.w HUD_KaitoNippleInit-HUD_Index	; $0C Init for MCZ (MyDawidVid.Fun)
-		dc.w HUD_KaitoNipple-HUD_Index		; $0E Run ~
-		dc.w HUD_omgA_Init-HUD_Index		; $10 Init for omg arrow(PPZ1/Joint zone)
-		dc.w HUD_omgA-HUD_Index				; $12 Run ~
-		dc.w HUD_omgA_delete-HUD_Index		; $14 Delete ~
-		dc.w HUD_omgB_Init-HUD_Index		; $16 Init for omg text (PPZ1/Joint zone)
-		dc.w HUD_omgB-HUD_Index				; $18 Run ~
-		dc.w HUD_omgB_delete-HUD_Index		; $1A Run ~
+		dc.w HUD_Main-HUD_Index					; $00 Main hud
+		dc.w HUD_Flash-HUD_Index				; $02 Main hud (flashing)
+		dc.w HUD_AlertInit-HUD_Index			; $04 Init for inside tonics body
+		dc.w HUD_Alert-HUD_Index				; $06 Alert for inside tonics body
+		dc.w HUD_AlertInit-HUD_Index			; $08 Init for prongle-o-wisp
+		dc.w HUD_Alert-HUD_Index				; $0A Alert ~
+		dc.w HUD_KaitoNippleInit-HUD_Index		; $0C Init for MCZ (MyDawidVid.Fun)
+		dc.w HUD_KaitoNipple-HUD_Index			; $0E Run ~
+		dc.w HUD_KaitoNipple_delete-HUD_Index	; $10 Delete ~
+		dc.w HUD_omgA_Init-HUD_Index			; $12 Init for omg arrow(PPZ1/Joint zone)
+		dc.w HUD_omgA-HUD_Index					; $14 Run ~
+		dc.w HUD_omgA_delete-HUD_Index			; $16 Delete ~
+		dc.w HUD_omgB_Init-HUD_Index			; $18 Init for omg text (PPZ1/Joint zone)
+		dc.w HUD_omgB-HUD_Index					; $1A Run ~
+		dc.w HUD_omgB_delete-HUD_Index			; $1C Run ~
 ; ===========================================================================
 
 HUD_Main:	; Routine 0
@@ -171,7 +172,8 @@ HUD_omgB:
 		bsr.s	HUD_omg_flash
 		jmp	(DisplaySprite).l
 
-;Deletes the omgA/B objects (arrow/text)
+;Deletes objects
+HUD_KaitoNipple_delete:
 HUD_omgA_delete:
 HUD_omgB_delete:
 		jsr		(DeleteObject).l

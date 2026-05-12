@@ -540,6 +540,9 @@ DLE_SLZ3boss:
 		move.b	#id_BossStarLight,obID(a1) ; load SLZ boss object
 
 loc_7144:
+		;!@ GD: Remove the porn watermark (PLC overwrite)
+		addq.b	#2,(v_pornvidmark+obRoutine).w
+
 		move.w	#bgm_Megalovania,d0
 		jsr	(QueueSound1).l	; play boss music
 		move.b	#1,(f_lockscreen).w ; lock screen

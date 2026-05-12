@@ -3356,9 +3356,9 @@ Level_ChkDebug:
 		
 .bug:
 		move.b	#id_HUD,(v_vsbmark_arrow).w ; load HUD arrow object
-		move.b	#$10,(v_vsbmark_arrow+obRoutine).w
+		move.b	#$12,(v_vsbmark_arrow+obRoutine).w
 		move.b	#id_HUD,(v_vsbmark_text).w ; load HUD text object
-		move.b	#$10+6,(v_vsbmark_text+obRoutine).w
+		move.b	#$12+6,(v_vsbmark_text+obRoutine).w
 
 .noBug:
 		tst.b	(f_debugcheat).w ; has debug cheat been entered?
@@ -3719,18 +3719,22 @@ SignpostArtLoad:
 		;!@ GD: Variant that will forcibly load the artwork (RandomMonitor spawn)
 
 SignpostArtLoad2:
-		;!@ GD: If levels with VScroll bug watermark,
-		;(PPZ1 or Joint zone), delete the watermarks (bc PLC overwrite)
+		;!@ GD: If levels with VScroll bug or Dawid watermark
+		;(MCZ, PPZ1/Joint zone), delete the watermarks (bc PLC overwrite)
+		cmpi.b	#id_MCZ,(v_zone).w			; is this MCZ?
+		beq.s	.del_porn					; if so, branch		
 		cmpi.b	#id_Joint,(v_zone).w		; is this joint zone?
 		beq.s	.del_vsb					; if so, branch
 		cmpi.w	#(id_PPZ<<8)+0,(v_zone).w	; is this PPZ1?
 		beq.s	.del_vsb					; if so, branch
+		bra.s	.skipDel
+	.del_porn:
+		addq.b	#2,(v_pornvidmark+obRoutine).w
 		bra.s	.skipDel		
-	.del_vsb:
+	.del_vsb:		
 		addq.b	#2,(v_vsbmark_arrow+obRoutine).w
 		addq.b	#2,(v_vsbmark_text+obRoutine).w	
 	.skipDel:
-
 		moveq	#plcid_Signpost,d0
 		bsr.w	NewPLC		; load signpost patterns - i did not notice the bra at first
 ; inlined UserPLC
