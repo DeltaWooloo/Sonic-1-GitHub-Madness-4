@@ -199,10 +199,17 @@ DebuggerMenu_Controls:
 		bra.w	.checklr
 		bra.w	.checklr
 		bra.w	.checklr
-		bra.w	.checklr
+		bra.w	.checklrChar			; !@ GD: Update char vars
 		bra.w	.checklr
 		bra.w	.soundtest
 		bra.w	.pcmtest
+; !@ GD: Update char vars
+.checklrChar:
+		;!@ GD: Move saved into char (for Ending mode etc)
+		bsr.w	.checklr
+		move.b	(v_savedcharacterid).w,(v_characterid).w		
+		rts		
+	
 .soundtest:
 		btst	#bitC,d1			; C: play sound
 		bne.w	DebuggerMenu_PlaySound

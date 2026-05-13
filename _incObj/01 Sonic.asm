@@ -573,6 +573,14 @@ Sonic_MdJump2:
 ; ----------------------------------------------------------------------------
 
 PlayerAttackHandle:
+		;!@ GD: Disable attacks when GotThrough shown, Ending mode/zone
+		cmpi.b	#id_Ending,(v_gamemode).w
+		beq.s	.nobullets
+		cmpi.b	#id_EndZ,(v_zone).w
+		beq.s	.nobullets
+		tst.b	(v_bossstatus).w			; If boss status set?
+		bne.w	.nobullets
+
 		btst	#6,(v_jpadpress1)
 		beq.w	.nobullets
 		moveq	#0,d0

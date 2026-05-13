@@ -3818,8 +3818,8 @@ End_LoadData:
 		lea	(Kos_EndFlowers).l,a0 ; load extra flower patterns
 		lea	(v_256x256+$4A*chunk_size).w,a1 ; RAM address to buffer the patterns (overwriting unused chunk RAM)
 		bsr.w	KosDec
-		moveq	#palid_Sonic,d0
-		bsr.w	PalLoad_Fade	; load Sonic's palette
+		;moveq	#palid_Sonic,d0
+		;bsr.w	PalLoad_Fade	; load Sonic's palette
 		move.w	#bgm_Ending,d0
 		bsr.w	QueueSound1	; play ending sequence music
 		btst	#bitA,(v_jpadhold1).w ; is button A pressed?
@@ -3827,6 +3827,30 @@ End_LoadData:
 		move.b	#1,(f_debugmode).w ; enable debug mode
 
 End_LoadSonic:
+		; !@ GD: load player data/palette		
+		moveq	#plcid_Main,d0
+		bsr.w	AddPLC			; load standard patterns
+		jsr	(GetOtherPlayerData).l
+		move.w	pdat.livesart(a5),d0
+		add.l	#Nem_Lives,d0 ; use RAM for PLC
+		lea	(v_ram_start).l,a1
+		move.l	d0,(a1)
+		move.w	#ArtTile_Lives_Counter*$20,4(a1)
+		move.l	#-1,6(a1)
+		bsr.w	UserPLC
+
+		jsr	(GetPlayerData).l
+		move.l	d3,a0
+		lea	v_palette,a1
+		move.l	(a0)+,(a1)+	; quick
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+		
+		
 		move.b	#id_SonicPlayer,(v_player).w ; load Sonic object
 		bset	#0,(v_player+obStatus).w ; make Sonic face left
 		move.b	#1,(f_lockctrl).w ; lock controls
