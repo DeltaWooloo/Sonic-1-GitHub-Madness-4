@@ -93,6 +93,7 @@ PalCycle_Win98:                               ; CODE XREF: 00002532↓p
 		subq.w  #1,(v_pcyc_time).w
 		bpl.s   .delay
 		move.w  #2,(v_pcyc_time).w
+		moveq	#0,d0
 		move.w  (v_pcyc_num).w,d0
 		subq.w  #1,(v_pcyc_num).w
 		tst.w	(v_pcyc_num).w	; is it the last frame?

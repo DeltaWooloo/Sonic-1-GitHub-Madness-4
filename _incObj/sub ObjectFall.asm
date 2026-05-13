@@ -81,9 +81,9 @@ ObjMoveGrv:
 ;.NoGravity:
 	tst.w	obVelY(a0)				; Are we moving up?
 	bmi.s	.NoDownVelCap			; If so, branch
-	cmpi.w	#$1000,obVelY(a0)		; Are we falling down too fast?
+	cmpi.w	#physics_TermVelY,obVelY(a0)		; Are we falling down too fast?
 	bcs.s	.NoDownVelCap			; If not, branch
-	move.w	#$1000,obVelY(a0)		; Cap the fall speed
+	move.w	#physics_TermVelY,obVelY(a0)		; Cap the fall speed
 
 .NoDownVelCap:
 	ext.l	d0						; Apply Y velocity

@@ -327,6 +327,10 @@ obSubtype:	equ $28	; object subtype
 ;standonobject:	equ $3D	; object index Sonic stands on
 ;locktime:	equ $3E	; temporary D-Pad control lock timer (2 bytes)
 
+;!@ GD: Sonic constants
+physics_TermVelY:	equ	$1000				; Terminal velocity (y-gravity) for Sonic
+physics_TermVelX:	equ	$1000				; Terminal velocity (x-vel) for Sonic
+
 ; Miscellaneous object scratch-RAM
 objoff_25:	equ $25
 objoff_26:	equ $26

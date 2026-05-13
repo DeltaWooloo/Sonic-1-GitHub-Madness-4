@@ -99,7 +99,8 @@ GM_BSOD:
 		;move.b	#bgm_Stop,d0
 		;jsr	QueueSound2
 		jsr	ClearPLC
-		bra.s	.start
+		;bra.s	.start
+		bra.w	.start
 	;	jsr	PaletteWhiteOut
 		; lea	(v_palette).w,a0
 		; move.l	#$0EEE0EEE,d0
@@ -130,7 +131,8 @@ GM_BSOD:
 		move.w	#$8AFF,(v_hbla_hreg).w		; set palette change position (for water)
 		;move.w	#$8700,(a6)					; set background colour (palette line 0, entry 0)
 		move.w	#$8710,(a6)					; set background colour (palette line 1, entry 0)
-		jsr	ClearScreen
+		jsr	(ClearScreen).l
+		fillVRAM	0, $0000, $10000		; Cause Sonic 1's ClearScreen sucks
 		clr.b	(f_wtr_state).w
 		movem.l	(sp)+,d0-d1/a5-a6
 		rts
