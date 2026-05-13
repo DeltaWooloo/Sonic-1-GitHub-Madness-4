@@ -68,8 +68,9 @@ loc_C5FE:
 		move.w	obX(a0),d0
 		bmi.s	locret_C60E
 		cmpi.w	#$200,d0	; has item moved beyond $200 on x-axis?
-		bhs.s	locret_C60E	; if yes, branch
-		bra.w	DisplaySprite
+		bhs.s	locret_C60E	; if yes, branch		
+		;!@ bra.w	DisplaySprite
+		bra.w	Got_DisplaySprite
 ; ===========================================================================
 
 locret_C60E:
@@ -95,11 +96,13 @@ Got_Wait:	; Routine 4, 8, $C
 		addq.b	#2,obRoutine(a0)
 
 Got_Display:
-		bra.w	DisplaySprite
+		;!@ bra.w	DisplaySprite
+		bra.w	Got_DisplaySprite
 ; ===========================================================================
 
 Got_TimeBonus:	; Routine 6
-		bsr.w	DisplaySprite
+		;!@ bsr.w	DisplaySprite
+		bsr.w	Got_DisplaySprite
 		move.b	#1,(f_endactbonus).w ; set time/ring bonus update flag
 		moveq	#0,d0
 		tst.w	(v_timebonus).w	; is time bonus = zero?
@@ -140,7 +143,8 @@ Got_AddBonus:
 ; ===========================================================================
 
 Got_NextLevel:	; Routine $A
-		bsr.w	DisplaySprite
+		;!@bsr.w	DisplaySprite
+		bsr.w	Got_DisplaySprite
 
 GotoNextLevel:
 		clr.b	(FM_PitchUp).w	; clear Firecore
@@ -205,7 +209,8 @@ Got_ChgPos2:
 		bmi.s	locret_C748
 		cmpi.w	#$200,d0	; has item moved beyond $200 on x-axis?
 		bhs.s	locret_C748	; if yes, branch
-		bra.w	DisplaySprite
+		;!@bra.w	DisplaySprite
+		bra.w	Got_DisplaySprite
 ; ===========================================================================
 
 locret_C748:
@@ -250,3 +255,14 @@ Got_Config:	dc.w 0, $120, $C0		; "SONIC HAS"
 
 		dc.w $200, $120, $A0		; oval
 		dc.b 2, 5
+
+;!@ GD: Bugfix for children to hide themselves in transition between PPZ2 and Final Zone
+Got_DisplaySprite:		
+		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w
+		bne.s	.show
+		cmpi.b	#2,(v_dle_routine).w
+		bgt.s	.end		
+	.show:
+		jsr		(DisplaySprite).l
+	.end:
+		rts

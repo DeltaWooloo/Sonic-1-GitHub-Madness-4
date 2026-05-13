@@ -1223,7 +1223,7 @@ Sonic_LevelBound:
 		move.w	(v_limitleft2).w,d0
 		addi.w	#$10,d0
 		cmp.w	d1,d0		; has Sonic touched the side boundary?
-		bhi.s	.leftside		; if yes, branch
+		bhi.w	.leftside		; if yes, branch
 		move.w	(v_limitright2).w,d0
 		addi.w	#$130,d0
 ;		tst.b	(f_lockscreen).w
@@ -1232,7 +1232,7 @@ Sonic_LevelBound:
 
 .screenlocked:
 		cmp.w	d1,d0		; has Sonic touched the side boundary?
-		bls.s	.rightside	; if yes, branch
+		bls.w	.rightside	; if yes, branch
 
 .chkbottom:
 		move.w	(v_limitbtm2).w,d0
@@ -1258,6 +1258,13 @@ Sonic_LevelBound:
 		bsr.w	reproduceSFX	
 		
 .no_sfx:
+		;!@ GD: Bugfix to ensure PPZ2 death goes to Final Zone (in PPZ2, and DLE>=ID 6)
+		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w
+		bne.s	.skipPPZ2fix
+		cmpi.b	#6,(v_dle_routine).w
+		blt.w	.skipPPZ2fix
+		bra.w	Sonic_LevelBound.gotoFZ
+	.skipPPZ2fix:
 		rts
 ; ----------------------------------------------------------------------------
 		
@@ -1266,6 +1273,7 @@ Sonic_LevelBound:
 		bne.w	KillSonic_Humpy	; if not, kill Sonic
 		cmpi.w	#$2000,(v_player+obX).w
 		blo.w	KillSonic_Humpy
+.gotoFZ:
 		clr.b	(v_lastlamp).w	; clear lamppost counter
 		jsr	(Pow_fix_RandMon_Runonce_flags).l	;!@ GD: Clear f_randMonPow runonce flags
 		move.w	#1,(f_restart).w ; restart the level

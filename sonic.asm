@@ -3385,7 +3385,7 @@ Level_LoadObj:
 		; GMZ - Our code starts here
 		tst.w	f_demo
 		bne.s	Level_SkipClr
-		move.w	d0,titleGoToScreensaver
+		move.w	d0,(titleGoToScreensaver).w
 		; GMZ - Our code ends here
 
 Level_SkipClr:
@@ -4324,18 +4324,20 @@ LevelDataLoad:
 		bsr.w	LevelLayoutLoad
 		andi.w	#$FF,d5
 		move.w	d5,d0
-		cmpi.w	#(id_ARZ<<8)+3,(v_zone).w	; is level SBZ3 (LZ4) ?
-		bne.s	.notSBZ3			; if not, branch
-		moveq	#palid_SBZ3,d0			; use SB3 palette
+		;cmpi.w	#(id_ARZ<<8)+3,(v_zone).w	; is level SBZ3 (LZ4) ?
+		;bne.s	.notSBZ3			; if not, branch
+		;moveq	#palid_SBZ3,d0			; use SB3 palette
 
-.notSBZ3:
-		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w	; is level SBZ2?
-		beq.s	.isSBZorFZ			; if yes, branch
-		cmpi.w	#(id_PPZ<<8)+2,(v_zone).w	; is level FZ?
-		bne.s	.normalpal			; if not, branch
+;.notSBZ3:
+		;cmpi.w	#(id_PPZ<<8)+1,(v_zone).w	; is level SBZ2?
+		;beq.s	.isSBZorFZ			; if yes, branch
+		;!@ GenesisDoes: Final zone bugfix
+		;cmpi.w	#(id_PPZ<<8)+2,(v_zone).w	; is level FZ?
+		;bne.s	.normalpal			; if not, branch
+		;bra.s	.normalpal
 
-.isSBZorFZ:
-		moveq	#palid_SBZ2,d0		; use SBZ2/FZ palette
+;.isSBZorFZ:
+		;moveq	#palid_SBZ2,d0		; use SBZ2/FZ palette
 
 .normalpal:
 		jsr	(PalLoad_Fade).w	; load palette (based on d0)
