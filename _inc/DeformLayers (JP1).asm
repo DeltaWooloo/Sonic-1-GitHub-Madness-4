@@ -645,6 +645,7 @@ Deform_SBZ2:;loc_68A2:
 		ext.l	d5
 		asl.l	#5,d5
 		bsr.w	BGScroll_XY
+		addi.w	#1,(v_bgscreenposy).w		;!@ GD: Constantly scroll up
 		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
 	; copy fg & bg x-position to hscroll table
 		lea	(v_hscrolltablebuffer).w,a1

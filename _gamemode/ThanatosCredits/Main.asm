@@ -392,6 +392,8 @@ thantxt: macro txt
 	thantxt	"ARCADETV"	
 	thantxt	"NOID MY GOAT"
 	thantxt	"SEGA"
+	thantxt "SONIC TEAM JR"
+	thantxt "SRBTWO"
 	thantxt	"SONIC UNDERGROUND"
 	thantxt	"NTENDO"	
 	thantxt	"SSRG"

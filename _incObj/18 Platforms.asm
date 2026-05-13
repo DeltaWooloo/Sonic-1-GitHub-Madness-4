@@ -96,7 +96,8 @@ loc_7F06:
 		bsr.w	Plat_Nudge
 		move.w	(sp)+,d2
 		bsr.w	MvSonicOnPtfm2
-		bsr.w	DisplaySprite
+		;!@ bsr.w	DisplaySprite
+		jsr		(DisplaySprite).l
 		bra.w	Plat_ChkDel
 
 		rts
