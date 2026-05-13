@@ -205,6 +205,7 @@ splash_turd macro routine
 	splash_liquid	GM_EagleSoft
 	splash_liquid	GM_CNNicoJump
 	splash_liquid	GM_DaxKatter
+	splash_liquid	GiovanniSplash	
 ;	splash_liquid	RobiWanKenobi_Splash
 	splash_liquid	Malachi_Splash
 ;	splash_liquid	TeamOverload_Splash
@@ -229,7 +230,6 @@ splash_turd macro routine
 	splash_liquid	GM_SegaEU
 ;	splash_turd	Remilia
 	splash_liquid	GM_DWSplash		; the later you have this, the funnier it is
-	splash_liquid	GiovanniSplash		; the later you have this, the funnier it is
 	dc.w	-1 ; end marker
 
 
