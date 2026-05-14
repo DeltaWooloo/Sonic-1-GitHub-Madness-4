@@ -263,8 +263,8 @@ PLC_BREW:	dc.w ((PLC_BREW2-PLC_BREW-2)/6)-1
 		plcm	Nem_Bridge,    ArtTile_GHZ_Bridge             ; bridge
 		plcm	Nem_SpikePole, ArtTile_GHZ_Spike_Pole         ; spiked pole
 		plcm	Nem_GhzWall1,  ArtTile_GHZ_SLZ_Smashable_Wall ; breakable wall
-		plcm	Nem_Splash,      ArtTile_LZ_Splash          ; waterfalls and splash
-		plcm	Nem_Bubbles,     ArtTile_LZ_Bubbles         ; bubbles and numbers
+;		plcm	Nem_Splash,      ArtTile_LZ_Splash          ; waterfalls and splash
+;		plcm	Nem_Bubbles,     ArtTile_LZ_Bubbles         ; bubbles and numbers
 		plcm	Nem_Spikes,    ArtTile_Spikes                 ; spikes
 		plcm	Nem_HSpring,   ArtTile_Spring_Horizontal      ; horizontal spring
 

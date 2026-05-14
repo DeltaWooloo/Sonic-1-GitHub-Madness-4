@@ -24,5 +24,15 @@ PWisp_Action:
 		move.w	#$80,d1
 		jsr	(ChaseObject).l
 		jsr	(SpeedToPos).l
+		lea	(Ani_Pwisp).l,a1
+		jsr	(AnimateSprite).l
 		jmp	(DisplaySprite).l
 		rts
+	
+Ani_Pwisp:	dc.w .norm-Ani_Pwisp
+			dc.w .pain-Ani_Pwisp
+
+.norm:			dc.b 2, 0, 1, 2, 3, afEnd
+		even
+.pain:			dc.b 2, 4, 5, 6, 7, afEnd
+		even

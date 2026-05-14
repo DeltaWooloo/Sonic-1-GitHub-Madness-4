@@ -253,7 +253,7 @@ Pal_Giovanni:	incbin "dotgen/Giovanni Splash Palette.bin"
 Pal_SplashText:	incbin "dotgen/Giovanni Splash Text Palette.bin"
 	even
 Text_Giovanni: 
-	dc.b	"DID NOT GET HELD AT GUNPOINT AND HAS"
-	dc.b	"WILLINGLY CONTRIBUTED TO THIS HACK! "
+	dc.b	"    NO MATTER WHAT HE TELLS YOU,    "
+	dc.b	"    DAXKATTER DID NOT BRING ME.     "
 	even
 		
