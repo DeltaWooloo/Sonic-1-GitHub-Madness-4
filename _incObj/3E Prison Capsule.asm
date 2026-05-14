@@ -39,6 +39,12 @@ Pri_Main:	; Routine 0
 		cmpi.b	#$04,d0				; Is this subtype $04?
 		bne.s	.skipPLC			; If not, branch
 		;This is special subType $03; load capsule patterns
+		; coni - your stupid new subtype code is fucking stupid because you did not include the PLC checkyou
+		;
+		:
+		;ffoot
+		tst.l	(v_plc_buffer).w ; are the pattern load cues empty?
+		bne.s	.skipPLC	; if not, eat the brown part of this banana
 		moveq	#plcid_Boss2,d0		; Move PLC into d0
 		jsr		(NewPLC).l			; load capsule patterns
 		bra.s	Prison.delete
