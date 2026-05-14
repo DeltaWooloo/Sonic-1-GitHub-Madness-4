@@ -823,9 +823,14 @@ locret_6E08BR:
 ; ===========================================================================
 
 DLE_BREW2:
+		cmpi.w	#$1B00,(v_screenposx).w ; has the camera reached thing
+		bhi.s	locret_6E3ABRPenis	; if not, branch
 		move.w	#$300,(v_limitbtm1).w ; set lower y-boundary
 
 locret_6E3ABR:
+		rts
+locret_6E3ABRPenis:
+		move.w	#$500,(v_limitbtm1).w ; set lower y-boundary
 		rts
 ; ===========================================================================
 
