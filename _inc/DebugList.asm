@@ -5,7 +5,7 @@ DebugList:
 		dc.w .GHZ-DebugList		; x id_OWZ
 ;		dc.w .SLZ-DebugList     
 		dc.w .LZ-DebugList      ; x id_WHZ
-		dc.w .MZ-DebugList      ; id_ACZ
+		dc.w .MZ-DebugList      ; x id_ACZ
 		dc.w .SLZ-DebugList     ; id_MCZ
 		dc.w .SYZ-DebugList     ; id_SFZ
 		dc.w .SBZ-DebugList     ; id_PPZ
@@ -122,7 +122,7 @@ allMonitors:	macro
 		dbug	Map_Smab,	id_SmashBlock,	0,	0,	make_art_tile(ArtTile_MZ_Block,2,0)
 		
 		dbug	Map_SStom,	id_SideStomp,	1,	0,	make_art_tile(ArtTile_MZ_Spike_Stomper,0,0)		
-		dbug	Map_But,	id_Button,	$81,	0,	make_art_tile(ArtTile_Button+4,2,0)		
+		dbug	Map_But,	id_Button,	$81,	0,	make_art_tile(ArtTile_Button_MZ,2,0)		
 		dbug	Map_Glass,	id_GlassBlock,	$14,	0,	make_art_tile(ArtTile_MZ_Glass_Pillar,2,1)		
 		dbug	Map_Push,	id_PushBlock,	0,	0,	make_art_tile(ArtTile_MZ_Block,2,0)
 		dbug	Map_MBlock,	id_MovingBlock,	2,	0,	make_art_tile(ArtTile_MZ_Block,2,0)								
@@ -206,7 +206,7 @@ allMonitors:	macro
 		dbug	Map_BBall,	id_SwingingPlatform, 7,	2,	make_art_tile(ArtTile_SBZ_Swing,2,0)
 		dbug	Map_Disc,	id_RunningDisc,	$E0,	0,	make_art_tile(ArtTile_SBZ_Disc,2,1)
 		dbug	Map_MBlock,	id_MovingBlock,	$28,	2,	make_art_tile(ArtTile_SBZ_Moving_Block_Short,1,0)
-		dbug	Map_But,	id_Button,	0,	0,	make_art_tile(ArtTile_Button+4,0,0)
+		dbug	Map_But,	id_Button,	0,	0,	make_art_tile(ArtTile_Button_Reg,0,0)
 		dbug	Map_Trap,	id_SpinPlatform, 3,	0,	make_art_tile(ArtTile_SBZ_Trap_Door,2,0)
 		dbug	Map_Spin,	id_SpinPlatform, $83,	0,	make_art_tile(ArtTile_SBZ_Spinning_Platform,0,0)
 		dbug	Map_Saw,	id_Saws,	2,	0,	make_art_tile(ArtTile_SBZ_Saw,2,0)

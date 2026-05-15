@@ -165,8 +165,8 @@ PLC_MZ:		dc.w ((PLC_MZ2-PLC_MZ-2)/6)-1
 		dc.w $A0E0
 
 PLC_MZ2:	dc.w ((PLC_MZ2end-PLC_MZ2-2)/6)-1
-		plcm	Nem_MzSwitch, ArtTile_Button+4           ; switch
-		plcm	Nem_SbzDoor1,	  ArtTile_SBZ_Door		 ; !@ GD: SBZ Door (used in ACZ2)
+		plcm	Nem_MzSwitch, ArtTile_Button_MZ          ; switch
+		plcm	Nem_SbzDoor1, ArtTile_SBZ_Door		 	 ; !@ GD: SBZ Door (used in ACZ2)
 		plcm	Nem_Spikes,   ArtTile_Spikes             ; spikes
 		plcm	Nem_HSpring,  ArtTile_Spring_Horizontal  ; horizontal spring
  		plcm	Nem_MzBlock,  ArtTile_MZ_Block           ; green stone block
