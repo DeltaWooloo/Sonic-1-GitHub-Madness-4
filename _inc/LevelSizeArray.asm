@@ -61,7 +61,7 @@
 		even
 		; Doleville
 		dc.w CAMDR_ABC, $0000, $1DC0, $0000, $0640, $0060
-		dc.w CAMDR_ABC, $0000, $0B40, $0000, $0640, $0060
+		dc.w CAMDR_ABC, $0000, $0D40, $0000, $0640, $0060
 		dc.w CAMDR_ABC, $0000, $0380, $0140, $0140, $0060
 		dc.w CAMDR_ABC, $0000, $3EC0, $0000, $0720, $0060
 		even

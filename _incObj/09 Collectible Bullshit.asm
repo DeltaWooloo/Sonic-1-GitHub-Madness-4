@@ -27,9 +27,23 @@ Collectible:
 		btst.b	d0,(v_collectibles).w	; Check if this collectible was already collected
 		bne.w	DeleteObject		; If so, delete the object
 
-	; Ring graphics are a placeholder
+		; Ring graphics are a placeholder
 		move.l	#Map_Ring,obMap(a0)
-		move.w	#make_art_tile(ArtTile_Ring,1,0),obGfx(a0)
+		
+		;!@ GD, change palette based on subType ID
+		;move.w	#make_art_tile(ArtTile_Ring,0,0),obGfx(a0)
+		movem.l	d0-d2,-(sp)											; Stash d0-d2 onto sp
+		moveq	#0,d0												; Clear d0
+		moveq	#0,d1												; Clear d1
+		moveq	#0,d2												; Clear d1
+		move.w	#make_art_tile(ArtTile_Ring,0,0),d1					; Move obFX base into d1
+		move.b	obSubtype(a0),d0									; Get the collectible's ID (1-8)
+		move.b	#13,d2												; 13-bit left shift in d2
+		andi.w	#3,d0												; Only keep 2-bit value
+		lsl.w	d2,d0												; Shift value by 13 (bits 13/14 in obGFX=pallete)
+		or.w	d0,d1												; d1=d1 OR d0
+		move.w	d1,obGfx(a0)										; Set palette
+		movem.l	(sp)+,d0-d2											; Pop d0-d2 from sp
 
 		move.b	#4,obRender(a0)
 		move.b	#2,obPriority(a0)
@@ -38,6 +52,10 @@ Collectible:
 
 ; ---------------------------------------------------------------------------
 .main:		
+		;!@ GD: Don't collect if in debug mode
+		tst.w	(v_debuguse).w	; is debug mode being used?
+		bne.w	.notCollected	; if yes, branch
+
 		move.w	(v_player+obX).w,d1	; Get player's position
 		move.w	(v_player+obY).w,d2	; ^
 		move.w	obX(a0),d3		; Get our position

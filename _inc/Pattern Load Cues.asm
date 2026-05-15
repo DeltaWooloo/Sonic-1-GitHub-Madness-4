@@ -310,16 +310,22 @@ PLC_Joint2end:
 ; Pattern load cues - DoleVille
 ; ---------------------------------------------------------------------------
 PLC_DVZ:	dc.w ((PLC_DVZ2-PLC_DVZ-2)/6)-1
-;		plcm	Nem_Joint,       ArtTile_Level                   ; Joint main patterns
-		plcm	Nem_Spikes,    ArtTile_Spikes                 ; spikes
-		plcm	Nem_HSpring,   ArtTile_Spring_Horizontal      ; horizontal spring
-		plcm	Nem_SlzSwing,  ArtTile_SLZ_Swing                 ; swinging platform
-		plcm	Nem_SyzSpike1, ArtTile_SYZ_Big_Spikeball   ; large spikeball
-		plcm	Nem_SyzSpike2, ArtTile_SYZ_Spikeball_Chain ; small spikeball
+;		plcm	Nem_Joint,       ArtTile_Level                  ; Joint main patterns
+		plcm	Nem_Swing,     ArtTile_GHZ_MZ_Swing           	; swinging platform
+		plcm	Nem_SyzSpike1, ArtTile_SYZ_Big_Spikeball   		; large spikeball
+		plcm	Nem_SyzSpike2, ArtTile_SYZ_Spikeball_Chain 		; small spikeball
+		plcm	Nem_MzFire,    ArtTile_MZ_Fireball              ; fireballs
 
 PLC_DVZ2:	dc.w ((PLC_DVZ2end-PLC_DVZ2-2)/6)-1
-		plcm	Nem_Spikes,     ArtTile_Spikes                 ; spikes
-		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal      ; horizontal spring
+		plcm	Nem_Spikes,     ArtTile_Spikes                 	; spikes
+		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal      	; horizontal spring		
+		
+		ifdef __DEBUG__
+		plcm	Nem_NeedleBoss,NEEDLB_VRAM/$20
+		plcm	Nem_NHammer,NHAMMER_VRAM/$20
+		plcm	Nem_NeedleBossBig,NEEDLBBIG_VRAM/$20
+		plcm	Nem_N3DTest,$8800/$20
+		endif
 		     
 PLC_DVZ2end:
 ; ---------------------------------------------------------------------------
@@ -372,9 +378,11 @@ PLC_BTZ2end:
 ; ---------------------------------------------------------------------------
 PLC_ARZ:		dc.w ((PLC_ARZ2-PLC_ARZ-2)/6)-1
 		plcm	Nem_Spikes,      ArtTile_Spikes             ; spikes
-;		plcm	Nem_LZ,          ArtTile_Level              ; LZ main patterns
+;		plcm	Nem_ARZ,          ArtTile_Level              ; ARZ main patterns
 		plcm	Nem_Wario,       ArtTile_Wario              ; Wario
-
+        plcm	Nem_SyzSpike1, ArtTile_SYZ_Big_Spikeball   ; large spikeball
+		plcm	Nem_SyzSpike2, ArtTile_SYZ_Spikeball_Chain ; small spikeball
+		
 PLC_ARZ2:	dc.w ((PLC_ARZ2end-PLC_ARZ2-2)/6)-1
 		plcm	Nem_HSpring,     ArtTile_Spring_Horizontal  ; horizontal spring
 PLC_ARZ2end:

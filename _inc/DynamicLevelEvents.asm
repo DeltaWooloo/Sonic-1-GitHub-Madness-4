@@ -950,6 +950,7 @@ DLE_DVZ:
 		bra.w	.Null	
 		bra.w	.Null
 		bra.w	DLE_DVZ3
+		bra.w	.Null
 .Null:
 		rts
 ; ---------------------------------------------------------------------------

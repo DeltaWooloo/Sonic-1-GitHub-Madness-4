@@ -11,13 +11,13 @@ DebugList:
 		dc.w .SBZ-DebugList     ; x id_PPZ
 		dc.w .Ending-DebugList  ; id_EndZ
 		dc.w .BREW-DebugList    ; id_CBZ
-		dc.w .WIN-DebugList     ; id_WIN
-		dc.w .Joint-DebugList   ; id_Joint
-		dc.w .DVZ-DebugList     ; id_DVZ
+		dc.w .WIN-DebugList     ; x id_WIN
+		dc.w .Joint-DebugList   ; x id_Joint
+		dc.w .DVZ-DebugList     ; x id_DVZ
 		dc.w .GHZ-DebugList     ; id_Nogales
-		dc.w .BSZ-DebugList     ; id_BSZ
-		dc.w .GHZ-DebugList     ; id_BTZ
-		dc.w .LZ-DebugList      ; id_ARZ	
+		dc.w .BSZ-DebugList     ; x id_BSZ
+		dc.w .BTZ-DebugList     ; x id_BTZ
+		dc.w .ARZ-DebugList     ; x id_ARZ	
 
 dbug:	macro map,object,subtype,frame,vram
 		dc.l map+(object<<24)
@@ -201,7 +201,9 @@ allMonitors:	macro
 		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,0,0)
 		;!@
 		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
-		allMonitors
+		allMonitors		
+		dbug	Map_kys,	id_PinballMode,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
+		
 		dbug	Map_Bomb,	id_Bomb,	0,	0,	make_art_tile(ArtTile_Bomb,0,0)
 		;dbug	Map_Orb,	id_Orbinaut,	0,	0,	make_art_tile(ArtTile_SBZ_Orbinaut,0,0)
 		dbug	Map_Cat,	id_Caterkiller,	0,	0,	make_art_tile(ArtTile_SBZ_Caterkiller,0,0)
@@ -287,18 +289,27 @@ allMonitors:	macro
 		;!@
 		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
 		allMonitors
-		dbug	Map_Elev,	id_Elevator,	0,	0,	make_art_tile(ArtTile_Level,2,0)
-		dbug	Map_CFlo,	id_CollapseFloor, 0,	2,	make_art_tile(ArtTile_SLZ_Collapsing_Floor,2,0)
-		dbug	Map_Plat_SLZ,	id_BasicPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
-		dbug	Map_Circ,	id_CirclingPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
-		dbug	Map_Stair,	id_Staircase,	0,	0,	make_art_tile(ArtTile_Level,2,0)
-		dbug	Map_Fan,	id_Fan,		0,	0,	make_art_tile(ArtTile_SLZ_Fan,2,0)
-		dbug	Map_Seesaw,	id_Seesaw,	0,	0,	make_art_tile(ArtTile_SLZ_Seesaw,0,0)
+		
+		dbug	Map_Splats,	id_InternetExplorer,	0,	0,	make_art_tile($04E4,1,0)
+		dbug	Map_Mouse,	id_MotoBug,	$00,	0,	make_art_tile(ArtTile_Villager,0,0)
+		dbug	Map_Mouse,	id_MotoBug,	$01,	0,	make_art_tile(ArtTile_Villager,0,0)
+		dbug	Map_Mouse,	id_MotoBug,	$FF,	0,	make_art_tile(ArtTile_Villager,0,0)		
+		dbug	Map_RecycleBin,	id_RecyleBin,	$00,	0,	make_art_tile(ArtTile_RecyleBin,0,0)
+		dbug	Map_RecycleBin,	id_RecyleBinTrash,	$00,	1,	make_art_tile(ArtTile_RecyleBin,0,0)
+		
+		;dbug	Map_Elev,	id_Elevator,	0,	0,	make_art_tile(ArtTile_Level,2,0)
+		;dbug	Map_CFlo,	id_CollapseFloor, 0,	2,	make_art_tile(ArtTile_SLZ_Collapsing_Floor,2,0)
+		;dbug	Map_Plat_SLZ,	id_BasicPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
+		;dbug	Map_Circ,	id_CirclingPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
+		;dbug	Map_Stair,	id_Staircase,	0,	0,	make_art_tile(ArtTile_Level,2,0)
+		;dbug	Map_Fan,	id_Fan,		0,	0,	make_art_tile(ArtTile_SLZ_Fan,2,0)
+		;dbug	Map_Seesaw,	id_Seesaw,	0,	0,	make_art_tile(ArtTile_SLZ_Seesaw,0,0)
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
-		dbug	Map_Fire,	id_LavaMaker,	0,	0,	make_art_tile(ArtTile_SLZ_Fireball,0,0)
-		dbug	Map_Scen,	id_Scenery,	0,	0,	make_art_tile(ArtTile_SLZ_Fireball_Launcher,2,0)
-		dbug	Map_Bomb,	id_Bomb,	0,	0,	make_art_tile(ArtTile_Bomb,0,0)
-		dbug	Map_Orb,	id_Orbinaut,	0,	0,	make_art_tile(ArtTile_SLZ_Orbinaut,1,0)
+		;dbug	Map_Fire,	id_LavaMaker,	0,	0,	make_art_tile(ArtTile_SLZ_Fireball,0,0)
+		;dbug	Map_Scen,	id_Scenery,	0,	0,	make_art_tile(ArtTile_SLZ_Fireball_Launcher,2,0)
+		;dbug	Map_Bomb,	id_Bomb,	0,	0,	make_art_tile(ArtTile_Bomb,0,0)
+		;dbug	Map_Orb,	id_Orbinaut,	0,	0,	make_art_tile(ArtTile_SLZ_Orbinaut,1,0)
+		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,1,0)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
 .WINend:
 
@@ -310,6 +321,7 @@ allMonitors:	macro
 		;!@
 		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
 		allMonitors
+		dbug	Map_kys,	id_PinballMode,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
 		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
@@ -323,14 +335,33 @@ allMonitors:	macro
 		;!@
 		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
 		allMonitors
-		dbug	Map_NeedleBoss, 	id_NeedleBoss,		4,	1,	NEEDLB_GFX
-		dbug	Map_NeedleBoss, 	id_NeedleBoss,		8,	2,	NEEDLB_GFX
-		dbug	Map_NeedleBoss, 	id_NeedleBoss,		12,	3,	NEEDLB_GFX
-		dbug	Map_NeedleBoss, 	id_NeedleBoss,		16,	4,	NEEDLB_GFX
-		dbug	Map_NeedleBoss, 	id_NeedleBoss,		20,	5,	NEEDLB_GFX
-		dbug	Map_Spike,		id_Spikes,		0,	0,	make_art_tile(ArtTile_Spikes,0,0)
-		dbug	Map_Spring,		id_Springs,		0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
-		dbug	Map_Lamp,		id_Lamppost,		1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
+		
+		dbug	Map_Ring, 	id_Collectible,		1,	0,	make_art_tile(ArtTile_Ring,0,0)
+		dbug	Map_Ring, 	id_Collectible,		2,	0,	make_art_tile(ArtTile_Ring,2,0)
+		dbug	Map_Ring, 	id_Collectible,		3,	0,	make_art_tile(ArtTile_Ring,3,0)
+		
+		ifdef __DEBUG__
+		dbug	Map_NeedleBoss, id_NeedleBoss,	4,	1,	NEEDLB_GFX
+		dbug	Map_NeedleBoss, id_NeedleBoss,	8,	2,	NEEDLB_GFX
+		dbug	Map_NeedleBoss, id_NeedleBoss,	12,	3,	NEEDLB_GFX
+		dbug	Map_NeedleBoss, id_NeedleBoss,	16,	4,	NEEDLB_GFX
+		dbug	Map_NeedleBoss, id_NeedleBoss,	20,	5,	NEEDLB_GFX
+		endif
+		
+		dbug	Map_Fire,	id_LavaMaker,		$50,0,	make_art_tile(ArtTile_MZ_Fireball,0,0)
+		dbug	Map_Swing_GHZ,	id_SwingingPlatform,	$05,	0,	make_art_tile(ArtTile_GHZ_MZ_Swing,2,0)
+		dbug	Map_SBall,	id_SpikeBall,	$00,	0,	make_art_tile(ArtTile_SYZ_Spikeball_Chain,0,0)	; Spike ball
+		dbug	Map_SBall,	id_SpikeBall,	$82,	0,	make_art_tile(ArtTile_SYZ_Spikeball_Chain,0,0)	; Spike ball
+		dbug	Map_SBall,	id_SpikeBall,	$87,	0,	make_art_tile(ArtTile_SYZ_Spikeball_Chain,0,0)	; Spike ball
+		
+		dbug	Map_Invis,	id_Invisibarrier, $0A,	0,	make_art_tile(ArtTile_Monitor,0,1)
+		dbug	Map_Invis,	id_Invisibarrier, $11,	0,	make_art_tile(ArtTile_Monitor,0,1)
+		dbug	Map_Invis,	id_Invisibarrier, $4A,	0,	make_art_tile(ArtTile_Monitor,0,1)
+		dbug	Map_Invis,	id_Invisibarrier, $46,	0,	make_art_tile(ArtTile_Monitor,0,1)		
+
+		dbug	Map_Spike,	id_Spikes,			0,	0,	make_art_tile(ArtTile_Spikes,0,0)
+		dbug	Map_Spring,	id_Springs,			0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
+		dbug	Map_Lamp,	id_Lamppost,		1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
 .DVZend:
 		even
 
@@ -341,9 +372,69 @@ allMonitors:	macro
 		;!@
 		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
 		allMonitors
-		dbug	Map_Ring, 	id_WaterSound,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		dbug	Map_DioDanner_Intro, 	id_WaterSound,	0,	0,	make_art_tile(ArtTile_FartDanner,1,0)
+		
+		dbug	Map_BTG,id_Crabmeat,0,0,make_art_tile(ArtTile_Crabmeat,0,0)		
+		dbug	Map_SCG,id_MotoBug,	0,0,	make_art_tile(ArtTile_SCG,0,0)
+		dbug	Map_Splats,	id_InternetExplorer,	0,	0,	make_art_tile($04E4,1,0)		
+		
+		dbug	Map_Invis,	id_Invisibarrier, $00,	0,	make_art_tile(ArtTile_Monitor,0,1)
+		dbug	Map_Invis,	id_Invisibarrier, $04,	0,	make_art_tile(ArtTile_Monitor,0,1)
+		dbug	Map_Invis,	id_Invisibarrier, $05,	0,	make_art_tile(ArtTile_Monitor,0,1)
+		dbug	Map_Invis,	id_Invisibarrier, $09,	0,	make_art_tile(ArtTile_Monitor,0,1)
+		dbug	Map_Invis,	id_Invisibarrier, $0E,	0,	make_art_tile(ArtTile_Monitor,0,1)
+		dbug	Map_Invis,	id_Invisibarrier, $0F,	0,	make_art_tile(ArtTile_Monitor,0,1)
+		
 		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
 .BSZend:
+		even
+		
+.BTZ:
+		dc.w (.BTZend-.BTZ-2)/8
+;			mappings	object		subtype	frame	VRAM setting
+		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,0,0)		
+		allMonitors
+		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
+		;!@ Insert other stuff here (boss/children objects etc)
+.BTZend:
+		even
+		
+.ARZ:
+		dc.w (.ARZend-.ARZ-2)/8
+
+;			mappings	object		subtype	frame	VRAM setting
+		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,0,0)
+		;!@
+		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		allMonitors
+		;dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
+		;dbug	Map_Jaws,	id_Jaws,	8,	0,	make_art_tile(ArtTile_Jaws,1,0)
+		;dbug	Map_Burro,	id_Burrobot,	0,	2,	make_art_tile(ArtTile_Burrobot,0,1)	; i want meiko to gently pet me
+		;dbug	Map_Harp,	id_Harpoon,	0,	0,	make_art_tile(ArtTile_LZ_Harpoon,0,0)
+		;dbug	Map_Harp,	id_Harpoon,	2,	3,	make_art_tile(ArtTile_LZ_Harpoon,0,0)
+		;dbug	Map_Push,	id_PushBlock,	0,	0,	make_art_tile(ArtTile_LZ_Push_Block,2,0)
+		;dbug	Map_But,	id_Button,	0,	0,	make_art_tile(ArtTile_Button+4,0,0)
+		;dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
+		;dbug	Map_MBlockLZ,	id_MovingBlock,	4,	0,	make_art_tile(ArtTile_LZ_Moving_Block,2,0)
+		;dbug	Map_LBlock,	id_LabyrinthBlock, 1,	0,	make_art_tile(ArtTile_LZ_Blocks,2,0)
+		;dbug	Map_LBlock,	id_LabyrinthBlock, $13,	1,	make_art_tile(ArtTile_LZ_Blocks,2,0)
+		;dbug	Map_LBlock,	id_LabyrinthBlock, 5,	0,	make_art_tile(ArtTile_LZ_Blocks,2,0)
+		;dbug	Map_Gar,	id_Gargoyle,	0,	0,	make_art_tile(ArtTile_LZ_Gargoyle,2,0)
+		;dbug	Map_LBlock,	id_LabyrinthBlock, $27,	2,	make_art_tile(ArtTile_LZ_Blocks,2,0)
+		;dbug	Map_LBlock,	id_LabyrinthBlock, $30,	3,	make_art_tile(ArtTile_LZ_Blocks,2,0)
+		;dbug	Map_LConv,	id_LabyrinthConvey, $7F, 0,	make_art_tile(ArtTile_LZ_Conveyor_Belt,0,0)
+		;dbug	Map_Orb,	id_Orbinaut,	0,	0,	make_art_tile(ArtTile_LZ_Orbinaut,0,0)
+		;dbug	Map_Bub,	id_Bubble,	$84,	$13,	make_art_tile(ArtTile_LZ_Bubbles,0,1)
+		;dbug	Map_WFall,	id_Waterfall,	2,	2,	make_art_tile(ArtTile_LZ_Splash,2,1)
+		;dbug	Map_WFall,	id_Waterfall,	9,	9,	make_art_tile(ArtTile_LZ_Splash,2,1)
+		;dbug	Map_Pole,	id_Pole,	0,	0,	make_art_tile(ArtTile_LZ_Pole,2,0)
+		;dbug	Map_Flap,	id_FlapDoor,	2,	0,	make_art_tile(ArtTile_LZ_Flapping_Door,2,0)
+		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
+		dbug	Map_Wario,	id_Yadrin,	0,	0,	make_art_tile(ArtTile_Wario,0,0)						; Wario
+		dbug	Map_SBall,	id_SpikeBall,	$00,	0,	make_art_tile(ArtTile_SYZ_Spikeball_Chain,0,0)	; Spike ball
+		dbug	Map_SBall,	id_SpikeBall,	$82,	0,	make_art_tile(ArtTile_SYZ_Spikeball_Chain,0,0)	; Spike ball
+		dbug	Map_SBall,	id_SpikeBall,	$87,	0,	make_art_tile(ArtTile_SYZ_Spikeball_Chain,0,0)	; Spike ball
+.ARZend:
 		even
