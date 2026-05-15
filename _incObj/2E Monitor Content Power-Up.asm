@@ -198,9 +198,11 @@ Pow_ChkShoes:
 Pow_SpeedShoes:
 		move.b	#1,(v_shoes).w	; speed up the BG music
 		move.w	#$4B0,(v_player+shoetime).w	; time limit for the power-up
-		move.w	#$C00,(v_sonspeedmax).w ; change Sonic's top speed
-		move.w	#$16,(v_sonspeedacc).w	; change Sonic's acceleration
-		move.w	#$80,(v_sonspeeddec).w	; change Sonic's deceleration
+		;!@ GD: Set appropriate water speed based on shoe and water status
+		char_setSpeed	$0000
+		;move.w	#$C00,(v_sonspeedmax).w ; change Sonic's top speed
+		;move.w	#$16,(v_sonspeedacc).w	; change Sonic's acceleration
+		;move.w	#$80,(v_sonspeeddec).w	; change Sonic's deceleration
 		tst.b	(v_clintonfucker).w ; is boss mode on?
 		bne.w	Pow_NoMusic	; if yes, branch
 		;!@ GenesisDoes: Play boost powa PCM
@@ -211,28 +213,20 @@ Pow_SpeedShoes:
 
 Pow_SlowShoes:
 		KDebug.WriteLine "Pow_SlowShoes"
-		move.b	#1,(v_shoes).w	; speed up the BG music
+		move.b	#$FF,(v_shoes).w			; speed up the BG music
 		move.w	#$4B0,(v_player+shoetime).w	; time limit for the power-up
 		
-		;Sonic Defaults:
-		;move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
-		;move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
-		;move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
-		
-		;Speed Shoes:		
-		;move.w	#$C00,(v_sonspeedmax).w ; change Sonic's top speed
-		;move.w	#$16,(v_sonspeedacc).w	; change Sonic's acceleration
-		;move.w	#$80,(v_sonspeeddec).w	; change Sonic's deceleration		
-		
 		;Slow Shoes:
-		move.w	#$600,(v_sonspeedmax).w ; Sonic's top speed
-		move.w	#$8,(v_sonspeedacc).w ; Sonic's acceleration
-		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
+		;!@ GD: Set appropriate water speed based on shoe and water status
+		char_setSpeed	$0000
+		;move.w	#$600,(v_sonspeedmax).w ; Sonic's top speed
+		;move.w	#$8,(v_sonspeedacc).w ; Sonic's acceleration
+		;move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
 		tst.b	(v_clintonfucker).w ; is boss mode on?
 		bne.w	.end	; if yes, branch
 		;!@ GenesisDoes: Play wrong way PCM
 		pcm	dBoostRPower
-		move.b	#bgm_LimitedEgg,d0
+		move.b	#bgm_BLIND_MODE,d0
 		jsr		(QueueSound1).l		; Speed up the music
 	.end:
 		rts
@@ -259,11 +253,11 @@ Pow_Invinciblity:
 		move.b	#id_ShieldItem,(v_starsobj4).w ; load stars object ($3804)
 		move.b	#4,(v_starsobj4+obAnim).w
 		tst.b	(f_lockscreen).w ; is boss mode on?
-		bne.s	Pow_NoMusic	; if yes, branch
+		bne.w	Pow_NoMusic	; if yes, branch
 		tst.b	(v_clintonfucker).w ; is boss mode on?
-		bne.s	Pow_NoMusic	; if yes, branch
+		bne.w	Pow_NoMusic	; if yes, branch
 		cmpi.w	#$C,(v_air).w
-		bls.s	Pow_NoMusic
+		bls.w	Pow_NoMusic
 		cmpi.b	#2,(v_characterid).w		; are we playing as MrBean?
 		beq.s	.Bean_invincbgm				; If so, you get your own song beany, not you tonic or maniac
 		move.w	#bgm_Invincible,d0
@@ -274,6 +268,53 @@ Pow_Invinciblity:
 
 .playbgm:
 		jmp	(QueueSound1).l ; play invincibility music
+; ===========================================================================
+; Subroutine applies SMB rainbow FX to 1st palette line (character)
+Pow_Invin_MarioRainbow:
+		;Push d0-d7, and a0-a1 onto stack
+		movem.l	d0-d7/a0-a1,-(sp)
+		
+		;Directly load garbage palette from random ROM address into dry v_palette 
+		;Clear d0-d1,d7, and a0-a1 registers
+		;KDebug.WriteLine "Mario time!"
+		moveq	#0,d0
+		moveq	#0,d1
+		moveq	#0,d2
+		moveq	#0,d3
+		moveq	#0,d7
+		movea.l	#0,a0
+		movea.l	#0,a1				
+		move.l	#(EndOfRom-1)-($10-1),d2	; Limit random ROM addr to within $10*2 bytes of max
+		jsr		(RandomAddress).l			; Pop random addr into d0
+		movea.l	d0,a0						; Move addr in d0 into a0 (source param)
+		lea		(v_palette).l,a1			; Load dry v_palette addr into a1 (dest param)
+		move.b	#$10-1,d7					; Load $40 palette words from source into dest
+		jsr		(PalLoadUser).l				; Dew the load. Dew it, Palpatine said
+		
+		;Again for wet v_palette_water
+		;tst.b	(v_waterflag).w 			; is level LZ?
+		;bpl.s	.skipFunkyWater				; if not, branch
+		bsr.w	isWaterLevel				; Does level have water?
+		beq.s	.skipFunkyWater				; If not, branch
+		;KDebug.WriteLine "Randomize wet palette"
+		moveq	#0,d0
+		moveq	#0,d1
+		moveq	#0,d2
+		moveq	#0,d3
+		moveq	#0,d7
+		movea.l	#0,a0
+		movea.l	#0,a1				
+		move.l	#(EndOfRom-1)-($10-1),d2
+		jsr		(RandomAddress).l
+		movea.l	d0,a0
+		lea		(v_palette_water).l,a1
+		move.b	#$10-1,d7
+		jsr		(PalLoadUser).l
+		
+	.skipFunkyWater:
+		;Pop d0-d2, d7, and a0-a1 from stack		
+		movem.l	(sp)+,d0-d7/a0-a1
+		rts
 ; ===========================================================================
 
 Pow_NoMusic:
@@ -491,9 +532,11 @@ Pow_Randomiser:
 		move.b	d0,(v_invinc).w			; remove the shoes
 		move.w	d0,(v_player+shoetime).w	; time limit for the power-up
 		move.w	d0,(v_player+invtime).w		; time limit for the power-up
-		move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
-		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
-		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
+		;!@ GD: Set appropriate water speed based on shoe and water status
+		char_setSpeed	$0000
+		;move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
+		;move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
+		;move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
 		move.b	#dClintonFail,d0
 		jsr	(MegaPCM_PlaySample).l		; as placeholder
 		move.b	(v_zonemusic).w,d0
@@ -922,9 +965,11 @@ superlucky:	; Congrats, you get all power-ups
 		move.b	#1,(v_shield).w		; give Sonic a shield
 		move.w	#$258,(v_player+shoetime).w	; time limit for the power-up
 		move.w	#$258,(v_player+invtime).w	; time limit for the power-up
-		move.w	#$C00,(v_sonspeedmax).w		; change Sonic's top speed
-		move.w	#$16,(v_sonspeedacc).w		; change Sonic's acceleration
-		move.w	#$80,(v_sonspeeddec).w		; change Sonic's deceleration
+		;!@ GD: Set appropriate water speed based on shoe and water status
+		char_setSpeed	$0000
+		;move.w	#$C00,(v_sonspeedmax).w		; change Sonic's top speed
+		;move.w	#$16,(v_sonspeedacc).w		; change Sonic's acceleration
+		;move.w	#$80,(v_sonspeeddec).w		; change Sonic's deceleration
 		move.b	#id_ShieldItem,(v_shieldobj).w	; load shield object ($38)
 		move.b	#id_ShieldItem,(v_starsobj1).w	; load stars object ($3801)
 		move.b	#1,(v_starsobj1+obAnim).w

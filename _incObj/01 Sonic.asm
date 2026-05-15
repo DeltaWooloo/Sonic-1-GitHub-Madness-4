@@ -193,10 +193,12 @@ Tonic_Init:
 		move.w	#make_art_tile(ArtTile_Sonic,0,0),obGfx(a0)
 		move.b	#2,obPriority(a0)
 		move.b	#$18,obActWid(a0)
-		move.b	#4,obRender(a0)
-		move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
-		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
-		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
+		move.b	#4,obRender(a0)		
+		;!@ GD: Set normal above water speed
+		char_setSpeed	$0100		
+		;move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
+		;move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
+		;move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
 		bra.w	Sonic_Control
 
 ; ----------------------------------------------------------------------------
@@ -218,9 +220,11 @@ Maniac_Init:
 		move.b	#4,obRender(a0)
 		move.b	#10,playammo(a0)	; ammo start
 		or.b	#1,f_ammocount.w
-		move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
-		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
-		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
+		;!@ GD: Set normal above water speed
+		char_setSpeed	$0100
+		;move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
+		;move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
+		;move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
 		bra.w	Sonic_Control
 		
 ; ----------------------------------------------------------------------------
@@ -241,9 +245,11 @@ MrBean_Init:
 		move.b	#$18,obActWid(a0)
 		move.b	#4,obRender(a0)
 ;		or.b	#1,f_ammocount.w
-		move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
-		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
-		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
+		;!@ GD: Set normal above water speed
+		char_setSpeed	$0100
+		;move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
+		;move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
+		;move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
 		bra.w	Sonic_Control
 		nop
 
@@ -361,6 +367,16 @@ Sonic_Display:
 		beq.s	.chkshoes	; if not, branch
 		tst.w	invtime(a0)	; check time remaining for invinciblity
 		beq.s	.chkshoes	; if no time remains, branch
+		
+		;!@ GD: Super Mario rainbow FX (read random ROM palette line every 8 frames)
+		moveq	#0,d0
+		move.b	(v_framebyte).w,d0	; Move framebyte into d0
+		andi.b	#andiMaskB(8),d0	; d0=ANDI(F,d0)
+		cmpi.b	#8,d0				; Is d0 8?
+		bne.s	.skipRainbow		; If not, branch
+		jsr		(Pow_Invin_MarioRainbow).l
+	.skipRainbow:
+		
 		subq.w	#1,invtime(a0)	; subtract 1 from time
 		bne.s	.chkshoes
 		tst.b	(f_lockscreen).w
@@ -369,6 +385,7 @@ Sonic_Display:
 		bne.w	.removeinvincible	; if yes, branch
 		cmpi.w	#$C,(v_air).w
 		blo.s	.removeinvincible
+				
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
 		cmpi.w	#(id_ARZ<<8)+3,(v_zone).w ; check if level is SBZ3
@@ -389,10 +406,16 @@ Sonic_Display:
 		beq.s	.chkFX
 		subq.w	#1,shoetime(a0)	; subtract 1 from time
 		bne.s	.chkFX
-		move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
-		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
-		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
+		
+		;!@ GD: Set appropriate water speed based on shoe and water status
 		move.b	#0,(v_shoes).w	; cancel speed shoes
+		;!@ GD: Set speed
+		char_setSpeed	$0000
+		;move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
+		;move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
+		;move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
+		;move.b	#0,(v_shoes).w	; cancel speed shoes		
+		
 		move.b	(v_zone).w,d0
 		cmpi.w	#(id_ARZ<<8)+3,(v_zone).w ; check if level is SBZ3
 		bne.s	.music2
@@ -464,9 +487,13 @@ Sonic_Water:
 		bsr.w	ResumeMusic
 		move.b	#id_DrownCount,(v_sonicbubbles).w ; load bubbles object from Sonic's mouth
 		move.b	#$81,(v_sonicbubbles+obSubtype).w
-		move.w	#$300,(v_sonspeedmax).w ; change Sonic's top speed
-		move.w	#6,(v_sonspeedacc).w ; change Sonic's acceleration
-		move.w	#$40,(v_sonspeeddec).w ; change Sonic's deceleration
+		
+		;!@ GD: Set appropriate water speed based on shoe and water status
+		char_setSpeed	$0000
+		;move.w	#$300,(v_sonspeedmax).w ; change Sonic's top speed
+		;move.w	#6,(v_sonspeedacc).w ; change Sonic's acceleration
+		;move.w	#$40,(v_sonspeeddec).w ; change Sonic's deceleration		
+		
 		asr.w	obVelX(a0)
 		asr.w	obVelY(a0)
 		asr.w	obVelY(a0)	; slow Sonic
@@ -480,9 +507,14 @@ Sonic_Water:
 		bclr	#6,obStatus(a0)
 		beq.s	.exit
 		bsr.w	ResumeMusic
-		move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
-		move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
-		move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
+		
+		;Regular speed
+		;!@ GD: Set appropriate water speed based on shoe and water status
+		char_setSpeed	$0000
+		;move.w	#$900,(v_sonspeedmax).w ; Sonic's top speed
+		;move.w	#$F,(v_sonspeedacc).w ; Sonic's acceleration
+		;move.w	#$80,(v_sonspeeddec).w ; Sonic's deceleration
+
 		asl.w	obVelY(a0)
 		beq.w	.exit
 		move.b	#id_Splash,(v_splash).w ; load splash object
@@ -494,6 +526,169 @@ Sonic_Water:
 		move.w	#sfx_Splash,d0
 		jmp	(QueueSound2).l	 ; play splash sound
 ; End of function Sonic_Water
+
+; Function sets the speed for Sonic, based on water and shoe state
+; Inputs:
+; d2.w != 0 = override state
+; hi(d2) = water state. -1=underwater, 1=above water, 0=ignore
+; lo(d2) = shoe state. -1=slow, 0=normal, 1=fast
+Sonic_SetSpeed:		
+		movem.l	d0-d1/a1,-(sp)			; Push regs d0-d1 and a1 onto stack				
+		moveq	#0,d0					; Clear d0
+		moveq	#0,d1					; Clear d1
+		move.l	#0,a1					; Clear a1
+		;KDebug.WriteLine "Sonic_SetSpeed call:"
+		
+		;Check d2 param
+		tst.w	d2
+		beq.s 	.skipOverride			; if 0, then detect; else override
+		
+		;We are overriding
+	.override:
+		;KDebug.WriteLine "OVERRIDE: %<.w d2>"
+		
+		move.w	d2,d0					; move param into d0
+		andi.w	#$FF00,d0				; Mask upper byte
+		lsr.w	#8,d0					; Rotate into lower byte param (keep high byte)
+		
+		cmpi.b	#$FF,d0					; Is high byte (water state) $FF? (Underwater)
+		bne.s	.above					; if NOT, branch
+	;Underwater
+	.under:	
+		bsr.w	.belowwater				; Do underwater
+		bra.s	.cont					; branch
+	;Above water
+	.above:
+		bsr.w	.abovewater				; Do above water
+	.cont:
+		;Get shoe speed set	
+		moveq	#0,d0					; Clear d0
+		moveq	#0,d1					; Clear d1
+		move.w	d2,d0					; Move param into d0
+		andi.w	#$00FF,d0				; Mask lower byte (shoe state)
+		bsr.w	.sub_getSpdIdx2			; Get shoe index into d1
+		bsr.w	.sub_setSpeed			; Set the speedSet
+		bra.w	.end					; End (restore regs)
+		rts
+		
+	;Auto-detect status
+	.skipOverride:
+		bsr.w	.sub_getTbl				; Get water table in a1
+		bsr.w	.sub_getSpdIdx			; Get shoe state in d1
+		bsr.w	.sub_setSpeed			; Apply the speedSet
+		bra.w	.end					; End (restore regs)
+		rts
+		
+	;---------------------------------------------------
+	;Subroutine loads appropriate speedSet table into a1
+	.sub_getTbl:
+		moveq	#0,d0					; Clear d0
+		moveq	#0,d1					; Clear d1
+		
+		move.w	(v_waterpos1).w,d0		; Move wtr pos into d0
+		move.w	obY(a0),d1				; Move player ypos into d1
+		;KDebug.WriteLine "obY / v_waterpos1: %<.w d1>/%<.w d0>"
+		cmp.w	d1,d0					; is Sonic above the water?
+		bge.s	.abovewater				; if yes, branch
+		
+		;Under water
+	.belowwater:
+		;KDebug.WriteLine "Water status: Below"
+		lea		(spdTbl_Below).l,a1		; Set a1 table to below table
+		bra.s	.sub_getTbl_end			; branch
+	.abovewater:
+		;KDebug.WriteLine "Water status: Above"
+		lea		(spdTbl_Above).l,a1		; Set a1 table to above table
+	.sub_getTbl_end:
+		rts
+		
+	;---------------------------------------------------
+	;Subroutine gets speedSet ID into d1
+	.sub_getSpdIdx:
+		moveq	#0,d0					; Clear d0
+		moveq	#0,d1					; Clear d1
+		move.b	(v_shoes).w,d0			; Check shoe status (move shoe value into d0)
+	.sub_getSpdIdx2:
+		;KDebug.WriteLine "Shoe value: %<.b d0>"		
+		cmpi.b	#$FF,d0					; Slow sloes?
+		bne.s	.notSlow				; If not, branch
+		
+		;Set Slow speed index
+		;KDebug.WriteLine "Shoe status: slow"
+		move.b	#$00,d1					; Set d1 idx as normal ($00)
+		bra.s	.sub_ws_end				; Branch
+	.notSlow:
+		cmpi.b	#$01,d0					; Fast shoes?
+		bne.s	.notFast				; If not, branch
+		;Set Fast speed index
+		;KDebug.WriteLine "Shoe status: fast"
+		move.b	#$02,d1					; Set d1 idx as fast ($02)
+		bra.s	.sub_ws_end				; branch
+	.notFast:
+		;;Set regular speed index
+		;KDebug.WriteLine "Shoe status: normal"
+		move.b	#$01,d1					; Set d1 idx as normal ($01)
+	.sub_ws_end:
+		rts
+		
+	;---------------------------------------------------
+	;Subroutine Set the speeds from the selected table entry
+	.sub_setSpeed:
+		;Get speedSet struct entry from struct array		
+		;KDebug.WriteLine "Speed Tbl: %<.l a1 sym>"
+		;KDebug.WriteLine "speedSet idx: %<.b d1>"
+		mulu.w	#6,d1					; d1 = d1 * 6 (get row offset into struct entry)
+		;KDebug.WriteLine "offset: %<.w d1>"
+		add.l	d1,a1					; a1 = a1+d1 offset (get beginning of row/struct entry)
+		;KDebug.WriteLine "Tbl entry: %<.l a1 sym>"		
+		move.w	(a1)+,d1
+		;KDebug.WriteLine "v_sonspeedmax: %<.w d1>"
+		move.w	d1,(v_sonspeedmax).w ; Set Sonic's top speed
+		move.w	(a1)+,d1
+		;KDebug.WriteLine "v_sonspeedacc: %<.w d1>"
+		move.w	d1,(v_sonspeedacc).w ; Set Sonic's acceleration
+		move.w	(a1)+,d1
+		move.w	d1,(v_sonspeeddec).w ; Set Sonic's deceleration
+		;KDebug.WriteLine "v_sonspeeddec: %<.w d1>"
+		;KDebug.WriteLine "=============="
+		rts
+		
+	;---------------------------------------------------
+	;Subroutine restores registers
+	.end:
+		movem.l	(sp)+,d0-d1/a1			; Push regs d0-d1 and a1 onto stack				
+		rts
+		
+	
+;Defines speed set (max, accel, de-accel)
+speedSet:	macro spdMax,spdAcc,spdDec,comment
+	;comment
+	dc.w	spdMax	;Max speed
+	dc.w	spdAcc	;Accel
+	dc.w	spdDec	;De-accel
+	endm
+	
+; The DeltaW speeds between below and above water:
+; Vector-crocodile math:
+; Vector: Magnitude AND direction! (Despicable Me)
+;  {$900,$0F,$80}
+;- {$300,$06,$40}
+;================
+;  {600,$09,$40}
+	
+; Below water table
+spdTbl_Below:
+	speedSet	$180,$04,$40,Below-slow  ; Slow
+	speedSet	$300,$06,$40,Below-normal; Normal
+	speedSet	$600,$0D,$40,Below-fast  ; Fast
+	even
+
+; Above water table
+spdTbl_Above:
+	speedSet	$600,$08,$80,Above-slow  ; Slow
+	speedSet	$900,$0F,$80,Above-normal; Normal
+	speedSet	$C00,$16,$80,Above-fast  ; Fast
+	even
 
 ; ----------------------------------------------------------------------------
 ; ---------------------------------------------------------------------------

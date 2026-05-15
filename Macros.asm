@@ -118,6 +118,16 @@ writeDBG_reg2	macro
 	lea		(debug_reg).l,a6	;Load VDP Debug reg into a6
 	move.w	d2,(a6)				;Write register
 	endm
+	
+;!@ GD: Sets the appropriate character speed, based on water/state OR override if parm!=$0000
+; See Sonic_SetSpeed for full details of input param
+char_setSpeed	macro parm
+	;char_setSpeed macro
+	movem.l	d2,-(sp)
+	move.w	#parm,d2
+	jsr		(Sonic_SetSpeed).l
+	movem.l	(sp)+,d2
+	endm
 
 ; ---------------------------------------------------------------------------
 ; DMA fill VRAM with a value

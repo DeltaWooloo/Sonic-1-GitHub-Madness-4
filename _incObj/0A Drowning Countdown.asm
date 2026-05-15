@@ -91,24 +91,29 @@ Drown_ChkWater:	; Routine 4
 		add.w	drown_origX(a0),d0
 		move.w	d0,obX(a0)
 		bsr.s	Drown_ShowNumber
-		bsr.w	SpeedToPos
+		;!@ bsr.w	SpeedToPos
+		jsr		(SpeedToPos).l
 		tst.b	obRender(a0)
 		bpl.s	.delete
-		bra.w	DisplaySprite
+		;!@ bra.w	DisplaySprite
+		jmp		(DisplaySprite).l
 
 .delete:
-		bra.w	DeleteObject
+		;!@ bra.w	DeleteObject
+		jmp		(DeleteObject).l
 ; ===========================================================================
 
 Drown_Display:	; Routine 6, Routine $E
 		bsr.s	Drown_ShowNumber
 		lea	(Ani_Drown).l,a1
 		jsr	(AnimateSprite).l
-		bra.w	DisplaySprite
+		;!@bra.w	DisplaySprite
+		jmp	(DisplaySprite).l
 ; ===========================================================================
 
 Drown_Delete:	; Routine 8, Routine $10
-		bra.w	DeleteObject
+		;!@bra.w	DeleteObject
+		jmp		(DeleteObject).l
 ; ===========================================================================
 
 Drown_AirLeft:	; Routine $C
@@ -122,14 +127,16 @@ Drown_AirLeft:	; Routine $C
 ; ===========================================================================
 
 .display:
-		lea	(Ani_Drown).l,a1
-		jsr	(AnimateSprite).l
+		lea		(Ani_Drown).l,a1
+		jsr		(AnimateSprite).l
 		tst.b	obRender(a0)
 		bpl.s	Drown_AirLeft_Delete
-		bra.w	DisplaySprite
+		;!@ bra.w	DisplaySprite
+		jmp		(DisplaySprite).l
 
 Drown_AirLeft_Delete:	
-		bra.w	DeleteObject
+		;!@bra.w	DeleteObject
+		jmp		(DeleteObject).l
 ; ===========================================================================
 
 Drown_ShowNumber:
