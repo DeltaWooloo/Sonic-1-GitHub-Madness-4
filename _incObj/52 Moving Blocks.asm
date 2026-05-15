@@ -46,8 +46,9 @@ loc_FE44:
 		cmpi.b	#id_PPZ,(v_zone).w ; check if level is SBZ
 		bne.s	loc_FE60
 		move.w	#make_art_tile(ArtTile_SBZ_Moving_Block_Short,1,0),obGfx(a0) ; SBZ specific code (object 5228)
-		cmpi.b	#$28,obSubtype(a0) ; is object 5228 ?
-		beq.s	loc_FE60	; if yes, branch
+		;!@ GD: Use this artwork for $20
+		cmpi.b	#$20,obSubtype(a0) 	; is object 5220?
+		beq.s	loc_FE60			; if yes, branch
 		move.w	#make_art_tile(ArtTile_SBZ_Moving_Block_Long,2,0),obGfx(a0) ; SBZ specific code (object 523x)
 
 loc_FE60:
@@ -56,7 +57,10 @@ loc_FE60:
 		move.b	obSubtype(a0),d0
 		lsr.w	#3,d0
 		andi.w	#$1E,d0
-		lea	MBlock_Var(pc,d0.w),a2
+		;!@ GD: Opcode broke. Replacing with equivalent
+		;lea	MBlock_Var(pc,d0.w),a2
+		lea		(MBlock_Var).l,a2
+		adda.w	d0,a2
 		move.b	(a2)+,obActWid(a0)
 		move.b	(a2)+,obFrame(a0)
 		move.b	#4,obPriority(a0)

@@ -202,7 +202,7 @@ PLC_SYZ:	dc.w ((PLC_SYZ2-PLC_SYZ-2)/6)-1
 ;		plcm	Nem_SYZ,       ArtTile_Level               ; SYZ main patterns
 		plcm	Nem_Crabmeat,  ArtTile_Crabmeat            ; crabmeat enemy
 		plcm	Nem_Buzz,      ArtTile_Buzz_Bomber         ; buzz bomber enemy
-		plcm	Nem_Wario,       ArtTile_Wario              ; Wario
+		plcm	Nem_Wario,	   ArtTile_Wario			   ; Wario
 
 PLC_SYZ2:	dc.w ((PLC_SYZ2end-PLC_SYZ2-2)/6)-1
 		plcm	Nem_Bumper,    ArtTile_SYZ_Bumper          ; bumper
@@ -214,7 +214,7 @@ PLC_SYZ2:	dc.w ((PLC_SYZ2end-PLC_SYZ2-2)/6)-1
 		plcm	Nem_HSpring,   ArtTile_Spring_Horizontal   ; horizontal spring
 		
 		;!@ GD: Add switch (relocated arttile)
-		plcm	Nem_LzSwitch,   ArtTile_Button_SYZ                 ; switch
+		plcm	Nem_LzSwitch,   ArtTile_Button_SYZ			; switch
 		    
 PLC_SYZ2end:
 ; ---------------------------------------------------------------------------
@@ -223,36 +223,33 @@ PLC_SYZ2end:
 PLC_SBZ:	dc.w ((PLC_SBZ2-PLC_SBZ-2)/6)-1
 ;		plcm	Nem_SBZ,       ArtTile_Level                   ; SBZ main patterns				
 		plcm	Nem_Stomper,   ArtTile_SBZ_Moving_Block_Short  ; moving platform and stomper
-		plcm	Nem_SbzDoor1,  ArtTile_SBZ_Door                ; door
+		;plcm	Nem_SbzDoor1,  ArtTile_SBZ_Door                ; door
 		plcm	Nem_Girder,    ArtTile_SBZ_Girder              ; girder
 		plcm	Nem_SbzWheel1, ArtTile_SBZ_Disc                ; spot on large wheel
-		plcm	Nem_SbzWheel2, ArtTile_SBZ_Junction            ; wheel that grabs Sonic
+		;plcm	Nem_SbzWheel2, ArtTile_SBZ_Junction            ; wheel that grabs Sonic
 		plcm	Nem_SyzSpike1, ArtTile_SBZ_Swing               ; large spikeball
-		plcm	Nem_Cutter,    ArtTile_SBZ_Saw                 ; pizza cutter
+		;plcm	Nem_Cutter,    ArtTile_SBZ_Saw                 ; pizza cutter
 		plcm	Nem_FlamePipe, ArtTile_SBZ_Flamethrower        ; flaming pipe
-		plcm	Nem_SbzFloor,  ArtTile_SBZ_Collapsing_Floor    ; collapsing floor
-		plcm	Nem_SbzBlock,  ArtTile_SBZ_Vanishing_Block     ; vanishing block
+		plcm	Nem_SbzFloor,  ArtTile_SBZ_Collapsing_Floor    ; collapsing floor		
+		
+		;plcm	Nem_SbzBlock,  ArtTile_SBZ_Vanishing_Block     ; vanishing block
 		plcm	Nem_Cater,      ArtTile_SBZ_Caterkiller        ; caterkiller enemy
 		plcm	Nem_Bomb,       ArtTile_Bomb                   ; bomb enemy
-		plcm	Nem_Orbinaut,   ArtTile_SBZ_Orbinaut           ; orbinaut enemy
+		;plcm	Nem_Orbinaut,   ArtTile_SBZ_Orbinaut           ; orbinaut enemy
 PLC_SBZ2:	dc.w ((PLC_SBZ2end-PLC_SBZ2-2)/6)-1
 		plcm	Nem_SlideFloor, ArtTile_SBZ_Moving_Block_Long  ; floor that slides away
-		plcm	Nem_SbzDoor2,   ArtTile_SBZ_Horizontal_Door    ; horizontal door
+		;plcm	Nem_SbzDoor2,   ArtTile_SBZ_Horizontal_Door    ; horizontal door
 		plcm	Nem_Electric,   ArtTile_SBZ_Electric_Orb       ; electric orb
-		plcm	Nem_TrapDoor,   ArtTile_SBZ_Trap_Door          ; trapdoor
+		;plcm	Nem_TrapDoor,   ArtTile_SBZ_Trap_Door          ; trapdoor
 		;plcm	Nem_SbzFloor,   ArtTile_SBZ_Collapsing_Floor+4 ; collapsing floor
 		plcm	Nem_SbzFloor,   ArtTile_SBZ_Collapsing_Floor ; collapsing floor
-		plcm	Nem_SpinPform,  ArtTile_SBZ_Spinning_Platform  ; small spinning platform
+		plcm	Nem_SpinPform,  ArtTile_SBZ_Spinning_Platform  ; small spinning platform		
 		plcm	Nem_LzSwitch,   ArtTile_Button                 ; switch
 		plcm	Nem_Spikes,     ArtTile_Spikes                 ; spikes
 		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal      ; horizontal spring
- 		plcm	Nem_BallHogH,   ArtTile_Ball_HogH                ; ball hog enemy
-		plcm	Nem_BallHogV,   ArtTile_Ball_HogV                ; ball hog enemy
-		plcm	Nem_ProtoExplosion, ArtTile_Proto_Explosion 	; explosion
-		;!@ GD: Add this to 2; artwork seems to be stomping over itself
-		plcm	Nem_Bomb,       ArtTile_Bomb                   ; bomb enemy
-		plcm	Nem_Cater,      ArtTile_SBZ_Caterkiller        ; caterkiller enemy
-		plcm	Nem_SbzBlock,  ArtTile_SBZ_Vanishing_Block     ; vanishing block
+ 		plcm	Nem_BallHogH,   ArtTile_Ball_HogH              ; ball hog enemy
+		;plcm	Nem_BallHogV,   ArtTile_Ball_HogV              ; ball hog enemy
+		;plcm	Nem_ProtoExplosion, ArtTile_Proto_Explosion    ; explosion
 		plcm	Nem_bugHUD,  	ArtTile_bugHUD1				   ; !@ GD: OMG vscroll bug watermark
 PLC_SBZ2end:
 ; ---------------------------------------------------------------------------

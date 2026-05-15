@@ -835,25 +835,40 @@ ArtTile_SLZ_Collapsing_Floor:	equ $4E0
 ArtTile_SLZ_Spikeball:		equ $4F0
 
 ; Scrap Brain Zone
-ArtTile_SBZ_Caterkiller:	equ $2B0
-ArtTile_SBZ_Moving_Block_Short:	equ $2C0
-ArtTile_SBZ_Door:		equ $2E8
-ArtTile_SBZ_Girder:		equ $2F0
-ArtTile_SBZ_Disc:		equ $344
-ArtTile_SBZ_Junction:		equ $348
-ArtTile_SBZ_Swing:		equ $391
-ArtTile_SBZ_Saw:		equ $3B5
-ArtTile_SBZ_Flamethrower:	equ $3D9
-ArtTile_SBZ_Collapsing_Floor:	equ $3F5
-ArtTile_SBZ_Orbinaut:		equ $429
-ArtTile_SBZ_Smoke_Puff_1:	equ ArtTile_Level+$448
-ArtTile_SBZ_Smoke_Puff_2:	equ ArtTile_Level+$454
+;!@ GD: Relocate
+;ArtTile_SBZ_Caterkiller:		equ $2B0
+
+;!@ Relocate
+;ArtTile_SBZ_Moving_Block_Short:	equ $2C0
+ArtTile_SBZ_Door:				equ $2E8				; unused
+ArtTile_SBZ_Girder:				equ $2F0
+;ArtTile_Ball_HogH:				equ $302
+ArtTile_SBZ_Disc:				equ $344
+ArtTile_SBZ_Junction:			equ $348				; unused
+;!@ GD: Relocate
+ArtTile_SBZ_Swing:				equ $391
+ArtTile_SBZ_Saw:				equ $3B5				; unused
+ArtTile_SBZ_Flamethrower:		equ $3D9
+
+;!@ GD: Relocate
+;ArtTile_SBZ_Collapsing_Floor:	equ $3F5
+
+;ArtTile_bugHUD1:				equ $429, $2E tiles = $457
+;ArtTile_Bomb:					equ $400
+ArtTile_SBZ_Orbinaut:			equ $429				; unused
+ArtTile_SBZ_Smoke_Puff_1:		equ ArtTile_Level+$448	; unused
+ArtTile_SBZ_Smoke_Puff_2:		equ ArtTile_Level+$454	; unused
 ArtTile_SBZ_Moving_Block_Long:	equ $460
-ArtTile_SBZ_Horizontal_Door:	equ $46F
-ArtTile_SBZ_Electric_Orb:	equ $47E
-ArtTile_SBZ_Trap_Door:		equ $492
-ArtTile_SBZ_Vanishing_Block:	equ $4C3
+ArtTile_SBZ_Horizontal_Door:	equ $46F				; unused,$0F tiles
+ArtTile_SBZ_Electric_Orb:		equ $47E
+ArtTile_SBZ_Trap_Door:			equ $492				; unused $31 tiles
+ArtTile_SBZ_Caterkiller:		equ $492				; !@ GD: Relocate, $10 tiles
+ArtTile_SBZ_Moving_Block_Short:	equ $4A2				; !@ GD: Relocate
+
+ArtTile_SBZ_Vanishing_Block:	equ $4C3				; unused $1C tiles
+ArtTile_SBZ_Collapsing_Floor:	equ $4C3				; !@ GD: Relocate, $10 tiles
 ArtTile_SBZ_Spinning_Platform:	equ $4DF
+;
 
 ; Final Zone
 ArtTile_FZ_Boss:		equ $300

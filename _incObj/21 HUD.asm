@@ -112,6 +112,10 @@ HUD_KaitoNipple:
 		
 ;!@ Arrow for OMG
 HUD_omgA_Init:
+		;!@GD: Don't init until PLCs are loaded (PPZ1), to prevent graphical race cond
+		tst.l	(v_plc_buffer).w 	; are the pattern load cues empty?
+		bne.s	HUD_omg_getArt.cont	; if not, skip
+
 		addq.b	#2,obRoutine(a0)
 		move.w	#$A0,obX(a0)
 		move.w	#$100,obScreenY(a0)
@@ -122,6 +126,10 @@ HUD_omgA_Init:
 		
 ;!@ text for OMG
 HUD_omgB_Init:
+		;!@GD: Don't init until PLCs are loaded (PPZ1), to prevent graphical race cond
+		tst.l	(v_plc_buffer).w 	; are the pattern load cues empty?
+		bne.s	HUD_omg_getArt.cont	; if not, skip
+
 		addq.b	#2,obRoutine(a0)
 		move.w	#$A0+$28,obX(a0)
 		move.w	#$100,obScreenY(a0)
@@ -158,10 +166,11 @@ HUD_omgA:
 		jsr		(DisplaySprite).l
 
 		;If runonce flag not set, then skip
-		tst.b	objoff_30(a0)
+		tst.b	pcm_runonce(a0)
 		bne.s	.locret
 		
-		move.b	#1,objoff_30(a0)			;Set runonce flag
+		stopPCM
+		move.b	#1,pcm_runonce(a0)			;Set runonce flag
 		;Play OMG pcm
 		move.b	#dazdOMG, d0
 		jsr	(MegaPCM_PlaySample).l
@@ -176,5 +185,4 @@ HUD_omgB:
 HUD_KaitoNipple_delete:
 HUD_omgA_delete:
 HUD_omgB_delete:
-		jsr		(DeleteObject).l
-		rts
+		jmp		(DeleteObject).l

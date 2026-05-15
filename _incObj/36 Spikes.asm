@@ -150,9 +150,14 @@ Spik_Display:
 .ren:		bra.w	DisplaySprite
 .del:		bra.w	DeleteObject
 Spik_Feature:
-		; This is a bug, sez GenesisDoes		
+		; This is a bug, sez GenesisDoes /jk
 		;!@ GD: Is Zone id_ACZ? If so, skip the "features"
 		cmpi.b	#id_ACZ,(v_zone).w
+		beq.s	.nobugs
+		
+		;!@ GD: Bugfix, also skip if horizontal spikes
+		;(player can get stuck in a wall of spikes and die at top of level lol)
+		cmpi.b	#5,obFrame(a0)	; is object type $5x ?
 		beq.s	.nobugs
 		
 		moveq	#7,d0

@@ -137,7 +137,7 @@ Obj1E_MakeBall:
 		move.b	#4,obFrame(a1)		; set bomb frame
 		move.l	#Map_BallHogH,obMap(a1)
 		move.b	#6,obHeight(a1)
-		move.w	#make_art_tile(ArtTile_Ball_HogH,1,0),obGfx(a1)
+		move.w	#make_art_tile(ArtTile_Ball_HogH,0,0),obGfx(a1)
 		cmpi.b	#id_CBZ,(v_zone).w		; is zone CBZ?
 		bne.s	.NotCheeseball	; if not, branch
 		move.l	#Map_Spongy,obMap(a1)
@@ -385,7 +385,7 @@ Hog_Idle3:
 		move.b	#8,obRoutine(a1); set proto bomb
 		move.b	#4,obFrame(a1)  ; set bomb frame
 		move.l	#Map_BallHogH,obMap(a1)
-		move.w	#make_art_tile(ArtTile_Ball_HogH,1,0),obGfx(a1)
+		move.w	#make_art_tile(ArtTile_Ball_HogH,0,0),obGfx(a1)
 		move.w	obX(a0),obX(a1)
 		move.w	obY(a0),obY(a1)
 		move.b	#4,obRender(a1)

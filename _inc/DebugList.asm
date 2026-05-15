@@ -7,8 +7,8 @@ DebugList:
 		dc.w .LZ-DebugList      ; x id_WHZ
 		dc.w .MZ-DebugList      ; x id_ACZ
 		dc.w .SLZ-DebugList     ; x id_MCZ
-		dc.w .SYZ-DebugList     ; id_SFZ
-		dc.w .SBZ-DebugList     ; id_PPZ
+		dc.w .SYZ-DebugList     ; x id_SFZ
+		dc.w .SBZ-DebugList     ; x id_PPZ
 		dc.w .Ending-DebugList  ; id_EndZ
 		dc.w .BREW-DebugList    ; id_CBZ
 		dc.w .WIN-DebugList     ; id_WIN
@@ -190,7 +190,7 @@ allMonitors:	macro
 		dbug	Map_FBlock,	id_FloatingBlock, 0,	0,	make_art_tile(ArtTile_Level,2,0)
 		
 		dbug	Map_But,	id_Button,	0,	0,	make_art_tile(ArtTile_Button_SYZ+4,0,0)
-		dbug	Map_Cat,	id_Caterkiller,	0,	0,	make_art_tile(ArtTile_MZ_SYZ_Caterkiller,1,0)
+		dbug	Map_Cat,	id_Caterkiller,	0,	0,	($A0E0/$20)		
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
 .SYZend:
 
@@ -203,31 +203,31 @@ allMonitors:	macro
 		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
 		allMonitors
 		dbug	Map_Bomb,	id_Bomb,	0,	0,	make_art_tile(ArtTile_Bomb,0,0)
-		dbug	Map_Orb,	id_Orbinaut,	0,	0,	make_art_tile(ArtTile_SBZ_Orbinaut,0,0)
-		dbug	Map_Cat,	id_Caterkiller,	0,	0,	make_art_tile(ArtTile_SBZ_Caterkiller,1,0)
+		;dbug	Map_Orb,	id_Orbinaut,	0,	0,	make_art_tile(ArtTile_SBZ_Orbinaut,0,0)
+		dbug	Map_Cat,	id_Caterkiller,	0,	0,	make_art_tile(ArtTile_SBZ_Caterkiller,0,0)
 		dbug	Map_BBall,	id_SwingingPlatform, 7,	2,	make_art_tile(ArtTile_SBZ_Swing,2,0)
 		dbug	Map_Disc,	id_RunningDisc,	$E0,	0,	make_art_tile(ArtTile_SBZ_Disc,2,1)
-		dbug	Map_MBlock,	id_MovingBlock,	$28,	2,	make_art_tile(ArtTile_SBZ_Moving_Block_Short,1,0)
+		dbug	Map_MBlock,	id_MovingBlock,	$20,	2,	make_art_tile(ArtTile_SBZ_Moving_Block_Short,1,0)
 		dbug	Map_But,	id_Button,	0,	0,	make_art_tile(ArtTile_Button_Reg,0,0)
-		dbug	Map_Trap,	id_SpinPlatform, 3,	0,	make_art_tile(ArtTile_SBZ_Trap_Door,2,0)
+		;dbug	Map_Trap,	id_SpinPlatform, 3,	0,	make_art_tile(ArtTile_SBZ_Trap_Door,2,0)
 		dbug	Map_Spin,	id_SpinPlatform, $83,	0,	make_art_tile(ArtTile_SBZ_Spinning_Platform,0,0)
-		dbug	Map_Saw,	id_Saws,	2,	0,	make_art_tile(ArtTile_SBZ_Saw,2,0)
+		;dbug	Map_Saw,	id_Saws,	2,	0,	make_art_tile(ArtTile_SBZ_Saw,2,0)
 		dbug	Map_CFlo,	id_CollapseFloor, 0,	0,	make_art_tile(ArtTile_SBZ_Collapsing_Floor,2,0)
 		dbug	Map_MBlock,	id_MovingBlock,	$39,	3,	make_art_tile(ArtTile_SBZ_Moving_Block_Long,2,0)
-		dbug	Map_Stomp,	id_ScrapStomp,	0,	0,	make_art_tile(ArtTile_SBZ_Moving_Block_Short,1,0)
-		dbug	Map_ADoor,	id_AutoDoor,	0,	0,	make_art_tile(ArtTile_SBZ_Door,2,0)
-		dbug	Map_Stomp,	id_ScrapStomp,	$13,	1,	make_art_tile(ArtTile_SBZ_Moving_Block_Short,1,0)
-		dbug	Map_Saw,	id_Saws,	1,	0,	make_art_tile(ArtTile_SBZ_Saw,2,0)
-		dbug	Map_Stomp,	id_ScrapStomp,	$24,	1,	make_art_tile(ArtTile_SBZ_Moving_Block_Short,1,0)
-		dbug	Map_Saw,	id_Saws,	4,	2,	make_art_tile(ArtTile_SBZ_Saw,2,0)
-		dbug	Map_Stomp,	id_ScrapStomp,	$34,	1,	make_art_tile(ArtTile_SBZ_Moving_Block_Short,1,0)
-		dbug	Map_VanP,	id_VanishPlatform, 0,	0,	make_art_tile(ArtTile_SBZ_Vanishing_Block,2,0)
+		;dbug	Map_Stomp,	id_ScrapStomp,	0,	0,	make_art_tile(ArtTile_SBZ_Moving_Block_Short,1,0)
+		;dbug	Map_ADoor,	id_AutoDoor,	0,	0,	make_art_tile(ArtTile_SBZ_Door,2,0)
+		;dbug	Map_Stomp,	id_ScrapStomp,	$13,	1,	make_art_tile(ArtTile_SBZ_Moving_Block_Short,1,0)
+		;dbug	Map_Saw,	id_Saws,	1,	0,	make_art_tile(ArtTile_SBZ_Saw,2,0)
+		;dbug	Map_Stomp,	id_ScrapStomp,	$24,	1,	make_art_tile(ArtTile_SBZ_Moving_Block_Short,1,0)
+		;dbug	Map_Saw,	id_Saws,	4,	2,	make_art_tile(ArtTile_SBZ_Saw,2,0)
+		;dbug	Map_Stomp,	id_ScrapStomp,	$34,	1,	make_art_tile(ArtTile_SBZ_Moving_Block_Short,1,0)
+		;dbug	Map_VanP,	id_VanishPlatform, 0,	0,	make_art_tile(ArtTile_SBZ_Vanishing_Block,2,0)
 		dbug	Map_Flame,	id_Flamethrower, $64,	0,	make_art_tile(ArtTile_SBZ_Flamethrower,0,1)
 		dbug	Map_Flame,	id_Flamethrower, $64,	$B,	make_art_tile(ArtTile_SBZ_Flamethrower,0,1)
 		dbug	Map_Elec,	id_Electro,	4,	0,	make_art_tile(ArtTile_SBZ_Electric_Orb,0,0)
 		dbug	Map_Gird,	id_Girder,	0,	0,	make_art_tile(ArtTile_SBZ_Girder,2,0)
 		dbug	Map_Invis,	id_Invisibarrier, $11,	0,	make_art_tile(ArtTile_Monitor,0,1)
-		dbug	Map_BallHogH,	id_BallHog,	4,	0,	make_art_tile(ArtTile_Ball_HogH,1,0)
+		dbug	Map_BallHogH,	id_BallHog,	4,	0,	make_art_tile(ArtTile_Ball_HogH,0,0)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
 .SBZend:
 
