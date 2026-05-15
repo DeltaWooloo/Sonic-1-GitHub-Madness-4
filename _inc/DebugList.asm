@@ -6,7 +6,7 @@ DebugList:
 ;		dc.w .SLZ-DebugList     
 		dc.w .LZ-DebugList      ; x id_WHZ
 		dc.w .MZ-DebugList      ; x id_ACZ
-		dc.w .SLZ-DebugList     ; id_MCZ
+		dc.w .SLZ-DebugList     ; x id_MCZ
 		dc.w .SYZ-DebugList     ; id_SFZ
 		dc.w .SBZ-DebugList     ; id_PPZ
 		dc.w .Ending-DebugList  ; id_EndZ
@@ -148,16 +148,18 @@ allMonitors:	macro
 		;!@
 		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
 		allMonitors
-		dbug	Map_Elev,	id_Elevator,	0,	0,	make_art_tile(ArtTile_Level,2,0)
-		dbug	Map_CFlo,	id_CollapseFloor, 0,	2,	make_art_tile(ArtTile_SLZ_Collapsing_Floor,2,0)
-		dbug	Map_Plat_SLZ,	id_BasicPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
-		dbug	Map_Circ,	id_CirclingPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
-		dbug	Map_Stair,	id_Staircase,	0,	0,	make_art_tile(ArtTile_Level,2,0)
-		dbug	Map_Fan,	id_Fan,		0,	0,	make_art_tile(ArtTile_SLZ_Fan,2,0)
-		dbug	Map_Seesaw,	id_Seesaw,	0,	0,	make_art_tile(ArtTile_SLZ_Seesaw,0,0)
+		;dbug	Map_Elev,	id_Elevator,	0,	0,	make_art_tile(ArtTile_Level,2,0)
+		;dbug	Map_CFlo,	id_CollapseFloor, 0,	2,	make_art_tile(ArtTile_SLZ_Collapsing_Floor,2,0)
+		;dbug	Map_Plat_SLZ,	id_BasicPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
+		;dbug	Map_Circ,	id_CirclingPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
+		;dbug	Map_Stair,	id_Staircase,	0,	0,	make_art_tile(ArtTile_Level,2,0)
+		;dbug	Map_Fan,	id_Fan,		0,	0,	make_art_tile(ArtTile_SLZ_Fan,2,0)
+		dbug	Map_Seesaw,	id_Seesaw,	0,	0,	make_art_tile(ArtTile_SLZ_Seesaw,0,0)		
+		dbug	Map_Swing_SLZ,	id_SwingingPlatform,	$00,	0,	make_art_tile(ArtTile_SLZ_Swing,2,0)
+		dbug	Map_Swing_SLZ,	id_SwingingPlatform,	$05,	0,	make_art_tile(ArtTile_SLZ_Swing,2,0)
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
 		dbug	Map_Fire,	id_LavaMaker,	0,	0,	make_art_tile(ArtTile_SLZ_Fireball,0,0)
-		dbug	Map_Scen,	id_Scenery,	0,	0,	make_art_tile(ArtTile_SLZ_Fireball_Launcher,2,0)
+		;dbug	Map_Scen,	id_Scenery,	0,	0,	make_art_tile(ArtTile_SLZ_Fireball_Launcher,2,0)
 		dbug	Map_Bomb,	id_Bomb,	0,	0,	make_art_tile(ArtTile_Bomb,0,0)
 		dbug	Map_Orb,	id_Orbinaut,	0,	0,	make_art_tile(ArtTile_SLZ_Orbinaut,1,0)
 		dbug	Map_RoadRoller,	id_RoadRoller,	0,	0,	make_art_tile(ArtTile_SLZ_RoadRoller,0,0)
