@@ -184,6 +184,7 @@ GotThroughAct:
 		bne.s	Sign_Return
 		
 		;!@ GD:  New code to skip edge lock if subType $1 (spawned from RandomMonitor)
+		jsr		(Level_LoadPal3).l		;!@ Reload player pal (rainbow invin)
 		cmpi.b	#0,obSubtype(a0)		;Is subType 0?
 		bne.s	GotThroughAct2			;If NOT (spawned from random monitor), then branch
 		

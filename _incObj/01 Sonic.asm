@@ -41,10 +41,11 @@ locktime:	equ $3E	; temporary D-Pad control lock timer (2 bytes)
 ; Playable Characters
 ; ---------------------------------------------------------------------------
 
-chrid_tonic	equ 0
+chrid_tonic		equ 0
 chrid_maniac	equ 1
 chrid_mrbean	equ 2
-chrid_last	equ 2
+chrid_last		equ chrid_mrbean
+chrid_last1		equ chrid_last+1
 
 ; ---------------------------------------------------------------------------
 
@@ -368,13 +369,17 @@ Sonic_Display:
 		tst.w	invtime(a0)	; check time remaining for invinciblity
 		beq.s	.chkshoes	; if no time remains, branch
 		
-		;!@ GD: Super Mario rainbow FX (read random ROM palette line every 8 frames)
+		;!@ GD: Super Mario rainbow FX for maniac
+		;(read random ROM palette line every 8 frames)
+		cmpi.b	#chrid_maniac,(v_characterid).w		; are we playing as Maniaca
+		bne.s	.skipRainbow						; If so, you get you get rainbow power
+		
 		moveq	#0,d0
 		move.b	(v_framebyte).w,d0	; Move framebyte into d0
 		andi.b	#andiMaskB(8),d0	; d0=ANDI(F,d0)
 		cmpi.b	#8,d0				; Is d0 8?
 		bne.s	.skipRainbow		; If not, branch
-		jsr		(Pow_Invin_MarioRainbow).l
+		jsr	(Pow_Invin_MarioRainbow).l
 	.skipRainbow:
 		
 		subq.w	#1,invtime(a0)	; subtract 1 from time
@@ -398,6 +403,7 @@ Sonic_Display:
 
 .removeinvincible:
 		move.b	#0,(v_invinc).w ; cancel invincibility
+		jsr		(Level_LoadPal3).l	;!@ Reload player pal
 
 .chkshoes:
 		tst.b	(v_shoes).w	; does Sonic have speed shoes?
@@ -1225,7 +1231,8 @@ loc_131AA:
 		move.b	pdat.width(a5),obWidth(a0)
 		move.b	#id_Wait,obAnim(a0) ; use "standing" animation
 		subq.w	#5,obY(a0)
-		
+		;!@ GD: Bugfix to stop pinball mode from pushing when at a standstill (no inertia)\
+		bra.w	loc_1300C
 		
 .KeepRolling:
 		move.w	#$400,obInertia(a0)

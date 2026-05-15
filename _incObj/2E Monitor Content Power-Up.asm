@@ -258,8 +258,8 @@ Pow_Invinciblity:
 		bne.w	Pow_NoMusic	; if yes, branch
 		cmpi.w	#$C,(v_air).w
 		bls.w	Pow_NoMusic
-		cmpi.b	#2,(v_characterid).w		; are we playing as MrBean?
-		beq.s	.Bean_invincbgm				; If so, you get your own song beany, not you tonic or maniac
+		cmpi.b	#chrid_mrbean,(v_characterid).w		; are we playing as MrBean?
+		beq.s	.Bean_invincbgm						; If so, you get your own song beany, not you tonic or maniac
 		move.w	#bgm_Invincible,d0
 		bra.s	.playbgm
 
@@ -452,7 +452,7 @@ Pow_Randomiser:
 
 ; ===========================================================================
 .getammo:	; you get a free ammo refill... if you're maniac mouse
-		cmpi.b	#1,(v_characterid).w	; are we maniac mouse?
+		cmpi.b	#chrid_maniac,(v_characterid).w	; are we maniac mouse?
 		bne.s	.nothing		; no? well get out of here Tonic, you get nothing, good day sir
 		lea	(v_player).w,a0		; load the player data
 		move.b	#10,playammo(a0)	; make players ammo count 10
@@ -516,7 +516,7 @@ Pow_Randomiser:
 
 ; ===========================================================================
 .Loseammo:	; the needlemouse gremlin stole your magazine... if you're maniac mouse
-		cmpi.b	#1,(v_characterid).w	; are maniac mouse?
+		cmpi.b	#chrid_maniac,(v_characterid).w	; are maniac mouse?
 		bne.w	.nothing		; no? well get out of here, you get nothing, good day sir
 		lea	(v_player).w,a0
 		move.b	#0,playammo(a0)		; fuck you, no ammo for you
@@ -1065,10 +1065,10 @@ Pow_fix_RandMon_Runonce_flags:
 		move.b	#0,(f_RandMonPow).w
 		rts
 ; ===========================================================================
-
-Level_LoadPal2:
-		movem.l	d0-d3/a0-a2,-(sp)		; Store regs
+; !@ Just reload player dry/water palette
+Level_LoadPal3:
 		; load player dry palette
+		movem.l	d0-d3/a0-a2,-(sp)		; Store regs
 		moveq	#0,d0
 		moveq	#0,d1
 		moveq	#0,d2
@@ -1094,19 +1094,25 @@ Level_LoadPal2:
 		
 		;!@ GD: Rewrite me after char underwater palette code is fixed up
 		moveq	#palid_CBZ2SonWat,d1
-		cmpi.b	#id_ARZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
-		beq.s	.ARZWtr			; it makes me have a boaner
+		cmpi.b	#id_ARZ,(v_zone).w		; golly i LOOOOVE hardcoded checks
+		beq.s	.ARZWtr					; it makes me have a boaner
 		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
-		bne.s	.wtr			; if not, branch
-		moveq	#palid_SBZ3SonWat,d1 ; palette number $10 (SBZ3)
+		bne.s	.wtr					; if not, branch
+		moveq	#palid_SBZ3SonWat,d1 	; palette number $10 (SBZ3)
 		bra.s	.wtr
 	.ARZWtr:
 		moveq	#palid_ARZSonWater,d1
 	.wtr:
 		moveq	#1,d2					; Set water flag
-		bsr.w	.loadpal				; Load d1 character water palette
-			
+		bsr.w	Level_LoadPal2.loadpal	; Load d1 character water palette			
 	.skipwtr2:
+		movem.l	(sp)+,d0-d3/a0-a2		; Restore regs
+		rts
+
+Level_LoadPal2:
+		movem.l	d0-d3/a0-a2,-(sp)		; Store regs		
+		bsr.w	Level_LoadPal3			; Reload player pal
+		
 		; Load this zone/act lhead from LevelHeaders
 		; !@ GD TODO bugfix: This .loadpal call is bugged if in a water level!
 		; Code adapted from GM_Level/Level_NoMusicFade.nowata (.loadLevelPal)
