@@ -158,7 +158,7 @@ PLC_MZ:		dc.w ((PLC_MZ2-PLC_MZ-2)/6)-1
 		; bye  
 		plcm	Nem_Swing,    ArtTile_GHZ_MZ_Swing       ; swinging platform
 		plcm	Nem_MzGlass,  ArtTile_MZ_Glass_Pillar    ; green glassy block
-		plcm	Nem_Lava,     ArtTile_MZ_Lava            ; lava
+		;plcm	Nem_Lava,     ArtTile_MZ_Lava            ; lava
 		plcm	Nem_Buzz,     ArtTile_Buzz_Bomber        ; buzz bomber enemy
 		plcm	Nem_Yadrin,   ArtTile_Yadrin             ; yadrin enemy
 		dc.l Nem_Cater		; caterkiller enemy
@@ -166,6 +166,7 @@ PLC_MZ:		dc.w ((PLC_MZ2-PLC_MZ-2)/6)-1
 
 PLC_MZ2:	dc.w ((PLC_MZ2end-PLC_MZ2-2)/6)-1
 		plcm	Nem_MzSwitch, ArtTile_Button+4           ; switch
+		plcm	Nem_SbzDoor1,	  ArtTile_SBZ_Door		 ; !@ GD: SBZ Door (used in ACZ2)
 		plcm	Nem_Spikes,   ArtTile_Spikes             ; spikes
 		plcm	Nem_HSpring,  ArtTile_Spring_Horizontal  ; horizontal spring
  		plcm	Nem_MzBlock,  ArtTile_MZ_Block           ; green stone block

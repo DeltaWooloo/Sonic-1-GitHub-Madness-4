@@ -388,18 +388,19 @@ thantxt: macro txt
 	thantxt	"DEVON"
 	thantxt	"OLLIE TECHDECK"
 	thantxt	"CLOWNANCY"				;Intentional typo for Ollie; lol
-	thantxt	"VLADIKOMPER"
-	thantxt	"ARCADETV"	
+	thantxt	"VLADIKOMPER"			;MegaPCM
+	thantxt	"ARCADETV"				;MSU Driver
 	thantxt	"NOID MY GOAT"
 	thantxt	"SEGA"
-	thantxt "SONIC TEAM JR"
-	thantxt "SRBTWO"
+	thantxt "SONIC TEAM JR"			; Fire/water monitor icon (invin)
+	thantxt "SRBTWO"				; Fire/water monitor icon (invin)
+	thantxt "DOLPHMAN"				; SBZ Door (Dust Hill Zone cactus), other artwork
 	thantxt	"SONIC UNDERGROUND"
-	thantxt	"NTENDO"	
+	thantxt	"NTENDO"				; Mario, Wario etc.
 	thantxt	"SSRG"
 	thantxt	"SONIC RETRO"
-	thantxt	"HACKPGH"
-	thantxt	"EAGLESOFT LTD"
+	thantxt	"HACKPGH"				; Local hackerspace in Pittsburgh for playtesting
+	thantxt	"EAGLESOFT LTD"			; GenesisDoes' home
 	thantxt	"FRANCO AMERICAN"
 	thantxt	"ME"
 	thantxt	"CARDS AG HUMANITY"
@@ -409,21 +410,22 @@ thantxt: macro txt
 	thantxt	"MICROSLOP CORP"	
 	thantxt	"STEVE BALLMER"	
 	thantxt	"GITHUB INC"
-	thantxt	"CS ONE EIGHT EIGHT"
-	thantxt	"WEBFREAK"
+	thantxt	"CS ONE EIGHT EIGHT"	; Youtube poop PCM for disclaimer screen (Steve Ballmer, "Just believe me don't watch")
+	thantxt	"WEBFREAK"				; Azumanga Daioh PCM for PPZ1/ITBZ bug sprite (Oh mah gah!)
 	thantxt	"SEGA CHANNEL GUY"
-	thantxt "AVGN JAMES ROLFE"
-	thantxt "PRES BILL CLINTON"
-	thantxt	"WEIRD AL YANK."
-	thantxt	"PHIL COLLINS"
-	thantxt	"GENESIS BAND"
+	thantxt "AVGN JAMES ROLFE"		; AVGN invin song
+	thantxt "AVGN MIKE MATEI"		; AVGN Mike Matei, quote in GNyU Linyux BSOD
+	thantxt "PRES BILL CLINTON"		; Clinton Fucker
+	thantxt	"WEIRD AL YANK."		; Songs (Virus Alert, Hardware store, PCM, etc)
+	thantxt	"PHIL COLLINS"			; Genesis band (solid splash)
+	thantxt	"GENESIS BAND"			; Genesis band (solid splash)
 	thantxt	"KRIKZZ FOR EVERDRIVE"
-	thantxt "STONE AGE GAMER"
-	thantxt "RETRO BIT"
-	thantxt "TEAM EUROPE"	
-	thantxt "GOODTOFUFRIDAY"
-	thantxt "GQ ELECTRONICS LLC"
-	thantxt "GENESISFAN SIXTYFOUR"
+	thantxt "STONE AGE GAMER"		; Everdrive seller
+	thantxt "RETRO BIT"				; Retro Duo Portable + Retro Gen adapter for GenesisDoes mobile hardware testing
+	thantxt "TEAM EUROPE"			; Sega Pico to Genesis flash cart adapter, for Pico support (unused)
+	thantxt "GOODTOFUFRIDAY"		; Research on Sega Mega Pico hardware mod
+	thantxt "GQ ELECTRONICS LLC"	; EPROM programmer for ST Mico MC EPROMs
+	thantxt "GENESISFAN SIXTYFOUR"	; Sega (Mega) Pico research, NikonMD library
 	thantxt	"SII ARCHIVES"
 	thantxt	"AND HIS STUPID TEAM"
 	thantxt	"KAGAYMINE LEN"
