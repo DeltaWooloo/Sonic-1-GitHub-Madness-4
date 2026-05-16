@@ -256,24 +256,30 @@ PLC_SBZ2end:
 ; Pattern load cues - COLD BREW
 ; ---------------------------------------------------------------------------
 PLC_BREW:	dc.w ((PLC_BREW2-PLC_BREW-2)/6)-1
-;		plcm	Nem_BREW,   ArtTile_Level                  ; GHZ main patterns
-		plcm	Nem_Swing,     ArtTile_GHZ_MZ_Swing           ; swinging platform
-		plcm	Nem_Bridge,    ArtTile_GHZ_Bridge             ; bridge
-		plcm	Nem_SpikePole, ArtTile_GHZ_Spike_Pole         ; spiked pole
-		plcm	Nem_GhzWall1,  ArtTile_GHZ_SLZ_Smashable_Wall ; breakable wall
-;		plcm	Nem_Splash,      ArtTile_LZ_Splash          ; waterfalls and splash
-;		plcm	Nem_Bubbles,     ArtTile_LZ_Bubbles         ; bubbles and numbers
-		plcm	Nem_Spikes,    ArtTile_Spikes                 ; spikes
-		plcm	Nem_HSpring,   ArtTile_Spring_Horizontal      ; horizontal spring
+;		plcm	Nem_BREW,   ArtTile_Level                  		; GHZ main patterns
+		;!@ GD: Relocate
+		;plcm	Nem_Swing,     ArtTile_GHZ_MZ_Swing           	; swinging platform		
+		
+		plcm	Nem_Bridge,    ArtTile_GHZ_Bridge             	; bridge
+		plcm	Nem_SpikePole, ArtTile_GHZ_Spike_Pole         	; spiked pole
+		plcm	Nem_GhzWall1,  ArtTile_GHZ_SLZ_Smashable_Wall 	; breakable wall
+		plcm	Nem_SplashCBZ, ArtTile_CBZ_Splash          		; Splash (CBZ), no waterfall
+		plcm	Nem_Bubbles,   ArtTile_CBZ_Bubbles         		; bubbles and numbers		
+		;!@ GD: Relocate. Swing will overwrite a portion of above bubbles (air bubble geneator).
+		;Please don't place air bubble objects in level; not enough VRAM to fit everything
+		plcm	Nem_Swing,     ArtTile_CBZ_Swing           		; swinging platform
+		
+		plcm	Nem_Spikes,    ArtTile_Spikes                 	; spikes
+		plcm	Nem_HSpring,   ArtTile_Spring_Horizontal      	; horizontal spring
 
 PLC_BREW2:	dc.w ((PLC_BREW2end-PLC_BREW2-2)/6)-1
-		plcm	Nem_IZ,		   ArtTile_CBZ_IZ               ; IZ enemy
-		plcm	Nem_Spongy,	 ArtTile_CBZSpongy               ; Spongy enemy
-		plcm	Nem_Newtron,   ArtTile_CBZNewtron                ; newtron enemy
-		plcm	Nem_BuzzCBZ,   ArtTile_CBZBuzz_Bomber                ; Buzz enemy
-		plcm	Nem_LenBro,   ArtTile_CBZLen                ; Len enemy
-		plcm	Nem_ChopperCBZ,   ArtTile_CBZChopper                ; chopper enemy
-		plcm	Nem_MotobugCBZ,   ArtTile_CBZMoto_Bug               ; motobug enemy
+		plcm	Nem_IZ,		   ArtTile_CBZ_IZ               	; IZ enemy
+		plcm	Nem_Spongy,	 ArtTile_CBZSpongy               	; Spongy enemy
+		plcm	Nem_Newtron,   ArtTile_CBZNewtron               ; newtron enemy
+		plcm	Nem_BuzzCBZ,   ArtTile_CBZBuzz_Bomber           ; Buzz enemy
+		plcm	Nem_LenBro,   ArtTile_CBZLen                	; Len enemy
+		plcm	Nem_ChopperCBZ,   ArtTile_CBZChopper            ; chopper enemy
+		plcm	Nem_MotobugCBZ,   ArtTile_CBZMoto_Bug           ; motobug enemy
 PLC_BREW2end:
 
 PLC_BREW3:	dc.w ((PLC_BREW3end-PLC_BREW3-2)/6)-1

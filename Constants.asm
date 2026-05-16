@@ -924,6 +924,7 @@ ArtTile_Lamppost:		equ $7A0
 ArtTile_Ring:			equ $7B2
 ArtTile_Lives_Counter:		equ $7D4
 
+; Cold Brew Zone
 ArtTile_CBZ_Waterfall:		equ ArtTile_Level+$37C
 ArtTile_CBZ_IZ:			equ ArtTile_Level+$3AA
 ArtTile_CBZ_Eiza:		equ ArtTile_Level+$400
@@ -933,6 +934,12 @@ ArtTile_CBZBuzz_Bomber:		equ $476
 ArtTile_CBZLen:		equ $4C9
 ArtTile_CBZChopper:		equ $541
 ArtTile_CBZMoto_Bug:		equ $559
+;!@ Relocate GHZ_MZ_Swing, LZ splash and bubbles
+ArtTile_CBZ_Swing:		equ $345
+ArtTile_CBZ_Splash:		equ $6E2
+ArtTile_CBZ_Bubbles:	equ $2DD
+;What is ArtTile_LZ_Sonic_Drowning used for?
+;ArtTile_CBZ_Sonic_Drowning:	equ $440-3
 
 ArtTile_Villager:		equ $4F0
 ArtTile_SCG:		equ $449

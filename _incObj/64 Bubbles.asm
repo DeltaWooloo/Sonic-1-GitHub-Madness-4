@@ -24,7 +24,13 @@ bub_freq = objoff_33		; frequency of bubble spawn
 Bub_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_Bub,obMap(a0)
+		
+		;!@ GD: Relocate artwork for CBZ
 		move.w	#make_art_tile(ArtTile_LZ_Bubbles,0,1),obGfx(a0)
+		cmpi.b	#id_CBZ,(v_zone).w
+		bne.s	.notCBZ
+		move.w	#make_art_tile(ArtTile_CBZ_Bubbles,0,1),obGfx(a0)
+	.notCBZ:
 		move.b	#$84,obRender(a0)
 		move.b	#$10,obActWid(a0)
 		move.b	#1,obPriority(a0)

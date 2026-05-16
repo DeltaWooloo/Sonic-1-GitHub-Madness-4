@@ -6197,9 +6197,8 @@ Map_Drown:	include	"_maps/Drowning Countdown.asm"
 ;Map_Vanish:	include	"_maps/Special Stage Entry (Unused).asm"	; REMOVE UNUSED DATA - CONI
 		include	"_anim/Water Splash.asm"
 Map_Splash:	include	"_maps/Water Splash.asm"
-
-
-
+;!@ Variant for CBZ, due to using less tiles/reloc of tiles
+Map_SplashCBZ:	include	"_maps/Water Splash_CBZ.asm"
 		;include	"_incObj/Sonic AnglePos.asm"
 		
 		include	"_incObj/sub FootCollision.asm"		; :^)
