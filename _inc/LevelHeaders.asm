@@ -29,7 +29,7 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 	lhead	plcid_MZ,Kos_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_LosTontos,palid_MZ,Col_MZ,ObjPos_MZ1, Level_MZ1,Level_MZ1bg
 	lhead	plcid_MZ,Kos_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_Area5,palid_MZ,Col_MZ,ObjPos_MZ2, Level_MZ2,Level_MZ2bg
 	lhead	plcid_MZ,Kos_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_Easton,palid_MZ,Col_MZ,ObjPos_MZ3, Level_MZ3,Level_MZ3bg
-	lhead	plcid_MZ,Kos_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_BeforeBoss,palid_MZ,Col_MZ,ObjPos_MZ4,Level_MZ4,Level_MZ4bg
+	lhead	plcid_MZ,Kos_MVZ,plcid_MZ2,Blk16_MVZ,Blk256_MVZ,bgm_MVZ,palid_MVZ,Col_MVZ,ObjPos_MZ4,Level_MZ4,Level_MZ4bg;MUSH VALLERZ
 
 	lhead	plcid_SLZ,Kos_SLZ,plcid_SLZ2,Blk16_SLZ,Blk256_SLZ,bgm_Minecraft,palid_SLZ,Col_SLZ,ObjPos_SLZ1,Level_SLZ1,Level_SLZbg
 	lhead	plcid_SLZ,Kos_SLZ,plcid_SLZ2,Blk16_SLZ,Blk256_SLZ,bgm_Doom,palid_SLZ,Col_SLZ,ObjPos_SLZ2,Level_SLZ2,Level_SLZbg

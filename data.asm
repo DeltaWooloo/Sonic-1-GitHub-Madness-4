@@ -543,7 +543,13 @@ Kos_ARZ:	binclude	"artkos/8x8 - ARZ.kos"	; LZ primary patterns
 		even
 Blk256_ARZ:	binclude	"map256/ARZ.kos"
 		even
-
+		
+Blk16_MVZ:	binclude	"map16/MVZ.eni"
+		even
+Kos_MVZ:		binclude	"artkos/8x8 - MVZ.kos"	; MZ primary patterns
+		even
+Blk256_MVZ:	binclude	"map256/MVZ (JP1).kos"
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - bosses and ending sequence
 ; ---------------------------------------------------------------------------
@@ -648,6 +654,8 @@ Col_BSZ:	binclude	"collide/BSZ.bin"
 Col_BTZ:	binclude	"collide/BTZ.bin"
 		even
 Col_ARZ:		binclude	"collide/ARZ.bin"	; LZ index
+		even
+Col_MVZ:		binclude	"collide/MVZ.bin"	; MZ index
 		even
 ; ---------------------------------------------------------------------------
 ; Animated uncompressed graphics
@@ -1126,7 +1134,8 @@ Pal_S2:         bincludeEndMarker  "ATOGKsplashesWIP/sonic2main.bin"
                 even 
 Pal_STMsonic:   bincludeEndMarker  "ATOGKsplashesWIP/STMsonic.bin"	  
                 even
-
+PAL_MVZ:        bincludeEndMarker  "palette/MVz.pal"
+                even
 ; ---------------------------------------------------------------------------
 ; "GIOVANNI.GEN" Splash Screen Graphics
 ; ---------------------------------------------------------------------------

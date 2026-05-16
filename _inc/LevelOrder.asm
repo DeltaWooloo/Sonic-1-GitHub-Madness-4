@@ -22,7 +22,7 @@
 		dc.b id_ACZ, 1	; Act 1
 		dc.b id_ACZ, 2	; Act 2
 		dc.b id_SFZ, 0	; Act 3
-		dc.b 0, 0
+		dc.b id_BSZ, 0	; Scrap Brain Zone Act 3
 
 		; Mien Kraft Zone
 		dc.b id_MCZ, 1	; Act 1
@@ -38,7 +38,7 @@
 
 		; Prongle Plant Zone
 		dc.b id_PPZ, 1	; Act 1
-		dc.b id_ARZ, 3	; Act 2
+		dc.b id_PPZ, 3	; Act 2
 		dc.b 0, 0	; Final Zone
 		dc.b 0, 0
 
@@ -104,7 +104,7 @@
 		; Azure Rainforest Zone
 		dc.b id_ARZ, 1	; Act 1
 		dc.b id_ARZ, 2	; Act 2
-		dc.b id_BSZ, 0	; Act 3
+		dc.b id_ACZ, 3	; Act 3
 		dc.b 0, 0
 		even
 
@@ -134,7 +134,7 @@ FetLevelOrder:
 		dc.b id_ACZ, 1	; Act 1
 		dc.b id_ACZ, 2	; Act 2
 		dc.b id_SFZ, 0	; Act 3
-		dc.b 0, 0
+		dc.b id_BSZ, 0	; Scrap Brain Zone Act 3
 
 		; Mien Kraft Zone
 		dc.b id_MCZ, 1	; Act 1
@@ -150,7 +150,7 @@ FetLevelOrder:
 
 		; Prongle Plant Zone
 		dc.b id_PPZ, 1	; Act 1
-		dc.b id_ARZ, 3	; Act 2
+		dc.b id_PPZ, 3	; Act 2
 		dc.b 0, 0	; Final Zone
 		dc.b 0, 0
 
@@ -216,7 +216,7 @@ FetLevelOrder:
 		; Azure Rainforest Zone
 		dc.b id_ARZ, 1	; Act 1
 		dc.b id_ARZ, 2	; Act 2
-		dc.b id_BSZ, 0	; Act 3
+		dc.b id_ACZ, 3	; Act 3
 		dc.b 0, 0
 		even
 

@@ -27,7 +27,7 @@ TitleCard_GHZ4:	equ  "Robi says hi"
 TitleCard_MZ1:	equ  "ALBERTA CANADA"
 TitleCard_MZ2:	equ  "KILOS LAIR"
 TitleCard_MZ3:	equ  "I LOVE YOU"
-TitleCard_MZ4:	equ  "porn"
+TitleCard_MZ4:	equ  "MUSHROOM VALLEY"
 
 TitleCard_SYZ1:	equ  "SPRING FIELD"
 TitleCard_SYZ2:	equ  "GASSY FIELD"
