@@ -936,7 +936,7 @@ ArtTile_CBZChopper:		equ $541
 ArtTile_CBZMoto_Bug:		equ $559
 ;!@ Relocate GHZ_MZ_Swing, LZ splash and bubbles
 ArtTile_CBZ_Swing:		equ $345
-ArtTile_CBZ_Splash:		equ $6E2
+ArtTile_CBZ_Splash:		equ $6E3
 ArtTile_CBZ_Bubbles:	equ $2DD
 ;What is ArtTile_LZ_Sonic_Drowning used for?
 ;ArtTile_CBZ_Sonic_Drowning:	equ $440-3

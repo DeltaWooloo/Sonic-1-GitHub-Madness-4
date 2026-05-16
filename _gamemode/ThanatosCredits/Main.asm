@@ -100,8 +100,11 @@ PalThanatosCredits:	bincludeEndMarker "_gamemode/ThanatosCredits/Palette.pal"
 	bsr.w	RenderTextPlane
 	bsr.w	RenderTextLine
 
-	QueueSound_M bgm_Ending,0	
-	pcm		dsbDevelopers			; Look at all of these developers!
+	; !@ GD: Use GHM4 song until/if a dedicated remix song of all zones is created
+	; Ending zone already plays this song; twice is annoying
+	;QueueSound_M bgm_Ending,0	
+	QueueSound_M bgm_Title,0	
+	pcm		dsbDevelopers			; Look at all of these DeVeloPeRs :O !
 
 	; Fade In
 	jsr	(PaletteFadeIn).l

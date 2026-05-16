@@ -3804,8 +3804,14 @@ GM_Ending:
 		move.w	#(id_EndZ<<8)+1,(v_zone).w ; set level number to 0601 (no flowers)
 
 End_LoadData:
-		moveq	#plcid_Ending,d0
+		;!@ Load new data
+		;moveq	#plcid_Ending,d0
+		;bsr.w	QuickPLC	; load ending sequence patterns		
+		moveq	#plcid_ENDZ,d0
 		bsr.w	QuickPLC	; load ending sequence patterns
+		moveq	#plcid_ENDZ2,d0
+		bsr.w	QuickPLC	; load ending sequence patterns
+
 		jsr	(Hud_Base).l
 		jsr	(LevelSizeLoad).l
 		jsr	(DeformLayers).l
@@ -3827,30 +3833,6 @@ End_LoadData:
 		move.b	#1,(f_debugmode).w ; enable debug mode
 
 End_LoadSonic:
-		; !@ GD: load player data/palette		
-		moveq	#plcid_Main,d0
-		bsr.w	AddPLC			; load standard patterns
-		jsr	(GetOtherPlayerData).l
-		move.w	pdat.livesart(a5),d0
-		add.l	#Nem_Lives,d0 ; use RAM for PLC
-		lea	(v_ram_start).l,a1
-		move.l	d0,(a1)
-		move.w	#ArtTile_Lives_Counter*$20,4(a1)
-		move.l	#-1,6(a1)
-		bsr.w	UserPLC
-
-		jsr	(GetPlayerData).l
-		move.l	d3,a0
-		lea	v_palette,a1
-		move.l	(a0)+,(a1)+	; quick
-		move.l	(a0)+,(a1)+
-		move.l	(a0)+,(a1)+
-		move.l	(a0)+,(a1)+
-		move.l	(a0)+,(a1)+
-		move.l	(a0)+,(a1)+
-		move.l	(a0)+,(a1)+
-		move.l	(a0)+,(a1)+		
-		
 		move.b	#id_SonicPlayer,(v_player).w ; load Sonic object
 		bset	#0,(v_player+obStatus).w ; make Sonic face left
 		move.b	#1,(f_lockctrl).w ; lock controls
@@ -3881,6 +3863,34 @@ End_LoadSonic:
 		enable_display
 		move.w	#$3F,(v_pfade_start).w
 		bsr.w	PaletteFadeIn
+		
+		; !@ GD: load player data/palette		
+		
+		;!@ GD: Bug, This QuickPLCcall isn't working; pclm data is now embeddied in ENDZ1 PLC
+		;moveq	#plcid_Main,d0
+		;bsr.w	QuickPLC			; load standard patterns. 
+		
+		;!@ GD: This code here is also not working in loading the lives counter
+		jsr	(GetOtherPlayerData).l
+		move.w	pdat.livesart(a5),d0
+		add.l	#Nem_Lives,d0 ; use RAM for PLC
+		lea	(v_ram_start).l,a1
+		move.l	d0,(a1)
+		move.w	#ArtTile_Lives_Counter*$20,4(a1)
+		move.l	#-1,6(a1)
+		bsr.w	UserPLC
+
+		jsr	(GetPlayerData).l
+		move.l	d3,a0
+		lea	v_palette,a1
+		move.l	(a0)+,(a1)+	; quick
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
 
 ; ---------------------------------------------------------------------------
 ; Main ending sequence loop
@@ -3903,7 +3913,7 @@ End_MainLoop:
 		cmpi.b	#id_Ending,(v_gamemode).w ; is game mode $18 (ending)?
 		beq.s	End_ChkEmerald	; if yes, branch
 
-		move.b	#id_TryAgainEnd,(v_gamemode).w ; goto credits
+		move.b	#id_Thanatos,(v_gamemode).w ; goto credits
 		move.w	#0,(v_creditsnum).w ; set credits index number to 0
 		rts
 ; ===========================================================================
@@ -3938,7 +3948,8 @@ End_SlowFade:
 		tst.w	(f_restart).w
 		beq.w	End_AllEmlds
 		clr.w	(f_restart).w
-		move.w	#$2E2F,(v_lvllayout+$80).w ; modify level layout
+		;!@ GD: Adjusted with new level layout
+		move.w	#$2F30,(v_lvllayout+$80).w ; modify level layout
 		lea	(vdp_control_port).l,a5
 		lea	(vdp_data_port).l,a6
 		lea	(v_screenposx).w,a3
