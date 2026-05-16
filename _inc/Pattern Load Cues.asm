@@ -571,7 +571,10 @@ PLC_TryAgainend:
 PLC_EggmanSBZ2:	dc.w ((PLC_EggmanSBZ2end-PLC_EggmanSBZ2-2)/6)-1
 		plcm	Nem_SbzBlock,   ArtTile_Eggman_Trap_Floor ; block
 		plcm	Nem_Sbz2Eggman, ArtTile_Eggman            ; Eggman
-		plcm	Nem_LzSwitch,   ArtTile_Eggman_Button-4   ; switch
+		;!@ GD: Relocate
+		; Just reuse switch in VRAM from SBZ2; same location
+		;plcm	Nem_LzSwitch,   ArtTile_Eggman_Button-4   ; switch
+		plcm	Nem_LzSwitch,   ArtTile_Eggman_Button     ; switch. 
 PLC_EggmanSBZ2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - final boss

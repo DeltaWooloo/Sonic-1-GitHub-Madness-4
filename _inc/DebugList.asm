@@ -14,7 +14,7 @@ DebugList:
 		dc.w .WIN-DebugList     ; x id_WIN
 		dc.w .Joint-DebugList   ; x id_Joint
 		dc.w .DVZ-DebugList     ; x id_DVZ
-		dc.w .NGZ-DebugList     ; id_Nogales
+		dc.w .NGZ-DebugList     ; x id_Nogales
 		dc.w .BSZ-DebugList     ; x id_BSZ
 		dc.w .BTZ-DebugList     ; x id_BTZ
 		dc.w .ARZ-DebugList     ; x id_ARZ	

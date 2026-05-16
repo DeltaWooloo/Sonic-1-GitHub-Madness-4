@@ -952,9 +952,13 @@ ArtTile_Ball_HogH_NGZ:	equ	$501
 ; Eggman
 ArtTile_Eggman:			equ $400
 ArtTile_Eggman_Weapons:		equ $46C
-ArtTile_Eggman_Button:		equ $4A4
+;!@ GD: Relocate
+;ArtTile_Eggman_Button:		equ $4A4
+ArtTile_Eggman_Button:		equ ArtTile_Button
 ArtTile_Eggman_Spikeball:	equ $518
-ArtTile_Eggman_Trap_Floor:	equ $518
+;!@ GD: Relocate
+;ArtTile_Eggman_Trap_Floor:	equ $518
+ArtTile_Eggman_Trap_Floor:	equ $518+3
 ArtTile_Eggman_Exhaust:		equ ArtTile_Eggman+$12A
 
 ; End of Level
