@@ -339,19 +339,27 @@ PLC_DVZ2end:
 ; ---------------------------------------------------------------------------
 PLC_NGZ:	dc.w ((PLC_NGZ2-PLC_NGZ-2)/6)-1
 		plcm	Nem_Stalk, $6B00/32	; flower stalk
+		;pplRock
+		;crabmeat
+		plcm	Nem_Buzz, $8880/32	; buzz bomber enemy	
+		plcm	Nem_Chopper, $9360/32	; chopper enemy
+		;newtron
 		plcm	Nem_Splats, $9C80/32	; Splats
+		;motobug
+		plcm	Nem_BallHogH,ArtTile_Ball_HogH_NGZ
+		;spikes
+		;hspring
+		;rift		
 
              ;   plcm    byte_2BBC2, $8300/32
 PLC_NGZ2:	dc.w ((PLC_NGZ2end-PLC_NGZ2-2)/6)-1
-		plcm	Nem_Bridge, $71C0/32	; bridge
-		plcm	Nem_Buzz, $8880/32	; buzz bomber enemy
 		plcm	Nem_Swing, $7000/32	; swinging platform
-		plcm	Nem_Chopper, $9360/32	; chopper enemy
-		plcm	Nem_Jaws, $8F60/32	; jaws enemy
+		plcm	Nem_Bridge, $71C0/32	; bridge
 		plcm	Nem_SpikePole, $7300/32	; spiked pole
 		plcm	Nem_NogalesBall, $3E0	; giant	ball
-		plcm	Nem_GhzWall1, $A1E0/32	; breakable wall
-		plcm	Nem_GhzWall2, $6980/32	; normal wall
+		;plcm	Nem_GhzWall1, $A1E0/32	; breakable wall
+		;plcm	Nem_GhzWall2, $6980/32	; normal wall
+		;plcm	Nem_Jaws, $8F60/32	; jaws enemy. GenesisDoes - Why is this here?
 PLC_NGZ2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - BlueScape

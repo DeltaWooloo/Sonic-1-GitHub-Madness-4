@@ -28,6 +28,14 @@ Obj1E_Index:	dc.w Obj1E_Main-Obj1E_Index	; 0
 Obj1E_Main:
 		move.l	#Map_BallHogH,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Ball_HogH,0,0),obGfx(a0)
+		
+		;!@ GD: Relocate hogH artwork if NGZ
+		cmpi.b	#id_Nogales,(v_zone).w
+		bne.s	.notNGZ
+		;NGZ
+		move.w	#make_art_tile(ArtTile_Ball_HogH_NGZ,0,0),obGfx(a0)		
+.notNGZ:
+	
 		cmpi.b	#id_CBZ,(v_zone).w		; is zone CBZ?
 		bne.s	.NotCBZ	; if not, branch
 		move.l	#Map_Spongy,obMap(a0)
@@ -135,9 +143,17 @@ Obj1E_MakeBall:
 		move.b	#id_BallHog,(a1)		; load bomb
 		move.b	#6,obRoutine(a1)	; set normal bomb
 		move.b	#4,obFrame(a1)		; set bomb frame
-		move.l	#Map_BallHogH,obMap(a1)
+		move.l	#Map_BallHogH,obMap(a1)			
 		move.b	#6,obHeight(a1)
 		move.w	#make_art_tile(ArtTile_Ball_HogH,0,0),obGfx(a1)
+		
+		;!@ GD: Relocate hogH artwork if NGZ
+		cmpi.b	#id_Nogales,(v_zone).w
+		bne.s	.notNGZ
+		;NGZ
+		move.w	#make_art_tile(ArtTile_Ball_HogH_NGZ,0,0),obGfx(a1)
+	.notNGZ:
+
 		cmpi.b	#id_CBZ,(v_zone).w		; is zone CBZ?
 		bne.s	.NotCheeseball	; if not, branch
 		move.l	#Map_Spongy,obMap(a1)
@@ -386,6 +402,14 @@ Hog_Idle3:
 		move.b	#4,obFrame(a1)  ; set bomb frame
 		move.l	#Map_BallHogH,obMap(a1)
 		move.w	#make_art_tile(ArtTile_Ball_HogH,0,0),obGfx(a1)
+		
+		;!@ GD: Relocate hogH artwork if NGZ
+		cmpi.b	#id_Nogales,(v_zone).w
+		bne.s	.notNGZ
+		;NGZ
+		move.w	#make_art_tile(ArtTile_Ball_HogH_NGZ,0,0),obGfx(a1)
+		
+.notNGZ:		
 		move.w	obX(a0),obX(a1)
 		move.w	obY(a0),obY(a1)
 		move.b	#4,obRender(a1)

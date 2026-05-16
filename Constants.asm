@@ -941,8 +941,13 @@ ArtTile_CBZ_Bubbles:	equ $2DD
 ;What is ArtTile_LZ_Sonic_Drowning used for?
 ;ArtTile_CBZ_Sonic_Drowning:	equ $440-3
 
+; MCZ
 ArtTile_Villager:		equ $4F0
 ArtTile_SCG:		equ $449
+
+; NGZ
+; !@ GD: Relocate ballHogH for NGZ
+ArtTile_Ball_HogH_NGZ:	equ	$501
 
 ; Eggman
 ArtTile_Eggman:			equ $400

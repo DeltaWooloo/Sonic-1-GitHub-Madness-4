@@ -38,15 +38,23 @@ DeformLayers:
 ; ---------------------------------------------------------------------------
 ; Offset index for background layer deformation code
 ; ---------------------------------------------------------------------------
-Deform_Index:	dc.w Deform_GHZ-Deform_Index, Deform_LZ-Deform_Index
-		dc.w Deform_MZ-Deform_Index, Deform_SLZ-Deform_Index
-		dc.w Deform_SYZ-Deform_Index, Deform_SBZ-Deform_Index
-		dc.w Deform_GHZ-Deform_Index, Deform_CBZ-Deform_Index
-		dc.w Deform_WZ-Deform_Index, Deform_ITBZ-Deform_Index
-		dc.w Deform_DVZ-Deform_Index,Deform_NGZ-Deform_Index
-		dc.w Deform_Default-Deform_Index,Deform_Default-Deform_Index
-		dc.w Deform_ARZ-Deform_Index
-		zonewarning Deform_Index,2
+Deform_Index:
+		dc.w Deform_GHZ-Deform_Index	; id_OWZ
+		dc.w Deform_LZ-Deform_Index		; id_WHZ
+		dc.w Deform_MZ-Deform_Index		; id_ACZ
+		dc.w Deform_SLZ-Deform_Index	; id_MCZ
+		dc.w Deform_SYZ-Deform_Index	; id_SFZ
+		dc.w Deform_SBZ-Deform_Index	; id_PPZ
+		dc.w Deform_GHZ-Deform_Index	; id_EndZ
+		dc.w Deform_CBZ-Deform_Index	; id_CBZ
+		dc.w Deform_WZ-Deform_Index		; id_WIN
+		dc.w Deform_ITBZ-Deform_Index	; id_Joint
+		dc.w Deform_DVZ-Deform_Index	; id_DVZ
+		dc.w Deform_NGZ-Deform_Index	; id_Nogales
+		dc.w Deform_Default-Deform_Index; id_BSZ
+		dc.w Deform_Default-Deform_Index; id_BTZ
+		dc.w Deform_ARZ-Deform_Index	; id_ARZ
+		zonewarning Deform_Index,2		
 ; ---------------------------------------------------------------------------
 ; Green Hill Zone background layer deformation code
 ; ---------------------------------------------------------------------------

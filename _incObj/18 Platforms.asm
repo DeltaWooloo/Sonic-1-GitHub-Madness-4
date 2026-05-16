@@ -311,4 +311,5 @@ Plat_ChkDel:
 ; ===========================================================================
 
 Plat_Delete:	; Routine 6
-		bra.w	DeleteObject
+		;!@bra.w	DeleteObject
+		jmp		(DeleteObject).l

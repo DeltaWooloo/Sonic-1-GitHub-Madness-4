@@ -10,11 +10,11 @@ DebugList:
 		dc.w .SYZ-DebugList     ; x id_SFZ
 		dc.w .SBZ-DebugList     ; x id_PPZ
 		dc.w .Ending-DebugList  ; id_EndZ
-		dc.w .BREW-DebugList    ; id_CBZ
+		dc.w .BREW-DebugList    ; x id_CBZ
 		dc.w .WIN-DebugList     ; x id_WIN
 		dc.w .Joint-DebugList   ; x id_Joint
 		dc.w .DVZ-DebugList     ; x id_DVZ
-		dc.w .GHZ-DebugList     ; id_Nogales
+		dc.w .NGZ-DebugList     ; id_Nogales
 		dc.w .BSZ-DebugList     ; x id_BSZ
 		dc.w .BTZ-DebugList     ; x id_BTZ
 		dc.w .ARZ-DebugList     ; x id_ARZ	
@@ -377,6 +377,53 @@ allMonitors:	macro
 		dbug	Map_Spring,	id_Springs,			0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
 		dbug	Map_Lamp,	id_Lamppost,		1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
 .DVZend:
+		even
+		
+.NGZ:
+		dc.w (.NGZend-.NGZ-2)/8
+;			mappings	object		subtype	frame	VRAM setting
+		dbug 	Map_Ring,	id_Rings,	0,	0,	make_art_tile(ArtTile_Ring,0,0)
+		;!@
+		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
+		allMonitors
+		dbug	Map_Buzz,	id_BuzzBomber,	0,	0,	make_art_tile(ArtTile_Buzz_Bomber,0,0)
+		dbug	Map_Chop,	id_Chopper,	0,	0,	$9360/$20
+		
+		dbug	Map_Plat_Unused,id_BasicPlatform, $00,	0,	make_art_tile(ArtTile_Level,2,0)
+		dbug	Map_Plat_Unused,id_BasicPlatform, $01,	0,	make_art_tile(ArtTile_Level,2,0)
+		dbug	Map_Plat_Unused,id_BasicPlatform, $02,	0,	make_art_tile(ArtTile_Level,2,0)
+		dbug	Map_Plat_Unused,id_BasicPlatform, $03,	0,	make_art_tile(ArtTile_Level,2,0)
+		dbug	Map_Plat_Unused,id_BasicPlatform, $05,	0,	make_art_tile(ArtTile_Level,2,0)
+		dbug	Map_Plat_Unused,id_BasicPlatform, $06,	0,	make_art_tile(ArtTile_Level,2,0)
+		dbug	Map_Plat_Unused,id_BasicPlatform, $0A,	0,	make_art_tile(ArtTile_Level,2,0)
+		dbug	Map_Plat_Unused,id_BasicPlatform, $0B,	0,	make_art_tile(ArtTile_Level,2,0)
+		dbug	Map_LedgeNogal,	id_CollapseLedge,$00,	0,	make_art_tile(ArtTile_Level,2,0)
+		dbug	Map_LedgeNogal,	id_CollapseLedge,$01,	1,	make_art_tile(ArtTile_Level,2,0)										
+		dbug	Map_Swing_GHZ,	id_SwingingPlatform,	$05,	0,	make_art_tile(ArtTile_GHZ_MZ_Swing,2,0)
+		dbug	Map_Swing_GHZ,	id_SwingingPlatform,	$06,	0,	make_art_tile(ArtTile_GHZ_MZ_Swing,2,0)
+		
+		;dbug	Map_PRock,	id_PurpleRock,	0,	0,	make_art_tile(ArtTile_GHZ_Purple_Rock,0,0)
+		;dbug	Map_Moto,	id_MotoBug,	0,	0,	make_art_tile(ArtTile_Moto_Bug,0,0)
+		;dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
+		;dbug	Map_Newt,	id_Newtron,	0,	0,	make_art_tile(ArtTile_Newtron,1,0)
+		;dbug	Map_Edge,	id_EdgeWalls,	0,	0,	make_art_tile(ArtTile_GHZ_Edge_Wall,2,0)
+		
+		dbug	Map_Hel,	id_Helix,	$10,	0,	make_art_tile(ArtTile_GHZ_Spike_Pole,2,0)				
+		dbug	Map_Bri,	id_Scenery,	$03,	$01,make_art_tile(ArtTile_GHZ_Bridge,2,0)
+		dbug	Map_Bri,	id_Bridge,	$08,	0,	make_art_tile(ArtTile_GHZ_Bridge,2,0)
+		dbug	Map_Bri,	id_Bridge,	$0A,	0,	make_art_tile(ArtTile_GHZ_Bridge,2,0)
+		dbug	Map_Bri,	id_Bridge,	$0C,	0,	make_art_tile(ArtTile_GHZ_Bridge,2,0)
+		dbug	Map_Bri,	id_Bridge,	$10,	0,	make_art_tile(ArtTile_GHZ_Bridge,2,0)
+		dbug	Map_Swi,	id_MagicSwitch,	0,	0,	make_art_tile(ArtTile_Level,2,0)		
+		dbug	Map_Splats,	id_InternetExplorer,	0,	0,	make_art_tile($04E4,1,0)		
+		dbug	Map_BallHogH,	id_BallHog,	4,	0,	make_art_tile(ArtTile_Ball_HogH_NGZ,0,0)
+		dbug	SprPat_RollingBall,	id_Obj19,	0,	1,	$43E0
+
+		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
+		dbug	Map_GRing,	id_GiantRing,	0,	0,	make_art_tile(ArtTile_Giant_Ring,1,0)
+		dbug	Map_Bonus,	id_HiddenBonus,	1,	1,	make_art_tile(ArtTile_Hidden_Points,0,1)
+		dbug	Map_Animal5,id_Animals,	0,	2,	make_art_tile(ArtTile_Animal_1,0,0)
+.NGZend:
 		even
 
 .BSZ:
