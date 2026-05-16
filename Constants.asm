@@ -259,6 +259,10 @@ cYellow:	equ cGreen+cRed		; colour yellow
 cAqua:		equ cGreen+cBlue	; colour aqua
 cMagenta:	equ cBlue+cRed		; colour magenta
 
+; Emeralds
+minEmerald:			equ	$00					;!@ GD: Minimum emerald ID
+maxEmerald:			equ	$06					;!@ Max emerald ID
+
 ;!@ GD:
 id_VBlank_PaletteFade:	equ	$12
 

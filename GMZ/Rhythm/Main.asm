@@ -332,7 +332,17 @@ REBout_Loop:
 		bra	Rhythm_MainLoop
 
 REnd_Exit:
-		move.b	#id_Level,v_gamemode
+		move.b	#id_Level,v_gamemode		
+		bsr.s	GiveEmerald				; !@ GD: Add emerald
+		rts
+		
+; !@ GD: Subroutine adds emerald, and caps if over max limit
+GiveEmerald:
+		addq.b	#1,(v_emeralds).w			; add 1 to number of emeralds
+		cmpi.b	#maxEmerald,(v_emeralds).w	; Is emerald count > max?
+		blo.s	.skipFix					; if not, branch
+		move.b	#maxEmerald,(v_emeralds).w	; Cap emerals to max
+	.skipFix:
 		rts
 
 		; GMZ - Function to manage the chart board's colors
