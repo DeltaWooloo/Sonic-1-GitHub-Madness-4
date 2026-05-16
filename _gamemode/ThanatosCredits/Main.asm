@@ -109,8 +109,14 @@ PalThanatosCredits:	bincludeEndMarker "_gamemode/ThanatosCredits/Palette.pal"
 	; Fade In
 	jsr	(PaletteFadeIn).l
 
+; Main text scroll loop
 -	move.b	#2,(v_vbla_routine).w
 	jsr	(WaitForVBla).l
+	
+	;!@ GD: Exit on start press
+	btst	#bitStart,(v_jpadpress1).w
+	bne.w	Thanatos_EndLoop
+	
 	add.w	#1,(v_scrposy_vdp).w
 	subq.b	#1,(than_next_blit).l
 	bne.s	-
@@ -222,6 +228,8 @@ RenderTextPlane:
 	bra.s	.post
 
 Thanatos_EndLoop:
+	;!@ GD: Set flag (in case skip credits via start btn)
+	move.w	#1,(than_end_flag).l		
 	move.w	#60*5,(v_generictimer).w
 	move.b	#1,(than_next_blit).l
 -	; end stuff (loop forever for now)
