@@ -40,8 +40,13 @@ Swing_Main:	; Routine 0
 		move.b	#$20,obActWid(a0)
 		move.b	#$10,obHeight(a0)
 		move.b	#$99,obColType(a0)
-
+		bra.s	.cont
 .notSLZ:
+		;!@ GD: Relocate swing for CBZ
+		cmpi.b	#id_CBZ,(v_zone).w ; check if level is CBZ
+		bne.s	.cont
+		move.w	#make_art_tile(ArtTile_CBZ_Swing,2,0),obGfx(a0)
+.cont:
 		cmpi.b	#id_PPZ,(v_zone).w ; check if level is SBZ
 		bne.s	.length
 

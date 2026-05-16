@@ -41,7 +41,8 @@ Bom_Action:	; Routine 2
 		move.w	.index(pc,d0.w),d1
 		jsr	.index(pc,d1.w)
 		lea	(Ani_Bomb).l,a1
-		bsr.w	AnimateSprite
+		;!@bsr.w	AnimateSprite
+		jsr		(AnimateSprite).l
 		bra.w	RememberState
 ; ===========================================================================
 .index:		dc.w .walk-.index

@@ -182,6 +182,9 @@ Nem_Water:	binclude	"artnem/LZ Water Surface.nem"
 		even
 Nem_Splash:	binclude	"artnem/LZ Water & Splashes.nem"
 		even
+;!@ Relocated/modified variant for CBZ, due to lack of VRAM
+Nem_SplashCBZ:	binclude	"artnem/CBZ Water & Splashes.nem"
+		even
 Nem_LzSpikeBall:binclude	"artnem/LZ Spiked Ball & Chain.nem"
 		even
 Nem_FlapDoor:	binclude	"artnem/LZ Flapping Door.nem"

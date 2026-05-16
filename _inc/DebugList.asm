@@ -260,25 +260,39 @@ allMonitors:	macro
 		;!@
 		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
 		allMonitors
-		dbug	Map_IZ,	id_IZ,	0,	0,	make_art_tile(ArtTile_CBZ_IZ,0,0)
-		dbug	Map_IZ,	id_IZ,	2,	0,	make_art_tile(ArtTile_CBZ_IZ,0,0)
-		dbug	Map_IZ,	id_IZ,	1,	0,	make_art_tile(ArtTile_CBZ_IZ,1,0)
-		dbug	Map_IZ,	id_IZ,	3,	0,	make_art_tile(ArtTile_CBZ_IZ,1,0)
+		dbug	Map_IZ,	id_IZ,	0,	0,	make_art_tile(ArtTile_CBZ_IZ,0,0)		;type A - reg
+		dbug	Map_IZ,	id_IZ,	2,	0,	make_art_tile(ArtTile_CBZ_IZ,0,0)		;type B - reg
+		dbug	Map_IZ,	id_IZ,	1,	0,	make_art_tile(ArtTile_CBZ_IZ,1,0)		;type A - green
+		dbug	Map_IZ,	id_IZ,	3,	0,	make_art_tile(ArtTile_CBZ_IZ,1,0)		;type B - green
+		
 		dbug	Map_BuzzCBZ,	id_BuzzBomber,	0,	0,	make_art_tile(ArtTile_CBZBuzz_Bomber,0,0)
 		dbug	Map_ChopCBZ,	id_Chopper,	0,	0,	make_art_tile(ArtTile_CBZChopper,0,0)
 		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
-		dbug	Map_Plat_CBZ,	id_BasicPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
+		dbug	Map_Plat_CBZ,	id_BasicPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)		
+		dbug	Map_LedgeCBZ,	id_CollapseLedge,	$00,	0,	make_art_tile(ArtTile_Level,2,0)
+		dbug	Map_LedgeCBZ,	id_CollapseLedge,	$01,	1,	make_art_tile(ArtTile_Level,2,0)				
+		dbug	Map_Swing_GHZ,	id_SwingingPlatform,	$00,	0,	make_art_tile(ArtTile_CBZ_Swing,2,0)
+		dbug	Map_Swing_GHZ,	id_SwingingPlatform,	$04,	0,	make_art_tile(ArtTile_CBZ_Swing,2,0)
+		dbug	Map_Swing_GHZ,	id_SwingingPlatform,	$06,	0,	make_art_tile(ArtTile_CBZ_Swing,2,0)
+		dbug	Map_Swing_GHZ,	id_SwingingPlatform,	$07,	0,	make_art_tile(ArtTile_CBZ_Swing,2,0)
+		dbug	Map_Swing_GHZ,	id_SwingingPlatform,	$08,	0,	make_art_tile(ArtTile_CBZ_Swing,2,0)
+		dbug	Map_Swing_GHZ,	id_SwingingPlatform,	$0C,	0,	make_art_tile(ArtTile_CBZ_Swing,2,0)
+		dbug	Map_Swing_GHZ,	id_SwingingPlatform,	$0D,	0,	make_art_tile(ArtTile_CBZ_Swing,2,0)		
 		dbug	Map_CBZRock,	id_PurpleRock,	0,	0,	make_art_tile(ArtTile_Level,0,0)
+		dbug	Map_Hel,	id_Helix,	$10,	0,	make_art_tile(ArtTile_GHZ_Spike_Pole,2,0),obGfx(a0)
+		dbug	Map_Ring,	id_WaterSound,	$00,	0,	make_art_tile(ArtTile_Ring,2,1)						
 		dbug	Map_MotoCBZ,	id_MotoBug,	0,	0,	make_art_tile(ArtTile_CBZMoto_Bug,0,0)
 		dbug	Map_Len,	id_Burrobot,	0,	0,	make_art_tile(ArtTile_CBZLen,0,0)
 		dbug	Map_Len,	id_Burrobot,	1,	0,	make_art_tile(ArtTile_CBZLen,1,0)
-		dbug	Map_Len,	id_Burrobot,	2,	0,	make_art_tile(ArtTile_CBZLen,3,0)
+		dbug	Map_Len,	id_Burrobot,	2,	0,	make_art_tile(ArtTile_CBZLen,3,0)		
+		dbug	Map_Len,	id_RecyleBinTrash,	$00,	8,	make_art_tile(ArtTile_CBZLen,0,0)
 		dbug	Map_Spring,	id_Springs,	0,	0,	make_art_tile(ArtTile_Spring_Horizontal,0,0)
 		dbug	Map_Newt,	id_Newtron,	0,	0,	make_art_tile(ArtTile_CBZNewtron,1,0)
 		dbug	Map_Spongy,	id_BallHog,	3,	0,	make_art_tile(ArtTile_CBZSpongy,0,0)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
+		
 		dbug	Map_Pwisp,	id_PWispBoss,	0,	0,	make_art_tile(ArtTile_Eggman,1,0)
-		dbug	Map_Animal5,id_Animals,	0,	2,	make_art_tile(ArtTile_Animal_1,0,0)
+		;dbug	Map_Animal5,id_Animals,	0,	2,	make_art_tile(ArtTile_Animal_1,0,0)
 .BREWend:
 
 .WIN:

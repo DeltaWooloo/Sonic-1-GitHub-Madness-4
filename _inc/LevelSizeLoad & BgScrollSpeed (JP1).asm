@@ -146,9 +146,9 @@ LoopTileNums:
 		dc.b	$7F,	$7F,	$7F,	$7F	; Spring Yard
 		dc.b	$7F,	$7F,	$7F,	$7F	; Scrap Brain
 		dc.b	$B5,	$7F,	$1F,	$20	; Ending (Green Hill)
-		dc.b	$BA,	$7F,	$26,	$27	; BREW
+		dc.b	$BB,	$7F,	$26,	$27	; BREW
 		dc.b	$7F,	$7F,	$7F,	$7F	; WIN
-		dc.b	$7F,	$7F,	$7F,	$7F	; Joint
+		dc.b	$7F,	$7F,	$0A,	$0E	; Joint
 		dc.b	$7F,	$7F,	$7F,	$7F	; DVZ		; Rechanged the loop placement
 		dc.b	$B5,	$7F,	$1F,	$20	; NGZ		; I AM A FUCKING IDIOT
 		dc.b	$7F,	$7F,	$7F,	$7F	; BSZ

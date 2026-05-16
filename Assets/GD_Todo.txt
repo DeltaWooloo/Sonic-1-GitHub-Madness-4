@@ -1,17 +1,5 @@
 Coding:
-- Bugfixes
-	x Address error bug (random monitor, Big Ring)
-	x Random Monitor crash
-	x Add code to undo funky colors (LoadPalUser/Jump TBL rewrite)
-x Modify wording of Disclaimer
 - Sega Pico build flag/gamepad code
 - Random monitor
 	- Add random monitor/slow down shoes to levels	
 	- Character water palettes/Funky Colors undo
-- Songs
-	- Windows 95 Rock (https://modarchive.org/index.php?request=view_by_moduleid&query=170694)
-	- Windows 95 Rock Remix (https://modarchive.org/index.php?request=view_by_moduleid&query=201495)
-  ???
-	- All about the Pentiums (Weird Al)?
-	- Seal - Crazy
-	- Ricky Martin - Livin' La Vida Loca	
