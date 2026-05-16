@@ -193,7 +193,7 @@ PLC_SLZ2:	dc.w ((PLC_SLZ2end-PLC_SLZ2-2)/6)-1
 		;plcm	Nem_Pylon,     ArtTile_SLZ_Pylon                 ; foreground pylon
 		plcm	Nem_SlzSwing,  ArtTile_SLZ_Swing                 ; swinging platform
 		;plcm	Nem_SlzCannon, ArtTile_SLZ_Fireball_Launcher     ; fireball launcher
-	    plcm	Nem_SlzSpike,  ArtTile_SLZ_Spikeball             ; spikeball
+	  ;   plcm	Nem_SlzSpike,  ArtTile_SLZ_Spikeball             ; spikeball DO NOT ADD THIS YOU FUCKING FRIED IDIOTS!
 PLC_SLZ2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - Spring Yard
