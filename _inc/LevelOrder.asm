@@ -104,7 +104,7 @@
 		; Azure Rainforest Zone
 		dc.b id_ARZ, 1	; Act 1
 		dc.b id_ARZ, 2	; Act 2
-		dc.b id_ACZ, 3	; Act 3
+		dc.b id_BSZ, 0	; Act 3
 		dc.b 0, 0
 		even
 
@@ -216,7 +216,7 @@ FetLevelOrder:
 		; Azure Rainforest Zone
 		dc.b id_ARZ, 1	; Act 1
 		dc.b id_ARZ, 2	; Act 2
-		dc.b id_ACZ, 3	; Act 3
+		dc.b id_BSZ, 0	; Act 3
 		dc.b 0, 0
 		even
 
