@@ -12,6 +12,7 @@ rhyChartWaitTime	ds.b	1
 rhyBlinkingVal	ds.b	1
 rhyCurMsg	ds.l	1
 rhyPrevMsg	ds.l	1
+rhyRequiredScore	ds.l	1	; GMZ - Incremented at each arrow that appears. Will be compared with the actual score at the end.
 rhyEndState	ds.b	1
 		dephase
 		!org	-	; GMZ - honestly sometimes i hate working in this
@@ -104,9 +105,10 @@ Rhythm_ClrObjMem:
 
 		; GMZ - Load chart
 		moveq	#0,d0
-		move.b	d0,rhyEndState	; GMZ - Clear three variables
+		move.b	d0,rhyEndState	; GMZ - Clear variables
 		move.b	d0,rhyBlinkingVal
 		move.b	d0,f_wtr_state
+		move.l	v_score,rhyRequiredScore
 		moveq	#0,d1
 		move.b	v_zone,d0
 		move.b	v_act,d1
@@ -333,7 +335,12 @@ REBout_Loop:
 
 REnd_Exit:
 		move.b	#id_Level,v_gamemode		
-		bsr.s	GiveEmerald				; !@ GD: Add emerald
+		move.l	rhyRequiredScore,d0		; GMZ - Get required score
+		sub.l	v_score,d0		; GMZ - Did we get perfect score?
+		bne	REExit_NoEmerald		; GMZ - If not, branch
+		bra	GiveEmerald				; !@ GD: Add emerald
+
+REExit_NoEmerald:	; GMZ
 		rts
 		
 ; !@ GD: Subroutine adds emerald, and caps if over max limit
@@ -406,6 +413,8 @@ MRChart_SpawnArrow:
 MRChart_ChkBtn:
 		btst	#0,d2
 		beq	MRChart_NextBtn
+
+		add.l	#10,rhyRequiredScore	; GMZ
 
 		jsr	FindFreeObj
 		bne	MRChart_NextBtn
@@ -519,10 +528,22 @@ RAFall_ChkCollectArea:
 		move.w	#$9D,obGfx(a1)
 		move.l	#Map_RhyMessages,obMap(a1)
 		lea	RAFCCArea_MessageInfo,a2
-		moveq	#0,d0
-		move.w	obScreenY(a0),d0
-		andi.w	#$10,d0
-		lea	(a2,d0.w),a2
+		
+		; GMZ - Start of NEW code for message and score increment
+		cmpi.w	#($160-6)+16,obScreenY(a0)
+		blo	RAFCCArea_Prototastic
+		add.l	#4,a2
+
+RAFCCArea_Prototastic:
+		; GMZ - End of NEW code for message and score increment
+
+		; GMZ - Start of OLD code for message and score increment
+		; moveq	#0,d0
+		; move.w	obScreenY(a0),d0
+		; andi.w	#$10,d0
+		; lea	(a2,d0.w),a2
+		; GMZ - End of OLD code for message and score increment
+
 		move.b	(a2)+,obRoutine(a1)
 		moveq	#0,d0
 		move.b	(a2)+,d0
@@ -534,15 +555,16 @@ RAFall_ChkCollectArea:
 		rts
 
 RAFCCArea_MessageInfo:
-		dc.b	5	; GMZ - PROTOTASTIC (Y: 0x160-0x16F)
+		dc.b	5	; GMZ - PROTOTASTIC
 		dc.b	10
 		dc.w	$0104
 
-		dc.l	0	; GMZ - Here for alignment purposes
-		dc.l	0
-		dc.l	0
+		; GMZ - Commented. Not needed anymore
+		; dc.l	0	; GMZ - Here for alignment purposes
+		; dc.l	0
+		; dc.l	0
 
-		dc.b	6	; GMZ - SPAZDUNKA (Y: 0x170-0x17F)
+		dc.b	6	; GMZ - SPAZDUNKA
 		dc.b	5
 		dc.w	$0100
 
