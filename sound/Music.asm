@@ -62,6 +62,7 @@ MusicIndex:
 	bgmdef $01, Mus_Megalovania
 	bgmdef $34, Mus_DoleBOSS
 	bgmdef $01, Mus_TwoSteps
+	bgmdef $01, Mus_MMX
 
 	bgmdef $6C, Mus_RamRanch
 	bgmdef $27, Mus_CanCan
@@ -235,6 +236,8 @@ Mus_TwoSteps:		include	"music/TG2000Tracks/Mus - Two Steps.asm"
 Mus_DoleBOSS:		include	"music/TG2000Tracks/DoleBOSS.asm"	;Boss Track
 	even
 Mus_WarioLand1Boss:	include "music/GenesisDoes/WarioLand1_Boss.asm"
+	even
+Mus_MMX:		include	"music/TG2000Tracks/MMX.asm"	;FZ Track
 	even
 
 Mus_Invincible:		include "music/TG2000Tracks/Mus - Somari Invincibility.asm"

@@ -43,7 +43,7 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 
 	lhead	plcid_SBZ,Kos_SBZ,plcid_SBZ2,Blk16_SBZ,Blk256_SBZ,bgm_fightMID,palid_SBZ1,Col_SBZ,ObjPos_SBZ1,Level_SBZ1,Level_SBZ1bg
 	lhead	plcid_SBZ,Kos_SBZ,plcid_SBZ2,Blk16_SBZ,Blk256_SBZ,bgm_Cheetah,palid_SBZ2,Col_SBZ,ObjPos_SBZ2,Level_SBZ2,Level_SBZ2bg
-	lhead	plcid_FZBoss,Kos_SBZ,plcid_FZBoss,Blk16_SBZ,Blk256_SBZ,bgm_Final,palid_SBZ2,Col_SBZ,ObjPos_FZ,Level_SBZ2,Level_SBZ2bg		; FZ: Special case; keep as is
+	lhead	plcid_FZBoss,Kos_SBZ,plcid_FZBoss,Blk16_SBZ,Blk256_SBZ,bgm_MMX,palid_SBZ2,Col_SBZ,ObjPos_FZ,Level_SBZ2,Level_SBZ2bg		; FZ: Special case; keep as is
 	lhead	plcid_SBZ,Kos_SBZ,plcid_SBZ2,Blk16_SBZ,Blk256_SBZ,bgm_Final,palid_SBZ1,Col_SBZ,ObjPos_Null,Level_SBZ1,Level_SBZ1bg		; Toss out SBZ3/LZ4 crap
 
 	lhead	plcid_ENDZ,Kos_GHZ,plcid_ENDZ2,Blk16_GHZ,Blk256_GHZ,bgm_Final,palid_Ending,Col_GHZ,ObjPos_End,Level_End,Level_GHZbg

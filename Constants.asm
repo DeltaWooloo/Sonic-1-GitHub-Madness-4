@@ -409,7 +409,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_TF2				; Bluescapes	(Act 1)		; Dax: Interesting song choice for this :/
 	nextenum bgm_Blue				;		(Act 2)
 	nextenum bgm_Dungeon3			; Azure Rainforest
-	nextenum bgm_Final				; Final Zone
+	nextenum bgm_MMX				; Final Zone
 
 	; Boss BGM
 	nextenum bgm_BeforeBoss			; Pre-Boss Encounter
@@ -422,6 +422,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Megalovania		; MeinKraft Boss
 	nextenum bgm_DoleBOSS			; Doleville Boss
 	nextenum bgm_TwoSteps			; Bluescapes Boss
+	nextenum bgm_Final			; Final Zone Boss
 
 	; Special Stage BGM
 	nextenum bgm_RamRanch			; Demo BGM
