@@ -9,13 +9,21 @@ ObjectFall:
 		;!@ GD: Special check to see if player.
 		;If so AND not demo mode, then use Sonic CD ObjMoveGrv function (terminal velocity cap)
 		movem.l	d0/d2-d3,-(sp)			;!@ Push regs onto stack		
+		if DemoRecord=0
 		tst.w	(f_demo).w				; In demo mode?
 		bne.s	.skipSCD				; If so, branch (skip Sonic CD check)
-		
-		;Not demo; check if object is player		
+		;Not demo; check if object is player
 		cmpi.b	#id_SonicPlayer,obID(a0); Is a0 object the player?
 		beq.s	ObjMoveGrv				; If so, apply Sonic CD gravity
 	.skipSCD:
+		else
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		endif
 	
 		movem.w	obVelX(a0),d2-d3
 		asl.l	#8, d2

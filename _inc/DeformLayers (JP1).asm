@@ -261,10 +261,15 @@ Lz_Scroll_Data:
 
 
 Deform_MZ:
-		move.w  (v_zone).w,d0
+		moveq	#0,d0
+		move.w  (v_zone).w,d0		
 ; GIO: i'm turning this off for now. please don't touch MZ4
 ;		cmpi.w  #(id_ACZ<<8)+3,d0
 ;		beq.w   Deform_MZ4
+
+; !@ GD: Somebody put Mushroom Valley Zone in AC4 :( . Now using regular BG scroll of level
+		cmpi.w  #(id_ACZ<<8)+3,d0
+		beq.w   Deform_SBZ2
 		
 Deform_MZNormal:	
 		move.w	(v_scrshiftx).w,d4
@@ -653,7 +658,12 @@ Deform_SBZ2:;loc_68A2:
 		ext.l	d5
 		asl.l	#5,d5
 		bsr.w	BGScroll_XY
-		addi.w	#1,(v_bgscreenposy).w		;!@ GD: Constantly scroll up
+		
+		;!@ GD: Constantly scroll up (only if SBZ2)
+		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w
+		bne.s	.skipAutoUpScroll		
+		addi.w	#1,(v_bgscreenposy).w		
+.skipAutoUpScroll:
 		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
 	; copy fg & bg x-position to hscroll table
 		lea	(v_hscrolltablebuffer).w,a1

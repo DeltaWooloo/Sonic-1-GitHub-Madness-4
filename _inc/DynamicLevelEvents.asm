@@ -433,48 +433,9 @@ DLE_MZ3_return:
 ; ===========================================================================
 
 DLE_MZ4:
-		moveq	#0,d0
-		move.b	(v_dle_routine).w,d0
-		move.w	DLE_MZ4_routines(pc,d0.w),d0
-		jmp	DLE_MZ4_routines(pc,d0.w)
-; ===========================================================================
-DLE_MZ4_routines:	dc.w DLE_MZ4chkboss-DLE_MZ4_routines
-			dc.w DLE_MZ4end-DLE_MZ4_routines
-			dc.w DLE_MZ4afterboss-DLE_MZ4_routines
-			dc.w DLE_MZ4_return-DLE_MZ4_routines
-; ===========================================================================
-		
-DLE_MZ4chkboss:
-		move.w	#$140,(v_limitbtm1).w
-		cmpi.w	#Knight_X_Spawn,(v_screenposx).w
-		blo.s	DLE_MZ4_return
-		jsr	(FindFreeObj).l
-		bne.s	.spawnfail
-		_move.b	#id_Roaring_Knight,obID(a1) ; load MZ boss object
-		move.w	#Knight_X_Spawn+$180,obX(a1)
-		move.w	#Knight_Y_Spawn+$24,obY(a1)
-
-.spawnfail:
-		move.w	#bgm_DeltaTale,d0 ;if you dont like this then uhh change it back to bgm_Boss :P -Dawid
-		jsr	(QueueSound1).l	; play boss music
-		move.b	#1,(f_lockscreen).w ; lock screen
-		addq.b	#2,(v_dle_routine).w	
-
-DLE_MZ4end:
-		move.w	(v_screenposx).w,(v_limitleft2).w
+		;!@ GD: NOP'd out.
 		rts
-		
-DLE_MZ4afterboss:
-		
-		addi.w	#$200,(v_limitright2).w
-		addq.b	#2,(v_dle_routine).w
-		move.w	#bgm_LosTontos,d0
-		jmp	(QueueSound1).w	; play level music
-
-DLE_MZ4_return:
-		rts
-		
-		
+				
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Star Light Zone dynamic level events

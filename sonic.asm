@@ -20,6 +20,11 @@ EggblockOrigin = 1
 ; 	| If 0, play ads at 5 minute intervals or when grabbing the ad random monitor powerup
 ; 	| If 1, no ads play at all unless opened from debug menu
 
+;!@ GD: Change runtime physics for DemoRecording
+DemoRecord = 0
+; 	| If 0, regular gameplay physics
+; 	| If 1, disable Sonic CD terminal velocity/speed caps for Sonic
+
 CheatsOn = 1
 ; 	| If 0, build it with no cheats active
 ; 	| If 1, build it with all cheats active

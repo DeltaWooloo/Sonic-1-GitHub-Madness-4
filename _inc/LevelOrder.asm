@@ -21,8 +21,8 @@
 		; Alberta Canada Zone
 		dc.b id_ACZ, 1	; Act 1
 		dc.b id_ACZ, 2	; Act 2
-		dc.b id_SFZ, 0	; Act 3
-		dc.b id_BSZ, 0	; Scrap Brain Zone Act 3
+		dc.b id_ACZ, 3	; Act 3
+		dc.b id_SFZ, 0	; Scrap Brain Zone Act 3
 
 		; Mien Kraft Zone
 		dc.b id_MCZ, 1	; Act 1
@@ -133,8 +133,8 @@ FetLevelOrder:
 		; Alberta Canada Zone
 		dc.b id_ACZ, 1	; Act 1
 		dc.b id_ACZ, 2	; Act 2
-		dc.b id_SFZ, 0	; Act 3
-		dc.b id_BSZ, 0	; Scrap Brain Zone Act 3
+		dc.b id_ACZ, 3	; Act 3
+		dc.b id_SFZ, 0	; Scrap Brain Zone Act 3
 
 		; Mien Kraft Zone
 		dc.b id_MCZ, 1	; Act 1
