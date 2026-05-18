@@ -174,9 +174,9 @@ InitCutsceneData:
 
 CutsceneInitTbl:
 	dc.l	Str_TonicIntro1+(3<<24)
-	dc.l	ArtList_ManiacIntro1+(bgm_Dingaling<<24)
-	dc.l	MapScr_ManiacIntro1A
-	dc.l	MapScr_ManiacIntro1B
+	dc.l	ArtList_TonicIntro1+(bgm_Dingaling<<24)
+	dc.l	MapScr_TonicIntro1A
+	dc.l	MapScr_TonicIntro1B
 
 	dc.l	Str_ManiacIntro1+(3<<24)
 	dc.l	ArtList_ManiacIntro1+(bgm_DoleAttack<<24)
@@ -189,9 +189,14 @@ CutsceneInitTbl:
 	dc.l	MapScr_InTonicIntro1B
 
 CutscenePalTbl:
-	dc.l	Pal_ManiacIntro1	; tonic
+	dc.l	Pal_EGA	; tonic
 	dc.l	Pal_ManiacIntro1	; maniac
 	dc.l	Pal_InTonicIntro1	; maniac
+
+ArtList_TonicIntro1:
+	dc.l	Nem_TonicIntro1
+	dc.w	$0000
+	dc.l	-1
 
 ArtList_ManiacIntro1:
 	dc.l	Nem_ManiacIntro1A
@@ -385,6 +390,39 @@ Art_ASCII:	binclude	"_gamemode/cutscene/ASCII.BIN"
 		even
 Art_ASCIIE:
 Art_ASCIISZ = (Art_ASCIIE-Art_ASCII)
+
+Pal_EGA:
+		binclude	"_gamemode/cutscene/data/EGA.pal"
+		dc.w		0
+		even
+
+Nem_TonicIntro1:
+		binclude	"_gamemode/cutscene/data/tonicint1.nem"
+		even
+MapScr_TonicIntro1A:
+		dc.b	40-1,	20-1	; width, height
+		dc.w	$C000
+		binclude	"_gamemode/cutscene/data/tonicint1A.map"
+		even
+MapScr_TonicIntro1B:
+		dc.b	40-1,	20-1	; width, height
+		dc.w	$E000
+		binclude	"_gamemode/cutscene/data/tonicint1B.map"
+		even
+
+Nem_TonicIntro2:
+		binclude	"_gamemode/cutscene/data/tonicint2.nem"
+		even
+MapScr_TonicIntro2A:
+		dc.b	40-1,	20-1	; width, height
+		dc.w	$C000
+		binclude	"_gamemode/cutscene/data/tonicint2A.map"
+		even
+MapScr_TonicIntro2B:
+		dc.b	40-1,	20-1	; width, height
+		dc.w	$E000
+		binclude	"_gamemode/cutscene/data/tonicint2B.map"
+		even
 
 Pal_ManiacIntro1:
 		binclude	"_gamemode/cutscene/data/maniaccutscene1.pal"	; the way i authored these was Very Tired Very Slow head so

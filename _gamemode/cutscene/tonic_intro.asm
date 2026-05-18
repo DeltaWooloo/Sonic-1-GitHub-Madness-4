@@ -23,5 +23,11 @@ TonicIntro_FadeIn:
 
 
 Str_TonicIntro1:
-	dc.b	"Teeth Tonic is a Colorado Cracker",0
+	dc.b	"Teeth Tonic is a Colorado Cracker",-1
+	dc.b	"whi manufactures etsyslop repro",-1
+	dc.b	"cartridges",0
+	even
+Str_TonicIntro2:
+	dc.b	"idk what else to type eyeah placing",-1
+	dc.b	"me holders woo yay lorado Cracker",0
 	even
