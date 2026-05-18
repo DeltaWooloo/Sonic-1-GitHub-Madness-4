@@ -154,6 +154,9 @@ Spik_Feature:
 		;!@ GD: Is Zone id_ACZ? If so, skip the "features"
 		cmpi.b	#id_ACZ,(v_zone).w
 		beq.s	.nobugs
+		;!@ GD: Is Hardware store? If so, skip the "features"
+		cmpi.b	#(id_DVZ>>8)+1,(v_zone).w
+		beq.s	.nobugs
 		
 		;!@ GD: Bugfix, also skip if horizontal spikes
 		;(player can get stuck in a wall of spikes and die at top of level lol)

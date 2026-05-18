@@ -871,12 +871,27 @@ DLE_BREW4:
 		jmp	CBZ4Events(pc,d0.w)
 CBZ4Events:
 		dc.w CBZ4PalLoad-CBZ4Events	;	janky
-		dc.w CBZ4PalLoad-CBZ4Events
+		dc.w CBZ4PalLoad-CBZ4Events	;	janky
+		dc.w CBZ4BossLoad-CBZ4Events
 		dc.w CBZ4Nothing-CBZ4Events
 CBZ4PalLoad:
 		moveq	#palid_PWisp,d0
 		jsr		(PalLoad).l
 		addq.b	#2,(v_dle_routine).w
+		rts
+;!@ GD: Load the chubby chase boss
+CBZ4BossLoad:
+		; load boss patterns
+		moveq	#plcid_BREW3,d0
+		jsr		(AddPLC).l		
+		addq.b	#2,(v_dle_routine).w
+		
+		;!@ GD: Spawn boss
+		jsr	(FindFreeObj).l
+		bne.s	CBZ4Nothing
+		_move.b	#id_PWispBoss,obID(a1) ; load BREW boss object
+		move.w	#$00A0,obX(a1)
+		move.w	#$0040,obY(a1)		
 CBZ4Nothing:
 		rts
 
