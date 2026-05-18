@@ -130,15 +130,6 @@ Art_Maniac:	binclude	"char_assets/Maniac Art.bin"	; Sonic
 Pal_Maniac:	binclude	"char_assets/Maniac Pal.bin"
 		even
 ; ---------------------------------------------------------------------------
-; Uncompressed graphics - Mr Bean
-; ---------------------------------------------------------------------------
-Map_MrBean:	include		"char_assets/Bean.asm"
-		even
-Dgfx_MrBean:	include		"char_assets/Bean - Dynamic Sex Script.asm"
-		even
-Art_MrBean:	binclude	"char_assets/Bean.bin"	; Sonic
-		even
-; ---------------------------------------------------------------------------
 ; Compressed graphics - various
 ; ---------------------------------------------------------------------------
 ;Nem_Shield:	binclude	"artnem/Shield.nem"
@@ -356,8 +347,6 @@ Nem_TonicLives: 	binclude	"char_assets/hud/Tonic Life Counter Icon.nem"
 		even
 Nem_ManiacLives:	binclude	"char_assets/hud/Maniac Life Counter Icon.nem"
 		even
-Nem_MrBeanLives: 	binclude	"char_assets/hud/MrBean's Life Counter Icon.nem"
-		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - various
 ; ---------------------------------------------------------------------------
@@ -393,8 +382,6 @@ Nem_CharSign:
 Nem_CharSignTonic:	binclude	"artnem/CharSign Tonic.nem"
 		even
 Nem_CharSignManiac:	binclude	"artnem/CharSign Maniac.nem"
-		even
-Nem_CharSignBeans:	binclude	"artnem/CharSign Bean.nem"
 		even
 
 

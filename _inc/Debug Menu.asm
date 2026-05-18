@@ -664,10 +664,8 @@ GamemodeNameTable:
 CharacterNameTable:
 .t:		dc.w	.Tonic-.t
 		dc.w	.Maniac-.t
-		dc.w	.Bean-.t
 .Tonic:		dc.b	"TEETH TONIC     "
 .Maniac:	dc.b	"MANIAC MOUSE    "
-.Bean:	dc.b	"MR BEAN SEXYBEAN"
 		even
 
 ; ---------------------------------------------------------------------------
