@@ -431,7 +431,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 
 	; Power Up BGM
 	nextenum bgm_Invincible			; Invincibility
-	nextenum bgm_WillTell			; Invincibility (Mr. Bean)
+	nextenum bgm_WillTell			; Useless
 	nextenum bgm_AVGNInv			; Power Sneakers
 	nextenum bgm_LimitedEgg			; Slow-Down Shoes
 

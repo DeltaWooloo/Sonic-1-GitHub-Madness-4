@@ -341,14 +341,13 @@ thantxt: macro txt
 	thantxt	"HIPSNAKE"
 	thantxt	"LIQUID GROGU"
 	thantxt	"CONINIGHT"
-	thantxt	"FREAKY BILLY"
+	thantxt	"OMICRONANO"
 	thantxt	"ROJO MMX"
 	thantxt	"DAXKATTER"
 	thantxt	"MALACHI"
 	thantxt	"DAWID"
 	thantxt	"SANCHI"
 	thantxt	"DARKSHAMILKHAN"
-	thantxt	"OMICRONANO.BIN"
 	thantxt	"ADD YOUR NAME HERE"
 	dc.b	1,1
 	
@@ -442,7 +441,6 @@ thantxt: macro txt
 	thantxt	"KAGAYMINE LEN"
 	thantxt	"STEVE JOBS BECAUSE"
 	thantxt	"VMWARE"
-	thantxt	"MISTER BEAN"
 	thantxt	"WINDOWS XP USER"
 	thantxt	"I FARTED SO HARD I SHIT MY"
     thantxt	"HOMER";leave this shit last

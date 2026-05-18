@@ -2778,7 +2778,7 @@ Maniac_Animate:
 
 ; SAnim_Push:
 .push:
-		move.w	obInertia(a0),d2 ; get Bean's speed
+		move.w	obInertia(a0),d2 ; get Maniac's speed
 		bmi.s	.negspeed
 		neg.w	d2
 
