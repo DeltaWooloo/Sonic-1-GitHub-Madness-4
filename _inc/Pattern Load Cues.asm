@@ -329,11 +329,12 @@ PLC_DVZ2:	dc.w ((PLC_DVZ2end-PLC_DVZ2-2)/6)-1
 		plcm	Nem_Spikes,     ArtTile_Spikes                 	; spikes
 		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal      	; horizontal spring		
 		
+		;!@ GD:
 		ifdef __DEBUG__
-		plcm	Nem_NeedleBoss,NEEDLB_VRAM/$20
-		plcm	Nem_NHammer,NHAMMER_VRAM/$20
-		plcm	Nem_NeedleBossBig,NEEDLBBIG_VRAM/$20
-		plcm	Nem_N3DTest,$8800/$20
+		;plcm	Nem_NeedleBoss,NEEDLB_VRAM/$20
+		;plcm	Nem_NHammer,NHAMMER_VRAM/$20
+		;plcm	Nem_NeedleBossBig,NEEDLBBIG_VRAM/$20
+		;plcm	Nem_N3DTest,$8800/$20
 		endif
 		     
 PLC_DVZ2end:
