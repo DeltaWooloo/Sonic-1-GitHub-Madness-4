@@ -44,7 +44,7 @@ ArifBoss:
 		move.w	obX(a0), obX(a1)
 		move.w	obY(a0), obY(a1)
 	
-		add.b	#2, obRoutine(a0)
+		addq.b	#2, obRoutine(a0)
 		rts
 
 .Loop:

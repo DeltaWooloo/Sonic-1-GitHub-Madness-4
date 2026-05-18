@@ -518,8 +518,10 @@ PLC_DVZAnimalsend:
 ; Pattern load cues - Nogales animals
 ; ---------------------------------------------------------------------------
 PLC_NGZAnimals:	dc.w ((PLC_NGZAnimalsend-PLC_NGZAnimals-2)/6)-1
-		plcm	Nem_Rin, ArtTile_Animal_1 ; rabbit
-		plcm	Nem_AOrange, ArtTile_Animal_2 ; flicky
+		;plcm	Nem_Rin, ArtTile_Animal_1 ; rabbit
+		;plcm	Nem_AOrange, ArtTile_Animal_2 ; flicky
+		plcm	Nem_Squirrel, ArtTile_Animal_1 ; rabbit
+		plcm	Nem_Squirrel, ArtTile_Animal_2 ; rabbit
 PLC_NGZAnimalsend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - BSZ animals

@@ -47,8 +47,12 @@ Anml_VarIndex:	dc.b 8,	7 ; Orange World Zone
 		dc.b 0,	5 ; COLD BREW Zone
 		dc.b $A, 9 ; WINDOWS Zone
 		dc.b 7, 1 ; JOINT Zone
-		dc.b 7, 1 ; Doleville Zone
-		dc.b 8, 7 ; Nogales Zone
+		dc.b 7, 1 ; Doleville Zone		
+
+		;!@ GD: Change NGZ animals, due to bad GHZ palette (incompatible with OWZ oranges)
+		;dc.b 8, 7 ; Nogales Zone
+		dc.b 7, 7 ; Nogales Zone
+
 		dc.b 7, 1 ; Bluescape Zone
 		dc.b 7, 1 ; Bluestone Zone
 		dc.b 2, 3 ; Azure Rainforest Zone
