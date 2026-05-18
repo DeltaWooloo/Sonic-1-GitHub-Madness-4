@@ -15,6 +15,7 @@ ArifBoss_Arif:
 
 ; Variables
 .DelayTimer:		equ $30	; bullet delay timer for atk mode 2
+.shootSFXRunonce:	equ	$38		;!@ GD
 .ShootAngle:		equ $3A
 .RoutineTimer:		equ $3C
 .FlashTimer:		equ $3E
@@ -80,11 +81,11 @@ ArifBoss_Arif:
 		
 		move.w	#$25,(v_screenshaketime).w
 		moveq	#0,d0
-		move.w	#sfx_Thud, d0
+		move.b	#sfx_Thud, d0
 		jsr	(QueueSound2).l
 
 		move.w	#-$500, obVelY(a0)			; fly away now, fly awaaaaay
-		add.b	#2, obRoutine(a0)			; change routine
+		addq.b	#2, obRoutine(a0)			; change routine
 
 .Intro1_Return:
 		rts
@@ -100,7 +101,7 @@ ArifBoss_Arif:
 		move.w	#0, obVelY(a0)				; in the air now...
 		move.b	#.Attacks1, .AttacksLeft(a0)
 		move.w	#.ShootTime1, .RoutineTimer(a0)
-		add.b	#2, obRoutine(a0) 			; change routine
+		addq.b	#2, obRoutine(a0) 			; change routine
 
 .Intro2_Return:
 		rts
@@ -114,24 +115,30 @@ ArifBoss_Arif:
 		tst.w	.RoutineTimer(a0)			; is timer zero?
 		beq.s	.Shoot1_Exit				; if yes, branch
 
-		sub.w	#$1, .RoutineTimer(a0) 
+		subi.w	#$1, .RoutineTimer(a0) 
 
+		;!@ GD: This gets spammed too much and corrupts data (resulting in random sfx/bgm playing)
+		;Let's change this to play once on 1st shot
+		tst.b	.shootSFXRunonce(a0)
+		bne.s	.skipSFX
+		move.b	#1,.shootSFXRunonce(a0)	;Set runonce flag
 		moveq	#0,d0
-		move.w	#sfx_HitBoss, d0
+		move.b	#sfx_HitBoss, d0
 		jsr	(QueueSound2).l
+	.skipSFX:
 
 		jsr	(FindFreeObj).l
-		move.b	#id_Arif, (a1)
+		move.b	#id_Arif, obID(a1)
 		move.b	#4, obSubtype(a1)
 		move.w	obX(a0), obX(a1)
 		move.w	obY(a0), obY(a1)
 		bsr.s 	.Shoot1_Velocity
-
 		rts
 
 .Shoot1_Exit:
 		move.w	#30, .RoutineTimer(a0)
-		add.b	#2, obRoutine(a0)
+		addq.b	#2, obRoutine(a0)
+		move.b	#0,.shootSFXRunonce(a0)	;Reset runonce flag
 		rts
 
 .Shoot1_Velocity:
@@ -161,17 +168,17 @@ ArifBoss_Arif:
 		tst.b	.AttacksLeft(a0)			; any attacks left?
 		beq.s	.Shoot1Idle_Done			; if not, branch
 
-		sub.w	#$1, .RoutineTimer(a0) 
+		subi.w	#$1, .RoutineTimer(a0) 
 		rts
 
 .Shoot1Idle_Continue:
-		sub.b	#1, .AttacksLeft(a0)
+		subi.b	#1, .AttacksLeft(a0)
 		move.w	#.ShootTime1, .RoutineTimer(a0)
-		sub.b	#2, obRoutine(a0)
+		subq.b	#2, obRoutine(a0)
 		rts
 
 .Shoot1Idle_Done:
-		add.b	#2, obRoutine(a0)
+		addq.b	#2, obRoutine(a0)
 		rts
 
 ; ===========================================================================
@@ -191,14 +198,14 @@ ArifBoss_Arif:
 
 		move.w	#$25,(v_screenshaketime).w
 		moveq	#0,d0
-		move.w	#sfx_Thud, d0
+		move.b	#sfx_Thud, d0
 		jsr	(QueueSound2).l
 
 		move.w 	#0, obVelX(a0)
 		move.w 	#0, obVelY(a0)
 
 		move.b 	#.FallWaitTime, .RoutineTimer(a0)
-		add.b	#2, obRoutine(a0)			; next
+		addq.b	#2, obRoutine(a0)			; next
 
 .Fall_Exit:
 		rts
@@ -206,13 +213,13 @@ ArifBoss_Arif:
 ; ===========================================================================
 
 .FallIdle:
-		sub.w	#$1, .RoutineTimer(a0)
+		subi.w	#$1, .RoutineTimer(a0)
 
 		tst.w	.RoutineTimer(a0)			; is timer zero?
 		beq.s	.FallIdle_Exit				; if not, branch
 
 		move.b	#.Attacks2, .AttacksLeft(a0)
-		add.b	#2, obRoutine(a0)			; next atk
+		addq.b	#2, obRoutine(a0)			; next atk
 
 .FallIdle_Exit:
 		rts
@@ -227,7 +234,7 @@ ArifBoss_Arif:
 		btst	#0, (v_framecount)
 		beq.s	.Shoot2_Exit
 
-		add.w 	#$800, .ShootAngle(a0)
+		addi.w 	#$800, .ShootAngle(a0)
 
 		jsr	(FindFreeObj).l
 		move.b	#id_Arif, (a1)
@@ -237,7 +244,6 @@ ArifBoss_Arif:
 
 		move.w 	.ShootAngle(a0), d0
 		bsr.s 	.Shoot2_Velocity
-
 		rts
 
 
@@ -255,7 +261,7 @@ ArifBoss_Arif:
 
 .Shoot2_Exit:
 		move.w	#30, .RoutineTimer(a0)
-		add.b	#2, obRoutine(a0)
+		addq.b	#2, obRoutine(a0)
 		rts
 		
 ; ===========================================================================
@@ -267,13 +273,13 @@ ArifBoss_Arif:
 		tst.b	.AttacksLeft(a0)			; any attacks left?
 		beq.s	.Shoot2Idle_Done			; if not, branch
 
-		sub.w	#$1, .RoutineTimer(a0) 
+		subi.w	#$1, .RoutineTimer(a0) 
 		rts
 
 .Shoot2Idle_Continue:
-		sub.b	#1, .AttacksLeft(a0)
+		subi.b	#1, .AttacksLeft(a0)
 		move.w	#.ShootTime2, .RoutineTimer(a0)
-		sub.b	#2, obRoutine(a0)
+		subq.b	#2, obRoutine(a0)
 		rts
 
 .Shoot2Idle_Done:
@@ -294,7 +300,7 @@ ArifBoss_Arif:
 		move.b	#$18, .FlashTimer(a0)			; set number of times to flash 
 		
 		moveq	#0,d0
-		move.w	#sfx_HitBoss, d0
+		move.b	#sfx_HitBoss, d0
 		jsr	(QueueSound2).l
 
 .HitFlash:
@@ -302,7 +308,7 @@ ArifBoss_Arif:
 		bne.s	.HitFlash_Restore
 
 		move.b	#1, obFrame(a0)
-		subq.b	#1, .FlashTimer(a0)			; subtract 1 from flashes counter
+		subi.b	#1, .FlashTimer(a0)			; subtract 1 from flashes counter
 		bne.s	.HandleHits_Return			; if flashes counter is not zero, branch
 
 		move.b	#0, obFrame(a0)				; restore frame

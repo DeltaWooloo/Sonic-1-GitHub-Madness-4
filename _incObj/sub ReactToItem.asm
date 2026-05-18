@@ -403,11 +403,13 @@ HurtSonic:
 
 		; hurt pcm
 ;		move.w	#ch_hurtpcm,d0
+		moveq	#0,d0
 		jsr	(GetOtherPlayerData).l
 		move.w	pdat.hurtsnd(a5),d0
 .playDeath:
 		jsr	(MegaPCM_PlaySample).l
 
+		moveq	#0,d0
 		move.w	#sfx_HitSpikes,d0
 		cmpi.b	#id_Spikes,obID(a2)	; was damage caused by spikes?
 		beq.s	.sound

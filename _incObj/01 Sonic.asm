@@ -1195,7 +1195,7 @@ loc_131AA:
 		move.b	pdat.width(a5),obWidth(a0)
 		move.b	#id_Wait,obAnim(a0) ; use "standing" animation
 		subq.w	#5,obY(a0)
-		;!@ GD: Bugfix to stop pinball mode from pushing when at a standstill (no inertia)\
+		;!@ GD: Bugfix to stop pinball mode from pushing when at a standstill (no inertia)
 		bra.w	locret_1307C
 		
 .KeepRolling:
