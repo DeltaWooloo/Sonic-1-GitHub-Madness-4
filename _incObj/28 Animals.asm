@@ -47,8 +47,12 @@ Anml_VarIndex:	dc.b 8,	7 ; Orange World Zone
 		dc.b 0,	5 ; COLD BREW Zone
 		dc.b $A, 9 ; WINDOWS Zone
 		dc.b 7, 1 ; JOINT Zone
-		dc.b 7, 1 ; Doleville Zone
-		dc.b 8, 7 ; Nogales Zone
+		dc.b 7, 1 ; Doleville Zone		
+
+		;!@ GD: Change NGZ animals, due to bad GHZ palette (incompatible with OWZ oranges)
+		;dc.b 8, 7 ; Nogales Zone
+		dc.b 7, 7 ; Nogales Zone
+
 		dc.b 7, 1 ; Bluescape Zone
 		dc.b 7, 1 ; Bluestone Zone
 		dc.b 2, 3 ; Azure Rainforest Zone
@@ -95,15 +99,45 @@ Anml_Variables:
 		dc.w -$340, -$300
 		dc.l Map_Animal5
 
-Anml_EndSpeed:	dc.w -$440, -$400, -$440, -$400, -$440, -$400, -$300, -$400
-		dc.w -$300, -$400, -$180, -$300, -$180, -$300, -$140, -$180
-		dc.w -$1C0, -$300, -$200, -$300, -$280, -$380
+Anml_EndSpeed:
+		dc.w -$440
+		dc.w -$400
+		dc.w -$440
+		dc.w -$400
+		dc.w -$440
+		dc.w -$400
+		dc.w -$300
+		dc.w -$400
+		dc.w -$300
+		dc.w -$400
+		dc.w -$180
+		dc.w -$300
+		dc.w -$180
+		dc.w -$300
+		dc.w -$140
+		dc.w -$180
+		dc.w -$1C0
+		dc.w -$300
+		dc.w -$200
+		dc.w -$300
+		dc.w -$280
+		dc.w -$380
 
-Anml_EndMap:	dc.l Map_Animal2, Map_Animal2, Map_Animal2, Map_Animal1, Map_Animal1
-		dc.l Map_Animal1, Map_Animal1, Map_Animal2, Map_Animal3, Map_Animal2
-		dc.l Map_Animal3
+Anml_EndMap:
+		dc.l Map_Animal4
+		dc.l Map_Animal4
+		dc.l Map_Animal4
+		dc.l Map_Animal4
+		dc.l Map_Animal4
+		dc.l Map_Animal4
+		dc.l Map_Animal4
+		dc.l Map_Animal4
+		dc.l Map_Animal4
+		dc.l Map_Animal4
+		dc.l Map_Animal4
 
-Anml_EndVram:	dc.w make_art_tile(ArtTile_Ending_Flicky,0,0)
+Anml_EndVram:
+		dc.w make_art_tile(ArtTile_Ending_Flicky,0,0)
 		dc.w make_art_tile(ArtTile_Ending_Flicky,0,0)
 		dc.w make_art_tile(ArtTile_Ending_Flicky,0,0)
 		dc.w make_art_tile(ArtTile_Ending_Rabbit,0,0)

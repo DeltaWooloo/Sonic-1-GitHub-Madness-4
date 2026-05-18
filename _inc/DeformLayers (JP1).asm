@@ -38,15 +38,23 @@ DeformLayers:
 ; ---------------------------------------------------------------------------
 ; Offset index for background layer deformation code
 ; ---------------------------------------------------------------------------
-Deform_Index:	dc.w Deform_GHZ-Deform_Index, Deform_LZ-Deform_Index
-		dc.w Deform_MZ-Deform_Index, Deform_SLZ-Deform_Index
-		dc.w Deform_SYZ-Deform_Index, Deform_SBZ-Deform_Index
-		dc.w Deform_GHZ-Deform_Index, Deform_CBZ-Deform_Index
-		dc.w Deform_WZ-Deform_Index, Deform_ITBZ-Deform_Index
-		dc.w Deform_DVZ-Deform_Index,Deform_NGZ-Deform_Index
-		dc.w Deform_Default-Deform_Index,Deform_Default-Deform_Index
-		dc.w Deform_ARZ-Deform_Index
-		zonewarning Deform_Index,2
+Deform_Index:
+		dc.w Deform_GHZ-Deform_Index	; id_OWZ
+		dc.w Deform_LZ-Deform_Index		; id_WHZ
+		dc.w Deform_MZ-Deform_Index		; id_ACZ
+		dc.w Deform_SLZ-Deform_Index	; id_MCZ
+		dc.w Deform_SYZ-Deform_Index	; id_SFZ
+		dc.w Deform_SBZ-Deform_Index	; id_PPZ
+		dc.w Deform_GHZ-Deform_Index	; id_EndZ
+		dc.w Deform_CBZ-Deform_Index	; id_CBZ
+		dc.w Deform_WZ-Deform_Index		; id_WIN
+		dc.w Deform_ITBZ-Deform_Index	; id_Joint
+		dc.w Deform_DVZ-Deform_Index	; id_DVZ
+		dc.w Deform_NGZ-Deform_Index	; id_Nogales
+		dc.w Deform_Default-Deform_Index; id_BSZ
+		dc.w Deform_Default-Deform_Index; id_BTZ
+		dc.w Deform_ARZ-Deform_Index	; id_ARZ
+		zonewarning Deform_Index,2		
 ; ---------------------------------------------------------------------------
 ; Green Hill Zone background layer deformation code
 ; ---------------------------------------------------------------------------
@@ -253,10 +261,15 @@ Lz_Scroll_Data:
 
 
 Deform_MZ:
-		move.w  (v_zone).w,d0
+		moveq	#0,d0
+		move.w  (v_zone).w,d0		
 ; GIO: i'm turning this off for now. please don't touch MZ4
 ;		cmpi.w  #(id_ACZ<<8)+3,d0
 ;		beq.w   Deform_MZ4
+
+; !@ GD: Somebody put Mushroom Valley Zone in AC4 :( . Now using regular BG scroll of level
+		cmpi.w  #(id_ACZ<<8)+3,d0
+		beq.w   Deform_SBZ2
 		
 Deform_MZNormal:	
 		move.w	(v_scrshiftx).w,d4
@@ -645,7 +658,12 @@ Deform_SBZ2:;loc_68A2:
 		ext.l	d5
 		asl.l	#5,d5
 		bsr.w	BGScroll_XY
-		addi.w	#1,(v_bgscreenposy).w		;!@ GD: Constantly scroll up
+		
+		;!@ GD: Constantly scroll up (only if SBZ2)
+		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w
+		bne.s	.skipAutoUpScroll		
+		addi.w	#1,(v_bgscreenposy).w		
+.skipAutoUpScroll:
 		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w
 	; copy fg & bg x-position to hscroll table
 		lea	(v_hscrolltablebuffer).w,a1

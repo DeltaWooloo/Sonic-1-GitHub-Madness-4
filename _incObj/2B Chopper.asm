@@ -27,7 +27,13 @@ Chop_Main:	; Routine 0
 		move.l	#Map_ChopCBZ,obMap(a0)
 		move.w	#make_art_tile(ArtTile_CBZChopper,0,0),obGfx(a0)
 		pcm		dSexyFlanders
+		bra.s	.cont			;!@
 .NotCBZ:		
+		;!@ GD: Check if NGZ, then relocate art
+		cmpi.b	#id_Nogales,(v_zone).w		; is zone NGZ?
+		bne.s	.cont					; if not, branch
+		move.w	#($9360/$20),obGfx(a0)
+.cont:
 		move.b	#4,obRender(a0)
 		move.b	#4,obPriority(a0)
 		move.b	#9,obColType(a0)

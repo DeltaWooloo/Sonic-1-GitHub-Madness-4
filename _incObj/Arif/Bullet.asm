@@ -23,15 +23,17 @@ ArifBoss_Bullet:
 ; ===========================================================================
 
 .Setup:
-		move.w	#$428, obGfx(a0)
+		;!@ GD: Fix gfx
+		;move.w	#$428, obGfx(a0)		
+		move.w	#make_art_tile(ArtTile_Buzz_Bomber,1,0),obGfx(a0)
 		move.l	#Map_Missile, obMap(a0)
 		move.b	#4, obRender(a0)
 		move.b	#$4, obWidth(a0)
 		move.b	#$4, obHeight(a0)
 		move.b	#$4, obActWid(a0)
-		add.b	#6, obPriority(a0)
+		addi.b	#6, obPriority(a0)
 		move.b	#.MaxTime, .TimeToLive(a0)
-		addi.b	#2, obRoutine(a0)
+		addq.b	#2, obRoutine(a0)
 		rts
 
 ; ===========================================================================

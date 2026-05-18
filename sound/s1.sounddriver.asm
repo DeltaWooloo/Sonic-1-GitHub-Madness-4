@@ -46,7 +46,7 @@ PSG_Index:
 		dc.l PSG_ClintonYr, PSG_Pass1, PSG_Pass2, PSG_Pass3, PSG_Pass4
 		dc.l PSG_Mega1, PSG_Mega2, PSG_Mega3, PSG_Mega4
 		dc.l AporiaTone_01, PSG_Will1, PSG_Will2, PSG_Before
-		dc.l PSG_S28Bit02,PSG_S28Bit03,PSG_S28Bit04,PSG_Toole
+		dc.l PSG_S28Bit02,PSG_S28Bit03,PSG_S28Bit04,PSG_Toole,PSG_MMX
 
 PSG1:		dc.b 0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,$80
 
@@ -293,6 +293,9 @@ PSG_Before:
 PSG_Toole:
 	dc.b	2,2,2,2,3,3,3,3,4,5,5,5,6,6,6,5,6,6,7,7,8,8,8
 	dc.b	9,9,9,9,$A,$B,$B,$C,$D,$80
+	
+PSG_MMX:
+	dc.b	0,1,1,2,3,4,5,6,7,8,9,$A,$B,$B,$C,$D,$D,$E,$80
 
 ; these are all supposed to use rests but the driver doesn't support it
 ; the driver also didn't update volenv in the start of a note

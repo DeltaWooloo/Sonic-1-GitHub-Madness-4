@@ -43,7 +43,9 @@ SEgg_Main:	; Routine 0
 		move.b	(a2)+,obAnim(a1)
 		move.b	(a2)+,obPriority(a1)
 		move.l	#Map_But,obMap(a1)
-		move.w	#make_art_tile(ArtTile_Eggman_Button,0,0),obGfx(a1)
+		;!@ GD: Relocate
+		;move.w	#make_art_tile(ArtTile_Eggman_Button,0,0),obGfx(a1)
+		move.w	#make_art_tile(ArtTile_Eggman_Button+4,0,0),obGfx(a1)
 		move.b	#4,obRender(a1)
 		bset	#7,obRender(a1)
 		move.b	#$10,obActWid(a1)

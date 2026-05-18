@@ -8,7 +8,8 @@
 SpeedToPos:
 		;!@ GD: Special check to see if player.
 		;If sonic AND not demo mode, then use Sonic CD ObjMoveGrv function (velocity caps)
-		movem.l	d0/d2-d3,-(sp)			;!@ Push regs onto stack		
+		movem.l	d0/d2-d3,-(sp)			;!@ Push regs onto stack
+		if DemoRecord=0
 		tst.w	(f_demo).w				; In demo mode?
 		bne.s	.skipSCD				; If so, branch (skip Sonic CD check)		
 		;Not demo; check if object is player		
@@ -17,6 +18,15 @@ SpeedToPos:
 		;tst.b	obPinball(a1)
 		;bne.s	ObjMove
 		bra.s	ObjMove
+		else
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+		endif
 		
 	.skipSCD:
 		movem.w	obVelX(a0),d2-d3

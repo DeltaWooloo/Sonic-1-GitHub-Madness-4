@@ -32,13 +32,21 @@ Debug_Main:	; Routine 0
         clr.b   (f_nobgscroll).w
         clr.b   (f_lockscroll).w
         bclr    #6,obStatus(a0)    ; Clear underwater status
+		
+		;!@ GD: Bugfix to only resume music if in water levels
+		;Fixes bug for random sfx/bgm spam in NGZ Boss, etc
+		jsr		(isWaterLevel).l
+		tst.b	d2
+		beq.s	.skipResumeMusic
         jsr     (ResumeMusic).l
-        beq.s   .skipReset
-        move.w  #$600,(v_sonspeedmax).w ; restore Sonic's speed
-        move.w  #$C,(v_sonspeedacc).w ; restore Sonic's acceleration
-        move.w  #$80,(v_sonspeeddec).w ; restore Sonic's deceleration
-.skipReset:
-
+	.skipResumeMusic:
+		;!@ GD: Restore speeds appropriately
+		char_setSpeed	$0000
+        ;beq.s   .skipReset
+        ;move.w  #$600,(v_sonspeedmax).w ; restore Sonic's speed
+        ;move.w  #$C,(v_sonspeedacc).w ; restore Sonic's acceleration
+        ;move.w  #$80,(v_sonspeeddec).w ; restore Sonic's deceleration
+;.skipReset:
 		move.b	#0,obFrame(a0)
 		move.b	#id_Walk,obAnim(a0)
 		cmpi.b	#id_Special,(v_gamemode).w ; is game mode $10 (special stage)?
@@ -232,6 +240,7 @@ Debug_ChgItem:
 .backtonormal:
 		btst	#bitB,(v_jpadpress1).w ; is button B pressed?
 		beq.s	.stayindebug	; if not, branch
+		
 		moveq	#0,d0
 		move.w	d0,(v_debuguse).w ; deactivate debug mode
 		jsr	(GetPlayerData).l
@@ -271,6 +280,9 @@ Debug_ChgItem:
 ; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-10#post-95225
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 Debug_ResetPlayerStats:
+		;!@ GD: Restore speeds
+		char_setSpeed	$0000
+
         move.b  d0,(v_player+obAnim).w
         move.w  d0,obX+2(a0)
         move.w  d0,obY+2(a0)

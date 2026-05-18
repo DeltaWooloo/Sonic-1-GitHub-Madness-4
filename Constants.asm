@@ -259,6 +259,10 @@ cYellow:	equ cGreen+cRed		; colour yellow
 cAqua:		equ cGreen+cBlue	; colour aqua
 cMagenta:	equ cBlue+cRed		; colour magenta
 
+; Emeralds
+minEmerald:			equ	$00					;!@ GD: Minimum emerald ID
+maxEmerald:			equ	$06					;!@ Max emerald ID
+
 ;!@ GD:
 id_VBlank_PaletteFade:	equ	$12
 
@@ -405,7 +409,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_TF2				; Bluescapes	(Act 1)		; Dax: Interesting song choice for this :/
 	nextenum bgm_Blue				;		(Act 2)
 	nextenum bgm_Dungeon3			; Azure Rainforest
-	nextenum bgm_Final				; Final Zone
+	nextenum bgm_MMX				; Final Zone
 
 	; Boss BGM
 	nextenum bgm_BeforeBoss			; Pre-Boss Encounter
@@ -418,6 +422,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 	nextenum bgm_Megalovania		; MeinKraft Boss
 	nextenum bgm_DoleBOSS			; Doleville Boss
 	nextenum bgm_TwoSteps			; Bluescapes Boss
+	nextenum bgm_Final			; Final Zone Boss
 
 	; Special Stage BGM
 	nextenum bgm_RamRanch			; Demo BGM
@@ -426,7 +431,7 @@ af2ndRoutine:	equ $FA	; increment 2nd routine counter
 
 	; Power Up BGM
 	nextenum bgm_Invincible			; Invincibility
-	nextenum bgm_WillTell			; Invincibility (Mr. Bean)
+	nextenum bgm_WillTell			; Useless
 	nextenum bgm_AVGNInv			; Power Sneakers
 	nextenum bgm_LimitedEgg			; Slow-Down Shoes
 
@@ -936,20 +941,29 @@ ArtTile_CBZChopper:		equ $541
 ArtTile_CBZMoto_Bug:		equ $559
 ;!@ Relocate GHZ_MZ_Swing, LZ splash and bubbles
 ArtTile_CBZ_Swing:		equ $345
-ArtTile_CBZ_Splash:		equ $6E2
+ArtTile_CBZ_Splash:		equ $6E3
 ArtTile_CBZ_Bubbles:	equ $2DD
 ;What is ArtTile_LZ_Sonic_Drowning used for?
 ;ArtTile_CBZ_Sonic_Drowning:	equ $440-3
 
+; MCZ
 ArtTile_Villager:		equ $4F0
 ArtTile_SCG:		equ $449
+
+; NGZ
+; !@ GD: Relocate ballHogH for NGZ
+ArtTile_Ball_HogH_NGZ:	equ	$501
 
 ; Eggman
 ArtTile_Eggman:			equ $400
 ArtTile_Eggman_Weapons:		equ $46C
-ArtTile_Eggman_Button:		equ $4A4
+;!@ GD: Relocate
+;ArtTile_Eggman_Button:		equ $4A4
+ArtTile_Eggman_Button:		equ ArtTile_Button
 ArtTile_Eggman_Spikeball:	equ $518
-ArtTile_Eggman_Trap_Floor:	equ $518
+;!@ GD: Relocate
+;ArtTile_Eggman_Trap_Floor:	equ $518
+ArtTile_Eggman_Trap_Floor:	equ $518+3
 ArtTile_Eggman_Exhaust:		equ ArtTile_Eggman+$12A
 
 ; End of Level

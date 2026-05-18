@@ -100,14 +100,23 @@ PalThanatosCredits:	bincludeEndMarker "_gamemode/ThanatosCredits/Palette.pal"
 	bsr.w	RenderTextPlane
 	bsr.w	RenderTextLine
 
-	QueueSound_M bgm_Ending,0	
-	pcm		dsbDevelopers			; Look at all of these developers!
+	; !@ GD: Use GHM4 song until/if a dedicated remix song of all zones is created
+	; Ending zone already plays this song; twice is annoying
+	;QueueSound_M bgm_Ending,0	
+	QueueSound_M bgm_Title,0	
+	pcm		dsbDevelopers			; Look at all of these DeVeloPeRs :O !
 
 	; Fade In
 	jsr	(PaletteFadeIn).l
 
+; Main text scroll loop
 -	move.b	#2,(v_vbla_routine).w
 	jsr	(WaitForVBla).l
+	
+	;!@ GD: Exit on start press
+	btst	#bitStart,(v_jpadpress1).w
+	bne.w	Thanatos_EndLoop
+	
 	add.w	#1,(v_scrposy_vdp).w
 	subq.b	#1,(than_next_blit).l
 	bne.s	-
@@ -219,6 +228,8 @@ RenderTextPlane:
 	bra.s	.post
 
 Thanatos_EndLoop:
+	;!@ GD: Set flag (in case skip credits via start btn)
+	move.w	#1,(than_end_flag).l		
 	move.w	#60*5,(v_generictimer).w
 	move.b	#1,(than_next_blit).l
 -	; end stuff (loop forever for now)
@@ -330,14 +341,13 @@ thantxt: macro txt
 	thantxt	"HIPSNAKE"
 	thantxt	"LIQUID GROGU"
 	thantxt	"CONINIGHT"
-	thantxt	"FREAKY BILLY"
+	thantxt	"OMICRONANO"
 	thantxt	"ROJO MMX"
 	thantxt	"DAXKATTER"
 	thantxt	"MALACHI"
 	thantxt	"DAWID"
 	thantxt	"SANCHI"
 	thantxt	"DARKSHAMILKHAN"
-	thantxt	"OMICRONANO.BIN"
 	thantxt	"ADD YOUR NAME HERE"
 	dc.b	1,1
 	
@@ -431,7 +441,6 @@ thantxt: macro txt
 	thantxt	"KAGAYMINE LEN"
 	thantxt	"STEVE JOBS BECAUSE"
 	thantxt	"VMWARE"
-	thantxt	"MISTER BEAN"
 	thantxt	"WINDOWS XP USER"
 	thantxt	"I FARTED SO HARD I SHIT MY"
     thantxt	"HOMER";leave this shit last
