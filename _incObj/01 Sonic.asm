@@ -757,12 +757,16 @@ Sonic_MdJump2:
 		btst	#6,obStatus(a0)
 		beq.s	.notunderwater
 		subi.w	#$28,obVelY(a0)
+		;!@ GD: Add this to remove rollJump floaty feature,
+		;because it leads to buoyancy while underwater.
+		;Boo-yah
+		bra.s	.SHITCODE
 
 .notunderwater:
 		btst	#4,obStatus(a0)
 		beq.s	.SHITCODE
 		subi.w	#$28,obVelY(a0)
-.SHITCODE		
+.SHITCODE:
         bsr.w	Sonic_ExtraJump
 		bsr.w	Sonic_JumpAngle
 		bsr.w	Sonic_Floor
