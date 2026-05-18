@@ -123,7 +123,7 @@ Cat_ChkGone:
 
 .delete:
 		;!@ Caterkiller collision bugfix: (https://sonicresearch.org/community/index.php?threads/how-to-fix-the-caterkiller-damage-bug.4178/)
-		clr.b    $20(a1)
+		;clr.b    $20(a1)
 		move.b	#$A,obRoutine(a0)	; goto Cat_Delete next
 		rts
 ; ===========================================================================
@@ -144,8 +144,12 @@ Cat_Index2:	dc.w .wait-Cat_Index2
 .move:
 		addq.b	#2,ob2ndRout(a0)
 		move.b	#$10,objoff_2A(a0)
-		move.w	#-$100,obVelX(a0)
-		move.w	#$A0,obInertia(a0)
+		;!@ GD: Bugfix for broken caterkiller body seg movemen 
+		;move.w	#-$100,obVelX(a0)
+		;move.w	#$A0,obInertia(a0)
+		move.w	#-$C0,obVelX(a0)
+		move.w	#$40,obInertia(a0)
+		
 		bchg	#4,objoff_2B(a0)
 		bne.s	loc_16AFC
 		clr.w	obVelX(a0)
@@ -243,9 +247,14 @@ Cat_BodySeg1:	; Routine 4, 8
 		move.b	objoff_2B(a1),objoff_2B(a0)
 		move.b	ob2ndRout(a1),ob2ndRout(a0)
 		beq.w	loc_16C64
-		move.w	obInertia(a1),d0
-		move.w	d0,obInertia(a0)
-		add.w	obVelX(a1),d0
+		
+		;!@ GD: Why was this code changed?
+		;It broke segment velocity around edges drifting apart
+		;move.w	obInertia(a1),d0
+		;move.w	d0,obInertia(a0)
+		move.w	obInertia(a1),obInertia(a0)
+		move.w	obVelX(a1),d0
+		
 		move.w	d0,obVelX(a0)
 		move.l	obX(a0),d2
 		move.l	d2,d3
@@ -272,7 +281,9 @@ loc_16C0C:
 		beq.s	locj_173E4
 		btst	#0,obStatus(a0)
 		beq.s	locj_173E4
-		cmpi.w	#-$100,obVelX(a0)
+		;!@ Ditto
+		;cmpi.w	#-$100,obVelX(a0)
+		cmpi.w	#-$C0,obVelX(a0)
 		bne.s	locj_173E4
 		subq.w	#1,obX(a0)
 		addq.b	#1,cat_parent(a0)
@@ -318,6 +329,9 @@ loc_16C64:
 
 .delete:
 		; Mark self for deletion.
+		;!@ Caterkiller collision bugfix: (https://sonicresearch.org/community/index.php?threads/how-to-fix-the-caterkiller-damage-bug.4178/)
+		clr.b    $20(a1)
+		
 		move.b	#$A,obRoutine(a0)
 
 	if FixBugs
@@ -346,7 +360,9 @@ loc_16C96:
 
 loc_16CAA:
 		move.w	d0,obVelX(a0)
-		move.w	#-$A00,obVelY(a0)
+		;!@ GD: Bugfix
+		;move.w	#-$A00,obVelY(a0)
+		move.w	#-$400,obVelY(a0)
 		move.b	#$C,obRoutine(a0)
 		andi.b	#$F8,obFrame(a0)
 

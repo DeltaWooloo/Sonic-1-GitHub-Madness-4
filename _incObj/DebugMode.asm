@@ -232,6 +232,7 @@ Debug_ChgItem:
 .backtonormal:
 		btst	#bitB,(v_jpadpress1).w ; is button B pressed?
 		beq.s	.stayindebug	; if not, branch
+		
 		moveq	#0,d0
 		move.w	d0,(v_debuguse).w ; deactivate debug mode
 		jsr	(GetPlayerData).l
@@ -271,6 +272,9 @@ Debug_ChgItem:
 ; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-10#post-95225
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 Debug_ResetPlayerStats:
+		;!@ GD: Restore speeds
+		char_setSpeed	$0000
+
         move.b  d0,(v_player+obAnim).w
         move.w  d0,obX+2(a0)
         move.w  d0,obY+2(a0)

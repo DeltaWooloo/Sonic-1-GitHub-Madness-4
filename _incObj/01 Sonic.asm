@@ -524,9 +524,9 @@ Sonic_Water:
 		asl.w	obVelY(a0)
 		beq.w	.exit
 		move.b	#id_Splash,(v_splash).w ; load splash object
-		cmpi.w	#-$1000,obVelY(a0)
+		cmpi.w	#-physics_TermVelY,obVelY(a0)
 		bgt.s	.belowmaxspeed
-		move.w	#-$1000,obVelY(a0) ; set maximum speed on leaving water
+		move.w	#-physics_TermVelY,obVelY(a0) ; set maximum speed on leaving water
 
 .belowmaxspeed:
 		move.w	#sfx_Splash,d0
@@ -723,7 +723,7 @@ Sonic_MdJump:
 		btst	#6,obStatus(a0)
 		beq.s	.notunderwater
 		subi.w	#$28,obVelY(a0)
-		addq.w  #1,obY(a0) 
+		;addq.w  #1,obY(a0) 
 
 .notunderwater:
         bsr.w	Sonic_ExtraJump
@@ -1256,14 +1256,14 @@ loc_131CC:
 		move.w	d0,obVelY(a0)
 		muls.w	obInertia(a0),d1
 		asr.l	#8,d1
-		cmpi.w	#$1000,d1
+		cmpi.w	#physics_TermVelY,d1
 		ble.s	loc_131F0
-		move.w	#$1000,d1
+		move.w	#physics_TermVelY,d1
 
 loc_131F0:
-		cmpi.w	#-$1000,d1
+		cmpi.w	#-physics_TermVelY,d1
 		bge.s	loc_131FA
-		move.w	#-$1000,d1
+		move.w	#-physics_TermVelY,d1
 
 loc_131FA:
 		move.w	d1,obVelX(a0)
