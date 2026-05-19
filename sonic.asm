@@ -4249,7 +4249,16 @@ TryAg_Exit:
 		jsr	(PaletteFadeOut).w
 		lea	(vdp_control_port).l,a6
 		move.w	#$8C81,(a6)	; set to H40 mode - hacky fix - coni
+				
+		;!@ GD: You won the game! Goto Debug Menu if so
+		cmpi.b	#6,(v_emeralds).w ; do you have all 6 emeralds?
+		blt.s	.lose
+.win:				
+		move.b	#id_DebugMenu,(v_gamemode).w ; goto Sega screen		
+		bra.s	.end
+.lose:
 		move.b	#id_Sega,(v_gamemode).w ; goto Sega screen
+.end:
 		rts
 
 ; ===========================================================================

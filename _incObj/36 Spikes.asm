@@ -162,6 +162,8 @@ Spik_Feature:
 		;(player can get stuck in a wall of spikes and die at top of level lol)
 		cmpi.b	#5,obFrame(a0)	; is object type $5x ?
 		beq.s	.nobugs
+		cmpi.b	#1,obFrame(a0)	; is object type $1x ?
+		beq.s	.nobugs
 		
 		moveq	#7,d0
 		and.w	(v_framecount).w,d0
