@@ -3766,7 +3766,7 @@ SignpostArtLoad2:
 Demo_GHZ:	binclude	"demodata/Intro - GHZ.bin"
 Demo_MZ:	binclude	"demodata/Intro - MZ.bin"
 Demo_SYZ:	binclude	"demodata/Intro - SYZ.bin"
-;Demo_BREW:	binclude	"demodata/Intro - BREW.bin"
+Demo_DVZ:	binclude	"demodata/Intro - DVZ.bin"
 ; ===========================================================================
 
 		include	"_incObj/80 Continue Screen Elements.asm"		; KEEP!!!!!!

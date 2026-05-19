@@ -99,7 +99,7 @@ DemoDataPtr:	dc.l Demo_GHZ		; orange world
 				dc.l Demo_SYZ		; technically unused cuz uhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh gamemode
 				dc.l Demo_SYZ		; bill gates scratching hi s ball gates )enesud(
 				dc.l Demo_SYZ		; rivet (unused i gave up labelling)
-				dc.l Demo_SYZ		; AH THERE YOU ARE DOLEVILLE
+				dc.l Demo_DVZ		; AH THERE YOU ARE DOLEVILLE
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
