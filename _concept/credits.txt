@@ -3,6 +3,7 @@ Credits:
 (to be added to the credits screen and thread page)
 
 Project Lead:
+Katsushimi
 DeltaW
 pikanoob
 
@@ -24,11 +25,11 @@ GenesisDoes
 dawidooo301
 ollie-ollie-tech-deck
 Malachi
-nanothehedgehog	(Request: credit me as "Omicronano" in the credits screen)
+Omicronano
 KGL
 RobiWanKenobi
 Min3rREALS
-MaybeNotMonitor (GMZ - credit as "garblemarden" !!!)
+garblemarden
 giovannidotgen
 dingish
 Hame
@@ -42,10 +43,3 @@ CandyDaCat
 
 
 Nineko/Sonineko music (for Sonic 1 musicFE/MMZ Past song)
-"That's right. [Nineko has] come to the decision to make the whole soniNeko OST available for public download,
-so that everyone can use those songs in their hacks.
-Of course there are a few rules to respect, though:
-1. Give full credit to me to the maximum possible extent (e.g. release thread, wiki page, actual screen in the hack);"
-
-Please credit him properly in in the release
-_
