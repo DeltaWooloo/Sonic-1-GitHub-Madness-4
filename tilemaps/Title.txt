@@ -1,0 +1,11 @@
+; provided by GenesisDoes, adapted for main folder
+Palette File: ../palette/Title Screen.bin
+Mapping File: ../tilemaps/Title Screen.eni
+Art File: ../artnem/Title Screen Foreground.nem
+Mapping Compression: Enigma
+Art Compression: Nemesis
+Palette Length: 0x80
+Palette Offset: 0x00
+x-Size: 40
+y-Size: 38
+Tile Offset: 0x200

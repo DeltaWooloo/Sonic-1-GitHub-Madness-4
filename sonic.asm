@@ -2779,7 +2779,7 @@ FinalTitle:
 		moveq	#palid_Title,d0	; load title screen palette
 		bsr.w	PalLoad_Fade
 		move.b	#0,(f_debugmode).w ; disable debug mode
-		move.w	#60*60,(v_generictimer).w ; run title screen for NOT 376 frames
+		move.w	#fps_Rate*20,(v_generictimer).w ; run title screen for 20 seconds
 		
 	if FixBugs
 		; Fix the Press Start Button text
@@ -2935,8 +2935,13 @@ AtoTimerLoop2:
 		dbf     d1, AtoTimerLoop2   ; Absolute trash code
 	    
 Tit_ChkLevSel:
-		move.b	#2,(v_continues).w 		; set continues to 2 for when it goes to level instead
-		move.b	#id_DebugMenu,(v_gamemode).w	; go to debug mode
+		move.b	#2,(v_continues).w 		; set continues to 2 for when it goes to level instead		
+		if DickingAround=1
+		move.b	#id_DebugMenu,(v_gamemode).w	; goto debug mode
+		else
+		move.w	#(id_OWZ<<8),(v_zone).w	; set level to GHZ (00)
+		move.b	#id_Options,(v_gamemode).w		; goto Options
+		endif
 		rts
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -3535,7 +3540,9 @@ Level_MainLoop:
 .tradwife:
 		tst.w	(f_demo).w				; do fadeout in demos (compatibility)
 		beq.w	GM_Level
-		move.b	#id_Sega,(v_gamemode).w
+		; !@ GD: Goto Title
+		;move.b	#id_Sega,(v_gamemode).w	
+		move.b	#id_Title,(v_gamemode).w	
 .fadeout:
 		move.w	#60,(v_generictimer).w
 		move.w	#$3F,(v_pfade_start).w
@@ -3710,6 +3717,9 @@ SignpostArtLoad:
 		cmpi.b	#2,(v_act).w	; is act number 02 (act 3)?
 		beq.w	SignpostArtLoad2.exit		; if yes, branch
 		cmpi.w	#(id_ACZ<<8)+3,(v_zone).w	; is this giovanni's test level?
+		beq.w	SignpostArtLoad2.exit		; if yes, branch
+		;!@ GD: Skip hardware store, because softlock in message easter egg area
+		cmpi.w	#(id_DVZ<<8)+1,(v_zone).w	; is this DV2?
 		beq.w	SignpostArtLoad2.exit		; if yes, branch
 
 		move.w	(v_screenposx).w,d0
