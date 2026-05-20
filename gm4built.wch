@@ -1,5 +1,5 @@
 0
-46
+47
 00000	00FFFFD5	b	h	0	f_difficulty
 00001	00FFFE0E	w	h	0	v_zone
 00002	00FFF740	b	h	0	v_dle_routine
@@ -36,14 +36,14 @@
 00021	00FFF62A	w	h	0	v_vbla_routine
 00022	00FFF733	b	h	0	v_waterflag
 00023	00FFF64E	b	h	0	f_water
-00024	00FFF648	w	h	0	v_waterpos1
-00025	00FFF73E	b	h	0	f_gnu
-00026	00000000	S	S	0	----------------------------
-00027	00FFF7D8	b	h	0	v_squashbuffer
-00028	00FFF73F	b	h	0	f_RandMonPow
-00029	00FFD01C	b	h	0	obAnim(v_player)
-0002A	00FFFE12	w	h	0	v_air
-0002B	00FFF7A5	b	h	0	v_bossstatus
-0002C	00FFF000	d	h	0	v_endcard
-0002D	00000000	S	S	0	----------------------------
-
+00024	00FFF650	b	h	0	f_wtr_state
+00025	00FFF648	w	h	0	v_waterpos1
+00026	00FFF73E	b	h	0	f_gnu
+00027	00000000	S	S	0	----------------------------
+00028	00FFF7D8	b	h	0	v_squashbuffer
+00029	00FFF73F	b	h	0	f_RandMonPow
+0002A	00FFD01C	b	h	0	obAnim(v_player)
+0002B	00FFFE12	w	h	0	v_air
+0002C	00FFF7A5	b	h	0	v_bossstatus
+0002D	00FFF000	d	h	0	v_endcard
+0002E	00000000	S	S	0	----------------------------
