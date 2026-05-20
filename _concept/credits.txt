@@ -48,3 +48,4 @@ Of course there are a few rules to respect, though:
 1. Give full credit to me to the maximum possible extent (e.g. release thread, wiki page, actual screen in the hack);"
 
 Please credit him properly in in the release
+_

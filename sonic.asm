@@ -12,7 +12,7 @@
 ; ASSEMBLY OPTIONS:
 
 
-DickingAround = 1
+DickingAround = 0
 ; 	| If 0, loads SEGA screen first (for public release)
 ; 	| If 1, load Debug Menu first
 
@@ -3959,6 +3959,15 @@ End_AllEmlds:
 		bpl.s	End_SlowFade
 		move.w	#2,(v_palchgspeed).w
 		bsr.w	WhiteOut_ToWhite
+		
+		;!@ If maniac, then play bomb sfx flash bang
+		cmpi.b	#chrid_maniac,(v_savedcharacterid).w
+		bne.s	End_SlowFade
+		
+		movem.l	d0,-(sp)
+		move.w	#sfx_Bomb,d0
+		jsr		(PlaySound_Special).l
+		movem.l	(sp)+,d0
 
 End_SlowFade:
 		tst.w	(f_restart).w
@@ -3977,6 +3986,29 @@ End_SlowFade:
 		moveq	#palid_Ending,d0
 		bsr.w	PalLoad_Fade	; load ending palette
 		bsr.w	PaletteWhiteIn
+		
+		;!@ GD: This code here is also not working in loading the lives counter
+		jsr	(GetOtherPlayerData).l
+		move.w	pdat.livesart(a5),d0
+		add.l	#Nem_Lives,d0 ; use RAM for PLC
+		lea	(v_ram_start).l,a1
+		move.l	d0,(a1)
+		move.w	#ArtTile_Lives_Counter*$20,4(a1)
+		move.l	#-1,6(a1)
+		bsr.w	UserPLC
+
+		jsr	(GetPlayerData).l
+		move.l	d3,a0
+		lea	v_palette,a1
+		move.l	(a0)+,(a1)+	; quick
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+
 		bra.w	End_MainLoop
 
 ; ---------------------------------------------------------------------------

@@ -142,5 +142,4 @@ Obj87_maniacFlashBangWait:
 		addq.b	#2,ob2ndRout(a0)
 Obj87_maniacFlashBangEnd:
 		jsr	Player_Animate
-		jsr	Player_LoadGfx
-		rts
+		jmp	Player_LoadGfx
