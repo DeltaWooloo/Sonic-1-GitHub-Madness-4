@@ -1,5 +1,4 @@
 Coding:
 - Sega Pico build flag/gamepad code
 - Random monitor
-	- Add random monitor/slow down shoes to levels	
 	- Character water palettes/Funky Colors undo

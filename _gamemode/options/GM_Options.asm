@@ -30,18 +30,30 @@ GM_Options:
 GM_Opt_ClrObjRam:
 		move.l	d0,(a1)+
 		dbf	d1,GM_Opt_ClrObjRam ; clear object RAM
-		move.b	#bgm_Memories,d0
-		jsr		(PlaySound_Special).l  ; play memories music
+		move.b	#bgm_MM8StageSelect,d0
+		jsr		(PlaySound_Special).l  ; play song
 		locVRAM	0
 		lea     (Nem_Options).l,a0
 		jsr		(NemDec).l	
+		
 		lea	($FF0000).l,a1
-		lea	(Eni_Options).l,a0 ; load map
+		lea	(Eni_OptionsBG).l,a0 ; load BG map
 		move.w	#0,d0
 		jsr		(EniDec).l
 
 		lea	($FF0000).l,a1
 		locVRAM	$E000,d0
+		moveq	#$28-1,d1
+		moveq	#$1C-1,d2
+		jsr		(TilemapToVRAM).l
+		
+		lea	($FF0000).l,a1
+		lea	(Eni_OptionsFG).l,a0 ; load FG map
+		move.w	#0,d0
+		jsr		(EniDec).l
+
+		lea	($FF0000).l,a1
+		locVRAM	$C000,d0
 		moveq	#$28-1,d1
 		moveq	#$1C-1,d2
 		jsr		(TilemapToVRAM).l
@@ -70,12 +82,12 @@ GM_Opt_ControlExit:
 		rts
 
 GM_Opt_PalSet:
-		lea     (Pal_Options2).l,a0
+		lea     (Pal_Options).l,a0
 		tst.b	(charizard).w ; check difficulty
 		beq.s	.dontset
-		lea     (Pal_Options).l,a0
+		lea     (Pal_Options2).l,a0
 	.dontset:
-		moveq   #32-1,d7	; 32 colors
+		moveq   #32-1,d7	; 64 colors
 	.loop:
 		move.l  (a0)+,(a1)+
 		dbf.w	d7,.loop
@@ -87,5 +99,7 @@ Pal_Options2:		bincludeEndMarker	"_gamemode/options/palette2.bin"
 		even
 Nem_Options:		binclude	"_gamemode/options/tiles.nem"
 		even
-Eni_Options:		binclude	"_gamemode/options/map.eni"
+Eni_OptionsFG:		binclude	"_gamemode/options/mapFG.eni"
+		even
+Eni_OptionsBG:		binclude	"_gamemode/options/mapBG.eni"
 		even

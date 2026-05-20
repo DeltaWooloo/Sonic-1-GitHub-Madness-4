@@ -29,7 +29,8 @@ Pause_Loop:
 		if DickingAround=1
 		move.b	#id_DebugMenu,(v_gamemode).w ; set Game Mode to deubg menu Screen
 		else
-		move.b	#id_Sega,(v_gamemode).w ; set Game Mode to Sega Screen
+		;!@ move.b	#id_Sega,(v_gamemode).w ; set Game Mode to Sega Screen
+		move.b	#id_Title,(v_gamemode).w ; set Game Mode to Sega Screen
 		endif
 		nop	
 		bra.s	Pause_EndMusic

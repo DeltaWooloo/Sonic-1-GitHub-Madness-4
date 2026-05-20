@@ -123,7 +123,9 @@ Screensa_MainLoop:
 		bra	Screensa_MainLoop
 
 Screensa_BackToSega:
-		move.b	#id_Sega,v_gamemode
+		;!@ GD: Changed
+		;move.b	#id_Sega,(v_gamemode).w ; go to Sega screen
+		move.b	#id_Title,(v_gamemode).w ; go to Sega screen
 		rts
 
 ManageScreensaSonic:
