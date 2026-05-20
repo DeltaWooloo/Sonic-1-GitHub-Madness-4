@@ -4034,7 +4034,10 @@ End_MoveSonExit:
 		include	"_incObj/89 Ending Sequence STH.asm"
 Map_ESon:	include	"_maps/Ending Sequence Sonic.asm"
 Map_ECha:	include	"_maps/Ending Sequence Emeralds.asm"
+;!@ GD: Tonic logo map
 Map_ESth:	include	"_maps/Ending Sequence STH.asm"
+;!@ GD: Maniac logo map
+Map_ESth2:	include	"_maps/Ending Sequence STH2.asm"
 
 ; ===========================================================================
 ; The entirety of Too LimitedSonic (with the header stripped out)

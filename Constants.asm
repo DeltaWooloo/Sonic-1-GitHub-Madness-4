@@ -1002,10 +1002,12 @@ ArtTile_Ending_Rabbit:		equ $553
 ArtTile_Ending_Chicken:		equ $565
 ArtTile_Ending_Penguin:		equ $573
 ArtTile_Ending_Seal:		equ $585
-ArtTile_Ending_Pig:		equ $593
+ArtTile_Ending_Pig:			equ $593
 ArtTile_Ending_Flicky:		equ $5A5
 ArtTile_Ending_Squirrel:	equ $5B3
-ArtTile_Ending_STH:		equ $5C5
+ArtTile_Ending_STH:			equ $5C5
+;!@ GD: New
+ArtTile_Ending_STH2:		equ	$2E0
 
 ; Try Again Screen
 ArtTile_Try_Again_Emeralds:	equ $3C5

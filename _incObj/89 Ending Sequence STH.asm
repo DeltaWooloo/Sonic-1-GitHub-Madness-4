@@ -20,8 +20,17 @@ ESth_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.w	#-$20,obX(a0)	; object starts outside the level boundary
 		move.w	#$D8,obScreenY(a0)
+		
+		
+		;!@ GD: Use char's art
 		move.l	#Map_ESth,obMap(a0)
-		move.w	#make_art_tile(ArtTile_Ending_STH,0,0),obGfx(a0)
+		move.w	#make_art_tile(ArtTile_Ending_STH,0,0),obGfx(a0)	;Tonic art
+		cmpi.b	#chrid_tonic,(v_savedcharacterid).w
+		beq.s	.notManiac
+		move.l	#Map_ESth2,obMap(a0)
+		move.w	#make_art_tile(ArtTile_Ending_STH2,0,0),obGfx(a0)	;Maniac art
+	.notManiac:
+
 		move.b	#0,obRender(a0)
 		move.b	#0,obPriority(a0)
 

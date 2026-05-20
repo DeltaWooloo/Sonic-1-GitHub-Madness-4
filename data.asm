@@ -569,7 +569,11 @@ Nem_EndFlower:	binclude	"artnem/Ending - Flowers.nem"
 		even
 Nem_CreditText:	binclude	"artnem/Ending - Credits.nem"
 		even
-Nem_EndStH:	binclude	"artnem/Ending - StH Logo.nem"
+;!@ GD: Ending logo (Tonic)
+Nem_EndStH:			binclude	"artnem/Ending - StH Logo.nem"
+		even
+;!@ GD: Ending logo (Maniac)
+Nem_EndStH2:		binclude	"artnem/Ending - StH Logo2.nem"
 		even
 Eni_TheIdiotBros:	binclude	"tilemaps/Idiots.eni"
 		even
