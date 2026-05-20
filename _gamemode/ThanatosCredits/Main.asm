@@ -278,41 +278,42 @@ thantxt: macro txt
 	dc.b strlen(txt)+1,txt
 	endm
 
-	thantxt	"SONIC I:"
-	thantxt	"GITHUB MADNESS IV"
-	dc.b	1,1
-
-
-	thantxt	"SONIC I TEAM"
+	thantxt	"SONIC GITHUB MADNESS"
+	thantxt	"IV"
 	dc.b	1
-	thantxt	" GAME PLAN"
-	thantxt	"HIROKAZU YASUHARA"
-	dc.b 1
-	thantxt	" PROGRAM"
-	thantxt	"YUJI NAKA"
-	dc.b 1
-	thantxt	" CHARACTER DESIGN"
-	thantxt	"NAOTO OSHIMA"
-	dc.b 1
-	thantxt	" DESIGN"
-	thantxt	"J.ISWTR. TSUKAHARA"
-	thantxt	"RIEKO KODAMA"
-	dc.b 1
-	thantxt	" SOUND PRODUCE"
-	thantxt	"MASATO NAKAMURA"
-	dc.b 1
-	thantxt	" SOUND PROGRAM"
-	thantxt	"HIROSHI KUBOTA"
-	thantxt	"YUKIFUMI MAKINO"
-	dc.b 1
-	thantxt	" SPECIAL THANKS"
-	thantxt	"FUJIO MINEGISHI"
-	thantxt "PAPA"
-	dc.b 1
-	thantxt	"  ORIGINAL GAME"
-	thantxt	"PRESENTED BY SEGA"
-	dc.b	1,1
+	thantxt	"STAFF"
+	dc.b	1,1,1
 
+	; GMZ - Bloat
+	;thantxt	"SONIC I TEAM"
+	;dc.b	1
+	;thantxt	" GAME PLAN"
+	;thantxt	"HIROKAZU YASUHARA"
+	;dc.b 1
+	;thantxt	" PROGRAM"
+	;thantxt	"YUJI NAKA"
+	;dc.b 1
+	;thantxt	" CHARACTER DESIGN"
+	;thantxt	"NAOTO OSHIMA"
+	;dc.b 1
+	;thantxt	" DESIGN"
+	;thantxt	"J.ISWTR. TSUKAHARA"
+	;thantxt	"RIEKO KODAMA"
+	;dc.b 1
+	;thantxt	" SOUND PRODUCE"
+	;thantxt	"MASATO NAKAMURA"
+	;dc.b 1
+	;thantxt	" SOUND PROGRAM"
+	;thantxt	"HIROSHI KUBOTA"
+	;thantxt	"YUKIFUMI MAKINO"
+	;dc.b 1
+	;thantxt	" SPECIAL THANKS"
+	;thantxt	"FUJIO MINEGISHI"
+	;thantxt "PAPA"
+	;dc.b 1
+	;thantxt	"  ORIGINAL GAME"
+	;thantxt	"PRESENTED BY SEGA"
+	;dc.b	1,1
 
 	thantxt	"REPO OWNER"
 	dc.b	1
@@ -326,7 +327,7 @@ thantxt: macro txt
 	thantxt	"PIKANOOB"		
 	dc.b	1,1
 
-	thantxt	"GHM IV DEV TEAM" ;Originally "Members," but I thought this would be more formal. ~TG2000
+	thantxt	"DEVELOPERS" ;Originally "Members," but I thought this would be more formal. ~TG2000
 	dc.b	1
 	thantxt	"KATSUSHIMI"
 	thantxt	"BLINGUS"		; created maniac intro art
@@ -337,7 +338,7 @@ thantxt: macro txt
 	thantxt	"GENESISDOES"
 	thantxt	"DINGISH"
 	thantxt	"MATTMANIA"
-	thantxt "THEGAMERMM"
+	thantxt	"THEGAMERMM"
 	thantxt	"HIPSNAKE"
 	thantxt	"LIQUID GROGU"
 	thantxt	"CONINIGHT"
@@ -348,7 +349,23 @@ thantxt: macro txt
 	thantxt	"DAWID"
 	thantxt	"SANCHI"
 	thantxt	"DARKSHAMILKHAN"
-	thantxt	"ADD YOUR NAME HERE"
+
+	;thantxt	"ADD YOUR NAME HERE"
+
+	thantxt	"ROBEEFNIK"
+	thantxt	"ARCANIACQ"
+	thantxt	"STEALTHY"
+	thantxt	"OLLIE TECHDECK"
+	thantxt	"MINERREALS"
+	thantxt	"GARBLEMARDEN"
+	thantxt	"GIOVANNI"
+	thantxt	"HAME"
+	thantxt	"GAMICOSMI"
+	thantxt	"TALKWALKER"
+	thantxt	"VERTZ"
+	thantxt	"SAMUELWITHTHECODE"
+	thantxt	"FORGOTTENARCHIVE"
+	thantxt	"CANDYDACAT"
 	dc.b	1,1
 	
 	thantxt	"QA LEAD"
@@ -392,11 +409,9 @@ thantxt: macro txt
 	dc.b	1
 	thantxt	"TEETH TONIC"
 	thantxt	"DELTAW"
-	thantxt	"PIKANOOB"	
-	thantxt	"TALKWALKER"
+	thantxt	"PIKANOOB"
 	thantxt	"NINEKO SONINEKO"
 	thantxt	"DEVON"
-	thantxt	"OLLIE TECHDECK"
 	thantxt	"CLOWNANCY"				;Intentional typo for Ollie; lol
 	thantxt	"VLADIKOMPER"			;MegaPCM
 	thantxt	"ARCADETV"				;MSU Driver
