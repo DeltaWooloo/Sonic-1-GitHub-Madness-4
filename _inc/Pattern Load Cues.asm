@@ -551,25 +551,26 @@ PLC_ARZAnimalsend:
 PLC_Ending1:	dc.w ((PLC_Ending1end-PLC_Ending1-2)/6)-1
 		; !@ Add other character stuff
 		; Empty PLC.
-		plcm	Nem_Hud,    ArtTile_HUD           ; HUD
-		plcm	Nem_Ring,   ArtTile_Ring          ; rings
-		plcm	Nem_Monitors, ArtTile_Monitor       ; monitors
-		plcm	Nem_EndSonic,  ArtTile_Ending_Sonic     ; Sonic
+		plcm	Nem_Hud,    	ArtTile_HUD           	; HUD
+		plcm	Nem_Ring,   	ArtTile_Ring          	; rings
+		plcm	Nem_Monitors, 	ArtTile_Monitor       	; monitors
+		plcm	Nem_EndSonic,  	ArtTile_Ending_Sonic    ; Sonic
+		plcm	Nem_EndStH,    	ArtTile_Ending_STH      ; "TONIC THE HEDGEHOG"
+		plcm	Nem_EndStH2,    ArtTile_Ending_STH2     ; "MANIAC THE MOUSE"
 PLC_Ending1end:
 
 PLC_Ending2:	dc.w ((PLC_Ending2end-PLC_Ending2-2)/6)-1
 ;		plcm	Nem_GHZ,   ArtTile_Level            ; GHZ main patterns
-		plcm	Nem_Stalk,     ArtTile_GHZ_Flower_Stalk ; flower stalk
-		plcm	Nem_EndFlower, ArtTile_Ending_Flowers   ; flowers
-		plcm	Nem_EndEm,     ArtTile_Ending_Emeralds  ; emeralds
-		plcm	Nem_Rabbit,    ArtTile_Ending_Rabbit    ; rabbit
-		plcm	Nem_Chicken,   ArtTile_Ending_Chicken   ; chicken
-		plcm	Nem_Penguin,   ArtTile_Ending_Penguin   ; penguin
-		plcm	Nem_Seal,      ArtTile_Ending_Seal      ; seal
-		plcm	Nem_Pig,       ArtTile_Ending_Pig       ; pig
-		plcm	Nem_Flicky,    ArtTile_Ending_Flicky    ; flicky
-		plcm	Nem_Squirrel,  ArtTile_Ending_Squirrel  ; squirrel
-		plcm	Nem_EndStH,    ArtTile_Ending_STH       ; "SONIC THE HEDGEHOG"
+		plcm	Nem_Stalk,     	ArtTile_GHZ_Flower_Stalk ; flower stalk
+		plcm	Nem_EndFlower, 	ArtTile_Ending_Flowers   ; flowers
+		plcm	Nem_EndEm,     	ArtTile_Ending_Emeralds  ; emeralds
+		plcm	Nem_Rabbit,    	ArtTile_Ending_Rabbit    ; rabbit
+		plcm	Nem_Chicken,   	ArtTile_Ending_Chicken   ; chicken
+		plcm	Nem_Penguin,   	ArtTile_Ending_Penguin   ; penguin
+		plcm	Nem_Seal,      	ArtTile_Ending_Seal      ; seal
+		plcm	Nem_Pig,       	ArtTile_Ending_Pig       ; pig
+		plcm	Nem_Flicky,    	ArtTile_Ending_Flicky    ; flicky
+		plcm	Nem_Squirrel,  	ArtTile_Ending_Squirrel  ; squirrel		
 PLC_Ending2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - "TRY AGAIN" and "END" screens
