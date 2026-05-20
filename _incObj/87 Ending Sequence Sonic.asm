@@ -9,20 +9,34 @@ EndSonic:
 		jsr	ESon_Index(pc,d1.w)
 		jmp	(DisplaySprite).l
 ; ===========================================================================
-ESon_Index:	dc.w ESon_Main-ESon_Index, ESon_MakeEmeralds-ESon_Index
-		dc.w Obj87_Animate-ESon_Index,	Obj87_LookUp-ESon_Index
-		dc.w Obj87_ClrObjRam-ESon_Index, Obj87_Animate-ESon_Index
-		dc.w Obj87_MakeLogo-ESon_Index, Obj87_Animate-ESon_Index
-		dc.w Obj87_Leap-ESon_Index, Obj87_Animate-ESon_Index
+ESon_Index:
+		;tonic good end
+		dc.w ESon_Main-ESon_Index, ESon_MakeEmeralds-ESon_Index 	;00,02
+		dc.w Obj87_Animate-ESon_Index,	Obj87_LookUp-ESon_Index		;04,06
+		dc.w Obj87_ClrObjRam-ESon_Index, Obj87_Animate-ESon_Index	;08,0A
+		dc.w Obj87_MakeLogo-ESon_Index								;0C
+		;tonic bad end
+		dc.w Obj87_Animate-ESon_Index								;0E
+		dc.w Obj87_Leap-ESon_Index, Obj87_Animate-ESon_Index		;10,12
+		;maniac
+		dc.w Obj87_maniacFlashBang-ESon_Index, Obj87_maniacFlashBangEnd-ESon_Index	;14,16
 
 eson_time = objoff_30	; time to wait between events
 ; ===========================================================================
 
 ESon_Main:	; Routine 0
-		cmpi.b	#6,(v_emeralds).w ; do you have all 6 emeralds?
+		tst.b	(v_characterid).w ; maniac?
+		bne.s	ESon_ManiacLogo	; if yes, branch
+		cmpi.b	#6,(v_emeralds).w ; else, do tonic's, do you have all 6 emeralds?
 		beq.s	ESon_Main2	; if yes, branch
 		addi.b	#$10,ob2ndRout(a0) ; else, skip emerald sequence
 		move.w	#216,eson_time(a0)
+		rts
+ESon_ManiacLogo:
+		move.b	#id_EndSTH,(v_endlogo).w ; load "SONIC THE HEDGEHOG" object
+		move.b	#id_LookUp,(v_player+obAnim).w 
+		addi.b	#$14,ob2ndRout(a0)
+		move.w	#5*60,eson_time(a0)
 		rts
 ; ===========================================================================
 
@@ -111,4 +125,19 @@ Obj87_Leap:	; Routine $10
 ; ===========================================================================
 
 ESon_Wait4:
+		rts
+
+Obj87_maniacFlashBang:
+		subq.w	#1,eson_time(a0)
+		bne.s	Obj87_maniacFlashBangEnd
+		move.w	#sfx_Bomb,d0
+		jsr		PlaySound_Special
+		;somebody fix this
+		move.l	a0,-(sp)
+		jsr		PaletteWhiteOut
+		move.l	(sp)+,a0
+		addq.b	#2,ob2ndRout(a0)
+Obj87_maniacFlashBangEnd:
+		jsr	Player_Animate
+		jsr	Player_LoadGfx
 		rts
