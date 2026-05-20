@@ -19,8 +19,8 @@ ESon_Index:
 		dc.w Obj87_Animate-ESon_Index								;0E
 		dc.w Obj87_Leap-ESon_Index, Obj87_Animate-ESon_Index		;10,12
 		;maniac
-		dc.w Obj87_maniacFlashBang-ESon_Index, Obj87_maniacFlashBangEnd-ESon_Index	;14,16
-
+		dc.w Obj87_maniacFlashBang-ESon_Index, Obj87_maniacFlashBangWait-ESon_Index	;14,16
+		dc.w Obj87_maniacFlashBangEnd-ESon_Index									;18
 eson_time = objoff_30	; time to wait between events
 ; ===========================================================================
 
@@ -36,7 +36,7 @@ ESon_ManiacLogo:
 		move.b	#id_EndSTH,(v_endlogo).w ; load "SONIC THE HEDGEHOG" object
 		move.b	#id_LookUp,(v_player+obAnim).w 
 		addi.b	#$14,ob2ndRout(a0)
-		move.w	#5*60,eson_time(a0)
+		move.w	#5*50,eson_time(a0)	;50 frames so it flashbangs the screen in time
 		rts
 ; ===========================================================================
 
@@ -132,10 +132,13 @@ Obj87_maniacFlashBang:
 		bne.s	Obj87_maniacFlashBangEnd
 		move.w	#sfx_Bomb,d0
 		jsr		PlaySound_Special
-		;somebody fix this
-		move.l	a0,-(sp)
-		jsr		PaletteWhiteOut
-		move.l	(sp)+,a0
+		move.w	#1,(f_restart).w ; set level to restart (causes flash)
+		move.w	#50,eson_time(a0)
+		addq.b	#2,ob2ndRout(a0)
+Obj87_maniacFlashBangWait:
+		subq.w	#1,eson_time(a0)
+		bne.s	Obj87_maniacFlashBangEnd
+		move.w	#1,(f_restart).w ; set level to restart so flash ends
 		addq.b	#2,ob2ndRout(a0)
 Obj87_maniacFlashBangEnd:
 		jsr	Player_Animate

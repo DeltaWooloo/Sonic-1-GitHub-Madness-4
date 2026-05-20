@@ -3964,6 +3964,8 @@ End_SlowFade:
 		tst.w	(f_restart).w
 		beq.w	End_AllEmlds
 		clr.w	(f_restart).w
+		tst.b	(v_characterid).w ; maniac?
+		bne.w	End_MainLoop	; if yes, branch
 		;!@ GD: Adjusted with new level layout
 		move.w	#$2F30,(v_lvllayout+$80).w ; modify level layout
 		lea	(vdp_control_port).l,a5
