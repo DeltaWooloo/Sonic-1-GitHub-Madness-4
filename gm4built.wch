@@ -2,8 +2,8 @@
 46
 00000	00FFFFD5	b	h	0	f_difficulty
 00001	00FFFE0E	w	h	0	v_zone
-00002	00FFFEAA	w	h	0	v_nextZone
-00003	00FFF740	b	h	0	v_dle_routine
+00002	00FFF740	b	h	0	v_dle_routine
+00003	00FFF7A8	b	h	0	f_lockscreen
 00004	00000000	S	S	0	----------------------------
 00005	00FFD004	b	h	0	obPinball(v_player)
 00006	00FFD004	d	h	0	obMap(v_player)
@@ -46,3 +46,4 @@
 0002B	00FFF7A5	b	h	0	v_bossstatus
 0002C	00FFF000	d	h	0	v_endcard
 0002D	00000000	S	S	0	----------------------------
+

@@ -45,7 +45,7 @@ AniArt_Index:
 		; !@ Ending anim art (special good ending flowers) is throwing an addr error
 		; Just replace with GHZ AnimArt, and replace the dynmaically loaded level chunks for good Ending
 		; with regular art. The good ending AnimArt is hardcoded to some chunk IDs
-		dc.w AniArt_Ending-AniArt_Index		; id_EndZ
+		;dc.w AniArt_Ending-AniArt_Index	; id_EndZ
 		dc.w AniArt_GHZ-AniArt_Index		; id_EndZ
 		
 		dc.w AniArt_CBZ-AniArt_Index		; id_CBZ

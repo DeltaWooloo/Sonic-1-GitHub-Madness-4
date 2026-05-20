@@ -3711,6 +3711,9 @@ SignpostArtLoad:
 		beq.w	SignpostArtLoad2.exit		; if yes, branch
 		cmpi.w	#(id_ACZ<<8)+3,(v_zone).w	; is this giovanni's test level?
 		beq.w	SignpostArtLoad2.exit		; if yes, branch
+		;!@ GD: Skip hardware store, because softlock in message easter egg area
+		cmpi.w	#(id_DVZ<<8)+1,(v_zone).w	; is this DV2?
+		beq.w	SignpostArtLoad2.exit		; if yes, branch
 
 		move.w	(v_screenposx).w,d0
 		move.w	(v_limitright2).w,d1
