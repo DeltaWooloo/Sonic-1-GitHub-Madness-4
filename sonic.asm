@@ -12,11 +12,11 @@
 ; ASSEMBLY OPTIONS:
 
 
-DickingAround = 1
+DickingAround = 0
 ; 	| If 0, loads SEGA screen first (for public release)
 ; 	| If 1, load Debug Menu first
 
-EggblockOrigin = 1
+EggblockOrigin = 0
 ; 	| If 0, play ads at 5 minute intervals or when grabbing the ad random monitor powerup
 ; 	| If 1, no ads play at all unless opened from debug menu
 
@@ -25,7 +25,7 @@ DemoRecord = 0
 ; 	| If 0, regular gameplay physics
 ; 	| If 1, disable Sonic CD terminal velocity/speed caps for Sonic
 
-CheatsOn = 1
+CheatsOn = 0
 ; 	| If 0, build it with no cheats active
 ; 	| If 1, build it with all cheats active
 
@@ -44,9 +44,9 @@ ZeroOffsetOptimization = 0|AllOptimizations
 PaddingOptimization = 0|AllOptimizations
 ;	| If 1, removes about 3 KB of various superfluous padding
 
-EnableSRAM = 1
+EnableSRAM = 0
 ;	| If 1, enable SRAM support
-BackupSRAM = 1
+BackupSRAM = 0
 ;	| 0 = no saving (read-only SRAM); 1 = allow saving
 AddressSRAM = 3
 ;	| 0 = odd+even; 2 = even only; 3 = odd only
