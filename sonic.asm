@@ -432,6 +432,7 @@ GameModeArray:
 	GAMEMODE	TryAgainEnd,		id_TryAgainEnd	; TRY AGAIN/END screen
 	GAMEMODE	GM_ColdBrew,		id_ColdBrew	; Cold Brew
 	GAMEMODE	GM_FoxyBoo,		id_FoxyBoo	; Jumpscare Test Mode
+	GAMEMODE	GM_Options,		id_Options	; Options select
 	GAMEMODE	GM_Fetus,		id_Fetus	; Difficulty Select
 	GAMEMODE	GM_Damn,		id_Damn		; DAMN!!!!!!!!!!!!!!!!!!!!!!!
 	GAMEMODE	GM_Advert,		id_Advert	; In-Game Advertisements
@@ -6971,7 +6972,9 @@ Art_LivesNums:	binclude	"artunc/Lives Counter Numbers.bin" ; 8x8 pixel numbers o
 		include	"_inc/SelbiTitlecards.asm"
 		include "conimodes/cold brew/GM_ColdBrew.asm"
 		include "conimodes/winxp/GM_NTOSKRNL.asm"
-		include "conimodes/splash/GM_CNNicoJump.asm"
+		include "conimodes/splash/GM_CNNicoJump.asm"		
+		;!@ GD: New Options mode
+		include "_gamemode/options/GM_Options.asm"
 		include "conimodes/fetus/GM_Fetus.asm"
 		include "conimodes/foxyboo/GM_FoxyBoo.asm"
 		include "conimodes/sorrynothing/GM_SorryNothing.asm"

@@ -625,6 +625,7 @@ GamemodeNameTable:
 		dc.w	.TryAgain-.t
 		dc.w	.ColdBrew-.t
 		dc.w	.Jumpscare-.t
+		dc.w	.Options-.t
 		dc.w	.Difficulty-.t
 		dc.w	.DamnScreen-.t
 		dc.w	.Advert-.t
@@ -649,16 +650,17 @@ GamemodeNameTable:
 .TryAgain:		dc.b	"TRY AGAIN/END   "
 .ColdBrew:		dc.b	"COLD BREW       "
 .Jumpscare:		dc.b	"JUMPSCARE       "
-.Difficulty:		dc.b	"DIFFICULTY      "
-.DamnScreen:		dc.b	"DAMN!!!!!!!!!!!!"
+.Options:		dc.b	"OPTIONS         "
+.Difficulty:	dc.b	"DIFFICULTY      "
+.DamnScreen:	dc.b	"DAMN!!!!!!!!!!!!"
 .Advert:		dc.b	"ADVERTISEMENTS  "
 .Earthbou:		dc.b	"CUTSCENES       "
-.Screensaver:		dc.b	"SCREENSAVER     "
+.Screensaver:	dc.b	"SCREENSAVER     "
 .Clinton:		dc.b	"CLINTON         "
 .BSOD:			dc.b	"WINDOWS BSOD    "
 .Sans:			dc.b	"SANS DEAD       "
 .DebugMenu:		dc.b	"DEBUG MENU      "
-.Placeholder:		dc.b	"PLACEHOLDER NAME"
+.Placeholder:	dc.b	"PLACEHOLDER NAME"
 		even
 
 CharacterNameTable:

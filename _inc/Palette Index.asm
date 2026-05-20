@@ -51,6 +51,8 @@ palid_FelixGameOver:	makePalEntry 	Pal_FelixGameOver, 	v_palette_line_1
 palid_Joint:			makePalEntry	Pal_Joint, 			v_palette_line_2
 palid_Fetus:			makePalEntry	Pal_Fetus, 			v_palette_line_1
 palid_Fetus2:			makePalEntry	Pal_Fetus2, 		v_palette_line_1
+palid_Options:			makePalEntry	Pal_Options, 		v_palette_line_1
+palid_Options2:			makePalEntry	Pal_Options2, 		v_palette_line_1
 
 palid_Black:			makePalEntry	Pal_Black, 			v_palette_line_1
 palid_TGPal:			makePalEntry	Pal_TGPal, 			v_palette_line_1
