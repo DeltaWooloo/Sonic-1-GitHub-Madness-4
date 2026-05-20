@@ -231,7 +231,9 @@ GM_CB_ChangeMode:
 		jsr		(PaletteFadeOut).l
 		lea	(vdp_control_port).l,a6
 		move.w	#$8C81,(a6)	; set to H40 mode
-		move.b	#id_Sega,(v_gamemode).w ; go to Sega screen
+		;!@ GD: Changed
+		;move.b	#id_Sega,(v_gamemode).w ; go to Sega screen
+		move.b	#id_Title,(v_gamemode).w ; go to Sega screen
 		rts
 ; ===========================================================================
 
