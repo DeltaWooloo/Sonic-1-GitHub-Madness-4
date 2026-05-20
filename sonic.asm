@@ -3959,6 +3959,15 @@ End_AllEmlds:
 		bpl.s	End_SlowFade
 		move.w	#2,(v_palchgspeed).w
 		bsr.w	WhiteOut_ToWhite
+		
+		;!@ If maniac, then play bomb sfx flash bang
+		cmpi.b	#chrid_maniac,(v_savedcharacterid).w
+		bne.s	End_SlowFade
+		
+		movem.l	d0,-(sp)
+		move.w	#sfx_Bomb,d0
+		jsr		(PlaySound_Special).l
+		movem.l	(sp)+,d0
 
 End_SlowFade:
 		tst.w	(f_restart).w
