@@ -357,11 +357,11 @@ Str_ManiacIntro3:
 	even
 
 Str_ManiacIntro4:
-	dc.b	"AND THEN A BETASLOP APPEARED AND",-1
-	dc.b	"SHOWED HIS CRAZY HEDGEPENIS.",-1
+	dc.b	"AND THEN A NERDSLOP APPEARED AND",-1
+	dc.b	"SHOWED HIS CRAZY NERDYPENIS.",-1
 	dc.b	-1
 	dc.b	"Uhh. Oh Yeah. That was in the sonic",-1
-	dc.b	"beta 1990.",0 
+	dc.b	"nerdslomp 1990 definitive version.",0 
 	even
 
 Str_ManiacIntro5:
