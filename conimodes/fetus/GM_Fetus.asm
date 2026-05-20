@@ -67,8 +67,12 @@ GM_Fet_ControlExit:
 		lea	(vdp_control_port).l,a6
 		move.w	#$8C81,(a6)	; set to next screen mode
 		
-		move.w	#(id_OWZ<<8),(v_zone).w	; set level to GHZ (00)
-		move.b	#id_Level,(v_gamemode).w ; go to level
+		;!@ GD: Init new game
+		move.w	#(id_OWZ<<8),(v_zone).w		; set level to GHZ (00)		
+		move.b	#0,(v_emeralds).w			; 0 emeralds
+		move.b	#3,(v_lives).w				; 3 lives
+		move.b	#2,(v_continues).w			; 2 continues
+		move.b	#id_Level,(v_gamemode).w 	; goto level
 		rts
 
 GM_Fet_PalSet:
