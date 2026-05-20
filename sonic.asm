@@ -3975,6 +3975,29 @@ End_SlowFade:
 		moveq	#palid_Ending,d0
 		bsr.w	PalLoad_Fade	; load ending palette
 		bsr.w	PaletteWhiteIn
+		
+		;!@ GD: This code here is also not working in loading the lives counter
+		jsr	(GetOtherPlayerData).l
+		move.w	pdat.livesart(a5),d0
+		add.l	#Nem_Lives,d0 ; use RAM for PLC
+		lea	(v_ram_start).l,a1
+		move.l	d0,(a1)
+		move.w	#ArtTile_Lives_Counter*$20,4(a1)
+		move.l	#-1,6(a1)
+		bsr.w	UserPLC
+
+		jsr	(GetPlayerData).l
+		move.l	d3,a0
+		lea	v_palette,a1
+		move.l	(a0)+,(a1)+	; quick
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+
 		bra.w	End_MainLoop
 
 ; ---------------------------------------------------------------------------
