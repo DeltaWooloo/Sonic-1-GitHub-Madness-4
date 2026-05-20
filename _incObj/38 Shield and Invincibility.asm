@@ -4,6 +4,10 @@
 
 shlastframe	= $34
 ShieldItem:
+		;!@ If clinton is fucking, then kill any shields/invin stars
+		cmpi.b	#id_ClintonScr,(v_gamemode).w	; is game mode Clinton?
+		beq.w	Shi_Start_Delete				; if so, branch
+
 		moveq	#0,d0
 		move.b	obRoutine(a0),d0
 		move.w	Shi_Index(pc,d0.w),d1
