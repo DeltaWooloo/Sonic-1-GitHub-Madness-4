@@ -458,13 +458,13 @@ DeadDioMildanner_Display:
 		jmp	(DisplaySprite).l
 
 ; ---------------------------------------------------------------------------
-Map_DioDanner_Intro:	include "_incObj\DioMildanner\Map - Intro.asm"
+Map_DioDanner_Intro:	include "_incObj/DioMildanner/Map - Intro.asm"
 	even
-Map_DioDanner_Boss:	include "_incObj\DioMildanner\Map - BossDPL.asm"
+Map_DioDanner_Boss:	include "_incObj/DioMildanner/Map - BossDPL.asm"
 	even
-DPLC_DioDanner_Boss:	include "_incObj\DioMildanner\DPLC - Boss.asm"
+DPLC_DioDanner_Boss:	include "_incObj/DioMildanner/DPLC - Boss.asm"
 	even
-Map_DioDanner_Dead:	include "_incObj\DioMildanner\Map - Dead.asm"
+Map_DioDanner_Dead:	include "_incObj/DioMildanner/Map - Dead.asm"
 	even
 
 DioDannerAni_Intro:	dc.w .stand-DioDannerAni_Intro
