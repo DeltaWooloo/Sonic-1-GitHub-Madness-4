@@ -291,8 +291,11 @@ locj_6E8C:
 DrawBGScrollBlock3:
 		tst.b	(a2)
 		beq.w	locj_6EF0
+		cmpi.w  #(id_ACZ<<8)+3,(v_zone).w	; GIO: do not use MZ deformation for ACZ4
+		beq.w	.skip				
 		cmpi.b	#id_ACZ,(v_zone).w
 		beq.w	Draw_Mz
+.skip:		
 		bclr	#0,(a2)
 		beq.s	locj_6ED0
 		; Draw new tiles on the left
@@ -693,8 +696,11 @@ LoadTilesFromStart:
 		move.w	#$6000,d2
 		tst.b	(v_zone).w
 		beq.w	Draw_GHz_Bg
+		cmpi.w  #(id_ACZ<<8)+3,(v_zone).w	; GIO: do not use MZ deformation for ACZ4
+		beq.w	.skip		
 		cmpi.b	#id_ACZ,(v_zone).w
 		beq.w	Draw_Mz_Bg
+.skip:		
 		;cmpi.w	#(id_PPZ<<8)+0,(v_zone).w
 		;beq.w	Draw_SBz_Bg
 		cmpi.b	#id_EndZ,(v_zone).w
