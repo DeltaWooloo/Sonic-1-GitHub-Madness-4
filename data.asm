@@ -153,7 +153,7 @@ Nem_Ball:	binclude	"artnem/GHZ Giant Ball.nem"
 Nem_Spikes:	binclude	"artnem/Spikes.nem"
 		even
 ;!@ GD: Variant of spikes for Windows Zone
-Nem_SpikesWin:	binclude	"artnem/SpikesWin.nem"
+Nem_SpikesWin:	binclude	"artnem/spikesWin.nem"
 		even
 ;Nem_GhzLog:	binclude	"artnem/Unused - GHZ Log.nem"
 ;		even
@@ -1104,7 +1104,7 @@ ObjPos_ARZ3:	binclude	"objpos/arz3.bin"
 
 ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 ;INSTAGRAM FOR DEMO ART!
-Nem_Instagram:	incbin	"artnem\Instagram.bin"
+Nem_Instagram:	incbin	"artnem/Instagram.bin"
 		even
 ; ===========================================================================
 ; ---------------------------------------------------------------------------

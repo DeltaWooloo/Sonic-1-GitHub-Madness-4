@@ -353,7 +353,7 @@ SampleTable:
 
 ; ---------------------------------------------------------------
 ; Whatever you want the Sega sound to be
-	incdac	SegaPCM, "sound/dac/sega.pcm"
+	incdac	SegaPCM, "sound/dac/Sega.pcm"
 
 ; ---------------------------------------------------------------
 	;!@ SAVE THIS AS (LAST SLOT-2)

@@ -2525,7 +2525,7 @@ Pal_SonisRetro: bincludeEndMarker "LiquidSplashes/Rerto/PaletteSonis.bin"
 Pal_MenuText:		bincludeEndMarker	"palette/Menu Font.bin"
 Pal_DioMildanner:	bincludeEndMarker	"_incObj/DioMildanner/Palette.bin"
 Pal_ARZ:		bincludeEndMarker	"palette/Azure Rainforest Zone.bin"
-Pal_ARZWater:		bincludeEndMarker	"palette/Azure Rainforest Zone (water).bin"
+Pal_ARZWater:		bincludeEndMarker	"palette/Azure Rainforest Zone (Water).bin"
 Pal_ARZSonWater:	bincludeEndMarker	"palette/Sonic - ARZ Underwater.bin"
 Pal_PWisp:	bincludeEndMarker	"palette/ProngleWisp.bin"
     even
@@ -7035,7 +7035,7 @@ Art_LivesNums:	binclude	"artunc/Lives Counter Numbers.bin" ; 8x8 pixel numbers o
 		include	"_incObj/NeedleBoss/NeedleBoss.asm"
 		
 
-		include	"coniobjs/eiza/Obj.asm"
+		include	"coniobjs/eiza/OBJ.asm"
 
 Map_Eiza:	include	"coniobjs/eiza/map.asm"
 		even
