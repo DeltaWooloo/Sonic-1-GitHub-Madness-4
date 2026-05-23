@@ -74,6 +74,8 @@ SEgg_ChkSonic:
 		addq.b	#2,ob2ndRout(a0)
 		move.w	#180,objoff_3C(a0)	; set delay to 3 seconds
 		move.b	#1,obAnim(a0)
+		;!@ GD: Do eggmanLaugh
+		pcm		dEggmanLaugh
 
 loc_19934:
 		jmp	(SpeedToPos).l

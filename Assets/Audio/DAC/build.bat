@@ -2,6 +2,9 @@ cls
 copy /y "AZD\azd_omg.wav" "..\..\..\sound\DAC\GenesisDoes\azd_omg.wav"
 copy /y "Boost\Boost.wav" "..\..\..\sound\DAC\GenesisDoes\Boost.wav"
 copy /y "BoostR\BoostR.wav" "..\..\..\sound\DAC\GenesisDoes\BoostR.wav"
+copy /y "chars\chr_mddio_laugh.wav" "..\..\..\sound\DAC\GenesisDoes\chr_mddio_laugh.wav"
+copy /y "chars\chr_tonic_burp.wav" "..\..\..\sound\DAC\GenesisDoes\chr_tonic_burp.wav"
+copy /y "chars\chr_maniac_laugh.wav" "..\..\..\sound\DAC\GenesisDoes\chr_maniac_laugh.wav"
 copy /y "dsud\udied.wav" "..\..\..\sound\DAC\GenesisDoes\udied.wav"
 copy /y "Four\4.wav" "..\..\..\sound\DAC\GenesisDoes\Four.wav"
 copy /y "GenesisCan\GenesisCan1.wav" "..\..\..\sound\DAC\GenesisDoes\GenesisCan1.wav"
@@ -40,4 +43,4 @@ copy /y "winBSOD\w98ipc.wav" "..\..\..\sound\DAC\GenesisDoes\w98ipc.wav"
 copy /y "winBSOD\windie.wav" "..\..\..\sound\DAC\GenesisDoes\windie.wav"
 copy /y "winBSOD\windows-xp-shutdown.wav" "..\..\..\sound\DAC\GenesisDoes\shutdown.wav"
 copy /y "MMZ_BF_Jap\YoFreddy_Rendered.wav" "..\..\..\sound\DAC\GenesisDoes\YoFreddy.wav"
-REM pause
+pause

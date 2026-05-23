@@ -6977,6 +6977,7 @@ AddPoints:
 		bmi.s	.noextralife ; branch if Mega Drive is Japanese
 		addq.b	#1,(v_lives).w ; give extra life
 		addq.b	#1,(f_lifecount).w
+		jsr		(playChr_pokemonCry).l	;!@ GD: Do pokemon cry
 		move.w	#bgm_ExtraLife,d0
 		jmp	(QueueSound1).l
 .locret_1C6B6:

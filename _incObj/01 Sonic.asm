@@ -133,25 +133,30 @@ PlayerMapList:
 ; ----------------------------------------------------------------------------
 ; idk
 
-ch_hudlives	equ 0
-ch_hurtpcm	equ 2
+ch_hudlives		equ $00
+ch_hurtpcm		equ $02
+ch_pokeCryPcm	equ	$0A		; !@ GD: offset for pokemon cry
 
 ; lazy struct
-
-pdat.livesart	= 0
-pdat.signart	= 2
-pdat.hurtsnd	= 4
-pdat.height	= 6
-pdat.height2	= 7
-pdat.width	= 8
-pdat.width2	= 9
+pdat.livesart	= $00		;$0001
+pdat.signart	= $02		;$0203
+pdat.hurtsnd	= $04		;$0405
+pdat.height		= $06		;$06
+pdat.height2	= $07		;$07
+pdat.width		= $08		;$08
+pdat.width2		= $09		;$09
+pdat.pokeCrySnd	= $0A		;$0A0B	!@ GD: pokemon cry
 
 GetOtherPlayerData:
+	movem.l	d0,-(sp)				;!@ GD: Push d0 onto stack
+
 	moveq	#0,d0
 	move.b	(v_characterid).w,d0
-	chk	#chrid_last,d0
-	mulu.w	#$A,d0
-	lea	OtherPlayerData(pc,d0.w),a5
+	chk		#chrid_last,d0
+	mulu.w	#$0C,d0
+	lea		OtherPlayerData(pc,d0.w),a5
+	
+	movem.l	(sp)+,d0				;!@ GD: Pop d0 from stack
 	rts
 
 	; HUD Life Icon Art, Signpost Art, Damage SFX
@@ -162,13 +167,24 @@ OtherPlayerData:
 	dc.w	dFuck
 	dc.b	19,14				; stand, roll height
 	dc.b	 9, 7				; stand, roll width
-;	dc.b	"Jiggly"			; padder
+	dc.w	dChr_tonic_burp
+
 	dc.w	Nem_ManiacLives-Nem_Lives
 	dc.w	Nem_CharSignManiac-Nem_CharSign
 	dc.w	dGayNeil
 	dc.b	15, 9
 	dc.b	 7, 6
-;	dc.b	"Joshyy"			; padder
+	dc.w	dChr_maniac_laugh
+	even
+	
+; !@ GD: New function to play character's pokemon cry PCM
+playChr_pokemonCry:	
+	moveq	#0,d0
+	bsr.s	GetOtherPlayerData
+	move.w	pdat.pokeCrySnd(a5),d0
+	jsr		(MegaPCM_PlaySample).l
+	rts
+
 ; ----------------------------------------------------------------------------
 ; TeethTonic character init routine
 ; ----------------------------------------------------------------------------

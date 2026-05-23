@@ -7,6 +7,8 @@ pow_Lampost:	equ	$02	; Bit #2 = l = lampost
 pow_Signpost:	equ	$01	; Bit #1 = s = signpost
 pow_Bigring:	equ	$00	; Bit #0 = b = BigRing
 
+pow_1upWait = objoff_26	; !@ GD: SST for 1up yield before pokemon cry
+
 ;Random monitor debug data/consts
 monLong	equ	4		;Length of each random monitor entry in table (long = 4 bytes)
 
@@ -191,7 +193,11 @@ Pow_GetLife2:
 
 Pow_GetLife3:
 		move.w	#bgm_ExtraLife,d0
-		jmp	(QueueSound1).l	; play extra life music
+		;!@ GD: Do pokemon cry
+		;jmp	(QueueSound1).l	; play extra life music
+		jsr		(QueueSound1).l	; play extra life music
+		jsr		(playChr_pokemonCry).l
+		rts
 ; ===========================================================================
 
 Pow_ChkShoes:

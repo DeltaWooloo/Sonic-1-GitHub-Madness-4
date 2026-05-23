@@ -95,6 +95,8 @@ ESon_Wait2:
 Obj87_MakeLogo:	; Routine $C
 		subq.w	#1,eson_time(a0)
 		bne.s	ESon_Wait3
+		
+		jsr		(playChr_pokemonCry).l		;!@ GD: Play pokemon cry
 		addq.b	#2,ob2ndRout(a0)
 		move.w	#180,eson_time(a0)
 		move.b	#2,obAnim(a0)
@@ -112,6 +114,8 @@ Obj87_Animate:	; Rountine 4, $A, $E, $12
 Obj87_Leap:	; Routine $10
 		subq.w	#1,eson_time(a0)
 		bne.s	ESon_Wait4
+				
+		jsr		(playChr_pokemonCry).l		;!@ GD: Play pokemon cry
 		addq.b	#2,ob2ndRout(a0)
 		move.l	#Map_ESon,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Ending_Sonic,0,0),obGfx(a0)
@@ -119,8 +123,8 @@ Obj87_Leap:	; Routine $10
 		clr.b	obStatus(a0)
 		move.b	#2,obPriority(a0)
 		move.b	#5,obFrame(a0)
-		move.b	#2,obAnim(a0)	; use "leaping" animation
-		move.b	#id_EndSTH,(v_endlogo).w ; load "SONIC THE HEDGEHOG" object
+		move.b	#2,obAnim(a0)				; use "leaping" animation
+		move.b	#id_EndSTH,(v_endlogo).w 	; load "SONIC THE HEDGEHOG" object
 		bra.s	Obj87_Animate
 ; ===========================================================================
 
@@ -130,10 +134,13 @@ ESon_Wait4:
 Obj87_maniacFlashBang:
 		subq.w	#1,eson_time(a0)
 		bne.s	Obj87_maniacFlashBangEnd
+		
+		jsr		(playChr_pokemonCry).l		;!@ GD: Play pokemon cry
+		
 		move.w	#sfx_Bomb,d0
 		jsr		PlaySound_Special
 		move.w	#1,(f_restart).w ; set level to restart (causes flash)
-		move.w	#50,eson_time(a0)
+		move.w	#chr_timer,eson_time(a0)	;!@ Wait until pokemon cry is over (so that developers pcm in credits can run)
 		addq.b	#2,ob2ndRout(a0)
 Obj87_maniacFlashBangWait:
 		subq.w	#1,eson_time(a0)

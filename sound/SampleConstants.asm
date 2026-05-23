@@ -74,6 +74,7 @@ dEagSoft_Chirp2				ds.b 1	; GMZ
 dEagSoft_Speech				ds.b 1	; GMZ
 dWeebTrash1					ds.b 1
 dWeebTrash2					ds.b 1
+dWeebTrash2B				ds.b 1
 dWeebTrash3					ds.b 1
 dDAMN						ds.b 1
 
@@ -94,7 +95,7 @@ dDAMN						ds.b 1
 ;dmsr_w95					ds.b 1
 ;dmsr_w95_2					ds.b 1
 
-dNull						ds.b 1
+;dNull						ds.b 1
 
 ; In-Game SFX Samples
 dLetsGOO					ds.b 1
@@ -116,7 +117,7 @@ dClintonHi					ds.b 1
 dClintonWin					ds.b 1
 dClintonFail				ds.b 1
 dDoYouSuck					ds.b 1
-dOnTheBall					ds.b 1
+;dOnTheBall					ds.b 1
 dTwerkOf87					ds.b 1
 dScream						ds.b 1
 dRift						ds.b 1
@@ -159,18 +160,22 @@ dOllieGameTap				ds.b 1
 dOllieWahoo					ds.b 1
 
 ; Deltarune Samples
-dKnight_Hurt					ds.b 1
-dKnight_Stretch					ds.b 1
-dKnight_Roar					ds.b 1
-dDR_Battle_Start				ds.b 1
+dKnight_Hurt				ds.b 1
+dKnight_Stretch				ds.b 1
+dKnight_Roar				ds.b 1
+dDR_Battle_Start			ds.b 1
 
-dSexyFlanders				ds.b 1
-; SEGA Samples
+dSexyFlanders:				ds.b 1
+dChr_tonic_burp:			ds.b 1
+dChr_maniac_laugh:			ds.b 1
+dChr_mddio_laugh:			ds.b 1
+
 dSega						ds.b 1
 
 ;!@ GD: Maximum DAC sample (exclusive range). Used for enum/array bounds
 ;Please reserve this as last
 dsfxSilence					ds.b 1
+dNull:
 DACMAX = dsfxSilence
 	dephase
 	!org -

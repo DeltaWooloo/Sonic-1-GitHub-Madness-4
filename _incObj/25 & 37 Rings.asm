@@ -168,12 +168,11 @@ CollectRing:
 .got100:
 		addq.b	#1,(v_lives).w	; add 1 to the number of lives you have
 		addq.b	#1,(f_lifecount).w ; update the lives counter
+		jsr		(playChr_pokemonCry).l	;!@ GD: Do pokemon cry		
 		move.w	#bgm_ExtraLife,d0 ; play extra life music
-
-
 		jmp	(QueueSound2).l
 .playsnd:		
-		move.b	#dQuakeRocket,d0
+		move.b	#dEggNo,d0
 		jmp	MegaPCM_PlaySample
 
 ; End of function CollectRing

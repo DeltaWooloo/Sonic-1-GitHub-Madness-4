@@ -69,14 +69,29 @@ GM_Opt_Loop:
 		jsr		(WaitForVBla).l
 		cmpi.b	#btnA,(v_jpadpress1).w ; check if action button is pressed
 		bne.s	GM_Opt_ControlExit	; if not, branch
+		
+		;!@ GD: Play FC Blip sfx on change
+		move.w	#sfx_FCBlip,d0
+		jsr	(PlaySound_Special).l		; play Blip sound
 		bchg	#0,(charizard).w
 		lea     (v_palette).w,a1
 		bsr.s	GM_Opt_PalSet
 GM_Opt_ControlExit:
 		andi.b	#btnStart,(v_jpadpress1).w ; check if Start is held - i can't check the same variable again apparently idk why - coni
 		beq.s	GM_Opt_Loop	; if not, branch
+		
+		;!@ GD: Play appropriate character PCM and yield until over
+		move.b	(charizard).w,(v_characterid).w
+		jsr		(playChr_pokemonCry).l		
+		move.w	#chr_timer,(v_generictimer).w		
+.loop:
+		move.b	#$14,(v_vbla_routine).w
+		jsr		(WaitForVBla).l
+		tst.w	(v_generictimer).w
+		bne.s	.loop
+		
 		jsr		(PaletteFadeOut).l	; INCASE
-		lea	(vdp_control_port).l,a6
+		lea		(vdp_control_port).l,a6
 		move.w	#$8C00,(a6)	; set to next screen mode (H32)
 		move.b	#id_Fetus,(v_gamemode).w ; go to Difficulty
 		rts

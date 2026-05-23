@@ -49,7 +49,7 @@ GM_Fet_ClrObjRam:
 		moveq	#palid_Fetus,d0
 		jsr		(PalLoad1).l		; load palette
 		lea     (v_palette_fading).w,a1
-		bsr.s	GM_Fet_PalSet
+		bsr.w	GM_Fet_PalSet
 		jsr		(PaletteFadeIn).l
 
 GM_Fet_Loop:
@@ -57,16 +57,37 @@ GM_Fet_Loop:
 		jsr		(WaitForVBla).l
 		cmpi.b	#btnA,(v_jpadpress1).w ; check if action button is pressed
 		bne.s	GM_Fet_ControlExit	; if not, branch
+		
+		;!@ GD: Play FC Blip sfx on change
+		move.w	#sfx_FCBlip,d0
+		jsr		(PlaySound_Special).l		; play Blip sound		
 		bchg	#0,(DiffVariable).w
 		lea     (v_palette).w,a1
 		bsr.s	GM_Fet_PalSet
 GM_Fet_ControlExit:
 		andi.b	#btnStart,(v_jpadpress1).w ; check if Start is held - i can't check the same variable again apparently idk why - coni
 		beq.s	GM_Fet_Loop	; if not, branch
+		
+		;!@ Play appropriate pcm based on diffculty selected
+		tst.b	(DiffVariable).w
+		bne.s	.easy
+	.hard:
+		pcm		dYoFreddy
+		bra.s	.cont
+	.easy:
+		pcm		dWeebTrash2B
+	.cont:	
+		move.w	#2*fps_Rate,(v_generictimer).w
+	.loop:
+		move.b	#$14,(v_vbla_routine).w
+		jsr		(WaitForVBla).l
+		tst.w	(v_generictimer).w
+		bne.s	.loop
+		
 		jsr		(PaletteFadeOut).l	; INCASE
 		lea	(vdp_control_port).l,a6
-		move.w	#$8C81,(a6)	; set to next screen mode
-		
+		move.w	#$8C81,(a6)	; set to next screen mode		
+	
 		;!@ GD: Init new game
 		move.w	#(id_OWZ<<8),(v_zone).w		; set level to GHZ (00)		
 		move.b	#0,(v_emeralds).w			; 0 emeralds

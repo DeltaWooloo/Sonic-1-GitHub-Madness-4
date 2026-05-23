@@ -20,12 +20,14 @@ opcode_jmpabslong	equ $4EF9
 opcode_jmpabsword	equ $4EF8
 
 ; Clocks
-Master_Clock:    equ 53693175
-M68000_Clock:    equ Master_Clock/7
-Z80_Clock:       equ Master_Clock/15
-FM_Sample_Rate:  equ M68000_Clock/(6*6*4)
-PSG_Sample_Rate: equ Z80_Clock/16
-fps_Rate:		 equ $3C						;!@ FPS for timers
+Master_Clock:    	equ 53693175
+M68000_Clock:    	equ Master_Clock/7
+Z80_Clock:       	equ Master_Clock/15
+FM_Sample_Rate:  	equ M68000_Clock/(6*6*4)
+PSG_Sample_Rate: 	equ Z80_Clock/16
+
+fps_Rate:		 	equ $3C						;!@ FPS for timers
+chr_timer:		 	equ $3*fps_Rate				; Timer for longer of the 2 character pokemon cries
 
 ;!@ GD: ROM headers
 hdr_Genesis:	 equ	"SEGA MEGA DRIVE "

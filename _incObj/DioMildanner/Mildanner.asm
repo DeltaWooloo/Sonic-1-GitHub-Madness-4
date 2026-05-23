@@ -87,11 +87,12 @@ BossDioMildanner_IntroHopIn:
 		; go to y $34C
 		cmpi.w	#$34C,obY(a0)
 		blt.s	.notfinished
-
+		
+		pcm		dChr_mddio_laugh		;!@ GD: Laugh insanely
 		move.w	#$34C,obY(a0)
-		move.b	#1,obAnim(a0) ; @laugh
-		move.w	#60*2,$30(a0) ; wait 2 secs
-		move.b	#0,$32(a0) ; boss load plc flag
+		move.b	#1,obAnim(a0) 		; @laugh
+		move.w	#4*fps_Rate,$30(a0) ; wait 4 secs
+		move.b	#0,$32(a0) 			; boss load plc flag
 		addq.b	#2,	obRoutine(a0)
 	.notfinished:
 		jmp	(DisplaySprite).l
@@ -100,7 +101,7 @@ BossDioMildanner_IntroHopIn:
 BossDioMildanner_IntroMain:
 		cmpi.b	#1,obAnim(a0)
 		bne.s	.ok
-		subq.b	#1,$30(a0)
+		subq.w	#1,$30(a0)
 		bpl.s	.ok2
 
 		tst.l	(v_plc_buffer).w
@@ -401,7 +402,7 @@ BossDioMildanner_BossAttackHops:
 		jsr	(PlaySound_Special).l
 
 		move.b	#3,obAnim(a0) ; @fall
-		move.b	#4,$30(a0)
+		move.w	#4,$30(a0)
 		move.b	#1,ob2ndRout(a0)
 	.hoponfortnite:
 
@@ -423,7 +424,7 @@ BossDioMildanner_BossAttackHops:
 		move.b	#sfx_ChainStomp,d0
 		jsr	(PlaySound_Special).l
 
-		subq.b	#1,$30(a0)
+		subq.w	#1,$30(a0)
 		beq.w	BossDioMildanner_ResetToBoss
 
 		bra.w	BossDioMildanner_Display
