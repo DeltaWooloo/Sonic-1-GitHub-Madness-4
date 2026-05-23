@@ -172,7 +172,7 @@ CollectRing:
 		move.w	#bgm_ExtraLife,d0 ; play extra life music
 		jmp	(QueueSound2).l
 .playsnd:		
-		move.b	#dEggNo,d0
+		move.b	#dQuakeRocket,d0
 		jmp	MegaPCM_PlaySample
 
 ; End of function CollectRing
