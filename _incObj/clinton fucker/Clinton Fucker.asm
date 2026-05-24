@@ -28,6 +28,9 @@ Clinton_WinInit:
 	fillVRAM	0, vram_bg, vram_bg+plane_size_64x32 ; clear background namespace
 ;
 	startZ80
+	
+	;!@ Kill hud
+	deleteHUD
 
 	clr.l	(v_scrposy_vdp).w
 	clr.l	(v_scrposx_vdp).w
@@ -210,8 +213,11 @@ CliFucker_Wait:
 	lea	CliFuckArtList,a1
 	jsr	UserPLC	; I HATE YOU I FUCKING HATE YOU DIE
 	move.w	#60+45,v_screenshaketime.w
+	
+	spawnHUD	hud_arrow,hud_start,bclr
+	
 	move.b	#dClintonHi,d0
-	jmp	MegaPCM_PlaySample
+	jmp	MegaPCM_PlaySample	
 
 CliFucker_Init2:
 	move.b	#bgm_ClintonFuck,d0		; placeholder

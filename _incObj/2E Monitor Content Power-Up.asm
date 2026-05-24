@@ -258,6 +258,9 @@ Pow_Invinciblity:
 		move.b	#3,(v_starsobj3+obAnim).w
 		move.b	#id_ShieldItem,(v_starsobj4).w ; load stars object ($3804)
 		move.b	#4,(v_starsobj4+obAnim).w
+		
+		jsr		(playChr_pokemonCry).l	;!@ GD: Do pokemon cry
+		
 		tst.b	(f_lockscreen).w ; is boss mode on?
 		bne.w	Pow_NoMusic	; if yes, branch
 		tst.b	(v_clintonfucker).w ; is boss mode on?
@@ -390,7 +393,7 @@ Pow_Randomiser:
 		dc.l	.timeforads			;$15 / $54
 		dc.l	.die				;$16 / $58
 		dc.l	.getjumpscared		;$17 / $5C
-		dc.l    Firecore
+		dc.l    Firecore			;$18 / $60
 		dc.l	.toolimited			;$19 / $64
 		
 		;!@ GenesisDoes: VDP register fuckery		
@@ -993,6 +996,10 @@ Pow_vdp_fixRegs:
 		movem.l	a0,-(sp)				; Push a0 onto stack
 		movem.l	a6,-(sp)				; Push a6 onto stack
 		lea		(vdp_control_port).l,a6
+		
+		;!@ GD: Undo firecore FX
+		clr.b	(FM_PitchUp).w
+		clr.b	(PSG_PitchUp).w		
 		
 		;!@ Remove Window plane (BSZ2)
 		cmpi.w	#(id_BSZ<<8)+1,(v_zone).w	; Is zone BSZ2?

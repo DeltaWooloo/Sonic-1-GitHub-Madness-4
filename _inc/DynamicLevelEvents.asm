@@ -52,7 +52,8 @@ loc_6DC4:
 ; ---------------------------------------------------------------------------
 ; Offset index for dynamic level events
 ; ---------------------------------------------------------------------------
-DLE_Index:	dc.w 	DLE_GHZ-DLE_Index
+DLE_Index:
+		dc.w 	DLE_GHZ-DLE_Index
 		dc.w	DLE_LZ-DLE_Index
 		dc.w 	DLE_MZ-DLE_Index
 		dc.w	DLE_SLZ-DLE_Index
@@ -79,7 +80,8 @@ DLE_GHZ:
 		move.w	DLE_GHZx(pc,d0.w),d0
 		jmp	DLE_GHZx(pc,d0.w)
 ; ===========================================================================
-DLE_GHZx:	dc.w DLE_GHZ1-DLE_GHZx
+DLE_GHZx:
+		dc.w DLE_GHZ1-DLE_GHZx
 		dc.w DLE_GHZ2-DLE_GHZx
 		dc.w DLE_GHZ3-DLE_GHZx
 ; ===========================================================================
@@ -1014,7 +1016,8 @@ DLE_NGZ:
 		move.w	DLE_NGZx(pc,d0.w),d0
 		jmp	DLE_NGZx(pc,d0.w)
 ; ===========================================================================
-DLE_NGZx:	dc.w DLE_NGZ1-DLE_NGZx
+DLE_NGZx:
+		dc.w DLE_NGZ1-DLE_NGZx
 		dc.w DLE_NGZ2-DLE_NGZx
 		dc.w DLE_NGZ3-DLE_NGZx
 ; ===========================================================================
@@ -1084,6 +1087,11 @@ DLE_NGZ3end:
 		;move.w	#bgm_Coffinman,d0
 		;jsr	(QueueSound1).l		; play boss music
 		
+		;!@ GD: Show HUD to continue
+		;lea		(ArtList_NGZ3_contHUD).l,a1
+		;jsr		(UserPLC).l
+		;spawnHUD	hud_arrow,hud_cont,bset
+		
 		;Fuck you Tonic
 		pcm		dSans
 		
@@ -1096,6 +1104,12 @@ DLE_NGZ3end:
 		move.b	#1, (f_lockscreen).w 	; lock screen
 		addq.b	#2,(v_dle_routine).w
 		rts
+		
+;ArtList_NGZ3_contHUD:
+		;dc.l	Nem_bugHUD
+		;dc.w	ArtTile_contHUD2*$20
+		;dc.l	-1
+		;even
 ; ---------------------------------------------------------------------------
 ;                 *******Aw yeah Bluescape zone!*******
 ; ---------------------------------------------------------------------------
@@ -1107,7 +1121,8 @@ DLE_BSZ:
 		move.w	DLE_BSZx(pc,d0.w),d0
 		jmp	DLE_BSZx(pc,d0.w)
 ; ===========================================================================
-DLE_BSZx:	dc.w DLE_BSZ1-DLE_BSZx
+DLE_BSZx:
+		dc.w DLE_BSZ1-DLE_BSZx
 		dc.w DLE_BSZ2-DLE_BSZx
 		dc.w DLE_BSZ3-DLE_BSZx
 ; ===========================================================================
@@ -1169,7 +1184,17 @@ DLE_BSZ1_return:
 DLE_BSZ1_BossEnd:
 		move.w	#$2700,(v_limitright1).w
 		move.w	#$2700,(v_limitright2).w
+		
+		;lea		(ArtList_BSZ1_contHUD).l,a1
+		;jsr		(UserPLC).l
+		;spawnHUD	hud_arrow,hud_cont,bset
 		rts
+		
+;ArtList_BSZ1_contHUD:
+		;dc.l	Nem_bugHUD
+		;dc.w	ArtTile_contHUD1*$20
+		;dc.l	-1
+		;even
 
 DLE_BSZ1_Boss_Setup:
 		move.w	#$2A0,(v_limitbtm1).w

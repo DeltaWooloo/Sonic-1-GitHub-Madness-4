@@ -3364,13 +3364,8 @@ Level_ChkDebug:
 		cmpi.w	#(id_PPZ<<8)+0,(v_zone).w	; is this PPZ1?
 		beq.s	.bug						; if so, branch
 		bra.s	.noBug						; Skip bug watermark if any other zone
-		
 .bug:
-		move.b	#id_HUD,(v_vsbmark_arrow).w ; load HUD arrow object
-		move.b	#$12,(v_vsbmark_arrow+obRoutine).w
-		move.b	#id_HUD,(v_vsbmark_text).w ; load HUD text object
-		move.b	#$12+6,(v_vsbmark_text+obRoutine).w
-
+		spawnHUD	hud_arrow,hud_omg,bclr 
 .noBug:
 		tst.b	(f_debugcheat).w ; has debug cheat been entered?
 		beq.s	Level_ChkWater	; if not, branch
@@ -3748,8 +3743,7 @@ SignpostArtLoad2:
 		addq.b	#2,(v_pornvidmark+obRoutine).w
 		bra.s	.skipDel		
 	.del_vsb:		
-		addq.b	#2,(v_vsbmark_arrow+obRoutine).w
-		addq.b	#2,(v_vsbmark_text+obRoutine).w	
+		deleteHUD
 	.skipDel:
 		moveq	#plcid_Signpost,d0
 		bsr.w	NewPLC		; load signpost patterns - i did not notice the bra at first

@@ -129,6 +129,7 @@ PLC_GHZ:	dc.w ((PLC_GHZ2-PLC_GHZ-2)/6)-1
 	    dc.w    $9760	
 
 PLC_GHZ2:	dc.w ((PLC_GHZ2end-PLC_GHZ2-2)/6)-1
+		plcm	Nem_bugHUD,    ArtTile_startHUD				  ; !@ GD: Goto start HUD watermark
 		plcm	Nem_Swing,     ArtTile_GHZ_MZ_Swing           ; swinging platform
 		plcm	Nem_Bridge,    ArtTile_GHZ_Bridge             ; bridge
 		plcm	Nem_SpikePole, ArtTile_GHZ_Spike_Pole         ; spiked pole
@@ -240,6 +241,7 @@ PLC_SBZ:	dc.w ((PLC_SBZ2-PLC_SBZ-2)/6)-1
 		plcm	Nem_Bomb,       ArtTile_Bomb                   ; bomb enemy
 		;plcm	Nem_Orbinaut,   ArtTile_SBZ_Orbinaut           ; orbinaut enemy
 PLC_SBZ2:	dc.w ((PLC_SBZ2end-PLC_SBZ2-2)/6)-1
+		plcm	Nem_bugHUD,  	ArtTile_bugHUD1				   ; !@ GD: OMG vscroll bug watermark
 		plcm	Nem_SlideFloor, ArtTile_SBZ_Moving_Block_Long  ; floor that slides away
 		;plcm	Nem_SbzDoor2,   ArtTile_SBZ_Horizontal_Door    ; horizontal door
 		plcm	Nem_Electric,   ArtTile_SBZ_Electric_Orb       ; electric orb
@@ -253,7 +255,6 @@ PLC_SBZ2:	dc.w ((PLC_SBZ2end-PLC_SBZ2-2)/6)-1
  		plcm	Nem_BallHogH,   ArtTile_Ball_HogH              ; ball hog enemy
 		;plcm	Nem_BallHogV,   ArtTile_Ball_HogV              ; ball hog enemy
 		;plcm	Nem_ProtoExplosion, ArtTile_Proto_Explosion    ; explosion
-		plcm	Nem_bugHUD,  	ArtTile_bugHUD1				   ; !@ GD: OMG vscroll bug watermark
 PLC_SBZ2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - COLD BREW
@@ -309,10 +310,10 @@ PLC_Joint:	dc.w ((PLC_Joint2-PLC_Joint-2)/6)-1
 ;		plcm	Nem_Joint,       ArtTile_Level                   ; Joint main patterns
 
 PLC_Joint2:	dc.w ((PLC_Joint2end-PLC_Joint2-2)/6)-1
-		plcm	Nem_bugHUD,  	ArtTile_bugHUD2					; !@ GD: OMG vscroll bug watermark
-		plcm	Nem_burpHud,    ArtTile_BurpHUD	; PLACEHOLDER IM PLACEHOLDERING IT - CONI
-		plcm	Nem_Spikes,     ArtTile_Spikes                 ; spikes
-		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal      ; horizontal spring
+		plcm	Nem_bugHUD,  	ArtTile_bugHUD2					; !@ GD: OMG vscroll bug watermark		
+		plcm	Nem_Spikes,     ArtTile_Spikes                  ; spikes
+		plcm	Nem_HSpring,    ArtTile_Spring_Horizontal       ; horizontal spring
+		plcm	Nem_burpHud,    ArtTile_BurpHUD					; PLACEHOLDER IM PLACEHOLDERING IT - CONI
 		     
 PLC_Joint2end:
 ; ---------------------------------------------------------------------------

@@ -923,6 +923,9 @@ ArtTile_BurpHUD:		equ $4C0
 ArtTile_mdfunHUD:		equ $536		;!@ GD: Mydawid.fun HUD for MCZ
 ArtTile_bugHUD1:		equ $429		;!@ GD: OMG vscrl bug HUD for levels with vscroll bug (PPZ1)
 ArtTile_bugHUD2:		equ $480		;!@ GD: OMG vscrl bug HUD for levels with vscroll bug (Joint zone)
+ArtTile_startHUD:		equ	$2E0		;!@ GD: Goto start HUD (OWZ2/Clinton)
+;ArtTile_contHUD1:		equ	$320		;!@ GD: Continue HUD (BSZ1)
+;ArtTile_contHUD2:		equ	$2A0		;!@ GD: Continue HUD (NGZ3)
 ArtTile_HUD:			equ $6C0
 ArtTile_SpecialAttack:	equ $6EA
 ArtTile_Sonic:			equ $780

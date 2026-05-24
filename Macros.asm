@@ -128,6 +128,21 @@ char_setSpeed	macro parm
 	jsr		(Sonic_SetSpeed).l
 	movem.l	(sp)+,d2
 	endm
+	
+;!@ GD: spawn a HUD arrow and msg
+spawnHUD	macro	T1,T2,opcode
+	move.b	#id_HUD,(v_vsbmark_arrow).w ; load HUD arrow object
+	;opcode	#0,(v_vsbmark_arrow+obStatus).w
+	move.b	#T1,(v_vsbmark_arrow+obRoutine).w
+	move.b	#id_HUD,(v_vsbmark_text).w ; load HUD text object
+	move.b	#T2,(v_vsbmark_text+obRoutine).w
+	endm
+	
+;!@ GD: Deletes that HUD
+deleteHUD	macro
+	addq.b	#2,(v_vsbmark_arrow+obRoutine).w
+    addq.b	#2,(v_vsbmark_text+obRoutine).w	
+	endm
 
 ; ---------------------------------------------------------------------------
 ; DMA fill VRAM with a value
