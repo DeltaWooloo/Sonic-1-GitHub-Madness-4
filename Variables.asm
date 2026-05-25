@@ -491,7 +491,7 @@ Saved_music: equ $FFFFFFCB ; byte
 v_timingandscreenvariables_end:
 Win98LogoSYSSeen:			ds.b	1
 					ds.b	1
-					ds.w	1
+v_Ipooped			ds.w	1
 FM_PitchUp:			ds.b	1
 PSG_PitchUp:		ds.b	1
 

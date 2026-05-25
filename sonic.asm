@@ -12,7 +12,7 @@
 ; ASSEMBLY OPTIONS:
 
 
-DickingAround = 0
+DickingAround = 1
 ; 	| If 0, loads SEGA screen first (for public release)
 ; 	| If 1, load Debug Menu first
 

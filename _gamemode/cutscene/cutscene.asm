@@ -2,7 +2,7 @@
 ASCII_VRAMADDR	= $D000
 ASCII_TILEDELTA	= $0660
 
-cutscene	= v_zone
+cutscene	= v_characterid;Dingus!
 
 	phase	v_sonspeedacc
 stringflags	ds.b	0

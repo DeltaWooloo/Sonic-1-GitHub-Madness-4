@@ -303,7 +303,8 @@ ScrollManiacIntro:
 	dbf	d7,.WriteHScroll
 .Exit:
 	rts
-
+MmIntro_FuckingGoLevel:
+    jmp GM_Level;fucking fuck fuck!
 ; ---------------------------------------------------------------------------
 ; Draw tilemap static for transitory sequences
 ; Draws 2 "random" tiles out of a memory space location (document later idk)
