@@ -12,7 +12,7 @@ Cutscene_TonicIntro:
 	move.w	cameraZPosY.w, v_bg3scrposy_vdp.w
 	add.w	#1,v_framecount.w
 	add.w	#1,v_Ipooped.w
-	cmpi.w #10*60,v_Ipooped.w ;CHECKS EVERY FUCKING FRAMES!
+	cmpi.w #15*60,v_Ipooped.w ;CHECKS EVERY FUCKING FRAMES!
 	bcs.s Waitfuckingyouifbitchn
     move.b	#id_Level,(v_gamemode).w ; go to Level 
 ;	jmp  GM_Level ;has to be the worst code i have ever written
@@ -32,7 +32,8 @@ Str_TonicIntro1:
 	dc.b	"Teeth Tonic is a Colorado Cracker",-1
 	dc.b	"who manufactures etsyslop repro",-1
 	dc.b	"cartridges.",-1
-	dc.b    "He decided he wants to fuck around",0
+	dc.b    "He decided he wants to fuck around.",-1
+	dc.b    "And so he went out to touch grass",0
 	even
 Str_TonicIntro2:
 	dc.b	"idk what else to type eyeah placing",-1

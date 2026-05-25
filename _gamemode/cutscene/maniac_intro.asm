@@ -24,6 +24,10 @@ Cutscene_ManiacIntro:
 	move.w	cameraZPosX.w, v_bg3scrposx_vdp.w
 	move.w	cameraZPosY.w, v_bg3scrposy_vdp.w
 	add.w	#1,v_framecount.w
+	add.w	#1,v_Ipooped.w
+	cmpi.w #49*60,v_Ipooped.w ;CHECKS EVERY FUCKING FRAMES!
+	bcs.s WaittofuckNedel
+    move.b	#id_Level,(v_gamemode).w ; go to Level 
 	rts
 
 
@@ -45,7 +49,8 @@ Cutscene_ManiacIntro:
 	bra.w	MmIntro_WaitClr4
 	rts
 	nop
-
+WaittofuckNedel:
+    rts
 MmIntro_Init:
 	move.b	#20,stringtimer.w
 	addq.b	#1,subscene.w

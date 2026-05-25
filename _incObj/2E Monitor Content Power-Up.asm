@@ -1000,7 +1000,9 @@ Pow_vdp_fixRegs:
 		;!@ GD: Undo firecore FX
 		clr.b	(FM_PitchUp).w
 		clr.b	(PSG_PitchUp).w		
-		
+		;fix poopy cutscene timer -Dawid did ts
+		clr.b	(v_Ipooped).w		
+
 		;!@ Remove Window plane (BSZ2)
 		cmpi.w	#(id_BSZ<<8)+1,(v_zone).w	; Is zone BSZ2?
 		bne.s	.resetWindow				; IF NOT, reset window plane; else do check below

@@ -59,7 +59,7 @@ GM_Fet_Loop:
 		bne.s	GM_Fet_ControlExit	; if not, branch
 		
 		;!@ GD: Play FC Blip sfx on change
-		move.w	#sfx_FCBlip,d0
+		move.w	#sfx_beepy,d0
 		jsr		(PlaySound_Special).l		; play Blip sound		
 		bchg	#0,(DiffVariable).w
 		lea     (v_palette).w,a1
@@ -93,7 +93,7 @@ GM_Fet_ControlExit:
 		move.b	#0,(v_emeralds).w			; 0 emeralds
 		move.b	#3,(v_lives).w				; 3 lives
 		move.b	#2,(v_continues).w			; 2 continues
-		move.b	#id_Level,(v_gamemode).w 	; goto level
+		move.b	#id_Cutscene,(v_gamemode).w 	; goto CSR
 		rts
 
 GM_Fet_PalSet:
