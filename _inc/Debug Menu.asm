@@ -375,6 +375,15 @@ DebuggerMenu_LoadGame:
 		move.l	d0,(v_emldlist+4).w ; clear emeralds
 		move.b	#2,(v_continues).w ; set continues to 2 for the accurate felix experience		
 		move.l	#5000,(v_scorelife).w ; extra life is awarded at 50000 points
+		
+		;!@ GD: If Maniac char and debug mode enabled, then set infinite ammo cheat
+		cmpi.b	#chrid_maniac,(v_savedcharacterid).w	; are we playing as Maniac?
+		bne.s	.skipInfAmmoCheat						; If not, skip check
+		tst.b	(f_debugmode).w							; Is debug mode active?
+		beq.s	.skipInfAmmoCheat						; if not, branch
+		move.b	#1,(v_unlimitedammo).w					; !@ Set infinite ammo cheat
+	.skipInfAmmoCheat:
+		
 		move.b	#1,(v_dbgmenu_exit).w
 		
 		;!@ GD: Check if clinton mode, and change submode based on Emerald count

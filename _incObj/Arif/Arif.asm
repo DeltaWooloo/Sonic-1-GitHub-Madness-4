@@ -51,6 +51,7 @@ ArifBoss_Arif:
 		move.l	#Map_Arif, obMap(a0)
 		move.w	#$400, obGfx(a0)
 		move.b	#4, obRender(a0)
+		bset	#6,obStatus(a0)						; !@ GD: GHM4/recognize hitboxes from character weapons
 		move.b	#$10, obWidth(a0)
 		move.b	#$10, obHeight(a0)
 		move.b	#$14, obActWid(a0)

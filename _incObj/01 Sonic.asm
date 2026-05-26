@@ -819,6 +819,10 @@ TonicAttack:
 ; ----------------------------------------------------------------------------
 
 ManiacAttack:
+		;!@ GD: Allow infinite ammo if cheat
+		tst.b	(v_unlimitedammo).w
+		bne.s	.go2
+
 		tst.b	playammo(a0)
 		bne.s	.go
 		or.b	#1,f_ammocount.w
@@ -827,6 +831,7 @@ ManiacAttack:
 .go:
 		sub.b	#1,playammo(a0)	; ammo start
 		or.b	#1,f_ammocount.w
+.go2:
 		moveq   #3, d2
 		moveq   #0, d1
 		moveq   #0, d0

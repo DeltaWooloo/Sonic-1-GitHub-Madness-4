@@ -452,9 +452,14 @@ Pow_Randomiser:
 .getammo:	; you get a free ammo refill... if you're maniac mouse
 		cmpi.b	#chrid_maniac,(v_characterid).w	; are we maniac mouse?
 		bne.s	.nothing		; no? well get out of here Tonic, you get nothing, good day sir
+		
+		;!@ GD: Skip changing ammo if infinite ammo cheat
+		tst.b	(v_unlimitedammo).w
+		bne.s	.infinite1
 		lea	(v_player).w,a0		; load the player data
 		move.b	#10,playammo(a0)	; make players ammo count 10
 		or.b	#1,(f_ammocount).w	; update ammo counter
+	.infinite1:
 		move.w	#sfx_B8,d0
 		jmp	(PlaySound_Special).l
 
@@ -516,9 +521,14 @@ Pow_Randomiser:
 .Loseammo:	; the needlemouse gremlin stole your magazine... if you're maniac mouse
 		cmpi.b	#chrid_maniac,(v_characterid).w	; are maniac mouse?
 		bne.w	.nothing		; no? well get out of here, you get nothing, good day sir
+		
+		;!@ GD: Skip changing ammo if infinite ammo cheat
+		tst.b	(v_unlimitedammo).w
+		bne.s	.infinite2
 		lea	(v_player).w,a0
 		move.b	#0,playammo(a0)		; fuck you, no ammo for you
 		or.b	#1,(f_ammocount).w
+	.infinite2:
 		move.b	#sfx_Error,d0		; Feel free to change this Kat
 		jmp	(QueueSound2).l
 

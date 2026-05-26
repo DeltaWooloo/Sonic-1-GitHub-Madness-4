@@ -70,10 +70,11 @@ BossDioMildanner_SetupBoss:
 		move.w	#make_art_tile(ArtTile_FartDanner,1,0),obGfx(a0)
 		move.b	#0,obFrame(a0)
 
+		bset	#6,obStatus(a0)						; !@ GD: GHM4/recognize hitboxes from character weapons
 		; size initially is 20x40
 		move.b	#20,obActWid(a0)
 		move.b	#20/2,obWidth(a0)
-		move.b	#40/2,obHeight(a0)
+		move.b	#40/2,obHeight(a0)				
 
 		addq.b	#2,	obRoutine(a0)
 BossDioMildanner_SetupBoss_rts:
@@ -143,6 +144,7 @@ BossDioMildanner_IntroMain:
 		jsr	(PlaySound_Special)
 
 		; size initially is 20x40
+		bset	#6,obStatus(a0)						; !@ GD: GHM4/recognize hitboxes from character weapons
 		move.b	#56,obActWid(a0)
 		move.b	#56/2,obWidth(a0)
 		move.b	#114/2,obHeight(a0)
