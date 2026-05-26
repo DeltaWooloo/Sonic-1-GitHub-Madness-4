@@ -8,8 +8,9 @@ BigSpikeBall:
 		move.w	BBall_Index(pc,d0.w),d1
 		jmp	BBall_Index(pc,d1.w)
 ; ===========================================================================
-BBall_Index:	dc.w BBall_Main-BBall_Index
-		dc.w BBall_Move-BBall_Index
+BBall_Index:
+				dc.w BBall_Main-BBall_Index
+				dc.w BBall_Move-BBall_Index
 
 bball_origX = objoff_3A		; original x-axis position
 bball_origY = objoff_38		; original y-axis position
@@ -27,11 +28,13 @@ BBall_Main:	; Routine 0
 		move.w	obX(a0),bball_origX(a0)
 		move.w	obY(a0),bball_origY(a0)
 		move.b	#$86,obColType(a0)
+		moveq	#0,d1				;!@ GD
 		move.b	obSubtype(a0),d1 ; get object type
 		andi.b	#$F0,d1		; read only the 1st digit
 		ext.w	d1
 		asl.w	#3,d1		; multiply by 8
 		move.w	d1,bball_speed(a0) ; set object speed
+		moveq	#0,d0				;!@ GD
 		move.b	obStatus(a0),d0
 		ror.b	#2,d0
 		andi.b	#$C0,d0
@@ -48,7 +51,8 @@ BBall_Move:	; Routine 2
 		out_of_range.w	DeleteObject,bball_origX(a0)
 		bra.w	DisplaySprite
 ; ===========================================================================
-.index:		dc.w .type00-.index
+.index:
+		dc.w .type00-.index
 		dc.w .type01-.index
 		dc.w .type02-.index
 		dc.w .type03-.index
@@ -59,6 +63,7 @@ BBall_Move:	; Routine 2
 ; ===========================================================================
 
 .type01:
+		moveq	#0,d1		;!@
 		move.w	#$60,d1
 		moveq	#0,d0
 		move.b	(v_oscillate+$E).w,d0
@@ -75,6 +80,7 @@ BBall_Move:	; Routine 2
 ; ===========================================================================
 
 .type02:
+		moveq	#0,d1		;!@
 		move.w	#$60,d1
 		moveq	#0,d0
 		move.b	(v_oscillate+$E).w,d0
@@ -95,6 +101,9 @@ BBall_Move:	; Routine 2
 		add.w	d0,obAngle(a0)
 		move.b	obAngle(a0),d0
 		jsr	(CalcSine).l
+		moveq	#0,d2		;!@
+		moveq	#0,d3		;!@
+		moveq	#0,d5		;!@
 		move.w	bball_origY(a0),d2
 		move.w	bball_origX(a0),d3
 		moveq	#0,d4

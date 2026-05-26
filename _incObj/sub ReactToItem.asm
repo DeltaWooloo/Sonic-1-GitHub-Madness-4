@@ -489,6 +489,7 @@ KillSonic:
 		beq.s	.sound				
 		
 		;!@ Check if death boundary vs. normal death
+		moveq	#0,d0					;!@
 		tst.b	(f_deathbnd).w
 		bne.s	.deathBoundary
 		move.b	#dFannys, d0
@@ -498,6 +499,7 @@ KillSonic:
 .deathBoundary:
 		move.b	#dScream,d0	; Scream
 		jsr	(MegaPCM_PlaySample).l
+		moveq	#0,d0					;!@
 		move.w	#sfx_Lamppost,d0
 		jsr	(QueueSound2).l	; play lamppost sound
 		bra.s	.explode
@@ -506,6 +508,7 @@ KillSonic:
 		jsr	(MegaPCM_PlaySample).l
 .explode:
 		move.b	#0,(f_deathbnd).w	;!@ Reset death bound
+		moveq	#0,d1				;!@
 		move.b	#$8, d1
 		jmp	(GHM3Explode_Custom).l
 
