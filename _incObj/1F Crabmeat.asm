@@ -59,7 +59,8 @@ Crab_Action:	; Routine 2
 		jsr	.index(pc,d1.w)
 		lea	(Ani_Crab).l,a1
 		bsr.w	AnimateSprite
-		bra.w	RememberState
+		;!@ bra.w	RememberState
+		jmp	(RememberState).l
 ; ===========================================================================
 .index:		dc.w .waittofire-.index
 		dc.w .walkonfloor-.index

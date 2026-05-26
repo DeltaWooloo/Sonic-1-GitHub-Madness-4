@@ -1438,34 +1438,38 @@ Sonic_LevelBound:
 .skip:
 		addi.w	#224,d0
 		cmp.w	obY(a0),d0	; has Sonic touched the bottom boundary?
-		blt.s	.bottom		; if yes, branch
+		;blt.s	.bottom		; if yes, branch
+		blt.s	.bottom2		; if yes, branch
 		rts
 ; ----------------------------------------------------------------------------
 
 ; Boundary_Bottom
-.bottom:
-		addi.w	#$400,d0
-		cmp.w	obY(a0),d0	; has Sonic touched the bottom boundary?
-		blt.s	.bottom2		; if yes, branch 
-		tst.b   $3A(a0)     ; codeeeee
-		bne.s   .no_sfx 
-		move.b  #1, $3A(a0) 
-		bsr.w	reproduceSFX	
+; .bottom:
+		; addi.w	#$400,d0
+		; cmp.w	obY(a0),d0	; has Sonic touched the bottom boundary?
+		; blt.s	.bottom2		; if yes, branch 
+		; tst.b   $3A(a0)     ; codeeeee
+		; bne.s   .no_sfx
+		; move.b  #1, $3A(a0)
+		; bsr.w	reproduceSFX
 		
-.no_sfx:
-		;!@ GD: Bugfix to ensure PPZ2 death goes to Final Zone (in PPZ2, and DLE>=ID 6)
-		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w
-		bne.s	.skipPPZ2fix
-		cmpi.b	#6,(v_dle_routine).w
-		blt.w	.skipPPZ2fix
-		bra.w	Sonic_LevelBound.gotoFZ
-	.skipPPZ2fix:
-		rts
+; .no_sfx:
+		; ;!@ GD: Bugfix to ensure PPZ2 death goes to Final Zone (in PPZ2, and DLE>=ID 6)
+		; cmpi.w	#(id_PPZ<<8)+1,(v_zone).w
+		; bne.s	.skipPPZ2fix
+		; cmpi.b	#6,(v_dle_routine).w
+		; blt.w	.skipPPZ2fix
+		; bra.w	Sonic_LevelBound.gotoFZ
+	; .skipPPZ2fix:
+		; rts
 ; ----------------------------------------------------------------------------
 		
-.bottom2:		
+.bottom2:
+		move.b	#1,(f_deathbnd).w			;!@ Set death boundary flag
 		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w ; is level SBZ2 ?
 		bne.w	KillSonic_Humpy	; if not, kill Sonic
+		cmpi.b	#6,(v_dle_routine).w
+		blt.w	KillSonic_Humpy
 		cmpi.w	#$2000,(v_player+obX).w
 		blo.w	KillSonic_Humpy
 .gotoFZ:
@@ -1497,11 +1501,13 @@ Sonic_LevelBound:
 		bra.w	.chkbottom
 ; End of function Sonic_LevelBound
 
-reproduceSFX:
-		move.b	#dScream,d0	; Scream
-		jsr	(MegaPCM_PlaySample).l
-		move.w	#sfx_Lamppost,d0
-		jmp	(QueueSound2).l	; play lamppost sound
+;!@ 
+;reproduceSFX:
+		;move.b	#dScream,d0	; Scream
+		;jsr	(MegaPCM_PlaySample).l
+		;move.w	#sfx_Lamppost,d0
+		;jsr	(QueueSound2).l	; play lamppost sound
+		;rts
 
 ; ---------------------------------------------------------------------------
 ; Subroutine allowing Sonic to roll when he's moving

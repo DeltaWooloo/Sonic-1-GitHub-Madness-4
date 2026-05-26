@@ -1029,6 +1029,8 @@ Pow_vdp_fixRegs:
 		movem.l	a6,-(sp)				; Push a6 onto stack
 		lea		(vdp_control_port).l,a6
 		
+		move.b	#0,(f_deathbnd).w			;!@ Reset death bound
+		
 		;!@ GD: Undo firecore FX
 		clr.b	(FM_PitchUp).w
 		clr.b	(PSG_PitchUp).w		

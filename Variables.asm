@@ -233,7 +233,10 @@ v_scrposy_orig:		ds.b	4		; stored y screen pos
 v_scrshiftx:		ds.w	1		; x-screen shift (new - last) * $100
 v_scrshifty:		ds.w	1		; y-screen shift (new - last) * $100
 v_lookshift:		ds.w	1		; screen shift when Sonic looks up/down
-v_unused7:			ds.b	1		; unused
+
+v_unused7:			ds.b	1		; kinda used. f_gnu flag, and player death bound flag
+f_deathbnd = v_unused7				; !@ GD: Used for f_gnu flag, for GNyU Linux BSOD flag, AND for flag when player dies from bottom boundary
+
 ;v_unused8:			ds.b	1		; unused	
 f_RandMonPow:		ds.b	1		; !@ GD: Now used, for keeping track if Random Monitor 
 									; Bitfield: 0000 0lsb

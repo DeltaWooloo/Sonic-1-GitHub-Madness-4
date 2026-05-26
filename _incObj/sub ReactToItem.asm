@@ -448,8 +448,9 @@ KillSonic:
 		jsr		(RandomNumber).l
 		cmpi.b	#$FF,(v_random).w
 		bne.s	.NotFoxy
-		move.b	#0,(v_invinc).w	; remove invincibility
-		move.w	#2,(f_restart).w ; FOXY SCARE
+		move.b	#0,(f_deathbnd).w	;!@ Reset death bound
+		move.b	#0,(v_invinc).w		; remove invincibility
+		move.w	#2,(f_restart).w 	; FOXY SCARE
 		rts
 .NotFoxy:
 		move.b	#6,obRoutine(a0)
@@ -486,14 +487,30 @@ KillSonic:
 		beq.s	.sound
 		cmpi.b	#id_Harpoon,obID(a2)	; check if you were killed by a harpoon
 		beq.s	.sound				
+		
+		;!@ Check if death boundary vs. normal death
+		tst.b	(f_deathbnd).w
+		bne.s	.deathBoundary
 		move.b	#dFannys, d0
+		bra.s	.sound					;!@
+		
+;!@ Do death boundary sfx
+.deathBoundary:
+		move.b	#dScream,d0	; Scream
+		jsr	(MegaPCM_PlaySample).l
+		move.w	#sfx_Lamppost,d0
+		jsr	(QueueSound2).l	; play lamppost sound
+		bra.s	.explode
+		
 .sound:
 		jsr	(MegaPCM_PlaySample).l
 .explode:
+		move.b	#0,(f_deathbnd).w	;!@ Reset death bound
 		move.b	#$8, d1
 		jmp	(GHM3Explode_Custom).l
 
 .dontdie:
+		move.b	#0,(f_deathbnd).w		;!@ Reset death bound
 		moveq	#-1,d0
 		rts
 ; End of function KillSonic
