@@ -659,9 +659,14 @@ Deform_SBZ2:;loc_68A2:
 		asl.l	#5,d5
 		bsr.w	BGScroll_XY
 		
-		;!@ GD: Constantly scroll up (only if SBZ2)
+		;!@ GD: Constantly scroll up (only if SBZ2-SBZ4)
+		cmpi.w	#(id_PPZ<<8)+2,(v_zone).w
+		beq.s	.DoAutoUpScroll
+		cmpi.w	#(id_PPZ<<8)+3,(v_zone).w
+		beq.s	.DoAutoUpScroll		
 		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w
 		bne.s	.skipAutoUpScroll		
+.DoAutoUpScroll:
 		addi.w	#1,(v_bgscreenposy).w		
 .skipAutoUpScroll:
 		move.w	(v_bgscreenposy).w,(v_bgscrposy_vdp).w

@@ -105,9 +105,14 @@ Collectible:
 		cmpi.b	#%111,d0		; (currently harcoded to 3, but can go up to 8)
 		bne.w	.sparkle		; If not, branch
 
-		clr.b	(v_player).w		; Erase the player
+		clr.b	(v_player).w	; Erase the player
 		jsr	(GHM3Explode).l		; Explosion
+		
+		;!@ GD: Check if player has 50+ rings (special stage/random monitor luck); if so, goto special stage
+		cmpi.w	#$32,d0
+		blo.s	.notSpecial
+		move.b	#1,(f_bigring).w 	; Set Special stage for $50+rings
+.notSpecial:		
 		jsr	(GotThroughAct).l	; Initiate the end of level sequence
 		bra.w	.sparkle		; If not, branch
-
 ; ---------------------------------------------------------------------------

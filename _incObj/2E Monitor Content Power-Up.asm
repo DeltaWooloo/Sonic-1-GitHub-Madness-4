@@ -7,16 +7,13 @@ pow_Lampost:	equ	$02	; Bit #2 = l = lampost
 pow_Signpost:	equ	$01	; Bit #1 = s = signpost
 pow_Bigring:	equ	$00	; Bit #0 = b = BigRing
 
-pow_1upWait = objoff_26	; !@ GD: SST for 1up yield before pokemon cry
-
 ;Random monitor debug data/consts
 monLong	equ	4		;Length of each random monitor entry in table (long = 4 bytes)
 
 ;Random monitor debugging
 	ifdef __DEBUG__
 ;If DEBUG mode, then force to your designated entry for quick testing (= ID * monLong)
-;monDebug equ $1D * monLong
-monDebug equ -1
+monDebug equ $25 * monLong
 	else
 ;If NOT debug mode, then skip
 monDebug equ -1
@@ -397,34 +394,34 @@ Pow_Randomiser:
 		dc.l	.toolimited			;$19 / $64
 		
 		;!@ GenesisDoes: VDP register fuckery		
-		dc.l	.vdp00_m1_reg		;x $19 / $64 - 	Mess wtih VDP register 	$00 (Mode Register 1)
+		dc.l	.vdp00_m1_reg		;x $1A / $68 - 	Mess wtih VDP register 	$00 (Mode Register 1)
 		;dc.l	.vdp01_m2_reg		;										$01 (Mode Register 2)
 		;dc.l	.vdp07_bg0_reg		;            - 	~						$07 (Background color)
 		;dc.l	.vdp0B_m3_reg		;										$0B (Mode Register 3)
-		dc.l	.vdp0C_m4_reg		;x $1A / $68 - 	~						$0C (Mode Register 4)
-		dc.l	.vdp10_planSz_reg	;x $1B / $6C - 	~						$10 (VDP Plane Size)
-		dc.l	.vdp_dbg_gfx		;x $1C / $70 -  ~ VDP Dbg Reg			$00 (GFX)
-		;dc.l	.vdp_dbg_z80oc		;x $1D / $74 -  ~ VDP Dbg Reg			$01 (Z80) - Too unstable for some emulators
-		dc.l	.funkyColors		;x $1D / $74 - 	Randomize CRAM colors (dry/water palletes)		
-		dc.l	.ultrashit			;x $1E / $78 -	All VDP corruption!
+		dc.l	.vdp0C_m4_reg		;x $1B / $6C - 	~						$0C (Mode Register 4)
+		dc.l	.vdp10_planSz_reg	;x $1C / $70 - 	~						$10 (VDP Plane Size)
+		dc.l	.vdp_dbg_gfx		;x $1D / $74 -  ~ VDP Dbg Reg			$00 (GFX)
+		;dc.l	.vdp_dbg_z80oc		;x $1E / $74 -  ~ VDP Dbg Reg			$01 (Z80) - Too unstable for some emulators
+		dc.l	.funkyColors		;x $1E / $78 - 	Randomize CRAM colors (dry/water palletes)		
+		dc.l	.ultrashit			;x $1F / $7C -	All VDP corruption!
 		;!@ GenesisDoes: Spawn stuff
-		;dc.l	.spawnPlayer		;x $1F / $7C - 	Spawn a	clone player - Has issues
-		dc.l	.instaWin			;x $1F / $7C - 	~			Signpost
-		dc.l	.springTime			;x $20 / $80 - 	~			Red vert spring
-		dc.l	.BigRing			;x $21 / $84 - 	~			Giant Ring + give 50 rings
-		dc.l	.monitorInception	;x $22 / $98 - 	~			Another random monitor
-		dc.l	.lampoil			;x $23 / $9C - 	~			New lamppost
-		dc.l	.rAndCRiftApart		;x $24 / $A0 -	~			RiftToGo
+		;dc.l	.spawnPlayer		;x $21 / $7C - 	Spawn a	clone player - Has issues
+		dc.l	.instaWin			;x $20 / $80 - 	~			Signpost
+		dc.l	.springTime			;x $21 / $84 - 	~			Red vert spring
+		dc.l	.BigRing			;x $22 / $88 - 	~			Giant Ring + give 50 rings
+		dc.l	.monitorInception	;x $23 / $8C - 	~			Another random monitor
+		dc.l	.lampoil			;x $24 / $90 - 	~			New lamppost
+		dc.l	.rAndCRiftApart		;x $25 / $94 -	~			RiftToGo
 		;!@ GenesisDoes: Other
-		dc.l	crash				;x $25 / $94 - 	Crash the game (illegal); Task fails successfully!
-		dc.l	.jukebox			;x $26 / $A8 - 	Play random song
-		dc.l	Pow_SlowShoes		;x $27 / $AC -  Slow down shoes
-		dc.l	FirecorePSGOnly		;x $28 / $B0 -  Slow down shoes
-		dc.l	FirecoreFIXER		;x $29 / $B4 -  Firecore fixer pitcher, does the opposite of "Firecore" Code
-        dc.l    FirecoreFMOnly      ;x $2A / $B8 self explanitory....		
+		dc.l	crash				;x $26 / $98 - 	Crash the game (illegal); Task fails successfully!
+		dc.l	.jukebox			;x $27 / $AC - 	Play random song
+		dc.l	Pow_SlowShoes		;x $28 / $B0 -  Slow down shoes
+		dc.l	FirecorePSGOnly		;x $29 / $B4 -  Slow down shoes
+		dc.l	FirecoreFIXER		;x $2A / $B8 -  Firecore fixer pitcher, does the opposite of "Firecore" Code
+        dc.l    FirecoreFMOnly      ;x $2B / $BC self explanitory....		
 		;Aka it pitches it up so it sounds right on firecores?? on emulators it sounds pitched up... yeah idk how to explain
 		; ML: the "why did no one do these already"s
-		dc.l	.newchara			;x $2B / $BC
+		dc.l	.newchara			;x $2C / $C0
 .powtableend:
 
 ; ===========================================================================
@@ -843,6 +840,15 @@ Pow_Randomiser:
 		
 ; Your winner! Spawn a signpost
 .instaWin:		
+		;!@ Don't spawn signposts in Act 3 or 4 levels
+		cmpi.b	#2,(v_act).w			; is act 3?
+		beq.w	.nothing				; if so, skip
+		cmpi.b	#3,(v_act).w			; is act 4?
+		beq.w	.nothing				; if so, skip		
+		;!@ GD: Bugfix to prevent signposts in PPZ (last zone)
+		cmpi.b	#id_PPZ,(v_zone).w				; is level PPZ?
+		beq.w	.nothing						; if so, skip
+		
 		if monDebug<0
 		btst	#pow_Signpost,(f_RandMonPow).w	;If signpost runonce flag set?
 		bne.w	.nothing						;If so, skip and re-randomize		
@@ -869,6 +875,15 @@ Pow_Randomiser:
 		
 ;Spawn a Giant Ring, and award 50 rings to ride
 .BigRing:
+		;!@ Don't spawn Big Ring in Act 3 or 4 levels
+		cmpi.b	#2,(v_act).w					; is act 3?
+		beq.w	.nothing						; if so, skip
+		cmpi.b	#3,(v_act).w					; is act 4?
+		beq.w	.nothing						; if so, skip		
+		;!@ GD: Bugfix to prevent Big Ring in PPZ (last zone)
+		cmpi.b	#id_PPZ,(v_zone).w				; is level PPZ?
+		beq.w	.nothing						; if so, skip
+
 		if monDebug<0
 		btst	#pow_Bigring,(f_RandMonPow).w	;If big ring runonce flag set?
 		bne.w	.nothing						;If so, skip
@@ -907,6 +922,12 @@ Pow_Randomiser:
 
 ;Spawn a rift
 .rAndCRiftApart:		;Rachet and Clank: Arif-tapart
+		;!@ GD: Bugfix to prevent rifts in PPZ and ITBZ zones (y-wrap/issues)
+		cmpi.b	#id_PPZ,(v_zone).w				; is level PPZ?
+		beq.w	.nothing						; if so, skip
+		cmpi.b	#id_Joint,(v_zone).w			; is level ITBZ?
+		beq.w	.nothing						; if so, skip
+
 		moveq	#plcid_Rift,d0					; Load rift PLC
 		jsr		(NewPLC).l						; load pattern
 		spawnObj	id_Rift,$00,dOllieGameTap

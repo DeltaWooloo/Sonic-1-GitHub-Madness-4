@@ -177,6 +177,11 @@ GotoNextLevel:
 Got_ChkSS:
 		clr.b	(v_lastlamp).w	; clear lamppost counter
 		jsr	(Pow_fix_RandMon_Runonce_flags).l	;!@ GD: Clear f_randMonPow runonce flags
+		
+		;!@ GD: Skip SS check if in OWZ2 (clinton); Clinton game mode will handle it
+		cmpi.w	#(id_OWZ<<8)+1,(v_zone).w
+		beq.s	loc_C6EA
+		
 		tst.b	(f_bigring).w	; has Sonic jumped into a giant ring?
 		beq.s	loc_C6EA	; if not, branch
 		move.b	#id_Special,(v_gamemode).w ; set game mode to Special Stage (10)
@@ -257,12 +262,31 @@ Got_Config:	dc.w 0, $120, $C0		; "SONIC HAS"
 		dc.b 2, 5
 
 ;!@ GD: Bugfix for children to hide themselves in transition between PPZ2 and Final Zone
+; Also bugfix to not show trohpy in CBZ2 underwater section, due to bug of using dry palette
 Got_DisplaySprite:		
-		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w
-		bne.s	.show
-		cmpi.b	#2,(v_dle_routine).w
-		bgt.s	.end		
+		;If zone is CBZ2, hide trophy
+		movem.l	d0,-(sp)					; Push d0 onto stack
+		
+		cmpi.w	#(id_CBZ<<8)+1,(v_zone).w	; Is this CBZ2?
+		bne.s	.notCBZ2					; if not, branch
+		; This is CBZ2
+		move.b	obFrame(a0),d0				; Move frame ID into d0
+		cmpi.b	#5,d0						; Is this frame 5 (trophy)?
+		beq.w	.end						; if so, skip and don't display
+	.notCBZ2:
+	
+		; Not CBZ2; check PPZ2
+	
+		cmpi.w	#(id_PPZ<<8)+1,(v_zone).w	; is this PPZ2?
+		bne.s	.show						; If not, branch
+		; This is PPZ2
+		cmpi.b	#2,(v_dle_routine).w		; Is routine 2?
+		bgt.s	.end						; If >=2, then skip display (PPZ2 to Final Zone transition)
+		
+	; Display sprite
 	.show:
 		jsr		(DisplaySprite).l
+	; Don't display sprite
 	.end:
+		movem.l	(sp)+,d0					; Pop d0 from stack
 		rts

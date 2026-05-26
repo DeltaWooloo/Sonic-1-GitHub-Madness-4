@@ -135,8 +135,17 @@ Clinton_ShowScr:
 	bra.s	Clinton_ShowScr
 .leave:
 	move.b	#0,submode.w
+	
+	;!@ GD: Goto special Stage if set
+	tst.b	(f_bigring).w				; is SS enabled?
+	beq.s	.level						; if not, branch
+.special:
+	move.w	#(id_OWZ<<8)+2,(v_zone).w	; !@ Force next level to be OWZ3
+	move.b	#id_Special,(v_gamemode).w 	; set game mode to Special Stage (10)
+	jmp		(GM_Special).l
+.level:	
 	move.b	#id_Level,v_gamemode.w
-	jmp	GM_Level
+	jmp		(GM_Level).l
 
 clifuck.Timer	=	$30
 clifuck.Accel	=	$32
@@ -289,8 +298,19 @@ CliFucker_Main:
 	jsr	DisplaySprite
 	rts
 .Exit:
+	;!@ GD: Winner is here (do end of level stuff)
+
 	tst.b	(v_endcard).w
 	bne.w	.ok
+	
+	;!@ GD: If have more than 50 rings, then set special stage
+	moveq	#0,d0
+	move.w	(v_rings).w,d0
+	cmpi.w	#50,d0
+	blo.s	.notSpecial
+	move.b	#1,(f_bigring).w 	; Set Special stage for $50+rings
+.notSpecial:
+
 	move.w	(v_limitleft2).w,(v_limitright2).w
 	clr.b	(v_invinc).w	; disable invincibility
 	clr.b	(f_timecount).w	; stop time counter
