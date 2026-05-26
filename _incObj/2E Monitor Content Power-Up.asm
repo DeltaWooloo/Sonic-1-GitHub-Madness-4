@@ -13,7 +13,8 @@ monLong	equ	4		;Length of each random monitor entry in table (long = 4 bytes)
 ;Random monitor debugging
 	ifdef __DEBUG__
 ;If DEBUG mode, then force to your designated entry for quick testing (= ID * monLong)
-monDebug equ $25 * monLong
+;monDebug equ $25 * monLong
+monDebug equ -1
 	else
 ;If NOT debug mode, then skip
 monDebug equ -1
