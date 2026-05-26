@@ -780,11 +780,13 @@ PlayerAttackHandle:
 .lut:
 		dc.l	TonicAttack
 		dc.l	ManiacAttack
+		even
 ; ----------------------------------------------------------------------------
 ; Tonic bullet spawn
 ; ----------------------------------------------------------------------------
 
 TonicAttack:	
+		movem.l d0/a1,-(sp)
 		tst.b	attacking(a0)
 		bne.s	.nobullets
 		move.b	#25,attacking(a0)
@@ -797,7 +799,7 @@ TonicAttack:
 
 .makebullets:
 		bsr.w	FindFreeObj
-	;	bne.s	.nobullets
+		bne.s	.nobullets
 
 		move.b	#id_PlayerBullet, obID(a1)
 		move.b	#4, obRoutine(a1)
@@ -810,8 +812,9 @@ TonicAttack:
 
 	;	move.w	#$25, v_screenshaketime		; tonic has insane firepower
 		move.w	#sfx_TonicTongue, d0
-		jmp	PlaySound_Special
+		jsr		(PlaySound_Special).l
 .nobullets:
+		movem.l (sp)+,d0/a1
 		rts
 
 ; ----------------------------------------------------------------------------
@@ -819,6 +822,8 @@ TonicAttack:
 ; ----------------------------------------------------------------------------
 
 ManiacAttack:
+		movem.l d0-d2/a1,-(sp)
+
 		;!@ GD: Allow infinite ammo if cheat
 		tst.b	(v_unlimitedammo).w
 		bne.s	.go2
@@ -827,7 +832,8 @@ ManiacAttack:
 		bne.s	.go
 		or.b	#1,f_ammocount.w
 		move.w	#sfx_B8, d0
-		jmp	PlaySound_Special	
+		jsr		(PlaySound_Special).l
+		bra.s	.nobullets
 .go:
 		sub.b	#1,playammo(a0)	; ammo start
 		or.b	#1,f_ammocount.w
@@ -858,6 +864,7 @@ ManiacAttack:
 		move.w	#sfx_Bomb, d0
 		jmp	PlaySound_Special		
 .nobullets:
+		movem.l (sp)+,d0-d2/a1
 		rts
 ; ---------------------------------------------------------------------------
 ; Subroutine to make Sonic walk/run

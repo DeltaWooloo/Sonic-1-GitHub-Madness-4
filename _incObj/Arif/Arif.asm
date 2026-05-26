@@ -14,18 +14,19 @@ ArifBoss_Arif:
 ; ===========================================================================
 
 ; Variables
-.DelayTimer:		equ $30	; bullet delay timer for atk mode 2
-.shootSFXRunonce:	equ	$38		;!@ GD
+.DelayTimer:		equ $30		; bullet delay timer for atk mode 2
+;.shootSFXRunonce:	equ	$34		;!@ GD
+.toggleChase:		equ	$36		;!@ GD Toggle between x xor y axis for chase
 .ShootAngle:		equ $3A
 .RoutineTimer:		equ $3C
 .FlashTimer:		equ $3E
-.AttacksLeft:		equ $3F ; byte counter for attacks left until next attack
+.AttacksLeft:		equ $3F 	; byte counter for attacks left until next attack
 
 ; Constants
-.Attacks1:		equ $4	; attacks for atk mode 1
-.Attacks2		equ $5	; attacks for atk mode 2
-.ShootTime1:		equ $F	; time for him to shoot (atk mode 1)
-.ShootTime2:		equ $2	; time for him to shoot (*2, atk mode 2)
+.Attacks1:			equ $4					; attacks for atk mode 1
+.Attacks2:			equ $3					; attacks for atk mode 2
+.ShootTime1:		equ $8					; time for him to shoot (atk mode 1)
+.ShootTime2:		equ .ShootTime1*3		; time for him to shoot (*2, atk mode 2)
 
 .FallWaitTime:		equ 60*4
 
@@ -113,33 +114,44 @@ ArifBoss_Arif:
 .Shoot1:
 		bsr.w 	.Chase
 
-		tst.w	.RoutineTimer(a0)			; is timer zero?
-		beq.s	.Shoot1_Exit				; if yes, branch
-
+		;!@
+		;tst.w	.RoutineTimer(a0)			; is timer zero?
+		;beq.s	.Shoot1_Exit				; if yes, branch
+		cmpi.w	#0,.RoutineTimer(a0)		; is timer zero?
+		ble.s	.Shoot1_Exit				; if yes, branch
+		
+		; !@ GD: Only check every 4 frames
+		moveq	#0,d0
+		move.b	(v_framebyte).w,d0
+		andi.b	#$07,d0
+		cmpi.b	#$04,d0
+		bne.s	.fail1
 		subi.w	#$1, .RoutineTimer(a0) 
 
 		;!@ GD: This gets spammed too much and corrupts data (resulting in random sfx/bgm playing)
 		;Let's change this to play once on 1st shot
-		tst.b	.shootSFXRunonce(a0)
-		bne.s	.skipSFX
-		move.b	#1,.shootSFXRunonce(a0)	;Set runonce flag
+		;tst.b	.shootSFXRunonce(a0)
+		;bne.s	.skipSFX
+		;move.b	#1,.shootSFXRunonce(a0)	;Set runonce flag
 		moveq	#0,d0
 		move.b	#sfx_HitBoss, d0
 		jsr	(QueueSound2).l
 	.skipSFX:
 
 		jsr	(FindFreeObj).l
+		bne.s	.fail1				;!@ Prevents bugs
 		move.b	#id_Arif, obID(a1)
 		move.b	#4, obSubtype(a1)
 		move.w	obX(a0), obX(a1)
 		move.w	obY(a0), obY(a1)
 		bsr.s 	.Shoot1_Velocity
+	.fail1:
 		rts
 
 .Shoot1_Exit:
 		move.w	#30, .RoutineTimer(a0)
 		addq.b	#2, obRoutine(a0)
-		move.b	#0,.shootSFXRunonce(a0)	;Reset runonce flag
+		;move.b	#0,.shootSFXRunonce(a0)	;Reset runonce flag
 		rts
 
 .Shoot1_Velocity:
@@ -163,8 +175,12 @@ ArifBoss_Arif:
 .Shoot1Idle:
 		bsr.w	.Chase
 
-		tst.w	.RoutineTimer(a0)			; is timer zero?
-		beq.s	.Shoot1Idle_Continue			; if yes, branch
+		;!@
+		;tst.w	.RoutineTimer(a0)			; is timer zero?
+		;beq.s	.Shoot1Idle_Continue			; if yes, branch
+		cmpi.w	#0,.RoutineTimer(a0)			; is timer zero?
+		ble.s	.Shoot1Idle_Continue			; if yes, branch
+		
 
 		tst.b	.AttacksLeft(a0)			; any attacks left?
 		beq.s	.Shoot1Idle_Done			; if not, branch
@@ -205,7 +221,7 @@ ArifBoss_Arif:
 		move.w 	#0, obVelX(a0)
 		move.w 	#0, obVelY(a0)
 
-		move.b 	#.FallWaitTime, .RoutineTimer(a0)
+		move.w 	#.FallWaitTime, .RoutineTimer(a0)
 		addq.b	#2, obRoutine(a0)			; next
 
 .Fall_Exit:
@@ -216,11 +232,12 @@ ArifBoss_Arif:
 .FallIdle:
 		subi.w	#$1, .RoutineTimer(a0)
 
-		tst.w	.RoutineTimer(a0)			; is timer zero?
-		beq.s	.FallIdle_Exit				; if not, branch
+		tst.w	.RoutineTimer(a0)				; is timer zero?
+		beq.s	.FallIdle_Exit					; if not, branch
 
 		move.b	#.Attacks2, .AttacksLeft(a0)
-		addq.b	#2, obRoutine(a0)			; next atk
+		move.w	#.ShootTime2, .RoutineTimer(a0)	;!@ Add
+		addq.b	#2, obRoutine(a0)				; next atk
 
 .FallIdle_Exit:
 		rts
@@ -230,21 +247,43 @@ ArifBoss_Arif:
 ; ===========================================================================
 .Shoot2:
 		tst.w	.RoutineTimer(a0)			; is timer zero?
-		beq.s	.Shoot2_Exit				; if yes, branch
-
-		btst	#0, (v_framecount)
-		beq.s	.Shoot2_Exit
-
+		beq.w	.Shoot2_Exit				; if yes, branch		
+		
+		subi.w	#$1, .RoutineTimer(a0)
 		addi.w 	#$800, .ShootAngle(a0)
-
+		
+		;!@ Skip every other bullet
+		;btst	#0, (v_framecount)
+		;beq.s	.Shoot2_Exit
+		moveq 	#0,d0
+		move.b	(v_framebyte).w,d0
+		andi.b	#$0F,d0		
+		;!@ This code is shit; just check over 4x hex digit ($x0,$x4,$x8,$xC)
+		cmpi.b	#$00,d0
+		beq.s	.win2
+		cmpi.b	#$04,d0
+		beq.s	.win2
+		cmpi.b	#$08,d0
+		beq.s	.win2
+		cmpi.b	#$0C,d0
+		beq.s	.win2
+		bra.s	.fail2
+	.win2:
 		jsr	(FindFreeObj).l
+		bne.s	.fail2						; !@ prevents bugs
 		move.b	#id_Arif, (a1)
 		move.b	#4, obSubtype(a1)
 		move.w	obX(a0), obX(a1)
 		move.w	obY(a0), obY(a1)
+		
+		;!@ Add shots
+		moveq	#0,d0
+		move.b	#sfx_Bomb, d0
+		jsr	(QueueSound2).l
 
 		move.w 	.ShootAngle(a0), d0
 		bsr.s 	.Shoot2_Velocity
+	.fail2:
 		rts
 
 
@@ -284,6 +323,8 @@ ArifBoss_Arif:
 		rts
 
 .Shoot2Idle_Done:
+		;!@ GD: Toggle axis
+		bchg	#0,.toggleChase(a0)
 		move.b	#2, obRoutine(a0)
 		rts
 
@@ -331,8 +372,15 @@ ArifBoss_Arif:
 		move.w	#$250, d0
 		move.w	#$10, d1
 		jsr	(ChaseObject).l
-
+		
+		;!@ GD: Toggle chase mode
+		btst	#0,.toggleChase(a0)
+		bne.s	.yChase
 		move.w	#0, obVelY(a0)
+		bra.s	.chaseEnd		
+	.yChase:
+		move.w	#0, obVelX(a0)		
+	.chaseEnd:
 		rts
 
 ; why is CAT drawing PINESS. why they HATE me.

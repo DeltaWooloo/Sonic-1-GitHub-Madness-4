@@ -1044,7 +1044,8 @@ DLE_NGZ3:
 		move.w	DLE_NGZ_HUMPY(pc,d0.w),d0
 		jmp	DLE_NGZ_HUMPY(pc,d0.w)
 ; ===========================================================================
-DLE_NGZ_HUMPY:	dc.w DLE_NGZ3main-DLE_NGZ_HUMPY
+DLE_NGZ_HUMPY:
+				dc.w DLE_NGZ3main-DLE_NGZ_HUMPY
 				dc.w locret_VOMITCOOKIE-DLE_NGZ_HUMPY
 				dc.w DLE_NGZ3end-DLE_NGZ_HUMPY			;!@ GD
 				dc.w locret_VOMITCOOKIE-DLE_NGZ_HUMPY	;!@ GD
@@ -1084,8 +1085,8 @@ locret_VOMITCOOKIE:
 		rts
 		
 DLE_NGZ3end:
-		;move.w	#bgm_Coffinman,d0
-		;jsr	(QueueSound1).l		; play boss music
+		move.w	#bgm_GHZ,d0
+		jsr	(QueueSound1).l		; Restore zone song
 		
 		;!@ GD: Show HUD to continue
 		;lea		(ArtList_NGZ3_contHUD).l,a1
