@@ -862,7 +862,7 @@ ManiacAttack:
 
 		move.w	#$F, v_screenshaketime
 		move.w	#sfx_Bomb, d0
-		jmp	PlaySound_Special		
+		jsr		(PlaySound_Special).l
 .nobullets:
 		movem.l (sp)+,d0-d2/a1
 		rts
