@@ -4,6 +4,8 @@
  ; intro - 0x331 (0x6620)
 BossDioMildanner:
 
+DioCB_hurt:		equ objoff_26		;!@ Attack Callback for dio flag to prevent knockback for player
+
 		moveq	#0,d0
 		move.b	obRoutine(a0),d0
 		move.w	.index(pc,d0.w),d1
@@ -64,13 +66,20 @@ BossDioMildanner_SetupBoss:
 		move.b	#$A1,obColType(a0)
 		move.b	#4,obPriority(a0)
 		move.b	#5,obRender(a0) ; x flip
-		move.b	#1,obStatus(a0)
+		;!@GD: Attack collision bugfix
+		;move.b	#1,obStatus(a0)
+		move.b	#0,obStatus(a0)
+		bset	#0,obStatus(a0)
 
 		move.l	#Map_DioDanner_Intro,obMap(a0)
 		move.w	#make_art_tile(ArtTile_FartDanner,1,0),obGfx(a0)
 		move.b	#0,obFrame(a0)
 
-		bset	#6,obStatus(a0)						; !@ GD: GHM4/recognize hitboxes from character weapons
+		bset	#6,obStatus(a0)						; !@ GD: GHM4/recognize hitboxes from character weapons		
+		;!@ GD: Attack Callback to set flag and
+		; prevent player from receiving knockback when Dio is hurt
+		move.l 	#BossDioMildanner_Hurt_CB, obColCallback(a0)
+		
 		; size initially is 20x40
 		move.b	#20,obActWid(a0)
 		move.b	#20/2,obWidth(a0)
@@ -223,13 +232,17 @@ BossDioMildanner_BossAttackJump2Side: ; Pre attack to jump to a side of the scre
 		move.w	obX(a1),d0
 		sub.w	#$22E8,d0 ; middle of arena
 
-		move.b	#1,obStatus(a0)
+		;!@GD: Attack collision bugfix
+		;move.b	#1,obStatus(a0)
+		bset	#0,obStatus(a0)
 		move.w	#$23C0,$34(a0) ; target X pos
 
 		tst.w	d0
 		bpl.s	BossDioMildanner_Display
 		; go right
-		move.b	#0,obStatus(a0)
+		;!@GD: Attack collision bugfix
+		;move.b	#0,obStatus(a0)
+		bclr	#0,obStatus(a0)
 		move.w	#$2200,$34(a0) ; target X pos
 
 		bra.s	BossDioMildanner_Display
@@ -268,14 +281,21 @@ BossDioMildanner_BossAttackRun:
 		move.b	#1,obAnim(a0) ; @runattack
 
 		move.b	#1,ob2ndRout(a0)
-		move.b	#1,obStatus(a0)
+		
+		;!@GD: Attack collision bugfix
+		;move.b	#1,obStatus(a0)
+		bset	#0,obStatus(a0)
 		move.w	#$2200,$34(a0) ; target X pos
 		move.w	#-$200,$36(a0) ; x accel
 
 		tst.w	d0
 		bpl.w	BossDioMildanner_Display
 
-		move.b	#0,obStatus(a0)
+		
+		;!@GD: Attack collision bugfix
+		;move.b	#0,obStatus(a0)
+		bclr	#0,obStatus(a0)
+		
 		move.w	#$23C0,$34(a0) ; target X pos
 		move.w	#$200,$36(a0) ; x accel
 		bra.w	BossDioMildanner_Display
@@ -306,11 +326,20 @@ BossDioMildanner_ResetToBoss:
 		bra.w	BossDioMildanner_Display
 
 ; ---------------------------------------------------------------------------
+
+BossDioMildanner_Hurt_CB:
+		move.b	#1,DioCB_hurt(a0)
+; ---------------------------------------------------------------------------
 BossDioMildanner_Hurt:
 		cmpi.b	#5,obAnim(a0)
-		beq.s	.ret
+		beq.w	.ret
 		tst.b	obColType(a0)
-		bne.s	.ret
+		bne.w	.ret
+		
+		;!@ GD: Prevent knockback if flag set
+		tst.b	DioCB_hurt(a0)
+		bne.s	.positiveknock		
+		
 		tst.b	$3E(a0)
 		bne.s	.already_hurt
 		move.w	#0,$30(a0) ; no more timer
@@ -332,6 +361,7 @@ BossDioMildanner_Hurt:
 		tst.b	obColProp(a0)
 		beq.s	.dead
 	.already_hurt:
+		move.b	#0,DioCB_hurt(a0)		;!@ GD: reset knockback flag
 		lea	(v_pal_dry+$22).w,a1
 		moveq	#0,d0
 		tst.w	(a1)
@@ -346,6 +376,7 @@ BossDioMildanner_Hurt:
 	.ret:
 		rts
 	.dead:
+		move.b	#0,DioCB_hurt(a0)		;!@ GD: reset knockback flag
 		move.b	#5,obAnim(a0)
 		move.b	#$1A,obRoutine(a0)
 		moveq	#plcid_DioDannerDEAD,d0

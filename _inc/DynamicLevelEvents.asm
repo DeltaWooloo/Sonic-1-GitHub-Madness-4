@@ -1077,9 +1077,9 @@ DLE_NGZ3main:
 		;cmpi.w	#$E50,(v_screenposx).w
 		;bcs.s	locret_VOMITCOOKIE
 		;move.w	#$210,(v_limitbtm1).w
-		cmpi.b	#1,($FFFFF600).w
-		beq.s	locret_VOMITCOOKIE
-		NOP
+		;cmpi.b	#1,($FFFFF600).w
+		;beq.s	locret_VOMITCOOKIE
+		;NOP
 
 locret_VOMITCOOKIE:
 		rts
@@ -1087,6 +1087,10 @@ locret_VOMITCOOKIE:
 DLE_NGZ3end:
 		move.w	#bgm_GHZ,d0
 		jsr	(QueueSound1).l		; Restore zone song
+		
+		; Move boss addr into a1 and delete
+		movea.l	(v_object).w,a0			
+		jsr		(DeleteObject).l
 		
 		;!@ GD: Show HUD to continue
 		;lea		(ArtList_NGZ3_contHUD).l,a1
