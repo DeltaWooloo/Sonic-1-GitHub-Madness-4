@@ -10,6 +10,9 @@ advertdebug equ 0
 	endif
 ; ---------------------------------------------------------------------------
 GM_Advert:
+		;!@ GD: Extra Pow_vdp_fixRegs call to fix BSZ2 window plane etc
+		mPow_vdp_fixRegs	0,1
+
 		move.b	#bgm_Stop,d0
 		jsr	QueueSound2
 		jsr	ClearPLC

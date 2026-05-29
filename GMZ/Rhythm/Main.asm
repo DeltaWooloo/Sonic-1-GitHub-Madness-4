@@ -19,6 +19,8 @@ rhyEndState	ds.b	1
 
 GM_Special:
 GM_Rhythm:
+		mPow_vdp_fixRegs	0,1
+
 		move.b	#bgm_Stop,d0
 		jsr	QueueSound2 ; stop music
 		jsr	ClearPLC

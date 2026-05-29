@@ -12,11 +12,11 @@
 ; ASSEMBLY OPTIONS:
 
 
-DickingAround = 0
+DickingAround = 1
 ; 	| If 0, loads SEGA screen first (for public release)
 ; 	| If 1, load Debug Menu first
 
-EggblockOrigin = 0
+EggblockOrigin = 1
 ; 	| If 0, play ads at 5 minute intervals or when grabbing the ad random monitor powerup
 ; 	| If 1, no ads play at all unless opened from debug menu
 
@@ -25,7 +25,7 @@ DemoRecord = 0
 ; 	| If 0, regular gameplay physics
 ; 	| If 1, disable Sonic CD terminal velocity/speed caps for Sonic
 
-CheatsOn = 0
+CheatsOn = 1
 ; 	| If 0, build it with no cheats active
 ; 	| If 1, build it with all cheats active
 
@@ -394,7 +394,6 @@ MainGameLoop:
 ; temporarily removed this. it causes extreme visual tearing when in certain gamemodes because 
 ; it's resetting registers during active scan
 ; add it to ClearScreen maybe, that's called on most gamemode inits
-
 
 ;		moveq	#0,d0
 ;		moveq	#1,d1
@@ -1144,12 +1143,13 @@ LoadDynPLC:
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 ClearScreen:
-		stopZ80
+		stopZ80		
 		waitZ80
 		fillVRAM	0, 0, $40 ; clear first two tiles
 		fillVRAM	0, vram_fg, vram_fg+plane_size_64x32 	; clear foreground namespace
 		fillVRAM	0, vram_bg, vram_bg+plane_size_64x32 	; clear background namespace
 		fillVRAM	0, vram_window, vram_window+plane_size_64x32 	; clear window namespace
+
 		startZ80
 .merge
 		clr.l	(v_scrposy_vdp).w
@@ -1163,7 +1163,15 @@ ClearScreen:
 		clearRAM vscroll_buffer,vscroll_buffer_end
 		clearRAM v_spritetablebuffer,v_spritetablebuffer_end
 		clearRAM v_hscrolltablebuffer,v_hscrolltablebuffer_end_padded
+		
+		;!@ GD: Extra call to fix issues
+		disable_ints
+		disable_display
+		
+		mPow_vdp_fixRegs 0,1		
+				
 		ResetDMAQueue
+		enable_display
 		rts
 ; End of function ClearScreen
 
@@ -2561,6 +2569,9 @@ WaitForVBla:
 ; ---------------------------------------------------------------------------
 
 GM_Sega:
+		;!@ GD: Extra Pow_vdp_fixRegs call to fix BSZ2 window plane etc
+		mPow_vdp_fixRegs	0,1
+
 		move.b	#bgm_Stop,d0
 		bsr.w	QueueSound2 ; stop music
 		bsr.w	ClearPLC
@@ -3146,9 +3157,7 @@ Level_NoMusicFade:
 		fillVRAM $2F,0,$10000		; fill vram with dummy tiles
 		bsr.w	ClearScreen
 		
-		moveq	#0,d0
-		moveq	#1,d1
-		jsr	(Pow_vdp_fixRegs).l
+		mPow_vdp_fixRegs	0,1		
 		move.b	#0,(v_vdp_fx).w	; cancel VDP FX
 
 
@@ -6848,7 +6857,13 @@ BossDefeated:
 		bne.s	locret_178A2
 		jsr	(FindFreeObj).l
 		bne.s	locret_178A2
+		
+		;!@ GD: For Final zone, use regular bomb
 		_move.b	#id_ExplosionBomb,obID(a1)	; load explosion object
+		cmpi.w	#(id_PPZ<<8)+2,(v_zone).w	; is this Final Zone?
+		bne.s	.cont
+		_move.b	#id_ExplosionItem,obID(a1)	; load boom object
+	.cont:
 		move.w	obX(a0),obX(a1)
 		move.w	obY(a0),obY(a1)
 		jsr	(RandomNumber).l

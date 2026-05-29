@@ -22,6 +22,10 @@ beep macro
 ; ---------------------------------------------------------------------------
 GM_DebugMenu:
 		move.b	#0,vscroll_mode
+		
+		;!@ GD: Extra call to clear window plane/other FX from BSZ2
+		mPow_vdp_fixRegs	0,1
+		
 		move.b	#bgm_Fade,d0
 		bsr.w	QueueSound2		; stop music
 		bsr.w	PaletteFadeOut

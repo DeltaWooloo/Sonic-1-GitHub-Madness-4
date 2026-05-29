@@ -6,6 +6,9 @@
 screensa_sonic:	equ	v_ram_start
 
 GM_SonicTheScreensaver:
+		;!@ GD: Extra Pow_vdp_fixRegs call to fix BSZ2 window plane etc
+		mPow_vdp_fixRegs	0,1
+
 		move.b	#bgm_Fade,d0
 		jsr	QueueSound2
 		jsr     MegaPCM_StopPlayback

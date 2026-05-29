@@ -6,6 +6,9 @@
 	include "ContinueScreen/Macros.asm"
 
 GM_Continue:
+	;!@ GD: Extra call to clear window plane/other FX from BSZ2
+	mPow_vdp_fixRegs	0,1
+
 	move.b	#02, (SMPS_RAM.v_main_tempo)	; slow current music to a crawl so it feels like the driver froze
 
 	jsr 	PaletteFadeOut
