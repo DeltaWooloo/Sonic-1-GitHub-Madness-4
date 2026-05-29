@@ -8,11 +8,13 @@ ScrapEggman:
 		move.w	SEgg_Index(pc,d0.w),d1
 		jmp	SEgg_Index(pc,d1.w)
 ; ===========================================================================
-SEgg_Index:	dc.w SEgg_Main-SEgg_Index
+SEgg_Index:
+		dc.w SEgg_Main-SEgg_Index
 		dc.w SEgg_Eggman-SEgg_Index
 		dc.w SEgg_Switch-SEgg_Index
 
-SEgg_ObjData:	dc.b 2,	0, 3		; routine number, animation, priority
+SEgg_ObjData:
+		dc.b 2,	0, 3		; routine number, animation, priority
 		dc.b 4,	0, 3
 ; ===========================================================================
 
@@ -60,7 +62,8 @@ SEgg_Eggman:	; Routine 2
 		jsr	(AnimateSprite).l
 		jmp	(DisplaySprite).l
 ; ===========================================================================
-SEgg_EggIndex:	dc.w SEgg_ChkSonic-SEgg_EggIndex
+SEgg_EggIndex:
+		dc.w SEgg_ChkSonic-SEgg_EggIndex
 		dc.w SEgg_PreLeap-SEgg_EggIndex
 		dc.w SEgg_Leap-SEgg_EggIndex
 		dc.w loc_19934-SEgg_EggIndex
@@ -114,6 +117,9 @@ loc_19976:
 		move.w	#"SW",obSubtype(a0)
 		cmpi.w	#boss_sbz2_y+$8B,obY(a0)
 		blo.s	SEgg_FindBlocks
+		
+		;!@ GD: Play Freddy pcm
+		pcm		dYoFreddy
 		move.w	#boss_sbz2_y+$8B,obY(a0)
 		clr.w	obVelY(a0)
 
@@ -151,7 +157,8 @@ SEgg_Switch:	; Routine 4
 		move.w	SEgg_SwIndex(pc,d0.w),d0
 		jmp	SEgg_SwIndex(pc,d0.w)
 ; ===========================================================================
-SEgg_SwIndex:	dc.w loc_199E6-SEgg_SwIndex
+SEgg_SwIndex:
+		dc.w loc_199E6-SEgg_SwIndex
 		dc.w SEgg_SwDisplay-SEgg_SwIndex
 ; ===========================================================================
 

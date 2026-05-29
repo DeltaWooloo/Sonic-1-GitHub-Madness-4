@@ -155,7 +155,11 @@ Mon_BreakOpen:	; Routine 4
 		move.b	obAnim(a0),obAnim(a1)
 
 Mon_Explode:
+		;!@ GD: Don't do GHM3 explode in Final Zone (not enough VRAM for PLC)
+		cmpi.w	#(id_PPZ<<8)+2,(v_zone).w	; is this PPZ3?
+		beq.s	.skip						; if so, skip
 		jsr	(GHM3Explode).l
+	.skip:
 
 		lea	(v_objstate).w,a2
 		moveq	#0,d0

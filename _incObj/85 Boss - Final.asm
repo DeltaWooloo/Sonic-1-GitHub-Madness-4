@@ -30,9 +30,13 @@ BossFinal_ObjData:
 		dc.l Map_FZLegs
 		dc.w boss_fz_x+$290, boss_fz_y+$86, make_art_tile(ArtTile_FZ_Eggman_No_Vehicle,0,0)
 		dc.l Map_SEgg
-		dc.w boss_fz_x+$290, boss_fz_y+$86, make_art_tile(ArtTile_Eggman,0,0)
+		;!@ GD: Relocate
+		;dc.w boss_fz_x+$290, boss_fz_y+$86, make_art_tile(ArtTile_Eggman,0,0)
+		dc.w boss_fz_x+$290, boss_fz_y+$86, make_art_tile(ArtTile_FZ_Eggman,0,0)
 		dc.l Map_Eggman
-		dc.w boss_fz_x+$290, boss_fz_y+$86, make_art_tile(ArtTile_Eggman,0,0)
+		;!@ GD: Relocate
+		;dc.w boss_fz_x+$290, boss_fz_y+$86, make_art_tile(ArtTile_Eggman,0,0)
+		dc.w boss_fz_x+$290, boss_fz_y+$86, make_art_tile(ArtTile_FZ_Eggman,0,0)
 		dc.l Map_Eggman
 
 BossFinal_ObjData2:
@@ -95,7 +99,13 @@ loc_19E3E:
 
 loc_19E5A:
 		move.w	#0,objoff_34(a0)
+		
+		;!@ GD: For debug testing, set HP to 1; else 8
+		ifdef __DEBUG__
+		move.b	#1,obColProp(a0) ; set number of hits to 1
+		else
 		move.b	#8,obColProp(a0) ; set number of hits to 8
+		endif
 		move.w	#-1,objoff_30(a0)
 
 BossFinal_Eggman:	; Routine 2
@@ -245,8 +255,13 @@ BossFinal_CylinderPairs:
 		; Possible permutations of the two cylinders that are activated at once.
 		; Two words per pair, first one is (normally) the cylinder Eggman is hiding in.
 		; 0 = top-left -- 2 = top-right -- 4 = bottom-left -- 6 bottom-right
-		dc.w 0, 2
-		dc.w 2, 4
+		;!@ GD:
+		;dc.w 0, 2
+		;dc.w 2, 4
+		;dc.w 4, 6
+		;dc.w 6, 0
+		dc.w 0, 4
+		dc.w 2, 6
 		dc.w 4, 6
 		dc.w 6, 0
 ; ===========================================================================
@@ -400,7 +415,9 @@ locret_1A190:
 
 loc_1A192:
 		move.l	#Map_Eggman,obMap(a0)
-		move.w	#make_art_tile(ArtTile_Eggman,0,0),obGfx(a0)
+		;!@ GD: Relocate
+		;move.w	#make_art_tile(ArtTile_Eggman,0,0),obGfx(a0)
+		move.w	#make_art_tile(ArtTile_FZ_Eggman,0,0),obGfx(a0)
 		move.b	#0,obAnim(a0)
 		bset	#0,obStatus(a0)
 		jsr	(SpeedToPos).l
@@ -518,7 +535,9 @@ loc_1A2E4:
 		ble.s	loc_1A312
 		move.b	#6,obAnim(a0)
 		move.l	#Map_Eggman,obMap(a0)
-		move.w	#make_art_tile(ArtTile_Eggman,0,0),obGfx(a0)
+		;!@ GD: Relocate
+		;move.w	#make_art_tile(ArtTile_Eggman,0,0),obGfx(a0)
+		move.w	#make_art_tile(ArtTile_FZ_Eggman,0,0),obGfx(a0)
 		lea	Ani_Eggman(pc),a1
 		jsr	(AnimateSprite).l
 		bra.w	loc_1A296

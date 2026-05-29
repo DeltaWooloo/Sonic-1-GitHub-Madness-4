@@ -61,11 +61,12 @@ ExplItem_Init:
 		move.w	#$800,expl.Factor(a0)
 		jsr	RandomNumber.l
 		move.w	d0,obAngle(a0)		; use angle as sin cntr
-ddd		;move.w	obX(a0),obX(a1)
+;ddd	;move.w	obX(a0),obX(a1)
 		;move.w	obY(a0),obY(a1)
 		;move.w	$3E(a0),$3E(a1)
 		move.l	#Map_ExplodeItem,obMap(a0)
-		move.w	#$5A0,obGfx(a0)
+		;move.w	#$5A0,obGfx(a0)
+		move.w	#make_art_tile(ArtTile_Explosion,0,0),obGfx(a0)
 		move.b	#4,obRender(a0)
 		move.b	#1,obPriority(a0)
 		move.b	#0,obColType(a0)

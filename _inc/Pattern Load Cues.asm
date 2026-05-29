@@ -596,11 +596,18 @@ PLC_EggmanSBZ2end:
 ; Pattern load cues - final boss
 ; ---------------------------------------------------------------------------
 PLC_FZBoss:	dc.w ((PLC_FZBossend-PLC_FZBoss-2)/6)-1
-		plcm	Nem_FzEggman,   ArtTile_FZ_Eggman_Fleeing    ; Eggman after boss
-		plcm	Nem_FzBoss,     ArtTile_FZ_Boss              ; FZ boss
-		plcm	Nem_Eggman,     ArtTile_Eggman               ; Eggman main patterns
-		plcm	Nem_Sbz2Eggman, ArtTile_FZ_Eggman_No_Vehicle ; Eggman without ship
-		plcm	Nem_Exhaust,    ArtTile_Eggman_Exhaust       ; exhaust flame
+		plcm	Nem_FzEggman,   ArtTile_FZ_Eggman_Fleeing    ; Eggman after boss 	- $4C tiles
+		plcm	Nem_FzBoss,     ArtTile_FZ_Boss              ; FZ boss				- $DA tiles
+		
+		;!@ GD: Relocate
+		;plcm	Nem_Eggman,     ArtTile_Eggman               ; Eggman main patterns	- $6C tiles
+		plcm	Nem_Sbz2Eggman, ArtTile_FZ_Eggman_No_Vehicle ; Eggman without ship	- $90 tiles
+		;!@ GD: Relocate
+		plcm	Nem_Eggman,     ArtTile_FZ_Eggman            ; Eggman main patterns	- $6C tiles		
+		;!@ GD: Relocate
+		;plcm	Nem_Exhaust,    ArtTile_Eggman_Exhaust       ; exhaust flame		- $11 tiles
+		plcm	Nem_Exhaust,    ArtTile_FZ_Eggman_Exhaust    ; exhaust flame		- $11 tiles
+		;													 ; Total tiles:			- $233 tiles
 PLC_FZBossend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - boss BLUESCAPO (mildanner)

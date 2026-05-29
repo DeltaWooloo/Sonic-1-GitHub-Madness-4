@@ -878,9 +878,26 @@ ArtTile_SBZ_Spinning_Platform:	equ $4DF
 ;
 
 ; Final Zone
-ArtTile_FZ_Boss:		equ $300
-ArtTile_FZ_Eggman_Fleeing:	equ $3A0
-ArtTile_FZ_Eggman_No_Vehicle:	equ $470
+; PLC Order:
+;ArtTile_FZ_Eggman_Fleeing
+;ArtTile_FZ_Boss
+;ArtTile_FZ_Eggman
+;ArtTile_FZ_Eggman_No_Vehicle
+;ArtTile_FZ_Eggman_Exhaust
+
+; !@ GD: Old PLC arttiles
+;ArtTile_FZ_Boss:				equ $300
+;ArtTile_FZ_Eggman_Fleeing:		equ $3A0
+;ArtTile_FZ_Eggman_No_Vehicle:	equ $470
+;ArtTile_Eggman_Exhaust:			equ ArtTile_FZ_Eggman+$12A;
+
+;!@ GD: New PLC arttiles
+ArtTile_FZ_Start:				equ $2EA
+ArtTile_FZ_Eggman_Fleeing:		equ ArtTile_FZ_Start					; $4C tiles
+ArtTile_FZ_Boss:				equ ArtTile_FZ_Eggman_Fleeing + $04C	; $DA tiles
+ArtTile_FZ_Eggman_No_Vehicle:	equ ArtTile_FZ_Boss + $0DA				; $90 tiles
+ArtTile_FZ_Eggman:				equ ArtTile_FZ_Eggman_No_Vehicle + $090	;!@ GD: New, reloc for eggman in FZ; $6C tiles
+ArtTile_FZ_Eggman_Exhaust:		equ $52A 								; !@ GD: New, reloc for eggman exhaust in FZ; $11 tiles
 
 ; General Level Art
 ArtTile_Level:			equ $000
