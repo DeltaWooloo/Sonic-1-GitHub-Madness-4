@@ -119,6 +119,12 @@ writeDBG_reg2	macro
 	move.w	d2,(a6)				;Write register
 	endm
 	
+mPow_vdp_fixRegs	macro	lvlpal,windows
+	moveq	#lvlpal,d0
+	moveq	#windows,d0
+	jsr		(Pow_vdp_fixRegs).l
+	endm
+	
 ;!@ GD: Sets the appropriate character speed, based on water/state OR override if parm!=$0000
 ; See Sonic_SetSpeed for full details of input param
 char_setSpeed	macro parm

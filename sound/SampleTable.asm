@@ -167,6 +167,10 @@ SampleTable:
 	dcSample	TYPE_DPCM,	chr_tonic_burp,	16000,	FLAGS_SFX	; $EB
 	dcSample	TYPE_DPCM,	chr_maniac_laugh,16000,	FLAGS_SFX	; $EC
 	dcSample	TYPE_DPCM,	chr_mddio_laugh,16000,	FLAGS_SFX	; $ED
+	; Final Zone samples (GenesisDoes)
+	dcSample	TYPE_DPCM,	prng_Can,		16000,	FLAGS_SFX	; $EE
+	dcSample	TYPE_DPCM,	prng_Chip,		16000,	FLAGS_SFX	; $EF
+	dcSample	TYPE_PCM,	prng_Ugh,		22050,	FLAGS_SFX	; $F0
 
 	; SEGA Samples
 	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $EE
@@ -361,6 +365,11 @@ SampleTable:
 	incdac	chr_tonic_burp,"sound/dac/GenesisDoes/chr_tonic_burp.dpcm"
 	incdac	chr_maniac_laugh,"sound/dac/GenesisDoes/chr_maniac_laugh.dpcm"
 	incdac	chr_mddio_laugh,"sound/dac/GenesisDoes/chr_mddio_laugh.dpcm"
+; ---------------------------------------------------------------
+; Final Zone samples (GenesisDoes)
+	incdac	prng_Can,"sound/dac/GenesisDoes/prngCan.dpcm"
+	incdac	prng_Chip,"sound/dac/GenesisDoes/prngChip.dpcm"
+	incdac	prng_Ugh,"sound/dac/GenesisDoes/prngUgh.pcm"
 
 ; ---------------------------------------------------------------
 ; Whatever you want the Sega sound to be

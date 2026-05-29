@@ -6,6 +6,10 @@ copy /y "chars\chr_mddio_laugh.wav" "..\..\..\sound\DAC\GenesisDoes\chr_mddio_la
 copy /y "chars\chr_tonic_burp.wav" "..\..\..\sound\DAC\GenesisDoes\chr_tonic_burp.wav"
 copy /y "chars\chr_maniac_laugh.wav" "..\..\..\sound\DAC\GenesisDoes\chr_maniac_laugh.wav"
 copy /y "dsud\udied.wav" "..\..\..\sound\DAC\GenesisDoes\udied.wav"
+copy /y "FinalZone\prngCan.wav" "..\..\..\sound\DAC\GenesisDoes\prngCan.wav"
+copy /y "FinalZone\prngChip.wav" "..\..\..\sound\DAC\GenesisDoes\prngChip.wav"
+copy /y "FinalZone\prngUgh.wav" "..\..\..\sound\DAC\GenesisDoes\prngUgh.wav"
+
 copy /y "Four\4.wav" "..\..\..\sound\DAC\GenesisDoes\Four.wav"
 copy /y "GenesisCan\GenesisCan1.wav" "..\..\..\sound\DAC\GenesisDoes\GenesisCan1.wav"
 copy /y "GenesisCan\GenesisCan2.wav" "..\..\..\sound\DAC\GenesisDoes\GenesisCan2.wav"

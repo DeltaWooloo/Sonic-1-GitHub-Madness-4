@@ -161,8 +161,11 @@ loc_19EC6:
 		move.w	#0,objoff_30(a1)
 		move.w	#1,objoff_32(a0)
 		clr.b	objoff_35(a0)
+				
+		;!@ GD: Play can PCM too
 		move.w	#sfx_Rumbling,d0
 		jsr	(QueueSound2).l	; play rumbling sound
+		pcm		dPrngCan
 
 loc_19F10:
 		tst.w	objoff_32(a0)
@@ -209,8 +212,10 @@ loc_19F6A:
 		
 		subq.b	#1,obColProp(a0)
 		move.b	#$64,objoff_35(a0)
+		;!@ GD: Play ugh PCM too
 		move.w	#sfx_HitBoss,d0
 		jsr	(QueueSound2).l	; play boss damage sound
+		pcm		dPrngUgh
 
 loc_19F88:
 		subq.b	#1,objoff_35(a0)
@@ -294,8 +299,10 @@ locret_1A01E:
 ; ===========================================================================
 
 loc_1A020:
-		move.w	#sfx_Electric,d0
-		jmp	(QueueSound2).l	; play electricity sound
+		;!@ GD: Play chip PCM
+		;move.w	#sfx_Electric,d0
+		;jmp	(QueueSound2).l	; play electricity sound
+		pcm		dPrngChip,1
 ; ===========================================================================
 
 loc_1A02A:
@@ -440,8 +447,10 @@ loc_1A1D4:
 		tst.b	obColType(a0)
 		bne.s	loc_1A216
 		move.w	#$1E,objoff_30(a0)
+		;!@ GD: Play ugh PCM too
 		move.w	#sfx_HitBoss,d0
 		jsr	(QueueSound2).l	; play boss damage sound
+		pcm		dPrngUgh
 
 loc_1A1FC:
 		subq.w	#1,objoff_30(a0)

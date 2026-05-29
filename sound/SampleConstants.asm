@@ -166,9 +166,14 @@ dKnight_Roar				ds.b 1
 dDR_Battle_Start			ds.b 1
 
 dSexyFlanders:				ds.b 1
+;Character PCM
 dChr_tonic_burp:			ds.b 1
 dChr_maniac_laugh:			ds.b 1
 dChr_mddio_laugh:			ds.b 1
+;!@ GD: Final Zone PCM
+dPrngCan:					ds.b 1
+dPrngChip:					ds.b 1
+dPrngUgh:					ds.b 1
 
 dSega						ds.b 1
 
