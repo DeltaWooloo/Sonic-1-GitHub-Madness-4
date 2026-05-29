@@ -1163,15 +1163,7 @@ ClearScreen:
 		clearRAM vscroll_buffer,vscroll_buffer_end
 		clearRAM v_spritetablebuffer,v_spritetablebuffer_end
 		clearRAM v_hscrolltablebuffer,v_hscrolltablebuffer_end_padded
-		
-		;!@ GD: Extra call to fix issues
-		disable_ints
-		disable_display
-		
-		mPow_vdp_fixRegs 0,1		
-				
 		ResetDMAQueue
-		enable_display
 		rts
 ; End of function ClearScreen
 
@@ -2669,6 +2661,9 @@ Sega_GotoTitle:
 ; ---------------------------------------------------------------------------
 
 GM_Title:
+		;!@ GD: Extra Pow_vdp_fixRegs call to fix BSZ2 window plane etc
+		mPow_vdp_fixRegs	0,1
+
 		;move.b	#bgm_Fade,d0
 		;bsr.w	QueueSound2 ; stop music
 		;GD: Bugfix to make Freddy sample play entirely from GH4 Title
@@ -3794,6 +3789,9 @@ Demo_DVZ:	binclude	"demodata/Intro - DVZ.bin"
 ; ---------------------------------------------------------------------------
 
 GM_Ending:
+		;!@ GD: Extra Pow_vdp_fixRegs call to fix BSZ2 window plane etc
+		mPow_vdp_fixRegs	0,1
+
 		move.b	#bgm_Stop,d0
 		bsr.w	QueueSound2 ; stop music
 		bsr.w	PaletteFadeOut
@@ -4224,6 +4222,9 @@ GM_Credits:
 ; ---------------------------------------------------------------------------
 
 TryAgainEnd:
+		;!@ GD: Extra Pow_vdp_fixRegs call to fix BSZ2 window plane etc
+		mPow_vdp_fixRegs	0,1
+
 		jsr	(ClearPLC).w
 		jsr	(PaletteFadeOut).w
 		lea	(vdp_control_port).l,a6

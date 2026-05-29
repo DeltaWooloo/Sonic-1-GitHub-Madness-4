@@ -121,7 +121,7 @@ writeDBG_reg2	macro
 	
 mPow_vdp_fixRegs	macro	lvlpal,windows
 	moveq	#lvlpal,d0
-	moveq	#windows,d0
+	moveq	#windows,d1
 	jsr		(Pow_vdp_fixRegs).l
 	endm
 	

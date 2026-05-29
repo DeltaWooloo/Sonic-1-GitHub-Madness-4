@@ -8,6 +8,9 @@ scareMask	equ	andiMaskB(scareCount1)
 ; ARGH!! I CAME FOR YE BOOTY!
 ; ---------------------------------------------------------------------------
 GM_FoxyBoo:
+		;!@ GD: Extra Pow_vdp_fixRegs call to fix BSZ2 window plane etc
+		mPow_vdp_fixRegs	0,1
+
 		move.b	#bgm_Stop,d0
 		jsr	(PlaySound_Special).l  ; fade out music
 		jsr	(MegaPCM_StopPlayback).l

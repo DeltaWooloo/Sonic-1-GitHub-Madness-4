@@ -16,6 +16,9 @@ VDP_ThanatosCredits:
 VDP_ThanatosCredits_end:
 
 GM_ThanatosCredits:
+	;!@ GD: Extra Pow_vdp_fixRegs call to fix BSZ2 window plane etc
+	mPow_vdp_fixRegs	0,1
+
 	QueueSound_M bgm_Fade,0
 
 	jsr	(ClearPLC).l

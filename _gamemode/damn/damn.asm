@@ -29,6 +29,9 @@ r_damn_end:
 	!org -
 ; ---------------------------------------------------------------------------
 GM_Damn:
+		;!@ GD: Extra Pow_vdp_fixRegs call to fix BSZ2 window plane etc
+		mPow_vdp_fixRegs	0,1
+
 		move.w	#bgm_Fade,d0
 		jsr	QueueSound2
 		jsr	PaletteWhiteOut

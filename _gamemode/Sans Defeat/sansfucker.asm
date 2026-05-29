@@ -3,6 +3,9 @@
 ; ---------------------------------------------------------------------------
 
 GM_Sans:
+		;!@ GD: Extra Pow_vdp_fixRegs call to fix BSZ2 window plane etc
+		mPow_vdp_fixRegs	0,1
+
 		jsr	PaletteFadeOut		; fade palettes out
 		jsr	ClearScreen		; clear the plane mappings
 		;!@ GD: Bugfix; init d0 to 0
