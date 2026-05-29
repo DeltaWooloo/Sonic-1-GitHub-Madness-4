@@ -33,7 +33,9 @@ BossPlasma_Generator:; Routine 2
 		movea.l	objoff_34(a0),a1
 		cmpi.b	#6,objoff_34(a1)
 		bne.s	loc_1A850
-		move.b	#id_ExplosionBomb,obID(a0)
+		;!@ GD: Fix
+		;move.b	#id_ExplosionBomb,obID(a0)
+		move.b	#id_ExplosionItem,obID(a0)
 		move.b	#0,obRoutine(a0)
 		jmp	(DisplaySprite).l
 ; ===========================================================================
@@ -84,7 +86,9 @@ BossPlasma_Loop:
 		move.w	obX(a0),obX(a1)
 		move.w	#boss_fz_y+$2C,obY(a1)
 		move.b	#8,obRoutine(a1)
-		move.w	#make_art_tile(ArtTile_FZ_Boss,1,0),obGfx(a1)
+		;!@ GD: Change palette
+		;move.w	#make_art_tile(ArtTile_FZ_Boss,1,0),obGfx(a1)
+		move.w	#make_art_tile(ArtTile_FZ_Boss,0,0),obGfx(a1)
 		move.l	#Map_Plasma,obMap(a1)
 		move.b	#$C,obHeight(a1)
 		move.b	#$C,obWidth(a1)
