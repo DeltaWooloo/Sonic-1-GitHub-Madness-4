@@ -184,6 +184,24 @@ playChr_pokemonCry:
 	move.w	pdat.pokeCrySnd(a5),d0
 	jsr		(MegaPCM_PlaySample).l
 	rts
+	
+;!@ GD: Function to get appropriate water palette in d0, based on character
+GetPlayerWaterPal:
+	moveq	#palid_CBZ2TonWat,d0
+	cmpi.b	#chrid_maniac,(v_characterid).w		; are we playing as Maniac?
+	bne.s	.skip								; If not, branch
+	moveq	#palid_CBZ2ManWat,d0
+.skip:
+	rts
+	
+;!@ GD: Same as GetPlayerWaterPal, but places results in d1
+GetPlayerWaterPal2:
+	movem.l	d0,-(sp)
+	bsr.s	GetPlayerWaterPal
+	moveq	#0,d1
+	move.b	d0,d1
+	movem.l	(sp)+,d0
+	rts
 
 ; ----------------------------------------------------------------------------
 ; TeethTonic character init routine

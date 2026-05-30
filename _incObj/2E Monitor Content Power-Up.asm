@@ -1133,17 +1133,18 @@ Level_LoadPal3:
 		bsr.w	isWaterLevel			; Does level have water?
 		beq.s	.skipwtr2				; If not, branch
 		
-		;!@ GD: Rewrite me after char underwater palette code is fixed up
-		moveq	#palid_CBZ2SonWat,d1
-		cmpi.b	#id_ARZ,(v_zone).w		; golly i LOOOOVE hardcoded checks
-		beq.s	.ARZWtr					; it makes me have a boaner
-		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
-		bne.s	.wtr					; if not, branch
-		moveq	#palid_SBZ3SonWat,d1 	; palette number $10 (SBZ3)
-		bra.s	.wtr
-	.ARZWtr:
-		moveq	#palid_ARZSonWater,d1
-	.wtr:
+		;!@ GD: Just use player water palette
+		jsr		(GetPlayerWaterPal2).l
+		;moveq	#palid_CBZ2SonWat,d1
+		;cmpi.b	#id_ARZ,(v_zone).w		; golly i LOOOOVE hardcoded checks
+		;beq.s	.ARZWtr					; it makes me have a boaner
+		;cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
+		;bne.s	.wtr					; if not, branch
+		;moveq	#palid_SBZ3SonWat,d1 	; palette number $10 (SBZ3)
+		;bra.s	.wtr
+	;.ARZWtr:
+		;moveq	#palid_ARZSonWater,d1
+	;.wtr:
 		moveq	#1,d2					; Set water flag
 		bsr.w	Level_LoadPal2.loadpal	; Load d1 character water palette			
 	.skipwtr2:
@@ -1194,18 +1195,18 @@ Level_LoadPal2:
 		bsr.w	isWaterLevel			; Does level have water?
 		beq.s	.end					; If not, branch
 
-		moveq	#palid_CBZ2SonWat,d1
-		cmpi.b	#id_ARZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
-		beq.s	.ARZWaterPal	; it makes me have a boaner
-		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
-		bne.s	.WtrNotSbz	; if not, branch
-		moveq	#palid_SBZ3SonWat,d1 ; palette number $10 (SBZ3)
-		bra.s	.WtrNotSbz
-
-.ARZWaterPal:
-		moveq	#palid_ARZSonWater,d1
-
-.WtrNotSbz:
+		;!@ GD: Just use player water palette
+		jsr		(GetPlayerWaterPal2).l
+		;moveq	#palid_CBZ2SonWat,d1
+		;cmpi.b	#id_ARZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
+		;beq.s	.ARZWaterPal	; it makes me have a boaner
+		;cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
+		;bne.s	.WtrNotSbz	; if not, branch
+		;moveq	#palid_SBZ3SonWat,d1 ; palette number $10 (SBZ3)
+		;bra.s	.WtrNotSbz
+;.ARZWaterPal:
+		;moveq	#palid_ARZSonWater,d1
+;.WtrNotSbz:
 		moveq	#1,d2					; Set water flag
 		bsr.w	.loadpal				; Load d1 level water palette 
 .end:

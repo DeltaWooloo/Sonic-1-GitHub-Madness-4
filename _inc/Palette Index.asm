@@ -34,7 +34,8 @@ palid_LZSonWater:		makePalEntry	Pal_LZSonWater,		v_palette_line_1
 palid_SBZ3SonWat:		makePalEntry	Pal_SBZ3SonWat,		v_palette_line_1
 palid_BREW:				makePalEntry	Pal_BREW,			v_palette_line_2
 palid_BREWWat:			makePalEntry	Pal_BREWWat, 		v_palette_line_1
-palid_CBZ2SonWat:		makePalEntry	Pal_CBZ2SonWat, 	v_palette_line_1
+palid_CBZ2TonWat:		makePalEntry	Pal_CBZ2TonWat, 	v_palette_line_1	;!@ GD: Tonic CBZ2 water palette
+palid_CBZ2ManWat:		makePalEntry	Pal_CBZ2ManWat, 	v_palette_line_1	;!@ GD: Maniac CBZ2 water palette
 palid_WIN:				makePalEntry	Pal_WIN, 			v_palette_line_2
 palid_SSResult:			makePalEntry	Pal_SSResult, 		v_palette_line_1
 palid_Continue:			makePalEntry	Pal_Continue, 		v_palette_line_1

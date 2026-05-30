@@ -2501,7 +2501,10 @@ Pal_LZSonWater:		bincludeEndMarker	"palette/Sonic - LZ Underwater.bin"
 Pal_SBZ3SonWat:		bincludeEndMarker	"palette/Sonic - SBZ3 Underwater.bin"
 Pal_BREW:		bincludeEndMarker	"palette/BREW Zone.bin"
 Pal_BREWWat:		bincludeEndMarker	"palette/BREW Zone Underwater.bin"
-Pal_CBZ2SonWat:		bincludeEndMarker	"palette/Sonic - CBZ2 Underwater.bin"
+;!@ GD: Changed up for Tonic/Maniac water palettes
+;Pal_CBZ2SonWat:		bincludeEndMarker	"palette/Sonic - CBZ2 Underwater.bin"
+Pal_CBZ2TonWat:		bincludeEndMarker	"palette/Tonic - CBZ2 Underwater.bin"
+Pal_CBZ2ManWat:		bincludeEndMarker	"palette/Maniac - CBZ2 Underwater.bin"
 Pal_WIN:		bincludeEndMarker	"palette/WINDOWS Zone.bin"
 Pal_SSResult:		bincludeEndMarker	"palette/Special Stage Results.bin"
 Pal_Continue:		bincludeEndMarker	"palette/Special Stage Continue Bonus.bin"
@@ -3273,16 +3276,17 @@ Level_LoadPal:
 		tst.b	(v_waterflag).w ; is level LZ?
 		bpl.s	Level_GetBgm	; if not, branch
 
-		moveq	#palid_CBZ2SonWat,d0
-		cmpi.b	#id_ARZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
-		beq.s	Level_ARZWaterPal	; it makes me have a boaner
-		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
-		bne.s	Level_WaterPal	; if not, branch
-		moveq	#palid_SBZ3SonWat,d0 ; palette number $10 (SBZ3)
-		bra.s	Level_WaterPal
-
-Level_ARZWaterPal:
-		moveq	#palid_ARZSonWater,d0
+		;!@ GD: Just use player water palette
+		jsr		(GetPlayerWaterPal).l
+		;moveq	#palid_CBZ2SonWat,d0
+		;cmpi.b	#id_ARZ,(v_zone).w	; golly i LOOOOVE hardcoded checks
+		;beq.s	Level_ARZWaterPal	; it makes me have a boaner
+		;cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
+		;bne.s	Level_WaterPal	; if not, branch
+		;moveq	#palid_SBZ3SonWat,d0 ; palette number $10 (SBZ3)
+		;bra.s	Level_WaterPal
+;Level_ARZWaterPal:
+		;moveq	#palid_ARZSonWater,d0
 
 Level_WaterPal:
 		bsr.w	PalLoad_Fade_Water	; load underwater palette
