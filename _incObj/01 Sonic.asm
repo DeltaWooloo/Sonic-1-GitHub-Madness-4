@@ -1222,8 +1222,12 @@ loc_131AA:
 		move.b	#id_Wait,obAnim(a0) ; use "standing" animation
 		subq.w	#5,obY(a0)
 		;!@ GD: Bugfix to stop pinball mode from pushing when at a standstill (no inertia)
-		bra.w	locret_1307C
+		bra.w	.resetscreen
 		
+; ---------------------------------------------------------------------------
+; magically gives Sonic an extra push if he's going to stop rolling where it's not allowed
+; (such as in an S-curve in HTZ or a stopper chamber in CNZ)
+; loc_1A848:
 .KeepRolling:
 		move.w	#$400,obInertia(a0)
 		btst	#0,obStatus(a0)
@@ -1232,11 +1236,13 @@ loc_131AA:
 
 ; resets the screen to normal while rolling, like Obj01_ResetScr
 .resetscreen:
-		cmpi.w	#60,(v_lookshift).w	; is screen in its default position?
-		beq.s	loc_131CC		; if yes, branch
-		bhs.s	+				; depending on the sign of the difference,
+		;!@ GD: Bugfix
+		cmpi.w	#$60,(v_lookshift).w	; is screen in its default position?		
+		beq.s	loc_131CC			; if yes, branch
+		bhs.s	.plus1				; depending on the sign of the difference,
 		addq.w	#4,(v_lookshift).w	; either add 2
-+		subq.w	#2,(v_lookshift).w	; or subtract 2
+.plus1:
+		subq.w	#2,(v_lookshift).w	; or subtract 2
 
 loc_131CC:
 		move.b	obAngle(a0),d0
@@ -1561,7 +1567,12 @@ Sonic_ChkRoll:
 		jsr	(QueueSound2).l	; play rolling sound
 		tst.w	obInertia(a0)
 		bne.s	.ismoving
+		
+		;!@ GD: Use $200 if not pinball mode; else $4000
 		move.w	#$200,obInertia(a0) ; set inertia if 0
+		tst.b	obPinball(a0)
+		beq.s	.ismoving
+		move.w	#$400,obInertia(a0)
 
 .ismoving:
 		rts
@@ -2080,13 +2091,13 @@ Sonic_ResetOnFloor:
 		clr.b (v_storedshield).w
 
 .noshield:
-		bclr	#5,obStatus(a0)	; clear push flag.
-		bclr	#1,obStatus(a0)	; clear in-air flag.
-		bclr	#4,obStatus(a0)	; clear roll-jump flag.
+		;bclr	#5,obStatus(a0)	; clear push flag.
+		;bclr	#1,obStatus(a0)	; clear in-air flag.
+		;bclr	#4,obStatus(a0)	; clear roll-jump flag.
 		
 		; Sonic reset floor fix:
 		; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-6#post-90342
-		move.b	#id_Walk,obAnim(a0) ; use running/walking animation
+		; move.b	#id_Walk,obAnim(a0) ; use running/walking animation
 		btst	#2,obStatus(a0)	; check if Sonic is in a ball state.
 		beq.s	.notball	; if not, skip.
 		bclr	#2,obStatus(a0)	; clear ball flag.
@@ -2095,10 +2106,14 @@ Sonic_ResetOnFloor:
 		move.b	pdat.width(a5),obWidth(a0)
 		; Sonic reset floor fix:
 		; https://sonicresearch.org/community/index.php?threads/mini-tutorials-thread.6189/page-6#post-90342
-		;move.b	#id_Walk,obAnim(a0) ; use running/walking animation
+		; move.b	#id_Walk,obAnim(a0) ; use running/walking animation
 		subq.w	#5,obY(a0)	; raise Sonic up 5 pixels so he's not inside the ground.
 
-.notball:
+.notball:		
+		;!@ GD: resets relocated here
+		bclr	#1,obStatus(a0)	; clear in-air flag.
+		bclr	#4,obStatus(a0)	; clear roll-jump flag.
+		bclr	#5,obStatus(a0)	; clear push flag.
 		move.b	#0,jumping(a0)	; clear jump flag.
 		move.w	#0,(v_itembonus).w	; clear enemy score chain.
 		rts
@@ -2348,7 +2363,12 @@ Sonic_Loops:
 		add.w	d1,d0
 		lea	(v_lvllayout).w,a1
 		move.b	(a1,d0.w),d1	; d1 is the 256x256 tile Sonic is currently on
-
+		
+		;!@ GD: Stupid bugfix for pinball mode resetting if land on ground after being in-air
+		tst.b	obPinball(a0) ; is the pinball mode flag set?
+		bne.w	Sonic_ChkRoll
+		
+		;Check roll tunnel chunks
 		cmp.b	(v_256roll1).w,d1 ; is Sonic on a "roll tunnel" tile?
 		beq.w	Sonic_ChkRoll	; if yes, branch
 		cmp.b	(v_256roll2).w,d1

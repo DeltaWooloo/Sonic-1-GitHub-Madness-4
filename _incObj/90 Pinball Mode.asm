@@ -10,7 +10,8 @@ PinballMode:
 		move.b	obRoutine(a0),d0
 		move.w	PBM_Index(pc,d0.w),d1
 		jsr	PBM_Index(pc,d1.w)
-		jmp	(RememberState).l		; if it has use, uncomment it
+		;jmp	(RememberState).l		; if it has use, uncomment it
+		rts
 ; ===========================================================================
 ; off_21170: PBM_States:
 PBM_Index: dc.w PBM_Init-PBM_Index	; 0
@@ -22,7 +23,9 @@ PBM_Init:
 		addq.b	#2,obRoutine(a0) ; => PBM_MainX
 		move.l	#Map_kys,obMap(a0)
 		move.w	#make_art_tile(ArtTile_Ring,0,0),obGfx(a0)
-		move.b	#4,obRender(a0)
+		;!@ GD: Bugfix
+		;move.b	#4,obRender(a0)
+		ori.b	#4,obRender(a0)
 		move.b	#$10,obActWid(a0)
 		move.b	#5,obPriority(a0)
 		move.b	obSubtype(a0),d0
@@ -37,9 +40,9 @@ PBM_Init:
 		move.w	obY(a0),d1
 		lea	(v_player).w,a1 ; a1=character
 		cmp.w	obY(a1),d1
-		bhs.s	+
+		bhs.s	.plus1
 		move.b	#1,objoff_34(a0)
-+
+.plus1:
 		bra.w	PBM_MainY
 ; ===========================================================================
 word_211E8:
@@ -57,9 +60,9 @@ PBM_Init_CheckX:
 		move.w	obX(a0),d1
 		lea	(v_player).w,a1 ; a1=character
 		cmp.w	obX(a1),d1
-		bhs.s	+
+		bhs.s	.plus2
 		move.b	#1,objoff_34(a0)
-+
+.plus2:
 		rts
 
 ; loc_21224:
@@ -85,11 +88,11 @@ PBM_MainX:
 		cmp.w	d3,d4
 		bhs.s	return_21284
 		btst	#0,obRender(a0)
-		bne.s	+
+		bne.s	.plus3
 		move.b	#1,obPinball(a1) ; enable must-roll "pinball mode"
 		bra.s	loc_212C4
 ; ---------------------------------------------------------------------------
-+
+.plus3:
 		move.b	#0,obPinball(a1) ; disable pinball mode
 
 return_21284:
@@ -111,21 +114,21 @@ PBM_MainX_Alt:
 		cmp.w	d3,d4
 		bhs.s	return_21284
 		btst	#0,obRender(a0)
-		beq.s	+
+		beq.s	.plus4
 		move.b	#1,obPinball(a1)
 		bra.s	loc_212C4
 ; ---------------------------------------------------------------------------
-+
+.plus4:
 		move.b	#0,obPinball(a1)
 		rts
 ; ===========================================================================
 
 loc_212C4:
 		btst	#2,obStatus(a1)
-		beq.s	+
+		beq.s	.plus5
 		rts
 ; ---------------------------------------------------------------------------
-+	
+.plus5:
 		bset	#2,obStatus(a1)
 		move.b	#$E,obHeight(a1)
 		move.b	#7,obWidth(a1)
@@ -158,11 +161,11 @@ PBM_MainY:
 		cmp.w	d3,d4
 		bhs.s	return_21350
 		btst	#0,obRender(a0)
-		bne.s	+
+		bne.s	.plus6
 		move.b	#1,obPinball(a1)
 		bra.w	loc_212C4
 ; ---------------------------------------------------------------------------
-+
+.plus6:
 		move.b	#0,obPinball(a1)
 
 return_21350:
@@ -184,11 +187,11 @@ PBM_MainY_Alt:
 		cmp.w	d3,d4
 		bhs.s	return_21350
 		btst	#0,obRender(a0)
-		beq.s	+
+		beq.s	.plus7
 		move.b	#1,obPinball(a1)
 		bra.w	loc_212C4
 ; ---------------------------------------------------------------------------
-+
+.plus7:
 		move.b	#0,obPinball(a1)
 		rts
 Map_kys:
