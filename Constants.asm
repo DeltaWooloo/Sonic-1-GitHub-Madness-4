@@ -772,7 +772,7 @@ ArtTile_GHZ_MZ_Swing:		equ $380
 ArtTile_MZ_SYZ_Caterkiller:	equ $4FF
 ArtTile_GHZ_SLZ_Smashable_Wall:	equ $50F
 
-; Green Hill Zone
+; Green Hill Zone (OWZ)
 ArtTile_GHZ_Flower_4:		equ ArtTile_Level+$340
 ArtTile_GHZ_Edge_Wall:		equ $34C
 ArtTile_GHZ_Flower_Stalk:	equ ArtTile_Level+$358
@@ -785,6 +785,12 @@ ArtTile_GHZ_Big_Flower_2:	equ ArtTile_Level+$390
 ArtTile_GHZ_Spike_Pole:		equ $398
 ArtTile_GHZ_Giant_Ball:		equ $3AA
 ArtTile_GHZ_Purple_Rock:	equ $3D0
+; Clinton stuff
+;!@ GD: Relocate
+;ArtTile_Clinton:			equ	$400
+ArtTile_Clinton:			equ	$3E8
+;!@ GD: Relocate crabmeat in OWZ, due to Clinton
+ArtTile_GHZ_Crabmeat:		equ $42C
 
 
 ; Marble Zone

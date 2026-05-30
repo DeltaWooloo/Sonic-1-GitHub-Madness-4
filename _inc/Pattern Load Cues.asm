@@ -116,8 +116,10 @@ PLC_GameOverend:
 PLC_GHZ:	dc.w ((PLC_GHZ2-PLC_GHZ-2)/6)-1
 ;		plcm	Nem_GHZ,   ArtTile_Level                  	; GHZ main patterns
 		plcm	Nem_Stalk,     ArtTile_GHZ_Flower_Stalk       ; flower stalk
-		plcm	Nem_PplRock,   ArtTile_GHZ_Purple_Rock        ; purple rock
-		plcm	Nem_Crabmeat,  ArtTile_Crabmeat               ; crabmeat enemy
+		plcm	Nem_PplRock,   ArtTile_GHZ_Purple_Rock        ; purple rock		
+		;!@ Relocate
+		;plcm	Nem_Crabmeat,  ArtTile_Crabmeat               ; crabmeat enemy
+		plcm	Nem_Crabmeat,  ArtTile_GHZ_Crabmeat               ; crabmeat enemy
 		plcm	Nem_Buzz,      ArtTile_Buzz_Bomber            ; buzz bomber enemy
 		dc.l    Nem_Chopper        ; hi
     	dc.w    $8F60    

@@ -45,7 +45,9 @@ allMonitors:	macro
 		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
 		allMonitors		
 		dbug	Map_Rift,id_Rift,	0,	1,	make_art_tile($9760/$20,0,0)	;!@ GD: Add Rift
-		dbug	Map_Crab,	id_Crabmeat,	0,	0,	make_art_tile(ArtTile_Crabmeat,0,0)
+		;!@ GD: Relocate
+		;dbug	Map_Crab,	id_Crabmeat,	0,	0,	make_art_tile(ArtTile_Crabmeat,0,0)
+		dbug	Map_Crab,	id_Crabmeat,	0,	0,	make_art_tile(ArtTile_GHZ_Crabmeat,0,0)
 		dbug	Map_Buzz,	id_BuzzBomber,	0,	0,	make_art_tile(ArtTile_Buzz_Bomber,0,0)
 		dbug	Map_Chop,	id_Chopper,	0,	0,	make_art_tile(ArtTile_Chopper,0,0)
 		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)

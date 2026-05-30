@@ -173,10 +173,26 @@ clifuck.Speed   =	$36
 ; Clinton Fucker Art List
 ; --------------------------------------------------------------
 
-CliFuckArtList:
-	dc.l	Nem_Clinton
-	dc.w	$8000
-	dc.l	-1		; Was it that hard?
+;CliFuckArtList:
+	;!@ GD: Load as uncompressed, due to DPLCs
+	;dc.l	Nem_Clinton
+	;dc.l	Art_Clinton
+	;dc.w	ArtTile_Clinton*tile_size
+	;dc.l	-1
+	;even
+	
+;!@ GD: Load clinton artwork as DPLCs
+Clinton_LoadDPLC:
+		move.b	obFrame(a0),d0						; get object's current frame
+		cmp.b	objoff_38(a0),d0					; has the frame changed?
+		beq.s	.end								; if not, nothing to do
+		move.b	d0,objoff_38(a0)					; update cached frame number
+		move.l	#DPLC_SprPat_Clinton,a2				; load DPLC table
+		move.w	#ArtTile_Clinton*tile_size,d4		; starting VRAM tile
+		move.l	#Art_Clinton,d6						; art pointer
+		jmp	(LoadDynPLC).l							; load DPLC
+.end:
+		rts											; return
 
 ; --------------------------------------------------------------
 ; Clinton Fucker Object
@@ -201,6 +217,7 @@ CliFucker_Init:
 	beq.s	.ok
 	jmp	DeleteObject
 .ok
+	spawnHUD	hud_arrow,hud_start,bclr
 	st	v_clintonfucker
 	addq.b	#2,obRoutine(a0)
 	move.l	(v_palette_line_1+20),(v_palette_line_2+20)
@@ -219,12 +236,10 @@ CliFucker_Wait:
 	rts
 
 .SayHi:
-	lea	CliFuckArtList,a1
-	jsr	UserPLC	; I HATE YOU I FUCKING HATE YOU DIE
-	move.w	#60+45,v_screenshaketime.w
-	
-	spawnHUD	hud_arrow,hud_start,bclr
-	
+	;!@ GD: Use DPLC instead
+	;lea	CliFuckArtList,a1
+	;jsr	UserPLC	; I HATE YOU I FUCKING HATE YOU DIE
+	move.w	#60+45,v_screenshaketime.w	
 	move.b	#dClintonHi,d0
 	jmp	MegaPCM_PlaySample	
 
@@ -234,7 +249,9 @@ CliFucker_Init2:
 	
 	addq.b	#2,obRoutine(a0)
 	move.l	#SprPat_Clinton,obMap(a0)
-	move.w	#$8000/32,obGfx(a0)
+	;!@ GD: Relocate
+	;move.w	#$8000/32,obGfx(a0)
+	move.w	#make_art_tile(ArtTile_Clinton,0,1),obGfx(a0)
 	move.b	#4,obRender(a0)
 	move.b	#4,obPriority(a0)
 	move.b	#$14,obActWid(a0)
@@ -300,9 +317,10 @@ CliFucker_Main:
 	;jsr	KillSonic
 	;move.l	(sp)+,a0
 .NoKill
-	lea	Ani_Clinton,a1
-	jsr	AnimateSprite
-	jsr	DisplaySprite
+	lea		Ani_Clinton,a1
+	jsr		(AnimateSprite).l
+	bsr.w	Clinton_LoadDPLC			;!@ GD: Load DPLC
+	jsr		(DisplaySprite).l
 	rts
 .Exit:
 	;!@ GD: Winner is here (do end of level stuff)
@@ -361,17 +379,17 @@ CliFucker_Main:
 
 CliFucker_Wait2:
 	jmp	DeleteObject
-
-Ani_Clinton:
-.tbl:
-	dc.w	clintonwalk-.tbl
-
-clintonwalk:	dc.b	3
-	dc.b	1,2,3,4,5,6,7,-1
+	
+Anim_Clinton:				include	"_incObj/clinton fucker/Anim_Clinton.asm"
 	even
 
-SprPat_Clinton:	include		"_incObj/clinton fucker/Clinton.asm"
-		even
+SprPat_Clinton:				include	"_incObj/clinton fucker/Clinton.asm"
+	even
+		
+DPLC_SprPat_Clinton:		include "_incObj/clinton fucker/DPLC_Clinton.asm"
+	even
 
-Nem_Clinton:	binclude	"_incObj/clinton fucker/Clinton.nem"
-		even
+;!@ GD: Load as uncompressed, due to DPLCs
+;Nem_Clinton:				binclude "_incObj/clinton fucker/Clinton.nem"
+Art_Clinton:				binclude "_incObj/clinton fucker/Clinton.unc"
+	even

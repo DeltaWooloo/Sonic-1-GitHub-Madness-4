@@ -3721,8 +3721,11 @@ SyncEnd:
 
 
 SignpostArtLoad:
+		;!@ GD: Don't load signpost if clinton/OWZ2
 		tst.b	v_clintonfucker
-		bne.w	SignpostArtLoad2.exit
+		bne.w	SignpostArtLoad2.exit		
+		cmpi.w	#(id_OWZ<<8)+1,(v_zone).w
+		beq.w	SignpostArtLoad2.exit		
 		tst.w	(v_debuguse).w	; is debug mode being used?
 		bne.w	SignpostArtLoad2.exit		; if yes, branch
 		cmpi.b	#2,(v_act).w	; is act number 02 (act 3)?
