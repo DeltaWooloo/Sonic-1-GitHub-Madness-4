@@ -277,6 +277,13 @@ CliFucker_Main:
 	move.w	#$28,d2
 	jsr	Obj44_SolidWall
 	move.b	obStatus(a0),d0
+	
+	;!@ GD: Add no kill for invinciblity or shield
+	tst.b	(v_invinc).w		; you have invincibility?
+	bne.s	.NoKill				; if yes, skip	
+	tst.b	(v_shield).w		; does Sonic have shield?
+	bne.s	.NoKill				; if yes, skip
+	
 	andi.b	#%101000,d0
 	beq.s	.NoKill
 	addq.b	#2,obRoutine(a0)
