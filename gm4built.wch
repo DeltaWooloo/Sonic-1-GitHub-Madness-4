@@ -1,5 +1,5 @@
 0
-52
+55
 00000	00FFFFD5	b	h	0	f_difficulty
 00001	00FFFE0E	w	h	0	v_zone
 00002	00FFFE1E	w	h	0	v_rings
@@ -52,3 +52,6 @@
 00031	00FFF7A5	b	h	0	v_bossstatus
 00032	00FFF000	d	h	0	v_endcard
 00033	00000000	S	S	0	----------------------------
+00034	00FFFFD6	b	h	0	f_levselcheat
+00035	00FFFFD8	b	h	0	f_debugcheat
+00036	00FFFFE0	w	h	0	v_demonum

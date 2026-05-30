@@ -12,11 +12,11 @@
 ; ASSEMBLY OPTIONS:
 
 
-DickingAround = 1
+DickingAround = 0
 ; 	| If 0, loads SEGA screen first (for public release)
 ; 	| If 1, load Debug Menu first
 
-EggblockOrigin = 1
+EggblockOrigin = 0
 ; 	| If 0, play ads at 5 minute intervals or when grabbing the ad random monitor powerup
 ; 	| If 1, no ads play at all unless opened from debug menu
 
@@ -25,7 +25,7 @@ DemoRecord = 0
 ; 	| If 0, regular gameplay physics
 ; 	| If 1, disable Sonic CD terminal velocity/speed caps for Sonic
 
-CheatsOn = 1
+CheatsOn = 0
 ; 	| If 0, build it with no cheats active
 ; 	| If 1, build it with all cheats active
 
@@ -2904,7 +2904,7 @@ Tit_ChkStartOrDemo:
 		tst.w	(v_generictimer).w	; GMZ - Has the title screen timer expired?
 		bne.s	Tit_NoDemo	; GMZ - If not, branch
 		eori.w	#1,titleGoToScreensaver
-		move.b	#id_Screensaver,v_gamemode
+		move.b	#id_Screensaver,(v_gamemode).w
 		rts
 
 Tit_ChkStartOrDemo_Cont:
@@ -2943,11 +2943,23 @@ AtoTimerLoop2:
 Tit_ChkLevSel:
 		move.b	#2,(v_continues).w 		; set continues to 2 for when it goes to level instead		
 		if DickingAround=1
-		move.b	#id_DebugMenu,(v_gamemode).w	; goto debug mode
+		move.b	#id_DebugMenu,(v_gamemode).w	; goto debug mode		
 		else
+		
 		move.w	#(id_OWZ<<8),(v_zone).w	; set level to GHZ (00)
 		move.b	#id_Options,(v_gamemode).w		; goto Options
+		
+		;!@ Check for cheats
+		tst.b	(f_levselcheat).w 				; check if level select code is on
+		bne.w	.cheat							; if so, cheat
+		tst.b	(f_debugcheat).w 				; check if debug code is on
+		bne.w	.cheat							; if so, cheat
+		;No cheats active; just goto Options menu
+		bra.s	.end							; Branch to Options
+	.cheat:
+		move.b	#id_DebugMenu,(v_gamemode).w	; goto debug mode		
 		endif
+	.end:
 		rts
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -3058,14 +3070,14 @@ Demo_Brew:
 DemoSetup:
 		move.w	(v_demonum).w,d0 ; load demo number
 ;		andi.w	#7,d0
-		moveq	#0,d0
+		;moveq	#0,d0					;!@ GD: Remove this; this just resets d0/demo number lol
 		add.w	d0,d0
 		move.w	Demo_Levels(pc,d0.w),d0	; load level number for demo
 		move.w	d0,(v_zone).w
-		addq.w	#1,(v_demonum).w ; add 1 to demo number
-		cmpi.w	#5,(v_demonum).w ; is demo number less than 6?
-		blo.s	loc_3422	; if yes, branch
-		move.w	#0,(v_demonum).w ; reset demo number to 0
+		addq.w	#1,(v_demonum).w 		; add 1 to demo number
+		cmpi.w	#5,(v_demonum).w 		; is demo number less than 6?
+		blo.s	loc_3422				; if yes, branch
+		move.w	#0,(v_demonum).w 		; reset demo number to 0
 loc_3422:
 		rts
 
@@ -4295,8 +4307,11 @@ TryAg_Exit:
 		;!@ GD: You won the game! Goto Debug Menu if so
 		cmpi.b	#6,(v_emeralds).w ; do you have all 6 emeralds?
 		blt.s	.lose
-.win:				
-		move.b	#id_DebugMenu,(v_gamemode).w ; goto Sega screen		
+.win:	
+		;!@ Enable cheats
+		move.w	#$101,(f_levselcheat).w
+		move.w	#$101,(f_debugcheat).w		
+		move.b	#id_DebugMenu,(v_gamemode).w ; goto Sega screen
 		bra.s	.end
 .lose:
 		move.b	#id_Sega,(v_gamemode).w ; goto Sega screen
