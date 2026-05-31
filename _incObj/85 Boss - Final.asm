@@ -300,8 +300,8 @@ locret_1A01E:
 
 loc_1A020:
 		;!@ GD: Play chip PCM
-		;move.w	#sfx_Electric,d0
-		;jmp	(QueueSound2).l	; play electricity sound
+		move.w	#sfx_Electric,d0
+		jsr		(QueueSound2).l	; play electricity sound
 		pcm		dPrngChip,1
 ; ===========================================================================
 

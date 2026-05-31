@@ -31,17 +31,15 @@ Map_c96a_2:	spriteHeader
 Map_c96a_2_End
 
 Map_c96a_3:	spriteHeader
- spritePiece -$10, -$C, 4, 4, $20, 1, 0, 0, 0
- spritePiece $10, -$B, 2, 1, $30, 1, 0, 0, 0
- spritePiece -$10, 8, 3, 2, $4E, 1, 0, 0, 0
- spritePiece -$A, -$1C, 3, 2, $E, 0, 0, 0, 0
+ spritePiece -$10, -8, 4, 1, $A, 0, 0, 0, 0
+ spritePiece -$10, -$18, 3, 2, $E, 0, 0, 0, 0
+ spritePiece -$10, 0, 4, 4, $6F, 0, 0, 0, 0
 Map_c96a_3_End
 
 Map_c96a_4:	spriteHeader
- spritePiece -$10, -$10, 4, 4, $20, 1, 0, 0, 0
- spritePiece $10, -$F, 2, 1, $30, 1, 0, 0, 0
- spritePiece -8, 8, 2, 3, $3E, 1, 0, 0, 0
- spritePiece -$A, -$20, 3, 2, 0, 0, 0, 0, 0
+ spritePiece -$10, 0, 4, 4, $7F, 0, 0, 0, 0
+ spritePiece -$10, -7, 4, 1, $A, 0, 0, 0, 0
+ spritePiece -$10, -$17, 3, 2, $E, 0, 0, 0, 0
 Map_c96a_4_End
 
 Map_c96a_5:	spriteHeader
@@ -50,29 +48,20 @@ Map_c96a_5:	spriteHeader
 Map_c96a_5_End
 
 Map_c96a_6:	spriteHeader
- spritePiece 0, 4, 3, 2, $34, 1, 0, 0, 0
- spritePiece -$18, 4, 2, 2, $3A, 1, 0, 0, 0
- spritePiece -$10, -$10, 4, 4, $20, 1, 0, 0, 0
- spritePiece $10, -$F, 2, 1, $54, 1, 0, 0, 0
- spritePiece -$20, -$F, 2, 1, $54, 0, 0, 0, 0
- spritePiece -$A, -$20, 3, 2, 0, 0, 0, 0, 0
+ spritePiece -$10, 0, 4, 4, $6F, 0, 0, 0, 0
+ spritePiece -$E, -$1C, 3, 4, $14, 0, 0, 0, 0
 Map_c96a_6_End
 
 Map_c96a_7:	spriteHeader
- spritePiece -$10, -$10, 4, 4, $20, 1, 0, 0, 0
- spritePiece $10, -$F, 2, 1, $30, 1, 0, 0, 0
- spritePiece 0, 4, 3, 2, $34, 1, 0, 0, 0
- spritePiece -$18, 4, 2, 2, $3A, 1, 0, 0, 0
- spritePiece -$A, -$20, 3, 2, $E, 0, 0, 0, 0
+ spritePiece -$10, -8, 4, 1, $A, 0, 0, 0, 0
+ spritePiece -$10, -$18, 3, 2, $E, 0, 0, 0, 0
+ spritePiece -$10, 0, 4, 4, $6F, 0, 0, 0, 0
 Map_c96a_7_End
 
 Map_c96a_8:	spriteHeader
- spritePiece -$10, -$12, 4, 4, $20, 1, 0, 0, 0
- spritePiece $10, -$11, 2, 1, $30, 1, 0, 0, 0
- spritePiece 0, 9, 2, 2, $44, 1, 0, 0, 0
- spritePiece -8, 3, 1, 2, $48, 1, 0, 0, 0
- spritePiece -$18, $B, 2, 2, $4A, 1, 0, 0, 0
- spritePiece -$A, -$22, 3, 2, 0, 0, 0, 0, 0
+ spritePiece -$10, -8, 4, 1, $A, 0, 0, 0, 0
+ spritePiece -$10, -$18, 3, 2, $E, 0, 0, 0, 0
+ spritePiece -$10, 0, 4, 4, $6F, 0, 0, 0, 0
 Map_c96a_8_End
 
 Map_c96a_9:	spriteHeader

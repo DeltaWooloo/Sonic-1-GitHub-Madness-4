@@ -142,7 +142,7 @@ Vectors:
 		dc.l ErrorTrap			; Unused (reserved)
 		;!@ GD: Add S1Pico code to change header depending on platform being run on
 		dc.b hdr_Genesis 		; Hardware system ID (Console name)
-		dc.b "SONICGM4 2026.05" ; Copyright holder and release date (generally year)
+		dc.b "SONICGM41  26.05" ; Copyright holder and release date (generally year)
 		dc.b "I WILL BANISH YOU TO THAT TOWN IN JOHTO         " ; Domestic name
 		dc.b "GITHUB MADNESS IV: RETURN OF THE FEVERDREAM     " ; International name
 		dc.b "GM 00042069-25" ; Serial/version number (Rev non-0)
