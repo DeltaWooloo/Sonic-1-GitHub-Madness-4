@@ -24,6 +24,7 @@ call riffstrip.exe "meow.wav"
 call riffstrip.exe "prngCan.wav"
 call riffstrip.exe "prngChip.wav"
 call riffstrip.exe "prngUgh.wav"
+call riffstrip.exe "doh.wav"
 
 call riffstrip.exe "shutdown.wav"
 call riffstrip.exe "udied.wav"
@@ -74,6 +75,7 @@ ren "meow.wav.stripped" "meow.pcm"
 ren "prngCan.wav.stripped" "prngCan.pcm
 ren "prngChip.wav.stripped" "prngChip.pcm
 ren "prngUgh.wav.stripped" "prngUgh.pcm
+ren "doh.wav.stripped" "doh.pcm
 
 ren "shutdown.wav.stripped" "shutdown.pcm"
 ren "udied.wav.stripped" "udied.pcm"
@@ -124,6 +126,7 @@ del /q "meow.wav.stripped"
 del /q "prngCan.wav.stripped"
 del /q "prngChip.wav.stripped"
 del /q "prngUgh.wav.stripped"
+del /q "doh.wav.stripped"
 del /q "shutdown.wav.stripped"
 REM del /q "nep.wav.stripped"
 REM del /q "SM64_MM.wav.stripped"
@@ -173,6 +176,7 @@ call "..\pcm2dpcm.exe" "meow.pcm" "meow.dpcm"
 call "..\pcm2dpcm.exe" "prngCan.pcm" "prngCan.dpcm"
 call "..\pcm2dpcm.exe" "prngChip.pcm" "prngChip.dpcm"
 call "..\pcm2dpcm.exe" "prngUgh.pcm" "prngUgh.dpcm"
+call "..\pcm2dpcm.exe" "doh.pcm" "doh.dpcm"
 call "..\pcm2dpcm.exe" "shutdown.pcm" "shutdown.dpcm"
 call "..\pcm2dpcm.exe" "udied.pcm" "udied.dpcm"
 REM call "..\pcm2dpcm.exe" "nep.pcm" "nep.dpcm"

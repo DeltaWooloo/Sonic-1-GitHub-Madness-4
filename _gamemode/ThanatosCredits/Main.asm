@@ -352,9 +352,7 @@ thantxt: macro txt
 	thantxt	"DAWID"
 	thantxt	"SANCHI"
 	thantxt	"DARKSHAMILKHAN"
-
 	;thantxt	"ADD YOUR NAME HERE"
-
 	thantxt	"ROBEEFNIK"
 	thantxt	"ARCANIACQ"
 	thantxt	"STEALTHY"
@@ -369,6 +367,14 @@ thantxt: macro txt
 	thantxt	"SAMUELWITHTHECODE"
 	thantxt	"FORGOTTENARCHIVE"
 	thantxt	"CANDYDACAT"
+	dc.b	1,1
+	
+	;!@ GD: V1.1 hotpatch build
+	thantxt	"HOTPATCH BUILD"
+	thantxt	"BUGFIXES AND"
+	thantxt	"POLISH"
+	dc.b	1
+	thantxt	"GENESISDOES"
 	dc.b	1,1
 	
 	thantxt	"QA LEAD"
@@ -392,6 +398,15 @@ thantxt: macro txt
 	thantxt	"DAXKATTER"
 	thantxt	"KATSUSHIMI"
 	dc.b	1,1
+	
+	;!@ GD: Marketing (boxart, catridge label, GHM4 song, YouTube trailers, etc)
+	thantxt	"MARKETING"
+	dc.b	1
+	thantxt	"THEGAMERMM"
+	thantxt	"TALKWALKER"
+	thantxt	"CONINIGHT"
+	thantxt	"GENESISDOES"
+	dc.b	1,1
 
 	thantxt	"DEMO RECORDING"
 	dc.b	1
@@ -399,12 +414,9 @@ thantxt: macro txt
 	dc.b	1,1
 
 	thantxt	"PROTOTASTIC"
-	dc.b	1
 	thantxt	"GAMERGIL THE GOAT"
-	dc.b	1,1
-	
-	thantxt	"JOHN PORK"
 	dc.b	1
+	thantxt	"JOHN PORK"
     thantxt	"IS CALLING"
 	dc.b	1,1
 
@@ -420,11 +432,29 @@ thantxt: macro txt
 	thantxt	"ARCADETV"				;MSU Driver
 	thantxt	"NOID MY GOAT"
 	thantxt	"SEGA"
+	thantxt	"ASPECT CO LTD"			; Sonic Triple Trouble options screen knockoff etc
 	thantxt "SONIC TEAM JR"			; Fire/water monitor icon (invin)
 	thantxt "SRBTWO"				; Fire/water monitor icon (invin)
 	thantxt "DOLPHMAN"				; SBZ Door (Dust Hill Zone cactus), other artwork
 	thantxt	"SONIC UNDERGROUND"
-	thantxt	"NTENDO"				; Mario, Wario etc.
+	thantxt	"NTENDO"				; Mario, Wario etc.	
+	thantxt	"FROMSOFTWARE"			; Dark Souls 2 "You Died" screen/pcm etc
+	thantxt	"NAMCO"
+	thantxt	"BANDAI"	
+	thantxt	"WHOOPEE CAMP"			; Developers of Tomba 2, for Prongle Pig swine sfx
+	dc.b	1
+	thantxt	"FUTURE DRIVER"			; Developer of Pringles Genesis homebrew game
+	thantxt	"MT CHOCOLATE"
+	thantxt "FOR PRINGLES"
+	thantxt "GENESIS HOMEBREW"
+	thantxt "GAME"
+	dc.b	1
+	thantxt	"MICROSOFT"				; Some character SFX
+	thantxt	"AND"
+	thantxt	"NICKELODEON"
+	thantxt	"FOR THREE D"
+	thantxt "MOVIE MAKER"
+	dc.b	1
 	thantxt	"SSRG"
 	thantxt	"SONIC RETRO"
 	thantxt	"HACKPGH"				; Local hackerspace in Pittsburgh for playtesting
@@ -460,6 +490,9 @@ thantxt: macro txt
 	thantxt	"STEVE JOBS BECAUSE"
 	thantxt	"VMWARE"
 	thantxt	"WINDOWS XP USER"
+	thantxt	"IMAGINEERING"			; Developers of Bart vs. the Space Mutants (homer block in SFZ boss)
+	thantxt	"ACCLAIM ENTERT"
+	dc.b	1
 	thantxt	"I FARTED SO HARD I SHIT MY"
     thantxt	"HOMER";leave this shit last
 	dc.b	1,1,1

@@ -4271,12 +4271,16 @@ TryAgainEnd:
 		clearRAM v_palette_fading
 
 		moveq	#palid_TryAgain,d0
-		jsr	(PalLoad_Fade).w	; load ending palette
-		cmpi.b	#6,(v_emeralds).w ; do you have all 6 emeralds?
-		beq.s	.donotkillleach	; if yes, branch
+		jsr	(PalLoad_Fade).w		; load ending palette
+		cmpi.b	#6,(v_emeralds).w 	; do you have all 6 emeralds?
+		beq.s	.goodPCM			; if yes, branch
+		pcm		dEggmanLaugh		; !@ GD: Play eggman laugh for bad Ending
 		move.l #cBlack,d0
 		lea	(v_palette_fading_line_4).w,a1
 		move.w	#6,d1
+		bra.s	.killleach			; branch	
+	.goodPCM:
+		pcm		dOllieWahoo			; !@ GD: Play mario for good Ending		
 	.killleach:
 		move.l	d0,(a1)+
 		dbf	d1,.killleach ; fill palette with black
@@ -6903,6 +6907,21 @@ BossDefeated:
 locret_178A2:
 		rts
 ; End of function BossDefeated
+
+; ---------------------------------------------------------------------------
+; Hit boss sfx subroutine
+; !@ GD: Play hitsfx + prongy pig oink for pig-based bosses
+; ---------------------------------------------------------------------------
+
+BossHit_Pig:
+	movem.l	d0,-(sp)			; Push d0 onto stack
+	move.w	#sfx_HitBoss,d0		; play boss damage sound
+	jsr	(QueueSound2).l
+	pcm		dPrngUgh			; play pig oink
+	movem.l	(sp)+,d0			; Pop d0 from stack
+	rts
+
+; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to move a boss

@@ -109,8 +109,10 @@ loc_19202:
 		tst.b	objoff_3E(a0)
 		bne.s	loc_1923A
 		move.b	#$20,objoff_3E(a0)
-		move.w	#sfx_HitBoss,d0
-		jsr	(QueueSound2).l	; play boss damage sound
+		;!@ Boss hit/oink
+		;move.w	#sfx_HitBoss,d0
+		;jsr	(QueueSound2).l	; play boss damage sound
+		jsr		(BossHit_Pig).l
 
 loc_1923A:
 		lea	(v_palette+$22).w,a1

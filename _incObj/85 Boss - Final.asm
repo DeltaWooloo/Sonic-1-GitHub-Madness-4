@@ -99,13 +99,7 @@ loc_19E3E:
 
 loc_19E5A:
 		move.w	#0,objoff_34(a0)
-		
-		;!@ GD: For debug testing, set HP to 1; else 8
-		ifdef __DEBUG__
-		move.b	#1,obColProp(a0) ; set number of hits to 1
-		else
 		move.b	#8,obColProp(a0) ; set number of hits to 8
-		endif
 		move.w	#-1,objoff_30(a0)
 
 BossFinal_Eggman:	; Routine 2
@@ -213,9 +207,10 @@ loc_19F6A:
 		subq.b	#1,obColProp(a0)
 		move.b	#$64,objoff_35(a0)
 		;!@ GD: Play ugh PCM too
-		move.w	#sfx_HitBoss,d0
-		jsr	(QueueSound2).l	; play boss damage sound
-		pcm		dPrngUgh
+		;move.w	#sfx_HitBoss,d0
+		;jsr	(QueueSound2).l	; play boss damage sound
+		;pcm		dPrngUgh
+		jsr		(BossHit_Pig).l
 
 loc_19F88:
 		subq.b	#1,objoff_35(a0)
@@ -260,11 +255,6 @@ BossFinal_CylinderPairs:
 		; Possible permutations of the two cylinders that are activated at once.
 		; Two words per pair, first one is (normally) the cylinder Eggman is hiding in.
 		; 0 = top-left -- 2 = top-right -- 4 = bottom-left -- 6 bottom-right
-		;!@ GD:
-		;dc.w 0, 2
-		;dc.w 2, 4
-		;dc.w 4, 6
-		;dc.w 6, 0
 		dc.w 0, 4
 		dc.w 2, 6
 		dc.w 4, 6

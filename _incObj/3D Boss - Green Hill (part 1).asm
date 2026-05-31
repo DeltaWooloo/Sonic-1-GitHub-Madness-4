@@ -99,8 +99,10 @@ loc_177E6:
 		tst.b	objoff_3E(a0)
 		bne.s	BGHZ_ShipFlash
 		move.b	#$20,objoff_3E(a0)	; set number of times for ship to flash
-		move.w	#sfx_HitBoss,d0
-		jsr	(QueueSound2).l	; play boss damage sound
+		;!@ Boss hit/oink
+		;move.w	#sfx_HitBoss,d0
+		;jsr	(QueueSound2).l	; play boss damage sound
+		jsr		(BossHit_Pig).l
 
 BGHZ_ShipFlash:
 		lea	(v_palette+$22).w,a1 ; load 2nd palette, 2nd entry

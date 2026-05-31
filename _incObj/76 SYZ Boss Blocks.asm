@@ -140,8 +140,10 @@ loc_197AA:
 		dbf	d1,BossBlock_LoopFrag ; repeat sequence 3 more times
 
 loc_197D4:
+		pcm	dDoh					;!@ GD: Play homer doh pcm
 		move.w	#sfx_WallSmash,d0
-		jmp	(QueueSound2).l	; play smashing sound
+		jmp	(QueueSound2).l			; play smashing sound		
+		
 ; End of function BossBlock_Break
 
 ; ===========================================================================

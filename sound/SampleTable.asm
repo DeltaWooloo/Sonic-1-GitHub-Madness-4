@@ -150,8 +150,8 @@ SampleTable:
 	dcSample	TYPE_DPCM,	GenesisCan3,	8000,	FLAGS_SFX	; $E3
 
 	; Ollie Samples
-	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $E4
-	dcSample	TYPE_DPCM,	OllieWahoo,	16000					; $E5
+	dcSample	TYPE_DPCM,	OllieGameTap,	16000, FLAGS_SFX	; $E4
+	dcSample	TYPE_DPCM,	OllieWahoo,	16000, FLAGS_SFX		; $E5
 	
 	
 	; Deltarune Samples
@@ -167,16 +167,17 @@ SampleTable:
 	dcSample	TYPE_DPCM,	chr_tonic_burp,	16000,	FLAGS_SFX	; $EB
 	dcSample	TYPE_DPCM,	chr_maniac_laugh,16000,	FLAGS_SFX	; $EC
 	dcSample	TYPE_DPCM,	chr_mddio_laugh,16000,	FLAGS_SFX	; $ED
-	; Final Zone samples (GenesisDoes)
+	; Final Zone/boss samples (GenesisDoes)
 	dcSample	TYPE_DPCM,	prng_Can,		16000,	FLAGS_SFX	; $EE
 	dcSample	TYPE_DPCM,	prng_Chip,		16000,	FLAGS_SFX	; $EF
 	dcSample	TYPE_PCM,	prng_Ugh,		22050,	FLAGS_SFX	; $F0
+	dcSample	TYPE_DPCM,	doh,			16000,	FLAGS_SFX	; $F1
 
 	; SEGA Samples
-	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $EE
+	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $F2
 
 	;!@ GD: Last slot always reserved for PCM SFX Silence
-	dcSample	TYPE_DPCM,	dummy,		8000,	FLAGS_SFX		; $EF
+	dcSample	TYPE_DPCM,	dummy,		8000,	FLAGS_SFX		; $F3
 
 	; Unused
 ;	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $F0
@@ -370,6 +371,7 @@ SampleTable:
 	incdac	prng_Can,"sound/dac/GenesisDoes/prngCan.dpcm"
 	incdac	prng_Chip,"sound/dac/GenesisDoes/prngChip.dpcm"
 	incdac	prng_Ugh,"sound/dac/GenesisDoes/prngUgh.pcm"
+	incdac	doh,"sound/dac/GenesisDoes/doh.dpcm"
 
 ; ---------------------------------------------------------------
 ; Whatever you want the Sega sound to be
