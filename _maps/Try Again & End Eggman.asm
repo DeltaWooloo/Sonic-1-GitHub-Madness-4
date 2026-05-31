@@ -23,21 +23,21 @@ M_EEgg_Try1:	spriteHeader
 M_EEgg_Try1_End
 
 M_EEgg_Try2:	spriteHeader
-	spritePiece	-$20, -$18, 4, 2, $12, 0, 0, 0, 0
-	spritePiece	-$18, -8, 3, 1, $1A, 0, 0, 0, 0
-	spritePiece	0, -$18, 2, 2, 0, 1, 0, 0, 0
-	spritePiece	0, -8, 4, 1, 4, 1, 0, 0, 0
-	spritePiece	-$10, 0, 2, 3, $1D, 0, 0, 0, 0
-	spritePiece	0, 0, 2, 3, $1D, 1, 0, 0, 0
+	spritePiece	-$10, -$17, 2, 2, 0, 0, 0, 0, 0
+	spritePiece	-$20, -7, 4, 1, 4, 0, 0, 0, 0
+	spritePiece	0, -$17, 2, 1, 8, 0, 0, 0, 0
+	spritePiece	0, -$F, 4, 2, $A, 0, 0, 0, 0
+	spritePiece	-$10, 1, 2, 3, $23, 0, 0, 0, 0
+	spritePiece	0, 1, 2, 3, $23, 1, 0, 0, 0
 	spritePiece	-$14, $18, 2, 1, $29, 0, 0, 0, 0
 	spritePiece	4, $18, 2, 1, $29, 1, 0, 0, 0
 M_EEgg_Try2_End
 
 M_EEgg_Try3:	spriteHeader
-	spritePiece	-$10, -$17, 2, 1, 8, 1, 0, 0, 0
-	spritePiece	-$20, -$F, 4, 2, $A, 1, 0, 0, 0
-	spritePiece	0, -$17, 2, 2, 0, 1, 0, 0, 0
-	spritePiece	0, -7, 4, 1, 4, 1, 0, 0, 0
+	spritePiece	-$10, -$17, 2, 2, 0, 0, 0, 0, 0
+	spritePiece	-$20, -7, 4, 1, 4, 0, 0, 0, 0
+	spritePiece	0, -$17, 2, 1, 8, 0, 0, 0, 0
+	spritePiece	0, -$F, 4, 2, $A, 0, 0, 0, 0
 	spritePiece	-$10, 1, 2, 3, $23, 0, 0, 0, 0
 	spritePiece	0, 1, 2, 3, $23, 1, 0, 0, 0
 	spritePiece	-$14, $18, 2, 1, $29, 0, 0, 0, 0
@@ -45,12 +45,12 @@ M_EEgg_Try3:	spriteHeader
 M_EEgg_Try3_End
 
 M_EEgg_Try4:	spriteHeader
-	spritePiece	-$10, -$18, 2, 2, 0, 0, 0, 0, 0
-	spritePiece	-$20, -8, 4, 1, 4, 0, 0, 0, 0
-	spritePiece	0, -$18, 4, 2, $12, 1, 0, 0, 0
-	spritePiece	0, -8, 3, 1, $1A, 1, 0, 0, 0
-	spritePiece	-$10, 0, 2, 3, $1D, 0, 0, 0, 0
-	spritePiece	0, 0, 2, 3, $1D, 1, 0, 0, 0
+	spritePiece	-$10, -$17, 2, 2, 0, 0, 0, 0, 0
+	spritePiece	-$20, -7, 4, 1, 4, 0, 0, 0, 0
+	spritePiece	0, -$17, 2, 1, 8, 0, 0, 0, 0
+	spritePiece	0, -$F, 4, 2, $A, 0, 0, 0, 0
+	spritePiece	-$10, 1, 2, 3, $23, 0, 0, 0, 0
+	spritePiece	0, 1, 2, 3, $23, 1, 0, 0, 0
 	spritePiece	-$14, $18, 2, 1, $29, 0, 0, 0, 0
 	spritePiece	4, $18, 2, 1, $29, 1, 0, 0, 0
 M_EEgg_Try4_End

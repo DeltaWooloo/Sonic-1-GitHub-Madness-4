@@ -14,6 +14,8 @@ TCha_Index:	dc.w TCha_Main-TCha_Index
 ; ===========================================================================
 
 TCha_Main:	; Routine 0
+		rts
+Fuckthis:
 		movea.l	a0,a1
 		moveq	#0,d2
 		moveq	#0,d3
