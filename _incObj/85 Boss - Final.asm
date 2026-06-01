@@ -438,9 +438,10 @@ loc_1A1D4:
 		bne.s	loc_1A216
 		move.w	#$1E,objoff_30(a0)
 		;!@ GD: Play ugh PCM too
-		move.w	#sfx_HitBoss,d0
-		jsr	(QueueSound2).l	; play boss damage sound
-		pcm		dPrngUgh
+		;move.w	#sfx_HitBoss,d0
+		;jsr	(QueueSound2).l	; play boss damage sound
+		;pcm	dPrngUgh
+		jsr		(BossHit_Pig).l		
 
 loc_1A1FC:
 		subq.w	#1,objoff_30(a0)

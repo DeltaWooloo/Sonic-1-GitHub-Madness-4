@@ -261,6 +261,10 @@ Solid_Squash:
 		btst	#1,obStatus(a1)	; is Sonic in the air?
 		bne.s	Solid_TopBtmAir	; if yes, branch
 		
+		;!@ GD: If CBZ2, skip bugfix
+		cmpi.w	#(id_CBZ<<8)+2,(v_zone).w
+		beq.s	.skipBugfix		
+		
 		;!@ Fix squash code:
 		; https://info.sonicretro.org/SCHG_How-to:Improve_Squash_Kill_Logic
 		; Sonic is supposed to get squashed now, here is where we will add the leeway check
@@ -276,7 +280,7 @@ Solid_Squash:
 
 .kill:
 		clr.b	(v_squashbuffer).w	; reset squash distance buffer
-		
+.skipBugfix:
 		move.l	a0,-(sp)
 		movea.l	a1,a0
 		jsr	(KillSonic).l	; kill Sonic

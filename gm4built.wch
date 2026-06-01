@@ -1,5 +1,5 @@
 0
-56
+61
 00000	00FFFFD5	b	h	0	f_difficulty
 00001	00FFFE0E	w	h	0	v_zone
 00002	00FFFE1E	w	h	0	v_rings
@@ -56,3 +56,8 @@
 00035	00FFFFD6	b	h	0	f_levselcheat
 00036	00FFFFD8	b	h	0	f_debugcheat
 00037	00FFFFE0	w	h	0	v_demonum
+00038	00000000	S	S	0	----------------------------
+00039	00FFD400	b	h	0	v_vsbmark_arrow+obType
+0003A	00FFD408	d	h	0	v_vsbmark_arrow+obX
+0003B	00FFD40C	d	h	0	v_vsbmark_arrow+obY
+0003C	00FFD428	b	h	0	v_vsbmark_arrow+obSubType

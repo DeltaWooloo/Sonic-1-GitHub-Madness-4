@@ -770,7 +770,8 @@ DLE_BREW:
 		move.w	DLE_BREWx(pc,d0.w),d0
 		jmp	DLE_BREWx(pc,d0.w)
 ; ===========================================================================
-DLE_BREWx:	dc.w DLE_BREW1-DLE_BREWx
+DLE_BREWx:
+		dc.w DLE_BREW1-DLE_BREWx
 		dc.w DLE_BREW2-DLE_BREWx
 		dc.w DLE_BREW3-DLE_BREWx
 		dc.w DLE_BREW4-DLE_BREWx
@@ -811,19 +812,48 @@ off_6E4ABR:
 ; ===========================================================================
 
 DLE_BREW3main:
+		;!@ GD: Spawn an invisible block at left edge
+		; Check if block singleton alive; if not spawn
+		;tst.b	(v_vsbmark_arrow).w
+		;bne.s	.skipSpawn
+		;move.b	#id_Invisibarrier,(v_vsbmark_arrow).w 			; load invis block
+		;move.b	#$1F,(v_vsbmark_arrow+obSubtype).w 				; of subtype $1F
+;.skipSpawn:
 		add.w	#1,(v_limitleft2).w
 		cmpi.w	#boss_ghz_x-$200,(v_screenposx).w
 		bcs.s	BrewAutoScroll
 		addq.b	#2,(v_dle_routine).w
+		
 BrewAutoScroll:
+		;!@ If died (death boundary, or anim), or debug mode, stop
+		tst.b	(f_deathbnd).w		; Death boundary touched?
+		bne.s	.skip				
+		lea		(v_player).w,a1
+		cmpi.b	#id_Death,obAnim(a1) ; is Sonic in death animation
+		beq.s	.skip
+		tst.w	(v_debuguse).w		; is debug mode being used?
+		bne.w	.skip		
+						
 		move.b	#1,(f_lockscreen).w ; lock screen
 		moveq	#1,d0
 		add.w	d0,(v_limitright2).w
-
 		add.w	d0,(v_screenposx).w
-		move.w	(v_screenposx).w,d0
+		moveq	#0,d0
+		move.w	(v_screenposx).w,d0		
+		;!@ GD: Continously move invis block		
+		;move.w	d0,(v_vsbmark_arrow+obX).w
+		;addi.w	#$07,(v_vsbmark_arrow+obX).w		
+		
+		; Move BG
 		asr.w	#2,d0
 		move.w	d0,(v_bg2screenposx).w
+		
+		;!@ GD: Continously move invis block		
+		;moveq	#0,d0
+		;move.w	(v_screenposy).w,d0
+		;addi.w	#$70,d0
+		;move.w	d0,(v_vsbmark_arrow+obY).w
+	.skip:
 		jmp	(DLE_BREW3end).l
 
 ; ===========================================================================
