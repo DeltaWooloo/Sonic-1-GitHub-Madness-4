@@ -908,7 +908,7 @@ Pow_Randomiser:
         blo.s   .BigRing_spawnit
         move.w  #999,(v_rings).w    ; cap your rings to 999
 .BigRing_spawnit:
-		spawnObj	id_GiantRing,$01,dOllieWahoo	;Special subtype $1 for proper usage
+		spawnObj	id_GiantRing,$01,dOllieWahoo2	;Special subtype $1 for proper usage
 		rts
 ; ===========================================================================
 ;Spawn another random monitor. LOL!
@@ -927,7 +927,7 @@ Pow_Randomiser:
 		endif
 		
 		clr.b	(v_lastlamp).w					;Reset lamppost, for new one
-		spawnObj	id_Lamppost,$7F,dOllieWahoo	;Subtype $7F to chump all other IDs
+		spawnObj	id_Lamppost,$7F,dOllieWahoo2	;Subtype $7F to chump all other IDs
 		rts
 ;===========================================================================
 
@@ -941,7 +941,7 @@ Pow_Randomiser:
 
 		moveq	#plcid_Rift,d0					; Load rift PLC
 		jsr		(NewPLC).l						; load pattern
-		spawnObj	id_Rift,$00,dOllieGameTap
+		spawnObj	id_Rift,$00,dOllieGameTap2
 		rts
 ;===========================================================================
  

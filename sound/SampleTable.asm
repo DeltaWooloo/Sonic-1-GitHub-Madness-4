@@ -134,50 +134,53 @@ SampleTable:
 	dcSample	TYPE_DPCM,	w98ipc,		16000,	FLAGS_SFX		; $D8
 	dcSample	TYPE_DPCM,	meow,		16000,					; $D9
 	dcSample	TYPE_DPCM,	meow,		8000,					; $DA
-	dcSample	TYPE_DPCM,	azdOMG,		16000,	FLAGS_SFX		; $DB
-	dcSample	TYPE_DPCM,	uDied,		4000,	FLAGS_SFX		; $DC
+	dcSample	TYPE_DPCM,	azdOMG,		16000,	FLAGS_SFX		; $DB	
 
 	; Splash Screens
-	dcSample	TYPE_PCM,	EggNo,		11297					; $DD
-	dcSample	TYPE_DPCM,	funnyb_utthole,	8000,	FLAGS_SFX	; $DE
-	dcSample	TYPE_DPCM,	yume2kki,	16000,	FLAGS_SFX		; $DF
+	dcSample	TYPE_PCM,	EggNo,		11297					; $DC
+	dcSample	TYPE_DPCM,	funnyb_utthole,	8000,	FLAGS_SFX	; $DD
+	dcSample	TYPE_DPCM,	yume2kki,	16000,	FLAGS_SFX		; $DE
 
-	dcSample	TYPE_DPCM,	GenesisDoes1,	8000				; $E0
-	dcSample	TYPE_DPCM,	Virus,		16000,	FLAGS_SFX		; $E1
-	dcSample	TYPE_DPCM,	supbeaches,	8000					; $E2
+	dcSample	TYPE_DPCM,	GenesisDoes1,	8000				; $DF
+	dcSample	TYPE_DPCM,	Virus,		16000,	FLAGS_SFX		; $E0
+	dcSample	TYPE_DPCM,	supbeaches,	8000					; $E1
 
 	; Commercial Samples
-	dcSample	TYPE_DPCM,	GenesisCan3,	8000,	FLAGS_SFX	; $E3
+	dcSample	TYPE_DPCM,	GenesisCan3,	8000,	FLAGS_SFX	; $E2
 
 	; Ollie Samples
-	dcSample	TYPE_DPCM,	OllieGameTap,	16000, FLAGS_SFX	; $E4
-	dcSample	TYPE_DPCM,	OllieWahoo,	16000, FLAGS_SFX		; $E5
+	dcSample	TYPE_DPCM,	OllieGameTap,	16000				; $E3
+	dcSample	TYPE_DPCM,	OllieWahoo,	16000 					; $E4
+	dcSample	TYPE_DPCM,	OllieGameTap,	16000, FLAGS_SFX	; $E5
+	dcSample	TYPE_DPCM,	OllieWahoo,	16000, FLAGS_SFX		; $E6
+	dcSample	TYPE_DPCM,	uDied,		4000,	FLAGS_SFX		; $E7
+	
 	
 	
 	; Deltarune Samples
-	dcSample	TYPE_PCM,	Knight_Hurt,	22050				; $E6
-	dcSample	TYPE_PCM,	Knight_Stretch,	22050				; $E7
-	dcSample	TYPE_PCM,	Knight_Roar,	22050,	FLAGS_SFX	; $E8
-	dcSample	TYPE_PCM,	DR_Battle_Start, 22050,	FLAGS_SFX	; $E9
+	dcSample	TYPE_PCM,	Knight_Hurt,	22050				; $E8
+	dcSample	TYPE_PCM,	Knight_Stretch,	22050				; $E9
+	dcSample	TYPE_PCM,	Knight_Roar,	22050,	FLAGS_SFX	; $EA
+	dcSample	TYPE_PCM,	DR_Battle_Start, 22050,	FLAGS_SFX	; $EB
 
 	; CBZ Samples
-	dcSample	TYPE_DPCM,	SexFland,	8000,	FLAGS_SFX		; $EA
+	dcSample	TYPE_DPCM,	SexFland,	8000,	FLAGS_SFX		; $EC
 	
 	; Character samples (GenesisDoes)
-	dcSample	TYPE_DPCM,	chr_tonic_burp,	16000,	FLAGS_SFX	; $EB
-	dcSample	TYPE_DPCM,	chr_maniac_laugh,16000,	FLAGS_SFX	; $EC
-	dcSample	TYPE_DPCM,	chr_mddio_laugh,16000,	FLAGS_SFX	; $ED
+	dcSample	TYPE_DPCM,	chr_tonic_burp,	16000,	FLAGS_SFX	; $ED
+	dcSample	TYPE_DPCM,	chr_maniac_laugh,16000,	FLAGS_SFX	; $EE
+	dcSample	TYPE_DPCM,	chr_mddio_laugh,16000,	FLAGS_SFX	; $EF
 	; Final Zone/boss samples (GenesisDoes)
-	dcSample	TYPE_DPCM,	prng_Can,		16000,	FLAGS_SFX	; $EE
-	dcSample	TYPE_DPCM,	prng_Chip,		16000,	FLAGS_SFX	; $EF
-	dcSample	TYPE_PCM,	prng_Ugh,		22050,	FLAGS_SFX	; $F0
-	dcSample	TYPE_DPCM,	doh,			16000,	FLAGS_SFX	; $F1
+	dcSample	TYPE_DPCM,	prng_Can,		16000,	FLAGS_SFX	; $F0
+	dcSample	TYPE_DPCM,	prng_Chip,		16000,	FLAGS_SFX	; $F1
+	dcSample	TYPE_PCM,	prng_Ugh,		22050,	FLAGS_SFX	; $F2
+	dcSample	TYPE_DPCM,	doh,			16000,	FLAGS_SFX	; $F3
 
 	; SEGA Samples
-	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $F2
+	dcSample	TYPE_PCM,	SegaPCM,	12000,	FLAGS_SFX		; $F4
 
 	;!@ GD: Last slot always reserved for PCM SFX Silence
-	dcSample	TYPE_DPCM,	dummy,		8000,	FLAGS_SFX		; $F3
+	dcSample	TYPE_DPCM,	dummy,		8000,	FLAGS_SFX		; $F5
 
 	; Unused
 ;	dcSample	TYPE_DPCM,	BeRightBack,	8000				; $F0

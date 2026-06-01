@@ -2807,8 +2807,9 @@ FinalTitle:
 
 ;		tst.b	(v_megadrive).w	; is console Japanese?
 ;		bpl.s	.isjpn		; if yes, branch
-;		move.b	#id_PSBTM,(v_titletm).w ; load "TM" object
-;		move.b	#3,(v_titletm+obFrame).w
+		;!@ GD: Re-enabled TM, but use it as version number
+		move.b	#id_PSBTM,(v_titletm).w ; load "TM" object
+		move.b	#3,(v_titletm+obFrame).w
 ;.isjpn:
 		; i feel like a rectangle cuz my rectangle is hard - rectangle from breakout (PS1)
 		move.b	#id_PSBTM,(v_ttlsonichide).w ; load object which hides part of Sonic
@@ -4280,7 +4281,7 @@ TryAgainEnd:
 		move.w	#6,d1
 		bra.s	.killleach			; branch	
 	.goodPCM:
-		pcm		dOllieWahoo			; !@ GD: Play mario for good Ending		
+		pcm		dOllieWahoo2		; !@ GD: Play mario for good Ending		
 	.killleach:
 		move.l	d0,(a1)+
 		dbf	d1,.killleach ; fill palette with black

@@ -9,7 +9,8 @@ PSBTM:
 		jsr	PSB_Index(pc,d1.w)
 		bra.w	DisplaySprite
 ; ===========================================================================
-PSB_Index:	dc.w PSB_Main-PSB_Index
+PSB_Index:
+		dc.w PSB_Main-PSB_Index
 		dc.w PSB_PrsStart-PSB_Index
 		dc.w PSB_Exit-PSB_Index
 ; ===========================================================================
@@ -17,8 +18,8 @@ PSB_Index:	dc.w PSB_Main-PSB_Index
 PSB_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 
-		; Fix dick position
-		; https://info.sonicretro.org/SCHG_How-to:Fix_the_Dick_position_in_Sonic_1
+		; Fix title position
+		; https://info.sonicretro.org/SCHG_How-to:Fix_the_Title_Screen_position_in_Sonic_1
 		move.w	#$120,obX(a0)
 		move.w	#$14C,obScreenY(a0)
 		move.l	#Map_PSB,obMap(a0)
@@ -27,15 +28,21 @@ PSB_Main:	; Routine 0
 		blo.s	PSB_PrsStart	; if yes, branch
 
 		addq.b	#2,obRoutine(a0)
-;		cmpi.b	#3,obFrame(a0)	; is the object "TM"?
-;		bne.s	PSB_Exit	; if not, branch
+		cmpi.b	#3,obFrame(a0)	; is the object "TM"?
+		beq.s	.version		; if so, branch
 ;
 ;		move.w	#make_art_tile(ArtTile_Title_Trademark,1,0),obGfx(a0) ; "TM" specific code
 
-		; Fix johnson position
-		; https://info.sonicretro.org/SCHG_How-to:Fix_the_Johnson_position_in_Sonic_1
+		; Fix title position
+		; https://info.sonicretro.org/SCHG_How-to:Fix_the_Title_Screen_position_in_Sonic_1
 		move.w	#$E0,obX(a0)
 		move.w	#$138,obScreenY(a0)
+		bra.s	PSB_Exit
+		
+		;!@ GD: Change TM to version number, and reposition
+.version:
+		move.w	#$198,obX(a0)
+		move.w	#$14C,obScreenY(a0)
 
 PSB_Exit:	; Routine 4
 		rts

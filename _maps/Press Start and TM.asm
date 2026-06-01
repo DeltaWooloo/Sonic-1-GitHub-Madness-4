@@ -2,6 +2,7 @@ Map_0643: mappingsTable
 	mappingsTableEntry.w	Map_0643_0
 	mappingsTableEntry.w	Map_0643_1
 	mappingsTableEntry.w	Map_0643_2
+	mappingsTableEntry.w	Map_0643_3
 
 Map_0643_0:	spriteHeader
 Map_0643_0_End
@@ -42,5 +43,9 @@ Map_0643_2:	spriteHeader
  spritePiece $58, -$38, 4, 2, $119, 0, 0, 0, 0
  spritePiece $78, -$38, 1, 2, $121, 0, 0, 0, 0
 Map_0643_2_End
+
+Map_0643_3:	spriteHeader
+ spritePiece -$10, -4, 4, 1, $139, 0, 0, 0, 0
+Map_0643_3_End
 
 	even

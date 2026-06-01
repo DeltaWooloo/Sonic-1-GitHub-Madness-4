@@ -178,8 +178,8 @@ Got_ChkSS:
 		clr.b	(v_lastlamp).w	; clear lamppost counter
 		jsr	(Pow_fix_RandMon_Runonce_flags).l	;!@ GD: Clear f_randMonPow runonce flags
 		
-		;!@ GD: Skip SS check if in OWZ2 (clinton); Clinton game mode will handle it
-		cmpi.w	#(id_OWZ<<8)+1,(v_zone).w
+		;!@ GD: Skip SS check if next zone is in OWZ2 (clinton); Clinton game mode will handle it
+		cmpi.w	#(id_OWZ<<8)+2,(v_zone).w
 		beq.s	loc_C6EA
 		
 		tst.b	(f_bigring).w	; has Sonic jumped into a giant ring?
