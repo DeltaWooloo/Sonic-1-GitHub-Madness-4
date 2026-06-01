@@ -12,7 +12,7 @@
 ; ASSEMBLY OPTIONS:
 
 
-DickingAround = 0
+DickingAround = 1
 ; 	| If 0, loads SEGA screen first (for public release)
 ; 	| If 1, load Debug Menu first
 
@@ -25,7 +25,7 @@ DemoRecord = 0
 ; 	| If 0, regular gameplay physics
 ; 	| If 1, disable Sonic CD terminal velocity/speed caps for Sonic
 
-CheatsOn = 0
+CheatsOn = 1
 ; 	| If 0, build it with no cheats active
 ; 	| If 1, build it with all cheats active
 
@@ -3740,6 +3740,9 @@ SignpostArtLoad:
 		;!@ GD: Skip hardware store, because softlock in message easter egg area
 		cmpi.w	#(id_DVZ<<8)+1,(v_zone).w	; is this DV2?
 		beq.w	SignpostArtLoad2.exit		; if yes, branch
+		;!@ GD: Also skip entirety of Bluestone, because OJ1 is just a capsule
+		cmpi.b	#id_BTZ,(v_zone).w			; is level Bluestone?
+		beq.w	SignpostArtLoad2.exit		; if yes, branch		
 
 		move.w	(v_screenposx).w,d0
 		move.w	(v_limitright2).w,d1
