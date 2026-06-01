@@ -54,7 +54,7 @@ HUD_Main:	; Routine 0
 		bne.s	.normal						; If not, branch
 	.BSZ2:
 		move.w	#$90+$28,obX(a0)
-		move.w	#$108,obScreenY(a0)
+		move.w	#$108+8,obScreenY(a0)
 		bra.s	.resume
 	.normal:
 		move.w	#$90,obX(a0)

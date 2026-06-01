@@ -3312,9 +3312,9 @@ Level_GetBgm:
 		;4000 is address
 		disable_ints
 		lea	(vdp_control_port).l,a6
-		move.w	#$8300+(vram_win>>10),(a6) 	; 40x30
+		move.w	#$8300+(vram_win>>10),(a6) 	; 40x28
 		move.w	#$918C,(a6)					; HP to right edge, $0C
-		move.w	#$929E,(a6)					; VP to bottom edge, $12
+		move.w	#$929F,(a6)					; VP to bottom edge, $13
 
 		fillVRAM	$C1,$FFF,vram_window ; clear background namespace
 
@@ -5493,8 +5493,8 @@ DrawInstagramOverlay:
 		bne.s	.return
 		move.w	#128+92,d3 ; x
 		;!@ GD: Move it upwards 8px tile for room for the life counter
-		;move.w	#128+92,d2 ; y
-		move.w	#(128+84),d2 ; y
+		move.w	#128+92,d2 ; y
+		;move.w	#(128+84),d2 ; y
 		move.w	#$1C0,a3 ; art tile offset
 		lea	Map_Instagram(pc),a1
 		adda.w	(a1),a1
