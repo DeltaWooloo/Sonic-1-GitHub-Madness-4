@@ -12,7 +12,7 @@
 ; ASSEMBLY OPTIONS:
 
 
-DickingAround = 1
+DickingAround = 0
 ; 	| If 0, loads SEGA screen first (for public release)
 ; 	| If 1, load Debug Menu first
 
@@ -25,7 +25,7 @@ DemoRecord = 0
 ; 	| If 0, regular gameplay physics
 ; 	| If 1, disable Sonic CD terminal velocity/speed caps for Sonic
 
-CheatsOn = 1
+CheatsOn = 0
 ; 	| If 0, build it with no cheats active
 ; 	| If 1, build it with all cheats active
 
