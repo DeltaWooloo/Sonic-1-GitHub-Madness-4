@@ -285,6 +285,20 @@ Player_Reinit:
 		st.b	obPrevAni(a0)
 		jsr	Player_Animate
 		jsr	Player_LoadGfx
+		
+		;!@ GD: If maniac character, add 10 ammo
+		moveq	#0,d0
+		move.b	(v_characterid).w,d0
+		cmpi.b	#chrid_maniac,d0
+		bne.s	.skipAmmo		
+		addi.b	#10,playammo(a0)		; add ammo count 10
+		or.b	#1,(f_ammocount).w		; update ammo counter
+		
+		;!@ GD: Enable infinite ammo if debug mode
+		tst.b	(f_debugmode).w			; Is debug mode active?
+		beq.s	.skipAmmo				; if not, branch
+		move.b	#1,(v_unlimitedammo).w	; !@ Set infinite ammo cheat
+	.skipAmmo:
 		rts
 
 ; ----------------------------------------------------------------------------
