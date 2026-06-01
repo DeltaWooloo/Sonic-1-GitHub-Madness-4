@@ -132,11 +132,18 @@ CliFucker_Main:
 	tst.b	(v_endcard).w
 	bne.w	.ok
 	
-	;!@ GD: If have more than 50 rings, then set special stage
-	moveq	#0,d0
-	move.w	(v_rings).w,d0
-	cmpi.w	#50,d0
-	blo.s	.notSpecial
+	;!@ GD: If have more than 50 rings AND not 6 emeralds, then set special stage		
+	moveq	#0,d0				; Clear d0
+	move.b	(v_emeralds).w,d0	; Move emeralds into d0
+	cmpi.b	#6,d0				; Is emerald count 6?
+	bhs.s	.notSpecial			; if >=,skip
+	;We DON'T have 6 emeralds.
+	;Check for 50 rings
+	moveq	#0,d0				; Clear d0
+	move.w	(v_rings).w,d0		; Move ring count into d0
+	cmpi.w	#50,d0				; Is d0 50?
+	blo.s	.notSpecial			; if < 50, branch
+	;We have 50 rings AND not 6 emeralds; set special stage
 	move.b	#1,(f_bigring).w 	; Set Special stage for $50+rings
 .notSpecial:
 

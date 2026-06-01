@@ -109,8 +109,15 @@ Collectible:
 		jsr	(GHM3Explode).l		; Explosion
 		
 		;!@ GD: Check if player has 50+ rings (special stage/random monitor luck); if so, goto special stage
-		cmpi.w	#$32,d0
-		blo.s	.notSpecial
+		moveq	#0,d0				; Clear d0
+		move.b	(v_emeralds).w,d0	; Move emeralds into d0
+		cmpi.b	#6,d0				; Is emerald count 6?
+		bhs.s	.notSpecial			; if >=,skip
+		moveq	#0,d0				; Clear d0
+		move.w	(v_rings).w,d0		; Move ring count into d0
+		cmpi.w	#50,d0				; Is ring count 50?
+		blo.s	.notSpecial			; if <50, branch
+		;We have 50 rings AND NOT 6 emeralds; goto special stage
 		move.b	#1,(f_bigring).w 	; Set Special stage for $50+rings
 .notSpecial:		
 		jsr	(GotThroughAct).l	; Initiate the end of level sequence

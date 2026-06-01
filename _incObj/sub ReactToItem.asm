@@ -167,8 +167,17 @@ ReactToItem:
 .withiny:
 .chktype:
 		move.b	obColType(a1),d1 ; load collision type
-		cmpi.b	#$A2,d1		; is obColType $A2?
-		beq.w	KillSonic	; if yes, branch
+		
+		bsr.w	HandleA2
+		;!@ GD: If colType is $A2 and invincible, skip
+		;cmpi.b	#$A2,d1		; is obColType $A2?
+		;beq.w	KillSonic	; if yes, branch
+		;bne.s	.notA2		; if not, branch
+		;tst.b	(v_invinc).w		; you have invincibility?
+		;bne.s	.notA2		; if so, skip
+		;bra.w	KillSonic
+	;.notA2:
+	
 		andi.b	#$C0,d1		; is obColType $40 or higher?
 		beq.w	React_Enemy	; if not, branch
 		cmpi.b	#$C0,d1		; is obColType $C0 or higher?
@@ -232,6 +241,18 @@ ReactToItem:
 		dc.b  $C,  $20		; $26	; GIO
 		dc.b  $28,  $C		; $27	; GIO
 		dc.b  $C,  $28		; $28   ; GIO
+		
+;!@ Special code to handle A2 (Minecraft steam rollers)
+HandleA2:
+		;!@ GD: If colType is $A2 and invincible, skip
+		cmpi.b	#$A2,d1		; is obColType $A2?
+		;beq.w	KillSonic	; if yes, branch
+		bne.s	.notA2		; if not, branch
+		tst.b	(v_invinc).w		; you have invincibility?
+		bne.s	.notA2		; if so, skip
+		bra.w	KillSonic
+	.notA2:
+		rts
 		
 
 ; ===========================================================================
