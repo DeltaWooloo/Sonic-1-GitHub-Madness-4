@@ -16,6 +16,11 @@ s1built.prev.bin
 s1built.bin
 __Release/GHM4.cue
 
+# Release assets
+__Release/Debug/*.*
+__Release/Promo/*.*
+__Release/Retail/*.*
+
 #GenesisDoes source tool shortcuts
 Assets/Tools/Art/*.lnk
 Assets/Tools/Audio/*.lnk
