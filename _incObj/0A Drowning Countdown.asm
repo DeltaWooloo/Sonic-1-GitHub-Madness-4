@@ -197,12 +197,8 @@ Drown_Countdown:; Routine $A
 		beq.w	.nocountdown	; if not, branch
 		
 		;!@ GD: Bugfix, if level has water and end-of-level cards loaded, skip drown (esp. CBZ2)
-		cmpi.b	#id_ARZ,(v_zone).w			; golly i LOOOOVE hardcoded checks
-		beq.s	.doBugfix
-		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; WHZ3?
-		beq.s	.doBugfix
-		cmpi.w	#(id_CBZ<<8)+1,(v_zone).w	; is level number CBZ2 (has water)?
-		beq.s	.doBugfix
+		jsr		(isWaterLevel).l
+		bne.s	.doBugfix
 		bra.s	.loseAir		
 	.doBugfix:
 		;!@ GD: There will probably be bugs here if

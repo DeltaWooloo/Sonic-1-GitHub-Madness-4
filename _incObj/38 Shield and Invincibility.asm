@@ -105,13 +105,10 @@ Shi_Stars:	; Routine 4
 		move.w	(a1)+,obY(a0)
 		
 		;!@ GD: Only check water level if has water
-		cmpi.b	#id_ARZ,(v_zone).w			; ARZ zone
-		beq.s	.doWtrChk
-		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; WHZ3?
-		beq.s	.doWtrChk
-		cmpi.w	#(id_CBZ<<8)+1,(v_zone).w	; CBZ2?
-		beq.s	.doWtrChk
-		bra.s	.resume		
+		jsr	(isWaterLevel).l
+		bne.s	.doWtrChk
+		bra.s	.resume
+
 ;We have water; check level
 .doWtrChk:		
 		moveq	#0,d0

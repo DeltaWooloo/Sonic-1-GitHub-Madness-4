@@ -1262,24 +1262,26 @@ Level_LoadPal2:
 		
 ;!@ GD: Change this as new zones get water
 ; Function determines if level has water, and sets ccr by tst.b(d2)
-; Output: d2; 1=has water, 0=doesn't
+; Output:
+;			d2; 1=has water, 0=doesn't
+;			d2 ccr also set for a water branch
 isWaterLevel:		
-		cmpi.w	#(id_CBZ<<8)+1,(v_zone).w		; Is this zone ARZ?
-		beq.s	.hasWtr					; If not, branch
-		cmpi.b	#id_ARZ,(v_zone).w		; Is this zone ARZ?
-		beq.s	.hasWtr					; If not, branch
-		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; is SBZ Act 3?
-		bne.s	.notWtr	; if not, branch
+		cmpi.w	#(id_CBZ<<8)+1,(v_zone).w	; Is this zone CBZ2?
+		beq.s	.hasWtr						; If so, branch
+		cmpi.b	#id_ARZ,(v_zone).w			; Is this zone ARZ?
+		beq.s	.hasWtr						; If so, branch
+		cmpi.w	#(id_WHZ<<8)+3,(v_zone).w	; Is this zone WHZ3?
+		bne.s	.notWtr						; if not, branch
 
 	;Level has water!
 	.hasWtr:
-		moveq	#1,d2					; Set d2 flag
-		bra.s	.end					; Branch
+		moveq	#1,d2						; Set d2 flag
+		bra.s	.end						; Branch
 	;Level doesn't water	
 	.notWtr:
-		moveq	#0,d2					; Clr d2 flag
+		moveq	#0,d2						; Clr d2 flag
 	.end:
-		tst.b	d2						; Is d2 0?
+		tst.b	d2							; Is d2 0?
 		rts
 
 ; ===========================================================================
