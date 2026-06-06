@@ -205,6 +205,7 @@ allMonitors:	macro
 		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
 		allMonitors		
 		dbug	Map_kys,	id_PinballMode,	0,	0,	make_art_tile(ArtTile_Ring,1,0)
+		dbug	Map_kys,	id_PinballMode,	4,	0,	make_art_tile(ArtTile_Ring,1,0)
 		
 		dbug	Map_Bomb,	id_Bomb,	0,	0,	make_art_tile(ArtTile_Bomb,0,0)
 		;dbug	Map_Orb,	id_Orbinaut,	0,	0,	make_art_tile(ArtTile_SBZ_Orbinaut,0,0)
@@ -271,6 +272,8 @@ allMonitors:	macro
 		dbug	Map_ChopCBZ,	id_Chopper,	0,	0,	make_art_tile(ArtTile_CBZChopper,0,0)
 		dbug	Map_Spike,	id_Spikes,	0,	0,	make_art_tile(ArtTile_Spikes,0,0)
 		dbug	Map_Plat_CBZ,	id_BasicPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)		
+		dbug	Map_Plat_CBZ,	id_CirclingPlatform, 0,	0,	make_art_tile(ArtTile_Level,2,0)
+		
 		dbug	Map_LedgeCBZ,	id_CollapseLedge,	$00,	0,	make_art_tile(ArtTile_Level,2,0)
 		dbug	Map_LedgeCBZ,	id_CollapseLedge,	$01,	1,	make_art_tile(ArtTile_Level,2,0)				
 		dbug	Map_Swing_GHZ,	id_SwingingPlatform,	$00,	0,	make_art_tile(ArtTile_CBZ_Swing,2,0)
@@ -306,7 +309,7 @@ allMonitors:	macro
 		;dbug	Map_Monitor,	id_Monitor,	0,	0,	make_art_tile(ArtTile_Monitor,0,0)
 		allMonitors
 		
-		dbug	Map_Splats,	id_InternetExplorer,	0,	0,	make_art_tile($04E4,1,0)
+		dbug	Map_IE,	id_InternetExplorer,	0,	0,	make_art_tile(ArtTile_IE,0,0)
 		dbug	Map_Mouse,	id_MotoBug,	$00,	0,	make_art_tile(ArtTile_Villager,0,0)
 		dbug	Map_Mouse,	id_MotoBug,	$01,	0,	make_art_tile(ArtTile_Villager,0,0)
 		dbug	Map_Mouse,	id_MotoBug,	$FF,	0,	make_art_tile(ArtTile_Villager,0,0)		
@@ -495,9 +498,9 @@ allMonitors:	macro
 		;dbug	Map_Pole,	id_Pole,	0,	0,	make_art_tile(ArtTile_LZ_Pole,2,0)
 		;dbug	Map_Flap,	id_FlapDoor,	2,	0,	make_art_tile(ArtTile_LZ_Flapping_Door,2,0)
 		dbug	Map_Lamp,	id_Lamppost,	1,	0,	make_art_tile(ArtTile_Lamppost,0,0)
-		dbug	Map_Wario,	id_Yadrin,	0,	0,	make_art_tile(ArtTile_Wario,0,0)						; Wario
-		dbug	Map_SBall,	id_SpikeBall,	$00,	0,	make_art_tile(ArtTile_SYZ_Spikeball_Chain,0,0)	; Spike ball
-		dbug	Map_SBall,	id_SpikeBall,	$82,	0,	make_art_tile(ArtTile_SYZ_Spikeball_Chain,0,0)	; Spike ball
-		dbug	Map_SBall,	id_SpikeBall,	$87,	0,	make_art_tile(ArtTile_SYZ_Spikeball_Chain,0,0)	; Spike ball
+		;dbug	Map_Wario,	id_Yadrin,	0,	0,	make_art_tile(ArtTile_Wario,0,0)						; Wario
+		;dbug	Map_SBall,	id_SpikeBall,	$00,	0,	make_art_tile(ArtTile_SYZ_Spikeball_Chain,0,0)	; Spike ball
+		;dbug	Map_SBall,	id_SpikeBall,	$82,	0,	make_art_tile(ArtTile_SYZ_Spikeball_Chain,0,0)	; Spike ball
+		;dbug	Map_SBall,	id_SpikeBall,	$87,	0,	make_art_tile(ArtTile_SYZ_Spikeball_Chain,0,0)	; Spike ball
 .ARZend:
 		even

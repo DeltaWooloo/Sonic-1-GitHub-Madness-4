@@ -398,14 +398,14 @@ PLC_BTZ2end:
 ; Pattern load cues - Labyrinth
 ; ---------------------------------------------------------------------------
 PLC_ARZ:		dc.w ((PLC_ARZ2-PLC_ARZ-2)/6)-1
-		plcm	Nem_Spikes,      ArtTile_Spikes             ; spikes
+		;plcm	Nem_Spikes,      ArtTile_Spikes             ; spikes
 ;		plcm	Nem_ARZ,          ArtTile_Level              ; ARZ main patterns
-		plcm	Nem_Wario,       ArtTile_Wario              ; Wario
-        plcm	Nem_SyzSpike1, ArtTile_SYZ_Big_Spikeball   ; large spikeball
-		plcm	Nem_SyzSpike2, ArtTile_SYZ_Spikeball_Chain ; small spikeball
+		;plcm	Nem_Wario,       ArtTile_Wario              ; Wario
+        ;plcm	Nem_SyzSpike1, ArtTile_SYZ_Big_Spikeball   ; large spikeball
+		;plcm	Nem_SyzSpike2, ArtTile_SYZ_Spikeball_Chain ; small spikeball
 		
 PLC_ARZ2:	dc.w ((PLC_ARZ2end-PLC_ARZ2-2)/6)-1
-		plcm	Nem_HSpring,     ArtTile_Spring_Horizontal  ; horizontal spring
+		;plcm	Nem_HSpring,     ArtTile_Spring_Horizontal  ; horizontal spring
 PLC_ARZ2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - WINNER card
