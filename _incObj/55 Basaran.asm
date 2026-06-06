@@ -8,7 +8,8 @@ Basaran:
 		move.w	Bas_Index(pc,d0.w),d1
 		jmp	Bas_Index(pc,d1.w)
 ; ===========================================================================
-Bas_Index:	dc.w Bas_Main-Bas_Index
+Bas_Index:
+		dc.w Bas_Main-Bas_Index
 		dc.w Bas_Action-Bas_Index
 ; ===========================================================================
 
@@ -17,10 +18,16 @@ Bas_Main:	; Routine 0
 		move.l	#Map_Bas,obMap(a0)
 		move.w	#($68A0/$20),obGfx(a0)
 		move.b	#4,obRender(a0)
-		move.b	#$18,obHeight(a0)
+		;!@ GD: Change so that player attack collision callback works
+		;move.b	#$18,obHeight(a0)
+		move.b	#$08,obWidth(a0)
+		move.b	#$08,obHeight(a0)		
 		move.b	#2,obPriority(a0)
 		move.b	#$B,obColType(a0)
 		move.b	#$10,obActWid(a0)
+		;!@ GD: Fix collision for attacks 
+		bset	#6,obStatus(a0)
+		move.l 	#stdEn_callback, obColCallback(a0)
 
 Bas_Action:	; Routine 2
 		moveq	#0,d0

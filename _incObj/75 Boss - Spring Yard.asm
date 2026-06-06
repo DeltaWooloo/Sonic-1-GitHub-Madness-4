@@ -44,6 +44,13 @@ BossSpringYard_Loop:
 
 BossSpringYard_LoadBoss:
 		bclr	#0,obStatus(a0)
+		
+		;!@ GD: Fix player attack collision
+		move.b	#$18,obWidth(a0)
+		move.b	#$18,obHeight(a0)
+		bset	#6,obStatus(a0)
+		move.l 	#stdEn_callback, obColCallback(a0)
+		
 		clr.b	ob2ndRout(a1)
 		move.b	(a2)+,obRoutine(a1)
 		move.b	(a2)+,obAnim(a1)
@@ -52,6 +59,13 @@ BossSpringYard_LoadBoss:
 		move.w	#make_art_tile(ArtTile_Eggman,0,0),obGfx(a1)
 		move.b	#4,obRender(a1)
 		move.b	#$20,obActWid(a1)
+		
+		;!@ GD: Fix player attack collision
+		move.b	#$18,obWidth(a1)
+		move.b	#$18,obHeight(a1)
+		bset	#6,obStatus(a1)
+		move.l 	#stdEn_callback, obColCallback(a1)
+		
 		move.l	a0,objoff_34(a1)
 		dbf	d1,BossSpringYard_Loop	; repeat sequence 3 more times
 

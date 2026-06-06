@@ -34,6 +34,13 @@ Orb_Main:	; Routine 0
 		move.b	#4,obPriority(a0)
 		move.b	#$B,obColType(a0)
 		move.b	#$C,obActWid(a0)
+		
+		;!@ GD: Player attack collision bugfix
+		move.b	#$18,obWidth(a0)
+		move.b	#$0C,obHeight(a0)
+		bset	#6,obStatus(a0)
+		move.l 	#stdEn_callback, obColCallback(a0)
+		
 		moveq	#0,d2
 		lea	objoff_37(a0),a2
 		movea.l	a2,a3

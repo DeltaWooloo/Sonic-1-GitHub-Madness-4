@@ -8,7 +8,8 @@ BossStarLight:
 		move.w	Obj7A_Index(pc,d0.w),d1
 		jmp	Obj7A_Index(pc,d1.w)
 ; ===========================================================================
-Obj7A_Index:	dc.w Obj7A_Main-Obj7A_Index
+Obj7A_Index:
+		dc.w Obj7A_Main-Obj7A_Index
 		dc.w Obj7A_ShipMain-Obj7A_Index
 		dc.w Obj7A_FaceMain-Obj7A_Index
 		dc.w Obj7A_FlameMain-Obj7A_Index
@@ -27,6 +28,13 @@ Obj7A_Main:
 		move.w	obY(a0),$38(a0);38 og
 		move.b	#$C,obColType(a0)
 		move.b	#$14,obColProp(a0) ; set number of hits to ALOT cause you technically miss... ALOT
+		
+		;!@ GD: Fix collision for attacks 
+		move.b	#$14,obWidth(a0)
+		move.b	#$10,obHeight(a0)
+		bset	#6,obStatus(a0)
+		move.l 	#stdEn_callback, obColCallback(a0)
+		
 		lea	Obj7A_ObjData(pc),a2
 		movea.l	a0,a1
 		moveq	#3,d1
