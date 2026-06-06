@@ -16,9 +16,13 @@ SStom_Index:	dc.w SStom_Main-SStom_Index
 
 		;	routine		frame
 		;		 xpos
-SStom_Var:	dc.b	2,  	 4,	0	; main block
+SStom_Var:
+		dc.b	2,  	 4,	0	; main block
 		dc.b	4,	-$1C,	1	; spikes
-		dc.b	8,	 $34,	3	; pole
+		;!@ GD: Fix sideways stomper. Thanks Clownacy!
+		; https://forums.sonicretro.org/posts/826729/
+		;dc.b	8,	 $34,	3	; pole
+		dc.b	8,	 $34+$20,3	; pole
 		dc.b	6,	 $28,	2	; wall bracket
 
 ;word_B9BE:	; Note that this indicates three subtypes
@@ -111,18 +115,20 @@ SStom_ChkDel:
 
 
 SStom_Move:
-		moveq	#0,d0
-		move.b	obSubtype(a0),d0
-		add.w	d0,d0
-		move.w	off_BAD6(pc,d0.w),d1
-		jmp	off_BAD6(pc,d1.w)
+;!@ GD: Fix sideways stomper. Thanks Clownacy!
+;		moveq	#0,d0
+;		move.b	obSubtype(a0),d0
+;		add.w	d0,d0
+;		move.w	off_BAD6(pc,d0.w),d1
+;		jmp	off_BAD6(pc,d1.w)
 ; End of function SStom_Move
 
 ; ===========================================================================
 		; This indicates only two subtypes... that do the same thing
 		; Compare to SStom_Len. This breaks subtype 02
-off_BAD6:	dc.w loc_BADA-off_BAD6
-		dc.w loc_BADA-off_BAD6
+;off_BAD6:
+;		dc.w loc_BADA-off_BAD6
+;		dc.w loc_BADA-off_BAD6
 ; ===========================================================================
 
 loc_BADA:
