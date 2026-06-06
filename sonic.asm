@@ -3868,9 +3868,16 @@ End_LoadData:
 		;bsr.w	PalLoad_Fade	; load Sonic's palette
 		move.w	#bgm_Ending,d0
 		bsr.w	QueueSound1	; play ending sequence music
-		btst	#bitA,(v_jpadhold1).w ; is button A pressed?
-		beq.s	End_LoadSonic	; if not, branch
-		move.b	#1,(f_debugmode).w ; enable debug mode
+		;!@ GD: Fix Ending debug mode check
+		;(https://forums.sonicretro.org/posts/838455/)
+		;btst	#bitA,(v_jpadhold1).w ; is button A pressed?
+		;beq.s	End_LoadSonic	; if not, branch
+		;move.b	#1,(f_debugmode).w ; enable debug mode
+		tst.b   (f_debugcheat).w 		; has debug cheat been entered?
+        beq.s   End_LoadSonic  			; if not, branch
+        btst    #bitA,(v_jpadhold1).w 	; is A button held?
+        beq.s   End_LoadSonic  			; if not, branch
+        move.b  #1,(f_debugmode).w 		; enable debug mode
 
 End_LoadSonic:
 		move.b	#id_SonicPlayer,(v_player).w ; load Sonic object
@@ -4548,6 +4555,11 @@ Plat_NoXCheck:
 		subq.w	#8,d0
 
 Platform3:
+		;!@ GD: Prevent sticking to platforms in debug mode
+		;https://forums.sonicretro.org/posts/1104256/
+		tst.w    (v_debugspeedtimer).w    ; Is debug active?
+        bne.w    Plat_Exit        	  ; If so, ignore platform collision. (Plat_Exit in Git)
+
 ;		perform y-axis range check
 		move.w	obY(a1),d2
 		move.b	obHeight(a1),d1
@@ -6794,7 +6806,10 @@ Sonic_HitWall:
 		move.w	obX(a0),d3
 
 loc_1504A:
-		subi.w	#$A,d3
+		;!@ GD: 1px wall Fix
+		;https://forums.sonicretro.org/posts/1076338/
+		;subi.w	#$A,d3
+		subi.w	#$B,d3
 		eori.w	#$F,d3
 		lea	(v_anglebuffer).w,a4
 		movea.w	#-$10,a3

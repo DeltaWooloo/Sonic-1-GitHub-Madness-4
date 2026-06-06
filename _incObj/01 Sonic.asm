@@ -1276,25 +1276,49 @@ loc_131AA:
 .plus1:
 		subq.w	#2,(v_lookshift).w	; or subtract 2
 
+;!@ GD: Ground roll speedcap
+; This fixes ITBZ roll tunnels going too fast and zipping through level geometry
+; https://forums.sonicretro.org/posts/1063355/
+;loc_131CC:
+;		move.b	obAngle(a0),d0
+;		jsr	(CalcSine).l
+;		muls.w	obInertia(a0),d0
+;		asr.l	#8,d0
+;		move.w	d0,obVelY(a0)
+;		muls.w	obInertia(a0),d1
+;		asr.l	#8,d1
+;		cmpi.w	#physics_TermVelY,d1
+;		ble.s	loc_131F0
+;		move.w	#physics_TermVelY,d1
+
+;loc_131F0:
+;		cmpi.w	#-physics_TermVelY,d1
+;		bge.s	loc_131FA
+;		move.w	#-physics_TermVelY,d1
+
+;loc_131FA:
+;		move.w	d1,obVelX(a0)
 loc_131CC:
-		move.b	obAngle(a0),d0
-		jsr	(CalcSine).l
-		muls.w	obInertia(a0),d0
-		asr.l	#8,d0
-		move.w	d0,obVelY(a0)
-		muls.w	obInertia(a0),d1
-		asr.l	#8,d1
-		cmpi.w	#physics_TermVelY,d1
-		ble.s	loc_131F0
-		move.w	#physics_TermVelY,d1
-
+		move.b  obAngle(a0),d0
+		jsr     (CalcSine).l
+		move.w  obInertia(a0),d2
+		cmpi.w  #$1000,d2
+		ble.s   loc_131F0
+		move.w  #$1000,d2
+ 
 loc_131F0:
-		cmpi.w	#-physics_TermVelY,d1
-		bge.s	loc_131FA
-		move.w	#-physics_TermVelY,d1
-
+		cmpi.w  #-$1000,d2
+		bge.s   loc_131FA
+		move.w  #-$1000,d2
+ 
 loc_131FA:
-		move.w	d1,obVelX(a0)
+		muls.w  d2,d0
+		asr.l   #8,d0
+		move.w  d0,obVelY(a0)
+		muls.w  d2,d1
+		asr.l   #8,d1
+		move.w  d1,obVelX(a0)
+
 		bra.w	loc_1300C
 ; End of function Sonic_RollSpeed
 
@@ -2196,7 +2220,10 @@ Sonic_HurtStop:
 		move.w	(v_limitbtm2).w,d0
 		move.w	(v_limitbtm1).w,d1
 		cmp.w	d0,d1
-		blo.s	.skip
+		;!@ GD: Death by top boundary fix
+		;https://forums.sonicretro.org/posts/838489/
+		;blo.s	.skip
+		blt.s	.skip		; Signed!
 		move.w	d1,d0
 .skip:
 		addi.w	#224,d0
@@ -2568,7 +2595,10 @@ Tonic_Animate:
 		move.b	obStatus(a0),d2
 		andi.b	#1,d2		; is Sonic mirrored horizontally?
 		bne.s	.flip		; if yes, branch
-		not.b	d0		; reverse angle
+		;!@ GD: Floor Angle bugfix
+		;https://forums.sonicretro.org/posts/1110351/
+		;not.b	d0		; reverse angle
+		neg.b	d0		; reverse angle
 
 .flip:
 		addi.b	#$10,d0		; add $10 to angle

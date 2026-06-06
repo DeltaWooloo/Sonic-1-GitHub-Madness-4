@@ -115,8 +115,10 @@ Buzz_Action:	; Routine 2
 		bne.s	.NotCBZA	; if not, branch
 		subi.w	#8,obY(a1)
 .NotCBZA:
-
-		moveq	#$18-4,d0
+		; !@ GD: Buzz bomber fire fix
+		;https://forums.sonicretro.org/posts/869836/
+		;moveq	#$18,d0		
+		moveq	#$18-4,d0		
 		btst	#0,obStatus(a0)	; is Buzz Bomber facing left?
 		bne.s	.noflip2	; if not, branch
 		neg.w	d0

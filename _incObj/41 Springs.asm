@@ -128,10 +128,19 @@ Spring_BounceLR:
 Spring_Flipped:
 		move.w	#15,locktime(a1)
 		move.w	obVelX(a1),obInertia(a1)
-		bchg	#0,obStatus(a1)
+		;!@ GD: Spring direction fix (https://forums.sonicretro.org/posts/729566/)
+		; KoH spring direction fix
+		cmpi.w  #$0000,obVelX(a1)
+        bmi.s	.faceLeft    				; if Sonic is running left, branch
+		bclr    #0,obStatus(a1)
+		bra.s   .faceCont
+		;bchg   #0,status(a1) 				; Removed this (KingofHarts spring direction fix)
+.faceLeft:
+		bset    #0,obStatus(a1)
+.faceCont: 									; End of fix
 		btst	#2,obStatus(a1)
 		bne.s	loc_DC56
-		move.b	#id_Walk,obAnim(a1)	; use walking animation
+		move.b	#id_Walk,obAnim(a1)			; use walking animation
 
 loc_DC56:
 		bclr	#5,obStatus(a0)
