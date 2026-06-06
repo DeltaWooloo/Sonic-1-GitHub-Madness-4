@@ -1553,7 +1553,20 @@ Sonic_LevelBound:
 .leftside:
 		move.w	#$600,obVelX(a0)
 		bclr	#0,obStatus(a0)
-		bra.s	.sides
+		
+		;!@ Check if CBZ3; if so kill as appropriate
+		cmpi.w	#(id_CBZ<<8)+2,(v_zone).w	;Is zone CBZ3?
+		bne.s	.sides						;if not, branch
+		cmpi.b	#0,(v_dle_routine).w		;Is DLE id 0? (Autoscroll?)
+		bne.s	.sides						;if not, branch
+		btst	#2,obStatus(a0)				;is Sonic rolling?
+		bne.s	.sides						;if so, branch		
+		cmpi.b	#id_Hurt,obAnim(a0)			;is Sonic hurt?
+		beq.s	.sides						;if so, branch		
+		;!@ Set death boundary flag and killSonic
+		move.w	#$0,obVelX(a0)
+		move.b	#1,(f_deathbnd).w
+		bra.w	KillSonic_Humpy
 .rightside:
 		move.w	#-$600,obVelX(a0)
 		bset	#0,obStatus(a0)

@@ -20,6 +20,8 @@ __Release/GHM4.cue
 __Release/Debug/*.*
 __Release/Promo/*.*
 __Release/Retail/*.*
+__Release/*.7z
+__Release/*.zip
 
 #GenesisDoes source tool shortcuts
 Assets/Tools/Art/*.lnk

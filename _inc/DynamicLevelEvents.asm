@@ -812,23 +812,9 @@ off_6E4ABR:
 ; ===========================================================================
 
 DLE_BREW3main:
-		;!@ GD: Spawn invisible blocks at left edge/right of Sonic
-		; Check if block singletons are alive; if not spawn
-		tst.b	(v_vsbmark_arrow).w
-		bne.s	.skipSpawn
-		move.b	#id_Invisibarrier,(v_vsbmark_arrow).w 			; load invis block
-		move.b	#$1F,(v_vsbmark_arrow+obSubtype).w 				; of subtype $1F
-.skipSpawn:		
-		tst.b	(v_vsbmark_text).w
-		bne.s	.skipSpawn2
-		move.b	#id_Invisibarrier,(v_vsbmark_text).w 			; load invis block
-		move.b	#$1F,(v_vsbmark_text+obSubtype).w 				; of subtype $1F
-
-.skipSpawn2:
 		add.w	#1,(v_limitleft2).w
 		cmpi.w	#boss_ghz_x-$200,(v_screenposx).w
 		bcs.s	BrewAutoScroll
-		deleteHUD												; !@ GD: Delete the invis wall crushers
 		addq.b	#2,(v_dle_routine).w		
 		
 BrewAutoScroll:
@@ -847,29 +833,10 @@ BrewAutoScroll:
 		add.w	d0,(v_screenposx).w
 		moveq	#0,d0
 		move.w	(v_screenposx).w,d0		
-		
-		;!@ GD: Continously move invis left block (xpos)
-		move.w	d0,(v_vsbmark_arrow+obX).w
-		addi.w	#$07,(v_vsbmark_arrow+obX).w		
-		
+
 		; Move BG
 		asr.w	#2,d0
 		move.w	d0,(v_bg2screenposx).w
-		
-		;!@ GD: Continously move invis left block (ypos)
-		moveq	#0,d0
-		move.w	(v_screenposy).w,d0
-		addi.w	#$70,d0
-		move.w	d0,(v_vsbmark_arrow+obY).w
-		
-		;!@ GD: Continously move invis right block (x/ypos)
-		moveq	#0,d0
-		move.w	obX(a1),d0
-		addi.w	#$2C,d0
-		move.w	d0,(v_vsbmark_text+obX).w
-		moveq	#0,d0
-		move.w	obY(a1),d0
-		move.w	d0,(v_vsbmark_text+obY).w
 		
 	.skip:
 		jmp	(DLE_BREW3end).l

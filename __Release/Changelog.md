@@ -41,8 +41,11 @@
     - $7A MCZ Boss (Sans)
 
 - **Enhancements/new features:**
-  - Added DLE for CBZ3
-    - Move 2 invisible wall singleton objects for crushing the player
+  - Added DLE for CBZ3 autoscroll death (kill player if ___)
+    - CBZ3 Zone
+	- Level DLE is 0 (autoscroll)
+	- Player is NOT rolling
+	- Player is NOT in hurt animation
   - Made hardcoded zone water checks use a function
   - Changed version sprite on title screen to v1.12
 

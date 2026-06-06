@@ -43,14 +43,7 @@ Invis_Solid:	; Routine 2
 		move.w	d2,d3
 		addq.w	#1,d3
 		move.w	obX(a0),d4
-		
-		;!@ GD: If CBZ3, skip bugfix
-		cmpi.w	#(id_CBZ<<8)+2,(v_zone).w
-		beq.s	.CBZ3
 		bsr.w	SolidObject71
-		bra.s	.chkdel
-.CBZ3:
-		bsr.w	SolidObject
 
 .chkdel:
 		out_of_range.s	.delete

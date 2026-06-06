@@ -12,6 +12,10 @@
 ;		d1: Acceleration
 ; ===========================================================================
 ChaseObject:
+		;!@ GD: Skip this darn-tootin function if in debug mode
+		tst.w	(v_debuguse).w	; is debug mode being used?
+		bne.s	ChaseObject_rts	; if so, branch
+
 		move.w	d0, d2			; move max velocity to d2
 		neg.w	d2				; negate max velocity in d2
 		move.w	d1, d3			
