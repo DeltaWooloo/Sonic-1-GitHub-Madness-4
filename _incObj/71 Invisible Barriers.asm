@@ -8,8 +8,10 @@ Invisibarrier:
 		move.w	Invis_Index(pc,d0.w),d1
 		jmp	Invis_Index(pc,d1.w)
 ; ===========================================================================
-Invis_Index:	dc.w Invis_Main-Invis_Index
+Invis_Index:
+		dc.w Invis_Main-Invis_Index
 		dc.w Invis_Solid-Invis_Index
+		dc.w Invis_Delete-Invis_Index	;!@ GD: New routine to delete object (dynamic walls in CBZ3)
 ; ===========================================================================
 
 Invis_Main:	; Routine 0
@@ -32,7 +34,7 @@ Invis_Solid:	; Routine 2
 		;!@ GD: Invis solid block fix
 		;bsr.w	ChkObjectVisible
 		bsr.w	ChkPartiallyVisible	 ; !@ Allow overlap if partially visible from height. Different from guide
-		bne.s	.chkdel
+		bne.w	.chkdel
 		moveq	#0,d1
 		move.b	obActWid(a0),d1
 		addi.w	#$B,d1
@@ -41,7 +43,14 @@ Invis_Solid:	; Routine 2
 		move.w	d2,d3
 		addq.w	#1,d3
 		move.w	obX(a0),d4
+		
+		;!@ GD: If CBZ3, skip bugfix
+		cmpi.w	#(id_CBZ<<8)+2,(v_zone).w
+		beq.s	.CBZ3
 		bsr.w	SolidObject71
+		bra.s	.chkdel
+.CBZ3:
+		bsr.w	SolidObject
 
 .chkdel:
 		out_of_range.s	.delete
@@ -53,4 +62,5 @@ Invis_Solid:	; Routine 2
 		rts
 
 .delete:
+Invis_Delete:
 		jmp	(DeleteObject).l

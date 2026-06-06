@@ -46,6 +46,7 @@ Map_0643_2_End
 
 Map_0643_3:	spriteHeader
  spritePiece -$10, -4, 4, 1, $139, 0, 0, 0, 0
+ spritePiece $10, -4, 1, 1, $13D, 0, 0, 0, 0
 Map_0643_3_End
 
 	even

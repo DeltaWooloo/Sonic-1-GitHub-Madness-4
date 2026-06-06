@@ -48,7 +48,7 @@ SolidObject71:
 		beq.w	loc_FAD0
 		move.w	d1,d2
 		add.w	d2,d2
-		lea	(v_player).w,a1
+		lea		(v_player).w,a1
 		btst	#1,obStatus(a1)
 		bne.s	.leave
 		move.w	obX(a1),d0
@@ -259,11 +259,7 @@ Solid_TopBtmAir_2:
 
 Solid_Squash:
 		btst	#1,obStatus(a1)	; is Sonic in the air?
-		bne.s	Solid_TopBtmAir	; if yes, branch
-		
-		;!@ GD: If CBZ2, skip bugfix
-		cmpi.w	#(id_CBZ<<8)+2,(v_zone).w
-		beq.s	.skipBugfix		
+		bne.s	Solid_TopBtmAir	; if yes, branch		
 		
 		;!@ Fix squash code:
 		; https://info.sonicretro.org/SCHG_How-to:Improve_Squash_Kill_Logic

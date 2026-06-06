@@ -8,12 +8,13 @@ BossEiza:
 		moveq	#0,d0
 		move.b	obRoutine(a0),d0
 		move.w	BossEiza_Index(pc,d0.w),d1
-		jmp	BossEiza_Index(pc,d1.w)
+		jmp		BossEiza_Index(pc,d1.w)
 ; ===========================================================================
-BossEiza_Index:	dc.w BossEiza_Init-BossEiza_Index
-				dc.w BossEiza_Main-BossEiza_Index
-				;dc.w BossEiza_PlaneInit-BGHZ_Index
-				;dc.w BossEiza_PlaneMain-BossEiza_Index
+BossEiza_Index:
+		dc.w BossEiza_Init-BossEiza_Index
+		dc.w BossEiza_Main-BossEiza_Index
+		;dc.w BossEiza_PlaneInit-BGHZ_Index
+		;dc.w BossEiza_PlaneMain-BossEiza_Index
 ; ===========================================================================
 
 BossEiza_Init:
@@ -33,23 +34,27 @@ BossEiza_Main:	; Routine 2
 		moveq	#0,d0
 		move.b	ob2ndRout(a0),d0
 		move.w	BossEiza_ModeIndex(pc,d0.w),d1
-		jsr	BossEiza_ModeIndex(pc,d1.w)
-		lea	(Ani_Eiza).l,a1
-		jsr	(AnimateSprite).l
+		jsr		BossEiza_ModeIndex(pc,d1.w)
+		lea		(Ani_Eiza).l,a1
+		jsr		(AnimateSprite).l
 		bsr.w	EizaArtLoad
 		move.b	obStatus(a0),d0
 		andi.b	#3,d0
+		;!@ GD: Setup attack callback
+		bset	#6,obStatus(a0)
+		move.l 	#Eiza_callback, obColCallback(a0)
 		andi.b	#$FC,obRender(a0)
 		or.b	d0,obRender(a0)
-		jmp	(DisplaySprite).l
+		jmp		(DisplaySprite).l
 ; ===========================================================================
-BossEiza_ModeIndex:	dc.w BossEiza_FallDownInit-BossEiza_ModeIndex
-					dc.w BossEiza_Nothing-BossEiza_ModeIndex
+BossEiza_ModeIndex:
+		dc.w BossEiza_FallDownInit-BossEiza_ModeIndex
+		dc.w BossEiza_Nothing-BossEiza_ModeIndex
 ; ===========================================================================
 
 BossEiza_FallDownInit:		; this will probably need to be changed to a check floor routine
 		add.w	#1,obY(a0)
-		jsr	(ObjFloorDist).l
+		jsr		(ObjFloorDist).l
 		tst.w	d1
 		bne.s	BossEiza_Nothing
 		move.b	#1,obAnim(a0)
@@ -58,18 +63,24 @@ BossEiza_FallDownInit:		; this will probably need to be changed to a check floor
 BossEiza_Nothing:
 ;		cmp.b	#1,obAnim(a0)
 ;		beq.s	.donotmakeherhittable
-		tst.b	obStatus(a0)
-		bmi.s	loc_1784CEIZA
+		;tst.b	obStatus(a0)
+		;bmi.s	loc_1784CEIZA
+		;bmi.s	Eiza_callback
 		tst.b	obColType(a0)
-		bne.s	locret_1784AEIZA
-		tst.b	objoff_3E(a0)
-		bne.s	BGHZ_ShipFlashEIZA
-		move.b	#$20,objoff_3E(a0)	; set number of times for ship to flash
-		move.w	#5,(f_restart).w	; yahahahahahaha this will be finalized in 1.1
-		move.w	#sfx_HitBoss,d0
-		jsr	(QueueSound2).l	; play boss damage sound
+		beq.s	Eiza_callback
+		bra.s	locret_1784AEIZA
 
-BGHZ_ShipFlashEIZA:
+		;tst.b	obColType(a0)
+		;bne.s	locret_1784AEIZA
+		;tst.b	objoff_3E(a0)
+		;bne.s	BGHZ_ShipFlashEIZA
+Eiza_callback:
+		;move.b	#$20,objoff_3E(a0)	; set number of times for ship to flash
+		move.w	#5,(f_restart).w	; yahahahahahaha this will be finalized in 1.1
+		;move.w	#sfx_HitBoss,d0
+		;jsr	(QueueSound2).l			; play boss damage sound
+
+;BGHZ_ShipFlashEIZA:
 ;		lea	(v_palette+$22).w,a1 ; load 2nd palette, 2nd entry
 ;		moveq	#0,d0		; move 0 (black) to d0
 ;		tst.w	(a1)
@@ -78,43 +89,43 @@ BGHZ_ShipFlashEIZA:
 ;
 ;loc_1783CEIZA:
 ;		move.w	d0,(a1)		; load colour stored in d0
-		subq.b	#1,objoff_3E(a0)
-		bne.s	locret_1784AEIZA
-		move.b	#$F,obColType(a0)
+		;subq.b	#1,objoff_3E(a0)
+		;bne.s	locret_1784AEIZA
+		;move.b	#$F,obColType(a0)
 
 locret_1784AEIZA:
 ;.donotmakeherhittable:
 		rts
 
 loc_1784CEIZA:
-		moveq	#100,d0
-		jsr		(AddPoints).l
-		move.b	#8,ob2ndRout(a0)
-		move.w	#$B3,objoff_3C(a0)
-		rts
-
+		;moveq	#100,d0
+		;jsr		(AddPoints).l
+		;move.b	#8,ob2ndRout(a0)
+		;move.w	#$B3,objoff_3C(a0)
+		;rts
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Run the art
 ; ---------------------------------------------------------------------------
 EizaArtLoad:
-		move.b	obFrame(a0),d0			; get Eiza's current frame
-		cmp.b	EizaFrameUpdate(a0),d0		; has the frame changed?
-		beq.s	.end				; if not, nothing to do
-		move.b	d0,EizaFrameUpdate(a0)		; update cached frame number
-		lea	(DPLC_Eiza).l,a2			; load Eiza DPLC
+		move.b	obFrame(a0),d0					; get Eiza's current frame
+		cmp.b	EizaFrameUpdate(a0),d0			; has the frame changed?
+		beq.s	.end							; if not, nothing to do
+		move.b	d0,EizaFrameUpdate(a0)			; update cached frame number
+		lea		(DPLC_Eiza).l,a2				; load Eiza DPLC
 		move.w	#ArtTile_CBZ_Eiza*tile_size,d4	; starting VRAM tile
-		move.l	#Art_Eiza,d6			; base Eiza art pointer
-		jmp	(LoadDynPLC).l			; load DPLC
+		move.l	#Art_Eiza,d6					; base Eiza art pointer
+		jmp		(LoadDynPLC).l					; load DPLC
 .end:
-		rts					; return
+		rts										; return
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Animation script - Eiza
 ; ---------------------------------------------------------------------------
-Ani_Eiza:	dc.w .stand-Ani_Eiza
+Ani_Eiza:
+			dc.w .stand-Ani_Eiza
 			dc.w .Init-Ani_Eiza
 			dc.w .Walk-Ani_Eiza
 			dc.w .Hurt-Ani_Eiza
