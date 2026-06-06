@@ -13,7 +13,8 @@ PlayerBullet:
 		jmp	PBullet_Index(pc, d1.w)
 
 ; ===========================================================================
-PBullet_Index:	dc.w PBullet_Init-PBullet_Index
+PBullet_Index:
+		dc.w PBullet_Init-PBullet_Index
 		dc.w PBullet_Run-PBullet_Index
 		dc.w PTonicAtt_Init-PBullet_Index
 		dc.w PTonicAtt_Main-PBullet_Index
@@ -71,7 +72,14 @@ PBullet_Callback:
 
 		andi.b	#$C0, d1	; is obColType $40 or higher?
 		beq.s	.DestroyTouched	; if not, branch
+		;!@ GD: Add support for special collision (yadrin, caterkiller, $D7/$E1)
+		cmpi.b	#$C0, d1		; is obColType $C0 or higher?
+		beq.w	.DestroyTouched_special; if yes, branch
 		
+		;!@ GD: Also check SOME  special painful objects
+		cmpi.b	#$9A,obColType(a1)	; Is object bomb?
+		beq.s	.DestroyTouched		; If yes, hit'em
+
 		; GIO:	Roaring Knight specific behavior
 		cmpi.b	#4,obRoutine(a0)	; Is attack one of Maniac Mouse's bullets?
 		bhs.s	.rkend			; If not, branch
@@ -83,9 +91,18 @@ PBullet_Callback:
 .rkend:		
 		andi.b	#$3F,d0
 		cmpi.b	#$6, d0		; is collision type $46 ?
-		beq.s	.OpenMonitor	; if yes, branch
-		
+		beq.s	.OpenMonitor	; if yes, branch		
 		rts
+		
+;!@ Check if special collision is NOT $D7 (bumper) or $E1 (LZ Pole)
+.DestroyTouched_special:
+		moveq	#0,d1
+		move.b	obColType(a1),d1
+		andi.b	#$3F,d1
+		cmpi.b	#$17,d1			; is collision type $D7 ?
+		beq.s	.DoNotOpen		; if yes, branch
+		cmpi.b	#$21,d1			; is collision type $E1 ?
+		beq.s	.DoNotOpen			; if yes, branch
 
 .DestroyTouched:
 		btst	#6,obStatus(a1)
@@ -106,8 +123,8 @@ PBullet_Callback:
 
 .Brk:
 		moveq	#10, d0			; add 100 to score
-		jsr	AddPoints
-    		move.b	#id_ExplosionItem, obID(a1) ; change object to explosion
+		jsr		AddPoints
+    	move.b	#id_ExplosionItem, obID(a1) ; change object to explosion
 		move.b	#0,obRoutine(a1)
 		rts
 
@@ -116,7 +133,7 @@ PBullet_Callback:
 		bne.s	.DoNotOpen
 		move.b	#4,obRoutine(a1)	; break open monitor
 
-.DoNotOpen
+.DoNotOpen:
 		rts
 
 ; ---------------------------------------------------------------------------

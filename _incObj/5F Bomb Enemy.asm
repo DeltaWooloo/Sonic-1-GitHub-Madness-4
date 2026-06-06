@@ -8,14 +8,21 @@ Bomb:
 		move.w	Bom_Index(pc,d0.w),d1
 		jmp	Bom_Index(pc,d1.w)
 ; ===========================================================================
-Bom_Index:	dc.w Bom_Main-Bom_Index
+Bom_Index:
+		dc.w Bom_Main-Bom_Index
 		dc.w Bom_Action-Bom_Index
 		dc.w Bom_Display-Bom_Index
 		dc.w Bom_End-Bom_Index
 
-bom_time = objoff_30		; time of fuse
-bom_origY = objoff_34		; original y-axis position
-bom_parent = objoff_3C		; address of parent object
+bom_child = objoff_26		; !@ GD: address of child fuse object 	$26-29
+bom_time = objoff_30		; time of fuse						 	$30-$33
+bom_origY = objoff_34		; original y-axis position				;$34-35
+bom_destroy = objoff_36		; !@ GD: Self-destruct flag				;$36
+;!@ GD: Relocate because we'll be using the collision callback
+;bom_parent = objoff_3C		; address of parent object
+bom_parent = objoff_38		; address of parent object				;$38-3B
+
+
 ; ===========================================================================
 
 Bom_Main:	; Routine 0
@@ -34,6 +41,12 @@ Bom_Main:	; Routine 0
 loc_11A3C:
 		move.b	#$9A,obColType(a0)
 		bchg	#0,obStatus(a0)
+		
+		;!@ GD: Allow for player attack collision
+		move.b	#$0C,obWidth(a0)
+		move.b	#$0C,obHeight(a0)
+		bset	#6,obStatus(a0)
+		move.l 	#bomb_callback, obColCallback(a0)
 
 Bom_Action:	; Routine 2
 		moveq	#0,d0
@@ -45,7 +58,8 @@ Bom_Action:	; Routine 2
 		jsr		(AnimateSprite).l
 		bra.w	RememberState
 ; ===========================================================================
-.index:		dc.w .walk-.index
+.index:	
+		dc.w .walk-.index
 		dc.w .wait-.index
 		dc.w .explode-.index
 ; ===========================================================================
@@ -84,8 +98,17 @@ Bom_Action:	; Routine 2
 ; ===========================================================================
 
 .explode:
+		;!@ GD: If self-destruct flag set, then skip timer
+		tst.b	bom_destroy(a0)
+		bne.s	.skip
+		
 		subq.w	#1,bom_time(a0)	; subtract 1 from time delay
 		bpl.s	.noexplode	; if time remains, branch
+	.skip:
+		;!@ GD: Self-destruct any children too
+		bsr.w	bomb_callback.explodeChild
+	
+	.skip2:
 		_move.b	#id_ExplosionBomb,obID(a0) ; change bomb into an explosion
 		jsr	(GHM3Explode).l
 		move.b	#0,obRoutine(a0)
@@ -121,6 +144,8 @@ Bom_Action:	; Routine 2
 		move.b	#2,obAnim(a0)	; use activated animation
 		bsr.w	FindNextFreeObj
 		bne.s	.outofrange
+				
+		move.l	a1,bom_child(a0)	;!@ GD: Assign child to parent
 		_move.b	#id_Bomb,obID(a1)	; load fuse object
 		move.w	obX(a0),obX(a1)
 		move.w	obY(a0),obY(a1)
@@ -203,3 +228,24 @@ Bom_End:	; Routine 6
 		bra.w	DisplaySprite
 ; ===========================================================================
 Bom_ShrSpeed:	dc.w -$200, -$300, -$100, -$200, $200, -$300, $100, -$200
+
+bombDestroy macro reg
+	move.b	#1,bom_destroy(reg)
+	move.b	#2,obRoutine(reg)
+	move.b	#4,ob2ndRout(reg)
+    endm
+
+;!@ GD: Allow for player attack collision
+bomb_callback:
+		;!@ Explode enemy
+		bombDestroy	a0
+.explodeChild:
+		;!@ Explode children fuses (if exist)
+		move.l	bom_child(a0),a1
+		beq.s	.end
+		bombDestroy	a1
+	.end:
+		;move.l	a0,a1
+		;lea		(v_player).w,a0
+		;jmp		(React_Enemy.donthurtsonic).l
+		rts

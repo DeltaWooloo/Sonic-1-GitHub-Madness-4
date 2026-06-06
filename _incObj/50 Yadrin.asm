@@ -59,9 +59,14 @@ Yad_Main:	; Routine 0
 		move.b	#4,obRender(a0)
 		move.b	#4,obPriority(a0)
 		move.b	#$10,obActWid(a0)
-		move.b	#$6,obHeight(a0)
-		move.b	#8,obWidth(a0)
+		
+		;!@ GD: attack collision callback
+		move.b	#$08,obWidth(a0)
+		move.b	#$06,obHeight(a0)
 		move.b	#$CC,obColType(a0)
+		bset	#6,obStatus(a0)
+		move.l 	#stdEn_callback, obColCallback(a0)
+		
 		bsr.w	ObjectFall
 		bsr.w	ObjFloorDist
 		tst.w	d1
