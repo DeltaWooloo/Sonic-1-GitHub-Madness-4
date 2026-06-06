@@ -1,5 +1,5 @@
 ; ---------------------------------------------------------------------------
-; Object 7 - DIO -Mildanner- (SBZ1 Boss)
+; Object 7 - DIOdanner- (SBZ1 Boss)
 ; ---------------------------------------------------------------------------
  ; intro - 0x331 (0x6620)
 BossDioMildanner:
@@ -12,40 +12,40 @@ DioCB_hurt:		equ objoff_26		;!@ Attack Callback for dio flag to prevent knockbac
 		jmp	.index(pc,d1.w)
 
 	.index:
-		dc.w BossDioMildanner_SetFadeOut-.index ; 0
-		dc.w BossDioMildanner_DoFadeOut-.index	; 2
-		dc.w BossDioMildanner_SetupBoss-.index	; 4
-		dc.w BossDioMildanner_IntroHopIn-.index	; 6
-		dc.w BossDioMildanner_IntroMain-.index	; 8
-		dc.w BossDioMildanner_AwaitPLCBoss-.index ; $A
-		dc.w BossDioMildanner_BossMain-.index	; $C
+		dc.w BossDiodanner_SetFadeOut-.index ; 0
+		dc.w BossDiodanner_DoFadeOut-.index	; 2
+		dc.w BossDiodanner_SetupBoss-.index	; 4
+		dc.w BossDiodanner_IntroHopIn-.index	; 6
+		dc.w BossDiodanner_IntroMain-.index	; 8
+		dc.w BossDiodanner_AwaitPLCBoss-.index ; $A
+		dc.w BossDiodanner_BossMain-.index	; $C
 	; attack index
-		dc.w BossDioMildanner_BossAttackJump2Side-.index ; $E
-		dc.w BossDioMildanner_BossAttackSmash-.index	; $10
-		dc.w BossDioMildanner_BossAttackJump2Side-.index ; $12
+		dc.w BossDiodanner_BossAttackJump2Side-.index ; $E
+		dc.w BossDiodanner_BossAttackSmash-.index	; $10
+		dc.w BossDiodanner_BossAttackJump2Side-.index ; $12
 	; post jump index
-		dc.w BossDioMildanner_BossAttackRun-.index ; $14
+		dc.w BossDiodanner_BossAttackRun-.index ; $14
 		dc.w 0	; $16
-		dc.w BossDioMildanner_BossAttackHops-.index ; $18
-		dc.w DeadDioMildanner_AwaitPLCDead-.index ; $1A
-		dc.w DeadDioMildanner_Display-.index ; $1C
+		dc.w BossDiodanner_BossAttackHops-.index ; $18
+		dc.w DeadDiodanner_AwaitPLCDead-.index ; $1A
+		dc.w DeadDiodanner_Display-.index ; $1C
 ; ---------------------------------------------------------------------------
 
-BossDioMildanner_SetFadeOut:
+BossDiodanner_SetFadeOut:
 		move.w	#0,(v_pal_dry+$40).w ; bg is black
 		move.w	#$500F,(v_pfade_start).w ; start position = $60; size = $10
 		move.b	#$15,$1A(a0)
 		addq.b	#2,	obRoutine(a0)
-BossDioMildanner_SetFadeOut_rts:
+BossDiodanner_SetFadeOut_rts:
 		rts
 
 ; ---------------------------------------------------------------------------
-BossDioMildanner_DoFadeOut:
+BossDiodanner_DoFadeOut:
 		move.l	a0,-(sp)
 		jsr	FadeOut_ToBlack
 		move.l	(sp)+,a0
 		subq.b	#1,$1A(a0)
-		bne.s	BossDioMildanner_SetFadeOut_rts
+		bne.s	BossDiodanner_SetFadeOut_rts
 
 		addq.b	#2,(v_dle_routine).w ; go to next screen routine
 
@@ -55,7 +55,7 @@ BossDioMildanner_DoFadeOut:
 		jmp	NewPLC		; load SBZ1 diodanner intro patterns
 
 ; ---------------------------------------------------------------------------
-BossDioMildanner_SetupBoss:
+BossDiodanner_SetupBoss:
 ;
 
 		move.w	#$23A0,obX(a0)
@@ -78,7 +78,7 @@ BossDioMildanner_SetupBoss:
 		bset	#6,obStatus(a0)						; !@ GD: GHM4/recognize hitboxes from character weapons		
 		;!@ GD: Attack Callback to set flag and
 		; prevent player from receiving knockback when Dio is hurt
-		move.l 	#BossDioMildanner_Hurt_CB, obColCallback(a0)
+		move.l 	#BossDiodanner_Hurt_CB, obColCallback(a0)
 		
 		; size initially is 20x40
 		move.b	#20,obActWid(a0)
@@ -86,11 +86,11 @@ BossDioMildanner_SetupBoss:
 		move.b	#40/2,obHeight(a0)				
 
 		addq.b	#2,	obRoutine(a0)
-BossDioMildanner_SetupBoss_rts:
+BossDiodanner_SetupBoss_rts:
 		rts
 
 ; ---------------------------------------------------------------------------
-BossDioMildanner_IntroHopIn:
+BossDiodanner_IntroHopIn:
 		jsr (ObjectFall)
 		tst.w	obVelY(a0)
 		bmi.s	.notfinished
@@ -108,7 +108,7 @@ BossDioMildanner_IntroHopIn:
 		jmp	(DisplaySprite).l
 
 ; ---------------------------------------------------------------------------
-BossDioMildanner_IntroMain:
+BossDiodanner_IntroMain:
 		cmpi.b	#1,obAnim(a0)
 		bne.s	.ok
 		subq.w	#1,$30(a0)
@@ -162,9 +162,9 @@ BossDioMildanner_IntroMain:
 		jmp	(DisplaySprite).l
 
 ; ---------------------------------------------------------------------------
-BossDioMildanner_AwaitPLCBoss:
+BossDiodanner_AwaitPLCBoss:
 ;		tst.l	(v_plc_buffer).w
-;		bne.s	BossDioMildanner_Display_0
+;		bne.s	BossDiodanner_Display_0
 		;move.b	#$F,obColType(a0)
 		addq.b	#2,	obRoutine(a0)
 		move.w	#1,$30(a0) ; attack timer
@@ -173,20 +173,20 @@ BossDioMildanner_AwaitPLCBoss:
 		move.b	#$F,obColType(a0)
 
 		move.b	#8,obColProp(a0) ; set number of hits to 8
-BossDioMildanner_Display_0:
+BossDiodanner_Display_0:
 		lea (DioDannerAni_Boss).l,a1
 		jsr	(AnimateSprite).l
 		bsr.w	DioDanner_LoadUncleGFX
 		jmp	(DisplaySprite).l
 
 ; ---------------------------------------------------------------------------
-BossDioMildanner_BossMain:
-		bsr.w	BossDioMildanner_Hurt
+BossDiodanner_BossMain:
+		bsr.w	BossDiodanner_Hurt
 		cmpi.b	#4,obAnim(a0) ; @hurt
-		bge.s	BossDioMildanner_Display_0
+		bge.s	BossDiodanner_Display_0
 
 		tst.b	obColType(a0)
-		beq.s	BossDioMildanner_Display_0
+		beq.s	BossDiodanner_Display_0
 
 		subq.w	#1,$30(a0)
 		bmi.s	.next_attack
@@ -209,16 +209,16 @@ BossDioMildanner_BossMain:
 
 		add.b	d0,d0
 		add.b	d0,obRoutine(a0)
-		;bra.s	BossDioMildanner_Display
+		;bra.s	BossDiodanner_Display
 
-BossDioMildanner_Display:
+BossDiodanner_Display:
 		lea (DioDannerAni_Boss).l,a1
 		jsr	(AnimateSprite).l
 		bsr.w	DioDanner_LoadUncleGFX
 		jmp	(DisplaySprite).l
 
 ; ---------------------------------------------------------------------------
-BossDioMildanner_BossAttackJump2Side: ; Pre attack to jump to a side of the screen
+BossDiodanner_BossAttackJump2Side: ; Pre attack to jump to a side of the screen
 		tst.b ob2ndRout(a0)
 		bne.s	.dojump
 		move.b	#2,obAnim(a0) ; @jump
@@ -238,14 +238,14 @@ BossDioMildanner_BossAttackJump2Side: ; Pre attack to jump to a side of the scre
 		move.w	#$23C0,$34(a0) ; target X pos
 
 		tst.w	d0
-		bpl.s	BossDioMildanner_Display
+		bpl.s	BossDiodanner_Display
 		; go right
 		;!@GD: Attack collision bugfix
 		;move.b	#0,obStatus(a0)
 		bclr	#0,obStatus(a0)
 		move.w	#$2200,$34(a0) ; target X pos
 
-		bra.s	BossDioMildanner_Display
+		bra.s	BossDiodanner_Display
 	.dojump:
 		move.w	obX(a0),d0
 		sub.w	$34(a0),d0
@@ -255,10 +255,10 @@ BossDioMildanner_BossAttackJump2Side: ; Pre attack to jump to a side of the scre
 	.goalreached:
 		jsr (ObjectFall)
 		tst.w	obVelY(a0)
-		bmi.w	BossDioMildanner_Display
+		bmi.w	BossDiodanner_Display
 		; go to y $34C
 		cmpi.w	#$328,obY(a0)
-		blt.w	BossDioMildanner_Display
+		blt.w	BossDiodanner_Display
 
 		move.w	#$328,obY(a0)
 
@@ -266,10 +266,10 @@ BossDioMildanner_BossAttackJump2Side: ; Pre attack to jump to a side of the scre
 		addq.b	#6,obRoutine(a0)
 		move.w	#0,obVelY(a0)
 		move.w	#0,obVelX(a0)
-		bra.w	BossDioMildanner_Display
+		bra.w	BossDiodanner_Display
 
 ; ---------------------------------------------------------------------------
-BossDioMildanner_BossAttackRun:
+BossDiodanner_BossAttackRun:
 		tst.b ob2ndRout(a0)
 		bne.s	.joestarsecrettechnique
 		move.w	obX(a0),d0
@@ -289,7 +289,7 @@ BossDioMildanner_BossAttackRun:
 		move.w	#-$200,$36(a0) ; x accel
 
 		tst.w	d0
-		bpl.w	BossDioMildanner_Display
+		bpl.w	BossDiodanner_Display
 
 		
 		;!@GD: Attack collision bugfix
@@ -298,7 +298,7 @@ BossDioMildanner_BossAttackRun:
 		
 		move.w	#$23C0,$34(a0) ; target X pos
 		move.w	#$200,$36(a0) ; x accel
-		bra.w	BossDioMildanner_Display
+		bra.w	BossDiodanner_Display
 	.joestarsecrettechnique: ; RUN AWAY!!
 		move.w	$36(a0),d1
 		add.w	d1,obVelX(a0)
@@ -312,25 +312,25 @@ BossDioMildanner_BossAttackRun:
 		neg.w	d0
 	.noneg:
 		tst.w	d0
-		bmi.w	BossDioMildanner_Display
+		bmi.w	BossDiodanner_Display
 	; reached goal
 		bchg	#0,obStatus(a0)
 
-BossDioMildanner_ResetToBoss:
+BossDiodanner_ResetToBoss:
 		move.b	#0,ob2ndRout(a0)
 		move.b	#$C,obRoutine(a0)
 		move.w	#60,$30(a0) ; timer
 		move.w	#0,obVelX(a0)
 		move.b	#0,obAnim(a0) ; idle
 		move.b	#$F,obColType(a0)
-		bra.w	BossDioMildanner_Display
+		bra.w	BossDiodanner_Display
 
 ; ---------------------------------------------------------------------------
 
-BossDioMildanner_Hurt_CB:
+BossDiodanner_Hurt_CB:
 		move.b	#1,DioCB_hurt(a0)
 ; ---------------------------------------------------------------------------
-BossDioMildanner_Hurt:
+BossDiodanner_Hurt:
 		cmpi.b	#5,obAnim(a0)
 		beq.w	.ret
 		tst.b	obColType(a0)
@@ -388,7 +388,7 @@ BossDioMildanner_Hurt:
         jmp (PlaySound).l
 
 ; ---------------------------------------------------------------------------
-BossDioMildanner_BossAttackSmash:
+BossDiodanner_BossAttackSmash:
 		tst.b ob2ndRout(a0)
 		bne.s	.jump
 
@@ -410,13 +410,13 @@ BossDioMildanner_BossAttackSmash:
 		sub.w	d0,obX(a0)
 
 		jsr (ObjectFall).l
-		bra.w	BossDioMildanner_Display
+		bra.w	BossDiodanner_Display
 	.fall:
 		move.b	#3,obAnim(a0) ; @fall
 		add.w	#$20,obY(a0)
 		; go to y $34C
 		cmpi.w	#$328,obY(a0)
-		blt.w	BossDioMildanner_Display
+		blt.w	BossDiodanner_Display
 
 		move.w	#$328,obY(a0)
 
@@ -424,10 +424,10 @@ BossDioMildanner_BossAttackSmash:
 		move.b	#sfx_ChainStomp,d0
 		jsr	(PlaySound_Special).l
 
-		bra.w	BossDioMildanner_ResetToBoss
+		bra.w	BossDiodanner_ResetToBoss
 
 ; ---------------------------------------------------------------------------
-BossDioMildanner_BossAttackHops:
+BossDiodanner_BossAttackHops:
 		tst.b ob2ndRout(a0)
 		bne.s	.hoponfortnite
 
@@ -449,7 +449,7 @@ BossDioMildanner_BossAttackHops:
 
 		; go to y $34C
 		cmpi.w	#$328,obY(a0)
-		blt.w	BossDioMildanner_Display
+		blt.w	BossDiodanner_Display
 
 		move.w	#$329,obY(a0)
 		move.w	#-$1000,obVelY(a0)
@@ -458,14 +458,14 @@ BossDioMildanner_BossAttackHops:
 		jsr	(PlaySound_Special).l
 
 		subq.w	#1,$30(a0)
-		beq.w	BossDioMildanner_ResetToBoss
+		beq.w	BossDiodanner_ResetToBoss
 
-		bra.w	BossDioMildanner_Display
+		bra.w	BossDiodanner_Display
 
 ; ---------------------------------------------------------------------------
-DeadDioMildanner_AwaitPLCDead:
+DeadDiodanner_AwaitPLCDead:
 		tst.l	(v_plc_buffer).w
-		bne.w	BossDioMildanner_Display
+		bne.w	BossDiodanner_Display
 
 		move.l	#Map_DioDanner_Dead,obMap(a0)
 		addq.b	#2,(v_dle_routine).w ; go to next screen routine
@@ -485,7 +485,7 @@ DeadDioMildanner_AwaitPLCDead:
 .boss_play:
         jsr (PlaySound).l
 
-DeadDioMildanner_Display:
+DeadDiodanner_Display:
 		lea (DioDannerAni_Dead).l,a1
 		jsr	(AnimateSprite).l
 		;bsr.w	DioDanner_LoadGfx3

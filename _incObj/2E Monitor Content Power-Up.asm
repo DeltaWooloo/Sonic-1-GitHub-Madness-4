@@ -1318,7 +1318,7 @@ Pow_GetErrorMsg:
 		dc.l	.nullreference		;$0B / $2C
 		dc.l	.programmernap		;$0C / $30
 		dc.l	.askdlc				;$0D / $34
-		dc.l	.mildanner			;$0E / $38
+		dc.l	.diodanner			;$0E / $38
 		dc.l	.piracy				;$0F / $3C
 		dc.l	.overheat			;$10 / $40
 		dc.l	.yourlose			;$11 / $44
@@ -1395,8 +1395,8 @@ Pow_GetErrorMsg:
 	RaiseError	"For this powerup monitor, please %<endl>install the Monitor DLC!"
 	rts
 
-.mildanner:
-	RaiseError	"HackROM security breached by %<endl>Mildanner!"
+.diodanner:
+	RaiseError	"HackROM security breached by %<endl>Diodanner!"
 	rts
 
 .piracy:

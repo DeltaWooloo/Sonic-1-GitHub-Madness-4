@@ -385,7 +385,3 @@ Str_ManiacIntro6:
 	dc.b		"SO HE WOULD HAVE TO GO GET PARTS TO",-1
 	dc.b		"FIX IT.",0
 	even
-
-
-	dc.b	"MILDANNER HAS A POOPY BUTT AND SONIC HACKING IS GAY"
-	even

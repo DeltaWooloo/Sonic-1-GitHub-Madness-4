@@ -612,7 +612,7 @@ PLC_FZBoss:	dc.w ((PLC_FZBossend-PLC_FZBoss-2)/6)-1
 		;													 ; Total tiles:			- $233 tiles
 PLC_FZBossend:
 ; ---------------------------------------------------------------------------
-; Pattern load cues - boss BLUESCAPO (mildanner)
+; Pattern load cues - boss BLUESCAPO (diodanner)
 ; ---------------------------------------------------------------------------
 PLC_DioDanner:	dc.w ((PLC_DioDannerend-PLC_DioDanner-2)/6)-1
 		plcm	Nem_DioDanner_Intro, ArtTile_FartDanner	; intro

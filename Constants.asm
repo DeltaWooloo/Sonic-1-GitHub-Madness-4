@@ -1069,7 +1069,7 @@ ArtTile_SS_Zone_4:		equ $797
 ArtTile_SS_Zone_5:		equ $7A0
 ArtTile_SS_Zone_6:		equ $7A9
 
-;MILD danner
+;Diodanner
 ArtTile_FartDanner:		equ $100	; compressed stuff goes here
 ArtTile_Mildfucker:		equ $400	; and this is where the true magic happens
 ;define this bs
