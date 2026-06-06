@@ -4557,8 +4557,8 @@ Plat_NoXCheck:
 Platform3:
 		;!@ GD: Prevent sticking to platforms in debug mode
 		;https://forums.sonicretro.org/posts/1104256/
-		tst.w    (v_debugspeedtimer).w    ; Is debug active?
-        bne.w    Plat_Exit        	  ; If so, ignore platform collision. (Plat_Exit in Git)
+		tst.w	(v_debuguse).w		; Is debug active?
+        bne.w    Plat_Exit			; If so, ignore platform collision. (Plat_Exit in Git)
 
 ;		perform y-axis range check
 		move.w	obY(a1),d2

@@ -31,7 +31,7 @@ Surf_Action:	; Routine 2
 		;!@ GD: Water surface pause bugfix
 		;https://forums.sonicretro.org/posts/995924/
 		btst    #bitStart,(v_jpadpress1).w ; is Start button pressed?
-        bne.s    .even    ; if yes, branch
+		bne.s    .even    ; if yes, branch
 		
 		btst	#0,(v_framebyte).w
 		beq.s	.even		; branch on even frames
