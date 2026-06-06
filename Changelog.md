@@ -1,10 +1,50 @@
 **Github Madness 4**
-**v1.1 Hotpatch release**
+**v1.2 Hotpatch release**
 
 [SSRG Thread](https://sonicresearch.org/community/index.php?threads/sonic-1-github-madness-4.7410/)
 
 
 **Changelog:**
+
+**v1.2 (06/06/2026):**
+- **Critical softlock/crash bugfixes**
+  - Fixed softlock from insta-killing certain bosses from character attacks
+	- CBZ boss (Eiza)
+- **Bugfixes**
+  - Fix circular platform mappings for CBZ eiza boss to standard CBZ platform
+  - DebugList changes  
+    - Added circular platform to CBZ DebugList
+	- Add horiz/vert pinball objects to PPZ DebugList
+    - Fix Windows Zone IE object sprite mapping in DebugList
+	- Remove objects from ARZ DebugList (only basic objects)
+  - Removed PLCs from ARZ
+  - Fixed sprite mappings and pole lengths for obType $45 Sideways stomper (ACZ)
+  - Various Sonic Retro stock Sonic 1 engine bugfixes
+    - Ground roll speedcap (fixes collision issues in ITBZ tunnels)
+	- Bugfix for death by top level boundary
+	- Floor Angle bugfix
+	- Bugfix for water surface sprite xpos when paused
+	- Bugfix for spring direction
+	- Bugfix to prevent obType $5D from pushing playing when transformed into DebugMode
+	- Fixed stray pixel in Sega logo graphics
+	- Added invisible wall to end of Final Zone to prevent jumping into death pit
+	- Bugfix for Ending gamemode debugmode check
+	- Bugfix to preven sticking to platforms while in DebugMode
+  - Fix Buzz Bomber configuration in Nogales Zone
+  - Fix Final Zone pringles can sprite mappings (ypos position to align with level floor)
+  - Bugfix to allow certain enemy types/bosses to be hit from character attacks
+    - $50 Yadrin (Wario/Bart)
+    - $55 Bassaran (ACZ flying enemy)
+    - $5F Bomb (MCZ/PPZ)
+    - $60 Orbinaut (Blaze MCZ)
+    - $75 SFZ Boss (Pig SYZ)
+    - $7A MCZ Boss (Sans)
+
+- **Enhancements/new features:**
+  - Added DLE for CBZ3
+    - Move 2 invisible wall singleton objects for crushing the player
+  - Made hardcoded zone water checks use a function
+  - Changed version sprite on title screen to v1.12
 
 **v1.1 (06/01/2026):**
 
@@ -155,3 +195,6 @@
     - v1.1 Hotpatch credits
 	- Marketing
 	- More special thanks
+	
+**v1.0 (05/20/2026):**
+- **Initial release**
