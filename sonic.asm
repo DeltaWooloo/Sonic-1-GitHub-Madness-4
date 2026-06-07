@@ -3733,9 +3733,14 @@ SignpostArtLoad:
 		beq.w	SignpostArtLoad2.exit		
 		tst.w	(v_debuguse).w	; is debug mode being used?
 		bne.w	SignpostArtLoad2.exit		; if yes, branch
+		
+		;!@ Zone checks
+		cmpi.w	#(id_ACZ<<8)+2,(v_zone).w	; is this ACZ3?
+		beq.w	.run_acz3					; if yes, RUN !@ Bugfix for ACZ3 signpost not loading
+		
 		cmpi.b	#2,(v_act).w	; is act number 02 (act 3)?
 		beq.w	SignpostArtLoad2.exit		; if yes, branch
-		cmpi.w	#(id_ACZ<<8)+3,(v_zone).w	; is this giovanni's test level?
+		cmpi.w	#(id_ACZ<<8)+3,(v_zone).w	; is this MVZ?
 		beq.w	SignpostArtLoad2.exit		; if yes, branch
 		;!@ GD: Skip hardware store, because softlock in message easter egg area
 		cmpi.w	#(id_DVZ<<8)+1,(v_zone).w	; is this DV2?
@@ -3743,7 +3748,15 @@ SignpostArtLoad:
 		;!@ GD: Also skip entirety of Bluestone, because OJ1 is just a capsule
 		cmpi.b	#id_BTZ,(v_zone).w			; is level Bluestone?
 		beq.w	SignpostArtLoad2.exit		; if yes, branch		
+		bra.s	.run2						; branch
+		
+	;!@ Special Check for ACZ3
+	.run_acz3:
+		cmpi.b	#$04,(v_dle_routine).w		; Is DLE >=4? (boss defeated/return)?
+		bhs.s	.run2						; if so, branch
+		bra.s	SignpostArtLoad2.exit		; brnach otherwise
 
+	.run2:
 		move.w	(v_screenposx).w,d0
 		move.w	(v_limitright2).w,d1
 		subi.w	#$100,d1
@@ -3754,8 +3767,8 @@ SignpostArtLoad:
 		cmp.w	(v_limitleft2).w,d1
 		beq.w	SignpostArtLoad2.exit
 		move.w	d1,(v_limitleft2).w ; move left boundary to current screen position
-		;!@ GD: Variant that will forcibly load the artwork (RandomMonitor spawn)
-
+		
+;!@ GD: Variant that will forcibly load the artwork (RandomMonitor spawn)
 SignpostArtLoad2:
 		;!@ GD: If levels with VScroll bug or Dawid watermark
 		;(MCZ, PPZ1/Joint zone), delete the watermarks (bc PLC overwrite)

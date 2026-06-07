@@ -339,8 +339,7 @@ Str_ManiacEllip:
 	even
 
 Str_ManiacIntro1:
-		;------------------------------------;
-
+			;------------------------------------;
 	dc.b	"MANIAC SAT WATCHING FUNNY SHORT CLIP",-1
 	dc.b	"AND COLONOSCOPY TUTORIALS ON HIS CRT",-1
 	dc.b	"HOOKED UP TO A FUCKING ROKU BOX",-1
@@ -348,9 +347,7 @@ Str_ManiacIntro1:
 	even
 
 Str_ManiacIntro2:
-
-		;------------------------------------;
-
+			;------------------------------------;
 	dc.b	" HE SAT AND WATCHED ",-1
 	dc.b	"  Sonic 1: South Island Expedition  ",-1
 	dc.b	" (SHC 2024 Demo) in 1080p at 60FPS  ",-1
@@ -358,11 +355,13 @@ Str_ManiacIntro2:
 	even
 
 Str_ManiacIntro3:
+			;------------------------------------;
 	dc.b	" UNTIL HE SAW",-1
 	dc.b	"THE RADIANT NEXUS SPLASH SCREEN.",0
 	even
 
 Str_ManiacIntro4:
+			;------------------------------------;
 	dc.b	"AND THEN A NERDSLOP APPEARED AND",-1
 	dc.b	"SHOWED HIS CRAZY NERDYPENIS.",-1
 	dc.b	-1
@@ -372,16 +371,20 @@ Str_ManiacIntro4:
 
 Str_ManiacIntro5:
 			;------------------------------------;
-	dc.b		"OH MY PROBLEMATIC. ERM.",-1
-	dc.b	        "  you are the single most unfunny",-1
-	dc.b		"  person to ever stumble onto my",-1
-	dc.b		"   riggedy cathode tube.",0
+	dc.b	"OH MY PROBLEMATIC. ERM.",-1
+	dc.b	"  you are the single most unfunny",-1
+	dc.b	"  person to ever stumble onto my",-1
+	dc.b	"   riggedy cathode tube.",0
 	even
 
 Str_ManiacIntro6:
 			;------------------------------------;
-	dc.b		"HE WENT TO GRAB HIS CHAINSAW, BUT IT",-1
-	dc.b		"WAS ALL FUCKED UP AND GREASY AND SHIT",-1
-	dc.b		"SO HE WOULD HAVE TO GO GET PARTS TO",-1
-	dc.b		"FIX IT.",0
+	dc.b	"HE WENT TO GRAB HIS CHAINSAW, BUT IT",-1
+	dc.b	"WAS ALL FUCKED UP N GREASY AND SHIT",-1
+	dc.b	"SO HE WOULD HAVE TO GO GET PARTS TO",-1
+	dc.b	"FIX IT.",0
+	even
+
+	; Padding?
+	dc.b	"                                                   "
 	even
