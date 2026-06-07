@@ -1,12 +1,12 @@
 **Github Madness 4**
-**v1.2 Hotpatch release**
+**v1.12 Hotpatch release**
 
 [SSRG Thread](https://sonicresearch.org/community/index.php?threads/sonic-1-github-madness-4.7410/)
 
 
 **Changelog:**
 
-**v1.2 (06/06/2026):**
+**v1.12 (06/06/2026):**
 - **Critical softlock/crash bugfixes**
   - Fixed softlock from insta-killing certain bosses from character attacks
 	- CBZ boss (Eiza)
