@@ -10,7 +10,16 @@
 - **Critical softlock/crash bugfixes**
   - Fixed softlock from insta-killing certain bosses from character attacks
 	- CBZ boss (Eiza)
+  - Level edits to prevent softlocks in SFZ
 - **Bugfixes**
+  - Bugfix to allow certain enemy types/bosses to be hit from character attacks
+    - $50 Yadrin (Wario/Bart)
+    - $55 Bassaran (ACZ flying enemy)
+    - $5F Bomb (MCZ/PPZ)
+    - $60 Orbinaut (Blaze MCZ)
+    - $75 SFZ Boss (Pig SYZ)
+    - $7A MCZ Boss (Sans)
+  - Bugfix to allow signpost to load in ACZ3 after boss DLE
   - Fix circular platform mappings for CBZ eiza boss to standard CBZ platform
   - DebugList changes  
     - Added circular platform to CBZ DebugList
@@ -32,13 +41,6 @@
 	- Bugfix to preven sticking to platforms while in DebugMode
   - Fix Buzz Bomber configuration in Nogales Zone
   - Fix Final Zone pringles can sprite mappings (ypos position to align with level floor)
-  - Bugfix to allow certain enemy types/bosses to be hit from character attacks
-    - $50 Yadrin (Wario/Bart)
-    - $55 Bassaran (ACZ flying enemy)
-    - $5F Bomb (MCZ/PPZ)
-    - $60 Orbinaut (Blaze MCZ)
-    - $75 SFZ Boss (Pig SYZ)
-    - $7A MCZ Boss (Sans)
 
 - **Enhancements/new features:**
   - Added DLE for CBZ3 autoscroll death (kill player if ___)
@@ -48,6 +50,7 @@
 	- Player is NOT in hurt animation
   - Made hardcoded zone water checks use a function
   - Changed version sprite on title screen to v1.12
+  - Level edits to add ammo monitors to all levels, other minor edits and fixes
 
 **v1.1 (06/01/2026):**
 
