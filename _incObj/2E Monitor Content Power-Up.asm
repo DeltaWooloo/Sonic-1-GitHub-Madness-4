@@ -163,7 +163,11 @@ Pow_Delete:	; Routine 4
 		rts
 ; ===========================================================================
 Pow_Unk:
+		;!@ GD: Make Unk do nothing
+		rts
 Pow_ChkGoggles:
+		;!@ GD: Make Goggles (ammo monitor) give you ammo. Duh
+		bra.w	Pow_Randomiser.getammo
 		rts
 Pow_GetHurt:
 		move.l	a0,a1
@@ -458,7 +462,9 @@ Pow_Randomiser:
 		tst.b	(v_unlimitedammo).w
 		bne.s	.infinite1
 		lea	(v_player).w,a0		; load the player data
-		move.b	#10,playammo(a0)	; make players ammo count 10
+		;!@ GD: Add 10 ammo, instead of set 10 ammo
+		;move.b	#10,playammo(a0)	; make players ammo count 10
+		addi.b	#10,playammo(a0)	; !@ add 10 ammo
 		or.b	#1,(f_ammocount).w	; update ammo counter
 	.infinite1:
 		move.w	#sfx_B8,d0
