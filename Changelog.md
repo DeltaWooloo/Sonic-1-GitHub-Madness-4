@@ -1,10 +1,14 @@
 **Github Madness 4**
-**v1.12 Hotpatch release**
+**v1.13 Hotpatch release**
 
 [SSRG Thread](https://sonicresearch.org/community/index.php?threads/sonic-1-github-madness-4.7410/)
 
 
 **Changelog:**
+
+**v1.13 (06/07/2026):**
+- **Bugfix**
+  - Make ammo monitor work properly (add 10 ammo if player is Maniac character)
 
 **v1.12 (06/06/2026):**
 - **Critical softlock/crash bugfixes**
