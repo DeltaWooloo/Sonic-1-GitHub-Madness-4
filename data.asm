@@ -1,3 +1,23 @@
+;!@ GD: M2Engage compat bugfix
+;!@ Macro to switch between KOS and NEM compressed 8x8 level tile assets based on M2Engage flag
+
+; Inputs:
+; abl = File label for regular build (Kos compresed)
+; bbl = File label for M2Engage build (Nem compresed)
+; lbl = label for filename (e.g. GHZ etc)
+; cmnt = Comment after binclude line
+tileData:	macro	abl,bbl,lbl,cmnt
+		if M2Engage=0
+abl:	label *
+		binclude	"artkos/8x8 - lbl.kos"	;cmnt
+		else
+bbl:	label *
+		binclude	"artnem/m2engage_lvl_alt/8x8 - lbl.nem"	;cmnt
+		endif
+		even
+		endm
+
+
 Nem_SegaLogo:	binclude	"artnem/Sega Logo (JP1).nem" ; large Sega logo
 		even
 Eni_SegaLogo:	binclude	"tilemaps/Sega Logo (JP1).eni" ; large Sega logo (mappings)
@@ -429,115 +449,98 @@ Nem_Navi:	binclude	"artnem/Animal Netscape.nem"
 ; ---------------------------------------------------------------------------
 Blk16_GHZ:	binclude	"map16/GHZ.eni"
 		even
-Kos_GHZ:	binclude	"artkos/8x8 - GHZ.kos"	; GHZ primary patterns
-		even
+	tileData	Kos_GHZ,Nem_GHZ,GHZ,GHZ primary patterns
 Blk256_GHZ:	binclude	"map256/GHZ.kos"
 		even
 
 Blk16_LZ:	binclude	"map16/LZ.eni"
 		even
-Kos_LZ:		binclude	"artkos/8x8 - LZ.kos"	; LZ primary patterns
-		even
+	tileData	Kos_LZ,Nem_LZ,LZ,LZ primary patterns
 Blk256_LZ:	binclude	"map256/LZ.kos"
 		even
 
 Blk16_MZ:	binclude	"map16/MZ.eni"
 		even
-Kos_MZ:		binclude	"artkos/8x8 - MZ.kos"	; MZ primary patterns
-		even
+	tileData	Kos_MZ,Nem_MZ,MZ,MZ primary patterns
 Blk256_MZ:	binclude	"map256/MZ (JP1).kos"
 		even
 
 Blk16_SLZ:	binclude	"map16/SLZ.eni"
 		even
-Kos_SLZ:	binclude	"artkos/8x8 - SLZ.kos"	; SLZ primary patterns
-		even
+	tileData	Kos_SLZ,Nem_SLZ,SLZ,SLZ primary patterns
 Blk256_SLZ:	binclude	"map256/SLZ.kos"
 		even
 
 Blk16_SYZ:	binclude	"map16/SYZ.eni"
 		even
-Kos_SYZ:	binclude	"artkos/8x8 - SYZ.kos"	; SYZ primary patterns
-		even
+	tileData	Kos_SYZ,Nem_SYZ,SYZ,SYZ primary patterns
 Blk256_SYZ:	binclude	"map256/SYZ.kos"
 		even
 
 Blk16_SBZ:	binclude	"map16/SBZ.eni"
 		even
-Kos_SBZ:	binclude	"artkos/8x8 - SBZ.kos"	; SBZ primary patterns
-		even
+	tileData	Kos_SBZ,Nem_SBZ,SBZ,SBZ primary patterns
 Blk256_SBZ:	binclude	"map256/SBZ (JP1).kos"
 		even
 
 Blk16_BREW:	binclude	"map16/BREW.eni"
 		even
-Kos_BREW:	binclude	"artkos/8x8 - BREW.kos"	; GHZ primary patterns
-		even
+	tileData	Kos_BREW,Nem_BREW,BREW,BREW primary patterns
 Blk256_BREW:	binclude	"map256/BREW.kos"
 		even
 
 Blk16_WIN:	binclude	"map16/WIN.eni"
 		even
-Kos_WIN:	binclude	"artkos/8x8 - WIN.kos"	; WIN primary patterns
-		even
+	tileData	Kos_WIN,Nem_WIN,WIN,WIN primary patterns
 Blk256_WIN:	binclude	"map256/WIN.kos"
 		even
 
 Blk16_Joint:	binclude	"map16/Joint.eni"
 		even
-Kos_Joint:	binclude	"artkos/8x8 - Joint.kos"	; Joint primary patterns
-		even
+	tileData	Kos_Joint,Nem_Joint,Joint,Joint primary patterns
 Blk256_Joint:	binclude	"map256/Joint.kos"
 		even
 Blk16_DVZ:	binclude	"map16/DVZ.eni"
 		even
 Blk16_DVZ3:	binclude	"map16/DVZ3.eni"
 		even
-Kos_DVZ:	binclude	"artkos/8x8 - DVZ.kos"	; DVZ	primary padded. pamperspoop
-		even
-Kos_DVZ3:	binclude	"artkos/8x8 - DVZ3.kos"	; DVZ	primary padded. pamperspoop
-		even
+	tileData	Kos_DVZ,Nem_DVZ,DVZ,DVZ primary padded. pamperspoop
+	tileData	Kos_DVZ3,Nem_DVZ3,DVZ3,DVZ3 primary padded. pamperspoop
 Blk256_DVZ:	binclude	"map256/DVZ.kos"
 		even
 Blk256_DVZ3:	binclude	"map256/DVZ3.kos"
 		even
 Blk16_NGZ:	binclude	"map16/NGZ.eni"
 		even
-Kos_NGZ:	binclude	"artkos/8x8 - NGZ.kos"	; nogales	#r&)*_@@@@@@@@u!#@*)eudq@(ewuiwdq*)dy&*#r&du(!@ido*u&#ft^*rd&(y*)u(rf
-		even
+	tileData	Kos_NGZ,Nem_NGZ,NGZ,Nogales primary patterns
 Blk256_NGZ:	binclude	"map256/NGZ.kos"		
 		even
 Blk16_HSZ:	binclude	"map16/HSZ.eni"
 		even
-Kos_HSZ:	binclude	"artkos/8x8 - HSZ.kos"
-		even
+	tileData	Kos_HSZ,Nem_HSZ,HSZ,HSZ primary patterns
 Blk256_HSZ:	binclude	"map256/HSZ.kos"		
 		even
 Blk16_BSZ:	binclude	"map16/BSZ.bin";sTOP
 		even
-Kos_BSZ:	binclude	"artkos/8x8 - BSZ.kos"
-		even
+	tileData	Kos_BSZ,Nem_BSZ,BSZ,BSZ primary patterns
 Blk256_BSZ:	binclude	"map256/BSZ.bin"		
 		even
 
 Blk16_BTZ:	binclude	"map16/BTZ.eni";sTOP
 		even
-Kos_BTZ:	binclude	"artkos/8x8 - BTZ.kos"
-		even
+	tileData	Kos_BTZ,Nem_BTZ,BTZ,BTZ primary patterns
 Blk256_BTZ:	binclude	"map256/BTZ.kos"		
 		even
 
 Blk16_ARZ:	binclude	"map16/ARZ.eni"
 		even
-Kos_ARZ:	binclude	"artkos/8x8 - ARZ.kos"	; LZ primary patterns
-		even
+	tileData	Kos_ARZ,Nem_ARZ,ARZ,ARZ/LZ primary patterns
 Blk256_ARZ:	binclude	"map256/ARZ.kos"
 		even
 		
 Blk16_MVZ:	binclude	"map16/MVZ.eni"
 		even
-Kos_MVZ:		binclude	"artkos/8x8 - MVZ.kos"	; MZ primary patterns
-		even
+	tileData	Kos_MVZ,Nem_MVZ,MVZ,MVZ primary patterns
 Blk256_MVZ:	binclude	"map256/MVZ (JP1).kos"
 		even
 ; ---------------------------------------------------------------------------

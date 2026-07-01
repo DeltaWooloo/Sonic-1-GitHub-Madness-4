@@ -31,6 +31,9 @@ CheatsOn = 0
 
 MSUEnabled = 0
 
+M2Engage = 0		;!@ GD: If set, then apply compatibility bugfixes and changes to make builds
+					;work properly on stock Sega Genesis 1/2 Mini emulator (M2Engage)
+
 FixBugs = 1
 ;	| If 1, enables various bugfixes across the game and sound driver
 ;	| See also FixMusicAndSFXDataBugs
@@ -4401,7 +4404,19 @@ LoadZoneTiles:
 		move.b	v_act.w,d0
 		lsl.w	#5,d0
 		lea	(a2,d0.w),a2
-		move.l	(a2)+,d0
+		
+		;!@ GD: M2Engage compat bugfixes
+		;If M2Engage build, then greatly simplify 8x8 art tile loading as just a simple NemDec
+		;This fixes bugs with Kosinski Ultra-DMA-Queue decompression not working in m2engage
+ if M2Engage=1
+		disable_ints
+		locVRAM	ArtTile_Level
+		movea.l	(a2),a0
+		;lea		(Nem_GHZ).l,a0 ; load Sega logo patterns
+		jsr		(NemDec).l
+		enable_ints
+ else
+		move.l	(a2)+,d0		
 		andi.l	#$FFFFFF,d0 ; 8x8 tile pointer
 		movea.l	d0,a0
 		lea	($FF0000).l,a1
@@ -4412,8 +4427,8 @@ LoadZoneTiles:
 		lsr.w	#1,d3
 		rol.w	#4,d7
 		andi.w	#$F,d7
-
-.loop:		move.w	d7,d2
+.loop:
+		move.w	d7,d2
 		lsl.w	#7,d2
 		lsl.w	#5,d2
 		move.l	#$FFFFFF,d1
@@ -4426,6 +4441,7 @@ LoadZoneTiles:
 		move.w	(sp)+,d7
 		move.w	#$800,d3
 		dbf		d7,.loop
+ endif 
 		rts
 ; End of function LoadZoneTiles
 

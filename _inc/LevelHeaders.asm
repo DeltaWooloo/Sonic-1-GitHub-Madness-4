@@ -14,8 +14,11 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 		dc.l lvllay
 		dc.l bglay
 		endm
+		
+;!@ GD: M2Engage compat bugfix
+;!@ Toggle between Kos-compressed and Nem-compressed 8x8 level tile graphics depending on M2Engage flag
 
-
+ if M2Engage=0
 	lhead	plcid_GHZ,Kos_GHZ,plcid_GHZ2,Blk16_GHZ,Blk256_GHZ,bgm_MWaterS,palid_GHZ,Col_GHZ,ObjPos_GHZ1,Level_GHZ1,Level_GHZbg
 	lhead	plcid_GHZ,Kos_GHZ,plcid_GHZ2,Blk16_GHZ,Blk256_GHZ,bgm_OrangeSong,palid_GHZ,Col_GHZ,ObjPos_GHZ2,Level_GHZ2,Level_GHZbg
 	lhead	plcid_GHZ,Kos_GHZ,plcid_GHZ2,Blk16_GHZ,Blk256_GHZ,bgm_GreenHills,palid_GHZ,Col_GHZ,ObjPos_GHZ3,Level_GHZ3,Level_GHZbg
@@ -91,3 +94,80 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal,col1,objlay,lvllay,bg
 	lhead	plcid_ARZ,Kos_ARZ,plcid_ARZ2,Blk16_ARZ,Blk256_ARZ,bgm_Dungeon3,palid_ARZ,Col_ARZ,ObjPos_ARZ3,Level_ARZ3,Level_ARZbg
 	lhead	plcid_ARZ,Kos_ARZ,plcid_ARZ2,Blk16_ARZ,Blk256_ARZ,bgm_Dungeon3,palid_ARZ,Col_ARZ,ObjPos_ARZ1,Level_ARZ1,Level_ARZbg
 	;zonewarning	LevelHeaders,32*4
+ else
+	lhead	plcid_GHZ,Nem_GHZ,plcid_GHZ2,Blk16_GHZ,Blk256_GHZ,bgm_MWaterS,palid_GHZ,Col_GHZ,ObjPos_GHZ1,Level_GHZ1,Level_GHZbg
+	lhead	plcid_GHZ,Nem_GHZ,plcid_GHZ2,Blk16_GHZ,Blk256_GHZ,bgm_OrangeSong,palid_GHZ,Col_GHZ,ObjPos_GHZ2,Level_GHZ2,Level_GHZbg
+	lhead	plcid_GHZ,Nem_GHZ,plcid_GHZ2,Blk16_GHZ,Blk256_GHZ,bgm_GreenHills,palid_GHZ,Col_GHZ,ObjPos_GHZ3,Level_GHZ3,Level_GHZbg
+	lhead	plcid_GHZ,Nem_GHZ,plcid_GHZ2,Blk16_GHZ,Blk256_GHZ,bgm_BeforeBoss,palid_GHZ,Col_GHZ,ObjPos_Null,Level_GHZ1,Level_GHZbg
+
+	lhead	plcid_LZ,Nem_LZ,plcid_LZ2,Blk16_LZ,Blk256_LZ,bgm_WariosCastle,palid_LZ,Col_LZ,ObjPos_LZ1, Level_LZ1,Level_LZbg
+	lhead	plcid_LZ,Nem_LZ,plcid_LZ2,Blk16_LZ,Blk256_LZ,bgm_BeforeBoss,palid_LZ,Col_LZ,ObjPos_LZ2, Level_LZ2,Level_LZbg
+	lhead	plcid_LZ,Nem_LZ,plcid_LZ2,Blk16_LZ,Blk256_LZ,bgm_WarioLand1Boss,palid_LZ,Col_LZ,ObjPos_LZ3, Level_LZ3,Level_LZbg
+	lhead	plcid_LZ,Nem_LZ,plcid_LZ2,Blk16_LZ,Blk256_LZ,bgm_REMansion,palid_LZ,Col_LZ,ObjPos_Null,Level_LZ1,Level_LZbg
+
+	lhead	plcid_MZ,Nem_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_LosTontos,palid_MZ,Col_MZ,ObjPos_MZ1, Level_MZ1,Level_MZ1bg
+	lhead	plcid_MZ,Nem_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_Area5,palid_MZ,Col_MZ,ObjPos_MZ2, Level_MZ2,Level_MZ2bg
+	lhead	plcid_MZ,Nem_MZ,plcid_MZ2,Blk16_MZ,Blk256_MZ,bgm_Easton,palid_MZ,Col_MZ,ObjPos_MZ3, Level_MZ3,Level_MZ3bg
+	lhead	plcid_MZ,Nem_MVZ,plcid_MZ2,Blk16_MVZ,Blk256_MVZ,bgm_MVZ,palid_MVZ,Col_MVZ,ObjPos_MZ4,Level_MZ4,Level_MZ4bg;MUSH VALLERZ
+
+	lhead	plcid_SLZ,Nem_SLZ,plcid_SLZ2,Blk16_SLZ,Blk256_SLZ,bgm_Minecraft,palid_SLZ,Col_SLZ,ObjPos_SLZ1,Level_SLZ1,Level_SLZbg
+	lhead	plcid_SLZ,Nem_SLZ,plcid_SLZ2,Blk16_SLZ,Blk256_SLZ,bgm_Doom,palid_SLZ,Col_SLZ,ObjPos_SLZ2,Level_SLZ2,Level_SLZbg
+	lhead	plcid_SLZ,Nem_SLZ,plcid_SLZ2,Blk16_SLZ,Blk256_SLZ,bgm_BadEmerald,palid_SLZ,Col_SLZ,ObjPos_SLZ3,Level_SLZ3,Level_SLZbg
+	lhead	plcid_SLZ,Nem_SLZ,plcid_SLZ2,Blk16_SLZ,Blk256_SLZ,bgm_BeforeBoss,palid_SLZ,Col_SLZ,ObjPos_Null,Level_SLZ1,Level_SLZbg
+
+	lhead	plcid_SYZ,Nem_SYZ,plcid_SYZ2,Blk16_SYZ,Blk256_SYZ,bgm_TreasureCaves,palid_SYZ,Col_SYZ,ObjPos_SYZ1,Level_SYZ1,Level_SYZbg
+	lhead	plcid_SYZ,Nem_SYZ,plcid_SYZ2,Blk16_SYZ,Blk256_SYZ,bgm_Danstar,palid_SYZ,Col_SYZ,ObjPos_SYZ2,Level_SYZ2,Level_SYZbg
+	lhead	plcid_SYZ,Nem_SYZ,plcid_SYZ2,Blk16_SYZ,Blk256_SYZ,bgm_GCV2005,palid_SYZ,Col_SYZ,ObjPos_SYZ3,Level_SYZ3,Level_SYZbg
+	lhead	plcid_SYZ,Nem_SYZ,plcid_SYZ2,Blk16_SYZ,Blk256_SYZ,bgm_BeforeBoss,palid_SYZ,Col_SYZ,ObjPos_Null,Level_SYZ1,Level_SYZbg
+
+	lhead	plcid_SBZ,Nem_SBZ,plcid_SBZ2,Blk16_SBZ,Blk256_SBZ,bgm_fightMID,palid_SBZ1,Col_SBZ,ObjPos_SBZ1,Level_SBZ1,Level_SBZ1bg
+	lhead	plcid_SBZ,Nem_SBZ,plcid_SBZ2,Blk16_SBZ,Blk256_SBZ,bgm_Cheetah,palid_SBZ2,Col_SBZ,ObjPos_SBZ2,Level_SBZ2,Level_SBZ2bg
+	lhead	plcid_FZBoss,Nem_SBZ,plcid_FZBoss,Blk16_SBZ,Blk256_SBZ,bgm_Final,palid_SBZ2,Col_SBZ,ObjPos_FZ,Level_SBZ2,Level_SBZ2bg		; FZ: Special case; keep as is
+	lhead	plcid_SBZ,Nem_SBZ,plcid_SBZ2,Blk16_SBZ,Blk256_SBZ,bgm_Final,palid_SBZ1,Col_SBZ,ObjPos_Null,Level_SBZ1,Level_SBZ1bg		; Toss out SBZ3/LZ4 crap
+
+	lhead	plcid_ENDZ,Nem_GHZ,plcid_ENDZ2,Blk16_GHZ,Blk256_GHZ,bgm_Final,palid_Ending,Col_GHZ,ObjPos_End,Level_End,Level_GHZbg
+	lhead	plcid_ENDZ,Nem_GHZ,plcid_ENDZ2,Blk16_GHZ,Blk256_GHZ,bgm_Final,palid_Ending,Col_GHZ,ObjPos_End,Level_End,Level_GHZbg
+	lhead	plcid_ENDZ,Nem_GHZ,plcid_ENDZ2,Blk16_GHZ,Blk256_GHZ,bgm_Final,palid_Ending,Col_GHZ,ObjPos_End,Level_End,Level_GHZbg
+	lhead	plcid_ENDZ,Nem_GHZ,plcid_ENDZ2,Blk16_GHZ,Blk256_GHZ,bgm_Final,palid_Ending,Col_GHZ,ObjPos_End,Level_End,Level_GHZbg
+
+	lhead	plcid_BREW,Nem_BREW,plcid_BREW2,Blk16_BREW,Blk256_BREW,bgm_ColdBrew,palid_BREW,Col_BREW,ObjPos_BREW1,Level_BREW1,Level_BREWbg
+	lhead	plcid_BREW,Nem_BREW,plcid_BREW2,Blk16_BREW,Blk256_BREW,bgm_ValSDST1,palid_BREW,Col_BREW,ObjPos_BREW2,Level_BREW2,Level_BREWbg
+	lhead	plcid_BREW,Nem_BREW,plcid_BREW2,Blk16_BREW,Blk256_BREW,bgm_BadEmerald,palid_BREW,Col_BREW,ObjPos_BREW3,Level_BREW3,Level_BREWbg
+	lhead	plcid_BREW,Nem_BREW,plcid_BREW3,Blk16_BREW,Blk256_BREW,$00,palid_BREW,Col_BREW,ObjPos_BREW4,Level_BREW4,Level_BREWbg ;- intended to be silent
+
+	lhead	plcid_WIN,Nem_WIN,plcid_WIN2,Blk16_WIN,Blk256_WIN,bgm_UNOwenWasHer,palid_WIN,Col_WIN,ObjPos_WIN1,Level_WIN1,Level_WINbg
+	lhead	plcid_WIN,Nem_WIN,plcid_WIN2,Blk16_WIN,Blk256_WIN,bgm_Passport,palid_WIN,Col_WIN,ObjPos_WIN2,Level_WIN2,Level_WINbg
+	lhead	plcid_WIN,Nem_WIN,plcid_WIN2,Blk16_WIN,Blk256_WIN,bgm_VirusAlert,palid_WIN,Col_WIN,ObjPos_WIN3,Level_WIN3,Level_WINbg
+	lhead	plcid_WIN,Nem_WIN,plcid_WIN2,Blk16_WIN,Blk256_WIN,bgm_BeforeBoss,palid_WIN,Col_WIN,ObjPos_WIN1,Level_WIN1,Level_WINbg
+
+	lhead	plcid_Joint,Nem_Joint,plcid_Joint2,Blk16_Joint,Blk256_Joint,bgm_Title,palid_Joint,Col_Joint,ObjPos_Joint1,Level_Joint1,Level_Jointbg
+	lhead	plcid_Joint,Nem_Joint,plcid_Joint2,Blk16_Joint,Blk256_Joint,bgm_Title,palid_Joint,Col_Joint,ObjPos_Joint2,Level_Joint2,Level_Jointbg
+	lhead	plcid_Joint,Nem_Joint,plcid_Joint2,Blk16_Joint,Blk256_Joint,bgm_Title,palid_Joint,Col_Joint,ObjPos_Joint3,Level_Joint3,Level_Jointbg
+	lhead	plcid_Joint,Nem_Joint,plcid_Joint2,Blk16_Joint,Blk256_Joint,bgm_Title,palid_Joint,Col_Joint,ObjPos_Joint1,Level_Joint1,Level_Jointbg
+
+	lhead	plcid_DVZ,Nem_DVZ,plcid_DVZ2,Blk16_DVZ,Blk256_DVZ,bgm_DoleDetective,palid_DVZ,Col_DVZ,ObjPos_DVZ1,Level_DVZ1,Level_DVZbg
+	lhead	plcid_DVZ,Nem_HSZ,plcid_DVZ2,Blk16_HSZ,Blk256_HSZ,bgm_HardwareStore,palid_HARDWARE,Col_HSZ,ObjPos_HSZ,Level_HSZ,Level_HSZbg
+	lhead	plcid_DVZ,Nem_DVZ3,plcid_DVZ2,Blk16_DVZ3,Blk256_DVZ3,bgm_BeforeBoss,palid_DVZ,Col_DVZ3,ObjPos_DVZ3,Level_DVZ3,Level_stub
+	lhead	plcid_DVZ,Nem_DVZ,plcid_DVZ2,Blk16_DVZ,Blk256_DVZ3,0,palid_Black,Col_DVZ,ObjPos_DVZ4,Level_DVZ4,Level_DVZbg4
+
+	lhead	plcid_NGZ,Nem_NGZ,plcid_NGZ2,Blk16_NGZ,Blk256_NGZ,bgm_GHZ,palid_NGZ,Col_NGZ,ObjPos_NGZ1,Level_NGZ1,Level_NGZbg
+	lhead	plcid_NGZ,Nem_NGZ,plcid_NGZ2,Blk16_NGZ,Blk256_NGZ,bgm_GHZ,palid_NGZ,Col_NGZ,ObjPos_NGZ2,Level_NGZ2,Level_NGZbg
+	lhead	plcid_NGZ,Nem_NGZ,plcid_NGZ2,Blk16_NGZ,Blk256_NGZ,bgm_GHZ,palid_NGZ,Col_NGZ,ObjPos_NGZ3,Level_NGZ3,Level_NGZbg
+	lhead	plcid_NGZ,Nem_NGZ,plcid_NGZ2,Blk16_NGZ,Blk256_NGZ,bgm_GHZ,palid_NGZ,Col_NGZ,ObjPos_NGZ1,Level_NGZ1,Level_NGZbg
+	
+	lhead	plcid_BSZ,Nem_BSZ,plcid_BSZ2,Blk16_BSZ,Blk256_BSZ,bgm_TF2,palid_BSZ,Col_BSZ,ObjPos_BSZ1,Level_BSZ1,Level_BSZbg
+	lhead	plcid_BSZ,Nem_BSZ,plcid_BSZ2,Blk16_BSZ,Blk256_BSZ,bgm_Blue,palid_BSZ,Col_BSZ,ObjPos_BSZ2,Level_BSZ2,Level_BSZbg
+	lhead	plcid_BSZ,Nem_BSZ,plcid_BSZ2,Blk16_BSZ,Blk256_BSZ,0,palid_BSZ,Col_BSZ,ObjPos_BSZ3,Level_BSZ3,Level_BSZbg
+	lhead	plcid_BSZ,Nem_BSZ,plcid_BSZ2,Blk16_BSZ,Blk256_BSZ,bgm_BeforeBoss,palid_BSZ,Col_BSZ,ObjPos_BSZ1,Level_BSZ1,Level_BSZbg
+
+	lhead	plcid_BTZ,Nem_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_BeforeBoss,palid_BTZ,Col_BTZ,ObjPos_BTZ1,Level_BTZ1,Level_BTZbg
+	lhead	plcid_BTZ,Nem_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_BeforeBoss,palid_BTZ,Col_BTZ,ObjPos_BTZ2,Level_BTZ2,Level_BTZbg
+	lhead	plcid_BTZ,Nem_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_BeforeBoss,palid_BTZ,Col_BTZ,ObjPos_BTZ3,Level_BTZ3,Level_BTZbg
+	lhead	plcid_BTZ,Nem_BTZ,plcid_BTZ2,Blk16_BTZ,Blk256_BTZ,bgm_BeforeBoss,palid_BTZ,Col_BTZ,ObjPos_BTZ1,Level_BTZ1,Level_BTZbg
+
+	lhead	plcid_ARZ,Nem_ARZ,plcid_ARZ2,Blk16_ARZ,Blk256_ARZ,bgm_Dungeon3,palid_ARZ,Col_ARZ,ObjPos_ARZ1,Level_ARZ1,Level_ARZbg
+	lhead	plcid_ARZ,Nem_ARZ,plcid_ARZ2,Blk16_ARZ,Blk256_ARZ,bgm_Dungeon3,palid_ARZ,Col_ARZ,ObjPos_ARZ2,Level_ARZ2,Level_ARZbg
+	lhead	plcid_ARZ,Nem_ARZ,plcid_ARZ2,Blk16_ARZ,Blk256_ARZ,bgm_Dungeon3,palid_ARZ,Col_ARZ,ObjPos_ARZ3,Level_ARZ3,Level_ARZbg
+	lhead	plcid_ARZ,Nem_ARZ,plcid_ARZ2,Blk16_ARZ,Blk256_ARZ,bgm_Dungeon3,palid_ARZ,Col_ARZ,ObjPos_ARZ1,Level_ARZ1,Level_ARZbg
+	;zonewarning	LevelHeaders,32*4
+ endif
