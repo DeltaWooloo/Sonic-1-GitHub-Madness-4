@@ -165,7 +165,8 @@ RomEndLoc:	dc.l EndOfRom-1		; End address of ROM
 		dc.b "HEY JIMMY, GIMME A ROM HEADER AREA FOR NOTHIN'.     " ; Notes (unused, anything can be put in this space, but it has to be 52 bytes.)
 		dc.b "JUE             " ; Region (Country code)
 EndOfHeader:
-
+		binclude "misc/rom manual.txt"
+		even
 ; ===========================================================================
 ; Crash/Freeze the 68000. Unlike Sonic 2, Sonic 1 uses the 68000 for playing music, so it stops too
 

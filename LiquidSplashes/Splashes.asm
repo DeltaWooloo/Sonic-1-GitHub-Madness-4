@@ -207,7 +207,7 @@ splash_turd macro routine
 	splash_liquid	GM_DaxKatter
 	splash_liquid	GiovanniSplash	
 ;	splash_liquid	RobiWanKenobi_Splash
-	splash_liquid	Malachi_Splash
+;	splash_liquid	Malachi_Splash
 ;	splash_liquid	TeamOverload_Splash
 	splash_liquid	GM_TheSunsetJester
 	splash_liquid	GM_TGSplash
@@ -252,7 +252,7 @@ splash_turd macro routine
 	include "_gamemode/RetroBlast/RetroBlast.asm"
 	include "LiquidSplashes/EagleSoft/EagleSoft.asm"
 	include "_gamemode/DaxKatter Splash/DaxKatter Splash.asm"
-	include "_gamemode/vmss/_runcode.asm"
+;	include "_gamemode/vmss/_runcode.asm"
 ;	include "_gamemode/Team Overload/main.asm"
 	include "LiquidSplashes/2kki/2kki.asm"
 	include "eurosega/eurosega.asm"
