@@ -76,9 +76,8 @@ PBullet_Callback:
 		cmpi.b	#$C0, d1		; is obColType $C0 or higher?
 		beq.w	.DestroyTouched_special; if yes, branch
 		
-		;!@ GD: Also check SOME  special painful objects
-		cmpi.b	#$9A,obColType(a1)	; Is object bomb?
-		beq.s	.DestroyTouched		; If yes, hit'em
+		;!@ GD: Special check for colType $9A (bomb/FZ plasma balls)
+		bsr.s	.check9A
 
 		; GIO:	Roaring Knight specific behavior
 		cmpi.b	#4,obRoutine(a0)	; Is attack one of Maniac Mouse's bullets?
@@ -92,6 +91,19 @@ PBullet_Callback:
 		andi.b	#$3F,d0
 		cmpi.b	#$6, d0		; is collision type $46 ?
 		beq.s	.OpenMonitor	; if yes, branch		
+		rts
+		
+.check9A:
+		;!@ GD: Also check SOME  special painful objects
+		cmpi.b	#$9A,obColType(a1)	; Is colType $9A?
+		bne.s	.skip				; If not, branch
+		
+		;!@ GD: Bugfix, Skip check for Plasma balls to prevent destruction by bullets
+		cmpi.b	#id_BossPlasma,obID(a1)
+		beq.s	.skip
+		bra.s	.DestroyTouched		; If anything else (bomb), hit'em
+		
+	.skip:
 		rts
 		
 ;!@ Check if special collision is NOT $D7 (bumper) or $E1 (LZ Pole)
