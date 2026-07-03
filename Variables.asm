@@ -281,7 +281,20 @@ v_opl_screen:		ds.w	1		; ObjPosLoad - screen variable
 v_opl_data:		ds.b	$10		; ObjPosLoad - data buffer
 v_ssangle:		ds.w	1		; Special Stage angle
 v_ssrotate:		ds.w	1		; Special Stage rotation speed
-			ds.b	$C		; unused
+
+;!@ GD: DMA flags in M2Engage build for the dgfx buffers (player attack, boss, shield)
+ if M2Engage=0
+					ds.b	$C		; unused
+ else
+f_sonAtkframechg:	ds.b	1		; flag set to update attack's sprite frame
+f_dplcFramechg:		ds.b	1		; flag set to update dplc's sprite frame
+f_shldFramechg:		ds.b	1		; flag set to update shield's sprite frame
+					ds.b	1		; unused (alignment)
+v_dplcAddr:			ds.l	1		; dynamic DPLC buffer VRAM destination addr
+v_dplcTileCnt:		ds.w	1		; Tile count in DPLC buffer
+					ds.b	$2		; unused
+ endif
+					
 v_btnpushtime1:		ds.w	1		; button push duration - in level
 v_btnpushtime2:		ds.w	1		; button push duration - in demo
 v_palchgspeed:		ds.w	1		; palette fade/transition speed (0 is fastest)
@@ -342,10 +355,17 @@ v_d_anim_done:		ds.w	1
 ;			ds.w	1
 f_switch:		ds.b	$10		; flags set when Sonic stands on a switch
 v_scroll_block_1_size:	ds.w	1
-v_scroll_block_2_size:	ds.w	1		; unused
-v_scroll_block_3_size:	ds.w	1		; unused
-v_scroll_block_4_size:	ds.w	1		; unused
-			ds.b	8		; unused
+v_scroll_block_2_size:	ds.w	1	; unused
+v_scroll_block_3_size:	ds.w	1	; unused
+v_scroll_block_4_size:	ds.w	1	; unused
+			;!@ GD: M2Engage compat
+			;Enable ROM chunks if M2Engage build
+			if M2Engage=0
+			ds.b	8				; unused
+			else
+v_rom_blocks:			ds.l	1	; !@ GD: pointer for 16x16 blocks in ROM
+v_rom_chunks:			ds.l	1	; !@ GD: pointer for 256x256 chunks in ROM
+			endif
 v_levelvariables_end:
 
 v_spritetablebuffer:	ds.b	$280		; sprite table (last $80 bytes are overwritten by v_palette_water_fading)
@@ -570,3 +590,21 @@ v_regbuffer:	ds.b	$40	; stores registers d0-a7 during an error event
 v_spbuffer:	ds.l	1	; stores most recent sp address
 v_errortype:	ds.b	1	; error type
 	dephase
+	
+; !@ GD: Add 4 DPLC RAM buffer areas if M2Engage flag
+; Shove them into the RAM occupied by v_16x16 and v_256x256 (RAM space freed via ROM Blocks and ROM Chunks)
+ if M2Engage=1 
+ 	phase (v_ram_start)
+v_sgfx_buffer:		ds.b	sgfx_size	; Sonic gfx
+v_sgfx_buffer_end:
+
+v_sagfx_buffer:		ds.b	sagfx_size	; Attack gfx
+v_sagfx_buffer_end:
+
+v_dgfx_buffer:		ds.b	dplc_size	; DPLC graphics (usually bosses)
+v_dgfx_buffer_end:
+
+v_hgfx_buffer:		ds.b	shld_size	; Shield graphics
+v_hgfx_buffer_end:
+	dephase
+ endif

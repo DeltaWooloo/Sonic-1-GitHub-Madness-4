@@ -27,6 +27,105 @@ writeVRAM:	macro source,destination
 		move.w	#$80+(((destination)&$C000)>>14),(v_vdp_buffer2).w
 		move.w	(v_vdp_buffer2).w,(a5)
 		endm
+		
+; ---------------------------------------------------------------------------
+; !@ GD:
+; WriteVRAM but with variable destination as a function
+; DMA copy data from 68K (RAM buffer) to the VRAM
+;
+; inputs: d0=VRAM destination
+; 		  v_dplcTileCnt=size of gfx buffer (tileCnt*tile_size)
+; ---------------------------------------------------------------------------
+
+writeVRAM_df:	macro source
+		movem.l	d0-d2/a5,-(sp)
+		moveq	#0,d1
+		moveq	#0,d2
+		lea		(vdp_control_port).l,a5		
+		
+		;move.l	#$94000000+((((source_end-source)>>1)&$FF00)<<8)+$9300+(((source_end-source)>>1)&$FF),(a5)
+		move.l	#$94000000,d1
+		move.w	(v_dplcTileCnt).w,d2
+		lsr.l	#1,d2
+		andi.l	#$FF00,d2
+		lsl.l	#8,d2
+		add.l	d2,d1
+		
+		addi.l	#$9300,d1
+		
+		move.w	(v_dplcTileCnt).w,d2
+		lsr.l	#1,d2
+		andi.l	#$FF,d2		
+		add.l	d2,d1
+		
+		move.l	d1,(a5)
+		
+		
+		
+		move.l	#$96000000+(((source>>1)&$FF00)<<8)+$9500+((source>>1)&$FF),(a5)
+		move.w	#$9700+((((source>>1)&$FF0000)>>16)&$7F),(a5)
+		
+		;move.w	#$4000+((destination)&$3FFF),(a5)		
+		moveq	#0,d1
+		move.w	d0,d1
+		andi.w	#$3FFF,d1
+		addi.w	#$4000,d1
+		move.w	d1,(a5)
+		
+		;move.w	#$80+(((destination)&$C000)>>14),(v_vdp_buffer2).w
+		moveq	#0,d1
+		move.w	d0,d1
+		andi.w	#$C000,d1
+		lsr.w	#7,d1
+		lsr.w	#7,d1
+		addi.w	#$0080,d1
+		move.w	d1,(v_vdp_buffer2).w
+		
+		move.w	(v_vdp_buffer2).w,(a5)
+		movem.l	(sp)+,d0-d2/a5
+		endm
+		
+; ---------------------------------------------------------------------------
+; Function call for LoadDynPLC
+; Input:
+;	d0.b = frame number
+;	d4.w = starting target VRAM tile address
+;	d6.l = pointer to uncompressed art
+;	a2   = pointer to DPLC table
+; if M2Engage flag set:
+;	a3 = RAM buffer
+;   a4 = variable flag to enable DMA transfer
+; ---------------------------------------------------------------------------
+; call_LoadDynPLC:	macro	frame,dplcFile,VRAM,artFile,ramBuff,dmaFlag
+	; move.b	frame,d0					; get Sonic's current frame
+	; move.l	dplcFile,a2					; load Sonic DPLC table
+	; move.w	VRAM,d4	; starting VRAM tile
+	; move.l	artFile,d6					; base Sonic art pointer
+	; ;!@ Add RAM buffer param if M2Engage build
+	; if M2Engage=1
+	; lea		(ramBuff).l,a3
+	; lea		(dmaFlag).l,a4
+	; endif
+	; jsr	(LoadDynPLC).l					; load DPLC
+	; endm
+	
+; call_LoadDynPLC2:	macro	frame,dplcFile,VRAM,artFile,ramBuff,dmaFlag
+	; ;!@ if M2Engage build set dynamic VRAM dest variable
+	; if M2Engage=1
+	; move.w	VRAM,(v_dplcAddr).l
+	; endif
+
+	; move.b	frame,d0					; get Sonic's current frame
+	; move.l	dplcFile,a2					; load Sonic DPLC table
+	; move.w	VRAM,d4	; starting VRAM tile
+	; move.l	artFile,d6					; base Sonic art pointer
+	; ;!@ Add RAM buffer param if M2Engage build
+	; if M2Engage=1
+	; lea		(ramBuff).l,a3
+	; lea		(dmaFlag).l,a4
+	; endif
+	; jsr	(LoadDynPLC).l					; load DPLC
+	; endm
 
 ; ---------------------------------------------------------------------------
 ; DMA copy data from 68K (ROM/RAM) to the CRAM
@@ -304,6 +403,12 @@ disableD:	macro
 ; ---------------------------------------------------------------------------
 ; long conditional jumps
 ; ---------------------------------------------------------------------------
+;!@ GD: Create a bunch of nops
+nopAtk: macro cnt
+		rept cnt
+		nop
+		endr
+		endm
 
 jhi:		macro loc
 		bls.s	.nojump

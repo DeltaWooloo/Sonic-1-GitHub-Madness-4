@@ -132,6 +132,7 @@ UseVIntSafeDMA = 1
 ; Like vdpComm, but starting from an address contained in a register
 vdpCommReg_defined = 1
 vdpCommReg macro reg,type,rwd,clr
+	bsr.w	DMA_DIE							; !@ GD: M2Engage compat
 	lsl.l	#2,reg							; Move high bits into (word-swapped) position, accidentally moving everything else
 	set .upperbits,(type&rwd)&3
 	if .upperbits<>0
@@ -199,6 +200,9 @@ QueueStaticDMA macro src,length,dest
 			fatal "DMA crosses a 128kB boundary. You should either split the DMA manually or align the source adequately."
 		endif
 	endif
+	
+	bsr.w	DMA_DIE												; !@ GD: M2Engage compat
+	
 	if UseVIntSafeDMA==1
 		move.w	sr,-(sp)										; Save current interrupt mask
 		disable_ints												; Mask off interrupts
@@ -224,6 +228,7 @@ QueueStaticDMA macro src,length,dest
 	endif
 ; ---------------------------------------------------------------------------
 ResetDMAQueue macro
+	bsr.w	DMA_DIE												; !@ GD: M2Engage compat
 	move.w	#VDP_Command_Buffer,(VDP_Command_Buffer_Slot).w
 	endm
 ; ===========================================================================
@@ -233,6 +238,7 @@ ResetDMAQueue macro
 ; sub_144E: DMA_68KtoVRAM: QueueCopyToVRAM: QueueVDPCommand:
 Add_To_DMA_Queue:
 QueueDMATransfer:
+	bsr.w	DMA_DIE											; !@ GD: M2Engage compat
 	if UseVIntSafeDMA==1
 		move.w	sr,-(sp)									; Save current interrupt mask
 		disable_ints											; Mask off interrupts
@@ -334,6 +340,7 @@ QueueDMATransfer:
 ; sub_14AC: CopyToVRAM: IssueVDPCommands: Process_DMA:
 Process_DMA_Queue:
 ProcessDMAQueue:
+	bsr.w	DMA_DIE											; !@ GD: M2Engage compat
 	move.w	(VDP_Command_Buffer_Slot).w,d0
 	subi.w	#VDP_Command_Buffer,d0
 	jmp	.jump_table(pc,d0.w)
@@ -374,6 +381,7 @@ ProcessDMAQueue:
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 InitDMAQueue:
+	bsr.w	DMA_DIE											; !@ GD: M2Engage compat
 	lea	(VDP_Command_Buffer).w,a0
 	moveq	#-$6C,d0				; fast-store $94 (sign-extended) in d0
 	move.l	#$93979695,d1
@@ -388,3 +396,68 @@ InitDMAQueue:
 	rts
 ; End of function ProcessDMAQueue
 ; ===========================================================================
+
+; !@ GD: DMA function are bugged in M2Engage emulator.	
+DMA_DIE:
+	; Throw error traps if called
+	if M2Engage=1
+	RaiseError "UltraDMA called in M2Engage build"
+	else
+	nop
+	endif
+	rts
+
+;!@ GD: New function in M2Engage builds to run DPLCs for Sonic, his Attack, generic DPLC buffer (bosses), and Shield
+	; Boss has variable VRAM destination and source data, rest are fixed
+; ===========================================================================
+; ---------------------------------------------------------------------------
+; !@ GD:
+; Function in M2Engage build to handle 4 standard RAM DPLC buffers in old Sonic 1 fashion
+; Works around UltraDMA Queue not working in M2Engage emulator
+;
+; ROM->RAM buffers, transfer RAM->VRAM during VBlank
+;
+; Buffers:
+; 1. Character DPLC
+; 2. Character Attack
+; 3. Generic DPLC (OWZ Clinton, CBZ Eisa, BSZ DioDanner, ACZ RKnight bosses)
+; 4. Character shield
+; ---------------------------------------------------------------------------
+; ===========================================================================
+ if M2Engage=1
+
+LoadDynPLC_Std:
+	;Sonic DPLC buffer (Fixed buffer)
+	tst.b	(f_sonframechg).w 									; has Sonic's sprite changed?
+	beq.s	.skipSonic											; if not, branch
+	writeVRAM	v_sgfx_buffer,ArtTile_Sonic*tile_size			; load new Sonic gfx
+	move.b	#0,(f_sonframechg).w								; Reset flag
+	
+.skipSonic:
+	;Attack DPLC buffer (Fixed buffer)
+	tst.b	(f_sonAtkframechg).w 								; has attack's sprite changed?
+	beq.s	.skipAttack											; if not, branch
+	writeVRAM	v_sagfx_buffer,ArtTile_SonicAttack*tile_size	; load new attack gfx
+	move.b	#0,(f_sonAtkframechg).w								; Reset flag
+
+.skipAttack:
+	;DPLC buffer (Dynamic buffer)
+	tst.b	(f_dplcFramechg).w 									; has attack's sprite changed?
+	beq.w	.skipDPLC											; if not, branch	
+	movem.l	d0/a0,-(sp)											; Push d0/a0 onto stack
+	moveq	#0,d0												; Clear d0
+	lea		(v_dplcAddr).l,a0									; Load VRAM addr from v_dplcAddr (dynamic destination)
+	move.w	(a0),d0												; Move VRAM dest into d0
+	writeVRAM_df	v_dgfx_buffer								; load new dplc gfx
+	move.b	#0,(f_dplcFramechg).w								; Reset flag
+	movem.l	(sp)+,d0/a0											; Pop d0/a0 from stack
+	
+.skipDPLC:
+	;Shield buffer (Fixed buffer)
+	tst.b	(f_shldFramechg).w 									; has shield changed?
+	beq.s	.skipShield											; if not, branch
+	writeVRAM	v_hgfx_buffer,ArtTile_Shield*tile_size			; load new shield gfx
+	move.b	#0,(f_shldFramechg).w								; Reset flag
+.skipShield:
+	rts
+ endif

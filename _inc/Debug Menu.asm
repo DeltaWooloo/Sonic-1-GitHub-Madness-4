@@ -49,7 +49,10 @@ GM_DebugMenu:
 		clr.w	(v_levselitem).w
 		clearRAM v_palette_fading
 
+		;!@ GD: M2Engage compat. Only reset dmaqueue on regular build
+		if M2Engage=0
 		ResetDMAQueue
+		endif
 
 		writeVRAM	Art_MenuFont,$D080
 

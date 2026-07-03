@@ -31,7 +31,7 @@ CheatsOn = 0
 
 MSUEnabled = 0
 
-M2Engage = 0		;!@ GD: If set, then apply compatibility bugfixes and changes to make builds
+M2Engage = 1		;!@ GD: If set, then apply compatibility bugfixes and changes to make builds
 					;work properly on stock Sega Genesis 1/2 Mini emulator (M2Engage)
 
 FixBugs = 1
@@ -377,7 +377,10 @@ GameInit:
 		bra.w	Get_CurGame	; This is where we branch to the different game
 
 Init_GHM4:
+		;!@ GD: Only init DMA queue in normal build
+		if M2Engage=0
 		bsr.w	InitDMAQueue
+		endif
 		bsr.w	VDPSetupGame
 		bsr.w	JoypadInit
 		jsr	(Init_SoundDriver).l
@@ -714,7 +717,10 @@ VBla_04:
 
 ; loc_C5E:
 VBla_06:
+	;!@ M2Engage compat; only run DMAQueue in regular build
+ if M2Engage=0
 		jsr	ProcessDMAQueue(pc)
+ endif		
 		bsr.w	VBla_StandardTransfers
 		bra.w	ProcessDPLC_9Tiles
 
@@ -746,7 +752,14 @@ VBla_08:
 .waterabove:
 		writeCRAM	v_palette_water,0
 .waterbelow:
+;!@ GD: M2Engage compat
+;If regular build, then use DMA queue; else regular S1 DPLCs
+ if M2Engage=0
 		jsr	ProcessDMAQueue(pc)
+ else
+ 		jsr	LoadDynPLC_Std(pc)
+ endif
+.nochg:
 
 		tst.w	(v_generictimer).w		; is there time left in the generic timer left?
 		beq.w	.end				; if not, branch
@@ -795,8 +808,13 @@ VBla_0A:
 		writeVRAM	v_spritetablebuffer,vram_sprites
 		writeVRAM	v_hscrolltablebuffer,vram_hscroll
 		writeCRAM	v_palette,0
-
+;!@ GD: M2Engage compat
+;If regular build, then use DMA queue; else regular S1 DPLCs
+ if M2Engage=0
 		jsr	ProcessDMAQueue(pc)
+ else
+		jsr	LoadDynPLC_Std(pc)
+ endif
 		tst.w	(v_generictimer).w	; is there time left on the demo?
 		beq.w	.end	; if not, return
 		subq.w	#1,(v_generictimer).w	; subtract 1 from time left in demo
@@ -821,8 +839,13 @@ VBla_18:
 .waterabove:
 		writeCRAM	v_palette_water,0
 .waterbelow:
+;!@ GD: M2Engage compat
+;If regular build, then use DMA queue; else regular S1 DPLCs
+ if M2Engage=0
 		jsr	ProcessDMAQueue(pc)
-		
+ else
+		jsr	LoadDynPLC_Std(pc)
+ endif
 		movem.l	(v_screenposx).w,d0-d7
 		movem.l	d0-d7,(v_screenposx_dup).w
 		movem.l	(v_fg_scroll_flags).w,d0-d1
@@ -864,8 +887,13 @@ VBla_16:
 		writeVRAM	v_spritetablebuffer,vram_sprites
 		writeVRAM	v_hscrolltablebuffer,vram_hscroll
 		writeCRAM	v_palette,0
-		
+;!@ GD: M2Engage compat
+;If regular build, then use DMA queue; else regular S1 DPLCs
+ if M2Engage=0
 		jsr	ProcessDMAQueue(pc)
+ else
+		jsr	LoadDynPLC_Std(pc)
+ endif
 		tst.w	(v_generictimer).w
 		beq.w	.end
 		subq.w	#1,(v_generictimer).w
@@ -901,8 +929,13 @@ VBla_StandardTransfers:
 VBla_1A:
 		stopZ80
 		waitZ80
-
+;!@ GD: M2Engage compat
+;If regular build, then use DMA queue; else regular S1 DPLCs
+ if M2Engage=0
 		jsr	ProcessDMAQueue(pc)
+ else
+		jsr	LoadDynPLC_Std(pc)
+ endif
 		bsr.w	VBla_StandardTransfers
 
 		startZ80
@@ -1100,6 +1133,9 @@ VDPSetupArray_End:
 
 ; ---------------------------------------------------------------------------
 ; Load a Dynamic Pattern Load Cues request into the DMA queue.
+;
+; !@ GD: Function calls to this are bugged in M2Engage emulator.
+; Specifically the Ultra DMA Queue QueueDMATransfer calls within
 ; ---------------------------------------------------------------------------
 ; Input:
 ;	d0.b = frame number
@@ -1111,6 +1147,10 @@ VDPSetupArray_End:
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
 
 LoadDynPLC:
+		; !@ GD: Function calls to this are bugged in M2Engage emulator.
+		; Throw error if called
+		bsr.w	DMA_DIE
+
 		andi.w	#$FF,d0			; mask out anything except the input frame
 		add.w	d0,d0			; double ID (for word-based indexing)
 		adda.w	(a2,d0.w),a2		; find current DPLC entry
@@ -1166,7 +1206,10 @@ ClearScreen:
 		clearRAM vscroll_buffer,vscroll_buffer_end
 		clearRAM v_spritetablebuffer,v_spritetablebuffer_end
 		clearRAM v_hscrolltablebuffer,v_hscrolltablebuffer_end_padded
+		;!@ GD: Disable ResetDMAQueue if M2Engage build
+		if M2Engage=0
 		ResetDMAQueue
+		endif
 		rts
 ; End of function ClearScreen
 
@@ -3389,7 +3432,12 @@ Level_ChkDebug:
 		beq.s	.bug						; if so, branch
 		bra.s	.noBug						; Skip bug watermark if any other zone
 .bug:
+		;!@ Only load arrow if NOT M2Engage build (emulator has VSCROLL = -1 bugfix)
+		if M2Engage=0
 		spawnHUD	hud_arrow,hud_omg,bclr 
+		else
+		nopAtk	$0C
+		endif
 .noBug:
 		tst.b	(f_debugcheat).w ; has debug cheat been entered?
 		beq.s	Level_ChkWater	; if not, branch
@@ -3785,8 +3833,14 @@ SignpostArtLoad2:
 	.del_porn:
 		addq.b	#2,(v_pornvidmark+obRoutine).w
 		bra.s	.skipDel		
-	.del_vsb:		
+	.del_vsb:
+		;!@ GD: Only delete OMG bug HUD if NOT M2Engage build (not spawned)
+		;M2Engage emulator has the VSCROLL=-1 bugfix applied
+		if M2Engage=0
 		deleteHUD
+		else
+		nopAtk	$04
+		endif
 	.skipDel:
 		moveq	#plcid_Signpost,d0
 		bsr.w	NewPLC		; load signpost patterns - i did not notice the bra at first
@@ -4464,13 +4518,27 @@ LevelDataLoad:
 		lea	(a2,d0.w),a2 
 		move.l	a2,-(sp)
 		addq.l	#4,a2
+		
+		;!@ GD: Load blocks from ROM if M2Engage flag set; else RAM
+		if M2Engage=0
 		movea.l	(a2)+,a0
 		lea	(v_16x16).w,a1	; RAM address for 16x16 mappings
 		move.w	#make_art_tile(ArtTile_Level,0,FALSE),d0
 		jsr	(EniDec).w
+		else
+		move.l	(a2)+,(v_rom_blocks).w	; !@ GD: set ROM Blk16 pointer
+		endif
+		
+		;!@ GD: Load chunks from ROM if M2Engage flag set; else RAM
+		if M2Engage=0
 		movea.l	(a2)+,a0
 		lea	(v_256x256).l,a1 ; RAM address for 256x256 mappings
 		jsr	(KosDec).w
+		else
+		move.l	(a2)+,(v_rom_chunks).w	; !@ GD: load ROM Blk256 pointer
+		endif
+		
+		
 		move.w	(a2)+,d5
 		move.w	(a2)+,d5
 		move.l	(a2)+,v_collindex

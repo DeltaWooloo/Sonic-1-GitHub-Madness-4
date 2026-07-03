@@ -547,16 +547,47 @@ DioDannerAni_Dead: dc.w .dead-DioDannerAni_Dead
 		; Nano: Uncomment this after someone added a DPLC mapping for DioDanner.
 
 DioDanner_LoadUncleGFX:
-		move.b	obFrame(a0),d0			; get object's current frame
-		cmp.b	objoff_38(a0),d0		; has the frame changed?
-		beq.s	.end					; if not, nothing to do
-		move.b	d0,objoff_38(a0)		; update cached frame number
-		move.l	#DPLC_DioDanner_Boss,a2		; load DPLC table
+		move.b	obFrame(a0),d0						; get object's current frame
+		cmp.b	objoff_38(a0),d0					; has the frame changed?
+		beq.s	.nochange							; if not, nothing to do
+		move.b	d0,objoff_38(a0)					; update cached frame number
+		;!@ GD: dplc buffer, M2Engage compat
+		move.l	#DPLC_DioDanner_Boss,a2				; load DPLC table
 		move.w	#ArtTile_Mildfucker*tile_size,d4	; starting VRAM tile
-		move.l	#Art_DioDanner,d6	; art pointer
-		jmp	(LoadDynPLC).l				; load DPLC
-
-.end:
+		if M2Engage=0
+		move.l	#Art_DioDanner,d6					; art pointer
+		jmp	(LoadDynPLC).l							; load DPLC
+		;call_LoadDynPLC2	d0,#DPLC_DioDanner_Boss,#ArtTile_Mildfucker*tile_size,#Art_DioDanner,v_dgfx_buffer,f_dplcFramechg
+		else
+		move.w	d4,(v_dplcAddr).l					; !@ Different
+		move.w	#dplcSz_Dio,(v_dplcTileCnt).w	; !@ Different
+ 		add.w	d0,d0
+		adda.w	(a2,d0.w),a2
+		moveq	#0,d1
+		move.b	(a2)+,d1	; read "number of entries" value
+		subq.b	#1,d1
+		bmi.s	.nochange	; if zero, branch
+		;lea		(v_sgfx_buffer).w,a3		
+		lea		(v_dgfx_buffer).l,a3
+		move.b	#1,(f_dplcFramechg).w ; set flag for gfx DMA
+.readentry:
+		moveq	#0,d2
+		move.b	(a2)+,d2
+		move.w	d2,d0
+		lsr.b	#4,d0
+		lsl.w	#8,d2		
+		move.b	(a2)+,d2
+		lsl.w	#5,d2
+		lea		(Art_DioDanner).l,a1
+		adda.l	d2,a1
+.loadtile:
+		movem.l	(a1)+,d2-d6/a4-a6
+		movem.l	d2-d6/a4-a6,(a3)
+		lea	$20(a3),a3	; next tile
+		dbf	d0,.loadtile	; repeat for number of tiles
+		dbf	d1,.readentry	; repeat for number of entries
+		endif
+.nochange:
 		rts								; return
 	
 ;DioDanner_LoadGfx2:

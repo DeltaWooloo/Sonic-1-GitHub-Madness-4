@@ -21,7 +21,14 @@ FindNearestTile:
 		lsr.w	#8,d1
 		andi.w	#$7F,d1
 		add.w	d1,d0		; combine
+		
+		;!@ GD: If M2Engage flag set, load chunks from ROM (d1=0); else RAM (d1=-1=$FFFFFFFF)
+		if M2Engage=0
 		moveq	#-1,d1
+		else
+		moveq	#0,d1
+		endif
+		
 		lea	(v_lvllayout).w,a1
 		move.b	(a1,d0.w),d1	; get 256x256 tile number
 		beq.s	.blanktile	; branch if 0
@@ -36,7 +43,11 @@ FindNearestTile:
 		move.w	d3,d0
 		lsr.w	#3,d0
 		andi.w	#$1E,d0
-		add.w	d0,d1
+		add.w	d0,d1		
+		;!@ GD: Load chunks from ROM if M2Engage flag set
+		if M2Engage=1
+		add.l	(v_rom_chunks).w,d1	; add ROM chunks pointer
+		endif		
 		movea.l	d1,a1
 .blanktile:
 		rts
@@ -62,6 +73,10 @@ FindNearestTile:
 		lsr.w	#3,d0
 		andi.w	#$1E,d0
 		add.w	d0,d1
+		;!@ GD: Load chunks from ROM if M2Engage flag set
+		if M2Engage=1
+		add.l	(v_rom_chunks).w,d1	; add ROM chunks pointer
+		endif		
 		movea.l	d1,a1
 		rts
 ; End of function FindNearestTile

@@ -16,7 +16,54 @@ bbl:	label *
 		endif
 		even
 		endm
-
+		
+;!@ GD: M2Engage compat bugfix
+;!@ Macro to switch between ENI and UNC compressed 16x16 level block assets based on M2Engage flag
+; Inputs:
+; abl = File label
+; file = filename
+blkData:	macro	abl,file
+abl:	label *
+		if M2Engage=0
+		binclude	"map16/file.eni"
+		else
+		binclude	"map16/file.unc"		
+		endif
+		even
+		endm
+blkData2:	macro	abl,aile,bile
+abl:	label *
+		if M2Engage=0
+		binclude	"map16/aile"
+		else
+		binclude	"map16/bile"
+		endif
+		even
+		endm
+		
+;!@ GD: M2Engage compat bugfix
+;!@ Macro to switch between KOS and UNC compressed 256x256 level chunk assets based on M2Engage flag
+; Inputs:
+; abl = File label
+; file = filename
+chkData:	macro	abl,file
+abl:	label *
+		if M2Engage=0
+		binclude	"map256/file.kos"
+		else
+		binclude	"map256/file.unc"		
+		endif
+		even
+		endm
+chkData2:	macro	abl,aile,bile
+abl:	label *
+		if M2Engage=0
+		binclude	"map256/aile"
+		else
+		binclude	"map256/bile"
+		endif
+		even
+		endm
 
 Nem_SegaLogo:	binclude	"artnem/Sega Logo (JP1).nem" ; large Sega logo
 		even
@@ -447,102 +494,72 @@ Nem_Navi:	binclude	"artnem/Animal Netscape.nem"
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - primary patterns and block mappings
 ; ---------------------------------------------------------------------------
-Blk16_GHZ:	binclude	"map16/GHZ.eni"
-		even
+	blkData		Blk16_GHZ,GHZ
 	tileData	Kos_GHZ,Nem_GHZ,GHZ,GHZ primary patterns
-Blk256_GHZ:	binclude	"map256/GHZ.kos"
-		even
+	chkData		Blk256_GHZ,GHZ
 
-Blk16_LZ:	binclude	"map16/LZ.eni"
-		even
+	blkData		Blk16_LZ,LZ
 	tileData	Kos_LZ,Nem_LZ,LZ,LZ primary patterns
-Blk256_LZ:	binclude	"map256/LZ.kos"
-		even
+	chkData		Blk256_LZ,LZ
 
-Blk16_MZ:	binclude	"map16/MZ.eni"
-		even
+	blkData		Blk16_MZ,MZ
 	tileData	Kos_MZ,Nem_MZ,MZ,MZ primary patterns
-Blk256_MZ:	binclude	"map256/MZ (JP1).kos"
-		even
+	chkData		Blk256_MZ,MZ (JP1)
 
-Blk16_SLZ:	binclude	"map16/SLZ.eni"
-		even
+	blkData		Blk16_SLZ,SLZ
 	tileData	Kos_SLZ,Nem_SLZ,SLZ,SLZ primary patterns
-Blk256_SLZ:	binclude	"map256/SLZ.kos"
-		even
+	chkData		Blk256_SLZ,SLZ
 
-Blk16_SYZ:	binclude	"map16/SYZ.eni"
-		even
+	blkData		Blk16_SYZ,SYZ
 	tileData	Kos_SYZ,Nem_SYZ,SYZ,SYZ primary patterns
-Blk256_SYZ:	binclude	"map256/SYZ.kos"
-		even
+	chkData		Blk256_SYZ,SYZ
 
-Blk16_SBZ:	binclude	"map16/SBZ.eni"
-		even
+	blkData		Blk16_SBZ,SBZ
 	tileData	Kos_SBZ,Nem_SBZ,SBZ,SBZ primary patterns
-Blk256_SBZ:	binclude	"map256/SBZ (JP1).kos"
-		even
+	chkData		Blk256_SBZ,SBZ (JP1)
 
-Blk16_BREW:	binclude	"map16/BREW.eni"
-		even
+	blkData		Blk16_BREW,BREW
 	tileData	Kos_BREW,Nem_BREW,BREW,BREW primary patterns
-Blk256_BREW:	binclude	"map256/BREW.kos"
-		even
+	chkData		Blk256_BREW,BREW
 
-Blk16_WIN:	binclude	"map16/WIN.eni"
-		even
+	blkData		Blk16_WIN,WIN
 	tileData	Kos_WIN,Nem_WIN,WIN,WIN primary patterns
-Blk256_WIN:	binclude	"map256/WIN.kos"
-		even
+	chkData		Blk256_WIN,WIN
 
-Blk16_Joint:	binclude	"map16/Joint.eni"
-		even
+	blkData		Blk16_Joint,Joint
 	tileData	Kos_Joint,Nem_Joint,Joint,Joint primary patterns
-Blk256_Joint:	binclude	"map256/Joint.kos"
-		even
-Blk16_DVZ:	binclude	"map16/DVZ.eni"
-		even
-Blk16_DVZ3:	binclude	"map16/DVZ3.eni"
-		even
+	chkData		Blk256_Joint,Joint
+
+	blkData		Blk16_DVZ,DVZ
+	blkData		Blk16_DVZ3,DVZ3
 	tileData	Kos_DVZ,Nem_DVZ,DVZ,DVZ primary padded. pamperspoop
 	tileData	Kos_DVZ3,Nem_DVZ3,DVZ3,DVZ3 primary padded. pamperspoop
-Blk256_DVZ:	binclude	"map256/DVZ.kos"
-		even
-Blk256_DVZ3:	binclude	"map256/DVZ3.kos"
-		even
-Blk16_NGZ:	binclude	"map16/NGZ.eni"
-		even
-	tileData	Kos_NGZ,Nem_NGZ,NGZ,Nogales primary patterns
-Blk256_NGZ:	binclude	"map256/NGZ.kos"		
-		even
-Blk16_HSZ:	binclude	"map16/HSZ.eni"
-		even
+	chkData		Blk256_DVZ,DVZ
+	chkData		Blk256_DVZ3,DVZ3
+	
+	blkData		Blk16_NGZ,NGZ	
+	tileData	Kos_NGZ,Nem_NGZ,NGZ,Nogales primary patterns
+	chkData		Blk256_NGZ,NGZ
+
+	blkData		Blk16_HSZ,HSZ
 	tileData	Kos_HSZ,Nem_HSZ,HSZ,HSZ primary patterns
-Blk256_HSZ:	binclude	"map256/HSZ.kos"		
-		even
-Blk16_BSZ:	binclude	"map16/BSZ.bin";sTOP
-		even
+	chkData		Blk256_HSZ,HSZ
+
+	blkData2	Blk16_BSZ,BSZ.bin,BSZ.unc
 	tileData	Kos_BSZ,Nem_BSZ,BSZ,BSZ primary patterns
-Blk256_BSZ:	binclude	"map256/BSZ.bin"		
-		even
+	chkData2	Blk256_BSZ,BSZ.bin,BSZ.unc
 
-Blk16_BTZ:	binclude	"map16/BTZ.eni";sTOP
-		even
+	blkData		Blk16_BTZ,BTZ
 	tileData	Kos_BTZ,Nem_BTZ,BTZ,BTZ primary patterns
-Blk256_BTZ:	binclude	"map256/BTZ.kos"		
-		even
+	chkData		Blk256_BTZ,BTZ
 
-Blk16_ARZ:	binclude	"map16/ARZ.eni"
-		even
+	blkData		Blk16_ARZ,ARZ
 	tileData	Kos_ARZ,Nem_ARZ,ARZ,ARZ/LZ primary patterns
-Blk256_ARZ:	binclude	"map256/ARZ.kos"
-		even
-		
-Blk16_MVZ:	binclude	"map16/MVZ.eni"
-		even
+	chkData		Blk256_ARZ,ARZ
+	
+	blkData		Blk16_MVZ,MVZ
 	tileData	Kos_MVZ,Nem_MVZ,MVZ,MVZ primary patterns
-Blk256_MVZ:	binclude	"map256/MVZ (JP1).kos"
-		even
+	chkData		Blk256_MVZ,MVZ (JP1)
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - bosses and ending sequence
 ; ---------------------------------------------------------------------------

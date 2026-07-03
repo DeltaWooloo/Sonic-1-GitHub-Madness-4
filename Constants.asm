@@ -198,14 +198,40 @@ security_addr:		equ $A14000
 
 ; VRAM data
 vram_window:	equ $A000
-vram_fg:	equ $C000	; foreground namespace
-vram_bg:	equ $E000	; background namespace
-vram_sprites:	equ $F800	; sprite table
-vram_hscroll:	equ $FC00	; horizontal scroll table
+vram_fg:	equ $C000					; foreground namespace
+vram_bg:	equ $E000					; background namespace
+vram_sprites:	equ $F800				; sprite table
+vram_hscroll:	equ $FC00				; horizontal scroll table
 
-tile_size:	equ 8*8/2	; size of a single 8x8 tile
-chunk_size:	equ $200	; size of a single 256x256 chunk
-plane_size_64x32: equ 64*32*2	; size of plane in 512x256 mode
+tile_size:			equ 8*8/2			; size of a single 8x8 tile
+chunk_size:			equ $200			; size of a single 256x256 chunk
+plane_size_64x32: 	equ 64*32*2			; size of plane in 512x256 mode
+
+;!@ DPLC buffer sizes
+dps_sgfx:			equ	$17
+sgfx_size:			equ	tile_size*dps_sgfx		; Size of dplc buffer (player)
+dps_sagfx:			equ $08
+sagfx_size:			equ	tile_size*dps_sagfx		; Size of dplc buffer (player attacks)
+
+												; Max tile counts:
+dps_Eiza:			equ	$1F
+dps_Dio:			equ $60
+dps_Clinton:		equ	$35
+dps_RKnight:		equ	$75
+dps_Max:			equ	dps_RKnight
+dplcSz_Eiza:		equ	tile_size*dps_Eiza		; Eiza = $1F tiles
+dplcSz_Dio:			equ	tile_size*dps_Dio		; DioDanner = $60 tiles
+dplcSz_Clinton:		equ	tile_size*dps_Clinton	; Clinton = $35 tiles
+dplcSz_RKnight:		equ	tile_size*dps_RKnight	; Knight = $75 tiles
+dplc_size:			equ	tile_size*dps_Max		; Size of dplc buffer (dynamic buffer, usually bosses)
+												; Max of all = $75 tiles
+												
+dps_shld:			equ $12
+shld_size:			equ	tile_size*dps_shld		; Size of dplc buffer (shield)
+												; Total size of all DPLC buffers =
+												; $A6 tiles * tile_count
+												; = $14C0 bytes
+										
 
 ; Game modes (Deprecated, moved to sonic.asm->GameModeArray)
 
@@ -951,7 +977,12 @@ ArtTile_startHUD:		equ	$2E0		;!@ GD: Goto start HUD (OWZ2/Clinton)
 ;ArtTile_contHUD2:		equ	$2A0		;!@ GD: Continue HUD (NGZ3)
 ArtTile_HUD:			equ $6C0
 ArtTile_SpecialAttack:	equ $6EA
+
+;!@ GD: DPLC destination VRAM locations
 ArtTile_Sonic:			equ $780
+;ArtTile_SonicAttack:	equ	$795		;!@ Attack location
+ArtTile_SonicAttack:	equ	$798		;!@ Attack location
+
 ArtTile_Points:			equ $797
 ArtTile_Lamppost:		equ $7A0
 ArtTile_Ring:			equ $7B2
