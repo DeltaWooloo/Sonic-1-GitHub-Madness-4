@@ -2927,20 +2927,58 @@ Maniac_Animate:
 
 ; ---------------------------------------------------------------------------
 ; Player DPLC loading subroutine
+;
+; !@ GD:
+;	d0.b = frame number
+;	d4.w = starting target VRAM tile address
+;	d6.l = pointer to uncompressed art
+;	a2   = pointer to DPLC table
 ; ---------------------------------------------------------------------------
 
 ; LoadDgfx_Tonic:
 Player_LoadGfx:
-		move.b	obFrame(a0),d0			; get Sonic's current frame
+		moveq	#0,d0
+		move.b	obFrame(a0),d0				; get Sonic's current frame
 		cmp.b	(v_sonframenum).w,d0		; has the frame changed?
-		beq.s	.end				; if not, nothing to do
-		move.b	d0,(v_sonframenum).w		; update cached frame number
-		move.l	dgfxaddr(a0),a2			; load Sonic DPLC table
+		beq.s	.nochange					; if not, nothing to do
+		move.b	d0,(v_sonframenum).w		; update cached frame number 
+		move.l	dgfxaddr(a0),a2				; load Sonic DPLC table
+		;!@ GD: Player buffer, M2Engage compat			
+ if M2Engage=0
 		move.w	#ArtTile_Sonic*tile_size,d4	; starting VRAM tile
-		move.l	artaddr(a0),d6			; base Sonic art pointer
-		jmp	(LoadDynPLC).l			; load DPLC
-.end:
+		move.l	artaddr(a0),d6				; base Sonic art pointer
+		jmp	(LoadDynPLC).l					; load DPLC
+ else
+ 		add.w	d0,d0
+		adda.w	(a2,d0.w),a2
+		moveq	#0,d1
+		move.b	(a2)+,d1	; read "number of entries" value
+		subq.b	#1,d1
+		bmi.s	.nochange	; if zero, branch
+		;lea		(v_sgfx_buffer).w,a3
+		lea		(v_sgfx_buffer).l,a3
+		move.b	#1,(f_sonframechg).w ; set flag for Sonic graphics DMA
+.readentry:
+		moveq	#0,d2
+		move.b	(a2)+,d2
+		move.w	d2,d0
+		lsr.b	#4,d0
+		lsl.w	#8,d2
+		move.b	(a2)+,d2
+		lsl.w	#5,d2
+		;lea	(Art_Sonic).l,a1
+		move.l	artaddr(a0),a1				; base Sonic art pointer
+		adda.l	d2,a1
+.loadtile:
+		movem.l	(a1)+,d2-d6/a4-a6
+		movem.l	d2-d6/a4-a6,(a3)
+		lea	$20(a3),a3	; next tile
+		dbf	d0,.loadtile	; repeat for number of tiles
+		dbf	d1,.readentry	; repeat for number of entries
+ endif
+.nochange:
 		rts					; return
+
 ; End of function Player_LoadGfx
 
 		include	"char_assets/Sonic Ani.asm"

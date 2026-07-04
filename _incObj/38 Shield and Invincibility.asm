@@ -156,13 +156,43 @@ Shi_Start_Delete:
 ShieldRunDGFX:
 		moveq	#0,d0
 		moveq	#0,d4
-		move.b	obFrame(a0),d0			; get Sonic's current frame
-		cmp.b	shlastframe(a0),d0		; has the frame changed?
-		beq.s	.end				; if not, nothing to do
-		move.b	d0,shlastframe(a0)		; update cached frame number
-		move.l	#Dgfx_Shield,a2			; load Sonic DPLC table
-		move.w	#ArtTile_Shield*tile_size,d4	; starting VRAM tile
-		move.l	#Art_Shield,d6			; base Sonic art pointer
-		jmp	(LoadDynPLC).l			; load DPLC
-.end:
-		rts	
+		move.b	obFrame(a0),d0					; get Sonic's current frame
+		cmp.b	shlastframe(a0),d0				; has the frame changed?
+		beq.s	.nochange						; if not, nothing to do
+		move.b	d0,shlastframe(a0)				; update cached frame number		
+		;!@ GD: Shield dplc buffer, M2Engage compat
+		move.l	#Dgfx_Shield,a2					; load Sonic DPLC table
+		move.w	#ArtTile_Shield*tile_size,d4	; starting VRAM tile		
+		;call_LoadDynPLC	d0,#Dgfx_Shield,#ArtTile_Shield*tile_size,#Art_Shield,v_hgfx_buffer,f_shldFramechg
+		if M2Engage=0
+		move.l	#Art_Shield,d6					; base Sonic art pointer
+		jmp		(LoadDynPLC).l
+		else
+ 		add.w	d0,d0
+		adda.w	(a2,d0.w),a2
+		moveq	#0,d1
+		move.b	(a2)+,d1	; read "number of entries" value
+		subq.b	#1,d1
+		bmi.s	.nochange	; if zero, branch
+		;lea		(v_sgfx_buffer).w,a3
+		lea		(v_hgfx_buffer).l,a3
+		move.b	#1,(f_shldFramechg).w 		; set flag for Sonic graphics DMA
+.readentry:
+		moveq	#0,d2
+		move.b	(a2)+,d2
+		move.w	d2,d0
+		lsr.b	#4,d0
+		lsl.w	#8,d2
+		move.b	(a2)+,d2
+		lsl.w	#5,d2
+		lea		(Art_Shield).l,a1
+		adda.l	d2,a1
+.loadtile:
+		movem.l	(a1)+,d2-d6/a4-a6
+		movem.l	d2-d6/a4-a6,(a3)
+		lea	$20(a3),a3	; next tile
+		dbf	d0,.loadtile	; repeat for number of tiles
+		dbf	d1,.readentry	; repeat for number of entries
+		endif
+.nochange:
+		rts					; return

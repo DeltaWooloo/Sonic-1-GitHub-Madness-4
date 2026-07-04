@@ -4,7 +4,9 @@
 
 bulletfactor = $30
 
-VRAM_ATTACK = $F2A0
+;!@ GD
+;VRAM_ATTACK = $F2A0
+VRAM_ATTACK = ArtTile_SonicAttack*tile_size	;$F2E0
 
 PlayerBullet:
 		moveq	#0, d0
@@ -44,7 +46,15 @@ PBullet_Init:
 
 		addq.b 	#2, obRoutine(a0)
 		move.b	obFrame(a0),d0			; get Sonic's current frame
+		;!@ GD: M2Engage compat for DPLCs
+		;If regular build, force DPLC art load; else do the check
+		;This is a bugfix to prevent DPLC artload spam,
+		;which will accidentally load a portion of Sonic's DPLCs over the loaded Tonic attack bullet
+		if M2Engage=0
 		bsr.w	AttackRunDGFX.Force
+		else
+		bsr.w	AttackRunDGFX
+		endif
 		rts
 
 ; ---------------------------------------------------------------------------
@@ -76,9 +86,8 @@ PBullet_Callback:
 		cmpi.b	#$C0, d1		; is obColType $C0 or higher?
 		beq.w	.DestroyTouched_special; if yes, branch
 		
-		;!@ GD: Also check SOME  special painful objects
-		cmpi.b	#$9A,obColType(a1)	; Is object bomb?
-		beq.s	.DestroyTouched		; If yes, hit'em
+		;!@ GD: Special check for colType $9A (bomb/FZ plasma balls)
+		bsr.s	.check9A
 
 		; GIO:	Roaring Knight specific behavior
 		cmpi.b	#4,obRoutine(a0)	; Is attack one of Maniac Mouse's bullets?
@@ -92,6 +101,19 @@ PBullet_Callback:
 		andi.b	#$3F,d0
 		cmpi.b	#$6, d0		; is collision type $46 ?
 		beq.s	.OpenMonitor	; if yes, branch		
+		rts
+		
+.check9A:
+		;!@ GD: Also check SOME  special painful objects
+		cmpi.b	#$9A,obColType(a1)	; Is colType $9A?
+		bne.s	.skip				; If not, branch
+		
+		;!@ GD: Bugfix, Skip check for Plasma balls to prevent destruction by bullets
+		cmpi.b	#id_BossPlasma,obID(a1)
+		beq.s	.skip
+		bra.s	.DestroyTouched		; If anything else (bomb), hit'em
+		
+	.skip:
 		rts
 		
 ;!@ Check if special collision is NOT $D7 (bumper) or $E1 (LZ Pole)
@@ -198,15 +220,46 @@ PTonicAtt_Main:
 
 AttackRunDGFX:
 		moveq	#0,d0
-		moveq	#0,d4
+		;moveq	#0,d4
 		move.b	obFrame(a0),d0			; get Sonic's current frame
 		cmp.b	shlastframe(a0),d0		; has the frame changed?
-		beq.s	.end				; if not, nothing to do
-.Force
+		beq.s	.nochange				; if not, nothing to do
+.Force:
+		moveq	#0,d4
 		move.b	d0,shlastframe(a0)		; update cached frame number
-		move.l	#Dgfx_Attacks,a2			; load Sonic DPLC table
-		move.w	#VRAM_ATTACK,d4	; starting VRAM tile
-		move.l	#Art_Attacks,d6			; base Sonic art pointer
-		jmp	(LoadDynPLC).l			; load DPLC
-.end:
-		rts	
+		;!@ GD: pAttack buffer, M2Engage compat			
+		move.l	#Dgfx_Attacks,a2		; load Sonic DPLC table
+		move.w	#VRAM_ATTACK,d4			; starting VRAM tile		
+		;call_LoadDynPLC		d0,#Dgfx_Attacks,#VRAM_ATTACK,#Art_Attacks,v_sagfx_buffer,f_sonAtkframechg
+		if M2Engage=0
+		move.l	#Art_Attacks,d6			; base attack art pointer
+		jmp		(LoadDynPLC).l			; load DPLC
+		else
+ 		add.w	d0,d0
+		adda.w	(a2,d0.w),a2
+		moveq	#0,d1
+		move.b	(a2)+,d1	; read "number of entries" value
+		subq.b	#1,d1
+		bmi.s	.nochange	; if zero, branch
+		;lea		(v_sgfx_buffer).w,a3
+		lea		(v_sagfx_buffer).l,a3
+		move.b	#1,(f_sonAtkframechg).w ; set flag for gfx DMA
+.readentry:
+		moveq	#0,d2
+		move.b	(a2)+,d2
+		move.w	d2,d0
+		lsr.b	#4,d0
+		lsl.w	#8,d2		
+		move.b	(a2)+,d2
+		lsl.w	#5,d2
+		lea		(Art_Attacks).l,a1
+		adda.l	d2,a1
+.loadtile:
+		movem.l	(a1)+,d2-d6/a4-a6
+		movem.l	d2-d6/a4-a6,(a3)
+		lea	$20(a3),a3	; next tile
+		dbf	d0,.loadtile	; repeat for number of tiles
+		dbf	d1,.readentry	; repeat for number of entries
+		endif
+.nochange:
+		rts

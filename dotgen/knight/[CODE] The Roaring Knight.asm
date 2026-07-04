@@ -10,7 +10,14 @@
 ; ===========================================================================
 
 ArtTile_Roaring_Knight	=	ArtTile_Eggman		; VRAM pointer to Knight graphics.
-ArtTile_Knight_Weapons	=	ArtTile_Eggman_Weapons	; VRAM pointer to Knight weapon graphics.
+;!@ GD: Relocate weapons if M2Engage build, because RKnight DPLC buffer is extended to $75 tiles for biggest sprite
+; Bugfix to prevent weapons from overwriting rknight graphics in phase 1
+; VRAM pointer to Knight weapon graphics.
+ if M2Engage=0
+ArtTile_Knight_Weapons	=	ArtTile_Eggman_Weapons	
+ else
+ArtTile_Knight_Weapons	=	ArtTile_Roaring_Knight+(dps_RKnight)+1
+ endif
 Knight_X_Spawn		=	$1840			; The Knight's horizontal spawn point. Also used in Dynamic level events. It should be the leftmost point of the arena.
 Knight_Y_Spawn		=	$220			; The Knight's vertical spawn point. Also used in Dynamic level events. It should be the uppermost point of the screen at its lowest possible height.
 Knight_Parent		=	objoff_3E		; Used by subobjects. They store the Knight's RAM location, to ensure that they exist. (2 bytes)
@@ -1241,13 +1248,56 @@ RKPhase1_Orientation:
 RKnight_LoadGfx:
 	move.b	obFrame(a0),d0				; get object's current frame
 	cmp.b	Knight_Previous_Frame(a0),d0		; has the frame changed?
-	beq.s	.end					; if not, nothing to do
+	beq.w	.nochange							; if not, nothing to do
 	move.b	d0,Knight_Previous_Frame(a0)		; update cached frame number
-	move.l	#DPLC_RKnight,a2			; load DPLC table
-	move.w	#ArtTile_Roaring_Knight*tile_size,d4	; starting VRAM tile
-	move.l	#Unc_RoaringKnight,d6			; art pointer
-	jmp	(LoadDynPLC).l				; load DPLC
-.end:
+	;!@ GD: dplc buffer, M2Engage compat	
+	move.l	#DPLC_RKnight,a2					; load DPLC table
+	move.w	#ArtTile_Roaring_Knight*tile_size,d4; starting VRAM tile
+	if M2Engage=0
+	move.l	#Unc_RoaringKnight,d6				; art pointer
+	jmp	(LoadDynPLC).l							; load DPLC
+	;call_LoadDynPLC2	d0,#DPLC_RKnight,#ArtTile_Roaring_Knight*tile_size,#Unc_RoaringKnight,v_dgfx_buffer,f_dplcFramechg
+	else
+	
+	;!@ Different; clear RAM section every time
+	movem.l	d0-d1/a1,-(sp)
+	clearRAM	v_dgfx_buffer,v_dgfx_buffer_end
+	movem.l	(sp)+,d0-d1/a1
+	
+	move.w	d4,(v_dplcAddr).l					; !@ Different
+	move.w	#dplcSz_RKnight,(v_dplcTileCnt).w	; !@ Different
+	add.w	d0,d0
+	adda.w	(a2,d0.w),a2
+	moveq	#0,d1
+	move.b	(a2)+,d1	; read "number of entries" value
+	subq.b	#1,d1
+	bmi.s	.nochange	; if zero, branch
+	;lea		(v_sgfx_buffer).w,a3		
+	lea		(v_dgfx_buffer).l,a3
+	move.b	#1,(f_dplcFramechg).w ; set flag for gfx DMA
+.readentry:
+	moveq	#0,d2
+	move.b	(a2)+,d2	;Load number of tiles
+	move.w	d2,d0
+	lsr.b	#4,d0
+	;add.w	d0,(v_dplcTileCnt).w	; !@ Increment tile count
+	lsl.w	#8,d2		
+	move.b	(a2)+,d2	;Load tile offset
+	;!@ GD: Bugfix for XL DPLC
+	;https://info.sonicretro.org/SCHG_How-to:Extend_the_Sonic_1_sprite_mappings_and_art_limit#Extending_Sonic.27s_art_limit
+	andi.w	#$0FFF,d2		; MJ: clear the counter
+	lsl.l	#5,d2			; MJ: shifting long-word instead of word (more than FFFF bytes)	
+	;lsl.w	#5,d2
+	lea		(Unc_RoaringKnight).l,a1
+	adda.l	d2,a1
+.loadtile:
+	movem.l	(a1)+,d2-d6/a4-a6
+	movem.l	d2-d6/a4-a6,(a3)
+	lea	$20(a3),a3	; next tile
+	dbf	d0,.loadtile	; repeat for number of tiles
+	dbf	d1,.readentry	; repeat for number of entries
+	endif	
+.nochange:
 	rts						; return
 
 ; ===========================================================================

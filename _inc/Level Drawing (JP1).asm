@@ -587,7 +587,13 @@ GetBlockData:
 
 GetBlockData_2:
 		add.w	4(a3),d4
-		lea	(v_16x16).w,a1
+		
+		;!@ GD: Enable ROM blocks if M2Engage flag set; else use RAM
+		if M2Engage=0
+		lea		(v_16x16).w,a1		; load RAM blk16 addr
+		else
+		movea.l	(v_rom_blocks).w,a1	; load ROM Blk16 pointer
+		endif
 		; Turn Y coordinate into index into level layout
 		move.w	d4,d3
 		lsr.w	#1,d3
@@ -599,7 +605,13 @@ GetBlockData_2:
 		andi.w	#$7F,d0
 		; Get chunk from level layout
 		add.w	d3,d0
+		
+		;!@ GD: Load chunks from ROM (d3=0) if M2Engage flag set; else RAM (d3=-1=$FFFFFFFF)
+		if M2Engage=0
 		moveq	#-1,d3
+		else
+		moveq	#0,d3
+		endif
 		move.b	(a4,d0.w),d3
 		beq.s	locret_6C1E	; If chunk 00, just return a pointer to the first block (expected to be empty)
 		; Turn chunk ID into index into chunk table
@@ -614,6 +626,12 @@ GetBlockData_2:
 		; Get block metadata from chunk
 		add.w	d4,d3
 		add.w	d5,d3
+		
+		;!@ GD: Load chunks from ROM if M2Engage flag set
+		if M2Engage=1
+		add.l	(v_rom_chunks).w,d3	; add ROM Blk256 pointer to offset
+		endif
+		
 		movea.l	d3,a0
 		move.w	(a0),d3
 		; Turn block ID into address

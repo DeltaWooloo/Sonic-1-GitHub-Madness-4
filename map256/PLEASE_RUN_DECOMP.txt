@@ -1,0 +1,7 @@
+PLEASE Run the decomp batch script on change of level 256x256 chunks!
+
+It will decompress all assets for M2Engage build
+compatibility. Build uses ROM Chunks to free up RAM for bugfixes
+(Genesis 1/2 Mini compatibility support)
+
+- GenesisDoes

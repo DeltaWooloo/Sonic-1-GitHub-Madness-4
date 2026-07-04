@@ -199,7 +199,10 @@ splash_turd macro routine
 	splash_solid	Gens,		$40, 1, _bgm, bgm_SS,			60*5
 	splash_liquid	MultiSplash_Init
 	splash_liquid	SonicRetro
+	;!@ GD: M2Compat. Disable NewSSRG if M2Engage build
+	if M2Engage=0
 	splash_liquid	NewSSRG_Screen
+	endif
 	splash_liquid	GM_SSRGScreen
 	splash_liquid	GM_SHCSplash
 	splash_liquid	GM_EagleSoft

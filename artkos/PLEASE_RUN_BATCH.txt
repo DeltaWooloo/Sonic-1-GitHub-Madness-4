@@ -1,0 +1,7 @@
+PLEASE Run the batch script on change of level tiles!
+
+This one is different and will duplicate all assets
+as NEM compressed, for M2Engage build flag
+(Genesis 1/2 Mini compatibility support)
+
+- GenesisDoes

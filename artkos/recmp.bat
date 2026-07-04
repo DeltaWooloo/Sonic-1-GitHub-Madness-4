@@ -1,10 +1,15 @@
 cls
+call KENSSharp.exe -r k "8x8 - ARZ.kos"
 call KENSSharp.exe -r k "8x8 - BREW.kos"
+call KENSSharp.exe -r k "8x8 - BSZ.kos"
+call KENSSharp.exe -r k "8x8 - BTZ.kos"
 call KENSSharp.exe -r k "8x8 - DVZ.kos"
+call KENSSharp.exe -r k "8x8 - DVZ3.kos"
 call KENSSharp.exe -r k "8x8 - GHZ.kos"
 call KENSSharp.exe -r k "8x8 - HSZ.kos"
 call KENSSharp.exe -r k "8x8 - Joint.kos"
 call KENSSharp.exe -r k "8x8 - LZ.kos"
+call KENSSharp.exe -r k "8x8 - MVZ.kos"
 call KENSSharp.exe -r k "8x8 - MZ.kos"
 call KENSSharp.exe -r k "8x8 - NGZ.kos"
 call KENSSharp.exe -r k "8x8 - SBZ.kos"
@@ -13,4 +18,51 @@ call KENSSharp.exe -r k "8x8 - SYZ.kos"
 call KENSSharp.exe -r n "8x8 - SYZ.nem"
 call KENSSharp.exe -r k "8x8 - WIN.kos"
 call KENSSharp.exe -r k "Flowers at Ending.kos"
+
+REM GD: This batch script is different
+REM To enable compatibility with M2Engage build flag/emulators
+REM in Sega Genesis 1/2 Mini hardware
+REM 
+REM Decompress all KOS assets into alt folder
+call KENSSharp.exe -d k "8x8 - ARZ.kos" "..\artnem\m2engage_lvl_alt\8x8 - ARZ.unc"
+call KENSSharp.exe -d k "8x8 - BREW.kos" "..\artnem\m2engage_lvl_alt\8x8 - BREW.unc"
+call KENSSharp.exe -d k "8x8 - BSZ.kos" "..\artnem\m2engage_lvl_alt\8x8 - BSZ.unc"
+call KENSSharp.exe -d k "8x8 - BTZ.kos" "..\artnem\m2engage_lvl_alt\8x8 - BTZ.unc"
+call KENSSharp.exe -d k "8x8 - DVZ.kos" "..\artnem\m2engage_lvl_alt\8x8 - DVZ.unc"
+call KENSSharp.exe -d k "8x8 - DVZ3.kos" "..\artnem\m2engage_lvl_alt\8x8 - DVZ3.unc"
+call KENSSharp.exe -d k "8x8 - GHZ.kos" "..\artnem\m2engage_lvl_alt\8x8 - GHZ.unc"
+call KENSSharp.exe -d k "8x8 - HSZ.kos" "..\artnem\m2engage_lvl_alt\8x8 - HSZ.unc"
+call KENSSharp.exe -d k "8x8 - Joint.kos" "..\artnem\m2engage_lvl_alt\8x8 - Joint.unc"
+call KENSSharp.exe -d k "8x8 - LZ.kos" "..\artnem\m2engage_lvl_alt\8x8 - LZ.unc" 
+call KENSSharp.exe -d k "8x8 - MVZ.kos" "..\artnem\m2engage_lvl_alt\8x8 - MVZ.unc" 
+call KENSSharp.exe -d k "8x8 - MZ.kos" "..\artnem\m2engage_lvl_alt\8x8 - MZ.unc" 
+call KENSSharp.exe -d k "8x8 - NGZ.kos" "..\artnem\m2engage_lvl_alt\8x8 - NGZ.unc"
+call KENSSharp.exe -d k "8x8 - SBZ.kos" "..\artnem\m2engage_lvl_alt\8x8 - SBZ.unc"
+call KENSSharp.exe -d k "8x8 - SLZ.kos" "..\artnem\m2engage_lvl_alt\8x8 - SLZ.unc"
+call KENSSharp.exe -d k "8x8 - SYZ.kos" "..\artnem\m2engage_lvl_alt\8x8 - SYZ.unc"
+call KENSSharp.exe -d k "8x8 - WIN.kos" "..\artnem\m2engage_lvl_alt\8x8 - WIN.unc"
+call KENSSharp.exe -d k "Flowers at Ending.kos" "..\artnem\m2engage_lvl_alt\Flowers at Ending.unc"
+
+REM Goto new folder
+cd "..\artnem\m2engage_lvl_alt\"
+REM Compress all assets as nem
+call KENSSharp.exe -c n "8x8 - ARZ.unc" "8x8 - ARZ.nem"
+call KENSSharp.exe -c n "8x8 - BREW.unc" "8x8 - BREW.nem"
+call KENSSharp.exe -c n "8x8 - BSZ.unc" "8x8 - BSZ.nem"
+call KENSSharp.exe -c n "8x8 - BTZ.unc" "8x8 - BTZ.nem"
+call KENSSharp.exe -c n "8x8 - DVZ.unc" "8x8 - DVZ.nem"
+call KENSSharp.exe -c n "8x8 - DVZ3.unc" "8x8 - DVZ3.nem"
+call KENSSharp.exe -c n "8x8 - GHZ.unc" "8x8 - GHZ.nem"
+call KENSSharp.exe -c n "8x8 - HSZ.unc" "8x8 - HSZ.nem"
+call KENSSharp.exe -c n "8x8 - Joint.unc" "8x8 - Joint.nem"
+call KENSSharp.exe -c n "8x8 - LZ.unc" "8x8 - LZ.nem"
+call KENSSharp.exe -c n "8x8 - MVZ.unc" "8x8 - MVZ.nem"
+call KENSSharp.exe -c n "8x8 - MZ.unc" "8x8 - MZ.nem"
+call KENSSharp.exe -c n "8x8 - NGZ.unc" "8x8 - NGZ.nem"
+call KENSSharp.exe -c n "8x8 - SBZ.unc" "8x8 - SBZ.nem"
+call KENSSharp.exe -c n "8x8 - SLZ.unc" "8x8 - SLZ.nem"
+call KENSSharp.exe -c n "8x8 - SYZ.unc" "8x8 - SYZ.nem"
+call KENSSharp.exe -c n "8x8 - WIN.unc" "8x8 - WIN.nem"
+call KENSSharp.exe -c n "Flowers at Ending.unc" "Flowers at Ending.nem"
+del /q *.unc
 REM pause

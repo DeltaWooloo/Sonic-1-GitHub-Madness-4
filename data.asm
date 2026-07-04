@@ -1,3 +1,93 @@
+;!@ GD: M2Engage compat bugfix
+;!@ Macro to switch between KOS and NEM compressed 8x8 level tile assets based on M2Engage flag
+
+; Inputs:
+; abl = File label for regular build (Kos compresed)
+; bbl = File label for M2Engage build (Nem compresed)
+; lbl = label for filename (e.g. GHZ etc)
+; cmnt = Comment after binclude line
+tileData:	macro	abl,bbl,lbl,cmnt
+		if M2Engage=0
+abl:	label *
+		binclude	"artkos/8x8 - lbl.kos"	;cmnt
+		else
+bbl:	label *
+		binclude	"artnem/m2engage_lvl_alt/8x8 - lbl.nem"	;cmnt
+		endif
+		even
+		endm
+		
+;!@ GD: M2Engage compat bugfix
+;!@ Macro to switch between UNC and NEM compressed tilemap tile assets based on M2Engage flag
+
+; Inputs:
+; abl = filename label
+; path = filepath
+; file = filename (no ext)
+; aext = ext for regular build
+; bext = ext for M2Engage build
+; bbl = end label
+; lbl = length label
+tileData2:	macro	abl,path,file,aext,bext,bbl,lbl
+abl:	label *
+		if M2Engage=0
+		binclude	"path/file.aext"
+		else
+		binclude	"path/file.bext"
+		endif
+		even
+bbl:	label *
+lbl = bbl-abl
+		endm
+		
+;!@ GD: M2Engage compat bugfix
+;!@ Macro to switch between ENI and UNC compressed 16x16 level block assets based on M2Engage flag
+; Inputs:
+; abl = File label
+; file = filename
+blkData:	macro	abl,file
+abl:	label *
+		if M2Engage=0
+		binclude	"map16/file.eni"
+		else
+		binclude	"map16/file.unc"		
+		endif
+		even
+		endm
+blkData2:	macro	abl,aile,bile
+abl:	label *
+		if M2Engage=0
+		binclude	"map16/aile"
+		else
+		binclude	"map16/bile"
+		endif
+		even
+		endm
+		
+;!@ GD: M2Engage compat bugfix
+;!@ Macro to switch between KOS and UNC compressed 256x256 level chunk assets based on M2Engage flag
+; Inputs:
+; abl = File label
+; file = filename
+chkData:	macro	abl,file
+abl:	label *
+		if M2Engage=0
+		binclude	"map256/file.kos"
+		else
+		binclude	"map256/file.unc"		
+		endif
+		even
+		endm
+chkData2:	macro	abl,aile,bile
+abl:	label *
+		if M2Engage=0
+		binclude	"map256/aile"
+		else
+		binclude	"map256/bile"
+		endif
+		even
+		endm
+
 Nem_SegaLogo:	binclude	"artnem/Sega Logo (JP1).nem" ; large Sega logo
 		even
 Eni_SegaLogo:	binclude	"tilemaps/Sega Logo (JP1).eni" ; large Sega logo (mappings)
@@ -427,119 +517,72 @@ Nem_Navi:	binclude	"artnem/Animal Netscape.nem"
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - primary patterns and block mappings
 ; ---------------------------------------------------------------------------
-Blk16_GHZ:	binclude	"map16/GHZ.eni"
-		even
-Kos_GHZ:	binclude	"artkos/8x8 - GHZ.kos"	; GHZ primary patterns
-		even
-Blk256_GHZ:	binclude	"map256/GHZ.kos"
-		even
+	blkData		Blk16_GHZ,GHZ
+	tileData	Kos_GHZ,Nem_GHZ,GHZ,GHZ primary patterns
+	chkData		Blk256_GHZ,GHZ
 
-Blk16_LZ:	binclude	"map16/LZ.eni"
-		even
-Kos_LZ:		binclude	"artkos/8x8 - LZ.kos"	; LZ primary patterns
-		even
-Blk256_LZ:	binclude	"map256/LZ.kos"
-		even
+	blkData		Blk16_LZ,LZ
+	tileData	Kos_LZ,Nem_LZ,LZ,LZ primary patterns
+	chkData		Blk256_LZ,LZ
 
-Blk16_MZ:	binclude	"map16/MZ.eni"
-		even
-Kos_MZ:		binclude	"artkos/8x8 - MZ.kos"	; MZ primary patterns
-		even
-Blk256_MZ:	binclude	"map256/MZ (JP1).kos"
-		even
+	blkData		Blk16_MZ,MZ
+	tileData	Kos_MZ,Nem_MZ,MZ,MZ primary patterns
+	chkData		Blk256_MZ,MZ (JP1)
 
-Blk16_SLZ:	binclude	"map16/SLZ.eni"
-		even
-Kos_SLZ:	binclude	"artkos/8x8 - SLZ.kos"	; SLZ primary patterns
-		even
-Blk256_SLZ:	binclude	"map256/SLZ.kos"
-		even
+	blkData		Blk16_SLZ,SLZ
+	tileData	Kos_SLZ,Nem_SLZ,SLZ,SLZ primary patterns
+	chkData		Blk256_SLZ,SLZ
 
-Blk16_SYZ:	binclude	"map16/SYZ.eni"
-		even
-Kos_SYZ:	binclude	"artkos/8x8 - SYZ.kos"	; SYZ primary patterns
-		even
-Blk256_SYZ:	binclude	"map256/SYZ.kos"
-		even
+	blkData		Blk16_SYZ,SYZ
+	tileData	Kos_SYZ,Nem_SYZ,SYZ,SYZ primary patterns
+	chkData		Blk256_SYZ,SYZ
 
-Blk16_SBZ:	binclude	"map16/SBZ.eni"
-		even
-Kos_SBZ:	binclude	"artkos/8x8 - SBZ.kos"	; SBZ primary patterns
-		even
-Blk256_SBZ:	binclude	"map256/SBZ (JP1).kos"
-		even
+	blkData		Blk16_SBZ,SBZ
+	tileData	Kos_SBZ,Nem_SBZ,SBZ,SBZ primary patterns
+	chkData		Blk256_SBZ,SBZ (JP1)
 
-Blk16_BREW:	binclude	"map16/BREW.eni"
-		even
-Kos_BREW:	binclude	"artkos/8x8 - BREW.kos"	; GHZ primary patterns
-		even
-Blk256_BREW:	binclude	"map256/BREW.kos"
-		even
+	blkData		Blk16_BREW,BREW
+	tileData	Kos_BREW,Nem_BREW,BREW,BREW primary patterns
+	chkData		Blk256_BREW,BREW
 
-Blk16_WIN:	binclude	"map16/WIN.eni"
-		even
-Kos_WIN:	binclude	"artkos/8x8 - WIN.kos"	; WIN primary patterns
-		even
-Blk256_WIN:	binclude	"map256/WIN.kos"
-		even
+	blkData		Blk16_WIN,WIN
+	tileData	Kos_WIN,Nem_WIN,WIN,WIN primary patterns
+	chkData		Blk256_WIN,WIN
 
-Blk16_Joint:	binclude	"map16/Joint.eni"
-		even
-Kos_Joint:	binclude	"artkos/8x8 - Joint.kos"	; Joint primary patterns
-		even
-Blk256_Joint:	binclude	"map256/Joint.kos"
-		even
-Blk16_DVZ:	binclude	"map16/DVZ.eni"
-		even
-Blk16_DVZ3:	binclude	"map16/DVZ3.eni"
-		even
-Kos_DVZ:	binclude	"artkos/8x8 - DVZ.kos"	; DVZ	primary padded. pamperspoop
-		even
-Kos_DVZ3:	binclude	"artkos/8x8 - DVZ3.kos"	; DVZ	primary padded. pamperspoop
-		even
-Blk256_DVZ:	binclude	"map256/DVZ.kos"
-		even
-Blk256_DVZ3:	binclude	"map256/DVZ3.kos"
-		even
-Blk16_NGZ:	binclude	"map16/NGZ.eni"
-		even
-Kos_NGZ:	binclude	"artkos/8x8 - NGZ.kos"	; nogales	#r&)*_@@@@@@@@u!#@*)eudq@(ewuiwdq*)dy&*#r&du(!@ido*u&#ft^*rd&(y*)u(rf
-		even
-Blk256_NGZ:	binclude	"map256/NGZ.kos"		
-		even
-Blk16_HSZ:	binclude	"map16/HSZ.eni"
-		even
-Kos_HSZ:	binclude	"artkos/8x8 - HSZ.kos"
-		even
-Blk256_HSZ:	binclude	"map256/HSZ.kos"		
-		even
-Blk16_BSZ:	binclude	"map16/BSZ.bin";sTOP
-		even
-Kos_BSZ:	binclude	"artkos/8x8 - BSZ.kos"
-		even
-Blk256_BSZ:	binclude	"map256/BSZ.bin"		
-		even
+	blkData		Blk16_Joint,Joint
+	tileData	Kos_Joint,Nem_Joint,Joint,Joint primary patterns
+	chkData		Blk256_Joint,Joint
 
-Blk16_BTZ:	binclude	"map16/BTZ.eni";sTOP
-		even
-Kos_BTZ:	binclude	"artkos/8x8 - BTZ.kos"
-		even
-Blk256_BTZ:	binclude	"map256/BTZ.kos"		
-		even
+	blkData		Blk16_DVZ,DVZ
+	blkData		Blk16_DVZ3,DVZ3
+	tileData	Kos_DVZ,Nem_DVZ,DVZ,DVZ primary padded. pamperspoop
+	tileData	Kos_DVZ3,Nem_DVZ3,DVZ3,DVZ3 primary padded. pamperspoop
+	chkData		Blk256_DVZ,DVZ
+	chkData		Blk256_DVZ3,DVZ3
+	
+	blkData		Blk16_NGZ,NGZ	
+	tileData	Kos_NGZ,Nem_NGZ,NGZ,Nogales primary patterns
+	chkData		Blk256_NGZ,NGZ
 
-Blk16_ARZ:	binclude	"map16/ARZ.eni"
-		even
-Kos_ARZ:	binclude	"artkos/8x8 - ARZ.kos"	; LZ primary patterns
-		even
-Blk256_ARZ:	binclude	"map256/ARZ.kos"
-		even
-		
-Blk16_MVZ:	binclude	"map16/MVZ.eni"
-		even
-Kos_MVZ:		binclude	"artkos/8x8 - MVZ.kos"	; MZ primary patterns
-		even
-Blk256_MVZ:	binclude	"map256/MVZ (JP1).kos"
-		even
+	blkData		Blk16_HSZ,HSZ
+	tileData	Kos_HSZ,Nem_HSZ,HSZ,HSZ primary patterns
+	chkData		Blk256_HSZ,HSZ
+
+	blkData2	Blk16_BSZ,BSZ.bin,BSZ.unc
+	tileData	Kos_BSZ,Nem_BSZ,BSZ,BSZ primary patterns
+	chkData2	Blk256_BSZ,BSZ.bin,BSZ.unc
+
+	blkData		Blk16_BTZ,BTZ
+	tileData	Kos_BTZ,Nem_BTZ,BTZ,BTZ primary patterns
+	chkData		Blk256_BTZ,BTZ
+
+	blkData		Blk16_ARZ,ARZ
+	tileData	Kos_ARZ,Nem_ARZ,ARZ,ARZ/LZ primary patterns
+	chkData		Blk256_ARZ,ARZ
+	
+	blkData		Blk16_MVZ,MVZ
+	tileData	Kos_MVZ,Nem_MVZ,MVZ,MVZ primary patterns
+	chkData		Blk256_MVZ,MVZ (JP1)
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - bosses and ending sequence
 ; ---------------------------------------------------------------------------
@@ -1149,11 +1192,13 @@ Nem_KnightWeapons:
 ; ---------------------------------------------------------------------------
 ; Clinton Fucker Fail screen data
 ; ---------------------------------------------------------------------------
-Art_ClintonFail:
-		incbin	"artunc/Clinton Fail Art.bin"
-		even
-Art_ClintonFailE:
-CLINTONFAILARTSZ = Art_ClintonFailE-Art_ClintonFail
+;!@ GD: M2Engage compat. Use macro switch(unc/nem artwork)
+;Art_ClintonFail:
+;		incbin	"artunc/Clinton Fail Art.bin"
+;		even
+;Art_ClintonFailE:
+;CLINTONFAILARTSZ = Art_ClintonFailE-Art_ClintonFail
+	tileData2	Art_ClintonFail,artunc,Clinton_Fail_Art,bin,nem,Art_ClintonFailE,CLINTONFAILARTSZ
 
 Pal_ClintonFail:
 		incbin	"palette/Clinton Fail.bin"
@@ -1165,18 +1210,22 @@ MapScr_ClintonWin:
 MapScr_ClintonFail:
 		incbin	"artunc/Clinton Fail Map.bin"
 		even
-Art_ClintonWin:
-		incbin	"artunc/Clinton Win Art.bin"
-		even
-Art_ClintonWinE:
-CLINTONWINARTSZ = Art_ClintonWinE-Art_ClintonWin
+		
+;!@ GD: M2Engage compat. Use macro switch(unc/nem artwork)
+;Art_ClintonWin:
+;		incbin	"artunc/Clinton Win Art.bin"
+;		even
+;Art_ClintonWinE:
+;CLINTONWINARTSZ = Art_ClintonWinE-Art_ClintonWin
+	tileData2	Art_ClintonWin,artunc,Clinton_Win_Art,bin,nem,Art_ClintonWinE,CLINTONWINARTSZ
 
 
-Art_NeedleScr:
-	incbin	"_incObj/NeedleBoss/scroll.art"
-	even
-Art_NeedleScrE:
-NEEDLESCRARTSZ = Art_NeedleScrE-Art_NeedleScr
+;Art_NeedleScr:
+;	incbin	"_incObj/NeedleBoss/scroll.art"
+;	even
+;Art_NeedleScrE:
+;NEEDLESCRARTSZ = Art_NeedleScrE-Art_NeedleScr
+	tileData2	Art_NeedleScr,_incObj/NeedleBoss,scroll,art,nem,Art_NeedleScrE,NEEDLESCRARTSZ
 
 MapScr_NeedleScr:
 	incbin	"_incObj/NeedleBoss/scroll.map"

@@ -103,7 +103,13 @@ VBLANK_CUTSCENE:
 		writeVRAM	v_spritetablebuffer,vram_sprites
 		writeVRAM	v_hscrolltablebuffer,vram_hscroll
 		writeCRAM	v_palette,0
+	;!@ GD: M2Compat. Disable ProcessDMAQueue if M2Engage build
+	if M2Engage=0
 	jsr	ProcessDMAQueue
+	else
+	nop
+	nop
+	endif
 	jsr	ProcessDPLC_9Tiles
 	move.w	#$9294,VDPCTRL		; window vertical position
 	tst.w	v_generictimer.w
@@ -218,10 +224,28 @@ ArtList_InTonicIntro1:
 ; ---------------------------------------------------------------------------
 
 AsciiArtLoad:
+;QueueDMATransfer:
+; Input:
+; 	d1	Source address (in bytes, or in words if AssumeSourceAddressInBytes is
+; 		set to 0)
+; 	d2	Destination address
+; 	d3	Transfer length (in words)
+
+	;!@ GD: M2Compat. Use QueueDMATransfer if regular build; else UserPLC if M2Engage build
+	if M2Engage=0
 	move.l  #Art_ASCII,d1
 	move.w  #ASCII_VRAMADDR,d2
 	move.w  #(Art_ASCIISZ/2),d3
-	jmp	QueueDMATransfer
+	jmp		(QueueDMATransfer).l
+	else
+	lea		(ArtList_CutsceneASCII).l,a1
+	jsr		(UserPLC).l
+	rts
+ArtList_CutsceneASCII:
+	dc.l	Art_ASCII
+	dc.w	ASCII_VRAMADDR
+	dc.l	-1
+	endif
 
 ; ---------------------------------------------------------------------------
 ; Print a word value to a VDP nametable/address
@@ -384,9 +408,12 @@ ClearMsgs:
 
 
 
-
-
+ ;!@ GD: M2Engage Compat. Use Unc art if regular build; else Nem art if M2Engage
+ if M2Engage=0
 Art_ASCII:	binclude	"_gamemode/cutscene/ASCII.BIN"
+ else
+Art_ASCII:	binclude	"_gamemode/cutscene/ASCII.nem" 
+ endif
 		even
 Art_ASCIIE:
 Art_ASCIISZ = (Art_ASCIIE-Art_ASCII)
