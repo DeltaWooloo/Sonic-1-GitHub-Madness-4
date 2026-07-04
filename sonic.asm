@@ -3100,7 +3100,7 @@ loc_33B6:
 		move.b	#id_Demo,(v_gamemode).w ; set screen mode to 08 (demo)
 		cmpi.w	#(id_CBZ<<8),d0	; is level number 0700 (the cold brew zone)?
 		beq.s	Demo_Brew	; if yes, branch
-		move.b	#A,(v_lives).w	; set lives to 10
+		move.b	#$0A,(v_lives).w	; set lives to 10
 		tst.b	(DiffVariable).w ; check difficulty
 		beq.s	dontHardAnuidkiforgotthename
 		move.b	#1,(v_lives).w	; set lives to 1
@@ -7193,7 +7193,11 @@ Art_LivesNums:	binclude	"artunc/Lives Counter Numbers.bin" ; 8x8 pixel numbers o
 		include	"_inc/GHM3Explode.asm"
 
 		include	"_gamemode/damn/damn.asm"
+		
+		;!@ GD: M2Compat. Don't inculde newSSRG screen if M2Engage build
+		if M2Engage=0
 		include "_gamemode/#SSRG/SSRG_Screen.asm"
+		endif
 
 		include "_incObj/clinton fucker/Clinton Fucker.asm"
 		include	"_incObj/10 Player Bullet.asm"
