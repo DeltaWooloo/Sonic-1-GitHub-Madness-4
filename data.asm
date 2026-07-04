@@ -18,6 +18,29 @@ bbl:	label *
 		endm
 		
 ;!@ GD: M2Engage compat bugfix
+;!@ Macro to switch between UNC and NEM compressed tilemap tile assets based on M2Engage flag
+
+; Inputs:
+; abl = filename label
+; path = filepath
+; file = filename (no ext)
+; aext = ext for regular build
+; bext = ext for M2Engage build
+; bbl = end label
+; lbl = length label
+tileData2:	macro	abl,path,file,aext,bext,bbl,lbl
+abl:	label *
+		if M2Engage=0
+		binclude	"path/file.aext"
+		else
+		binclude	"path/file.bext"
+		endif
+		even
+bbl:	label *
+lbl = bbl-abl
+		endm
+		
+;!@ GD: M2Engage compat bugfix
 ;!@ Macro to switch between ENI and UNC compressed 16x16 level block assets based on M2Engage flag
 ; Inputs:
 ; abl = File label
@@ -1169,11 +1192,13 @@ Nem_KnightWeapons:
 ; ---------------------------------------------------------------------------
 ; Clinton Fucker Fail screen data
 ; ---------------------------------------------------------------------------
-Art_ClintonFail:
-		incbin	"artunc/Clinton Fail Art.bin"
-		even
-Art_ClintonFailE:
-CLINTONFAILARTSZ = Art_ClintonFailE-Art_ClintonFail
+;!@ GD: M2Engage compat. Use macro switch(unc/nem artwork)
+;Art_ClintonFail:
+;		incbin	"artunc/Clinton Fail Art.bin"
+;		even
+;Art_ClintonFailE:
+;CLINTONFAILARTSZ = Art_ClintonFailE-Art_ClintonFail
+	tileData2	Art_ClintonFail,artunc,Clinton_Fail_Art,bin,nem,Art_ClintonFailE,CLINTONFAILARTSZ
 
 Pal_ClintonFail:
 		incbin	"palette/Clinton Fail.bin"
@@ -1185,11 +1210,14 @@ MapScr_ClintonWin:
 MapScr_ClintonFail:
 		incbin	"artunc/Clinton Fail Map.bin"
 		even
-Art_ClintonWin:
-		incbin	"artunc/Clinton Win Art.bin"
-		even
-Art_ClintonWinE:
-CLINTONWINARTSZ = Art_ClintonWinE-Art_ClintonWin
+		
+;!@ GD: M2Engage compat. Use macro switch(unc/nem artwork)
+;Art_ClintonWin:
+;		incbin	"artunc/Clinton Win Art.bin"
+;		even
+;Art_ClintonWinE:
+;CLINTONWINARTSZ = Art_ClintonWinE-Art_ClintonWin
+	tileData2	Art_ClintonWin,artunc,Clinton_Win_Art,bin,nem,Art_ClintonWinE,CLINTONWINARTSZ
 
 
 Art_NeedleScr:

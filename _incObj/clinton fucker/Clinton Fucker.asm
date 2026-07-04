@@ -18,7 +18,7 @@ GM_ClintonScreens:
 Clinton_FailInit:
 Clinton_WinInit:
 	disable_ints
-	move.l	#60*2,v_generictimer.w
+	move.l	#fps_Rate*2,v_generictimer.w
 
 	stopZ80
 	waitZ80
@@ -66,13 +66,29 @@ Clinton_WinInit:
 	clearRAM v_hscrolltablebuffer,v_hscrolltablebuffer_end_padded
 
 	cmpi.b	#4,submode
-	bne.s	.Fail
+	bne.w	.Fail
 	move.b	#8,submode.w
 	move.w	#$FFFF,v_generictimer.w
+	
+	;!@ GD: M2Engage compat.
+	;Use QueueDMATransfer if regular build;
+	;else if M2Engage build then UserPLC (Nem compressed; slower but compatible)
+	if M2Engage=0
+;QueueDMATransfer:
+; Input:
+; 	d1	Source address (in bytes, or in words if AssumeSourceAddressInBytes is
+; 		set to 0)
+; 	d2	Destination address
+; 	d3	Transfer length (in words)
 	move.l  #Art_ClintonWin,d1
-	move.w  #0,d2
+	move.w  #ArtTile_Level,d2
 	move.w  #(CLINTONWINARTSZ/2),d3
 	jsr	QueueDMATransfer.l
+	else
+	lea		(ArtList_ClintonWin).l,a1
+	jsr		(UserPLC).l
+	disable_display
+	endif
 	stopZ80
 	waitZ80
 
@@ -80,31 +96,77 @@ Clinton_WinInit:
 
 	startZ80
 	enable_ints
+	
+	;!@ In M2Engage builds, set a timer (yield 3 seconds while tiles load)
+	if M2Engage=1
+	move.w	#fps_Rate*3,(v_generictimer.w)
+	endif
+.winLoop:
 	move.b	#$1A,(v_vbla_routine).w		; wait
-	jsr	WaitForVBla
+	jsr		(WaitForVBla).l
+	
+	;!@ In M2Engage builds, wait for timer yield
+	if M2Engage=1
+	jsr		(RunPLC).l
+	tst.w	(v_generictimer).w
+	bne.s	.winLoop
+	enable_display
+	endif
+	
 	pcm	dClintonWin
-	bra.s	.Skip
+	move.w	#$FFFF,v_generictimer.w
+	bra.w	.Skip
+	
 .Fail:
 	move.b	#8,submode.w
-	move.w	#60*3,v_generictimer.w
+	move.w	#fps_Rate*3,(v_generictimer).w
+	
+	;!@ GD: M2Engage compat.
+	;Use QueueDMATransfer if regular build;
+	;else if M2Engage build then UserPLC (Nem compressed; slower but compatible)
+	if M2Engage=0
+; Input:
+; 	d1	Source address (in bytes, or in words if AssumeSourceAddressInBytes is
+; 		set to 0)
+; 	d2	Destination address
+; 	d3	Transfer length (in words)
 	move.l  #Art_ClintonFail,d1
 	move.w  #0,d2
 	move.w  #(CLINTONFAILARTSZ/2),d3
 	jsr	QueueDMATransfer.l
-
+	else
+	lea		(ArtList_ClintonLose).l,a1
+	jsr		(UserPLC).l
+	disable_display
+	endif
 	stopZ80
 	waitZ80
 
 	copyTilemap	MapScr_ClintonFail,vram_bg,40,28
 
 	startZ80
+	;!@ In M2Engage builds, set a timer (yield 3 seconds while tiles load)
+	if M2Engage=1
+	move.w	#fps_Rate*3,(v_generictimer.w)
+	endif
+.loseLoop:
 	move.b	#$1A,(v_vbla_routine).w		; wait
-	jsr	WaitForVBla
+	jsr		(WaitForVBla).l
+	
+	;!@ In M2Engage builds, wait for timer yield
+	if M2Engage=1
+	jsr		(RunPLC).l
+	tst.w	(v_generictimer.w)
+	bne.s	.loseLoop
+	enable_display
+	endif
+	
 	pcm	dClintonFail
+	move.w	#fps_Rate*3,(v_generictimer).w
 .Skip:	
 	enable_ints
 	move.b	#$1A,(v_vbla_routine).w		; garbage will show for a frame without this
-	jsr	WaitForVBla
+	jsr		(WaitForVBla).l
 
 	lea	(v_palette+32).w,a0
 	lea	Pal_ClintonFail,a1
@@ -116,22 +178,35 @@ Clinton_WinInit:
 	move.l	(a1)+,(a0)+
 	move.l	(a1)+,(a0)+
 	move.l	(a1)+,(a0)+
+	
+	;!@ M2Engage Compat. UserPLC list for screen
+	if M2Engage=1
+	bra.s	Clinton_ShowScr
+ArtList_ClintonWin:
+	dc.l	Art_ClintonWin
+	dc.w	ArtTile_Level
+	dc.l	-1
+ArtList_ClintonLose:
+	dc.l	Art_ClintonFail
+	dc.w	ArtTile_Level
+	dc.l	-1
+	endif
 
 Clinton_ShowScr:
 	moveq	#$1A,d7
-	jsr	PauseGame
+	jsr		(PauseGame).l
 	move.b	#$1A,(v_vbla_routine).w
-	jsr	WaitForVBla
-	tst.w	v_generictimer.w
+	jsr		(WaitForVBla).l
+	tst.w	(v_generictimer).w
 	beq.s	.leave
-	tst.w	f_restart.w
+	tst.w	(f_restart).w
 	bne.s	.leave
 	jsr	(ExecuteObjects).l
 	jsr	(BuildSprites).l
 ;	jsr	(ObjPosLoad).l
-	jsr	RunPLC.l
-	jsr	OscillateNumDo.l
-	jsr	SynchroAnimate.l
+	jsr	(RunPLC).l
+	jsr	(OscillateNumDo).l
+	jsr	(SynchroAnimate).l
 	bra.s	Clinton_ShowScr
 .leave:
 	move.b	#0,submode.w
