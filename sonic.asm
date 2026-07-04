@@ -31,7 +31,7 @@ CheatsOn = 0
 
 MSUEnabled = 0
 
-M2Engage = 1		;!@ GD: If set, then apply compatibility bugfixes and changes to make builds
+M2Engage = 0		;!@ GD: If set, then apply compatibility bugfixes and changes to make builds
 					;work properly on stock Sega Genesis 1/2 Mini emulator (M2Engage)
 
 FixBugs = 1
