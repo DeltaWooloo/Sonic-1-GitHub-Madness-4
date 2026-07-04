@@ -1006,11 +1006,23 @@ DLE_DVZ3:
 		stopZ80
 		waitZ80
 
-		fillVRAM	0, vram_fg, vram_fg+plane_size_64x32 ; clear foreground namespace
+		fillVRAM	0, vram_fg, vram_fg+plane_size_64x32 ; clear foreground namespace		
+		;!@ M2Engage compat. Use QueueDMATransfer if regular build; else UserPLC to load gfx
+		if M2Engage=0
+;QueueDMATransfer:
+; Input:
+; 	d1	Source address (in bytes, or in words if AssumeSourceAddressInBytes is
+; 		set to 0)
+; 	d2	Destination address
+; 	d3	Transfer length (in words)
 		move.l  #Art_NeedleScr,d1
 		move.w  #$2000,d2
 		move.w  #(NEEDLESCRARTSZ/2),d3
 		jsr	QueueDMATransfer.l
+		else
+		lea		(ArtList_NeedlScr).l,a1
+		jsr		(UserPLC).l
+		endif
 		copyTilemap	MapScr_NeedleScr,vram_bg+$700,58,14
 
 		startZ80
@@ -1019,6 +1031,14 @@ DLE_DVZ3:
 		addq.b	#4,v_dle_routine.w
 		add.w	#256,v_limitright2.w		
 		rts
+		
+	;!@ M2Engage compat. Needleboss BG UserPLC
+	if M2Engage=1
+ArtList_NeedlScr:
+	dc.l	Art_NeedleScr
+	dc.w	$2000
+	dc.l	-1
+	endif
 
 ; ---------------------------------------------------------------------------
 ; Nogales Zone direct port from ice cc remake :^)

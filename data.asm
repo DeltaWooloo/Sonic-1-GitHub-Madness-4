@@ -1220,11 +1220,12 @@ MapScr_ClintonFail:
 	tileData2	Art_ClintonWin,artunc,Clinton_Win_Art,bin,nem,Art_ClintonWinE,CLINTONWINARTSZ
 
 
-Art_NeedleScr:
-	incbin	"_incObj/NeedleBoss/scroll.art"
-	even
-Art_NeedleScrE:
-NEEDLESCRARTSZ = Art_NeedleScrE-Art_NeedleScr
+;Art_NeedleScr:
+;	incbin	"_incObj/NeedleBoss/scroll.art"
+;	even
+;Art_NeedleScrE:
+;NEEDLESCRARTSZ = Art_NeedleScrE-Art_NeedleScr
+	tileData2	Art_NeedleScr,_incObj/NeedleBoss,scroll,art,nem,Art_NeedleScrE,NEEDLESCRARTSZ
 
 MapScr_NeedleScr:
 	incbin	"_incObj/NeedleBoss/scroll.map"
