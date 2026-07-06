@@ -1,0 +1,52 @@
+Metadata for hakchi2 CE when you upload GHM4 ROMs:
+Link:
+https://github.com/TeamShinkansen/Hakchi2-CE
+
+Please use the M2Engage ROM variants for
+SNES/SFC and Genesis/MD Mini 1 & 2 micro consoles!
+
+These have compatibility fixes for M2Engage emulator on Genesis 1/2 Mini etc.
+
+
+MetaData:
+
+Compress: yes
+Name: Github Madness 4 (variantData)
+Sort Name: github madness 4 (variantdata)
+
+variantData =
+m2engage\Retail\gm4built.gen = M2Engage
+m2engage\Retail\gm4built.debug.gen = M2Engage, Debug
+m2engage\Debug\gm4built.gen = M2Engage, Cheats
+m2engage\Debug\gm4built.debug.gen = M2Engage, Cheats, Debug
+Retail\gm4built.gen = Retail
+Retail\gm4built.debug.gen = Retail, Debug
+Debug\gm4built.gen = Cheats
+Debug\gm4built.debug.gen = Cheats, Debug
+
+
+Publisher: SEGA
+Copyright: ┏SEGA
+Release date (YYYY-MM-DD): 2026-07-06
+Max Players: One
+Region: United States
+Genre: Action
+
+Command Line:
+/bin/m2engage /var/games/[GAMEID]/[rom].gen.7z --preamp=-0.86 --mdz80.overclock=0.989
+[ROM] = Either gm4built.gen or gm4built.debug.gen based on variant
+
+Description:
+Release Year: 2026
+
+The fever dream is back...
+... now with four times the madness!
+
+Spiral into an even greater bout of insanity as you guide Teeth Tonic and Maniac Mouse through the bizarre world of Github Madness 4!
+
+Only on Sega Genesis!
+
+Artwork:
+Nintendo (large): (use Promo/m2engage/name_original.png)
+Nintendo (small): (use Promo/m2engage/name_small.png)
+Sega: (use Promo/m2engage/name_mdmini.png)
