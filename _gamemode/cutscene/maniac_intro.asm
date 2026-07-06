@@ -9,7 +9,6 @@ cameraZPosY	=	v_bg3screenposy
 
 shakescale	= cameraZPosX
 
-
 Cutscene_ManiacIntro:
 	moveq   #0,d0
 	move.b	subscene.w,d0
@@ -25,8 +24,9 @@ Cutscene_ManiacIntro:
 	move.w	cameraZPosY.w, v_bg3scrposy_vdp.w
 	add.w	#1,v_framecount.w
 	add.w	#1,v_Ipooped.w
-	cmpi.w #49*60,v_Ipooped.w ;CHECKS EVERY FUCKING FRAMES!
+	cmpi.w #49*fps_Rate,v_Ipooped.w ;CHECKS EVERY FUCKING FRAMES!
 	bcs.s WaittofuckNedel
+	jsr		(Cutscene_Exit).l		;!@ GD: Crash Bugfix
     move.b	#id_Level,(v_gamemode).w ; go to Level 
 	rts
 
@@ -78,7 +78,7 @@ MmIntro_Main:
 	tst.w	cameraAPosX.w
 	bne.s	.Static
 	addq.b	#1,subscene.w
-	move.w	#60*4,v_generictimer.w
+	move.w	#fps_Rate*4,v_generictimer.w
 
 .Static:
 	move.l	#$62A40003,d3      		; d3 = initial address
@@ -128,7 +128,7 @@ MmIntro_TVStatic:
 .Next:
 	addq.b	#1,subscene.w
 	move.l	#Str_ManiacEllip,stringaddr.w
-	move.b	#60,stringtime.w
+	move.b	#fps_Rate,stringtime.w
 	move.w	#bgm_Fade,d0
 	jsr	QueueSound2
 	rts
@@ -156,7 +156,7 @@ MmIntro_FlashRN:
 MmIntro_WaitTxt1:
 	tst.b	stringflags.w
 	beq.s	.Wait
-	move.w	#60*2,v_generictimer.w
+	move.w	#fps_Rate*2,v_generictimer.w
 	addq.b	#1,subscene.w
 .Wait
 	rts
@@ -168,7 +168,7 @@ MmIntro_WaitClr1:
 	bsr.w	ClearMsgs
 	move.l	#Str_ManiacIntro4,stringaddr.w
 	move.b	#3,stringtime.w
-	move.b	#60,stringtimer.w
+	move.b	#fps_Rate,stringtimer.w
 	move.w  #$AA84,stringvram.w
 	move.w	#$AA84,stringvramline.w
 .Wait:
@@ -177,7 +177,7 @@ MmIntro_WaitClr1:
 MmIntro_HedgePenis:
 	tst.b	stringflags.w
 	beq.s	.Wait
-	move.w	#60*2,v_generictimer.w
+	move.w	#fps_Rate*2,v_generictimer.w
 	addq.b	#1,subscene.w
 .Wait
 	rts
@@ -198,7 +198,7 @@ MmIntro_WaitClr2:
 	jsr	UserPLC
 	pcm	dChicken
 	move.l	#Str_ManiacIntro5,stringaddr.w
-	move.b	#60,stringtimer.w
+	move.b	#fps_Rate,stringtimer.w
 	move.w  #$AA84,stringvram.w
 	move.w	#$AA84,stringvramline.w
 	move.w	#-16,cameraAPosX.w
@@ -211,7 +211,7 @@ MmIntro_WaitClr3:
 	addq.b	#1,subscene.w
 	bsr.w	ClearMsgs
 	move.l	#Str_ManiacIntro6,stringaddr.w
-	move.b	#60,stringtimer.w
+	move.b	#fps_Rate,stringtimer.w
 	move.w  #$AA84,stringvram.w
 	move.w	#$AA84,stringvramline.w
 	rts
@@ -219,7 +219,7 @@ MmIntro_WaitClr3:
 MmIntro_FaceShake
 	tst.b	stringflags.w
 	beq.s	.Wait
-	move.w	#60*2,v_generictimer.w
+	move.w	#fps_Rate*2,v_generictimer.w
 	addq.b	#1,subscene.w
 .Wait
 	moveq	#0,d1
@@ -256,7 +256,7 @@ MmIntro_WaitClr4:
 	jsr	RandomNumber
 	andi.l	#$3FFFFF,d0		; uh. yeah i  Dont care. lol
 	move.l	d0,stringaddr.w
-	move.b	#60,stringtimer.w
+	move.b	#fps_Rate,stringtimer.w
 	move.w  #$AA84,stringvram.w
 	move.w	#$AA84,stringvramline.w
 	move.w	#0,cameraAPosX.w

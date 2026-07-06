@@ -55,6 +55,10 @@ Collectible:
 		;!@ GD: Don't collect if in debug mode
 		tst.w	(v_debuguse).w	; is debug mode being used?
 		bne.w	.notCollected	; if yes, branch
+		
+		;!@ GD: Don't collect if Sonic is dead/dying
+		cmpi.b	#id_Death,(v_player+obAnim).w
+		beq.s	.notCollected	; if yes, branch
 
 		move.w	(v_player+obX).w,d1	; Get player's position
 		move.w	(v_player+obY).w,d2	; ^
@@ -104,6 +108,10 @@ Collectible:
 		move.b	(v_collectibles).w,d0	; Check if all the collectibles have been obtained
 		cmpi.b	#%111,d0		; (currently harcoded to 3, but can go up to 8)
 		bne.w	.sparkle		; If not, branch
+		
+		;!@ GD: Bugfix, clear lamp and collectible bitfield flags onWin
+		move.b	#0,(v_lamp_collectibles).w
+		move.b	#0,(v_collectibles).w
 
 		clr.b	(v_player).w	; Erase the player
 		jsr	(GHM3Explode).l		; Explosion

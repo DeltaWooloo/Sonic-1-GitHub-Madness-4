@@ -8,6 +8,9 @@
 GM_Continue:
 	;!@ GD: Extra call to clear window plane/other FX from BSZ2
 	mPow_vdp_fixRegs	0,1
+	;!@ GD: Bugfix, clear lamp and collectible bitfield flags
+	move.b	d0,(v_lamp_collectibles).w
+	move.b	d0,(v_collectibles).w
 
 	move.b	#02, (SMPS_RAM.v_main_tempo)	; slow current music to a crawl so it feels like the driver froze
 

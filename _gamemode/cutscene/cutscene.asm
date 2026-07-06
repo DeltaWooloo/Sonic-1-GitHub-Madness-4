@@ -52,6 +52,11 @@ Cutscene_Init:
 	enable_ints
 	enable_display
 
+	;!@ GD: BugfixReset ipooped frame counter and submode, to prevent crashes/lag frames
+	; and skipping of cutscenes for ;consecutive cutscene gamemode calls (gameovers, resets, etc)
+	move.w	#0,(v_Ipooped).w
+	move.b	#0,(submode).w
+
 	move.b	#0,subscene.w
 	moveq	#0,d0
 	move.b	cutscene,d0
@@ -70,6 +75,13 @@ Cutscene_Init:
 	tst.l	v_plc_buffer
 	bne.s	.Wait
 ;	jsr	PalFadeIn
+	rts
+	
+Cutscene_Exit:
+	;!@ GD: Bugfix. Reset ipooped frame counter and submode, to prevent crashes/lag frames
+	; and skipping of cutscenes for ;consecutive cutscene gamemode calls (gameovers, resets, etc)
+	move.w	#0,(v_Ipooped).w
+	move.b	#0,(submode).w
 	rts
 
 Cutscene_Tonic:

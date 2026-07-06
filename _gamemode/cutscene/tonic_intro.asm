@@ -12,8 +12,9 @@ Cutscene_TonicIntro:
 	move.w	cameraZPosY.w, v_bg3scrposy_vdp.w
 	add.w	#1,v_framecount.w
 	add.w	#1,v_Ipooped.w
-	cmpi.w #15*60,v_Ipooped.w ;CHECKS EVERY FUCKING FRAMES!
+	cmpi.w #15*fps_Rate,v_Ipooped.w ;CHECKS EVERY FUCKING FRAMES!
 	bcs.s Waitfuckingyouifbitchn
+	jsr		(Cutscene_Exit).l		;!@ GD: Crash Bugfix
     move.b	#id_Level,(v_gamemode).w ; go to Level 
 ;	jmp  GM_Level ;has to be the worst code i have ever written
 	rts

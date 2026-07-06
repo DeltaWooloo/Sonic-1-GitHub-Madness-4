@@ -380,6 +380,9 @@ DebuggerMenu_LoadGame:
 		move.b	d0,(v_lastspecial).w ; clear special stage number
 		move.l	d0,(v_emldlist).w ; clear emeralds
 		move.l	d0,(v_emldlist+4).w ; clear emeralds
+		;!@ GD: Bugfix, clear lamp and collectible bitfield flags
+		move.b	d0,(v_lamp_collectibles).w
+		move.b	d0,(v_collectibles).w
 		move.b	#2,(v_continues).w ; set continues to 2 for the accurate felix experience		
 		move.l	#5000,(v_scorelife).w ; extra life is awarded at 50000 points
 		
