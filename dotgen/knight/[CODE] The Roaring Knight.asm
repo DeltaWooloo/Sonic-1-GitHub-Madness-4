@@ -88,6 +88,12 @@ RKnight_Init:
 	lea	(KnightBullets_ArtList).l,a1				; Get instructions for UserPLC
 	jsr	(UserPLC).l
 	
+	;!@ GD: Bugfix. Force a DPLC DMA on init if M2Engage build. To guarantee correct gfx initz
+	if M2Engage=1
+	move.b	obFrame(a0),d0
+	bsr.w	RKnight_LoadGfx.force
+	endif
+	
 ; ===========================================================================
 ; Start of Phase 1 main behavior.
 ; This phase is more of a joke.
@@ -194,6 +200,11 @@ RKPhase1_MoveToYTarget:
 RKPhase1_Attack_Setup:
 	move.b	#3,obFrame(a0)
 	addq.b	#2,ob2ndRout(a0)			; Advance to next routine.
+	; !@ GD: Bugfix. Force DPLC DMA if M2Engage build
+	if M2Engage=1
+	move.b	obFrame(a0),d0
+	bsr.w	RKnight_LoadGfx.force
+	endif
 	move.w	#1,Knight_Timer(a0)			; Set internal timer. Will be used by attack routine.
 	move.w	#Knight_Y_Spawn+$A4,Knight_Y_Target(a0)	; Set target location
 	; bra.s	RKPhase1_Attack				; Continue straight to the attack routine
@@ -1249,6 +1260,8 @@ RKnight_LoadGfx:
 	move.b	obFrame(a0),d0				; get object's current frame
 	cmp.b	Knight_Previous_Frame(a0),d0		; has the frame changed?
 	beq.w	.nochange							; if not, nothing to do
+;!@ GD: Same as RKnight_LoadGfx, but force a DPLC DMA
+.force:
 	move.b	d0,Knight_Previous_Frame(a0)		; update cached frame number
 	;!@ GD: dplc buffer, M2Engage compat	
 	move.l	#DPLC_RKnight,a2					; load DPLC table
