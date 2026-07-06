@@ -1,10 +1,55 @@
 **Github Madness 4**
-**v1.13 Hotpatch release**
+**v1.14 Hotpatch release**
 
 [SSRG Thread](https://sonicresearch.org/community/index.php?threads/sonic-1-github-madness-4.7410/)
 
 
 **Changelog:**
+**v1.14 (07/06/2026):**
+- **Critical softlock/crash bugfixes**
+  - Fixed softlock of killing Final Zone's plasma balls with character attacks
+  - Fixed crash when running consecutive cutscenes after various game modes/conditions
+	- New game
+	- Game reset after declining gameover continue
+	- Loading cutscenes through the Debug Menu
+- **Bugfix**
+  - Removed invalid chunk ID within level layout of Minecraft Zone (MCZ) Act 2
+  - Fixed lamppost IDs for MCZ3
+  - Bugfixes for collectible objects in DVZ2 (Hardware Store Zone)
+	- Prevent obtaining collectibles when dying
+	- Reset collectibles and store collectibles flags through various game modes
+	  - DebugMenu
+	  - Continue
+	  - Character Select
+	- Resetting flags ensure level can be replayed again in a new game or game reset
+- **Enhancements/new features:**
+  - Created new set of compatible ROM builds and appropriate release assets (boxart and metadata) for stock emulator (M2Engage) on Sega Genesis Mini 1 and 2 micro consoles
+	- If your emulator has issues with DMA loading DPLC artwork, please use this set of builds
+	  - M2Engage emulator
+	  - Sega Ages emulator
+	  - Possibly other emulators
+	- Created M2Engage box art and meta data for the builds for usage in Hakchi
+	- Disabled new SSRG splash screen in M2Engage builds
+	- Changed game and related code to use ROM blocks and ROM Chunks for levels
+	  - Change all related assets to uncompressed
+	  - Frees up RAM for x4 DPLC RAM buffers for bugfixes
+	- Changed game to use Nemesis compressed level 8x8 tile artwork
+	  - Instead of Kosinski compression
+	  - Slower loading
+	  - But allows simpler loading code and for it to be compatible with M2Engage
+	- Downgraded DMA Queue code to Stock 1 Sonic DPLC system and x4 RAM buffers to ensure DPLC DMAs will work properly on M2Engage
+	- DMA Buffers
+	  - Character artwork (static buffer)
+	  - Character attacks (static buffer)
+	  - Shield (static buffer)
+	  - Generic DPLC buffer (dynamic buffer)
+	    - Clinton boss
+	    - Clinton win/lose screens
+	    - Roaring Knight boss
+	    - Eiza boss
+	    - DVZ3 Needleboss checkered BG art upload
+	    - DioDanner boss
+	    - Cutscene ASCII art upload
 
 **v1.13 (06/07/2026):**
 - **Bugfix**
